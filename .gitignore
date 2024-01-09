@@ -20,8 +20,10 @@
 # Go workspace file
 go.work
 
-# Compiled provider
+# Terraform stuff
 terraform-provider-scm
+terraform-tfstate*
+.terraform/
 
 # Others
 .DS_Store

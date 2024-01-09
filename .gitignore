@@ -22,8 +22,7 @@ go.work
 
 # Terraform stuff
 terraform-provider-scm
-terraform-tfstate
-terraform-tfstate.backup
+terraform.tfstate*
 .terraform/
 *.tf
 

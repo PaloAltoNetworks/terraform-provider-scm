@@ -410,7 +410,7 @@ type localUserRsModel struct {
 	Snippet  types.String `tfsdk:"snippet"`
 
 	// Output.
-	EncryptedValues map[string]types.String `tfsdk:"encrypted_values"`
+	EncryptedValues types.Map `tfsdk:"encrypted_values"`
 	// omit input: disabled
 	// omit input: id
 	// omit input: name
@@ -590,7 +590,10 @@ func (r *localUserResource) Create(ctx context.Context, req resource.CreateReque
 
 	var2 := "solo | plaintext | password"
 	state.Password = ev[var2]
-	state.EncryptedValues = ev
+
+	var3, var4 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var3
+	resp.Diagnostics.Append(var4.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -612,9 +615,11 @@ func (r *localUserResource) Read(ctx context.Context, req resource.ReadRequest, 
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	var ev map[string]types.String
-	//ev := make(map[string] types.StringType)
-	ev = savestate.EncryptedValues
+	ev := make(map[string]types.String, len(savestate.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(savestate.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
@@ -678,7 +683,10 @@ func (r *localUserResource) Read(ctx context.Context, req resource.ReadRequest, 
 	} else {
 		state.Password = types.StringNull()
 	}
-	state.EncryptedValues = ev
+
+	var2, var3 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var2
+	resp.Diagnostics.Append(var3.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -705,7 +713,11 @@ func (r *localUserResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	ev := state.EncryptedValues
+	ev := make(map[string]types.String, len(state.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource update", map[string]any{
@@ -759,7 +771,10 @@ func (r *localUserResource) Update(ctx context.Context, req resource.UpdateReque
 
 	var2 := "solo | plaintext | password"
 	state.Password = ev[var2]
-	state.EncryptedValues = ev
+
+	var3, var4 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var3
+	resp.Diagnostics.Append(var4.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)

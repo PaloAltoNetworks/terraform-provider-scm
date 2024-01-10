@@ -977,7 +977,7 @@ type remoteNetworkRsModel struct {
 	Subnets              types.List                                      `tfsdk:"subnets"`
 
 	// Output.
-	EncryptedValues map[string]types.String `tfsdk:"encrypted_values"`
+	EncryptedValues types.Map `tfsdk:"encrypted_values"`
 	// omit input: ecmp_load_balancing
 	// omit input: ecmp_tunnels
 	// omit input: id
@@ -1551,7 +1551,10 @@ func (r *remoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 	var11, var12 := types.ListValueFrom(ctx, types.StringType, ans.Subnets)
 	state.Subnets = var11
 	resp.Diagnostics.Append(var12.Errors()...)
-	state.EncryptedValues = ev
+
+	var13, var14 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var13
+	resp.Diagnostics.Append(var14.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -1573,9 +1576,11 @@ func (r *remoteNetworkResource) Read(ctx context.Context, req resource.ReadReque
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	var ev map[string]types.String
-	//ev := make(map[string] types.StringType)
-	ev = savestate.EncryptedValues
+	ev := make(map[string]types.String, len(savestate.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(savestate.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
@@ -1748,7 +1753,10 @@ func (r *remoteNetworkResource) Read(ctx context.Context, req resource.ReadReque
 	var6, var7 := types.ListValueFrom(ctx, types.StringType, ans.Subnets)
 	state.Subnets = var6
 	resp.Diagnostics.Append(var7.Errors()...)
-	state.EncryptedValues = ev
+
+	var8, var9 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var8
+	resp.Diagnostics.Append(var9.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -1775,7 +1783,11 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	ev := state.EncryptedValues
+	ev := make(map[string]types.String, len(state.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource update", map[string]any{
@@ -2035,7 +2047,10 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 	var11, var12 := types.ListValueFrom(ctx, types.StringType, ans.Subnets)
 	state.Subnets = var11
 	resp.Diagnostics.Append(var12.Errors()...)
-	state.EncryptedValues = ev
+
+	var13, var14 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var13
+	resp.Diagnostics.Append(var14.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)

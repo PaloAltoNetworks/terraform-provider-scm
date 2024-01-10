@@ -514,7 +514,7 @@ type tacacsServerProfileRsModel struct {
 	UseSingleConnection types.Bool                                        `tfsdk:"use_single_connection"`
 
 	// Output.
-	EncryptedValues map[string]types.String `tfsdk:"encrypted_values"`
+	EncryptedValues types.Map `tfsdk:"encrypted_values"`
 	// omit input: id
 	// omit input: protocol
 	// omit input: servers
@@ -777,7 +777,10 @@ func (r *tacacsServerProfileResource) Create(ctx context.Context, req resource.C
 	state.Timeout = types.Int64PointerValue(ans.Timeout)
 
 	state.UseSingleConnection = types.BoolPointerValue(ans.UseSingleConnection)
-	state.EncryptedValues = ev
+
+	var7, var8 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var7
+	resp.Diagnostics.Append(var8.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -799,9 +802,11 @@ func (r *tacacsServerProfileResource) Read(ctx context.Context, req resource.Rea
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	var ev map[string]types.String
-	//ev := make(map[string] types.StringType)
-	ev = savestate.EncryptedValues
+	ev := make(map[string]types.String, len(savestate.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(savestate.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
@@ -893,7 +898,10 @@ func (r *tacacsServerProfileResource) Read(ctx context.Context, req resource.Rea
 	state.Timeout = types.Int64PointerValue(ans.Timeout)
 
 	state.UseSingleConnection = types.BoolPointerValue(ans.UseSingleConnection)
-	state.EncryptedValues = ev
+
+	var4, var5 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var4
+	resp.Diagnostics.Append(var5.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -920,7 +928,11 @@ func (r *tacacsServerProfileResource) Update(ctx context.Context, req resource.U
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	ev := state.EncryptedValues
+	ev := make(map[string]types.String, len(state.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource update", map[string]any{
@@ -1018,7 +1030,10 @@ func (r *tacacsServerProfileResource) Update(ctx context.Context, req resource.U
 	state.Timeout = types.Int64PointerValue(ans.Timeout)
 
 	state.UseSingleConnection = types.BoolPointerValue(ans.UseSingleConnection)
-	state.EncryptedValues = ev
+
+	var7, var8 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var7
+	resp.Diagnostics.Append(var8.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)

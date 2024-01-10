@@ -2509,7 +2509,7 @@ type externalDynamicListRsModel struct {
 	Type    externalDynamicListRsModel_hhIWLbI_TypeObject `tfsdk:"type"`
 
 	// Output.
-	EncryptedValues map[string]types.String `tfsdk:"encrypted_values"`
+	EncryptedValues types.Map `tfsdk:"encrypted_values"`
 	// omit input: id
 	// omit input: name
 	// omit input: type
@@ -4252,7 +4252,10 @@ func (r *externalDynamicListResource) Create(ctx context.Context, req resource.C
 			state.Type.Url.UrlAuth.Username = types.StringValue(ans.Type.Url.UrlAuth.Username)
 		}
 	}
-	state.EncryptedValues = ev
+
+	var24, var25 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var24
+	resp.Diagnostics.Append(var25.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -4274,9 +4277,11 @@ func (r *externalDynamicListResource) Read(ctx context.Context, req resource.Rea
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	var ev map[string]types.String
-	//ev := make(map[string] types.StringType)
-	ev = savestate.EncryptedValues
+	ev := make(map[string]types.String, len(savestate.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(savestate.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
@@ -4668,7 +4673,10 @@ func (r *externalDynamicListResource) Read(ctx context.Context, req resource.Rea
 			state.Type.Url.UrlAuth.Username = types.StringValue(ans.Type.Url.UrlAuth.Username)
 		}
 	}
-	state.EncryptedValues = ev
+
+	var16, var17 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var16
+	resp.Diagnostics.Append(var17.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -4695,7 +4703,11 @@ func (r *externalDynamicListResource) Update(ctx context.Context, req resource.U
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	ev := state.EncryptedValues
+	ev := make(map[string]types.String, len(state.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource update", map[string]any{
@@ -5387,7 +5399,10 @@ func (r *externalDynamicListResource) Update(ctx context.Context, req resource.U
 			state.Type.Url.UrlAuth.Username = types.StringValue(ans.Type.Url.UrlAuth.Username)
 		}
 	}
-	state.EncryptedValues = ev
+
+	var24, var25 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var24
+	resp.Diagnostics.Append(var25.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)

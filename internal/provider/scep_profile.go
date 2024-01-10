@@ -814,7 +814,7 @@ type scepProfileRsModel struct {
 	UseForKeyEncipherment types.Bool                                              `tfsdk:"use_for_key_encipherment"`
 
 	// Output.
-	EncryptedValues map[string]types.String `tfsdk:"encrypted_values"`
+	EncryptedValues types.Map `tfsdk:"encrypted_values"`
 	// omit input: algorithm
 	// omit input: ca_identity_name
 	// omit input: certificate_attributes
@@ -1255,7 +1255,10 @@ func (r *scepProfileResource) Create(ctx context.Context, req resource.CreateReq
 	state.UseAsDigitalSignature = types.BoolPointerValue(ans.UseAsDigitalSignature)
 
 	state.UseForKeyEncipherment = types.BoolPointerValue(ans.UseForKeyEncipherment)
-	state.EncryptedValues = ev
+
+	var3, var4 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var3
+	resp.Diagnostics.Append(var4.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -1277,9 +1280,11 @@ func (r *scepProfileResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	var ev map[string]types.String
-	//ev := make(map[string] types.StringType)
-	ev = savestate.EncryptedValues
+	ev := make(map[string]types.String, len(savestate.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(savestate.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
@@ -1405,7 +1410,10 @@ func (r *scepProfileResource) Read(ctx context.Context, req resource.ReadRequest
 	state.UseAsDigitalSignature = types.BoolPointerValue(ans.UseAsDigitalSignature)
 
 	state.UseForKeyEncipherment = types.BoolPointerValue(ans.UseForKeyEncipherment)
-	state.EncryptedValues = ev
+
+	var2, var3 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var2
+	resp.Diagnostics.Append(var3.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -1432,7 +1440,11 @@ func (r *scepProfileResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 
 	// Map containing encrypted and plain text values for encrypted params.
-	ev := state.EncryptedValues
+	ev := make(map[string]types.String, len(state.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource update", map[string]any{
@@ -1600,7 +1612,10 @@ func (r *scepProfileResource) Update(ctx context.Context, req resource.UpdateReq
 	state.UseAsDigitalSignature = types.BoolPointerValue(ans.UseAsDigitalSignature)
 
 	state.UseForKeyEncipherment = types.BoolPointerValue(ans.UseForKeyEncipherment)
-	state.EncryptedValues = ev
+
+	var3, var4 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var3
+	resp.Diagnostics.Append(var4.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)

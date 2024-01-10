@@ -2,7 +2,7 @@ module github.com/paloaltonetworks/terraform-provider-scm
 
 go 1.21.4
 
-replace github.com/paloaltonetworks/scm-go => /Users/gfreeman/repos/scm-go
+replace github.com/paloaltonetworks/scm-go => ../scm-go
 
 require (
 	github.com/hashicorp/terraform-plugin-docs v0.16.0

@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -163,19 +164,19 @@ func (d *dnsSecurityProfileListDataSource) Schema(_ context.Context, _ datasourc
 												Attributes: map[string]dsschema.Attribute{
 													// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} forceNew:map[string]bool(nil)
 													"alert": dsschema.BoolAttribute{
-														Description: "The Alert param.",
+														Description: "The Alert param. Default: `false`.",
 														Computed:    true,
 													},
 													"allow": dsschema.BoolAttribute{
-														Description: "The Allow param.",
+														Description: "The Allow param. Default: `false`.",
 														Computed:    true,
 													},
 													"block": dsschema.BoolAttribute{
-														Description: "The Block param.",
+														Description: "The Block param. Default: `false`.",
 														Computed:    true,
 													},
 													"sinkhole": dsschema.BoolAttribute{
-														Description: "The Sinkhole param.",
+														Description: "The Sinkhole param. Default: `false`.",
 														Computed:    true,
 													},
 												},
@@ -588,19 +589,19 @@ func (d *dnsSecurityProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 									Attributes: map[string]dsschema.Attribute{
 										// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} forceNew:map[string]bool(nil)
 										"alert": dsschema.BoolAttribute{
-											Description: "The Alert param.",
+											Description: "The Alert param. Default: `false`.",
 											Computed:    true,
 										},
 										"allow": dsschema.BoolAttribute{
-											Description: "The Allow param.",
+											Description: "The Allow param. Default: `false`.",
 											Computed:    true,
 										},
 										"block": dsschema.BoolAttribute{
-											Description: "The Block param.",
+											Description: "The Block param. Default: `false`.",
 											Computed:    true,
 										},
 										"sinkhole": dsschema.BoolAttribute{
-											Description: "The Sinkhole param.",
+											Description: "The Sinkhole param. Default: `false`.",
 											Computed:    true,
 										},
 									},
@@ -942,20 +943,28 @@ func (r *dnsSecurityProfileResource) Schema(_ context.Context, _ resource.Schema
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} outputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} forceNew:map[string]bool(nil)
 										"alert": rsschema.BoolAttribute{
-											Description: "The Alert param.",
+											Description: "The Alert param. Default: `false`.",
 											Optional:    true,
+											Computed:    true,
+											Default:     booldefault.StaticBool(false),
 										},
 										"allow": rsschema.BoolAttribute{
-											Description: "The Allow param.",
+											Description: "The Allow param. Default: `false`.",
 											Optional:    true,
+											Computed:    true,
+											Default:     booldefault.StaticBool(false),
 										},
 										"block": rsschema.BoolAttribute{
-											Description: "The Block param.",
+											Description: "The Block param. Default: `false`.",
 											Optional:    true,
+											Computed:    true,
+											Default:     booldefault.StaticBool(false),
 										},
 										"sinkhole": rsschema.BoolAttribute{
-											Description: "The Sinkhole param.",
+											Description: "The Sinkhole param. Default: `false`.",
 											Optional:    true,
+											Computed:    true,
+											Default:     booldefault.StaticBool(false),
 										},
 									},
 								},

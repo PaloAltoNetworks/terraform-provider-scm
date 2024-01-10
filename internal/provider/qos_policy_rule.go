@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -209,7 +210,7 @@ func (d *qosPolicyRuleListDataSource) Schema(_ context.Context, _ datasource.Sch
 														},
 													},
 													"ef": dsschema.BoolAttribute{
-														Description: "The Ef param.",
+														Description: "The Ef param. Default: `false`.",
 														Computed:    true,
 													},
 													"tos": dsschema.SingleNestedAttribute{
@@ -645,7 +646,7 @@ func (d *qosPolicyRuleDataSource) Schema(_ context.Context, _ datasource.SchemaR
 											},
 										},
 										"ef": dsschema.BoolAttribute{
-											Description: "The Ef param.",
+											Description: "The Ef param. Default: `false`.",
 											Computed:    true,
 										},
 										"tos": dsschema.SingleNestedAttribute{
@@ -996,8 +997,10 @@ func (r *qosPolicyRuleResource) Schema(_ context.Context, _ resource.SchemaReque
 											},
 										},
 										"ef": rsschema.BoolAttribute{
-											Description: "The Ef param.",
+											Description: "The Ef param. Default: `false`.",
 											Optional:    true,
+											Computed:    true,
+											Default:     booldefault.StaticBool(false),
 										},
 										"tos": rsschema.SingleNestedAttribute{
 											Description: "The Tos param.",

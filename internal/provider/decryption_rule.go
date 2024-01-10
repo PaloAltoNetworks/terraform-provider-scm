@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -208,7 +209,7 @@ func (d *decryptionRuleListDataSource) Schema(_ context.Context, _ datasource.Sc
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} forceNew:map[string]bool(nil)
 								"ssl_forward_proxy": dsschema.BoolAttribute{
-									Description: "The SslForwardProxy param.",
+									Description: "The SslForwardProxy param. Default: `false`.",
 									Computed:    true,
 								},
 								"ssl_inbound_inspection": dsschema.StringAttribute{
@@ -617,7 +618,7 @@ func (d *decryptionRuleDataSource) Schema(_ context.Context, _ datasource.Schema
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} forceNew:map[string]bool(nil)
 					"ssl_forward_proxy": dsschema.BoolAttribute{
-						Description: "The SslForwardProxy param.",
+						Description: "The SslForwardProxy param. Default: `false`.",
 						Computed:    true,
 					},
 					"ssl_inbound_inspection": dsschema.StringAttribute{
@@ -988,8 +989,10 @@ func (r *decryptionRuleResource) Schema(_ context.Context, _ resource.SchemaRequ
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} outputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} forceNew:map[string]bool(nil)
 					"ssl_forward_proxy": rsschema.BoolAttribute{
-						Description: "The SslForwardProxy param.",
+						Description: "The SslForwardProxy param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"ssl_inbound_inspection": rsschema.StringAttribute{
 						Description: "add the certificate name for SSL inbound inspection.",

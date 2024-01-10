@@ -67,10 +67,10 @@ Optional:
 
 Optional:
 
-- `alert` (Boolean) The Alert param.
-- `allow` (Boolean) The Allow param.
-- `block` (Boolean) The Block param.
-- `sinkhole` (Boolean) The Sinkhole param.
+- `alert` (Boolean) The Alert param. Default: `false`.
+- `allow` (Boolean) The Allow param. Default: `false`.
+- `block` (Boolean) The Block param. Default: `false`.
+- `sinkhole` (Boolean) The Sinkhole param. Default: `false`.
 
 
 

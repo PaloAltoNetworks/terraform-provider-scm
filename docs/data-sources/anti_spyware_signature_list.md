@@ -53,13 +53,13 @@ Read-Only:
 
 Read-Only:
 
-- `alert` (Boolean) The Alert param.
-- `allow` (Boolean) The Allow param.
+- `alert` (Boolean) The Alert param. Default: `false`.
+- `allow` (Boolean) The Allow param. Default: `false`.
 - `block_ip` (Attributes) The BlockIp param. (see [below for nested schema](#nestedatt--data--default_action--block_ip))
-- `drop` (Boolean) The Drop param.
-- `reset_both` (Boolean) The ResetBoth param.
-- `reset_client` (Boolean) The ResetClient param.
-- `reset_server` (Boolean) The ResetServer param.
+- `drop` (Boolean) The Drop param. Default: `false`.
+- `reset_both` (Boolean) The ResetBoth param. Default: `false`.
+- `reset_client` (Boolean) The ResetClient param. Default: `false`.
+- `reset_server` (Boolean) The ResetServer param. Default: `false`.
 
 <a id="nestedatt--data--default_action--block_ip"></a>
 ### Nested Schema for `data.default_action.block_ip`

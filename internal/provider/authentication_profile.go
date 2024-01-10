@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -223,7 +224,7 @@ func (d *authenticationProfileListDataSource) Schema(_ context.Context, _ dataso
 									},
 								},
 								"local_database": dsschema.BoolAttribute{
-									Description: "The LocalDatabase param.",
+									Description: "The LocalDatabase param. Default: `false`.",
 									Computed:    true,
 								},
 								"radius": dsschema.SingleNestedAttribute{
@@ -781,7 +782,7 @@ func (d *authenticationProfileDataSource) Schema(_ context.Context, _ datasource
 						},
 					},
 					"local_database": dsschema.BoolAttribute{
-						Description: "The LocalDatabase param.",
+						Description: "The LocalDatabase param. Default: `false`.",
 						Computed:    true,
 					},
 					"radius": dsschema.SingleNestedAttribute{
@@ -1283,8 +1284,10 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 						},
 					},
 					"local_database": rsschema.BoolAttribute{
-						Description: "The LocalDatabase param.",
+						Description: "The LocalDatabase param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"radius": rsschema.SingleNestedAttribute{
 						Description: "The Radius param.",

@@ -61,7 +61,7 @@ Optional:
 
 Optional:
 
-- `disabled` (Boolean) The Disabled param.
-- `domain_credentials` (Boolean) The DomainCredentials param.
+- `disabled` (Boolean) The Disabled param. Default: `false`.
+- `domain_credentials` (Boolean) The DomainCredentials param. Default: `false`.
 - `group_mapping` (String) The GroupMapping param.
-- `ip_user` (Boolean) The IpUser param.
+- `ip_user` (Boolean) The IpUser param. Default: `false`.

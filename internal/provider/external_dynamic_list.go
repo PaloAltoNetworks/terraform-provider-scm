@@ -356,11 +356,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param.",
+													Description: "The FiveMinute param. Default: `false`.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param.",
+													Description: "The Hourly param. Default: `false`.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -451,11 +451,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param.",
+													Description: "The FiveMinute param. Default: `false`.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param.",
+													Description: "The Hourly param. Default: `false`.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -546,11 +546,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param.",
+													Description: "The FiveMinute param. Default: `false`.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param.",
+													Description: "The Hourly param. Default: `false`.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -642,11 +642,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param.",
+													Description: "The FiveMinute param. Default: `false`.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param.",
+													Description: "The Hourly param. Default: `false`.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -762,11 +762,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param.",
+													Description: "The FiveMinute param. Default: `false`.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param.",
+													Description: "The Hourly param. Default: `false`.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -1623,11 +1623,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -1718,11 +1718,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -1813,11 +1813,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -1909,11 +1909,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -2029,11 +2029,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -2856,12 +2856,16 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param.",
@@ -2991,12 +2995,16 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param.",
@@ -3126,12 +3134,16 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param.",
@@ -3262,12 +3274,16 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param.",
@@ -3422,12 +3438,16 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param.",
+										Description: "The FiveMinute param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param.",
+										Description: "The Hourly param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param.",

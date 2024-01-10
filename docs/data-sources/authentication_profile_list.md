@@ -62,7 +62,7 @@ Read-Only:
 - `cloud` (Attributes) The Cloud param. (see [below for nested schema](#nestedatt--data--method--cloud))
 - `kerberos` (Attributes) The Kerberos param. (see [below for nested schema](#nestedatt--data--method--kerberos))
 - `ldap` (Attributes) The Ldap param. (see [below for nested schema](#nestedatt--data--method--ldap))
-- `local_database` (Boolean) The LocalDatabase param.
+- `local_database` (Boolean) The LocalDatabase param. Default: `false`.
 - `radius` (Attributes) The Radius param. (see [below for nested schema](#nestedatt--data--method--radius))
 - `saml_idp` (Attributes) The SamlIdp param. (see [below for nested schema](#nestedatt--data--method--saml_idp))
 - `tacplus` (Attributes) The Tacplus param. (see [below for nested schema](#nestedatt--data--method--tacplus))

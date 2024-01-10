@@ -75,7 +75,7 @@ Read-Only:
 
 Read-Only:
 
-- `not_available` (Boolean) The NotAvailable param.
+- `not_available` (Boolean) The NotAvailable param. Default: `false`.
 - `not_within` (Attributes) The NotWithin param. (see [below for nested schema](#nestedatt--data--anti_malware--criteria--virdef_version--not_within))
 - `within` (Attributes) The Within param. (see [below for nested schema](#nestedatt--data--anti_malware--criteria--virdef_version--within))
 
@@ -312,7 +312,7 @@ Read-Only:
 
 Read-Only:
 
-- `not_available` (Boolean) The NotAvailable param.
+- `not_available` (Boolean) The NotAvailable param. Default: `false`.
 - `not_within` (Attributes) The NotWithin param. (see [below for nested schema](#nestedatt--data--disk_backup--criteria--last_backup_time--not_within))
 - `within` (Attributes) The Within param. (see [below for nested schema](#nestedatt--data--disk_backup--criteria--last_backup_time--within))
 
@@ -548,7 +548,7 @@ Read-Only:
 
 Read-Only:
 
-- `no` (Boolean) The No param.
+- `no` (Boolean) The No param. Default: `false`.
 - `yes` (Attributes) The Yes param. (see [below for nested schema](#nestedatt--data--mobile_device--criteria--tag--has_malware--yes))
 
 <a id="nestedatt--data--mobile_device--criteria--tag--has_malware--yes"></a>
@@ -676,7 +676,7 @@ Read-Only:
 Read-Only:
 
 - `mobile` (Attributes) The Mobile param. (see [below for nested schema](#nestedatt--data--network_info--criteria--network--is--mobile))
-- `unknown` (Boolean) The Unknown param.
+- `unknown` (Boolean) The Unknown param. Default: `false`.
 - `wifi` (Attributes) The Wifi param. (see [below for nested schema](#nestedatt--data--network_info--criteria--network--is--wifi))
 
 <a id="nestedatt--data--network_info--criteria--network--is--mobile"></a>
@@ -701,9 +701,9 @@ Read-Only:
 
 Read-Only:
 
-- `ethernet` (Boolean) The Ethernet param.
+- `ethernet` (Boolean) The Ethernet param. Default: `false`.
 - `mobile` (Attributes) The Mobile param. (see [below for nested schema](#nestedatt--data--network_info--criteria--network--is_not--mobile))
-- `unknown` (Boolean) The Unknown param.
+- `unknown` (Boolean) The Unknown param. Default: `false`.
 - `wifi` (Attributes) The Wifi param. (see [below for nested schema](#nestedatt--data--network_info--criteria--network--is_not--wifi))
 
 <a id="nestedatt--data--network_info--criteria--network--is_not--mobile"></a>

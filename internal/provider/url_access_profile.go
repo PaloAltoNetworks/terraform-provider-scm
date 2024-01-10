@@ -172,11 +172,11 @@ func (d *urlAccessProfileListDataSource) Schema(_ context.Context, _ datasource.
 									Attributes: map[string]dsschema.Attribute{
 										// inputs:map[string]bool{} outputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} forceNew:map[string]bool(nil)
 										"disabled": dsschema.BoolAttribute{
-											Description: "The Disabled param.",
+											Description: "The Disabled param. Default: `false`.",
 											Computed:    true,
 										},
 										"domain_credentials": dsschema.BoolAttribute{
-											Description: "The DomainCredentials param.",
+											Description: "The DomainCredentials param. Default: `false`.",
 											Computed:    true,
 										},
 										"group_mapping": dsschema.StringAttribute{
@@ -184,7 +184,7 @@ func (d *urlAccessProfileListDataSource) Schema(_ context.Context, _ datasource.
 											Computed:    true,
 										},
 										"ip_user": dsschema.BoolAttribute{
-											Description: "The IpUser param.",
+											Description: "The IpUser param. Default: `false`.",
 											Computed:    true,
 										},
 									},
@@ -587,11 +587,11 @@ func (d *urlAccessProfileDataSource) Schema(_ context.Context, _ datasource.Sche
 						Attributes: map[string]dsschema.Attribute{
 							// inputs:map[string]bool{} outputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} forceNew:map[string]bool(nil)
 							"disabled": dsschema.BoolAttribute{
-								Description: "The Disabled param.",
+								Description: "The Disabled param. Default: `false`.",
 								Computed:    true,
 							},
 							"domain_credentials": dsschema.BoolAttribute{
-								Description: "The DomainCredentials param.",
+								Description: "The DomainCredentials param. Default: `false`.",
 								Computed:    true,
 							},
 							"group_mapping": dsschema.StringAttribute{
@@ -599,7 +599,7 @@ func (d *urlAccessProfileDataSource) Schema(_ context.Context, _ datasource.Sche
 								Computed:    true,
 							},
 							"ip_user": dsschema.BoolAttribute{
-								Description: "The IpUser param.",
+								Description: "The IpUser param. Default: `false`.",
 								Computed:    true,
 							},
 						},
@@ -932,20 +932,26 @@ func (r *urlAccessProfileResource) Schema(_ context.Context, _ resource.SchemaRe
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} outputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} forceNew:map[string]bool(nil)
 							"disabled": rsschema.BoolAttribute{
-								Description: "The Disabled param.",
+								Description: "The Disabled param. Default: `false`.",
 								Optional:    true,
+								Computed:    true,
+								Default:     booldefault.StaticBool(false),
 							},
 							"domain_credentials": rsschema.BoolAttribute{
-								Description: "The DomainCredentials param.",
+								Description: "The DomainCredentials param. Default: `false`.",
 								Optional:    true,
+								Computed:    true,
+								Default:     booldefault.StaticBool(false),
 							},
 							"group_mapping": rsschema.StringAttribute{
 								Description: "The GroupMapping param.",
 								Optional:    true,
 							},
 							"ip_user": rsschema.BoolAttribute{
-								Description: "The IpUser param.",
+								Description: "The IpUser param. Default: `false`.",
 								Optional:    true,
+								Computed:    true,
+								Default:     booldefault.StaticBool(false),
 							},
 						},
 					},

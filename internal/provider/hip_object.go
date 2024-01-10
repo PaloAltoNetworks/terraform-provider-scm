@@ -542,7 +542,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 											Attributes: map[string]dsschema.Attribute{
 												// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 												"not_available": dsschema.BoolAttribute{
-													Description: "The NotAvailable param.",
+													Description: "The NotAvailable param. Default: `false`.",
 													Computed:    true,
 												},
 												"not_within": dsschema.SingleNestedAttribute{
@@ -915,7 +915,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 											Attributes: map[string]dsschema.Attribute{
 												// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 												"not_available": dsschema.BoolAttribute{
-													Description: "The NotAvailable param.",
+													Description: "The NotAvailable param. Default: `false`.",
 													Computed:    true,
 												},
 												"not_within": dsschema.SingleNestedAttribute{
@@ -1260,7 +1260,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"no":true, "yes":true} forceNew:map[string]bool(nil)
 														"no": dsschema.BoolAttribute{
-															Description: "The No param.",
+															Description: "The No param. Default: `false`.",
 															Computed:    true,
 														},
 														"yes": dsschema.SingleNestedAttribute{
@@ -1477,7 +1477,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 															},
 														},
 														"unknown": dsschema.BoolAttribute{
-															Description: "The Unknown param.",
+															Description: "The Unknown param. Default: `false`.",
 															Computed:    true,
 														},
 														"wifi": dsschema.SingleNestedAttribute{
@@ -1499,7 +1499,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 														"ethernet": dsschema.BoolAttribute{
-															Description: "The Ethernet param.",
+															Description: "The Ethernet param. Default: `false`.",
 															Computed:    true,
 														},
 														"mobile": dsschema.SingleNestedAttribute{
@@ -1514,7 +1514,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 															},
 														},
 														"unknown": dsschema.BoolAttribute{
-															Description: "The Unknown param.",
+															Description: "The Unknown param. Default: `false`.",
 															Computed:    true,
 														},
 														"wifi": dsschema.SingleNestedAttribute{
@@ -3061,7 +3061,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 								Attributes: map[string]dsschema.Attribute{
 									// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": dsschema.BoolAttribute{
-										Description: "The NotAvailable param.",
+										Description: "The NotAvailable param. Default: `false`.",
 										Computed:    true,
 									},
 									"not_within": dsschema.SingleNestedAttribute{
@@ -3434,7 +3434,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 								Attributes: map[string]dsschema.Attribute{
 									// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": dsschema.BoolAttribute{
-										Description: "The NotAvailable param.",
+										Description: "The NotAvailable param. Default: `false`.",
 										Computed:    true,
 									},
 									"not_within": dsschema.SingleNestedAttribute{
@@ -3779,7 +3779,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"no":true, "yes":true} forceNew:map[string]bool(nil)
 											"no": dsschema.BoolAttribute{
-												Description: "The No param.",
+												Description: "The No param. Default: `false`.",
 												Computed:    true,
 											},
 											"yes": dsschema.SingleNestedAttribute{
@@ -3996,7 +3996,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 												},
 											},
 											"unknown": dsschema.BoolAttribute{
-												Description: "The Unknown param.",
+												Description: "The Unknown param. Default: `false`.",
 												Computed:    true,
 											},
 											"wifi": dsschema.SingleNestedAttribute{
@@ -4018,7 +4018,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 											"ethernet": dsschema.BoolAttribute{
-												Description: "The Ethernet param.",
+												Description: "The Ethernet param. Default: `false`.",
 												Computed:    true,
 											},
 											"mobile": dsschema.SingleNestedAttribute{
@@ -4033,7 +4033,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 												},
 											},
 											"unknown": dsschema.BoolAttribute{
-												Description: "The Unknown param.",
+												Description: "The Unknown param. Default: `false`.",
 												Computed:    true,
 											},
 											"wifi": dsschema.SingleNestedAttribute{
@@ -5508,8 +5508,10 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_available":true, "not_within":true, "within":true} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": rsschema.BoolAttribute{
-										Description: "The NotAvailable param.",
+										Description: "The NotAvailable param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"not_within": rsschema.SingleNestedAttribute{
 										Description: "The NotWithin param.",
@@ -6023,8 +6025,10 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_available":true, "not_within":true, "within":true} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": rsschema.BoolAttribute{
-										Description: "The NotAvailable param.",
+										Description: "The NotAvailable param. Default: `false`.",
 										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
 									},
 									"not_within": rsschema.SingleNestedAttribute{
 										Description: "The NotWithin param.",
@@ -6501,8 +6505,10 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"no":true, "yes":true} outputs:map[string]bool{"no":true, "yes":true} forceNew:map[string]bool(nil)
 											"no": rsschema.BoolAttribute{
-												Description: "The No param.",
+												Description: "The No param. Default: `false`.",
 												Optional:    true,
+												Computed:    true,
+												Default:     booldefault.StaticBool(false),
 											},
 											"yes": rsschema.SingleNestedAttribute{
 												Description: "The Yes param.",
@@ -6793,8 +6799,10 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"unknown": rsschema.BoolAttribute{
-												Description: "The Unknown param.",
+												Description: "The Unknown param. Default: `false`.",
 												Optional:    true,
+												Computed:    true,
+												Default:     booldefault.StaticBool(false),
 											},
 											"wifi": rsschema.SingleNestedAttribute{
 												Description: "The Wifi param.",
@@ -6819,8 +6827,10 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} outputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 											"ethernet": rsschema.BoolAttribute{
-												Description: "The Ethernet param.",
+												Description: "The Ethernet param. Default: `false`.",
 												Optional:    true,
+												Computed:    true,
+												Default:     booldefault.StaticBool(false),
 											},
 											"mobile": rsschema.SingleNestedAttribute{
 												Description: "The Mobile param.",
@@ -6838,8 +6848,10 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"unknown": rsschema.BoolAttribute{
-												Description: "The Unknown param.",
+												Description: "The Unknown param. Default: `false`.",
 												Optional:    true,
+												Computed:    true,
+												Default:     booldefault.StaticBool(false),
 											},
 											"wifi": rsschema.SingleNestedAttribute{
 												Description: "The Wifi param.",

@@ -226,11 +226,11 @@ func (d *antiSpywareSignatureListDataSource) Schema(_ context.Context, _ datasou
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": dsschema.BoolAttribute{
-									Description: "The Alert param.",
+									Description: "The Alert param. Default: `false`.",
 									Computed:    true,
 								},
 								"allow": dsschema.BoolAttribute{
-									Description: "The Allow param.",
+									Description: "The Allow param. Default: `false`.",
 									Computed:    true,
 								},
 								"block_ip": dsschema.SingleNestedAttribute{
@@ -249,19 +249,19 @@ func (d *antiSpywareSignatureListDataSource) Schema(_ context.Context, _ datasou
 									},
 								},
 								"drop": dsschema.BoolAttribute{
-									Description: "The Drop param.",
+									Description: "The Drop param. Default: `false`.",
 									Computed:    true,
 								},
 								"reset_both": dsschema.BoolAttribute{
-									Description: "The ResetBoth param.",
+									Description: "The ResetBoth param. Default: `false`.",
 									Computed:    true,
 								},
 								"reset_client": dsschema.BoolAttribute{
-									Description: "The ResetClient param.",
+									Description: "The ResetClient param. Default: `false`.",
 									Computed:    true,
 								},
 								"reset_server": dsschema.BoolAttribute{
-									Description: "The ResetServer param.",
+									Description: "The ResetServer param. Default: `false`.",
 									Computed:    true,
 								},
 							},
@@ -1144,11 +1144,11 @@ func (d *antiSpywareSignatureDataSource) Schema(_ context.Context, _ datasource.
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 					"alert": dsschema.BoolAttribute{
-						Description: "The Alert param.",
+						Description: "The Alert param. Default: `false`.",
 						Computed:    true,
 					},
 					"allow": dsschema.BoolAttribute{
-						Description: "The Allow param.",
+						Description: "The Allow param. Default: `false`.",
 						Computed:    true,
 					},
 					"block_ip": dsschema.SingleNestedAttribute{
@@ -1167,19 +1167,19 @@ func (d *antiSpywareSignatureDataSource) Schema(_ context.Context, _ datasource.
 						},
 					},
 					"drop": dsschema.BoolAttribute{
-						Description: "The Drop param.",
+						Description: "The Drop param. Default: `false`.",
 						Computed:    true,
 					},
 					"reset_both": dsschema.BoolAttribute{
-						Description: "The ResetBoth param.",
+						Description: "The ResetBoth param. Default: `false`.",
 						Computed:    true,
 					},
 					"reset_client": dsschema.BoolAttribute{
-						Description: "The ResetClient param.",
+						Description: "The ResetClient param. Default: `false`.",
 						Computed:    true,
 					},
 					"reset_server": dsschema.BoolAttribute{
-						Description: "The ResetServer param.",
+						Description: "The ResetServer param. Default: `false`.",
 						Computed:    true,
 					},
 				},
@@ -1989,12 +1989,16 @@ func (r *antiSpywareSignatureResource) Schema(_ context.Context, _ resource.Sche
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 					"alert": rsschema.BoolAttribute{
-						Description: "The Alert param.",
+						Description: "The Alert param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"allow": rsschema.BoolAttribute{
-						Description: "The Allow param.",
+						Description: "The Allow param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"block_ip": rsschema.SingleNestedAttribute{
 						Description: "The BlockIp param.",
@@ -2018,20 +2022,28 @@ func (r *antiSpywareSignatureResource) Schema(_ context.Context, _ resource.Sche
 						},
 					},
 					"drop": rsschema.BoolAttribute{
-						Description: "The Drop param.",
+						Description: "The Drop param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"reset_both": rsschema.BoolAttribute{
-						Description: "The ResetBoth param.",
+						Description: "The ResetBoth param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"reset_client": rsschema.BoolAttribute{
-						Description: "The ResetClient param.",
+						Description: "The ResetClient param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"reset_server": rsschema.BoolAttribute{
-						Description: "The ResetServer param.",
+						Description: "The ResetServer param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 				},
 			},

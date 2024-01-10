@@ -71,13 +71,13 @@ Read-Only:
 
 Read-Only:
 
-- `alert` (Boolean) The Alert param.
-- `allow` (Boolean) The Allow param.
+- `alert` (Boolean) The Alert param. Default: `false`.
+- `allow` (Boolean) The Allow param. Default: `false`.
 - `block_ip` (Attributes) The BlockIp param. (see [below for nested schema](#nestedatt--data--rules--action--block_ip))
-- `drop` (Boolean) The Drop param.
-- `reset_both` (Boolean) The ResetBoth param.
-- `reset_client` (Boolean) The ResetClient param.
-- `reset_server` (Boolean) The ResetServer param.
+- `drop` (Boolean) The Drop param. Default: `false`.
+- `reset_both` (Boolean) The ResetBoth param. Default: `false`.
+- `reset_client` (Boolean) The ResetClient param. Default: `false`.
+- `reset_server` (Boolean) The ResetServer param. Default: `false`.
 
 <a id="nestedatt--data--rules--action--block_ip"></a>
 ### Nested Schema for `data.rules.action.reset_server`
@@ -106,14 +106,14 @@ Read-Only:
 
 Read-Only:
 
-- `alert` (Boolean) The Alert param.
-- `allow` (Boolean) The Allow param.
+- `alert` (Boolean) The Alert param. Default: `false`.
+- `allow` (Boolean) The Allow param. Default: `false`.
 - `block_ip` (Attributes) The BlockIp param. (see [below for nested schema](#nestedatt--data--threat_exceptions--action--block_ip))
-- `default` (Boolean) The Default param.
-- `drop` (Boolean) The Drop param.
-- `reset_both` (Boolean) The ResetBoth param.
-- `reset_client` (Boolean) The ResetClient param.
-- `reset_server` (Boolean) The ResetServer param.
+- `default` (Boolean) The Default param. Default: `false`.
+- `drop` (Boolean) The Drop param. Default: `false`.
+- `reset_both` (Boolean) The ResetBoth param. Default: `false`.
+- `reset_client` (Boolean) The ResetClient param. Default: `false`.
+- `reset_server` (Boolean) The ResetServer param. Default: `false`.
 
 <a id="nestedatt--data--threat_exceptions--action--block_ip"></a>
 ### Nested Schema for `data.threat_exceptions.action.reset_server`

@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -126,7 +127,7 @@ func (d *radiusServerProfileListDataSource) Schema(_ context.Context, _ datasour
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} forceNew:map[string]bool(nil)
 								"chap": dsschema.BoolAttribute{
-									Description: "The Chap param.",
+									Description: "The Chap param. Default: `false`.",
 									Computed:    true,
 								},
 								"eap_ttls_with_pap": dsschema.SingleNestedAttribute{
@@ -145,7 +146,7 @@ func (d *radiusServerProfileListDataSource) Schema(_ context.Context, _ datasour
 									},
 								},
 								"pap": dsschema.BoolAttribute{
-									Description: "The Pap param.",
+									Description: "The Pap param. Default: `false`.",
 									Computed:    true,
 								},
 								"peap_mschap_v2": dsschema.SingleNestedAttribute{
@@ -516,7 +517,7 @@ func (d *radiusServerProfileDataSource) Schema(_ context.Context, _ datasource.S
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} forceNew:map[string]bool(nil)
 					"chap": dsschema.BoolAttribute{
-						Description: "The Chap param.",
+						Description: "The Chap param. Default: `false`.",
 						Computed:    true,
 					},
 					"eap_ttls_with_pap": dsschema.SingleNestedAttribute{
@@ -535,7 +536,7 @@ func (d *radiusServerProfileDataSource) Schema(_ context.Context, _ datasource.S
 						},
 					},
 					"pap": dsschema.BoolAttribute{
-						Description: "The Pap param.",
+						Description: "The Pap param. Default: `false`.",
 						Computed:    true,
 					},
 					"peap_mschap_v2": dsschema.SingleNestedAttribute{
@@ -846,8 +847,10 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} outputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} forceNew:map[string]bool(nil)
 					"chap": rsschema.BoolAttribute{
-						Description: "The Chap param.",
+						Description: "The Chap param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"eap_ttls_with_pap": rsschema.SingleNestedAttribute{
 						Description: "The EapTtlsWithPap param.",
@@ -865,8 +868,10 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"pap": rsschema.BoolAttribute{
-						Description: "The Pap param.",
+						Description: "The Pap param. Default: `false`.",
 						Optional:    true,
+						Computed:    true,
+						Default:     booldefault.StaticBool(false),
 					},
 					"peap_mschap_v2": rsschema.SingleNestedAttribute{
 						Description: "The PeapMschapV2 param.",

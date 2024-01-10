@@ -32,9 +32,9 @@ Retrieves a config item.
 
 Read-Only:
 
-- `chap` (Boolean) The Chap param.
+- `chap` (Boolean) The Chap param. Default: `false`.
 - `eap_ttls_with_pap` (Attributes) The EapTtlsWithPap param. (see [below for nested schema](#nestedatt--protocol--eap_ttls_with_pap))
-- `pap` (Boolean) The Pap param.
+- `pap` (Boolean) The Pap param. Default: `false`.
 - `peap_mschap_v2` (Attributes) The PeapMschapV2 param. (see [below for nested schema](#nestedatt--protocol--peap_mschap_v2))
 - `peap_with_gtc` (Attributes) The PeapWithGtc param. (see [below for nested schema](#nestedatt--protocol--peap_with_gtc))
 

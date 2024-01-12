@@ -1,0 +1,43 @@
+---
+page_title: "Provider: scm"
+description: |-
+    The Terraform provider for Palo Alto Networks Strata Cloud Manager.
+---
+
+# Provider scm
+
+The `scm` provider provides resources and data sources to manage and query Strata Cloud Manager.
+
+This provider covers the following aspects of Strata Cloud Manager:
+* Unified Networking Security
+
+
+## Example Usage
+
+{{tffile "examples/provider/provider.tf"}}
+
+
+## Provider Parameter Priority
+
+There are multiple ways to specify the provider's parameters.  If overlapping values are configured for the provider, then this is the resolution order:
+
+1. Statically configured in the `provider` block
+2. Environment variable (where applicable)
+3. Taken from the JSON config file
+
+
+{{ .SchemaMarkdown | trimspace }}
+
+
+## Debugging
+
+To view the API invocations and responses, the `TF_LOG` flag can be set:
+
+```bash
+TF_LOG=debug terraform apply
+```
+
+
+## Support
+
+This template/solution are released under an as-is, best effort, support policy. These scripts should be seen as community supported and Palo Alto Networks will contribute our expertise as and when possible. We do not provide technical support or help in using or troubleshooting the components of the project through our normal support options such as Palo Alto Networks support teams, or ASC (Authorized Support Centers) partners and backline support options. The underlying product used (the VM-Series firewall) by the scripts or templates are still supported, but the support is only for the product functionality and not for help in deploying or using the template or script itself. Unless explicitly tagged, all projects or work posted in our GitHub repository (at https://github.com/PaloAltoNetworks) or sites other than our official Downloads page on https://support.paloaltonetworks.com are provided under the best effort policy.

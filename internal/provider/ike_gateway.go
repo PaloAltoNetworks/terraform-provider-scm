@@ -656,7 +656,8 @@ type ikeGatewayDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Folder types.String `tfsdk:"folder"`
+	Id     types.String `tfsdk:"id"`
 
 	// Output.
 	Authentication ikeGatewayDsModel_yJkkSzS_AuthenticationObject `tfsdk:"authentication"`
@@ -755,7 +756,7 @@ func (d *ikeGatewayDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"authentication":true, "id":true, "local_id":true, "name":true, "peer_address":true, "peer_id":true, "protocol":true, "protocol_common":true, "tfid":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"authentication":true, "id":true, "local_id":true, "name":true, "peer_address":true, "peer_id":true, "protocol":true, "protocol_common":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
 			"authentication": dsschema.SingleNestedAttribute{
 				Description: "The Authentication param.",
 				Computed:    true,
@@ -808,6 +809,10 @@ func (d *ikeGatewayDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 						},
 					},
 				},
+			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param.",
+				Optional:    true,
 			},
 			"id": dsschema.StringAttribute{
 				Description: "The Id param.",
@@ -984,6 +989,7 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 		"data_source_name":            "scm_ike_gateway",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -993,6 +999,8 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	input := kJVbXva.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueStringPointer()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -1004,6 +1012,11 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Folder != nil {
+		idBuilder.WriteString(*input.Folder)
+	}
 
 	// Store the answer to state.
 
@@ -1139,9 +1152,8 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 
 // Resource.
 var (
-	_ resource.Resource                = &ikeGatewayResource{}
-	_ resource.ResourceWithConfigure   = &ikeGatewayResource{}
-	_ resource.ResourceWithImportState = &ikeGatewayResource{}
+	_ resource.Resource              = &ikeGatewayResource{}
+	_ resource.ResourceWithConfigure = &ikeGatewayResource{}
 )
 
 func NewIkeGatewayResource() resource.Resource {
@@ -1170,6 +1182,7 @@ type ikeGatewayRsModel struct {
 	Snippet        types.String                                    `tfsdk:"snippet"`
 
 	// Output.
+	EncryptedValues types.Map `tfsdk:"encrypted_values"`
 	// omit input: authentication
 	// omit input: id
 	// omit input: local_id
@@ -1267,6 +1280,12 @@ func (r *ikeGatewayResource) Schema(_ context.Context, _ resource.SchemaRequest,
 
 		Attributes: map[string]rsschema.Attribute{
 			// inputs:map[string]bool{"authentication":true, "device":true, "folder":true, "id":true, "local_id":true, "name":true, "peer_address":true, "peer_id":true, "protocol":true, "protocol_common":true, "snippet":true} outputs:map[string]bool{"authentication":true, "id":true, "local_id":true, "name":true, "peer_address":true, "peer_id":true, "protocol":true, "protocol_common":true, "tfid":true} forceNew:map[string]bool{"device":true, "folder":true, "snippet":true}
+			"encrypted_values": rsschema.MapAttribute{
+				Description: "(Internal use) Encrypted values returned from the API.",
+				Computed:    true,
+				Sensitive:   true,
+				ElementType: types.StringType,
+			},
 			"authentication": rsschema.SingleNestedAttribute{
 				Description: "The Authentication param.",
 				Required:    true,
@@ -1543,6 +1562,9 @@ func (r *ikeGatewayResource) Create(ctx context.Context, req resource.CreateRequ
 		return
 	}
 
+	// Map containing encrypted and plain text values for encrypted params.
+	ev := make(map[string]types.String)
+
 	// Basic logging.
 	tflog.Info(ctx, "performing resource create", map[string]any{
 		"resource_name":               "scm_ike_gateway",
@@ -1586,6 +1608,8 @@ func (r *ikeGatewayResource) Create(ctx context.Context, req resource.CreateRequ
 	if state.Authentication.PreSharedKey != nil {
 		input.Request.Authentication.PreSharedKey = &yJkkSzS.PreSharedKeyObject{}
 
+		var0 := "solo | plaintext | key"
+		ev[var0] = state.Authentication.PreSharedKey.Key
 		input.Request.Authentication.PreSharedKey.Key = state.Authentication.PreSharedKey.Key.ValueStringPointer()
 	}
 
@@ -1724,7 +1748,11 @@ func (r *ikeGatewayResource) Create(ctx context.Context, req resource.CreateRequ
 	} else {
 		state.Authentication.PreSharedKey = &ikeGatewayRsModel_yJkkSzS_PreSharedKeyObject{}
 
-		state.Authentication.PreSharedKey.Key = types.StringPointerValue(ans.Authentication.PreSharedKey.Key)
+		var1 := "solo | encrypted | key"
+		ev[var1] = types.StringPointerValue(ans.Authentication.PreSharedKey.Key)
+
+		var2 := "solo | plaintext | key"
+		state.Authentication.PreSharedKey.Key = ev[var2]
 	}
 
 	state.Id = types.StringPointerValue(ans.Id)
@@ -1819,6 +1847,10 @@ func (r *ikeGatewayResource) Create(ctx context.Context, req resource.CreateRequ
 		state.ProtocolCommon.PassiveMode = types.BoolPointerValue(ans.ProtocolCommon.PassiveMode)
 	}
 
+	var3, var4 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var3
+	resp.Diagnostics.Append(var4.Errors()...)
+
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -1838,6 +1870,13 @@ func (r *ikeGatewayResource) Read(ctx context.Context, req resource.ReadRequest,
 		return
 	}
 
+	// Map containing encrypted and plain text values for encrypted params.
+	ev := make(map[string]types.String, len(savestate.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(savestate.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
 		"terraform_provider_function": "Read",
@@ -1853,6 +1892,8 @@ func (r *ikeGatewayResource) Read(ctx context.Context, req resource.ReadRequest,
 	input := kJVbXva.ReadInput{}
 
 	input.Id = tokens[3]
+
+	input.Folder = &tokens[0]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -1915,7 +1956,14 @@ func (r *ikeGatewayResource) Read(ctx context.Context, req resource.ReadRequest,
 	} else {
 		state.Authentication.PreSharedKey = &ikeGatewayRsModel_yJkkSzS_PreSharedKeyObject{}
 
-		state.Authentication.PreSharedKey.Key = types.StringPointerValue(ans.Authentication.PreSharedKey.Key)
+		var0 := "solo | encrypted | key"
+		if ev[var0].Equal(types.StringPointerValue(ans.Authentication.PreSharedKey.Key)) {
+
+			var1 := "solo | plaintext | key"
+			state.Authentication.PreSharedKey.Key = ev[var1]
+		} else {
+			state.Authentication.PreSharedKey.Key = types.StringNull()
+		}
 	}
 
 	state.Id = types.StringPointerValue(ans.Id)
@@ -2010,6 +2058,10 @@ func (r *ikeGatewayResource) Read(ctx context.Context, req resource.ReadRequest,
 		state.ProtocolCommon.PassiveMode = types.BoolPointerValue(ans.ProtocolCommon.PassiveMode)
 	}
 
+	var2, var3 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var2
+	resp.Diagnostics.Append(var3.Errors()...)
+
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -2031,6 +2083,13 @@ func (r *ikeGatewayResource) Update(ctx context.Context, req resource.UpdateRequ
 	tokens := strings.Split(tfid, IdSeparator)
 	if len(tokens) != 4 {
 		resp.Diagnostics.AddError("Error in resource ID format", "Expected 4 tokens")
+		return
+	}
+
+	// Map containing encrypted and plain text values for encrypted params.
+	ev := make(map[string]types.String, len(state.EncryptedValues.Elements()))
+	resp.Diagnostics.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false).Errors()...)
+	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -2073,6 +2132,8 @@ func (r *ikeGatewayResource) Update(ctx context.Context, req resource.UpdateRequ
 	if plan.Authentication.PreSharedKey != nil {
 		input.Request.Authentication.PreSharedKey = &yJkkSzS.PreSharedKeyObject{}
 
+		var0 := "solo | plaintext | key"
+		ev[var0] = plan.Authentication.PreSharedKey.Key
 		input.Request.Authentication.PreSharedKey.Key = plan.Authentication.PreSharedKey.Key.ValueStringPointer()
 	}
 
@@ -2190,7 +2251,11 @@ func (r *ikeGatewayResource) Update(ctx context.Context, req resource.UpdateRequ
 	} else {
 		state.Authentication.PreSharedKey = &ikeGatewayRsModel_yJkkSzS_PreSharedKeyObject{}
 
-		state.Authentication.PreSharedKey.Key = types.StringPointerValue(ans.Authentication.PreSharedKey.Key)
+		var1 := "solo | encrypted | key"
+		ev[var1] = types.StringPointerValue(ans.Authentication.PreSharedKey.Key)
+
+		var2 := "solo | plaintext | key"
+		state.Authentication.PreSharedKey.Key = ev[var2]
 	}
 
 	state.Id = types.StringPointerValue(ans.Id)
@@ -2285,6 +2350,10 @@ func (r *ikeGatewayResource) Update(ctx context.Context, req resource.UpdateRequ
 		state.ProtocolCommon.PassiveMode = types.BoolPointerValue(ans.ProtocolCommon.PassiveMode)
 	}
 
+	var3, var4 := types.MapValueFrom(ctx, types.StringType, ev)
+	state.EncryptedValues = var3
+	resp.Diagnostics.Append(var4.Errors()...)
+
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -2322,8 +2391,4 @@ func (r *ikeGatewayResource) Delete(ctx context.Context, req resource.DeleteRequ
 	if _, err := svc.Delete(ctx, input); err != nil && !IsObjectNotFound(err) {
 		resp.Diagnostics.AddError("Error in delete", err.Error())
 	}
-}
-
-func (r *ikeGatewayResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }

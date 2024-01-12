@@ -27,20 +27,20 @@ import (
 
 // Data source (listing).
 var (
-	_ datasource.DataSource              = &tagsListDataSource{}
-	_ datasource.DataSourceWithConfigure = &tagsListDataSource{}
+	_ datasource.DataSource              = &tagListDataSource{}
+	_ datasource.DataSourceWithConfigure = &tagListDataSource{}
 )
 
-func NewTagsListDataSource() datasource.DataSource {
-	return &tagsListDataSource{}
+func NewTagListDataSource() datasource.DataSource {
+	return &tagListDataSource{}
 }
 
-type tagsListDataSource struct {
+type tagListDataSource struct {
 	client *scm.Client
 }
 
-// tagsListDsModel is the model.
-type tagsListDsModel struct {
+// tagListDsModel is the model.
+type tagListDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
@@ -52,13 +52,13 @@ type tagsListDsModel struct {
 	Snippet types.String `tfsdk:"snippet"`
 
 	// Output.
-	Data []tagsListDsModel_qFWAgJG_Config `tfsdk:"data"`
+	Data []tagListDsModel_qFWAgJG_Config `tfsdk:"data"`
 	// omit input: limit
 	// omit input: offset
 	Total types.Int64 `tfsdk:"total"`
 }
 
-type tagsListDsModel_qFWAgJG_Config struct {
+type tagListDsModel_qFWAgJG_Config struct {
 	Color    types.String `tfsdk:"color"`
 	Comments types.String `tfsdk:"comments"`
 	Id       types.String `tfsdk:"id"`
@@ -66,12 +66,12 @@ type tagsListDsModel_qFWAgJG_Config struct {
 }
 
 // Metadata returns the data source type name.
-func (d *tagsListDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_tags_list"
+func (d *tagListDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_tag_list"
 }
 
 // Schema defines the schema for this listing data source.
-func (d *tagsListDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *tagListDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = dsschema.Schema{
 		Description: "Retrieves a listing of config items.",
 
@@ -141,7 +141,7 @@ func (d *tagsListDataSource) Schema(_ context.Context, _ datasource.SchemaReques
 }
 
 // Configure prepares the struct.
-func (d *tagsListDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *tagListDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -150,8 +150,8 @@ func (d *tagsListDataSource) Configure(_ context.Context, req datasource.Configu
 }
 
 // Read performs Read for the struct.
-func (d *tagsListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var state tagsListDsModel
+func (d *tagListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var state tagListDsModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -159,7 +159,7 @@ func (d *tagsListDataSource) Read(ctx context.Context, req datasource.ReadReques
 
 	// Basic logging.
 	tflog.Info(ctx, "performing data source listing", map[string]any{
-		"data_source_name":            "scm_tags_list",
+		"data_source_name":            "scm_tag_list",
 		"terraform_provider_function": "Read",
 		"name":                        state.Name.ValueString(),
 		"folder":                      state.Folder.ValueString(),
@@ -232,9 +232,9 @@ func (d *tagsListDataSource) Read(ctx context.Context, req datasource.ReadReques
 	if len(ans.Data) == 0 {
 		state.Data = nil
 	} else {
-		state.Data = make([]tagsListDsModel_qFWAgJG_Config, 0, len(ans.Data))
+		state.Data = make([]tagListDsModel_qFWAgJG_Config, 0, len(ans.Data))
 		for _, var0 := range ans.Data {
-			var1 := tagsListDsModel_qFWAgJG_Config{}
+			var1 := tagListDsModel_qFWAgJG_Config{}
 
 			var1.Color = types.StringPointerValue(var0.Color)
 
@@ -259,20 +259,20 @@ func (d *tagsListDataSource) Read(ctx context.Context, req datasource.ReadReques
 
 // Data source.
 var (
-	_ datasource.DataSource              = &tagsDataSource{}
-	_ datasource.DataSourceWithConfigure = &tagsDataSource{}
+	_ datasource.DataSource              = &tagDataSource{}
+	_ datasource.DataSourceWithConfigure = &tagDataSource{}
 )
 
-func NewTagsDataSource() datasource.DataSource {
-	return &tagsDataSource{}
+func NewTagDataSource() datasource.DataSource {
+	return &tagDataSource{}
 }
 
-type tagsDataSource struct {
+type tagDataSource struct {
 	client *scm.Client
 }
 
-// tagsDsModel is the model.
-type tagsDsModel struct {
+// tagDsModel is the model.
+type tagDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
@@ -286,12 +286,12 @@ type tagsDsModel struct {
 }
 
 // Metadata returns the data source type name.
-func (d *tagsDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_tags"
+func (d *tagDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_tag"
 }
 
 // Schema defines the schema for this data source.
-func (d *tagsDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *tagDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = dsschema.Schema{
 		Description: "Retrieves a config item.",
 
@@ -322,7 +322,7 @@ func (d *tagsDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, r
 }
 
 // Configure prepares the struct.
-func (d *tagsDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *tagDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -331,8 +331,8 @@ func (d *tagsDataSource) Configure(_ context.Context, req datasource.ConfigureRe
 }
 
 // Read performs Read for the struct.
-func (d *tagsDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var state tagsDsModel
+func (d *tagDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var state tagDsModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -340,7 +340,7 @@ func (d *tagsDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 
 	// Basic logging.
 	tflog.Info(ctx, "performing data source read", map[string]any{
-		"data_source_name":            "scm_tags",
+		"data_source_name":            "scm_tag",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
 	})
@@ -382,21 +382,21 @@ func (d *tagsDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 
 // Resource.
 var (
-	_ resource.Resource                = &tagsResource{}
-	_ resource.ResourceWithConfigure   = &tagsResource{}
-	_ resource.ResourceWithImportState = &tagsResource{}
+	_ resource.Resource                = &tagResource{}
+	_ resource.ResourceWithConfigure   = &tagResource{}
+	_ resource.ResourceWithImportState = &tagResource{}
 )
 
-func NewTagsResource() resource.Resource {
-	return &tagsResource{}
+func NewTagResource() resource.Resource {
+	return &tagResource{}
 }
 
-type tagsResource struct {
+type tagResource struct {
 	client *scm.Client
 }
 
-// tagsRsModel is the model.
-type tagsRsModel struct {
+// tagRsModel is the model.
+type tagRsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
@@ -416,12 +416,12 @@ type tagsRsModel struct {
 }
 
 // Metadata returns the data source type name.
-func (r *tagsResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_tags"
+func (r *tagResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_tag"
 }
 
 // Schema defines the schema for this data source.
-func (r *tagsResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *tagResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = rsschema.Schema{
 		Description: "Retrieves a config item.",
 
@@ -488,7 +488,7 @@ func (r *tagsResource) Schema(_ context.Context, _ resource.SchemaRequest, resp 
 }
 
 // Configure prepares the struct.
-func (r *tagsResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *tagResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -497,8 +497,8 @@ func (r *tagsResource) Configure(_ context.Context, req resource.ConfigureReques
 }
 
 // Create resource.
-func (r *tagsResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var state tagsRsModel
+func (r *tagResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var state tagRsModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -506,7 +506,7 @@ func (r *tagsResource) Create(ctx context.Context, req resource.CreateRequest, r
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource create", map[string]any{
-		"resource_name":               "scm_tags",
+		"resource_name":               "scm_tag",
 		"terraform_provider_function": "Create",
 		"folder":                      state.Folder.ValueString(),
 		"snippet":                     state.Snippet.ValueString(),
@@ -581,8 +581,8 @@ func (r *tagsResource) Create(ctx context.Context, req resource.CreateRequest, r
 }
 
 // Read performs Read for the struct.
-func (r *tagsResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var savestate, state tagsRsModel
+func (r *tagResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var savestate, state tagRsModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &savestate)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -598,7 +598,7 @@ func (r *tagsResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
 		"terraform_provider_function": "Read",
-		"resource_name":               "scm_tags",
+		"resource_name":               "scm_tag",
 		"locMap":                      map[string]int{"device": 2, "folder": 0, "id": 3, "snippet": 1},
 		"tokens":                      tokens,
 	})
@@ -656,8 +656,8 @@ func (r *tagsResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 }
 
 // Update performs the Update for the struct.
-func (r *tagsResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan, state tagsRsModel
+func (r *tagResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var plan, state tagRsModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -678,7 +678,7 @@ func (r *tagsResource) Update(ctx context.Context, req resource.UpdateRequest, r
 	// Basic logging.
 	tflog.Info(ctx, "performing resource update", map[string]any{
 		"terraform_provider_function": "Update",
-		"resource_name":               "scm_tags",
+		"resource_name":               "scm_tag",
 		"tfid":                        state.Tfid.ValueString(),
 	})
 
@@ -727,7 +727,7 @@ func (r *tagsResource) Update(ctx context.Context, req resource.UpdateRequest, r
 }
 
 // Delete performs delete for the struct.
-func (r *tagsResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+func (r *tagResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
 	var idType types.String
 	resp.Diagnostics.Append(req.State.GetAttribute(ctx, path.Root("tfid"), &idType)...)
 	if resp.Diagnostics.HasError() {
@@ -743,7 +743,7 @@ func (r *tagsResource) Delete(ctx context.Context, req resource.DeleteRequest, r
 	// Basic logging.
 	tflog.Info(ctx, "performing resource delete", map[string]any{
 		"terraform_provider_function": "Delete",
-		"resource_name":               "scm_tags",
+		"resource_name":               "scm_tag",
 		"locMap":                      map[string]int{"device": 2, "folder": 0, "id": 3, "snippet": 1},
 		"tokens":                      tokens,
 	})
@@ -761,6 +761,6 @@ func (r *tagsResource) Delete(ctx context.Context, req resource.DeleteRequest, r
 	}
 }
 
-func (r *tagsResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *tagResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }

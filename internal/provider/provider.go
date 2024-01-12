@@ -125,7 +125,7 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		Logging:          config.Logging.ValueString(),
 		Logger:           tflog.Debug,
 		CheckEnvironment: true,
-		Agent:            fmt.Sprintf("Terraform/%s Provider/%s", req.TerraformVersion, p.version),
+		Agent:            fmt.Sprintf("Terraform/%s Provider/scm Version/%s", req.TerraformVersion, p.version),
 	}
 
 	if err := con.Setup(); err != nil {

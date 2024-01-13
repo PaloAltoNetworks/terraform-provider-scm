@@ -15,6 +15,13 @@ This provider covers the following aspects of Strata Cloud Manager:
 ## Example Usage
 
 ```terraform
+provider "scm" {
+  host          = "api.strata.paloaltonetworks.com"
+  client_id     = "your-id@12345"
+  client_secret = "secret"
+  scope         = "tsg_id:12345"
+}
+
 terraform {
   required_providers {
     scm = {
@@ -22,13 +29,6 @@ terraform {
       version = "0.1.0"
     }
   }
-}
-
-provider "scm" {
-  host          = "api.strata.paloaltonetworks.com"
-  client_id     = "your-id@12345"
-  client_secret = "secret"
-  scope         = "tsg_id:12345"
 }
 ```
 

@@ -27,24 +27,24 @@ resource "scm_application_filter" "example" {
 
 ### Optional
 
-- `categories` (List of String) The Categories param.
+- `categories` (List of String) The Categories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.
 - `device` (String) The Device param.
 - `evasive` (Boolean) only True is a valid value.
 - `excessive_bandwidth_use` (Boolean) only True is a valid value.
-- `excludes` (List of String) The Excludes param.
+- `excludes` (List of String) The Excludes param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.
 - `folder` (String) The Folder param.
 - `has_known_vulnerabilities` (Boolean) only True is a valid value.
 - `is_saas` (Boolean) only True is a valid value.
 - `new_appid` (Boolean) only True is a valid value.
 - `pervasive` (Boolean) only True is a valid value.
 - `prone_to_misuse` (Boolean) only True is a valid value.
-- `risks` (List of Number) The Risks param.
-- `saas_certifications` (List of String) The SaasCertifications param.
-- `saas_risks` (List of String) The SaasRisks param.
+- `risks` (List of Number) The Risks param. Individual elements in this list are subject to additional validation. Value must be between 1 and 5.
+- `saas_certifications` (List of String) The SaasCertifications param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.
+- `saas_risks` (List of String) The SaasRisks param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.
 - `snippet` (String) The Snippet param.
-- `subcategories` (List of String) The Subcategories param.
+- `subcategories` (List of String) The Subcategories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.
 - `tagging` (Attributes) The Tagging param. (see [below for nested schema](#nestedatt--tagging))
-- `technologies` (List of String) The Technologies param.
+- `technologies` (List of String) The Technologies param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.
 - `transfers_files` (Boolean) only True is a valid value.
 - `tunnels_other_apps` (Boolean) only True is a valid value.
 - `used_by_malware` (Boolean) only True is a valid value.
@@ -59,5 +59,5 @@ resource "scm_application_filter" "example" {
 
 Optional:
 
-- `no_tag` (Boolean) The NoTag param.
-- `tags` (List of String) The Tags param.
+- `no_tag` (Boolean) The NoTag param. Ensure that only one of the following is specified: `no_tag`, `tag`
+- `tags` (List of String) The Tags param. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters. Ensure that only one of the following is specified: `no_tag`, `tag`

@@ -33,12 +33,12 @@ resource "scm_address_object" "example" {
 - `description` (String) The Description param. String length must not exceed 1023 characters.
 - `device` (String) The Device param.
 - `folder` (String) The Folder param.
-- `fqdn` (String) The Fqdn param. String length must be between 1 and 255 characters. String validation regex: `^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$`.
-- `ip_netmask` (String) The IpNetmask param.
-- `ip_range` (String) The IpRange param.
-- `ip_wildcard` (String) The IpWildcard param.
+- `fqdn` (String) The Fqdn param. String length must be between 1 and 255 characters. String validation regex: `^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$`. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`
+- `ip_netmask` (String) The IpNetmask param. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`
+- `ip_range` (String) The IpRange param. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`
+- `ip_wildcard` (String) The IpWildcard param. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`
 - `snippet` (String) The Snippet param.
-- `tags` (List of String) Tags for address object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for address object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 
 ### Read-Only
 

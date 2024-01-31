@@ -65,8 +65,8 @@ resource "scm_ike_gateway" "example" {
 
 Optional:
 
-- `certificate` (Attributes) The Certificate param. (see [below for nested schema](#nestedatt--authentication--certificate))
-- `pre_shared_key` (Attributes) The PreSharedKey param. (see [below for nested schema](#nestedatt--authentication--pre_shared_key))
+- `certificate` (Attributes) The Certificate param. Ensure that only one of the following is specified: `certificate`, `pre_shared_key` (see [below for nested schema](#nestedatt--authentication--certificate))
+- `pre_shared_key` (Attributes) The PreSharedKey param. Ensure that only one of the following is specified: `certificate`, `pre_shared_key` (see [below for nested schema](#nestedatt--authentication--pre_shared_key))
 
 <a id="nestedatt--authentication--certificate"></a>
 ### Nested Schema for `authentication.certificate`
@@ -102,9 +102,9 @@ Optional:
 
 Optional:
 
-- `dynamic_address` (Boolean) The DynamicAddress param. Default: `true`.
-- `fqdn` (String) peer gateway FQDN name. String length must not exceed 255 characters.
-- `ip` (String) peer gateway has static IP address.
+- `dynamic_address` (Boolean) The DynamicAddress param. Default: `true`. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`
+- `fqdn` (String) peer gateway FQDN name. String length must not exceed 255 characters. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`
+- `ip` (String) peer gateway has static IP address. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`
 
 
 <a id="nestedatt--protocol"></a>

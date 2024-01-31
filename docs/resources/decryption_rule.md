@@ -62,5 +62,5 @@ resource "scm_decryption_rule" "example" {
 
 Optional:
 
-- `ssl_forward_proxy` (Boolean) The SslForwardProxy param. Default: `false`.
-- `ssl_inbound_inspection` (String) add the certificate name for SSL inbound inspection.
+- `ssl_forward_proxy` (Boolean) The SslForwardProxy param. Default: `false`. Ensure that only one of the following is specified: `ssl_forward_proxy`, `ssl_inbound_inspection`
+- `ssl_inbound_inspection` (String) add the certificate name for SSL inbound inspection. Ensure that only one of the following is specified: `ssl_forward_proxy`, `ssl_inbound_inspection`

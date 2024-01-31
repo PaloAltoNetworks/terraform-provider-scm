@@ -116,7 +116,7 @@ func (d *autoTagActionsListDataSource) Schema(_ context.Context, _ datasource.Sc
 														Computed:    true,
 													},
 													"tags": dsschema.ListAttribute{
-														Description: "Tags for address object. List must contain at most 64 elements.",
+														Description: "Tags for address object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 														Computed:    true,
 														ElementType: types.StringType,
 													},

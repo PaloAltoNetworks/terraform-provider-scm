@@ -13,6 +13,7 @@ import (
 	lhPcfTR "github.com/paloaltonetworks/scm-go/netsec/services/authenticationprofiles"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -1239,8 +1240,19 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"cloud":true, "kerberos":true, "ldap":true, "local_database":true, "radius":true, "saml_idp":true, "tacplus":true} outputs:map[string]bool{"cloud":true, "kerberos":true, "ldap":true, "local_database":true, "radius":true, "saml_idp":true, "tacplus":true} forceNew:map[string]bool(nil)
 					"cloud": rsschema.SingleNestedAttribute{
-						Description: "The Cloud param.",
+						Description: "The Cloud param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("kerberos"),
+								path.MatchRelative().AtParent().AtName("ldap"),
+								path.MatchRelative().AtParent().AtName("local_database"),
+								path.MatchRelative().AtParent().AtName("radius"),
+								path.MatchRelative().AtParent().AtName("saml_idp"),
+								path.MatchRelative().AtParent().AtName("tacplus"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"profile_name":true} outputs:map[string]bool{"profile_name":true} forceNew:map[string]bool(nil)
 							"profile_name": rsschema.StringAttribute{
@@ -1250,7 +1262,7 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 						},
 					},
 					"kerberos": rsschema.SingleNestedAttribute{
-						Description: "The Kerberos param.",
+						Description: "The Kerberos param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"realm":true, "server_profile":true} outputs:map[string]bool{"realm":true, "server_profile":true} forceNew:map[string]bool(nil)
@@ -1265,7 +1277,7 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 						},
 					},
 					"ldap": rsschema.SingleNestedAttribute{
-						Description: "The Ldap param.",
+						Description: "The Ldap param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"login_attribute":true, "passwd_exp_days":true, "server_profile":true} outputs:map[string]bool{"login_attribute":true, "passwd_exp_days":true, "server_profile":true} forceNew:map[string]bool(nil)
@@ -1284,13 +1296,13 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 						},
 					},
 					"local_database": rsschema.BoolAttribute{
-						Description: "The LocalDatabase param. Default: `false`.",
+						Description: "The LocalDatabase param. Default: `false`. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
 						Computed:    true,
 						Default:     booldefault.StaticBool(false),
 					},
 					"radius": rsschema.SingleNestedAttribute{
-						Description: "The Radius param.",
+						Description: "The Radius param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"checkgroup":true, "server_profile":true} outputs:map[string]bool{"checkgroup":true, "server_profile":true} forceNew:map[string]bool(nil)
@@ -1305,7 +1317,7 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 						},
 					},
 					"saml_idp": rsschema.SingleNestedAttribute{
-						Description: "The SamlIdp param.",
+						Description: "The SamlIdp param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"attribute_name_usergroup":true, "attribute_name_username":true, "certificate_profile":true, "enable_single_logout":true, "request_signing_certificate":true, "server_profile":true} outputs:map[string]bool{"attribute_name_usergroup":true, "attribute_name_username":true, "certificate_profile":true, "enable_single_logout":true, "request_signing_certificate":true, "server_profile":true} forceNew:map[string]bool(nil)
@@ -1351,7 +1363,7 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 						},
 					},
 					"tacplus": rsschema.SingleNestedAttribute{
-						Description: "The Tacplus param.",
+						Description: "The Tacplus param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"checkgroup":true, "server_profile":true} outputs:map[string]bool{"checkgroup":true, "server_profile":true} forceNew:map[string]bool(nil)

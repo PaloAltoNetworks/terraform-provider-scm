@@ -65,6 +65,6 @@ Read-Only:
 Read-Only:
 
 - `action` (String) Add or Remove tag option. String must be one of these: `"add-tag"`, `"remove-tag"`.
-- `tags` (List of String) Tags for address object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for address object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 - `target` (String) Source or Destination Address, User, X-Forwarded-For Address.
 - `timeout` (Number) The Timeout param.

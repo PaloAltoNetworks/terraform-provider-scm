@@ -27,7 +27,9 @@ data "scm_ike_gateway" "example" {
 
 ### Optional
 
+- `device` (String) The Device param.
 - `folder` (String) The Folder param.
+- `snippet` (String) The Snippet param.
 
 ### Read-Only
 

@@ -43,13 +43,13 @@ resource "scm_external_dynamic_list" "example" {
 
 Optional:
 
-- `domain` (Attributes) The Domain param. (see [below for nested schema](#nestedatt--type--domain))
-- `imei` (Attributes) The Imei param. (see [below for nested schema](#nestedatt--type--imei))
-- `imsi` (Attributes) The Imsi param. (see [below for nested schema](#nestedatt--type--imsi))
-- `ip` (Attributes) The Ip param. (see [below for nested schema](#nestedatt--type--ip))
-- `predefined_ip` (Attributes) The PredefinedIp param. (see [below for nested schema](#nestedatt--type--predefined_ip))
-- `predefined_url` (Attributes) The PredefinedUrl param. (see [below for nested schema](#nestedatt--type--predefined_url))
-- `url` (Attributes) The Url param. (see [below for nested schema](#nestedatt--type--url))
+- `domain` (Attributes) The Domain param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url` (see [below for nested schema](#nestedatt--type--domain))
+- `imei` (Attributes) The Imei param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url` (see [below for nested schema](#nestedatt--type--imei))
+- `imsi` (Attributes) The Imsi param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url` (see [below for nested schema](#nestedatt--type--imsi))
+- `ip` (Attributes) The Ip param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url` (see [below for nested schema](#nestedatt--type--ip))
+- `predefined_ip` (Attributes) The PredefinedIp param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url` (see [below for nested schema](#nestedatt--type--predefined_ip))
+- `predefined_url` (Attributes) The PredefinedUrl param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url` (see [below for nested schema](#nestedatt--type--predefined_url))
+- `url` (Attributes) The Url param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url` (see [below for nested schema](#nestedatt--type--url))
 
 <a id="nestedatt--type--domain"></a>
 ### Nested Schema for `type.domain`
@@ -63,7 +63,7 @@ Optional:
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
 - `domain_auth` (Attributes) The DomainAuth param. (see [below for nested schema](#nestedatt--type--domain--domain_auth))
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `expand_domain` (Boolean) Enable/Disable expand domain. Default: `false`.
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
 
@@ -72,11 +72,11 @@ Optional:
 
 Optional:
 
-- `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--domain--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
-- `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--domain--recurring--monthly))
-- `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--domain--recurring--weekly))
+- `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--domain--recurring--daily))
+- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--domain--recurring--monthly))
+- `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--domain--recurring--weekly))
 
 <a id="nestedatt--type--domain--recurring--daily"></a>
 ### Nested Schema for `type.domain.recurring.weekly`
@@ -132,7 +132,7 @@ Optional:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.
 - `imei_auth` (Attributes) The ImeiAuth param. (see [below for nested schema](#nestedatt--type--imei--imei_auth))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
 
@@ -141,11 +141,11 @@ Optional:
 
 Optional:
 
-- `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--imei--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
-- `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--imei--recurring--monthly))
-- `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--imei--recurring--weekly))
+- `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imei--recurring--daily))
+- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imei--recurring--monthly))
+- `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imei--recurring--weekly))
 
 <a id="nestedatt--type--imei--recurring--daily"></a>
 ### Nested Schema for `type.imei.recurring.weekly`
@@ -201,7 +201,7 @@ Optional:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 34 characters.
 - `imsi_auth` (Attributes) The ImsiAuth param. (see [below for nested schema](#nestedatt--type--imsi--imsi_auth))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
 
@@ -210,11 +210,11 @@ Optional:
 
 Optional:
 
-- `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--imsi--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
-- `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--imsi--recurring--monthly))
-- `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--imsi--recurring--weekly))
+- `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imsi--recurring--daily))
+- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imsi--recurring--monthly))
+- `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imsi--recurring--weekly))
 
 <a id="nestedatt--type--imsi--recurring--daily"></a>
 ### Nested Schema for `type.imsi.recurring.weekly`
@@ -270,7 +270,7 @@ Optional:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `ip_auth` (Attributes) The IpAuth param. (see [below for nested schema](#nestedatt--type--ip--ip_auth))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
 
@@ -279,11 +279,11 @@ Optional:
 
 Optional:
 
-- `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--ip--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
-- `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--ip--recurring--monthly))
-- `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--ip--recurring--weekly))
+- `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--ip--recurring--daily))
+- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--ip--recurring--monthly))
+- `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--ip--recurring--weekly))
 
 <a id="nestedatt--type--ip--recurring--daily"></a>
 ### Nested Schema for `type.ip.recurring.weekly`
@@ -338,7 +338,7 @@ Required:
 Optional:
 
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 
 
 <a id="nestedatt--type--predefined_url"></a>
@@ -351,7 +351,7 @@ Required:
 Optional:
 
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 
 
 <a id="nestedatt--type--url"></a>
@@ -365,7 +365,7 @@ Optional:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
 - `url_auth` (Attributes) The UrlAuth param. (see [below for nested schema](#nestedatt--type--url--url_auth))
 
@@ -374,11 +374,11 @@ Optional:
 
 Optional:
 
-- `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--url--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
-- `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--url--recurring--monthly))
-- `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--url--recurring--weekly))
+- `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--url--recurring--daily))
+- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--url--recurring--monthly))
+- `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--url--recurring--weekly))
 
 <a id="nestedatt--type--url--recurring--daily"></a>
 ### Nested Schema for `type.url.recurring.weekly`

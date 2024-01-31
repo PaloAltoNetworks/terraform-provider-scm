@@ -12,6 +12,7 @@ import (
 	tephihM "github.com/paloaltonetworks/scm-go/netsec/schemas/decryption/rules"
 	dvnOhnM "github.com/paloaltonetworks/scm-go/netsec/services/decryptionrules"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -989,13 +990,19 @@ func (r *decryptionRuleResource) Schema(_ context.Context, _ resource.SchemaRequ
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} outputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} forceNew:map[string]bool(nil)
 					"ssl_forward_proxy": rsschema.BoolAttribute{
-						Description: "The SslForwardProxy param. Default: `false`.",
+						Description: "The SslForwardProxy param. Default: `false`. Ensure that only one of the following is specified: `ssl_forward_proxy`, `ssl_inbound_inspection`",
 						Optional:    true,
 						Computed:    true,
 						Default:     booldefault.StaticBool(false),
+						Validators: []validator.Bool{
+							boolvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("ssl_inbound_inspection"),
+							),
+						},
 					},
 					"ssl_inbound_inspection": rsschema.StringAttribute{
-						Description: "add the certificate name for SSL inbound inspection.",
+						Description: "add the certificate name for SSL inbound inspection. Ensure that only one of the following is specified: `ssl_forward_proxy`, `ssl_inbound_inspection`",
 						Optional:    true,
 					},
 				},

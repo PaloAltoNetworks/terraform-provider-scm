@@ -52,7 +52,7 @@ Read-Only:
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
 - `domain_auth` (Attributes) The DomainAuth param. (see [below for nested schema](#nestedatt--type--domain--domain_auth))
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `expand_domain` (Boolean) Enable/Disable expand domain. Default: `false`.
 - `recurring` (Attributes) The Recurring param. (see [below for nested schema](#nestedatt--type--domain--recurring))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
@@ -112,7 +112,7 @@ Read-Only:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.
 - `imei_auth` (Attributes) The ImeiAuth param. (see [below for nested schema](#nestedatt--type--imei--imei_auth))
 - `recurring` (Attributes) The Recurring param. (see [below for nested schema](#nestedatt--type--imei--recurring))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
@@ -172,7 +172,7 @@ Read-Only:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 34 characters.
 - `imsi_auth` (Attributes) The ImsiAuth param. (see [below for nested schema](#nestedatt--type--imsi--imsi_auth))
 - `recurring` (Attributes) The Recurring param. (see [below for nested schema](#nestedatt--type--imsi--recurring))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
@@ -232,7 +232,7 @@ Read-Only:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `ip_auth` (Attributes) The IpAuth param. (see [below for nested schema](#nestedatt--type--ip--ip_auth))
 - `recurring` (Attributes) The Recurring param. (see [below for nested schema](#nestedatt--type--ip--recurring))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
@@ -291,7 +291,7 @@ Read-Only:
 Read-Only:
 
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `url` (String) The Url param.
 
 
@@ -301,7 +301,7 @@ Read-Only:
 Read-Only:
 
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `url` (String) The Url param.
 
 
@@ -312,7 +312,7 @@ Read-Only:
 
 - `certificate_profile` (String) Profile for authenticating client certificates. Default: `"None"`.
 - `description` (String) The Description param. String length must not exceed 255 characters.
-- `exception_list` (List of String) The ExceptionList param.
+- `exception_list` (List of String) The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.
 - `recurring` (Attributes) The Recurring param. (see [below for nested schema](#nestedatt--type--url--recurring))
 - `url` (String) The Url param. String length must not exceed 255 characters. Default: `"http://"`.
 - `url_auth` (Attributes) The UrlAuth param. (see [below for nested schema](#nestedatt--type--url--url_auth))

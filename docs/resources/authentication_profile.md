@@ -57,13 +57,13 @@ Optional:
 
 Optional:
 
-- `cloud` (Attributes) The Cloud param. (see [below for nested schema](#nestedatt--method--cloud))
-- `kerberos` (Attributes) The Kerberos param. (see [below for nested schema](#nestedatt--method--kerberos))
-- `ldap` (Attributes) The Ldap param. (see [below for nested schema](#nestedatt--method--ldap))
-- `local_database` (Boolean) The LocalDatabase param. Default: `false`.
-- `radius` (Attributes) The Radius param. (see [below for nested schema](#nestedatt--method--radius))
-- `saml_idp` (Attributes) The SamlIdp param. (see [below for nested schema](#nestedatt--method--saml_idp))
-- `tacplus` (Attributes) The Tacplus param. (see [below for nested schema](#nestedatt--method--tacplus))
+- `cloud` (Attributes) The Cloud param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus` (see [below for nested schema](#nestedatt--method--cloud))
+- `kerberos` (Attributes) The Kerberos param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus` (see [below for nested schema](#nestedatt--method--kerberos))
+- `ldap` (Attributes) The Ldap param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus` (see [below for nested schema](#nestedatt--method--ldap))
+- `local_database` (Boolean) The LocalDatabase param. Default: `false`. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`
+- `radius` (Attributes) The Radius param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus` (see [below for nested schema](#nestedatt--method--radius))
+- `saml_idp` (Attributes) The SamlIdp param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus` (see [below for nested schema](#nestedatt--method--saml_idp))
+- `tacplus` (Attributes) The Tacplus param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus` (see [below for nested schema](#nestedatt--method--tacplus))
 
 <a id="nestedatt--method--cloud"></a>
 ### Nested Schema for `method.cloud`

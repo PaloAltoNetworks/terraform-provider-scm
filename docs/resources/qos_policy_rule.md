@@ -69,11 +69,11 @@ Optional:
 
 Optional:
 
-- `af` (Attributes) The Af param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--af))
-- `cs` (Attributes) The Cs param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--cs))
-- `custom` (Attributes) The Custom param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--custom))
-- `ef` (Boolean) The Ef param. Default: `false`.
-- `tos` (Attributes) The Tos param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--tos))
+- `af` (Attributes) The Af param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos` (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--af))
+- `cs` (Attributes) The Cs param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos` (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--cs))
+- `custom` (Attributes) The Custom param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos` (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--custom))
+- `ef` (Boolean) The Ef param. Default: `false`. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`
+- `tos` (Attributes) The Tos param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos` (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--tos))
 
 <a id="nestedatt--dscp_tos--codepoints--type--af"></a>
 ### Nested Schema for `dscp_tos.codepoints.type.tos`

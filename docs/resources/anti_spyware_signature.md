@@ -51,13 +51,13 @@ resource "scm_anti_spyware_signature" "example" {
 
 Optional:
 
-- `alert` (Boolean) The Alert param. Default: `false`.
-- `allow` (Boolean) The Allow param. Default: `false`.
-- `block_ip` (Attributes) The BlockIp param. (see [below for nested schema](#nestedatt--default_action--block_ip))
-- `drop` (Boolean) The Drop param. Default: `false`.
-- `reset_both` (Boolean) The ResetBoth param. Default: `false`.
-- `reset_client` (Boolean) The ResetClient param. Default: `false`.
-- `reset_server` (Boolean) The ResetServer param. Default: `false`.
+- `alert` (Boolean) The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`
+- `allow` (Boolean) The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`
+- `block_ip` (Attributes) The BlockIp param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server` (see [below for nested schema](#nestedatt--default_action--block_ip))
+- `drop` (Boolean) The Drop param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`
+- `reset_both` (Boolean) The ResetBoth param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`
+- `reset_client` (Boolean) The ResetClient param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`
+- `reset_server` (Boolean) The ResetServer param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`
 
 <a id="nestedatt--default_action--block_ip"></a>
 ### Nested Schema for `default_action.block_ip`
@@ -74,8 +74,8 @@ Optional:
 
 Optional:
 
-- `combination` (Attributes) The Combination param. (see [below for nested schema](#nestedatt--signature--combination))
-- `standards` (Attributes List) The Standards param. (see [below for nested schema](#nestedatt--signature--standards))
+- `combination` (Attributes) The Combination param. Ensure that only one of the following is specified: `combination`, `standard` (see [below for nested schema](#nestedatt--signature--combination))
+- `standards` (Attributes List) The Standards param. Ensure that only one of the following is specified: `combination`, `standard` (see [below for nested schema](#nestedatt--signature--standards))
 
 <a id="nestedatt--signature--combination"></a>
 ### Nested Schema for `signature.combination`

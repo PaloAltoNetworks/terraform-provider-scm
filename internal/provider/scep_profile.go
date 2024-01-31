@@ -12,6 +12,7 @@ import (
 	nnsRzDg "github.com/paloaltonetworks/scm-go/netsec/schemas/scep/profiles"
 	rmBFeLV "github.com/paloaltonetworks/scm-go/netsec/services/scepprofiles"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -903,15 +904,22 @@ func (r *scepProfileResource) Schema(_ context.Context, _ resource.SchemaRequest
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"dnsname":true, "rfc822name":true, "uniform_resource_identifier":true} outputs:map[string]bool{"dnsname":true, "rfc822name":true, "uniform_resource_identifier":true} forceNew:map[string]bool(nil)
 					"dnsname": rsschema.StringAttribute{
-						Description: "The Dnsname param.",
+						Description: "The Dnsname param. Ensure that only one of the following is specified: `dnsname`, `rfc822name`, `uniform_resource_identifier`",
 						Optional:    true,
+						Validators: []validator.String{
+							stringvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("rfc822name"),
+								path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
+							),
+						},
 					},
 					"rfc822name": rsschema.StringAttribute{
-						Description: "The Rfc822name param.",
+						Description: "The Rfc822name param. Ensure that only one of the following is specified: `dnsname`, `rfc822name`, `uniform_resource_identifier`",
 						Optional:    true,
 					},
 					"uniform_resource_identifier": rsschema.StringAttribute{
-						Description: "The UniformResourceIdentifier param.",
+						Description: "The UniformResourceIdentifier param. Ensure that only one of the following is specified: `dnsname`, `rfc822name`, `uniform_resource_identifier`",
 						Optional:    true,
 					},
 				},
@@ -962,8 +970,15 @@ func (r *scepProfileResource) Schema(_ context.Context, _ resource.SchemaRequest
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"dynamic":true, "fixed":true, "none":true} outputs:map[string]bool{"dynamic":true, "fixed":true, "none":true} forceNew:map[string]bool(nil)
 					"dynamic_challenge": rsschema.SingleNestedAttribute{
-						Description: "The DynamicChallenge param.",
+						Description: "The DynamicChallenge param. Ensure that only one of the following is specified: `dynamic`, `fixed`, `none`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("fixed"),
+								path.MatchRelative().AtParent().AtName("none"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"otp_server_url":true, "password":true, "username":true} outputs:map[string]bool{"otp_server_url":true, "password":true, "username":true} forceNew:map[string]bool(nil)
 							"otp_server_url": rsschema.StringAttribute{
@@ -991,14 +1006,14 @@ func (r *scepProfileResource) Schema(_ context.Context, _ resource.SchemaRequest
 						},
 					},
 					"fixed": rsschema.StringAttribute{
-						Description: "Challenge to use for SCEP server on mobile clients. String length must not exceed 1024 characters.",
+						Description: "Challenge to use for SCEP server on mobile clients. String length must not exceed 1024 characters. Ensure that only one of the following is specified: `dynamic`, `fixed`, `none`",
 						Optional:    true,
 						Validators: []validator.String{
 							stringvalidator.LengthAtMost(1024),
 						},
 					},
 					"none": rsschema.StringAttribute{
-						Description: "The None param. String must be one of these: `\"\"`.",
+						Description: "The None param. String must be one of these: `\"\"`. Ensure that only one of the following is specified: `dynamic`, `fixed`, `none`",
 						Optional:    true,
 						Validators: []validator.String{
 							stringvalidator.OneOf(""),

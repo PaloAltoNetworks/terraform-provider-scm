@@ -65,7 +65,7 @@ Read-Only:
 - `ident_by_icmp6_type` (Attributes) The IdentByIcmp6Type param. (see [below for nested schema](#nestedatt--default--ident_by_icmp6_type))
 - `ident_by_icmp_type` (Attributes) The IdentByIcmpType param. (see [below for nested schema](#nestedatt--default--ident_by_icmp_type))
 - `ident_by_ip_protocol` (String) The IdentByIpProtocol param.
-- `ports` (List of String) The Ports param.
+- `ports` (List of String) The Ports param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.
 
 <a id="nestedatt--default--ident_by_icmp6_type"></a>
 ### Nested Schema for `default.ident_by_icmp6_type`

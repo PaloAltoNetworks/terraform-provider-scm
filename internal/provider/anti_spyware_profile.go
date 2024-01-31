@@ -12,6 +12,7 @@ import (
 	lrzxLXR "github.com/paloaltonetworks/scm-go/netsec/schemas/anti/spyware/profiles"
 	bUPXiuP "github.com/paloaltonetworks/scm-go/netsec/services/antispywareprofiles"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -1334,19 +1335,30 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 							Attributes: map[string]rsschema.Attribute{
 								// inputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": rsschema.BoolAttribute{
-									Description: "The Alert param. Default: `false`.",
+									Description: "The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
+									Validators: []validator.Bool{
+										boolvalidator.ExactlyOneOf(
+											path.MatchRelative(),
+											path.MatchRelative().AtParent().AtName("allow"),
+											path.MatchRelative().AtParent().AtName("block_ip"),
+											path.MatchRelative().AtParent().AtName("drop"),
+											path.MatchRelative().AtParent().AtName("reset_both"),
+											path.MatchRelative().AtParent().AtName("reset_client"),
+											path.MatchRelative().AtParent().AtName("reset_server"),
+										),
+									},
 								},
 								"allow": rsschema.BoolAttribute{
-									Description: "The Allow param. Default: `false`.",
+									Description: "The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"block_ip": rsschema.SingleNestedAttribute{
-									Description: "The BlockIp param.",
+									Description: "The BlockIp param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"duration":true, "track_by":true} outputs:map[string]bool{"duration":true, "track_by":true} forceNew:map[string]bool(nil)
@@ -1367,25 +1379,25 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 									},
 								},
 								"drop": rsschema.BoolAttribute{
-									Description: "The Drop param. Default: `false`.",
+									Description: "The Drop param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"reset_both": rsschema.BoolAttribute{
-									Description: "The ResetBoth param. Default: `false`.",
+									Description: "The ResetBoth param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"reset_client": rsschema.BoolAttribute{
-									Description: "The ResetClient param. Default: `false`.",
+									Description: "The ResetClient param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"reset_server": rsschema.BoolAttribute{
-									Description: "The ResetServer param. Default: `false`.",
+									Description: "The ResetServer param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
@@ -1451,19 +1463,31 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 							Attributes: map[string]rsschema.Attribute{
 								// inputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "default":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "default":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": rsschema.BoolAttribute{
-									Description: "The Alert param. Default: `false`.",
+									Description: "The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
+									Validators: []validator.Bool{
+										boolvalidator.ExactlyOneOf(
+											path.MatchRelative(),
+											path.MatchRelative().AtParent().AtName("allow"),
+											path.MatchRelative().AtParent().AtName("block_ip"),
+											path.MatchRelative().AtParent().AtName("default"),
+											path.MatchRelative().AtParent().AtName("drop"),
+											path.MatchRelative().AtParent().AtName("reset_both"),
+											path.MatchRelative().AtParent().AtName("reset_client"),
+											path.MatchRelative().AtParent().AtName("reset_server"),
+										),
+									},
 								},
 								"allow": rsschema.BoolAttribute{
-									Description: "The Allow param. Default: `false`.",
+									Description: "The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"block_ip": rsschema.SingleNestedAttribute{
-									Description: "The BlockIp param.",
+									Description: "The BlockIp param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"duration":true, "track_by":true} outputs:map[string]bool{"duration":true, "track_by":true} forceNew:map[string]bool(nil)
@@ -1484,31 +1508,31 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 									},
 								},
 								"default": rsschema.BoolAttribute{
-									Description: "The Default param. Default: `false`.",
+									Description: "The Default param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"drop": rsschema.BoolAttribute{
-									Description: "The Drop param. Default: `false`.",
+									Description: "The Drop param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"reset_both": rsschema.BoolAttribute{
-									Description: "The ResetBoth param. Default: `false`.",
+									Description: "The ResetBoth param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"reset_client": rsschema.BoolAttribute{
-									Description: "The ResetClient param. Default: `false`.",
+									Description: "The ResetClient param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
 								},
 								"reset_server": rsschema.BoolAttribute{
-									Description: "The ResetServer param. Default: `false`.",
+									Description: "The ResetServer param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),

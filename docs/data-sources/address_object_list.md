@@ -48,5 +48,5 @@ Read-Only:
 - `ip_range` (String) The IpRange param.
 - `ip_wildcard` (String) The IpWildcard param.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 63 characters.
-- `tags` (List of String) Tags for address object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for address object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 - `type` (String) The Type param.

@@ -45,7 +45,7 @@ Read-Only:
 - `id` (String) UUID of the resource.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 63 characters.
 - `protocol` (Attributes) The Protocol param. (see [below for nested schema](#nestedatt--data--protocol))
-- `tags` (List of String) Tags for service object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for service object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 
 <a id="nestedatt--data--protocol"></a>
 ### Nested Schema for `data.protocol`

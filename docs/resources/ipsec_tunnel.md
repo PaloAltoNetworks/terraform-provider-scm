@@ -80,9 +80,9 @@ Optional:
 
 Optional:
 
-- `number` (Number) IP protocol number. Value must be between 1 and 254.
-- `tcp` (Attributes) The Tcp param. (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6s--protocol--tcp))
-- `udp` (Attributes) The Udp param. (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6s--protocol--udp))
+- `number` (Number) IP protocol number. Value must be between 1 and 254. Ensure that only one of the following is specified: `number`, `tcp`, `udp`
+- `tcp` (Attributes) The Tcp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp` (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6s--protocol--tcp))
+- `udp` (Attributes) The Udp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp` (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6s--protocol--udp))
 
 <a id="nestedatt--auto_key--proxy_id_v6s--protocol--tcp"></a>
 ### Nested Schema for `auto_key.proxy_id_v6s.protocol.udp`
@@ -122,9 +122,9 @@ Optional:
 
 Optional:
 
-- `number` (Number) IP protocol number. Value must be between 1 and 254.
-- `tcp` (Attributes) The Tcp param. (see [below for nested schema](#nestedatt--auto_key--proxy_ids--protocol--tcp))
-- `udp` (Attributes) The Udp param. (see [below for nested schema](#nestedatt--auto_key--proxy_ids--protocol--udp))
+- `number` (Number) IP protocol number. Value must be between 1 and 254. Ensure that only one of the following is specified: `number`, `tcp`, `udp`
+- `tcp` (Attributes) The Tcp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp` (see [below for nested schema](#nestedatt--auto_key--proxy_ids--protocol--tcp))
+- `udp` (Attributes) The Udp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp` (see [below for nested schema](#nestedatt--auto_key--proxy_ids--protocol--udp))
 
 <a id="nestedatt--auto_key--proxy_ids--protocol--tcp"></a>
 ### Nested Schema for `auto_key.proxy_ids.protocol.udp`

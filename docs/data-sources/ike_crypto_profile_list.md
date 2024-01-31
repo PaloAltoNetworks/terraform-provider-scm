@@ -42,9 +42,9 @@ data "scm_ike_crypto_profile_list" "example" {
 Read-Only:
 
 - `authentication_multiple` (Number) IKEv2 SA reauthentication interval equals authetication-multiple * rekey-lifetime; 0 means reauthentication disabled. Value must be less than or equal to 50. Default: `0`.
-- `dh_groups` (List of String) The DhGroups param.
-- `encryptions` (List of String) Encryption algorithm.
-- `hashes` (List of String) The Hashes param.
+- `dh_groups` (List of String) The DhGroups param. Individual elements in this list are subject to additional validation. String must be one of these: `"group1"`, `"group2"`, `"group5"`, `"group14"`, `"group19"`, `"group20"`.
+- `encryptions` (List of String) Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `"des"`, `"3des"`, `"aes-128-cbc"`, `"aes-192-cbc"`, `"aes-256-cbc"`, `"aes-128-gcm"`, `"aes-256-gcm"`.
+- `hashes` (List of String) The Hashes param. Individual elements in this list are subject to additional validation. String must be one of these: `"md5"`, `"sha1"`, `"sha256"`, `"sha384"`, `"sha512"`.
 - `id` (String) UUID of the resource.
 - `lifetime` (Attributes) The Lifetime param. (see [below for nested schema](#nestedatt--data--lifetime))
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]. String length must not exceed 31 characters.

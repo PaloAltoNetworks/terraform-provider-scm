@@ -40,11 +40,11 @@ resource "scm_address_object" "x" {
 
 - `description` (String) The Description param. String length must not exceed 1023 characters.
 - `device` (String) The Device param.
-- `dynamic_value` (Attributes) The DynamicValue param. (see [below for nested schema](#nestedatt--dynamic_value))
+- `dynamic_value` (Attributes) The DynamicValue param. Ensure that only one of the following is specified: `dynamic`, `static` (see [below for nested schema](#nestedatt--dynamic_value))
 - `folder` (String) The Folder param.
 - `snippet` (String) The Snippet param.
-- `static_list` (List of String) The StaticList param.
-- `tags` (List of String) Tags for address group object. List must contain at most 64 elements.
+- `static_list` (List of String) The StaticList param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters. Ensure that only one of the following is specified: `dynamic`, `static`
+- `tags` (List of String) Tags for address group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 
 ### Read-Only
 

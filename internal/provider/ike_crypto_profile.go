@@ -13,6 +13,7 @@ import (
 	uIHLJPY "github.com/paloaltonetworks/scm-go/netsec/services/ikecryptoprofiles"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -100,17 +101,17 @@ func (d *ikeCryptoProfileListDataSource) Schema(_ context.Context, _ datasource.
 							Computed:    true,
 						},
 						"dh_groups": dsschema.ListAttribute{
-							Description: "The DhGroups param.",
+							Description: "The DhGroups param. Individual elements in this list are subject to additional validation. String must be one of these: `\"group1\"`, `\"group2\"`, `\"group5\"`, `\"group14\"`, `\"group19\"`, `\"group20\"`.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"encryptions": dsschema.ListAttribute{
-							Description: "Encryption algorithm.",
+							Description: "Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `\"des\"`, `\"3des\"`, `\"aes-128-cbc\"`, `\"aes-192-cbc\"`, `\"aes-256-cbc\"`, `\"aes-128-gcm\"`, `\"aes-256-gcm\"`.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"hashes": dsschema.ListAttribute{
-							Description: "The Hashes param.",
+							Description: "The Hashes param. Individual elements in this list are subject to additional validation. String must be one of these: `\"md5\"`, `\"sha1\"`, `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -346,7 +347,10 @@ type ikeCryptoProfileDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Device  types.String `tfsdk:"device"`
+	Folder  types.String `tfsdk:"folder"`
+	Id      types.String `tfsdk:"id"`
+	Snippet types.String `tfsdk:"snippet"`
 
 	// Output.
 	AuthenticationMultiple types.Int64 `tfsdk:"authentication_multiple"`
@@ -376,23 +380,31 @@ func (d *ikeCryptoProfileDataSource) Schema(_ context.Context, _ datasource.Sche
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"authentication_multiple":true, "dh_group":true, "encryption":true, "hash":true, "id":true, "lifetime":true, "name":true, "tfid":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"device":true, "folder":true, "id":true, "snippet":true} outputs:map[string]bool{"authentication_multiple":true, "dh_group":true, "encryption":true, "hash":true, "id":true, "lifetime":true, "name":true, "tfid":true} forceNew:map[string]bool{"device":true, "folder":true, "id":true, "snippet":true}
 			"authentication_multiple": dsschema.Int64Attribute{
 				Description: "IKEv2 SA reauthentication interval equals authetication-multiple * rekey-lifetime; 0 means reauthentication disabled. Value must be less than or equal to 50. Default: `0`.",
 				Computed:    true,
 			},
+			"device": dsschema.StringAttribute{
+				Description: "The Device param.",
+				Optional:    true,
+			},
 			"dh_groups": dsschema.ListAttribute{
-				Description: "The DhGroups param.",
+				Description: "The DhGroups param. Individual elements in this list are subject to additional validation. String must be one of these: `\"group1\"`, `\"group2\"`, `\"group5\"`, `\"group14\"`, `\"group19\"`, `\"group20\"`.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"encryptions": dsschema.ListAttribute{
-				Description: "Encryption algorithm.",
+				Description: "Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `\"des\"`, `\"3des\"`, `\"aes-128-cbc\"`, `\"aes-192-cbc\"`, `\"aes-256-cbc\"`, `\"aes-128-gcm\"`, `\"aes-256-gcm\"`.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param.",
+				Optional:    true,
+			},
 			"hashes": dsschema.ListAttribute{
-				Description: "The Hashes param.",
+				Description: "The Hashes param. Individual elements in this list are subject to additional validation. String must be one of these: `\"md5\"`, `\"sha1\"`, `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -427,6 +439,10 @@ func (d *ikeCryptoProfileDataSource) Schema(_ context.Context, _ datasource.Sche
 				Description: "Alphanumeric string begin with letter: [0-9a-zA-Z._-]. String length must not exceed 31 characters.",
 				Computed:    true,
 			},
+			"snippet": dsschema.StringAttribute{
+				Description: "The Snippet param.",
+				Optional:    true,
+			},
 			"tfid": dsschema.StringAttribute{
 				Description: "The Terraform ID.",
 				Computed:    true,
@@ -457,6 +473,9 @@ func (d *ikeCryptoProfileDataSource) Read(ctx context.Context, req datasource.Re
 		"data_source_name":            "scm_ike_crypto_profile",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
+		"snippet":                     state.Snippet.ValueString(),
+		"device":                      state.Device.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -466,6 +485,12 @@ func (d *ikeCryptoProfileDataSource) Read(ctx context.Context, req datasource.Re
 	input := uIHLJPY.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueStringPointer()
+
+	input.Snippet = state.Snippet.ValueStringPointer()
+
+	input.Device = state.Device.ValueStringPointer()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -477,6 +502,21 @@ func (d *ikeCryptoProfileDataSource) Read(ctx context.Context, req datasource.Re
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Folder != nil {
+		idBuilder.WriteString(*input.Folder)
+	}
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Snippet != nil {
+		idBuilder.WriteString(*input.Snippet)
+	}
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Device != nil {
+		idBuilder.WriteString(*input.Device)
+	}
 
 	// Store the answer to state.
 
@@ -595,14 +635,24 @@ func (r *ikeCryptoProfileResource) Schema(_ context.Context, _ resource.SchemaRe
 				},
 			},
 			"dh_groups": rsschema.ListAttribute{
-				Description: "The DhGroups param.",
+				Description: "The DhGroups param. Individual elements in this list are subject to additional validation. String must be one of these: `\"group1\"`, `\"group2\"`, `\"group5\"`, `\"group14\"`, `\"group19\"`, `\"group20\"`.",
 				Required:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.OneOf("group1", "group2", "group5", "group14", "group19", "group20"),
+					),
+				},
 			},
 			"encryptions": rsschema.ListAttribute{
-				Description: "Encryption algorithm.",
+				Description: "Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `\"des\"`, `\"3des\"`, `\"aes-128-cbc\"`, `\"aes-192-cbc\"`, `\"aes-256-cbc\"`, `\"aes-128-gcm\"`, `\"aes-256-gcm\"`.",
 				Required:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.OneOf("des", "3des", "aes-128-cbc", "aes-192-cbc", "aes-256-cbc", "aes-128-gcm", "aes-256-gcm"),
+					),
+				},
 			},
 			"folder": rsschema.StringAttribute{
 				Description: "The Folder param.",
@@ -612,9 +662,14 @@ func (r *ikeCryptoProfileResource) Schema(_ context.Context, _ resource.SchemaRe
 				},
 			},
 			"hashes": rsschema.ListAttribute{
-				Description: "The Hashes param.",
+				Description: "The Hashes param. Individual elements in this list are subject to additional validation. String must be one of these: `\"md5\"`, `\"sha1\"`, `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.",
 				Required:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.OneOf("md5", "sha1", "sha256", "sha384", "sha512"),
+					),
+				},
 			},
 			"id": rsschema.StringAttribute{
 				Description: "UUID of the resource.",
@@ -629,28 +684,34 @@ func (r *ikeCryptoProfileResource) Schema(_ context.Context, _ resource.SchemaRe
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"days":true, "hours":true, "minutes":true, "seconds":true} outputs:map[string]bool{"days":true, "hours":true, "minutes":true, "seconds":true} forceNew:map[string]bool(nil)
 					"days": rsschema.Int64Attribute{
-						Description: "specify lifetime in days. Value must be between 1 and 365.",
+						Description: "specify lifetime in days. Value must be between 1 and 365. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 365),
+							int64validator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("hours"),
+								path.MatchRelative().AtParent().AtName("minutes"),
+								path.MatchRelative().AtParent().AtName("seconds"),
+							),
 						},
 					},
 					"hours": rsschema.Int64Attribute{
-						Description: "specify lifetime in hours. Value must be between 1 and 65535.",
+						Description: "specify lifetime in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 65535),
 						},
 					},
 					"minutes": rsschema.Int64Attribute{
-						Description: "specify lifetime in minutes. Value must be between 3 and 65535.",
+						Description: "specify lifetime in minutes. Value must be between 3 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(3, 65535),
 						},
 					},
 					"seconds": rsschema.Int64Attribute{
-						Description: "specify lifetime in seconds. Value must be between 180 and 65535.",
+						Description: "specify lifetime in seconds. Value must be between 180 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(180, 65535),
@@ -864,6 +925,12 @@ func (r *ikeCryptoProfileResource) Read(ctx context.Context, req resource.ReadRe
 	input := uIHLJPY.ReadInput{}
 
 	input.Id = tokens[3]
+
+	input.Folder = &tokens[0]
+
+	input.Snippet = &tokens[1]
+
+	input.Device = &tokens[2]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

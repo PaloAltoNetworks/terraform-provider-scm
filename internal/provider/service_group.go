@@ -89,7 +89,7 @@ func (d *serviceGroupListDataSource) Schema(_ context.Context, _ datasource.Sche
 							Computed:    true,
 						},
 						"members": dsschema.ListAttribute{
-							Description: "The Members param.",
+							Description: "The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -98,7 +98,7 @@ func (d *serviceGroupListDataSource) Schema(_ context.Context, _ datasource.Sche
 							Computed:    true,
 						},
 						"tags": dsschema.ListAttribute{
-							Description: "Tags for service group object. List must contain at most 64 elements.",
+							Description: "Tags for service group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -309,7 +309,7 @@ func (d *serviceGroupDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 				Required:    true,
 			},
 			"members": dsschema.ListAttribute{
-				Description: "The Members param.",
+				Description: "The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -318,7 +318,7 @@ func (d *serviceGroupDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 				Computed:    true,
 			},
 			"tags": dsschema.ListAttribute{
-				Description: "Tags for service group object. List must contain at most 64 elements.",
+				Description: "Tags for service group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -462,9 +462,14 @@ func (r *serviceGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"members": rsschema.ListAttribute{
-				Description: "The Members param.",
+				Description: "The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 				Required:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(63),
+					),
+				},
 			},
 			"name": rsschema.StringAttribute{
 				Description: "Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 63 characters.",
@@ -481,11 +486,14 @@ func (r *serviceGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"tags": rsschema.ListAttribute{
-				Description: "Tags for service group object. List must contain at most 64 elements.",
+				Description: "Tags for service group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
 				Validators: []validator.List{
 					listvalidator.SizeAtMost(64),
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(127),
+					),
 				},
 			},
 			"tfid": rsschema.StringAttribute{

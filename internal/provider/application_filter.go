@@ -12,6 +12,9 @@ import (
 	wugpput "github.com/paloaltonetworks/scm-go/netsec/schemas/application/filters"
 	uIHLJPY "github.com/paloaltonetworks/scm-go/netsec/services/applicationfilters"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -105,7 +108,7 @@ func (d *applicationFilterListDataSource) Schema(_ context.Context, _ datasource
 					Attributes: map[string]dsschema.Attribute{
 						// inputs:map[string]bool{} outputs:map[string]bool{"category":true, "evasive":true, "excessive_bandwidth_use":true, "exclude":true, "has_known_vulnerabilities":true, "id":true, "is_saas":true, "name":true, "new_appid":true, "pervasive":true, "prone_to_misuse":true, "risk":true, "saas_certifications":true, "saas_risk":true, "subcategory":true, "tagging":true, "technology":true, "transfers_files":true, "tunnels_other_apps":true, "used_by_malware":true} forceNew:map[string]bool(nil)
 						"categories": dsschema.ListAttribute{
-							Description: "The Categories param.",
+							Description: "The Categories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -118,7 +121,7 @@ func (d *applicationFilterListDataSource) Schema(_ context.Context, _ datasource
 							Computed:    true,
 						},
 						"excludes": dsschema.ListAttribute{
-							Description: "The Excludes param.",
+							Description: "The Excludes param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -151,22 +154,22 @@ func (d *applicationFilterListDataSource) Schema(_ context.Context, _ datasource
 							Computed:    true,
 						},
 						"risks": dsschema.ListAttribute{
-							Description: "The Risks param.",
+							Description: "The Risks param. Individual elements in this list are subject to additional validation. Value must be between 1 and 5.",
 							Computed:    true,
 							ElementType: types.Int64Type,
 						},
 						"saas_certifications": dsschema.ListAttribute{
-							Description: "The SaasCertifications param.",
+							Description: "The SaasCertifications param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"saas_risks": dsschema.ListAttribute{
-							Description: "The SaasRisks param.",
+							Description: "The SaasRisks param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"subcategories": dsschema.ListAttribute{
-							Description: "The Subcategories param.",
+							Description: "The Subcategories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -180,14 +183,14 @@ func (d *applicationFilterListDataSource) Schema(_ context.Context, _ datasource
 									Computed:    true,
 								},
 								"tags": dsschema.ListAttribute{
-									Description: "The Tags param.",
+									Description: "The Tags param. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
 							},
 						},
 						"technologies": dsschema.ListAttribute{
-							Description: "The Technologies param.",
+							Description: "The Technologies param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -479,7 +482,7 @@ func (d *applicationFilterDataSource) Schema(_ context.Context, _ datasource.Sch
 		Attributes: map[string]dsschema.Attribute{
 			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"category":true, "evasive":true, "excessive_bandwidth_use":true, "exclude":true, "has_known_vulnerabilities":true, "id":true, "is_saas":true, "name":true, "new_appid":true, "pervasive":true, "prone_to_misuse":true, "risk":true, "saas_certifications":true, "saas_risk":true, "subcategory":true, "tagging":true, "technology":true, "tfid":true, "transfers_files":true, "tunnels_other_apps":true, "used_by_malware":true} forceNew:map[string]bool{"id":true}
 			"categories": dsschema.ListAttribute{
-				Description: "The Categories param.",
+				Description: "The Categories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -492,7 +495,7 @@ func (d *applicationFilterDataSource) Schema(_ context.Context, _ datasource.Sch
 				Computed:    true,
 			},
 			"excludes": dsschema.ListAttribute{
-				Description: "The Excludes param.",
+				Description: "The Excludes param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -525,22 +528,22 @@ func (d *applicationFilterDataSource) Schema(_ context.Context, _ datasource.Sch
 				Computed:    true,
 			},
 			"risks": dsschema.ListAttribute{
-				Description: "The Risks param.",
+				Description: "The Risks param. Individual elements in this list are subject to additional validation. Value must be between 1 and 5.",
 				Computed:    true,
 				ElementType: types.Int64Type,
 			},
 			"saas_certifications": dsschema.ListAttribute{
-				Description: "The SaasCertifications param.",
+				Description: "The SaasCertifications param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"saas_risks": dsschema.ListAttribute{
-				Description: "The SaasRisks param.",
+				Description: "The SaasRisks param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"subcategories": dsschema.ListAttribute{
-				Description: "The Subcategories param.",
+				Description: "The Subcategories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -554,14 +557,14 @@ func (d *applicationFilterDataSource) Schema(_ context.Context, _ datasource.Sch
 						Computed:    true,
 					},
 					"tags": dsschema.ListAttribute{
-						Description: "The Tags param.",
+						Description: "The Tags param. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 						Computed:    true,
 						ElementType: types.StringType,
 					},
 				},
 			},
 			"technologies": dsschema.ListAttribute{
-				Description: "The Technologies param.",
+				Description: "The Technologies param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -785,9 +788,14 @@ func (r *applicationFilterResource) Schema(_ context.Context, _ resource.SchemaR
 		Attributes: map[string]rsschema.Attribute{
 			// inputs:map[string]bool{"category":true, "device":true, "evasive":true, "excessive_bandwidth_use":true, "exclude":true, "folder":true, "has_known_vulnerabilities":true, "id":true, "is_saas":true, "name":true, "new_appid":true, "pervasive":true, "prone_to_misuse":true, "risk":true, "saas_certifications":true, "saas_risk":true, "snippet":true, "subcategory":true, "tagging":true, "technology":true, "transfers_files":true, "tunnels_other_apps":true, "used_by_malware":true} outputs:map[string]bool{"category":true, "evasive":true, "excessive_bandwidth_use":true, "exclude":true, "has_known_vulnerabilities":true, "id":true, "is_saas":true, "name":true, "new_appid":true, "pervasive":true, "prone_to_misuse":true, "risk":true, "saas_certifications":true, "saas_risk":true, "subcategory":true, "tagging":true, "technology":true, "tfid":true, "transfers_files":true, "tunnels_other_apps":true, "used_by_malware":true} forceNew:map[string]bool{"device":true, "folder":true, "snippet":true}
 			"categories": rsschema.ListAttribute{
-				Description: "The Categories param.",
+				Description: "The Categories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(128),
+					),
+				},
 			},
 			"device": rsschema.StringAttribute{
 				Description: "The Device param.",
@@ -805,9 +813,14 @@ func (r *applicationFilterResource) Schema(_ context.Context, _ resource.SchemaR
 				Optional:    true,
 			},
 			"excludes": rsschema.ListAttribute{
-				Description: "The Excludes param.",
+				Description: "The Excludes param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(63),
+					),
+				},
 			},
 			"folder": rsschema.StringAttribute{
 				Description: "The Folder param.",
@@ -851,19 +864,34 @@ func (r *applicationFilterResource) Schema(_ context.Context, _ resource.SchemaR
 				Optional:    true,
 			},
 			"risks": rsschema.ListAttribute{
-				Description: "The Risks param.",
+				Description: "The Risks param. Individual elements in this list are subject to additional validation. Value must be between 1 and 5.",
 				Optional:    true,
 				ElementType: types.Int64Type,
+				Validators: []validator.List{
+					listvalidator.ValueInt64sAre(
+						int64validator.Between(1, 5),
+					),
+				},
 			},
 			"saas_certifications": rsschema.ListAttribute{
-				Description: "The SaasCertifications param.",
+				Description: "The SaasCertifications param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(32),
+					),
+				},
 			},
 			"saas_risks": rsschema.ListAttribute{
-				Description: "The SaasRisks param.",
+				Description: "The SaasRisks param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(32),
+					),
+				},
 			},
 			"snippet": rsschema.StringAttribute{
 				Description: "The Snippet param.",
@@ -873,9 +901,14 @@ func (r *applicationFilterResource) Schema(_ context.Context, _ resource.SchemaR
 				},
 			},
 			"subcategories": rsschema.ListAttribute{
-				Description: "The Subcategories param.",
+				Description: "The Subcategories param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(128),
+					),
+				},
 			},
 			"tagging": rsschema.SingleNestedAttribute{
 				Description: "The Tagging param.",
@@ -883,20 +916,36 @@ func (r *applicationFilterResource) Schema(_ context.Context, _ resource.SchemaR
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"no_tag":true, "tag":true} outputs:map[string]bool{"no_tag":true, "tag":true} forceNew:map[string]bool(nil)
 					"no_tag": rsschema.BoolAttribute{
-						Description: "The NoTag param.",
+						Description: "The NoTag param. Ensure that only one of the following is specified: `no_tag`, `tag`",
 						Optional:    true,
+						Validators: []validator.Bool{
+							boolvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("tag"),
+							),
+						},
 					},
 					"tags": rsschema.ListAttribute{
-						Description: "The Tags param.",
+						Description: "The Tags param. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters. Ensure that only one of the following is specified: `no_tag`, `tag`",
 						Optional:    true,
 						ElementType: types.StringType,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthAtMost(127),
+							),
+						},
 					},
 				},
 			},
 			"technologies": rsschema.ListAttribute{
-				Description: "The Technologies param.",
+				Description: "The Technologies param. Individual elements in this list are subject to additional validation. String length must not exceed 128 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(128),
+					),
+				},
 			},
 			"tfid": rsschema.StringAttribute{
 				Description: "The Terraform ID.",

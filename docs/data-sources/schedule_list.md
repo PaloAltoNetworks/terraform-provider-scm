@@ -50,7 +50,7 @@ Read-Only:
 
 Read-Only:
 
-- `non_recurring_list` (List of String) The NonRecurringList param.
+- `non_recurring_list` (List of String) The NonRecurringList param. Individual elements in this list are subject to additional validation. String length must be between 33 and 33 characters. String validation regex: `[0-9][0-9][0-9][0-9]\/([0][1-9]|[1][0-2])\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])-[0-9][0-9][0-9][0-9]\/([0][1-9]|[1][0-2])\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])`.
 - `recurring` (Attributes) The Recurring param. (see [below for nested schema](#nestedatt--data--schedule_type--recurring))
 
 <a id="nestedatt--data--schedule_type--recurring"></a>
@@ -58,7 +58,7 @@ Read-Only:
 
 Read-Only:
 
-- `daily_list` (List of String) The DailyList param.
+- `daily_list` (List of String) The DailyList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
 - `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--data--schedule_type--recurring--weekly))
 
 <a id="nestedatt--data--schedule_type--recurring--weekly"></a>
@@ -66,10 +66,10 @@ Read-Only:
 
 Read-Only:
 
-- `friday_list` (List of String) The FridayList param.
-- `monday_list` (List of String) The MondayList param.
-- `saturday_list` (List of String) The SaturdayList param.
-- `sunday_list` (List of String) The SundayList param.
-- `thursday_list` (List of String) The ThursdayList param.
-- `tuesday_list` (List of String) The TuesdayList param.
-- `wednesday_list` (List of String) The WednesdayList param.
+- `friday_list` (List of String) The FridayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `monday_list` (List of String) The MondayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `saturday_list` (List of String) The SaturdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `sunday_list` (List of String) The SundayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `thursday_list` (List of String) The ThursdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `tuesday_list` (List of String) The TuesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `wednesday_list` (List of String) The WednesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.

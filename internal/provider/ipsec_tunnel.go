@@ -1255,14 +1255,19 @@ func (r *ipsecTunnelResource) Schema(_ context.Context, _ resource.SchemaRequest
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"number":true, "tcp":true, "udp":true} outputs:map[string]bool{"number":true, "tcp":true, "udp":true} forceNew:map[string]bool(nil)
 										"number": rsschema.Int64Attribute{
-											Description: "IP protocol number. Value must be between 1 and 254.",
+											Description: "IP protocol number. Value must be between 1 and 254. Ensure that only one of the following is specified: `number`, `tcp`, `udp`",
 											Optional:    true,
 											Validators: []validator.Int64{
 												int64validator.Between(1, 254),
+												int64validator.ExactlyOneOf(
+													path.MatchRelative(),
+													path.MatchRelative().AtParent().AtName("tcp"),
+													path.MatchRelative().AtParent().AtName("udp"),
+												),
 											},
 										},
 										"tcp": rsschema.SingleNestedAttribute{
-											Description: "The Tcp param.",
+											Description: "The Tcp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp`",
 											Optional:    true,
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"local_port":true, "remote_port":true} outputs:map[string]bool{"local_port":true, "remote_port":true} forceNew:map[string]bool(nil)
@@ -1287,7 +1292,7 @@ func (r *ipsecTunnelResource) Schema(_ context.Context, _ resource.SchemaRequest
 											},
 										},
 										"udp": rsschema.SingleNestedAttribute{
-											Description: "The Udp param.",
+											Description: "The Udp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp`",
 											Optional:    true,
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"local_port":true, "remote_port":true} outputs:map[string]bool{"local_port":true, "remote_port":true} forceNew:map[string]bool(nil)
@@ -1340,14 +1345,19 @@ func (r *ipsecTunnelResource) Schema(_ context.Context, _ resource.SchemaRequest
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"number":true, "tcp":true, "udp":true} outputs:map[string]bool{"number":true, "tcp":true, "udp":true} forceNew:map[string]bool(nil)
 										"number": rsschema.Int64Attribute{
-											Description: "IP protocol number. Value must be between 1 and 254.",
+											Description: "IP protocol number. Value must be between 1 and 254. Ensure that only one of the following is specified: `number`, `tcp`, `udp`",
 											Optional:    true,
 											Validators: []validator.Int64{
 												int64validator.Between(1, 254),
+												int64validator.ExactlyOneOf(
+													path.MatchRelative(),
+													path.MatchRelative().AtParent().AtName("tcp"),
+													path.MatchRelative().AtParent().AtName("udp"),
+												),
 											},
 										},
 										"tcp": rsschema.SingleNestedAttribute{
-											Description: "The Tcp param.",
+											Description: "The Tcp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp`",
 											Optional:    true,
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"local_port":true, "remote_port":true} outputs:map[string]bool{"local_port":true, "remote_port":true} forceNew:map[string]bool(nil)
@@ -1372,7 +1382,7 @@ func (r *ipsecTunnelResource) Schema(_ context.Context, _ resource.SchemaRequest
 											},
 										},
 										"udp": rsschema.SingleNestedAttribute{
-											Description: "The Udp param.",
+											Description: "The Udp param. Ensure that only one of the following is specified: `number`, `tcp`, `udp`",
 											Optional:    true,
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"local_port":true, "remote_port":true} outputs:map[string]bool{"local_port":true, "remote_port":true} forceNew:map[string]bool(nil)

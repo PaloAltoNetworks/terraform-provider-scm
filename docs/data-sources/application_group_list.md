@@ -42,5 +42,5 @@ data "scm_application_group_list" "example" {
 Read-Only:
 
 - `id` (String) UUID of the resource.
-- `members` (List of String) The Members param.
+- `members` (List of String) The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 31 characters.

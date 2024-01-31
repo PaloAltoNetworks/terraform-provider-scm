@@ -11,6 +11,7 @@ import (
 	oPPPeKY "github.com/paloaltonetworks/scm-go/netsec/schemas/mfa/servers"
 	jhtSIUK "github.com/paloaltonetworks/scm-go/netsec/services/mfaservers"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -18,6 +19,7 @@ import (
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
@@ -496,8 +498,16 @@ func (r *mfaServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"duo_security_v2":true, "okta_adaptive_v1":true, "ping_identity_v1":true, "rsa_securid_access_v1":true} outputs:map[string]bool{"duo_security_v2":true, "okta_adaptive_v1":true, "ping_identity_v1":true, "rsa_securid_access_v1":true} forceNew:map[string]bool(nil)
 					"duo_security_v2": rsschema.SingleNestedAttribute{
-						Description: "The DuoSecurityV2 param.",
+						Description: "The DuoSecurityV2 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("okta_adaptive_v1"),
+								path.MatchRelative().AtParent().AtName("ping_identity_v1"),
+								path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"duo_api_host":true, "duo_baseuri":true, "duo_integration_key":true, "duo_secret_key":true, "duo_timeout":true} outputs:map[string]bool{"duo_api_host":true, "duo_baseuri":true, "duo_integration_key":true, "duo_secret_key":true, "duo_timeout":true} forceNew:map[string]bool(nil)
 							"duo_api_host": rsschema.StringAttribute{
@@ -523,7 +533,7 @@ func (r *mfaServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 						},
 					},
 					"okta_adaptive_v1": rsschema.SingleNestedAttribute{
-						Description: "The OktaAdaptiveV1 param.",
+						Description: "The OktaAdaptiveV1 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"okta_api_host":true, "okta_baseuri":true, "okta_org":true, "okta_timeout":true, "okta_token":true} outputs:map[string]bool{"okta_api_host":true, "okta_baseuri":true, "okta_org":true, "okta_timeout":true, "okta_token":true} forceNew:map[string]bool(nil)
@@ -550,7 +560,7 @@ func (r *mfaServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 						},
 					},
 					"ping_identity_v1": rsschema.SingleNestedAttribute{
-						Description: "The PingIdentityV1 param.",
+						Description: "The PingIdentityV1 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"ping_api_host":true, "ping_baseuri":true, "ping_org":true, "ping_org_alias":true, "ping_timeout":true, "ping_token":true} outputs:map[string]bool{"ping_api_host":true, "ping_baseuri":true, "ping_org":true, "ping_org_alias":true, "ping_timeout":true, "ping_token":true} forceNew:map[string]bool(nil)
@@ -581,7 +591,7 @@ func (r *mfaServerResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 						},
 					},
 					"rsa_securid_access_v1": rsschema.SingleNestedAttribute{
-						Description: "The RsaSecuridAccessV1 param.",
+						Description: "The RsaSecuridAccessV1 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"rsa_accessid":true, "rsa_accesskey":true, "rsa_api_host":true, "rsa_assurancepolicyid":true, "rsa_baseuri":true, "rsa_timeout":true} outputs:map[string]bool{"rsa_accessid":true, "rsa_accesskey":true, "rsa_api_host":true, "rsa_assurancepolicyid":true, "rsa_baseuri":true, "rsa_timeout":true} forceNew:map[string]bool(nil)

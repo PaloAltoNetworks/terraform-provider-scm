@@ -73,17 +73,17 @@ Optional:
 
 Optional:
 
-- `not_available` (Boolean) The NotAvailable param. Default: `false`.
-- `not_within` (Attributes) The NotWithin param. (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--not_within))
-- `within` (Attributes) The Within param. (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--within))
+- `not_available` (Boolean) The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`
+- `not_within` (Attributes) The NotWithin param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--not_within))
+- `within` (Attributes) The Within param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--within))
 
 <a id="nestedatt--anti_malware--criteria--last_scan_time--not_within"></a>
 ### Nested Schema for `anti_malware.criteria.last_scan_time.within`
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`.
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`.
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
 
 
 <a id="nestedatt--anti_malware--criteria--last_scan_time--within"></a>
@@ -91,8 +91,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`.
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`.
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
 
 
 
@@ -101,15 +101,15 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `greater_equal` (String) The GreaterEqual param. String length must not exceed 255 characters.
-- `greater_than` (String) The GreaterThan param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
-- `less_equal` (String) The LessEqual param. String length must not exceed 255 characters.
-- `less_than` (String) The LessThan param. String length must not exceed 255 characters.
-- `not_within` (Attributes) The NotWithin param. (see [below for nested schema](#nestedatt--anti_malware--criteria--product_version--not_within))
-- `within` (Attributes) The Within param. (see [below for nested schema](#nestedatt--anti_malware--criteria--product_version--within))
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`
+- `greater_equal` (String) The GreaterEqual param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`
+- `greater_than` (String) The GreaterThan param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`
+- `less_equal` (String) The LessEqual param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`
+- `less_than` (String) The LessThan param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`
+- `not_within` (Attributes) The NotWithin param. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--product_version--not_within))
+- `within` (Attributes) The Within param. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--product_version--within))
 
 <a id="nestedatt--anti_malware--criteria--product_version--not_within"></a>
 ### Nested Schema for `anti_malware.criteria.product_version.within`
@@ -133,16 +133,16 @@ Optional:
 
 Optional:
 
-- `not_within` (Attributes) The NotWithin param. (see [below for nested schema](#nestedatt--anti_malware--criteria--virdef_version--not_within))
-- `within` (Attributes) The Within param. (see [below for nested schema](#nestedatt--anti_malware--criteria--virdef_version--within))
+- `not_within` (Attributes) The NotWithin param. Ensure that only one of the following is specified: `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--virdef_version--not_within))
+- `within` (Attributes) The Within param. Ensure that only one of the following is specified: `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--virdef_version--within))
 
 <a id="nestedatt--anti_malware--criteria--virdef_version--not_within"></a>
 ### Nested Schema for `anti_malware.criteria.virdef_version.within`
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`.
-- `versions` (Number) specify versions range. Value must be between 1 and 65535. Default: `1`.
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
+- `versions` (Number) specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
 
 
 <a id="nestedatt--anti_malware--criteria--virdef_version--within"></a>
@@ -150,8 +150,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`.
-- `versions` (Number) specify versions range. Value must be between 1 and 65535. Default: `1`.
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
+- `versions` (Number) specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
 
 
 
@@ -165,7 +165,7 @@ Required:
 
 Optional:
 
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -308,7 +308,7 @@ Required:
 
 Optional:
 
-- `products` (List of String) Product name.
+- `products` (List of String) Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -334,17 +334,17 @@ Optional:
 
 Optional:
 
-- `not_available` (Boolean) The NotAvailable param. Default: `false`.
-- `not_within` (Attributes) The NotWithin param. (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--not_within))
-- `within` (Attributes) The Within param. (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--within))
+- `not_available` (Boolean) The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`
+- `not_within` (Attributes) The NotWithin param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--not_within))
+- `within` (Attributes) The Within param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--within))
 
 <a id="nestedatt--disk_backup--criteria--last_backup_time--not_within"></a>
 ### Nested Schema for `disk_backup.criteria.last_backup_time.within`
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`.
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`.
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
 
 
 <a id="nestedatt--disk_backup--criteria--last_backup_time--within"></a>
@@ -352,8 +352,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`.
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`.
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
 
 
 
@@ -367,7 +367,7 @@ Required:
 
 Optional:
 
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -404,8 +404,8 @@ Optional:
 
 Optional:
 
-- `is` (String) The Is param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Default: `"encrypted"`.
-- `is_not` (String) The IsNot param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Default: `"encrypted"`.
+- `is` (String) The Is param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Default: `"encrypted"`. Ensure that only one of the following is specified: `is`, `is_not`
+- `is_not` (String) The IsNot param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Default: `"encrypted"`. Ensure that only one of the following is specified: `is`, `is_not`
 
 
 
@@ -419,7 +419,7 @@ Required:
 
 Optional:
 
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -450,7 +450,7 @@ Required:
 
 Optional:
 
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -479,9 +479,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 <a id="nestedatt--host_info--criteria--domain"></a>
@@ -489,9 +489,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 <a id="nestedatt--host_info--criteria--host_id"></a>
@@ -499,9 +499,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 <a id="nestedatt--host_info--criteria--host_name"></a>
@@ -509,9 +509,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 <a id="nestedatt--host_info--criteria--os"></a>
@@ -519,18 +519,18 @@ Optional:
 
 Optional:
 
-- `contains` (Attributes) The Contains param. (see [below for nested schema](#nestedatt--host_info--criteria--os--contains))
+- `contains` (Attributes) The Contains param. Ensure that only one of the following is specified: `contains` (see [below for nested schema](#nestedatt--host_info--criteria--os--contains))
 
 <a id="nestedatt--host_info--criteria--os--contains"></a>
 ### Nested Schema for `host_info.criteria.os.contains`
 
 Optional:
 
-- `apple` (String) Apple vendor. String length must not exceed 255 characters. Default: `"All"`.
-- `google` (String) Google vendor. String length must not exceed 255 characters. Default: `"All"`.
-- `linux` (String) Linux vendor. String length must not exceed 255 characters. Default: `"All"`.
-- `microsoft` (String) Microsoft vendor. String length must not exceed 255 characters. Default: `"All"`.
-- `other` (String) Other vendor. String length must not exceed 255 characters.
+- `apple` (String) Apple vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `google` (String) Google vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `linux` (String) Linux vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `microsoft` (String) Microsoft vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `other` (String) Other vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
 
 
 
@@ -539,9 +539,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 
@@ -582,8 +582,8 @@ Optional:
 
 Optional:
 
-- `no` (Boolean) The No param. Default: `false`.
-- `yes` (Attributes) The Yes param. (see [below for nested schema](#nestedatt--mobile_device--criteria--applications--includes--yes))
+- `no` (Boolean) The No param. Default: `false`. Ensure that only one of the following is specified: `no`, `yes`
+- `yes` (Attributes) The Yes param. Ensure that only one of the following is specified: `no`, `yes` (see [below for nested schema](#nestedatt--mobile_device--criteria--applications--includes--yes))
 
 <a id="nestedatt--mobile_device--criteria--applications--includes--yes"></a>
 ### Nested Schema for `mobile_device.criteria.applications.includes.yes`
@@ -626,9 +626,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 <a id="nestedatt--mobile_device--criteria--last_checkin_time"></a>
@@ -636,8 +636,8 @@ Optional:
 
 Optional:
 
-- `not_within` (Attributes) The NotWithin param. (see [below for nested schema](#nestedatt--mobile_device--criteria--last_checkin_time--not_within))
-- `within` (Attributes) The Within param. (see [below for nested schema](#nestedatt--mobile_device--criteria--last_checkin_time--within))
+- `not_within` (Attributes) The NotWithin param. Ensure that only one of the following is specified: `not_within`, `within` (see [below for nested schema](#nestedatt--mobile_device--criteria--last_checkin_time--not_within))
+- `within` (Attributes) The Within param. Ensure that only one of the following is specified: `not_within`, `within` (see [below for nested schema](#nestedatt--mobile_device--criteria--last_checkin_time--within))
 
 <a id="nestedatt--mobile_device--criteria--last_checkin_time--not_within"></a>
 ### Nested Schema for `mobile_device.criteria.last_checkin_time.within`
@@ -661,9 +661,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 <a id="nestedatt--mobile_device--criteria--phone_number"></a>
@@ -671,9 +671,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 <a id="nestedatt--mobile_device--criteria--tag"></a>
@@ -681,9 +681,9 @@ Optional:
 
 Optional:
 
-- `contains` (String) The Contains param. String length must not exceed 255 characters.
-- `is` (String) The Is param. String length must not exceed 255 characters.
-- `is_not` (String) The IsNot param. String length must not exceed 255 characters.
+- `contains` (String) The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is` (String) The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
+- `is_not` (String) The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`
 
 
 
@@ -707,17 +707,17 @@ Optional:
 
 Optional:
 
-- `is` (Attributes) The Is param. (see [below for nested schema](#nestedatt--network_info--criteria--network--is))
-- `is_not` (Attributes) The IsNot param. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not))
+- `is` (Attributes) The Is param. Ensure that only one of the following is specified: `is`, `is_not` (see [below for nested schema](#nestedatt--network_info--criteria--network--is))
+- `is_not` (Attributes) The IsNot param. Ensure that only one of the following is specified: `is`, `is_not` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not))
 
 <a id="nestedatt--network_info--criteria--network--is"></a>
 ### Nested Schema for `network_info.criteria.network.is_not`
 
 Optional:
 
-- `mobile` (Attributes) The Mobile param. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--mobile))
-- `unknown` (Boolean) The Unknown param. Default: `false`.
-- `wifi` (Attributes) The Wifi param. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--wifi))
+- `mobile` (Attributes) The Mobile param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--mobile))
+- `unknown` (Boolean) The Unknown param. Default: `false`. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`
+- `wifi` (Attributes) The Wifi param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--wifi))
 
 <a id="nestedatt--network_info--criteria--network--is_not--mobile"></a>
 ### Nested Schema for `network_info.criteria.network.is_not.mobile`
@@ -741,10 +741,10 @@ Optional:
 
 Optional:
 
-- `ethernet` (Boolean) The Ethernet param. Default: `false`.
-- `mobile` (Attributes) The Mobile param. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--mobile))
-- `unknown` (Boolean) The Unknown param. Default: `false`.
-- `wifi` (Attributes) The Wifi param. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--wifi))
+- `ethernet` (Boolean) The Ethernet param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`
+- `mobile` (Attributes) The Mobile param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--mobile))
+- `unknown` (Boolean) The Unknown param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`
+- `wifi` (Attributes) The Wifi param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--wifi))
 
 <a id="nestedatt--network_info--criteria--network--is_not--mobile"></a>
 ### Nested Schema for `network_info.criteria.network.is_not.mobile`
@@ -790,7 +790,7 @@ Optional:
 Optional:
 
 - `check` (String) The Check param. String must be one of these: `"has-any"`, `"has-none"`, `"has-all"`. Default: `"has-any"`.
-- `patches` (List of String) The Patches param.
+- `patches` (List of String) The Patches param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 - `severity` (Attributes) The Severity param. (see [below for nested schema](#nestedatt--patch_management--criteria--missing_patches--severity))
 
 <a id="nestedatt--patch_management--criteria--missing_patches--severity"></a>
@@ -798,12 +798,12 @@ Optional:
 
 Optional:
 
-- `greater_equal` (Number) The GreaterEqual param. Value must be between 0 and 100000.
-- `greater_than` (Number) The GreaterThan param. Value must be between 0 and 100000.
-- `is` (Number) The Is param. Value must be between 0 and 100000.
-- `is_not` (Number) The IsNot param. Value must be between 0 and 100000.
-- `less_equal` (Number) The LessEqual param. Value must be between 0 and 100000.
-- `less_than` (Number) The LessThan param. Value must be between 0 and 100000.
+- `greater_equal` (Number) The GreaterEqual param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`
+- `greater_than` (Number) The GreaterThan param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`
+- `is` (Number) The Is param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`
+- `is_not` (Number) The IsNot param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`
+- `less_equal` (Number) The LessEqual param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`
+- `less_than` (Number) The LessThan param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`
 
 
 
@@ -817,4 +817,4 @@ Required:
 
 Optional:
 
-- `products` (List of String) Product name.
+- `products` (List of String) Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.

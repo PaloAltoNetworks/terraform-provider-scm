@@ -13,6 +13,7 @@ import (
 	ampruGo "github.com/paloaltonetworks/scm-go/netsec/services/addressgroups"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -114,12 +115,12 @@ func (d *addressGroupListDataSource) Schema(_ context.Context, _ datasource.Sche
 							Computed:    true,
 						},
 						"static_list": dsschema.ListAttribute{
-							Description: "The StaticList param.",
+							Description: "The StaticList param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"tags": dsschema.ListAttribute{
-							Description: "Tags for address group object. List must contain at most 64 elements.",
+							Description: "Tags for address group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -365,12 +366,12 @@ func (d *addressGroupDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 				Computed:    true,
 			},
 			"static_list": dsschema.ListAttribute{
-				Description: "The StaticList param.",
+				Description: "The StaticList param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"tags": dsschema.ListAttribute{
-				Description: "Tags for address group object. List must contain at most 64 elements.",
+				Description: "Tags for address group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -525,8 +526,14 @@ func (r *addressGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"dynamic_value": rsschema.SingleNestedAttribute{
-				Description: "The DynamicValue param.",
+				Description: "The DynamicValue param. Ensure that only one of the following is specified: `dynamic`, `static`",
 				Optional:    true,
+				Validators: []validator.Object{
+					objectvalidator.ExactlyOneOf(
+						path.MatchRelative(),
+						path.MatchRelative().AtParent().AtName("static"),
+					),
+				},
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"filter":true} outputs:map[string]bool{"filter":true} forceNew:map[string]bool(nil)
 					"filter": rsschema.StringAttribute{
@@ -567,16 +574,24 @@ func (r *addressGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"static_list": rsschema.ListAttribute{
-				Description: "The StaticList param.",
+				Description: "The StaticList param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters. Ensure that only one of the following is specified: `dynamic`, `static`",
 				Optional:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(63),
+					),
+				},
 			},
 			"tags": rsschema.ListAttribute{
-				Description: "Tags for address group object. List must contain at most 64 elements.",
+				Description: "Tags for address group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
 				Validators: []validator.List{
 					listvalidator.SizeAtMost(64),
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(127),
+					),
 				},
 			},
 			"tfid": rsschema.StringAttribute{

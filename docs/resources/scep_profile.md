@@ -70,9 +70,9 @@ Optional:
 
 Optional:
 
-- `dnsname` (String) The Dnsname param.
-- `rfc822name` (String) The Rfc822name param.
-- `uniform_resource_identifier` (String) The UniformResourceIdentifier param.
+- `dnsname` (String) The Dnsname param. Ensure that only one of the following is specified: `dnsname`, `rfc822name`, `uniform_resource_identifier`
+- `rfc822name` (String) The Rfc822name param. Ensure that only one of the following is specified: `dnsname`, `rfc822name`, `uniform_resource_identifier`
+- `uniform_resource_identifier` (String) The UniformResourceIdentifier param. Ensure that only one of the following is specified: `dnsname`, `rfc822name`, `uniform_resource_identifier`
 
 
 <a id="nestedatt--scep_challenge"></a>
@@ -80,9 +80,9 @@ Optional:
 
 Optional:
 
-- `dynamic_challenge` (Attributes) The DynamicChallenge param. (see [below for nested schema](#nestedatt--scep_challenge--dynamic_challenge))
-- `fixed` (String) Challenge to use for SCEP server on mobile clients. String length must not exceed 1024 characters.
-- `none` (String) The None param. String must be one of these: `""`.
+- `dynamic_challenge` (Attributes) The DynamicChallenge param. Ensure that only one of the following is specified: `dynamic`, `fixed`, `none` (see [below for nested schema](#nestedatt--scep_challenge--dynamic_challenge))
+- `fixed` (String) Challenge to use for SCEP server on mobile clients. String length must not exceed 1024 characters. Ensure that only one of the following is specified: `dynamic`, `fixed`, `none`
+- `none` (String) The None param. String must be one of these: `""`. Ensure that only one of the following is specified: `dynamic`, `fixed`, `none`
 
 <a id="nestedatt--scep_challenge--dynamic_challenge"></a>
 ### Nested Schema for `scep_challenge.dynamic_challenge`

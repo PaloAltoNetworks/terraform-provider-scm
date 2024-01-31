@@ -28,10 +28,10 @@ resource "scm_ipsec_crypto_profile" "example" {
 
 ### Optional
 
-- `ah` (Attributes) The Ah param. (see [below for nested schema](#nestedatt--ah))
+- `ah` (Attributes) The Ah param. Ensure that only one of the following is specified: `ah`, `esp` (see [below for nested schema](#nestedatt--ah))
 - `device` (String) The Device param.
 - `dh_group` (String) phase-2 DH group (PFS DH group). String must be one of these: `"no-pfs"`, `"group1"`, `"group2"`, `"group5"`, `"group14"`, `"group19"`, `"group20"`. Default: `"group2"`.
-- `esp` (Attributes) The Esp param. (see [below for nested schema](#nestedatt--esp))
+- `esp` (Attributes) The Esp param. Ensure that only one of the following is specified: `ah`, `esp` (see [below for nested schema](#nestedatt--esp))
 - `folder` (String) The Folder param.
 - `lifesize` (Attributes) The Lifesize param. (see [below for nested schema](#nestedatt--lifesize))
 - `snippet` (String) The Snippet param.
@@ -46,10 +46,10 @@ resource "scm_ipsec_crypto_profile" "example" {
 
 Optional:
 
-- `days` (Number) specify lifetime in days. Value must be between 1 and 365.
-- `hours` (Number) specify lifetime in hours. Value must be between 1 and 65535.
-- `minutes` (Number) specify lifetime in minutes. Value must be between 3 and 65535.
-- `seconds` (Number) specify lifetime in seconds. Value must be between 180 and 65535.
+- `days` (Number) specify lifetime in days. Value must be between 1 and 365. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`
+- `hours` (Number) specify lifetime in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`
+- `minutes` (Number) specify lifetime in minutes. Value must be between 3 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`
+- `seconds` (Number) specify lifetime in seconds. Value must be between 180 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`
 
 
 <a id="nestedatt--ah"></a>
@@ -57,7 +57,7 @@ Optional:
 
 Required:
 
-- `authentications` (List of String) The Authentications param.
+- `authentications` (List of String) The Authentications param. Individual elements in this list are subject to additional validation. String must be one of these: `"md5"`, `"sha1"`, `"sha256"`, `"sha384"`, `"sha512"`.
 
 
 <a id="nestedatt--esp"></a>
@@ -66,7 +66,7 @@ Required:
 Required:
 
 - `authentications` (List of String) Authentication algorithm.
-- `encryptions` (List of String) Encryption algorithm.
+- `encryptions` (List of String) Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `"des"`, `"3des"`, `"aes-128-cbc"`, `"aes-192-cbc"`, `"aes-256-cbc"`, `"aes-128-gcm"`, `"aes-256-gcm"`, `"null"`.
 
 
 <a id="nestedatt--lifesize"></a>
@@ -74,7 +74,7 @@ Required:
 
 Optional:
 
-- `gb` (Number) specify lifesize in gigabytes(GB). Value must be between 1 and 65535.
-- `kb` (Number) specify lifesize in kilobytes(KB). Value must be between 1 and 65535.
-- `mb` (Number) specify lifesize in megabytes(MB). Value must be between 1 and 65535.
-- `tb` (Number) specify lifesize in terabytes(TB). Value must be between 1 and 65535.
+- `gb` (Number) specify lifesize in gigabytes(GB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`
+- `kb` (Number) specify lifesize in kilobytes(KB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`
+- `mb` (Number) specify lifesize in megabytes(MB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`
+- `tb` (Number) specify lifesize in terabytes(TB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`

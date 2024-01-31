@@ -13,6 +13,8 @@ import (
 	bUPXiuP "github.com/paloaltonetworks/scm-go/netsec/services/ipseccryptoprofiles"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -117,7 +119,7 @@ func (d *ipsecCryptoProfileListDataSource) Schema(_ context.Context, _ datasourc
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"authentication":true} forceNew:map[string]bool(nil)
 								"authentications": dsschema.ListAttribute{
-									Description: "The Authentications param.",
+									Description: "The Authentications param. Individual elements in this list are subject to additional validation. String must be one of these: `\"md5\"`, `\"sha1\"`, `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -138,7 +140,7 @@ func (d *ipsecCryptoProfileListDataSource) Schema(_ context.Context, _ datasourc
 									ElementType: types.StringType,
 								},
 								"encryptions": dsschema.ListAttribute{
-									Description: "Encryption algorithm.",
+									Description: "Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `\"des\"`, `\"3des\"`, `\"aes-128-cbc\"`, `\"aes-192-cbc\"`, `\"aes-256-cbc\"`, `\"aes-128-gcm\"`, `\"aes-256-gcm\"`, `\"null\"`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -421,7 +423,10 @@ type ipsecCryptoProfileDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Device  types.String `tfsdk:"device"`
+	Folder  types.String `tfsdk:"folder"`
+	Id      types.String `tfsdk:"id"`
+	Snippet types.String `tfsdk:"snippet"`
 
 	// Output.
 	Ah      *ipsecCryptoProfileDsModel_lrzxLXR_AhObject  `tfsdk:"ah"`
@@ -467,18 +472,22 @@ func (d *ipsecCryptoProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"ah":true, "dh_group":true, "esp":true, "id":true, "lifesize":true, "lifetime":true, "name":true, "tfid":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"device":true, "folder":true, "id":true, "snippet":true} outputs:map[string]bool{"ah":true, "dh_group":true, "esp":true, "id":true, "lifesize":true, "lifetime":true, "name":true, "tfid":true} forceNew:map[string]bool{"device":true, "folder":true, "id":true, "snippet":true}
 			"ah": dsschema.SingleNestedAttribute{
 				Description: "The Ah param.",
 				Computed:    true,
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"authentication":true} forceNew:map[string]bool(nil)
 					"authentications": dsschema.ListAttribute{
-						Description: "The Authentications param.",
+						Description: "The Authentications param. Individual elements in this list are subject to additional validation. String must be one of these: `\"md5\"`, `\"sha1\"`, `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.",
 						Computed:    true,
 						ElementType: types.StringType,
 					},
 				},
+			},
+			"device": dsschema.StringAttribute{
+				Description: "The Device param.",
+				Optional:    true,
 			},
 			"dh_group": dsschema.StringAttribute{
 				Description: "phase-2 DH group (PFS DH group). String must be one of these: `\"no-pfs\"`, `\"group1\"`, `\"group2\"`, `\"group5\"`, `\"group14\"`, `\"group19\"`, `\"group20\"`. Default: `\"group2\"`.",
@@ -495,11 +504,15 @@ func (d *ipsecCryptoProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 						ElementType: types.StringType,
 					},
 					"encryptions": dsschema.ListAttribute{
-						Description: "Encryption algorithm.",
+						Description: "Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `\"des\"`, `\"3des\"`, `\"aes-128-cbc\"`, `\"aes-192-cbc\"`, `\"aes-256-cbc\"`, `\"aes-128-gcm\"`, `\"aes-256-gcm\"`, `\"null\"`.",
 						Computed:    true,
 						ElementType: types.StringType,
 					},
 				},
+			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param.",
+				Optional:    true,
 			},
 			"id": dsschema.StringAttribute{
 				Description: "The Id param.",
@@ -555,6 +568,10 @@ func (d *ipsecCryptoProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 				Description: "Alphanumeric string begin with letter: [0-9a-zA-Z._-]. String length must not exceed 31 characters.",
 				Computed:    true,
 			},
+			"snippet": dsschema.StringAttribute{
+				Description: "The Snippet param.",
+				Optional:    true,
+			},
 			"tfid": dsschema.StringAttribute{
 				Description: "The Terraform ID.",
 				Computed:    true,
@@ -585,6 +602,9 @@ func (d *ipsecCryptoProfileDataSource) Read(ctx context.Context, req datasource.
 		"data_source_name":            "scm_ipsec_crypto_profile",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
+		"snippet":                     state.Snippet.ValueString(),
+		"device":                      state.Device.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -594,6 +614,12 @@ func (d *ipsecCryptoProfileDataSource) Read(ctx context.Context, req datasource.
 	input := bUPXiuP.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueStringPointer()
+
+	input.Snippet = state.Snippet.ValueStringPointer()
+
+	input.Device = state.Device.ValueStringPointer()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -605,6 +631,21 @@ func (d *ipsecCryptoProfileDataSource) Read(ctx context.Context, req datasource.
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Folder != nil {
+		idBuilder.WriteString(*input.Folder)
+	}
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Snippet != nil {
+		idBuilder.WriteString(*input.Snippet)
+	}
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Device != nil {
+		idBuilder.WriteString(*input.Device)
+	}
 
 	// Store the answer to state.
 
@@ -745,14 +786,25 @@ func (r *ipsecCryptoProfileResource) Schema(_ context.Context, _ resource.Schema
 		Attributes: map[string]rsschema.Attribute{
 			// inputs:map[string]bool{"ah":true, "device":true, "dh_group":true, "esp":true, "folder":true, "id":true, "lifesize":true, "lifetime":true, "name":true, "snippet":true} outputs:map[string]bool{"ah":true, "dh_group":true, "esp":true, "id":true, "lifesize":true, "lifetime":true, "name":true, "tfid":true} forceNew:map[string]bool{"device":true, "folder":true, "snippet":true}
 			"ah": rsschema.SingleNestedAttribute{
-				Description: "The Ah param.",
+				Description: "The Ah param. Ensure that only one of the following is specified: `ah`, `esp`",
 				Optional:    true,
+				Validators: []validator.Object{
+					objectvalidator.ExactlyOneOf(
+						path.MatchRelative(),
+						path.MatchRelative().AtParent().AtName("esp"),
+					),
+				},
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"authentication":true} outputs:map[string]bool{"authentication":true} forceNew:map[string]bool(nil)
 					"authentications": rsschema.ListAttribute{
-						Description: "The Authentications param.",
+						Description: "The Authentications param. Individual elements in this list are subject to additional validation. String must be one of these: `\"md5\"`, `\"sha1\"`, `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.",
 						Required:    true,
 						ElementType: types.StringType,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(
+								stringvalidator.OneOf("md5", "sha1", "sha256", "sha384", "sha512"),
+							),
+						},
 					},
 				},
 			},
@@ -773,7 +825,7 @@ func (r *ipsecCryptoProfileResource) Schema(_ context.Context, _ resource.Schema
 				},
 			},
 			"esp": rsschema.SingleNestedAttribute{
-				Description: "The Esp param.",
+				Description: "The Esp param. Ensure that only one of the following is specified: `ah`, `esp`",
 				Optional:    true,
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"authentication":true, "encryption":true} outputs:map[string]bool{"authentication":true, "encryption":true} forceNew:map[string]bool(nil)
@@ -783,9 +835,14 @@ func (r *ipsecCryptoProfileResource) Schema(_ context.Context, _ resource.Schema
 						ElementType: types.StringType,
 					},
 					"encryptions": rsschema.ListAttribute{
-						Description: "Encryption algorithm.",
+						Description: "Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `\"des\"`, `\"3des\"`, `\"aes-128-cbc\"`, `\"aes-192-cbc\"`, `\"aes-256-cbc\"`, `\"aes-128-gcm\"`, `\"aes-256-gcm\"`, `\"null\"`.",
 						Required:    true,
 						ElementType: types.StringType,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(
+								stringvalidator.OneOf("des", "3des", "aes-128-cbc", "aes-192-cbc", "aes-256-cbc", "aes-128-gcm", "aes-256-gcm", "null"),
+							),
+						},
 					},
 				},
 			},
@@ -809,28 +866,34 @@ func (r *ipsecCryptoProfileResource) Schema(_ context.Context, _ resource.Schema
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"gb":true, "kb":true, "mb":true, "tb":true} outputs:map[string]bool{"gb":true, "kb":true, "mb":true, "tb":true} forceNew:map[string]bool(nil)
 					"gb": rsschema.Int64Attribute{
-						Description: "specify lifesize in gigabytes(GB). Value must be between 1 and 65535.",
+						Description: "specify lifesize in gigabytes(GB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 65535),
+							int64validator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("kb"),
+								path.MatchRelative().AtParent().AtName("mb"),
+								path.MatchRelative().AtParent().AtName("tb"),
+							),
 						},
 					},
 					"kb": rsschema.Int64Attribute{
-						Description: "specify lifesize in kilobytes(KB). Value must be between 1 and 65535.",
+						Description: "specify lifesize in kilobytes(KB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 65535),
 						},
 					},
 					"mb": rsschema.Int64Attribute{
-						Description: "specify lifesize in megabytes(MB). Value must be between 1 and 65535.",
+						Description: "specify lifesize in megabytes(MB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 65535),
 						},
 					},
 					"tb": rsschema.Int64Attribute{
-						Description: "specify lifesize in terabytes(TB). Value must be between 1 and 65535.",
+						Description: "specify lifesize in terabytes(TB). Value must be between 1 and 65535. Ensure that only one of the following is specified: `gb`, `kb`, `mb`, `tb`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 65535),
@@ -844,28 +907,34 @@ func (r *ipsecCryptoProfileResource) Schema(_ context.Context, _ resource.Schema
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"days":true, "hours":true, "minutes":true, "seconds":true} outputs:map[string]bool{"days":true, "hours":true, "minutes":true, "seconds":true} forceNew:map[string]bool(nil)
 					"days": rsschema.Int64Attribute{
-						Description: "specify lifetime in days. Value must be between 1 and 365.",
+						Description: "specify lifetime in days. Value must be between 1 and 365. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 365),
+							int64validator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("hours"),
+								path.MatchRelative().AtParent().AtName("minutes"),
+								path.MatchRelative().AtParent().AtName("seconds"),
+							),
 						},
 					},
 					"hours": rsschema.Int64Attribute{
-						Description: "specify lifetime in hours. Value must be between 1 and 65535.",
+						Description: "specify lifetime in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(1, 65535),
 						},
 					},
 					"minutes": rsschema.Int64Attribute{
-						Description: "specify lifetime in minutes. Value must be between 3 and 65535.",
+						Description: "specify lifetime in minutes. Value must be between 3 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(3, 65535),
 						},
 					},
 					"seconds": rsschema.Int64Attribute{
-						Description: "specify lifetime in seconds. Value must be between 180 and 65535.",
+						Description: "specify lifetime in seconds. Value must be between 180 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`",
 						Optional:    true,
 						Validators: []validator.Int64{
 							int64validator.Between(180, 65535),
@@ -1117,6 +1186,12 @@ func (r *ipsecCryptoProfileResource) Read(ctx context.Context, req resource.Read
 	input := bUPXiuP.ReadInput{}
 
 	input.Id = tokens[3]
+
+	input.Folder = &tokens[0]
+
+	input.Snippet = &tokens[1]
+
+	input.Device = &tokens[2]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

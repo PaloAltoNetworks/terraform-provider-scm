@@ -12,6 +12,7 @@ import (
 	xlJKoIe "github.com/paloaltonetworks/scm-go/netsec/schemas/radius/server/profiles"
 	cKzmQTd "github.com/paloaltonetworks/scm-go/netsec/services/radiusserverprofiles"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -847,13 +848,22 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} outputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} forceNew:map[string]bool(nil)
 					"chap": rsschema.BoolAttribute{
-						Description: "The Chap param. Default: `false`.",
+						Description: "The Chap param. Default: `false`. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
 						Optional:    true,
 						Computed:    true,
 						Default:     booldefault.StaticBool(false),
+						Validators: []validator.Bool{
+							boolvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("EAP_TTLS_with_PAP"),
+								path.MatchRelative().AtParent().AtName("PAP"),
+								path.MatchRelative().AtParent().AtName("PEAP_MSCHAPv2"),
+								path.MatchRelative().AtParent().AtName("PEAP_with_GTC"),
+							),
+						},
 					},
 					"eap_ttls_with_pap": rsschema.SingleNestedAttribute{
-						Description: "The EapTtlsWithPap param.",
+						Description: "The EapTtlsWithPap param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"anon_outer_id":true, "radius_cert_profile":true} outputs:map[string]bool{"anon_outer_id":true, "radius_cert_profile":true} forceNew:map[string]bool(nil)
@@ -868,13 +878,13 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"pap": rsschema.BoolAttribute{
-						Description: "The Pap param. Default: `false`.",
+						Description: "The Pap param. Default: `false`. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
 						Optional:    true,
 						Computed:    true,
 						Default:     booldefault.StaticBool(false),
 					},
 					"peap_mschap_v2": rsschema.SingleNestedAttribute{
-						Description: "The PeapMschapV2 param.",
+						Description: "The PeapMschapV2 param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"allow_pwd_change":true, "anon_outer_id":true, "radius_cert_profile":true} outputs:map[string]bool{"allow_pwd_change":true, "anon_outer_id":true, "radius_cert_profile":true} forceNew:map[string]bool(nil)
@@ -893,7 +903,7 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"peap_with_gtc": rsschema.SingleNestedAttribute{
-						Description: "The PeapWithGtc param.",
+						Description: "The PeapWithGtc param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"anon_outer_id":true, "radius_cert_profile":true} outputs:map[string]bool{"anon_outer_id":true, "radius_cert_profile":true} forceNew:map[string]bool(nil)

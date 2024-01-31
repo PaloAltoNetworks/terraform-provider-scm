@@ -25,6 +25,12 @@ data "scm_ipsec_crypto_profile" "example" {
 
 - `id` (String) The Id param.
 
+### Optional
+
+- `device` (String) The Device param.
+- `folder` (String) The Folder param.
+- `snippet` (String) The Snippet param.
+
 ### Read-Only
 
 - `ah` (Attributes) The Ah param. (see [below for nested schema](#nestedatt--ah))
@@ -40,7 +46,7 @@ data "scm_ipsec_crypto_profile" "example" {
 
 Read-Only:
 
-- `authentications` (List of String) The Authentications param.
+- `authentications` (List of String) The Authentications param. Individual elements in this list are subject to additional validation. String must be one of these: `"md5"`, `"sha1"`, `"sha256"`, `"sha384"`, `"sha512"`.
 
 
 <a id="nestedatt--esp"></a>
@@ -49,7 +55,7 @@ Read-Only:
 Read-Only:
 
 - `authentications` (List of String) Authentication algorithm.
-- `encryptions` (List of String) Encryption algorithm.
+- `encryptions` (List of String) Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `"des"`, `"3des"`, `"aes-128-cbc"`, `"aes-192-cbc"`, `"aes-256-cbc"`, `"aes-128-gcm"`, `"aes-256-gcm"`, `"null"`.
 
 
 <a id="nestedatt--lifesize"></a>

@@ -14,6 +14,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -194,7 +195,7 @@ func (d *serviceListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 							},
 						},
 						"tags": dsschema.ListAttribute{
-							Description: "Tags for service object. List must contain at most 64 elements.",
+							Description: "Tags for service object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -548,7 +549,7 @@ func (d *serviceDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 				},
 			},
 			"tags": dsschema.ListAttribute{
-				Description: "Tags for service object. List must contain at most 64 elements.",
+				Description: "Tags for service object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -780,8 +781,14 @@ func (r *serviceResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"tcp":true, "udp":true} outputs:map[string]bool{"tcp":true, "udp":true} forceNew:map[string]bool(nil)
 					"tcp": rsschema.SingleNestedAttribute{
-						Description: "The Tcp param.",
+						Description: "The Tcp param. Ensure that only one of the following is specified: `tcp`, `udp`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("udp"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"override":true, "port":true, "source_port":true} outputs:map[string]bool{"override":true, "port":true, "source_port":true} forceNew:map[string]bool(nil)
 							"override": rsschema.SingleNestedAttribute{
@@ -835,7 +842,7 @@ func (r *serviceResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 						},
 					},
 					"udp": rsschema.SingleNestedAttribute{
-						Description: "The Udp param.",
+						Description: "The Udp param. Ensure that only one of the following is specified: `tcp`, `udp`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"override":true, "port":true, "source_port":true} outputs:map[string]bool{"override":true, "port":true, "source_port":true} forceNew:map[string]bool(nil)
@@ -881,11 +888,14 @@ func (r *serviceResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				},
 			},
 			"tags": rsschema.ListAttribute{
-				Description: "Tags for service object. List must contain at most 64 elements.",
+				Description: "Tags for service object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
 				Validators: []validator.List{
 					listvalidator.SizeAtMost(64),
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(127),
+					),
 				},
 			},
 			"tfid": rsschema.StringAttribute{

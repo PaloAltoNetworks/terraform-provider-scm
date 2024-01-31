@@ -13,6 +13,8 @@ import (
 	yJkkSzS "github.com/paloaltonetworks/scm-go/netsec/schemas/ike/gateways"
 	kJVbXva "github.com/paloaltonetworks/scm-go/netsec/services/ikegateways"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -656,8 +658,10 @@ type ikeGatewayDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Folder types.String `tfsdk:"folder"`
-	Id     types.String `tfsdk:"id"`
+	Device  types.String `tfsdk:"device"`
+	Folder  types.String `tfsdk:"folder"`
+	Id      types.String `tfsdk:"id"`
+	Snippet types.String `tfsdk:"snippet"`
 
 	// Output.
 	Authentication ikeGatewayDsModel_yJkkSzS_AuthenticationObject `tfsdk:"authentication"`
@@ -756,7 +760,7 @@ func (d *ikeGatewayDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"authentication":true, "id":true, "local_id":true, "name":true, "peer_address":true, "peer_id":true, "protocol":true, "protocol_common":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
+			// inputs:map[string]bool{"device":true, "folder":true, "id":true, "snippet":true} outputs:map[string]bool{"authentication":true, "id":true, "local_id":true, "name":true, "peer_address":true, "peer_id":true, "protocol":true, "protocol_common":true, "tfid":true} forceNew:map[string]bool{"device":true, "folder":true, "id":true, "snippet":true}
 			"authentication": dsschema.SingleNestedAttribute{
 				Description: "The Authentication param.",
 				Computed:    true,
@@ -809,6 +813,10 @@ func (d *ikeGatewayDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 						},
 					},
 				},
+			},
+			"device": dsschema.StringAttribute{
+				Description: "The Device param.",
+				Optional:    true,
 			},
 			"folder": dsschema.StringAttribute{
 				Description: "The Folder param.",
@@ -959,6 +967,10 @@ func (d *ikeGatewayDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 					},
 				},
 			},
+			"snippet": dsschema.StringAttribute{
+				Description: "The Snippet param.",
+				Optional:    true,
+			},
 			"tfid": dsschema.StringAttribute{
 				Description: "The Terraform ID.",
 				Computed:    true,
@@ -990,6 +1002,8 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
 		"folder":                      state.Folder.ValueString(),
+		"snippet":                     state.Snippet.ValueString(),
+		"device":                      state.Device.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -1001,6 +1015,10 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	input.Id = state.Id.ValueString()
 
 	input.Folder = state.Folder.ValueStringPointer()
+
+	input.Snippet = state.Snippet.ValueStringPointer()
+
+	input.Device = state.Device.ValueStringPointer()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -1016,6 +1034,16 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	idBuilder.WriteString(IdSeparator)
 	if input.Folder != nil {
 		idBuilder.WriteString(*input.Folder)
+	}
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Snippet != nil {
+		idBuilder.WriteString(*input.Snippet)
+	}
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Device != nil {
+		idBuilder.WriteString(*input.Device)
 	}
 
 	// Store the answer to state.
@@ -1292,8 +1320,14 @@ func (r *ikeGatewayResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"certificate":true, "pre_shared_key":true} outputs:map[string]bool{"certificate":true, "pre_shared_key":true} forceNew:map[string]bool(nil)
 					"certificate": rsschema.SingleNestedAttribute{
-						Description: "The Certificate param.",
+						Description: "The Certificate param. Ensure that only one of the following is specified: `certificate`, `pre_shared_key`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("pre_shared_key"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"allow_id_payload_mismatch":true, "certificate_profile":true, "local_certificate":true, "strict_validation_revocation":true, "use_management_as_source":true} outputs:map[string]bool{"allow_id_payload_mismatch":true, "certificate_profile":true, "local_certificate":true, "strict_validation_revocation":true, "use_management_as_source":true} forceNew:map[string]bool(nil)
 							"allow_id_payload_mismatch": rsschema.BoolAttribute{
@@ -1326,7 +1360,7 @@ func (r *ikeGatewayResource) Schema(_ context.Context, _ resource.SchemaRequest,
 						},
 					},
 					"pre_shared_key": rsschema.SingleNestedAttribute{
-						Description: "The PreSharedKey param.",
+						Description: "The PreSharedKey param. Ensure that only one of the following is specified: `certificate`, `pre_shared_key`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"key":true} outputs:map[string]bool{"key":true} forceNew:map[string]bool(nil)
@@ -1392,20 +1426,27 @@ func (r *ikeGatewayResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"dynamic":true, "fqdn":true, "ip":true} outputs:map[string]bool{"dynamic":true, "fqdn":true, "ip":true} forceNew:map[string]bool(nil)
 					"dynamic_address": rsschema.BoolAttribute{
-						Description: "The DynamicAddress param. Default: `true`.",
+						Description: "The DynamicAddress param. Default: `true`. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`",
 						Optional:    true,
 						Computed:    true,
 						Default:     booldefault.StaticBool(true),
+						Validators: []validator.Bool{
+							boolvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("fqdn"),
+								path.MatchRelative().AtParent().AtName("ip"),
+							),
+						},
 					},
 					"fqdn": rsschema.StringAttribute{
-						Description: "peer gateway FQDN name. String length must not exceed 255 characters.",
+						Description: "peer gateway FQDN name. String length must not exceed 255 characters. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`",
 						Optional:    true,
 						Validators: []validator.String{
 							stringvalidator.LengthAtMost(255),
 						},
 					},
 					"ip": rsschema.StringAttribute{
-						Description: "peer gateway has static IP address.",
+						Description: "peer gateway has static IP address. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`",
 						Optional:    true,
 					},
 				},
@@ -1894,6 +1935,10 @@ func (r *ikeGatewayResource) Read(ctx context.Context, req resource.ReadRequest,
 	input.Id = tokens[3]
 
 	input.Folder = &tokens[0]
+
+	input.Snippet = &tokens[1]
+
+	input.Device = &tokens[2]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

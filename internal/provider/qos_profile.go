@@ -13,6 +13,7 @@ import (
 	cBiswpr "github.com/paloaltonetworks/scm-go/netsec/services/qosprofiles"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -904,8 +905,14 @@ func (r *qosProfileResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"mbps":true, "percentage":true} outputs:map[string]bool{"mbps":true, "percentage":true} forceNew:map[string]bool(nil)
 					"mbps": rsschema.SingleNestedAttribute{
-						Description: "The Mbps param.",
+						Description: "The Mbps param. Ensure that only one of the following is specified: `mbps`, `percentage`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("percentage"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"class":true} outputs:map[string]bool{"class":true} forceNew:map[string]bool(nil)
 							"classes": rsschema.ListNestedAttribute{
@@ -957,7 +964,7 @@ func (r *qosProfileResource) Schema(_ context.Context, _ resource.SchemaRequest,
 						},
 					},
 					"percentage": rsschema.SingleNestedAttribute{
-						Description: "The Percentage param.",
+						Description: "The Percentage param. Ensure that only one of the following is specified: `mbps`, `percentage`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"class":true} outputs:map[string]bool{"class":true} forceNew:map[string]bool(nil)

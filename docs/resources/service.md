@@ -32,7 +32,7 @@ resource "scm_service" "example" {
 - `device` (String) The Device param.
 - `folder` (String) The Folder param.
 - `snippet` (String) The Snippet param.
-- `tags` (List of String) Tags for service object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for service object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 
 ### Read-Only
 
@@ -44,8 +44,8 @@ resource "scm_service" "example" {
 
 Optional:
 
-- `tcp` (Attributes) The Tcp param. (see [below for nested schema](#nestedatt--protocol--tcp))
-- `udp` (Attributes) The Udp param. (see [below for nested schema](#nestedatt--protocol--udp))
+- `tcp` (Attributes) The Tcp param. Ensure that only one of the following is specified: `tcp`, `udp` (see [below for nested schema](#nestedatt--protocol--tcp))
+- `udp` (Attributes) The Udp param. Ensure that only one of the following is specified: `tcp`, `udp` (see [below for nested schema](#nestedatt--protocol--udp))
 
 <a id="nestedatt--protocol--tcp"></a>
 ### Nested Schema for `protocol.tcp`

@@ -45,8 +45,8 @@ Read-Only:
 - `dynamic_value` (Attributes) The DynamicValue param. (see [below for nested schema](#nestedatt--data--dynamic_value))
 - `id` (String) UUID of the resource.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 63 characters.
-- `static_list` (List of String) The StaticList param.
-- `tags` (List of String) Tags for address group object. List must contain at most 64 elements.
+- `static_list` (List of String) The StaticList param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.
+- `tags` (List of String) Tags for address group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 
 <a id="nestedatt--data--dynamic_value"></a>
 ### Nested Schema for `data.dynamic_value`

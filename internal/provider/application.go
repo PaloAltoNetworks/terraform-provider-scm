@@ -14,6 +14,8 @@ import (
 	kJVbXva "github.com/paloaltonetworks/scm-go/netsec/services/applications"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -254,7 +256,7 @@ func (d *applicationListDataSource) Schema(_ context.Context, _ datasource.Schem
 									Computed:    true,
 								},
 								"ports": dsschema.ListAttribute{
-									Description: "The Ports param.",
+									Description: "The Ports param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -1098,7 +1100,7 @@ func (d *applicationDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 						Computed:    true,
 					},
 					"ports": dsschema.ListAttribute{
-						Description: "The Ports param.",
+						Description: "The Ports param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 						Computed:    true,
 						ElementType: types.StringType,
 					},
@@ -1852,8 +1854,16 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"ident_by_icmp6_type":true, "ident_by_icmp_type":true, "ident_by_ip_protocol":true, "port":true} outputs:map[string]bool{"ident_by_icmp6_type":true, "ident_by_icmp_type":true, "ident_by_ip_protocol":true, "port":true} forceNew:map[string]bool(nil)
 					"ident_by_icmp6_type": rsschema.SingleNestedAttribute{
-						Description: "The IdentByIcmp6Type param.",
+						Description: "The IdentByIcmp6Type param. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
+								path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
+								path.MatchRelative().AtParent().AtName("port"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"code":true, "type":true} outputs:map[string]bool{"code":true, "type":true} forceNew:map[string]bool(nil)
 							"code": rsschema.StringAttribute{
@@ -1867,7 +1877,7 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 						},
 					},
 					"ident_by_icmp_type": rsschema.SingleNestedAttribute{
-						Description: "The IdentByIcmpType param.",
+						Description: "The IdentByIcmpType param. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"code":true, "type":true} outputs:map[string]bool{"code":true, "type":true} forceNew:map[string]bool(nil)
@@ -1882,13 +1892,18 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 						},
 					},
 					"ident_by_ip_protocol": rsschema.StringAttribute{
-						Description: "The IdentByIpProtocol param.",
+						Description: "The IdentByIpProtocol param. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port`",
 						Optional:    true,
 					},
 					"ports": rsschema.ListAttribute{
-						Description: "The Ports param.",
+						Description: "The Ports param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port`",
 						Optional:    true,
 						ElementType: types.StringType,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthAtMost(63),
+							),
+						},
 					},
 				},
 			},
@@ -2003,8 +2018,16 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 													Attributes: map[string]rsschema.Attribute{
 														// inputs:map[string]bool{"equal_to":true, "greater_than":true, "less_than":true, "pattern_match":true} outputs:map[string]bool{"equal_to":true, "greater_than":true, "less_than":true, "pattern_match":true} forceNew:map[string]bool(nil)
 														"equal_to": rsschema.SingleNestedAttribute{
-															Description: "The EqualTo param.",
+															Description: "The EqualTo param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match`",
 															Optional:    true,
+															Validators: []validator.Object{
+																objectvalidator.ExactlyOneOf(
+																	path.MatchRelative(),
+																	path.MatchRelative().AtParent().AtName("greater_than"),
+																	path.MatchRelative().AtParent().AtName("less_than"),
+																	path.MatchRelative().AtParent().AtName("pattern_match"),
+																),
+															},
 															Attributes: map[string]rsschema.Attribute{
 																// inputs:map[string]bool{"context":true, "mask":true, "position":true, "value":true} outputs:map[string]bool{"context":true, "mask":true, "position":true, "value":true} forceNew:map[string]bool(nil)
 																"context": rsschema.StringAttribute{
@@ -2036,7 +2059,7 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 															},
 														},
 														"greater_than": rsschema.SingleNestedAttribute{
-															Description: "The GreaterThan param.",
+															Description: "The GreaterThan param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match`",
 															Optional:    true,
 															Attributes: map[string]rsschema.Attribute{
 																// inputs:map[string]bool{"context":true, "qualifier":true, "value":true} outputs:map[string]bool{"context":true, "qualifier":true, "value":true} forceNew:map[string]bool(nil)
@@ -2077,7 +2100,7 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 															},
 														},
 														"less_than": rsschema.SingleNestedAttribute{
-															Description: "The LessThan param.",
+															Description: "The LessThan param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match`",
 															Optional:    true,
 															Attributes: map[string]rsschema.Attribute{
 																// inputs:map[string]bool{"context":true, "qualifier":true, "value":true} outputs:map[string]bool{"context":true, "qualifier":true, "value":true} forceNew:map[string]bool(nil)
@@ -2118,7 +2141,7 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 															},
 														},
 														"pattern_match": rsschema.SingleNestedAttribute{
-															Description: "The PatternMatch param.",
+															Description: "The PatternMatch param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match`",
 															Optional:    true,
 															Attributes: map[string]rsschema.Attribute{
 																// inputs:map[string]bool{"context":true, "pattern":true, "qualifier":true} outputs:map[string]bool{"context":true, "pattern":true, "qualifier":true} forceNew:map[string]bool(nil)

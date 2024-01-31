@@ -5,6 +5,7 @@ package provider
 
 import (
 	"context"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -12,6 +13,7 @@ import (
 	mCcgFKg "github.com/paloaltonetworks/scm-go/netsec/schemas/schedules"
 	oYXHuUA "github.com/paloaltonetworks/scm-go/netsec/services/schedules"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -116,7 +118,7 @@ func (d *scheduleListDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"non_recurring":true, "recurring":true} forceNew:map[string]bool(nil)
 								"non_recurring_list": dsschema.ListAttribute{
-									Description: "The NonRecurringList param.",
+									Description: "The NonRecurringList param. Individual elements in this list are subject to additional validation. String length must be between 33 and 33 characters. String validation regex: `[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])-[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -126,7 +128,7 @@ func (d *scheduleListDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 									Attributes: map[string]dsschema.Attribute{
 										// inputs:map[string]bool{} outputs:map[string]bool{"daily":true, "weekly":true} forceNew:map[string]bool(nil)
 										"daily_list": dsschema.ListAttribute{
-											Description: "The DailyList param.",
+											Description: "The DailyList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -136,37 +138,37 @@ func (d *scheduleListDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 											Attributes: map[string]dsschema.Attribute{
 												// inputs:map[string]bool{} outputs:map[string]bool{"friday":true, "monday":true, "saturday":true, "sunday":true, "thursday":true, "tuesday":true, "wednesday":true} forceNew:map[string]bool(nil)
 												"friday_list": dsschema.ListAttribute{
-													Description: "The FridayList param.",
+													Description: "The FridayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
 												"monday_list": dsschema.ListAttribute{
-													Description: "The MondayList param.",
+													Description: "The MondayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
 												"saturday_list": dsschema.ListAttribute{
-													Description: "The SaturdayList param.",
+													Description: "The SaturdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
 												"sunday_list": dsschema.ListAttribute{
-													Description: "The SundayList param.",
+													Description: "The SundayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
 												"thursday_list": dsschema.ListAttribute{
-													Description: "The ThursdayList param.",
+													Description: "The ThursdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
 												"tuesday_list": dsschema.ListAttribute{
-													Description: "The TuesdayList param.",
+													Description: "The TuesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
 												"wednesday_list": dsschema.ListAttribute{
-													Description: "The WednesdayList param.",
+													Description: "The WednesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
@@ -453,7 +455,7 @@ func (d *scheduleDataSource) Schema(_ context.Context, _ datasource.SchemaReques
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"non_recurring":true, "recurring":true} forceNew:map[string]bool(nil)
 					"non_recurring_list": dsschema.ListAttribute{
-						Description: "The NonRecurringList param.",
+						Description: "The NonRecurringList param. Individual elements in this list are subject to additional validation. String length must be between 33 and 33 characters. String validation regex: `[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])-[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 						Computed:    true,
 						ElementType: types.StringType,
 					},
@@ -463,7 +465,7 @@ func (d *scheduleDataSource) Schema(_ context.Context, _ datasource.SchemaReques
 						Attributes: map[string]dsschema.Attribute{
 							// inputs:map[string]bool{} outputs:map[string]bool{"daily":true, "weekly":true} forceNew:map[string]bool(nil)
 							"daily_list": dsschema.ListAttribute{
-								Description: "The DailyList param.",
+								Description: "The DailyList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -473,37 +475,37 @@ func (d *scheduleDataSource) Schema(_ context.Context, _ datasource.SchemaReques
 								Attributes: map[string]dsschema.Attribute{
 									// inputs:map[string]bool{} outputs:map[string]bool{"friday":true, "monday":true, "saturday":true, "sunday":true, "thursday":true, "tuesday":true, "wednesday":true} forceNew:map[string]bool(nil)
 									"friday_list": dsschema.ListAttribute{
-										Description: "The FridayList param.",
+										Description: "The FridayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
 									"monday_list": dsschema.ListAttribute{
-										Description: "The MondayList param.",
+										Description: "The MondayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
 									"saturday_list": dsschema.ListAttribute{
-										Description: "The SaturdayList param.",
+										Description: "The SaturdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
 									"sunday_list": dsschema.ListAttribute{
-										Description: "The SundayList param.",
+										Description: "The SundayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
 									"thursday_list": dsschema.ListAttribute{
-										Description: "The ThursdayList param.",
+										Description: "The ThursdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
 									"tuesday_list": dsschema.ListAttribute{
-										Description: "The TuesdayList param.",
+										Description: "The TuesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
 									"wednesday_list": dsschema.ListAttribute{
-										Description: "The WednesdayList param.",
+										Description: "The WednesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
@@ -725,59 +727,121 @@ func (r *scheduleResource) Schema(_ context.Context, _ resource.SchemaRequest, r
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"non_recurring":true, "recurring":true} outputs:map[string]bool{"non_recurring":true, "recurring":true} forceNew:map[string]bool(nil)
 					"non_recurring_list": rsschema.ListAttribute{
-						Description: "The NonRecurringList param.",
+						Description: "The NonRecurringList param. Individual elements in this list are subject to additional validation. String length must be between 33 and 33 characters. String validation regex: `[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])-[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])`. Ensure that only one of the following is specified: `non_recurring`, `recurring`",
 						Optional:    true,
 						ElementType: types.StringType,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(33, 33),
+								stringvalidator.RegexMatches(regexp.MustCompile("[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])-[0-9][0-9][0-9][0-9]\\/([0][1-9]|[1][0-2])\\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+							),
+							listvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("recurring"),
+							),
+						},
 					},
 					"recurring": rsschema.SingleNestedAttribute{
-						Description: "The Recurring param.",
+						Description: "The Recurring param. Ensure that only one of the following is specified: `non_recurring`, `recurring`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"daily":true, "weekly":true} outputs:map[string]bool{"daily":true, "weekly":true} forceNew:map[string]bool(nil)
 							"daily_list": rsschema.ListAttribute{
-								Description: "The DailyList param.",
+								Description: "The DailyList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`. Ensure that only one of the following is specified: `daily`, `weekly`",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthBetween(11, 11),
+										stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+									),
+									listvalidator.ExactlyOneOf(
+										path.MatchRelative(),
+										path.MatchRelative().AtParent().AtName("weekly"),
+									),
+								},
 							},
 							"weekly": rsschema.SingleNestedAttribute{
-								Description: "The Weekly param.",
+								Description: "The Weekly param. Ensure that only one of the following is specified: `daily`, `weekly`",
 								Optional:    true,
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"friday":true, "monday":true, "saturday":true, "sunday":true, "thursday":true, "tuesday":true, "wednesday":true} outputs:map[string]bool{"friday":true, "monday":true, "saturday":true, "sunday":true, "thursday":true, "tuesday":true, "wednesday":true} forceNew:map[string]bool(nil)
 									"friday_list": rsschema.ListAttribute{
-										Description: "The FridayList param.",
+										Description: "The FridayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(11, 11),
+												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+											),
+										},
 									},
 									"monday_list": rsschema.ListAttribute{
-										Description: "The MondayList param.",
+										Description: "The MondayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(11, 11),
+												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+											),
+										},
 									},
 									"saturday_list": rsschema.ListAttribute{
-										Description: "The SaturdayList param.",
+										Description: "The SaturdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(11, 11),
+												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+											),
+										},
 									},
 									"sunday_list": rsschema.ListAttribute{
-										Description: "The SundayList param.",
+										Description: "The SundayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(11, 11),
+												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+											),
+										},
 									},
 									"thursday_list": rsschema.ListAttribute{
-										Description: "The ThursdayList param.",
+										Description: "The ThursdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(11, 11),
+												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+											),
+										},
 									},
 									"tuesday_list": rsschema.ListAttribute{
-										Description: "The TuesdayList param.",
+										Description: "The TuesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(11, 11),
+												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+											),
+										},
 									},
 									"wednesday_list": rsschema.ListAttribute{
-										Description: "The WednesdayList param.",
+										Description: "The WednesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(11, 11),
+												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])"), ""),
+											),
+										},
 									},
 								},
 							},

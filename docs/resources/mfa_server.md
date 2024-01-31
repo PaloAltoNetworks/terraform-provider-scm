@@ -43,10 +43,10 @@ resource "scm_mfa_server" "example" {
 
 Optional:
 
-- `duo_security_v2` (Attributes) The DuoSecurityV2 param. (see [below for nested schema](#nestedatt--mfa_vendor_type--duo_security_v2))
-- `okta_adaptive_v1` (Attributes) The OktaAdaptiveV1 param. (see [below for nested schema](#nestedatt--mfa_vendor_type--okta_adaptive_v1))
-- `ping_identity_v1` (Attributes) The PingIdentityV1 param. (see [below for nested schema](#nestedatt--mfa_vendor_type--ping_identity_v1))
-- `rsa_securid_access_v1` (Attributes) The RsaSecuridAccessV1 param. (see [below for nested schema](#nestedatt--mfa_vendor_type--rsa_securid_access_v1))
+- `duo_security_v2` (Attributes) The DuoSecurityV2 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1` (see [below for nested schema](#nestedatt--mfa_vendor_type--duo_security_v2))
+- `okta_adaptive_v1` (Attributes) The OktaAdaptiveV1 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1` (see [below for nested schema](#nestedatt--mfa_vendor_type--okta_adaptive_v1))
+- `ping_identity_v1` (Attributes) The PingIdentityV1 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1` (see [below for nested schema](#nestedatt--mfa_vendor_type--ping_identity_v1))
+- `rsa_securid_access_v1` (Attributes) The RsaSecuridAccessV1 param. Ensure that only one of the following is specified: `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, `rsa_securid_access_v1` (see [below for nested schema](#nestedatt--mfa_vendor_type--rsa_securid_access_v1))
 
 <a id="nestedatt--mfa_vendor_type--duo_security_v2"></a>
 ### Nested Schema for `mfa_vendor_type.duo_security_v2`

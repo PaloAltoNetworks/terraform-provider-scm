@@ -23,9 +23,9 @@ resource "scm_ike_crypto_profile" "example" {
 
 ### Required
 
-- `dh_groups` (List of String) The DhGroups param.
-- `encryptions` (List of String) Encryption algorithm.
-- `hashes` (List of String) The Hashes param.
+- `dh_groups` (List of String) The DhGroups param. Individual elements in this list are subject to additional validation. String must be one of these: `"group1"`, `"group2"`, `"group5"`, `"group14"`, `"group19"`, `"group20"`.
+- `encryptions` (List of String) Encryption algorithm. Individual elements in this list are subject to additional validation. String must be one of these: `"des"`, `"3des"`, `"aes-128-cbc"`, `"aes-192-cbc"`, `"aes-256-cbc"`, `"aes-128-gcm"`, `"aes-256-gcm"`.
+- `hashes` (List of String) The Hashes param. Individual elements in this list are subject to additional validation. String must be one of these: `"md5"`, `"sha1"`, `"sha256"`, `"sha384"`, `"sha512"`.
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]. String length must not exceed 31 characters.
 
 ### Optional
@@ -46,7 +46,7 @@ resource "scm_ike_crypto_profile" "example" {
 
 Optional:
 
-- `days` (Number) specify lifetime in days. Value must be between 1 and 365.
-- `hours` (Number) specify lifetime in hours. Value must be between 1 and 65535.
-- `minutes` (Number) specify lifetime in minutes. Value must be between 3 and 65535.
-- `seconds` (Number) specify lifetime in seconds. Value must be between 180 and 65535.
+- `days` (Number) specify lifetime in days. Value must be between 1 and 365. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`
+- `hours` (Number) specify lifetime in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`
+- `minutes` (Number) specify lifetime in minutes. Value must be between 3 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`
+- `seconds` (Number) specify lifetime in seconds. Value must be between 180 and 65535. Ensure that only one of the following is specified: `days`, `hours`, `minutes`, `seconds`

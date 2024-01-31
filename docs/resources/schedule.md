@@ -42,26 +42,26 @@ resource "scm_schedule" "example" {
 
 Optional:
 
-- `non_recurring_list` (List of String) The NonRecurringList param.
-- `recurring` (Attributes) The Recurring param. (see [below for nested schema](#nestedatt--schedule_type--recurring))
+- `non_recurring_list` (List of String) The NonRecurringList param. Individual elements in this list are subject to additional validation. String length must be between 33 and 33 characters. String validation regex: `[0-9][0-9][0-9][0-9]\/([0][1-9]|[1][0-2])\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])-[0-9][0-9][0-9][0-9]\/([0][1-9]|[1][0-2])\/([0-2][0-9]|[3][0-1])@([01][0-9]|[2][0-3]):([0-5][0-9])`. Ensure that only one of the following is specified: `non_recurring`, `recurring`
+- `recurring` (Attributes) The Recurring param. Ensure that only one of the following is specified: `non_recurring`, `recurring` (see [below for nested schema](#nestedatt--schedule_type--recurring))
 
 <a id="nestedatt--schedule_type--recurring"></a>
 ### Nested Schema for `schedule_type.recurring`
 
 Optional:
 
-- `daily_list` (List of String) The DailyList param.
-- `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--schedule_type--recurring--weekly))
+- `daily_list` (List of String) The DailyList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`. Ensure that only one of the following is specified: `daily`, `weekly`
+- `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `weekly` (see [below for nested schema](#nestedatt--schedule_type--recurring--weekly))
 
 <a id="nestedatt--schedule_type--recurring--weekly"></a>
 ### Nested Schema for `schedule_type.recurring.weekly`
 
 Optional:
 
-- `friday_list` (List of String) The FridayList param.
-- `monday_list` (List of String) The MondayList param.
-- `saturday_list` (List of String) The SaturdayList param.
-- `sunday_list` (List of String) The SundayList param.
-- `thursday_list` (List of String) The ThursdayList param.
-- `tuesday_list` (List of String) The TuesdayList param.
-- `wednesday_list` (List of String) The WednesdayList param.
+- `friday_list` (List of String) The FridayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `monday_list` (List of String) The MondayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `saturday_list` (List of String) The SaturdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `sunday_list` (List of String) The SundayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `thursday_list` (List of String) The ThursdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `tuesday_list` (List of String) The TuesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.
+- `wednesday_list` (List of String) The WednesdayList param. Individual elements in this list are subject to additional validation. String length must be between 11 and 11 characters. String validation regex: `([01][0-9]|[2][0-3]):([0-5][0-9])-([01][0-9]|[2][0-3]):([0-5][0-9])`.

@@ -156,7 +156,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The Name param. String length must not exceed 103 characters.
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -278,7 +278,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The Name param. String length must not exceed 103 characters.
-- `products` (List of String) Product name.
+- `products` (List of String) Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -334,7 +334,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The Name param. String length must not exceed 103 characters.
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -380,7 +380,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The Name param. String length must not exceed 103 characters.
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -408,7 +408,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The Name param. String length must not exceed 103 characters.
-- `products` (List of String) The Products param.
+- `products` (List of String) The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 
 
 
@@ -742,7 +742,7 @@ Read-Only:
 Read-Only:
 
 - `check` (String) The Check param. String must be one of these: `"has-any"`, `"has-none"`, `"has-all"`. Default: `"has-any"`.
-- `patches` (List of String) The Patches param.
+- `patches` (List of String) The Patches param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.
 - `severity` (Attributes) The Severity param. (see [below for nested schema](#nestedatt--patch_management--criteria--missing_patches--severity))
 
 <a id="nestedatt--patch_management--criteria--missing_patches--severity"></a>
@@ -766,4 +766,4 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The Name param. String length must not exceed 103 characters.
-- `products` (List of String) Product name.
+- `products` (List of String) Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.

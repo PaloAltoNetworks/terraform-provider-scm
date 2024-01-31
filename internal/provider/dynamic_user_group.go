@@ -102,7 +102,7 @@ func (d *dynamicUserGroupListDataSource) Schema(_ context.Context, _ datasource.
 							Computed:    true,
 						},
 						"tags": dsschema.ListAttribute{
-							Description: "Tags for dynamic user group object. List must contain at most 64 elements.",
+							Description: "Tags for dynamic user group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -326,7 +326,7 @@ func (d *dynamicUserGroupDataSource) Schema(_ context.Context, _ datasource.Sche
 				Computed:    true,
 			},
 			"tags": dsschema.ListAttribute{
-				Description: "Tags for dynamic user group object. List must contain at most 64 elements.",
+				Description: "Tags for dynamic user group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -500,11 +500,14 @@ func (r *dynamicUserGroupResource) Schema(_ context.Context, _ resource.SchemaRe
 				},
 			},
 			"tags": rsschema.ListAttribute{
-				Description: "Tags for dynamic user group object. List must contain at most 64 elements.",
+				Description: "Tags for dynamic user group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
 				Validators: []validator.List{
 					listvalidator.SizeAtMost(64),
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(127),
+					),
 				},
 			},
 			"tfid": rsschema.StringAttribute{

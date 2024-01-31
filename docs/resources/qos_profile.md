@@ -52,8 +52,8 @@ Optional:
 
 Optional:
 
-- `mbps` (Attributes) The Mbps param. (see [below for nested schema](#nestedatt--class_bandwidth_type--mbps))
-- `percentage` (Attributes) The Percentage param. (see [below for nested schema](#nestedatt--class_bandwidth_type--percentage))
+- `mbps` (Attributes) The Mbps param. Ensure that only one of the following is specified: `mbps`, `percentage` (see [below for nested schema](#nestedatt--class_bandwidth_type--mbps))
+- `percentage` (Attributes) The Percentage param. Ensure that only one of the following is specified: `mbps`, `percentage` (see [below for nested schema](#nestedatt--class_bandwidth_type--percentage))
 
 <a id="nestedatt--class_bandwidth_type--mbps"></a>
 ### Nested Schema for `class_bandwidth_type.mbps`

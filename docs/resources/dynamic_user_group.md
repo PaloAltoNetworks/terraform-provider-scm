@@ -32,7 +32,7 @@ resource "scm_dynamic_user_group" "example" {
 - `device` (String) The Device param.
 - `folder` (String) The Folder param.
 - `snippet` (String) The Snippet param.
-- `tags` (List of String) Tags for dynamic user group object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for dynamic user group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 
 ### Read-Only
 

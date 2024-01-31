@@ -13,7 +13,10 @@ import (
 	suxdMuj "github.com/paloaltonetworks/scm-go/netsec/schemas/hip/objects"
 	sdhSKaQ "github.com/paloaltonetworks/scm-go/netsec/services/hipobjects"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -692,7 +695,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 												Computed:    true,
 											},
 											"products": dsschema.ListAttribute{
-												Description: "The Products param.",
+												Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 												Computed:    true,
 												ElementType: types.StringType,
 											},
@@ -882,7 +885,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 												Computed:    true,
 											},
 											"products": dsschema.ListAttribute{
-												Description: "Product name.",
+												Description: "Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 												Computed:    true,
 												ElementType: types.StringType,
 											},
@@ -967,7 +970,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 												Computed:    true,
 											},
 											"products": dsschema.ListAttribute{
-												Description: "The Products param.",
+												Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 												Computed:    true,
 												ElementType: types.StringType,
 											},
@@ -1035,7 +1038,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 												Computed:    true,
 											},
 											"products": dsschema.ListAttribute{
-												Description: "The Products param.",
+												Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 												Computed:    true,
 												ElementType: types.StringType,
 											},
@@ -1079,7 +1082,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 												Computed:    true,
 											},
 											"products": dsschema.ListAttribute{
-												Description: "The Products param.",
+												Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 												Computed:    true,
 												ElementType: types.StringType,
 											},
@@ -1564,7 +1567,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Computed:    true,
 												},
 												"patches": dsschema.ListAttribute{
-													Description: "The Patches param.",
+													Description: "The Patches param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 													Computed:    true,
 													ElementType: types.StringType,
 												},
@@ -1618,7 +1621,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 												Computed:    true,
 											},
 											"products": dsschema.ListAttribute{
-												Description: "Product name.",
+												Description: "Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 												Computed:    true,
 												ElementType: types.StringType,
 											},
@@ -3211,7 +3214,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 									Computed:    true,
 								},
 								"products": dsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -3401,7 +3404,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 									Computed:    true,
 								},
 								"products": dsschema.ListAttribute{
-									Description: "Product name.",
+									Description: "Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -3486,7 +3489,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 									Computed:    true,
 								},
 								"products": dsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -3554,7 +3557,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 									Computed:    true,
 								},
 								"products": dsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -3598,7 +3601,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 									Computed:    true,
 								},
 								"products": dsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -4083,7 +4086,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Computed:    true,
 									},
 									"patches": dsschema.ListAttribute{
-										Description: "The Patches param.",
+										Description: "The Patches param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 										Computed:    true,
 										ElementType: types.StringType,
 									},
@@ -4137,7 +4140,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 									Computed:    true,
 								},
 								"products": dsschema.ListAttribute{
-									Description: "Product name.",
+									Description: "Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Computed:    true,
 									ElementType: types.StringType,
 								},
@@ -5508,27 +5511,38 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_available":true, "not_within":true, "within":true} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": rsschema.BoolAttribute{
-										Description: "The NotAvailable param. Default: `false`.",
+										Description: "The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
+										Validators: []validator.Bool{
+											boolvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("not_within"),
+												path.MatchRelative().AtParent().AtName("within"),
+											),
+										},
 									},
 									"not_within": rsschema.SingleNestedAttribute{
-										Description: "The NotWithin param.",
+										Description: "The NotWithin param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
+													int64validator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("hours"),
+													),
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(24),
@@ -5539,21 +5553,25 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										},
 									},
 									"within": rsschema.SingleNestedAttribute{
-										Description: "The Within param.",
+										Description: "The Within param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
+													int64validator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("hours"),
+													),
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(24),
@@ -5571,56 +5589,67 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "greater_equal":true, "greater_than":true, "is":true, "is_not":true, "less_equal":true, "less_than":true, "not_within":true, "within":true} outputs:map[string]bool{"contains":true, "greater_equal":true, "greater_than":true, "is":true, "is_not":true, "less_equal":true, "less_than":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("greater_equal"),
+												path.MatchRelative().AtParent().AtName("greater_than"),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+												path.MatchRelative().AtParent().AtName("less_equal"),
+												path.MatchRelative().AtParent().AtName("less_than"),
+												path.MatchRelative().AtParent().AtName("not_within"),
+												path.MatchRelative().AtParent().AtName("within"),
+											),
 										},
 									},
 									"greater_equal": rsschema.StringAttribute{
-										Description: "The GreaterEqual param. String length must not exceed 255 characters.",
+										Description: "The GreaterEqual param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"greater_than": rsschema.StringAttribute{
-										Description: "The GreaterThan param. String length must not exceed 255 characters.",
+										Description: "The GreaterThan param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"less_equal": rsschema.StringAttribute{
-										Description: "The LessEqual param. String length must not exceed 255 characters.",
+										Description: "The LessEqual param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"less_than": rsschema.StringAttribute{
-										Description: "The LessThan param. String length must not exceed 255 characters.",
+										Description: "The LessThan param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"not_within": rsschema.SingleNestedAttribute{
-										Description: "The NotWithin param.",
+										Description: "The NotWithin param. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"versions":true} outputs:map[string]bool{"versions":true} forceNew:map[string]bool(nil)
@@ -5636,7 +5665,7 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										},
 									},
 									"within": rsschema.SingleNestedAttribute{
-										Description: "The Within param.",
+										Description: "The Within param. Ensure that only one of the following is specified: `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"versions":true} outputs:map[string]bool{"versions":true} forceNew:map[string]bool(nil)
@@ -5666,21 +5695,31 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_within":true, "within":true} outputs:map[string]bool{"not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_within": rsschema.SingleNestedAttribute{
-										Description: "The NotWithin param.",
+										Description: "The NotWithin param. Ensure that only one of the following is specified: `not_within`, `within`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("within"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "versions":true} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
+													int64validator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("versions"),
+													),
 												},
 											},
 											"versions": rsschema.Int64Attribute{
-												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
@@ -5691,21 +5730,25 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										},
 									},
 									"within": rsschema.SingleNestedAttribute{
-										Description: "The Within param.",
+										Description: "The Within param. Ensure that only one of the following is specified: `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "versions":true} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
+													int64validator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("versions"),
+													),
 												},
 											},
 											"versions": rsschema.Int64Attribute{
-												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
@@ -5739,9 +5782,15 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 									},
 								},
 								"products": rsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Optional:    true,
 									ElementType: types.StringType,
+									Validators: []validator.List{
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1023),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+										),
+									},
 								},
 							},
 						},
@@ -5980,9 +6029,15 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 									},
 								},
 								"products": rsschema.ListAttribute{
-									Description: "Product name.",
+									Description: "Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Optional:    true,
 									ElementType: types.StringType,
+									Validators: []validator.List{
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1023),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+										),
+									},
 								},
 							},
 						},
@@ -6025,27 +6080,38 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_available":true, "not_within":true, "within":true} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": rsschema.BoolAttribute{
-										Description: "The NotAvailable param. Default: `false`.",
+										Description: "The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
+										Validators: []validator.Bool{
+											boolvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("not_within"),
+												path.MatchRelative().AtParent().AtName("within"),
+											),
+										},
 									},
 									"not_within": rsschema.SingleNestedAttribute{
-										Description: "The NotWithin param.",
+										Description: "The NotWithin param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
+													int64validator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("hours"),
+													),
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(24),
@@ -6056,21 +6122,25 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										},
 									},
 									"within": rsschema.SingleNestedAttribute{
-										Description: "The Within param.",
+										Description: "The Within param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
+													int64validator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("hours"),
+													),
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
 												Computed:    true,
 												Default:     int64default.StaticInt64(24),
@@ -6104,9 +6174,15 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 									},
 								},
 								"products": rsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Optional:    true,
 									ElementType: types.StringType,
+									Validators: []validator.List{
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1023),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+										),
+									},
 								},
 							},
 						},
@@ -6135,16 +6211,20 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"is":true, "is_not":true} outputs:map[string]bool{"is":true, "is_not":true} forceNew:map[string]bool(nil)
 												"is": rsschema.StringAttribute{
-													Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`.",
+													Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`. Ensure that only one of the following is specified: `is`, `is_not`",
 													Optional:    true,
 													Computed:    true,
 													Default:     stringdefault.StaticString("encrypted"),
 													Validators: []validator.String{
 														stringvalidator.OneOf("encrypted", "unencrypted", "partial", "unknown"),
+														stringvalidator.ExactlyOneOf(
+															path.MatchRelative(),
+															path.MatchRelative().AtParent().AtName("is_not"),
+														),
 													},
 												},
 												"is_not": rsschema.StringAttribute{
-													Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`.",
+													Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`. Ensure that only one of the following is specified: `is`, `is_not`",
 													Optional:    true,
 													Computed:    true,
 													Default:     stringdefault.StaticString("encrypted"),
@@ -6192,9 +6272,15 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 									},
 								},
 								"products": rsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Optional:    true,
 									ElementType: types.StringType,
+									Validators: []validator.List{
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1023),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+										),
+									},
 								},
 							},
 						},
@@ -6246,9 +6332,15 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 									},
 								},
 								"products": rsschema.ListAttribute{
-									Description: "The Products param.",
+									Description: "The Products param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Optional:    true,
 									ElementType: types.StringType,
+									Validators: []validator.List{
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1023),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+										),
+									},
 								},
 							},
 						},
@@ -6278,21 +6370,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6306,21 +6403,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6334,21 +6436,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6362,21 +6469,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6394,21 +6506,33 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true} outputs:map[string]bool{"contains":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.SingleNestedAttribute{
-										Description: "The Contains param.",
+										Description: "The Contains param. Ensure that only one of the following is specified: `contains`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"Apple":true, "Google":true, "Linux":true, "Microsoft":true, "Other":true} outputs:map[string]bool{"Apple":true, "Google":true, "Linux":true, "Microsoft":true, "Other":true} forceNew:map[string]bool(nil)
 											"apple": rsschema.StringAttribute{
-												Description: "Apple vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Apple vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
 												Computed:    true,
 												Default:     stringdefault.StaticString("All"),
 												Validators: []validator.String{
 													stringvalidator.LengthAtMost(255),
+													stringvalidator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("Google"),
+														path.MatchRelative().AtParent().AtName("Linux"),
+														path.MatchRelative().AtParent().AtName("Microsoft"),
+														path.MatchRelative().AtParent().AtName("Other"),
+													),
 												},
 											},
 											"google": rsschema.StringAttribute{
-												Description: "Google vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Google vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
 												Computed:    true,
 												Default:     stringdefault.StaticString("All"),
@@ -6417,7 +6541,7 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"linux": rsschema.StringAttribute{
-												Description: "Linux vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Linux vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
 												Computed:    true,
 												Default:     stringdefault.StaticString("All"),
@@ -6426,7 +6550,7 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"microsoft": rsschema.StringAttribute{
-												Description: "Microsoft vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Microsoft vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
 												Computed:    true,
 												Default:     stringdefault.StaticString("All"),
@@ -6435,7 +6559,7 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"other": rsschema.StringAttribute{
-												Description: "Other vendor. String length must not exceed 255 characters.",
+												Description: "Other vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
 												Validators: []validator.String{
 													stringvalidator.LengthAtMost(255),
@@ -6451,21 +6575,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6505,13 +6634,19 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"no":true, "yes":true} outputs:map[string]bool{"no":true, "yes":true} forceNew:map[string]bool(nil)
 											"no": rsschema.BoolAttribute{
-												Description: "The No param. Default: `false`.",
+												Description: "The No param. Default: `false`. Ensure that only one of the following is specified: `no`, `yes`",
 												Optional:    true,
 												Computed:    true,
 												Default:     booldefault.StaticBool(false),
+												Validators: []validator.Bool{
+													boolvalidator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("yes"),
+													),
+												},
 											},
 											"yes": rsschema.SingleNestedAttribute{
-												Description: "The Yes param.",
+												Description: "The Yes param. Ensure that only one of the following is specified: `no`, `yes`",
 												Optional:    true,
 												Attributes: map[string]rsschema.Attribute{
 													// inputs:map[string]bool{"excludes":true} outputs:map[string]bool{"excludes":true} forceNew:map[string]bool(nil)
@@ -6599,21 +6734,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6631,8 +6771,14 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_within":true, "within":true} outputs:map[string]bool{"not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_within": rsschema.SingleNestedAttribute{
-										Description: "The NotWithin param.",
+										Description: "The NotWithin param. Ensure that only one of the following is specified: `not_within`, `within`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("within"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true} outputs:map[string]bool{"days":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
@@ -6647,7 +6793,7 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										},
 									},
 									"within": rsschema.SingleNestedAttribute{
-										Description: "The Within param.",
+										Description: "The Within param. Ensure that only one of the following is specified: `not_within`, `within`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true} outputs:map[string]bool{"days":true} forceNew:map[string]bool(nil)
@@ -6670,21 +6816,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6702,21 +6853,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6730,21 +6886,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"contains":true, "is":true, "is_not":true} outputs:map[string]bool{"contains":true, "is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"contains": rsschema.StringAttribute{
-										Description: "The Contains param. String length must not exceed 255 characters.",
+										Description: "The Contains param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
+											stringvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is"),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
 										},
 									},
 									"is": rsschema.StringAttribute{
-										Description: "The Is param. String length must not exceed 255 characters.",
+										Description: "The Is param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
 										},
 									},
 									"is_not": rsschema.StringAttribute{
-										Description: "The IsNot param. String length must not exceed 255 characters.",
+										Description: "The IsNot param. String length must not exceed 255 characters. Ensure that only one of the following is specified: `contains`, `is`, `is_not`",
 										Optional:    true,
 										Validators: []validator.String{
 											stringvalidator.LengthAtMost(255),
@@ -6779,13 +6940,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"is":true, "is_not":true} outputs:map[string]bool{"is":true, "is_not":true} forceNew:map[string]bool(nil)
 									"is": rsschema.SingleNestedAttribute{
-										Description: "The Is param.",
+										Description: "The Is param. Ensure that only one of the following is specified: `is`, `is_not`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("is_not"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"mobile":true, "unknown":true, "wifi":true} outputs:map[string]bool{"mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 											"mobile": rsschema.SingleNestedAttribute{
-												Description: "The Mobile param.",
+												Description: "The Mobile param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`",
 												Optional:    true,
+												Validators: []validator.Object{
+													objectvalidator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("unknown"),
+														path.MatchRelative().AtParent().AtName("wifi"),
+													),
+												},
 												Attributes: map[string]rsschema.Attribute{
 													// inputs:map[string]bool{"carrier":true} outputs:map[string]bool{"carrier":true} forceNew:map[string]bool(nil)
 													"carrier": rsschema.StringAttribute{
@@ -6799,13 +6973,13 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"unknown": rsschema.BoolAttribute{
-												Description: "The Unknown param. Default: `false`.",
+												Description: "The Unknown param. Default: `false`. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`",
 												Optional:    true,
 												Computed:    true,
 												Default:     booldefault.StaticBool(false),
 											},
 											"wifi": rsschema.SingleNestedAttribute{
-												Description: "The Wifi param.",
+												Description: "The Wifi param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`",
 												Optional:    true,
 												Attributes: map[string]rsschema.Attribute{
 													// inputs:map[string]bool{"ssid":true} outputs:map[string]bool{"ssid":true} forceNew:map[string]bool(nil)
@@ -6822,18 +6996,26 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										},
 									},
 									"is_not": rsschema.SingleNestedAttribute{
-										Description: "The IsNot param.",
+										Description: "The IsNot param. Ensure that only one of the following is specified: `is`, `is_not`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} outputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 											"ethernet": rsschema.BoolAttribute{
-												Description: "The Ethernet param. Default: `false`.",
+												Description: "The Ethernet param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
 												Optional:    true,
 												Computed:    true,
 												Default:     booldefault.StaticBool(false),
+												Validators: []validator.Bool{
+													boolvalidator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("mobile"),
+														path.MatchRelative().AtParent().AtName("unknown"),
+														path.MatchRelative().AtParent().AtName("wifi"),
+													),
+												},
 											},
 											"mobile": rsschema.SingleNestedAttribute{
-												Description: "The Mobile param.",
+												Description: "The Mobile param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
 												Optional:    true,
 												Attributes: map[string]rsschema.Attribute{
 													// inputs:map[string]bool{"carrier":true} outputs:map[string]bool{"carrier":true} forceNew:map[string]bool(nil)
@@ -6848,13 +7030,13 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"unknown": rsschema.BoolAttribute{
-												Description: "The Unknown param. Default: `false`.",
+												Description: "The Unknown param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
 												Optional:    true,
 												Computed:    true,
 												Default:     booldefault.StaticBool(false),
 											},
 											"wifi": rsschema.SingleNestedAttribute{
-												Description: "The Wifi param.",
+												Description: "The Wifi param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
 												Optional:    true,
 												Attributes: map[string]rsschema.Attribute{
 													// inputs:map[string]bool{"ssid":true} outputs:map[string]bool{"ssid":true} forceNew:map[string]bool(nil)
@@ -6914,9 +7096,15 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										},
 									},
 									"patches": rsschema.ListAttribute{
-										Description: "The Patches param.",
+										Description: "The Patches param. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 										Optional:    true,
 										ElementType: types.StringType,
+										Validators: []validator.List{
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtMost(1023),
+												stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+											),
+										},
 									},
 									"severity": rsschema.SingleNestedAttribute{
 										Description: "The Severity param.",
@@ -6924,42 +7112,50 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"greater_equal":true, "greater_than":true, "is":true, "is_not":true, "less_equal":true, "less_than":true} outputs:map[string]bool{"greater_equal":true, "greater_than":true, "is":true, "is_not":true, "less_equal":true, "less_than":true} forceNew:map[string]bool(nil)
 											"greater_equal": rsschema.Int64Attribute{
-												Description: "The GreaterEqual param. Value must be between 0 and 100000.",
+												Description: "The GreaterEqual param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`",
 												Optional:    true,
 												Validators: []validator.Int64{
 													int64validator.Between(0, 100000),
+													int64validator.ExactlyOneOf(
+														path.MatchRelative(),
+														path.MatchRelative().AtParent().AtName("greater_than"),
+														path.MatchRelative().AtParent().AtName("is"),
+														path.MatchRelative().AtParent().AtName("is_not"),
+														path.MatchRelative().AtParent().AtName("less_equal"),
+														path.MatchRelative().AtParent().AtName("less_than"),
+													),
 												},
 											},
 											"greater_than": rsschema.Int64Attribute{
-												Description: "The GreaterThan param. Value must be between 0 and 100000.",
+												Description: "The GreaterThan param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`",
 												Optional:    true,
 												Validators: []validator.Int64{
 													int64validator.Between(0, 100000),
 												},
 											},
 											"is": rsschema.Int64Attribute{
-												Description: "The Is param. Value must be between 0 and 100000.",
+												Description: "The Is param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`",
 												Optional:    true,
 												Validators: []validator.Int64{
 													int64validator.Between(0, 100000),
 												},
 											},
 											"is_not": rsschema.Int64Attribute{
-												Description: "The IsNot param. Value must be between 0 and 100000.",
+												Description: "The IsNot param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`",
 												Optional:    true,
 												Validators: []validator.Int64{
 													int64validator.Between(0, 100000),
 												},
 											},
 											"less_equal": rsschema.Int64Attribute{
-												Description: "The LessEqual param. Value must be between 0 and 100000.",
+												Description: "The LessEqual param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`",
 												Optional:    true,
 												Validators: []validator.Int64{
 													int64validator.Between(0, 100000),
 												},
 											},
 											"less_than": rsschema.Int64Attribute{
-												Description: "The LessThan param. Value must be between 0 and 100000.",
+												Description: "The LessThan param. Value must be between 0 and 100000. Ensure that only one of the following is specified: `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`",
 												Optional:    true,
 												Validators: []validator.Int64{
 													int64validator.Between(0, 100000),
@@ -6991,9 +7187,15 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 									},
 								},
 								"products": rsschema.ListAttribute{
-									Description: "Product name.",
+									Description: "Product name. Individual elements in this list are subject to additional validation. String length must not exceed 1023 characters. String validation regex: `.*`.",
 									Optional:    true,
 									ElementType: types.StringType,
+									Validators: []validator.List{
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1023),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+										),
+									},
 								},
 							},
 						},

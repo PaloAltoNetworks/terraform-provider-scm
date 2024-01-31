@@ -12,6 +12,7 @@ import (
 	irQawLY "github.com/paloaltonetworks/scm-go/netsec/schemas/dns/security/profiles"
 	jOaWaMY "github.com/paloaltonetworks/scm-go/netsec/services/dnssecurityprofiles"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -943,25 +944,33 @@ func (r *dnsSecurityProfileResource) Schema(_ context.Context, _ resource.Schema
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} outputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} forceNew:map[string]bool(nil)
 										"alert": rsschema.BoolAttribute{
-											Description: "The Alert param. Default: `false`.",
+											Description: "The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
 											Computed:    true,
 											Default:     booldefault.StaticBool(false),
+											Validators: []validator.Bool{
+												boolvalidator.ExactlyOneOf(
+													path.MatchRelative(),
+													path.MatchRelative().AtParent().AtName("allow"),
+													path.MatchRelative().AtParent().AtName("block"),
+													path.MatchRelative().AtParent().AtName("sinkhole"),
+												),
+											},
 										},
 										"allow": rsschema.BoolAttribute{
-											Description: "The Allow param. Default: `false`.",
+											Description: "The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
 											Computed:    true,
 											Default:     booldefault.StaticBool(false),
 										},
 										"block": rsschema.BoolAttribute{
-											Description: "The Block param. Default: `false`.",
+											Description: "The Block param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
 											Computed:    true,
 											Default:     booldefault.StaticBool(false),
 										},
 										"sinkhole": rsschema.BoolAttribute{
-											Description: "The Sinkhole param. Default: `false`.",
+											Description: "The Sinkhole param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
 											Computed:    true,
 											Default:     booldefault.StaticBool(false),

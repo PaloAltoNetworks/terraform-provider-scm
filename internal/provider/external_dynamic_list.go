@@ -14,6 +14,8 @@ import (
 	ljRBvXJ "github.com/paloaltonetworks/scm-go/netsec/services/externaldynamiclists"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -331,7 +333,7 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 											},
 										},
 										"exception_list": dsschema.ListAttribute{
-											Description: "The ExceptionList param.",
+											Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -415,7 +417,7 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 											Computed:    true,
 										},
 										"exception_list": dsschema.ListAttribute{
-											Description: "The ExceptionList param.",
+											Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -510,7 +512,7 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 											Computed:    true,
 										},
 										"exception_list": dsschema.ListAttribute{
-											Description: "The ExceptionList param.",
+											Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 34 characters.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -605,7 +607,7 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 											Computed:    true,
 										},
 										"exception_list": dsschema.ListAttribute{
-											Description: "The ExceptionList param.",
+											Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -697,7 +699,7 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 											Computed:    true,
 										},
 										"exception_list": dsschema.ListAttribute{
-											Description: "The ExceptionList param.",
+											Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -717,7 +719,7 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 											Computed:    true,
 										},
 										"exception_list": dsschema.ListAttribute{
-											Description: "The ExceptionList param.",
+											Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -741,7 +743,7 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 											Computed:    true,
 										},
 										"exception_list": dsschema.ListAttribute{
-											Description: "The ExceptionList param.",
+											Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 											Computed:    true,
 											ElementType: types.StringType,
 										},
@@ -1598,7 +1600,7 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 								},
 							},
 							"exception_list": dsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -1682,7 +1684,7 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 								Computed:    true,
 							},
 							"exception_list": dsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -1777,7 +1779,7 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 								Computed:    true,
 							},
 							"exception_list": dsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 34 characters.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -1872,7 +1874,7 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 								Computed:    true,
 							},
 							"exception_list": dsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -1964,7 +1966,7 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 								Computed:    true,
 							},
 							"exception_list": dsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -1984,7 +1986,7 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 								Computed:    true,
 							},
 							"exception_list": dsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -2008,7 +2010,7 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 								Computed:    true,
 							},
 							"exception_list": dsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Computed:    true,
 								ElementType: types.StringType,
 							},
@@ -2784,8 +2786,19 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"domain":true, "imei":true, "imsi":true, "ip":true, "predefined_ip":true, "predefined_url":true, "url":true} outputs:map[string]bool{"domain":true, "imei":true, "imsi":true, "ip":true, "predefined_ip":true, "predefined_url":true, "url":true} forceNew:map[string]bool(nil)
 					"domain": rsschema.SingleNestedAttribute{
-						Description: "The Domain param.",
+						Description: "The Domain param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url`",
 						Optional:    true,
+						Validators: []validator.Object{
+							objectvalidator.ExactlyOneOf(
+								path.MatchRelative(),
+								path.MatchRelative().AtParent().AtName("imei"),
+								path.MatchRelative().AtParent().AtName("imsi"),
+								path.MatchRelative().AtParent().AtName("ip"),
+								path.MatchRelative().AtParent().AtName("predefined_ip"),
+								path.MatchRelative().AtParent().AtName("predefined_url"),
+								path.MatchRelative().AtParent().AtName("url"),
+							),
+						},
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "expand_domain":true, "recurring":true, "url":true} outputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "expand_domain":true, "recurring":true, "url":true} forceNew:map[string]bool(nil)
 							"certificate_profile": rsschema.StringAttribute{
@@ -2823,9 +2836,14 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								},
 							},
 							"exception_list": rsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(255),
+									),
+								},
 							},
 							"expand_domain": rsschema.BoolAttribute{
 								Description: "Enable/Disable expand domain. Default: `false`.",
@@ -2839,8 +2857,17 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} outputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} forceNew:map[string]bool(nil)
 									"daily": rsschema.SingleNestedAttribute{
-										Description: "The Daily param.",
+										Description: "The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("five_minute"),
+												path.MatchRelative().AtParent().AtName("hourly"),
+												path.MatchRelative().AtParent().AtName("monthly"),
+												path.MatchRelative().AtParent().AtName("weekly"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true} outputs:map[string]bool{"at":true} forceNew:map[string]bool(nil)
 											"at": rsschema.StringAttribute{
@@ -2856,19 +2883,19 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
-										Description: "The Monthly param.",
+										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_month":true} outputs:map[string]bool{"at":true, "day_of_month":true} forceNew:map[string]bool(nil)
@@ -2892,7 +2919,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"weekly": rsschema.SingleNestedAttribute{
-										Description: "The Weekly param.",
+										Description: "The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_week":true} outputs:map[string]bool{"at":true, "day_of_week":true} forceNew:map[string]bool(nil)
@@ -2929,7 +2956,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"imei": rsschema.SingleNestedAttribute{
-						Description: "The Imei param.",
+						Description: "The Imei param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} outputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} forceNew:map[string]bool(nil)
@@ -2947,9 +2974,14 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								},
 							},
 							"exception_list": rsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 32 characters.",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(32),
+									),
+								},
 							},
 							"imei_auth": rsschema.SingleNestedAttribute{
 								Description: "The ImeiAuth param.",
@@ -2978,8 +3010,17 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} outputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} forceNew:map[string]bool(nil)
 									"daily": rsschema.SingleNestedAttribute{
-										Description: "The Daily param.",
+										Description: "The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("five_minute"),
+												path.MatchRelative().AtParent().AtName("hourly"),
+												path.MatchRelative().AtParent().AtName("monthly"),
+												path.MatchRelative().AtParent().AtName("weekly"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true} outputs:map[string]bool{"at":true} forceNew:map[string]bool(nil)
 											"at": rsschema.StringAttribute{
@@ -2995,19 +3036,19 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
-										Description: "The Monthly param.",
+										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_month":true} outputs:map[string]bool{"at":true, "day_of_month":true} forceNew:map[string]bool(nil)
@@ -3031,7 +3072,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"weekly": rsschema.SingleNestedAttribute{
-										Description: "The Weekly param.",
+										Description: "The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_week":true} outputs:map[string]bool{"at":true, "day_of_week":true} forceNew:map[string]bool(nil)
@@ -3068,7 +3109,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"imsi": rsschema.SingleNestedAttribute{
-						Description: "The Imsi param.",
+						Description: "The Imsi param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} outputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} forceNew:map[string]bool(nil)
@@ -3086,9 +3127,14 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								},
 							},
 							"exception_list": rsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 34 characters.",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(34),
+									),
+								},
 							},
 							"imsi_auth": rsschema.SingleNestedAttribute{
 								Description: "The ImsiAuth param.",
@@ -3117,8 +3163,17 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} outputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} forceNew:map[string]bool(nil)
 									"daily": rsschema.SingleNestedAttribute{
-										Description: "The Daily param.",
+										Description: "The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("five_minute"),
+												path.MatchRelative().AtParent().AtName("hourly"),
+												path.MatchRelative().AtParent().AtName("monthly"),
+												path.MatchRelative().AtParent().AtName("weekly"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true} outputs:map[string]bool{"at":true} forceNew:map[string]bool(nil)
 											"at": rsschema.StringAttribute{
@@ -3134,19 +3189,19 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
-										Description: "The Monthly param.",
+										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_month":true} outputs:map[string]bool{"at":true, "day_of_month":true} forceNew:map[string]bool(nil)
@@ -3170,7 +3225,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"weekly": rsschema.SingleNestedAttribute{
-										Description: "The Weekly param.",
+										Description: "The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_week":true} outputs:map[string]bool{"at":true, "day_of_week":true} forceNew:map[string]bool(nil)
@@ -3207,7 +3262,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"ip": rsschema.SingleNestedAttribute{
-						Description: "The Ip param.",
+						Description: "The Ip param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} outputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} forceNew:map[string]bool(nil)
@@ -3225,9 +3280,14 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								},
 							},
 							"exception_list": rsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(255),
+									),
+								},
 							},
 							"ip_auth": rsschema.SingleNestedAttribute{
 								Description: "The IpAuth param.",
@@ -3257,8 +3317,17 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} outputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} forceNew:map[string]bool(nil)
 									"daily": rsschema.SingleNestedAttribute{
-										Description: "The Daily param.",
+										Description: "The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("five_minute"),
+												path.MatchRelative().AtParent().AtName("hourly"),
+												path.MatchRelative().AtParent().AtName("monthly"),
+												path.MatchRelative().AtParent().AtName("weekly"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true} outputs:map[string]bool{"at":true} forceNew:map[string]bool(nil)
 											"at": rsschema.StringAttribute{
@@ -3274,19 +3343,19 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
-										Description: "The Monthly param.",
+										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_month":true} outputs:map[string]bool{"at":true, "day_of_month":true} forceNew:map[string]bool(nil)
@@ -3310,7 +3379,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"weekly": rsschema.SingleNestedAttribute{
-										Description: "The Weekly param.",
+										Description: "The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_week":true} outputs:map[string]bool{"at":true, "day_of_week":true} forceNew:map[string]bool(nil)
@@ -3347,7 +3416,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"predefined_ip": rsschema.SingleNestedAttribute{
-						Description: "The PredefinedIp param.",
+						Description: "The PredefinedIp param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"description":true, "exception_list":true, "url":true} outputs:map[string]bool{"description":true, "exception_list":true, "url":true} forceNew:map[string]bool(nil)
@@ -3359,9 +3428,14 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								},
 							},
 							"exception_list": rsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(255),
+									),
+								},
 							},
 							"url": rsschema.StringAttribute{
 								Description: "The Url param.",
@@ -3370,7 +3444,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"predefined_url": rsschema.SingleNestedAttribute{
-						Description: "The PredefinedUrl param.",
+						Description: "The PredefinedUrl param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"description":true, "exception_list":true, "url":true} outputs:map[string]bool{"description":true, "exception_list":true, "url":true} forceNew:map[string]bool(nil)
@@ -3382,9 +3456,14 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								},
 							},
 							"exception_list": rsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(255),
+									),
+								},
 							},
 							"url": rsschema.StringAttribute{
 								Description: "The Url param.",
@@ -3393,7 +3472,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"url": rsschema.SingleNestedAttribute{
-						Description: "The Url param.",
+						Description: "The Url param. Ensure that only one of the following is specified: `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, `url`",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} outputs:map[string]bool{"auth":true, "certificate_profile":true, "description":true, "exception_list":true, "recurring":true, "url":true} forceNew:map[string]bool(nil)
@@ -3411,9 +3490,14 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								},
 							},
 							"exception_list": rsschema.ListAttribute{
-								Description: "The ExceptionList param.",
+								Description: "The ExceptionList param. Individual elements in this list are subject to additional validation. String length must not exceed 255 characters.",
 								Optional:    true,
 								ElementType: types.StringType,
+								Validators: []validator.List{
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(255),
+									),
+								},
 							},
 							"recurring": rsschema.SingleNestedAttribute{
 								Description: "The Recurring param.",
@@ -3421,8 +3505,17 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} outputs:map[string]bool{"daily":true, "five_minute":true, "hourly":true, "monthly":true, "weekly":true} forceNew:map[string]bool(nil)
 									"daily": rsschema.SingleNestedAttribute{
-										Description: "The Daily param.",
+										Description: "The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
+										Validators: []validator.Object{
+											objectvalidator.ExactlyOneOf(
+												path.MatchRelative(),
+												path.MatchRelative().AtParent().AtName("five_minute"),
+												path.MatchRelative().AtParent().AtName("hourly"),
+												path.MatchRelative().AtParent().AtName("monthly"),
+												path.MatchRelative().AtParent().AtName("weekly"),
+											),
+										},
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true} outputs:map[string]bool{"at":true} forceNew:map[string]bool(nil)
 											"at": rsschema.StringAttribute{
@@ -3438,19 +3531,19 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
-										Description: "The Monthly param.",
+										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_month":true} outputs:map[string]bool{"at":true, "day_of_month":true} forceNew:map[string]bool(nil)
@@ -3474,7 +3567,7 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"weekly": rsschema.SingleNestedAttribute{
-										Description: "The Weekly param.",
+										Description: "The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"at":true, "day_of_week":true} outputs:map[string]bool{"at":true, "day_of_week":true} forceNew:map[string]bool(nil)

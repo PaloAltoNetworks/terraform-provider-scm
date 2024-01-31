@@ -23,7 +23,7 @@ resource "scm_service_group" "example" {
 
 ### Required
 
-- `members` (List of String) The Members param.
+- `members` (List of String) The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 63 characters.
 
 ### Optional
@@ -31,7 +31,7 @@ resource "scm_service_group" "example" {
 - `device` (String) The Device param.
 - `folder` (String) The Folder param.
 - `snippet` (String) The Snippet param.
-- `tags` (List of String) Tags for service group object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for service group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 
 ### Read-Only
 

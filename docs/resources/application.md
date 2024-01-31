@@ -68,10 +68,10 @@ resource "scm_application" "example" {
 
 Optional:
 
-- `ident_by_icmp6_type` (Attributes) The IdentByIcmp6Type param. (see [below for nested schema](#nestedatt--default--ident_by_icmp6_type))
-- `ident_by_icmp_type` (Attributes) The IdentByIcmpType param. (see [below for nested schema](#nestedatt--default--ident_by_icmp_type))
-- `ident_by_ip_protocol` (String) The IdentByIpProtocol param.
-- `ports` (List of String) The Ports param.
+- `ident_by_icmp6_type` (Attributes) The IdentByIcmp6Type param. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port` (see [below for nested schema](#nestedatt--default--ident_by_icmp6_type))
+- `ident_by_icmp_type` (Attributes) The IdentByIcmpType param. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port` (see [below for nested schema](#nestedatt--default--ident_by_icmp_type))
+- `ident_by_ip_protocol` (String) The IdentByIpProtocol param. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port`
+- `ports` (List of String) The Ports param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters. Ensure that only one of the following is specified: `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, `port`
 
 <a id="nestedatt--default--ident_by_icmp6_type"></a>
 ### Nested Schema for `default.ident_by_icmp6_type`
@@ -136,10 +136,10 @@ Required:
 
 Optional:
 
-- `equal_to` (Attributes) The EqualTo param. (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--equal_to))
-- `greater_than` (Attributes) The GreaterThan param. (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--greater_than))
-- `less_than` (Attributes) The LessThan param. (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--less_than))
-- `pattern_match` (Attributes) The PatternMatch param. (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--pattern_match))
+- `equal_to` (Attributes) The EqualTo param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match` (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--equal_to))
+- `greater_than` (Attributes) The GreaterThan param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match` (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--greater_than))
+- `less_than` (Attributes) The LessThan param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match` (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--less_than))
+- `pattern_match` (Attributes) The PatternMatch param. Ensure that only one of the following is specified: `equal_to`, `greater_than`, `less_than`, `pattern_match` (see [below for nested schema](#nestedatt--signatures--and_conditions--or_conditions--operator--pattern_match))
 
 <a id="nestedatt--signatures--and_conditions--or_conditions--operator--equal_to"></a>
 ### Nested Schema for `signatures.and_conditions.or_conditions.operator.equal_to`

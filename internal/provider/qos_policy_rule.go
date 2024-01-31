@@ -12,6 +12,7 @@ import (
 	tephihM "github.com/paloaltonetworks/scm-go/netsec/schemas/qos/policy/rules"
 	dvnOhnM "github.com/paloaltonetworks/scm-go/netsec/services/qospolicyrules"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -953,8 +954,17 @@ func (r *qosPolicyRuleResource) Schema(_ context.Context, _ resource.SchemaReque
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"af":true, "cs":true, "custom":true, "ef":true, "tos":true} outputs:map[string]bool{"af":true, "cs":true, "custom":true, "ef":true, "tos":true} forceNew:map[string]bool(nil)
 										"af": rsschema.SingleNestedAttribute{
-											Description: "The Af param.",
+											Description: "The Af param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
 											Optional:    true,
+											Validators: []validator.Object{
+												objectvalidator.ExactlyOneOf(
+													path.MatchRelative(),
+													path.MatchRelative().AtParent().AtName("cs"),
+													path.MatchRelative().AtParent().AtName("custom"),
+													path.MatchRelative().AtParent().AtName("ef"),
+													path.MatchRelative().AtParent().AtName("tos"),
+												),
+											},
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"codepoint":true} outputs:map[string]bool{"codepoint":true} forceNew:map[string]bool(nil)
 												"codepoint": rsschema.StringAttribute{
@@ -964,7 +974,7 @@ func (r *qosPolicyRuleResource) Schema(_ context.Context, _ resource.SchemaReque
 											},
 										},
 										"cs": rsschema.SingleNestedAttribute{
-											Description: "The Cs param.",
+											Description: "The Cs param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
 											Optional:    true,
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"codepoint":true} outputs:map[string]bool{"codepoint":true} forceNew:map[string]bool(nil)
@@ -975,7 +985,7 @@ func (r *qosPolicyRuleResource) Schema(_ context.Context, _ resource.SchemaReque
 											},
 										},
 										"custom": rsschema.SingleNestedAttribute{
-											Description: "The Custom param.",
+											Description: "The Custom param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
 											Optional:    true,
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"codepoint":true} outputs:map[string]bool{"codepoint":true} forceNew:map[string]bool(nil)
@@ -997,13 +1007,13 @@ func (r *qosPolicyRuleResource) Schema(_ context.Context, _ resource.SchemaReque
 											},
 										},
 										"ef": rsschema.BoolAttribute{
-											Description: "The Ef param. Default: `false`.",
+											Description: "The Ef param. Default: `false`. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
 											Optional:    true,
 											Computed:    true,
 											Default:     booldefault.StaticBool(false),
 										},
 										"tos": rsschema.SingleNestedAttribute{
-											Description: "The Tos param.",
+											Description: "The Tos param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
 											Optional:    true,
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"codepoint":true} outputs:map[string]bool{"codepoint":true} forceNew:map[string]bool(nil)

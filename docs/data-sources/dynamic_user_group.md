@@ -30,5 +30,5 @@ data "scm_dynamic_user_group" "example" {
 - `description` (String) The Description param. String length must not exceed 1023 characters.
 - `filter` (String) tag-based filter. String length must not exceed 2047 characters.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 63 characters.
-- `tags` (List of String) Tags for dynamic user group object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for dynamic user group object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 - `tfid` (String) The Terraform ID.

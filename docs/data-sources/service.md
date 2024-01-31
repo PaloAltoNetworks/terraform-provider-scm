@@ -30,7 +30,7 @@ data "scm_service" "example" {
 - `description` (String) The Description param. String length must not exceed 1023 characters.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 63 characters.
 - `protocol` (Attributes) The Protocol param. (see [below for nested schema](#nestedatt--protocol))
-- `tags` (List of String) Tags for service object. List must contain at most 64 elements.
+- `tags` (List of String) Tags for service object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--protocol"></a>

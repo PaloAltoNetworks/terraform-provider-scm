@@ -12,6 +12,7 @@ import (
 	qhDZEMT "github.com/paloaltonetworks/scm-go/netsec/schemas/application/groups"
 	xUpBHLw "github.com/paloaltonetworks/scm-go/netsec/services/applicationgroups"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -87,7 +88,7 @@ func (d *applicationGroupListDataSource) Schema(_ context.Context, _ datasource.
 							Computed:    true,
 						},
 						"members": dsschema.ListAttribute{
-							Description: "The Members param.",
+							Description: "The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -297,7 +298,7 @@ func (d *applicationGroupDataSource) Schema(_ context.Context, _ datasource.Sche
 				Required:    true,
 			},
 			"members": dsschema.ListAttribute{
-				Description: "The Members param.",
+				Description: "The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -439,9 +440,14 @@ func (r *applicationGroupResource) Schema(_ context.Context, _ resource.SchemaRe
 				},
 			},
 			"members": rsschema.ListAttribute{
-				Description: "The Members param.",
+				Description: "The Members param. Individual elements in this list are subject to additional validation. String length must not exceed 63 characters.",
 				Required:    true,
 				ElementType: types.StringType,
+				Validators: []validator.List{
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(63),
+					),
+				},
 			},
 			"name": rsschema.StringAttribute{
 				Description: "Alphanumeric string [ 0-9a-zA-Z._-]. String length must not exceed 31 characters.",

@@ -119,7 +119,7 @@ func (d *addressObjectListDataSource) Schema(_ context.Context, _ datasource.Sch
 							Computed:    true,
 						},
 						"tags": dsschema.ListAttribute{
-							Description: "Tags for address object. List must contain at most 64 elements.",
+							Description: "Tags for address object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -371,7 +371,7 @@ func (d *addressObjectDataSource) Schema(_ context.Context, _ datasource.SchemaR
 				Computed:    true,
 			},
 			"tags": dsschema.ListAttribute{
-				Description: "Tags for address object. List must contain at most 64 elements.",
+				Description: "Tags for address object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -537,11 +537,17 @@ func (r *addressObjectResource) Schema(_ context.Context, _ resource.SchemaReque
 				},
 			},
 			"fqdn": rsschema.StringAttribute{
-				Description: "The Fqdn param. String length must be between 1 and 255 characters. String validation regex: `^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$`.",
+				Description: "The Fqdn param. String length must be between 1 and 255 characters. String validation regex: `^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$`. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`",
 				Optional:    true,
 				Validators: []validator.String{
 					stringvalidator.LengthBetween(1, 255),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$"), ""),
+					stringvalidator.ExactlyOneOf(
+						path.MatchRelative(),
+						path.MatchRelative().AtParent().AtName("ip_netmask"),
+						path.MatchRelative().AtParent().AtName("ip_range"),
+						path.MatchRelative().AtParent().AtName("ip_wildcard"),
+					),
 				},
 			},
 			"id": rsschema.StringAttribute{
@@ -552,15 +558,15 @@ func (r *addressObjectResource) Schema(_ context.Context, _ resource.SchemaReque
 				},
 			},
 			"ip_netmask": rsschema.StringAttribute{
-				Description: "The IpNetmask param.",
+				Description: "The IpNetmask param. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`",
 				Optional:    true,
 			},
 			"ip_range": rsschema.StringAttribute{
-				Description: "The IpRange param.",
+				Description: "The IpRange param. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`",
 				Optional:    true,
 			},
 			"ip_wildcard": rsschema.StringAttribute{
-				Description: "The IpWildcard param.",
+				Description: "The IpWildcard param. Ensure that only one of the following is specified: `fqdn`, `ip_netmask`, `ip_range`, `ip_wildcard`",
 				Optional:    true,
 			},
 			"name": rsschema.StringAttribute{
@@ -578,11 +584,14 @@ func (r *addressObjectResource) Schema(_ context.Context, _ resource.SchemaReque
 				},
 			},
 			"tags": rsschema.ListAttribute{
-				Description: "Tags for address object. List must contain at most 64 elements.",
+				Description: "Tags for address object. List must contain at most 64 elements. Individual elements in this list are subject to additional validation. String length must not exceed 127 characters.",
 				Optional:    true,
 				ElementType: types.StringType,
 				Validators: []validator.List{
 					listvalidator.SizeAtMost(64),
+					listvalidator.ValueStringsAre(
+						stringvalidator.LengthAtMost(127),
+					),
 				},
 			},
 			"tfid": rsschema.StringAttribute{

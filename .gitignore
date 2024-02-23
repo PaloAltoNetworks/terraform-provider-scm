@@ -24,7 +24,7 @@ go.work
 terraform-provider-scm
 terraform.tfstate*
 .terraform/
-*.tf
+/*.tf
 
 # Others
 .DS_Store

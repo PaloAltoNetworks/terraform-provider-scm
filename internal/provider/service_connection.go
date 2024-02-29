@@ -492,7 +492,8 @@ type serviceConnectionDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Folder types.String `tfsdk:"folder"`
+	Id     types.String `tfsdk:"id"`
 
 	// Output.
 	BackupSC types.String                                    `tfsdk:"backup__s_c"`
@@ -552,7 +553,7 @@ func (d *serviceConnectionDataSource) Schema(_ context.Context, _ datasource.Sch
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"backup_SC":true, "bgp_peer":true, "id":true, "ipsec_tunnel":true, "name":true, "nat_pool":true, "no_export_community":true, "onboarding_type":true, "protocol":true, "qos":true, "region":true, "secondary_ipsec_tunnel":true, "source_nat":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"backup_SC":true, "bgp_peer":true, "id":true, "ipsec_tunnel":true, "name":true, "nat_pool":true, "no_export_community":true, "onboarding_type":true, "protocol":true, "qos":true, "region":true, "secondary_ipsec_tunnel":true, "source_nat":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
 			"backup__s_c": dsschema.StringAttribute{
 				Description: "The BackupSC param.",
 				Computed:    true,
@@ -588,6 +589,11 @@ func (d *serviceConnectionDataSource) Schema(_ context.Context, _ datasource.Sch
 						Sensitive:   true,
 					},
 				},
+			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param. String can either be a specific string(`\"Service Connections\"`) or match this regex: `^[0-9a-zA-Z._\\s-]{1,}$`. Default: `\"Service Connections\"`.",
+				Optional:    true,
+				Computed:    true,
 			},
 			"id": dsschema.StringAttribute{
 				Description: "The Id param.",
@@ -726,6 +732,7 @@ func (d *serviceConnectionDataSource) Read(ctx context.Context, req datasource.R
 		"data_source_name":            "scm_service_connection",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -735,6 +742,8 @@ func (d *serviceConnectionDataSource) Read(ctx context.Context, req datasource.R
 	input := uIHLJPY.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueString()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -746,6 +755,9 @@ func (d *serviceConnectionDataSource) Read(ctx context.Context, req datasource.R
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	idBuilder.WriteString(input.Folder)
 
 	// Store the answer to state.
 
@@ -1390,6 +1402,8 @@ func (r *serviceConnectionResource) Read(ctx context.Context, req resource.ReadR
 	input := uIHLJPY.ReadInput{}
 
 	input.Id = tokens[1]
+
+	input.Folder = tokens[0]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

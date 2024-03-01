@@ -25,6 +25,10 @@ data "scm_remote_network" "example" {
 
 - `id` (String) The Id param.
 
+### Optional
+
+- `folder` (String) The Folder param. String can either be a specific string(`"Remote Networks"`) or match this regex: `^[\s0-9a-zA-Z._-]{1,}$`. Default: `"Remote Networks"`.
+
 ### Read-Only
 
 - `ecmp_load_balancing` (String) The EcmpLoadBalancing param. String must be one of these: `"enable"`, `"disable"`. Default: `"disable"`.

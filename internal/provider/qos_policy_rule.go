@@ -502,7 +502,8 @@ type qosPolicyRuleDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Folder types.String `tfsdk:"folder"`
+	Id     types.String `tfsdk:"id"`
 
 	// Output.
 	Action      qosPolicyRuleDsModel_tephihM_ActionObject   `tfsdk:"action"`
@@ -566,7 +567,7 @@ func (d *qosPolicyRuleDataSource) Schema(_ context.Context, _ datasource.SchemaR
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"action":true, "description":true, "dscp_tos":true, "id":true, "name":true, "schedule":true, "tfid":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"action":true, "description":true, "dscp_tos":true, "id":true, "name":true, "schedule":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
 			"action": dsschema.SingleNestedAttribute{
 				Description: "The Action param.",
 				Computed:    true,
@@ -668,6 +669,10 @@ func (d *qosPolicyRuleDataSource) Schema(_ context.Context, _ datasource.SchemaR
 					},
 				},
 			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param.",
+				Optional:    true,
+			},
 			"id": dsschema.StringAttribute{
 				Description: "The Id param.",
 				Required:    true,
@@ -710,6 +715,7 @@ func (d *qosPolicyRuleDataSource) Read(ctx context.Context, req datasource.ReadR
 		"data_source_name":            "scm_qos_policy_rule",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -719,6 +725,8 @@ func (d *qosPolicyRuleDataSource) Read(ctx context.Context, req datasource.ReadR
 	input := dvnOhnM.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueStringPointer()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -730,6 +738,11 @@ func (d *qosPolicyRuleDataSource) Read(ctx context.Context, req datasource.ReadR
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Folder != nil {
+		idBuilder.WriteString(*input.Folder)
+	}
 
 	// Store the answer to state.
 
@@ -1335,6 +1348,8 @@ func (r *qosPolicyRuleResource) Read(ctx context.Context, req resource.ReadReque
 	input := dvnOhnM.ReadInput{}
 
 	input.Id = tokens[4]
+
+	input.Folder = &tokens[0]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

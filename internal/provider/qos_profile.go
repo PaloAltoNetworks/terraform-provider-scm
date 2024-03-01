@@ -483,7 +483,8 @@ type qosProfileDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Folder types.String `tfsdk:"folder"`
+	Id     types.String `tfsdk:"id"`
 
 	// Output.
 	AggregateBandwidth *qosProfileDsModel_zGfKFAQ_AggregateBandwidthObject `tfsdk:"aggregate_bandwidth"`
@@ -543,7 +544,7 @@ func (d *qosProfileDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"aggregate_bandwidth":true, "class_bandwidth_type":true, "id":true, "name":true, "tfid":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"aggregate_bandwidth":true, "class_bandwidth_type":true, "id":true, "name":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
 			"aggregate_bandwidth": dsschema.SingleNestedAttribute{
 				Description: "The AggregateBandwidth param.",
 				Computed:    true,
@@ -644,6 +645,10 @@ func (d *qosProfileDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 					},
 				},
 			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param.",
+				Optional:    true,
+			},
 			"id": dsschema.StringAttribute{
 				Description: "The Id param.",
 				Required:    true,
@@ -682,6 +687,7 @@ func (d *qosProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 		"data_source_name":            "scm_qos_profile",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -691,6 +697,8 @@ func (d *qosProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	input := cBiswpr.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueStringPointer()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -702,6 +710,11 @@ func (d *qosProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Folder != nil {
+		idBuilder.WriteString(*input.Folder)
+	}
 
 	// Store the answer to state.
 
@@ -1315,6 +1328,8 @@ func (r *qosProfileResource) Read(ctx context.Context, req resource.ReadRequest,
 	input := cBiswpr.ReadInput{}
 
 	input.Id = tokens[3]
+
+	input.Folder = &tokens[0]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

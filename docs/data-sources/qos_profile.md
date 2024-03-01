@@ -25,6 +25,10 @@ data "scm_qos_profile" "example" {
 
 - `id` (String) The Id param.
 
+### Optional
+
+- `folder` (String) The Folder param.
+
 ### Read-Only
 
 - `aggregate_bandwidth` (Attributes) The AggregateBandwidth param. (see [below for nested schema](#nestedatt--aggregate_bandwidth))

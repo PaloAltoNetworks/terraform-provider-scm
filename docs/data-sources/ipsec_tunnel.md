@@ -25,6 +25,10 @@ data "scm_ipsec_tunnel" "example" {
 
 - `id` (String) The Id param.
 
+### Optional
+
+- `folder` (String) The Folder param.
+
 ### Read-Only
 
 - `anti_replay` (Boolean) Enable Anti-Replay check on this tunnel.

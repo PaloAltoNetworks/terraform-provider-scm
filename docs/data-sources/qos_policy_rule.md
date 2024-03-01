@@ -25,6 +25,10 @@ data "scm_qos_policy_rule" "example" {
 
 - `id` (String) The Id param.
 
+### Optional
+
+- `folder` (String) The Folder param.
+
 ### Read-Only
 
 - `action` (Attributes) The Action param. (see [below for nested schema](#nestedatt--action))

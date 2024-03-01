@@ -634,7 +634,8 @@ type ipsecTunnelDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Folder types.String `tfsdk:"folder"`
+	Id     types.String `tfsdk:"id"`
 
 	// Output.
 	AntiReplay             types.Bool                               `tfsdk:"anti_replay"`
@@ -720,7 +721,7 @@ func (d *ipsecTunnelDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"anti_replay":true, "auto_key":true, "copy_tos":true, "enable_gre_encapsulation":true, "id":true, "name":true, "tfid":true, "tunnel_monitor":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"anti_replay":true, "auto_key":true, "copy_tos":true, "enable_gre_encapsulation":true, "id":true, "name":true, "tfid":true, "tunnel_monitor":true} forceNew:map[string]bool{"folder":true, "id":true}
 			"anti_replay": dsschema.BoolAttribute{
 				Description: "Enable Anti-Replay check on this tunnel.",
 				Computed:    true,
@@ -881,6 +882,10 @@ func (d *ipsecTunnelDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 				Description: "allow GRE over IPSec. Default: `false`.",
 				Computed:    true,
 			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param.",
+				Optional:    true,
+			},
 			"id": dsschema.StringAttribute{
 				Description: "The Id param.",
 				Required:    true,
@@ -938,6 +943,7 @@ func (d *ipsecTunnelDataSource) Read(ctx context.Context, req datasource.ReadReq
 		"data_source_name":            "scm_ipsec_tunnel",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -947,6 +953,8 @@ func (d *ipsecTunnelDataSource) Read(ctx context.Context, req datasource.ReadReq
 	input := rmBFeLV.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueStringPointer()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -958,6 +966,11 @@ func (d *ipsecTunnelDataSource) Read(ctx context.Context, req datasource.ReadReq
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	if input.Folder != nil {
+		idBuilder.WriteString(*input.Folder)
+	}
 
 	// Store the answer to state.
 
@@ -1833,6 +1846,8 @@ func (r *ipsecTunnelResource) Read(ctx context.Context, req resource.ReadRequest
 	input := rmBFeLV.ReadInput{}
 
 	input.Id = tokens[3]
+
+	input.Folder = &tokens[0]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

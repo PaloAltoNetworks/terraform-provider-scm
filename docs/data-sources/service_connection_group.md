@@ -26,6 +26,10 @@ data "scm_service_connection_group" "example" {
 
 - `id` (String) The Id param.
 
+### Optional
+
+- `folder` (String) The Folder param. String can either be a specific string(`"Service Connections"`) or match this regex: `^[0-9a-zA-Z._\s-]{1,}$`. Default: `"Service Connections"`.
+
 ### Read-Only
 
 - `disable_snat` (Boolean) The DisableSnat param.

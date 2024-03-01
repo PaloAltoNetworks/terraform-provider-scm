@@ -261,7 +261,8 @@ type serviceConnectionGroupDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	Id types.String `tfsdk:"id"`
+	Folder types.String `tfsdk:"folder"`
+	Id     types.String `tfsdk:"id"`
 
 	// Output.
 	DisableSnat types.Bool `tfsdk:"disable_snat"`
@@ -282,9 +283,14 @@ func (d *serviceConnectionGroupDataSource) Schema(_ context.Context, _ datasourc
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"disable_snat":true, "id":true, "name":true, "pbf_only":true, "target":true, "tfid":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"disable_snat":true, "id":true, "name":true, "pbf_only":true, "target":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
 			"disable_snat": dsschema.BoolAttribute{
 				Description: "The DisableSnat param.",
+				Computed:    true,
+			},
+			"folder": dsschema.StringAttribute{
+				Description: "The Folder param. String can either be a specific string(`\"Service Connections\"`) or match this regex: `^[0-9a-zA-Z._\\s-]{1,}$`. Default: `\"Service Connections\"`.",
+				Optional:    true,
 				Computed:    true,
 			},
 			"id": dsschema.StringAttribute{
@@ -334,6 +340,7 @@ func (d *serviceConnectionGroupDataSource) Read(ctx context.Context, req datasou
 		"data_source_name":            "scm_service_connection_group",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
+		"folder":                      state.Folder.ValueString(),
 	})
 
 	// Prepare to run the command.
@@ -343,6 +350,8 @@ func (d *serviceConnectionGroupDataSource) Read(ctx context.Context, req datasou
 	input := utDbvHr.ReadInput{}
 
 	input.Id = state.Id.ValueString()
+
+	input.Folder = state.Folder.ValueString()
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)
@@ -354,6 +363,9 @@ func (d *serviceConnectionGroupDataSource) Read(ctx context.Context, req datasou
 	// Create the Terraform ID.
 	var idBuilder strings.Builder
 	idBuilder.WriteString(input.Id)
+
+	idBuilder.WriteString(IdSeparator)
+	idBuilder.WriteString(input.Folder)
 
 	// Store the answer to state.
 
@@ -586,6 +598,8 @@ func (r *serviceConnectionGroupResource) Read(ctx context.Context, req resource.
 	input := utDbvHr.ReadInput{}
 
 	input.Id = tokens[1]
+
+	input.Folder = tokens[0]
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

@@ -136,6 +136,8 @@ github.com/paloaltonetworks/scm-go v0.3.0 h1:bTguA7GDVtNYA68TM2fEDHYg6leFnniXEWA
 github.com/paloaltonetworks/scm-go v0.3.0/go.mod h1:8CiN/F+XcDSwup6WutVuV92+Rw+35F8aPDo+QFdoQeA=
 github.com/paloaltonetworks/scm-go v0.4.0 h1:Bdpw1S8KBYqtn1DNgURO5VUcKskaeyjlmBfXGgxz9VA=
 github.com/paloaltonetworks/scm-go v0.4.0/go.mod h1:8CiN/F+XcDSwup6WutVuV92+Rw+35F8aPDo+QFdoQeA=
+github.com/paloaltonetworks/scm-go v0.5.0 h1:3XOGBxKRCRP3Tbgvme47v7pI9Icj+L9O3DhAiDGbLu8=
+github.com/paloaltonetworks/scm-go v0.5.0/go.mod h1:8CiN/F+XcDSwup6WutVuV92+Rw+35F8aPDo+QFdoQeA=
 github.com/pjbgf/sha1cd v0.3.0 h1:4D5XXmUUBUl/xQ6IjCkEAbqXskkq/4O7LmGn0AqMDs4=
 github.com/pjbgf/sha1cd v0.3.0/go.mod h1:nZ1rrWOcGJ5uZgEEVL1VUM9iRQiZvWdbZjkKyFzPPsI=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

@@ -872,10 +872,10 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 						Validators: []validator.Bool{
 							boolvalidator.ExactlyOneOf(
 								path.MatchRelative(),
-								path.MatchRelative().AtParent().AtName("EAP_TTLS_with_PAP"),
-								path.MatchRelative().AtParent().AtName("PAP"),
-								path.MatchRelative().AtParent().AtName("PEAP_MSCHAPv2"),
-								path.MatchRelative().AtParent().AtName("PEAP_with_GTC"),
+								path.MatchRelative().AtParent().AtName("eap_ttls_with_pap"),
+								path.MatchRelative().AtParent().AtName("pap"),
+								path.MatchRelative().AtParent().AtName("peap_mschap_v2"),
+								path.MatchRelative().AtParent().AtName("peap_with_gtc"),
 							),
 						},
 					},

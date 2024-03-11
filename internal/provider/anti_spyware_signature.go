@@ -2159,7 +2159,7 @@ func (r *antiSpywareSignatureResource) Schema(_ context.Context, _ resource.Sche
 						Validators: []validator.Object{
 							objectvalidator.ExactlyOneOf(
 								path.MatchRelative(),
-								path.MatchRelative().AtParent().AtName("standard"),
+								path.MatchRelative().AtParent().AtName("standards"),
 							),
 						},
 						Attributes: map[string]rsschema.Attribute{

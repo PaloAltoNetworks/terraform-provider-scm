@@ -607,7 +607,7 @@ func (r *trafficSteeringRuleResource) Schema(_ context.Context, _ resource.Schem
 						Validators: []validator.Object{
 							objectvalidator.ExactlyOneOf(
 								path.MatchRelative(),
-								path.MatchRelative().AtParent().AtName("no-pbf"),
+								path.MatchRelative().AtParent().AtName("no_pbf"),
 							),
 						},
 						Attributes: map[string]rsschema.Attribute{

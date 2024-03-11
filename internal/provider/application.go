@@ -1861,7 +1861,7 @@ func (r *applicationResource) Schema(_ context.Context, _ resource.SchemaRequest
 								path.MatchRelative(),
 								path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
 								path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
-								path.MatchRelative().AtParent().AtName("port"),
+								path.MatchRelative().AtParent().AtName("ports"),
 							),
 						},
 						Attributes: map[string]rsschema.Attribute{

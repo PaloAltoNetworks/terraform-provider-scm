@@ -531,7 +531,7 @@ func (r *addressGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				Validators: []validator.Object{
 					objectvalidator.ExactlyOneOf(
 						path.MatchRelative(),
-						path.MatchRelative().AtParent().AtName("static"),
+						path.MatchRelative().AtParent().AtName("static_list"),
 					),
 				},
 				Attributes: map[string]rsschema.Attribute{

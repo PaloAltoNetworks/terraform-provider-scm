@@ -921,7 +921,7 @@ func (r *applicationFilterResource) Schema(_ context.Context, _ resource.SchemaR
 						Validators: []validator.Bool{
 							boolvalidator.ExactlyOneOf(
 								path.MatchRelative(),
-								path.MatchRelative().AtParent().AtName("tag"),
+								path.MatchRelative().AtParent().AtName("tags"),
 							),
 						},
 					},

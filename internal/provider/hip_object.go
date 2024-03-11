@@ -545,7 +545,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 											Attributes: map[string]dsschema.Attribute{
 												// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 												"not_available": dsschema.BoolAttribute{
-													Description: "The NotAvailable param. Default: `false`.",
+													Description: "The NotAvailable param.",
 													Computed:    true,
 												},
 												"not_within": dsschema.SingleNestedAttribute{
@@ -554,11 +554,11 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 														"days": dsschema.Int64Attribute{
-															Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify time in days. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 														"hours": dsschema.Int64Attribute{
-															Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+															Description: "specify time in hours. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 													},
@@ -569,11 +569,11 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 														"days": dsschema.Int64Attribute{
-															Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify time in days. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 														"hours": dsschema.Int64Attribute{
-															Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+															Description: "specify time in hours. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 													},
@@ -652,11 +652,11 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 														"days": dsschema.Int64Attribute{
-															Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify time in days. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 														"versions": dsschema.Int64Attribute{
-															Description: "specify versions range. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify versions range. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 													},
@@ -667,11 +667,11 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 														"days": dsschema.Int64Attribute{
-															Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify time in days. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 														"versions": dsschema.Int64Attribute{
-															Description: "specify versions range. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify versions range. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 													},
@@ -918,7 +918,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 											Attributes: map[string]dsschema.Attribute{
 												// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 												"not_available": dsschema.BoolAttribute{
-													Description: "The NotAvailable param. Default: `false`.",
+													Description: "The NotAvailable param.",
 													Computed:    true,
 												},
 												"not_within": dsschema.SingleNestedAttribute{
@@ -927,11 +927,11 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 														"days": dsschema.Int64Attribute{
-															Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify time in days. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 														"hours": dsschema.Int64Attribute{
-															Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+															Description: "specify time in hours. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 													},
@@ -942,11 +942,11 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 														"days": dsschema.Int64Attribute{
-															Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+															Description: "specify time in days. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 														"hours": dsschema.Int64Attribute{
-															Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+															Description: "specify time in hours. Value must be between 1 and 65535.",
 															Computed:    true,
 														},
 													},
@@ -1001,11 +1001,11 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 														Attributes: map[string]dsschema.Attribute{
 															// inputs:map[string]bool{} outputs:map[string]bool{"is":true, "is_not":true} forceNew:map[string]bool(nil)
 															"is": dsschema.StringAttribute{
-																Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`.",
+																Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`.",
 																Computed:    true,
 															},
 															"is_not": dsschema.StringAttribute{
-																Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`.",
+																Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`.",
 																Computed:    true,
 															},
 														},
@@ -1192,19 +1192,19 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"Apple":true, "Google":true, "Linux":true, "Microsoft":true, "Other":true} forceNew:map[string]bool(nil)
 														"apple": dsschema.StringAttribute{
-															Description: "Apple vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+															Description: "Apple vendor. String length must not exceed 255 characters.",
 															Computed:    true,
 														},
 														"google": dsschema.StringAttribute{
-															Description: "Google vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+															Description: "Google vendor. String length must not exceed 255 characters.",
 															Computed:    true,
 														},
 														"linux": dsschema.StringAttribute{
-															Description: "Linux vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+															Description: "Linux vendor. String length must not exceed 255 characters.",
 															Computed:    true,
 														},
 														"microsoft": dsschema.StringAttribute{
-															Description: "Microsoft vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+															Description: "Microsoft vendor. String length must not exceed 255 characters.",
 															Computed:    true,
 														},
 														"other": dsschema.StringAttribute{
@@ -1263,7 +1263,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"no":true, "yes":true} forceNew:map[string]bool(nil)
 														"no": dsschema.BoolAttribute{
-															Description: "The No param. Default: `false`.",
+															Description: "The No param.",
 															Computed:    true,
 														},
 														"yes": dsschema.SingleNestedAttribute{
@@ -1480,7 +1480,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 															},
 														},
 														"unknown": dsschema.BoolAttribute{
-															Description: "The Unknown param. Default: `false`.",
+															Description: "The Unknown param.",
 															Computed:    true,
 														},
 														"wifi": dsschema.SingleNestedAttribute{
@@ -1502,7 +1502,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 													Attributes: map[string]dsschema.Attribute{
 														// inputs:map[string]bool{} outputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 														"ethernet": dsschema.BoolAttribute{
-															Description: "The Ethernet param. Default: `false`.",
+															Description: "The Ethernet param.",
 															Computed:    true,
 														},
 														"mobile": dsschema.SingleNestedAttribute{
@@ -1517,7 +1517,7 @@ func (d *hipObjectListDataSource) Schema(_ context.Context, _ datasource.SchemaR
 															},
 														},
 														"unknown": dsschema.BoolAttribute{
-															Description: "The Unknown param. Default: `false`.",
+															Description: "The Unknown param.",
 															Computed:    true,
 														},
 														"wifi": dsschema.SingleNestedAttribute{
@@ -1784,7 +1784,12 @@ func (d *hipObjectListDataSource) Read(ctx context.Context, req datasource.ReadR
 					} else {
 						var1.AntiMalware.Criteria.LastScanTime = &hipObjectListDsModel_suxdMuj_LastScanTimeObject{}
 
-						var1.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(var0.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
+						if var0.AntiMalware.Criteria.LastScanTime.NotAvailable != nil {
+							var1.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(true)
+						} else {
+							var1.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolPointerValue(nil)
+						}
+						//var1.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(var0.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
 
 						if var0.AntiMalware.Criteria.LastScanTime.NotWithin == nil {
 							var1.AntiMalware.Criteria.LastScanTime.NotWithin = nil
@@ -2056,7 +2061,12 @@ func (d *hipObjectListDataSource) Read(ctx context.Context, req datasource.ReadR
 					} else {
 						var1.DiskBackup.Criteria.LastBackupTime = &hipObjectListDsModel_suxdMuj_LastBackupTimeObject{}
 
-						var1.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(var0.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
+						if var0.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil {
+							var1.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(true)
+						} else {
+							var1.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolPointerValue(nil)
+						}
+						//var1.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(var0.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
 
 						if var0.DiskBackup.Criteria.LastBackupTime.NotWithin == nil {
 							var1.DiskBackup.Criteria.LastBackupTime.NotWithin = nil
@@ -2301,7 +2311,12 @@ func (d *hipObjectListDataSource) Read(ctx context.Context, req datasource.ReadR
 						} else {
 							var1.MobileDevice.Criteria.Applications.HasMalware = &hipObjectListDsModel_suxdMuj_HasMalwareObject{}
 
-							var1.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(var0.MobileDevice.Criteria.Applications.HasMalware.No != nil)
+							if var0.MobileDevice.Criteria.Applications.HasMalware.No != nil {
+								var1.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(true)
+							} else {
+								var1.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolPointerValue(nil)
+							}
+							//var1.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(var0.MobileDevice.Criteria.Applications.HasMalware.No != nil)
 
 							if var0.MobileDevice.Criteria.Applications.HasMalware.Yes == nil {
 								var1.MobileDevice.Criteria.Applications.HasMalware.Yes = nil
@@ -2453,7 +2468,12 @@ func (d *hipObjectListDataSource) Read(ctx context.Context, req datasource.ReadR
 								var1.NetworkInfo.Criteria.Network.Is.Mobile.Carrier = types.StringPointerValue(var0.NetworkInfo.Criteria.Network.Is.Mobile.Carrier)
 							}
 
-							var1.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(var0.NetworkInfo.Criteria.Network.Is.Unknown != nil)
+							if var0.NetworkInfo.Criteria.Network.Is.Unknown != nil {
+								var1.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(true)
+							} else {
+								var1.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolPointerValue(nil)
+							}
+							//var1.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(var0.NetworkInfo.Criteria.Network.Is.Unknown != nil)
 
 							if var0.NetworkInfo.Criteria.Network.Is.Wifi == nil {
 								var1.NetworkInfo.Criteria.Network.Is.Wifi = nil
@@ -2469,7 +2489,12 @@ func (d *hipObjectListDataSource) Read(ctx context.Context, req datasource.ReadR
 						} else {
 							var1.NetworkInfo.Criteria.Network.IsNot = &hipObjectListDsModel_suxdMuj_IsNotObject{}
 
-							var1.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(var0.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
+							if var0.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil {
+								var1.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(true)
+							} else {
+								var1.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolPointerValue(nil)
+							}
+							//var1.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(var0.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
 
 							if var0.NetworkInfo.Criteria.Network.IsNot.Mobile == nil {
 								var1.NetworkInfo.Criteria.Network.IsNot.Mobile = nil
@@ -2479,7 +2504,12 @@ func (d *hipObjectListDataSource) Read(ctx context.Context, req datasource.ReadR
 								var1.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier = types.StringPointerValue(var0.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier)
 							}
 
-							var1.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(var0.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
+							if var0.NetworkInfo.Criteria.Network.IsNot.Unknown != nil {
+								var1.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(true)
+							} else {
+								var1.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolPointerValue(nil)
+							}
+							//var1.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(var0.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
 
 							if var0.NetworkInfo.Criteria.Network.IsNot.Wifi == nil {
 								var1.NetworkInfo.Criteria.Network.IsNot.Wifi = nil
@@ -3064,7 +3094,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 								Attributes: map[string]dsschema.Attribute{
 									// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": dsschema.BoolAttribute{
-										Description: "The NotAvailable param. Default: `false`.",
+										Description: "The NotAvailable param.",
 										Computed:    true,
 									},
 									"not_within": dsschema.SingleNestedAttribute{
@@ -3073,11 +3103,11 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": dsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 											"hours": dsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 										},
@@ -3088,11 +3118,11 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": dsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 											"hours": dsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 										},
@@ -3171,11 +3201,11 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 											"days": dsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 											"versions": dsschema.Int64Attribute{
-												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify versions range. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 										},
@@ -3186,11 +3216,11 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 											"days": dsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 											"versions": dsschema.Int64Attribute{
-												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify versions range. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 										},
@@ -3437,7 +3467,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 								Attributes: map[string]dsschema.Attribute{
 									// inputs:map[string]bool{} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": dsschema.BoolAttribute{
-										Description: "The NotAvailable param. Default: `false`.",
+										Description: "The NotAvailable param.",
 										Computed:    true,
 									},
 									"not_within": dsschema.SingleNestedAttribute{
@@ -3446,11 +3476,11 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": dsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 											"hours": dsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 										},
@@ -3461,11 +3491,11 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": dsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`.",
+												Description: "specify time in days. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 											"hours": dsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`.",
+												Description: "specify time in hours. Value must be between 1 and 65535.",
 												Computed:    true,
 											},
 										},
@@ -3520,11 +3550,11 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 											Attributes: map[string]dsschema.Attribute{
 												// inputs:map[string]bool{} outputs:map[string]bool{"is":true, "is_not":true} forceNew:map[string]bool(nil)
 												"is": dsschema.StringAttribute{
-													Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`.",
+													Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`.",
 													Computed:    true,
 												},
 												"is_not": dsschema.StringAttribute{
-													Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`.",
+													Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`.",
 													Computed:    true,
 												},
 											},
@@ -3711,19 +3741,19 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"Apple":true, "Google":true, "Linux":true, "Microsoft":true, "Other":true} forceNew:map[string]bool(nil)
 											"apple": dsschema.StringAttribute{
-												Description: "Apple vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Apple vendor. String length must not exceed 255 characters.",
 												Computed:    true,
 											},
 											"google": dsschema.StringAttribute{
-												Description: "Google vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Google vendor. String length must not exceed 255 characters.",
 												Computed:    true,
 											},
 											"linux": dsschema.StringAttribute{
-												Description: "Linux vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Linux vendor. String length must not exceed 255 characters.",
 												Computed:    true,
 											},
 											"microsoft": dsschema.StringAttribute{
-												Description: "Microsoft vendor. String length must not exceed 255 characters. Default: `\"All\"`.",
+												Description: "Microsoft vendor. String length must not exceed 255 characters.",
 												Computed:    true,
 											},
 											"other": dsschema.StringAttribute{
@@ -3782,7 +3812,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"no":true, "yes":true} forceNew:map[string]bool(nil)
 											"no": dsschema.BoolAttribute{
-												Description: "The No param. Default: `false`.",
+												Description: "The No param.",
 												Computed:    true,
 											},
 											"yes": dsschema.SingleNestedAttribute{
@@ -3999,7 +4029,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 												},
 											},
 											"unknown": dsschema.BoolAttribute{
-												Description: "The Unknown param. Default: `false`.",
+												Description: "The Unknown param.",
 												Computed:    true,
 											},
 											"wifi": dsschema.SingleNestedAttribute{
@@ -4021,7 +4051,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 											"ethernet": dsschema.BoolAttribute{
-												Description: "The Ethernet param. Default: `false`.",
+												Description: "The Ethernet param.",
 												Computed:    true,
 											},
 											"mobile": dsschema.SingleNestedAttribute{
@@ -4036,7 +4066,7 @@ func (d *hipObjectDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 												},
 											},
 											"unknown": dsschema.BoolAttribute{
-												Description: "The Unknown param. Default: `false`.",
+												Description: "The Unknown param.",
 												Computed:    true,
 											},
 											"wifi": dsschema.SingleNestedAttribute{
@@ -4221,7 +4251,12 @@ func (d *hipObjectDataSource) Read(ctx context.Context, req datasource.ReadReque
 			} else {
 				state.AntiMalware.Criteria.LastScanTime = &hipObjectDsModel_suxdMuj_LastScanTimeObject{}
 
-				state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
+				if ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
 
 				if ans.AntiMalware.Criteria.LastScanTime.NotWithin == nil {
 					state.AntiMalware.Criteria.LastScanTime.NotWithin = nil
@@ -4493,7 +4528,12 @@ func (d *hipObjectDataSource) Read(ctx context.Context, req datasource.ReadReque
 			} else {
 				state.DiskBackup.Criteria.LastBackupTime = &hipObjectDsModel_suxdMuj_LastBackupTimeObject{}
 
-				state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
+				if ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
 
 				if ans.DiskBackup.Criteria.LastBackupTime.NotWithin == nil {
 					state.DiskBackup.Criteria.LastBackupTime.NotWithin = nil
@@ -4738,7 +4778,12 @@ func (d *hipObjectDataSource) Read(ctx context.Context, req datasource.ReadReque
 				} else {
 					state.MobileDevice.Criteria.Applications.HasMalware = &hipObjectDsModel_suxdMuj_HasMalwareObject{}
 
-					state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
+					if ans.MobileDevice.Criteria.Applications.HasMalware.No != nil {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(true)
+					} else {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolPointerValue(nil)
+					}
+					//state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
 
 					if ans.MobileDevice.Criteria.Applications.HasMalware.Yes == nil {
 						state.MobileDevice.Criteria.Applications.HasMalware.Yes = nil
@@ -4890,7 +4935,12 @@ func (d *hipObjectDataSource) Read(ctx context.Context, req datasource.ReadReque
 						state.NetworkInfo.Criteria.Network.Is.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.Is.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.Is.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.Is.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.Is.Wifi = nil
@@ -4906,7 +4956,12 @@ func (d *hipObjectDataSource) Read(ctx context.Context, req datasource.ReadReque
 				} else {
 					state.NetworkInfo.Criteria.Network.IsNot = &hipObjectDsModel_suxdMuj_IsNotObject{}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Mobile == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile = nil
@@ -4916,7 +4971,12 @@ func (d *hipObjectDataSource) Read(ctx context.Context, req datasource.ReadReque
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Wifi = nil
@@ -5511,10 +5571,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_available":true, "not_within":true, "within":true} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": rsschema.BoolAttribute{
-										Description: "The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
+										Description: "The NotAvailable param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 										Validators: []validator.Bool{
 											boolvalidator.ExactlyOneOf(
 												path.MatchRelative(),
@@ -5529,10 +5587,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 													int64validator.ExactlyOneOf(
@@ -5542,10 +5598,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(24),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 												},
@@ -5558,10 +5612,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 													int64validator.ExactlyOneOf(
@@ -5571,10 +5623,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(24),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 												},
@@ -5706,10 +5756,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "versions":true} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
+												Description: "specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 													int64validator.ExactlyOneOf(
@@ -5719,10 +5767,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"versions": rsschema.Int64Attribute{
-												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
+												Description: "specify versions range. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 												},
@@ -5735,10 +5781,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "versions":true} outputs:map[string]bool{"days":true, "versions":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
+												Description: "specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 													int64validator.ExactlyOneOf(
@@ -5748,10 +5792,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"versions": rsschema.Int64Attribute{
-												Description: "specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`",
+												Description: "specify versions range. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 												},
@@ -6080,10 +6122,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 								Attributes: map[string]rsschema.Attribute{
 									// inputs:map[string]bool{"not_available":true, "not_within":true, "within":true} outputs:map[string]bool{"not_available":true, "not_within":true, "within":true} forceNew:map[string]bool(nil)
 									"not_available": rsschema.BoolAttribute{
-										Description: "The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
+										Description: "The NotAvailable param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 										Validators: []validator.Bool{
 											boolvalidator.ExactlyOneOf(
 												path.MatchRelative(),
@@ -6098,10 +6138,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 													int64validator.ExactlyOneOf(
@@ -6111,10 +6149,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(24),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 												},
@@ -6127,10 +6163,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"days":true, "hours":true} outputs:map[string]bool{"days":true, "hours":true} forceNew:map[string]bool(nil)
 											"days": rsschema.Int64Attribute{
-												Description: "specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(1),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 													int64validator.ExactlyOneOf(
@@ -6140,10 +6174,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"hours": rsschema.Int64Attribute{
-												Description: "specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`",
+												Description: "specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`",
 												Optional:    true,
-												Computed:    true,
-												Default:     int64default.StaticInt64(24),
 												Validators: []validator.Int64{
 													int64validator.Between(1, 65535),
 												},
@@ -6211,10 +6243,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 											Attributes: map[string]rsschema.Attribute{
 												// inputs:map[string]bool{"is":true, "is_not":true} outputs:map[string]bool{"is":true, "is_not":true} forceNew:map[string]bool(nil)
 												"is": rsschema.StringAttribute{
-													Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`. Ensure that only one of the following is specified: `is`, `is_not`",
+													Description: "The Is param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Ensure that only one of the following is specified: `is`, `is_not`",
 													Optional:    true,
-													Computed:    true,
-													Default:     stringdefault.StaticString("encrypted"),
 													Validators: []validator.String{
 														stringvalidator.OneOf("encrypted", "unencrypted", "partial", "unknown"),
 														stringvalidator.ExactlyOneOf(
@@ -6224,10 +6254,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 													},
 												},
 												"is_not": rsschema.StringAttribute{
-													Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Default: `\"encrypted\"`. Ensure that only one of the following is specified: `is`, `is_not`",
+													Description: "The IsNot param. String must be one of these: `\"encrypted\"`, `\"unencrypted\"`, `\"partial\"`, `\"unknown\"`. Ensure that only one of the following is specified: `is`, `is_not`",
 													Optional:    true,
-													Computed:    true,
-													Default:     stringdefault.StaticString("encrypted"),
 													Validators: []validator.String{
 														stringvalidator.OneOf("encrypted", "unencrypted", "partial", "unknown"),
 													},
@@ -6516,10 +6544,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"Apple":true, "Google":true, "Linux":true, "Microsoft":true, "Other":true} outputs:map[string]bool{"Apple":true, "Google":true, "Linux":true, "Microsoft":true, "Other":true} forceNew:map[string]bool(nil)
 											"apple": rsschema.StringAttribute{
-												Description: "Apple vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
+												Description: "Apple vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
-												Computed:    true,
-												Default:     stringdefault.StaticString("All"),
 												Validators: []validator.String{
 													stringvalidator.LengthAtMost(255),
 													stringvalidator.ExactlyOneOf(
@@ -6532,28 +6558,22 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"google": rsschema.StringAttribute{
-												Description: "Google vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
+												Description: "Google vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
-												Computed:    true,
-												Default:     stringdefault.StaticString("All"),
 												Validators: []validator.String{
 													stringvalidator.LengthAtMost(255),
 												},
 											},
 											"linux": rsschema.StringAttribute{
-												Description: "Linux vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
+												Description: "Linux vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
-												Computed:    true,
-												Default:     stringdefault.StaticString("All"),
 												Validators: []validator.String{
 													stringvalidator.LengthAtMost(255),
 												},
 											},
 											"microsoft": rsschema.StringAttribute{
-												Description: "Microsoft vendor. String length must not exceed 255 characters. Default: `\"All\"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
+												Description: "Microsoft vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`",
 												Optional:    true,
-												Computed:    true,
-												Default:     stringdefault.StaticString("All"),
 												Validators: []validator.String{
 													stringvalidator.LengthAtMost(255),
 												},
@@ -6634,10 +6654,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"no":true, "yes":true} outputs:map[string]bool{"no":true, "yes":true} forceNew:map[string]bool(nil)
 											"no": rsschema.BoolAttribute{
-												Description: "The No param. Default: `false`. Ensure that only one of the following is specified: `no`, `yes`",
+												Description: "The No param. Ensure that only one of the following is specified: `no`, `yes`",
 												Optional:    true,
-												Computed:    true,
-												Default:     booldefault.StaticBool(false),
 												Validators: []validator.Bool{
 													boolvalidator.ExactlyOneOf(
 														path.MatchRelative(),
@@ -6973,10 +6991,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"unknown": rsschema.BoolAttribute{
-												Description: "The Unknown param. Default: `false`. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`",
+												Description: "The Unknown param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`",
 												Optional:    true,
-												Computed:    true,
-												Default:     booldefault.StaticBool(false),
 											},
 											"wifi": rsschema.SingleNestedAttribute{
 												Description: "The Wifi param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`",
@@ -7001,10 +7017,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 										Attributes: map[string]rsschema.Attribute{
 											// inputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} outputs:map[string]bool{"ethernet":true, "mobile":true, "unknown":true, "wifi":true} forceNew:map[string]bool(nil)
 											"ethernet": rsschema.BoolAttribute{
-												Description: "The Ethernet param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
+												Description: "The Ethernet param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
 												Optional:    true,
-												Computed:    true,
-												Default:     booldefault.StaticBool(false),
 												Validators: []validator.Bool{
 													boolvalidator.ExactlyOneOf(
 														path.MatchRelative(),
@@ -7030,10 +7044,8 @@ func (r *hipObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, 
 												},
 											},
 											"unknown": rsschema.BoolAttribute{
-												Description: "The Unknown param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
+												Description: "The Unknown param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
 												Optional:    true,
-												Computed:    true,
-												Default:     booldefault.StaticBool(false),
 											},
 											"wifi": rsschema.SingleNestedAttribute{
 												Description: "The Wifi param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`",
@@ -7988,7 +8000,12 @@ func (r *hipObjectResource) Create(ctx context.Context, req resource.CreateReque
 			} else {
 				state.AntiMalware.Criteria.LastScanTime = &hipObjectRsModel_suxdMuj_LastScanTimeObject{}
 
-				state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
+				if ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
 
 				if ans.AntiMalware.Criteria.LastScanTime.NotWithin == nil {
 					state.AntiMalware.Criteria.LastScanTime.NotWithin = nil
@@ -8260,7 +8277,12 @@ func (r *hipObjectResource) Create(ctx context.Context, req resource.CreateReque
 			} else {
 				state.DiskBackup.Criteria.LastBackupTime = &hipObjectRsModel_suxdMuj_LastBackupTimeObject{}
 
-				state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
+				if ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
 
 				if ans.DiskBackup.Criteria.LastBackupTime.NotWithin == nil {
 					state.DiskBackup.Criteria.LastBackupTime.NotWithin = nil
@@ -8505,7 +8527,12 @@ func (r *hipObjectResource) Create(ctx context.Context, req resource.CreateReque
 				} else {
 					state.MobileDevice.Criteria.Applications.HasMalware = &hipObjectRsModel_suxdMuj_HasMalwareObject{}
 
-					state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
+					if ans.MobileDevice.Criteria.Applications.HasMalware.No != nil {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(true)
+					} else {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolPointerValue(nil)
+					}
+					//state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
 
 					if ans.MobileDevice.Criteria.Applications.HasMalware.Yes == nil {
 						state.MobileDevice.Criteria.Applications.HasMalware.Yes = nil
@@ -8657,7 +8684,12 @@ func (r *hipObjectResource) Create(ctx context.Context, req resource.CreateReque
 						state.NetworkInfo.Criteria.Network.Is.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.Is.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.Is.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.Is.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.Is.Wifi = nil
@@ -8673,7 +8705,12 @@ func (r *hipObjectResource) Create(ctx context.Context, req resource.CreateReque
 				} else {
 					state.NetworkInfo.Criteria.Network.IsNot = &hipObjectRsModel_suxdMuj_IsNotObject{}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Mobile == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile = nil
@@ -8683,7 +8720,12 @@ func (r *hipObjectResource) Create(ctx context.Context, req resource.CreateReque
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Wifi = nil
@@ -8845,7 +8887,12 @@ func (r *hipObjectResource) Read(ctx context.Context, req resource.ReadRequest, 
 			} else {
 				state.AntiMalware.Criteria.LastScanTime = &hipObjectRsModel_suxdMuj_LastScanTimeObject{}
 
-				state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
+				if ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
 
 				if ans.AntiMalware.Criteria.LastScanTime.NotWithin == nil {
 					state.AntiMalware.Criteria.LastScanTime.NotWithin = nil
@@ -9117,7 +9164,12 @@ func (r *hipObjectResource) Read(ctx context.Context, req resource.ReadRequest, 
 			} else {
 				state.DiskBackup.Criteria.LastBackupTime = &hipObjectRsModel_suxdMuj_LastBackupTimeObject{}
 
-				state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
+				if ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
 
 				if ans.DiskBackup.Criteria.LastBackupTime.NotWithin == nil {
 					state.DiskBackup.Criteria.LastBackupTime.NotWithin = nil
@@ -9362,7 +9414,12 @@ func (r *hipObjectResource) Read(ctx context.Context, req resource.ReadRequest, 
 				} else {
 					state.MobileDevice.Criteria.Applications.HasMalware = &hipObjectRsModel_suxdMuj_HasMalwareObject{}
 
-					state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
+					if ans.MobileDevice.Criteria.Applications.HasMalware.No != nil {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(true)
+					} else {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolPointerValue(nil)
+					}
+					//state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
 
 					if ans.MobileDevice.Criteria.Applications.HasMalware.Yes == nil {
 						state.MobileDevice.Criteria.Applications.HasMalware.Yes = nil
@@ -9514,7 +9571,12 @@ func (r *hipObjectResource) Read(ctx context.Context, req resource.ReadRequest, 
 						state.NetworkInfo.Criteria.Network.Is.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.Is.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.Is.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.Is.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.Is.Wifi = nil
@@ -9530,7 +9592,12 @@ func (r *hipObjectResource) Read(ctx context.Context, req resource.ReadRequest, 
 				} else {
 					state.NetworkInfo.Criteria.Network.IsNot = &hipObjectRsModel_suxdMuj_IsNotObject{}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Mobile == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile = nil
@@ -9540,7 +9607,12 @@ func (r *hipObjectResource) Read(ctx context.Context, req resource.ReadRequest, 
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Wifi = nil
@@ -10368,7 +10440,12 @@ func (r *hipObjectResource) Update(ctx context.Context, req resource.UpdateReque
 			} else {
 				state.AntiMalware.Criteria.LastScanTime = &hipObjectRsModel_suxdMuj_LastScanTimeObject{}
 
-				state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
+				if ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.AntiMalware.Criteria.LastScanTime.NotAvailable = types.BoolValue(ans.AntiMalware.Criteria.LastScanTime.NotAvailable != nil)
 
 				if ans.AntiMalware.Criteria.LastScanTime.NotWithin == nil {
 					state.AntiMalware.Criteria.LastScanTime.NotWithin = nil
@@ -10640,7 +10717,12 @@ func (r *hipObjectResource) Update(ctx context.Context, req resource.UpdateReque
 			} else {
 				state.DiskBackup.Criteria.LastBackupTime = &hipObjectRsModel_suxdMuj_LastBackupTimeObject{}
 
-				state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
+				if ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(true)
+				} else {
+					state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolPointerValue(nil)
+				}
+				//state.DiskBackup.Criteria.LastBackupTime.NotAvailable = types.BoolValue(ans.DiskBackup.Criteria.LastBackupTime.NotAvailable != nil)
 
 				if ans.DiskBackup.Criteria.LastBackupTime.NotWithin == nil {
 					state.DiskBackup.Criteria.LastBackupTime.NotWithin = nil
@@ -10885,7 +10967,12 @@ func (r *hipObjectResource) Update(ctx context.Context, req resource.UpdateReque
 				} else {
 					state.MobileDevice.Criteria.Applications.HasMalware = &hipObjectRsModel_suxdMuj_HasMalwareObject{}
 
-					state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
+					if ans.MobileDevice.Criteria.Applications.HasMalware.No != nil {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(true)
+					} else {
+						state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolPointerValue(nil)
+					}
+					//state.MobileDevice.Criteria.Applications.HasMalware.No = types.BoolValue(ans.MobileDevice.Criteria.Applications.HasMalware.No != nil)
 
 					if ans.MobileDevice.Criteria.Applications.HasMalware.Yes == nil {
 						state.MobileDevice.Criteria.Applications.HasMalware.Yes = nil
@@ -11037,7 +11124,12 @@ func (r *hipObjectResource) Update(ctx context.Context, req resource.UpdateReque
 						state.NetworkInfo.Criteria.Network.Is.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.Is.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.Is.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.Is.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.Is.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.Is.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.Is.Wifi = nil
@@ -11053,7 +11145,12 @@ func (r *hipObjectResource) Update(ctx context.Context, req resource.UpdateReque
 				} else {
 					state.NetworkInfo.Criteria.Network.IsNot = &hipObjectRsModel_suxdMuj_IsNotObject{}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Ethernet = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Ethernet != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Mobile == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile = nil
@@ -11063,7 +11160,12 @@ func (r *hipObjectResource) Update(ctx context.Context, req resource.UpdateReque
 						state.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier = types.StringPointerValue(ans.NetworkInfo.Criteria.Network.IsNot.Mobile.Carrier)
 					}
 
-					state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
+					if ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(true)
+					} else {
+						state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolPointerValue(nil)
+					}
+					//state.NetworkInfo.Criteria.Network.IsNot.Unknown = types.BoolValue(ans.NetworkInfo.Criteria.Network.IsNot.Unknown != nil)
 
 					if ans.NetworkInfo.Criteria.Network.IsNot.Wifi == nil {
 						state.NetworkInfo.Criteria.Network.IsNot.Wifi = nil

@@ -204,11 +204,11 @@ func (d *antiSpywareProfileListDataSource) Schema(_ context.Context, _ datasourc
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 											"alert": dsschema.BoolAttribute{
-												Description: "The Alert param. Default: `false`.",
+												Description: "The Alert param.",
 												Computed:    true,
 											},
 											"allow": dsschema.BoolAttribute{
-												Description: "The Allow param. Default: `false`.",
+												Description: "The Allow param.",
 												Computed:    true,
 											},
 											"block_ip": dsschema.SingleNestedAttribute{
@@ -227,19 +227,19 @@ func (d *antiSpywareProfileListDataSource) Schema(_ context.Context, _ datasourc
 												},
 											},
 											"drop": dsschema.BoolAttribute{
-												Description: "The Drop param. Default: `false`.",
+												Description: "The Drop param.",
 												Computed:    true,
 											},
 											"reset_both": dsschema.BoolAttribute{
-												Description: "The ResetBoth param. Default: `false`.",
+												Description: "The ResetBoth param.",
 												Computed:    true,
 											},
 											"reset_client": dsschema.BoolAttribute{
-												Description: "The ResetClient param. Default: `false`.",
+												Description: "The ResetClient param.",
 												Computed:    true,
 											},
 											"reset_server": dsschema.BoolAttribute{
-												Description: "The ResetServer param. Default: `false`.",
+												Description: "The ResetServer param.",
 												Computed:    true,
 											},
 										},
@@ -280,11 +280,11 @@ func (d *antiSpywareProfileListDataSource) Schema(_ context.Context, _ datasourc
 										Attributes: map[string]dsschema.Attribute{
 											// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "default":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 											"alert": dsschema.BoolAttribute{
-												Description: "The Alert param. Default: `false`.",
+												Description: "The Alert param.",
 												Computed:    true,
 											},
 											"allow": dsschema.BoolAttribute{
-												Description: "The Allow param. Default: `false`.",
+												Description: "The Allow param.",
 												Computed:    true,
 											},
 											"block_ip": dsschema.SingleNestedAttribute{
@@ -303,23 +303,23 @@ func (d *antiSpywareProfileListDataSource) Schema(_ context.Context, _ datasourc
 												},
 											},
 											"default": dsschema.BoolAttribute{
-												Description: "The Default param. Default: `false`.",
+												Description: "The Default param.",
 												Computed:    true,
 											},
 											"drop": dsschema.BoolAttribute{
-												Description: "The Drop param. Default: `false`.",
+												Description: "The Drop param.",
 												Computed:    true,
 											},
 											"reset_both": dsschema.BoolAttribute{
-												Description: "The ResetBoth param. Default: `false`.",
+												Description: "The ResetBoth param.",
 												Computed:    true,
 											},
 											"reset_client": dsschema.BoolAttribute{
-												Description: "The ResetClient param. Default: `false`.",
+												Description: "The ResetClient param.",
 												Computed:    true,
 											},
 											"reset_server": dsschema.BoolAttribute{
-												Description: "The ResetServer param. Default: `false`.",
+												Description: "The ResetServer param.",
 												Computed:    true,
 											},
 										},
@@ -531,9 +531,19 @@ func (d *antiSpywareProfileListDataSource) Read(ctx context.Context, req datasou
 					} else {
 						var9.Action = &antiSpywareProfileListDsModel_lrzxLXR_RuleActionObject{}
 
-						var9.Action.Alert = types.BoolValue(var8.Action.Alert != nil)
+						if var8.Action.Alert != nil {
+							var9.Action.Alert = types.BoolValue(true)
+						} else {
+							var9.Action.Alert = types.BoolPointerValue(nil)
+						}
+						//var9.Action.Alert = types.BoolValue(var8.Action.Alert != nil)
 
-						var9.Action.Allow = types.BoolValue(var8.Action.Allow != nil)
+						if var8.Action.Allow != nil {
+							var9.Action.Allow = types.BoolValue(true)
+						} else {
+							var9.Action.Allow = types.BoolPointerValue(nil)
+						}
+						//var9.Action.Allow = types.BoolValue(var8.Action.Allow != nil)
 
 						if var8.Action.BlockIp == nil {
 							var9.Action.BlockIp = nil
@@ -545,13 +555,33 @@ func (d *antiSpywareProfileListDataSource) Read(ctx context.Context, req datasou
 							var9.Action.BlockIp.TrackBy = types.StringPointerValue(var8.Action.BlockIp.TrackBy)
 						}
 
-						var9.Action.Drop = types.BoolValue(var8.Action.Drop != nil)
+						if var8.Action.Drop != nil {
+							var9.Action.Drop = types.BoolValue(true)
+						} else {
+							var9.Action.Drop = types.BoolPointerValue(nil)
+						}
+						//var9.Action.Drop = types.BoolValue(var8.Action.Drop != nil)
 
-						var9.Action.ResetBoth = types.BoolValue(var8.Action.ResetBoth != nil)
+						if var8.Action.ResetBoth != nil {
+							var9.Action.ResetBoth = types.BoolValue(true)
+						} else {
+							var9.Action.ResetBoth = types.BoolPointerValue(nil)
+						}
+						//var9.Action.ResetBoth = types.BoolValue(var8.Action.ResetBoth != nil)
 
-						var9.Action.ResetClient = types.BoolValue(var8.Action.ResetClient != nil)
+						if var8.Action.ResetClient != nil {
+							var9.Action.ResetClient = types.BoolValue(true)
+						} else {
+							var9.Action.ResetClient = types.BoolPointerValue(nil)
+						}
+						//var9.Action.ResetClient = types.BoolValue(var8.Action.ResetClient != nil)
 
-						var9.Action.ResetServer = types.BoolValue(var8.Action.ResetServer != nil)
+						if var8.Action.ResetServer != nil {
+							var9.Action.ResetServer = types.BoolValue(true)
+						} else {
+							var9.Action.ResetServer = types.BoolPointerValue(nil)
+						}
+						//var9.Action.ResetServer = types.BoolValue(var8.Action.ResetServer != nil)
 					}
 
 					var9.Category = types.StringPointerValue(var8.Category)
@@ -581,9 +611,19 @@ func (d *antiSpywareProfileListDataSource) Read(ctx context.Context, req datasou
 					} else {
 						var13.Action = &antiSpywareProfileListDsModel_lrzxLXR_ThreatExceptionActionObject{}
 
-						var13.Action.Alert = types.BoolValue(var12.Action.Alert != nil)
+						if var12.Action.Alert != nil {
+							var13.Action.Alert = types.BoolValue(true)
+						} else {
+							var13.Action.Alert = types.BoolPointerValue(nil)
+						}
+						//var13.Action.Alert = types.BoolValue(var12.Action.Alert != nil)
 
-						var13.Action.Allow = types.BoolValue(var12.Action.Allow != nil)
+						if var12.Action.Allow != nil {
+							var13.Action.Allow = types.BoolValue(true)
+						} else {
+							var13.Action.Allow = types.BoolPointerValue(nil)
+						}
+						//var13.Action.Allow = types.BoolValue(var12.Action.Allow != nil)
 
 						if var12.Action.BlockIp == nil {
 							var13.Action.BlockIp = nil
@@ -595,15 +635,40 @@ func (d *antiSpywareProfileListDataSource) Read(ctx context.Context, req datasou
 							var13.Action.BlockIp.TrackBy = types.StringPointerValue(var12.Action.BlockIp.TrackBy)
 						}
 
-						var13.Action.Default = types.BoolValue(var12.Action.Default != nil)
+						if var12.Action.Default != nil {
+							var13.Action.Default = types.BoolValue(true)
+						} else {
+							var13.Action.Default = types.BoolPointerValue(nil)
+						}
+						//var13.Action.Default = types.BoolValue(var12.Action.Default != nil)
 
-						var13.Action.Drop = types.BoolValue(var12.Action.Drop != nil)
+						if var12.Action.Drop != nil {
+							var13.Action.Drop = types.BoolValue(true)
+						} else {
+							var13.Action.Drop = types.BoolPointerValue(nil)
+						}
+						//var13.Action.Drop = types.BoolValue(var12.Action.Drop != nil)
 
-						var13.Action.ResetBoth = types.BoolValue(var12.Action.ResetBoth != nil)
+						if var12.Action.ResetBoth != nil {
+							var13.Action.ResetBoth = types.BoolValue(true)
+						} else {
+							var13.Action.ResetBoth = types.BoolPointerValue(nil)
+						}
+						//var13.Action.ResetBoth = types.BoolValue(var12.Action.ResetBoth != nil)
 
-						var13.Action.ResetClient = types.BoolValue(var12.Action.ResetClient != nil)
+						if var12.Action.ResetClient != nil {
+							var13.Action.ResetClient = types.BoolValue(true)
+						} else {
+							var13.Action.ResetClient = types.BoolPointerValue(nil)
+						}
+						//var13.Action.ResetClient = types.BoolValue(var12.Action.ResetClient != nil)
 
-						var13.Action.ResetServer = types.BoolValue(var12.Action.ResetServer != nil)
+						if var12.Action.ResetServer != nil {
+							var13.Action.ResetServer = types.BoolValue(true)
+						} else {
+							var13.Action.ResetServer = types.BoolPointerValue(nil)
+						}
+						//var13.Action.ResetServer = types.BoolValue(var12.Action.ResetServer != nil)
 					}
 
 					if len(var12.ExemptIps) == 0 {
@@ -797,11 +862,11 @@ func (d *antiSpywareProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": dsschema.BoolAttribute{
-									Description: "The Alert param. Default: `false`.",
+									Description: "The Alert param.",
 									Computed:    true,
 								},
 								"allow": dsschema.BoolAttribute{
-									Description: "The Allow param. Default: `false`.",
+									Description: "The Allow param.",
 									Computed:    true,
 								},
 								"block_ip": dsschema.SingleNestedAttribute{
@@ -820,19 +885,19 @@ func (d *antiSpywareProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 									},
 								},
 								"drop": dsschema.BoolAttribute{
-									Description: "The Drop param. Default: `false`.",
+									Description: "The Drop param.",
 									Computed:    true,
 								},
 								"reset_both": dsschema.BoolAttribute{
-									Description: "The ResetBoth param. Default: `false`.",
+									Description: "The ResetBoth param.",
 									Computed:    true,
 								},
 								"reset_client": dsschema.BoolAttribute{
-									Description: "The ResetClient param. Default: `false`.",
+									Description: "The ResetClient param.",
 									Computed:    true,
 								},
 								"reset_server": dsschema.BoolAttribute{
-									Description: "The ResetServer param. Default: `false`.",
+									Description: "The ResetServer param.",
 									Computed:    true,
 								},
 							},
@@ -877,11 +942,11 @@ func (d *antiSpywareProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "default":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": dsschema.BoolAttribute{
-									Description: "The Alert param. Default: `false`.",
+									Description: "The Alert param.",
 									Computed:    true,
 								},
 								"allow": dsschema.BoolAttribute{
-									Description: "The Allow param. Default: `false`.",
+									Description: "The Allow param.",
 									Computed:    true,
 								},
 								"block_ip": dsschema.SingleNestedAttribute{
@@ -900,23 +965,23 @@ func (d *antiSpywareProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 									},
 								},
 								"default": dsschema.BoolAttribute{
-									Description: "The Default param. Default: `false`.",
+									Description: "The Default param.",
 									Computed:    true,
 								},
 								"drop": dsschema.BoolAttribute{
-									Description: "The Drop param. Default: `false`.",
+									Description: "The Drop param.",
 									Computed:    true,
 								},
 								"reset_both": dsschema.BoolAttribute{
-									Description: "The ResetBoth param. Default: `false`.",
+									Description: "The ResetBoth param.",
 									Computed:    true,
 								},
 								"reset_client": dsschema.BoolAttribute{
-									Description: "The ResetClient param. Default: `false`.",
+									Description: "The ResetClient param.",
 									Computed:    true,
 								},
 								"reset_server": dsschema.BoolAttribute{
-									Description: "The ResetServer param. Default: `false`.",
+									Description: "The ResetServer param.",
 									Computed:    true,
 								},
 							},
@@ -1042,9 +1107,19 @@ func (d *antiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 			} else {
 				var7.Action = &antiSpywareProfileDsModel_lrzxLXR_RuleActionObject{}
 
-				var7.Action.Alert = types.BoolValue(var6.Action.Alert != nil)
+				if var6.Action.Alert != nil {
+					var7.Action.Alert = types.BoolValue(true)
+				} else {
+					var7.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var7.Action.Alert = types.BoolValue(var6.Action.Alert != nil)
 
-				var7.Action.Allow = types.BoolValue(var6.Action.Allow != nil)
+				if var6.Action.Allow != nil {
+					var7.Action.Allow = types.BoolValue(true)
+				} else {
+					var7.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var7.Action.Allow = types.BoolValue(var6.Action.Allow != nil)
 
 				if var6.Action.BlockIp == nil {
 					var7.Action.BlockIp = nil
@@ -1056,13 +1131,33 @@ func (d *antiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 					var7.Action.BlockIp.TrackBy = types.StringPointerValue(var6.Action.BlockIp.TrackBy)
 				}
 
-				var7.Action.Drop = types.BoolValue(var6.Action.Drop != nil)
+				if var6.Action.Drop != nil {
+					var7.Action.Drop = types.BoolValue(true)
+				} else {
+					var7.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var7.Action.Drop = types.BoolValue(var6.Action.Drop != nil)
 
-				var7.Action.ResetBoth = types.BoolValue(var6.Action.ResetBoth != nil)
+				if var6.Action.ResetBoth != nil {
+					var7.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var7.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var7.Action.ResetBoth = types.BoolValue(var6.Action.ResetBoth != nil)
 
-				var7.Action.ResetClient = types.BoolValue(var6.Action.ResetClient != nil)
+				if var6.Action.ResetClient != nil {
+					var7.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var7.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var7.Action.ResetClient = types.BoolValue(var6.Action.ResetClient != nil)
 
-				var7.Action.ResetServer = types.BoolValue(var6.Action.ResetServer != nil)
+				if var6.Action.ResetServer != nil {
+					var7.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var7.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var7.Action.ResetServer = types.BoolValue(var6.Action.ResetServer != nil)
 			}
 
 			var7.Category = types.StringPointerValue(var6.Category)
@@ -1092,9 +1187,19 @@ func (d *antiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 			} else {
 				var11.Action = &antiSpywareProfileDsModel_lrzxLXR_ThreatExceptionActionObject{}
 
-				var11.Action.Alert = types.BoolValue(var10.Action.Alert != nil)
+				if var10.Action.Alert != nil {
+					var11.Action.Alert = types.BoolValue(true)
+				} else {
+					var11.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Alert = types.BoolValue(var10.Action.Alert != nil)
 
-				var11.Action.Allow = types.BoolValue(var10.Action.Allow != nil)
+				if var10.Action.Allow != nil {
+					var11.Action.Allow = types.BoolValue(true)
+				} else {
+					var11.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Allow = types.BoolValue(var10.Action.Allow != nil)
 
 				if var10.Action.BlockIp == nil {
 					var11.Action.BlockIp = nil
@@ -1106,15 +1211,40 @@ func (d *antiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 					var11.Action.BlockIp.TrackBy = types.StringPointerValue(var10.Action.BlockIp.TrackBy)
 				}
 
-				var11.Action.Default = types.BoolValue(var10.Action.Default != nil)
+				if var10.Action.Default != nil {
+					var11.Action.Default = types.BoolValue(true)
+				} else {
+					var11.Action.Default = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Default = types.BoolValue(var10.Action.Default != nil)
 
-				var11.Action.Drop = types.BoolValue(var10.Action.Drop != nil)
+				if var10.Action.Drop != nil {
+					var11.Action.Drop = types.BoolValue(true)
+				} else {
+					var11.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Drop = types.BoolValue(var10.Action.Drop != nil)
 
-				var11.Action.ResetBoth = types.BoolValue(var10.Action.ResetBoth != nil)
+				if var10.Action.ResetBoth != nil {
+					var11.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var11.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var11.Action.ResetBoth = types.BoolValue(var10.Action.ResetBoth != nil)
 
-				var11.Action.ResetClient = types.BoolValue(var10.Action.ResetClient != nil)
+				if var10.Action.ResetClient != nil {
+					var11.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var11.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var11.Action.ResetClient = types.BoolValue(var10.Action.ResetClient != nil)
 
-				var11.Action.ResetServer = types.BoolValue(var10.Action.ResetServer != nil)
+				if var10.Action.ResetServer != nil {
+					var11.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var11.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var11.Action.ResetServer = types.BoolValue(var10.Action.ResetServer != nil)
 			}
 
 			if len(var10.ExemptIps) == 0 {
@@ -1335,10 +1465,8 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 							Attributes: map[string]rsschema.Attribute{
 								// inputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": rsschema.BoolAttribute{
-									Description: "The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The Alert param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 									Validators: []validator.Bool{
 										boolvalidator.ExactlyOneOf(
 											path.MatchRelative(),
@@ -1352,10 +1480,8 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 									},
 								},
 								"allow": rsschema.BoolAttribute{
-									Description: "The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The Allow param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"block_ip": rsschema.SingleNestedAttribute{
 									Description: "The BlockIp param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
@@ -1379,28 +1505,20 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 									},
 								},
 								"drop": rsschema.BoolAttribute{
-									Description: "The Drop param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The Drop param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"reset_both": rsschema.BoolAttribute{
-									Description: "The ResetBoth param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The ResetBoth param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"reset_client": rsschema.BoolAttribute{
-									Description: "The ResetClient param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The ResetClient param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"reset_server": rsschema.BoolAttribute{
-									Description: "The ResetServer param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The ResetServer param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 							},
 						},
@@ -1463,10 +1581,8 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 							Attributes: map[string]rsschema.Attribute{
 								// inputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "default":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "default":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": rsschema.BoolAttribute{
-									Description: "The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The Alert param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 									Validators: []validator.Bool{
 										boolvalidator.ExactlyOneOf(
 											path.MatchRelative(),
@@ -1481,10 +1597,8 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 									},
 								},
 								"allow": rsschema.BoolAttribute{
-									Description: "The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The Allow param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"block_ip": rsschema.SingleNestedAttribute{
 									Description: "The BlockIp param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
@@ -1508,34 +1622,24 @@ func (r *antiSpywareProfileResource) Schema(_ context.Context, _ resource.Schema
 									},
 								},
 								"default": rsschema.BoolAttribute{
-									Description: "The Default param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The Default param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"drop": rsschema.BoolAttribute{
-									Description: "The Drop param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The Drop param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"reset_both": rsschema.BoolAttribute{
-									Description: "The ResetBoth param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The ResetBoth param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"reset_client": rsschema.BoolAttribute{
-									Description: "The ResetClient param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The ResetClient param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 								"reset_server": rsschema.BoolAttribute{
-									Description: "The ResetServer param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+									Description: "The ResetServer param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 									Optional:    true,
-									Computed:    true,
-									Default:     booldefault.StaticBool(false),
 								},
 							},
 						},
@@ -1849,9 +1953,19 @@ func (r *antiSpywareProfileResource) Create(ctx context.Context, req resource.Cr
 			} else {
 				var18.Action = &antiSpywareProfileRsModel_lrzxLXR_RuleActionObject{}
 
-				var18.Action.Alert = types.BoolValue(var17.Action.Alert != nil)
+				if var17.Action.Alert != nil {
+					var18.Action.Alert = types.BoolValue(true)
+				} else {
+					var18.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var18.Action.Alert = types.BoolValue(var17.Action.Alert != nil)
 
-				var18.Action.Allow = types.BoolValue(var17.Action.Allow != nil)
+				if var17.Action.Allow != nil {
+					var18.Action.Allow = types.BoolValue(true)
+				} else {
+					var18.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var18.Action.Allow = types.BoolValue(var17.Action.Allow != nil)
 
 				if var17.Action.BlockIp == nil {
 					var18.Action.BlockIp = nil
@@ -1863,13 +1977,33 @@ func (r *antiSpywareProfileResource) Create(ctx context.Context, req resource.Cr
 					var18.Action.BlockIp.TrackBy = types.StringPointerValue(var17.Action.BlockIp.TrackBy)
 				}
 
-				var18.Action.Drop = types.BoolValue(var17.Action.Drop != nil)
+				if var17.Action.Drop != nil {
+					var18.Action.Drop = types.BoolValue(true)
+				} else {
+					var18.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var18.Action.Drop = types.BoolValue(var17.Action.Drop != nil)
 
-				var18.Action.ResetBoth = types.BoolValue(var17.Action.ResetBoth != nil)
+				if var17.Action.ResetBoth != nil {
+					var18.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var18.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var18.Action.ResetBoth = types.BoolValue(var17.Action.ResetBoth != nil)
 
-				var18.Action.ResetClient = types.BoolValue(var17.Action.ResetClient != nil)
+				if var17.Action.ResetClient != nil {
+					var18.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var18.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var18.Action.ResetClient = types.BoolValue(var17.Action.ResetClient != nil)
 
-				var18.Action.ResetServer = types.BoolValue(var17.Action.ResetServer != nil)
+				if var17.Action.ResetServer != nil {
+					var18.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var18.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var18.Action.ResetServer = types.BoolValue(var17.Action.ResetServer != nil)
 			}
 
 			var18.Category = types.StringPointerValue(var17.Category)
@@ -1899,9 +2033,19 @@ func (r *antiSpywareProfileResource) Create(ctx context.Context, req resource.Cr
 			} else {
 				var22.Action = &antiSpywareProfileRsModel_lrzxLXR_ThreatExceptionActionObject{}
 
-				var22.Action.Alert = types.BoolValue(var21.Action.Alert != nil)
+				if var21.Action.Alert != nil {
+					var22.Action.Alert = types.BoolValue(true)
+				} else {
+					var22.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Alert = types.BoolValue(var21.Action.Alert != nil)
 
-				var22.Action.Allow = types.BoolValue(var21.Action.Allow != nil)
+				if var21.Action.Allow != nil {
+					var22.Action.Allow = types.BoolValue(true)
+				} else {
+					var22.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Allow = types.BoolValue(var21.Action.Allow != nil)
 
 				if var21.Action.BlockIp == nil {
 					var22.Action.BlockIp = nil
@@ -1913,15 +2057,40 @@ func (r *antiSpywareProfileResource) Create(ctx context.Context, req resource.Cr
 					var22.Action.BlockIp.TrackBy = types.StringPointerValue(var21.Action.BlockIp.TrackBy)
 				}
 
-				var22.Action.Default = types.BoolValue(var21.Action.Default != nil)
+				if var21.Action.Default != nil {
+					var22.Action.Default = types.BoolValue(true)
+				} else {
+					var22.Action.Default = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Default = types.BoolValue(var21.Action.Default != nil)
 
-				var22.Action.Drop = types.BoolValue(var21.Action.Drop != nil)
+				if var21.Action.Drop != nil {
+					var22.Action.Drop = types.BoolValue(true)
+				} else {
+					var22.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Drop = types.BoolValue(var21.Action.Drop != nil)
 
-				var22.Action.ResetBoth = types.BoolValue(var21.Action.ResetBoth != nil)
+				if var21.Action.ResetBoth != nil {
+					var22.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var22.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var22.Action.ResetBoth = types.BoolValue(var21.Action.ResetBoth != nil)
 
-				var22.Action.ResetClient = types.BoolValue(var21.Action.ResetClient != nil)
+				if var21.Action.ResetClient != nil {
+					var22.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var22.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var22.Action.ResetClient = types.BoolValue(var21.Action.ResetClient != nil)
 
-				var22.Action.ResetServer = types.BoolValue(var21.Action.ResetServer != nil)
+				if var21.Action.ResetServer != nil {
+					var22.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var22.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var22.Action.ResetServer = types.BoolValue(var21.Action.ResetServer != nil)
 			}
 
 			if len(var21.ExemptIps) == 0 {
@@ -2054,9 +2223,19 @@ func (r *antiSpywareProfileResource) Read(ctx context.Context, req resource.Read
 			} else {
 				var7.Action = &antiSpywareProfileRsModel_lrzxLXR_RuleActionObject{}
 
-				var7.Action.Alert = types.BoolValue(var6.Action.Alert != nil)
+				if var6.Action.Alert != nil {
+					var7.Action.Alert = types.BoolValue(true)
+				} else {
+					var7.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var7.Action.Alert = types.BoolValue(var6.Action.Alert != nil)
 
-				var7.Action.Allow = types.BoolValue(var6.Action.Allow != nil)
+				if var6.Action.Allow != nil {
+					var7.Action.Allow = types.BoolValue(true)
+				} else {
+					var7.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var7.Action.Allow = types.BoolValue(var6.Action.Allow != nil)
 
 				if var6.Action.BlockIp == nil {
 					var7.Action.BlockIp = nil
@@ -2068,13 +2247,33 @@ func (r *antiSpywareProfileResource) Read(ctx context.Context, req resource.Read
 					var7.Action.BlockIp.TrackBy = types.StringPointerValue(var6.Action.BlockIp.TrackBy)
 				}
 
-				var7.Action.Drop = types.BoolValue(var6.Action.Drop != nil)
+				if var6.Action.Drop != nil {
+					var7.Action.Drop = types.BoolValue(true)
+				} else {
+					var7.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var7.Action.Drop = types.BoolValue(var6.Action.Drop != nil)
 
-				var7.Action.ResetBoth = types.BoolValue(var6.Action.ResetBoth != nil)
+				if var6.Action.ResetBoth != nil {
+					var7.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var7.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var7.Action.ResetBoth = types.BoolValue(var6.Action.ResetBoth != nil)
 
-				var7.Action.ResetClient = types.BoolValue(var6.Action.ResetClient != nil)
+				if var6.Action.ResetClient != nil {
+					var7.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var7.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var7.Action.ResetClient = types.BoolValue(var6.Action.ResetClient != nil)
 
-				var7.Action.ResetServer = types.BoolValue(var6.Action.ResetServer != nil)
+				if var6.Action.ResetServer != nil {
+					var7.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var7.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var7.Action.ResetServer = types.BoolValue(var6.Action.ResetServer != nil)
 			}
 
 			var7.Category = types.StringPointerValue(var6.Category)
@@ -2104,9 +2303,19 @@ func (r *antiSpywareProfileResource) Read(ctx context.Context, req resource.Read
 			} else {
 				var11.Action = &antiSpywareProfileRsModel_lrzxLXR_ThreatExceptionActionObject{}
 
-				var11.Action.Alert = types.BoolValue(var10.Action.Alert != nil)
+				if var10.Action.Alert != nil {
+					var11.Action.Alert = types.BoolValue(true)
+				} else {
+					var11.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Alert = types.BoolValue(var10.Action.Alert != nil)
 
-				var11.Action.Allow = types.BoolValue(var10.Action.Allow != nil)
+				if var10.Action.Allow != nil {
+					var11.Action.Allow = types.BoolValue(true)
+				} else {
+					var11.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Allow = types.BoolValue(var10.Action.Allow != nil)
 
 				if var10.Action.BlockIp == nil {
 					var11.Action.BlockIp = nil
@@ -2118,15 +2327,40 @@ func (r *antiSpywareProfileResource) Read(ctx context.Context, req resource.Read
 					var11.Action.BlockIp.TrackBy = types.StringPointerValue(var10.Action.BlockIp.TrackBy)
 				}
 
-				var11.Action.Default = types.BoolValue(var10.Action.Default != nil)
+				if var10.Action.Default != nil {
+					var11.Action.Default = types.BoolValue(true)
+				} else {
+					var11.Action.Default = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Default = types.BoolValue(var10.Action.Default != nil)
 
-				var11.Action.Drop = types.BoolValue(var10.Action.Drop != nil)
+				if var10.Action.Drop != nil {
+					var11.Action.Drop = types.BoolValue(true)
+				} else {
+					var11.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var11.Action.Drop = types.BoolValue(var10.Action.Drop != nil)
 
-				var11.Action.ResetBoth = types.BoolValue(var10.Action.ResetBoth != nil)
+				if var10.Action.ResetBoth != nil {
+					var11.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var11.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var11.Action.ResetBoth = types.BoolValue(var10.Action.ResetBoth != nil)
 
-				var11.Action.ResetClient = types.BoolValue(var10.Action.ResetClient != nil)
+				if var10.Action.ResetClient != nil {
+					var11.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var11.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var11.Action.ResetClient = types.BoolValue(var10.Action.ResetClient != nil)
 
-				var11.Action.ResetServer = types.BoolValue(var10.Action.ResetServer != nil)
+				if var10.Action.ResetServer != nil {
+					var11.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var11.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var11.Action.ResetServer = types.BoolValue(var10.Action.ResetServer != nil)
 			}
 
 			if len(var10.ExemptIps) == 0 {
@@ -2407,9 +2641,19 @@ func (r *antiSpywareProfileResource) Update(ctx context.Context, req resource.Up
 			} else {
 				var18.Action = &antiSpywareProfileRsModel_lrzxLXR_RuleActionObject{}
 
-				var18.Action.Alert = types.BoolValue(var17.Action.Alert != nil)
+				if var17.Action.Alert != nil {
+					var18.Action.Alert = types.BoolValue(true)
+				} else {
+					var18.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var18.Action.Alert = types.BoolValue(var17.Action.Alert != nil)
 
-				var18.Action.Allow = types.BoolValue(var17.Action.Allow != nil)
+				if var17.Action.Allow != nil {
+					var18.Action.Allow = types.BoolValue(true)
+				} else {
+					var18.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var18.Action.Allow = types.BoolValue(var17.Action.Allow != nil)
 
 				if var17.Action.BlockIp == nil {
 					var18.Action.BlockIp = nil
@@ -2421,13 +2665,33 @@ func (r *antiSpywareProfileResource) Update(ctx context.Context, req resource.Up
 					var18.Action.BlockIp.TrackBy = types.StringPointerValue(var17.Action.BlockIp.TrackBy)
 				}
 
-				var18.Action.Drop = types.BoolValue(var17.Action.Drop != nil)
+				if var17.Action.Drop != nil {
+					var18.Action.Drop = types.BoolValue(true)
+				} else {
+					var18.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var18.Action.Drop = types.BoolValue(var17.Action.Drop != nil)
 
-				var18.Action.ResetBoth = types.BoolValue(var17.Action.ResetBoth != nil)
+				if var17.Action.ResetBoth != nil {
+					var18.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var18.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var18.Action.ResetBoth = types.BoolValue(var17.Action.ResetBoth != nil)
 
-				var18.Action.ResetClient = types.BoolValue(var17.Action.ResetClient != nil)
+				if var17.Action.ResetClient != nil {
+					var18.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var18.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var18.Action.ResetClient = types.BoolValue(var17.Action.ResetClient != nil)
 
-				var18.Action.ResetServer = types.BoolValue(var17.Action.ResetServer != nil)
+				if var17.Action.ResetServer != nil {
+					var18.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var18.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var18.Action.ResetServer = types.BoolValue(var17.Action.ResetServer != nil)
 			}
 
 			var18.Category = types.StringPointerValue(var17.Category)
@@ -2457,9 +2721,19 @@ func (r *antiSpywareProfileResource) Update(ctx context.Context, req resource.Up
 			} else {
 				var22.Action = &antiSpywareProfileRsModel_lrzxLXR_ThreatExceptionActionObject{}
 
-				var22.Action.Alert = types.BoolValue(var21.Action.Alert != nil)
+				if var21.Action.Alert != nil {
+					var22.Action.Alert = types.BoolValue(true)
+				} else {
+					var22.Action.Alert = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Alert = types.BoolValue(var21.Action.Alert != nil)
 
-				var22.Action.Allow = types.BoolValue(var21.Action.Allow != nil)
+				if var21.Action.Allow != nil {
+					var22.Action.Allow = types.BoolValue(true)
+				} else {
+					var22.Action.Allow = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Allow = types.BoolValue(var21.Action.Allow != nil)
 
 				if var21.Action.BlockIp == nil {
 					var22.Action.BlockIp = nil
@@ -2471,15 +2745,40 @@ func (r *antiSpywareProfileResource) Update(ctx context.Context, req resource.Up
 					var22.Action.BlockIp.TrackBy = types.StringPointerValue(var21.Action.BlockIp.TrackBy)
 				}
 
-				var22.Action.Default = types.BoolValue(var21.Action.Default != nil)
+				if var21.Action.Default != nil {
+					var22.Action.Default = types.BoolValue(true)
+				} else {
+					var22.Action.Default = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Default = types.BoolValue(var21.Action.Default != nil)
 
-				var22.Action.Drop = types.BoolValue(var21.Action.Drop != nil)
+				if var21.Action.Drop != nil {
+					var22.Action.Drop = types.BoolValue(true)
+				} else {
+					var22.Action.Drop = types.BoolPointerValue(nil)
+				}
+				//var22.Action.Drop = types.BoolValue(var21.Action.Drop != nil)
 
-				var22.Action.ResetBoth = types.BoolValue(var21.Action.ResetBoth != nil)
+				if var21.Action.ResetBoth != nil {
+					var22.Action.ResetBoth = types.BoolValue(true)
+				} else {
+					var22.Action.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var22.Action.ResetBoth = types.BoolValue(var21.Action.ResetBoth != nil)
 
-				var22.Action.ResetClient = types.BoolValue(var21.Action.ResetClient != nil)
+				if var21.Action.ResetClient != nil {
+					var22.Action.ResetClient = types.BoolValue(true)
+				} else {
+					var22.Action.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var22.Action.ResetClient = types.BoolValue(var21.Action.ResetClient != nil)
 
-				var22.Action.ResetServer = types.BoolValue(var21.Action.ResetServer != nil)
+				if var21.Action.ResetServer != nil {
+					var22.Action.ResetServer = types.BoolValue(true)
+				} else {
+					var22.Action.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var22.Action.ResetServer = types.BoolValue(var21.Action.ResetServer != nil)
 			}
 
 			if len(var21.ExemptIps) == 0 {

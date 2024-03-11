@@ -415,13 +415,28 @@ func (d *urlAccessProfileListDataSource) Read(ctx context.Context, req datasourc
 				} else {
 					var1.CredentialEnforcement.Mode = &urlAccessProfileListDsModel_ivVDSwf_ModeObject{}
 
-					var1.CredentialEnforcement.Mode.Disabled = types.BoolValue(var0.CredentialEnforcement.Mode.Disabled != nil)
+					if var0.CredentialEnforcement.Mode.Disabled != nil {
+						var1.CredentialEnforcement.Mode.Disabled = types.BoolValue(true)
+					} else {
+						var1.CredentialEnforcement.Mode.Disabled = types.BoolPointerValue(nil)
+					}
+					//var1.CredentialEnforcement.Mode.Disabled = types.BoolValue(var0.CredentialEnforcement.Mode.Disabled != nil)
 
-					var1.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(var0.CredentialEnforcement.Mode.DomainCredentials != nil)
+					if var0.CredentialEnforcement.Mode.DomainCredentials != nil {
+						var1.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(true)
+					} else {
+						var1.CredentialEnforcement.Mode.DomainCredentials = types.BoolPointerValue(nil)
+					}
+					//var1.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(var0.CredentialEnforcement.Mode.DomainCredentials != nil)
 
 					var1.CredentialEnforcement.Mode.GroupMapping = types.StringPointerValue(var0.CredentialEnforcement.Mode.GroupMapping)
 
-					var1.CredentialEnforcement.Mode.IpUser = types.BoolValue(var0.CredentialEnforcement.Mode.IpUser != nil)
+					if var0.CredentialEnforcement.Mode.IpUser != nil {
+						var1.CredentialEnforcement.Mode.IpUser = types.BoolValue(true)
+					} else {
+						var1.CredentialEnforcement.Mode.IpUser = types.BoolPointerValue(nil)
+					}
+					//var1.CredentialEnforcement.Mode.IpUser = types.BoolValue(var0.CredentialEnforcement.Mode.IpUser != nil)
 				}
 			}
 
@@ -748,13 +763,28 @@ func (d *urlAccessProfileDataSource) Read(ctx context.Context, req datasource.Re
 		} else {
 			state.CredentialEnforcement.Mode = &urlAccessProfileDsModel_ivVDSwf_ModeObject{}
 
-			state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
+			if ans.CredentialEnforcement.Mode.Disabled != nil {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
 
-			state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
+			if ans.CredentialEnforcement.Mode.DomainCredentials != nil {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
 
 			state.CredentialEnforcement.Mode.GroupMapping = types.StringPointerValue(ans.CredentialEnforcement.Mode.GroupMapping)
 
-			state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
+			if ans.CredentialEnforcement.Mode.IpUser != nil {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
 		}
 	}
 
@@ -1281,13 +1311,28 @@ func (r *urlAccessProfileResource) Create(ctx context.Context, req resource.Crea
 		} else {
 			state.CredentialEnforcement.Mode = &urlAccessProfileRsModel_ivVDSwf_ModeObject{}
 
-			state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
+			if ans.CredentialEnforcement.Mode.Disabled != nil {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
 
-			state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
+			if ans.CredentialEnforcement.Mode.DomainCredentials != nil {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
 
 			state.CredentialEnforcement.Mode.GroupMapping = types.StringPointerValue(ans.CredentialEnforcement.Mode.GroupMapping)
 
-			state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
+			if ans.CredentialEnforcement.Mode.IpUser != nil {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
 		}
 	}
 
@@ -1426,13 +1471,28 @@ func (r *urlAccessProfileResource) Read(ctx context.Context, req resource.ReadRe
 		} else {
 			state.CredentialEnforcement.Mode = &urlAccessProfileRsModel_ivVDSwf_ModeObject{}
 
-			state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
+			if ans.CredentialEnforcement.Mode.Disabled != nil {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
 
-			state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
+			if ans.CredentialEnforcement.Mode.DomainCredentials != nil {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
 
 			state.CredentialEnforcement.Mode.GroupMapping = types.StringPointerValue(ans.CredentialEnforcement.Mode.GroupMapping)
 
-			state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
+			if ans.CredentialEnforcement.Mode.IpUser != nil {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
 		}
 	}
 
@@ -1675,13 +1735,28 @@ func (r *urlAccessProfileResource) Update(ctx context.Context, req resource.Upda
 		} else {
 			state.CredentialEnforcement.Mode = &urlAccessProfileRsModel_ivVDSwf_ModeObject{}
 
-			state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
+			if ans.CredentialEnforcement.Mode.Disabled != nil {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.Disabled = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.Disabled = types.BoolValue(ans.CredentialEnforcement.Mode.Disabled != nil)
 
-			state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
+			if ans.CredentialEnforcement.Mode.DomainCredentials != nil {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.DomainCredentials = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.DomainCredentials = types.BoolValue(ans.CredentialEnforcement.Mode.DomainCredentials != nil)
 
 			state.CredentialEnforcement.Mode.GroupMapping = types.StringPointerValue(ans.CredentialEnforcement.Mode.GroupMapping)
 
-			state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
+			if ans.CredentialEnforcement.Mode.IpUser != nil {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolValue(true)
+			} else {
+				state.CredentialEnforcement.Mode.IpUser = types.BoolPointerValue(nil)
+			}
+			//state.CredentialEnforcement.Mode.IpUser = types.BoolValue(ans.CredentialEnforcement.Mode.IpUser != nil)
 		}
 	}
 

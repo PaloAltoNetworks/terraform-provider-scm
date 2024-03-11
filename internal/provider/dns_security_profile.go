@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -165,19 +164,19 @@ func (d *dnsSecurityProfileListDataSource) Schema(_ context.Context, _ datasourc
 												Attributes: map[string]dsschema.Attribute{
 													// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} forceNew:map[string]bool(nil)
 													"alert": dsschema.BoolAttribute{
-														Description: "The Alert param. Default: `false`.",
+														Description: "The Alert param.",
 														Computed:    true,
 													},
 													"allow": dsschema.BoolAttribute{
-														Description: "The Allow param. Default: `false`.",
+														Description: "The Allow param.",
 														Computed:    true,
 													},
 													"block": dsschema.BoolAttribute{
-														Description: "The Block param. Default: `false`.",
+														Description: "The Block param.",
 														Computed:    true,
 													},
 													"sinkhole": dsschema.BoolAttribute{
-														Description: "The Sinkhole param. Default: `false`.",
+														Description: "The Sinkhole param.",
 														Computed:    true,
 													},
 												},
@@ -411,13 +410,33 @@ func (d *dnsSecurityProfileListDataSource) Read(ctx context.Context, req datasou
 						} else {
 							var5.Action = &dnsSecurityProfileListDsModel_irQawLY_ActionObject{}
 
-							var5.Action.Alert = types.BoolValue(var4.Action.Alert != nil)
+							if var4.Action.Alert != nil {
+								var5.Action.Alert = types.BoolValue(true)
+							} else {
+								var5.Action.Alert = types.BoolPointerValue(nil)
+							}
+							//var5.Action.Alert = types.BoolValue(var4.Action.Alert != nil)
 
-							var5.Action.Allow = types.BoolValue(var4.Action.Allow != nil)
+							if var4.Action.Allow != nil {
+								var5.Action.Allow = types.BoolValue(true)
+							} else {
+								var5.Action.Allow = types.BoolPointerValue(nil)
+							}
+							//var5.Action.Allow = types.BoolValue(var4.Action.Allow != nil)
 
-							var5.Action.Block = types.BoolValue(var4.Action.Block != nil)
+							if var4.Action.Block != nil {
+								var5.Action.Block = types.BoolValue(true)
+							} else {
+								var5.Action.Block = types.BoolPointerValue(nil)
+							}
+							//var5.Action.Block = types.BoolValue(var4.Action.Block != nil)
 
-							var5.Action.Sinkhole = types.BoolValue(var4.Action.Sinkhole != nil)
+							if var4.Action.Sinkhole != nil {
+								var5.Action.Sinkhole = types.BoolValue(true)
+							} else {
+								var5.Action.Sinkhole = types.BoolPointerValue(nil)
+							}
+							//var5.Action.Sinkhole = types.BoolValue(var4.Action.Sinkhole != nil)
 						}
 
 						var5.Name = types.StringValue(var4.Name)
@@ -590,19 +609,19 @@ func (d *dnsSecurityProfileDataSource) Schema(_ context.Context, _ datasource.Sc
 									Attributes: map[string]dsschema.Attribute{
 										// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} forceNew:map[string]bool(nil)
 										"alert": dsschema.BoolAttribute{
-											Description: "The Alert param. Default: `false`.",
+											Description: "The Alert param.",
 											Computed:    true,
 										},
 										"allow": dsschema.BoolAttribute{
-											Description: "The Allow param. Default: `false`.",
+											Description: "The Allow param.",
 											Computed:    true,
 										},
 										"block": dsschema.BoolAttribute{
-											Description: "The Block param. Default: `false`.",
+											Description: "The Block param.",
 											Computed:    true,
 										},
 										"sinkhole": dsschema.BoolAttribute{
-											Description: "The Sinkhole param. Default: `false`.",
+											Description: "The Sinkhole param.",
 											Computed:    true,
 										},
 									},
@@ -754,13 +773,33 @@ func (d *dnsSecurityProfileDataSource) Read(ctx context.Context, req datasource.
 				} else {
 					var3.Action = &dnsSecurityProfileDsModel_irQawLY_ActionObject{}
 
-					var3.Action.Alert = types.BoolValue(var2.Action.Alert != nil)
+					if var2.Action.Alert != nil {
+						var3.Action.Alert = types.BoolValue(true)
+					} else {
+						var3.Action.Alert = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Alert = types.BoolValue(var2.Action.Alert != nil)
 
-					var3.Action.Allow = types.BoolValue(var2.Action.Allow != nil)
+					if var2.Action.Allow != nil {
+						var3.Action.Allow = types.BoolValue(true)
+					} else {
+						var3.Action.Allow = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Allow = types.BoolValue(var2.Action.Allow != nil)
 
-					var3.Action.Block = types.BoolValue(var2.Action.Block != nil)
+					if var2.Action.Block != nil {
+						var3.Action.Block = types.BoolValue(true)
+					} else {
+						var3.Action.Block = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Block = types.BoolValue(var2.Action.Block != nil)
 
-					var3.Action.Sinkhole = types.BoolValue(var2.Action.Sinkhole != nil)
+					if var2.Action.Sinkhole != nil {
+						var3.Action.Sinkhole = types.BoolValue(true)
+					} else {
+						var3.Action.Sinkhole = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Sinkhole = types.BoolValue(var2.Action.Sinkhole != nil)
 				}
 
 				var3.Name = types.StringValue(var2.Name)
@@ -944,10 +983,8 @@ func (r *dnsSecurityProfileResource) Schema(_ context.Context, _ resource.Schema
 									Attributes: map[string]rsschema.Attribute{
 										// inputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} outputs:map[string]bool{"alert":true, "allow":true, "block":true, "sinkhole":true} forceNew:map[string]bool(nil)
 										"alert": rsschema.BoolAttribute{
-											Description: "The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
+											Description: "The Alert param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
-											Computed:    true,
-											Default:     booldefault.StaticBool(false),
 											Validators: []validator.Bool{
 												boolvalidator.ExactlyOneOf(
 													path.MatchRelative(),
@@ -958,22 +995,16 @@ func (r *dnsSecurityProfileResource) Schema(_ context.Context, _ resource.Schema
 											},
 										},
 										"allow": rsschema.BoolAttribute{
-											Description: "The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
+											Description: "The Allow param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
-											Computed:    true,
-											Default:     booldefault.StaticBool(false),
 										},
 										"block": rsschema.BoolAttribute{
-											Description: "The Block param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
+											Description: "The Block param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
-											Computed:    true,
-											Default:     booldefault.StaticBool(false),
 										},
 										"sinkhole": rsschema.BoolAttribute{
-											Description: "The Sinkhole param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
+											Description: "The Sinkhole param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`",
 											Optional:    true,
-											Computed:    true,
-											Default:     booldefault.StaticBool(false),
 										},
 									},
 								},
@@ -1264,13 +1295,33 @@ func (r *dnsSecurityProfileResource) Create(ctx context.Context, req resource.Cr
 				} else {
 					var9.Action = &dnsSecurityProfileRsModel_irQawLY_ActionObject{}
 
-					var9.Action.Alert = types.BoolValue(var8.Action.Alert != nil)
+					if var8.Action.Alert != nil {
+						var9.Action.Alert = types.BoolValue(true)
+					} else {
+						var9.Action.Alert = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Alert = types.BoolValue(var8.Action.Alert != nil)
 
-					var9.Action.Allow = types.BoolValue(var8.Action.Allow != nil)
+					if var8.Action.Allow != nil {
+						var9.Action.Allow = types.BoolValue(true)
+					} else {
+						var9.Action.Allow = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Allow = types.BoolValue(var8.Action.Allow != nil)
 
-					var9.Action.Block = types.BoolValue(var8.Action.Block != nil)
+					if var8.Action.Block != nil {
+						var9.Action.Block = types.BoolValue(true)
+					} else {
+						var9.Action.Block = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Block = types.BoolValue(var8.Action.Block != nil)
 
-					var9.Action.Sinkhole = types.BoolValue(var8.Action.Sinkhole != nil)
+					if var8.Action.Sinkhole != nil {
+						var9.Action.Sinkhole = types.BoolValue(true)
+					} else {
+						var9.Action.Sinkhole = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Sinkhole = types.BoolValue(var8.Action.Sinkhole != nil)
 				}
 
 				var9.Name = types.StringValue(var8.Name)
@@ -1413,13 +1464,33 @@ func (r *dnsSecurityProfileResource) Read(ctx context.Context, req resource.Read
 				} else {
 					var3.Action = &dnsSecurityProfileRsModel_irQawLY_ActionObject{}
 
-					var3.Action.Alert = types.BoolValue(var2.Action.Alert != nil)
+					if var2.Action.Alert != nil {
+						var3.Action.Alert = types.BoolValue(true)
+					} else {
+						var3.Action.Alert = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Alert = types.BoolValue(var2.Action.Alert != nil)
 
-					var3.Action.Allow = types.BoolValue(var2.Action.Allow != nil)
+					if var2.Action.Allow != nil {
+						var3.Action.Allow = types.BoolValue(true)
+					} else {
+						var3.Action.Allow = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Allow = types.BoolValue(var2.Action.Allow != nil)
 
-					var3.Action.Block = types.BoolValue(var2.Action.Block != nil)
+					if var2.Action.Block != nil {
+						var3.Action.Block = types.BoolValue(true)
+					} else {
+						var3.Action.Block = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Block = types.BoolValue(var2.Action.Block != nil)
 
-					var3.Action.Sinkhole = types.BoolValue(var2.Action.Sinkhole != nil)
+					if var2.Action.Sinkhole != nil {
+						var3.Action.Sinkhole = types.BoolValue(true)
+					} else {
+						var3.Action.Sinkhole = types.BoolPointerValue(nil)
+					}
+					//var3.Action.Sinkhole = types.BoolValue(var2.Action.Sinkhole != nil)
 				}
 
 				var3.Name = types.StringValue(var2.Name)
@@ -1628,13 +1699,33 @@ func (r *dnsSecurityProfileResource) Update(ctx context.Context, req resource.Up
 				} else {
 					var9.Action = &dnsSecurityProfileRsModel_irQawLY_ActionObject{}
 
-					var9.Action.Alert = types.BoolValue(var8.Action.Alert != nil)
+					if var8.Action.Alert != nil {
+						var9.Action.Alert = types.BoolValue(true)
+					} else {
+						var9.Action.Alert = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Alert = types.BoolValue(var8.Action.Alert != nil)
 
-					var9.Action.Allow = types.BoolValue(var8.Action.Allow != nil)
+					if var8.Action.Allow != nil {
+						var9.Action.Allow = types.BoolValue(true)
+					} else {
+						var9.Action.Allow = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Allow = types.BoolValue(var8.Action.Allow != nil)
 
-					var9.Action.Block = types.BoolValue(var8.Action.Block != nil)
+					if var8.Action.Block != nil {
+						var9.Action.Block = types.BoolValue(true)
+					} else {
+						var9.Action.Block = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Block = types.BoolValue(var8.Action.Block != nil)
 
-					var9.Action.Sinkhole = types.BoolValue(var8.Action.Sinkhole != nil)
+					if var8.Action.Sinkhole != nil {
+						var9.Action.Sinkhole = types.BoolValue(true)
+					} else {
+						var9.Action.Sinkhole = types.BoolPointerValue(nil)
+					}
+					//var9.Action.Sinkhole = types.BoolValue(var8.Action.Sinkhole != nil)
 				}
 
 				var9.Name = types.StringValue(var8.Name)

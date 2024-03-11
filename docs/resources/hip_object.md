@@ -14,7 +14,20 @@ Retrieves a config item.
 
 ```terraform
 resource "scm_hip_object" "example" {
-  # Resource params
+  folder      = "Shared"
+  name        = "myExample"
+  description = "Made by Terraform"
+  disk_backup = {
+    criteria = {
+      is_installed = true
+      last_backup_time = {
+        within = {
+          days = 1
+        }
+      }
+    }
+    exclude_vendor = false
+  }
 }
 ```
 
@@ -73,7 +86,7 @@ Optional:
 
 Optional:
 
-- `not_available` (Boolean) The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`
+- `not_available` (Boolean) The NotAvailable param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`
 - `not_within` (Attributes) The NotWithin param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--not_within))
 - `within` (Attributes) The Within param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--within))
 
@@ -82,8 +95,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
 
 
 <a id="nestedatt--anti_malware--criteria--last_scan_time--within"></a>
@@ -91,8 +104,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
 
 
 
@@ -141,8 +154,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
-- `versions` (Number) specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`
+- `versions` (Number) specify versions range. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`
 
 
 <a id="nestedatt--anti_malware--criteria--virdef_version--within"></a>
@@ -150,8 +163,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
-- `versions` (Number) specify versions range. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `versions`
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`
+- `versions` (Number) specify versions range. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `versions`
 
 
 
@@ -334,7 +347,7 @@ Optional:
 
 Optional:
 
-- `not_available` (Boolean) The NotAvailable param. Default: `false`. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`
+- `not_available` (Boolean) The NotAvailable param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within`
 - `not_within` (Attributes) The NotWithin param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--not_within))
 - `within` (Attributes) The Within param. Ensure that only one of the following is specified: `not_available`, `not_within`, `within` (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--within))
 
@@ -343,8 +356,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
 
 
 <a id="nestedatt--disk_backup--criteria--last_backup_time--within"></a>
@@ -352,8 +365,8 @@ Optional:
 
 Optional:
 
-- `days` (Number) specify time in days. Value must be between 1 and 65535. Default: `1`. Ensure that only one of the following is specified: `days`, `hours`
-- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Default: `24`. Ensure that only one of the following is specified: `days`, `hours`
+- `days` (Number) specify time in days. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
+- `hours` (Number) specify time in hours. Value must be between 1 and 65535. Ensure that only one of the following is specified: `days`, `hours`
 
 
 
@@ -404,8 +417,8 @@ Optional:
 
 Optional:
 
-- `is` (String) The Is param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Default: `"encrypted"`. Ensure that only one of the following is specified: `is`, `is_not`
-- `is_not` (String) The IsNot param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Default: `"encrypted"`. Ensure that only one of the following is specified: `is`, `is_not`
+- `is` (String) The Is param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Ensure that only one of the following is specified: `is`, `is_not`
+- `is_not` (String) The IsNot param. String must be one of these: `"encrypted"`, `"unencrypted"`, `"partial"`, `"unknown"`. Ensure that only one of the following is specified: `is`, `is_not`
 
 
 
@@ -526,10 +539,10 @@ Optional:
 
 Optional:
 
-- `apple` (String) Apple vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
-- `google` (String) Google vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
-- `linux` (String) Linux vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
-- `microsoft` (String) Microsoft vendor. String length must not exceed 255 characters. Default: `"All"`. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `apple` (String) Apple vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `google` (String) Google vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `linux` (String) Linux vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
+- `microsoft` (String) Microsoft vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
 - `other` (String) Other vendor. String length must not exceed 255 characters. Ensure that only one of the following is specified: `Apple`, `Google`, `Linux`, `Microsoft`, `Other`
 
 
@@ -582,7 +595,7 @@ Optional:
 
 Optional:
 
-- `no` (Boolean) The No param. Default: `false`. Ensure that only one of the following is specified: `no`, `yes`
+- `no` (Boolean) The No param. Ensure that only one of the following is specified: `no`, `yes`
 - `yes` (Attributes) The Yes param. Ensure that only one of the following is specified: `no`, `yes` (see [below for nested schema](#nestedatt--mobile_device--criteria--applications--includes--yes))
 
 <a id="nestedatt--mobile_device--criteria--applications--includes--yes"></a>
@@ -716,7 +729,7 @@ Optional:
 Optional:
 
 - `mobile` (Attributes) The Mobile param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--mobile))
-- `unknown` (Boolean) The Unknown param. Default: `false`. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`
+- `unknown` (Boolean) The Unknown param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi`
 - `wifi` (Attributes) The Wifi param. Ensure that only one of the following is specified: `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--wifi))
 
 <a id="nestedatt--network_info--criteria--network--is_not--mobile"></a>
@@ -741,9 +754,9 @@ Optional:
 
 Optional:
 
-- `ethernet` (Boolean) The Ethernet param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`
+- `ethernet` (Boolean) The Ethernet param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`
 - `mobile` (Attributes) The Mobile param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--mobile))
-- `unknown` (Boolean) The Unknown param. Default: `false`. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`
+- `unknown` (Boolean) The Unknown param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi`
 - `wifi` (Attributes) The Wifi param. Ensure that only one of the following is specified: `ethernet`, `mobile`, `unknown`, `wifi` (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--wifi))
 
 <a id="nestedatt--network_info--criteria--network--is_not--mobile"></a>

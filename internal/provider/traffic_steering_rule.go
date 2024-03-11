@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -115,7 +114,7 @@ func (d *trafficSteeringRuleListDataSource) Schema(_ context.Context, _ datasour
 									},
 								},
 								"no_pbf": dsschema.BoolAttribute{
-									Description: "The NoPbf param. Default: `false`.",
+									Description: "The NoPbf param.",
 									Computed:    true,
 								},
 							},
@@ -278,7 +277,12 @@ func (d *trafficSteeringRuleListDataSource) Read(ctx context.Context, req dataso
 					var1.Action.Forward.Target = types.StringPointerValue(var0.Action.Forward.Target)
 				}
 
-				var1.Action.NoPbf = types.BoolValue(var0.Action.NoPbf != nil)
+				if var0.Action.NoPbf != nil {
+					var1.Action.NoPbf = types.BoolValue(true)
+				} else {
+					var1.Action.NoPbf = types.BoolPointerValue(nil)
+				}
+				//var1.Action.NoPbf = types.BoolValue(var0.Action.NoPbf != nil)
 			}
 
 			var2, var3 := types.ListValueFrom(ctx, types.StringType, var0.Category)
@@ -388,7 +392,7 @@ func (d *trafficSteeringRuleDataSource) Schema(_ context.Context, _ datasource.S
 						},
 					},
 					"no_pbf": dsschema.BoolAttribute{
-						Description: "The NoPbf param. Default: `false`.",
+						Description: "The NoPbf param.",
 						Computed:    true,
 					},
 				},
@@ -494,7 +498,12 @@ func (d *trafficSteeringRuleDataSource) Read(ctx context.Context, req datasource
 			state.Action.Forward.Target = types.StringPointerValue(ans.Action.Forward.Target)
 		}
 
-		state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
+		if ans.Action.NoPbf != nil {
+			state.Action.NoPbf = types.BoolValue(true)
+		} else {
+			state.Action.NoPbf = types.BoolPointerValue(nil)
+		}
+		//state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
 	}
 
 	var0, var1 := types.ListValueFrom(ctx, types.StringType, ans.Category)
@@ -610,10 +619,8 @@ func (r *trafficSteeringRuleResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"no_pbf": rsschema.BoolAttribute{
-						Description: "The NoPbf param. Default: `false`. Ensure that only one of the following is specified: `forward`, `no-pbf`",
+						Description: "The NoPbf param. Ensure that only one of the following is specified: `forward`, `no-pbf`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 				},
 			},
@@ -802,7 +809,12 @@ func (r *trafficSteeringRuleResource) Create(ctx context.Context, req resource.C
 			state.Action.Forward.Target = types.StringPointerValue(ans.Action.Forward.Target)
 		}
 
-		state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
+		if ans.Action.NoPbf != nil {
+			state.Action.NoPbf = types.BoolValue(true)
+		} else {
+			state.Action.NoPbf = types.BoolPointerValue(nil)
+		}
+		//state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
 	}
 
 	var5, var6 := types.ListValueFrom(ctx, types.StringType, ans.Category)
@@ -897,7 +909,12 @@ func (r *trafficSteeringRuleResource) Read(ctx context.Context, req resource.Rea
 			state.Action.Forward.Target = types.StringPointerValue(ans.Action.Forward.Target)
 		}
 
-		state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
+		if ans.Action.NoPbf != nil {
+			state.Action.NoPbf = types.BoolValue(true)
+		} else {
+			state.Action.NoPbf = types.BoolPointerValue(nil)
+		}
+		//state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
 	}
 
 	var0, var1 := types.ListValueFrom(ctx, types.StringType, ans.Category)
@@ -1050,7 +1067,12 @@ func (r *trafficSteeringRuleResource) Update(ctx context.Context, req resource.U
 			state.Action.Forward.Target = types.StringPointerValue(ans.Action.Forward.Target)
 		}
 
-		state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
+		if ans.Action.NoPbf != nil {
+			state.Action.NoPbf = types.BoolValue(true)
+		} else {
+			state.Action.NoPbf = types.BoolPointerValue(nil)
+		}
+		//state.Action.NoPbf = types.BoolValue(ans.Action.NoPbf != nil)
 	}
 
 	var5, var6 := types.ListValueFrom(ctx, types.StringType, ans.Category)

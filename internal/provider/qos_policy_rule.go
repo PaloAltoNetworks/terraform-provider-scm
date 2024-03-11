@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -211,7 +210,7 @@ func (d *qosPolicyRuleListDataSource) Schema(_ context.Context, _ datasource.Sch
 														},
 													},
 													"ef": dsschema.BoolAttribute{
-														Description: "The Ef param. Default: `false`.",
+														Description: "The Ef param.",
 														Computed:    true,
 													},
 													"tos": dsschema.SingleNestedAttribute{
@@ -449,7 +448,12 @@ func (d *qosPolicyRuleListDataSource) Read(ctx context.Context, req datasource.R
 								}
 							}
 
-							var3.Type.Ef = types.BoolValue(var2.Type.Ef != nil)
+							if var2.Type.Ef != nil {
+								var3.Type.Ef = types.BoolValue(true)
+							} else {
+								var3.Type.Ef = types.BoolPointerValue(nil)
+							}
+							//var3.Type.Ef = types.BoolValue(var2.Type.Ef != nil)
 
 							if var2.Type.Tos == nil {
 								var3.Type.Tos = nil
@@ -648,7 +652,7 @@ func (d *qosPolicyRuleDataSource) Schema(_ context.Context, _ datasource.SchemaR
 											},
 										},
 										"ef": dsschema.BoolAttribute{
-											Description: "The Ef param. Default: `false`.",
+											Description: "The Ef param.",
 											Computed:    true,
 										},
 										"tos": dsschema.SingleNestedAttribute{
@@ -805,7 +809,12 @@ func (d *qosPolicyRuleDataSource) Read(ctx context.Context, req datasource.ReadR
 						}
 					}
 
-					var1.Type.Ef = types.BoolValue(var0.Type.Ef != nil)
+					if var0.Type.Ef != nil {
+						var1.Type.Ef = types.BoolValue(true)
+					} else {
+						var1.Type.Ef = types.BoolPointerValue(nil)
+					}
+					//var1.Type.Ef = types.BoolValue(var0.Type.Ef != nil)
 
 					if var0.Type.Tos == nil {
 						var1.Type.Tos = nil
@@ -1020,10 +1029,8 @@ func (r *qosPolicyRuleResource) Schema(_ context.Context, _ resource.SchemaReque
 											},
 										},
 										"ef": rsschema.BoolAttribute{
-											Description: "The Ef param. Default: `false`. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
+											Description: "The Ef param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
 											Optional:    true,
-											Computed:    true,
-											Default:     booldefault.StaticBool(false),
 										},
 										"tos": rsschema.SingleNestedAttribute{
 											Description: "The Tos param. Ensure that only one of the following is specified: `af`, `cs`, `custom`, `ef`, `tos`",
@@ -1293,7 +1300,12 @@ func (r *qosPolicyRuleResource) Create(ctx context.Context, req resource.CreateR
 						}
 					}
 
-					var3.Type.Ef = types.BoolValue(var2.Type.Ef != nil)
+					if var2.Type.Ef != nil {
+						var3.Type.Ef = types.BoolValue(true)
+					} else {
+						var3.Type.Ef = types.BoolPointerValue(nil)
+					}
+					//var3.Type.Ef = types.BoolValue(var2.Type.Ef != nil)
 
 					if var2.Type.Tos == nil {
 						var3.Type.Tos = nil
@@ -1446,7 +1458,12 @@ func (r *qosPolicyRuleResource) Read(ctx context.Context, req resource.ReadReque
 						}
 					}
 
-					var1.Type.Ef = types.BoolValue(var0.Type.Ef != nil)
+					if var0.Type.Ef != nil {
+						var1.Type.Ef = types.BoolValue(true)
+					} else {
+						var1.Type.Ef = types.BoolPointerValue(nil)
+					}
+					//var1.Type.Ef = types.BoolValue(var0.Type.Ef != nil)
 
 					if var0.Type.Tos == nil {
 						var1.Type.Tos = nil
@@ -1641,7 +1658,12 @@ func (r *qosPolicyRuleResource) Update(ctx context.Context, req resource.UpdateR
 						}
 					}
 
-					var3.Type.Ef = types.BoolValue(var2.Type.Ef != nil)
+					if var2.Type.Ef != nil {
+						var3.Type.Ef = types.BoolValue(true)
+					} else {
+						var3.Type.Ef = types.BoolPointerValue(nil)
+					}
+					//var3.Type.Ef = types.BoolValue(var2.Type.Ef != nil)
 
 					if var2.Type.Tos == nil {
 						var3.Type.Tos = nil

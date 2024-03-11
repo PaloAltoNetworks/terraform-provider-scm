@@ -228,11 +228,11 @@ func (d *antiSpywareSignatureListDataSource) Schema(_ context.Context, _ datasou
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 								"alert": dsschema.BoolAttribute{
-									Description: "The Alert param. Default: `false`.",
+									Description: "The Alert param.",
 									Computed:    true,
 								},
 								"allow": dsschema.BoolAttribute{
-									Description: "The Allow param. Default: `false`.",
+									Description: "The Allow param.",
 									Computed:    true,
 								},
 								"block_ip": dsschema.SingleNestedAttribute{
@@ -251,19 +251,19 @@ func (d *antiSpywareSignatureListDataSource) Schema(_ context.Context, _ datasou
 									},
 								},
 								"drop": dsschema.BoolAttribute{
-									Description: "The Drop param. Default: `false`.",
+									Description: "The Drop param.",
 									Computed:    true,
 								},
 								"reset_both": dsschema.BoolAttribute{
-									Description: "The ResetBoth param. Default: `false`.",
+									Description: "The ResetBoth param.",
 									Computed:    true,
 								},
 								"reset_client": dsschema.BoolAttribute{
-									Description: "The ResetClient param. Default: `false`.",
+									Description: "The ResetClient param.",
 									Computed:    true,
 								},
 								"reset_server": dsschema.BoolAttribute{
-									Description: "The ResetServer param. Default: `false`.",
+									Description: "The ResetServer param.",
 									Computed:    true,
 								},
 							},
@@ -711,9 +711,19 @@ func (d *antiSpywareSignatureListDataSource) Read(ctx context.Context, req datas
 			} else {
 				var1.DefaultAction = &antiSpywareSignatureListDsModel_eumQbRC_DefaultActionObject{}
 
-				var1.DefaultAction.Alert = types.BoolValue(var0.DefaultAction.Alert != nil)
+				if var0.DefaultAction.Alert != nil {
+					var1.DefaultAction.Alert = types.BoolValue(true)
+				} else {
+					var1.DefaultAction.Alert = types.BoolPointerValue(nil)
+				}
+				//var1.DefaultAction.Alert = types.BoolValue(var0.DefaultAction.Alert != nil)
 
-				var1.DefaultAction.Allow = types.BoolValue(var0.DefaultAction.Allow != nil)
+				if var0.DefaultAction.Allow != nil {
+					var1.DefaultAction.Allow = types.BoolValue(true)
+				} else {
+					var1.DefaultAction.Allow = types.BoolPointerValue(nil)
+				}
+				//var1.DefaultAction.Allow = types.BoolValue(var0.DefaultAction.Allow != nil)
 
 				if var0.DefaultAction.BlockIp == nil {
 					var1.DefaultAction.BlockIp = nil
@@ -725,13 +735,33 @@ func (d *antiSpywareSignatureListDataSource) Read(ctx context.Context, req datas
 					var1.DefaultAction.BlockIp.TrackBy = types.StringPointerValue(var0.DefaultAction.BlockIp.TrackBy)
 				}
 
-				var1.DefaultAction.Drop = types.BoolValue(var0.DefaultAction.Drop != nil)
+				if var0.DefaultAction.Drop != nil {
+					var1.DefaultAction.Drop = types.BoolValue(true)
+				} else {
+					var1.DefaultAction.Drop = types.BoolPointerValue(nil)
+				}
+				//var1.DefaultAction.Drop = types.BoolValue(var0.DefaultAction.Drop != nil)
 
-				var1.DefaultAction.ResetBoth = types.BoolValue(var0.DefaultAction.ResetBoth != nil)
+				if var0.DefaultAction.ResetBoth != nil {
+					var1.DefaultAction.ResetBoth = types.BoolValue(true)
+				} else {
+					var1.DefaultAction.ResetBoth = types.BoolPointerValue(nil)
+				}
+				//var1.DefaultAction.ResetBoth = types.BoolValue(var0.DefaultAction.ResetBoth != nil)
 
-				var1.DefaultAction.ResetClient = types.BoolValue(var0.DefaultAction.ResetClient != nil)
+				if var0.DefaultAction.ResetClient != nil {
+					var1.DefaultAction.ResetClient = types.BoolValue(true)
+				} else {
+					var1.DefaultAction.ResetClient = types.BoolPointerValue(nil)
+				}
+				//var1.DefaultAction.ResetClient = types.BoolValue(var0.DefaultAction.ResetClient != nil)
 
-				var1.DefaultAction.ResetServer = types.BoolValue(var0.DefaultAction.ResetServer != nil)
+				if var0.DefaultAction.ResetServer != nil {
+					var1.DefaultAction.ResetServer = types.BoolValue(true)
+				} else {
+					var1.DefaultAction.ResetServer = types.BoolPointerValue(nil)
+				}
+				//var1.DefaultAction.ResetServer = types.BoolValue(var0.DefaultAction.ResetServer != nil)
 			}
 
 			var1.Direction = types.StringPointerValue(var0.Direction)
@@ -1146,11 +1176,11 @@ func (d *antiSpywareSignatureDataSource) Schema(_ context.Context, _ datasource.
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 					"alert": dsschema.BoolAttribute{
-						Description: "The Alert param. Default: `false`.",
+						Description: "The Alert param.",
 						Computed:    true,
 					},
 					"allow": dsschema.BoolAttribute{
-						Description: "The Allow param. Default: `false`.",
+						Description: "The Allow param.",
 						Computed:    true,
 					},
 					"block_ip": dsschema.SingleNestedAttribute{
@@ -1169,19 +1199,19 @@ func (d *antiSpywareSignatureDataSource) Schema(_ context.Context, _ datasource.
 						},
 					},
 					"drop": dsschema.BoolAttribute{
-						Description: "The Drop param. Default: `false`.",
+						Description: "The Drop param.",
 						Computed:    true,
 					},
 					"reset_both": dsschema.BoolAttribute{
-						Description: "The ResetBoth param. Default: `false`.",
+						Description: "The ResetBoth param.",
 						Computed:    true,
 					},
 					"reset_client": dsschema.BoolAttribute{
-						Description: "The ResetClient param. Default: `false`.",
+						Description: "The ResetClient param.",
 						Computed:    true,
 					},
 					"reset_server": dsschema.BoolAttribute{
-						Description: "The ResetServer param. Default: `false`.",
+						Description: "The ResetServer param.",
 						Computed:    true,
 					},
 				},
@@ -1547,9 +1577,19 @@ func (d *antiSpywareSignatureDataSource) Read(ctx context.Context, req datasourc
 	} else {
 		state.DefaultAction = &antiSpywareSignatureDsModel_eumQbRC_DefaultActionObject{}
 
-		state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
+		if ans.DefaultAction.Alert != nil {
+			state.DefaultAction.Alert = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Alert = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
 
-		state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
+		if ans.DefaultAction.Allow != nil {
+			state.DefaultAction.Allow = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Allow = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
 
 		if ans.DefaultAction.BlockIp == nil {
 			state.DefaultAction.BlockIp = nil
@@ -1561,13 +1601,33 @@ func (d *antiSpywareSignatureDataSource) Read(ctx context.Context, req datasourc
 			state.DefaultAction.BlockIp.TrackBy = types.StringPointerValue(ans.DefaultAction.BlockIp.TrackBy)
 		}
 
-		state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
+		if ans.DefaultAction.Drop != nil {
+			state.DefaultAction.Drop = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Drop = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
 
-		state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
+		if ans.DefaultAction.ResetBoth != nil {
+			state.DefaultAction.ResetBoth = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetBoth = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
 
-		state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
+		if ans.DefaultAction.ResetClient != nil {
+			state.DefaultAction.ResetClient = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetClient = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
 
-		state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
+		if ans.DefaultAction.ResetServer != nil {
+			state.DefaultAction.ResetServer = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetServer = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
 	}
 
 	state.Direction = types.StringPointerValue(ans.Direction)
@@ -1991,10 +2051,8 @@ func (r *antiSpywareSignatureResource) Schema(_ context.Context, _ resource.Sche
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} outputs:map[string]bool{"alert":true, "allow":true, "block_ip":true, "drop":true, "reset_both":true, "reset_client":true, "reset_server":true} forceNew:map[string]bool(nil)
 					"alert": rsschema.BoolAttribute{
-						Description: "The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+						Description: "The Alert param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 						Validators: []validator.Bool{
 							boolvalidator.ExactlyOneOf(
 								path.MatchRelative(),
@@ -2008,10 +2066,8 @@ func (r *antiSpywareSignatureResource) Schema(_ context.Context, _ resource.Sche
 						},
 					},
 					"allow": rsschema.BoolAttribute{
-						Description: "The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+						Description: "The Allow param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 					"block_ip": rsschema.SingleNestedAttribute{
 						Description: "The BlockIp param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
@@ -2035,28 +2091,20 @@ func (r *antiSpywareSignatureResource) Schema(_ context.Context, _ resource.Sche
 						},
 					},
 					"drop": rsschema.BoolAttribute{
-						Description: "The Drop param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+						Description: "The Drop param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 					"reset_both": rsschema.BoolAttribute{
-						Description: "The ResetBoth param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+						Description: "The ResetBoth param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 					"reset_client": rsschema.BoolAttribute{
-						Description: "The ResetClient param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+						Description: "The ResetClient param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 					"reset_server": rsschema.BoolAttribute{
-						Description: "The ResetServer param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
+						Description: "The ResetServer param. Ensure that only one of the following is specified: `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, `reset_server`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 				},
 			},
@@ -2770,9 +2818,19 @@ func (r *antiSpywareSignatureResource) Create(ctx context.Context, req resource.
 	} else {
 		state.DefaultAction = &antiSpywareSignatureRsModel_eumQbRC_DefaultActionObject{}
 
-		state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
+		if ans.DefaultAction.Alert != nil {
+			state.DefaultAction.Alert = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Alert = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
 
-		state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
+		if ans.DefaultAction.Allow != nil {
+			state.DefaultAction.Allow = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Allow = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
 
 		if ans.DefaultAction.BlockIp == nil {
 			state.DefaultAction.BlockIp = nil
@@ -2784,13 +2842,33 @@ func (r *antiSpywareSignatureResource) Create(ctx context.Context, req resource.
 			state.DefaultAction.BlockIp.TrackBy = types.StringPointerValue(ans.DefaultAction.BlockIp.TrackBy)
 		}
 
-		state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
+		if ans.DefaultAction.Drop != nil {
+			state.DefaultAction.Drop = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Drop = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
 
-		state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
+		if ans.DefaultAction.ResetBoth != nil {
+			state.DefaultAction.ResetBoth = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetBoth = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
 
-		state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
+		if ans.DefaultAction.ResetClient != nil {
+			state.DefaultAction.ResetClient = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetClient = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
 
-		state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
+		if ans.DefaultAction.ResetServer != nil {
+			state.DefaultAction.ResetServer = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetServer = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
 	}
 
 	state.Direction = types.StringPointerValue(ans.Direction)
@@ -3093,9 +3171,19 @@ func (r *antiSpywareSignatureResource) Read(ctx context.Context, req resource.Re
 	} else {
 		state.DefaultAction = &antiSpywareSignatureRsModel_eumQbRC_DefaultActionObject{}
 
-		state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
+		if ans.DefaultAction.Alert != nil {
+			state.DefaultAction.Alert = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Alert = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
 
-		state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
+		if ans.DefaultAction.Allow != nil {
+			state.DefaultAction.Allow = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Allow = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
 
 		if ans.DefaultAction.BlockIp == nil {
 			state.DefaultAction.BlockIp = nil
@@ -3107,13 +3195,33 @@ func (r *antiSpywareSignatureResource) Read(ctx context.Context, req resource.Re
 			state.DefaultAction.BlockIp.TrackBy = types.StringPointerValue(ans.DefaultAction.BlockIp.TrackBy)
 		}
 
-		state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
+		if ans.DefaultAction.Drop != nil {
+			state.DefaultAction.Drop = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Drop = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
 
-		state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
+		if ans.DefaultAction.ResetBoth != nil {
+			state.DefaultAction.ResetBoth = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetBoth = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
 
-		state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
+		if ans.DefaultAction.ResetClient != nil {
+			state.DefaultAction.ResetClient = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetClient = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
 
-		state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
+		if ans.DefaultAction.ResetServer != nil {
+			state.DefaultAction.ResetServer = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetServer = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
 	}
 
 	state.Direction = types.StringPointerValue(ans.Direction)
@@ -3650,9 +3758,19 @@ func (r *antiSpywareSignatureResource) Update(ctx context.Context, req resource.
 	} else {
 		state.DefaultAction = &antiSpywareSignatureRsModel_eumQbRC_DefaultActionObject{}
 
-		state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
+		if ans.DefaultAction.Alert != nil {
+			state.DefaultAction.Alert = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Alert = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Alert = types.BoolValue(ans.DefaultAction.Alert != nil)
 
-		state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
+		if ans.DefaultAction.Allow != nil {
+			state.DefaultAction.Allow = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Allow = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Allow = types.BoolValue(ans.DefaultAction.Allow != nil)
 
 		if ans.DefaultAction.BlockIp == nil {
 			state.DefaultAction.BlockIp = nil
@@ -3664,13 +3782,33 @@ func (r *antiSpywareSignatureResource) Update(ctx context.Context, req resource.
 			state.DefaultAction.BlockIp.TrackBy = types.StringPointerValue(ans.DefaultAction.BlockIp.TrackBy)
 		}
 
-		state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
+		if ans.DefaultAction.Drop != nil {
+			state.DefaultAction.Drop = types.BoolValue(true)
+		} else {
+			state.DefaultAction.Drop = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.Drop = types.BoolValue(ans.DefaultAction.Drop != nil)
 
-		state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
+		if ans.DefaultAction.ResetBoth != nil {
+			state.DefaultAction.ResetBoth = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetBoth = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetBoth = types.BoolValue(ans.DefaultAction.ResetBoth != nil)
 
-		state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
+		if ans.DefaultAction.ResetClient != nil {
+			state.DefaultAction.ResetClient = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetClient = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetClient = types.BoolValue(ans.DefaultAction.ResetClient != nil)
 
-		state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
+		if ans.DefaultAction.ResetServer != nil {
+			state.DefaultAction.ResetServer = types.BoolValue(true)
+		} else {
+			state.DefaultAction.ResetServer = types.BoolPointerValue(nil)
+		}
+		//state.DefaultAction.ResetServer = types.BoolValue(ans.DefaultAction.ResetServer != nil)
 	}
 
 	state.Direction = types.StringPointerValue(ans.Direction)

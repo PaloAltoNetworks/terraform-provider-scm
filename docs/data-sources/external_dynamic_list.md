@@ -72,8 +72,8 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--domain--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
+- `five_minute` (Boolean) The FiveMinute param.
+- `hourly` (Boolean) The Hourly param.
 - `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--domain--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--domain--recurring--weekly))
 
@@ -132,8 +132,8 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--imei--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
+- `five_minute` (Boolean) The FiveMinute param.
+- `hourly` (Boolean) The Hourly param.
 - `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--imei--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--imei--recurring--weekly))
 
@@ -192,8 +192,8 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--imsi--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
+- `five_minute` (Boolean) The FiveMinute param.
+- `hourly` (Boolean) The Hourly param.
 - `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--imsi--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--imsi--recurring--weekly))
 
@@ -252,8 +252,8 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--ip--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
+- `five_minute` (Boolean) The FiveMinute param.
+- `hourly` (Boolean) The Hourly param.
 - `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--ip--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--ip--recurring--weekly))
 
@@ -323,8 +323,8 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) The Daily param. (see [below for nested schema](#nestedatt--type--url--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`.
-- `hourly` (Boolean) The Hourly param. Default: `false`.
+- `five_minute` (Boolean) The FiveMinute param.
+- `hourly` (Boolean) The Hourly param.
 - `monthly` (Attributes) The Monthly param. (see [below for nested schema](#nestedatt--type--url--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. (see [below for nested schema](#nestedatt--type--url--recurring--weekly))
 

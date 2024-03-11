@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -128,7 +127,7 @@ func (d *radiusServerProfileListDataSource) Schema(_ context.Context, _ datasour
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} forceNew:map[string]bool(nil)
 								"chap": dsschema.BoolAttribute{
-									Description: "The Chap param. Default: `false`.",
+									Description: "The Chap param.",
 									Computed:    true,
 								},
 								"eap_ttls_with_pap": dsschema.SingleNestedAttribute{
@@ -147,7 +146,7 @@ func (d *radiusServerProfileListDataSource) Schema(_ context.Context, _ datasour
 									},
 								},
 								"pap": dsschema.BoolAttribute{
-									Description: "The Pap param. Default: `false`.",
+									Description: "The Pap param.",
 									Computed:    true,
 								},
 								"peap_mschap_v2": dsschema.SingleNestedAttribute{
@@ -364,7 +363,12 @@ func (d *radiusServerProfileListDataSource) Read(ctx context.Context, req dataso
 			} else {
 				var1.Protocol = &radiusServerProfileListDsModel_xlJKoIe_ProtocolObject{}
 
-				var1.Protocol.Chap = types.BoolValue(var0.Protocol.Chap != nil)
+				if var0.Protocol.Chap != nil {
+					var1.Protocol.Chap = types.BoolValue(true)
+				} else {
+					var1.Protocol.Chap = types.BoolPointerValue(nil)
+				}
+				//var1.Protocol.Chap = types.BoolValue(var0.Protocol.Chap != nil)
 
 				if var0.Protocol.EapTtlsWithPap == nil {
 					var1.Protocol.EapTtlsWithPap = nil
@@ -376,7 +380,12 @@ func (d *radiusServerProfileListDataSource) Read(ctx context.Context, req dataso
 					var1.Protocol.EapTtlsWithPap.RadiusCertProfile = types.StringPointerValue(var0.Protocol.EapTtlsWithPap.RadiusCertProfile)
 				}
 
-				var1.Protocol.Pap = types.BoolValue(var0.Protocol.Pap != nil)
+				if var0.Protocol.Pap != nil {
+					var1.Protocol.Pap = types.BoolValue(true)
+				} else {
+					var1.Protocol.Pap = types.BoolPointerValue(nil)
+				}
+				//var1.Protocol.Pap = types.BoolValue(var0.Protocol.Pap != nil)
 
 				if var0.Protocol.PeapMschapV2 == nil {
 					var1.Protocol.PeapMschapV2 = nil
@@ -518,7 +527,7 @@ func (d *radiusServerProfileDataSource) Schema(_ context.Context, _ datasource.S
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} forceNew:map[string]bool(nil)
 					"chap": dsschema.BoolAttribute{
-						Description: "The Chap param. Default: `false`.",
+						Description: "The Chap param.",
 						Computed:    true,
 					},
 					"eap_ttls_with_pap": dsschema.SingleNestedAttribute{
@@ -537,7 +546,7 @@ func (d *radiusServerProfileDataSource) Schema(_ context.Context, _ datasource.S
 						},
 					},
 					"pap": dsschema.BoolAttribute{
-						Description: "The Pap param. Default: `false`.",
+						Description: "The Pap param.",
 						Computed:    true,
 					},
 					"peap_mschap_v2": dsschema.SingleNestedAttribute{
@@ -672,7 +681,12 @@ func (d *radiusServerProfileDataSource) Read(ctx context.Context, req datasource
 	} else {
 		state.Protocol = &radiusServerProfileDsModel_xlJKoIe_ProtocolObject{}
 
-		state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
+		if ans.Protocol.Chap != nil {
+			state.Protocol.Chap = types.BoolValue(true)
+		} else {
+			state.Protocol.Chap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
 
 		if ans.Protocol.EapTtlsWithPap == nil {
 			state.Protocol.EapTtlsWithPap = nil
@@ -684,7 +698,12 @@ func (d *radiusServerProfileDataSource) Read(ctx context.Context, req datasource
 			state.Protocol.EapTtlsWithPap.RadiusCertProfile = types.StringPointerValue(ans.Protocol.EapTtlsWithPap.RadiusCertProfile)
 		}
 
-		state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
+		if ans.Protocol.Pap != nil {
+			state.Protocol.Pap = types.BoolValue(true)
+		} else {
+			state.Protocol.Pap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
 
 		if ans.Protocol.PeapMschapV2 == nil {
 			state.Protocol.PeapMschapV2 = nil
@@ -848,10 +867,8 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} outputs:map[string]bool{"CHAP":true, "EAP_TTLS_with_PAP":true, "PAP":true, "PEAP_MSCHAPv2":true, "PEAP_with_GTC":true} forceNew:map[string]bool(nil)
 					"chap": rsschema.BoolAttribute{
-						Description: "The Chap param. Default: `false`. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
+						Description: "The Chap param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 						Validators: []validator.Bool{
 							boolvalidator.ExactlyOneOf(
 								path.MatchRelative(),
@@ -878,10 +895,8 @@ func (r *radiusServerProfileResource) Schema(_ context.Context, _ resource.Schem
 						},
 					},
 					"pap": rsschema.BoolAttribute{
-						Description: "The Pap param. Default: `false`. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
+						Description: "The Pap param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 					"peap_mschap_v2": rsschema.SingleNestedAttribute{
 						Description: "The PeapMschapV2 param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`",
@@ -1128,7 +1143,12 @@ func (r *radiusServerProfileResource) Create(ctx context.Context, req resource.C
 	} else {
 		state.Protocol = &radiusServerProfileRsModel_xlJKoIe_ProtocolObject{}
 
-		state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
+		if ans.Protocol.Chap != nil {
+			state.Protocol.Chap = types.BoolValue(true)
+		} else {
+			state.Protocol.Chap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
 
 		if ans.Protocol.EapTtlsWithPap == nil {
 			state.Protocol.EapTtlsWithPap = nil
@@ -1140,7 +1160,12 @@ func (r *radiusServerProfileResource) Create(ctx context.Context, req resource.C
 			state.Protocol.EapTtlsWithPap.RadiusCertProfile = types.StringPointerValue(ans.Protocol.EapTtlsWithPap.RadiusCertProfile)
 		}
 
-		state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
+		if ans.Protocol.Pap != nil {
+			state.Protocol.Pap = types.BoolValue(true)
+		} else {
+			state.Protocol.Pap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
 
 		if ans.Protocol.PeapMschapV2 == nil {
 			state.Protocol.PeapMschapV2 = nil
@@ -1286,7 +1311,12 @@ func (r *radiusServerProfileResource) Read(ctx context.Context, req resource.Rea
 	} else {
 		state.Protocol = &radiusServerProfileRsModel_xlJKoIe_ProtocolObject{}
 
-		state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
+		if ans.Protocol.Chap != nil {
+			state.Protocol.Chap = types.BoolValue(true)
+		} else {
+			state.Protocol.Chap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
 
 		if ans.Protocol.EapTtlsWithPap == nil {
 			state.Protocol.EapTtlsWithPap = nil
@@ -1298,7 +1328,12 @@ func (r *radiusServerProfileResource) Read(ctx context.Context, req resource.Rea
 			state.Protocol.EapTtlsWithPap.RadiusCertProfile = types.StringPointerValue(ans.Protocol.EapTtlsWithPap.RadiusCertProfile)
 		}
 
-		state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
+		if ans.Protocol.Pap != nil {
+			state.Protocol.Pap = types.BoolValue(true)
+		} else {
+			state.Protocol.Pap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
 
 		if ans.Protocol.PeapMschapV2 == nil {
 			state.Protocol.PeapMschapV2 = nil
@@ -1497,7 +1532,12 @@ func (r *radiusServerProfileResource) Update(ctx context.Context, req resource.U
 	} else {
 		state.Protocol = &radiusServerProfileRsModel_xlJKoIe_ProtocolObject{}
 
-		state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
+		if ans.Protocol.Chap != nil {
+			state.Protocol.Chap = types.BoolValue(true)
+		} else {
+			state.Protocol.Chap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Chap = types.BoolValue(ans.Protocol.Chap != nil)
 
 		if ans.Protocol.EapTtlsWithPap == nil {
 			state.Protocol.EapTtlsWithPap = nil
@@ -1509,7 +1549,12 @@ func (r *radiusServerProfileResource) Update(ctx context.Context, req resource.U
 			state.Protocol.EapTtlsWithPap.RadiusCertProfile = types.StringPointerValue(ans.Protocol.EapTtlsWithPap.RadiusCertProfile)
 		}
 
-		state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
+		if ans.Protocol.Pap != nil {
+			state.Protocol.Pap = types.BoolValue(true)
+		} else {
+			state.Protocol.Pap = types.BoolPointerValue(nil)
+		}
+		//state.Protocol.Pap = types.BoolValue(ans.Protocol.Pap != nil)
 
 		if ans.Protocol.PeapMschapV2 == nil {
 			state.Protocol.PeapMschapV2 = nil

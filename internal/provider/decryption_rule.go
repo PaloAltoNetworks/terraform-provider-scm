@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -210,7 +209,7 @@ func (d *decryptionRuleListDataSource) Schema(_ context.Context, _ datasource.Sc
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} forceNew:map[string]bool(nil)
 								"ssl_forward_proxy": dsschema.BoolAttribute{
-									Description: "The SslForwardProxy param. Default: `false`.",
+									Description: "The SslForwardProxy param.",
 									Computed:    true,
 								},
 								"ssl_inbound_inspection": dsschema.StringAttribute{
@@ -434,7 +433,12 @@ func (d *decryptionRuleListDataSource) Read(ctx context.Context, req datasource.
 			} else {
 				var1.Type = &decryptionRuleListDsModel_tephihM_TypeObject{}
 
-				var1.Type.SslForwardProxy = types.BoolValue(var0.Type.SslForwardProxy != nil)
+				if var0.Type.SslForwardProxy != nil {
+					var1.Type.SslForwardProxy = types.BoolValue(true)
+				} else {
+					var1.Type.SslForwardProxy = types.BoolPointerValue(nil)
+				}
+				//var1.Type.SslForwardProxy = types.BoolValue(var0.Type.SslForwardProxy != nil)
 
 				var1.Type.SslInboundInspection = types.StringPointerValue(var0.Type.SslInboundInspection)
 			}
@@ -619,7 +623,7 @@ func (d *decryptionRuleDataSource) Schema(_ context.Context, _ datasource.Schema
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} forceNew:map[string]bool(nil)
 					"ssl_forward_proxy": dsschema.BoolAttribute{
-						Description: "The SslForwardProxy param. Default: `false`.",
+						Description: "The SslForwardProxy param.",
 						Computed:    true,
 					},
 					"ssl_inbound_inspection": dsschema.StringAttribute{
@@ -746,7 +750,12 @@ func (d *decryptionRuleDataSource) Read(ctx context.Context, req datasource.Read
 	} else {
 		state.Type = &decryptionRuleDsModel_tephihM_TypeObject{}
 
-		state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
+		if ans.Type.SslForwardProxy != nil {
+			state.Type.SslForwardProxy = types.BoolValue(true)
+		} else {
+			state.Type.SslForwardProxy = types.BoolPointerValue(nil)
+		}
+		//state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
 
 		state.Type.SslInboundInspection = types.StringPointerValue(ans.Type.SslInboundInspection)
 	}
@@ -990,10 +999,8 @@ func (r *decryptionRuleResource) Schema(_ context.Context, _ resource.SchemaRequ
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} outputs:map[string]bool{"ssl_forward_proxy":true, "ssl_inbound_inspection":true} forceNew:map[string]bool(nil)
 					"ssl_forward_proxy": rsschema.BoolAttribute{
-						Description: "The SslForwardProxy param. Default: `false`. Ensure that only one of the following is specified: `ssl_forward_proxy`, `ssl_inbound_inspection`",
+						Description: "The SslForwardProxy param. Ensure that only one of the following is specified: `ssl_forward_proxy`, `ssl_inbound_inspection`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 						Validators: []validator.Bool{
 							boolvalidator.ExactlyOneOf(
 								path.MatchRelative(),
@@ -1269,7 +1276,12 @@ func (r *decryptionRuleResource) Create(ctx context.Context, req resource.Create
 	} else {
 		state.Type = &decryptionRuleRsModel_tephihM_TypeObject{}
 
-		state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
+		if ans.Type.SslForwardProxy != nil {
+			state.Type.SslForwardProxy = types.BoolValue(true)
+		} else {
+			state.Type.SslForwardProxy = types.BoolPointerValue(nil)
+		}
+		//state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
 
 		state.Type.SslInboundInspection = types.StringPointerValue(ans.Type.SslInboundInspection)
 	}
@@ -1414,7 +1426,12 @@ func (r *decryptionRuleResource) Read(ctx context.Context, req resource.ReadRequ
 	} else {
 		state.Type = &decryptionRuleRsModel_tephihM_TypeObject{}
 
-		state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
+		if ans.Type.SslForwardProxy != nil {
+			state.Type.SslForwardProxy = types.BoolValue(true)
+		} else {
+			state.Type.SslForwardProxy = types.BoolPointerValue(nil)
+		}
+		//state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
 
 		state.Type.SslInboundInspection = types.StringPointerValue(ans.Type.SslInboundInspection)
 	}
@@ -1653,7 +1670,12 @@ func (r *decryptionRuleResource) Update(ctx context.Context, req resource.Update
 	} else {
 		state.Type = &decryptionRuleRsModel_tephihM_TypeObject{}
 
-		state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
+		if ans.Type.SslForwardProxy != nil {
+			state.Type.SslForwardProxy = types.BoolValue(true)
+		} else {
+			state.Type.SslForwardProxy = types.BoolPointerValue(nil)
+		}
+		//state.Type.SslForwardProxy = types.BoolValue(ans.Type.SslForwardProxy != nil)
 
 		state.Type.SslInboundInspection = types.StringPointerValue(ans.Type.SslInboundInspection)
 	}

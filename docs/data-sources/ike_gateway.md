@@ -93,7 +93,7 @@ Read-Only:
 
 Read-Only:
 
-- `dynamic_address` (Boolean) The DynamicAddress param. Default: `true`.
+- `dynamic_address` (Boolean) The DynamicAddress param.
 - `fqdn` (String) peer gateway FQDN name. String length must not exceed 255 characters.
 - `ip` (String) peer gateway has static IP address.
 

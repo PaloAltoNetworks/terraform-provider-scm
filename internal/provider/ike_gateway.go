@@ -249,7 +249,7 @@ func (d *ikeGatewayListDataSource) Schema(_ context.Context, _ datasource.Schema
 							Attributes: map[string]dsschema.Attribute{
 								// inputs:map[string]bool{} outputs:map[string]bool{"dynamic":true, "fqdn":true, "ip":true} forceNew:map[string]bool(nil)
 								"dynamic_address": dsschema.BoolAttribute{
-									Description: "The DynamicAddress param. Default: `true`.",
+									Description: "The DynamicAddress param.",
 									Computed:    true,
 								},
 								"fqdn": dsschema.StringAttribute{
@@ -550,7 +550,12 @@ func (d *ikeGatewayListDataSource) Read(ctx context.Context, req datasource.Read
 
 			var1.PeerAddress = ikeGatewayListDsModel_yJkkSzS_PeerAddressObject{}
 
-			var1.PeerAddress.DynamicAddress = types.BoolValue(var0.PeerAddress.DynamicAddress != nil)
+			if var0.PeerAddress.DynamicAddress != nil {
+				var1.PeerAddress.DynamicAddress = types.BoolValue(true)
+			} else {
+				var1.PeerAddress.DynamicAddress = types.BoolPointerValue(nil)
+			}
+			//var1.PeerAddress.DynamicAddress = types.BoolValue(var0.PeerAddress.DynamicAddress != nil)
 
 			var1.PeerAddress.Fqdn = types.StringPointerValue(var0.PeerAddress.Fqdn)
 
@@ -851,7 +856,7 @@ func (d *ikeGatewayDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 				Attributes: map[string]dsschema.Attribute{
 					// inputs:map[string]bool{} outputs:map[string]bool{"dynamic":true, "fqdn":true, "ip":true} forceNew:map[string]bool(nil)
 					"dynamic_address": dsschema.BoolAttribute{
-						Description: "The DynamicAddress param. Default: `true`.",
+						Description: "The DynamicAddress param.",
 						Computed:    true,
 					},
 					"fqdn": dsschema.StringAttribute{
@@ -1098,7 +1103,12 @@ func (d *ikeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 
 	state.PeerAddress = ikeGatewayDsModel_yJkkSzS_PeerAddressObject{}
 
-	state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
+	if ans.PeerAddress.DynamicAddress != nil {
+		state.PeerAddress.DynamicAddress = types.BoolValue(true)
+	} else {
+		state.PeerAddress.DynamicAddress = types.BoolPointerValue(nil)
+	}
+	//state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
 
 	state.PeerAddress.Fqdn = types.StringPointerValue(ans.PeerAddress.Fqdn)
 
@@ -1426,10 +1436,8 @@ func (r *ikeGatewayResource) Schema(_ context.Context, _ resource.SchemaRequest,
 				Attributes: map[string]rsschema.Attribute{
 					// inputs:map[string]bool{"dynamic":true, "fqdn":true, "ip":true} outputs:map[string]bool{"dynamic":true, "fqdn":true, "ip":true} forceNew:map[string]bool(nil)
 					"dynamic_address": rsschema.BoolAttribute{
-						Description: "The DynamicAddress param. Default: `true`. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`",
+						Description: "The DynamicAddress param. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(true),
 						Validators: []validator.Bool{
 							boolvalidator.ExactlyOneOf(
 								path.MatchRelative(),
@@ -1812,7 +1820,12 @@ func (r *ikeGatewayResource) Create(ctx context.Context, req resource.CreateRequ
 
 	state.PeerAddress = ikeGatewayRsModel_yJkkSzS_PeerAddressObject{}
 
-	state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
+	if ans.PeerAddress.DynamicAddress != nil {
+		state.PeerAddress.DynamicAddress = types.BoolValue(true)
+	} else {
+		state.PeerAddress.DynamicAddress = types.BoolPointerValue(nil)
+	}
+	//state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
 
 	state.PeerAddress.Fqdn = types.StringPointerValue(ans.PeerAddress.Fqdn)
 
@@ -2027,7 +2040,12 @@ func (r *ikeGatewayResource) Read(ctx context.Context, req resource.ReadRequest,
 
 	state.PeerAddress = ikeGatewayRsModel_yJkkSzS_PeerAddressObject{}
 
-	state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
+	if ans.PeerAddress.DynamicAddress != nil {
+		state.PeerAddress.DynamicAddress = types.BoolValue(true)
+	} else {
+		state.PeerAddress.DynamicAddress = types.BoolPointerValue(nil)
+	}
+	//state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
 
 	state.PeerAddress.Fqdn = types.StringPointerValue(ans.PeerAddress.Fqdn)
 
@@ -2319,7 +2337,12 @@ func (r *ikeGatewayResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	state.PeerAddress = ikeGatewayRsModel_yJkkSzS_PeerAddressObject{}
 
-	state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
+	if ans.PeerAddress.DynamicAddress != nil {
+		state.PeerAddress.DynamicAddress = types.BoolValue(true)
+	} else {
+		state.PeerAddress.DynamicAddress = types.BoolPointerValue(nil)
+	}
+	//state.PeerAddress.DynamicAddress = types.BoolValue(ans.PeerAddress.DynamicAddress != nil)
 
 	state.PeerAddress.Fqdn = types.StringPointerValue(ans.PeerAddress.Fqdn)
 

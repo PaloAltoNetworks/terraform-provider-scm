@@ -102,7 +102,7 @@ Optional:
 
 Optional:
 
-- `dynamic_address` (Boolean) The DynamicAddress param. Default: `true`. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`
+- `dynamic_address` (Boolean) The DynamicAddress param. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`
 - `fqdn` (String) peer gateway FQDN name. String length must not exceed 255 characters. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`
 - `ip` (String) peer gateway has static IP address. Ensure that only one of the following is specified: `dynamic`, `fqdn`, `ip`
 

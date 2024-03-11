@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -225,7 +224,7 @@ func (d *authenticationProfileListDataSource) Schema(_ context.Context, _ dataso
 									},
 								},
 								"local_database": dsschema.BoolAttribute{
-									Description: "The LocalDatabase param. Default: `false`.",
+									Description: "The LocalDatabase param.",
 									Computed:    true,
 								},
 								"radius": dsschema.SingleNestedAttribute{
@@ -522,7 +521,12 @@ func (d *authenticationProfileListDataSource) Read(ctx context.Context, req data
 					var1.Method.Ldap.ServerProfile = types.StringPointerValue(var0.Method.Ldap.ServerProfile)
 				}
 
-				var1.Method.LocalDatabase = types.BoolValue(var0.Method.LocalDatabase != nil)
+				if var0.Method.LocalDatabase != nil {
+					var1.Method.LocalDatabase = types.BoolValue(true)
+				} else {
+					var1.Method.LocalDatabase = types.BoolPointerValue(nil)
+				}
+				//var1.Method.LocalDatabase = types.BoolValue(var0.Method.LocalDatabase != nil)
 
 				if var0.Method.Radius == nil {
 					var1.Method.Radius = nil
@@ -783,7 +787,7 @@ func (d *authenticationProfileDataSource) Schema(_ context.Context, _ datasource
 						},
 					},
 					"local_database": dsschema.BoolAttribute{
-						Description: "The LocalDatabase param. Default: `false`.",
+						Description: "The LocalDatabase param.",
 						Computed:    true,
 					},
 					"radius": dsschema.SingleNestedAttribute{
@@ -998,7 +1002,12 @@ func (d *authenticationProfileDataSource) Read(ctx context.Context, req datasour
 			state.Method.Ldap.ServerProfile = types.StringPointerValue(ans.Method.Ldap.ServerProfile)
 		}
 
-		state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
+		if ans.Method.LocalDatabase != nil {
+			state.Method.LocalDatabase = types.BoolValue(true)
+		} else {
+			state.Method.LocalDatabase = types.BoolPointerValue(nil)
+		}
+		//state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
 
 		if ans.Method.Radius == nil {
 			state.Method.Radius = nil
@@ -1296,10 +1305,8 @@ func (r *authenticationProfileResource) Schema(_ context.Context, _ resource.Sch
 						},
 					},
 					"local_database": rsschema.BoolAttribute{
-						Description: "The LocalDatabase param. Default: `false`. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
+						Description: "The LocalDatabase param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
 						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(false),
 					},
 					"radius": rsschema.SingleNestedAttribute{
 						Description: "The Radius param. Ensure that only one of the following is specified: `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, `tacplus`",
@@ -1686,7 +1693,12 @@ func (r *authenticationProfileResource) Create(ctx context.Context, req resource
 			state.Method.Ldap.ServerProfile = types.StringPointerValue(ans.Method.Ldap.ServerProfile)
 		}
 
-		state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
+		if ans.Method.LocalDatabase != nil {
+			state.Method.LocalDatabase = types.BoolValue(true)
+		} else {
+			state.Method.LocalDatabase = types.BoolPointerValue(nil)
+		}
+		//state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
 
 		if ans.Method.Radius == nil {
 			state.Method.Radius = nil
@@ -1873,7 +1885,12 @@ func (r *authenticationProfileResource) Read(ctx context.Context, req resource.R
 			state.Method.Ldap.ServerProfile = types.StringPointerValue(ans.Method.Ldap.ServerProfile)
 		}
 
-		state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
+		if ans.Method.LocalDatabase != nil {
+			state.Method.LocalDatabase = types.BoolValue(true)
+		} else {
+			state.Method.LocalDatabase = types.BoolPointerValue(nil)
+		}
+		//state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
 
 		if ans.Method.Radius == nil {
 			state.Method.Radius = nil
@@ -2158,7 +2175,12 @@ func (r *authenticationProfileResource) Update(ctx context.Context, req resource
 			state.Method.Ldap.ServerProfile = types.StringPointerValue(ans.Method.Ldap.ServerProfile)
 		}
 
-		state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
+		if ans.Method.LocalDatabase != nil {
+			state.Method.LocalDatabase = types.BoolValue(true)
+		} else {
+			state.Method.LocalDatabase = types.BoolPointerValue(nil)
+		}
+		//state.Method.LocalDatabase = types.BoolValue(ans.Method.LocalDatabase != nil)
 
 		if ans.Method.Radius == nil {
 			state.Method.Radius = nil

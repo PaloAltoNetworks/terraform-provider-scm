@@ -47,7 +47,7 @@ resource "scm_traffic_steering_rule" "example" {
 Optional:
 
 - `forward` (Attributes) The Forward param. Ensure that only one of the following is specified: `forward`, `no-pbf` (see [below for nested schema](#nestedatt--action--forward))
-- `no_pbf` (Boolean) The NoPbf param. Default: `false`. Ensure that only one of the following is specified: `forward`, `no-pbf`
+- `no_pbf` (Boolean) The NoPbf param. Ensure that only one of the following is specified: `forward`, `no-pbf`
 
 <a id="nestedatt--action--forward"></a>
 ### Nested Schema for `action.forward`

@@ -68,9 +68,9 @@ Optional:
 
 Optional:
 
-- `chap` (Boolean) The Chap param. Default: `false`. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`
+- `chap` (Boolean) The Chap param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`
 - `eap_ttls_with_pap` (Attributes) The EapTtlsWithPap param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC` (see [below for nested schema](#nestedatt--protocol--eap_ttls_with_pap))
-- `pap` (Boolean) The Pap param. Default: `false`. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`
+- `pap` (Boolean) The Pap param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC`
 - `peap_mschap_v2` (Attributes) The PeapMschapV2 param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC` (see [below for nested schema](#nestedatt--protocol--peap_mschap_v2))
 - `peap_with_gtc` (Attributes) The PeapWithGtc param. Ensure that only one of the following is specified: `CHAP`, `EAP_TTLS_with_PAP`, `PAP`, `PEAP_MSCHAPv2`, `PEAP_with_GTC` (see [below for nested schema](#nestedatt--protocol--peap_with_gtc))
 

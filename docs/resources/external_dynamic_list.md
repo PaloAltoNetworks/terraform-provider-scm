@@ -73,8 +73,8 @@ Optional:
 Optional:
 
 - `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--domain--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
-- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `five_minute` (Boolean) The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
 - `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--domain--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--domain--recurring--weekly))
 
@@ -142,8 +142,8 @@ Optional:
 Optional:
 
 - `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imei--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
-- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `five_minute` (Boolean) The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
 - `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imei--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imei--recurring--weekly))
 
@@ -211,8 +211,8 @@ Optional:
 Optional:
 
 - `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imsi--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
-- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `five_minute` (Boolean) The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
 - `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imsi--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--imsi--recurring--weekly))
 
@@ -280,8 +280,8 @@ Optional:
 Optional:
 
 - `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--ip--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
-- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `five_minute` (Boolean) The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
 - `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--ip--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--ip--recurring--weekly))
 
@@ -375,8 +375,8 @@ Optional:
 Optional:
 
 - `daily` (Attributes) The Daily param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--url--recurring--daily))
-- `five_minute` (Boolean) The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
-- `hourly` (Boolean) The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `five_minute` (Boolean) The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
+- `hourly` (Boolean) The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`
 - `monthly` (Attributes) The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--url--recurring--monthly))
 - `weekly` (Attributes) The Weekly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly` (see [below for nested schema](#nestedatt--type--url--recurring--weekly))
 

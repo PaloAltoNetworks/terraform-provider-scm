@@ -73,10 +73,10 @@ Optional:
 
 Optional:
 
-- `alert` (Boolean) The Alert param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
-- `allow` (Boolean) The Allow param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
-- `block` (Boolean) The Block param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
-- `sinkhole` (Boolean) The Sinkhole param. Default: `false`. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
+- `alert` (Boolean) The Alert param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
+- `allow` (Boolean) The Allow param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
+- `block` (Boolean) The Block param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
+- `sinkhole` (Boolean) The Sinkhole param. Ensure that only one of the following is specified: `alert`, `allow`, `block`, `sinkhole`
 
 
 

@@ -55,5 +55,5 @@ data "scm_decryption_rule" "example" {
 
 Read-Only:
 
-- `ssl_forward_proxy` (Boolean) The SslForwardProxy param. Default: `false`.
+- `ssl_forward_proxy` (Boolean) The SslForwardProxy param.
 - `ssl_inbound_inspection` (String) add the certificate name for SSL inbound inspection.

@@ -54,7 +54,7 @@ Read-Only:
 Read-Only:
 
 - `forward` (Attributes) The Forward param. (see [below for nested schema](#nestedatt--data--action--forward))
-- `no_pbf` (Boolean) The NoPbf param. Default: `false`.
+- `no_pbf` (Boolean) The NoPbf param.
 
 <a id="nestedatt--data--action--forward"></a>
 ### Nested Schema for `data.action.forward`

@@ -69,7 +69,7 @@ Read-Only:
 - `af` (Attributes) The Af param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--af))
 - `cs` (Attributes) The Cs param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--cs))
 - `custom` (Attributes) The Custom param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--custom))
-- `ef` (Boolean) The Ef param. Default: `false`.
+- `ef` (Boolean) The Ef param.
 - `tos` (Attributes) The Tos param. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--tos))
 
 <a id="nestedatt--dscp_tos--codepoints--type--af"></a>

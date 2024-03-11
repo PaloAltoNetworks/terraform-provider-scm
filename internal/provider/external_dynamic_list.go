@@ -358,11 +358,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param. Default: `false`.",
+													Description: "The FiveMinute param.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param. Default: `false`.",
+													Description: "The Hourly param.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -453,11 +453,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param. Default: `false`.",
+													Description: "The FiveMinute param.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param. Default: `false`.",
+													Description: "The Hourly param.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -548,11 +548,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param. Default: `false`.",
+													Description: "The FiveMinute param.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param. Default: `false`.",
+													Description: "The Hourly param.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -644,11 +644,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param. Default: `false`.",
+													Description: "The FiveMinute param.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param. Default: `false`.",
+													Description: "The Hourly param.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -764,11 +764,11 @@ func (d *externalDynamicListListDataSource) Schema(_ context.Context, _ datasour
 													},
 												},
 												"five_minute": dsschema.BoolAttribute{
-													Description: "The FiveMinute param. Default: `false`.",
+													Description: "The FiveMinute param.",
 													Computed:    true,
 												},
 												"hourly": dsschema.BoolAttribute{
-													Description: "The Hourly param. Default: `false`.",
+													Description: "The Hourly param.",
 													Computed:    true,
 												},
 												"monthly": dsschema.SingleNestedAttribute{
@@ -1004,9 +1004,19 @@ func (d *externalDynamicListListDataSource) Read(ctx context.Context, req dataso
 					var1.Type.Domain.Recurring.Daily.At = types.StringValue(var0.Type.Domain.Recurring.Daily.At)
 				}
 
-				var1.Type.Domain.Recurring.FiveMinute = types.BoolValue(var0.Type.Domain.Recurring.FiveMinute != nil)
+				if var0.Type.Domain.Recurring.FiveMinute != nil {
+					var1.Type.Domain.Recurring.FiveMinute = types.BoolValue(true)
+				} else {
+					var1.Type.Domain.Recurring.FiveMinute = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Domain.Recurring.FiveMinute = types.BoolValue(var0.Type.Domain.Recurring.FiveMinute != nil)
 
-				var1.Type.Domain.Recurring.Hourly = types.BoolValue(var0.Type.Domain.Recurring.Hourly != nil)
+				if var0.Type.Domain.Recurring.Hourly != nil {
+					var1.Type.Domain.Recurring.Hourly = types.BoolValue(true)
+				} else {
+					var1.Type.Domain.Recurring.Hourly = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Domain.Recurring.Hourly = types.BoolValue(var0.Type.Domain.Recurring.Hourly != nil)
 
 				if var0.Type.Domain.Recurring.Monthly == nil {
 					var1.Type.Domain.Recurring.Monthly = nil
@@ -1064,9 +1074,19 @@ func (d *externalDynamicListListDataSource) Read(ctx context.Context, req dataso
 					var1.Type.Imei.Recurring.Daily.At = types.StringValue(var0.Type.Imei.Recurring.Daily.At)
 				}
 
-				var1.Type.Imei.Recurring.FiveMinute = types.BoolValue(var0.Type.Imei.Recurring.FiveMinute != nil)
+				if var0.Type.Imei.Recurring.FiveMinute != nil {
+					var1.Type.Imei.Recurring.FiveMinute = types.BoolValue(true)
+				} else {
+					var1.Type.Imei.Recurring.FiveMinute = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Imei.Recurring.FiveMinute = types.BoolValue(var0.Type.Imei.Recurring.FiveMinute != nil)
 
-				var1.Type.Imei.Recurring.Hourly = types.BoolValue(var0.Type.Imei.Recurring.Hourly != nil)
+				if var0.Type.Imei.Recurring.Hourly != nil {
+					var1.Type.Imei.Recurring.Hourly = types.BoolValue(true)
+				} else {
+					var1.Type.Imei.Recurring.Hourly = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Imei.Recurring.Hourly = types.BoolValue(var0.Type.Imei.Recurring.Hourly != nil)
 
 				if var0.Type.Imei.Recurring.Monthly == nil {
 					var1.Type.Imei.Recurring.Monthly = nil
@@ -1124,9 +1144,19 @@ func (d *externalDynamicListListDataSource) Read(ctx context.Context, req dataso
 					var1.Type.Imsi.Recurring.Daily.At = types.StringValue(var0.Type.Imsi.Recurring.Daily.At)
 				}
 
-				var1.Type.Imsi.Recurring.FiveMinute = types.BoolValue(var0.Type.Imsi.Recurring.FiveMinute != nil)
+				if var0.Type.Imsi.Recurring.FiveMinute != nil {
+					var1.Type.Imsi.Recurring.FiveMinute = types.BoolValue(true)
+				} else {
+					var1.Type.Imsi.Recurring.FiveMinute = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Imsi.Recurring.FiveMinute = types.BoolValue(var0.Type.Imsi.Recurring.FiveMinute != nil)
 
-				var1.Type.Imsi.Recurring.Hourly = types.BoolValue(var0.Type.Imsi.Recurring.Hourly != nil)
+				if var0.Type.Imsi.Recurring.Hourly != nil {
+					var1.Type.Imsi.Recurring.Hourly = types.BoolValue(true)
+				} else {
+					var1.Type.Imsi.Recurring.Hourly = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Imsi.Recurring.Hourly = types.BoolValue(var0.Type.Imsi.Recurring.Hourly != nil)
 
 				if var0.Type.Imsi.Recurring.Monthly == nil {
 					var1.Type.Imsi.Recurring.Monthly = nil
@@ -1184,9 +1214,19 @@ func (d *externalDynamicListListDataSource) Read(ctx context.Context, req dataso
 					var1.Type.Ip.Recurring.Daily.At = types.StringValue(var0.Type.Ip.Recurring.Daily.At)
 				}
 
-				var1.Type.Ip.Recurring.FiveMinute = types.BoolValue(var0.Type.Ip.Recurring.FiveMinute != nil)
+				if var0.Type.Ip.Recurring.FiveMinute != nil {
+					var1.Type.Ip.Recurring.FiveMinute = types.BoolValue(true)
+				} else {
+					var1.Type.Ip.Recurring.FiveMinute = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Ip.Recurring.FiveMinute = types.BoolValue(var0.Type.Ip.Recurring.FiveMinute != nil)
 
-				var1.Type.Ip.Recurring.Hourly = types.BoolValue(var0.Type.Ip.Recurring.Hourly != nil)
+				if var0.Type.Ip.Recurring.Hourly != nil {
+					var1.Type.Ip.Recurring.Hourly = types.BoolValue(true)
+				} else {
+					var1.Type.Ip.Recurring.Hourly = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Ip.Recurring.Hourly = types.BoolValue(var0.Type.Ip.Recurring.Hourly != nil)
 
 				if var0.Type.Ip.Recurring.Monthly == nil {
 					var1.Type.Ip.Recurring.Monthly = nil
@@ -1262,9 +1302,19 @@ func (d *externalDynamicListListDataSource) Read(ctx context.Context, req dataso
 					var1.Type.Url.Recurring.Daily.At = types.StringValue(var0.Type.Url.Recurring.Daily.At)
 				}
 
-				var1.Type.Url.Recurring.FiveMinute = types.BoolValue(var0.Type.Url.Recurring.FiveMinute != nil)
+				if var0.Type.Url.Recurring.FiveMinute != nil {
+					var1.Type.Url.Recurring.FiveMinute = types.BoolValue(true)
+				} else {
+					var1.Type.Url.Recurring.FiveMinute = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Url.Recurring.FiveMinute = types.BoolValue(var0.Type.Url.Recurring.FiveMinute != nil)
 
-				var1.Type.Url.Recurring.Hourly = types.BoolValue(var0.Type.Url.Recurring.Hourly != nil)
+				if var0.Type.Url.Recurring.Hourly != nil {
+					var1.Type.Url.Recurring.Hourly = types.BoolValue(true)
+				} else {
+					var1.Type.Url.Recurring.Hourly = types.BoolPointerValue(nil)
+				}
+				//var1.Type.Url.Recurring.Hourly = types.BoolValue(var0.Type.Url.Recurring.Hourly != nil)
 
 				if var0.Type.Url.Recurring.Monthly == nil {
 					var1.Type.Url.Recurring.Monthly = nil
@@ -1625,11 +1675,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -1720,11 +1770,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -1815,11 +1865,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -1911,11 +1961,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -2031,11 +2081,11 @@ func (d *externalDynamicListDataSource) Schema(_ context.Context, _ datasource.S
 										},
 									},
 									"five_minute": dsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`.",
+										Description: "The FiveMinute param.",
 										Computed:    true,
 									},
 									"hourly": dsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`.",
+										Description: "The Hourly param.",
 										Computed:    true,
 									},
 									"monthly": dsschema.SingleNestedAttribute{
@@ -2185,9 +2235,19 @@ func (d *externalDynamicListDataSource) Read(ctx context.Context, req datasource
 			state.Type.Domain.Recurring.Daily.At = types.StringValue(ans.Type.Domain.Recurring.Daily.At)
 		}
 
-		state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
+		if ans.Type.Domain.Recurring.FiveMinute != nil {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
 
-		state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
+		if ans.Type.Domain.Recurring.Hourly != nil {
+			state.Type.Domain.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
 
 		if ans.Type.Domain.Recurring.Monthly == nil {
 			state.Type.Domain.Recurring.Monthly = nil
@@ -2245,9 +2305,19 @@ func (d *externalDynamicListDataSource) Read(ctx context.Context, req datasource
 			state.Type.Imei.Recurring.Daily.At = types.StringValue(ans.Type.Imei.Recurring.Daily.At)
 		}
 
-		state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
+		if ans.Type.Imei.Recurring.FiveMinute != nil {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
 
-		state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
+		if ans.Type.Imei.Recurring.Hourly != nil {
+			state.Type.Imei.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
 
 		if ans.Type.Imei.Recurring.Monthly == nil {
 			state.Type.Imei.Recurring.Monthly = nil
@@ -2305,9 +2375,19 @@ func (d *externalDynamicListDataSource) Read(ctx context.Context, req datasource
 			state.Type.Imsi.Recurring.Daily.At = types.StringValue(ans.Type.Imsi.Recurring.Daily.At)
 		}
 
-		state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
+		if ans.Type.Imsi.Recurring.FiveMinute != nil {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
 
-		state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
+		if ans.Type.Imsi.Recurring.Hourly != nil {
+			state.Type.Imsi.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
 
 		if ans.Type.Imsi.Recurring.Monthly == nil {
 			state.Type.Imsi.Recurring.Monthly = nil
@@ -2365,9 +2445,19 @@ func (d *externalDynamicListDataSource) Read(ctx context.Context, req datasource
 			state.Type.Ip.Recurring.Daily.At = types.StringValue(ans.Type.Ip.Recurring.Daily.At)
 		}
 
-		state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
+		if ans.Type.Ip.Recurring.FiveMinute != nil {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
 
-		state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
+		if ans.Type.Ip.Recurring.Hourly != nil {
+			state.Type.Ip.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
 
 		if ans.Type.Ip.Recurring.Monthly == nil {
 			state.Type.Ip.Recurring.Monthly = nil
@@ -2443,9 +2533,19 @@ func (d *externalDynamicListDataSource) Read(ctx context.Context, req datasource
 			state.Type.Url.Recurring.Daily.At = types.StringValue(ans.Type.Url.Recurring.Daily.At)
 		}
 
-		state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
+		if ans.Type.Url.Recurring.FiveMinute != nil {
+			state.Type.Url.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
 
-		state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
+		if ans.Type.Url.Recurring.Hourly != nil {
+			state.Type.Url.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
 
 		if ans.Type.Url.Recurring.Monthly == nil {
 			state.Type.Url.Recurring.Monthly = nil
@@ -2883,16 +2983,12 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
@@ -3036,16 +3132,12 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
@@ -3189,16 +3281,12 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
@@ -3343,16 +3431,12 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
@@ -3531,16 +3615,12 @@ func (r *externalDynamicListResource) Schema(_ context.Context, _ resource.Schem
 										},
 									},
 									"five_minute": rsschema.BoolAttribute{
-										Description: "The FiveMinute param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The FiveMinute param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"hourly": rsschema.BoolAttribute{
-										Description: "The Hourly param. Default: `false`. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
+										Description: "The Hourly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
 										Optional:    true,
-										Computed:    true,
-										Default:     booldefault.StaticBool(false),
 									},
 									"monthly": rsschema.SingleNestedAttribute{
 										Description: "The Monthly param. Ensure that only one of the following is specified: `daily`, `five_minute`, `hourly`, `monthly`, `weekly`",
@@ -4067,9 +4147,19 @@ func (r *externalDynamicListResource) Create(ctx context.Context, req resource.C
 			state.Type.Domain.Recurring.Daily.At = types.StringValue(ans.Type.Domain.Recurring.Daily.At)
 		}
 
-		state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
+		if ans.Type.Domain.Recurring.FiveMinute != nil {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
 
-		state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
+		if ans.Type.Domain.Recurring.Hourly != nil {
+			state.Type.Domain.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
 
 		if ans.Type.Domain.Recurring.Monthly == nil {
 			state.Type.Domain.Recurring.Monthly = nil
@@ -4127,9 +4217,19 @@ func (r *externalDynamicListResource) Create(ctx context.Context, req resource.C
 			state.Type.Imei.Recurring.Daily.At = types.StringValue(ans.Type.Imei.Recurring.Daily.At)
 		}
 
-		state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
+		if ans.Type.Imei.Recurring.FiveMinute != nil {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
 
-		state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
+		if ans.Type.Imei.Recurring.Hourly != nil {
+			state.Type.Imei.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
 
 		if ans.Type.Imei.Recurring.Monthly == nil {
 			state.Type.Imei.Recurring.Monthly = nil
@@ -4187,9 +4287,19 @@ func (r *externalDynamicListResource) Create(ctx context.Context, req resource.C
 			state.Type.Imsi.Recurring.Daily.At = types.StringValue(ans.Type.Imsi.Recurring.Daily.At)
 		}
 
-		state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
+		if ans.Type.Imsi.Recurring.FiveMinute != nil {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
 
-		state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
+		if ans.Type.Imsi.Recurring.Hourly != nil {
+			state.Type.Imsi.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
 
 		if ans.Type.Imsi.Recurring.Monthly == nil {
 			state.Type.Imsi.Recurring.Monthly = nil
@@ -4251,9 +4361,19 @@ func (r *externalDynamicListResource) Create(ctx context.Context, req resource.C
 			state.Type.Ip.Recurring.Daily.At = types.StringValue(ans.Type.Ip.Recurring.Daily.At)
 		}
 
-		state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
+		if ans.Type.Ip.Recurring.FiveMinute != nil {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
 
-		state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
+		if ans.Type.Ip.Recurring.Hourly != nil {
+			state.Type.Ip.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
 
 		if ans.Type.Ip.Recurring.Monthly == nil {
 			state.Type.Ip.Recurring.Monthly = nil
@@ -4329,9 +4449,19 @@ func (r *externalDynamicListResource) Create(ctx context.Context, req resource.C
 			state.Type.Url.Recurring.Daily.At = types.StringValue(ans.Type.Url.Recurring.Daily.At)
 		}
 
-		state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
+		if ans.Type.Url.Recurring.FiveMinute != nil {
+			state.Type.Url.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
 
-		state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
+		if ans.Type.Url.Recurring.Hourly != nil {
+			state.Type.Url.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
 
 		if ans.Type.Url.Recurring.Monthly == nil {
 			state.Type.Url.Recurring.Monthly = nil
@@ -4485,9 +4615,19 @@ func (r *externalDynamicListResource) Read(ctx context.Context, req resource.Rea
 			state.Type.Domain.Recurring.Daily.At = types.StringValue(ans.Type.Domain.Recurring.Daily.At)
 		}
 
-		state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
+		if ans.Type.Domain.Recurring.FiveMinute != nil {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
 
-		state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
+		if ans.Type.Domain.Recurring.Hourly != nil {
+			state.Type.Domain.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
 
 		if ans.Type.Domain.Recurring.Monthly == nil {
 			state.Type.Domain.Recurring.Monthly = nil
@@ -4545,9 +4685,19 @@ func (r *externalDynamicListResource) Read(ctx context.Context, req resource.Rea
 			state.Type.Imei.Recurring.Daily.At = types.StringValue(ans.Type.Imei.Recurring.Daily.At)
 		}
 
-		state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
+		if ans.Type.Imei.Recurring.FiveMinute != nil {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
 
-		state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
+		if ans.Type.Imei.Recurring.Hourly != nil {
+			state.Type.Imei.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
 
 		if ans.Type.Imei.Recurring.Monthly == nil {
 			state.Type.Imei.Recurring.Monthly = nil
@@ -4605,9 +4755,19 @@ func (r *externalDynamicListResource) Read(ctx context.Context, req resource.Rea
 			state.Type.Imsi.Recurring.Daily.At = types.StringValue(ans.Type.Imsi.Recurring.Daily.At)
 		}
 
-		state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
+		if ans.Type.Imsi.Recurring.FiveMinute != nil {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
 
-		state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
+		if ans.Type.Imsi.Recurring.Hourly != nil {
+			state.Type.Imsi.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
 
 		if ans.Type.Imsi.Recurring.Monthly == nil {
 			state.Type.Imsi.Recurring.Monthly = nil
@@ -4672,9 +4832,19 @@ func (r *externalDynamicListResource) Read(ctx context.Context, req resource.Rea
 			state.Type.Ip.Recurring.Daily.At = types.StringValue(ans.Type.Ip.Recurring.Daily.At)
 		}
 
-		state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
+		if ans.Type.Ip.Recurring.FiveMinute != nil {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
 
-		state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
+		if ans.Type.Ip.Recurring.Hourly != nil {
+			state.Type.Ip.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
 
 		if ans.Type.Ip.Recurring.Monthly == nil {
 			state.Type.Ip.Recurring.Monthly = nil
@@ -4750,9 +4920,19 @@ func (r *externalDynamicListResource) Read(ctx context.Context, req resource.Rea
 			state.Type.Url.Recurring.Daily.At = types.StringValue(ans.Type.Url.Recurring.Daily.At)
 		}
 
-		state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
+		if ans.Type.Url.Recurring.FiveMinute != nil {
+			state.Type.Url.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
 
-		state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
+		if ans.Type.Url.Recurring.Hourly != nil {
+			state.Type.Url.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
 
 		if ans.Type.Url.Recurring.Monthly == nil {
 			state.Type.Url.Recurring.Monthly = nil
@@ -5214,9 +5394,19 @@ func (r *externalDynamicListResource) Update(ctx context.Context, req resource.U
 			state.Type.Domain.Recurring.Daily.At = types.StringValue(ans.Type.Domain.Recurring.Daily.At)
 		}
 
-		state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
+		if ans.Type.Domain.Recurring.FiveMinute != nil {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.FiveMinute = types.BoolValue(ans.Type.Domain.Recurring.FiveMinute != nil)
 
-		state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
+		if ans.Type.Domain.Recurring.Hourly != nil {
+			state.Type.Domain.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Domain.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Domain.Recurring.Hourly = types.BoolValue(ans.Type.Domain.Recurring.Hourly != nil)
 
 		if ans.Type.Domain.Recurring.Monthly == nil {
 			state.Type.Domain.Recurring.Monthly = nil
@@ -5274,9 +5464,19 @@ func (r *externalDynamicListResource) Update(ctx context.Context, req resource.U
 			state.Type.Imei.Recurring.Daily.At = types.StringValue(ans.Type.Imei.Recurring.Daily.At)
 		}
 
-		state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
+		if ans.Type.Imei.Recurring.FiveMinute != nil {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.FiveMinute = types.BoolValue(ans.Type.Imei.Recurring.FiveMinute != nil)
 
-		state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
+		if ans.Type.Imei.Recurring.Hourly != nil {
+			state.Type.Imei.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imei.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imei.Recurring.Hourly = types.BoolValue(ans.Type.Imei.Recurring.Hourly != nil)
 
 		if ans.Type.Imei.Recurring.Monthly == nil {
 			state.Type.Imei.Recurring.Monthly = nil
@@ -5334,9 +5534,19 @@ func (r *externalDynamicListResource) Update(ctx context.Context, req resource.U
 			state.Type.Imsi.Recurring.Daily.At = types.StringValue(ans.Type.Imsi.Recurring.Daily.At)
 		}
 
-		state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
+		if ans.Type.Imsi.Recurring.FiveMinute != nil {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.FiveMinute = types.BoolValue(ans.Type.Imsi.Recurring.FiveMinute != nil)
 
-		state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
+		if ans.Type.Imsi.Recurring.Hourly != nil {
+			state.Type.Imsi.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Imsi.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Imsi.Recurring.Hourly = types.BoolValue(ans.Type.Imsi.Recurring.Hourly != nil)
 
 		if ans.Type.Imsi.Recurring.Monthly == nil {
 			state.Type.Imsi.Recurring.Monthly = nil
@@ -5398,9 +5608,19 @@ func (r *externalDynamicListResource) Update(ctx context.Context, req resource.U
 			state.Type.Ip.Recurring.Daily.At = types.StringValue(ans.Type.Ip.Recurring.Daily.At)
 		}
 
-		state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
+		if ans.Type.Ip.Recurring.FiveMinute != nil {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.FiveMinute = types.BoolValue(ans.Type.Ip.Recurring.FiveMinute != nil)
 
-		state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
+		if ans.Type.Ip.Recurring.Hourly != nil {
+			state.Type.Ip.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Ip.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Ip.Recurring.Hourly = types.BoolValue(ans.Type.Ip.Recurring.Hourly != nil)
 
 		if ans.Type.Ip.Recurring.Monthly == nil {
 			state.Type.Ip.Recurring.Monthly = nil
@@ -5476,9 +5696,19 @@ func (r *externalDynamicListResource) Update(ctx context.Context, req resource.U
 			state.Type.Url.Recurring.Daily.At = types.StringValue(ans.Type.Url.Recurring.Daily.At)
 		}
 
-		state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
+		if ans.Type.Url.Recurring.FiveMinute != nil {
+			state.Type.Url.Recurring.FiveMinute = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.FiveMinute = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.FiveMinute = types.BoolValue(ans.Type.Url.Recurring.FiveMinute != nil)
 
-		state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
+		if ans.Type.Url.Recurring.Hourly != nil {
+			state.Type.Url.Recurring.Hourly = types.BoolValue(true)
+		} else {
+			state.Type.Url.Recurring.Hourly = types.BoolPointerValue(nil)
+		}
+		//state.Type.Url.Recurring.Hourly = types.BoolValue(ans.Type.Url.Recurring.Hourly != nil)
 
 		if ans.Type.Url.Recurring.Monthly == nil {
 			state.Type.Url.Recurring.Monthly = nil

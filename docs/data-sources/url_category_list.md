@@ -42,6 +42,7 @@ data "scm_url_category_list" "example" {
 Read-Only:
 
 - `description` (String) The Description param.
+- `id` (String) UUID of the resource.
 - `list` (List of String) The List param.
 - `name` (String) The Name param.
 - `type` (String) The Type param. String must be one of these: `"URL List"`, `"Category Match"`. Default: `"URL List"`.

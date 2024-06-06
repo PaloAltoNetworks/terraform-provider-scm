@@ -27,7 +27,11 @@ type ScmProvider struct {
 
 // ScmProviderModel maps provider schema data to a Go type.
 type ScmProviderModel struct {
+	AuthUrl      types.String `tfsdk:"auth_url"`
+	Protocol     types.String `tfsdk:"protocol"`
 	Host         types.String `tfsdk:"host"`
+	Port         types.Int64  `tfsdk:"port"`
+	Headers      types.Map    `tfsdk:"headers"`
 	ClientId     types.String `tfsdk:"client_id"`
 	ClientSecret types.String `tfsdk:"client_secret"`
 	Scope        types.String `tfsdk:"scope"`
@@ -46,6 +50,24 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 	resp.Schema = schema.Schema{
 		Description: "Terraform provider to interact with Palo Alto Networks Strata Cloud Manager API.",
 		Attributes: map[string]schema.Attribute{
+			"auth_url": schema.StringAttribute{
+				Description: ProviderParamDescription(
+					"The URL to send auth credentials to which will return a JWT.",
+					"https://auth.apps.paloaltonetworks.com/auth/v1/oauth2/access_token",
+					"SCM_AUTH_URL",
+					"auth_url",
+				),
+				Optional: true,
+			},
+			"protocol": schema.StringAttribute{
+				Description: ProviderParamDescription(
+					"The protocol to use for SCM. This should be 'http' or 'https'.",
+					"https",
+					"SCM_PROTOCOL",
+					"protocol",
+				),
+				Optional: true,
+			},
 			"host": schema.StringAttribute{
 				Description: ProviderParamDescription(
 					"The hostname of Strata Cloud Manager API.",
@@ -54,6 +76,25 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 					"host",
 				),
 				Optional: true,
+			},
+			"port": schema.Int64Attribute{
+				Description: ProviderParamDescription(
+					"The port number to use for API commands, if non-standard for the given protocol.",
+					"",
+					"SCM_PORT",
+					"port",
+				),
+				Optional: true,
+			},
+			"headers": schema.MapAttribute{
+				Description: ProviderParamDescription(
+					"Custom HTTP headers to be sent with all API commands.",
+					"",
+					"SCM_HEADERS",
+					"headers",
+				),
+				Optional:    true,
+				ElementType: types.StringType,
 			},
 			"client_id": schema.StringAttribute{
 				Description: ProviderParamDescription(
@@ -116,8 +157,23 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 	}
 
 	// Configure the client.
+	ht := make(map[string]types.String, len(config.Headers.Elements()))
+	resp.Diagnostics.Append(config.Headers.ElementsAs(ctx, &ht, false).Errors()...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	headers := make(map[string]string, len(ht))
+	for hkey, hval := range ht {
+		headers[hkey] = hval.ValueString()
+	}
+
 	con := &sdk.Client{
+		AuthUrl:          config.AuthUrl.ValueString(),
+		Protocol:         config.Protocol.ValueString(),
 		Host:             config.Host.ValueString(),
+		Port:             int(config.Port.ValueInt64()),
+		Headers:          headers,
 		ClientId:         config.ClientId.ValueString(),
 		ClientSecret:     config.ClientSecret.ValueString(),
 		Scope:            config.Scope.ValueString(),

@@ -61,7 +61,6 @@ type remoteNetworkListDsModel struct {
 }
 
 type remoteNetworkListDsModel_uewNibC_Config struct {
-	ConnectionType       types.String                                        `tfsdk:"connection_type"`
 	EcmpLoadBalancing    types.String                                        `tfsdk:"ecmp_load_balancing"`
 	EcmpTunnels          []remoteNetworkListDsModel_uewNibC_EcmpTunnelObject `tfsdk:"ecmp_tunnels"`
 	Id                   types.String                                        `tfsdk:"id"`
@@ -126,11 +125,7 @@ func (d *remoteNetworkListDataSource) Schema(_ context.Context, _ datasource.Sch
 				Computed:    true,
 				NestedObject: dsschema.NestedAttributeObject{
 					Attributes: map[string]dsschema.Attribute{
-						// inputs:map[string]bool{} outputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} forceNew:map[string]bool(nil)
-						"connection_type": dsschema.StringAttribute{
-							Description: "The connection type for the remote network. String must be one of these: `\"prisma-access\"`, `\"meraki\"`, `\"cisco-catalyst-sdwan\"`, `\"velocloud\"`, `\"prisma-sdwan\"`. Default: `\"prisma-access\"`.",
-							Computed:    true,
-						},
+						// inputs:map[string]bool{} outputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} forceNew:map[string]bool(nil)
 						"ecmp_load_balancing": dsschema.StringAttribute{
 							Description: "The EcmpLoadBalancing param. String must be one of these: `\"enable\"`, `\"disable\"`. Default: `\"disable\"`.",
 							Computed:    true,
@@ -423,8 +418,6 @@ func (d *remoteNetworkListDataSource) Read(ctx context.Context, req datasource.R
 		for _, var0 := range ans.Data {
 			var1 := remoteNetworkListDsModel_uewNibC_Config{}
 
-			var1.ConnectionType = types.StringPointerValue(var0.ConnectionType)
-
 			var1.EcmpLoadBalancing = types.StringPointerValue(var0.EcmpLoadBalancing)
 
 			if len(var0.EcmpTunnels) == 0 {
@@ -565,7 +558,6 @@ type remoteNetworkDsModel struct {
 	Id     types.String `tfsdk:"id"`
 
 	// Output.
-	ConnectionType    types.String                                    `tfsdk:"connection_type"`
 	EcmpLoadBalancing types.String                                    `tfsdk:"ecmp_load_balancing"`
 	EcmpTunnels       []remoteNetworkDsModel_uewNibC_EcmpTunnelObject `tfsdk:"ecmp_tunnels"`
 	// omit input: id
@@ -624,11 +616,7 @@ func (d *remoteNetworkDataSource) Schema(_ context.Context, _ datasource.SchemaR
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
-			"connection_type": dsschema.StringAttribute{
-				Description: "The connection type for the remote network. String must be one of these: `\"prisma-access\"`, `\"meraki\"`, `\"cisco-catalyst-sdwan\"`, `\"velocloud\"`, `\"prisma-sdwan\"`. Default: `\"prisma-access\"`.",
-				Computed:    true,
-			},
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
 			"ecmp_load_balancing": dsschema.StringAttribute{
 				Description: "The EcmpLoadBalancing param. String must be one of these: `\"enable\"`, `\"disable\"`. Default: `\"disable\"`.",
 				Computed:    true,
@@ -875,8 +863,6 @@ func (d *remoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 
 	state.Tfid = types.StringValue(idBuilder.String())
 
-	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
-
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 
 	if len(ans.EcmpTunnels) == 0 {
@@ -1004,7 +990,6 @@ type remoteNetworkRsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
-	ConnectionType       types.String                                    `tfsdk:"connection_type"`
 	EcmpLoadBalancing    types.String                                    `tfsdk:"ecmp_load_balancing"`
 	EcmpTunnels          []remoteNetworkRsModel_uewNibC_EcmpTunnelObject `tfsdk:"ecmp_tunnels"`
 	Folder               types.String                                    `tfsdk:"folder"`
@@ -1020,7 +1005,6 @@ type remoteNetworkRsModel struct {
 
 	// Output.
 	EncryptedValues types.Map `tfsdk:"encrypted_values"`
-	// omit input: connection_type
 	// omit input: ecmp_load_balancing
 	// omit input: ecmp_tunnels
 	// omit input: id
@@ -1079,21 +1063,12 @@ func (r *remoteNetworkResource) Schema(_ context.Context, _ resource.SchemaReque
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]rsschema.Attribute{
-			// inputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "folder":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} outputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true}
+			// inputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "folder":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} outputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true}
 			"encrypted_values": rsschema.MapAttribute{
 				Description: "(Internal use) Encrypted values returned from the API.",
 				Computed:    true,
 				Sensitive:   true,
 				ElementType: types.StringType,
-			},
-			"connection_type": rsschema.StringAttribute{
-				Description: "The connection type for the remote network. String must be one of these: `\"prisma-access\"`, `\"meraki\"`, `\"cisco-catalyst-sdwan\"`, `\"velocloud\"`, `\"prisma-sdwan\"`. Default: `\"prisma-access\"`.",
-				Optional:    true,
-				Computed:    true,
-				Default:     stringdefault.StaticString("prisma-access"),
-				Validators: []validator.String{
-					stringvalidator.OneOf("prisma-access", "meraki", "cisco-catalyst-sdwan", "velocloud", "prisma-sdwan"),
-				},
 			},
 			"ecmp_load_balancing": rsschema.StringAttribute{
 				Description: "The EcmpLoadBalancing param. String must be one of these: `\"enable\"`, `\"disable\"`. Default: `\"disable\"`.",
@@ -1361,8 +1336,6 @@ func (r *remoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 	input.Folder = state.Folder.ValueString()
 	input.Request = &uewNibC.Config{}
 
-	input.Request.ConnectionType = state.ConnectionType.ValueStringPointer()
-
 	input.Request.EcmpLoadBalancing = state.EcmpLoadBalancing.ValueStringPointer()
 
 	if len(state.EcmpTunnels) != 0 {
@@ -1484,8 +1457,6 @@ func (r *remoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 	// Store the answer to state.
 
 	state.Tfid = types.StringValue(idBuilder.String())
-
-	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
 
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 
@@ -1687,8 +1658,6 @@ func (r *remoteNetworkResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	state.Tfid = savestate.Tfid
 
-	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
-
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 
 	if len(ans.EcmpTunnels) == 0 {
@@ -1880,8 +1849,6 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	input.Request = &uewNibC.Config{}
 
-	input.Request.ConnectionType = plan.ConnectionType.ValueStringPointer()
-
 	input.Request.EcmpLoadBalancing = plan.EcmpLoadBalancing.ValueStringPointer()
 
 	if len(plan.EcmpTunnels) != 0 {
@@ -1994,8 +1961,6 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 	// Store the answer to state.
 	// Note: when supporting importing a resource, this will need to change to taking
 	// values from the savestate.Tfid param and locMap.
-
-	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
 
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 

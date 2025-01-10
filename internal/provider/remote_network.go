@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -60,6 +61,7 @@ type remoteNetworkListDsModel struct {
 }
 
 type remoteNetworkListDsModel_uewNibC_Config struct {
+	ConnectionType       types.String                                        `tfsdk:"connection_type"`
 	EcmpLoadBalancing    types.String                                        `tfsdk:"ecmp_load_balancing"`
 	EcmpTunnels          []remoteNetworkListDsModel_uewNibC_EcmpTunnelObject `tfsdk:"ecmp_tunnels"`
 	Id                   types.String                                        `tfsdk:"id"`
@@ -103,6 +105,7 @@ type remoteNetworkListDsModel_uewNibC_ProtocolObject struct {
 type remoteNetworkListDsModel_uewNibC_BgpPeerObject struct {
 	LocalIpAddress types.String `tfsdk:"local_ip_address"`
 	PeerIpAddress  types.String `tfsdk:"peer_ip_address"`
+	SameAsPrimary  types.Bool   `tfsdk:"same_as_primary"`
 	Secret         types.String `tfsdk:"secret"`
 }
 
@@ -123,7 +126,11 @@ func (d *remoteNetworkListDataSource) Schema(_ context.Context, _ datasource.Sch
 				Computed:    true,
 				NestedObject: dsschema.NestedAttributeObject{
 					Attributes: map[string]dsschema.Attribute{
-						// inputs:map[string]bool{} outputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} forceNew:map[string]bool(nil)
+						// inputs:map[string]bool{} outputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} forceNew:map[string]bool(nil)
+						"connection_type": dsschema.StringAttribute{
+							Description: "The connection type for the remote network. String must be one of these: `\"prisma-access\"`, `\"meraki\"`, `\"cisco-catalyst-sdwan\"`, `\"velocloud\"`, `\"prisma-sdwan\"`. Default: `\"prisma-access\"`.",
+							Computed:    true,
+						},
 						"ecmp_load_balancing": dsschema.StringAttribute{
 							Description: "The EcmpLoadBalancing param. String must be one of these: `\"enable\"`, `\"disable\"`. Default: `\"disable\"`.",
 							Computed:    true,
@@ -265,13 +272,17 @@ func (d *remoteNetworkListDataSource) Schema(_ context.Context, _ datasource.Sch
 									Description: "secondary bgp routing as bgp_peer.",
 									Computed:    true,
 									Attributes: map[string]dsschema.Attribute{
-										// inputs:map[string]bool{} outputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "secret":true} forceNew:map[string]bool(nil)
+										// inputs:map[string]bool{} outputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "same_as_primary":true, "secret":true} forceNew:map[string]bool(nil)
 										"local_ip_address": dsschema.StringAttribute{
 											Description: "The LocalIpAddress param.",
 											Computed:    true,
 										},
 										"peer_ip_address": dsschema.StringAttribute{
 											Description: "The PeerIpAddress param.",
+											Computed:    true,
+										},
+										"same_as_primary": dsschema.BoolAttribute{
+											Description: "If true, the secondary BGP peer configuration will be the same as the primary BGP peer. Default: `true`.",
 											Computed:    true,
 										},
 										"secret": dsschema.StringAttribute{
@@ -412,6 +423,8 @@ func (d *remoteNetworkListDataSource) Read(ctx context.Context, req datasource.R
 		for _, var0 := range ans.Data {
 			var1 := remoteNetworkListDsModel_uewNibC_Config{}
 
+			var1.ConnectionType = types.StringPointerValue(var0.ConnectionType)
+
 			var1.EcmpLoadBalancing = types.StringPointerValue(var0.EcmpLoadBalancing)
 
 			if len(var0.EcmpTunnels) == 0 {
@@ -500,6 +513,8 @@ func (d *remoteNetworkListDataSource) Read(ctx context.Context, req datasource.R
 
 					var1.Protocol.BgpPeer.PeerIpAddress = types.StringPointerValue(var0.Protocol.BgpPeer.PeerIpAddress)
 
+					var1.Protocol.BgpPeer.SameAsPrimary = types.BoolPointerValue(var0.Protocol.BgpPeer.SameAsPrimary)
+
 					var1.Protocol.BgpPeer.Secret = types.StringPointerValue(var0.Protocol.BgpPeer.Secret)
 				}
 			}
@@ -550,6 +565,7 @@ type remoteNetworkDsModel struct {
 	Id     types.String `tfsdk:"id"`
 
 	// Output.
+	ConnectionType    types.String                                    `tfsdk:"connection_type"`
 	EcmpLoadBalancing types.String                                    `tfsdk:"ecmp_load_balancing"`
 	EcmpTunnels       []remoteNetworkDsModel_uewNibC_EcmpTunnelObject `tfsdk:"ecmp_tunnels"`
 	// omit input: id
@@ -593,6 +609,7 @@ type remoteNetworkDsModel_uewNibC_ProtocolObject struct {
 type remoteNetworkDsModel_uewNibC_BgpPeerObject struct {
 	LocalIpAddress types.String `tfsdk:"local_ip_address"`
 	PeerIpAddress  types.String `tfsdk:"peer_ip_address"`
+	SameAsPrimary  types.Bool   `tfsdk:"same_as_primary"`
 	Secret         types.String `tfsdk:"secret"`
 }
 
@@ -607,7 +624,11 @@ func (d *remoteNetworkDataSource) Schema(_ context.Context, _ datasource.SchemaR
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
+			// inputs:map[string]bool{"folder":true, "id":true} outputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true, "id":true}
+			"connection_type": dsschema.StringAttribute{
+				Description: "The connection type for the remote network. String must be one of these: `\"prisma-access\"`, `\"meraki\"`, `\"cisco-catalyst-sdwan\"`, `\"velocloud\"`, `\"prisma-sdwan\"`. Default: `\"prisma-access\"`.",
+				Computed:    true,
+			},
 			"ecmp_load_balancing": dsschema.StringAttribute{
 				Description: "The EcmpLoadBalancing param. String must be one of these: `\"enable\"`, `\"disable\"`. Default: `\"disable\"`.",
 				Computed:    true,
@@ -754,13 +775,17 @@ func (d *remoteNetworkDataSource) Schema(_ context.Context, _ datasource.SchemaR
 						Description: "secondary bgp routing as bgp_peer.",
 						Computed:    true,
 						Attributes: map[string]dsschema.Attribute{
-							// inputs:map[string]bool{} outputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "secret":true} forceNew:map[string]bool(nil)
+							// inputs:map[string]bool{} outputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "same_as_primary":true, "secret":true} forceNew:map[string]bool(nil)
 							"local_ip_address": dsschema.StringAttribute{
 								Description: "The LocalIpAddress param.",
 								Computed:    true,
 							},
 							"peer_ip_address": dsschema.StringAttribute{
 								Description: "The PeerIpAddress param.",
+								Computed:    true,
+							},
+							"same_as_primary": dsschema.BoolAttribute{
+								Description: "If true, the secondary BGP peer configuration will be the same as the primary BGP peer. Default: `true`.",
 								Computed:    true,
 							},
 							"secret": dsschema.StringAttribute{
@@ -850,6 +875,8 @@ func (d *remoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 
 	state.Tfid = types.StringValue(idBuilder.String())
 
+	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
+
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 
 	if len(ans.EcmpTunnels) == 0 {
@@ -938,6 +965,8 @@ func (d *remoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 
 			state.Protocol.BgpPeer.PeerIpAddress = types.StringPointerValue(ans.Protocol.BgpPeer.PeerIpAddress)
 
+			state.Protocol.BgpPeer.SameAsPrimary = types.BoolPointerValue(ans.Protocol.BgpPeer.SameAsPrimary)
+
 			state.Protocol.BgpPeer.Secret = types.StringPointerValue(ans.Protocol.BgpPeer.Secret)
 		}
 	}
@@ -975,6 +1004,7 @@ type remoteNetworkRsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
+	ConnectionType       types.String                                    `tfsdk:"connection_type"`
 	EcmpLoadBalancing    types.String                                    `tfsdk:"ecmp_load_balancing"`
 	EcmpTunnels          []remoteNetworkRsModel_uewNibC_EcmpTunnelObject `tfsdk:"ecmp_tunnels"`
 	Folder               types.String                                    `tfsdk:"folder"`
@@ -990,6 +1020,7 @@ type remoteNetworkRsModel struct {
 
 	// Output.
 	EncryptedValues types.Map `tfsdk:"encrypted_values"`
+	// omit input: connection_type
 	// omit input: ecmp_load_balancing
 	// omit input: ecmp_tunnels
 	// omit input: id
@@ -1033,6 +1064,7 @@ type remoteNetworkRsModel_uewNibC_ProtocolObject struct {
 type remoteNetworkRsModel_uewNibC_BgpPeerObject struct {
 	LocalIpAddress types.String `tfsdk:"local_ip_address"`
 	PeerIpAddress  types.String `tfsdk:"peer_ip_address"`
+	SameAsPrimary  types.Bool   `tfsdk:"same_as_primary"`
 	Secret         types.String `tfsdk:"secret"`
 }
 
@@ -1047,12 +1079,21 @@ func (r *remoteNetworkResource) Schema(_ context.Context, _ resource.SchemaReque
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]rsschema.Attribute{
-			// inputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "folder":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} outputs:map[string]bool{"ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true}
+			// inputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "folder":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true} outputs:map[string]bool{"connection_type":true, "ecmp_load_balancing":true, "ecmp_tunnels":true, "id":true, "ipsec_tunnel":true, "license_type":true, "name":true, "protocol":true, "region":true, "secondary_ipsec_tunnel":true, "spn_name":true, "subnets":true, "tfid":true} forceNew:map[string]bool{"folder":true}
 			"encrypted_values": rsschema.MapAttribute{
 				Description: "(Internal use) Encrypted values returned from the API.",
 				Computed:    true,
 				Sensitive:   true,
 				ElementType: types.StringType,
+			},
+			"connection_type": rsschema.StringAttribute{
+				Description: "The connection type for the remote network. String must be one of these: `\"prisma-access\"`, `\"meraki\"`, `\"cisco-catalyst-sdwan\"`, `\"velocloud\"`, `\"prisma-sdwan\"`. Default: `\"prisma-access\"`.",
+				Optional:    true,
+				Computed:    true,
+				Default:     stringdefault.StaticString("prisma-access"),
+				Validators: []validator.String{
+					stringvalidator.OneOf("prisma-access", "meraki", "cisco-catalyst-sdwan", "velocloud", "prisma-sdwan"),
+				},
 			},
 			"ecmp_load_balancing": rsschema.StringAttribute{
 				Description: "The EcmpLoadBalancing param. String must be one of these: `\"enable\"`, `\"disable\"`. Default: `\"disable\"`.",
@@ -1229,7 +1270,7 @@ func (r *remoteNetworkResource) Schema(_ context.Context, _ resource.SchemaReque
 						Description: "secondary bgp routing as bgp_peer.",
 						Optional:    true,
 						Attributes: map[string]rsschema.Attribute{
-							// inputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "secret":true} outputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "secret":true} forceNew:map[string]bool(nil)
+							// inputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "same_as_primary":true, "secret":true} outputs:map[string]bool{"local_ip_address":true, "peer_ip_address":true, "same_as_primary":true, "secret":true} forceNew:map[string]bool(nil)
 							"local_ip_address": rsschema.StringAttribute{
 								Description: "The LocalIpAddress param.",
 								Optional:    true,
@@ -1237,6 +1278,12 @@ func (r *remoteNetworkResource) Schema(_ context.Context, _ resource.SchemaReque
 							"peer_ip_address": rsschema.StringAttribute{
 								Description: "The PeerIpAddress param.",
 								Optional:    true,
+							},
+							"same_as_primary": rsschema.BoolAttribute{
+								Description: "If true, the secondary BGP peer configuration will be the same as the primary BGP peer. Default: `true`.",
+								Optional:    true,
+								Computed:    true,
+								Default:     booldefault.StaticBool(true),
 							},
 							"secret": rsschema.StringAttribute{
 								Description: "The Secret param.",
@@ -1313,6 +1360,8 @@ func (r *remoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 
 	input.Folder = state.Folder.ValueString()
 	input.Request = &uewNibC.Config{}
+
+	input.Request.ConnectionType = state.ConnectionType.ValueStringPointer()
 
 	input.Request.EcmpLoadBalancing = state.EcmpLoadBalancing.ValueStringPointer()
 
@@ -1392,6 +1441,8 @@ func (r *remoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 
 			input.Request.Protocol.BgpPeer.PeerIpAddress = state.Protocol.BgpPeer.PeerIpAddress.ValueStringPointer()
 
+			input.Request.Protocol.BgpPeer.SameAsPrimary = state.Protocol.BgpPeer.SameAsPrimary.ValueBoolPointer()
+
 			input.Request.Protocol.BgpPeer.Secret = state.Protocol.BgpPeer.Secret.ValueStringPointer()
 		}
 	}
@@ -1433,6 +1484,8 @@ func (r *remoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 	// Store the answer to state.
 
 	state.Tfid = types.StringValue(idBuilder.String())
+
+	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
 
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 
@@ -1550,6 +1603,8 @@ func (r *remoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 
 			state.Protocol.BgpPeer.PeerIpAddress = types.StringPointerValue(ans.Protocol.BgpPeer.PeerIpAddress)
 
+			state.Protocol.BgpPeer.SameAsPrimary = types.BoolPointerValue(ans.Protocol.BgpPeer.SameAsPrimary)
+
 			state.Protocol.BgpPeer.Secret = types.StringPointerValue(ans.Protocol.BgpPeer.Secret)
 		}
 	}
@@ -1631,6 +1686,8 @@ func (r *remoteNetworkResource) Read(ctx context.Context, req resource.ReadReque
 		state.Folder = types.StringValue(tokens[0])
 	}
 	state.Tfid = savestate.Tfid
+
+	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
 
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 
@@ -1754,6 +1811,8 @@ func (r *remoteNetworkResource) Read(ctx context.Context, req resource.ReadReque
 
 			state.Protocol.BgpPeer.PeerIpAddress = types.StringPointerValue(ans.Protocol.BgpPeer.PeerIpAddress)
 
+			state.Protocol.BgpPeer.SameAsPrimary = types.BoolPointerValue(ans.Protocol.BgpPeer.SameAsPrimary)
+
 			state.Protocol.BgpPeer.Secret = types.StringPointerValue(ans.Protocol.BgpPeer.Secret)
 		}
 	}
@@ -1820,6 +1879,8 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 		input.Id = tokens[1]
 	}
 	input.Request = &uewNibC.Config{}
+
+	input.Request.ConnectionType = plan.ConnectionType.ValueStringPointer()
 
 	input.Request.EcmpLoadBalancing = plan.EcmpLoadBalancing.ValueStringPointer()
 
@@ -1899,6 +1960,8 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 
 			input.Request.Protocol.BgpPeer.PeerIpAddress = plan.Protocol.BgpPeer.PeerIpAddress.ValueStringPointer()
 
+			input.Request.Protocol.BgpPeer.SameAsPrimary = plan.Protocol.BgpPeer.SameAsPrimary.ValueBoolPointer()
+
 			input.Request.Protocol.BgpPeer.Secret = plan.Protocol.BgpPeer.Secret.ValueStringPointer()
 		}
 	}
@@ -1931,6 +1994,8 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 	// Store the answer to state.
 	// Note: when supporting importing a resource, this will need to change to taking
 	// values from the savestate.Tfid param and locMap.
+
+	state.ConnectionType = types.StringPointerValue(ans.ConnectionType)
 
 	state.EcmpLoadBalancing = types.StringPointerValue(ans.EcmpLoadBalancing)
 
@@ -2047,6 +2112,8 @@ func (r *remoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 			state.Protocol.BgpPeer.LocalIpAddress = types.StringPointerValue(ans.Protocol.BgpPeer.LocalIpAddress)
 
 			state.Protocol.BgpPeer.PeerIpAddress = types.StringPointerValue(ans.Protocol.BgpPeer.PeerIpAddress)
+
+			state.Protocol.BgpPeer.SameAsPrimary = types.BoolPointerValue(ans.Protocol.BgpPeer.SameAsPrimary)
 
 			state.Protocol.BgpPeer.Secret = types.StringPointerValue(ans.Protocol.BgpPeer.Secret)
 		}

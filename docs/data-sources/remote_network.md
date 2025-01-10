@@ -31,6 +31,7 @@ data "scm_remote_network" "example" {
 
 ### Read-Only
 
+- `connection_type` (String) The connection type for the remote network. String must be one of these: `"prisma-access"`, `"meraki"`, `"cisco-catalyst-sdwan"`, `"velocloud"`, `"prisma-sdwan"`. Default: `"prisma-access"`.
 - `ecmp_load_balancing` (String) The EcmpLoadBalancing param. String must be one of these: `"enable"`, `"disable"`. Default: `"disable"`.
 - `ecmp_tunnels` (Attributes List) ecmp_tunnels is required when ecmp_load_balancing is enable. (see [below for nested schema](#nestedatt--ecmp_tunnels))
 - `ipsec_tunnel` (String) ipsec_tunnel is required when ecmp_load_balancing is disable.
@@ -108,4 +109,5 @@ Read-Only:
 
 - `local_ip_address` (String) The LocalIpAddress param.
 - `peer_ip_address` (String) The PeerIpAddress param.
+- `same_as_primary` (Boolean) If true, the secondary BGP peer configuration will be the same as the primary BGP peer. Default: `true`.
 - `secret` (String, Sensitive) The Secret param.

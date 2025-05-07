@@ -1,8 +1,18 @@
 Terraform Provider for Palo Alto Networks Strata Cloud Manager API
 ==================================================================
 
-**NOTE**: This provider is auto-generated.
+**NOTE**: This provider is auto-generated with some custom extensions.
 
+## Features
+
+- Manages Palo Alto Networks Strata Cloud Manager resources
+- Supports complex security policy management 
+- Security rule ordering and positioning capabilities
+- Auto-generated from the SCM API specification
+
+## Documentation
+
+Full documentation is available in the [docs](./docs) directory.
 
 Warranty
 --------

@@ -1361,7 +1361,9 @@ func (r *qosPolicyRuleResource) Read(ctx context.Context, req resource.ReadReque
 
 	input.Id = tokens[4]
 
-	input.Folder = &tokens[0]
+	if tokens[0] != "" {
+		input.Folder = &tokens[0]
+	}
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

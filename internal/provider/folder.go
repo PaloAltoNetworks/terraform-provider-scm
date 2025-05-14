@@ -9,10 +9,9 @@ import (
 	"strings"
 
 	"github.com/paloaltonetworks/scm-go"
-	yJkkSzS "github.com/paloaltonetworks/scm-go/netsec/schemas/snippets/mod"
-	kJVbXva "github.com/paloaltonetworks/scm-go/netsec/services/snippets"
+	vnMMXJg "github.com/paloaltonetworks/scm-go/netsec/schemas/folder/manual"
+	rmBFeLV "github.com/paloaltonetworks/scm-go/netsec/services/folders"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -20,27 +19,26 @@ import (
 	rsschema "github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
 // Data source (listing).
 var (
-	_ datasource.DataSource              = &snippetListDataSource{}
-	_ datasource.DataSourceWithConfigure = &snippetListDataSource{}
+	_ datasource.DataSource              = &folderListDataSource{}
+	_ datasource.DataSourceWithConfigure = &folderListDataSource{}
 )
 
-func NewSnippetListDataSource() datasource.DataSource {
-	return &snippetListDataSource{}
+func NewFolderListDataSource() datasource.DataSource {
+	return &folderListDataSource{}
 }
 
-type snippetListDataSource struct {
+type folderListDataSource struct {
 	client *scm.Client
 }
 
-// snippetListDsModel is the model.
-type snippetListDsModel struct {
+// folderListDsModel is the model.
+type folderListDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
@@ -49,27 +47,28 @@ type snippetListDsModel struct {
 	Offset types.Int64  `tfsdk:"offset"`
 
 	// Output.
-	Data []snippetListDsModel_yJkkSzS_Config `tfsdk:"data"`
+	Data []folderListDsModel_vnMMXJg_Config `tfsdk:"data"`
 	// omit input: limit
 	// omit input: offset
 	Total types.Int64 `tfsdk:"total"`
 }
 
-type snippetListDsModel_yJkkSzS_Config struct {
+type folderListDsModel_vnMMXJg_Config struct {
 	Description types.String `tfsdk:"description"`
 	Id          types.String `tfsdk:"id"`
 	Labels      types.List   `tfsdk:"labels"`
 	Name        types.String `tfsdk:"name"`
-	Type        types.String `tfsdk:"type"`
+	Parent      types.String `tfsdk:"parent"`
+	Snippets    types.List   `tfsdk:"snippets"`
 }
 
 // Metadata returns the data source type name.
-func (d *snippetListDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet_list"
+func (d *folderListDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_folder_list"
 }
 
 // Schema defines the schema for this listing data source.
-func (d *snippetListDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *folderListDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = dsschema.Schema{
 		Description: "Retrieves a listing of config items.",
 
@@ -80,7 +79,7 @@ func (d *snippetListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 				Computed:    true,
 				NestedObject: dsschema.NestedAttributeObject{
 					Attributes: map[string]dsschema.Attribute{
-						// inputs:map[string]bool{} outputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "type":true} forceNew:map[string]bool(nil)
+						// inputs:map[string]bool{} outputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "parent":true, "snippets":true} forceNew:map[string]bool(nil)
 						"description": dsschema.StringAttribute{
 							Description: "The Description param.",
 							Computed:    true,
@@ -98,9 +97,14 @@ func (d *snippetListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 							Description: "The Name param.",
 							Computed:    true,
 						},
-						"type": dsschema.StringAttribute{
-							Description: "The Type param. String must be one of these: `\"predefined\"`, `\"custom\"`.",
+						"parent": dsschema.StringAttribute{
+							Description: "The Parent param.",
 							Computed:    true,
+						},
+						"snippets": dsschema.ListAttribute{
+							Description: "The Snippets param.",
+							Computed:    true,
+							ElementType: types.StringType,
 						},
 					},
 				},
@@ -132,7 +136,7 @@ func (d *snippetListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 }
 
 // Configure prepares the struct.
-func (d *snippetListDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *folderListDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -141,8 +145,8 @@ func (d *snippetListDataSource) Configure(_ context.Context, req datasource.Conf
 }
 
 // Read performs Read for the struct.
-func (d *snippetListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var state snippetListDsModel
+func (d *folderListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var state folderListDsModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -150,7 +154,7 @@ func (d *snippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 	// Basic logging.
 	tflog.Info(ctx, "performing data source listing", map[string]any{
-		"data_source_name":            "scm_snippet_list",
+		"data_source_name":            "scm_folder_list",
 		"terraform_provider_function": "Read",
 		"name":                        state.Name.ValueString(),
 		"limit":                       state.Limit.ValueInt64(),
@@ -158,10 +162,10 @@ func (d *snippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 	})
 
 	// Prepare to run the command.
-	svc := kJVbXva.NewClient(d.client)
+	svc := rmBFeLV.NewClient(d.client)
 
 	// Prepare input for the API endpoint.
-	input := kJVbXva.ListInput{}
+	input := rmBFeLV.ListInput{}
 
 	input.Name = state.Name.ValueStringPointer()
 
@@ -199,9 +203,9 @@ func (d *snippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 	if len(ans.Data) == 0 {
 		state.Data = nil
 	} else {
-		state.Data = make([]snippetListDsModel_yJkkSzS_Config, 0, len(ans.Data))
+		state.Data = make([]folderListDsModel_vnMMXJg_Config, 0, len(ans.Data))
 		for _, var0 := range ans.Data {
-			var1 := snippetListDsModel_yJkkSzS_Config{}
+			var1 := folderListDsModel_vnMMXJg_Config{}
 
 			var1.Description = types.StringPointerValue(var0.Description)
 
@@ -213,7 +217,11 @@ func (d *snippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 			var1.Name = types.StringValue(var0.Name)
 
-			var1.Type = types.StringPointerValue(var0.Type)
+			var1.Parent = types.StringValue(var0.Parent)
+
+			var4, var5 := types.ListValueFrom(ctx, types.StringType, var0.Snippets)
+			var1.Snippets = var4
+			resp.Diagnostics.Append(var5.Errors()...)
 			state.Data = append(state.Data, var1)
 		}
 	}
@@ -230,20 +238,20 @@ func (d *snippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 // Data source.
 var (
-	_ datasource.DataSource              = &snippetDataSource{}
-	_ datasource.DataSourceWithConfigure = &snippetDataSource{}
+	_ datasource.DataSource              = &folderDataSource{}
+	_ datasource.DataSourceWithConfigure = &folderDataSource{}
 )
 
-func NewSnippetDataSource() datasource.DataSource {
-	return &snippetDataSource{}
+func NewFolderDataSource() datasource.DataSource {
+	return &folderDataSource{}
 }
 
-type snippetDataSource struct {
+type folderDataSource struct {
 	client *scm.Client
 }
 
-// snippetDsModel is the model.
-type snippetDsModel struct {
+// folderDsModel is the model.
+type folderDsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
@@ -252,23 +260,24 @@ type snippetDsModel struct {
 	// Output.
 	Description types.String `tfsdk:"description"`
 	// omit input: id
-	Labels types.List   `tfsdk:"labels"`
-	Name   types.String `tfsdk:"name"`
-	Type   types.String `tfsdk:"type"`
+	Labels   types.List   `tfsdk:"labels"`
+	Name     types.String `tfsdk:"name"`
+	Parent   types.String `tfsdk:"parent"`
+	Snippets types.List   `tfsdk:"snippets"`
 }
 
 // Metadata returns the data source type name.
-func (d *snippetDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet"
+func (d *folderDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_folder"
 }
 
 // Schema defines the schema for this data source.
-func (d *snippetDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+func (d *folderDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = dsschema.Schema{
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "tfid":true, "type":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "parent":true, "snippets":true, "tfid":true} forceNew:map[string]bool{"id":true}
 			"description": dsschema.StringAttribute{
 				Description: "The Description param.",
 				Computed:    true,
@@ -286,12 +295,17 @@ func (d *snippetDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 				Description: "The Name param.",
 				Computed:    true,
 			},
-			"tfid": dsschema.StringAttribute{
-				Description: "The Terraform ID.",
+			"parent": dsschema.StringAttribute{
+				Description: "The Parent param.",
 				Computed:    true,
 			},
-			"type": dsschema.StringAttribute{
-				Description: "The Type param. String must be one of these: `\"predefined\"`, `\"custom\"`.",
+			"snippets": dsschema.ListAttribute{
+				Description: "The Snippets param.",
+				Computed:    true,
+				ElementType: types.StringType,
+			},
+			"tfid": dsschema.StringAttribute{
+				Description: "The Terraform ID.",
 				Computed:    true,
 			},
 		},
@@ -299,7 +313,7 @@ func (d *snippetDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 }
 
 // Configure prepares the struct.
-func (d *snippetDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *folderDataSource) Configure(_ context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -308,8 +322,8 @@ func (d *snippetDataSource) Configure(_ context.Context, req datasource.Configur
 }
 
 // Read performs Read for the struct.
-func (d *snippetDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var state snippetDsModel
+func (d *folderDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var state folderDsModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -317,16 +331,16 @@ func (d *snippetDataSource) Read(ctx context.Context, req datasource.ReadRequest
 
 	// Basic logging.
 	tflog.Info(ctx, "performing data source read", map[string]any{
-		"data_source_name":            "scm_snippet",
+		"data_source_name":            "scm_folder",
 		"terraform_provider_function": "Read",
 		"id":                          state.Id.ValueString(),
 	})
 
 	// Prepare to run the command.
-	svc := kJVbXva.NewClient(d.client)
+	svc := rmBFeLV.NewClient(d.client)
 
 	// Prepare input for the API endpoint.
-	input := kJVbXva.ReadInput{}
+	input := rmBFeLV.ReadInput{}
 
 	input.Id = state.Id.ValueString()
 
@@ -355,7 +369,11 @@ func (d *snippetDataSource) Read(ctx context.Context, req datasource.ReadRequest
 
 	state.Name = types.StringValue(ans.Name)
 
-	state.Type = types.StringPointerValue(ans.Type)
+	state.Parent = types.StringValue(ans.Parent)
+
+	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.Snippets)
+	state.Snippets = var2
+	resp.Diagnostics.Append(var3.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -363,21 +381,21 @@ func (d *snippetDataSource) Read(ctx context.Context, req datasource.ReadRequest
 
 // Resource.
 var (
-	_ resource.Resource                = &snippetResource{}
-	_ resource.ResourceWithConfigure   = &snippetResource{}
-	_ resource.ResourceWithImportState = &snippetResource{}
+	_ resource.Resource                = &folderResource{}
+	_ resource.ResourceWithConfigure   = &folderResource{}
+	_ resource.ResourceWithImportState = &folderResource{}
 )
 
-func NewSnippetResource() resource.Resource {
-	return &snippetResource{}
+func NewFolderResource() resource.Resource {
+	return &folderResource{}
 }
 
-type snippetResource struct {
+type folderResource struct {
 	client *scm.Client
 }
 
-// snippetRsModel is the model.
-type snippetRsModel struct {
+// folderRsModel is the model.
+type folderRsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
@@ -385,28 +403,30 @@ type snippetRsModel struct {
 	Id          types.String `tfsdk:"id"`
 	Labels      types.List   `tfsdk:"labels"`
 	Name        types.String `tfsdk:"name"`
-	Type        types.String `tfsdk:"type"`
+	Parent      types.String `tfsdk:"parent"`
+	Snippets    types.List   `tfsdk:"snippets"`
 
 	// Output.
 	// omit input: description
 	// omit input: id
 	// omit input: labels
 	// omit input: name
-	// omit input: type
+	// omit input: parent
+	// omit input: snippets
 }
 
 // Metadata returns the data source type name.
-func (r *snippetResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet"
+func (r *folderResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_folder"
 }
 
 // Schema defines the schema for this data source.
-func (r *snippetResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *folderResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = rsschema.Schema{
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]rsschema.Attribute{
-			// inputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "type":true} outputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "tfid":true, "type":true} forceNew:map[string]bool{}
+			// inputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "parent":true, "snippets":true} outputs:map[string]bool{"description":true, "id":true, "labels":true, "name":true, "parent":true, "snippets":true, "tfid":true} forceNew:map[string]bool{}
 			"description": rsschema.StringAttribute{
 				Description: "The Description param.",
 				Optional:    true,
@@ -427,6 +447,15 @@ func (r *snippetResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				Description: "The Name param.",
 				Required:    true,
 			},
+			"parent": rsschema.StringAttribute{
+				Description: "The Parent param.",
+				Required:    true,
+			},
+			"snippets": rsschema.ListAttribute{
+				Description: "The Snippets param.",
+				Optional:    true,
+				ElementType: types.StringType,
+			},
 			"tfid": rsschema.StringAttribute{
 				Description: "The Terraform ID.",
 				Computed:    true,
@@ -434,22 +463,12 @@ func (r *snippetResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"type": rsschema.StringAttribute{
-				Description: "The Type param. String must be one of these: `\"predefined\"`, `\"custom\"`.",
-				Computed:    true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-				Validators: []validator.String{
-					stringvalidator.OneOf("predefined", "custom"),
-				},
-			},
 		},
 	}
 }
 
 // Configure prepares the struct.
-func (r *snippetResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *folderResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -458,8 +477,8 @@ func (r *snippetResource) Configure(_ context.Context, req resource.ConfigureReq
 }
 
 // Create resource.
-func (r *snippetResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var state snippetRsModel
+func (r *folderResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var state folderRsModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -467,17 +486,17 @@ func (r *snippetResource) Create(ctx context.Context, req resource.CreateRequest
 
 	// Basic logging.
 	tflog.Info(ctx, "performing resource create", map[string]any{
-		"resource_name":               "scm_snippet",
+		"resource_name":               "scm_folder",
 		"terraform_provider_function": "Create",
 	})
 
 	// Prepare to create the config.
-	svc := kJVbXva.NewClient(r.client)
+	svc := rmBFeLV.NewClient(r.client)
 
 	// Prepare input for the API endpoint.
-	input := kJVbXva.CreateInput{}
+	input := rmBFeLV.CreateInput{}
 
-	input.Request = &yJkkSzS.Config{}
+	input.Request = &vnMMXJg.Config{}
 
 	input.Request.Description = state.Description.ValueStringPointer()
 
@@ -490,6 +509,16 @@ func (r *snippetResource) Create(ctx context.Context, req resource.CreateRequest
 	//}
 
 	input.Request.Name = state.Name.ValueString()
+
+	input.Request.Parent = state.Parent.ValueString()
+
+	resp.Diagnostics.Append(state.Snippets.ElementsAs(ctx, &input.Request.Snippets, false)...)
+	//if len(state.Snippets) != 0 {
+	//    input.Request.Snippets = make([]string, 0, len(state.Snippets))
+	//    for _, var1 := range state.Snippets {
+	//        input.Request.Snippets = append(input.Request.Snippets, var1.ValueString())
+	//    }
+	//}
 
 	// Perform the operation.
 	ans, err := svc.Create(ctx, input)
@@ -516,21 +545,25 @@ func (r *snippetResource) Create(ctx context.Context, req resource.CreateRequest
 
 	state.Id = types.StringPointerValue(ans.Id)
 
-	var1, var2 := types.ListValueFrom(ctx, types.StringType, ans.Labels)
-	state.Labels = var1
-	resp.Diagnostics.Append(var2.Errors()...)
+	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.Labels)
+	state.Labels = var2
+	resp.Diagnostics.Append(var3.Errors()...)
 
 	state.Name = types.StringValue(ans.Name)
 
-	state.Type = types.StringPointerValue(ans.Type)
+	state.Parent = types.StringValue(ans.Parent)
+
+	var4, var5 := types.ListValueFrom(ctx, types.StringType, ans.Snippets)
+	state.Snippets = var4
+	resp.Diagnostics.Append(var5.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
 
 // Read performs Read for the struct.
-func (r *snippetResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var savestate, state snippetRsModel
+func (r *folderResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var savestate, state folderRsModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &savestate)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -546,16 +579,16 @@ func (r *snippetResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Basic logging.
 	tflog.Info(ctx, "performing resource read", map[string]any{
 		"terraform_provider_function": "Read",
-		"resource_name":               "scm_snippet",
+		"resource_name":               "scm_folder",
 		"locMap":                      map[string]int{"id": 0},
 		"tokens":                      tokens,
 	})
 
 	// Prepare to read the config.
-	svc := kJVbXva.NewClient(r.client)
+	svc := rmBFeLV.NewClient(r.client)
 
 	// Prepare input for the API endpoint.
-	input := kJVbXva.ReadInput{}
+	input := rmBFeLV.ReadInput{}
 
 	input.Id = tokens[0]
 
@@ -583,15 +616,19 @@ func (r *snippetResource) Read(ctx context.Context, req resource.ReadRequest, re
 
 	state.Name = types.StringValue(ans.Name)
 
-	state.Type = types.StringPointerValue(ans.Type)
+	state.Parent = types.StringValue(ans.Parent)
+
+	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.Snippets)
+	state.Snippets = var2
+	resp.Diagnostics.Append(var3.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
 
 // Update performs the Update for the struct.
-func (r *snippetResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var plan, state snippetRsModel
+func (r *folderResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var plan, state folderRsModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -612,20 +649,20 @@ func (r *snippetResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Basic logging.
 	tflog.Info(ctx, "performing resource update", map[string]any{
 		"terraform_provider_function": "Update",
-		"resource_name":               "scm_snippet",
+		"resource_name":               "scm_folder",
 		"tfid":                        state.Tfid.ValueString(),
 	})
 
 	// Prepare to update the config.
-	svc := kJVbXva.NewClient(r.client)
+	svc := rmBFeLV.NewClient(r.client)
 
 	// Prepare input for the API endpoint.
-	input := kJVbXva.UpdateInput{}
+	input := rmBFeLV.UpdateInput{}
 
 	if tokens[0] != "" {
 		input.Id = tokens[0]
 	}
-	input.Request = &yJkkSzS.Config{}
+	input.Request = &vnMMXJg.Config{}
 
 	input.Request.Description = plan.Description.ValueStringPointer()
 
@@ -638,6 +675,16 @@ func (r *snippetResource) Update(ctx context.Context, req resource.UpdateRequest
 	//}
 
 	input.Request.Name = plan.Name.ValueString()
+
+	input.Request.Parent = plan.Parent.ValueString()
+
+	resp.Diagnostics.Append(plan.Snippets.ElementsAs(ctx, &input.Request.Snippets, false)...)
+	//if len(plan.Snippets) != 0 {
+	//    input.Request.Snippets = make([]string, 0, len(plan.Snippets))
+	//    for _, var1 := range plan.Snippets {
+	//        input.Request.Snippets = append(input.Request.Snippets, var1.ValueString())
+	//    }
+	//}
 
 	// Perform the operation.
 	ans, err := svc.Update(ctx, input)
@@ -658,20 +705,24 @@ func (r *snippetResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	state.Id = types.StringPointerValue(ans.Id)
 
-	var1, var2 := types.ListValueFrom(ctx, types.StringType, ans.Labels)
-	state.Labels = var1
-	resp.Diagnostics.Append(var2.Errors()...)
+	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.Labels)
+	state.Labels = var2
+	resp.Diagnostics.Append(var3.Errors()...)
 
 	state.Name = types.StringValue(ans.Name)
 
-	state.Type = types.StringPointerValue(ans.Type)
+	state.Parent = types.StringValue(ans.Parent)
+
+	var4, var5 := types.ListValueFrom(ctx, types.StringType, ans.Snippets)
+	state.Snippets = var4
+	resp.Diagnostics.Append(var5.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
 
 // Delete performs delete for the struct.
-func (r *snippetResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+func (r *folderResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
 	var idType types.String
 	resp.Diagnostics.Append(req.State.GetAttribute(ctx, path.Root("tfid"), &idType)...)
 	if resp.Diagnostics.HasError() {
@@ -687,15 +738,15 @@ func (r *snippetResource) Delete(ctx context.Context, req resource.DeleteRequest
 	// Basic logging.
 	tflog.Info(ctx, "performing resource delete", map[string]any{
 		"terraform_provider_function": "Delete",
-		"resource_name":               "scm_snippet",
+		"resource_name":               "scm_folder",
 		"locMap":                      map[string]int{"id": 0},
 		"tokens":                      tokens,
 	})
 
-	svc := kJVbXva.NewClient(r.client)
+	svc := rmBFeLV.NewClient(r.client)
 
 	// Prepare input for the API endpoint.
-	input := kJVbXva.DeleteInput{}
+	input := rmBFeLV.DeleteInput{}
 
 	input.Id = tokens[0]
 
@@ -705,6 +756,6 @@ func (r *snippetResource) Delete(ctx context.Context, req resource.DeleteRequest
 	}
 }
 
-func (r *snippetResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *folderResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }

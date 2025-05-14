@@ -68,7 +68,7 @@ Optional:
 
 Optional:
 
-- `disabled` (Boolean) The Disabled param. Default: `false`.
-- `domain_credentials` (Boolean) The DomainCredentials param. Default: `false`.
-- `group_mapping` (String) The GroupMapping param.
-- `ip_user` (Boolean) The IpUser param. Default: `false`.
+- `disabled` (Boolean) The Disabled param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`
+- `domain_credentials` (Boolean) The DomainCredentials param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`
+- `group_mapping` (String) The GroupMapping param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`
+- `ip_user` (Boolean) The IpUser param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`

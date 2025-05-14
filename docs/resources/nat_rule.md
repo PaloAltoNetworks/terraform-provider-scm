@@ -32,11 +32,11 @@ resource "scm_nat_rule" "example" {
 
 ### Required
 
-- `destinations` (List of String) The destination address(es). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
-- `froms` (List of String) The source security zone(s). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `destinations` (List of String) The destination address(es).
+- `froms` (List of String) The source security zone(s).
 - `name` (String) The Name param.
 - `service` (String) The Service param.
-- `sources` (List of String) The source address(es). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `sources` (List of String) The source address(es).
 - `tos` (List of String) The destination security zone(s).
 
 ### Optional
@@ -55,7 +55,7 @@ resource "scm_nat_rule" "example" {
 - `source_translation` (Attributes) The SourceTranslation param. (see [below for nested schema](#nestedatt--source_translation))
 - `tags` (List of String) The Tags param.
 - `target` (Attributes) The Target param. (see [below for nested schema](#nestedatt--target))
-- `to_interface` (String) The ToInterface param. String must be one of these: `"any"`.
+- `to_interface` (String) The ToInterface param.
 
 ### Read-Only
 

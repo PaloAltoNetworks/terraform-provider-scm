@@ -27,21 +27,8 @@ data "scm_snippet" "example" {
 
 ### Read-Only
 
-- `created_in` (String) The CreatedIn param.
 - `description` (String) The Description param.
-- `display_name` (String) The DisplayName param.
-- `folders` (Attributes List) The Folders param. (see [below for nested schema](#nestedatt--folders))
 - `labels` (List of String) The Labels param.
-- `last_update` (String) The LastUpdate param.
 - `name` (String) The Name param.
-- `shared_in` (String) The SharedIn param.
 - `tfid` (String) The Terraform ID.
-- `type` (String) The Type param. String must be one of these: `"predefined"`.
-
-<a id="nestedatt--folders"></a>
-### Nested Schema for `folders`
-
-Read-Only:
-
-- `id` (String) The Id param.
-- `name` (String) The Name param.
+- `type` (String) The Type param. String must be one of these: `"predefined"`, `"custom"`.

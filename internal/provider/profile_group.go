@@ -57,6 +57,7 @@ type profileGroupListDsModel struct {
 }
 
 type profileGroupListDsModel_qhaCvMo_Config struct {
+	AiSecurities             types.List   `tfsdk:"ai_securities"`
 	DnsSecurities            types.List   `tfsdk:"dns_securities"`
 	FileBlockings            types.List   `tfsdk:"file_blockings"`
 	Id                       types.String `tfsdk:"id"`
@@ -85,14 +86,19 @@ func (d *profileGroupListDataSource) Schema(_ context.Context, _ datasource.Sche
 				Computed:    true,
 				NestedObject: dsschema.NestedAttributeObject{
 					Attributes: map[string]dsschema.Attribute{
-						// inputs:map[string]bool{} outputs:map[string]bool{"dns_security":true, "file_blocking":true, "id":true, "name":true, "saas_security":true, "spyware":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} forceNew:map[string]bool(nil)
+						// inputs:map[string]bool{} outputs:map[string]bool{"ai_security":true, "dns_security":true, "file_blocking":true, "id":true, "name":true, "saas_security":true, "spyware":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} forceNew:map[string]bool(nil)
+						"ai_securities": dsschema.ListAttribute{
+							Description: "List of AI security profiles.",
+							Computed:    true,
+							ElementType: types.StringType,
+						},
 						"dns_securities": dsschema.ListAttribute{
-							Description: "The DnsSecurities param.",
+							Description: "List of DNS security profiles.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"file_blockings": dsschema.ListAttribute{
-							Description: "The FileBlockings param.",
+							Description: "List of file blocking profiles.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -101,31 +107,31 @@ func (d *profileGroupListDataSource) Schema(_ context.Context, _ datasource.Sche
 							Computed:    true,
 						},
 						"name": dsschema.StringAttribute{
-							Description: "The Name param.",
+							Description: "The name of the profile group.",
 							Computed:    true,
 						},
 						"saas_securities": dsschema.ListAttribute{
-							Description: "The SaasSecurities param.",
+							Description: "List of HTTP header insertion profiles.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"spywares": dsschema.ListAttribute{
-							Description: "The Spywares param.",
+							Description: "List of anti-spyware profiles.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"url_filterings": dsschema.ListAttribute{
-							Description: "The UrlFilterings param.",
+							Description: "List of URL filtering profiles.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"virus_and_wildfire_analyses": dsschema.ListAttribute{
-							Description: "The VirusAndWildfireAnalyses param.",
+							Description: "List of anti-virus and Wildfire analysis profiles.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
 						"vulnerabilities": dsschema.ListAttribute{
-							Description: "The Vulnerabilities param.",
+							Description: "List of vulnerability protection profiles.",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -266,37 +272,41 @@ func (d *profileGroupListDataSource) Read(ctx context.Context, req datasource.Re
 		for _, var0 := range ans.Data {
 			var1 := profileGroupListDsModel_qhaCvMo_Config{}
 
-			var2, var3 := types.ListValueFrom(ctx, types.StringType, var0.DnsSecurities)
-			var1.DnsSecurities = var2
+			var2, var3 := types.ListValueFrom(ctx, types.StringType, var0.AiSecurities)
+			var1.AiSecurities = var2
 			resp.Diagnostics.Append(var3.Errors()...)
 
-			var4, var5 := types.ListValueFrom(ctx, types.StringType, var0.FileBlockings)
-			var1.FileBlockings = var4
+			var4, var5 := types.ListValueFrom(ctx, types.StringType, var0.DnsSecurities)
+			var1.DnsSecurities = var4
 			resp.Diagnostics.Append(var5.Errors()...)
+
+			var6, var7 := types.ListValueFrom(ctx, types.StringType, var0.FileBlockings)
+			var1.FileBlockings = var6
+			resp.Diagnostics.Append(var7.Errors()...)
 
 			var1.Id = types.StringPointerValue(var0.Id)
 
 			var1.Name = types.StringValue(var0.Name)
 
-			var6, var7 := types.ListValueFrom(ctx, types.StringType, var0.SaasSecurities)
-			var1.SaasSecurities = var6
-			resp.Diagnostics.Append(var7.Errors()...)
-
-			var8, var9 := types.ListValueFrom(ctx, types.StringType, var0.Spywares)
-			var1.Spywares = var8
+			var8, var9 := types.ListValueFrom(ctx, types.StringType, var0.SaasSecurities)
+			var1.SaasSecurities = var8
 			resp.Diagnostics.Append(var9.Errors()...)
 
-			var10, var11 := types.ListValueFrom(ctx, types.StringType, var0.UrlFilterings)
-			var1.UrlFilterings = var10
+			var10, var11 := types.ListValueFrom(ctx, types.StringType, var0.Spywares)
+			var1.Spywares = var10
 			resp.Diagnostics.Append(var11.Errors()...)
 
-			var12, var13 := types.ListValueFrom(ctx, types.StringType, var0.VirusAndWildfireAnalyses)
-			var1.VirusAndWildfireAnalyses = var12
+			var12, var13 := types.ListValueFrom(ctx, types.StringType, var0.UrlFilterings)
+			var1.UrlFilterings = var12
 			resp.Diagnostics.Append(var13.Errors()...)
 
-			var14, var15 := types.ListValueFrom(ctx, types.StringType, var0.Vulnerabilities)
-			var1.Vulnerabilities = var14
+			var14, var15 := types.ListValueFrom(ctx, types.StringType, var0.VirusAndWildfireAnalyses)
+			var1.VirusAndWildfireAnalyses = var14
 			resp.Diagnostics.Append(var15.Errors()...)
+
+			var16, var17 := types.ListValueFrom(ctx, types.StringType, var0.Vulnerabilities)
+			var1.Vulnerabilities = var16
+			resp.Diagnostics.Append(var17.Errors()...)
 			state.Data = append(state.Data, var1)
 		}
 	}
@@ -333,6 +343,7 @@ type profileGroupDsModel struct {
 	Id types.String `tfsdk:"id"`
 
 	// Output.
+	AiSecurities  types.List `tfsdk:"ai_securities"`
 	DnsSecurities types.List `tfsdk:"dns_securities"`
 	FileBlockings types.List `tfsdk:"file_blockings"`
 	// omit input: id
@@ -355,14 +366,19 @@ func (d *profileGroupDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]dsschema.Attribute{
-			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"dns_security":true, "file_blocking":true, "id":true, "name":true, "saas_security":true, "spyware":true, "tfid":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} forceNew:map[string]bool{"id":true}
+			// inputs:map[string]bool{"id":true} outputs:map[string]bool{"ai_security":true, "dns_security":true, "file_blocking":true, "id":true, "name":true, "saas_security":true, "spyware":true, "tfid":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} forceNew:map[string]bool{"id":true}
+			"ai_securities": dsschema.ListAttribute{
+				Description: "List of AI security profiles.",
+				Computed:    true,
+				ElementType: types.StringType,
+			},
 			"dns_securities": dsschema.ListAttribute{
-				Description: "The DnsSecurities param.",
+				Description: "List of DNS security profiles.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"file_blockings": dsschema.ListAttribute{
-				Description: "The FileBlockings param.",
+				Description: "List of file blocking profiles.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -371,16 +387,16 @@ func (d *profileGroupDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 				Required:    true,
 			},
 			"name": dsschema.StringAttribute{
-				Description: "The Name param.",
+				Description: "The name of the profile group.",
 				Computed:    true,
 			},
 			"saas_securities": dsschema.ListAttribute{
-				Description: "The SaasSecurities param.",
+				Description: "List of HTTP header insertion profiles.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"spywares": dsschema.ListAttribute{
-				Description: "The Spywares param.",
+				Description: "List of anti-spyware profiles.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -389,17 +405,17 @@ func (d *profileGroupDataSource) Schema(_ context.Context, _ datasource.SchemaRe
 				Computed:    true,
 			},
 			"url_filterings": dsschema.ListAttribute{
-				Description: "The UrlFilterings param.",
+				Description: "List of URL filtering profiles.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"virus_and_wildfire_analyses": dsschema.ListAttribute{
-				Description: "The VirusAndWildfireAnalyses param.",
+				Description: "List of anti-virus and Wildfire analysis profiles.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
 			"vulnerabilities": dsschema.ListAttribute{
-				Description: "The Vulnerabilities param.",
+				Description: "List of vulnerability protection profiles.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -454,37 +470,41 @@ func (d *profileGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 
 	state.Tfid = types.StringValue(idBuilder.String())
 
-	var0, var1 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
-	state.DnsSecurities = var0
+	var0, var1 := types.ListValueFrom(ctx, types.StringType, ans.AiSecurities)
+	state.AiSecurities = var0
 	resp.Diagnostics.Append(var1.Errors()...)
 
-	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
-	state.FileBlockings = var2
+	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
+	state.DnsSecurities = var2
 	resp.Diagnostics.Append(var3.Errors()...)
+
+	var4, var5 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
+	state.FileBlockings = var4
+	resp.Diagnostics.Append(var5.Errors()...)
 
 	state.Id = types.StringPointerValue(ans.Id)
 
 	state.Name = types.StringValue(ans.Name)
 
-	var4, var5 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
-	state.SaasSecurities = var4
-	resp.Diagnostics.Append(var5.Errors()...)
-
-	var6, var7 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
-	state.Spywares = var6
+	var6, var7 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
+	state.SaasSecurities = var6
 	resp.Diagnostics.Append(var7.Errors()...)
 
-	var8, var9 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
-	state.UrlFilterings = var8
+	var8, var9 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
+	state.Spywares = var8
 	resp.Diagnostics.Append(var9.Errors()...)
 
-	var10, var11 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
-	state.VirusAndWildfireAnalyses = var10
+	var10, var11 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
+	state.UrlFilterings = var10
 	resp.Diagnostics.Append(var11.Errors()...)
 
-	var12, var13 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
-	state.Vulnerabilities = var12
+	var12, var13 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
+	state.VirusAndWildfireAnalyses = var12
 	resp.Diagnostics.Append(var13.Errors()...)
+
+	var14, var15 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
+	state.Vulnerabilities = var14
+	resp.Diagnostics.Append(var15.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -510,6 +530,7 @@ type profileGroupRsModel struct {
 	Tfid types.String `tfsdk:"tfid"`
 
 	// Input.
+	AiSecurities             types.List   `tfsdk:"ai_securities"`
 	Device                   types.String `tfsdk:"device"`
 	DnsSecurities            types.List   `tfsdk:"dns_securities"`
 	FileBlockings            types.List   `tfsdk:"file_blockings"`
@@ -524,6 +545,7 @@ type profileGroupRsModel struct {
 	Vulnerabilities          types.List   `tfsdk:"vulnerabilities"`
 
 	// Output.
+	// omit input: ai_securities
 	// omit input: dns_securities
 	// omit input: file_blockings
 	// omit input: id
@@ -546,7 +568,12 @@ func (r *profileGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 		Description: "Retrieves a config item.",
 
 		Attributes: map[string]rsschema.Attribute{
-			// inputs:map[string]bool{"device":true, "dns_security":true, "file_blocking":true, "folder":true, "id":true, "name":true, "saas_security":true, "snippet":true, "spyware":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} outputs:map[string]bool{"dns_security":true, "file_blocking":true, "id":true, "name":true, "saas_security":true, "spyware":true, "tfid":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} forceNew:map[string]bool{"device":true, "folder":true, "snippet":true}
+			// inputs:map[string]bool{"ai_security":true, "device":true, "dns_security":true, "file_blocking":true, "folder":true, "id":true, "name":true, "saas_security":true, "snippet":true, "spyware":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} outputs:map[string]bool{"ai_security":true, "dns_security":true, "file_blocking":true, "id":true, "name":true, "saas_security":true, "spyware":true, "tfid":true, "url_filtering":true, "virus_and_wildfire_analysis":true, "vulnerability":true} forceNew:map[string]bool{"device":true, "folder":true, "snippet":true}
+			"ai_securities": rsschema.ListAttribute{
+				Description: "List of AI security profiles.",
+				Optional:    true,
+				ElementType: types.StringType,
+			},
 			"device": rsschema.StringAttribute{
 				Description: "The Device param.",
 				Optional:    true,
@@ -555,12 +582,12 @@ func (r *profileGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"dns_securities": rsschema.ListAttribute{
-				Description: "The DnsSecurities param.",
+				Description: "List of DNS security profiles.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"file_blockings": rsschema.ListAttribute{
-				Description: "The FileBlockings param.",
+				Description: "List of file blocking profiles.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -579,11 +606,11 @@ func (r *profileGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"name": rsschema.StringAttribute{
-				Description: "The Name param.",
+				Description: "The name of the profile group.",
 				Required:    true,
 			},
 			"saas_securities": rsschema.ListAttribute{
-				Description: "The SaasSecurities param.",
+				Description: "List of HTTP header insertion profiles.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -595,7 +622,7 @@ func (r *profileGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"spywares": rsschema.ListAttribute{
-				Description: "The Spywares param.",
+				Description: "List of anti-spyware profiles.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -607,17 +634,17 @@ func (r *profileGroupResource) Schema(_ context.Context, _ resource.SchemaReques
 				},
 			},
 			"url_filterings": rsschema.ListAttribute{
-				Description: "The UrlFilterings param.",
+				Description: "List of URL filtering profiles.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"virus_and_wildfire_analyses": rsschema.ListAttribute{
-				Description: "The VirusAndWildfireAnalyses param.",
+				Description: "List of anti-virus and Wildfire analysis profiles.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"vulnerabilities": rsschema.ListAttribute{
-				Description: "The Vulnerabilities param.",
+				Description: "List of vulnerability protection profiles.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -664,19 +691,27 @@ func (r *profileGroupResource) Create(ctx context.Context, req resource.CreateRe
 	input.Device = state.Device.ValueStringPointer()
 	input.Request = &qhaCvMo.Config{}
 
+	resp.Diagnostics.Append(state.AiSecurities.ElementsAs(ctx, &input.Request.AiSecurities, false)...)
+	//if len(state.AiSecurities) != 0 {
+	//    input.Request.AiSecurities = make([]string, 0, len(state.AiSecurities))
+	//    for _, var0 := range state.AiSecurities {
+	//        input.Request.AiSecurities = append(input.Request.AiSecurities, var0.ValueString())
+	//    }
+	//}
+
 	resp.Diagnostics.Append(state.DnsSecurities.ElementsAs(ctx, &input.Request.DnsSecurities, false)...)
 	//if len(state.DnsSecurities) != 0 {
 	//    input.Request.DnsSecurities = make([]string, 0, len(state.DnsSecurities))
-	//    for _, var0 := range state.DnsSecurities {
-	//        input.Request.DnsSecurities = append(input.Request.DnsSecurities, var0.ValueString())
+	//    for _, var1 := range state.DnsSecurities {
+	//        input.Request.DnsSecurities = append(input.Request.DnsSecurities, var1.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(state.FileBlockings.ElementsAs(ctx, &input.Request.FileBlockings, false)...)
 	//if len(state.FileBlockings) != 0 {
 	//    input.Request.FileBlockings = make([]string, 0, len(state.FileBlockings))
-	//    for _, var1 := range state.FileBlockings {
-	//        input.Request.FileBlockings = append(input.Request.FileBlockings, var1.ValueString())
+	//    for _, var2 := range state.FileBlockings {
+	//        input.Request.FileBlockings = append(input.Request.FileBlockings, var2.ValueString())
 	//    }
 	//}
 
@@ -685,40 +720,40 @@ func (r *profileGroupResource) Create(ctx context.Context, req resource.CreateRe
 	resp.Diagnostics.Append(state.SaasSecurities.ElementsAs(ctx, &input.Request.SaasSecurities, false)...)
 	//if len(state.SaasSecurities) != 0 {
 	//    input.Request.SaasSecurities = make([]string, 0, len(state.SaasSecurities))
-	//    for _, var2 := range state.SaasSecurities {
-	//        input.Request.SaasSecurities = append(input.Request.SaasSecurities, var2.ValueString())
+	//    for _, var3 := range state.SaasSecurities {
+	//        input.Request.SaasSecurities = append(input.Request.SaasSecurities, var3.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(state.Spywares.ElementsAs(ctx, &input.Request.Spywares, false)...)
 	//if len(state.Spywares) != 0 {
 	//    input.Request.Spywares = make([]string, 0, len(state.Spywares))
-	//    for _, var3 := range state.Spywares {
-	//        input.Request.Spywares = append(input.Request.Spywares, var3.ValueString())
+	//    for _, var4 := range state.Spywares {
+	//        input.Request.Spywares = append(input.Request.Spywares, var4.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(state.UrlFilterings.ElementsAs(ctx, &input.Request.UrlFilterings, false)...)
 	//if len(state.UrlFilterings) != 0 {
 	//    input.Request.UrlFilterings = make([]string, 0, len(state.UrlFilterings))
-	//    for _, var4 := range state.UrlFilterings {
-	//        input.Request.UrlFilterings = append(input.Request.UrlFilterings, var4.ValueString())
+	//    for _, var5 := range state.UrlFilterings {
+	//        input.Request.UrlFilterings = append(input.Request.UrlFilterings, var5.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(state.VirusAndWildfireAnalyses.ElementsAs(ctx, &input.Request.VirusAndWildfireAnalyses, false)...)
 	//if len(state.VirusAndWildfireAnalyses) != 0 {
 	//    input.Request.VirusAndWildfireAnalyses = make([]string, 0, len(state.VirusAndWildfireAnalyses))
-	//    for _, var5 := range state.VirusAndWildfireAnalyses {
-	//        input.Request.VirusAndWildfireAnalyses = append(input.Request.VirusAndWildfireAnalyses, var5.ValueString())
+	//    for _, var6 := range state.VirusAndWildfireAnalyses {
+	//        input.Request.VirusAndWildfireAnalyses = append(input.Request.VirusAndWildfireAnalyses, var6.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(state.Vulnerabilities.ElementsAs(ctx, &input.Request.Vulnerabilities, false)...)
 	//if len(state.Vulnerabilities) != 0 {
 	//    input.Request.Vulnerabilities = make([]string, 0, len(state.Vulnerabilities))
-	//    for _, var6 := range state.Vulnerabilities {
-	//        input.Request.Vulnerabilities = append(input.Request.Vulnerabilities, var6.ValueString())
+	//    for _, var7 := range state.Vulnerabilities {
+	//        input.Request.Vulnerabilities = append(input.Request.Vulnerabilities, var7.ValueString())
 	//    }
 	//}
 
@@ -758,37 +793,41 @@ func (r *profileGroupResource) Create(ctx context.Context, req resource.CreateRe
 
 	state.Tfid = types.StringValue(idBuilder.String())
 
-	var7, var8 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
-	state.DnsSecurities = var7
-	resp.Diagnostics.Append(var8.Errors()...)
+	var8, var9 := types.ListValueFrom(ctx, types.StringType, ans.AiSecurities)
+	state.AiSecurities = var8
+	resp.Diagnostics.Append(var9.Errors()...)
 
-	var9, var10 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
-	state.FileBlockings = var9
-	resp.Diagnostics.Append(var10.Errors()...)
+	var10, var11 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
+	state.DnsSecurities = var10
+	resp.Diagnostics.Append(var11.Errors()...)
+
+	var12, var13 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
+	state.FileBlockings = var12
+	resp.Diagnostics.Append(var13.Errors()...)
 
 	state.Id = types.StringPointerValue(ans.Id)
 
 	state.Name = types.StringValue(ans.Name)
 
-	var11, var12 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
-	state.SaasSecurities = var11
-	resp.Diagnostics.Append(var12.Errors()...)
+	var14, var15 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
+	state.SaasSecurities = var14
+	resp.Diagnostics.Append(var15.Errors()...)
 
-	var13, var14 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
-	state.Spywares = var13
-	resp.Diagnostics.Append(var14.Errors()...)
+	var16, var17 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
+	state.Spywares = var16
+	resp.Diagnostics.Append(var17.Errors()...)
 
-	var15, var16 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
-	state.UrlFilterings = var15
-	resp.Diagnostics.Append(var16.Errors()...)
+	var18, var19 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
+	state.UrlFilterings = var18
+	resp.Diagnostics.Append(var19.Errors()...)
 
-	var17, var18 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
-	state.VirusAndWildfireAnalyses = var17
-	resp.Diagnostics.Append(var18.Errors()...)
+	var20, var21 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
+	state.VirusAndWildfireAnalyses = var20
+	resp.Diagnostics.Append(var21.Errors()...)
 
-	var19, var20 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
-	state.Vulnerabilities = var19
-	resp.Diagnostics.Append(var20.Errors()...)
+	var22, var23 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
+	state.Vulnerabilities = var22
+	resp.Diagnostics.Append(var23.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -857,37 +896,41 @@ func (r *profileGroupResource) Read(ctx context.Context, req resource.ReadReques
 	}
 	state.Tfid = savestate.Tfid
 
-	var0, var1 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
-	state.DnsSecurities = var0
+	var0, var1 := types.ListValueFrom(ctx, types.StringType, ans.AiSecurities)
+	state.AiSecurities = var0
 	resp.Diagnostics.Append(var1.Errors()...)
 
-	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
-	state.FileBlockings = var2
+	var2, var3 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
+	state.DnsSecurities = var2
 	resp.Diagnostics.Append(var3.Errors()...)
+
+	var4, var5 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
+	state.FileBlockings = var4
+	resp.Diagnostics.Append(var5.Errors()...)
 
 	state.Id = types.StringPointerValue(ans.Id)
 
 	state.Name = types.StringValue(ans.Name)
 
-	var4, var5 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
-	state.SaasSecurities = var4
-	resp.Diagnostics.Append(var5.Errors()...)
-
-	var6, var7 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
-	state.Spywares = var6
+	var6, var7 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
+	state.SaasSecurities = var6
 	resp.Diagnostics.Append(var7.Errors()...)
 
-	var8, var9 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
-	state.UrlFilterings = var8
+	var8, var9 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
+	state.Spywares = var8
 	resp.Diagnostics.Append(var9.Errors()...)
 
-	var10, var11 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
-	state.VirusAndWildfireAnalyses = var10
+	var10, var11 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
+	state.UrlFilterings = var10
 	resp.Diagnostics.Append(var11.Errors()...)
 
-	var12, var13 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
-	state.Vulnerabilities = var12
+	var12, var13 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
+	state.VirusAndWildfireAnalyses = var12
 	resp.Diagnostics.Append(var13.Errors()...)
+
+	var14, var15 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
+	state.Vulnerabilities = var14
+	resp.Diagnostics.Append(var15.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -931,19 +974,27 @@ func (r *profileGroupResource) Update(ctx context.Context, req resource.UpdateRe
 	}
 	input.Request = &qhaCvMo.Config{}
 
+	resp.Diagnostics.Append(plan.AiSecurities.ElementsAs(ctx, &input.Request.AiSecurities, false)...)
+	//if len(plan.AiSecurities) != 0 {
+	//    input.Request.AiSecurities = make([]string, 0, len(plan.AiSecurities))
+	//    for _, var0 := range plan.AiSecurities {
+	//        input.Request.AiSecurities = append(input.Request.AiSecurities, var0.ValueString())
+	//    }
+	//}
+
 	resp.Diagnostics.Append(plan.DnsSecurities.ElementsAs(ctx, &input.Request.DnsSecurities, false)...)
 	//if len(plan.DnsSecurities) != 0 {
 	//    input.Request.DnsSecurities = make([]string, 0, len(plan.DnsSecurities))
-	//    for _, var0 := range plan.DnsSecurities {
-	//        input.Request.DnsSecurities = append(input.Request.DnsSecurities, var0.ValueString())
+	//    for _, var1 := range plan.DnsSecurities {
+	//        input.Request.DnsSecurities = append(input.Request.DnsSecurities, var1.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(plan.FileBlockings.ElementsAs(ctx, &input.Request.FileBlockings, false)...)
 	//if len(plan.FileBlockings) != 0 {
 	//    input.Request.FileBlockings = make([]string, 0, len(plan.FileBlockings))
-	//    for _, var1 := range plan.FileBlockings {
-	//        input.Request.FileBlockings = append(input.Request.FileBlockings, var1.ValueString())
+	//    for _, var2 := range plan.FileBlockings {
+	//        input.Request.FileBlockings = append(input.Request.FileBlockings, var2.ValueString())
 	//    }
 	//}
 
@@ -952,40 +1003,40 @@ func (r *profileGroupResource) Update(ctx context.Context, req resource.UpdateRe
 	resp.Diagnostics.Append(plan.SaasSecurities.ElementsAs(ctx, &input.Request.SaasSecurities, false)...)
 	//if len(plan.SaasSecurities) != 0 {
 	//    input.Request.SaasSecurities = make([]string, 0, len(plan.SaasSecurities))
-	//    for _, var2 := range plan.SaasSecurities {
-	//        input.Request.SaasSecurities = append(input.Request.SaasSecurities, var2.ValueString())
+	//    for _, var3 := range plan.SaasSecurities {
+	//        input.Request.SaasSecurities = append(input.Request.SaasSecurities, var3.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(plan.Spywares.ElementsAs(ctx, &input.Request.Spywares, false)...)
 	//if len(plan.Spywares) != 0 {
 	//    input.Request.Spywares = make([]string, 0, len(plan.Spywares))
-	//    for _, var3 := range plan.Spywares {
-	//        input.Request.Spywares = append(input.Request.Spywares, var3.ValueString())
+	//    for _, var4 := range plan.Spywares {
+	//        input.Request.Spywares = append(input.Request.Spywares, var4.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(plan.UrlFilterings.ElementsAs(ctx, &input.Request.UrlFilterings, false)...)
 	//if len(plan.UrlFilterings) != 0 {
 	//    input.Request.UrlFilterings = make([]string, 0, len(plan.UrlFilterings))
-	//    for _, var4 := range plan.UrlFilterings {
-	//        input.Request.UrlFilterings = append(input.Request.UrlFilterings, var4.ValueString())
+	//    for _, var5 := range plan.UrlFilterings {
+	//        input.Request.UrlFilterings = append(input.Request.UrlFilterings, var5.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(plan.VirusAndWildfireAnalyses.ElementsAs(ctx, &input.Request.VirusAndWildfireAnalyses, false)...)
 	//if len(plan.VirusAndWildfireAnalyses) != 0 {
 	//    input.Request.VirusAndWildfireAnalyses = make([]string, 0, len(plan.VirusAndWildfireAnalyses))
-	//    for _, var5 := range plan.VirusAndWildfireAnalyses {
-	//        input.Request.VirusAndWildfireAnalyses = append(input.Request.VirusAndWildfireAnalyses, var5.ValueString())
+	//    for _, var6 := range plan.VirusAndWildfireAnalyses {
+	//        input.Request.VirusAndWildfireAnalyses = append(input.Request.VirusAndWildfireAnalyses, var6.ValueString())
 	//    }
 	//}
 
 	resp.Diagnostics.Append(plan.Vulnerabilities.ElementsAs(ctx, &input.Request.Vulnerabilities, false)...)
 	//if len(plan.Vulnerabilities) != 0 {
 	//    input.Request.Vulnerabilities = make([]string, 0, len(plan.Vulnerabilities))
-	//    for _, var6 := range plan.Vulnerabilities {
-	//        input.Request.Vulnerabilities = append(input.Request.Vulnerabilities, var6.ValueString())
+	//    for _, var7 := range plan.Vulnerabilities {
+	//        input.Request.Vulnerabilities = append(input.Request.Vulnerabilities, var7.ValueString())
 	//    }
 	//}
 
@@ -1004,37 +1055,41 @@ func (r *profileGroupResource) Update(ctx context.Context, req resource.UpdateRe
 	// Note: when supporting importing a resource, this will need to change to taking
 	// values from the savestate.Tfid param and locMap.
 
-	var7, var8 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
-	state.DnsSecurities = var7
-	resp.Diagnostics.Append(var8.Errors()...)
+	var8, var9 := types.ListValueFrom(ctx, types.StringType, ans.AiSecurities)
+	state.AiSecurities = var8
+	resp.Diagnostics.Append(var9.Errors()...)
 
-	var9, var10 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
-	state.FileBlockings = var9
-	resp.Diagnostics.Append(var10.Errors()...)
+	var10, var11 := types.ListValueFrom(ctx, types.StringType, ans.DnsSecurities)
+	state.DnsSecurities = var10
+	resp.Diagnostics.Append(var11.Errors()...)
+
+	var12, var13 := types.ListValueFrom(ctx, types.StringType, ans.FileBlockings)
+	state.FileBlockings = var12
+	resp.Diagnostics.Append(var13.Errors()...)
 
 	state.Id = types.StringPointerValue(ans.Id)
 
 	state.Name = types.StringValue(ans.Name)
 
-	var11, var12 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
-	state.SaasSecurities = var11
-	resp.Diagnostics.Append(var12.Errors()...)
+	var14, var15 := types.ListValueFrom(ctx, types.StringType, ans.SaasSecurities)
+	state.SaasSecurities = var14
+	resp.Diagnostics.Append(var15.Errors()...)
 
-	var13, var14 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
-	state.Spywares = var13
-	resp.Diagnostics.Append(var14.Errors()...)
+	var16, var17 := types.ListValueFrom(ctx, types.StringType, ans.Spywares)
+	state.Spywares = var16
+	resp.Diagnostics.Append(var17.Errors()...)
 
-	var15, var16 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
-	state.UrlFilterings = var15
-	resp.Diagnostics.Append(var16.Errors()...)
+	var18, var19 := types.ListValueFrom(ctx, types.StringType, ans.UrlFilterings)
+	state.UrlFilterings = var18
+	resp.Diagnostics.Append(var19.Errors()...)
 
-	var17, var18 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
-	state.VirusAndWildfireAnalyses = var17
-	resp.Diagnostics.Append(var18.Errors()...)
+	var20, var21 := types.ListValueFrom(ctx, types.StringType, ans.VirusAndWildfireAnalyses)
+	state.VirusAndWildfireAnalyses = var20
+	resp.Diagnostics.Append(var21.Errors()...)
 
-	var19, var20 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
-	state.Vulnerabilities = var19
-	resp.Diagnostics.Append(var20.Errors()...)
+	var22, var23 := types.ListValueFrom(ctx, types.StringType, ans.Vulnerabilities)
+	state.Vulnerabilities = var22
+	resp.Diagnostics.Append(var23.Errors()...)
 
 	// Done.
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)

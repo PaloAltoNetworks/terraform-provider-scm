@@ -44,12 +44,12 @@ Read-Only:
 - `active_active_device_binding` (String) The ActiveActiveDeviceBinding param. String must be one of these: `"primary"`, `"both"`, `"0"`, `"1"`.
 - `description` (String) The Description param.
 - `destination_translation` (Attributes) Static destination translation parameter. (see [below for nested schema](#nestedatt--data--destination_translation))
-- `destinations` (List of String) The destination address(es). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `destinations` (List of String) The destination address(es).
 - `device` (String) The device in which the resource is defined. String length must not exceed 64 characters. String validation regex: `^[a-zA-Z\d-_\. ]+$`.
 - `disabled` (Boolean) The Disabled param.
 - `dynamic_destination_translation` (Attributes) Dynamic destination translation parameter. (see [below for nested schema](#nestedatt--data--dynamic_destination_translation))
 - `folder` (String) The folder in which the resource is defined. String length must not exceed 64 characters. String validation regex: `^[a-zA-Z\d-_\. ]+$`.
-- `froms` (List of String) The source security zone(s). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `froms` (List of String) The source security zone(s).
 - `group_tag` (String) The GroupTag param.
 - `id` (String) The Id param.
 - `name` (String) The Name param.
@@ -57,10 +57,10 @@ Read-Only:
 - `service` (String) The Service param.
 - `snippet` (String) The snippet in which the resource is defined. String length must not exceed 64 characters. String validation regex: `^[a-zA-Z\d-_\. ]+$`.
 - `source_translation` (Attributes) The SourceTranslation param. (see [below for nested schema](#nestedatt--data--source_translation))
-- `sources` (List of String) The source address(es). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `sources` (List of String) The source address(es).
 - `tags` (List of String) The Tags param.
 - `target` (Attributes) The Target param. (see [below for nested schema](#nestedatt--data--target))
-- `to_interface` (String) The ToInterface param. String must be one of these: `"any"`.
+- `to_interface` (String) The ToInterface param.
 - `tos` (List of String) The destination security zone(s).
 
 <a id="nestedatt--data--destination_translation"></a>

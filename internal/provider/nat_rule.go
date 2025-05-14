@@ -176,7 +176,7 @@ func (d *natRuleListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 							},
 						},
 						"destinations": dsschema.ListAttribute{
-							Description: "The destination address(es). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+							Description: "The destination address(es).",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -212,7 +212,7 @@ func (d *natRuleListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 							Computed:    true,
 						},
 						"froms": dsschema.ListAttribute{
-							Description: "The source security zone(s). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+							Description: "The source security zone(s).",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -272,7 +272,7 @@ func (d *natRuleListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 							},
 						},
 						"sources": dsschema.ListAttribute{
-							Description: "The source address(es). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+							Description: "The source address(es).",
 							Computed:    true,
 							ElementType: types.StringType,
 						},
@@ -311,7 +311,7 @@ func (d *natRuleListDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 							},
 						},
 						"to_interface": dsschema.StringAttribute{
-							Description: "The ToInterface param. String must be one of these: `\"any\"`.",
+							Description: "The ToInterface param.",
 							Computed:    true,
 						},
 						"tos": dsschema.ListAttribute{
@@ -729,7 +729,7 @@ func (d *natRuleDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 				},
 			},
 			"destinations": dsschema.ListAttribute{
-				Description: "The destination address(es). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+				Description: "The destination address(es).",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -765,7 +765,7 @@ func (d *natRuleDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 				Computed:    true,
 			},
 			"froms": dsschema.ListAttribute{
-				Description: "The source security zone(s). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+				Description: "The source security zone(s).",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -825,7 +825,7 @@ func (d *natRuleDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 				},
 			},
 			"sources": dsschema.ListAttribute{
-				Description: "The source address(es). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+				Description: "The source address(es).",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
@@ -868,7 +868,7 @@ func (d *natRuleDataSource) Schema(_ context.Context, _ datasource.SchemaRequest
 				Computed:    true,
 			},
 			"to_interface": dsschema.StringAttribute{
-				Description: "The ToInterface param. String must be one of these: `\"any\"`.",
+				Description: "The ToInterface param.",
 				Computed:    true,
 			},
 			"tos": dsschema.ListAttribute{
@@ -1213,14 +1213,9 @@ func (r *natRuleResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				},
 			},
 			"destinations": rsschema.ListAttribute{
-				Description: "The destination address(es). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+				Description: "The destination address(es).",
 				Required:    true,
 				ElementType: types.StringType,
-				Validators: []validator.List{
-					listvalidator.ValueStringsAre(
-						stringvalidator.OneOf("any"),
-					),
-				},
 			},
 			"device": rsschema.StringAttribute{
 				Description: "The device in which the resource is defined. String length must not exceed 64 characters. String validation regex: `^[a-zA-Z\\d-_\\. ]+$`.",
@@ -1270,14 +1265,9 @@ func (r *natRuleResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				},
 			},
 			"froms": rsschema.ListAttribute{
-				Description: "The source security zone(s). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+				Description: "The source security zone(s).",
 				Required:    true,
 				ElementType: types.StringType,
-				Validators: []validator.List{
-					listvalidator.ValueStringsAre(
-						stringvalidator.OneOf("any"),
-					),
-				},
 			},
 			"group_tag": rsschema.StringAttribute{
 				Description: "The GroupTag param.",
@@ -1374,14 +1364,9 @@ func (r *natRuleResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				},
 			},
 			"sources": rsschema.ListAttribute{
-				Description: "The source address(es). Individual elements in this list are subject to additional validation. String must be one of these: `\"any\"`.",
+				Description: "The source address(es).",
 				Required:    true,
 				ElementType: types.StringType,
-				Validators: []validator.List{
-					listvalidator.ValueStringsAre(
-						stringvalidator.OneOf("any"),
-					),
-				},
 			},
 			"tags": rsschema.ListAttribute{
 				Description: "The Tags param.",
@@ -1425,11 +1410,8 @@ func (r *natRuleResource) Schema(_ context.Context, _ resource.SchemaRequest, re
 				},
 			},
 			"to_interface": rsschema.StringAttribute{
-				Description: "The ToInterface param. String must be one of these: `\"any\"`.",
+				Description: "The ToInterface param.",
 				Optional:    true,
-				Validators: []validator.String{
-					stringvalidator.OneOf("any"),
-				},
 			},
 			"tos": rsschema.ListAttribute{
 				Description: "The destination security zone(s).",

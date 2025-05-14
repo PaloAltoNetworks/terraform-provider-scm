@@ -41,12 +41,13 @@ data "scm_profile_group_list" "example" {
 
 Read-Only:
 
-- `dns_securities` (List of String) The DnsSecurities param.
-- `file_blockings` (List of String) The FileBlockings param.
+- `ai_securities` (List of String) List of AI security profiles.
+- `dns_securities` (List of String) List of DNS security profiles.
+- `file_blockings` (List of String) List of file blocking profiles.
 - `id` (String) UUID of the resource.
-- `name` (String) The Name param.
-- `saas_securities` (List of String) The SaasSecurities param.
-- `spywares` (List of String) The Spywares param.
-- `url_filterings` (List of String) The UrlFilterings param.
-- `virus_and_wildfire_analyses` (List of String) The VirusAndWildfireAnalyses param.
-- `vulnerabilities` (List of String) The Vulnerabilities param.
+- `name` (String) The name of the profile group.
+- `saas_securities` (List of String) List of HTTP header insertion profiles.
+- `spywares` (List of String) List of anti-spyware profiles.
+- `url_filterings` (List of String) List of URL filtering profiles.
+- `virus_and_wildfire_analyses` (List of String) List of anti-virus and Wildfire analysis profiles.
+- `vulnerabilities` (List of String) List of vulnerability protection profiles.

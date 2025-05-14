@@ -30,23 +30,23 @@ data "scm_nat_rule" "example" {
 - `active_active_device_binding` (String) The ActiveActiveDeviceBinding param. String must be one of these: `"primary"`, `"both"`, `"0"`, `"1"`.
 - `description` (String) The Description param.
 - `destination_translation` (Attributes) Static destination translation parameter. (see [below for nested schema](#nestedatt--destination_translation))
-- `destinations` (List of String) The destination address(es). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `destinations` (List of String) The destination address(es).
 - `device` (String) The device in which the resource is defined. String length must not exceed 64 characters. String validation regex: `^[a-zA-Z\d-_\. ]+$`.
 - `disabled` (Boolean) The Disabled param.
 - `dynamic_destination_translation` (Attributes) Dynamic destination translation parameter. (see [below for nested schema](#nestedatt--dynamic_destination_translation))
 - `folder` (String) The folder in which the resource is defined. String length must not exceed 64 characters. String validation regex: `^[a-zA-Z\d-_\. ]+$`.
-- `froms` (List of String) The source security zone(s). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `froms` (List of String) The source security zone(s).
 - `group_tag` (String) The GroupTag param.
 - `name` (String) The Name param.
 - `nat_type` (String) The NatType param. String must be one of these: `"ipv4"`, `"nat64"`, `"nptv6"`.
 - `service` (String) The Service param.
 - `snippet` (String) The snippet in which the resource is defined. String length must not exceed 64 characters. String validation regex: `^[a-zA-Z\d-_\. ]+$`.
 - `source_translation` (Attributes) The SourceTranslation param. (see [below for nested schema](#nestedatt--source_translation))
-- `sources` (List of String) The source address(es). Individual elements in this list are subject to additional validation. String must be one of these: `"any"`.
+- `sources` (List of String) The source address(es).
 - `tags` (List of String) The Tags param.
 - `target` (Attributes) The Target param. (see [below for nested schema](#nestedatt--target))
 - `tfid` (String) The Terraform ID.
-- `to_interface` (String) The ToInterface param. String must be one of these: `"any"`.
+- `to_interface` (String) The ToInterface param.
 - `tos` (List of String) The destination security zone(s).
 
 <a id="nestedatt--destination_translation"></a>

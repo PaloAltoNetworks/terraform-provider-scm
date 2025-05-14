@@ -12,6 +12,7 @@ import (
 	ivVDSwf "github.com/paloaltonetworks/scm-go/netsec/schemas/url/access/profiles"
 	alljvhu "github.com/paloaltonetworks/scm-go/netsec/services/urlaccessprofiles"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -172,11 +173,11 @@ func (d *urlAccessProfileListDataSource) Schema(_ context.Context, _ datasource.
 									Attributes: map[string]dsschema.Attribute{
 										// inputs:map[string]bool{} outputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} forceNew:map[string]bool(nil)
 										"disabled": dsschema.BoolAttribute{
-											Description: "The Disabled param. Default: `false`.",
+											Description: "The Disabled param.",
 											Computed:    true,
 										},
 										"domain_credentials": dsschema.BoolAttribute{
-											Description: "The DomainCredentials param. Default: `false`.",
+											Description: "The DomainCredentials param.",
 											Computed:    true,
 										},
 										"group_mapping": dsschema.StringAttribute{
@@ -184,7 +185,7 @@ func (d *urlAccessProfileListDataSource) Schema(_ context.Context, _ datasource.
 											Computed:    true,
 										},
 										"ip_user": dsschema.BoolAttribute{
-											Description: "The IpUser param. Default: `false`.",
+											Description: "The IpUser param.",
 											Computed:    true,
 										},
 									},
@@ -602,11 +603,11 @@ func (d *urlAccessProfileDataSource) Schema(_ context.Context, _ datasource.Sche
 						Attributes: map[string]dsschema.Attribute{
 							// inputs:map[string]bool{} outputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} forceNew:map[string]bool(nil)
 							"disabled": dsschema.BoolAttribute{
-								Description: "The Disabled param. Default: `false`.",
+								Description: "The Disabled param.",
 								Computed:    true,
 							},
 							"domain_credentials": dsschema.BoolAttribute{
-								Description: "The DomainCredentials param. Default: `false`.",
+								Description: "The DomainCredentials param.",
 								Computed:    true,
 							},
 							"group_mapping": dsschema.StringAttribute{
@@ -614,7 +615,7 @@ func (d *urlAccessProfileDataSource) Schema(_ context.Context, _ datasource.Sche
 								Computed:    true,
 							},
 							"ip_user": dsschema.BoolAttribute{
-								Description: "The IpUser param. Default: `false`.",
+								Description: "The IpUser param.",
 								Computed:    true,
 							},
 						},
@@ -962,26 +963,28 @@ func (r *urlAccessProfileResource) Schema(_ context.Context, _ resource.SchemaRe
 						Attributes: map[string]rsschema.Attribute{
 							// inputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} outputs:map[string]bool{"disabled":true, "domain_credentials":true, "group_mapping":true, "ip_user":true} forceNew:map[string]bool(nil)
 							"disabled": rsschema.BoolAttribute{
-								Description: "The Disabled param. Default: `false`.",
+								Description: "The Disabled param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`",
 								Optional:    true,
-								Computed:    true,
-								Default:     booldefault.StaticBool(false),
+								Validators: []validator.Bool{
+									boolvalidator.ExactlyOneOf(
+										path.MatchRelative(),
+										path.MatchRelative().AtParent().AtName("domain_credentials"),
+										path.MatchRelative().AtParent().AtName("group_mapping"),
+										path.MatchRelative().AtParent().AtName("ip_user"),
+									),
+								},
 							},
 							"domain_credentials": rsschema.BoolAttribute{
-								Description: "The DomainCredentials param. Default: `false`.",
+								Description: "The DomainCredentials param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`",
 								Optional:    true,
-								Computed:    true,
-								Default:     booldefault.StaticBool(false),
 							},
 							"group_mapping": rsschema.StringAttribute{
-								Description: "The GroupMapping param.",
+								Description: "The GroupMapping param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`",
 								Optional:    true,
 							},
 							"ip_user": rsschema.BoolAttribute{
-								Description: "The IpUser param. Default: `false`.",
+								Description: "The IpUser param. Ensure that only one of the following is specified: `disabled`, `domain_credentials`, `group_mapping`, `ip_user`",
 								Optional:    true,
-								Computed:    true,
-								Default:     booldefault.StaticBool(false),
 							},
 						},
 					},

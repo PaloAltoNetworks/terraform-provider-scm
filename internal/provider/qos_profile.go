@@ -1329,7 +1329,9 @@ func (r *qosProfileResource) Read(ctx context.Context, req resource.ReadRequest,
 
 	input.Id = tokens[3]
 
-	input.Folder = &tokens[0]
+	if tokens[0] != "" {
+		input.Folder = &tokens[0]
+	}
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

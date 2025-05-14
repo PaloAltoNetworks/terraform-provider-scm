@@ -23,20 +23,21 @@ resource "scm_profile_group" "example" {
 
 ### Required
 
-- `name` (String) The Name param.
+- `name` (String) The name of the profile group.
 
 ### Optional
 
+- `ai_securities` (List of String) List of AI security profiles.
 - `device` (String) The Device param.
-- `dns_securities` (List of String) The DnsSecurities param.
-- `file_blockings` (List of String) The FileBlockings param.
+- `dns_securities` (List of String) List of DNS security profiles.
+- `file_blockings` (List of String) List of file blocking profiles.
 - `folder` (String) The Folder param.
-- `saas_securities` (List of String) The SaasSecurities param.
+- `saas_securities` (List of String) List of HTTP header insertion profiles.
 - `snippet` (String) The Snippet param.
-- `spywares` (List of String) The Spywares param.
-- `url_filterings` (List of String) The UrlFilterings param.
-- `virus_and_wildfire_analyses` (List of String) The VirusAndWildfireAnalyses param.
-- `vulnerabilities` (List of String) The Vulnerabilities param.
+- `spywares` (List of String) List of anti-spyware profiles.
+- `url_filterings` (List of String) List of URL filtering profiles.
+- `virus_and_wildfire_analyses` (List of String) List of anti-virus and Wildfire analysis profiles.
+- `vulnerabilities` (List of String) List of vulnerability protection profiles.
 
 ### Read-Only
 

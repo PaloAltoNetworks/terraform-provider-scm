@@ -926,11 +926,17 @@ func (r *ikeCryptoProfileResource) Read(ctx context.Context, req resource.ReadRe
 
 	input.Id = tokens[3]
 
-	input.Folder = &tokens[0]
+	if tokens[0] != "" {
+		input.Folder = &tokens[0]
+	}
 
-	input.Snippet = &tokens[1]
+	if tokens[1] != "" {
+		input.Snippet = &tokens[1]
+	}
 
-	input.Device = &tokens[2]
+	if tokens[2] != "" {
+		input.Device = &tokens[2]
+	}
 
 	// Perform the operation.
 	ans, err := svc.Read(ctx, input)

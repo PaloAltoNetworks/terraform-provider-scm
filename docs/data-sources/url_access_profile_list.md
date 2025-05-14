@@ -75,7 +75,7 @@ Read-Only:
 
 Read-Only:
 
-- `disabled` (Boolean) The Disabled param. Default: `false`.
-- `domain_credentials` (Boolean) The DomainCredentials param. Default: `false`.
+- `disabled` (Boolean) The Disabled param.
+- `domain_credentials` (Boolean) The DomainCredentials param.
 - `group_mapping` (String) The GroupMapping param.
-- `ip_user` (Boolean) The IpUser param. Default: `false`.
+- `ip_user` (Boolean) The IpUser param.

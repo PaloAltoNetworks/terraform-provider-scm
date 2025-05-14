@@ -130,8 +130,8 @@ github.com/mitchellh/reflectwalk v1.0.2 h1:G2LzWKi524PWgd3mLHV8Y5k7s6XUvT0Gef6zx
 github.com/mitchellh/reflectwalk v1.0.2/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
 github.com/oklog/run v1.0.0 h1:Ru7dDtJNOyC66gQ5dQmaCa0qIsAUFY3sFpK1Xk8igrw=
 github.com/oklog/run v1.0.0/go.mod h1:dlhp/R75TPv97u0XWUtDeV/lRKWPKSdTuV0TZvrmrQA=
-github.com/paloaltonetworks/scm-go v0.11.0 h1:Mt9TflvL4hvYjkXPZh3uPvVDzV+d8+ETceExIPsxwjk=
-github.com/paloaltonetworks/scm-go v0.11.0/go.mod h1:8CiN/F+XcDSwup6WutVuV92+Rw+35F8aPDo+QFdoQeA=
+github.com/paloaltonetworks/scm-go v0.12.0 h1:tsJ7DtPADW7S68Jet103qvcC4NnmmQmiO7DjEHeik4w=
+github.com/paloaltonetworks/scm-go v0.12.0/go.mod h1:8CiN/F+XcDSwup6WutVuV92+Rw+35F8aPDo+QFdoQeA=
 github.com/pjbgf/sha1cd v0.3.0 h1:4D5XXmUUBUl/xQ6IjCkEAbqXskkq/4O7LmGn0AqMDs4=
 github.com/pjbgf/sha1cd v0.3.0/go.mod h1:nZ1rrWOcGJ5uZgEEVL1VUM9iRQiZvWdbZjkKyFzPPsI=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

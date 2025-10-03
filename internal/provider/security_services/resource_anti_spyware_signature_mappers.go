@@ -1,0 +1,339 @@
+package provider
+
+import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
+
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+)
+
+// --- Unpacker for AntiSpywareSignatures ---
+func unpackAntiSpywareSignaturesToSdk(ctx context.Context, obj types.Object) (*security_services.AntiSpywareSignatures, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.AntiSpywareSignatures", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.AntiSpywareSignatures
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk security_services.AntiSpywareSignatures
+	var d diag.Diagnostics
+	// Handling Lists
+	if !model.Bugtraq.IsNull() && !model.Bugtraq.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Bugtraq")
+		diags.Append(model.Bugtraq.ElementsAs(ctx, &sdk.Bugtraq, false)...)
+	}
+
+	// Handling Primitives
+	if !model.Comment.IsNull() && !model.Comment.IsUnknown() {
+		sdk.Comment = model.Comment.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Comment", "value": *sdk.Comment})
+	}
+
+	// Handling Lists
+	if !model.Cve.IsNull() && !model.Cve.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Cve")
+		diags.Append(model.Cve.ElementsAs(ctx, &sdk.Cve, false)...)
+	}
+
+	// Handling Objects
+	if !model.DefaultAction.IsNull() && !model.DefaultAction.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field DefaultAction")
+		unpacked, d := unpackAntiSpywareProfilesRulesInnerActionToSdk(ctx, model.DefaultAction)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "DefaultAction"})
+		}
+		if unpacked != nil {
+			sdk.DefaultAction = unpacked
+		}
+	}
+
+	// Handling Primitives
+	if !model.Device.IsNull() && !model.Device.IsUnknown() {
+		sdk.Device = model.Device.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+	}
+
+	// Handling Primitives
+	if !model.Direction.IsNull() && !model.Direction.IsUnknown() {
+		sdk.Direction = model.Direction.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Direction", "value": *sdk.Direction})
+	}
+
+	// Handling Primitives
+	if !model.Folder.IsNull() && !model.Folder.IsUnknown() {
+		sdk.Folder = model.Folder.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+	}
+
+	// Handling Primitives
+	if !model.Id.IsNull() && !model.Id.IsUnknown() {
+		sdk.Id = model.Id.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+	}
+
+	// Handling Lists
+	if !model.Reference.IsNull() && !model.Reference.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Reference")
+		diags.Append(model.Reference.ElementsAs(ctx, &sdk.Reference, false)...)
+	}
+
+	// Handling Primitives
+	if !model.Severity.IsNull() && !model.Severity.IsUnknown() {
+		sdk.Severity = model.Severity.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Severity", "value": *sdk.Severity})
+	}
+
+	// Handling Objects
+	if !model.Signature.IsNull() && !model.Signature.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Signature")
+		unpacked, d := unpackAntiSpywareSignaturesSignatureToSdk(ctx, model.Signature)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Signature"})
+		}
+		if unpacked != nil {
+			sdk.Signature = unpacked
+		}
+	}
+
+	// Handling Primitives
+	if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
+		sdk.Snippet = model.Snippet.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+	}
+
+	// Handling Primitives
+	if !model.ThreatId.IsNull() && !model.ThreatId.IsUnknown() {
+		sdk.ThreatId = int32(model.ThreatId.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ThreatId", "value": sdk.ThreatId})
+	}
+
+	// Handling Primitives
+	if !model.Threatname.IsNull() && !model.Threatname.IsUnknown() {
+		sdk.Threatname = model.Threatname.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Threatname", "value": sdk.Threatname})
+	}
+
+	// Handling Lists
+	if !model.Vendor.IsNull() && !model.Vendor.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Vendor")
+		diags.Append(model.Vendor.ElementsAs(ctx, &sdk.Vendor, false)...)
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.AntiSpywareSignatures", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for AntiSpywareSignatures ---
+func packAntiSpywareSignaturesFromSdk(ctx context.Context, sdk security_services.AntiSpywareSignatures) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.AntiSpywareSignatures", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.AntiSpywareSignatures
+	var d diag.Diagnostics
+	// Handling Lists
+	if sdk.Bugtraq != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Bugtraq")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Bugtraq, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Bugtraq)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Bugtraq = basetypes.NewListNull(elemType)
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Comment != nil {
+		model.Comment = basetypes.NewStringValue(*sdk.Comment)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Comment", "value": *sdk.Comment})
+	} else {
+		model.Comment = basetypes.NewStringNull()
+	}
+	// Handling Lists
+	if sdk.Cve != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Cve")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Cve, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Cve)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Cve = basetypes.NewListNull(elemType)
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.DefaultAction != nil {
+		tflog.Debug(ctx, "Packing nested object for field DefaultAction")
+		packed, d := packAntiSpywareProfilesRulesInnerActionFromSdk(ctx, *sdk.DefaultAction)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "DefaultAction"})
+		}
+		model.DefaultAction = packed
+	} else {
+		model.DefaultAction = basetypes.NewObjectNull(models.AntiSpywareProfilesRulesInnerAction{}.AttrTypes())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Device != nil {
+		model.Device = basetypes.NewStringValue(*sdk.Device)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+	} else {
+		model.Device = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Direction != nil {
+		model.Direction = basetypes.NewStringValue(*sdk.Direction)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Direction", "value": *sdk.Direction})
+	} else {
+		model.Direction = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Folder != nil {
+		model.Folder = basetypes.NewStringValue(*sdk.Folder)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+	} else {
+		model.Folder = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	model.Id = basetypes.NewStringValue(sdk.Id)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+	// Handling Lists
+	if sdk.Reference != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Reference")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Reference, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Reference)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Reference = basetypes.NewListNull(elemType)
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Severity != nil {
+		model.Severity = basetypes.NewStringValue(*sdk.Severity)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Severity", "value": *sdk.Severity})
+	} else {
+		model.Severity = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Signature != nil {
+		tflog.Debug(ctx, "Packing nested object for field Signature")
+		packed, d := packAntiSpywareSignaturesSignatureFromSdk(ctx, *sdk.Signature)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Signature"})
+		}
+		model.Signature = packed
+	} else {
+		model.Signature = basetypes.NewObjectNull(models.AntiSpywareSignaturesSignature{}.AttrTypes())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Snippet != nil {
+		model.Snippet = basetypes.NewStringValue(*sdk.Snippet)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+	} else {
+		model.Snippet = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	model.ThreatId = basetypes.NewInt64Value(int64(sdk.ThreatId))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ThreatId", "value": sdk.ThreatId})
+	// Handling Primitives
+	// Standard primitive packing
+	model.Threatname = basetypes.NewStringValue(sdk.Threatname)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Threatname", "value": sdk.Threatname})
+	// Handling Lists
+	if sdk.Vendor != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Vendor")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Vendor, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Vendor)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Vendor = basetypes.NewListNull(elemType)
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.AntiSpywareSignatures{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.AntiSpywareSignatures", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for AntiSpywareSignatures ---
+func unpackAntiSpywareSignaturesListToSdk(ctx context.Context, list types.List) ([]security_services.AntiSpywareSignatures, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.AntiSpywareSignatures")
+	diags := diag.Diagnostics{}
+	var data []models.AntiSpywareSignatures
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]security_services.AntiSpywareSignatures, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.AntiSpywareSignatures{}.AttrTypes(), &item)
+		unpacked, d := unpackAntiSpywareSignaturesToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.AntiSpywareSignatures", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for AntiSpywareSignatures ---
+func packAntiSpywareSignaturesListFromSdk(ctx context.Context, sdks []security_services.AntiSpywareSignatures) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.AntiSpywareSignatures")
+	diags := diag.Diagnostics{}
+	var data []models.AntiSpywareSignatures
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.AntiSpywareSignatures
+		obj, d := packAntiSpywareSignaturesFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.AntiSpywareSignatures{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.AntiSpywareSignatures", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.AntiSpywareSignatures{}.AttrType(), data)
+}

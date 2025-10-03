@@ -1,0 +1,323 @@
+package provider
+
+import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
+
+	"github.com/paloaltonetworks/scm-go/generated/network_services"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+)
+
+// --- Unpacker for Layer3Subinterfaces ---
+func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*network_services.Layer3Subinterfaces, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.Layer3Subinterfaces", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.Layer3Subinterfaces
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.Layer3Subinterfaces
+	var d diag.Diagnostics
+	// Handling Lists
+	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
+		unpacked, d := unpackArpInnerListToSdk(ctx, model.Arp)
+		diags.Append(d...)
+		sdk.Arp = unpacked
+	}
+
+	// Handling Primitives
+	if !model.Comment.IsNull() && !model.Comment.IsUnknown() {
+		sdk.Comment = model.Comment.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Comment", "value": *sdk.Comment})
+	}
+
+	// Handling Objects
+	if !model.DdnsConfig.IsNull() && !model.DdnsConfig.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field DdnsConfig")
+		unpacked, d := unpackDdnsConfigToSdk(ctx, model.DdnsConfig)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "DdnsConfig"})
+		}
+		if unpacked != nil {
+			sdk.DdnsConfig = unpacked
+		}
+	}
+
+	// Handling Primitives
+	if !model.Device.IsNull() && !model.Device.IsUnknown() {
+		sdk.Device = model.Device.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+	}
+
+	// Handling Objects
+	if !model.DhcpClient.IsNull() && !model.DhcpClient.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field DhcpClient")
+		unpacked, d := unpackAggregateEthernetInterfacesLayer3DhcpClientToSdk(ctx, model.DhcpClient)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "DhcpClient"})
+		}
+		if unpacked != nil {
+			sdk.DhcpClient = unpacked
+		}
+	}
+
+	// Handling Primitives
+	if !model.Folder.IsNull() && !model.Folder.IsUnknown() {
+		sdk.Folder = model.Folder.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+	}
+
+	// Handling Primitives
+	if !model.Id.IsNull() && !model.Id.IsUnknown() {
+		sdk.Id = model.Id.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
+	}
+
+	// Handling Primitives
+	if !model.InterfaceManagementProfile.IsNull() && !model.InterfaceManagementProfile.IsUnknown() {
+		sdk.InterfaceManagementProfile = model.InterfaceManagementProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InterfaceManagementProfile", "value": *sdk.InterfaceManagementProfile})
+	}
+
+	// Handling Lists
+	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Ip")
+		diags.Append(model.Ip.ElementsAs(ctx, &sdk.Ip, false)...)
+	}
+
+	// Handling Primitives
+	if !model.Mtu.IsNull() && !model.Mtu.IsUnknown() {
+		val := float32(model.Mtu.ValueFloat64())
+		sdk.Mtu = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
+	}
+
+	// Handling Primitives
+	if !model.Name.IsNull() && !model.Name.IsUnknown() {
+		sdk.Name = model.Name.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	}
+
+	// Handling Primitives
+	if !model.ParentInterface.IsNull() && !model.ParentInterface.IsUnknown() {
+		sdk.ParentInterface = model.ParentInterface.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ParentInterface", "value": *sdk.ParentInterface})
+	}
+
+	// Handling Primitives
+	if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
+		sdk.Snippet = model.Snippet.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+	}
+
+	// Handling Primitives
+	if !model.Tag.IsNull() && !model.Tag.IsUnknown() {
+		val := float32(model.Tag.ValueFloat64())
+		sdk.Tag = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Tag", "value": *sdk.Tag})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.Layer3Subinterfaces", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for Layer3Subinterfaces ---
+func packLayer3SubinterfacesFromSdk(ctx context.Context, sdk network_services.Layer3Subinterfaces) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.Layer3Subinterfaces", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.Layer3Subinterfaces
+	var d diag.Diagnostics
+	// Handling Lists
+	if sdk.Arp != nil {
+		tflog.Debug(ctx, "Packing list of objects for field Arp")
+		packed, d := packArpInnerListFromSdk(ctx, sdk.Arp)
+		diags.Append(d...)
+		model.Arp = packed
+	} else {
+		model.Arp = basetypes.NewListNull(models.ArpInner{}.AttrType())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Comment != nil {
+		model.Comment = basetypes.NewStringValue(*sdk.Comment)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Comment", "value": *sdk.Comment})
+	} else {
+		model.Comment = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.DdnsConfig != nil {
+		tflog.Debug(ctx, "Packing nested object for field DdnsConfig")
+		packed, d := packDdnsConfigFromSdk(ctx, *sdk.DdnsConfig)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "DdnsConfig"})
+		}
+		model.DdnsConfig = packed
+	} else {
+		model.DdnsConfig = basetypes.NewObjectNull(models.DdnsConfig{}.AttrTypes())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Device != nil {
+		model.Device = basetypes.NewStringValue(*sdk.Device)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+	} else {
+		model.Device = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.DhcpClient != nil {
+		tflog.Debug(ctx, "Packing nested object for field DhcpClient")
+		packed, d := packAggregateEthernetInterfacesLayer3DhcpClientFromSdk(ctx, *sdk.DhcpClient)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "DhcpClient"})
+		}
+		model.DhcpClient = packed
+	} else {
+		model.DhcpClient = basetypes.NewObjectNull(models.AggregateEthernetInterfacesLayer3DhcpClient{}.AttrTypes())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Folder != nil {
+		model.Folder = basetypes.NewStringValue(*sdk.Folder)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+	} else {
+		model.Folder = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Id != nil {
+		model.Id = basetypes.NewStringValue(*sdk.Id)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
+	} else {
+		model.Id = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.InterfaceManagementProfile != nil {
+		model.InterfaceManagementProfile = basetypes.NewStringValue(*sdk.InterfaceManagementProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "InterfaceManagementProfile", "value": *sdk.InterfaceManagementProfile})
+	} else {
+		model.InterfaceManagementProfile = basetypes.NewStringNull()
+	}
+	// Handling Lists
+	if sdk.Ip != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Ip")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Ip, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Ip)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Ip = basetypes.NewListNull(elemType)
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Mtu != nil {
+		model.Mtu = basetypes.NewFloat64Value(float64(*sdk.Mtu))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
+	} else {
+		model.Mtu = basetypes.NewFloat64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	model.Name = basetypes.NewStringValue(sdk.Name)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.ParentInterface != nil {
+		model.ParentInterface = basetypes.NewStringValue(*sdk.ParentInterface)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "ParentInterface", "value": *sdk.ParentInterface})
+	} else {
+		model.ParentInterface = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Snippet != nil {
+		model.Snippet = basetypes.NewStringValue(*sdk.Snippet)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+	} else {
+		model.Snippet = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Tag != nil {
+		model.Tag = basetypes.NewFloat64Value(float64(*sdk.Tag))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Tag", "value": *sdk.Tag})
+	} else {
+		model.Tag = basetypes.NewFloat64Null()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.Layer3Subinterfaces{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.Layer3Subinterfaces", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for Layer3Subinterfaces ---
+func unpackLayer3SubinterfacesListToSdk(ctx context.Context, list types.List) ([]network_services.Layer3Subinterfaces, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.Layer3Subinterfaces")
+	diags := diag.Diagnostics{}
+	var data []models.Layer3Subinterfaces
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.Layer3Subinterfaces, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.Layer3Subinterfaces{}.AttrTypes(), &item)
+		unpacked, d := unpackLayer3SubinterfacesToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.Layer3Subinterfaces", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for Layer3Subinterfaces ---
+func packLayer3SubinterfacesListFromSdk(ctx context.Context, sdks []network_services.Layer3Subinterfaces) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.Layer3Subinterfaces")
+	diags := diag.Diagnostics{}
+	var data []models.Layer3Subinterfaces
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.Layer3Subinterfaces
+		obj, d := packLayer3SubinterfacesFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.Layer3Subinterfaces{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.Layer3Subinterfaces", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.Layer3Subinterfaces{}.AttrType(), data)
+}

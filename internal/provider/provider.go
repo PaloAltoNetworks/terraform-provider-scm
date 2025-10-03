@@ -3,9 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
-
-	sdk "github.com/paloaltonetworks/scm-go"
-	sdkapi "github.com/paloaltonetworks/scm-go/api"
+	"net/http"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
@@ -13,12 +11,39 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	setup "github.com/paloaltonetworks/scm-go"
+
+	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
+	"github.com/paloaltonetworks/scm-go/generated/identity_services"
+	"github.com/paloaltonetworks/scm-go/generated/network_services"
+	"github.com/paloaltonetworks/scm-go/generated/objects"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
+
+	tfProviderDeployment_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
+	tfProviderIdentity_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/identity_services"
+	tfProviderNetwork_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/network_services"
+	tfProviderObjects "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/objects"
+	tfProviderSecurity_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // Ensure the provider implementation interface is sound.
 var (
 	_ provider.Provider = &ScmProvider{}
 )
+
+func New(version string) provider.Provider {
+	return &ScmProvider{
+		version: version,
+	}
+}
+
+// NewFactory returns a function that creates a new provider instance with the given version
+func NewFactory(version string) func() provider.Provider {
+	return func() provider.Provider {
+		return New(version)
+	}
+}
 
 // ScmProvider is the provider implementation.
 type ScmProvider struct {
@@ -51,96 +76,46 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 		Description: "Terraform provider to interact with Palo Alto Networks Strata Cloud Manager API.",
 		Attributes: map[string]schema.Attribute{
 			"auth_url": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The URL to send auth credentials to which will return a JWT.",
-					"https://auth.apps.paloaltonetworks.com/auth/v1/oauth2/access_token",
-					"SCM_AUTH_URL",
-					"auth_url",
-				),
-				Optional: true,
+				Description: "The URL to send auth credentials to which will return a JWT. Default: `https://auth.apps.paloaltonetworks.com/auth/v1/oauth2/access_token`. Environment variable: `SCM_AUTH_URL`. JSON config file variable: `auth_url`.",
+				Optional:    true,
 			},
 			"protocol": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The protocol to use for SCM. This should be 'http' or 'https'.",
-					"https",
-					"SCM_PROTOCOL",
-					"protocol",
-				),
-				Optional: true,
+				Description: "The protocol to use for SCM. This should be 'http' or 'https'. Default: `https`. Environment variable: `SCM_PROTOCOL`. JSON config file variable: `protocol`.",
+				Optional:    true,
 			},
 			"host": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The hostname of Strata Cloud Manager API.",
-					"api.sase.paloaltonetworks.com",
-					"SCM_HOST",
-					"host",
-				),
-				Optional: true,
+				Description: "The hostname of Strata Cloud Manager API. Default: `api.sase.paloaltonetworks.com`. Environment variable: `SCM_HOST`. JSON config file variable: `host`.",
+				Optional:    true,
 			},
 			"port": schema.Int64Attribute{
-				Description: ProviderParamDescription(
-					"The port number to use for API commands, if non-standard for the given protocol.",
-					"",
-					"SCM_PORT",
-					"port",
-				),
-				Optional: true,
+				Description: "The port number to use for API commands, if non-standard for the given protocol. Environment variable: `SCM_PORT`. JSON config file variable: `port`.",
+				Optional:    true,
 			},
 			"headers": schema.MapAttribute{
-				Description: ProviderParamDescription(
-					"Custom HTTP headers to be sent with all API commands.",
-					"",
-					"SCM_HEADERS",
-					"headers",
-				),
+				Description: "Custom HTTP headers to be sent with all API commands. Environment variable: `SCM_HEADERS`. JSON config file variable: `headers`.",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
 			"client_id": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The client ID for the connection.",
-					"",
-					"SCM_CLIENT_ID",
-					"client_id",
-				),
-				Optional: true,
+				Description: "The client ID for the connection. Environment variable: `SCM_CLIENT_ID`. JSON config file variable: `client_id`.",
+				Optional:    true,
 			},
 			"client_secret": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The client secret for the connection.",
-					"",
-					"SCM_CLIENT_SECRET",
-					"client_secret",
-				),
-				Optional:  true,
-				Sensitive: true,
+				Description: "The client secret for the connection. Environment variable: `SCM_CLIENT_SECRET`. JSON config file variable: `client_secret`.",
+				Optional:    true,
+				Sensitive:   true,
 			},
 			"scope": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The client scope.",
-					"",
-					"SCM_SCOPE",
-					"scope",
-				),
-				Optional: true,
+				Description: "The client scope. Environment variable: `SCM_SCOPE`. JSON config file variable: `scope`.",
+				Optional:    true,
 			},
 			"logging": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The logging level of the provider and the underlying communication.",
-					sdkapi.LogQuiet,
-					"SCM_LOGGING",
-					"logging",
-				),
-				Optional: true,
+				Description: "The logging level of the provider and the underlying communication. Default: `quiet`. Environment variable: `SCM_LOGGING`. JSON config file variable: `logging`.",
+				Optional:    true,
 			},
 			"auth_file": schema.StringAttribute{
-				Description: ProviderParamDescription(
-					"The file path to the JSON file with auth creds for SCM.",
-					"",
-					"",
-					"",
-				),
-				Optional: true,
+				Description: "The file path to the JSON file with auth creds for SCM.",
+				Optional:    true,
 			},
 		},
 	}
@@ -149,7 +124,6 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 // Configure prepares the provider.
 func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
 	tflog.Info(ctx, "Configuring the provider client")
-
 	var config ScmProviderModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &config)...)
 	if resp.Diagnostics.HasError() {
@@ -168,7 +142,7 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		headers[hkey] = hval.ValueString()
 	}
 
-	con := &sdk.Client{
+	setupClient := &setup.Client{
 		AuthUrl:          config.AuthUrl.ValueString(),
 		Protocol:         config.Protocol.ValueString(),
 		Host:             config.Host.ValueString(),
@@ -184,231 +158,148 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		Agent:            fmt.Sprintf("Terraform/%s Provider/scm Version/%s", req.TerraformVersion, p.version),
 	}
 
-	if err := con.Setup(); err != nil {
+	if err := setupClient.Setup(); err != nil {
 		resp.Diagnostics.AddError("Provider parameter value error", err.Error())
 		return
 	}
 
-	con.HttpClient.Transport = sdkapi.NewTransport(con.HttpClient.Transport, con)
-
-	if err := con.RefreshJwt(ctx); err != nil {
-		resp.Diagnostics.AddError("Authentication error", err.Error())
-		return
+	if config.Logging.ValueString() == "debug" {
+		if setupClient.HttpClient == nil {
+			setupClient.HttpClient = &http.Client{}
+		}
+		if setupClient.HttpClient.Transport == nil {
+			setupClient.HttpClient.Transport = http.DefaultTransport
+		}
+		// FIX: Pass the context (ctx) to the LoggingRoundTripper.
+		setupClient.HttpClient.Transport = &utils.LoggingRoundTripper{
+			Wrapped: setupClient.HttpClient.Transport,
+			Ctx:     ctx,
+		}
 	}
 
-	resp.DataSourceData = con
-	resp.ResourceData = con
+	// Refresh JWT token
+	if setupClient.Jwt == "" {
+		// Only refresh if no JWT exists
+		if err := setupClient.RefreshJwt(ctx); err != nil {
+			resp.Diagnostics.AddError("Refresh JWT Authentication error", err.Error())
+			return
+		}
+	}
 
-	// Done.
+	// Create a client container with all service-specific clients
+	// Create clients map
+	clients := map[string]interface{}{
+		"deployment_services": p.getDeployment_servicesAPIClient(setupClient),
+		"identity_services":   p.getIdentity_servicesAPIClient(setupClient),
+		"network_services":    p.getNetwork_servicesAPIClient(setupClient),
+		"objects":             p.getObjectsAPIClient(setupClient),
+		"security_services":   p.getSecurity_servicesAPIClient(setupClient),
+	}
+
+	resp.DataSourceData = clients
+	resp.ResourceData = clients
 	tflog.Info(ctx, "Configured client", map[string]any{"success": true})
 }
 
+func (p *ScmProvider) getDeployment_servicesAPIClient(setupClient *setup.Client) *deployment_services.APIClient {
+	// Create the deployment_services API client
+	deployment_servicesConfig := deployment_services.NewConfiguration()
+	deployment_servicesConfig.Host = setupClient.GetHost()
+	deployment_servicesConfig.Scheme = "https"
+	deployment_servicesConfig.HTTPClient = setupClient.HttpClient
+	// Set up the default header with JWT
+	deployment_servicesConfig.DefaultHeader = make(map[string]string)
+	deployment_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
+	deployment_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
+	deployment_servicesApiClient := deployment_services.NewAPIClient(deployment_servicesConfig)
+	return deployment_servicesApiClient
+}
+
+func (p *ScmProvider) getIdentity_servicesAPIClient(setupClient *setup.Client) *identity_services.APIClient {
+	// Create the identity_services API client
+	identity_servicesConfig := identity_services.NewConfiguration()
+	identity_servicesConfig.Host = setupClient.GetHost()
+	identity_servicesConfig.Scheme = "https"
+	identity_servicesConfig.HTTPClient = setupClient.HttpClient
+	// Set up the default header with JWT
+	identity_servicesConfig.DefaultHeader = make(map[string]string)
+	identity_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
+	identity_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
+	identity_servicesApiClient := identity_services.NewAPIClient(identity_servicesConfig)
+	return identity_servicesApiClient
+}
+
+func (p *ScmProvider) getNetwork_servicesAPIClient(setupClient *setup.Client) *network_services.APIClient {
+	// Create the network_services API client
+	network_servicesConfig := network_services.NewConfiguration()
+	network_servicesConfig.Host = setupClient.GetHost()
+	network_servicesConfig.Scheme = "https"
+	network_servicesConfig.HTTPClient = setupClient.HttpClient
+	// Set up the default header with JWT
+	network_servicesConfig.DefaultHeader = make(map[string]string)
+	network_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
+	network_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
+	network_servicesApiClient := network_services.NewAPIClient(network_servicesConfig)
+	return network_servicesApiClient
+}
+
+func (p *ScmProvider) getObjectsAPIClient(setupClient *setup.Client) *objects.APIClient {
+	// Create the objects API client
+	objectsConfig := objects.NewConfiguration()
+	objectsConfig.Host = setupClient.GetHost()
+	objectsConfig.Scheme = "https"
+	objectsConfig.HTTPClient = setupClient.HttpClient
+	// Set up the default header with JWT
+	objectsConfig.DefaultHeader = make(map[string]string)
+	objectsConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
+	objectsConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
+	objectsApiClient := objects.NewAPIClient(objectsConfig)
+	return objectsApiClient
+}
+
+func (p *ScmProvider) getSecurity_servicesAPIClient(setupClient *setup.Client) *security_services.APIClient {
+	// Create the security_services API client
+	security_servicesConfig := security_services.NewConfiguration()
+	security_servicesConfig.Host = setupClient.GetHost()
+	security_servicesConfig.Scheme = "https"
+	security_servicesConfig.HTTPClient = setupClient.HttpClient
+	// Set up the default header with JWT
+	security_servicesConfig.DefaultHeader = make(map[string]string)
+	security_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
+	security_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
+	security_servicesApiClient := security_services.NewAPIClient(security_servicesConfig)
+	return security_servicesApiClient
+}
+
 // DataSources defines the data sources for this provider.
-func (p *ScmProvider) DataSources(_ context.Context) []func() datasource.DataSource {
-	return []func() datasource.DataSource{
-		NewAddressGroupDataSource,
-		NewAddressGroupListDataSource,
-		NewAddressObjectDataSource,
-		NewAddressObjectListDataSource,
-		NewAntiSpywareProfileDataSource,
-		NewAntiSpywareProfileListDataSource,
-		NewAntiSpywareSignatureDataSource,
-		NewAntiSpywareSignatureListDataSource,
-		NewAppOverrideRuleDataSource,
-		NewAppOverrideRuleListDataSource,
-		NewApplicationDataSource,
-		NewApplicationFilterDataSource,
-		NewApplicationFilterListDataSource,
-		NewApplicationGroupDataSource,
-		NewApplicationGroupListDataSource,
-		NewApplicationListDataSource,
-		NewAuthenticationPortalDataSource,
-		NewAuthenticationPortalListDataSource,
-		NewAuthenticationProfileDataSource,
-		NewAuthenticationProfileListDataSource,
-		NewAuthenticationRuleDataSource,
-		NewAuthenticationRuleListDataSource,
-		NewAuthenticationSequenceDataSource,
-		NewAuthenticationSequenceListDataSource,
-		NewAutoTagActionsListDataSource,
-		NewCertificateProfileDataSource,
-		NewCertificateProfileListDataSource,
-		NewDecryptionExclusionDataSource,
-		NewDecryptionProfileDataSource,
-		NewDecryptionProfileListDataSource,
-		NewDecryptionRuleDataSource,
-		NewDecryptionRuleListDataSource,
-		NewDeviceDataSource,
-		NewDeviceListDataSource,
-		NewDnsSecurityProfileDataSource,
-		NewDnsSecurityProfileListDataSource,
-		NewDynamicUserGroupDataSource,
-		NewDynamicUserGroupListDataSource,
-		NewExternalDynamicListDataSource,
-		NewExternalDynamicListListDataSource,
-		NewFileBlockingProfileDataSource,
-		NewFileBlockingProfileListDataSource,
-		NewFolderDataSource,
-		NewFolderListDataSource,
-		NewHipObjectDataSource,
-		NewHipObjectListDataSource,
-		NewHipProfileDataSource,
-		NewHipProfileListDataSource,
-		NewHttpHeaderProfileDataSource,
-		NewHttpHeaderProfileListDataSource,
-		NewIkeCryptoProfileDataSource,
-		NewIkeCryptoProfileListDataSource,
-		NewIkeGatewayDataSource,
-		NewIkeGatewayListDataSource,
-		NewInternalDnsServerDataSource,
-		NewInternalDnsServerListDataSource,
-		NewIpsecCryptoProfileDataSource,
-		NewIpsecCryptoProfileListDataSource,
-		NewIpsecTunnelDataSource,
-		NewIpsecTunnelListDataSource,
-		NewJobsDataSource,
-		NewJobsListDataSource,
-		NewKerberosServerProfileDataSource,
-		NewKerberosServerProfileListDataSource,
-		NewLabelListDataSource,
-		NewLabelsGetbyidResponseDataSource,
-		NewLdapServerProfileDataSource,
-		NewLdapServerProfileListDataSource,
-		NewLocalUserDataSource,
-		NewLocalUserGroupListDataSource,
-		NewLocalUserListDataSource,
-		NewMfaServerDataSource,
-		NewNatRuleDataSource,
-		NewNatRuleListDataSource,
-		NewOcspResponderDataSource,
-		NewOcspResponderListDataSource,
-		NewProfileGroupDataSource,
-		NewProfileGroupListDataSource,
-		NewQosPolicyRuleDataSource,
-		NewQosPolicyRuleListDataSource,
-		NewQosProfileDataSource,
-		NewQosProfileListDataSource,
-		NewRadiusServerProfileDataSource,
-		NewRadiusServerProfileListDataSource,
-		NewRegionDataSource,
-		NewRegionListDataSource,
-		NewRemoteNetworkDataSource,
-		NewRemoteNetworkListDataSource,
-		NewSamlServerProfileDataSource,
-		NewSamlServerProfileListDataSource,
-		NewScepProfileDataSource,
-		NewScepProfileListDataSource,
-		NewScheduleDataSource,
-		NewScheduleListDataSource,
-		NewSecurityRuleDataSource,
-		NewSecurityRuleListDataSource,
-		NewServiceConnectionDataSource,
-		NewServiceConnectionGroupDataSource,
-		NewServiceConnectionGroupListDataSource,
-		NewServiceConnectionListDataSource,
-		NewServiceDataSource,
-		NewServiceGroupDataSource,
-		NewServiceGroupListDataSource,
-		NewServiceListDataSource,
-		NewSharedInfrastructureSettingsListDataSource,
-		NewSnippetDataSource,
-		NewSnippetListDataSource,
-		NewTacacsServerProfileDataSource,
-		NewTacacsServerProfileListDataSource,
-		NewTagDataSource,
-		NewTagListDataSource,
-		NewTlsServiceProfileDataSource,
-		NewTlsServiceProfileListDataSource,
-		NewTrafficSteeringRuleDataSource,
-		NewTrafficSteeringRuleListDataSource,
-		NewTrustedCertificateAuthorityListDataSource,
-		NewUrlAccessProfileDataSource,
-		NewUrlAccessProfileListDataSource,
-		NewUrlCategoryDataSource,
-		NewUrlCategoryListDataSource,
-		NewUrlFilteringCategoryListDataSource,
-		NewVariableDataSource,
-		NewVariableListDataSource,
-		NewVulnerabilityProtectionProfileDataSource,
-		NewVulnerabilityProtectionProfileListDataSource,
-		NewVulnerabilityProtectionSignaturesDataSource,
-		NewVulnerabilityProtectionSignaturesListDataSource,
-		NewWildfireAntiVirusProfileDataSource,
-		NewWildfireAntiVirusProfileListDataSource,
-	}
+func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
+	var dataSources []func() datasource.DataSource
+	// Add deployment_services package data sources
+	dataSources = append(dataSources, tfProviderDeployment_services.GetDataSources()...)
+	// Add identity_services package data sources
+	dataSources = append(dataSources, tfProviderIdentity_services.GetDataSources()...)
+	// Add network_services package data sources
+	dataSources = append(dataSources, tfProviderNetwork_services.GetDataSources()...)
+	// Add objects package data sources
+	dataSources = append(dataSources, tfProviderObjects.GetDataSources()...)
+	// Add security_services package data sources
+	dataSources = append(dataSources, tfProviderSecurity_services.GetDataSources()...)
+	return dataSources
 }
 
-// Resources defines the data sources for this provider.
-func (p *ScmProvider) Resources(_ context.Context) []func() resource.Resource {
-	return []func() resource.Resource{
-		NewAddressGroupResource,
-		NewAddressObjectResource,
-		NewAntiSpywareProfileResource,
-		NewAntiSpywareSignatureResource,
-		NewAppOverrideRuleResource,
-		NewApplicationFilterResource,
-		NewApplicationGroupResource,
-		NewApplicationResource,
-		NewAuthenticationPortalResource,
-		NewAuthenticationProfileResource,
-		NewAuthenticationRuleResource,
-		NewAuthenticationSequenceResource,
-		NewCertificateProfileResource,
-		NewDecryptionExclusionResource,
-		NewDecryptionProfileResource,
-		NewDecryptionRuleResource,
-		NewDnsSecurityProfileResource,
-		NewDynamicUserGroupResource,
-		NewExternalDynamicListResource,
-		NewFileBlockingProfileResource,
-		NewFolderResource,
-		NewHipObjectResource,
-		NewHipProfileResource,
-		NewHttpHeaderProfileResource,
-		NewIkeCryptoProfileResource,
-		NewIkeGatewayResource,
-		NewInternalDnsServerResource,
-		NewIpsecCryptoProfileResource,
-		NewIpsecTunnelResource,
-		NewKerberosServerProfileResource,
-		NewLdapServerProfileResource,
-		NewLocalUserResource,
-		NewMfaServerResource,
-		NewNatRuleResource,
-		NewOcspResponderResource,
-		NewProfileGroupResource,
-		NewQosPolicyRuleResource,
-		NewQosProfileResource,
-		NewRadiusServerProfileResource,
-		NewRegionResource,
-		NewRemoteNetworkResource,
-		NewSamlServerProfileResource,
-		NewScepProfileResource,
-		NewScheduleResource,
-		NewSecurityRuleResource,
-		NewServiceConnectionGroupResource,
-		NewServiceConnectionResource,
-		NewServiceGroupResource,
-		NewServiceResource,
-		NewSnippetResource,
-		NewTacacsServerProfileResource,
-		NewTagResource,
-		NewTlsServiceProfileResource,
-		NewTrafficSteeringRuleResource,
-		NewUrlAccessProfileResource,
-		NewUrlCategoryResource,
-		NewVariableResource,
-		NewVulnerabilityProtectionProfileResource,
-		NewVulnerabilityProtectionSignaturesResource,
-		NewWildfireAntiVirusProfileResource,
-	}
-}
+// Resources defines the resources for this provider.
+func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource {
+	var resources []func() resource.Resource
+	// Add deployment_services package resources
+	resources = append(resources, tfProviderDeployment_services.GetResources()...)
+	// Add identity_services package resources
+	resources = append(resources, tfProviderIdentity_services.GetResources()...)
+	// Add network_services package resources
+	resources = append(resources, tfProviderNetwork_services.GetResources()...)
+	// Add objects package resources
+	resources = append(resources, tfProviderObjects.GetResources()...)
+	// Add security_services package resources
+	resources = append(resources, tfProviderSecurity_services.GetResources()...)
 
-// New is a helper function to get the provider implementation.
-func New(version string) func() provider.Provider {
-	return func() provider.Provider {
-		return &ScmProvider{
-			version: version,
-		}
-	}
+	return resources
 }

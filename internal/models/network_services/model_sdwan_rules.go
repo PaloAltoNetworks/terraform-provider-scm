@@ -107,7 +107,7 @@ func (o SdwanRulesAction) AttrType() attr.Type {
 
 // SdwanRulesResourceSchema defines the schema for SdwanRules resource
 var SdwanRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SdwanRules objects",
+	MarkdownDescription: "SdwanRule resource",
 	Attributes: map[string]schema.Attribute{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "Action",
@@ -268,7 +268,7 @@ var SdwanRulesResourceSchema = schema.Schema{
 
 // SdwanRulesDataSourceSchema defines the schema for SdwanRules data source
 var SdwanRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SdwanRules data source",
+	MarkdownDescription: "SdwanRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Action",

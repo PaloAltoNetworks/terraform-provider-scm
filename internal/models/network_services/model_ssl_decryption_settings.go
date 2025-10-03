@@ -112,7 +112,7 @@ func (o SslDecryptionSettingsSslExcludeCertInner) AttrType() attr.Type {
 
 // SslDecryptionSettingsResourceSchema defines the schema for SslDecryptionSettings resource
 var SslDecryptionSettingsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SslDecryptionSettings objects",
+	MarkdownDescription: "SslDecryptionSetting resource",
 	Attributes: map[string]schema.Attribute{
 		"disabled_ssl_exclude_cert_from_predefined": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -189,7 +189,7 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 
 // SslDecryptionSettingsDataSourceSchema defines the schema for SslDecryptionSettings data source
 var SslDecryptionSettingsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SslDecryptionSettings data source",
+	MarkdownDescription: "SslDecryptionSetting data source",
 	Attributes: map[string]dsschema.Attribute{
 		"disabled_ssl_exclude_cert_from_predefined": dsschema.ListAttribute{
 			ElementType:         types.StringType,

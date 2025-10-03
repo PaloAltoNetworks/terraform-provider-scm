@@ -233,7 +233,7 @@ func (o BgpRedistributionProfilesIpv4UnicastStatic) AttrType() attr.Type {
 
 // BgpRedistributionProfilesResourceSchema defines the schema for BgpRedistributionProfiles resource
 var BgpRedistributionProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM BgpRedistributionProfiles objects",
+	MarkdownDescription: "BgpRedistributionProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -378,7 +378,7 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 
 // BgpRedistributionProfilesDataSourceSchema defines the schema for BgpRedistributionProfiles data source
 var BgpRedistributionProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "BgpRedistributionProfiles data source",
+	MarkdownDescription: "BgpRedistributionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

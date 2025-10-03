@@ -3,12 +3,12 @@
 page_title: "scm_hip_object Data Source - scm"
 subcategory: ""
 description: |-
-  HipObjects data source
+  HipObject data source
 ---
 
 # scm_hip_object (Data Source)
 
-HipObjects data source
+HipObject data source
 
 ## Example Usage
 

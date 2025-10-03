@@ -494,7 +494,7 @@ func (o SecurityRulesSecuritySettings) AttrType() attr.Type {
 
 // SecurityRulesResourceSchema defines the schema for SecurityRules resource
 var SecurityRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SecurityRules objects",
+	MarkdownDescription: "SecurityRule resource",
 	Attributes: map[string]schema.Attribute{
 		"action": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1000,7 +1000,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 
 // SecurityRulesDataSourceSchema defines the schema for SecurityRules data source
 var SecurityRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SecurityRules data source",
+	MarkdownDescription: "SecurityRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.StringAttribute{
 			MarkdownDescription: "The action to be taken when the rule is matched",

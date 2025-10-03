@@ -3,12 +3,12 @@
 page_title: "scm_qos_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM QosProfiles objects
+  QosProfile resource
 ---
 
 # scm_qos_profile (Resource)
 
-Manages SCM QosProfiles objects
+QosProfile resource
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_service Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Services objects
+  Service resource
 ---
 
 # scm_service (Resource)
 
-Manages SCM Services objects
+Service resource
 
 ## Example Usage
 

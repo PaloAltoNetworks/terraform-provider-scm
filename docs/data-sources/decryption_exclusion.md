@@ -3,12 +3,12 @@
 page_title: "scm_decryption_exclusion Data Source - scm"
 subcategory: ""
 description: |-
-  DecryptionExclusions data source
+  DecryptionExclusion data source
 ---
 
 # scm_decryption_exclusion (Data Source)
 
-DecryptionExclusions data source
+DecryptionExclusion data source
 
 
 

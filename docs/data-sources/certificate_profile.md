@@ -3,12 +3,12 @@
 page_title: "scm_certificate_profile Data Source - scm"
 subcategory: ""
 description: |-
-  CertificateProfiles data source
+  CertificateProfile data source
 ---
 
 # scm_certificate_profile (Data Source)
 
-CertificateProfiles data source
+CertificateProfile data source
 
 ## Example Usage
 

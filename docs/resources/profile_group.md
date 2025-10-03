@@ -3,12 +3,12 @@
 page_title: "scm_profile_group Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ProfileGroups objects
+  ProfileGroup resource
 ---
 
 # scm_profile_group (Resource)
 
-Manages SCM ProfileGroups objects
+ProfileGroup resource
 
 
 

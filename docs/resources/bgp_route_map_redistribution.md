@@ -3,12 +3,12 @@
 page_title: "scm_bgp_route_map_redistribution Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM BgpRouteMapRedistributions objects
+  BgpRouteMapRedistribution resource
 ---
 
 # scm_bgp_route_map_redistribution (Resource)
 
-Manages SCM BgpRouteMapRedistributions objects
+BgpRouteMapRedistribution resource
 
 
 

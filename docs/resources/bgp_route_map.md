@@ -3,12 +3,12 @@
 page_title: "scm_bgp_route_map Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM BgpRouteMaps objects
+  BgpRouteMap resource
 ---
 
 # scm_bgp_route_map (Resource)
 
-Manages SCM BgpRouteMaps objects
+BgpRouteMap resource
 
 
 

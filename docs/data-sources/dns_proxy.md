@@ -3,12 +3,12 @@
 page_title: "scm_dns_proxy Data Source - scm"
 subcategory: ""
 description: |-
-  DnsProxies data source
+  DnsProxy data source
 ---
 
 # scm_dns_proxy (Data Source)
 
-DnsProxies data source
+DnsProxy data source
 
 
 

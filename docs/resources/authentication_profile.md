@@ -3,12 +3,12 @@
 page_title: "scm_authentication_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AuthenticationProfiles objects
+  AuthenticationProfile resource
 ---
 
 # scm_authentication_profile (Resource)
 
-Manages SCM AuthenticationProfiles objects
+AuthenticationProfile resource
 
 
 

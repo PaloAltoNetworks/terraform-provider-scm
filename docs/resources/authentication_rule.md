@@ -3,12 +3,12 @@
 page_title: "scm_authentication_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AuthenticationRules objects
+  AuthenticationRule resource
 ---
 
 # scm_authentication_rule (Resource)
 
-Manages SCM AuthenticationRules objects
+AuthenticationRule resource
 
 
 

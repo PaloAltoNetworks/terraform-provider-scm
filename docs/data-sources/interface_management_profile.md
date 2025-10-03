@@ -3,12 +3,12 @@
 page_title: "scm_interface_management_profile Data Source - scm"
 subcategory: ""
 description: |-
-  InterfaceManagementProfiles data source
+  InterfaceManagementProfile data source
 ---
 
 # scm_interface_management_profile (Data Source)
 
-InterfaceManagementProfiles data source
+InterfaceManagementProfile data source
 
 
 

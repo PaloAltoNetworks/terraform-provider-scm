@@ -3,12 +3,12 @@
 page_title: "scm_file_blocking_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM FileBlockingProfiles objects
+  FileBlockingProfile resource
 ---
 
 # scm_file_blocking_profile (Resource)
 
-Manages SCM FileBlockingProfiles objects
+FileBlockingProfile resource
 
 
 

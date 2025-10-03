@@ -3,12 +3,12 @@
 page_title: "scm_authentication_sequence Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AuthenticationSequences objects
+  AuthenticationSequence resource
 ---
 
 # scm_authentication_sequence (Resource)
 
-Manages SCM AuthenticationSequences objects
+AuthenticationSequence resource
 
 
 

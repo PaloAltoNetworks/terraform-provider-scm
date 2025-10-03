@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_path_quality_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SdwanPathQualityProfiles objects
+  SdwanPathQualityProfile resource
 ---
 
 # scm_sdwan_path_quality_profile (Resource)
 
-Manages SCM SdwanPathQualityProfiles objects
+SdwanPathQualityProfile resource
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_remote_network Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM RemoteNetworks objects
+  RemoteNetwork resource
 ---
 
 # scm_remote_network (Resource)
 
-Manages SCM RemoteNetworks objects
+RemoteNetwork resource
 
 ## Example Usage
 

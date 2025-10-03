@@ -3,12 +3,12 @@
 page_title: "scm_anti_spyware_signature Data Source - scm"
 subcategory: ""
 description: |-
-  AntiSpywareSignatures data source
+  AntiSpywareSignature data source
 ---
 
 # scm_anti_spyware_signature (Data Source)
 
-AntiSpywareSignatures data source
+AntiSpywareSignature data source
 
 
 

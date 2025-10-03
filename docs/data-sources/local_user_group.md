@@ -3,12 +3,12 @@
 page_title: "scm_local_user_group Data Source - scm"
 subcategory: ""
 description: |-
-  LocalUserGroups data source
+  LocalUserGroup data source
 ---
 
 # scm_local_user_group (Data Source)
 
-LocalUserGroups data source
+LocalUserGroup data source
 
 
 

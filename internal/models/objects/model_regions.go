@@ -80,7 +80,7 @@ func (o RegionsGeoLocation) AttrType() attr.Type {
 
 // RegionsResourceSchema defines the schema for Regions resource
 var RegionsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Regions objects",
+	MarkdownDescription: "Region resource",
 	Attributes: map[string]schema.Attribute{
 		"address": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -179,7 +179,7 @@ var RegionsResourceSchema = schema.Schema{
 
 // RegionsDataSourceSchema defines the schema for Regions data source
 var RegionsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Regions data source",
+	MarkdownDescription: "Region data source",
 	Attributes: map[string]dsschema.Attribute{
 		"address": dsschema.ListAttribute{
 			ElementType:         types.StringType,

@@ -3,12 +3,12 @@
 page_title: "scm_tunnel_interface Data Source - scm"
 subcategory: ""
 description: |-
-  TunnelInterfaces data source
+  TunnelInterface data source
 ---
 
 # scm_tunnel_interface (Data Source)
 
-TunnelInterfaces data source
+TunnelInterface data source
 
 
 

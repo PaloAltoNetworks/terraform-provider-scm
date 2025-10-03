@@ -56,7 +56,7 @@ func (o DynamicUserGroups) AttrType() attr.Type {
 
 // DynamicUserGroupsResourceSchema defines the schema for DynamicUserGroups resource
 var DynamicUserGroupsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DynamicUserGroups objects",
+	MarkdownDescription: "DynamicUserGroup resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -153,7 +153,7 @@ var DynamicUserGroupsResourceSchema = schema.Schema{
 
 // DynamicUserGroupsDataSourceSchema defines the schema for DynamicUserGroups data source
 var DynamicUserGroupsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DynamicUserGroups data source",
+	MarkdownDescription: "DynamicUserGroup data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "The description of the dynamic address group",

@@ -197,7 +197,7 @@ func (o SyslogServerProfilesServers) AttrType() attr.Type {
 
 // SyslogServerProfilesResourceSchema defines the schema for SyslogServerProfiles resource
 var SyslogServerProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SyslogServerProfiles objects",
+	MarkdownDescription: "SyslogServerProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -406,7 +406,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 
 // SyslogServerProfilesDataSourceSchema defines the schema for SyslogServerProfiles data source
 var SyslogServerProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SyslogServerProfiles data source",
+	MarkdownDescription: "SyslogServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

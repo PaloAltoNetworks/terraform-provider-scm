@@ -3,12 +3,12 @@
 page_title: "scm_kerberos_server_profile Data Source - scm"
 subcategory: ""
 description: |-
-  KerberosServerProfiles data source
+  KerberosServerProfile data source
 ---
 
 # scm_kerberos_server_profile (Data Source)
 
-KerberosServerProfiles data source
+KerberosServerProfile data source
 
 
 

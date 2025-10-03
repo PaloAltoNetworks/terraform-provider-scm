@@ -55,7 +55,7 @@ func (o Layer2Subinterfaces) AttrType() attr.Type {
 
 // Layer2SubinterfacesResourceSchema defines the schema for Layer2Subinterfaces resource
 var Layer2SubinterfacesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Layer2Subinterfaces objects",
+	MarkdownDescription: "Layer2Subinterface resource",
 	Attributes: map[string]schema.Attribute{
 		"comment": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -137,7 +137,7 @@ var Layer2SubinterfacesResourceSchema = schema.Schema{
 
 // Layer2SubinterfacesDataSourceSchema defines the schema for Layer2Subinterfaces data source
 var Layer2SubinterfacesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Layer2Subinterfaces data source",
+	MarkdownDescription: "Layer2Subinterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"comment": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

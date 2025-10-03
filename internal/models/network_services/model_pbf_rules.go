@@ -301,7 +301,7 @@ func (o PbfRulesFrom) AttrType() attr.Type {
 
 // PbfRulesResourceSchema defines the schema for PbfRules resource
 var PbfRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM PbfRules objects",
+	MarkdownDescription: "PbfRule resource",
 	Attributes: map[string]schema.Attribute{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "Action",
@@ -538,7 +538,7 @@ var PbfRulesResourceSchema = schema.Schema{
 
 // PbfRulesDataSourceSchema defines the schema for PbfRules data source
 var PbfRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "PbfRules data source",
+	MarkdownDescription: "PbfRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Action",

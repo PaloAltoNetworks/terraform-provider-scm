@@ -3,12 +3,12 @@
 page_title: "scm_dns_security_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DnsSecurityProfiles objects
+  DnsSecurityProfile resource
 ---
 
 # scm_dns_security_profile (Resource)
 
-Manages SCM DnsSecurityProfiles objects
+DnsSecurityProfile resource
 
 
 

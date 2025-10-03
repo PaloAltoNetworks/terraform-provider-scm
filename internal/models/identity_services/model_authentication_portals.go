@@ -62,7 +62,7 @@ func (o AuthenticationPortals) AttrType() attr.Type {
 
 // AuthenticationPortalsResourceSchema defines the schema for AuthenticationPortals resource
 var AuthenticationPortalsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AuthenticationPortals objects",
+	MarkdownDescription: "AuthenticationPortal resource",
 	Attributes: map[string]schema.Attribute{
 		"authentication_profile": schema.StringAttribute{
 			MarkdownDescription: "The authentication profile",
@@ -165,7 +165,7 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 
 // AuthenticationPortalsDataSourceSchema defines the schema for AuthenticationPortals data source
 var AuthenticationPortalsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AuthenticationPortals data source",
+	MarkdownDescription: "AuthenticationPortal data source",
 	Attributes: map[string]dsschema.Attribute{
 		"authentication_profile": dsschema.StringAttribute{
 			MarkdownDescription: "The authentication profile",

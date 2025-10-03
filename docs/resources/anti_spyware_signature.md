@@ -3,12 +3,12 @@
 page_title: "scm_anti_spyware_signature Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AntiSpywareSignatures objects
+  AntiSpywareSignature resource
 ---
 
 # scm_anti_spyware_signature (Resource)
 
-Manages SCM AntiSpywareSignatures objects
+AntiSpywareSignature resource
 
 
 

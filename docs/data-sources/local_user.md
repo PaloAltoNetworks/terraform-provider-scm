@@ -3,12 +3,12 @@
 page_title: "scm_local_user Data Source - scm"
 subcategory: ""
 description: |-
-  LocalUsers data source
+  LocalUser data source
 ---
 
 # scm_local_user (Data Source)
 
-LocalUsers data source
+LocalUser data source
 
 
 

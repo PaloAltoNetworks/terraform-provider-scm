@@ -3,12 +3,12 @@
 page_title: "scm_bgp_filtering_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM BgpFilteringProfiles objects
+  BgpFilteringProfile resource
 ---
 
 # scm_bgp_filtering_profile (Resource)
 
-Manages SCM BgpFilteringProfiles objects
+BgpFilteringProfile resource
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_saas_quality_profile Data Source - scm"
 subcategory: ""
 description: |-
-  SdwanSaasQualityProfiles data source
+  SdwanSaasQualityProfile data source
 ---
 
 # scm_sdwan_saas_quality_profile (Data Source)
 
-SdwanSaasQualityProfiles data source
+SdwanSaasQualityProfile data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_anti_spyware_profile Data Source - scm"
 subcategory: ""
 description: |-
-  AntiSpywareProfiles data source
+  AntiSpywareProfile data source
 ---
 
 # scm_anti_spyware_profile (Data Source)
 
-AntiSpywareProfiles data source
+AntiSpywareProfile data source
 
 
 

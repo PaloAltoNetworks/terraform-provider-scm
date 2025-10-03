@@ -3,12 +3,12 @@
 page_title: "scm_ike_gateway Data Source - scm"
 subcategory: ""
 description: |-
-  IkeGateways data source
+  IkeGateway data source
 ---
 
 # scm_ike_gateway (Data Source)
 
-IkeGateways data source
+IkeGateway data source
 
 ## Example Usage
 

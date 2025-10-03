@@ -3,12 +3,12 @@
 page_title: "scm_scep_profile Data Source - scm"
 subcategory: ""
 description: |-
-  ScepProfiles data source
+  ScepProfile data source
 ---
 
 # scm_scep_profile (Data Source)
 
-ScepProfiles data source
+ScepProfile data source
 
 
 

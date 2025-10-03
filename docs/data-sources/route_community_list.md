@@ -3,12 +3,12 @@
 page_title: "scm_route_community_list Data Source - scm"
 subcategory: ""
 description: |-
-  RouteCommunityLists data source
+  RouteCommunityList data source
 ---
 
 # scm_route_community_list (Data Source)
 
-RouteCommunityLists data source
+RouteCommunityList data source
 
 
 

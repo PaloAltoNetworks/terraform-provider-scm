@@ -289,7 +289,7 @@ func (o RouteCommunityListsTypeRegularRegularEntryInner) AttrType() attr.Type {
 
 // RouteCommunityListsResourceSchema defines the schema for RouteCommunityLists resource
 var RouteCommunityListsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM RouteCommunityLists objects",
+	MarkdownDescription: "RouteCommunityList resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -492,7 +492,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 
 // RouteCommunityListsDataSourceSchema defines the schema for RouteCommunityLists data source
 var RouteCommunityListsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "RouteCommunityLists data source",
+	MarkdownDescription: "RouteCommunityList data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

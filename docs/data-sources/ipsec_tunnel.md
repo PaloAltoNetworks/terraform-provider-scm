@@ -3,12 +3,12 @@
 page_title: "scm_ipsec_tunnel Data Source - scm"
 subcategory: ""
 description: |-
-  IpsecTunnels data source
+  IpsecTunnel data source
 ---
 
 # scm_ipsec_tunnel (Data Source)
 
-IpsecTunnels data source
+IpsecTunnel data source
 
 ## Example Usage
 

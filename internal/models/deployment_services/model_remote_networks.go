@@ -275,7 +275,7 @@ func (o RemoteNetworksProtocolBgpPeer) AttrType() attr.Type {
 
 // RemoteNetworksResourceSchema defines the schema for RemoteNetworks resource
 var RemoteNetworksResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM RemoteNetworks objects",
+	MarkdownDescription: "RemoteNetwork resource",
 	Attributes: map[string]schema.Attribute{
 		"ecmp_load_balancing": schema.StringAttribute{
 			Validators: []validator.String{
@@ -495,7 +495,7 @@ var RemoteNetworksResourceSchema = schema.Schema{
 
 // RemoteNetworksDataSourceSchema defines the schema for RemoteNetworks data source
 var RemoteNetworksDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "RemoteNetworks data source",
+	MarkdownDescription: "RemoteNetwork data source",
 	Attributes: map[string]dsschema.Attribute{
 		"ecmp_load_balancing": dsschema.StringAttribute{
 			MarkdownDescription: "Ecmp load balancing",

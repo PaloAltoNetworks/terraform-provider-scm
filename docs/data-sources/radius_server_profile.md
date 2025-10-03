@@ -3,12 +3,12 @@
 page_title: "scm_radius_server_profile Data Source - scm"
 subcategory: ""
 description: |-
-  RadiusServerProfiles data source
+  RadiusServerProfile data source
 ---
 
 # scm_radius_server_profile (Data Source)
 
-RadiusServerProfiles data source
+RadiusServerProfile data source
 
 
 

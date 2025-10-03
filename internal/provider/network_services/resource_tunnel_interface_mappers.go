@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -244,106 +243,4 @@ func packTunnelInterfacesListFromSdk(ctx context.Context, sdks []network_service
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.TunnelInterfaces", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.TunnelInterfaces{}.AttrType(), data)
-}
-
-// --- Unpacker for LoopbackInterfacesIp ---
-func unpackLoopbackInterfacesIpToSdk(ctx context.Context, obj types.Object) (*network_services.LoopbackInterfacesIp, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.LoopbackInterfacesIp", map[string]interface{}{"tf_object": obj})
-	diags := diag.Diagnostics{}
-	var model models.LoopbackInterfacesIp
-	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
-
-	var sdk network_services.LoopbackInterfacesIp
-	var d diag.Diagnostics
-	// Handling Lists
-	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field Ip")
-		diags.Append(model.Ip.ElementsAs(ctx, &sdk.Ip, false)...)
-	}
-
-	diags.Append(d...)
-
-	tflog.Debug(ctx, "Exiting unpack helper for models.LoopbackInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
-	return &sdk, diags
-
-}
-
-// --- Packer for LoopbackInterfacesIp ---
-func packLoopbackInterfacesIpFromSdk(ctx context.Context, sdk network_services.LoopbackInterfacesIp) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.LoopbackInterfacesIp", map[string]interface{}{"sdk_struct": sdk})
-	diags := diag.Diagnostics{}
-	var model models.LoopbackInterfacesIp
-	var d diag.Diagnostics
-	// Handling Lists
-	if sdk.Ip != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field Ip")
-		var d diag.Diagnostics
-		// This logic now dynamically determines the element type based on the SDK's Go type.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.Ip, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Ip)
-		diags.Append(d...)
-	} else {
-		// This logic now creates a correctly typed null list.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.Ip = basetypes.NewListNull(elemType)
-	}
-	diags.Append(d...)
-
-	obj, d := types.ObjectValueFrom(ctx, models.LoopbackInterfacesIp{}.AttrTypes(), &model)
-	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
-	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.LoopbackInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
-	return obj, diags
-
-}
-
-// --- List Unpacker for LoopbackInterfacesIp ---
-func unpackLoopbackInterfacesIpListToSdk(ctx context.Context, list types.List) ([]network_services.LoopbackInterfacesIp, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.LoopbackInterfacesIp")
-	diags := diag.Diagnostics{}
-	var data []models.LoopbackInterfacesIp
-	diags.Append(list.ElementsAs(ctx, &data, false)...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-
-	ans := make([]network_services.LoopbackInterfacesIp, 0, len(data))
-	for i, item := range data {
-		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.LoopbackInterfacesIp{}.AttrTypes(), &item)
-		unpacked, d := unpackLoopbackInterfacesIpToSdk(ctx, obj)
-		diags.Append(d...)
-		if unpacked != nil {
-			ans = append(ans, *unpacked)
-		}
-	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.LoopbackInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
-	return ans, diags
-}
-
-// --- List Packer for LoopbackInterfacesIp ---
-func packLoopbackInterfacesIpListFromSdk(ctx context.Context, sdks []network_services.LoopbackInterfacesIp) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.LoopbackInterfacesIp")
-	diags := diag.Diagnostics{}
-	var data []models.LoopbackInterfacesIp
-
-	for i, sdk := range sdks {
-		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.LoopbackInterfacesIp
-		obj, d := packLoopbackInterfacesIpFromSdk(ctx, sdk)
-		diags.Append(d...)
-		if diags.HasError() {
-			return basetypes.NewListNull(models.LoopbackInterfacesIp{}.AttrType()), diags
-		}
-		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-		data = append(data, model)
-	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.LoopbackInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.LoopbackInterfacesIp{}.AttrType(), data)
 }

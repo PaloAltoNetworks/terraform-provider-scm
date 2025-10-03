@@ -3,12 +3,12 @@
 page_title: "scm_hip_profile Data Source - scm"
 subcategory: ""
 description: |-
-  HipProfiles data source
+  HipProfile data source
 ---
 
 # scm_hip_profile (Data Source)
 
-HipProfiles data source
+HipProfile data source
 
 ## Example Usage
 

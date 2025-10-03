@@ -87,7 +87,7 @@ func (o AutoVpnPushConfigAutoVpnDevicesInner) AttrType() attr.Type {
 
 // AutoVpnPushResponseResourceSchema defines the schema for AutoVpnPushResponse resource
 var AutoVpnPushResponseResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AutoVpnPushResponse objects",
+	MarkdownDescription: "AutoVpnPushResponse resource",
 	Attributes: map[string]schema.Attribute{
 		"job": schema.StringAttribute{
 			MarkdownDescription: "Job ID",

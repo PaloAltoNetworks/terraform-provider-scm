@@ -90,7 +90,7 @@ func (o TacacsServerProfilesServerInner) AttrType() attr.Type {
 
 // TacacsServerProfilesResourceSchema defines the schema for TacacsServerProfiles resource
 var TacacsServerProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM TacacsServerProfiles objects",
+	MarkdownDescription: "TacacsServerProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -209,7 +209,7 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 
 // TacacsServerProfilesDataSourceSchema defines the schema for TacacsServerProfiles data source
 var TacacsServerProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "TacacsServerProfiles data source",
+	MarkdownDescription: "TacacsServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

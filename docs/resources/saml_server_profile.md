@@ -3,12 +3,12 @@
 page_title: "scm_saml_server_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SamlServerProfiles objects
+  SamlServerProfile resource
 ---
 
 # scm_saml_server_profile (Resource)
 
-Manages SCM SamlServerProfiles objects
+SamlServerProfile resource
 
 
 

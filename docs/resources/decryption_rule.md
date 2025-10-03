@@ -3,12 +3,12 @@
 page_title: "scm_decryption_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DecryptionRules objects
+  DecryptionRule resource
 ---
 
 # scm_decryption_rule (Resource)
 
-Manages SCM DecryptionRules objects
+DecryptionRule resource
 
 
 

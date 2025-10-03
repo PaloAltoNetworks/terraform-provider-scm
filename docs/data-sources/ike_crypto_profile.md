@@ -3,12 +3,12 @@
 page_title: "scm_ike_crypto_profile Data Source - scm"
 subcategory: ""
 description: |-
-  IkeCryptoProfiles data source
+  IkeCryptoProfile data source
 ---
 
 # scm_ike_crypto_profile (Data Source)
 
-IkeCryptoProfiles data source
+IkeCryptoProfile data source
 
 ## Example Usage
 

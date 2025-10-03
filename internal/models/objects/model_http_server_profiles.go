@@ -859,7 +859,7 @@ func (o HttpServerProfilesServerInner) AttrType() attr.Type {
 
 // HttpServerProfilesResourceSchema defines the schema for HttpServerProfiles resource
 var HttpServerProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM HttpServerProfiles objects",
+	MarkdownDescription: "HttpServerProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1959,7 +1959,7 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 
 // HttpServerProfilesDataSourceSchema defines the schema for HttpServerProfiles data source
 var HttpServerProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "HttpServerProfiles data source",
+	MarkdownDescription: "HttpServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

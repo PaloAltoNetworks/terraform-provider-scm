@@ -212,7 +212,7 @@ func (o ServiceConnectionsQos) AttrType() attr.Type {
 
 // ServiceConnectionsResourceSchema defines the schema for ServiceConnections resource
 var ServiceConnectionsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ServiceConnections objects",
+	MarkdownDescription: "ServiceConnection resource",
 	Attributes: map[string]schema.Attribute{
 		"backup__s_c": schema.StringAttribute{
 			MarkdownDescription: "Backup s c",
@@ -385,7 +385,7 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 
 // ServiceConnectionsDataSourceSchema defines the schema for ServiceConnections data source
 var ServiceConnectionsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ServiceConnections data source",
+	MarkdownDescription: "ServiceConnection data source",
 	Attributes: map[string]dsschema.Attribute{
 		"backup__s_c": dsschema.StringAttribute{
 			MarkdownDescription: "Backup s c",

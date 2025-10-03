@@ -3,12 +3,12 @@
 page_title: "scm_tacacs_server_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM TacacsServerProfiles objects
+  TacacsServerProfile resource
 ---
 
 # scm_tacacs_server_profile (Resource)
 
-Manages SCM TacacsServerProfiles objects
+TacacsServerProfile resource
 
 
 

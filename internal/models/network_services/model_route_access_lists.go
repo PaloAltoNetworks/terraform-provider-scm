@@ -232,7 +232,7 @@ func (o RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress) AttrType() attr.Typ
 
 // RouteAccessListsResourceSchema defines the schema for RouteAccessLists resource
 var RouteAccessListsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM RouteAccessLists objects",
+	MarkdownDescription: "RouteAccessList resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -392,7 +392,7 @@ var RouteAccessListsResourceSchema = schema.Schema{
 
 // RouteAccessListsDataSourceSchema defines the schema for RouteAccessLists data source
 var RouteAccessListsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "RouteAccessLists data source",
+	MarkdownDescription: "RouteAccessList data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

@@ -3,12 +3,12 @@
 page_title: "scm_traffic_steering_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM TrafficSteeringRules objects
+  TrafficSteeringRule resource
 ---
 
 # scm_traffic_steering_rule (Resource)
 
-Manages SCM TrafficSteeringRules objects
+TrafficSteeringRule resource
 
 
 

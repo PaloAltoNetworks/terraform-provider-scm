@@ -83,7 +83,7 @@ func (o RoutePathAccessListsAspathEntryInner) AttrType() attr.Type {
 
 // RoutePathAccessListsResourceSchema defines the schema for RoutePathAccessLists resource
 var RoutePathAccessListsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM RoutePathAccessLists objects",
+	MarkdownDescription: "RoutePathAccessList resource",
 	Attributes: map[string]schema.Attribute{
 		"aspath_entry": schema.ListNestedAttribute{
 			MarkdownDescription: "AS paths",
@@ -183,7 +183,7 @@ var RoutePathAccessListsResourceSchema = schema.Schema{
 
 // RoutePathAccessListsDataSourceSchema defines the schema for RoutePathAccessLists data source
 var RoutePathAccessListsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "RoutePathAccessLists data source",
+	MarkdownDescription: "RoutePathAccessList data source",
 	Attributes: map[string]dsschema.Attribute{
 		"aspath_entry": dsschema.ListNestedAttribute{
 			MarkdownDescription: "AS paths",

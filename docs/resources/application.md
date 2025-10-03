@@ -3,12 +3,12 @@
 page_title: "scm_application Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Applications objects
+  Application resource
 ---
 
 # scm_application (Resource)
 
-Manages SCM Applications objects
+Application resource
 
 ## Example Usage
 

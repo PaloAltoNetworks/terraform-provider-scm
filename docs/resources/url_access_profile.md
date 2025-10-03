@@ -3,12 +3,12 @@
 page_title: "scm_url_access_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM UrlAccessProfiles objects
+  UrlAccessProfile resource
 ---
 
 # scm_url_access_profile (Resource)
 
-Manages SCM UrlAccessProfiles objects
+UrlAccessProfile resource
 
 ## Example Usage
 

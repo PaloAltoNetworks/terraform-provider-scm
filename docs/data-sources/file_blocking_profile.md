@@ -3,12 +3,12 @@
 page_title: "scm_file_blocking_profile Data Source - scm"
 subcategory: ""
 description: |-
-  FileBlockingProfiles data source
+  FileBlockingProfile data source
 ---
 
 # scm_file_blocking_profile (Data Source)
 
-FileBlockingProfiles data source
+FileBlockingProfile data source
 
 
 

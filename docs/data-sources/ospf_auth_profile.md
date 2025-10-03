@@ -3,12 +3,12 @@
 page_title: "scm_ospf_auth_profile Data Source - scm"
 subcategory: ""
 description: |-
-  OspfAuthProfiles data source
+  OspfAuthProfile data source
 ---
 
 # scm_ospf_auth_profile (Data Source)
 
-OspfAuthProfiles data source
+OspfAuthProfile data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_authentication_profile Data Source - scm"
 subcategory: ""
 description: |-
-  AuthenticationProfiles data source
+  AuthenticationProfile data source
 ---
 
 # scm_authentication_profile (Data Source)
 
-AuthenticationProfiles data source
+AuthenticationProfile data source
 
 
 

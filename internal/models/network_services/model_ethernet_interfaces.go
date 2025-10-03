@@ -349,7 +349,7 @@ func (o Poe) AttrType() attr.Type {
 
 // EthernetInterfacesResourceSchema defines the schema for EthernetInterfaces resource
 var EthernetInterfacesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM EthernetInterfaces objects",
+	MarkdownDescription: "EthernetInterface resource",
 	Attributes: map[string]schema.Attribute{
 		"comment": schema.StringAttribute{
 			Validators: []validator.String{
@@ -684,7 +684,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 
 // EthernetInterfacesDataSourceSchema defines the schema for EthernetInterfaces data source
 var EthernetInterfacesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "EthernetInterfaces data source",
+	MarkdownDescription: "EthernetInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"comment": dsschema.StringAttribute{
 			MarkdownDescription: "Interface description",

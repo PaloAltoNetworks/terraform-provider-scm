@@ -3,12 +3,12 @@
 page_title: "scm_tls_service_profile Data Source - scm"
 subcategory: ""
 description: |-
-  TlsServiceProfiles data source
+  TlsServiceProfile data source
 ---
 
 # scm_tls_service_profile (Data Source)
 
-TlsServiceProfiles data source
+TlsServiceProfile data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_hip_object Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM HipObjects objects
+  HipObject resource
 ---
 
 # scm_hip_object (Resource)
 
-Manages SCM HipObjects objects
+HipObject resource
 
 ## Example Usage
 

@@ -91,7 +91,7 @@ func (o LogForwardingProfilesMatchListInner) AttrType() attr.Type {
 
 // LogForwardingProfilesResourceSchema defines the schema for LogForwardingProfiles resource
 var LogForwardingProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM LogForwardingProfiles objects",
+	MarkdownDescription: "LogForwardingProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Log forwarding profile description",
@@ -214,7 +214,7 @@ var LogForwardingProfilesResourceSchema = schema.Schema{
 
 // LogForwardingProfilesDataSourceSchema defines the schema for LogForwardingProfiles data source
 var LogForwardingProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "LogForwardingProfiles data source",
+	MarkdownDescription: "LogForwardingProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Log forwarding profile description",

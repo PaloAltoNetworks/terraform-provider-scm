@@ -34,6 +34,11 @@ type LoopbackInterfaces struct {
 	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
 }
 
+// LoopbackInterfacesIp represents a nested structure within the LoopbackInterfaces model
+type LoopbackInterfacesIp struct {
+	Ip basetypes.ListValue `tfsdk:"ip"`
+}
+
 // AttrTypes defines the attribute types for the LoopbackInterfaces model.
 func (o LoopbackInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -62,9 +67,23 @@ func (o LoopbackInterfaces) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the LoopbackInterfacesIp model.
+func (o LoopbackInterfacesIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ip": basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of LoopbackInterfacesIp objects.
+func (o LoopbackInterfacesIp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // LoopbackInterfacesResourceSchema defines the schema for LoopbackInterfaces resource
 var LoopbackInterfacesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM LoopbackInterfaces objects",
+	MarkdownDescription: "LoopbackInterface resource",
 	Attributes: map[string]schema.Attribute{
 		"comment": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -164,7 +183,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 
 // LoopbackInterfacesDataSourceSchema defines the schema for LoopbackInterfaces data source
 var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "LoopbackInterfaces data source",
+	MarkdownDescription: "LoopbackInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"comment": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

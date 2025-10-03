@@ -3,12 +3,12 @@
 page_title: "scm_ethernet_interface Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM EthernetInterfaces objects
+  EthernetInterface resource
 ---
 
 # scm_ethernet_interface (Resource)
 
-Manages SCM EthernetInterfaces objects
+EthernetInterface resource
 
 
 

@@ -54,7 +54,7 @@ func (o AuthenticationSequences) AttrType() attr.Type {
 
 // AuthenticationSequencesResourceSchema defines the schema for AuthenticationSequences resource
 var AuthenticationSequencesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AuthenticationSequences objects",
+	MarkdownDescription: "AuthenticationSequence resource",
 	Attributes: map[string]schema.Attribute{
 		"authentication_profiles": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -135,7 +135,7 @@ var AuthenticationSequencesResourceSchema = schema.Schema{
 
 // AuthenticationSequencesDataSourceSchema defines the schema for AuthenticationSequences data source
 var AuthenticationSequencesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AuthenticationSequences data source",
+	MarkdownDescription: "AuthenticationSequence data source",
 	Attributes: map[string]dsschema.Attribute{
 		"authentication_profiles": dsschema.ListAttribute{
 			ElementType:         types.StringType,

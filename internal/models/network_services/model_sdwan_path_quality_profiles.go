@@ -174,7 +174,7 @@ func (o SdwanPathQualityProfilesMetricPktLoss) AttrType() attr.Type {
 
 // SdwanPathQualityProfilesResourceSchema defines the schema for SdwanPathQualityProfiles resource
 var SdwanPathQualityProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SdwanPathQualityProfiles objects",
+	MarkdownDescription: "SdwanPathQualityProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -307,7 +307,7 @@ var SdwanPathQualityProfilesResourceSchema = schema.Schema{
 
 // SdwanPathQualityProfilesDataSourceSchema defines the schema for SdwanPathQualityProfiles data source
 var SdwanPathQualityProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SdwanPathQualityProfiles data source",
+	MarkdownDescription: "SdwanPathQualityProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

@@ -3,12 +3,12 @@
 page_title: "scm_layer3_subinterface Data Source - scm"
 subcategory: ""
 description: |-
-  Layer3Subinterfaces data source
+  Layer3Subinterface data source
 ---
 
 # scm_layer3_subinterface (Data Source)
 
-Layer3Subinterfaces data source
+Layer3Subinterface data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_mfa_server Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM MfaServers objects
+  MfaServer resource
 ---
 
 # scm_mfa_server (Resource)
 
-Manages SCM MfaServers objects
+MfaServer resource
 
 
 

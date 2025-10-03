@@ -3,12 +3,12 @@
 page_title: "scm_schedule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Schedules objects
+  Schedule resource
 ---
 
 # scm_schedule (Resource)
 
-Manages SCM Schedules objects
+Schedule resource
 
 
 

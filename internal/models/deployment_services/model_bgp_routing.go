@@ -84,7 +84,7 @@ func (o BgpRoutingRoutingPreference) AttrType() attr.Type {
 
 // BgpRoutingResourceSchema defines the schema for BgpRouting resource
 var BgpRoutingResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM BgpRouting objects",
+	MarkdownDescription: "BgpRouting resource",
 	Attributes: map[string]schema.Attribute{
 		"accept_route_over__s_c": schema.BoolAttribute{
 			MarkdownDescription: "Accept route over s c",

@@ -3,12 +3,12 @@
 page_title: "scm_schedule Data Source - scm"
 subcategory: ""
 description: |-
-  Schedules data source
+  Schedule data source
 ---
 
 # scm_schedule (Data Source)
 
-Schedules data source
+Schedule data source
 
 
 

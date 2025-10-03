@@ -38,7 +38,7 @@ func (o QuarantinedDevices) AttrType() attr.Type {
 
 // QuarantinedDevicesResourceSchema defines the schema for QuarantinedDevices resource
 var QuarantinedDevicesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM QuarantinedDevices objects",
+	MarkdownDescription: "QuarantinedDevice resource",
 	Attributes: map[string]schema.Attribute{
 		"host_id": schema.StringAttribute{
 			MarkdownDescription: "Device host ID",
@@ -60,7 +60,7 @@ var QuarantinedDevicesResourceSchema = schema.Schema{
 
 // QuarantinedDevicesDataSourceSchema defines the schema for QuarantinedDevices data source
 var QuarantinedDevicesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "QuarantinedDevices data source",
+	MarkdownDescription: "QuarantinedDevice data source",
 	Attributes: map[string]dsschema.Attribute{
 		"host_id": dsschema.StringAttribute{
 			MarkdownDescription: "Device host ID",

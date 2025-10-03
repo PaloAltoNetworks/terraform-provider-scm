@@ -3,12 +3,12 @@
 page_title: "scm_site Data Source - scm"
 subcategory: ""
 description: |-
-  Sites data source
+  Site data source
 ---
 
 # scm_site (Data Source)
 
-Sites data source
+Site data source
 
 
 

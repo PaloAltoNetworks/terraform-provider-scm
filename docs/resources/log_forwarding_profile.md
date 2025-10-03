@@ -3,12 +3,12 @@
 page_title: "scm_log_forwarding_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM LogForwardingProfiles objects
+  LogForwardingProfile resource
 ---
 
 # scm_log_forwarding_profile (Resource)
 
-Manages SCM LogForwardingProfiles objects
+LogForwardingProfile resource
 
 
 

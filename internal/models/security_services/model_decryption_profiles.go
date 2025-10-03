@@ -238,7 +238,7 @@ func (o DecryptionProfilesSslProtocolSettings) AttrType() attr.Type {
 
 // DecryptionProfilesResourceSchema defines the schema for DecryptionProfiles resource
 var DecryptionProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DecryptionProfiles objects",
+	MarkdownDescription: "DecryptionProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -543,7 +543,7 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 
 // DecryptionProfilesDataSourceSchema defines the schema for DecryptionProfiles data source
 var DecryptionProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DecryptionProfiles data source",
+	MarkdownDescription: "DecryptionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

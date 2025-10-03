@@ -113,7 +113,7 @@ func (o ApplicationFiltersTagging) AttrType() attr.Type {
 
 // ApplicationFiltersResourceSchema defines the schema for ApplicationFilters resource
 var ApplicationFiltersResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ApplicationFilters objects",
+	MarkdownDescription: "ApplicationFilter resource",
 	Attributes: map[string]schema.Attribute{
 		"category": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -305,7 +305,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 
 // ApplicationFiltersDataSourceSchema defines the schema for ApplicationFilters data source
 var ApplicationFiltersDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ApplicationFilters data source",
+	MarkdownDescription: "ApplicationFilter data source",
 	Attributes: map[string]dsschema.Attribute{
 		"category": dsschema.ListAttribute{
 			ElementType:         types.StringType,

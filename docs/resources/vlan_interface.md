@@ -3,12 +3,12 @@
 page_title: "scm_vlan_interface Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM VlanInterfaces objects
+  VlanInterface resource
 ---
 
 # scm_vlan_interface (Resource)
 
-Manages SCM VlanInterfaces objects
+VlanInterface resource
 
 
 

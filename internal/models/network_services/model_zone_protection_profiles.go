@@ -903,7 +903,7 @@ func (o ZoneProtectionProfilesScanWhiteListInner) AttrType() attr.Type {
 
 // ZoneProtectionProfilesResourceSchema defines the schema for ZoneProtectionProfiles resource
 var ZoneProtectionProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ZoneProtectionProfiles objects",
+	MarkdownDescription: "ZoneProtectionProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"asymmetric_path": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1564,7 +1564,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 
 // ZoneProtectionProfilesDataSourceSchema defines the schema for ZoneProtectionProfiles data source
 var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ZoneProtectionProfiles data source",
+	MarkdownDescription: "ZoneProtectionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"asymmetric_path": dsschema.StringAttribute{
 			MarkdownDescription: "Determine whether to drop or bypass packets that contain out-of-sync ACKs or out-of-window sequence numbers:\n* `global` — Use system-wide setting that is assigned through TCP Settings or the CLI.\n* `drop` — Drop packets that contain an asymmetric path.\n* `bypass` — Bypass scanning on packets that contain an asymmetric path.\n",

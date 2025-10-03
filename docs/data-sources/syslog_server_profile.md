@@ -3,12 +3,12 @@
 page_title: "scm_syslog_server_profile Data Source - scm"
 subcategory: ""
 description: |-
-  SyslogServerProfiles data source
+  SyslogServerProfile data source
 ---
 
 # scm_syslog_server_profile (Data Source)
 
-SyslogServerProfiles data source
+SyslogServerProfile data source
 
 
 

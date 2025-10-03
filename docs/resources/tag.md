@@ -3,12 +3,12 @@
 page_title: "scm_tag Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Tags objects
+  Tag resource
 ---
 
 # scm_tag (Resource)
 
-Manages SCM Tags objects
+Tag resource
 
 ## Example Usage
 

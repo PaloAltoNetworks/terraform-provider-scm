@@ -3,12 +3,12 @@
 page_title: "scm_dhcp_interface Data Source - scm"
 subcategory: ""
 description: |-
-  DhcpInterfaces data source
+  DhcpInterface data source
 ---
 
 # scm_dhcp_interface (Data Source)
 
-DhcpInterfaces data source
+DhcpInterface data source
 
 
 

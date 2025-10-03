@@ -3,12 +3,12 @@
 page_title: "scm_syslog_server_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SyslogServerProfiles objects
+  SyslogServerProfile resource
 ---
 
 # scm_syslog_server_profile (Resource)
 
-Manages SCM SyslogServerProfiles objects
+SyslogServerProfile resource
 
 
 

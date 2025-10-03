@@ -601,7 +601,7 @@ func (o AutoVpnClustersGatewaysInnerPrivateInterfacesInner) AttrType() attr.Type
 
 // AutoVpnClustersResourceSchema defines the schema for AutoVpnClusters resource
 var AutoVpnClustersResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AutoVpnClusters objects",
+	MarkdownDescription: "AutoVpnCluster resource",
 	Attributes: map[string]schema.Attribute{
 		"branches": schema.ListNestedAttribute{
 			MarkdownDescription: "Branches",
@@ -978,7 +978,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 
 // AutoVpnClustersDataSourceSchema defines the schema for AutoVpnClusters data source
 var AutoVpnClustersDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AutoVpnClusters data source",
+	MarkdownDescription: "AutoVpnCluster data source",
 	Attributes: map[string]dsschema.Attribute{
 		"branches": dsschema.ListNestedAttribute{
 			MarkdownDescription: "Branches",

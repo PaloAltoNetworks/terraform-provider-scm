@@ -53,7 +53,7 @@ func (o HipProfiles) AttrType() attr.Type {
 
 // HipProfilesResourceSchema defines the schema for HipProfiles resource
 var HipProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM HipProfiles objects",
+	MarkdownDescription: "HipProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -141,7 +141,7 @@ var HipProfilesResourceSchema = schema.Schema{
 
 // HipProfilesDataSourceSchema defines the schema for HipProfiles data source
 var HipProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "HipProfiles data source",
+	MarkdownDescription: "HipProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

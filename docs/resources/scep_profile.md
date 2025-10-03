@@ -3,12 +3,12 @@
 page_title: "scm_scep_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ScepProfiles objects
+  ScepProfile resource
 ---
 
 # scm_scep_profile (Resource)
 
-Manages SCM ScepProfiles objects
+ScepProfile resource
 
 
 

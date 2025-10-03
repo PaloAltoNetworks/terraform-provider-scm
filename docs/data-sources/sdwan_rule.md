@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_rule Data Source - scm"
 subcategory: ""
 description: |-
-  SdwanRules data source
+  SdwanRule data source
 ---
 
 # scm_sdwan_rule (Data Source)
 
-SdwanRules data source
+SdwanRule data source
 
 
 

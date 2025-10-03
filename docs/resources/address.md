@@ -3,12 +3,12 @@
 page_title: "scm_address Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Addresses objects
+  Address resource
 ---
 
 # scm_address (Resource)
 
-Manages SCM Addresses objects
+Address resource
 
 ## Example Usage
 

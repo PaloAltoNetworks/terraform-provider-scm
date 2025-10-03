@@ -3,12 +3,12 @@
 page_title: "scm_dns_proxy Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DnsProxies objects
+  DnsProxy resource
 ---
 
 # scm_dns_proxy (Resource)
 
-Manages SCM DnsProxies objects
+DnsProxy resource
 
 
 

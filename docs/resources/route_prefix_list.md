@@ -3,12 +3,12 @@
 page_title: "scm_route_prefix_list Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM RoutePrefixLists objects
+  RoutePrefixList resource
 ---
 
 # scm_route_prefix_list (Resource)
 
-Manages SCM RoutePrefixLists objects
+RoutePrefixList resource
 
 
 

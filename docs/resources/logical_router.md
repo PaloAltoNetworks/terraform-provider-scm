@@ -3,12 +3,12 @@
 page_title: "scm_logical_router Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM LogicalRouters objects
+  LogicalRouter resource
 ---
 
 # scm_logical_router (Resource)
 
-Manages SCM LogicalRouters objects
+LogicalRouter resource
 
 
 

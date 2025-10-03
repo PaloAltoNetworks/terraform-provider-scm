@@ -54,7 +54,7 @@ func (o ServiceGroups) AttrType() attr.Type {
 
 // ServiceGroupsResourceSchema defines the schema for ServiceGroups resource
 var ServiceGroupsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ServiceGroups objects",
+	MarkdownDescription: "ServiceGroup resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -145,7 +145,7 @@ var ServiceGroupsResourceSchema = schema.Schema{
 
 // ServiceGroupsDataSourceSchema defines the schema for ServiceGroups data source
 var ServiceGroupsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ServiceGroups data source",
+	MarkdownDescription: "ServiceGroup data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

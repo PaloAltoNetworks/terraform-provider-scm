@@ -3,12 +3,12 @@
 page_title: "scm_region Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Regions objects
+  Region resource
 ---
 
 # scm_region (Resource)
 
-Manages SCM Regions objects
+Region resource
 
 
 

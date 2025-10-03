@@ -174,7 +174,7 @@ func (o IpsecCryptoProfilesLifetime) AttrType() attr.Type {
 
 // IpsecCryptoProfilesResourceSchema defines the schema for IpsecCryptoProfiles resource
 var IpsecCryptoProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM IpsecCryptoProfiles objects",
+	MarkdownDescription: "IpsecCryptoProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"ah": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ah",
@@ -379,7 +379,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 
 // IpsecCryptoProfilesDataSourceSchema defines the schema for IpsecCryptoProfiles data source
 var IpsecCryptoProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "IpsecCryptoProfiles data source",
+	MarkdownDescription: "IpsecCryptoProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"ah": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Ah",

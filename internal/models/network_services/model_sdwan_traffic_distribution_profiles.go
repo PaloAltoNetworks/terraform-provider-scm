@@ -79,7 +79,7 @@ func (o SdwanTrafficDistributionProfilesLinkTagsInner) AttrType() attr.Type {
 
 // SdwanTrafficDistributionProfilesResourceSchema defines the schema for SdwanTrafficDistributionProfiles resource
 var SdwanTrafficDistributionProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SdwanTrafficDistributionProfiles objects",
+	MarkdownDescription: "SdwanTrafficDistributionProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -172,7 +172,7 @@ var SdwanTrafficDistributionProfilesResourceSchema = schema.Schema{
 
 // SdwanTrafficDistributionProfilesDataSourceSchema defines the schema for SdwanTrafficDistributionProfiles data source
 var SdwanTrafficDistributionProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SdwanTrafficDistributionProfiles data source",
+	MarkdownDescription: "SdwanTrafficDistributionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

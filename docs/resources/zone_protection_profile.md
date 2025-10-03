@@ -3,12 +3,12 @@
 page_title: "scm_zone_protection_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ZoneProtectionProfiles objects
+  ZoneProtectionProfile resource
 ---
 
 # scm_zone_protection_profile (Resource)
 
-Manages SCM ZoneProtectionProfiles objects
+ZoneProtectionProfile resource
 
 
 

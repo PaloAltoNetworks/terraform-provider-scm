@@ -123,7 +123,7 @@ func (o DecryptionRulesType) AttrType() attr.Type {
 
 // DecryptionRulesResourceSchema defines the schema for DecryptionRules resource
 var DecryptionRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DecryptionRules objects",
+	MarkdownDescription: "DecryptionRule resource",
 	Attributes: map[string]schema.Attribute{
 		"action": schema.StringAttribute{
 			Validators: []validator.String{
@@ -319,7 +319,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 
 // DecryptionRulesDataSourceSchema defines the schema for DecryptionRules data source
 var DecryptionRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DecryptionRules data source",
+	MarkdownDescription: "DecryptionRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.StringAttribute{
 			MarkdownDescription: "The action to be taken",

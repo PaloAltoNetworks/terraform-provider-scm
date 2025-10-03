@@ -3,12 +3,12 @@
 page_title: "scm_certificate_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM CertificateProfiles objects
+  CertificateProfile resource
 ---
 
 # scm_certificate_profile (Resource)
 
-Manages SCM CertificateProfiles objects
+CertificateProfile resource
 
 ## Example Usage
 

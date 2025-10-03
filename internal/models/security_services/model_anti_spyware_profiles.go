@@ -55,23 +55,6 @@ type AntiSpywareProfilesRulesInner struct {
 	ThreatName    basetypes.StringValue `tfsdk:"threat_name"`
 }
 
-// AntiSpywareProfilesRulesInnerAction represents a nested structure within the AntiSpywareProfiles model
-type AntiSpywareProfilesRulesInnerAction struct {
-	Alert       basetypes.ObjectValue `tfsdk:"alert"`
-	Allow       basetypes.ObjectValue `tfsdk:"allow"`
-	BlockIp     basetypes.ObjectValue `tfsdk:"block_ip"`
-	Drop        basetypes.ObjectValue `tfsdk:"drop"`
-	ResetBoth   basetypes.ObjectValue `tfsdk:"reset_both"`
-	ResetClient basetypes.ObjectValue `tfsdk:"reset_client"`
-	ResetServer basetypes.ObjectValue `tfsdk:"reset_server"`
-}
-
-// AntiSpywareProfilesRulesInnerActionBlockIp represents a nested structure within the AntiSpywareProfiles model
-type AntiSpywareProfilesRulesInnerActionBlockIp struct {
-	Duration basetypes.Int64Value  `tfsdk:"duration"`
-	TrackBy  basetypes.StringValue `tfsdk:"track_by"`
-}
-
 // AntiSpywareProfilesThreatExceptionInner represents a nested structure within the AntiSpywareProfiles model
 type AntiSpywareProfilesThreatExceptionInner struct {
 	Action        basetypes.ObjectValue `tfsdk:"action"`
@@ -79,23 +62,6 @@ type AntiSpywareProfilesThreatExceptionInner struct {
 	Name          basetypes.StringValue `tfsdk:"name"`
 	Notes         basetypes.StringValue `tfsdk:"notes"`
 	PacketCapture basetypes.StringValue `tfsdk:"packet_capture"`
-}
-
-// AntiSpywareProfilesThreatExceptionInnerAction represents a nested structure within the AntiSpywareProfiles model
-type AntiSpywareProfilesThreatExceptionInnerAction struct {
-	Alert       basetypes.ObjectValue `tfsdk:"alert"`
-	Allow       basetypes.ObjectValue `tfsdk:"allow"`
-	BlockIp     basetypes.ObjectValue `tfsdk:"block_ip"`
-	Default     basetypes.ObjectValue `tfsdk:"default"`
-	Drop        basetypes.ObjectValue `tfsdk:"drop"`
-	ResetBoth   basetypes.ObjectValue `tfsdk:"reset_both"`
-	ResetClient basetypes.ObjectValue `tfsdk:"reset_client"`
-	ResetServer basetypes.ObjectValue `tfsdk:"reset_server"`
-}
-
-// AntiSpywareProfilesThreatExceptionInnerExemptIpInner represents a nested structure within the AntiSpywareProfiles model
-type AntiSpywareProfilesThreatExceptionInnerExemptIpInner struct {
-	Name basetypes.StringValue `tfsdk:"name"`
 }
 
 // AttrTypes defines the attribute types for the AntiSpywareProfiles model.
@@ -268,58 +234,6 @@ func (o AntiSpywareProfilesRulesInner) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AntiSpywareProfilesRulesInnerAction model.
-func (o AntiSpywareProfilesRulesInnerAction) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"alert": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"allow": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"block_ip": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"duration": basetypes.Int64Type{},
-				"track_by": basetypes.StringType{},
-			},
-		},
-		"drop": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"reset_both": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"reset_client": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"reset_server": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of AntiSpywareProfilesRulesInnerAction objects.
-func (o AntiSpywareProfilesRulesInnerAction) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the AntiSpywareProfilesRulesInnerActionBlockIp model.
-func (o AntiSpywareProfilesRulesInnerActionBlockIp) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"duration": basetypes.Int64Type{},
-		"track_by": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of AntiSpywareProfilesRulesInnerActionBlockIp objects.
-func (o AntiSpywareProfilesRulesInnerActionBlockIp) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AttrTypes defines the attribute types for the AntiSpywareProfilesThreatExceptionInner model.
 func (o AntiSpywareProfilesThreatExceptionInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -372,63 +286,9 @@ func (o AntiSpywareProfilesThreatExceptionInner) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AntiSpywareProfilesThreatExceptionInnerAction model.
-func (o AntiSpywareProfilesThreatExceptionInnerAction) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"alert": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"allow": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"block_ip": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"duration": basetypes.Int64Type{},
-				"track_by": basetypes.StringType{},
-			},
-		},
-		"default": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"drop": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"reset_both": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"reset_client": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"reset_server": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of AntiSpywareProfilesThreatExceptionInnerAction objects.
-func (o AntiSpywareProfilesThreatExceptionInnerAction) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the AntiSpywareProfilesThreatExceptionInnerExemptIpInner model.
-func (o AntiSpywareProfilesThreatExceptionInnerExemptIpInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"name": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of AntiSpywareProfilesThreatExceptionInnerExemptIpInner objects.
-func (o AntiSpywareProfilesThreatExceptionInnerExemptIpInner) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AntiSpywareProfilesResourceSchema defines the schema for AntiSpywareProfiles resource
 var AntiSpywareProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AntiSpywareProfiles objects",
+	MarkdownDescription: "AntiSpywareProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"cloud_inline_analysis": schema.BoolAttribute{
 			MarkdownDescription: "Cloud inline analysis",
@@ -887,7 +747,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 
 // AntiSpywareProfilesDataSourceSchema defines the schema for AntiSpywareProfiles data source
 var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AntiSpywareProfiles data source",
+	MarkdownDescription: "AntiSpywareProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"cloud_inline_analysis": dsschema.BoolAttribute{
 			MarkdownDescription: "Cloud inline analysis",

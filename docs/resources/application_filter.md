@@ -3,12 +3,12 @@
 page_title: "scm_application_filter Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ApplicationFilters objects
+  ApplicationFilter resource
 ---
 
 # scm_application_filter (Resource)
 
-Manages SCM ApplicationFilters objects
+ApplicationFilter resource
 
 ## Example Usage
 

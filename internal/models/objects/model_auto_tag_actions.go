@@ -159,7 +159,7 @@ func (o AutoTagActionsActionsInnerTypeTagging) AttrType() attr.Type {
 
 // AutoTagActionsResourceSchema defines the schema for AutoTagActions resource
 var AutoTagActionsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AutoTagActions objects",
+	MarkdownDescription: "AutoTagAction resource",
 	Attributes: map[string]schema.Attribute{
 		"actions": schema.ListNestedAttribute{
 			MarkdownDescription: "Actions",
@@ -299,7 +299,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 
 // AutoTagActionsDataSourceSchema defines the schema for AutoTagActions data source
 var AutoTagActionsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AutoTagActions data source",
+	MarkdownDescription: "AutoTagAction data source",
 	Attributes: map[string]dsschema.Attribute{
 		"actions": dsschema.ListNestedAttribute{
 			MarkdownDescription: "Actions",

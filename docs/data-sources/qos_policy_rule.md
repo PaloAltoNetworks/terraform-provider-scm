@@ -3,12 +3,12 @@
 page_title: "scm_qos_policy_rule Data Source - scm"
 subcategory: ""
 description: |-
-  QosPolicyRules data source
+  QosPolicyRule data source
 ---
 
 # scm_qos_policy_rule (Data Source)
 
-QosPolicyRules data source
+QosPolicyRule data source
 
 
 

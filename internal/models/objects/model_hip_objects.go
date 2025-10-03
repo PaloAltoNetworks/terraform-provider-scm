@@ -2531,7 +2531,7 @@ func (o HipObjectsPatchManagementCriteriaMissingPatchesSeverity) AttrType() attr
 
 // HipObjectsResourceSchema defines the schema for HipObjects resource
 var HipObjectsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM HipObjects objects",
+	MarkdownDescription: "HipObject resource",
 	Attributes: map[string]schema.Attribute{
 		"anti_malware": schema.SingleNestedAttribute{
 			MarkdownDescription: "Anti malware",
@@ -4442,7 +4442,7 @@ var HipObjectsResourceSchema = schema.Schema{
 
 // HipObjectsDataSourceSchema defines the schema for HipObjects data source
 var HipObjectsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "HipObjects data source",
+	MarkdownDescription: "HipObject data source",
 	Attributes: map[string]dsschema.Attribute{
 		"anti_malware": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Anti malware",

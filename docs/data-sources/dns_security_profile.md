@@ -3,12 +3,12 @@
 page_title: "scm_dns_security_profile Data Source - scm"
 subcategory: ""
 description: |-
-  DnsSecurityProfiles data source
+  DnsSecurityProfile data source
 ---
 
 # scm_dns_security_profile (Data Source)
 
-DnsSecurityProfiles data source
+DnsSecurityProfile data source
 
 
 

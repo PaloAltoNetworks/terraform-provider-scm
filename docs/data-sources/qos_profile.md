@@ -3,12 +3,12 @@
 page_title: "scm_qos_profile Data Source - scm"
 subcategory: ""
 description: |-
-  QosProfiles data source
+  QosProfile data source
 ---
 
 # scm_qos_profile (Data Source)
 
-QosProfiles data source
+QosProfile data source
 
 
 

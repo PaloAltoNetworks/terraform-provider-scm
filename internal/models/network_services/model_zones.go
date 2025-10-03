@@ -123,7 +123,7 @@ func (o ZonesNetwork) AttrType() attr.Type {
 
 // ZonesResourceSchema defines the schema for Zones resource
 var ZonesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Zones objects",
+	MarkdownDescription: "Zone resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -260,7 +260,7 @@ var ZonesResourceSchema = schema.Schema{
 
 // ZonesDataSourceSchema defines the schema for Zones data source
 var ZonesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Zones data source",
+	MarkdownDescription: "Zone data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

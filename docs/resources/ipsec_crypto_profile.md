@@ -3,12 +3,12 @@
 page_title: "scm_ipsec_crypto_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM IpsecCryptoProfiles objects
+  IpsecCryptoProfile resource
 ---
 
 # scm_ipsec_crypto_profile (Resource)
 
-Manages SCM IpsecCryptoProfiles objects
+IpsecCryptoProfile resource
 
 ## Example Usage
 

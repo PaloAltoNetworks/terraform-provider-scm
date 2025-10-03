@@ -959,7 +959,7 @@ func (o BgpAddressFamilySendCommunity) AttrType() attr.Type {
 
 // BgpAddressFamilyProfilesResourceSchema defines the schema for BgpAddressFamilyProfiles resource
 var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM BgpAddressFamilyProfiles objects",
+	MarkdownDescription: "BgpAddressFamilyProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1537,7 +1537,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 
 // BgpAddressFamilyProfilesDataSourceSchema defines the schema for BgpAddressFamilyProfiles data source
 var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "BgpAddressFamilyProfiles data source",
+	MarkdownDescription: "BgpAddressFamilyProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

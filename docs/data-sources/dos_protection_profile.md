@@ -3,12 +3,12 @@
 page_title: "scm_dos_protection_profile Data Source - scm"
 subcategory: ""
 description: |-
-  DosProtectionProfiles data source
+  DosProtectionProfile data source
 ---
 
 # scm_dos_protection_profile (Data Source)
 
-DosProtectionProfiles data source
+DosProtectionProfile data source
 
 
 

@@ -51,7 +51,7 @@ func (o DecryptionExclusions) AttrType() attr.Type {
 
 // DecryptionExclusionsResourceSchema defines the schema for DecryptionExclusions resource
 var DecryptionExclusionsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DecryptionExclusions objects",
+	MarkdownDescription: "DecryptionExclusion resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -125,7 +125,7 @@ var DecryptionExclusionsResourceSchema = schema.Schema{
 
 // DecryptionExclusionsDataSourceSchema defines the schema for DecryptionExclusions data source
 var DecryptionExclusionsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DecryptionExclusions data source",
+	MarkdownDescription: "DecryptionExclusion data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

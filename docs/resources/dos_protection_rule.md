@@ -3,12 +3,12 @@
 page_title: "scm_dos_protection_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DosProtectionRules objects
+  DosProtectionRule resource
 ---
 
 # scm_dos_protection_rule (Resource)
 
-Manages SCM DosProtectionRules objects
+DosProtectionRule resource
 
 
 

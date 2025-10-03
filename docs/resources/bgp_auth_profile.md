@@ -3,12 +3,12 @@
 page_title: "scm_bgp_auth_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM BgpAuthProfiles objects
+  BgpAuthProfile resource
 ---
 
 # scm_bgp_auth_profile (Resource)
 
-Manages SCM BgpAuthProfiles objects
+BgpAuthProfile resource
 
 
 

@@ -506,7 +506,7 @@ func (o DosProtectionProfilesResourceSessions) AttrType() attr.Type {
 
 // DosProtectionProfilesResourceSchema defines the schema for DosProtectionProfiles resource
 var DosProtectionProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DosProtectionProfiles objects",
+	MarkdownDescription: "DosProtectionProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -913,7 +913,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 
 // DosProtectionProfilesDataSourceSchema defines the schema for DosProtectionProfiles data source
 var DosProtectionProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DosProtectionProfiles data source",
+	MarkdownDescription: "DosProtectionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

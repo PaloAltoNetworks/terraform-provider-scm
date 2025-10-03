@@ -3,12 +3,12 @@
 page_title: "scm_dos_protection_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DosProtectionProfiles objects
+  DosProtectionProfile resource
 ---
 
 # scm_dos_protection_profile (Resource)
 
-Manages SCM DosProtectionProfiles objects
+DosProtectionProfile resource
 
 
 

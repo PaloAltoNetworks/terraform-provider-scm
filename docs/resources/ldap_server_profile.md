@@ -3,12 +3,12 @@
 page_title: "scm_ldap_server_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM LdapServerProfiles objects
+  LdapServerProfile resource
 ---
 
 # scm_ldap_server_profile (Resource)
 
-Manages SCM LdapServerProfiles objects
+LdapServerProfile resource
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_http_server_profile Data Source - scm"
 subcategory: ""
 description: |-
-  HttpServerProfiles data source
+  HttpServerProfile data source
 ---
 
 # scm_http_server_profile (Data Source)
 
-HttpServerProfiles data source
+HttpServerProfile data source
 
 
 

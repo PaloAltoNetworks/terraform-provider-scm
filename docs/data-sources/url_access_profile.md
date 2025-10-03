@@ -3,12 +3,12 @@
 page_title: "scm_url_access_profile Data Source - scm"
 subcategory: ""
 description: |-
-  UrlAccessProfiles data source
+  UrlAccessProfile data source
 ---
 
 # scm_url_access_profile (Data Source)
 
-UrlAccessProfiles data source
+UrlAccessProfile data source
 
 ## Example Usage
 

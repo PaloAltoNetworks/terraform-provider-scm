@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_traffic_distribution_profile Data Source - scm"
 subcategory: ""
 description: |-
-  SdwanTrafficDistributionProfiles data source
+  SdwanTrafficDistributionProfile data source
 ---
 
 # scm_sdwan_traffic_distribution_profile (Data Source)
 
-SdwanTrafficDistributionProfiles data source
+SdwanTrafficDistributionProfile data source
 
 
 

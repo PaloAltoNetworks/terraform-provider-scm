@@ -3,12 +3,12 @@
 page_title: "scm_loopback_interface Data Source - scm"
 subcategory: ""
 description: |-
-  LoopbackInterfaces data source
+  LoopbackInterface data source
 ---
 
 # scm_loopback_interface (Data Source)
 
-LoopbackInterfaces data source
+LoopbackInterface data source
 
 
 

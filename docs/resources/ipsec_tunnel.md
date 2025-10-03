@@ -3,12 +3,12 @@
 page_title: "scm_ipsec_tunnel Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM IpsecTunnels objects
+  IpsecTunnel resource
 ---
 
 # scm_ipsec_tunnel (Resource)
 
-Manages SCM IpsecTunnels objects
+IpsecTunnel resource
 
 ## Example Usage
 

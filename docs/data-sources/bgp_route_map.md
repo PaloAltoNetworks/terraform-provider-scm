@@ -3,12 +3,12 @@
 page_title: "scm_bgp_route_map Data Source - scm"
 subcategory: ""
 description: |-
-  BgpRouteMaps data source
+  BgpRouteMap data source
 ---
 
 # scm_bgp_route_map (Data Source)
 
-BgpRouteMaps data source
+BgpRouteMap data source
 
 
 

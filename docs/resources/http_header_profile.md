@@ -3,12 +3,12 @@
 page_title: "scm_http_header_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM HttpHeaderProfiles objects
+  HttpHeaderProfile resource
 ---
 
 # scm_http_header_profile (Resource)
 
-Manages SCM HttpHeaderProfiles objects
+HttpHeaderProfile resource
 
 
 

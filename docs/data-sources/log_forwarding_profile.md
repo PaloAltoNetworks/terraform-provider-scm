@@ -3,12 +3,12 @@
 page_title: "scm_log_forwarding_profile Data Source - scm"
 subcategory: ""
 description: |-
-  LogForwardingProfiles data source
+  LogForwardingProfile data source
 ---
 
 # scm_log_forwarding_profile (Data Source)
 
-LogForwardingProfiles data source
+LogForwardingProfile data source
 
 
 

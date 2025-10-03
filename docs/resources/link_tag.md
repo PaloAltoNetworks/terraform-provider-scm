@@ -3,12 +3,12 @@
 page_title: "scm_link_tag Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM LinkTags objects
+  LinkTag resource
 ---
 
 # scm_link_tag (Resource)
 
-Manages SCM LinkTags objects
+LinkTag resource
 
 
 

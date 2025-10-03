@@ -3,12 +3,12 @@
 page_title: "scm_pbf_rule Data Source - scm"
 subcategory: ""
 description: |-
-  PbfRules data source
+  PbfRule data source
 ---
 
 # scm_pbf_rule (Data Source)
 
-PbfRules data source
+PbfRule data source
 
 
 

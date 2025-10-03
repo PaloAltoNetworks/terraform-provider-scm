@@ -301,7 +301,7 @@ func (o DnsSecurityProfilesBotnetDomainsWhitelistInner) AttrType() attr.Type {
 
 // DnsSecurityProfilesResourceSchema defines the schema for DnsSecurityProfiles resource
 var DnsSecurityProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DnsSecurityProfiles objects",
+	MarkdownDescription: "DnsSecurityProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"botnet_domains": schema.SingleNestedAttribute{
 			MarkdownDescription: "Botnet domains",
@@ -527,7 +527,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 
 // DnsSecurityProfilesDataSourceSchema defines the schema for DnsSecurityProfiles data source
 var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DnsSecurityProfiles data source",
+	MarkdownDescription: "DnsSecurityProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"botnet_domains": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Botnet domains",

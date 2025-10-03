@@ -457,7 +457,7 @@ func (o IpsecTunnelsTunnelMonitor) AttrType() attr.Type {
 
 // IpsecTunnelsResourceSchema defines the schema for IpsecTunnels resource
 var IpsecTunnelsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM IpsecTunnels objects",
+	MarkdownDescription: "IpsecTunnel resource",
 	Attributes: map[string]schema.Attribute{
 		"anti_replay": schema.BoolAttribute{
 			MarkdownDescription: "Enable Anti-Replay check on this tunnel",
@@ -798,7 +798,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 
 // IpsecTunnelsDataSourceSchema defines the schema for IpsecTunnels data source
 var IpsecTunnelsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "IpsecTunnels data source",
+	MarkdownDescription: "IpsecTunnel data source",
 	Attributes: map[string]dsschema.Attribute{
 		"anti_replay": dsschema.BoolAttribute{
 			MarkdownDescription: "Enable Anti-Replay check on this tunnel",

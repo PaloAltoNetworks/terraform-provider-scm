@@ -67,7 +67,7 @@ func (o ProfileGroups) AttrType() attr.Type {
 
 // ProfileGroupsResourceSchema defines the schema for ProfileGroups resource
 var ProfileGroupsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ProfileGroups objects",
+	MarkdownDescription: "ProfileGroup resource",
 	Attributes: map[string]schema.Attribute{
 		"ai_security": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -182,7 +182,7 @@ var ProfileGroupsResourceSchema = schema.Schema{
 
 // ProfileGroupsDataSourceSchema defines the schema for ProfileGroups data source
 var ProfileGroupsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ProfileGroups data source",
+	MarkdownDescription: "ProfileGroup data source",
 	Attributes: map[string]dsschema.Attribute{
 		"ai_security": dsschema.ListAttribute{
 			ElementType:         types.StringType,

@@ -3,12 +3,12 @@
 page_title: "scm_bgp_address_family_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM BgpAddressFamilyProfiles objects
+  BgpAddressFamilyProfile resource
 ---
 
 # scm_bgp_address_family_profile (Resource)
 
-Manages SCM BgpAddressFamilyProfiles objects
+BgpAddressFamilyProfile resource
 
 
 

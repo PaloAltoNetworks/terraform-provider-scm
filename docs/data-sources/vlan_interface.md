@@ -3,12 +3,12 @@
 page_title: "scm_vlan_interface Data Source - scm"
 subcategory: ""
 description: |-
-  VlanInterfaces data source
+  VlanInterface data source
 ---
 
 # scm_vlan_interface (Data Source)
 
-VlanInterfaces data source
+VlanInterface data source
 
 
 

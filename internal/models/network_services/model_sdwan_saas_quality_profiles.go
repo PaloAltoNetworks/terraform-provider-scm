@@ -221,7 +221,7 @@ func (o SdwanSaasQualityProfilesMonitorModeStaticIpIpAddressInner) AttrType() at
 
 // SdwanSaasQualityProfilesResourceSchema defines the schema for SdwanSaasQualityProfiles resource
 var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SdwanSaasQualityProfiles objects",
+	MarkdownDescription: "SdwanSaasQualityProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -389,7 +389,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 
 // SdwanSaasQualityProfilesDataSourceSchema defines the schema for SdwanSaasQualityProfiles data source
 var SdwanSaasQualityProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SdwanSaasQualityProfiles data source",
+	MarkdownDescription: "SdwanSaasQualityProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

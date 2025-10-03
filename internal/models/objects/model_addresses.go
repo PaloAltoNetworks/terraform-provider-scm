@@ -61,7 +61,7 @@ func (o Addresses) AttrType() attr.Type {
 
 // AddressesResourceSchema defines the schema for Addresses resource
 var AddressesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Addresses objects",
+	MarkdownDescription: "Address resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -159,7 +159,7 @@ var AddressesResourceSchema = schema.Schema{
 
 // AddressesDataSourceSchema defines the schema for Addresses data source
 var AddressesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Addresses data source",
+	MarkdownDescription: "Address data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "The description of the address object",

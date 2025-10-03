@@ -3,12 +3,12 @@
 page_title: "scm_tls_service_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM TlsServiceProfiles objects
+  TlsServiceProfile resource
 ---
 
 # scm_tls_service_profile (Resource)
 
-Manages SCM TlsServiceProfiles objects
+TlsServiceProfile resource
 
 
 

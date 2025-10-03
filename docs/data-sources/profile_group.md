@@ -3,12 +3,12 @@
 page_title: "scm_profile_group Data Source - scm"
 subcategory: ""
 description: |-
-  ProfileGroups data source
+  ProfileGroup data source
 ---
 
 # scm_profile_group (Data Source)
 
-ProfileGroups data source
+ProfileGroup data source
 
 
 

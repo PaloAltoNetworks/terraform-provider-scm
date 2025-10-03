@@ -3,12 +3,12 @@
 page_title: "scm_zone Data Source - scm"
 subcategory: ""
 description: |-
-  Zones data source
+  Zone data source
 ---
 
 # scm_zone (Data Source)
 
-Zones data source
+Zone data source
 
 
 

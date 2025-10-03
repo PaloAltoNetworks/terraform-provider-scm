@@ -171,7 +171,7 @@ func (o SchedulesScheduleTypeRecurringWeekly) AttrType() attr.Type {
 
 // SchedulesResourceSchema defines the schema for Schedules resource
 var SchedulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Schedules objects",
+	MarkdownDescription: "Schedule resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -351,7 +351,7 @@ var SchedulesResourceSchema = schema.Schema{
 
 // SchedulesDataSourceSchema defines the schema for Schedules data source
 var SchedulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Schedules data source",
+	MarkdownDescription: "Schedule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

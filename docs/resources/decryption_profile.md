@@ -3,12 +3,12 @@
 page_title: "scm_decryption_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DecryptionProfiles objects
+  DecryptionProfile resource
 ---
 
 # scm_decryption_profile (Resource)
 
-Manages SCM DecryptionProfiles objects
+DecryptionProfile resource
 
 
 

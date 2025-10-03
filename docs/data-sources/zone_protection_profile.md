@@ -3,12 +3,12 @@
 page_title: "scm_zone_protection_profile Data Source - scm"
 subcategory: ""
 description: |-
-  ZoneProtectionProfiles data source
+  ZoneProtectionProfile data source
 ---
 
 # scm_zone_protection_profile (Data Source)
 
-ZoneProtectionProfiles data source
+ZoneProtectionProfile data source
 
 
 

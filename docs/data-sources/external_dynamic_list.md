@@ -3,12 +3,12 @@
 page_title: "scm_external_dynamic_list Data Source - scm"
 subcategory: ""
 description: |-
-  ExternalDynamicLists data source
+  ExternalDynamicList data source
 ---
 
 # scm_external_dynamic_list (Data Source)
 
-ExternalDynamicLists data source
+ExternalDynamicList data source
 
 ## Example Usage
 

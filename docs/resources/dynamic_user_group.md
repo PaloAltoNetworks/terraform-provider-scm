@@ -3,12 +3,12 @@
 page_title: "scm_dynamic_user_group Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DynamicUserGroups objects
+  DynamicUserGroup resource
 ---
 
 # scm_dynamic_user_group (Resource)
 
-Manages SCM DynamicUserGroups objects
+DynamicUserGroup resource
 
 ## Example Usage
 

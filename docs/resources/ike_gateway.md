@@ -3,12 +3,12 @@
 page_title: "scm_ike_gateway Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM IkeGateways objects
+  IkeGateway resource
 ---
 
 # scm_ike_gateway (Resource)
 
-Manages SCM IkeGateways objects
+IkeGateway resource
 
 ## Example Usage
 

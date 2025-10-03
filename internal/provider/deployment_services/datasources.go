@@ -7,23 +7,23 @@ import (
 // GetDataSources returns the list of data sources for this package.
 func GetDataSources() []func() datasource.DataSource {
 	return []func() datasource.DataSource{
-		NewSiteDataSource,
-		// 		NewBgpRoutingDataSource,
+		NewTrafficSteeringRuleDataSource,
 		NewServiceConnectionDataSource,
 		NewServiceConnectionGroupDataSource,
-		// 		NewBandwidthAllocationDataSource,
 		// 		NewInternalDnsServerDataSource,
-		NewTrafficSteeringRuleDataSource,
-		NewRemoteNetworkDataSource,
+		// 		NewBgpRoutingDataSource,
 		// 		NewSharedInfrastructureSettingDataSource,
-		NewSiteListDataSource,
-		// 		NewBgpRoutingListDataSource,
+		NewSiteDataSource,
+		// 		NewBandwidthAllocationDataSource,
+		NewRemoteNetworkDataSource,
+		NewTrafficSteeringRuleListDataSource,
 		NewServiceConnectionListDataSource,
 		NewServiceConnectionGroupListDataSource,
-		// 		NewBandwidthAllocationListDataSource,
 		// 		NewInternalDnsServerListDataSource,
-		NewTrafficSteeringRuleListDataSource,
-		NewRemoteNetworkListDataSource,
+		// 		NewBgpRoutingListDataSource,
 		// 		NewSharedInfrastructureSettingListDataSource,
+		NewSiteListDataSource,
+		// 		NewBandwidthAllocationListDataSource,
+		NewRemoteNetworkListDataSource,
 	}
 }

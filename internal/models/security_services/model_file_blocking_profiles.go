@@ -88,7 +88,7 @@ func (o FileBlockingProfilesRulesInner) AttrType() attr.Type {
 
 // FileBlockingProfilesResourceSchema defines the schema for FileBlockingProfiles resource
 var FileBlockingProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM FileBlockingProfiles objects",
+	MarkdownDescription: "FileBlockingProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -198,7 +198,7 @@ var FileBlockingProfilesResourceSchema = schema.Schema{
 
 // FileBlockingProfilesDataSourceSchema defines the schema for FileBlockingProfiles data source
 var FileBlockingProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "FileBlockingProfiles data source",
+	MarkdownDescription: "FileBlockingProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

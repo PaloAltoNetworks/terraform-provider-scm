@@ -3,12 +3,12 @@
 page_title: "scm_remote_network Data Source - scm"
 subcategory: ""
 description: |-
-  RemoteNetworks data source
+  RemoteNetwork data source
 ---
 
 # scm_remote_network (Data Source)
 
-RemoteNetworks data source
+RemoteNetwork data source
 
 ## Example Usage
 

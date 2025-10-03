@@ -53,7 +53,7 @@ func (o LinkTags) AttrType() attr.Type {
 
 // LinkTagsResourceSchema defines the schema for LinkTags resource
 var LinkTagsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM LinkTags objects",
+	MarkdownDescription: "LinkTag resource",
 	Attributes: map[string]schema.Attribute{
 		"color": schema.StringAttribute{
 			Validators: []validator.String{
@@ -140,7 +140,7 @@ var LinkTagsResourceSchema = schema.Schema{
 
 // LinkTagsDataSourceSchema defines the schema for LinkTags data source
 var LinkTagsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "LinkTags data source",
+	MarkdownDescription: "LinkTag data source",
 	Attributes: map[string]dsschema.Attribute{
 		"color": dsschema.StringAttribute{
 			MarkdownDescription: "The color of the link tag",

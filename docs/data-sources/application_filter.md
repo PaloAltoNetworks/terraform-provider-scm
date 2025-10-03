@@ -3,12 +3,12 @@
 page_title: "scm_application_filter Data Source - scm"
 subcategory: ""
 description: |-
-  ApplicationFilters data source
+  ApplicationFilter data source
 ---
 
 # scm_application_filter (Data Source)
 
-ApplicationFilters data source
+ApplicationFilter data source
 
 ## Example Usage
 

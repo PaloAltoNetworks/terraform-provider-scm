@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_saas_quality_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SdwanSaasQualityProfiles objects
+  SdwanSaasQualityProfile resource
 ---
 
 # scm_sdwan_saas_quality_profile (Resource)
 
-Manages SCM SdwanSaasQualityProfiles objects
+SdwanSaasQualityProfile resource
 
 
 

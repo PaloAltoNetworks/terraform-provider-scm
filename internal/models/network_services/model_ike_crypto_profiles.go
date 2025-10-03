@@ -93,7 +93,7 @@ func (o IkeCryptoProfilesLifetime) AttrType() attr.Type {
 
 // IkeCryptoProfilesResourceSchema defines the schema for IkeCryptoProfiles resource
 var IkeCryptoProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM IkeCryptoProfiles objects",
+	MarkdownDescription: "IkeCryptoProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"authentication_multiple": schema.Int64Attribute{
 			MarkdownDescription: "IKEv2 SA reauthentication interval equals authetication-multiple * rekey-lifetime; 0 means reauthentication disabled",
@@ -241,7 +241,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 
 // IkeCryptoProfilesDataSourceSchema defines the schema for IkeCryptoProfiles data source
 var IkeCryptoProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "IkeCryptoProfiles data source",
+	MarkdownDescription: "IkeCryptoProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"authentication_multiple": dsschema.Int64Attribute{
 			MarkdownDescription: "IKEv2 SA reauthentication interval equals authetication-multiple * rekey-lifetime; 0 means reauthentication disabled",

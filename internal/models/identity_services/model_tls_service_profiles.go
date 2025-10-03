@@ -116,7 +116,7 @@ func (o TlsServiceProfilesProtocolSettings) AttrType() attr.Type {
 
 // TlsServiceProfilesResourceSchema defines the schema for TlsServiceProfiles resource
 var TlsServiceProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM TlsServiceProfiles objects",
+	MarkdownDescription: "TlsServiceProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"certificate": schema.StringAttribute{
 			Validators: []validator.String{
@@ -269,7 +269,7 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 
 // TlsServiceProfilesDataSourceSchema defines the schema for TlsServiceProfiles data source
 var TlsServiceProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "TlsServiceProfiles data source",
+	MarkdownDescription: "TlsServiceProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"certificate": dsschema.StringAttribute{
 			MarkdownDescription: "Certificate name",

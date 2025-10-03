@@ -44,7 +44,7 @@ func (o InternalDnsServers) AttrType() attr.Type {
 
 // InternalDnsServersResourceSchema defines the schema for InternalDnsServers resource
 var InternalDnsServersResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM InternalDnsServers objects",
+	MarkdownDescription: "InternalDnsServer resource",
 	Attributes: map[string]schema.Attribute{
 		"domain_name": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -82,7 +82,7 @@ var InternalDnsServersResourceSchema = schema.Schema{
 
 // InternalDnsServersDataSourceSchema defines the schema for InternalDnsServers data source
 var InternalDnsServersDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "InternalDnsServers data source",
+	MarkdownDescription: "InternalDnsServer data source",
 	Attributes: map[string]dsschema.Attribute{
 		"domain_name": dsschema.ListAttribute{
 			ElementType:         types.StringType,

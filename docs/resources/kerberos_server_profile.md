@@ -3,12 +3,12 @@
 page_title: "scm_kerberos_server_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM KerberosServerProfiles objects
+  KerberosServerProfile resource
 ---
 
 # scm_kerberos_server_profile (Resource)
 
-Manages SCM KerberosServerProfiles objects
+KerberosServerProfile resource
 
 
 

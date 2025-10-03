@@ -236,7 +236,7 @@ func (o DosProtectionRulesProtectionClassifiedClassificationCriteria) AttrType()
 
 // DosProtectionRulesResourceSchema defines the schema for DosProtectionRules resource
 var DosProtectionRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DosProtectionRules objects",
+	MarkdownDescription: "DosProtectionRule resource",
 	Attributes: map[string]schema.Attribute{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "The action to take on rule match",
@@ -461,7 +461,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 
 // DosProtectionRulesDataSourceSchema defines the schema for DosProtectionRules data source
 var DosProtectionRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DosProtectionRules data source",
+	MarkdownDescription: "DosProtectionRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "The action to take on rule match",

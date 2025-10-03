@@ -3,12 +3,12 @@
 page_title: "scm_ipsec_crypto_profile Data Source - scm"
 subcategory: ""
 description: |-
-  IpsecCryptoProfiles data source
+  IpsecCryptoProfile data source
 ---
 
 # scm_ipsec_crypto_profile (Data Source)
 
-IpsecCryptoProfiles data source
+IpsecCryptoProfile data source
 
 ## Example Usage
 

@@ -325,7 +325,7 @@ func (o DnsProxiesUdpQueriesRetries) AttrType() attr.Type {
 
 // DnsProxiesResourceSchema defines the schema for DnsProxies resource
 var DnsProxiesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DnsProxies objects",
+	MarkdownDescription: "DnsProxy resource",
 	Attributes: map[string]schema.Attribute{
 		"cache": schema.SingleNestedAttribute{
 			MarkdownDescription: "Cache",
@@ -543,7 +543,7 @@ var DnsProxiesResourceSchema = schema.Schema{
 
 // DnsProxiesDataSourceSchema defines the schema for DnsProxies data source
 var DnsProxiesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DnsProxies data source",
+	MarkdownDescription: "DnsProxy data source",
 	Attributes: map[string]dsschema.Attribute{
 		"cache": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Cache",

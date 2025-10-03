@@ -227,7 +227,7 @@ func (o ServicesProtocolUdpOverride) AttrType() attr.Type {
 
 // ServicesResourceSchema defines the schema for Services resource
 var ServicesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Services objects",
+	MarkdownDescription: "Service resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -432,7 +432,7 @@ var ServicesResourceSchema = schema.Schema{
 
 // ServicesDataSourceSchema defines the schema for Services data source
 var ServicesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Services data source",
+	MarkdownDescription: "Service data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

@@ -3,12 +3,12 @@
 page_title: "scm_application_group Data Source - scm"
 subcategory: ""
 description: |-
-  ApplicationGroups data source
+  ApplicationGroup data source
 ---
 
 # scm_application_group (Data Source)
 
-ApplicationGroups data source
+ApplicationGroup data source
 
 ## Example Usage
 

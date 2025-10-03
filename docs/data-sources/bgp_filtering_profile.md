@@ -3,12 +3,12 @@
 page_title: "scm_bgp_filtering_profile Data Source - scm"
 subcategory: ""
 description: |-
-  BgpFilteringProfiles data source
+  BgpFilteringProfile data source
 ---
 
 # scm_bgp_filtering_profile (Data Source)
 
-BgpFilteringProfiles data source
+BgpFilteringProfile data source
 
 
 

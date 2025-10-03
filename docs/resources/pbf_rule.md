@@ -3,12 +3,12 @@
 page_title: "scm_pbf_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM PbfRules objects
+  PbfRule resource
 ---
 
 # scm_pbf_rule (Resource)
 
-Manages SCM PbfRules objects
+PbfRule resource
 
 
 

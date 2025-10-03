@@ -66,7 +66,7 @@ func (o SamlServerProfiles) AttrType() attr.Type {
 
 // SamlServerProfilesResourceSchema defines the schema for SamlServerProfiles resource
 var SamlServerProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SamlServerProfiles objects",
+	MarkdownDescription: "SamlServerProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"certificate": schema.StringAttribute{
 			Validators: []validator.String{
@@ -188,7 +188,7 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 
 // SamlServerProfilesDataSourceSchema defines the schema for SamlServerProfiles data source
 var SamlServerProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SamlServerProfiles data source",
+	MarkdownDescription: "SamlServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"certificate": dsschema.StringAttribute{
 			MarkdownDescription: "The identity provider certificate",

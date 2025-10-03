@@ -3,12 +3,12 @@
 page_title: "scm_security_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SecurityRules objects
+  SecurityRule resource
 ---
 
 # scm_security_rule (Resource)
 
-Manages SCM SecurityRules objects
+SecurityRule resource
 
 ## Example Usage
 

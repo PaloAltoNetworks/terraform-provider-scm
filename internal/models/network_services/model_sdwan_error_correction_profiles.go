@@ -138,7 +138,7 @@ func (o SdwanErrorCorrectionProfilesModePacketDuplication) AttrType() attr.Type 
 
 // SdwanErrorCorrectionProfilesResourceSchema defines the schema for SdwanErrorCorrectionProfiles resource
 var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SdwanErrorCorrectionProfiles objects",
+	MarkdownDescription: "SdwanErrorCorrectionProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"activation_threshold": schema.Float64Attribute{
 			MarkdownDescription: "Activation threshold",
@@ -252,7 +252,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 
 // SdwanErrorCorrectionProfilesDataSourceSchema defines the schema for SdwanErrorCorrectionProfiles data source
 var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SdwanErrorCorrectionProfiles data source",
+	MarkdownDescription: "SdwanErrorCorrectionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"activation_threshold": dsschema.Float64Attribute{
 			MarkdownDescription: "Activation threshold",

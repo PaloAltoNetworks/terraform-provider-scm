@@ -74,7 +74,7 @@ func (o BandwidthAllocationsQos) AttrType() attr.Type {
 
 // BandwidthAllocationsResourceSchema defines the schema for BandwidthAllocations resource
 var BandwidthAllocationsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM BandwidthAllocations objects",
+	MarkdownDescription: "BandwidthAllocation resource",
 	Attributes: map[string]schema.Attribute{
 		"allocated_bandwidth": schema.Float64Attribute{
 			MarkdownDescription: "bandwidth to allocate in Mbps",
@@ -123,7 +123,7 @@ var BandwidthAllocationsResourceSchema = schema.Schema{
 
 // BandwidthAllocationsDataSourceSchema defines the schema for BandwidthAllocations data source
 var BandwidthAllocationsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "BandwidthAllocations data source",
+	MarkdownDescription: "BandwidthAllocation data source",
 	Attributes: map[string]dsschema.Attribute{
 		"allocated_bandwidth": dsschema.Float64Attribute{
 			MarkdownDescription: "bandwidth to allocate in Mbps",

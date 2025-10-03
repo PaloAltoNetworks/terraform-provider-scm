@@ -3,12 +3,12 @@
 page_title: "scm_interface_management_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM InterfaceManagementProfiles objects
+  InterfaceManagementProfile resource
 ---
 
 # scm_interface_management_profile (Resource)
 
-Manages SCM InterfaceManagementProfiles objects
+InterfaceManagementProfile resource
 
 
 

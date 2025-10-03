@@ -3,12 +3,12 @@
 page_title: "scm_wildfire_anti_virus_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM WildfireAntiVirusProfiles objects
+  WildfireAntiVirusProfile resource
 ---
 
 # scm_wildfire_anti_virus_profile (Resource)
 
-Manages SCM WildfireAntiVirusProfiles objects
+WildfireAntiVirusProfile resource
 
 
 

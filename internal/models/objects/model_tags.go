@@ -53,7 +53,7 @@ func (o Tags) AttrType() attr.Type {
 
 // TagsResourceSchema defines the schema for Tags resource
 var TagsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Tags objects",
+	MarkdownDescription: "Tag resource",
 	Attributes: map[string]schema.Attribute{
 		"color": schema.StringAttribute{
 			Validators: []validator.String{
@@ -140,7 +140,7 @@ var TagsResourceSchema = schema.Schema{
 
 // TagsDataSourceSchema defines the schema for Tags data source
 var TagsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Tags data source",
+	MarkdownDescription: "Tag data source",
 	Attributes: map[string]dsschema.Attribute{
 		"color": dsschema.StringAttribute{
 			MarkdownDescription: "The color of the tag",

@@ -3,12 +3,12 @@
 page_title: "scm_bgp_route_map_redistribution Data Source - scm"
 subcategory: ""
 description: |-
-  BgpRouteMapRedistributions data source
+  BgpRouteMapRedistribution data source
 ---
 
 # scm_bgp_route_map_redistribution (Data Source)
 
-BgpRouteMapRedistributions data source
+BgpRouteMapRedistribution data source
 
 
 

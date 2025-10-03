@@ -271,7 +271,7 @@ func (o MfaServersMfaVendorTypeRsaSecuridAccessV1) AttrType() attr.Type {
 
 // MfaServersResourceSchema defines the schema for MfaServers resource
 var MfaServersResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM MfaServers objects",
+	MarkdownDescription: "MfaServer resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -578,7 +578,7 @@ var MfaServersResourceSchema = schema.Schema{
 
 // MfaServersDataSourceSchema defines the schema for MfaServers data source
 var MfaServersDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "MfaServers data source",
+	MarkdownDescription: "MfaServer data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

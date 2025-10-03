@@ -3,12 +3,12 @@
 page_title: "scm_local_user Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM LocalUsers objects
+  LocalUser resource
 ---
 
 # scm_local_user (Resource)
 
-Manages SCM LocalUsers objects
+LocalUser resource
 
 
 

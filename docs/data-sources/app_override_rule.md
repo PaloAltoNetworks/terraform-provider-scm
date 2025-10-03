@@ -3,12 +3,12 @@
 page_title: "scm_app_override_rule Data Source - scm"
 subcategory: ""
 description: |-
-  AppOverrideRules data source
+  AppOverrideRule data source
 ---
 
 # scm_app_override_rule (Data Source)
 
-AppOverrideRules data source
+AppOverrideRule data source
 
 
 

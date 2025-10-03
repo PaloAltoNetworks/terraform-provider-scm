@@ -3,12 +3,12 @@
 page_title: "scm_bgp_auth_profile Data Source - scm"
 subcategory: ""
 description: |-
-  BgpAuthProfiles data source
+  BgpAuthProfile data source
 ---
 
 # scm_bgp_auth_profile (Data Source)
 
-BgpAuthProfiles data source
+BgpAuthProfile data source
 
 
 

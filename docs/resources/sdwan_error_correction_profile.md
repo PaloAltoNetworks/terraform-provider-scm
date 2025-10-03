@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_error_correction_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SdwanErrorCorrectionProfiles objects
+  SdwanErrorCorrectionProfile resource
 ---
 
 # scm_sdwan_error_correction_profile (Resource)
 
-Manages SCM SdwanErrorCorrectionProfiles objects
+SdwanErrorCorrectionProfile resource
 
 
 

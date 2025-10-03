@@ -3,12 +3,12 @@
 page_title: "scm_region Data Source - scm"
 subcategory: ""
 description: |-
-  Regions data source
+  Region data source
 ---
 
 # scm_region (Data Source)
 
-Regions data source
+Region data source
 
 
 

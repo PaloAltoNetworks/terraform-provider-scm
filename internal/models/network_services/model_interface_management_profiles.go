@@ -71,7 +71,7 @@ func (o InterfaceManagementProfiles) AttrType() attr.Type {
 
 // InterfaceManagementProfilesResourceSchema defines the schema for InterfaceManagementProfiles resource
 var InterfaceManagementProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM InterfaceManagementProfiles objects",
+	MarkdownDescription: "InterfaceManagementProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -186,7 +186,7 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 
 // InterfaceManagementProfilesDataSourceSchema defines the schema for InterfaceManagementProfiles data source
 var InterfaceManagementProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "InterfaceManagementProfiles data source",
+	MarkdownDescription: "InterfaceManagementProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

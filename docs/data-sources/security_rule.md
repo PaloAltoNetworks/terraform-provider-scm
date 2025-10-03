@@ -3,12 +3,12 @@
 page_title: "scm_security_rule Data Source - scm"
 subcategory: ""
 description: |-
-  SecurityRules data source
+  SecurityRule data source
 ---
 
 # scm_security_rule (Data Source)
 
-SecurityRules data source
+SecurityRule data source
 
 
 

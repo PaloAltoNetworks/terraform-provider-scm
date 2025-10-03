@@ -3,12 +3,12 @@
 page_title: "scm_tag Data Source - scm"
 subcategory: ""
 description: |-
-  Tags data source
+  Tag data source
 ---
 
 # scm_tag (Data Source)
 
-Tags data source
+Tag data source
 
 ## Example Usage
 

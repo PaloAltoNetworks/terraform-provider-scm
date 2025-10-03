@@ -3,12 +3,12 @@
 page_title: "scm_url_category Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM UrlCategories objects
+  UrlCategory resource
 ---
 
 # scm_url_category (Resource)
 
-Manages SCM UrlCategories objects
+UrlCategory resource
 
 ## Example Usage
 

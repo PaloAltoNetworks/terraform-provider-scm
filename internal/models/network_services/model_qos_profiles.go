@@ -326,7 +326,7 @@ func (o QosProfilesClassBandwidthTypePercentageClassInnerClassBandwidth) AttrTyp
 
 // QosProfilesResourceSchema defines the schema for QosProfiles resource
 var QosProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM QosProfiles objects",
+	MarkdownDescription: "QosProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"aggregate_bandwidth": schema.SingleNestedAttribute{
 			MarkdownDescription: "Aggregate bandwidth",
@@ -535,7 +535,7 @@ var QosProfilesResourceSchema = schema.Schema{
 
 // QosProfilesDataSourceSchema defines the schema for QosProfiles data source
 var QosProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "QosProfiles data source",
+	MarkdownDescription: "QosProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"aggregate_bandwidth": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Aggregate bandwidth",

@@ -52,7 +52,7 @@ func (o ApplicationGroups) AttrType() attr.Type {
 
 // ApplicationGroupsResourceSchema defines the schema for ApplicationGroups resource
 var ApplicationGroupsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ApplicationGroups objects",
+	MarkdownDescription: "ApplicationGroup resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -133,7 +133,7 @@ var ApplicationGroupsResourceSchema = schema.Schema{
 
 // ApplicationGroupsDataSourceSchema defines the schema for ApplicationGroups data source
 var ApplicationGroupsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ApplicationGroups data source",
+	MarkdownDescription: "ApplicationGroup data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

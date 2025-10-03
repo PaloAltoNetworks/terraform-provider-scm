@@ -3,12 +3,12 @@
 page_title: "scm_ospf_auth_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM OspfAuthProfiles objects
+  OspfAuthProfile resource
 ---
 
 # scm_ospf_auth_profile (Resource)
 
-Manages SCM OspfAuthProfiles objects
+OspfAuthProfile resource
 
 
 

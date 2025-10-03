@@ -3,12 +3,12 @@
 page_title: "scm_zone Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Zones objects
+  Zone resource
 ---
 
 # scm_zone (Resource)
 
-Manages SCM Zones objects
+Zone resource
 
 
 

@@ -638,7 +638,7 @@ func (o ApplicationsSignatureInnerAndConditionInnerOrConditionInnerOperatorPatte
 
 // ApplicationsResourceSchema defines the schema for Applications resource
 var ApplicationsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Applications objects",
+	MarkdownDescription: "Application resource",
 	Attributes: map[string]schema.Attribute{
 		"able_to_transfer_file": schema.BoolAttribute{
 			MarkdownDescription: "Able to transfer file",
@@ -1163,7 +1163,7 @@ var ApplicationsResourceSchema = schema.Schema{
 
 // ApplicationsDataSourceSchema defines the schema for Applications data source
 var ApplicationsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Applications data source",
+	MarkdownDescription: "Application data source",
 	Attributes: map[string]dsschema.Attribute{
 		"able_to_transfer_file": dsschema.BoolAttribute{
 			MarkdownDescription: "Able to transfer file",

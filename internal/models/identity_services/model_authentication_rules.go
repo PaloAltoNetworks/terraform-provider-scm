@@ -92,7 +92,7 @@ func (o AuthenticationRules) AttrType() attr.Type {
 
 // AuthenticationRulesResourceSchema defines the schema for AuthenticationRules resource
 var AuthenticationRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AuthenticationRules objects",
+	MarkdownDescription: "AuthenticationRule resource",
 	Attributes: map[string]schema.Attribute{
 		"authentication_enforcement": schema.StringAttribute{
 			MarkdownDescription: "The authentication profile name",
@@ -270,7 +270,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 
 // AuthenticationRulesDataSourceSchema defines the schema for AuthenticationRules data source
 var AuthenticationRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AuthenticationRules data source",
+	MarkdownDescription: "AuthenticationRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"authentication_enforcement": dsschema.StringAttribute{
 			MarkdownDescription: "The authentication profile name",

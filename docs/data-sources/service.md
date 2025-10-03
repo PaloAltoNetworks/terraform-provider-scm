@@ -3,12 +3,12 @@
 page_title: "scm_service Data Source - scm"
 subcategory: ""
 description: |-
-  Services data source
+  Service data source
 ---
 
 # scm_service (Data Source)
 
-Services data source
+Service data source
 
 ## Example Usage
 

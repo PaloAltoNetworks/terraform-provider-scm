@@ -209,7 +209,7 @@ func (o RadiusServerProfilesServerInner) AttrType() attr.Type {
 
 // RadiusServerProfilesResourceSchema defines the schema for RadiusServerProfiles resource
 var RadiusServerProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM RadiusServerProfiles objects",
+	MarkdownDescription: "RadiusServerProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -384,7 +384,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 
 // RadiusServerProfilesDataSourceSchema defines the schema for RadiusServerProfiles data source
 var RadiusServerProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "RadiusServerProfiles data source",
+	MarkdownDescription: "RadiusServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

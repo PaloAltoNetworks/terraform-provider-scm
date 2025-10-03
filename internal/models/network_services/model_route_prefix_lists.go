@@ -196,7 +196,7 @@ func (o RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry) AttrType() attr.Type {
 
 // RoutePrefixListsResourceSchema defines the schema for RoutePrefixLists resource
 var RoutePrefixListsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM RoutePrefixLists objects",
+	MarkdownDescription: "RoutePrefixList resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -343,7 +343,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 
 // RoutePrefixListsDataSourceSchema defines the schema for RoutePrefixLists data source
 var RoutePrefixListsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "RoutePrefixLists data source",
+	MarkdownDescription: "RoutePrefixList data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

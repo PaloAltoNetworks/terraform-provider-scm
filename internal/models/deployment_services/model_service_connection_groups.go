@@ -46,7 +46,7 @@ func (o ServiceConnectionGroups) AttrType() attr.Type {
 
 // ServiceConnectionGroupsResourceSchema defines the schema for ServiceConnectionGroups resource
 var ServiceConnectionGroupsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ServiceConnectionGroups objects",
+	MarkdownDescription: "ServiceConnectionGroup resource",
 	Attributes: map[string]schema.Attribute{
 		"disable_snat": schema.BoolAttribute{
 			MarkdownDescription: "Disable snat",
@@ -91,7 +91,7 @@ var ServiceConnectionGroupsResourceSchema = schema.Schema{
 
 // ServiceConnectionGroupsDataSourceSchema defines the schema for ServiceConnectionGroups data source
 var ServiceConnectionGroupsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ServiceConnectionGroups data source",
+	MarkdownDescription: "ServiceConnectionGroup data source",
 	Attributes: map[string]dsschema.Attribute{
 		"disable_snat": dsschema.BoolAttribute{
 			MarkdownDescription: "Disable snat",

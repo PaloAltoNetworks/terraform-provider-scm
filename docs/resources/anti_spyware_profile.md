@@ -3,12 +3,12 @@
 page_title: "scm_anti_spyware_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AntiSpywareProfiles objects
+  AntiSpywareProfile resource
 ---
 
 # scm_anti_spyware_profile (Resource)
 
-Manages SCM AntiSpywareProfiles objects
+AntiSpywareProfile resource
 
 
 

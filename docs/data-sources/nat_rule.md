@@ -3,12 +3,12 @@
 page_title: "scm_nat_rule Data Source - scm"
 subcategory: ""
 description: |-
-  NatRules data source
+  NatRule data source
 ---
 
 # scm_nat_rule (Data Source)
 
-NatRules data source
+NatRule data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_decryption_rule Data Source - scm"
 subcategory: ""
 description: |-
-  DecryptionRules data source
+  DecryptionRule data source
 ---
 
 # scm_decryption_rule (Data Source)
 
-DecryptionRules data source
+DecryptionRule data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_qos_policy_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM QosPolicyRules objects
+  QosPolicyRule resource
 ---
 
 # scm_qos_policy_rule (Resource)
 
-Manages SCM QosPolicyRules objects
+QosPolicyRule resource
 
 
 

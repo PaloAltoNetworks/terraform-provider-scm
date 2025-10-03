@@ -3,12 +3,12 @@
 page_title: "scm_loopback_interface Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM LoopbackInterfaces objects
+  LoopbackInterface resource
 ---
 
 # scm_loopback_interface (Resource)
 
-Manages SCM LoopbackInterfaces objects
+LoopbackInterface resource
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_aggregate_ethernet_interface Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AggregateEthernetInterfaces objects
+  AggregateEthernetInterface resource
 ---
 
 # scm_aggregate_ethernet_interface (Resource)
 
-Manages SCM AggregateEthernetInterfaces objects
+AggregateEthernetInterface resource
 
 
 

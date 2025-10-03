@@ -3,12 +3,12 @@
 page_title: "scm_address_group Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AddressGroups objects
+  AddressGroup resource
 ---
 
 # scm_address_group (Resource)
 
-Manages SCM AddressGroups objects
+AddressGroup resource
 
 ## Example Usage
 

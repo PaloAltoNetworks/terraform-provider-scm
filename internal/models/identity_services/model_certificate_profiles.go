@@ -131,7 +131,7 @@ func (o CertificateProfilesUsernameField) AttrType() attr.Type {
 
 // CertificateProfilesResourceSchema defines the schema for CertificateProfiles resource
 var CertificateProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM CertificateProfiles objects",
+	MarkdownDescription: "CertificateProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"block_expired_cert": schema.BoolAttribute{
 			MarkdownDescription: "Block sessions with expired certificates?",
@@ -288,7 +288,7 @@ var CertificateProfilesResourceSchema = schema.Schema{
 
 // CertificateProfilesDataSourceSchema defines the schema for CertificateProfiles data source
 var CertificateProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "CertificateProfiles data source",
+	MarkdownDescription: "CertificateProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"block_expired_cert": dsschema.BoolAttribute{
 			MarkdownDescription: "Block sessions with expired certificates?",

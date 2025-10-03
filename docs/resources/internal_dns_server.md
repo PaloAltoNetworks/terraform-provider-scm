@@ -3,12 +3,12 @@
 page_title: "scm_internal_dns_server Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM InternalDnsServers objects
+  InternalDnsServer resource
 ---
 
 # scm_internal_dns_server (Resource)
 
-Manages SCM InternalDnsServers objects
+InternalDnsServer resource
 
 
 

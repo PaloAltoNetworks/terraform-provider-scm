@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_error_correction_profile Data Source - scm"
 subcategory: ""
 description: |-
-  SdwanErrorCorrectionProfiles data source
+  SdwanErrorCorrectionProfile data source
 ---
 
 # scm_sdwan_error_correction_profile (Data Source)
 
-SdwanErrorCorrectionProfiles data source
+SdwanErrorCorrectionProfile data source
 
 
 

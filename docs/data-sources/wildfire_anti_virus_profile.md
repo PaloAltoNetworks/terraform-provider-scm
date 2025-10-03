@@ -3,12 +3,12 @@
 page_title: "scm_wildfire_anti_virus_profile Data Source - scm"
 subcategory: ""
 description: |-
-  WildfireAntiVirusProfiles data source
+  WildfireAntiVirusProfile data source
 ---
 
 # scm_wildfire_anti_virus_profile (Data Source)
 
-WildfireAntiVirusProfiles data source
+WildfireAntiVirusProfile data source
 
 
 

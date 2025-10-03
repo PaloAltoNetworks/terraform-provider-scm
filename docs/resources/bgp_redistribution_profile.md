@@ -3,12 +3,12 @@
 page_title: "scm_bgp_redistribution_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM BgpRedistributionProfiles objects
+  BgpRedistributionProfile resource
 ---
 
 # scm_bgp_redistribution_profile (Resource)
 
-Manages SCM BgpRedistributionProfiles objects
+BgpRedistributionProfile resource
 
 
 

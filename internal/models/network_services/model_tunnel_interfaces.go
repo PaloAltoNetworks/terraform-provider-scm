@@ -34,11 +34,6 @@ type TunnelInterfaces struct {
 	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
 }
 
-// LoopbackInterfacesIp represents a nested structure within the TunnelInterfaces model
-type LoopbackInterfacesIp struct {
-	Ip basetypes.ListValue `tfsdk:"ip"`
-}
-
 // AttrTypes defines the attribute types for the TunnelInterfaces model.
 func (o TunnelInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -67,23 +62,9 @@ func (o TunnelInterfaces) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the LoopbackInterfacesIp model.
-func (o LoopbackInterfacesIp) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"ip": basetypes.ListType{ElemType: basetypes.StringType{}},
-	}
-}
-
-// AttrType returns the attribute type for a list of LoopbackInterfacesIp objects.
-func (o LoopbackInterfacesIp) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // TunnelInterfacesResourceSchema defines the schema for TunnelInterfaces resource
 var TunnelInterfacesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM TunnelInterfaces objects",
+	MarkdownDescription: "TunnelInterface resource",
 	Attributes: map[string]schema.Attribute{
 		"comment": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -183,7 +164,7 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 
 // TunnelInterfacesDataSourceSchema defines the schema for TunnelInterfaces data source
 var TunnelInterfacesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "TunnelInterfaces data source",
+	MarkdownDescription: "TunnelInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"comment": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

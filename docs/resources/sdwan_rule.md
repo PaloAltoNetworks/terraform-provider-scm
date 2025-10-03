@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SdwanRules objects
+  SdwanRule resource
 ---
 
 # scm_sdwan_rule (Resource)
 
-Manages SCM SdwanRules objects
+SdwanRule resource
 
 
 

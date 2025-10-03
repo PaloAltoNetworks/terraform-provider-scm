@@ -3,12 +3,12 @@
 page_title: "scm_route_path_access_list Data Source - scm"
 subcategory: ""
 description: |-
-  RoutePathAccessLists data source
+  RoutePathAccessList data source
 ---
 
 # scm_route_path_access_list (Data Source)
 
-RoutePathAccessLists data source
+RoutePathAccessList data source
 
 
 

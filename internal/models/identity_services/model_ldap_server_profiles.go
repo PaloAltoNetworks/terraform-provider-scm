@@ -101,7 +101,7 @@ func (o LdapServerProfilesServerInner) AttrType() attr.Type {
 
 // LdapServerProfilesResourceSchema defines the schema for LdapServerProfiles resource
 var LdapServerProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM LdapServerProfiles objects",
+	MarkdownDescription: "LdapServerProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"base": schema.StringAttribute{
 			Validators: []validator.String{
@@ -249,7 +249,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 
 // LdapServerProfilesDataSourceSchema defines the schema for LdapServerProfiles data source
 var LdapServerProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "LdapServerProfiles data source",
+	MarkdownDescription: "LdapServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"base": dsschema.StringAttribute{
 			MarkdownDescription: "The base DN",

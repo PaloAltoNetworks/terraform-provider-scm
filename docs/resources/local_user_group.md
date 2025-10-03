@@ -3,12 +3,12 @@
 page_title: "scm_local_user_group Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM LocalUserGroups objects
+  LocalUserGroup resource
 ---
 
 # scm_local_user_group (Resource)
 
-Manages SCM LocalUserGroups objects
+LocalUserGroup resource
 
 
 

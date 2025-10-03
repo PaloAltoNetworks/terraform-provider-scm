@@ -51,7 +51,7 @@ func (o OcspResponders) AttrType() attr.Type {
 
 // OcspRespondersResourceSchema defines the schema for OcspResponders resource
 var OcspRespondersResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM OcspResponders objects",
+	MarkdownDescription: "OcspResponder resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -133,7 +133,7 @@ var OcspRespondersResourceSchema = schema.Schema{
 
 // OcspRespondersDataSourceSchema defines the schema for OcspResponders data source
 var OcspRespondersDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "OcspResponders data source",
+	MarkdownDescription: "OcspResponder data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

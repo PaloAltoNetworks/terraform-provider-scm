@@ -84,7 +84,7 @@ func (o OspfAuthProfilesMd5Inner) AttrType() attr.Type {
 
 // OspfAuthProfilesResourceSchema defines the schema for OspfAuthProfiles resource
 var OspfAuthProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM OspfAuthProfiles objects",
+	MarkdownDescription: "OspfAuthProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -180,7 +180,7 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 
 // OspfAuthProfilesDataSourceSchema defines the schema for OspfAuthProfiles data source
 var OspfAuthProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "OspfAuthProfiles data source",
+	MarkdownDescription: "OspfAuthProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

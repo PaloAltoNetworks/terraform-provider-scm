@@ -3,12 +3,12 @@
 page_title: "scm_route_path_access_list Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM RoutePathAccessLists objects
+  RoutePathAccessList resource
 ---
 
 # scm_route_path_access_list (Resource)
 
-Manages SCM RoutePathAccessLists objects
+RoutePathAccessList resource
 
 
 

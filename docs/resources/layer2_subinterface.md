@@ -3,12 +3,12 @@
 page_title: "scm_layer2_subinterface Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM Layer2Subinterfaces objects
+  Layer2Subinterface resource
 ---
 
 # scm_layer2_subinterface (Resource)
 
-Manages SCM Layer2Subinterfaces objects
+Layer2Subinterface resource
 
 
 

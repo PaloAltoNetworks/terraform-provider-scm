@@ -3,12 +3,12 @@
 page_title: "scm_application_group Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ApplicationGroups objects
+  ApplicationGroup resource
 ---
 
 # scm_application_group (Resource)
 
-Manages SCM ApplicationGroups objects
+ApplicationGroup resource
 
 ## Example Usage
 

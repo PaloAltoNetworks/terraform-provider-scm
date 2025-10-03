@@ -3,12 +3,12 @@
 page_title: "scm_route_community_list Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM RouteCommunityLists objects
+  RouteCommunityList resource
 ---
 
 # scm_route_community_list (Resource)
 
-Manages SCM RouteCommunityLists objects
+RouteCommunityList resource
 
 
 

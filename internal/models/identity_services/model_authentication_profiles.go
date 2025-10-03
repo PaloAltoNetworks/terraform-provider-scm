@@ -369,7 +369,7 @@ func (o AuthenticationProfilesSingleSignOn) AttrType() attr.Type {
 
 // AuthenticationProfilesResourceSchema defines the schema for AuthenticationProfiles resource
 var AuthenticationProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AuthenticationProfiles objects",
+	MarkdownDescription: "AuthenticationProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"allow_list": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -712,7 +712,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 
 // AuthenticationProfilesDataSourceSchema defines the schema for AuthenticationProfiles data source
 var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AuthenticationProfiles data source",
+	MarkdownDescription: "AuthenticationProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"allow_list": dsschema.ListAttribute{
 			ElementType:         types.StringType,

@@ -81,7 +81,7 @@ func (o KerberosServerProfilesServerInner) AttrType() attr.Type {
 
 // KerberosServerProfilesResourceSchema defines the schema for KerberosServerProfiles resource
 var KerberosServerProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM KerberosServerProfiles objects",
+	MarkdownDescription: "KerberosServerProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -174,7 +174,7 @@ var KerberosServerProfilesResourceSchema = schema.Schema{
 
 // KerberosServerProfilesDataSourceSchema defines the schema for KerberosServerProfiles data source
 var KerberosServerProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "KerberosServerProfiles data source",
+	MarkdownDescription: "KerberosServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

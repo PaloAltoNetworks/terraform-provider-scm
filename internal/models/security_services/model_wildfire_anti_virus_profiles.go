@@ -149,7 +149,7 @@ func (o WildfireAntiVirusProfilesThreatExceptionInner) AttrType() attr.Type {
 
 // WildfireAntiVirusProfilesResourceSchema defines the schema for WildfireAntiVirusProfiles resource
 var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM WildfireAntiVirusProfiles objects",
+	MarkdownDescription: "WildfireAntiVirusProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -302,7 +302,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 
 // WildfireAntiVirusProfilesDataSourceSchema defines the schema for WildfireAntiVirusProfiles data source
 var WildfireAntiVirusProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "WildfireAntiVirusProfiles data source",
+	MarkdownDescription: "WildfireAntiVirusProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

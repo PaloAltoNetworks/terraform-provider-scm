@@ -3,12 +3,12 @@
 page_title: "scm_decryption_exclusion Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DecryptionExclusions objects
+  DecryptionExclusion resource
 ---
 
 # scm_decryption_exclusion (Resource)
 
-Manages SCM DecryptionExclusions objects
+DecryptionExclusion resource
 
 
 

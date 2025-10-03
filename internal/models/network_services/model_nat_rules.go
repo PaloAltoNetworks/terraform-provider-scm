@@ -174,7 +174,7 @@ func (o NatRulesSourceTranslationFallback) AttrType() attr.Type {
 
 // NatRulesResourceSchema defines the schema for NatRules resource
 var NatRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM NatRules objects",
+	MarkdownDescription: "NatRule resource",
 	Attributes: map[string]schema.Attribute{
 		"active_active_device_binding": schema.StringAttribute{
 			Validators: []validator.String{
@@ -407,7 +407,7 @@ var NatRulesResourceSchema = schema.Schema{
 
 // NatRulesDataSourceSchema defines the schema for NatRules data source
 var NatRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "NatRules data source",
+	MarkdownDescription: "NatRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"active_active_device_binding": dsschema.StringAttribute{
 			MarkdownDescription: "Active active device binding",

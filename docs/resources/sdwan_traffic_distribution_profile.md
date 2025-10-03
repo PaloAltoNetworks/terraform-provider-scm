@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_traffic_distribution_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM SdwanTrafficDistributionProfiles objects
+  SdwanTrafficDistributionProfile resource
 ---
 
 # scm_sdwan_traffic_distribution_profile (Resource)
 
-Manages SCM SdwanTrafficDistributionProfiles objects
+SdwanTrafficDistributionProfile resource
 
 
 

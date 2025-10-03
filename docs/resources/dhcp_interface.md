@@ -3,12 +3,12 @@
 page_title: "scm_dhcp_interface Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM DhcpInterfaces objects
+  DhcpInterface resource
 ---
 
 # scm_dhcp_interface (Resource)
 
-Manages SCM DhcpInterfaces objects
+DhcpInterface resource
 
 
 

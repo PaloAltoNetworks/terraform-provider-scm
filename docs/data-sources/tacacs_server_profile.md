@@ -3,12 +3,12 @@
 page_title: "scm_tacacs_server_profile Data Source - scm"
 subcategory: ""
 description: |-
-  TacacsServerProfiles data source
+  TacacsServerProfile data source
 ---
 
 # scm_tacacs_server_profile (Data Source)
 
-TacacsServerProfiles data source
+TacacsServerProfile data source
 
 
 

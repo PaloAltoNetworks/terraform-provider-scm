@@ -3,12 +3,12 @@
 page_title: "scm_nat_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM NatRules objects
+  NatRule resource
 ---
 
 # scm_nat_rule (Resource)
 
-Manages SCM NatRules objects
+NatRule resource
 
 
 

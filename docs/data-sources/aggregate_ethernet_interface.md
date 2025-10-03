@@ -3,12 +3,12 @@
 page_title: "scm_aggregate_ethernet_interface Data Source - scm"
 subcategory: ""
 description: |-
-  AggregateEthernetInterfaces data source
+  AggregateEthernetInterface data source
 ---
 
 # scm_aggregate_ethernet_interface (Data Source)
 
-AggregateEthernetInterfaces data source
+AggregateEthernetInterface data source
 
 
 

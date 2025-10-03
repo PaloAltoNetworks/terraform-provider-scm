@@ -51,7 +51,7 @@ func (o LocalUserGroups) AttrType() attr.Type {
 
 // LocalUserGroupsResourceSchema defines the schema for LocalUserGroups resource
 var LocalUserGroupsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM LocalUserGroups objects",
+	MarkdownDescription: "LocalUserGroup resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -130,7 +130,7 @@ var LocalUserGroupsResourceSchema = schema.Schema{
 
 // LocalUserGroupsDataSourceSchema defines the schema for LocalUserGroups data source
 var LocalUserGroupsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "LocalUserGroups data source",
+	MarkdownDescription: "LocalUserGroup data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

@@ -3,12 +3,12 @@
 page_title: "scm_route_prefix_list Data Source - scm"
 subcategory: ""
 description: |-
-  RoutePrefixLists data source
+  RoutePrefixList data source
 ---
 
 # scm_route_prefix_list (Data Source)
 
-RoutePrefixLists data source
+RoutePrefixList data source
 
 
 

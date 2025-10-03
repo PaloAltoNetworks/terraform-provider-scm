@@ -3,12 +3,12 @@
 page_title: "scm_link_tag Data Source - scm"
 subcategory: ""
 description: |-
-  LinkTags data source
+  LinkTag data source
 ---
 
 # scm_link_tag (Data Source)
 
-LinkTags data source
+LinkTag data source
 
 
 

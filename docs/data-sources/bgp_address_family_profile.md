@@ -3,12 +3,12 @@
 page_title: "scm_bgp_address_family_profile Data Source - scm"
 subcategory: ""
 description: |-
-  BgpAddressFamilyProfiles data source
+  BgpAddressFamilyProfile data source
 ---
 
 # scm_bgp_address_family_profile (Data Source)
 
-BgpAddressFamilyProfiles data source
+BgpAddressFamilyProfile data source
 
 
 

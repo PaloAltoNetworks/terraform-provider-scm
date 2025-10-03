@@ -3,12 +3,12 @@
 page_title: "scm_authentication_rule Data Source - scm"
 subcategory: ""
 description: |-
-  AuthenticationRules data source
+  AuthenticationRule data source
 ---
 
 # scm_authentication_rule (Data Source)
 
-AuthenticationRules data source
+AuthenticationRule data source
 
 
 

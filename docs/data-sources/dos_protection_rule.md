@@ -3,12 +3,12 @@
 page_title: "scm_dos_protection_rule Data Source - scm"
 subcategory: ""
 description: |-
-  DosProtectionRules data source
+  DosProtectionRule data source
 ---
 
 # scm_dos_protection_rule (Data Source)
 
-DosProtectionRules data source
+DosProtectionRule data source
 
 
 

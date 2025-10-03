@@ -3,12 +3,12 @@
 page_title: "scm_address Data Source - scm"
 subcategory: ""
 description: |-
-  Addresses data source
+  Address data source
 ---
 
 # scm_address (Data Source)
 
-Addresses data source
+Address data source
 
 ## Example Usage
 

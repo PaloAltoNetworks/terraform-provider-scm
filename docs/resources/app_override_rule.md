@@ -3,12 +3,12 @@
 page_title: "scm_app_override_rule Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM AppOverrideRules objects
+  AppOverrideRule resource
 ---
 
 # scm_app_override_rule (Resource)
 
-Manages SCM AppOverrideRules objects
+AppOverrideRule resource
 
 
 

@@ -219,7 +219,7 @@ func (o ScepProfilesScepChallengeDynamic) AttrType() attr.Type {
 
 // ScepProfilesResourceSchema defines the schema for ScepProfiles resource
 var ScepProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ScepProfiles objects",
+	MarkdownDescription: "ScepProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"algorithm": schema.SingleNestedAttribute{
 			MarkdownDescription: "Algorithm",
@@ -451,7 +451,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 
 // ScepProfilesDataSourceSchema defines the schema for ScepProfiles data source
 var ScepProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ScepProfiles data source",
+	MarkdownDescription: "ScepProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"algorithm": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Algorithm",

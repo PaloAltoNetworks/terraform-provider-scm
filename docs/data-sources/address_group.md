@@ -3,12 +3,12 @@
 page_title: "scm_address_group Data Source - scm"
 subcategory: ""
 description: |-
-  AddressGroups data source
+  AddressGroup data source
 ---
 
 # scm_address_group (Data Source)
 
-AddressGroups data source
+AddressGroup data source
 
 ## Example Usage
 

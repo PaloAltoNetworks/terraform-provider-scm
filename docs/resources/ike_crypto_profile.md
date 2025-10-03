@@ -3,12 +3,12 @@
 page_title: "scm_ike_crypto_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM IkeCryptoProfiles objects
+  IkeCryptoProfile resource
 ---
 
 # scm_ike_crypto_profile (Resource)
 
-Manages SCM IkeCryptoProfiles objects
+IkeCryptoProfile resource
 
 ## Example Usage
 

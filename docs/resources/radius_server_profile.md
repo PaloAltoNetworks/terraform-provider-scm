@@ -3,12 +3,12 @@
 page_title: "scm_radius_server_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM RadiusServerProfiles objects
+  RadiusServerProfile resource
 ---
 
 # scm_radius_server_profile (Resource)
 
-Manages SCM RadiusServerProfiles objects
+RadiusServerProfile resource
 
 
 

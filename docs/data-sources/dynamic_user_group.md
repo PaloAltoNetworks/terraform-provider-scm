@@ -3,12 +3,12 @@
 page_title: "scm_dynamic_user_group Data Source - scm"
 subcategory: ""
 description: |-
-  DynamicUserGroups data source
+  DynamicUserGroup data source
 ---
 
 # scm_dynamic_user_group (Data Source)
 
-DynamicUserGroups data source
+DynamicUserGroup data source
 
 ## Example Usage
 

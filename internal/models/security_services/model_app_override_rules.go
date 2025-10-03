@@ -77,7 +77,7 @@ func (o AppOverrideRules) AttrType() attr.Type {
 
 // AppOverrideRulesResourceSchema defines the schema for AppOverrideRules resource
 var AppOverrideRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AppOverrideRules objects",
+	MarkdownDescription: "AppOverrideRule resource",
 	Attributes: map[string]schema.Attribute{
 		"application": schema.StringAttribute{
 			MarkdownDescription: "Application",
@@ -223,7 +223,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 
 // AppOverrideRulesDataSourceSchema defines the schema for AppOverrideRules data source
 var AppOverrideRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AppOverrideRules data source",
+	MarkdownDescription: "AppOverrideRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"application": dsschema.StringAttribute{
 			MarkdownDescription: "Application",

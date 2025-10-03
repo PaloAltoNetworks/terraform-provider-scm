@@ -73,7 +73,7 @@ func (o LicenseInfo) AttrType() attr.Type {
 
 // LicenseResultResourceSchema defines the schema for LicenseResult resource
 var LicenseResultResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM LicenseResult objects",
+	MarkdownDescription: "LicenseResult resource",
 	Attributes: map[string]schema.Attribute{
 		"configured_licenses": schema.ListNestedAttribute{
 			MarkdownDescription: "Configured licenses",

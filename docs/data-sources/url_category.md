@@ -3,12 +3,12 @@
 page_title: "scm_url_category Data Source - scm"
 subcategory: ""
 description: |-
-  UrlCategories data source
+  UrlCategory data source
 ---
 
 # scm_url_category (Data Source)
 
-UrlCategories data source
+UrlCategory data source
 
 ## Example Usage
 

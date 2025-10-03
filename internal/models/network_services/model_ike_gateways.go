@@ -495,7 +495,7 @@ func (o IkeGatewaysProtocolCommonNatTraversal) AttrType() attr.Type {
 
 // IkeGatewaysResourceSchema defines the schema for IkeGateways resource
 var IkeGatewaysResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM IkeGateways objects",
+	MarkdownDescription: "IkeGateway resource",
 	Attributes: map[string]schema.Attribute{
 		"authentication": schema.SingleNestedAttribute{
 			MarkdownDescription: "Authentication",
@@ -818,7 +818,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 
 // IkeGatewaysDataSourceSchema defines the schema for IkeGateways data source
 var IkeGatewaysDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "IkeGateways data source",
+	MarkdownDescription: "IkeGateway data source",
 	Attributes: map[string]dsschema.Attribute{
 		"authentication": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Authentication",

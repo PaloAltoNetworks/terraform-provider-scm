@@ -80,7 +80,7 @@ func (o AddressGroupsDynamic) AttrType() attr.Type {
 
 // AddressGroupsResourceSchema defines the schema for AddressGroups resource
 var AddressGroupsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AddressGroups objects",
+	MarkdownDescription: "AddressGroup resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -179,7 +179,7 @@ var AddressGroupsResourceSchema = schema.Schema{
 
 // AddressGroupsDataSourceSchema defines the schema for AddressGroups data source
 var AddressGroupsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AddressGroups data source",
+	MarkdownDescription: "AddressGroup data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

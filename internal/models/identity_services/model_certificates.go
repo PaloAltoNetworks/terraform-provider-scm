@@ -41,11 +41,35 @@ type CertificatesGet struct {
 	SubjectInt     basetypes.StringValue `tfsdk:"subject_int"`
 }
 
-// ExportCertificatePayload represents a nested structure within the CertificatesGet model
-type ExportCertificatePayload struct {
-	Tfid       types.String          `tfsdk:"tfid"`
-	Format     basetypes.StringValue `tfsdk:"format"`
-	Passphrase basetypes.StringValue `tfsdk:"passphrase"`
+// CertificatesPost represents a nested structure within the CertificatesGet model
+type CertificatesPost struct {
+	Tfid                   types.String          `tfsdk:"tfid"`
+	Algorithm              basetypes.ObjectValue `tfsdk:"algorithm"`
+	AlternateEmail         basetypes.ListValue   `tfsdk:"alternate_email"`
+	CertificateName        basetypes.StringValue `tfsdk:"certificate_name"`
+	CommonName             basetypes.StringValue `tfsdk:"common_name"`
+	CountryCode            basetypes.StringValue `tfsdk:"country_code"`
+	DayTillExpiration      basetypes.Int64Value  `tfsdk:"day_till_expiration"`
+	Department             basetypes.ListValue   `tfsdk:"department"`
+	Device                 basetypes.StringValue `tfsdk:"device"`
+	Digest                 basetypes.StringValue `tfsdk:"digest"`
+	Email                  basetypes.StringValue `tfsdk:"email"`
+	Folder                 basetypes.StringValue `tfsdk:"folder"`
+	Hostname               basetypes.ListValue   `tfsdk:"hostname"`
+	Ip                     basetypes.ListValue   `tfsdk:"ip"`
+	IsBlockPrivateKey      basetypes.BoolValue   `tfsdk:"is_block_private_key"`
+	IsCertificateAuthority basetypes.BoolValue   `tfsdk:"is_certificate_authority"`
+	Locality               basetypes.StringValue `tfsdk:"locality"`
+	OcspResponderUrl       basetypes.StringValue `tfsdk:"ocsp_responder_url"`
+	SignedBy               basetypes.StringValue `tfsdk:"signed_by"`
+	Snippet                basetypes.StringValue `tfsdk:"snippet"`
+	State                  basetypes.StringValue `tfsdk:"state"`
+}
+
+// CertificatesPostAlgorithm represents a nested structure within the CertificatesGet model
+type CertificatesPostAlgorithm struct {
+	EcdsaNumberOfBits basetypes.Float64Value `tfsdk:"ecdsa_number_of_bits"`
+	RsaNumberOfBits   basetypes.Float64Value `tfsdk:"rsa_number_of_bits"`
 }
 
 // AttrTypes defines the attribute types for the CertificatesGet model.
@@ -80,17 +104,55 @@ func (o CertificatesGet) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the ExportCertificatePayload model.
-func (o ExportCertificatePayload) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the CertificatesPost model.
+func (o CertificatesPost) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":       basetypes.StringType{},
-		"format":     basetypes.StringType{},
-		"passphrase": basetypes.StringType{},
+		"tfid": basetypes.StringType{},
+		"algorithm": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"ecdsa_number_of_bits": basetypes.NumberType{},
+				"rsa_number_of_bits":   basetypes.NumberType{},
+			},
+		},
+		"alternate_email":          basetypes.ListType{ElemType: basetypes.StringType{}},
+		"certificate_name":         basetypes.StringType{},
+		"common_name":              basetypes.StringType{},
+		"country_code":             basetypes.StringType{},
+		"day_till_expiration":      basetypes.Int64Type{},
+		"department":               basetypes.ListType{ElemType: basetypes.StringType{}},
+		"device":                   basetypes.StringType{},
+		"digest":                   basetypes.StringType{},
+		"email":                    basetypes.StringType{},
+		"folder":                   basetypes.StringType{},
+		"hostname":                 basetypes.ListType{ElemType: basetypes.StringType{}},
+		"ip":                       basetypes.ListType{ElemType: basetypes.StringType{}},
+		"is_block_private_key":     basetypes.BoolType{},
+		"is_certificate_authority": basetypes.BoolType{},
+		"locality":                 basetypes.StringType{},
+		"ocsp_responder_url":       basetypes.StringType{},
+		"signed_by":                basetypes.StringType{},
+		"snippet":                  basetypes.StringType{},
+		"state":                    basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of ExportCertificatePayload objects.
-func (o ExportCertificatePayload) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of CertificatesPost objects.
+func (o CertificatesPost) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the CertificatesPostAlgorithm model.
+func (o CertificatesPostAlgorithm) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ecdsa_number_of_bits": basetypes.NumberType{},
+		"rsa_number_of_bits":   basetypes.NumberType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of CertificatesPostAlgorithm objects.
+func (o CertificatesPostAlgorithm) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -98,7 +160,7 @@ func (o ExportCertificatePayload) AttrType() attr.Type {
 
 // CertificatesGetResourceSchema defines the schema for CertificatesGet resource
 var CertificatesGetResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM CertificatesGet objects",
+	MarkdownDescription: "CertificatesGet resource",
 	Attributes: map[string]schema.Attribute{
 		"algorithm": schema.StringAttribute{
 			MarkdownDescription: "Algorithm",

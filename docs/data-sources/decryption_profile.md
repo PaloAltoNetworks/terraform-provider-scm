@@ -3,12 +3,12 @@
 page_title: "scm_decryption_profile Data Source - scm"
 subcategory: ""
 description: |-
-  DecryptionProfiles data source
+  DecryptionProfile data source
 ---
 
 # scm_decryption_profile (Data Source)
 
-DecryptionProfiles data source
+DecryptionProfile data source
 
 
 

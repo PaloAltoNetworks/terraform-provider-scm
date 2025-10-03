@@ -3,12 +3,12 @@
 page_title: "scm_service_connection Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ServiceConnections objects
+  ServiceConnection resource
 ---
 
 # scm_service_connection (Resource)
 
-Manages SCM ServiceConnections objects
+ServiceConnection resource
 
 
 

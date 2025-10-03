@@ -3,12 +3,12 @@
 page_title: "scm_ethernet_interface Data Source - scm"
 subcategory: ""
 description: |-
-  EthernetInterfaces data source
+  EthernetInterface data source
 ---
 
 # scm_ethernet_interface (Data Source)
 
-EthernetInterfaces data source
+EthernetInterface data source
 
 
 

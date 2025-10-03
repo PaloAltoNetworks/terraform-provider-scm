@@ -64,12 +64,6 @@ type AggregateEthernetInterfacesLayer3 struct {
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 }
 
-// ArpInner represents a nested structure within the AggregateEthernetInterfaces model
-type ArpInner struct {
-	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
-	Name      basetypes.StringValue `tfsdk:"name"`
-}
-
 // AttrTypes defines the attribute types for the AggregateEthernetInterfaces model.
 func (o AggregateEthernetInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -252,24 +246,9 @@ func (o AggregateEthernetInterfacesLayer3) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the ArpInner model.
-func (o ArpInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"hw_address": basetypes.StringType{},
-		"name":       basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of ArpInner objects.
-func (o ArpInner) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AggregateEthernetInterfacesResourceSchema defines the schema for AggregateEthernetInterfaces resource
 var AggregateEthernetInterfacesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM AggregateEthernetInterfaces objects",
+	MarkdownDescription: "AggregateEthernetInterface resource",
 	Attributes: map[string]schema.Attribute{
 		"comment": schema.StringAttribute{
 			Validators: []validator.String{
@@ -564,7 +543,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 
 // AggregateEthernetInterfacesDataSourceSchema defines the schema for AggregateEthernetInterfaces data source
 var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AggregateEthernetInterfaces data source",
+	MarkdownDescription: "AggregateEthernetInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"comment": dsschema.StringAttribute{
 			MarkdownDescription: "Aggregate interface description",

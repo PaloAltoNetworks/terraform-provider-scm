@@ -176,7 +176,7 @@ func (o UrlAccessProfilesCredentialEnforcementMode) AttrType() attr.Type {
 
 // UrlAccessProfilesResourceSchema defines the schema for UrlAccessProfiles resource
 var UrlAccessProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM UrlAccessProfiles objects",
+	MarkdownDescription: "UrlAccessProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"alert": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -388,7 +388,7 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 
 // UrlAccessProfilesDataSourceSchema defines the schema for UrlAccessProfiles data source
 var UrlAccessProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "UrlAccessProfiles data source",
+	MarkdownDescription: "UrlAccessProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"alert": dsschema.ListAttribute{
 			ElementType:         types.StringType,

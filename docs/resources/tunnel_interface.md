@@ -3,12 +3,12 @@
 page_title: "scm_tunnel_interface Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM TunnelInterfaces objects
+  TunnelInterface resource
 ---
 
 # scm_tunnel_interface (Resource)
 
-Manages SCM TunnelInterfaces objects
+TunnelInterface resource
 
 
 

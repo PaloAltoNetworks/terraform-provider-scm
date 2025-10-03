@@ -112,7 +112,7 @@ func (o TrafficSteeringRulesActionForward) AttrType() attr.Type {
 
 // TrafficSteeringRulesResourceSchema defines the schema for TrafficSteeringRules resource
 var TrafficSteeringRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM TrafficSteeringRules objects",
+	MarkdownDescription: "TrafficSteeringRule resource",
 	Attributes: map[string]schema.Attribute{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "Action",
@@ -196,7 +196,7 @@ var TrafficSteeringRulesResourceSchema = schema.Schema{
 
 // TrafficSteeringRulesDataSourceSchema defines the schema for TrafficSteeringRules data source
 var TrafficSteeringRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "TrafficSteeringRules data source",
+	MarkdownDescription: "TrafficSteeringRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Action",

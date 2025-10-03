@@ -105,7 +105,7 @@ func (o EditSharedInfrastructureSettingsConnectorConnectorBlocks) AttrType() att
 
 // SharedInfrastructureSettingsResourceSchema defines the schema for SharedInfrastructureSettings resource
 var SharedInfrastructureSettingsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM SharedInfrastructureSettings objects",
+	MarkdownDescription: "SharedInfrastructureSetting resource",
 	Attributes: map[string]schema.Attribute{
 		"api_key": schema.StringAttribute{
 			MarkdownDescription: "Api key",
@@ -187,7 +187,7 @@ var SharedInfrastructureSettingsResourceSchema = schema.Schema{
 
 // SharedInfrastructureSettingsDataSourceSchema defines the schema for SharedInfrastructureSettings data source
 var SharedInfrastructureSettingsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "SharedInfrastructureSettings data source",
+	MarkdownDescription: "SharedInfrastructureSetting data source",
 	Attributes: map[string]dsschema.Attribute{
 		"api_key": dsschema.StringAttribute{
 			MarkdownDescription: "Api key",

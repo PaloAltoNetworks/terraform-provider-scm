@@ -3,12 +3,12 @@
 page_title: "scm_logical_router Data Source - scm"
 subcategory: ""
 description: |-
-  LogicalRouters data source
+  LogicalRouter data source
 ---
 
 # scm_logical_router (Data Source)
 
-LogicalRouters data source
+LogicalRouter data source
 
 
 

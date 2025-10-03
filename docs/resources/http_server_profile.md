@@ -3,12 +3,12 @@
 page_title: "scm_http_server_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM HttpServerProfiles objects
+  HttpServerProfile resource
 ---
 
 # scm_http_server_profile (Resource)
 
-Manages SCM HttpServerProfiles objects
+HttpServerProfile resource
 
 
 

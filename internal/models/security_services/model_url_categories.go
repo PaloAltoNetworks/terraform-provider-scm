@@ -56,7 +56,7 @@ func (o UrlCategories) AttrType() attr.Type {
 
 // UrlCategoriesResourceSchema defines the schema for UrlCategories resource
 var UrlCategoriesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM UrlCategories objects",
+	MarkdownDescription: "UrlCategory resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
@@ -144,7 +144,7 @@ var UrlCategoriesResourceSchema = schema.Schema{
 
 // UrlCategoriesDataSourceSchema defines the schema for UrlCategories data source
 var UrlCategoriesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "UrlCategories data source",
+	MarkdownDescription: "UrlCategory data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",

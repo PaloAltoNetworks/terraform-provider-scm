@@ -3,12 +3,12 @@
 page_title: "scm_bgp_redistribution_profile Data Source - scm"
 subcategory: ""
 description: |-
-  BgpRedistributionProfiles data source
+  BgpRedistributionProfile data source
 ---
 
 # scm_bgp_redistribution_profile (Data Source)
 
-BgpRedistributionProfiles data source
+BgpRedistributionProfile data source
 
 
 

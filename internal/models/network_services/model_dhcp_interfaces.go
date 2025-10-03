@@ -525,7 +525,7 @@ func (o DhcpInterfacesServerReservedInner) AttrType() attr.Type {
 
 // DhcpInterfacesResourceSchema defines the schema for DhcpInterfaces resource
 var DhcpInterfacesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM DhcpInterfaces objects",
+	MarkdownDescription: "DhcpInterface resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -802,7 +802,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 
 // DhcpInterfacesDataSourceSchema defines the schema for DhcpInterfaces data source
 var DhcpInterfacesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "DhcpInterfaces data source",
+	MarkdownDescription: "DhcpInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

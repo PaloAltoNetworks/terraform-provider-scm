@@ -3,12 +3,12 @@
 page_title: "scm_traffic_steering_rule Data Source - scm"
 subcategory: ""
 description: |-
-  TrafficSteeringRules data source
+  TrafficSteeringRule data source
 ---
 
 # scm_traffic_steering_rule (Data Source)
 
-TrafficSteeringRules data source
+TrafficSteeringRule data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_hip_profile Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM HipProfiles objects
+  HipProfile resource
 ---
 
 # scm_hip_profile (Resource)
 
-Manages SCM HipProfiles objects
+HipProfile resource
 
 ## Example Usage
 

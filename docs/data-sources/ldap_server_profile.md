@@ -3,12 +3,12 @@
 page_title: "scm_ldap_server_profile Data Source - scm"
 subcategory: ""
 description: |-
-  LdapServerProfiles data source
+  LdapServerProfile data source
 ---
 
 # scm_ldap_server_profile (Data Source)
 
-LdapServerProfiles data source
+LdapServerProfile data source
 
 
 

@@ -3,12 +3,12 @@
 page_title: "scm_authentication_sequence Data Source - scm"
 subcategory: ""
 description: |-
-  AuthenticationSequences data source
+  AuthenticationSequence data source
 ---
 
 # scm_authentication_sequence (Data Source)
 
-AuthenticationSequences data source
+AuthenticationSequence data source
 
 
 

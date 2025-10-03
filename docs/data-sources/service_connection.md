@@ -3,12 +3,12 @@
 page_title: "scm_service_connection Data Source - scm"
 subcategory: ""
 description: |-
-  ServiceConnections data source
+  ServiceConnection data source
 ---
 
 # scm_service_connection (Data Source)
 
-ServiceConnections data source
+ServiceConnection data source
 
 
 

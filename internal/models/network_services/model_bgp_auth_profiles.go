@@ -53,7 +53,7 @@ func (o BgpAuthProfiles) AttrType() attr.Type {
 
 // BgpAuthProfilesResourceSchema defines the schema for BgpAuthProfiles resource
 var BgpAuthProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM BgpAuthProfiles objects",
+	MarkdownDescription: "BgpAuthProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -134,7 +134,7 @@ var BgpAuthProfilesResourceSchema = schema.Schema{
 
 // BgpAuthProfilesDataSourceSchema defines the schema for BgpAuthProfiles data source
 var BgpAuthProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "BgpAuthProfiles data source",
+	MarkdownDescription: "BgpAuthProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

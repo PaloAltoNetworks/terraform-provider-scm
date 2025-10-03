@@ -345,7 +345,7 @@ func (o QosPolicyRulesDscpTosCodepointsInnerTypeCustomCodepoint) AttrType() attr
 
 // QosPolicyRulesResourceSchema defines the schema for QosPolicyRules resource
 var QosPolicyRulesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM QosPolicyRules objects",
+	MarkdownDescription: "QosPolicyRule resource",
 	Attributes: map[string]schema.Attribute{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "Action",
@@ -564,7 +564,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 
 // QosPolicyRulesDataSourceSchema defines the schema for QosPolicyRules data source
 var QosPolicyRulesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "QosPolicyRules data source",
+	MarkdownDescription: "QosPolicyRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Action",

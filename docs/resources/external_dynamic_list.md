@@ -3,12 +3,12 @@
 page_title: "scm_external_dynamic_list Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ExternalDynamicLists objects
+  ExternalDynamicList resource
 ---
 
 # scm_external_dynamic_list (Resource)
 
-Manages SCM ExternalDynamicLists objects
+ExternalDynamicList resource
 
 ## Example Usage
 

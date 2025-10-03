@@ -3,12 +3,12 @@
 page_title: "scm_service_group Resource - scm"
 subcategory: ""
 description: |-
-  Manages SCM ServiceGroups objects
+  ServiceGroup resource
 ---
 
 # scm_service_group (Resource)
 
-Manages SCM ServiceGroups objects
+ServiceGroup resource
 
 ## Example Usage
 

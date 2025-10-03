@@ -12823,7 +12823,7 @@ func (o LogicalRoutersVrfInnerVrAdminDists) AttrType() attr.Type {
 
 // LogicalRoutersResourceSchema defines the schema for LogicalRouters resource
 var LogicalRoutersResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM LogicalRouters objects",
+	MarkdownDescription: "LogicalRouter resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -18345,7 +18345,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 
 // LogicalRoutersDataSourceSchema defines the schema for LogicalRouters data source
 var LogicalRoutersDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "LogicalRouters data source",
+	MarkdownDescription: "LogicalRouter data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

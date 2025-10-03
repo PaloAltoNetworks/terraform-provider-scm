@@ -123,7 +123,7 @@ func (o SitesQos) AttrType() attr.Type {
 
 // SitesResourceSchema defines the schema for Sites resource
 var SitesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM Sites objects",
+	MarkdownDescription: "Site resource",
 	Attributes: map[string]schema.Attribute{
 		"address_line_1": schema.StringAttribute{
 			MarkdownDescription: "The address in which the site exists",
@@ -235,7 +235,7 @@ var SitesResourceSchema = schema.Schema{
 
 // SitesDataSourceSchema defines the schema for Sites data source
 var SitesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "Sites data source",
+	MarkdownDescription: "Site data source",
 	Attributes: map[string]dsschema.Attribute{
 		"address_line_1": dsschema.StringAttribute{
 			MarkdownDescription: "The address in which the site exists",

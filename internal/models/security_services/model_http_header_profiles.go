@@ -161,7 +161,7 @@ func (o HttpHeaderProfilesHttpHeaderInsertionInnerTypeInnerHeadersInner) AttrTyp
 
 // HttpHeaderProfilesResourceSchema defines the schema for HttpHeaderProfiles resource
 var HttpHeaderProfilesResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM HttpHeaderProfiles objects",
+	MarkdownDescription: "HttpHeaderProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the HTTP header profile",
@@ -290,7 +290,7 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 
 // HttpHeaderProfilesDataSourceSchema defines the schema for HttpHeaderProfiles data source
 var HttpHeaderProfilesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "HttpHeaderProfiles data source",
+	MarkdownDescription: "HttpHeaderProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "The description of the HTTP header profile",

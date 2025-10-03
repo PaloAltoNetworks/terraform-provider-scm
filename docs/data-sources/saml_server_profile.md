@@ -3,12 +3,12 @@
 page_title: "scm_saml_server_profile Data Source - scm"
 subcategory: ""
 description: |-
-  SamlServerProfiles data source
+  SamlServerProfile data source
 ---
 
 # scm_saml_server_profile (Data Source)
 
-SamlServerProfiles data source
+SamlServerProfile data source
 
 
 

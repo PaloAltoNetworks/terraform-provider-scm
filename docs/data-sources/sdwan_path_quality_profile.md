@@ -3,12 +3,12 @@
 page_title: "scm_sdwan_path_quality_profile Data Source - scm"
 subcategory: ""
 description: |-
-  SdwanPathQualityProfiles data source
+  SdwanPathQualityProfile data source
 ---
 
 # scm_sdwan_path_quality_profile (Data Source)
 
-SdwanPathQualityProfiles data source
+SdwanPathQualityProfile data source
 
 
 

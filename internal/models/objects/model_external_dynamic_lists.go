@@ -998,7 +998,7 @@ func (o ExternalDynamicListsTypeUrl) AttrType() attr.Type {
 
 // ExternalDynamicListsResourceSchema defines the schema for ExternalDynamicLists resource
 var ExternalDynamicListsResourceSchema = schema.Schema{
-	MarkdownDescription: "Manages SCM ExternalDynamicLists objects",
+	MarkdownDescription: "ExternalDynamicList resource",
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -2088,7 +2088,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 
 // ExternalDynamicListsDataSourceSchema defines the schema for ExternalDynamicLists data source
 var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "ExternalDynamicLists data source",
+	MarkdownDescription: "ExternalDynamicList data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",

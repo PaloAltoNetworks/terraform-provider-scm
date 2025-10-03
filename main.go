@@ -5,9 +5,9 @@ import (
 	"flag"
 	"log"
 
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/provider"
-
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
+
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/provider"
 )
 
 // Run "go generate" to format example terraform files and generate the docs for the registry/website
@@ -40,8 +40,7 @@ func main() {
 		Debug:   debug,
 	}
 
-	err := providerserver.Serve(context.Background(), provider.New(version), opts)
-
+	err := providerserver.Serve(context.Background(), provider.NewFactory(version), opts)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

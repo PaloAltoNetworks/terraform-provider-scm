@@ -1,0 +1,788 @@
+package models
+
+import (
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
+	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+)
+
+// Package: network_services
+// This file contains models for the network_services SDK package
+
+// AggregateEthernetInterfaces represents the Terraform model for AggregateEthernetInterfaces
+type AggregateEthernetInterfaces struct {
+	Tfid         types.String          `tfsdk:"tfid"`
+	Comment      basetypes.StringValue `tfsdk:"comment"`
+	DefaultValue basetypes.StringValue `tfsdk:"default_value"`
+	Device       basetypes.StringValue `tfsdk:"device"`
+	Folder       basetypes.StringValue `tfsdk:"folder"`
+	Id           basetypes.StringValue `tfsdk:"id"`
+	Layer2       basetypes.ObjectValue `tfsdk:"layer2"`
+	Layer3       basetypes.ObjectValue `tfsdk:"layer3"`
+	Name         basetypes.StringValue `tfsdk:"name"`
+	Snippet      basetypes.StringValue `tfsdk:"snippet"`
+}
+
+// AggregateEthernetInterfacesLayer2 represents a nested structure within the AggregateEthernetInterfaces model
+type AggregateEthernetInterfacesLayer2 struct {
+	Lacp    basetypes.ObjectValue `tfsdk:"lacp"`
+	VlanTag basetypes.Int64Value  `tfsdk:"vlan_tag"`
+}
+
+// Lacp represents a nested structure within the AggregateEthernetInterfaces model
+type Lacp struct {
+	Enable           basetypes.BoolValue   `tfsdk:"enable"`
+	FastFailover     basetypes.BoolValue   `tfsdk:"fast_failover"`
+	MaxPorts         basetypes.Int64Value  `tfsdk:"max_ports"`
+	Mode             basetypes.StringValue `tfsdk:"mode"`
+	SystemPriority   basetypes.Int64Value  `tfsdk:"system_priority"`
+	TransmissionRate basetypes.StringValue `tfsdk:"transmission_rate"`
+}
+
+// AggregateEthernetInterfacesLayer3 represents a nested structure within the AggregateEthernetInterfaces model
+type AggregateEthernetInterfacesLayer3 struct {
+	Arp                        basetypes.ListValue   `tfsdk:"arp"`
+	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
+	DhcpClient                 basetypes.ObjectValue `tfsdk:"dhcp_client"`
+	InterfaceManagementProfile basetypes.StringValue `tfsdk:"interface_management_profile"`
+	Ip                         basetypes.ListValue   `tfsdk:"ip"`
+	Lacp                       basetypes.ObjectValue `tfsdk:"lacp"`
+	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
+}
+
+// AttrTypes defines the attribute types for the AggregateEthernetInterfaces model.
+func (o AggregateEthernetInterfaces) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"tfid":          basetypes.StringType{},
+		"comment":       basetypes.StringType{},
+		"default_value": basetypes.StringType{},
+		"device":        basetypes.StringType{},
+		"folder":        basetypes.StringType{},
+		"id":            basetypes.StringType{},
+		"layer2": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"lacp": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable":            basetypes.BoolType{},
+						"fast_failover":     basetypes.BoolType{},
+						"max_ports":         basetypes.Int64Type{},
+						"mode":              basetypes.StringType{},
+						"system_priority":   basetypes.Int64Type{},
+						"transmission_rate": basetypes.StringType{},
+					},
+				},
+				"vlan_tag": basetypes.Int64Type{},
+			},
+		},
+		"layer3": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"hw_address": basetypes.StringType{},
+						"name":       basetypes.StringType{},
+					},
+				}},
+				"ddns_config": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"ddns_cert_profile":    basetypes.StringType{},
+						"ddns_enabled":         basetypes.BoolType{},
+						"ddns_hostname":        basetypes.StringType{},
+						"ddns_ip":              basetypes.StringType{},
+						"ddns_update_interval": basetypes.Int64Type{},
+						"ddns_vendor":          basetypes.StringType{},
+						"ddns_vendor_config":   basetypes.StringType{},
+					},
+				},
+				"dhcp_client": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"create_default_route": basetypes.BoolType{},
+						"default_route_metric": basetypes.Int64Type{},
+						"enable":               basetypes.BoolType{},
+						"send_hostname": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"enable":   basetypes.BoolType{},
+								"hostname": basetypes.StringType{},
+							},
+						},
+					},
+				},
+				"interface_management_profile": basetypes.StringType{},
+				"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
+				"lacp": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable":            basetypes.BoolType{},
+						"fast_failover":     basetypes.BoolType{},
+						"max_ports":         basetypes.Int64Type{},
+						"mode":              basetypes.StringType{},
+						"system_priority":   basetypes.Int64Type{},
+						"transmission_rate": basetypes.StringType{},
+					},
+				},
+				"mtu": basetypes.Int64Type{},
+			},
+		},
+		"name":    basetypes.StringType{},
+		"snippet": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggregateEthernetInterfaces objects.
+func (o AggregateEthernetInterfaces) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer2 model.
+func (o AggregateEthernetInterfacesLayer2) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"lacp": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":            basetypes.BoolType{},
+				"fast_failover":     basetypes.BoolType{},
+				"max_ports":         basetypes.Int64Type{},
+				"mode":              basetypes.StringType{},
+				"system_priority":   basetypes.Int64Type{},
+				"transmission_rate": basetypes.StringType{},
+			},
+		},
+		"vlan_tag": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer2 objects.
+func (o AggregateEthernetInterfacesLayer2) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the Lacp model.
+func (o Lacp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable":            basetypes.BoolType{},
+		"fast_failover":     basetypes.BoolType{},
+		"max_ports":         basetypes.Int64Type{},
+		"mode":              basetypes.StringType{},
+		"system_priority":   basetypes.Int64Type{},
+		"transmission_rate": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of Lacp objects.
+func (o Lacp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3 model.
+func (o AggregateEthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"hw_address": basetypes.StringType{},
+				"name":       basetypes.StringType{},
+			},
+		}},
+		"ddns_config": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"ddns_cert_profile":    basetypes.StringType{},
+				"ddns_enabled":         basetypes.BoolType{},
+				"ddns_hostname":        basetypes.StringType{},
+				"ddns_ip":              basetypes.StringType{},
+				"ddns_update_interval": basetypes.Int64Type{},
+				"ddns_vendor":          basetypes.StringType{},
+				"ddns_vendor_config":   basetypes.StringType{},
+			},
+		},
+		"dhcp_client": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"create_default_route": basetypes.BoolType{},
+				"default_route_metric": basetypes.Int64Type{},
+				"enable":               basetypes.BoolType{},
+				"send_hostname": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable":   basetypes.BoolType{},
+						"hostname": basetypes.StringType{},
+					},
+				},
+			},
+		},
+		"interface_management_profile": basetypes.StringType{},
+		"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
+		"lacp": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":            basetypes.BoolType{},
+				"fast_failover":     basetypes.BoolType{},
+				"max_ports":         basetypes.Int64Type{},
+				"mode":              basetypes.StringType{},
+				"system_priority":   basetypes.Int64Type{},
+				"transmission_rate": basetypes.StringType{},
+			},
+		},
+		"mtu": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3 objects.
+func (o AggregateEthernetInterfacesLayer3) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AggregateEthernetInterfacesResourceSchema defines the schema for AggregateEthernetInterfaces resource
+var AggregateEthernetInterfacesResourceSchema = schema.Schema{
+	MarkdownDescription: "AggregateEthernetInterface resource",
+	Attributes: map[string]schema.Attribute{
+		"comment": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.LengthAtMost(1023),
+			},
+			MarkdownDescription: "Aggregate interface description",
+			Optional:            true,
+		},
+		"default_value": schema.StringAttribute{
+			MarkdownDescription: "Default value",
+			Optional:            true,
+		},
+		"device": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+			},
+			MarkdownDescription: "The device in which the resource is defined",
+			Optional:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.RequiresReplace(),
+			},
+		},
+		"folder": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+			},
+			MarkdownDescription: "The folder in which the resource is defined",
+			Optional:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.RequiresReplace(),
+			},
+		},
+		"id": schema.StringAttribute{
+			MarkdownDescription: "UUID of the resource",
+			Computed:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
+			},
+		},
+		"layer2": schema.SingleNestedAttribute{
+			MarkdownDescription: "Layer2",
+			Optional:            true,
+			Computed:            true,
+			Attributes: map[string]schema.Attribute{
+				"lacp": schema.SingleNestedAttribute{
+					MarkdownDescription: "Lacp",
+					Optional:            true,
+					Computed:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable LACP?",
+							Optional:            true,
+							Computed:            true,
+							Default:             booldefault.StaticBool(false),
+						},
+						"fast_failover": schema.BoolAttribute{
+							MarkdownDescription: "Fast failover",
+							Optional:            true,
+							Computed:            true,
+						},
+						"max_ports": schema.Int64Attribute{
+							MarkdownDescription: "Max ports",
+							Optional:            true,
+							Computed:            true,
+						},
+						"mode": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.OneOf("passive", "active"),
+							},
+							MarkdownDescription: "Mode",
+							Optional:            true,
+							Computed:            true,
+							Default:             stringdefault.StaticString("passive"),
+						},
+						"system_priority": schema.Int64Attribute{
+							MarkdownDescription: "System priority",
+							Optional:            true,
+							Computed:            true,
+						},
+						"transmission_rate": schema.StringAttribute{
+							MarkdownDescription: "Transmission rate",
+							Optional:            true,
+							Computed:            true,
+						},
+					},
+				},
+				"vlan_tag": schema.Int64Attribute{
+					MarkdownDescription: "Vlan tag",
+					Optional:            true,
+					Computed:            true,
+				},
+			},
+		},
+		"layer3": schema.SingleNestedAttribute{
+			MarkdownDescription: "Layer3",
+			Optional:            true,
+			Computed:            true,
+			Attributes: map[string]schema.Attribute{
+				"arp": schema.ListNestedAttribute{
+					MarkdownDescription: "ARP configuration",
+					Optional:            true,
+					Computed:            true,
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"hw_address": schema.StringAttribute{
+								MarkdownDescription: "Hw address",
+								Optional:            true,
+							},
+							"name": schema.StringAttribute{
+								MarkdownDescription: "IP address",
+								Optional:            true,
+							},
+						},
+					},
+				},
+				"ddns_config": schema.SingleNestedAttribute{
+					MarkdownDescription: "Ddns config",
+					Optional:            true,
+					Computed:            true,
+					Attributes: map[string]schema.Attribute{
+						"ddns_cert_profile": schema.StringAttribute{
+							MarkdownDescription: "Ddns cert profile",
+							Optional:            true,
+							Computed:            true,
+						},
+						"ddns_enabled": schema.BoolAttribute{
+							MarkdownDescription: "Ddns enabled",
+							Optional:            true,
+							Computed:            true,
+						},
+						"ddns_hostname": schema.StringAttribute{
+							MarkdownDescription: "Ddns hostname",
+							Optional:            true,
+							Computed:            true,
+						},
+						"ddns_ip": schema.StringAttribute{
+							MarkdownDescription: "Ddns ip",
+							Optional:            true,
+							Computed:            true,
+						},
+						"ddns_update_interval": schema.Int64Attribute{
+							MarkdownDescription: "Ddns update interval",
+							Optional:            true,
+							Computed:            true,
+						},
+						"ddns_vendor": schema.StringAttribute{
+							MarkdownDescription: "Ddns vendor",
+							Optional:            true,
+							Computed:            true,
+						},
+						"ddns_vendor_config": schema.StringAttribute{
+							MarkdownDescription: "Ddns vendor config",
+							Optional:            true,
+							Computed:            true,
+						},
+					},
+				},
+				"dhcp_client": schema.SingleNestedAttribute{
+					MarkdownDescription: "Dhcp client",
+					Optional:            true,
+					Computed:            true,
+					Attributes: map[string]schema.Attribute{
+						"create_default_route": schema.BoolAttribute{
+							MarkdownDescription: "Create default route",
+							Optional:            true,
+							Computed:            true,
+						},
+						"default_route_metric": schema.Int64Attribute{
+							MarkdownDescription: "Default route metric",
+							Optional:            true,
+							Computed:            true,
+						},
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable",
+							Optional:            true,
+							Computed:            true,
+						},
+						"send_hostname": schema.SingleNestedAttribute{
+							MarkdownDescription: "Send hostname",
+							Optional:            true,
+							Computed:            true,
+							Attributes: map[string]schema.Attribute{
+								"enable": schema.BoolAttribute{
+									MarkdownDescription: "Enable",
+									Optional:            true,
+									Computed:            true,
+								},
+								"hostname": schema.StringAttribute{
+									MarkdownDescription: "Hostname",
+									Optional:            true,
+									Computed:            true,
+								},
+							},
+						},
+					},
+				},
+				"interface_management_profile": schema.StringAttribute{
+					MarkdownDescription: "Interface management profile",
+					Optional:            true,
+					Computed:            true,
+				},
+				"ip": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Interface IP addresses",
+					Validators: []validator.List{
+						listvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("dhcp_client"),
+						),
+					},
+					Optional: true,
+					Computed: true,
+				},
+				"lacp": schema.SingleNestedAttribute{
+					MarkdownDescription: "Lacp",
+					Optional:            true,
+					Computed:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable LACP?",
+							Optional:            true,
+							Computed:            true,
+							Default:             booldefault.StaticBool(false),
+						},
+						"fast_failover": schema.BoolAttribute{
+							MarkdownDescription: "Fast failover",
+							Optional:            true,
+							Computed:            true,
+						},
+						"max_ports": schema.Int64Attribute{
+							MarkdownDescription: "Max ports",
+							Optional:            true,
+							Computed:            true,
+						},
+						"mode": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.OneOf("passive", "active"),
+							},
+							MarkdownDescription: "Mode",
+							Optional:            true,
+							Computed:            true,
+							Default:             stringdefault.StaticString("passive"),
+						},
+						"system_priority": schema.Int64Attribute{
+							MarkdownDescription: "System priority",
+							Optional:            true,
+							Computed:            true,
+						},
+						"transmission_rate": schema.StringAttribute{
+							MarkdownDescription: "Transmission rate",
+							Optional:            true,
+							Computed:            true,
+						},
+					},
+				},
+				"mtu": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(576, 9216),
+					},
+					MarkdownDescription: "MTU",
+					Optional:            true,
+					Computed:            true,
+					Default:             int64default.StaticInt64(1500),
+				},
+			},
+		},
+		"name": schema.StringAttribute{
+			MarkdownDescription: "Aggregate interface name",
+			Required:            true,
+		},
+		"snippet": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+			},
+			MarkdownDescription: "The snippet in which the resource is defined",
+			Optional:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.RequiresReplace(),
+			},
+		},
+		"tfid": schema.StringAttribute{
+			MarkdownDescription: "The Terraform ID.",
+			Computed:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
+			},
+		},
+	},
+}
+
+// AggregateEthernetInterfacesDataSourceSchema defines the schema for AggregateEthernetInterfaces data source
+var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
+	MarkdownDescription: "AggregateEthernetInterface data source",
+	Attributes: map[string]dsschema.Attribute{
+		"comment": dsschema.StringAttribute{
+			MarkdownDescription: "Aggregate interface description",
+			Computed:            true,
+		},
+		"default_value": dsschema.StringAttribute{
+			MarkdownDescription: "Default value",
+			Computed:            true,
+		},
+		"device": dsschema.StringAttribute{
+			MarkdownDescription: "The device in which the resource is defined",
+			Computed:            true,
+		},
+		"folder": dsschema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined",
+			Computed:            true,
+		},
+		"id": dsschema.StringAttribute{
+			MarkdownDescription: "UUID of the resource",
+			Required:            true,
+		},
+		"layer2": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Layer2",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"lacp": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Lacp",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable LACP?",
+							Computed:            true,
+						},
+						"fast_failover": dsschema.BoolAttribute{
+							MarkdownDescription: "Fast failover",
+							Computed:            true,
+						},
+						"max_ports": dsschema.Int64Attribute{
+							MarkdownDescription: "Max ports",
+							Computed:            true,
+						},
+						"mode": dsschema.StringAttribute{
+							MarkdownDescription: "Mode",
+							Computed:            true,
+						},
+						"system_priority": dsschema.Int64Attribute{
+							MarkdownDescription: "System priority",
+							Computed:            true,
+						},
+						"transmission_rate": dsschema.StringAttribute{
+							MarkdownDescription: "Transmission rate",
+							Computed:            true,
+						},
+					},
+				},
+				"vlan_tag": dsschema.Int64Attribute{
+					MarkdownDescription: "Vlan tag",
+					Computed:            true,
+				},
+			},
+		},
+		"layer3": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Layer3",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"arp": dsschema.ListNestedAttribute{
+					MarkdownDescription: "ARP configuration",
+					Computed:            true,
+					NestedObject: dsschema.NestedAttributeObject{
+						Attributes: map[string]dsschema.Attribute{
+							"hw_address": dsschema.StringAttribute{
+								MarkdownDescription: "Hw address",
+								Computed:            true,
+							},
+							"name": dsschema.StringAttribute{
+								MarkdownDescription: "IP address",
+								Computed:            true,
+							},
+						},
+					},
+				},
+				"ddns_config": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Ddns config",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"ddns_cert_profile": dsschema.StringAttribute{
+							MarkdownDescription: "Ddns cert profile",
+							Computed:            true,
+						},
+						"ddns_enabled": dsschema.BoolAttribute{
+							MarkdownDescription: "Ddns enabled",
+							Computed:            true,
+						},
+						"ddns_hostname": dsschema.StringAttribute{
+							MarkdownDescription: "Ddns hostname",
+							Computed:            true,
+						},
+						"ddns_ip": dsschema.StringAttribute{
+							MarkdownDescription: "Ddns ip",
+							Computed:            true,
+						},
+						"ddns_update_interval": dsschema.Int64Attribute{
+							MarkdownDescription: "Ddns update interval",
+							Computed:            true,
+						},
+						"ddns_vendor": dsschema.StringAttribute{
+							MarkdownDescription: "Ddns vendor",
+							Computed:            true,
+						},
+						"ddns_vendor_config": dsschema.StringAttribute{
+							MarkdownDescription: "Ddns vendor config",
+							Computed:            true,
+						},
+					},
+				},
+				"dhcp_client": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Dhcp client",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"create_default_route": dsschema.BoolAttribute{
+							MarkdownDescription: "Create default route",
+							Computed:            true,
+						},
+						"default_route_metric": dsschema.Int64Attribute{
+							MarkdownDescription: "Default route metric",
+							Computed:            true,
+						},
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable",
+							Computed:            true,
+						},
+						"send_hostname": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Send hostname",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"enable": dsschema.BoolAttribute{
+									MarkdownDescription: "Enable",
+									Computed:            true,
+								},
+								"hostname": dsschema.StringAttribute{
+									MarkdownDescription: "Hostname",
+									Computed:            true,
+								},
+							},
+						},
+					},
+				},
+				"interface_management_profile": dsschema.StringAttribute{
+					MarkdownDescription: "Interface management profile",
+					Computed:            true,
+				},
+				"ip": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Interface IP addresses",
+					Computed:            true,
+				},
+				"lacp": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Lacp",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable LACP?",
+							Computed:            true,
+						},
+						"fast_failover": dsschema.BoolAttribute{
+							MarkdownDescription: "Fast failover",
+							Computed:            true,
+						},
+						"max_ports": dsschema.Int64Attribute{
+							MarkdownDescription: "Max ports",
+							Computed:            true,
+						},
+						"mode": dsschema.StringAttribute{
+							MarkdownDescription: "Mode",
+							Computed:            true,
+						},
+						"system_priority": dsschema.Int64Attribute{
+							MarkdownDescription: "System priority",
+							Computed:            true,
+						},
+						"transmission_rate": dsschema.StringAttribute{
+							MarkdownDescription: "Transmission rate",
+							Computed:            true,
+						},
+					},
+				},
+				"mtu": dsschema.Int64Attribute{
+					MarkdownDescription: "MTU",
+					Computed:            true,
+				},
+			},
+		},
+		"name": dsschema.StringAttribute{
+			MarkdownDescription: "Aggregate interface name",
+			Optional:            true,
+			Computed:            true,
+		},
+		"snippet": dsschema.StringAttribute{
+			MarkdownDescription: "The snippet in which the resource is defined",
+			Computed:            true,
+		},
+		"tfid": dsschema.StringAttribute{
+			MarkdownDescription: "The Terraform ID.",
+			Computed:            true,
+		},
+	},
+}
+
+// AggregateEthernetInterfacesListModel represents the data model for a list data source.
+type AggregateEthernetInterfacesListModel struct {
+	Tfid    types.String                  `tfsdk:"tfid"`
+	Data    []AggregateEthernetInterfaces `tfsdk:"data"`
+	Limit   types.Int64                   `tfsdk:"limit"`
+	Offset  types.Int64                   `tfsdk:"offset"`
+	Name    types.String                  `tfsdk:"name"`
+	Total   types.Int64                   `tfsdk:"total"`
+	Folder  types.String                  `tfsdk:"folder"`
+	Snippet types.String                  `tfsdk:"snippet"`
+	Device  types.String                  `tfsdk:"device"`
+}
+
+// AggregateEthernetInterfacesListDataSourceSchema defines the schema for a list data source.
+var AggregateEthernetInterfacesListDataSourceSchema = dsschema.Schema{
+	MarkdownDescription: "Retrieves a listing of config items.",
+	Attributes: map[string]dsschema.Attribute{
+		"tfid": dsschema.StringAttribute{Description: "The Terraform ID.", Computed: true},
+		"data": dsschema.ListNestedAttribute{
+			Description: "The data.",
+			Computed:    true,
+			NestedObject: dsschema.NestedAttributeObject{
+				Attributes: AggregateEthernetInterfacesDataSourceSchema.Attributes,
+			},
+		},
+		"limit":   dsschema.Int64Attribute{Description: "The max number of items to return. Default: 200.", Optional: true},
+		"offset":  dsschema.Int64Attribute{Description: "The offset of the first item to return.", Optional: true},
+		"name":    dsschema.StringAttribute{Description: "The name of the item.", Optional: true},
+		"total":   dsschema.Int64Attribute{Description: "The total number of items.", Computed: true},
+		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
+		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
+		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+	},
+}

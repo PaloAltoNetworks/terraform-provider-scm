@@ -1,3 +1,11 @@
-data "scm_certificate_profile_list" "example" {
+# Fetch a list of all certificate profile objects from the "Shared" folder.
+data "scm_certificate_profile_list" "all_profiles" {
   folder = "Shared"
+}
+
+# Output the raw list of all certificate profile objects found.
+output "certificate_profiles_list" {
+  description = "A list of all certificate profile objects from the Shared folder."
+  # This directly outputs the list of data from the data source
+  value = data.scm_certificate_profile_list.all_profiles.data
 }

@@ -1097,8 +1097,8 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						"activate_rate": schema.Int64Attribute{
 							Validators: []validator.Int64{
 								int64validator.ExactlyOneOf(
-									path.MatchRelative().AtParent().AtName("alarm_rate"),
 									path.MatchRelative().AtParent().AtName("maximal_rate"),
+									path.MatchRelative().AtParent().AtName("alarm_rate"),
 								),
 								int64validator.Between(0, 2000000),
 							},
@@ -1108,8 +1108,8 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						"alarm_rate": schema.Int64Attribute{
 							Validators: []validator.Int64{
 								int64validator.ExactlyOneOf(
-									path.MatchRelative().AtParent().AtName("activate_rate"),
 									path.MatchRelative().AtParent().AtName("maximal_rate"),
+									path.MatchRelative().AtParent().AtName("activate_rate"),
 								),
 								int64validator.Between(0, 2000000),
 							},

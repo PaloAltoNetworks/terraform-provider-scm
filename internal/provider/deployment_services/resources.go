@@ -7,14 +7,14 @@ import (
 // GetResources returns all resources for the deployment_services package
 func GetResources() []func() resource.Resource {
 	return []func() resource.Resource{
-		NewTrafficSteeringRuleResource,
-		NewServiceConnectionResource,
-		NewServiceConnectionGroupResource,
-		NewInternalDnsServerResource,
-		// 		NewBgpRoutingResource,
-		// 		NewSharedInfrastructureSettingResource,
 		// 		NewSiteResource,
-		// 		NewBandwidthAllocationResource,
+		// 		NewBgpRoutingResource,
 		NewRemoteNetworkResource,
+		NewTrafficSteeringRuleResource,
+		// 		NewSharedInfrastructureSettingResource,
+		NewServiceConnectionGroupResource,
+		// 		NewBandwidthAllocationResource,
+		NewServiceConnectionResource,
+		NewInternalDnsServerResource,
 	}
 }

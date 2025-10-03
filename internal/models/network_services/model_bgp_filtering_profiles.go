@@ -680,11 +680,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
 										),
 									},
 									MarkdownDescription: "Conditional advertisement",
@@ -724,11 +724,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
 										),
 									},
 									MarkdownDescription: "Filter list",
@@ -748,11 +748,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
 										),
 									},
 									MarkdownDescription: "Inbound network filters",
@@ -771,12 +771,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"inherit": schema.BoolAttribute{
 									Validators: []validator.Bool{
 										boolvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
 										),
 									},
 									MarkdownDescription: "Inherit from unicast",
@@ -786,11 +786,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
 										),
 									},
 									MarkdownDescription: "Outbound network filters",
@@ -810,11 +810,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
 										),
 									},
 									MarkdownDescription: "Route maps",
@@ -834,11 +834,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
 										),
 									},
 									MarkdownDescription: "Unsuppress map",

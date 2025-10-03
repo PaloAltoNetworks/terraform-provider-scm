@@ -2,13 +2,14 @@ module github.com/paloaltonetworks/terraform-provider-scm
 
 go 1.24.0
 
-replace github.com/paloaltonetworks/scm-go => ../scm-go
+//replace github.com/paloaltonetworks/scm-go => ../scm-go
 
 require (
 	github.com/hashicorp/terraform-plugin-docs v0.23.0
 	github.com/hashicorp/terraform-plugin-framework v1.14.1
 	github.com/hashicorp/terraform-plugin-framework-validators v0.18.0
 	github.com/hashicorp/terraform-plugin-log v0.9.0
+	github.com/paloaltonetworks/scm-go v1.0.0
 )
 
 require (
@@ -72,7 +73,6 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
-	github.com/paloaltonetworks/scm-go v0.0.0
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/oauth2 v0.31.0 // indirect

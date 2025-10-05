@@ -318,8 +318,8 @@ var NatRulesResourceSchema = schema.Schema{
 						objectvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("interface"),
 							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("bi_directional"),
 							path.MatchRelative().AtParent().AtName("translated_address_single"),
+							path.MatchRelative().AtParent().AtName("bi_directional"),
 						),
 					},
 					MarkdownDescription: "Fallback",
@@ -336,8 +336,8 @@ var NatRulesResourceSchema = schema.Schema{
 						stringvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("translated_address_array"),
 							path.MatchRelative().AtParent().AtName("fallback"),
-							path.MatchRelative().AtParent().AtName("bi_directional"),
 							path.MatchRelative().AtParent().AtName("translated_address_single"),
+							path.MatchRelative().AtParent().AtName("bi_directional"),
 						),
 					},
 					MarkdownDescription: "Interface name",
@@ -350,8 +350,8 @@ var NatRulesResourceSchema = schema.Schema{
 						listvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("interface"),
 							path.MatchRelative().AtParent().AtName("fallback"),
-							path.MatchRelative().AtParent().AtName("bi_directional"),
 							path.MatchRelative().AtParent().AtName("translated_address_single"),
+							path.MatchRelative().AtParent().AtName("bi_directional"),
 						),
 					},
 					Optional: true,

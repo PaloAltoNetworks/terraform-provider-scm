@@ -69,7 +69,7 @@ Read-Only:
 
 Read-Only:
 
-- `action` (Attributes) Action (see [below for nested schema](#nestedatt--data--rules--action))
+- `action` (Attributes) anti spyware profiles rules default action (see [below for nested schema](#nestedatt--data--rules--action))
 - `category` (String) Category
 - `name` (String) Name
 - `packet_capture` (String) Packet capture
@@ -83,7 +83,7 @@ Read-Only:
 
 - `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--data--rules--action--alert))
 - `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--data--rules--action--allow))
-- `block_ip` (Attributes) Block ip (see [below for nested schema](#nestedatt--data--rules--action--block_ip))
+- `block_ip` (Attributes) anti spyware profiles rules action block ip (see [below for nested schema](#nestedatt--data--rules--action--block_ip))
 - `drop` (Attributes) Drop (see [below for nested schema](#nestedatt--data--rules--action--drop))
 - `reset_both` (Attributes) Reset both (see [below for nested schema](#nestedatt--data--rules--action--reset_both))
 - `reset_client` (Attributes) Reset client (see [below for nested schema](#nestedatt--data--rules--action--reset_client))
@@ -129,7 +129,7 @@ Read-Only:
 
 Read-Only:
 
-- `action` (Attributes) Action (see [below for nested schema](#nestedatt--data--threat_exception--action))
+- `action` (Attributes) anti spyware profiles threat exception default action (see [below for nested schema](#nestedatt--data--threat_exception--action))
 - `exempt_ip` (Attributes List) Exempt ip (see [below for nested schema](#nestedatt--data--threat_exception--exempt_ip))
 - `name` (String) Name
 - `notes` (String) Notes
@@ -142,7 +142,7 @@ Read-Only:
 
 - `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--data--threat_exception--action--alert))
 - `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--data--threat_exception--action--allow))
-- `block_ip` (Attributes) Block ip (see [below for nested schema](#nestedatt--data--threat_exception--action--block_ip))
+- `block_ip` (Attributes) anti spyware profiles threat exception action block ip (see [below for nested schema](#nestedatt--data--threat_exception--action--block_ip))
 - `default` (Attributes) Default (see [below for nested schema](#nestedatt--data--threat_exception--action--default))
 - `drop` (Attributes) Drop (see [below for nested schema](#nestedatt--data--threat_exception--action--drop))
 - `reset_both` (Attributes) Reset both (see [below for nested schema](#nestedatt--data--threat_exception--action--reset_both))

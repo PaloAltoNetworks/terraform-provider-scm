@@ -1103,7 +1103,7 @@ func unpackAntiSpywareProfilesThreatExceptionInnerActionToSdk(ctx context.Contex
 	// Handling Objects
 	if !model.BlockIp.IsNull() && !model.BlockIp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field BlockIp")
-		unpacked, d := unpackAntiSpywareProfilesRulesInnerActionBlockIpToSdk(ctx, model.BlockIp)
+		unpacked, d := unpackAntiSpywareProfilesThreatExceptionInnerActionBlockIpToSdk(ctx, model.BlockIp)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "BlockIp"})
@@ -1186,14 +1186,14 @@ func packAntiSpywareProfilesThreatExceptionInnerActionFromSdk(ctx context.Contex
 	// This is a regular nested object that has its own packer.
 	if sdk.BlockIp != nil {
 		tflog.Debug(ctx, "Packing nested object for field BlockIp")
-		packed, d := packAntiSpywareProfilesRulesInnerActionBlockIpFromSdk(ctx, *sdk.BlockIp)
+		packed, d := packAntiSpywareProfilesThreatExceptionInnerActionBlockIpFromSdk(ctx, *sdk.BlockIp)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "BlockIp"})
 		}
 		model.BlockIp = packed
 	} else {
-		model.BlockIp = basetypes.NewObjectNull(models.AntiSpywareProfilesRulesInnerActionBlockIp{}.AttrTypes())
+		model.BlockIp = basetypes.NewObjectNull(models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp{}.AttrTypes())
 	}
 	// Handling Objects
 	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
@@ -1314,6 +1314,118 @@ func packAntiSpywareProfilesThreatExceptionInnerActionListFromSdk(ctx context.Co
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.AntiSpywareProfilesThreatExceptionInnerAction", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.AntiSpywareProfilesThreatExceptionInnerAction{}.AttrType(), data)
+}
+
+// --- Unpacker for AntiSpywareProfilesThreatExceptionInnerActionBlockIp ---
+func unpackAntiSpywareProfilesThreatExceptionInnerActionBlockIpToSdk(ctx context.Context, obj types.Object) (*security_services.AntiSpywareProfilesThreatExceptionInnerActionBlockIp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk security_services.AntiSpywareProfilesThreatExceptionInnerActionBlockIp
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Duration.IsNull() && !model.Duration.IsUnknown() {
+		val := int32(model.Duration.ValueInt64())
+		sdk.Duration = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Duration", "value": *sdk.Duration})
+	}
+
+	// Handling Primitives
+	if !model.TrackBy.IsNull() && !model.TrackBy.IsUnknown() {
+		sdk.TrackBy = model.TrackBy.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TrackBy", "value": *sdk.TrackBy})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for AntiSpywareProfilesThreatExceptionInnerActionBlockIp ---
+func packAntiSpywareProfilesThreatExceptionInnerActionBlockIpFromSdk(ctx context.Context, sdk security_services.AntiSpywareProfilesThreatExceptionInnerActionBlockIp) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Duration != nil {
+		model.Duration = basetypes.NewInt64Value(int64(*sdk.Duration))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Duration", "value": *sdk.Duration})
+	} else {
+		model.Duration = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.TrackBy != nil {
+		model.TrackBy = basetypes.NewStringValue(*sdk.TrackBy)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TrackBy", "value": *sdk.TrackBy})
+	} else {
+		model.TrackBy = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for AntiSpywareProfilesThreatExceptionInnerActionBlockIp ---
+func unpackAntiSpywareProfilesThreatExceptionInnerActionBlockIpListToSdk(ctx context.Context, list types.List) ([]security_services.AntiSpywareProfilesThreatExceptionInnerActionBlockIp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp")
+	diags := diag.Diagnostics{}
+	var data []models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]security_services.AntiSpywareProfilesThreatExceptionInnerActionBlockIp, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp{}.AttrTypes(), &item)
+		unpacked, d := unpackAntiSpywareProfilesThreatExceptionInnerActionBlockIpToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for AntiSpywareProfilesThreatExceptionInnerActionBlockIp ---
+func packAntiSpywareProfilesThreatExceptionInnerActionBlockIpListFromSdk(ctx context.Context, sdks []security_services.AntiSpywareProfilesThreatExceptionInnerActionBlockIp) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp")
+	diags := diag.Diagnostics{}
+	var data []models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp
+		obj, d := packAntiSpywareProfilesThreatExceptionInnerActionBlockIpFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.AntiSpywareProfilesThreatExceptionInnerActionBlockIp{}.AttrType(), data)
 }
 
 // --- Unpacker for AntiSpywareProfilesThreatExceptionInnerExemptIpInner ---

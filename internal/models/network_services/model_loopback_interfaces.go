@@ -135,12 +135,12 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"ip": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "loopback ip parent",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "Loopback IP address(es)",
 					Optional:            true,
 				},
 			},
@@ -210,12 +210,12 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ip": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "loopback ip parent",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "Loopback IP address(es)",
 					Computed:            true,
 				},
 			},

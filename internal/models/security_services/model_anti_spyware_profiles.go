@@ -93,6 +93,12 @@ type AntiSpywareProfilesThreatExceptionInnerAction struct {
 	ResetServer basetypes.ObjectValue `tfsdk:"reset_server"`
 }
 
+// AntiSpywareProfilesThreatExceptionInnerActionBlockIp represents a nested structure within the AntiSpywareProfiles model
+type AntiSpywareProfilesThreatExceptionInnerActionBlockIp struct {
+	Duration basetypes.Int64Value  `tfsdk:"duration"`
+	TrackBy  basetypes.StringValue `tfsdk:"track_by"`
+}
+
 // AntiSpywareProfilesThreatExceptionInnerExemptIpInner represents a nested structure within the AntiSpywareProfiles model
 type AntiSpywareProfilesThreatExceptionInnerExemptIpInner struct {
 	Name basetypes.StringValue `tfsdk:"name"`
@@ -412,6 +418,21 @@ func (o AntiSpywareProfilesThreatExceptionInnerAction) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the AntiSpywareProfilesThreatExceptionInnerActionBlockIp model.
+func (o AntiSpywareProfilesThreatExceptionInnerActionBlockIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"duration": basetypes.Int64Type{},
+		"track_by": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareProfilesThreatExceptionInnerActionBlockIp objects.
+func (o AntiSpywareProfilesThreatExceptionInnerActionBlockIp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the AntiSpywareProfilesThreatExceptionInnerExemptIpInner model.
 func (o AntiSpywareProfilesThreatExceptionInnerExemptIpInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -518,7 +539,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"action": schema.SingleNestedAttribute{
-						MarkdownDescription: "Action",
+						MarkdownDescription: "anti spyware profiles rules default action",
 						Optional:            true,
 						Attributes: map[string]schema.Attribute{
 							"alert": schema.SingleNestedAttribute{
@@ -562,7 +583,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_both"),
 									),
 								},
-								MarkdownDescription: "Block ip",
+								MarkdownDescription: "anti spyware profiles rules action block ip",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
 									"duration": schema.Int64Attribute{
@@ -704,7 +725,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"action": schema.SingleNestedAttribute{
-						MarkdownDescription: "Action",
+						MarkdownDescription: "anti spyware profiles threat exception default action",
 						Optional:            true,
 						Attributes: map[string]schema.Attribute{
 							"alert": schema.SingleNestedAttribute{
@@ -751,7 +772,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_both"),
 									),
 								},
-								MarkdownDescription: "Block ip",
+								MarkdownDescription: "anti spyware profiles threat exception action block ip",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
 									"duration": schema.Int64Attribute{
@@ -946,7 +967,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"action": dsschema.SingleNestedAttribute{
-						MarkdownDescription: "Action",
+						MarkdownDescription: "anti spyware profiles rules default action",
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
 							"alert": dsschema.SingleNestedAttribute{
@@ -960,7 +981,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"block_ip": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Block ip",
+								MarkdownDescription: "anti spyware profiles rules action block ip",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"duration": dsschema.Int64Attribute{
@@ -1033,7 +1054,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"action": dsschema.SingleNestedAttribute{
-						MarkdownDescription: "Action",
+						MarkdownDescription: "anti spyware profiles threat exception default action",
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
 							"alert": dsschema.SingleNestedAttribute{
@@ -1047,7 +1068,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"block_ip": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Block ip",
+								MarkdownDescription: "anti spyware profiles threat exception action block ip",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"duration": dsschema.Int64Attribute{

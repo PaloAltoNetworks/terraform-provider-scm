@@ -25,13 +25,13 @@ AntiSpywareSignature resource
 - `bugtraq` (List of String) Bugtraq
 - `comment` (String) Comment
 - `cve` (List of String) Cve
-- `default_action` (Attributes) Default action (see [below for nested schema](#nestedatt--default_action))
+- `default_action` (Attributes) anti spyware signature default action (see [below for nested schema](#nestedatt--default_action))
 - `device` (String) The device in which the resource is defined
 - `direction` (String) Direction
 - `folder` (String) The folder in which the resource is defined
 - `reference` (List of String) Reference
 - `severity` (String) Severity
-- `signature` (Attributes) Signature (see [below for nested schema](#nestedatt--signature))
+- `signature` (Attributes) anti spyware signature (see [below for nested schema](#nestedatt--signature))
 - `snippet` (String) The snippet in which the resource is defined
 - `vendor` (List of String) Vendor
 
@@ -47,7 +47,7 @@ Optional:
 
 - `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--default_action--alert))
 - `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--default_action--allow))
-- `block_ip` (Attributes) Block ip (see [below for nested schema](#nestedatt--default_action--block_ip))
+- `block_ip` (Attributes) anti spyware signature block ip (see [below for nested schema](#nestedatt--default_action--block_ip))
 - `drop` (Attributes) Drop (see [below for nested schema](#nestedatt--default_action--drop))
 - `reset_both` (Attributes) Reset both (see [below for nested schema](#nestedatt--default_action--reset_both))
 - `reset_client` (Attributes) Reset client (see [below for nested schema](#nestedatt--default_action--reset_client))

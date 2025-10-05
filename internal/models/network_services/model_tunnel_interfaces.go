@@ -34,6 +34,11 @@ type TunnelInterfaces struct {
 	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
 }
 
+// TunnelInterfacesIp represents a nested structure within the TunnelInterfaces model
+type TunnelInterfacesIp struct {
+	Ip basetypes.ListValue `tfsdk:"ip"`
+}
+
 // AttrTypes defines the attribute types for the TunnelInterfaces model.
 func (o TunnelInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -57,6 +62,20 @@ func (o TunnelInterfaces) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of TunnelInterfaces objects.
 func (o TunnelInterfaces) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the TunnelInterfacesIp model.
+func (o TunnelInterfacesIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ip": basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of TunnelInterfacesIp objects.
+func (o TunnelInterfacesIp) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -116,12 +135,12 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"ip": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "tunnel interfaces ip parent",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "tunnel interfaces IP address(es)",
 					Optional:            true,
 				},
 			},
@@ -191,12 +210,12 @@ var TunnelInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ip": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "tunnel interfaces ip parent",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "tunnel interfaces IP address(es)",
 					Computed:            true,
 				},
 			},

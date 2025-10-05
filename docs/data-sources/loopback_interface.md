@@ -30,7 +30,7 @@ LoopbackInterface data source
 - `device` (String) The device in which the resource is defined
 - `folder` (String) The folder in which the resource is defined
 - `interface_management_profile` (String) Interface management profile
-- `ip` (Attributes) Ip (see [below for nested schema](#nestedatt--ip))
+- `ip` (Attributes) loopback ip parent (see [below for nested schema](#nestedatt--ip))
 - `mtu` (Number) MTU
 - `snippet` (String) The snippet in which the resource is defined
 - `tfid` (String) The Terraform ID.
@@ -40,4 +40,4 @@ LoopbackInterface data source
 
 Read-Only:
 
-- `ip` (List of String) IP address(es)
+- `ip` (List of String) Loopback IP address(es)

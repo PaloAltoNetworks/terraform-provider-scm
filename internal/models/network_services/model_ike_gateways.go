@@ -788,6 +788,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					MarkdownDescription: "Passive mode",
 					Optional:            true,
 					Computed:            true,
+					Default:             booldefault.StaticBool(false),
 				},
 			},
 		},

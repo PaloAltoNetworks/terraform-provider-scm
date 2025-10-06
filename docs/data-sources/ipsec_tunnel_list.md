@@ -139,8 +139,8 @@ Read-Only:
 Read-Only:
 
 - `number` (Number) IP protocol number
-- `tcp` (Attributes) Tcp (see [below for nested schema](#nestedatt--data--auto_key--proxy_id_v6--protocol--tcp))
-- `udp` (Attributes) Udp (see [below for nested schema](#nestedatt--data--auto_key--proxy_id_v6--protocol--udp))
+- `tcp` (Attributes) TCP (see [below for nested schema](#nestedatt--data--auto_key--proxy_id_v6--protocol--tcp))
+- `udp` (Attributes) UDP (see [below for nested schema](#nestedatt--data--auto_key--proxy_id_v6--protocol--udp))
 
 <a id="nestedatt--data--auto_key--proxy_id_v6--protocol--tcp"></a>
 ### Nested Schema for `data.auto_key.proxy_id_v6.protocol.tcp`

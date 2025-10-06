@@ -44,6 +44,31 @@ type VlanInterfacesArpInner struct {
 	Name      basetypes.StringValue `tfsdk:"name"`
 }
 
+// DdnsConfig represents a nested structure within the VlanInterfaces model
+type DdnsConfig struct {
+	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
+	DdnsEnabled        basetypes.BoolValue   `tfsdk:"ddns_enabled"`
+	DdnsHostname       basetypes.StringValue `tfsdk:"ddns_hostname"`
+	DdnsIp             basetypes.StringValue `tfsdk:"ddns_ip"`
+	DdnsUpdateInterval basetypes.Int64Value  `tfsdk:"ddns_update_interval"`
+	DdnsVendor         basetypes.StringValue `tfsdk:"ddns_vendor"`
+	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
+}
+
+// AggregateEthernetInterfacesLayer3DhcpClient represents a nested structure within the VlanInterfaces model
+type AggregateEthernetInterfacesLayer3DhcpClient struct {
+	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
+	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
+	Enable             basetypes.BoolValue   `tfsdk:"enable"`
+	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
+}
+
+// AggregateEthernetInterfacesLayer3DhcpClientSendHostname represents a nested structure within the VlanInterfaces model
+type AggregateEthernetInterfacesLayer3DhcpClientSendHostname struct {
+	Enable   basetypes.BoolValue   `tfsdk:"enable"`
+	Hostname basetypes.StringValue `tfsdk:"hostname"`
+}
+
 // AttrTypes defines the attribute types for the VlanInterfaces model.
 func (o VlanInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -111,6 +136,63 @@ func (o VlanInterfacesArpInner) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of VlanInterfacesArpInner objects.
 func (o VlanInterfacesArpInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the DdnsConfig model.
+func (o DdnsConfig) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ddns_cert_profile":    basetypes.StringType{},
+		"ddns_enabled":         basetypes.BoolType{},
+		"ddns_hostname":        basetypes.StringType{},
+		"ddns_ip":              basetypes.StringType{},
+		"ddns_update_interval": basetypes.Int64Type{},
+		"ddns_vendor":          basetypes.StringType{},
+		"ddns_vendor_config":   basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of DdnsConfig objects.
+func (o DdnsConfig) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClient model.
+func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"create_default_route": basetypes.BoolType{},
+		"default_route_metric": basetypes.Int64Type{},
+		"enable":               basetypes.BoolType{},
+		"send_hostname": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":   basetypes.BoolType{},
+				"hostname": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClient objects.
+func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClientSendHostname model.
+func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable":   basetypes.BoolType{},
+		"hostname": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClientSendHostname objects.
+func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

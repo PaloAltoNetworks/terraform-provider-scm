@@ -79,27 +79,6 @@ type IpsecTunnelsAutoKeyProxyIdInnerProtocolUdp struct {
 	RemotePort basetypes.Int64Value `tfsdk:"remote_port"`
 }
 
-// IpsecTunnelsAutoKeyProxyIdV6Inner represents a nested structure within the IpsecTunnels model
-type IpsecTunnelsAutoKeyProxyIdV6Inner struct {
-	Local    basetypes.StringValue `tfsdk:"local"`
-	Name     basetypes.StringValue `tfsdk:"name"`
-	Protocol basetypes.ObjectValue `tfsdk:"protocol"`
-	Remote   basetypes.StringValue `tfsdk:"remote"`
-}
-
-// IpsecTunnelsAutoKeyProxyIdV6InnerProtocol represents a nested structure within the IpsecTunnels model
-type IpsecTunnelsAutoKeyProxyIdV6InnerProtocol struct {
-	Number basetypes.Int64Value  `tfsdk:"number"`
-	Tcp    basetypes.ObjectValue `tfsdk:"tcp"`
-	Udp    basetypes.ObjectValue `tfsdk:"udp"`
-}
-
-// IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp represents a nested structure within the IpsecTunnels model
-type IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp struct {
-	LocalPort  basetypes.Int64Value `tfsdk:"local_port"`
-	RemotePort basetypes.Int64Value `tfsdk:"remote_port"`
-}
-
 // IpsecTunnelsTunnelMonitor represents a nested structure within the IpsecTunnels model
 type IpsecTunnelsTunnelMonitor struct {
 	DestinationIp basetypes.StringValue `tfsdk:"destination_ip"`
@@ -365,80 +344,6 @@ func (o IpsecTunnelsAutoKeyProxyIdInnerProtocolUdp) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the IpsecTunnelsAutoKeyProxyIdV6Inner model.
-func (o IpsecTunnelsAutoKeyProxyIdV6Inner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"local": basetypes.StringType{},
-		"name":  basetypes.StringType{},
-		"protocol": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"number": basetypes.Int64Type{},
-				"tcp": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"local_port":  basetypes.Int64Type{},
-						"remote_port": basetypes.Int64Type{},
-					},
-				},
-				"udp": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"local_port":  basetypes.Int64Type{},
-						"remote_port": basetypes.Int64Type{},
-					},
-				},
-			},
-		},
-		"remote": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of IpsecTunnelsAutoKeyProxyIdV6Inner objects.
-func (o IpsecTunnelsAutoKeyProxyIdV6Inner) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the IpsecTunnelsAutoKeyProxyIdV6InnerProtocol model.
-func (o IpsecTunnelsAutoKeyProxyIdV6InnerProtocol) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"number": basetypes.Int64Type{},
-		"tcp": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"local_port":  basetypes.Int64Type{},
-				"remote_port": basetypes.Int64Type{},
-			},
-		},
-		"udp": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"local_port":  basetypes.Int64Type{},
-				"remote_port": basetypes.Int64Type{},
-			},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of IpsecTunnelsAutoKeyProxyIdV6InnerProtocol objects.
-func (o IpsecTunnelsAutoKeyProxyIdV6InnerProtocol) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp model.
-func (o IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"local_port":  basetypes.Int64Type{},
-		"remote_port": basetypes.Int64Type{},
-	}
-}
-
-// AttrType returns the attribute type for a list of IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp objects.
-func (o IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AttrTypes defines the attribute types for the IpsecTunnelsTunnelMonitor model.
 func (o IpsecTunnelsTunnelMonitor) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -621,7 +526,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("udp"),
 											),
 										},
-										MarkdownDescription: "Tcp",
+										MarkdownDescription: "TCP",
 										Optional:            true,
 										Computed:            true,
 										Attributes: map[string]schema.Attribute{
@@ -652,7 +557,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tcp"),
 											),
 										},
-										MarkdownDescription: "Udp",
+										MarkdownDescription: "UDP",
 										Optional:            true,
 										Computed:            true,
 										Attributes: map[string]schema.Attribute{
@@ -904,7 +809,7 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 									},
 									"tcp": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Tcp",
+										MarkdownDescription: "TCP",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"local_port": dsschema.Int64Attribute{
@@ -918,7 +823,7 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"udp": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Udp",
+										MarkdownDescription: "UDP",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"local_port": dsschema.Int64Attribute{

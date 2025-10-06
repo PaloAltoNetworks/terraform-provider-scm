@@ -129,8 +129,8 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -160,9 +160,9 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				"days": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("seconds"),
-							path.MatchRelative().AtParent().AtName("minutes"),
 							path.MatchRelative().AtParent().AtName("hours"),
+							path.MatchRelative().AtParent().AtName("minutes"),
+							path.MatchRelative().AtParent().AtName("seconds"),
 						),
 						int64validator.Between(1, 365),
 					},
@@ -172,9 +172,9 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				"hours": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("seconds"),
-							path.MatchRelative().AtParent().AtName("minutes"),
 							path.MatchRelative().AtParent().AtName("days"),
+							path.MatchRelative().AtParent().AtName("minutes"),
+							path.MatchRelative().AtParent().AtName("seconds"),
 						),
 						int64validator.Between(1, 65535),
 					},
@@ -184,9 +184,9 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				"minutes": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("seconds"),
-							path.MatchRelative().AtParent().AtName("hours"),
 							path.MatchRelative().AtParent().AtName("days"),
+							path.MatchRelative().AtParent().AtName("hours"),
+							path.MatchRelative().AtParent().AtName("seconds"),
 						),
 						int64validator.Between(3, 65535),
 					},
@@ -196,9 +196,9 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				"seconds": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("minutes"),
-							path.MatchRelative().AtParent().AtName("hours"),
 							path.MatchRelative().AtParent().AtName("days"),
+							path.MatchRelative().AtParent().AtName("hours"),
+							path.MatchRelative().AtParent().AtName("minutes"),
 						),
 						int64validator.Between(180, 65535),
 					},
@@ -217,8 +217,8 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),

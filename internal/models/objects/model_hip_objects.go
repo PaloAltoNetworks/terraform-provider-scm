@@ -2557,8 +2557,8 @@ var HipObjectsResourceSchema = schema.Schema{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
 									MarkdownDescription: "Not available",
@@ -2652,8 +2652,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 										stringvalidator.LengthAtMost(255),
 									},
@@ -2664,14 +2664,14 @@ var HipObjectsResourceSchema = schema.Schema{
 								"greater_equal": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("contains"),
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 										stringvalidator.LengthAtMost(255),
 									},
@@ -2682,14 +2682,14 @@ var HipObjectsResourceSchema = schema.Schema{
 								"greater_than": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("contains"),
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 										stringvalidator.LengthAtMost(255),
 									},
@@ -2700,14 +2700,14 @@ var HipObjectsResourceSchema = schema.Schema{
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("contains"),
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 										stringvalidator.LengthAtMost(255),
 									},
@@ -2718,14 +2718,14 @@ var HipObjectsResourceSchema = schema.Schema{
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("contains"),
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 										stringvalidator.LengthAtMost(255),
 									},
@@ -2736,14 +2736,14 @@ var HipObjectsResourceSchema = schema.Schema{
 								"less_equal": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("contains"),
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 										stringvalidator.LengthAtMost(255),
 									},
@@ -2754,14 +2754,14 @@ var HipObjectsResourceSchema = schema.Schema{
 								"less_than": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
-											path.MatchRelative().AtParent().AtName("contains"),
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 										stringvalidator.LengthAtMost(255),
 									},
@@ -2772,13 +2772,13 @@ var HipObjectsResourceSchema = schema.Schema{
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
@@ -2798,13 +2798,13 @@ var HipObjectsResourceSchema = schema.Schema{
 								"within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 											path.MatchRelative().AtParent().AtName("less_equal"),
 											path.MatchRelative().AtParent().AtName("less_than"),
-											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
@@ -3221,8 +3221,8 @@ var HipObjectsResourceSchema = schema.Schema{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("within"),
 											path.MatchRelative().AtParent().AtName("not_within"),
+											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
 									MarkdownDescription: "Not available",
@@ -3489,8 +3489,8 @@ var HipObjectsResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -4104,8 +4104,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										"mobile": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ExactlyOneOf(
-													path.MatchRelative().AtParent().AtName("wifi"),
 													path.MatchRelative().AtParent().AtName("unknown"),
+													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
 											MarkdownDescription: "Mobile",
@@ -4124,8 +4124,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										"unknown": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ExactlyOneOf(
-													path.MatchRelative().AtParent().AtName("wifi"),
 													path.MatchRelative().AtParent().AtName("mobile"),
+													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
 											MarkdownDescription: "Unknown",
@@ -4166,9 +4166,9 @@ var HipObjectsResourceSchema = schema.Schema{
 										"ethernet": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ExactlyOneOf(
-													path.MatchRelative().AtParent().AtName("wifi"),
 													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("unknown"),
+													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
 											MarkdownDescription: "Ethernet",
@@ -4178,9 +4178,9 @@ var HipObjectsResourceSchema = schema.Schema{
 										"mobile": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ExactlyOneOf(
-													path.MatchRelative().AtParent().AtName("wifi"),
 													path.MatchRelative().AtParent().AtName("ethernet"),
 													path.MatchRelative().AtParent().AtName("unknown"),
+													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
 											MarkdownDescription: "Mobile",
@@ -4199,9 +4199,9 @@ var HipObjectsResourceSchema = schema.Schema{
 										"unknown": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ExactlyOneOf(
-													path.MatchRelative().AtParent().AtName("wifi"),
-													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("ethernet"),
+													path.MatchRelative().AtParent().AtName("mobile"),
+													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
 											MarkdownDescription: "Unknown",
@@ -4211,8 +4211,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										"wifi": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ExactlyOneOf(
-													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("ethernet"),
+													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("unknown"),
 												),
 											},
@@ -4418,8 +4418,8 @@ var HipObjectsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),

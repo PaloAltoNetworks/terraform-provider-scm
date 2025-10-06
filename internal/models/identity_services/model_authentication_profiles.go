@@ -395,8 +395,8 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -441,12 +441,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				"cloud": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("local_database"),
-							path.MatchRelative().AtParent().AtName("saml_idp"),
-							path.MatchRelative().AtParent().AtName("ldap"),
-							path.MatchRelative().AtParent().AtName("radius"),
-							path.MatchRelative().AtParent().AtName("tacplus"),
 							path.MatchRelative().AtParent().AtName("kerberos"),
+							path.MatchRelative().AtParent().AtName("ldap"),
+							path.MatchRelative().AtParent().AtName("local_database"),
+							path.MatchRelative().AtParent().AtName("radius"),
+							path.MatchRelative().AtParent().AtName("saml_idp"),
+							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
 					MarkdownDescription: "Cloud",
@@ -461,12 +461,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				"kerberos": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("local_database"),
-							path.MatchRelative().AtParent().AtName("saml_idp"),
-							path.MatchRelative().AtParent().AtName("ldap"),
-							path.MatchRelative().AtParent().AtName("radius"),
-							path.MatchRelative().AtParent().AtName("tacplus"),
 							path.MatchRelative().AtParent().AtName("cloud"),
+							path.MatchRelative().AtParent().AtName("ldap"),
+							path.MatchRelative().AtParent().AtName("local_database"),
+							path.MatchRelative().AtParent().AtName("radius"),
+							path.MatchRelative().AtParent().AtName("saml_idp"),
+							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
 					MarkdownDescription: "Kerberos",
@@ -485,12 +485,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				"ldap": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("local_database"),
-							path.MatchRelative().AtParent().AtName("saml_idp"),
-							path.MatchRelative().AtParent().AtName("radius"),
-							path.MatchRelative().AtParent().AtName("tacplus"),
-							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("cloud"),
+							path.MatchRelative().AtParent().AtName("kerberos"),
+							path.MatchRelative().AtParent().AtName("local_database"),
+							path.MatchRelative().AtParent().AtName("radius"),
+							path.MatchRelative().AtParent().AtName("saml_idp"),
+							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
 					MarkdownDescription: "Ldap",
@@ -513,12 +513,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				"local_database": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("saml_idp"),
+							path.MatchRelative().AtParent().AtName("cloud"),
+							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("ldap"),
 							path.MatchRelative().AtParent().AtName("radius"),
+							path.MatchRelative().AtParent().AtName("saml_idp"),
 							path.MatchRelative().AtParent().AtName("tacplus"),
-							path.MatchRelative().AtParent().AtName("kerberos"),
-							path.MatchRelative().AtParent().AtName("cloud"),
 						),
 					},
 					MarkdownDescription: "Local database",
@@ -528,12 +528,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				"radius": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("cloud"),
+							path.MatchRelative().AtParent().AtName("kerberos"),
+							path.MatchRelative().AtParent().AtName("ldap"),
 							path.MatchRelative().AtParent().AtName("local_database"),
 							path.MatchRelative().AtParent().AtName("saml_idp"),
-							path.MatchRelative().AtParent().AtName("ldap"),
 							path.MatchRelative().AtParent().AtName("tacplus"),
-							path.MatchRelative().AtParent().AtName("kerberos"),
-							path.MatchRelative().AtParent().AtName("cloud"),
 						),
 					},
 					MarkdownDescription: "Radius",
@@ -552,12 +552,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				"saml_idp": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("local_database"),
+							path.MatchRelative().AtParent().AtName("cloud"),
+							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("ldap"),
+							path.MatchRelative().AtParent().AtName("local_database"),
 							path.MatchRelative().AtParent().AtName("radius"),
 							path.MatchRelative().AtParent().AtName("tacplus"),
-							path.MatchRelative().AtParent().AtName("kerberos"),
-							path.MatchRelative().AtParent().AtName("cloud"),
 						),
 					},
 					MarkdownDescription: "Saml idp",
@@ -609,12 +609,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				"tacplus": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("local_database"),
-							path.MatchRelative().AtParent().AtName("saml_idp"),
-							path.MatchRelative().AtParent().AtName("ldap"),
-							path.MatchRelative().AtParent().AtName("radius"),
-							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("cloud"),
+							path.MatchRelative().AtParent().AtName("kerberos"),
+							path.MatchRelative().AtParent().AtName("ldap"),
+							path.MatchRelative().AtParent().AtName("local_database"),
+							path.MatchRelative().AtParent().AtName("radius"),
+							path.MatchRelative().AtParent().AtName("saml_idp"),
 						),
 					},
 					MarkdownDescription: "Tacplus",
@@ -674,8 +674,8 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),

@@ -6,7 +6,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -63,8 +62,8 @@ type SecurityRules struct {
 	Position               basetypes.StringValue `tfsdk:"position"`
 }
 
-// SecurityRulesAllowUrlCategoryInner represents a nested structure within the SecurityRules model
-type SecurityRulesAllowUrlCategoryInner struct {
+// InternetRuleTypeAllowUrlCategoryInner represents a nested structure within the SecurityRules model
+type InternetRuleTypeAllowUrlCategoryInner struct {
 	AdditionalAction      basetypes.StringValue `tfsdk:"additional_action"`
 	CredentialEnforcement basetypes.StringValue `tfsdk:"credential_enforcement"`
 	Decryption            basetypes.StringValue `tfsdk:"decryption"`
@@ -74,14 +73,14 @@ type SecurityRulesAllowUrlCategoryInner struct {
 	Name                  basetypes.StringValue `tfsdk:"name"`
 }
 
-// SecurityRulesAllowUrlCategoryInnerFileControl represents a nested structure within the SecurityRules model
-type SecurityRulesAllowUrlCategoryInnerFileControl struct {
+// InternetRuleTypeAllowUrlCategoryInnerFileControl represents a nested structure within the SecurityRules model
+type InternetRuleTypeAllowUrlCategoryInnerFileControl struct {
 	Download basetypes.StringValue `tfsdk:"download"`
 	Upload   basetypes.StringValue `tfsdk:"upload"`
 }
 
-// SecurityRulesAllowWebApplicationInner represents a nested structure within the SecurityRules model
-type SecurityRulesAllowWebApplicationInner struct {
+// InternetRuleTypeAllowWebApplicationInner represents a nested structure within the SecurityRules model
+type InternetRuleTypeAllowWebApplicationInner struct {
 	ApplicationFunction   basetypes.ListValue   `tfsdk:"application_function"`
 	Dlp                   basetypes.StringValue `tfsdk:"dlp"`
 	FileControl           basetypes.ObjectValue `tfsdk:"file_control"`
@@ -93,49 +92,49 @@ type SecurityRulesAllowWebApplicationInner struct {
 	Type                  basetypes.StringValue `tfsdk:"type"`
 }
 
-// SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl represents a nested structure within the SecurityRules model
-type SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl struct {
+// InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl represents a nested structure within the SecurityRules model
+type InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl struct {
 	ConsumerAccess   basetypes.ObjectValue `tfsdk:"consumer_access"`
 	EnterpriseAccess basetypes.ObjectValue `tfsdk:"enterprise_access"`
 }
 
-// SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess represents a nested structure within the SecurityRules model
-type SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess struct {
+// InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess represents a nested structure within the SecurityRules model
+type InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess struct {
 	Enable basetypes.StringValue `tfsdk:"enable"`
 }
 
-// SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess represents a nested structure within the SecurityRules model
-type SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess struct {
+// InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess represents a nested structure within the SecurityRules model
+type InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess struct {
 	Enable             basetypes.StringValue `tfsdk:"enable"`
 	TenantRestrictions basetypes.ListValue   `tfsdk:"tenant_restrictions"`
 }
 
-// SecurityRulesAllowWebApplicationInnerTenantControl represents a nested structure within the SecurityRules model
-type SecurityRulesAllowWebApplicationInnerTenantControl struct {
+// InternetRuleTypeAllowWebApplicationInnerTenantControl represents a nested structure within the SecurityRules model
+type InternetRuleTypeAllowWebApplicationInnerTenantControl struct {
 	AllowedActivities basetypes.ListValue   `tfsdk:"allowed_activities"`
 	BlockedActivities basetypes.ListValue   `tfsdk:"blocked_activities"`
 	ParentApplication basetypes.StringValue `tfsdk:"parent_application"`
 	Tenants           basetypes.ListValue   `tfsdk:"tenants"`
 }
 
-// SecurityRulesDefaultProfileSettings represents a nested structure within the SecurityRules model
-type SecurityRulesDefaultProfileSettings struct {
+// InternetRuleTypeDefaultProfileSettings represents a nested structure within the SecurityRules model
+type InternetRuleTypeDefaultProfileSettings struct {
 	Dlp         basetypes.StringValue `tfsdk:"dlp"`
 	FileControl basetypes.ObjectValue `tfsdk:"file_control"`
 }
 
-// SecurityRulesLogSettings represents a nested structure within the SecurityRules model
-type SecurityRulesLogSettings struct {
+// InternetRuleTypeLogSettings represents a nested structure within the SecurityRules model
+type InternetRuleTypeLogSettings struct {
 	LogSessions basetypes.BoolValue `tfsdk:"log_sessions"`
 }
 
-// SecurityRulesProfileSetting represents a nested structure within the SecurityRules model
-type SecurityRulesProfileSetting struct {
+// SecurityRuleTypeProfileSetting represents a nested structure within the SecurityRules model
+type SecurityRuleTypeProfileSetting struct {
 	Group basetypes.ListValue `tfsdk:"group"`
 }
 
-// SecurityRulesSecuritySettings represents a nested structure within the SecurityRules model
-type SecurityRulesSecuritySettings struct {
+// InternetRuleTypeSecuritySettings represents a nested structure within the SecurityRules model
+type InternetRuleTypeSecuritySettings struct {
 	AntiSpyware              basetypes.StringValue `tfsdk:"anti_spyware"`
 	VirusAndWildfireAnalysis basetypes.StringValue `tfsdk:"virus_and_wildfire_analysis"`
 	Vulnerability            basetypes.StringValue `tfsdk:"vulnerability"`
@@ -270,8 +269,8 @@ func (o SecurityRules) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesAllowUrlCategoryInner model.
-func (o SecurityRulesAllowUrlCategoryInner) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeAllowUrlCategoryInner model.
+func (o InternetRuleTypeAllowUrlCategoryInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"additional_action":      basetypes.StringType{},
 		"credential_enforcement": basetypes.StringType{},
@@ -288,30 +287,30 @@ func (o SecurityRulesAllowUrlCategoryInner) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesAllowUrlCategoryInner objects.
-func (o SecurityRulesAllowUrlCategoryInner) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeAllowUrlCategoryInner objects.
+func (o InternetRuleTypeAllowUrlCategoryInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesAllowUrlCategoryInnerFileControl model.
-func (o SecurityRulesAllowUrlCategoryInnerFileControl) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeAllowUrlCategoryInnerFileControl model.
+func (o InternetRuleTypeAllowUrlCategoryInnerFileControl) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"download": basetypes.StringType{},
 		"upload":   basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesAllowUrlCategoryInnerFileControl objects.
-func (o SecurityRulesAllowUrlCategoryInnerFileControl) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeAllowUrlCategoryInnerFileControl objects.
+func (o InternetRuleTypeAllowUrlCategoryInnerFileControl) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesAllowWebApplicationInner model.
-func (o SecurityRulesAllowWebApplicationInner) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeAllowWebApplicationInner model.
+func (o InternetRuleTypeAllowWebApplicationInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"application_function": basetypes.ListType{ElemType: basetypes.StringType{}},
 		"dlp":                  basetypes.StringType{},
@@ -351,15 +350,15 @@ func (o SecurityRulesAllowWebApplicationInner) AttrTypes() map[string]attr.Type 
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesAllowWebApplicationInner objects.
-func (o SecurityRulesAllowWebApplicationInner) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeAllowWebApplicationInner objects.
+func (o InternetRuleTypeAllowWebApplicationInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl model.
-func (o SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl model.
+func (o InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"consumer_access": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -375,44 +374,44 @@ func (o SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl) AttrTypes() 
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl objects.
-func (o SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl objects.
+func (o InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess model.
-func (o SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess model.
+func (o InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess objects.
-func (o SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess objects.
+func (o InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess model.
-func (o SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess model.
+func (o InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":              basetypes.StringType{},
 		"tenant_restrictions": basetypes.ListType{ElemType: basetypes.StringType{}},
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess objects.
-func (o SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess objects.
+func (o InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesAllowWebApplicationInnerTenantControl model.
-func (o SecurityRulesAllowWebApplicationInnerTenantControl) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeAllowWebApplicationInnerTenantControl model.
+func (o InternetRuleTypeAllowWebApplicationInnerTenantControl) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"allowed_activities": basetypes.ListType{ElemType: basetypes.StringType{}},
 		"blocked_activities": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -421,15 +420,15 @@ func (o SecurityRulesAllowWebApplicationInnerTenantControl) AttrTypes() map[stri
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesAllowWebApplicationInnerTenantControl objects.
-func (o SecurityRulesAllowWebApplicationInnerTenantControl) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeAllowWebApplicationInnerTenantControl objects.
+func (o InternetRuleTypeAllowWebApplicationInnerTenantControl) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesDefaultProfileSettings model.
-func (o SecurityRulesDefaultProfileSettings) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeDefaultProfileSettings model.
+func (o InternetRuleTypeDefaultProfileSettings) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"dlp": basetypes.StringType{},
 		"file_control": basetypes.ObjectType{
@@ -441,43 +440,43 @@ func (o SecurityRulesDefaultProfileSettings) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesDefaultProfileSettings objects.
-func (o SecurityRulesDefaultProfileSettings) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeDefaultProfileSettings objects.
+func (o InternetRuleTypeDefaultProfileSettings) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesLogSettings model.
-func (o SecurityRulesLogSettings) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeLogSettings model.
+func (o InternetRuleTypeLogSettings) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"log_sessions": basetypes.BoolType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesLogSettings objects.
-func (o SecurityRulesLogSettings) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeLogSettings objects.
+func (o InternetRuleTypeLogSettings) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesProfileSetting model.
-func (o SecurityRulesProfileSetting) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the SecurityRuleTypeProfileSetting model.
+func (o SecurityRuleTypeProfileSetting) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"group": basetypes.ListType{ElemType: basetypes.StringType{}},
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesProfileSetting objects.
-func (o SecurityRulesProfileSetting) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of SecurityRuleTypeProfileSetting objects.
+func (o SecurityRuleTypeProfileSetting) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the SecurityRulesSecuritySettings model.
-func (o SecurityRulesSecuritySettings) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the InternetRuleTypeSecuritySettings model.
+func (o InternetRuleTypeSecuritySettings) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"anti_spyware":                basetypes.StringType{},
 		"virus_and_wildfire_analysis": basetypes.StringType{},
@@ -485,8 +484,8 @@ func (o SecurityRulesSecuritySettings) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of SecurityRulesSecuritySettings objects.
-func (o SecurityRulesSecuritySettings) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of InternetRuleTypeSecuritySettings objects.
+func (o InternetRuleTypeSecuritySettings) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -767,10 +766,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
-					path.MatchRelative().AtParent().AtName("snippet"),
-				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
@@ -794,10 +789,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
-					path.MatchRelative().AtParent().AtName("device"),
-				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
@@ -943,10 +934,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
-					path.MatchRelative().AtParent().AtName("device"),
-				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},

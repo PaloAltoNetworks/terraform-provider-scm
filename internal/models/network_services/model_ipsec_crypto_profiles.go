@@ -260,8 +260,8 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				"kb": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("mb"),
 							path.MatchRelative().AtParent().AtName("gb"),
+							path.MatchRelative().AtParent().AtName("mb"),
 							path.MatchRelative().AtParent().AtName("tb"),
 						),
 						int64validator.Between(1, 65535),
@@ -272,8 +272,8 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				"mb": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("kb"),
 							path.MatchRelative().AtParent().AtName("gb"),
+							path.MatchRelative().AtParent().AtName("kb"),
 							path.MatchRelative().AtParent().AtName("tb"),
 						),
 						int64validator.Between(1, 65535),
@@ -284,9 +284,9 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				"tb": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("gb"),
 							path.MatchRelative().AtParent().AtName("kb"),
 							path.MatchRelative().AtParent().AtName("mb"),
-							path.MatchRelative().AtParent().AtName("gb"),
 						),
 						int64validator.Between(1, 65535),
 					},
@@ -302,9 +302,9 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				"days": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("seconds"),
-							path.MatchRelative().AtParent().AtName("minutes"),
 							path.MatchRelative().AtParent().AtName("hours"),
+							path.MatchRelative().AtParent().AtName("minutes"),
+							path.MatchRelative().AtParent().AtName("seconds"),
 						),
 						int64validator.Between(1, 365),
 					},
@@ -314,9 +314,9 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				"hours": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("seconds"),
-							path.MatchRelative().AtParent().AtName("minutes"),
 							path.MatchRelative().AtParent().AtName("days"),
+							path.MatchRelative().AtParent().AtName("minutes"),
+							path.MatchRelative().AtParent().AtName("seconds"),
 						),
 						int64validator.Between(1, 65535),
 					},
@@ -326,9 +326,9 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				"minutes": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("seconds"),
-							path.MatchRelative().AtParent().AtName("hours"),
 							path.MatchRelative().AtParent().AtName("days"),
+							path.MatchRelative().AtParent().AtName("hours"),
+							path.MatchRelative().AtParent().AtName("seconds"),
 						),
 						int64validator.Between(3, 65535),
 					},
@@ -338,9 +338,9 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				"seconds": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("minutes"),
-							path.MatchRelative().AtParent().AtName("hours"),
 							path.MatchRelative().AtParent().AtName("days"),
+							path.MatchRelative().AtParent().AtName("hours"),
+							path.MatchRelative().AtParent().AtName("minutes"),
 						),
 						int64validator.Between(180, 65535),
 					},

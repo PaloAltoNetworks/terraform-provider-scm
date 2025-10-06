@@ -268,8 +268,8 @@ var ScepProfilesResourceSchema = schema.Schema{
 				"uniform_resource_identifier": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("rfc822name"),
 							path.MatchRelative().AtParent().AtName("dnsname"),
+							path.MatchRelative().AtParent().AtName("rfc822name"),
 						),
 					},
 					MarkdownDescription: "Uniform resource identifier",
@@ -312,8 +312,8 @@ var ScepProfilesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -349,8 +349,8 @@ var ScepProfilesResourceSchema = schema.Schema{
 				"dynamic": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("none"),
 							path.MatchRelative().AtParent().AtName("fixed"),
+							path.MatchRelative().AtParent().AtName("none"),
 						),
 					},
 					MarkdownDescription: "Dynamic",
@@ -383,8 +383,8 @@ var ScepProfilesResourceSchema = schema.Schema{
 				"fixed": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("none"),
 							path.MatchRelative().AtParent().AtName("dynamic"),
+							path.MatchRelative().AtParent().AtName("none"),
 						),
 						stringvalidator.LengthAtMost(1024),
 					},
@@ -394,8 +394,8 @@ var ScepProfilesResourceSchema = schema.Schema{
 				"none": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("fixed"),
 							path.MatchRelative().AtParent().AtName("dynamic"),
+							path.MatchRelative().AtParent().AtName("fixed"),
 						),
 						stringvalidator.OneOf(""),
 					},
@@ -415,8 +415,8 @@ var ScepProfilesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),

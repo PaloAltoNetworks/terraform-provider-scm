@@ -546,8 +546,8 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"pppoe": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
+							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
 					MarkdownDescription: "Pppoe",

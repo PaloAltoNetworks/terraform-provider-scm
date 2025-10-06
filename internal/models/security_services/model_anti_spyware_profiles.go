@@ -479,8 +479,8 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -546,11 +546,11 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
 										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
 										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Alert",
@@ -561,11 +561,11 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
 										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Allow",
@@ -575,12 +575,12 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"block_ip": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
 									),
 								},
 								MarkdownDescription: "anti spyware profiles rules action block ip",
@@ -605,12 +605,12 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"drop": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Drop",
@@ -620,12 +620,12 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"reset_both": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
 										path.MatchRelative().AtParent().AtName("drop"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Reset both",
@@ -635,12 +635,12 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"reset_client": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
-										path.MatchRelative().AtParent().AtName("drop"),
-										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
 								MarkdownDescription: "Reset client",
@@ -650,12 +650,12 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"reset_server": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
-										path.MatchRelative().AtParent().AtName("drop"),
-										path.MatchRelative().AtParent().AtName("reset_client"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("reset_client"),
 									),
 								},
 								MarkdownDescription: "Reset server",
@@ -700,8 +700,8 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -731,13 +731,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"alert": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("default"),
 										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("default"),
 										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Alert",
@@ -747,13 +747,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"allow": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("default"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("default"),
 										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Allow",
@@ -763,13 +763,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"block_ip": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("default"),
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("default"),
 										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
 									),
 								},
 								MarkdownDescription: "anti spyware profiles threat exception action block ip",
@@ -794,13 +794,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"default": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
 										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Default",
@@ -810,13 +810,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"drop": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("default"),
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("default"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Drop",
@@ -826,13 +826,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"reset_both": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("default"),
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
+										path.MatchRelative().AtParent().AtName("allow"),
+										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("default"),
 										path.MatchRelative().AtParent().AtName("drop"),
 										path.MatchRelative().AtParent().AtName("reset_client"),
 										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("block_ip"),
 									),
 								},
 								MarkdownDescription: "Reset both",
@@ -842,13 +842,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"reset_client": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("default"),
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
-										path.MatchRelative().AtParent().AtName("drop"),
-										path.MatchRelative().AtParent().AtName("reset_server"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("default"),
+										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
 								MarkdownDescription: "Reset client",
@@ -858,13 +858,13 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 							"reset_server": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
 									objectvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("default"),
-										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("alert"),
-										path.MatchRelative().AtParent().AtName("drop"),
-										path.MatchRelative().AtParent().AtName("reset_client"),
-										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("allow"),
 										path.MatchRelative().AtParent().AtName("block_ip"),
+										path.MatchRelative().AtParent().AtName("default"),
+										path.MatchRelative().AtParent().AtName("drop"),
+										path.MatchRelative().AtParent().AtName("reset_both"),
+										path.MatchRelative().AtParent().AtName("reset_client"),
 									),
 								},
 								MarkdownDescription: "Reset server",

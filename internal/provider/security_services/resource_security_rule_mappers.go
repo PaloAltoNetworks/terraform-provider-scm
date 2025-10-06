@@ -36,7 +36,7 @@ func unpackSecurityRulesToSdk(ctx context.Context, obj types.Object) (*security_
 	// Handling Lists
 	if !model.AllowUrlCategory.IsNull() && !model.AllowUrlCategory.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field AllowUrlCategory")
-		unpacked, d := unpackSecurityRulesAllowUrlCategoryInnerListToSdk(ctx, model.AllowUrlCategory)
+		unpacked, d := unpackInternetRuleTypeAllowUrlCategoryInnerListToSdk(ctx, model.AllowUrlCategory)
 		diags.Append(d...)
 		sdk.AllowUrlCategory = unpacked
 	}
@@ -44,7 +44,7 @@ func unpackSecurityRulesToSdk(ctx context.Context, obj types.Object) (*security_
 	// Handling Lists
 	if !model.AllowWebApplication.IsNull() && !model.AllowWebApplication.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field AllowWebApplication")
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerListToSdk(ctx, model.AllowWebApplication)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerListToSdk(ctx, model.AllowWebApplication)
 		diags.Append(d...)
 		sdk.AllowWebApplication = unpacked
 	}
@@ -76,7 +76,7 @@ func unpackSecurityRulesToSdk(ctx context.Context, obj types.Object) (*security_
 	// Handling Objects
 	if !model.DefaultProfileSettings.IsNull() && !model.DefaultProfileSettings.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field DefaultProfileSettings")
-		unpacked, d := unpackSecurityRulesDefaultProfileSettingsToSdk(ctx, model.DefaultProfileSettings)
+		unpacked, d := unpackInternetRuleTypeDefaultProfileSettingsToSdk(ctx, model.DefaultProfileSettings)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "DefaultProfileSettings"})
@@ -155,7 +155,7 @@ func unpackSecurityRulesToSdk(ctx context.Context, obj types.Object) (*security_
 	// Handling Objects
 	if !model.LogSettings.IsNull() && !model.LogSettings.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field LogSettings")
-		unpacked, d := unpackSecurityRulesLogSettingsToSdk(ctx, model.LogSettings)
+		unpacked, d := unpackInternetRuleTypeLogSettingsToSdk(ctx, model.LogSettings)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "LogSettings"})
@@ -204,7 +204,7 @@ func unpackSecurityRulesToSdk(ctx context.Context, obj types.Object) (*security_
 	// Handling Objects
 	if !model.ProfileSetting.IsNull() && !model.ProfileSetting.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field ProfileSetting")
-		unpacked, d := unpackSecurityRulesProfileSettingToSdk(ctx, model.ProfileSetting)
+		unpacked, d := unpackSecurityRuleTypeProfileSettingToSdk(ctx, model.ProfileSetting)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "ProfileSetting"})
@@ -223,7 +223,7 @@ func unpackSecurityRulesToSdk(ctx context.Context, obj types.Object) (*security_
 	// Handling Objects
 	if !model.SecuritySettings.IsNull() && !model.SecuritySettings.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field SecuritySettings")
-		unpacked, d := unpackSecurityRulesSecuritySettingsToSdk(ctx, model.SecuritySettings)
+		unpacked, d := unpackInternetRuleTypeSecuritySettingsToSdk(ctx, model.SecuritySettings)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "SecuritySettings"})
@@ -305,20 +305,20 @@ func packSecurityRulesFromSdk(ctx context.Context, sdk security_services.Securit
 	// Handling Lists
 	if sdk.AllowUrlCategory != nil {
 		tflog.Debug(ctx, "Packing list of objects for field AllowUrlCategory")
-		packed, d := packSecurityRulesAllowUrlCategoryInnerListFromSdk(ctx, sdk.AllowUrlCategory)
+		packed, d := packInternetRuleTypeAllowUrlCategoryInnerListFromSdk(ctx, sdk.AllowUrlCategory)
 		diags.Append(d...)
 		model.AllowUrlCategory = packed
 	} else {
-		model.AllowUrlCategory = basetypes.NewListNull(models.SecurityRulesAllowUrlCategoryInner{}.AttrType())
+		model.AllowUrlCategory = basetypes.NewListNull(models.InternetRuleTypeAllowUrlCategoryInner{}.AttrType())
 	}
 	// Handling Lists
 	if sdk.AllowWebApplication != nil {
 		tflog.Debug(ctx, "Packing list of objects for field AllowWebApplication")
-		packed, d := packSecurityRulesAllowWebApplicationInnerListFromSdk(ctx, sdk.AllowWebApplication)
+		packed, d := packInternetRuleTypeAllowWebApplicationInnerListFromSdk(ctx, sdk.AllowWebApplication)
 		diags.Append(d...)
 		model.AllowWebApplication = packed
 	} else {
-		model.AllowWebApplication = basetypes.NewListNull(models.SecurityRulesAllowWebApplicationInner{}.AttrType())
+		model.AllowWebApplication = basetypes.NewListNull(models.InternetRuleTypeAllowWebApplicationInner{}.AttrType())
 	}
 	// Handling Lists
 	if sdk.Application != nil {
@@ -376,14 +376,14 @@ func packSecurityRulesFromSdk(ctx context.Context, sdk security_services.Securit
 	// This is a regular nested object that has its own packer.
 	if sdk.DefaultProfileSettings != nil {
 		tflog.Debug(ctx, "Packing nested object for field DefaultProfileSettings")
-		packed, d := packSecurityRulesDefaultProfileSettingsFromSdk(ctx, *sdk.DefaultProfileSettings)
+		packed, d := packInternetRuleTypeDefaultProfileSettingsFromSdk(ctx, *sdk.DefaultProfileSettings)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "DefaultProfileSettings"})
 		}
 		model.DefaultProfileSettings = packed
 	} else {
-		model.DefaultProfileSettings = basetypes.NewObjectNull(models.SecurityRulesDefaultProfileSettings{}.AttrTypes())
+		model.DefaultProfileSettings = basetypes.NewObjectNull(models.InternetRuleTypeDefaultProfileSettings{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -497,14 +497,14 @@ func packSecurityRulesFromSdk(ctx context.Context, sdk security_services.Securit
 	// This is a regular nested object that has its own packer.
 	if sdk.LogSettings != nil {
 		tflog.Debug(ctx, "Packing nested object for field LogSettings")
-		packed, d := packSecurityRulesLogSettingsFromSdk(ctx, *sdk.LogSettings)
+		packed, d := packInternetRuleTypeLogSettingsFromSdk(ctx, *sdk.LogSettings)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "LogSettings"})
 		}
 		model.LogSettings = packed
 	} else {
-		model.LogSettings = basetypes.NewObjectNull(models.SecurityRulesLogSettings{}.AttrTypes())
+		model.LogSettings = basetypes.NewObjectNull(models.InternetRuleTypeLogSettings{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -558,14 +558,14 @@ func packSecurityRulesFromSdk(ctx context.Context, sdk security_services.Securit
 	// This is a regular nested object that has its own packer.
 	if sdk.ProfileSetting != nil {
 		tflog.Debug(ctx, "Packing nested object for field ProfileSetting")
-		packed, d := packSecurityRulesProfileSettingFromSdk(ctx, *sdk.ProfileSetting)
+		packed, d := packSecurityRuleTypeProfileSettingFromSdk(ctx, *sdk.ProfileSetting)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "ProfileSetting"})
 		}
 		model.ProfileSetting = packed
 	} else {
-		model.ProfileSetting = basetypes.NewObjectNull(models.SecurityRulesProfileSetting{}.AttrTypes())
+		model.ProfileSetting = basetypes.NewObjectNull(models.SecurityRuleTypeProfileSetting{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -579,14 +579,14 @@ func packSecurityRulesFromSdk(ctx context.Context, sdk security_services.Securit
 	// This is a regular nested object that has its own packer.
 	if sdk.SecuritySettings != nil {
 		tflog.Debug(ctx, "Packing nested object for field SecuritySettings")
-		packed, d := packSecurityRulesSecuritySettingsFromSdk(ctx, *sdk.SecuritySettings)
+		packed, d := packInternetRuleTypeSecuritySettingsFromSdk(ctx, *sdk.SecuritySettings)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "SecuritySettings"})
 		}
 		model.SecuritySettings = packed
 	} else {
-		model.SecuritySettings = basetypes.NewObjectNull(models.SecurityRulesSecuritySettings{}.AttrTypes())
+		model.SecuritySettings = basetypes.NewObjectNull(models.InternetRuleTypeSecuritySettings{}.AttrTypes())
 	}
 	// Handling Lists
 	if sdk.Service != nil {
@@ -743,11 +743,11 @@ func packSecurityRulesListFromSdk(ctx context.Context, sdks []security_services.
 	return basetypes.NewListValueFrom(ctx, models.SecurityRules{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesAllowUrlCategoryInner ---
-func unpackSecurityRulesAllowUrlCategoryInnerToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesAllowUrlCategoryInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesAllowUrlCategoryInner", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeAllowUrlCategoryInner ---
+func unpackInternetRuleTypeAllowUrlCategoryInnerToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeAllowUrlCategoryInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeAllowUrlCategoryInner", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowUrlCategoryInner
+	var model models.InternetRuleTypeAllowUrlCategoryInner
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -755,7 +755,7 @@ func unpackSecurityRulesAllowUrlCategoryInnerToSdk(ctx context.Context, obj type
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesAllowUrlCategoryInner
+	var sdk security_services.InternetRuleTypeAllowUrlCategoryInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.AdditionalAction.IsNull() && !model.AdditionalAction.IsUnknown() {
@@ -784,7 +784,7 @@ func unpackSecurityRulesAllowUrlCategoryInnerToSdk(ctx context.Context, obj type
 	// Handling Objects
 	if !model.FileControl.IsNull() && !model.FileControl.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field FileControl")
-		unpacked, d := unpackSecurityRulesAllowUrlCategoryInnerFileControlToSdk(ctx, model.FileControl)
+		unpacked, d := unpackInternetRuleTypeAllowUrlCategoryInnerFileControlToSdk(ctx, model.FileControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "FileControl"})
@@ -808,16 +808,16 @@ func unpackSecurityRulesAllowUrlCategoryInnerToSdk(ctx context.Context, obj type
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesAllowUrlCategoryInner ---
-func packSecurityRulesAllowUrlCategoryInnerFromSdk(ctx context.Context, sdk security_services.SecurityRulesAllowUrlCategoryInner) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesAllowUrlCategoryInner", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeAllowUrlCategoryInner ---
+func packInternetRuleTypeAllowUrlCategoryInnerFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeAllowUrlCategoryInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeAllowUrlCategoryInner", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowUrlCategoryInner
+	var model models.InternetRuleTypeAllowUrlCategoryInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -855,14 +855,14 @@ func packSecurityRulesAllowUrlCategoryInnerFromSdk(ctx context.Context, sdk secu
 	// This is a regular nested object that has its own packer.
 	if sdk.FileControl != nil {
 		tflog.Debug(ctx, "Packing nested object for field FileControl")
-		packed, d := packSecurityRulesAllowUrlCategoryInnerFileControlFromSdk(ctx, *sdk.FileControl)
+		packed, d := packInternetRuleTypeAllowUrlCategoryInnerFileControlFromSdk(ctx, *sdk.FileControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "FileControl"})
 		}
 		model.FileControl = packed
 	} else {
-		model.FileControl = basetypes.NewObjectNull(models.SecurityRulesAllowUrlCategoryInnerFileControl{}.AttrTypes())
+		model.FileControl = basetypes.NewObjectNull(models.InternetRuleTypeAllowUrlCategoryInnerFileControl{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -882,65 +882,65 @@ func packSecurityRulesAllowUrlCategoryInnerFromSdk(ctx context.Context, sdk secu
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesAllowUrlCategoryInner{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowUrlCategoryInner{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesAllowUrlCategoryInner ---
-func unpackSecurityRulesAllowUrlCategoryInnerListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesAllowUrlCategoryInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesAllowUrlCategoryInner")
+// --- List Unpacker for InternetRuleTypeAllowUrlCategoryInner ---
+func unpackInternetRuleTypeAllowUrlCategoryInnerListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeAllowUrlCategoryInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeAllowUrlCategoryInner")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowUrlCategoryInner
+	var data []models.InternetRuleTypeAllowUrlCategoryInner
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesAllowUrlCategoryInner, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeAllowUrlCategoryInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesAllowUrlCategoryInner{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesAllowUrlCategoryInnerToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowUrlCategoryInner{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeAllowUrlCategoryInnerToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesAllowUrlCategoryInner ---
-func packSecurityRulesAllowUrlCategoryInnerListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesAllowUrlCategoryInner) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesAllowUrlCategoryInner")
+// --- List Packer for InternetRuleTypeAllowUrlCategoryInner ---
+func packInternetRuleTypeAllowUrlCategoryInnerListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeAllowUrlCategoryInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeAllowUrlCategoryInner")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowUrlCategoryInner
+	var data []models.InternetRuleTypeAllowUrlCategoryInner
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesAllowUrlCategoryInner
-		obj, d := packSecurityRulesAllowUrlCategoryInnerFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeAllowUrlCategoryInner
+		obj, d := packInternetRuleTypeAllowUrlCategoryInnerFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesAllowUrlCategoryInner{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeAllowUrlCategoryInner{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesAllowUrlCategoryInner{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeAllowUrlCategoryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeAllowUrlCategoryInner{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesAllowUrlCategoryInnerFileControl ---
-func unpackSecurityRulesAllowUrlCategoryInnerFileControlToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesAllowUrlCategoryInnerFileControl, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeAllowUrlCategoryInnerFileControl ---
+func unpackInternetRuleTypeAllowUrlCategoryInnerFileControlToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeAllowUrlCategoryInnerFileControl, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowUrlCategoryInnerFileControl
+	var model models.InternetRuleTypeAllowUrlCategoryInnerFileControl
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -948,7 +948,7 @@ func unpackSecurityRulesAllowUrlCategoryInnerFileControlToSdk(ctx context.Contex
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesAllowUrlCategoryInnerFileControl
+	var sdk security_services.InternetRuleTypeAllowUrlCategoryInnerFileControl
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Download.IsNull() && !model.Download.IsUnknown() {
@@ -964,16 +964,16 @@ func unpackSecurityRulesAllowUrlCategoryInnerFileControlToSdk(ctx context.Contex
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesAllowUrlCategoryInnerFileControl ---
-func packSecurityRulesAllowUrlCategoryInnerFileControlFromSdk(ctx context.Context, sdk security_services.SecurityRulesAllowUrlCategoryInnerFileControl) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeAllowUrlCategoryInnerFileControl ---
+func packInternetRuleTypeAllowUrlCategoryInnerFileControlFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeAllowUrlCategoryInnerFileControl) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowUrlCategoryInnerFileControl
+	var model models.InternetRuleTypeAllowUrlCategoryInnerFileControl
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -993,65 +993,65 @@ func packSecurityRulesAllowUrlCategoryInnerFileControlFromSdk(ctx context.Contex
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesAllowUrlCategoryInnerFileControl{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowUrlCategoryInnerFileControl{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesAllowUrlCategoryInnerFileControl ---
-func unpackSecurityRulesAllowUrlCategoryInnerFileControlListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesAllowUrlCategoryInnerFileControl, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl")
+// --- List Unpacker for InternetRuleTypeAllowUrlCategoryInnerFileControl ---
+func unpackInternetRuleTypeAllowUrlCategoryInnerFileControlListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeAllowUrlCategoryInnerFileControl, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowUrlCategoryInnerFileControl
+	var data []models.InternetRuleTypeAllowUrlCategoryInnerFileControl
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesAllowUrlCategoryInnerFileControl, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeAllowUrlCategoryInnerFileControl, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesAllowUrlCategoryInnerFileControl{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesAllowUrlCategoryInnerFileControlToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowUrlCategoryInnerFileControl{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeAllowUrlCategoryInnerFileControlToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesAllowUrlCategoryInnerFileControl ---
-func packSecurityRulesAllowUrlCategoryInnerFileControlListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesAllowUrlCategoryInnerFileControl) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl")
+// --- List Packer for InternetRuleTypeAllowUrlCategoryInnerFileControl ---
+func packInternetRuleTypeAllowUrlCategoryInnerFileControlListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeAllowUrlCategoryInnerFileControl) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowUrlCategoryInnerFileControl
+	var data []models.InternetRuleTypeAllowUrlCategoryInnerFileControl
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesAllowUrlCategoryInnerFileControl
-		obj, d := packSecurityRulesAllowUrlCategoryInnerFileControlFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeAllowUrlCategoryInnerFileControl
+		obj, d := packInternetRuleTypeAllowUrlCategoryInnerFileControlFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesAllowUrlCategoryInnerFileControl{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeAllowUrlCategoryInnerFileControl{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesAllowUrlCategoryInnerFileControl{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeAllowUrlCategoryInnerFileControl", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeAllowUrlCategoryInnerFileControl{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesAllowWebApplicationInner ---
-func unpackSecurityRulesAllowWebApplicationInnerToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesAllowWebApplicationInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesAllowWebApplicationInner", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeAllowWebApplicationInner ---
+func unpackInternetRuleTypeAllowWebApplicationInnerToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeAllowWebApplicationInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeAllowWebApplicationInner", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInner
+	var model models.InternetRuleTypeAllowWebApplicationInner
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1059,7 +1059,7 @@ func unpackSecurityRulesAllowWebApplicationInnerToSdk(ctx context.Context, obj t
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesAllowWebApplicationInner
+	var sdk security_services.InternetRuleTypeAllowWebApplicationInner
 	var d diag.Diagnostics
 	// Handling Lists
 	if !model.ApplicationFunction.IsNull() && !model.ApplicationFunction.IsUnknown() {
@@ -1076,7 +1076,7 @@ func unpackSecurityRulesAllowWebApplicationInnerToSdk(ctx context.Context, obj t
 	// Handling Objects
 	if !model.FileControl.IsNull() && !model.FileControl.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field FileControl")
-		unpacked, d := unpackSecurityRulesAllowUrlCategoryInnerFileControlToSdk(ctx, model.FileControl)
+		unpacked, d := unpackInternetRuleTypeAllowUrlCategoryInnerFileControlToSdk(ctx, model.FileControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "FileControl"})
@@ -1095,7 +1095,7 @@ func unpackSecurityRulesAllowWebApplicationInnerToSdk(ctx context.Context, obj t
 	// Handling Objects
 	if !model.SaasEnterpriseControl.IsNull() && !model.SaasEnterpriseControl.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field SaasEnterpriseControl")
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx, model.SaasEnterpriseControl)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx, model.SaasEnterpriseControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "SaasEnterpriseControl"})
@@ -1120,7 +1120,7 @@ func unpackSecurityRulesAllowWebApplicationInnerToSdk(ctx context.Context, obj t
 	// Handling Objects
 	if !model.TenantControl.IsNull() && !model.TenantControl.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field TenantControl")
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerTenantControlToSdk(ctx, model.TenantControl)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerTenantControlToSdk(ctx, model.TenantControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "TenantControl"})
@@ -1138,16 +1138,16 @@ func unpackSecurityRulesAllowWebApplicationInnerToSdk(ctx context.Context, obj t
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesAllowWebApplicationInner ---
-func packSecurityRulesAllowWebApplicationInnerFromSdk(ctx context.Context, sdk security_services.SecurityRulesAllowWebApplicationInner) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesAllowWebApplicationInner", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeAllowWebApplicationInner ---
+func packInternetRuleTypeAllowWebApplicationInnerFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeAllowWebApplicationInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeAllowWebApplicationInner", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInner
+	var model models.InternetRuleTypeAllowWebApplicationInner
 	var d diag.Diagnostics
 	// Handling Lists
 	if sdk.ApplicationFunction != nil {
@@ -1174,14 +1174,14 @@ func packSecurityRulesAllowWebApplicationInnerFromSdk(ctx context.Context, sdk s
 	// This is a regular nested object that has its own packer.
 	if sdk.FileControl != nil {
 		tflog.Debug(ctx, "Packing nested object for field FileControl")
-		packed, d := packSecurityRulesAllowUrlCategoryInnerFileControlFromSdk(ctx, *sdk.FileControl)
+		packed, d := packInternetRuleTypeAllowUrlCategoryInnerFileControlFromSdk(ctx, *sdk.FileControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "FileControl"})
 		}
 		model.FileControl = packed
 	} else {
-		model.FileControl = basetypes.NewObjectNull(models.SecurityRulesAllowUrlCategoryInnerFileControl{}.AttrTypes())
+		model.FileControl = basetypes.NewObjectNull(models.InternetRuleTypeAllowUrlCategoryInnerFileControl{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -1195,14 +1195,14 @@ func packSecurityRulesAllowWebApplicationInnerFromSdk(ctx context.Context, sdk s
 	// This is a regular nested object that has its own packer.
 	if sdk.SaasEnterpriseControl != nil {
 		tflog.Debug(ctx, "Packing nested object for field SaasEnterpriseControl")
-		packed, d := packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlFromSdk(ctx, *sdk.SaasEnterpriseControl)
+		packed, d := packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlFromSdk(ctx, *sdk.SaasEnterpriseControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "SaasEnterpriseControl"})
 		}
 		model.SaasEnterpriseControl = packed
 	} else {
-		model.SaasEnterpriseControl = basetypes.NewObjectNull(models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl{}.AttrTypes())
+		model.SaasEnterpriseControl = basetypes.NewObjectNull(models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl{}.AttrTypes())
 	}
 	// Handling Lists
 	if sdk.SaasTenantList != nil {
@@ -1234,14 +1234,14 @@ func packSecurityRulesAllowWebApplicationInnerFromSdk(ctx context.Context, sdk s
 	// This is a regular nested object that has its own packer.
 	if sdk.TenantControl != nil {
 		tflog.Debug(ctx, "Packing nested object for field TenantControl")
-		packed, d := packSecurityRulesAllowWebApplicationInnerTenantControlFromSdk(ctx, *sdk.TenantControl)
+		packed, d := packInternetRuleTypeAllowWebApplicationInnerTenantControlFromSdk(ctx, *sdk.TenantControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "TenantControl"})
 		}
 		model.TenantControl = packed
 	} else {
-		model.TenantControl = basetypes.NewObjectNull(models.SecurityRulesAllowWebApplicationInnerTenantControl{}.AttrTypes())
+		model.TenantControl = basetypes.NewObjectNull(models.InternetRuleTypeAllowWebApplicationInnerTenantControl{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -1253,65 +1253,65 @@ func packSecurityRulesAllowWebApplicationInnerFromSdk(ctx context.Context, sdk s
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInner{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInner{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesAllowWebApplicationInner ---
-func unpackSecurityRulesAllowWebApplicationInnerListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesAllowWebApplicationInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesAllowWebApplicationInner")
+// --- List Unpacker for InternetRuleTypeAllowWebApplicationInner ---
+func unpackInternetRuleTypeAllowWebApplicationInnerListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeAllowWebApplicationInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeAllowWebApplicationInner")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInner
+	var data []models.InternetRuleTypeAllowWebApplicationInner
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesAllowWebApplicationInner, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeAllowWebApplicationInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInner{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInner{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesAllowWebApplicationInner ---
-func packSecurityRulesAllowWebApplicationInnerListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesAllowWebApplicationInner) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesAllowWebApplicationInner")
+// --- List Packer for InternetRuleTypeAllowWebApplicationInner ---
+func packInternetRuleTypeAllowWebApplicationInnerListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeAllowWebApplicationInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeAllowWebApplicationInner")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInner
+	var data []models.InternetRuleTypeAllowWebApplicationInner
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesAllowWebApplicationInner
-		obj, d := packSecurityRulesAllowWebApplicationInnerFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeAllowWebApplicationInner
+		obj, d := packInternetRuleTypeAllowWebApplicationInnerFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesAllowWebApplicationInner{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeAllowWebApplicationInner{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesAllowWebApplicationInner{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeAllowWebApplicationInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInner{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl ---
-func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl ---
+func unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl
+	var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1319,12 +1319,12 @@ func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx c
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl
+	var sdk security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl
 	var d diag.Diagnostics
 	// Handling Objects
 	if !model.ConsumerAccess.IsNull() && !model.ConsumerAccess.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field ConsumerAccess")
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessToSdk(ctx, model.ConsumerAccess)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessToSdk(ctx, model.ConsumerAccess)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "ConsumerAccess"})
@@ -1337,7 +1337,7 @@ func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx c
 	// Handling Objects
 	if !model.EnterpriseAccess.IsNull() && !model.EnterpriseAccess.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field EnterpriseAccess")
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessToSdk(ctx, model.EnterpriseAccess)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessToSdk(ctx, model.EnterpriseAccess)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "EnterpriseAccess"})
@@ -1349,104 +1349,104 @@ func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx c
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl ---
-func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlFromSdk(ctx context.Context, sdk security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl ---
+func packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl
+	var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl
 	var d diag.Diagnostics
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.ConsumerAccess != nil {
 		tflog.Debug(ctx, "Packing nested object for field ConsumerAccess")
-		packed, d := packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessFromSdk(ctx, *sdk.ConsumerAccess)
+		packed, d := packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessFromSdk(ctx, *sdk.ConsumerAccess)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "ConsumerAccess"})
 		}
 		model.ConsumerAccess = packed
 	} else {
-		model.ConsumerAccess = basetypes.NewObjectNull(models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrTypes())
+		model.ConsumerAccess = basetypes.NewObjectNull(models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrTypes())
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.EnterpriseAccess != nil {
 		tflog.Debug(ctx, "Packing nested object for field EnterpriseAccess")
-		packed, d := packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessFromSdk(ctx, *sdk.EnterpriseAccess)
+		packed, d := packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessFromSdk(ctx, *sdk.EnterpriseAccess)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "EnterpriseAccess"})
 		}
 		model.EnterpriseAccess = packed
 	} else {
-		model.EnterpriseAccess = basetypes.NewObjectNull(models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrTypes())
+		model.EnterpriseAccess = basetypes.NewObjectNull(models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrTypes())
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl ---
-func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl")
+// --- List Unpacker for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl ---
+func unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl
+	var data []models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl ---
-func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl")
+// --- List Packer for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl ---
+func packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl
+	var data []models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl
-		obj, d := packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl
+		obj, d := packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControl{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControl{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
-func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
+func unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
+	var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1454,7 +1454,7 @@ func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAcc
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
+	var sdk security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Enable.IsNull() && !model.Enable.IsUnknown() {
@@ -1464,16 +1464,16 @@ func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAcc
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
-func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessFromSdk(ctx context.Context, sdk security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
+func packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
+	var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1485,65 +1485,65 @@ func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAcces
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
-func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess")
+// --- List Unpacker for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
+func unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
+	var data []models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
-func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess")
+// --- List Packer for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess ---
+func packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
+	var data []models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
-		obj, d := packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess
+		obj, d := packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccessFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlConsumerAccess{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
-func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
+func unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
+	var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1551,7 +1551,7 @@ func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseA
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
+	var sdk security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Enable.IsNull() && !model.Enable.IsUnknown() {
@@ -1567,16 +1567,16 @@ func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseA
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
-func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessFromSdk(ctx context.Context, sdk security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
+func packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
+	var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1601,65 +1601,65 @@ func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAcc
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
-func unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess")
+// --- List Unpacker for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
+func unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
+	var data []models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
-func packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess")
+// --- List Packer for InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess ---
+func packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
+	var data []models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
-		obj, d := packSecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess
+		obj, d := packInternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccessFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerSaasEnterpriseControlEnterpriseAccess{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesAllowWebApplicationInnerTenantControl ---
-func unpackSecurityRulesAllowWebApplicationInnerTenantControlToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesAllowWebApplicationInnerTenantControl, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeAllowWebApplicationInnerTenantControl ---
+func unpackInternetRuleTypeAllowWebApplicationInnerTenantControlToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeAllowWebApplicationInnerTenantControl, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerTenantControl
+	var model models.InternetRuleTypeAllowWebApplicationInnerTenantControl
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1667,7 +1667,7 @@ func unpackSecurityRulesAllowWebApplicationInnerTenantControlToSdk(ctx context.C
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesAllowWebApplicationInnerTenantControl
+	var sdk security_services.InternetRuleTypeAllowWebApplicationInnerTenantControl
 	var d diag.Diagnostics
 	// Handling Lists
 	if !model.AllowedActivities.IsNull() && !model.AllowedActivities.IsUnknown() {
@@ -1695,16 +1695,16 @@ func unpackSecurityRulesAllowWebApplicationInnerTenantControlToSdk(ctx context.C
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesAllowWebApplicationInnerTenantControl ---
-func packSecurityRulesAllowWebApplicationInnerTenantControlFromSdk(ctx context.Context, sdk security_services.SecurityRulesAllowWebApplicationInnerTenantControl) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeAllowWebApplicationInnerTenantControl ---
+func packInternetRuleTypeAllowWebApplicationInnerTenantControlFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeAllowWebApplicationInnerTenantControl) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesAllowWebApplicationInnerTenantControl
+	var model models.InternetRuleTypeAllowWebApplicationInnerTenantControl
 	var d diag.Diagnostics
 	// Handling Lists
 	if sdk.AllowedActivities != nil {
@@ -1755,65 +1755,65 @@ func packSecurityRulesAllowWebApplicationInnerTenantControlFromSdk(ctx context.C
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerTenantControl{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerTenantControl{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesAllowWebApplicationInnerTenantControl ---
-func unpackSecurityRulesAllowWebApplicationInnerTenantControlListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesAllowWebApplicationInnerTenantControl, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl")
+// --- List Unpacker for InternetRuleTypeAllowWebApplicationInnerTenantControl ---
+func unpackInternetRuleTypeAllowWebApplicationInnerTenantControlListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeAllowWebApplicationInnerTenantControl, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerTenantControl
+	var data []models.InternetRuleTypeAllowWebApplicationInnerTenantControl
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesAllowWebApplicationInnerTenantControl, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeAllowWebApplicationInnerTenantControl, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerTenantControl{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesAllowWebApplicationInnerTenantControlToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerTenantControl{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeAllowWebApplicationInnerTenantControlToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesAllowWebApplicationInnerTenantControl ---
-func packSecurityRulesAllowWebApplicationInnerTenantControlListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesAllowWebApplicationInnerTenantControl) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl")
+// --- List Packer for InternetRuleTypeAllowWebApplicationInnerTenantControl ---
+func packInternetRuleTypeAllowWebApplicationInnerTenantControlListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeAllowWebApplicationInnerTenantControl) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesAllowWebApplicationInnerTenantControl
+	var data []models.InternetRuleTypeAllowWebApplicationInnerTenantControl
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesAllowWebApplicationInnerTenantControl
-		obj, d := packSecurityRulesAllowWebApplicationInnerTenantControlFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeAllowWebApplicationInnerTenantControl
+		obj, d := packInternetRuleTypeAllowWebApplicationInnerTenantControlFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesAllowWebApplicationInnerTenantControl{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeAllowWebApplicationInnerTenantControl{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesAllowWebApplicationInnerTenantControl{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeAllowWebApplicationInnerTenantControl", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeAllowWebApplicationInnerTenantControl{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesDefaultProfileSettings ---
-func unpackSecurityRulesDefaultProfileSettingsToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesDefaultProfileSettings, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesDefaultProfileSettings", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeDefaultProfileSettings ---
+func unpackInternetRuleTypeDefaultProfileSettingsToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeDefaultProfileSettings, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeDefaultProfileSettings", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesDefaultProfileSettings
+	var model models.InternetRuleTypeDefaultProfileSettings
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1821,7 +1821,7 @@ func unpackSecurityRulesDefaultProfileSettingsToSdk(ctx context.Context, obj typ
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesDefaultProfileSettings
+	var sdk security_services.InternetRuleTypeDefaultProfileSettings
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Dlp.IsNull() && !model.Dlp.IsUnknown() {
@@ -1832,7 +1832,7 @@ func unpackSecurityRulesDefaultProfileSettingsToSdk(ctx context.Context, obj typ
 	// Handling Objects
 	if !model.FileControl.IsNull() && !model.FileControl.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field FileControl")
-		unpacked, d := unpackSecurityRulesAllowUrlCategoryInnerFileControlToSdk(ctx, model.FileControl)
+		unpacked, d := unpackInternetRuleTypeAllowUrlCategoryInnerFileControlToSdk(ctx, model.FileControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "FileControl"})
@@ -1844,16 +1844,16 @@ func unpackSecurityRulesDefaultProfileSettingsToSdk(ctx context.Context, obj typ
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesDefaultProfileSettings ---
-func packSecurityRulesDefaultProfileSettingsFromSdk(ctx context.Context, sdk security_services.SecurityRulesDefaultProfileSettings) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesDefaultProfileSettings", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeDefaultProfileSettings ---
+func packInternetRuleTypeDefaultProfileSettingsFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeDefaultProfileSettings) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeDefaultProfileSettings", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesDefaultProfileSettings
+	var model models.InternetRuleTypeDefaultProfileSettings
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1867,76 +1867,76 @@ func packSecurityRulesDefaultProfileSettingsFromSdk(ctx context.Context, sdk sec
 	// This is a regular nested object that has its own packer.
 	if sdk.FileControl != nil {
 		tflog.Debug(ctx, "Packing nested object for field FileControl")
-		packed, d := packSecurityRulesAllowUrlCategoryInnerFileControlFromSdk(ctx, *sdk.FileControl)
+		packed, d := packInternetRuleTypeAllowUrlCategoryInnerFileControlFromSdk(ctx, *sdk.FileControl)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "FileControl"})
 		}
 		model.FileControl = packed
 	} else {
-		model.FileControl = basetypes.NewObjectNull(models.SecurityRulesAllowUrlCategoryInnerFileControl{}.AttrTypes())
+		model.FileControl = basetypes.NewObjectNull(models.InternetRuleTypeAllowUrlCategoryInnerFileControl{}.AttrTypes())
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesDefaultProfileSettings{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeDefaultProfileSettings{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesDefaultProfileSettings ---
-func unpackSecurityRulesDefaultProfileSettingsListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesDefaultProfileSettings, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesDefaultProfileSettings")
+// --- List Unpacker for InternetRuleTypeDefaultProfileSettings ---
+func unpackInternetRuleTypeDefaultProfileSettingsListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeDefaultProfileSettings, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeDefaultProfileSettings")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesDefaultProfileSettings
+	var data []models.InternetRuleTypeDefaultProfileSettings
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesDefaultProfileSettings, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeDefaultProfileSettings, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesDefaultProfileSettings{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesDefaultProfileSettingsToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeDefaultProfileSettings{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeDefaultProfileSettingsToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesDefaultProfileSettings ---
-func packSecurityRulesDefaultProfileSettingsListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesDefaultProfileSettings) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesDefaultProfileSettings")
+// --- List Packer for InternetRuleTypeDefaultProfileSettings ---
+func packInternetRuleTypeDefaultProfileSettingsListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeDefaultProfileSettings) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeDefaultProfileSettings")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesDefaultProfileSettings
+	var data []models.InternetRuleTypeDefaultProfileSettings
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesDefaultProfileSettings
-		obj, d := packSecurityRulesDefaultProfileSettingsFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeDefaultProfileSettings
+		obj, d := packInternetRuleTypeDefaultProfileSettingsFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesDefaultProfileSettings{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeDefaultProfileSettings{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesDefaultProfileSettings{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeDefaultProfileSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeDefaultProfileSettings{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesLogSettings ---
-func unpackSecurityRulesLogSettingsToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesLogSettings, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesLogSettings", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeLogSettings ---
+func unpackInternetRuleTypeLogSettingsToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeLogSettings, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeLogSettings", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesLogSettings
+	var model models.InternetRuleTypeLogSettings
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1944,7 +1944,7 @@ func unpackSecurityRulesLogSettingsToSdk(ctx context.Context, obj types.Object) 
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesLogSettings
+	var sdk security_services.InternetRuleTypeLogSettings
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.LogSessions.IsNull() && !model.LogSessions.IsUnknown() {
@@ -1954,16 +1954,16 @@ func unpackSecurityRulesLogSettingsToSdk(ctx context.Context, obj types.Object) 
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesLogSettings ---
-func packSecurityRulesLogSettingsFromSdk(ctx context.Context, sdk security_services.SecurityRulesLogSettings) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesLogSettings", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeLogSettings ---
+func packInternetRuleTypeLogSettingsFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeLogSettings) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeLogSettings", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesLogSettings
+	var model models.InternetRuleTypeLogSettings
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1975,65 +1975,65 @@ func packSecurityRulesLogSettingsFromSdk(ctx context.Context, sdk security_servi
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesLogSettings{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeLogSettings{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesLogSettings ---
-func unpackSecurityRulesLogSettingsListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesLogSettings, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesLogSettings")
+// --- List Unpacker for InternetRuleTypeLogSettings ---
+func unpackInternetRuleTypeLogSettingsListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeLogSettings, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeLogSettings")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesLogSettings
+	var data []models.InternetRuleTypeLogSettings
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesLogSettings, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeLogSettings, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesLogSettings{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesLogSettingsToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeLogSettings{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeLogSettingsToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesLogSettings ---
-func packSecurityRulesLogSettingsListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesLogSettings) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesLogSettings")
+// --- List Packer for InternetRuleTypeLogSettings ---
+func packInternetRuleTypeLogSettingsListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeLogSettings) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeLogSettings")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesLogSettings
+	var data []models.InternetRuleTypeLogSettings
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesLogSettings
-		obj, d := packSecurityRulesLogSettingsFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeLogSettings
+		obj, d := packInternetRuleTypeLogSettingsFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesLogSettings{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeLogSettings{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesLogSettings{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeLogSettings", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeLogSettings{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesProfileSetting ---
-func unpackSecurityRulesProfileSettingToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesProfileSetting, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesProfileSetting", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for SecurityRuleTypeProfileSetting ---
+func unpackSecurityRuleTypeProfileSettingToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRuleTypeProfileSetting, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRuleTypeProfileSetting", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesProfileSetting
+	var model models.SecurityRuleTypeProfileSetting
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -2041,7 +2041,7 @@ func unpackSecurityRulesProfileSettingToSdk(ctx context.Context, obj types.Objec
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesProfileSetting
+	var sdk security_services.SecurityRuleTypeProfileSetting
 	var d diag.Diagnostics
 	// Handling Lists
 	if !model.Group.IsNull() && !model.Group.IsUnknown() {
@@ -2051,16 +2051,16 @@ func unpackSecurityRulesProfileSettingToSdk(ctx context.Context, obj types.Objec
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRuleTypeProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesProfileSetting ---
-func packSecurityRulesProfileSettingFromSdk(ctx context.Context, sdk security_services.SecurityRulesProfileSetting) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesProfileSetting", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for SecurityRuleTypeProfileSetting ---
+func packSecurityRuleTypeProfileSettingFromSdk(ctx context.Context, sdk security_services.SecurityRuleTypeProfileSetting) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.SecurityRuleTypeProfileSetting", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesProfileSetting
+	var model models.SecurityRuleTypeProfileSetting
 	var d diag.Diagnostics
 	// Handling Lists
 	if sdk.Group != nil {
@@ -2077,65 +2077,65 @@ func packSecurityRulesProfileSettingFromSdk(ctx context.Context, sdk security_se
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesProfileSetting{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.SecurityRuleTypeProfileSetting{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRuleTypeProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesProfileSetting ---
-func unpackSecurityRulesProfileSettingListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesProfileSetting, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesProfileSetting")
+// --- List Unpacker for SecurityRuleTypeProfileSetting ---
+func unpackSecurityRuleTypeProfileSettingListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRuleTypeProfileSetting, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRuleTypeProfileSetting")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesProfileSetting
+	var data []models.SecurityRuleTypeProfileSetting
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesProfileSetting, 0, len(data))
+	ans := make([]security_services.SecurityRuleTypeProfileSetting, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesProfileSetting{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesProfileSettingToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRuleTypeProfileSetting{}.AttrTypes(), &item)
+		unpacked, d := unpackSecurityRuleTypeProfileSettingToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRuleTypeProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesProfileSetting ---
-func packSecurityRulesProfileSettingListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesProfileSetting) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesProfileSetting")
+// --- List Packer for SecurityRuleTypeProfileSetting ---
+func packSecurityRuleTypeProfileSettingListFromSdk(ctx context.Context, sdks []security_services.SecurityRuleTypeProfileSetting) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRuleTypeProfileSetting")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesProfileSetting
+	var data []models.SecurityRuleTypeProfileSetting
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesProfileSetting
-		obj, d := packSecurityRulesProfileSettingFromSdk(ctx, sdk)
+		var model models.SecurityRuleTypeProfileSetting
+		obj, d := packSecurityRuleTypeProfileSettingFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesProfileSetting{}.AttrType()), diags
+			return basetypes.NewListNull(models.SecurityRuleTypeProfileSetting{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesProfileSetting{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRuleTypeProfileSetting", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.SecurityRuleTypeProfileSetting{}.AttrType(), data)
 }
 
-// --- Unpacker for SecurityRulesSecuritySettings ---
-func unpackSecurityRulesSecuritySettingsToSdk(ctx context.Context, obj types.Object) (*security_services.SecurityRulesSecuritySettings, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SecurityRulesSecuritySettings", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for InternetRuleTypeSecuritySettings ---
+func unpackInternetRuleTypeSecuritySettingsToSdk(ctx context.Context, obj types.Object) (*security_services.InternetRuleTypeSecuritySettings, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InternetRuleTypeSecuritySettings", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesSecuritySettings
+	var model models.InternetRuleTypeSecuritySettings
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -2143,7 +2143,7 @@ func unpackSecurityRulesSecuritySettingsToSdk(ctx context.Context, obj types.Obj
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk security_services.SecurityRulesSecuritySettings
+	var sdk security_services.InternetRuleTypeSecuritySettings
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.AntiSpyware.IsNull() && !model.AntiSpyware.IsUnknown() {
@@ -2165,16 +2165,16 @@ func unpackSecurityRulesSecuritySettingsToSdk(ctx context.Context, obj types.Obj
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SecurityRulesSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.InternetRuleTypeSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SecurityRulesSecuritySettings ---
-func packSecurityRulesSecuritySettingsFromSdk(ctx context.Context, sdk security_services.SecurityRulesSecuritySettings) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SecurityRulesSecuritySettings", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for InternetRuleTypeSecuritySettings ---
+func packInternetRuleTypeSecuritySettingsFromSdk(ctx context.Context, sdk security_services.InternetRuleTypeSecuritySettings) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InternetRuleTypeSecuritySettings", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SecurityRulesSecuritySettings
+	var model models.InternetRuleTypeSecuritySettings
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -2202,56 +2202,56 @@ func packSecurityRulesSecuritySettingsFromSdk(ctx context.Context, sdk security_
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SecurityRulesSecuritySettings{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.InternetRuleTypeSecuritySettings{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SecurityRulesSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.InternetRuleTypeSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SecurityRulesSecuritySettings ---
-func unpackSecurityRulesSecuritySettingsListToSdk(ctx context.Context, list types.List) ([]security_services.SecurityRulesSecuritySettings, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SecurityRulesSecuritySettings")
+// --- List Unpacker for InternetRuleTypeSecuritySettings ---
+func unpackInternetRuleTypeSecuritySettingsListToSdk(ctx context.Context, list types.List) ([]security_services.InternetRuleTypeSecuritySettings, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InternetRuleTypeSecuritySettings")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesSecuritySettings
+	var data []models.InternetRuleTypeSecuritySettings
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]security_services.SecurityRulesSecuritySettings, 0, len(data))
+	ans := make([]security_services.InternetRuleTypeSecuritySettings, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SecurityRulesSecuritySettings{}.AttrTypes(), &item)
-		unpacked, d := unpackSecurityRulesSecuritySettingsToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.InternetRuleTypeSecuritySettings{}.AttrTypes(), &item)
+		unpacked, d := unpackInternetRuleTypeSecuritySettingsToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SecurityRulesSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InternetRuleTypeSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SecurityRulesSecuritySettings ---
-func packSecurityRulesSecuritySettingsListFromSdk(ctx context.Context, sdks []security_services.SecurityRulesSecuritySettings) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SecurityRulesSecuritySettings")
+// --- List Packer for InternetRuleTypeSecuritySettings ---
+func packInternetRuleTypeSecuritySettingsListFromSdk(ctx context.Context, sdks []security_services.InternetRuleTypeSecuritySettings) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InternetRuleTypeSecuritySettings")
 	diags := diag.Diagnostics{}
-	var data []models.SecurityRulesSecuritySettings
+	var data []models.InternetRuleTypeSecuritySettings
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SecurityRulesSecuritySettings
-		obj, d := packSecurityRulesSecuritySettingsFromSdk(ctx, sdk)
+		var model models.InternetRuleTypeSecuritySettings
+		obj, d := packInternetRuleTypeSecuritySettingsFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SecurityRulesSecuritySettings{}.AttrType()), diags
+			return basetypes.NewListNull(models.InternetRuleTypeSecuritySettings{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SecurityRulesSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SecurityRulesSecuritySettings{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.InternetRuleTypeSecuritySettings", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InternetRuleTypeSecuritySettings{}.AttrType(), data)
 }

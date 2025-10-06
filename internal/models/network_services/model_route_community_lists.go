@@ -313,8 +313,8 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -339,8 +339,8 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -365,8 +365,8 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				"extended": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("regular"),
 							path.MatchRelative().AtParent().AtName("large"),
+							path.MatchRelative().AtParent().AtName("regular"),
 						),
 					},
 					MarkdownDescription: "Extended",
@@ -407,8 +407,8 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				"large": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("regular"),
 							path.MatchRelative().AtParent().AtName("extended"),
+							path.MatchRelative().AtParent().AtName("regular"),
 						),
 					},
 					MarkdownDescription: "Large",
@@ -449,8 +449,8 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				"regular": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("large"),
 							path.MatchRelative().AtParent().AtName("extended"),
+							path.MatchRelative().AtParent().AtName("large"),
 						),
 					},
 					MarkdownDescription: "Regular",

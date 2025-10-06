@@ -396,10 +396,10 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 									"af": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
-												path.MatchRelative().AtParent().AtName("ef"),
 												path.MatchRelative().AtParent().AtName("cs"),
-												path.MatchRelative().AtParent().AtName("tos"),
 												path.MatchRelative().AtParent().AtName("custom"),
+												path.MatchRelative().AtParent().AtName("ef"),
+												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
 										MarkdownDescription: "Af",
@@ -414,10 +414,10 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 									"cs": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
-												path.MatchRelative().AtParent().AtName("ef"),
 												path.MatchRelative().AtParent().AtName("af"),
-												path.MatchRelative().AtParent().AtName("tos"),
 												path.MatchRelative().AtParent().AtName("custom"),
+												path.MatchRelative().AtParent().AtName("ef"),
+												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
 										MarkdownDescription: "Cs",
@@ -432,9 +432,9 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 									"custom": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
-												path.MatchRelative().AtParent().AtName("ef"),
 												path.MatchRelative().AtParent().AtName("af"),
 												path.MatchRelative().AtParent().AtName("cs"),
+												path.MatchRelative().AtParent().AtName("ef"),
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
@@ -462,8 +462,8 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 											objectvalidator.ExactlyOneOf(
 												path.MatchRelative().AtParent().AtName("af"),
 												path.MatchRelative().AtParent().AtName("cs"),
-												path.MatchRelative().AtParent().AtName("tos"),
 												path.MatchRelative().AtParent().AtName("custom"),
+												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
 										MarkdownDescription: "Ef",
@@ -473,10 +473,10 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 									"tos": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
-												path.MatchRelative().AtParent().AtName("ef"),
 												path.MatchRelative().AtParent().AtName("af"),
 												path.MatchRelative().AtParent().AtName("cs"),
 												path.MatchRelative().AtParent().AtName("custom"),
+												path.MatchRelative().AtParent().AtName("ef"),
 											),
 										},
 										MarkdownDescription: "Tos",
@@ -498,8 +498,8 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
@@ -540,8 +540,8 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),

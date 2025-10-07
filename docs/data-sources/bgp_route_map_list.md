@@ -121,7 +121,7 @@ Read-Only:
 
 Read-Only:
 
-- `aggregator` (Attributes) Aggregator (see [below for nested schema](#nestedatt--data--route_map--set--aggregator))
+- `aggregator` (Attributes) bgp-route-maps aggregator (see [below for nested schema](#nestedatt--data--route_map--set--aggregator))
 - `aspath_exclude` (List of Number) Aspath exclude
 - `aspath_prepend` (List of Number) Aspath prepend
 - `atomic_aggregate` (Boolean) Enable BGP atomic aggregate?

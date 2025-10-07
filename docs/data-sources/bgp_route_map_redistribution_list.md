@@ -307,7 +307,7 @@ Read-Only:
 
 Read-Only:
 
-- `aggregator` (Attributes) Aggregator (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--set--aggregator))
+- `aggregator` (Attributes) bgp-route-map-redistributions connected_static aggregator (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--set--aggregator))
 - `aspath_prepend` (List of Number) AS numbers
 - `atomic_aggregate` (Boolean) Enable BGP atomic aggregate?
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--set--ipv4))
@@ -553,7 +553,7 @@ Read-Only:
 
 Read-Only:
 
-- `aggregator` (Attributes) Aggregator (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set--aggregator))
+- `aggregator` (Attributes) bgp-route-map-redistributions set aggregator (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set--aggregator))
 - `aspath_prepend` (List of Number) AS numbers
 - `atomic_aggregate` (Boolean) Enable BGP atomic aggregate?
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set--ipv4))

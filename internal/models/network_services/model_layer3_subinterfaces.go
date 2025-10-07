@@ -128,7 +128,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "Layer3Subinterface resource",
 	Attributes: map[string]schema.Attribute{
 		"arp": schema.ListNestedAttribute{
-			MarkdownDescription: "ARP configuration",
+			MarkdownDescription: "Layer 3 sub Interfaces ARP configuration",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
@@ -299,7 +299,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "Layer3Subinterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"arp": dsschema.ListNestedAttribute{
-			MarkdownDescription: "ARP configuration",
+			MarkdownDescription: "Layer 3 sub Interfaces ARP configuration",
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{

@@ -41,11 +41,18 @@ type CertificatesGet struct {
 	SubjectInt     basetypes.StringValue `tfsdk:"subject_int"`
 }
 
-// ExportCertificatePayload represents a nested structure within the CertificatesGet model
-type ExportCertificatePayload struct {
-	Tfid       types.String          `tfsdk:"tfid"`
-	Format     basetypes.StringValue `tfsdk:"format"`
-	Passphrase basetypes.StringValue `tfsdk:"passphrase"`
+// CertificatesImport represents a nested structure within the CertificatesGet model
+type CertificatesImport struct {
+	Tfid            types.String          `tfsdk:"tfid"`
+	EncryptedValues basetypes.MapValue    `tfsdk:"encrypted_values"`
+	CertificateFile basetypes.StringValue `tfsdk:"certificate_file"`
+	Device          basetypes.StringValue `tfsdk:"device"`
+	Folder          basetypes.StringValue `tfsdk:"folder"`
+	Format          basetypes.StringValue `tfsdk:"format"`
+	KeyFile         basetypes.StringValue `tfsdk:"key_file"`
+	Name            basetypes.StringValue `tfsdk:"name"`
+	Passphrase      basetypes.StringValue `tfsdk:"passphrase"`
+	Snippet         basetypes.StringValue `tfsdk:"snippet"`
 }
 
 // AttrTypes defines the attribute types for the CertificatesGet model.
@@ -80,17 +87,24 @@ func (o CertificatesGet) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the ExportCertificatePayload model.
-func (o ExportCertificatePayload) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the CertificatesImport model.
+func (o CertificatesImport) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":       basetypes.StringType{},
-		"format":     basetypes.StringType{},
-		"passphrase": basetypes.StringType{},
+		"tfid":             basetypes.StringType{},
+		"encrypted_values": basetypes.MapType{ElemType: basetypes.StringType{}},
+		"certificate_file": basetypes.StringType{},
+		"device":           basetypes.StringType{},
+		"folder":           basetypes.StringType{},
+		"format":           basetypes.StringType{},
+		"key_file":         basetypes.StringType{},
+		"name":             basetypes.StringType{},
+		"passphrase":       basetypes.StringType{},
+		"snippet":          basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of ExportCertificatePayload objects.
-func (o ExportCertificatePayload) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of CertificatesImport objects.
+func (o CertificatesImport) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

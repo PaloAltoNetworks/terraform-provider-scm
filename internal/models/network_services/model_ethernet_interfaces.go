@@ -59,8 +59,8 @@ type EthernetInterfacesLayer3 struct {
 	Pppoe                      basetypes.ObjectValue `tfsdk:"pppoe"`
 }
 
-// ArpInner represents a nested structure within the EthernetInterfaces model
-type ArpInner struct {
+// AggEthernetArpInner represents a nested structure within the EthernetInterfaces model
+type AggEthernetArpInner struct {
 	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
 	Name      basetypes.StringValue `tfsdk:"name"`
 }
@@ -297,16 +297,16 @@ func (o EthernetInterfacesLayer3) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the ArpInner model.
-func (o ArpInner) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the AggEthernetArpInner model.
+func (o AggEthernetArpInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"hw_address": basetypes.StringType{},
 		"name":       basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of ArpInner objects.
-func (o ArpInner) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of AggEthernetArpInner objects.
+func (o AggEthernetArpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -516,7 +516,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"arp": schema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Optional:            true,
 					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
@@ -830,7 +830,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{

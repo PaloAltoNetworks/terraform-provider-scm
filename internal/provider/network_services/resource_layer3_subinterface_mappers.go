@@ -30,7 +30,7 @@ func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
-		unpacked, d := unpackArpInnerListToSdk(ctx, model.Arp)
+		unpacked, d := unpackAggEthernetArpInnerListToSdk(ctx, model.Arp)
 		diags.Append(d...)
 		sdk.Arp = unpacked
 	}
@@ -145,11 +145,11 @@ func packLayer3SubinterfacesFromSdk(ctx context.Context, sdk network_services.La
 	// Handling Lists
 	if sdk.Arp != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Arp")
-		packed, d := packArpInnerListFromSdk(ctx, sdk.Arp)
+		packed, d := packAggEthernetArpInnerListFromSdk(ctx, sdk.Arp)
 		diags.Append(d...)
 		model.Arp = packed
 	} else {
-		model.Arp = basetypes.NewListNull(models.ArpInner{}.AttrType())
+		model.Arp = basetypes.NewListNull(models.AggEthernetArpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing

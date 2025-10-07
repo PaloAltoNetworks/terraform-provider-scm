@@ -381,7 +381,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"arp": schema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Aggregate Ethernet ARP configuration",
 					Optional:            true,
 					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
@@ -641,7 +641,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Aggregate Ethernet ARP configuration",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{

@@ -25,7 +25,7 @@ Layer3Subinterface data source
 
 ### Read-Only
 
-- `arp` (Attributes List) ARP configuration (see [below for nested schema](#nestedatt--arp))
+- `arp` (Attributes List) Layer 3 sub Interfaces ARP configuration (see [below for nested schema](#nestedatt--arp))
 - `comment` (String) Description
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Layer 3 sub Interfaces. (see [below for nested schema](#nestedatt--ddns_config))
 - `device` (String) The device in which the resource is defined

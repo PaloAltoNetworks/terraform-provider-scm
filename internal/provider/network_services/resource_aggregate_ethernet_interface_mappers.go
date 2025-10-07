@@ -552,7 +552,7 @@ func unpackAggregateEthernetInterfacesLayer3ToSdk(ctx context.Context, obj types
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
-		unpacked, d := unpackArpInnerListToSdk(ctx, model.Arp)
+		unpacked, d := unpackAggEthernetArpInnerListToSdk(ctx, model.Arp)
 		diags.Append(d...)
 		sdk.Arp = unpacked
 	}
@@ -631,11 +631,11 @@ func packAggregateEthernetInterfacesLayer3FromSdk(ctx context.Context, sdk netwo
 	// Handling Lists
 	if sdk.Arp != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Arp")
-		packed, d := packArpInnerListFromSdk(ctx, sdk.Arp)
+		packed, d := packAggEthernetArpInnerListFromSdk(ctx, sdk.Arp)
 		diags.Append(d...)
 		model.Arp = packed
 	} else {
-		model.Arp = basetypes.NewListNull(models.ArpInner{}.AttrType())
+		model.Arp = basetypes.NewListNull(models.AggEthernetArpInner{}.AttrType())
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.

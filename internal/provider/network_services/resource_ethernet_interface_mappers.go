@@ -484,7 +484,7 @@ func unpackEthernetInterfacesLayer3ToSdk(ctx context.Context, obj types.Object) 
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
-		unpacked, d := unpackArpInnerListToSdk(ctx, model.Arp)
+		unpacked, d := unpackAggEthernetArpInnerListToSdk(ctx, model.Arp)
 		diags.Append(d...)
 		sdk.Arp = unpacked
 	}
@@ -563,11 +563,11 @@ func packEthernetInterfacesLayer3FromSdk(ctx context.Context, sdk network_servic
 	// Handling Lists
 	if sdk.Arp != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Arp")
-		packed, d := packArpInnerListFromSdk(ctx, sdk.Arp)
+		packed, d := packAggEthernetArpInnerListFromSdk(ctx, sdk.Arp)
 		diags.Append(d...)
 		model.Arp = packed
 	} else {
-		model.Arp = basetypes.NewListNull(models.ArpInner{}.AttrType())
+		model.Arp = basetypes.NewListNull(models.AggEthernetArpInner{}.AttrType())
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -693,11 +693,11 @@ func packEthernetInterfacesLayer3ListFromSdk(ctx context.Context, sdks []network
 	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer3{}.AttrType(), data)
 }
 
-// --- Unpacker for ArpInner ---
-func unpackArpInnerToSdk(ctx context.Context, obj types.Object) (*network_services.ArpInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.ArpInner", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for AggEthernetArpInner ---
+func unpackAggEthernetArpInnerToSdk(ctx context.Context, obj types.Object) (*network_services.AggEthernetArpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.AggEthernetArpInner", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.ArpInner
+	var model models.AggEthernetArpInner
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -705,7 +705,7 @@ func unpackArpInnerToSdk(ctx context.Context, obj types.Object) (*network_servic
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.ArpInner
+	var sdk network_services.AggEthernetArpInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.HwAddress.IsNull() && !model.HwAddress.IsUnknown() {
@@ -721,16 +721,16 @@ func unpackArpInnerToSdk(ctx context.Context, obj types.Object) (*network_servic
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.ArpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.AggEthernetArpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for ArpInner ---
-func packArpInnerFromSdk(ctx context.Context, sdk network_services.ArpInner) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.ArpInner", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for AggEthernetArpInner ---
+func packAggEthernetArpInnerFromSdk(ctx context.Context, sdk network_services.AggEthernetArpInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.AggEthernetArpInner", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.ArpInner
+	var model models.AggEthernetArpInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -750,58 +750,58 @@ func packArpInnerFromSdk(ctx context.Context, sdk network_services.ArpInner) (ty
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.ArpInner{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.AggEthernetArpInner{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.ArpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.AggEthernetArpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for ArpInner ---
-func unpackArpInnerListToSdk(ctx context.Context, list types.List) ([]network_services.ArpInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.ArpInner")
+// --- List Unpacker for AggEthernetArpInner ---
+func unpackAggEthernetArpInnerListToSdk(ctx context.Context, list types.List) ([]network_services.AggEthernetArpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.AggEthernetArpInner")
 	diags := diag.Diagnostics{}
-	var data []models.ArpInner
+	var data []models.AggEthernetArpInner
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.ArpInner, 0, len(data))
+	ans := make([]network_services.AggEthernetArpInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.ArpInner{}.AttrTypes(), &item)
-		unpacked, d := unpackArpInnerToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.AggEthernetArpInner{}.AttrTypes(), &item)
+		unpacked, d := unpackAggEthernetArpInnerToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.ArpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.AggEthernetArpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for ArpInner ---
-func packArpInnerListFromSdk(ctx context.Context, sdks []network_services.ArpInner) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.ArpInner")
+// --- List Packer for AggEthernetArpInner ---
+func packAggEthernetArpInnerListFromSdk(ctx context.Context, sdks []network_services.AggEthernetArpInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.AggEthernetArpInner")
 	diags := diag.Diagnostics{}
-	var data []models.ArpInner
+	var data []models.AggEthernetArpInner
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.ArpInner
-		obj, d := packArpInnerFromSdk(ctx, sdk)
+		var model models.AggEthernetArpInner
+		obj, d := packAggEthernetArpInnerFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.ArpInner{}.AttrType()), diags
+			return basetypes.NewListNull(models.AggEthernetArpInner{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.ArpInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.ArpInner{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.AggEthernetArpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.AggEthernetArpInner{}.AttrType(), data)
 }
 
 // --- Unpacker for EthernetInterfacesLayer3DdnsConfig ---

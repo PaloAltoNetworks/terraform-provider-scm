@@ -68,7 +68,7 @@ Optional:
 - `as_path_access_list` (String) AS path access list
 - `extended_community` (String) Extended community
 - `interface` (String) Interface
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4))
+- `ipv4` (Attributes) bgp-route-map-redistributions ipv4 object (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4))
 - `large_community` (String) Large community
 - `local_preference` (Number) Local preference
 - `metric` (Number) Metric

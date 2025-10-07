@@ -55,6 +55,13 @@ type BgpRouteMapsRouteMapInnerMatch struct {
 	Tag               basetypes.Int64Value  `tfsdk:"tag"`
 }
 
+// BgpRouteMapsRouteMapInnerMatchIpv4 represents a nested structure within the BgpRouteMaps model
+type BgpRouteMapsRouteMapInnerMatchIpv4 struct {
+	Address     basetypes.ObjectValue `tfsdk:"address"`
+	NextHop     basetypes.ObjectValue `tfsdk:"next_hop"`
+	RouteSource basetypes.ObjectValue `tfsdk:"route_source"`
+}
+
 // BgpRouteMapsRouteMapInnerSet represents a nested structure within the BgpRouteMaps model
 type BgpRouteMapsRouteMapInnerSet struct {
 	Aggregator                basetypes.ObjectValue `tfsdk:"aggregator"`
@@ -308,6 +315,37 @@ func (o BgpRouteMapsRouteMapInnerMatch) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerMatchIpv4 model.
+func (o BgpRouteMapsRouteMapInnerMatchIpv4) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"next_hop": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"route_source": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapsRouteMapInnerMatchIpv4 objects.
+func (o BgpRouteMapsRouteMapInnerMatchIpv4) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerSet model.
 func (o BgpRouteMapsRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -435,7 +473,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								Optional:            true,
 							},
 							"ipv4": schema.SingleNestedAttribute{
-								MarkdownDescription: "Ipv4",
+								MarkdownDescription: "bgp-route-maps ipv4 object",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
 									"address": schema.SingleNestedAttribute{
@@ -743,7 +781,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 							},
 							"ipv4": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Ipv4",
+								MarkdownDescription: "bgp-route-maps ipv4 object",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"address": dsschema.SingleNestedAttribute{

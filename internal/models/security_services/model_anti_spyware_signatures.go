@@ -1165,7 +1165,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							Default:             booldefault.StaticBool(false),
 						},
 						"time_attribute": schema.SingleNestedAttribute{
-							MarkdownDescription: "Time attribute",
+							MarkdownDescription: "anti spyware time attribute",
 							Optional:            true,
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
@@ -1603,7 +1603,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"time_attribute": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Time attribute",
+							MarkdownDescription: "anti spyware time attribute",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"interval": dsschema.Int64Attribute{

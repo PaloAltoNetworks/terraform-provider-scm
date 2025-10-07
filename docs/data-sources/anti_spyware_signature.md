@@ -99,7 +99,7 @@ Read-Only:
 
 - `and_condition` (Attributes List) And condition (see [below for nested schema](#nestedatt--signature--combination--and_condition))
 - `order_free` (Boolean) Order free
-- `time_attribute` (Attributes) Time attribute (see [below for nested schema](#nestedatt--signature--combination--time_attribute))
+- `time_attribute` (Attributes) anti spyware time attribute (see [below for nested schema](#nestedatt--signature--combination--time_attribute))
 
 <a id="nestedatt--signature--combination--and_condition"></a>
 ### Nested Schema for `signature.combination.and_condition`

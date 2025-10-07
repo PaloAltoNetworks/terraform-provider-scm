@@ -919,6 +919,278 @@ func packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchListFromSdk(ctx cont
 	return basetypes.NewListValueFrom(ctx, models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatch{}.AttrType(), data)
 }
 
+// --- Unpacker for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4 ---
+func unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4ToSdk(ctx context.Context, obj types.Object) (*network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4
+	var d diag.Diagnostics
+	// Handling Objects
+	if !model.Address.IsNull() && !model.Address.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Address")
+		unpacked, d := unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressToSdk(ctx, model.Address)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Address"})
+		}
+		if unpacked != nil {
+			sdk.Address = unpacked
+		}
+	}
+
+	// Handling Objects
+	if !model.NextHop.IsNull() && !model.NextHop.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field NextHop")
+		unpacked, d := unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressToSdk(ctx, model.NextHop)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "NextHop"})
+		}
+		if unpacked != nil {
+			sdk.NextHop = unpacked
+		}
+	}
+
+	// Handling Objects
+	if !model.RouteSource.IsNull() && !model.RouteSource.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field RouteSource")
+		unpacked, d := unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressToSdk(ctx, model.RouteSource)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "RouteSource"})
+		}
+		if unpacked != nil {
+			sdk.RouteSource = unpacked
+		}
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4 ---
+func packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4FromSdk(ctx context.Context, sdk network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4
+	var d diag.Diagnostics
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Address != nil {
+		tflog.Debug(ctx, "Packing nested object for field Address")
+		packed, d := packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressFromSdk(ctx, *sdk.Address)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Address"})
+		}
+		model.Address = packed
+	} else {
+		model.Address = basetypes.NewObjectNull(models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address{}.AttrTypes())
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.NextHop != nil {
+		tflog.Debug(ctx, "Packing nested object for field NextHop")
+		packed, d := packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressFromSdk(ctx, *sdk.NextHop)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "NextHop"})
+		}
+		model.NextHop = packed
+	} else {
+		model.NextHop = basetypes.NewObjectNull(models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address{}.AttrTypes())
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.RouteSource != nil {
+		tflog.Debug(ctx, "Packing nested object for field RouteSource")
+		packed, d := packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressFromSdk(ctx, *sdk.RouteSource)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "RouteSource"})
+		}
+		model.RouteSource = packed
+	} else {
+		model.RouteSource = basetypes.NewObjectNull(models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address{}.AttrTypes())
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4 ---
+func unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4ListToSdk(ctx context.Context, list types.List) ([]network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4{}.AttrTypes(), &item)
+		unpacked, d := unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4ToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4 ---
+func packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4ListFromSdk(ctx context.Context, sdks []network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4
+		obj, d := packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4FromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4{}.AttrType(), data)
+}
+
+// --- Unpacker for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address ---
+func unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressToSdk(ctx context.Context, obj types.Object) (*network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.AccessList.IsNull() && !model.AccessList.IsUnknown() {
+		sdk.AccessList = model.AccessList.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AccessList", "value": *sdk.AccessList})
+	}
+
+	// Handling Primitives
+	if !model.PrefixList.IsNull() && !model.PrefixList.IsUnknown() {
+		sdk.PrefixList = model.PrefixList.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "PrefixList", "value": *sdk.PrefixList})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address ---
+func packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressFromSdk(ctx context.Context, sdk network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.AccessList != nil {
+		model.AccessList = basetypes.NewStringValue(*sdk.AccessList)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AccessList", "value": *sdk.AccessList})
+	} else {
+		model.AccessList = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.PrefixList != nil {
+		model.PrefixList = basetypes.NewStringValue(*sdk.PrefixList)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PrefixList", "value": *sdk.PrefixList})
+	} else {
+		model.PrefixList = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address ---
+func unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressListToSdk(ctx context.Context, list types.List) ([]network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address{}.AttrTypes(), &item)
+		unpacked, d := unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address ---
+func packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressListFromSdk(ctx context.Context, sdks []network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address
+		obj, d := packBgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4AddressFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address{}.AttrType(), data)
+}
+
 // --- Unpacker for BgpRouteMapRedistributionsBgpOspfRouteMapInnerSet ---
 func unpackBgpRouteMapRedistributionsBgpOspfRouteMapInnerSetToSdk(ctx context.Context, obj types.Object) (*network_services.BgpRouteMapRedistributionsBgpOspfRouteMapInnerSet, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering unpack helper for models.BgpRouteMapRedistributionsBgpOspfRouteMapInnerSet", map[string]interface{}{"tf_object": obj})
@@ -2561,6 +2833,341 @@ func packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetListFromSdk
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSet", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSet{}.AttrType(), data)
+}
+
+// --- Unpacker for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator ---
+func unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregatorToSdk(ctx context.Context, obj types.Object) (*network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.As.IsNull() && !model.As.IsUnknown() {
+		val := int32(model.As.ValueInt64())
+		sdk.As = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "As", "value": *sdk.As})
+	}
+
+	// Handling Primitives
+	if !model.RouterId.IsNull() && !model.RouterId.IsUnknown() {
+		sdk.RouterId = model.RouterId.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RouterId", "value": *sdk.RouterId})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator ---
+func packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregatorFromSdk(ctx context.Context, sdk network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.As != nil {
+		model.As = basetypes.NewInt64Value(int64(*sdk.As))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "As", "value": *sdk.As})
+	} else {
+		model.As = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.RouterId != nil {
+		model.RouterId = basetypes.NewStringValue(*sdk.RouterId)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RouterId", "value": *sdk.RouterId})
+	} else {
+		model.RouterId = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator ---
+func unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregatorListToSdk(ctx context.Context, list types.List) ([]network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator{}.AttrTypes(), &item)
+		unpacked, d := unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregatorToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator ---
+func packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregatorListFromSdk(ctx context.Context, sdks []network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator
+		obj, d := packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregatorFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator{}.AttrType(), data)
+}
+
+// --- Unpacker for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 ---
+func unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4ToSdk(ctx context.Context, obj types.Object) (*network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.NextHop.IsNull() && !model.NextHop.IsUnknown() {
+		sdk.NextHop = model.NextHop.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NextHop", "value": *sdk.NextHop})
+	}
+
+	// Handling Primitives
+	if !model.SourceAddress.IsNull() && !model.SourceAddress.IsUnknown() {
+		sdk.SourceAddress = model.SourceAddress.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SourceAddress", "value": *sdk.SourceAddress})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 ---
+func packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4FromSdk(ctx context.Context, sdk network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NextHop != nil {
+		model.NextHop = basetypes.NewStringValue(*sdk.NextHop)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NextHop", "value": *sdk.NextHop})
+	} else {
+		model.NextHop = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.SourceAddress != nil {
+		model.SourceAddress = basetypes.NewStringValue(*sdk.SourceAddress)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SourceAddress", "value": *sdk.SourceAddress})
+	} else {
+		model.SourceAddress = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 ---
+func unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4ListToSdk(ctx context.Context, list types.List) ([]network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4{}.AttrTypes(), &item)
+		unpacked, d := unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4ToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 ---
+func packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4ListFromSdk(ctx context.Context, sdks []network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4
+		obj, d := packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4FromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4{}.AttrType(), data)
+}
+
+// --- Unpacker for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric ---
+func unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetricToSdk(ctx context.Context, obj types.Object) (*network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Action.IsNull() && !model.Action.IsUnknown() {
+		sdk.Action = model.Action.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Action", "value": *sdk.Action})
+	}
+
+	// Handling Primitives
+	if !model.Value.IsNull() && !model.Value.IsUnknown() {
+		val := int32(model.Value.ValueInt64())
+		sdk.Value = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Value", "value": *sdk.Value})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric ---
+func packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetricFromSdk(ctx context.Context, sdk network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Action != nil {
+		model.Action = basetypes.NewStringValue(*sdk.Action)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Action", "value": *sdk.Action})
+	} else {
+		model.Action = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Value != nil {
+		model.Value = basetypes.NewInt64Value(int64(*sdk.Value))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Value", "value": *sdk.Value})
+	} else {
+		model.Value = basetypes.NewInt64Null()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric ---
+func unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetricListToSdk(ctx context.Context, list types.List) ([]network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric{}.AttrTypes(), &item)
+		unpacked, d := unpackBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetricToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric ---
+func packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetricListFromSdk(ctx context.Context, sdks []network_services.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric")
+	diags := diag.Diagnostics{}
+	var data []models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric
+		obj, d := packBgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetricFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric{}.AttrType(), data)
 }
 
 // --- Unpacker for BgpRouteMapRedistributionsConnectedStaticOspf ---

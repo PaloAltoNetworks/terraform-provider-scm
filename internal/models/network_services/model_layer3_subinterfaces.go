@@ -37,8 +37,8 @@ type Layer3Subinterfaces struct {
 	Tag                        basetypes.Float64Value `tfsdk:"tag"`
 }
 
-// AggEthernetArpInner represents a nested structure within the Layer3Subinterfaces model
-type AggEthernetArpInner struct {
+// Layer3SubinterfacesArpInner represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubinterfacesArpInner struct {
 	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
 	Name      basetypes.StringValue `tfsdk:"name"`
 }
@@ -52,20 +52,6 @@ type Layer3SubinterfacesDdnsConfig struct {
 	DdnsUpdateInterval basetypes.Int64Value  `tfsdk:"ddns_update_interval"`
 	DdnsVendor         basetypes.StringValue `tfsdk:"ddns_vendor"`
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
-}
-
-// AggregateEthernetInterfacesLayer3DhcpClient represents a nested structure within the Layer3Subinterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClient struct {
-	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
-	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
-	Enable             basetypes.BoolValue   `tfsdk:"enable"`
-	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
-}
-
-// AggregateEthernetInterfacesLayer3DhcpClientSendHostname represents a nested structure within the Layer3Subinterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClientSendHostname struct {
-	Enable   basetypes.BoolValue   `tfsdk:"enable"`
-	Hostname basetypes.StringValue `tfsdk:"hostname"`
 }
 
 // AttrTypes defines the attribute types for the Layer3Subinterfaces model.
@@ -123,16 +109,16 @@ func (o Layer3Subinterfaces) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AggEthernetArpInner model.
-func (o AggEthernetArpInner) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the Layer3SubinterfacesArpInner model.
+func (o Layer3SubinterfacesArpInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"hw_address": basetypes.StringType{},
 		"name":       basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of AggEthernetArpInner objects.
-func (o AggEthernetArpInner) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of Layer3SubinterfacesArpInner objects.
+func (o Layer3SubinterfacesArpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -153,43 +139,6 @@ func (o Layer3SubinterfacesDdnsConfig) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of Layer3SubinterfacesDdnsConfig objects.
 func (o Layer3SubinterfacesDdnsConfig) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClient model.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"create_default_route": basetypes.BoolType{},
-		"default_route_metric": basetypes.Int64Type{},
-		"enable":               basetypes.BoolType{},
-		"send_hostname": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"enable":   basetypes.BoolType{},
-				"hostname": basetypes.StringType{},
-			},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClient objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClientSendHostname model.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"enable":   basetypes.BoolType{},
-		"hostname": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClientSendHostname objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

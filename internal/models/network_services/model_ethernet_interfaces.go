@@ -59,6 +59,12 @@ type EthernetInterfacesLayer3 struct {
 	Pppoe                      basetypes.ObjectValue `tfsdk:"pppoe"`
 }
 
+// EthernetInterfacesArpInner represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesArpInner struct {
+	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
+	Name      basetypes.StringValue `tfsdk:"name"`
+}
+
 // EthernetInterfacesLayer3DdnsConfig represents a nested structure within the EthernetInterfaces model
 type EthernetInterfacesLayer3DdnsConfig struct {
 	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
@@ -272,6 +278,21 @@ func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of EthernetInterfacesLayer3 objects.
 func (o EthernetInterfacesLayer3) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesArpInner model.
+func (o EthernetInterfacesArpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"hw_address": basetypes.StringType{},
+		"name":       basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesArpInner objects.
+func (o EthernetInterfacesArpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

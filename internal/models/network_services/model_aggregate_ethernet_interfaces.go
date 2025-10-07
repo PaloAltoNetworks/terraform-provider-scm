@@ -64,6 +64,12 @@ type AggregateEthernetInterfacesLayer3 struct {
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 }
 
+// AggEthernetArpInner represents a nested structure within the AggregateEthernetInterfaces model
+type AggEthernetArpInner struct {
+	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
+	Name      basetypes.StringValue `tfsdk:"name"`
+}
+
 // AggregateEthernetInterfacesLayer3DdnsConfig represents a nested structure within the AggregateEthernetInterfaces model
 type AggregateEthernetInterfacesLayer3DdnsConfig struct {
 	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
@@ -252,6 +258,21 @@ func (o AggregateEthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3 objects.
 func (o AggregateEthernetInterfacesLayer3) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggEthernetArpInner model.
+func (o AggEthernetArpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"hw_address": basetypes.StringType{},
+		"name":       basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggEthernetArpInner objects.
+func (o AggEthernetArpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

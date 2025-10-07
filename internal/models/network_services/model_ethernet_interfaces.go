@@ -59,12 +59,6 @@ type EthernetInterfacesLayer3 struct {
 	Pppoe                      basetypes.ObjectValue `tfsdk:"pppoe"`
 }
 
-// AggEthernetArpInner represents a nested structure within the EthernetInterfaces model
-type AggEthernetArpInner struct {
-	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
-	Name      basetypes.StringValue `tfsdk:"name"`
-}
-
 // EthernetInterfacesLayer3DdnsConfig represents a nested structure within the EthernetInterfaces model
 type EthernetInterfacesLayer3DdnsConfig struct {
 	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
@@ -79,20 +73,6 @@ type EthernetInterfacesLayer3DdnsConfig struct {
 // DhcpClient represents a nested structure within the EthernetInterfaces model
 type DhcpClient struct {
 	DhcpClient basetypes.ObjectValue `tfsdk:"dhcp_client"`
-}
-
-// AggregateEthernetInterfacesLayer3DhcpClient represents a nested structure within the EthernetInterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClient struct {
-	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
-	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
-	Enable             basetypes.BoolValue   `tfsdk:"enable"`
-	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
-}
-
-// AggregateEthernetInterfacesLayer3DhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClientSendHostname struct {
-	Enable   basetypes.BoolValue   `tfsdk:"enable"`
-	Hostname basetypes.StringValue `tfsdk:"hostname"`
 }
 
 // EthernetInterfacesLayer3Pppoe represents a nested structure within the EthernetInterfaces model
@@ -297,21 +277,6 @@ func (o EthernetInterfacesLayer3) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AggEthernetArpInner model.
-func (o AggEthernetArpInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"hw_address": basetypes.StringType{},
-		"name":       basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of AggEthernetArpInner objects.
-func (o AggEthernetArpInner) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AttrTypes defines the attribute types for the EthernetInterfacesLayer3DdnsConfig model.
 func (o EthernetInterfacesLayer3DdnsConfig) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -353,43 +318,6 @@ func (o DhcpClient) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of DhcpClient objects.
 func (o DhcpClient) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClient model.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"create_default_route": basetypes.BoolType{},
-		"default_route_metric": basetypes.Int64Type{},
-		"enable":               basetypes.BoolType{},
-		"send_hostname": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"enable":   basetypes.BoolType{},
-				"hostname": basetypes.StringType{},
-			},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClient objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClientSendHostname model.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"enable":   basetypes.BoolType{},
-		"hostname": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClientSendHostname objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

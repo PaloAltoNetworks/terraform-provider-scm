@@ -84,6 +84,13 @@ type AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner 
 	ThreatId basetypes.StringValue `tfsdk:"threat_id"`
 }
 
+// AntiSpywareSignaturesSignatureCombinationTimeAttribute represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureCombinationTimeAttribute struct {
+	Interval  basetypes.Int64Value  `tfsdk:"interval"`
+	Threshold basetypes.Int64Value  `tfsdk:"threshold"`
+	TrackBy   basetypes.StringValue `tfsdk:"track_by"`
+}
+
 // AntiSpywareSignaturesSignatureStandardInner represents a nested structure within the AntiSpywareSignatures model
 type AntiSpywareSignaturesSignatureStandardInner struct {
 	AndCondition basetypes.ListValue   `tfsdk:"and_condition"`
@@ -518,6 +525,22 @@ func (o AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInn
 
 // AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner objects.
 func (o AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureCombinationTimeAttribute model.
+func (o AntiSpywareSignaturesSignatureCombinationTimeAttribute) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"interval":  basetypes.Int64Type{},
+		"threshold": basetypes.Int64Type{},
+		"track_by":  basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureCombinationTimeAttribute objects.
+func (o AntiSpywareSignaturesSignatureCombinationTimeAttribute) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

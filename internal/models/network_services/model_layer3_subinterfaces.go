@@ -37,6 +37,17 @@ type Layer3Subinterfaces struct {
 	Tag                        basetypes.Float64Value `tfsdk:"tag"`
 }
 
+// Layer3SubinterfacesDdnsConfig represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubinterfacesDdnsConfig struct {
+	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
+	DdnsEnabled        basetypes.BoolValue   `tfsdk:"ddns_enabled"`
+	DdnsHostname       basetypes.StringValue `tfsdk:"ddns_hostname"`
+	DdnsIp             basetypes.StringValue `tfsdk:"ddns_ip"`
+	DdnsUpdateInterval basetypes.Int64Value  `tfsdk:"ddns_update_interval"`
+	DdnsVendor         basetypes.StringValue `tfsdk:"ddns_vendor"`
+	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
+}
+
 // AttrTypes defines the attribute types for the Layer3Subinterfaces model.
 func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -92,6 +103,26 @@ func (o Layer3Subinterfaces) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the Layer3SubinterfacesDdnsConfig model.
+func (o Layer3SubinterfacesDdnsConfig) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ddns_cert_profile":    basetypes.StringType{},
+		"ddns_enabled":         basetypes.BoolType{},
+		"ddns_hostname":        basetypes.StringType{},
+		"ddns_ip":              basetypes.StringType{},
+		"ddns_update_interval": basetypes.Int64Type{},
+		"ddns_vendor":          basetypes.StringType{},
+		"ddns_vendor_config":   basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of Layer3SubinterfacesDdnsConfig objects.
+func (o Layer3SubinterfacesDdnsConfig) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // Layer3SubinterfacesResourceSchema defines the schema for Layer3Subinterfaces resource
 var Layer3SubinterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "Layer3Subinterface resource",
@@ -117,7 +148,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"ddns_config": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ddns config",
+			MarkdownDescription: "Dynamic DNS configuration specific to the Layer 3 sub Interfaces.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ddns_cert_profile": schema.StringAttribute{
@@ -288,7 +319,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ddns_config": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ddns config",
+			MarkdownDescription: "Dynamic DNS configuration specific to the Layer 3 sub Interfaces.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ddns_cert_profile": dsschema.StringAttribute{

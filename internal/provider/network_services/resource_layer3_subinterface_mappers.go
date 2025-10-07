@@ -44,7 +44,7 @@ func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 	// Handling Objects
 	if !model.DdnsConfig.IsNull() && !model.DdnsConfig.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field DdnsConfig")
-		unpacked, d := unpackDdnsConfigToSdk(ctx, model.DdnsConfig)
+		unpacked, d := unpackLayer3SubinterfacesDdnsConfigToSdk(ctx, model.DdnsConfig)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "DdnsConfig"})
@@ -163,14 +163,14 @@ func packLayer3SubinterfacesFromSdk(ctx context.Context, sdk network_services.La
 	// This is a regular nested object that has its own packer.
 	if sdk.DdnsConfig != nil {
 		tflog.Debug(ctx, "Packing nested object for field DdnsConfig")
-		packed, d := packDdnsConfigFromSdk(ctx, *sdk.DdnsConfig)
+		packed, d := packLayer3SubinterfacesDdnsConfigFromSdk(ctx, *sdk.DdnsConfig)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "DdnsConfig"})
 		}
 		model.DdnsConfig = packed
 	} else {
-		model.DdnsConfig = basetypes.NewObjectNull(models.DdnsConfig{}.AttrTypes())
+		model.DdnsConfig = basetypes.NewObjectNull(models.Layer3SubinterfacesDdnsConfig{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -320,4 +320,170 @@ func packLayer3SubinterfacesListFromSdk(ctx context.Context, sdks []network_serv
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.Layer3Subinterfaces", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.Layer3Subinterfaces{}.AttrType(), data)
+}
+
+// --- Unpacker for Layer3SubinterfacesDdnsConfig ---
+func unpackLayer3SubinterfacesDdnsConfigToSdk(ctx context.Context, obj types.Object) (*network_services.Layer3SubinterfacesDdnsConfig, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.Layer3SubinterfacesDdnsConfig", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.Layer3SubinterfacesDdnsConfig
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.Layer3SubinterfacesDdnsConfig
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.DdnsCertProfile.IsNull() && !model.DdnsCertProfile.IsUnknown() {
+		sdk.DdnsCertProfile = model.DdnsCertProfile.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "DdnsCertProfile", "value": sdk.DdnsCertProfile})
+	}
+
+	// Handling Primitives
+	if !model.DdnsEnabled.IsNull() && !model.DdnsEnabled.IsUnknown() {
+		sdk.DdnsEnabled = model.DdnsEnabled.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DdnsEnabled", "value": *sdk.DdnsEnabled})
+	}
+
+	// Handling Primitives
+	if !model.DdnsHostname.IsNull() && !model.DdnsHostname.IsUnknown() {
+		sdk.DdnsHostname = model.DdnsHostname.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "DdnsHostname", "value": sdk.DdnsHostname})
+	}
+
+	// Handling Primitives
+	if !model.DdnsIp.IsNull() && !model.DdnsIp.IsUnknown() {
+		sdk.DdnsIp = model.DdnsIp.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DdnsIp", "value": *sdk.DdnsIp})
+	}
+
+	// Handling Primitives
+	if !model.DdnsUpdateInterval.IsNull() && !model.DdnsUpdateInterval.IsUnknown() {
+		val := int32(model.DdnsUpdateInterval.ValueInt64())
+		sdk.DdnsUpdateInterval = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DdnsUpdateInterval", "value": *sdk.DdnsUpdateInterval})
+	}
+
+	// Handling Primitives
+	if !model.DdnsVendor.IsNull() && !model.DdnsVendor.IsUnknown() {
+		sdk.DdnsVendor = model.DdnsVendor.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "DdnsVendor", "value": sdk.DdnsVendor})
+	}
+
+	// Handling Primitives
+	if !model.DdnsVendorConfig.IsNull() && !model.DdnsVendorConfig.IsUnknown() {
+		sdk.DdnsVendorConfig = model.DdnsVendorConfig.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "DdnsVendorConfig", "value": sdk.DdnsVendorConfig})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.Layer3SubinterfacesDdnsConfig", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for Layer3SubinterfacesDdnsConfig ---
+func packLayer3SubinterfacesDdnsConfigFromSdk(ctx context.Context, sdk network_services.Layer3SubinterfacesDdnsConfig) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.Layer3SubinterfacesDdnsConfig", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.Layer3SubinterfacesDdnsConfig
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	model.DdnsCertProfile = basetypes.NewStringValue(sdk.DdnsCertProfile)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "DdnsCertProfile", "value": sdk.DdnsCertProfile})
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.DdnsEnabled != nil {
+		model.DdnsEnabled = basetypes.NewBoolValue(*sdk.DdnsEnabled)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DdnsEnabled", "value": *sdk.DdnsEnabled})
+	} else {
+		model.DdnsEnabled = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	model.DdnsHostname = basetypes.NewStringValue(sdk.DdnsHostname)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "DdnsHostname", "value": sdk.DdnsHostname})
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.DdnsIp != nil {
+		model.DdnsIp = basetypes.NewStringValue(*sdk.DdnsIp)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DdnsIp", "value": *sdk.DdnsIp})
+	} else {
+		model.DdnsIp = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.DdnsUpdateInterval != nil {
+		model.DdnsUpdateInterval = basetypes.NewInt64Value(int64(*sdk.DdnsUpdateInterval))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DdnsUpdateInterval", "value": *sdk.DdnsUpdateInterval})
+	} else {
+		model.DdnsUpdateInterval = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	model.DdnsVendor = basetypes.NewStringValue(sdk.DdnsVendor)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "DdnsVendor", "value": sdk.DdnsVendor})
+	// Handling Primitives
+	// Standard primitive packing
+	model.DdnsVendorConfig = basetypes.NewStringValue(sdk.DdnsVendorConfig)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "DdnsVendorConfig", "value": sdk.DdnsVendorConfig})
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.Layer3SubinterfacesDdnsConfig{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.Layer3SubinterfacesDdnsConfig", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for Layer3SubinterfacesDdnsConfig ---
+func unpackLayer3SubinterfacesDdnsConfigListToSdk(ctx context.Context, list types.List) ([]network_services.Layer3SubinterfacesDdnsConfig, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.Layer3SubinterfacesDdnsConfig")
+	diags := diag.Diagnostics{}
+	var data []models.Layer3SubinterfacesDdnsConfig
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.Layer3SubinterfacesDdnsConfig, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.Layer3SubinterfacesDdnsConfig{}.AttrTypes(), &item)
+		unpacked, d := unpackLayer3SubinterfacesDdnsConfigToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.Layer3SubinterfacesDdnsConfig", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for Layer3SubinterfacesDdnsConfig ---
+func packLayer3SubinterfacesDdnsConfigListFromSdk(ctx context.Context, sdks []network_services.Layer3SubinterfacesDdnsConfig) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.Layer3SubinterfacesDdnsConfig")
+	diags := diag.Diagnostics{}
+	var data []models.Layer3SubinterfacesDdnsConfig
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.Layer3SubinterfacesDdnsConfig
+		obj, d := packLayer3SubinterfacesDdnsConfigFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.Layer3SubinterfacesDdnsConfig{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.Layer3SubinterfacesDdnsConfig", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.Layer3SubinterfacesDdnsConfig{}.AttrType(), data)
 }

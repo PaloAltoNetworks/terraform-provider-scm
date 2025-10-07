@@ -23,7 +23,7 @@ Layer3Subinterface resource
 
 - `arp` (Attributes List) ARP configuration (see [below for nested schema](#nestedatt--arp))
 - `comment` (String) Description
-- `ddns_config` (Attributes) Ddns config (see [below for nested schema](#nestedatt--ddns_config))
+- `ddns_config` (Attributes) Dynamic DNS configuration specific to the Layer 3 sub Interfaces. (see [below for nested schema](#nestedatt--ddns_config))
 - `device` (String) The device in which the resource is defined
 - `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--dhcp_client))
 - `folder` (String) The folder in which the resource is defined

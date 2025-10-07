@@ -37,12 +37,6 @@ type Layer3Subinterfaces struct {
 	Tag                        basetypes.Float64Value `tfsdk:"tag"`
 }
 
-// ArpInner represents a nested structure within the Layer3Subinterfaces model
-type ArpInner struct {
-	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
-	Name      basetypes.StringValue `tfsdk:"name"`
-}
-
 // AttrTypes defines the attribute types for the Layer3Subinterfaces model.
 func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -93,21 +87,6 @@ func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of Layer3Subinterfaces objects.
 func (o Layer3Subinterfaces) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the ArpInner model.
-func (o ArpInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"hw_address": basetypes.StringType{},
-		"name":       basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of ArpInner objects.
-func (o ArpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

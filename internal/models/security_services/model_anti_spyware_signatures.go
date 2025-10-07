@@ -65,6 +65,13 @@ type AntiSpywareSignaturesSignature struct {
 	Standard    basetypes.ListValue   `tfsdk:"standard"`
 }
 
+// AntiSpywareSignaturesSignatureCombination represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureCombination struct {
+	AndCondition  basetypes.ListValue   `tfsdk:"and_condition"`
+	OrderFree     basetypes.BoolValue   `tfsdk:"order_free"`
+	TimeAttribute basetypes.ObjectValue `tfsdk:"time_attribute"`
+}
+
 // AttrTypes defines the attribute types for the AntiSpywareSignatures model.
 func (o AntiSpywareSignatures) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -379,6 +386,38 @@ func (o AntiSpywareSignaturesSignature) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureCombination model.
+func (o AntiSpywareSignaturesSignatureCombination) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"and_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+				"or_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name":      basetypes.StringType{},
+						"threat_id": basetypes.StringType{},
+					},
+				}},
+			},
+		}},
+		"order_free": basetypes.BoolType{},
+		"time_attribute": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"interval":  basetypes.Int64Type{},
+				"threshold": basetypes.Int64Type{},
+				"track_by":  basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureCombination objects.
+func (o AntiSpywareSignaturesSignatureCombination) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AntiSpywareSignaturesResourceSchema defines the schema for AntiSpywareSignatures resource
 var AntiSpywareSignaturesResourceSchema = schema.Schema{
 	MarkdownDescription: "AntiSpywareSignature resource",
@@ -593,7 +632,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("standard"),
 						),
 					},
-					MarkdownDescription: "Combination",
+					MarkdownDescription: "anti spyware signature combination",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1035,7 +1074,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"combination": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Combination",
+					MarkdownDescription: "anti spyware signature combination",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"and_condition": dsschema.ListNestedAttribute{

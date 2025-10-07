@@ -92,7 +92,7 @@ Optional:
 
 Optional:
 
-- `combination` (Attributes) Combination (see [below for nested schema](#nestedatt--signature--combination))
+- `combination` (Attributes) anti spyware signature combination (see [below for nested schema](#nestedatt--signature--combination))
 - `standard` (Attributes List) Standard (see [below for nested schema](#nestedatt--signature--standard))
 
 <a id="nestedatt--signature--combination"></a>

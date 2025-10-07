@@ -107,7 +107,7 @@ Read-Only:
 
 Read-Only:
 
-- `combination` (Attributes) Combination (see [below for nested schema](#nestedatt--data--signature--combination))
+- `combination` (Attributes) anti spyware signature combination (see [below for nested schema](#nestedatt--data--signature--combination))
 - `standard` (Attributes List) Standard (see [below for nested schema](#nestedatt--data--signature--standard))
 
 <a id="nestedatt--data--signature--combination"></a>

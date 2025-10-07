@@ -799,3 +799,143 @@ func packAntiSpywareSignaturesSignatureListFromSdk(ctx context.Context, sdks []s
 	tflog.Debug(ctx, "Exiting list pack helper for models.AntiSpywareSignaturesSignature", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.AntiSpywareSignaturesSignature{}.AttrType(), data)
 }
+
+// --- Unpacker for AntiSpywareSignaturesSignatureCombination ---
+func unpackAntiSpywareSignaturesSignatureCombinationToSdk(ctx context.Context, obj types.Object) (*security_services.AntiSpywareSignaturesSignatureCombination, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.AntiSpywareSignaturesSignatureCombination", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.AntiSpywareSignaturesSignatureCombination
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk security_services.AntiSpywareSignaturesSignatureCombination
+	var d diag.Diagnostics
+	// Handling Lists
+	if !model.AndCondition.IsNull() && !model.AndCondition.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of objects for field AndCondition")
+		unpacked, d := unpackAntiSpywareSignaturesSignatureCombinationAndConditionInnerListToSdk(ctx, model.AndCondition)
+		diags.Append(d...)
+		sdk.AndCondition = unpacked
+	}
+
+	// Handling Primitives
+	if !model.OrderFree.IsNull() && !model.OrderFree.IsUnknown() {
+		sdk.OrderFree = model.OrderFree.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "OrderFree", "value": *sdk.OrderFree})
+	}
+
+	// Handling Objects
+	if !model.TimeAttribute.IsNull() && !model.TimeAttribute.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field TimeAttribute")
+		unpacked, d := unpackAntiSpywareSignaturesSignatureCombinationTimeAttributeToSdk(ctx, model.TimeAttribute)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "TimeAttribute"})
+		}
+		if unpacked != nil {
+			sdk.TimeAttribute = unpacked
+		}
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.AntiSpywareSignaturesSignatureCombination", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for AntiSpywareSignaturesSignatureCombination ---
+func packAntiSpywareSignaturesSignatureCombinationFromSdk(ctx context.Context, sdk security_services.AntiSpywareSignaturesSignatureCombination) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.AntiSpywareSignaturesSignatureCombination", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.AntiSpywareSignaturesSignatureCombination
+	var d diag.Diagnostics
+	// Handling Lists
+	if sdk.AndCondition != nil {
+		tflog.Debug(ctx, "Packing list of objects for field AndCondition")
+		packed, d := packAntiSpywareSignaturesSignatureCombinationAndConditionInnerListFromSdk(ctx, sdk.AndCondition)
+		diags.Append(d...)
+		model.AndCondition = packed
+	} else {
+		model.AndCondition = basetypes.NewListNull(models.AntiSpywareSignaturesSignatureCombinationAndConditionInner{}.AttrType())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.OrderFree != nil {
+		model.OrderFree = basetypes.NewBoolValue(*sdk.OrderFree)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "OrderFree", "value": *sdk.OrderFree})
+	} else {
+		model.OrderFree = basetypes.NewBoolNull()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.TimeAttribute != nil {
+		tflog.Debug(ctx, "Packing nested object for field TimeAttribute")
+		packed, d := packAntiSpywareSignaturesSignatureCombinationTimeAttributeFromSdk(ctx, *sdk.TimeAttribute)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "TimeAttribute"})
+		}
+		model.TimeAttribute = packed
+	} else {
+		model.TimeAttribute = basetypes.NewObjectNull(models.AntiSpywareSignaturesSignatureCombinationTimeAttribute{}.AttrTypes())
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.AntiSpywareSignaturesSignatureCombination{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.AntiSpywareSignaturesSignatureCombination", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for AntiSpywareSignaturesSignatureCombination ---
+func unpackAntiSpywareSignaturesSignatureCombinationListToSdk(ctx context.Context, list types.List) ([]security_services.AntiSpywareSignaturesSignatureCombination, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.AntiSpywareSignaturesSignatureCombination")
+	diags := diag.Diagnostics{}
+	var data []models.AntiSpywareSignaturesSignatureCombination
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]security_services.AntiSpywareSignaturesSignatureCombination, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.AntiSpywareSignaturesSignatureCombination{}.AttrTypes(), &item)
+		unpacked, d := unpackAntiSpywareSignaturesSignatureCombinationToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.AntiSpywareSignaturesSignatureCombination", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for AntiSpywareSignaturesSignatureCombination ---
+func packAntiSpywareSignaturesSignatureCombinationListFromSdk(ctx context.Context, sdks []security_services.AntiSpywareSignaturesSignatureCombination) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.AntiSpywareSignaturesSignatureCombination")
+	diags := diag.Diagnostics{}
+	var data []models.AntiSpywareSignaturesSignatureCombination
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.AntiSpywareSignaturesSignatureCombination
+		obj, d := packAntiSpywareSignaturesSignatureCombinationFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.AntiSpywareSignaturesSignatureCombination{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.AntiSpywareSignaturesSignatureCombination", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.AntiSpywareSignaturesSignatureCombination{}.AttrType(), data)
+}

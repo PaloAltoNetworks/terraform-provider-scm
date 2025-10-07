@@ -76,9 +76,17 @@ type EthernetInterfacesLayer3DdnsConfig struct {
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
 }
 
-// DhcpClient represents a nested structure within the EthernetInterfaces model
-type DhcpClient struct {
+// EthernetInterfacesDhcpClient represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesDhcpClient struct {
 	DhcpClient basetypes.ObjectValue `tfsdk:"dhcp_client"`
+}
+
+// EthernetInterfacesDhcpClientDhcpClient represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesDhcpClientDhcpClient struct {
+	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
+	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
+	Enable             basetypes.BoolValue   `tfsdk:"enable"`
+	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
 // EthernetInterfacesLayer3Pppoe represents a nested structure within the EthernetInterfaces model
@@ -318,8 +326,8 @@ func (o EthernetInterfacesLayer3DdnsConfig) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the DhcpClient model.
-func (o DhcpClient) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClient model.
+func (o EthernetInterfacesDhcpClient) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"dhcp_client": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -337,8 +345,30 @@ func (o DhcpClient) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of DhcpClient objects.
-func (o DhcpClient) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClient objects.
+func (o EthernetInterfacesDhcpClient) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClient model.
+func (o EthernetInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"create_default_route": basetypes.BoolType{},
+		"default_route_metric": basetypes.Int64Type{},
+		"enable":               basetypes.BoolType{},
+		"send_hostname": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":   basetypes.BoolType{},
+				"hostname": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClient objects.
+func (o EthernetInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

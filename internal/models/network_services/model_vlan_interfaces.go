@@ -55,18 +55,12 @@ type VlanInterfacesDdnsConfig struct {
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
 }
 
-// AggregateEthernetInterfacesLayer3DhcpClient represents a nested structure within the VlanInterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClient struct {
+// VlanInterfacesDhcpClient represents a nested structure within the VlanInterfaces model
+type VlanInterfacesDhcpClient struct {
 	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
 	Enable             basetypes.BoolValue   `tfsdk:"enable"`
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
-}
-
-// AggregateEthernetInterfacesLayer3DhcpClientSendHostname represents a nested structure within the VlanInterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClientSendHostname struct {
-	Enable   basetypes.BoolValue   `tfsdk:"enable"`
-	Hostname basetypes.StringValue `tfsdk:"hostname"`
 }
 
 // AttrTypes defines the attribute types for the VlanInterfaces model.
@@ -161,8 +155,8 @@ func (o VlanInterfacesDdnsConfig) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClient model.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the VlanInterfacesDhcpClient model.
+func (o VlanInterfacesDhcpClient) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"create_default_route": basetypes.BoolType{},
 		"default_route_metric": basetypes.Int64Type{},
@@ -176,23 +170,8 @@ func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr
 	}
 }
 
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClient objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClientSendHostname model.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"enable":   basetypes.BoolType{},
-		"hostname": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClientSendHostname objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of VlanInterfacesDhcpClient objects.
+func (o VlanInterfacesDhcpClient) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

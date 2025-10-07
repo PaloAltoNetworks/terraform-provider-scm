@@ -54,6 +54,14 @@ type Layer3SubinterfacesDdnsConfig struct {
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
 }
 
+// Layer3SubInterfacesDhcpClientDhcpClient represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubInterfacesDhcpClientDhcpClient struct {
+	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
+	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
+	Enable             basetypes.BoolValue   `tfsdk:"enable"`
+	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
+}
+
 // AttrTypes defines the attribute types for the Layer3Subinterfaces model.
 func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -139,6 +147,28 @@ func (o Layer3SubinterfacesDdnsConfig) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of Layer3SubinterfacesDdnsConfig objects.
 func (o Layer3SubinterfacesDdnsConfig) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the Layer3SubInterfacesDhcpClientDhcpClient model.
+func (o Layer3SubInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"create_default_route": basetypes.BoolType{},
+		"default_route_metric": basetypes.Int64Type{},
+		"enable":               basetypes.BoolType{},
+		"send_hostname": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":   basetypes.BoolType{},
+				"hostname": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of Layer3SubInterfacesDhcpClientDhcpClient objects.
+func (o Layer3SubInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

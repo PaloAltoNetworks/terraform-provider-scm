@@ -89,8 +89,8 @@ type EthernetInterfacesDhcpClientDhcpClient struct {
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
-// AggEthernetDhcpClientDhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
-type AggEthernetDhcpClientDhcpClientSendHostname struct {
+// EthernetInterfacesDhcpClientDhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesDhcpClientDhcpClientSendHostname struct {
 	Enable   basetypes.BoolValue   `tfsdk:"enable"`
 	Hostname basetypes.StringValue `tfsdk:"hostname"`
 }
@@ -380,16 +380,16 @@ func (o EthernetInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AggEthernetDhcpClientDhcpClientSendHostname model.
-func (o AggEthernetDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClientSendHostname model.
+func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":   basetypes.BoolType{},
 		"hostname": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of AggEthernetDhcpClientDhcpClientSendHostname objects.
-func (o AggEthernetDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClientSendHostname objects.
+func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

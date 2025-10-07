@@ -62,6 +62,12 @@ type Layer3SubInterfacesDhcpClientDhcpClient struct {
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
+// Layer3SubInterfacesDhcpClientDhcpClientSendHostname represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubInterfacesDhcpClientDhcpClientSendHostname struct {
+	Enable   basetypes.BoolValue   `tfsdk:"enable"`
+	Hostname basetypes.StringValue `tfsdk:"hostname"`
+}
+
 // AttrTypes defines the attribute types for the Layer3Subinterfaces model.
 func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -169,6 +175,21 @@ func (o Layer3SubInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Typ
 
 // AttrType returns the attribute type for a list of Layer3SubInterfacesDhcpClientDhcpClient objects.
 func (o Layer3SubInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the Layer3SubInterfacesDhcpClientDhcpClientSendHostname model.
+func (o Layer3SubInterfacesDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable":   basetypes.BoolType{},
+		"hostname": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of Layer3SubInterfacesDhcpClientDhcpClientSendHostname objects.
+func (o Layer3SubInterfacesDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

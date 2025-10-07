@@ -63,6 +63,12 @@ type VlanInterfacesDhcpClient struct {
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
+// VlanInterfacesDhcpClientSendHostname represents a nested structure within the VlanInterfaces model
+type VlanInterfacesDhcpClientSendHostname struct {
+	Enable   basetypes.BoolValue   `tfsdk:"enable"`
+	Hostname basetypes.StringValue `tfsdk:"hostname"`
+}
+
 // AttrTypes defines the attribute types for the VlanInterfaces model.
 func (o VlanInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -172,6 +178,21 @@ func (o VlanInterfacesDhcpClient) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of VlanInterfacesDhcpClient objects.
 func (o VlanInterfacesDhcpClient) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the VlanInterfacesDhcpClientSendHostname model.
+func (o VlanInterfacesDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable":   basetypes.BoolType{},
+		"hostname": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of VlanInterfacesDhcpClientSendHostname objects.
+func (o VlanInterfacesDhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

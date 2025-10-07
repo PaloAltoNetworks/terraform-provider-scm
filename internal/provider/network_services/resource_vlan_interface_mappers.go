@@ -649,7 +649,7 @@ func unpackVlanInterfacesDhcpClientToSdk(ctx context.Context, obj types.Object) 
 	// Handling Objects
 	if !model.SendHostname.IsNull() && !model.SendHostname.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field SendHostname")
-		unpacked, d := unpackAggEthernetDhcpClientDhcpClientSendHostnameToSdk(ctx, model.SendHostname)
+		unpacked, d := unpackVlanInterfacesDhcpClientSendHostnameToSdk(ctx, model.SendHostname)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "SendHostname"})
@@ -700,14 +700,14 @@ func packVlanInterfacesDhcpClientFromSdk(ctx context.Context, sdk network_servic
 	// This is a regular nested object that has its own packer.
 	if sdk.SendHostname != nil {
 		tflog.Debug(ctx, "Packing nested object for field SendHostname")
-		packed, d := packAggEthernetDhcpClientDhcpClientSendHostnameFromSdk(ctx, *sdk.SendHostname)
+		packed, d := packVlanInterfacesDhcpClientSendHostnameFromSdk(ctx, *sdk.SendHostname)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "SendHostname"})
 		}
 		model.SendHostname = packed
 	} else {
-		model.SendHostname = basetypes.NewObjectNull(models.AggEthernetDhcpClientDhcpClientSendHostname{}.AttrTypes())
+		model.SendHostname = basetypes.NewObjectNull(models.VlanInterfacesDhcpClientSendHostname{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -763,4 +763,115 @@ func packVlanInterfacesDhcpClientListFromSdk(ctx context.Context, sdks []network
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.VlanInterfacesDhcpClient", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.VlanInterfacesDhcpClient{}.AttrType(), data)
+}
+
+// --- Unpacker for VlanInterfacesDhcpClientSendHostname ---
+func unpackVlanInterfacesDhcpClientSendHostnameToSdk(ctx context.Context, obj types.Object) (*network_services.VlanInterfacesDhcpClientSendHostname, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.VlanInterfacesDhcpClientSendHostname", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.VlanInterfacesDhcpClientSendHostname
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.VlanInterfacesDhcpClientSendHostname
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Enable.IsNull() && !model.Enable.IsUnknown() {
+		sdk.Enable = model.Enable.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Enable", "value": *sdk.Enable})
+	}
+
+	// Handling Primitives
+	if !model.Hostname.IsNull() && !model.Hostname.IsUnknown() {
+		sdk.Hostname = model.Hostname.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Hostname", "value": *sdk.Hostname})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.VlanInterfacesDhcpClientSendHostname", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for VlanInterfacesDhcpClientSendHostname ---
+func packVlanInterfacesDhcpClientSendHostnameFromSdk(ctx context.Context, sdk network_services.VlanInterfacesDhcpClientSendHostname) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.VlanInterfacesDhcpClientSendHostname", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.VlanInterfacesDhcpClientSendHostname
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Enable != nil {
+		model.Enable = basetypes.NewBoolValue(*sdk.Enable)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Enable", "value": *sdk.Enable})
+	} else {
+		model.Enable = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Hostname != nil {
+		model.Hostname = basetypes.NewStringValue(*sdk.Hostname)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Hostname", "value": *sdk.Hostname})
+	} else {
+		model.Hostname = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.VlanInterfacesDhcpClientSendHostname{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.VlanInterfacesDhcpClientSendHostname", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for VlanInterfacesDhcpClientSendHostname ---
+func unpackVlanInterfacesDhcpClientSendHostnameListToSdk(ctx context.Context, list types.List) ([]network_services.VlanInterfacesDhcpClientSendHostname, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.VlanInterfacesDhcpClientSendHostname")
+	diags := diag.Diagnostics{}
+	var data []models.VlanInterfacesDhcpClientSendHostname
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.VlanInterfacesDhcpClientSendHostname, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.VlanInterfacesDhcpClientSendHostname{}.AttrTypes(), &item)
+		unpacked, d := unpackVlanInterfacesDhcpClientSendHostnameToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.VlanInterfacesDhcpClientSendHostname", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for VlanInterfacesDhcpClientSendHostname ---
+func packVlanInterfacesDhcpClientSendHostnameListFromSdk(ctx context.Context, sdks []network_services.VlanInterfacesDhcpClientSendHostname) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.VlanInterfacesDhcpClientSendHostname")
+	diags := diag.Diagnostics{}
+	var data []models.VlanInterfacesDhcpClientSendHostname
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.VlanInterfacesDhcpClientSendHostname
+		obj, d := packVlanInterfacesDhcpClientSendHostnameFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.VlanInterfacesDhcpClientSendHostname{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.VlanInterfacesDhcpClientSendHostname", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.VlanInterfacesDhcpClientSendHostname{}.AttrType(), data)
 }

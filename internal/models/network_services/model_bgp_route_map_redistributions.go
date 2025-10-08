@@ -155,12 +155,6 @@ type BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop struct {
 	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
 }
 
-// BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource represents a nested structure within the BgpRouteMapRedistributions model
-type BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource struct {
-	AccessList basetypes.StringValue `tfsdk:"access_list"`
-	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
-}
-
 // BgpRouteMapRedistributionsBgpRibRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
 type BgpRouteMapRedistributionsBgpRibRouteMapInnerSet struct {
 	SourceAddress basetypes.StringValue `tfsdk:"source_address"`
@@ -220,18 +214,6 @@ type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSet struct {
 type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator struct {
 	As       basetypes.Int64Value  `tfsdk:"as"`
 	RouterId basetypes.StringValue `tfsdk:"router_id"`
-}
-
-// BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 represents a nested structure within the BgpRouteMapRedistributions model
-type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 struct {
-	NextHop       basetypes.StringValue `tfsdk:"next_hop"`
-	SourceAddress basetypes.StringValue `tfsdk:"source_address"`
-}
-
-// BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric represents a nested structure within the BgpRouteMapRedistributions model
-type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric struct {
-	Action basetypes.StringValue `tfsdk:"action"`
-	Value  basetypes.Int64Value  `tfsdk:"value"`
 }
 
 // BgpRouteMapRedistributionsConnectedStaticOspf represents a nested structure within the BgpRouteMapRedistributions model
@@ -1404,21 +1386,6 @@ func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop) AttrType(
 	}
 }
 
-// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource model.
-func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"access_list": basetypes.StringType{},
-		"prefix_list": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource objects.
-func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpRibRouteMapInnerSet model.
 func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -1841,36 +1808,6 @@ func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator) 
 
 // AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator objects.
 func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetAggregator) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 model.
-func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"next_hop":       basetypes.StringType{},
-		"source_address": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4 objects.
-func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetIpv4) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric model.
-func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"action": basetypes.StringType{},
-		"value":  basetypes.Int64Type{},
-	}
-}
-
-// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric objects.
-func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSetMetric) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -3457,7 +3394,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -3468,7 +3405,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -3792,7 +3729,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,

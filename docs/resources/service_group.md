@@ -13,26 +13,26 @@ ServiceGroup resource
 ## Example Usage
 
 ```terraform
-# TCP Service for a web server
-resource "scm_service" "scm_sg_service_1" {
+# TCP Service with multiple destination ports custom timeout
+resource "scm_service" "scm_service_tcp_ports" {
   folder      = "Shared"
-  name        = "scm_sg_service_1"
-  description = "Service for TCP traffic to web server"
+  name        = "scm_service_tcp_ports"
+  description = "Managed by Terraform"
   protocol = {
     tcp = {
       port = "80,443"
       override = {
-        timeout = 3600 # 1 hour
+        timeout = 3600
       }
     }
   }
 }
 
-# UDP Service for DNS
-resource "scm_service" "scm_sg_service_2" {
+# UDP Service with single destination port
+resource "scm_service" "scm_service_udp_port" {
   folder      = "Shared"
-  name        = "scm_sg_service_2"
-  description = "Service for UDP DNS traffic"
+  name        = "scm_service_udp_port"
+  description = "Managed by Terraform"
   protocol = {
     udp = {
       port = "53"
@@ -40,13 +40,24 @@ resource "scm_service" "scm_sg_service_2" {
   }
 }
 
-# Service Group containing both services
-resource "scm_service_group" "scm_service_group_1" {
+# Service Group containing multiple services
+resource "scm_service_group" "scm_servicegroup" {
   folder = "Shared"
-  name   = "scm_service_group_1"
+  name   = "scm_servicegroup"
   members = [
-    scm_service.scm_sg_service_1.name,
-    scm_service.scm_sg_service_2.name
+    scm_service.scm_service_tcp_ports.name,
+    scm_service.scm_service_udp_port.name
+  ]
+}
+
+# Service Group containing multiple services and another servicegroup
+resource "scm_service_group" "scm_servicegroup_nested" {
+  folder = "Shared"
+  name   = "scm_servicegroup_nested"
+  members = [
+    scm_service.scm_service_tcp_ports.name,
+    scm_service.scm_service_udp_port.name,
+    scm_service_group.scm_servicegroup.name
   ]
 }
 ```

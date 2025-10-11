@@ -34,12 +34,6 @@ func unpackServiceConnectionGroupsToSdk(ctx context.Context, obj types.Object) (
 	}
 
 	// Handling Primitives
-	if !model.Folder.IsNull() && !model.Folder.IsUnknown() {
-		sdk.Folder = model.Folder.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Folder", "value": sdk.Folder})
-	}
-
-	// Handling Primitives
 	if !model.Id.IsNull() && !model.Id.IsUnknown() {
 		sdk.Id = model.Id.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
@@ -84,10 +78,6 @@ func packServiceConnectionGroupsFromSdk(ctx context.Context, sdk deployment_serv
 	} else {
 		model.DisableSnat = basetypes.NewBoolNull()
 	}
-	// Handling Primitives
-	// Standard primitive packing
-	model.Folder = basetypes.NewStringValue(sdk.Folder)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Folder", "value": sdk.Folder})
 	// Handling Primitives
 	// Standard primitive packing
 	model.Id = basetypes.NewStringValue(sdk.Id)

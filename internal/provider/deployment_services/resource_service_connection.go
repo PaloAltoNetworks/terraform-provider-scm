@@ -415,11 +415,27 @@ func (r *ServiceConnectionResource) Read(ctx context.Context, req resource.ReadR
 
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
-	if tokens[0] != "" {
-		data.Folder = basetypes.NewStringValue(tokens[0])
-	} else {
-		data.Folder = basetypes.NewStringNull()
+	// --- FOLDER RESTORATION (tokens[0]) ---
+
+	// Use reflection to safely restore the Folder field from the TFID token 0.
+	vFolder := reflect.ValueOf(&data).Elem() // Unique variable: vFolder
+	fFolder := vFolder.FieldByName("Folder") // Unique variable: fFolder
+
+	if fFolder.IsValid() && fFolder.CanSet() {
+		tokenValue := tokens[0]
+
+		if tokenValue != "" {
+			newStringValue := basetypes.NewStringValue(tokenValue)
+			fFolder.Set(reflect.ValueOf(newStringValue))
+		} else {
+			newNullValue := basetypes.NewStringNull()
+			fFolder.Set(reflect.ValueOf(newNullValue))
+		}
 	}
+
+	// --- SNIPPET RESTORATION (tokens[1]) ---
+
+	// --- DEVICE RESTORATION (tokens[2]) ---
 
 	// Step 10 - Set data back into tf state and done
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

@@ -168,6 +168,12 @@ func (r *SnippetResource) Read(ctx context.Context, req resource.ReadRequest, re
 
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
+	// --- FOLDER RESTORATION (tokens[0]) ---
+
+	// --- SNIPPET RESTORATION (tokens[1]) ---
+
+	// --- DEVICE RESTORATION (tokens[2]) ---
+
 	// Step 10 - Set data back into tf state and done
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

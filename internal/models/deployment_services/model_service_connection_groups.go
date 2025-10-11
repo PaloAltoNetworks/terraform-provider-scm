@@ -17,7 +17,6 @@ import (
 type ServiceConnectionGroups struct {
 	Tfid        types.String          `tfsdk:"tfid"`
 	DisableSnat basetypes.BoolValue   `tfsdk:"disable_snat"`
-	Folder      basetypes.StringValue `tfsdk:"folder"`
 	Id          basetypes.StringValue `tfsdk:"id"`
 	Name        basetypes.StringValue `tfsdk:"name"`
 	PbfOnly     basetypes.BoolValue   `tfsdk:"pbf_only"`
@@ -29,7 +28,6 @@ func (o ServiceConnectionGroups) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":         basetypes.StringType{},
 		"disable_snat": basetypes.BoolType{},
-		"folder":       basetypes.StringType{},
 		"id":           basetypes.StringType{},
 		"name":         basetypes.StringType{},
 		"pbf_only":     basetypes.BoolType{},
@@ -51,13 +49,6 @@ var ServiceConnectionGroupsResourceSchema = schema.Schema{
 		"disable_snat": schema.BoolAttribute{
 			MarkdownDescription: "Disable snat",
 			Optional:            true,
-		},
-		"folder": schema.StringAttribute{
-			MarkdownDescription: "The folder containing the service connection group",
-			Required:            true,
-			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.RequiresReplace(),
-			},
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the service connection group",
@@ -95,10 +86,6 @@ var ServiceConnectionGroupsDataSourceSchema = dsschema.Schema{
 	Attributes: map[string]dsschema.Attribute{
 		"disable_snat": dsschema.BoolAttribute{
 			MarkdownDescription: "Disable snat",
-			Computed:            true,
-		},
-		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder containing the service connection group",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{

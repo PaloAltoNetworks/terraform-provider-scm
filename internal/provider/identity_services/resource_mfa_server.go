@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -469,9 +470,15 @@ func (r *MfaServerResource) Read(ctx context.Context, req resource.ReadRequest, 
 	// Step 3 - Make read api call with id = id from state tfid
 	tflog.Debug(ctx, "Reading mfa_servers from SCM API", map[string]interface{}{"id": objectId})
 	getReq := r.client.MFAServersAPI.GetMFAServersByID(ctx, objectId)
-	scmObject, _, err := getReq.Execute()
+	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error reading mfa_servers", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no mfa_servers on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error reading mfa_servers", err.Error())
+		}
 		return
 	}
 
@@ -925,9 +932,15 @@ func (r *MfaServerResource) Update(ctx context.Context, req resource.UpdateReque
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
-	updatedObject, _, err := updateReq.Execute()
+	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error updating mfa_servers", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no mfa_servers on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error updating mfa_servers", err.Error())
+		}
 		return
 	}
 

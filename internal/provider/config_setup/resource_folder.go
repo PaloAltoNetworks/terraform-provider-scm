@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -144,9 +145,15 @@ func (r *FolderResource) Read(ctx context.Context, req resource.ReadRequest, res
 	// Step 3 - Make read api call with id = id from state tfid
 	tflog.Debug(ctx, "Reading folders from SCM API", map[string]interface{}{"id": objectId})
 	getReq := r.client.FoldersAPI.GetFolderByID(ctx, objectId)
-	scmObject, _, err := getReq.Execute()
+	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error reading folders", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no folders on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error reading folders", err.Error())
+		}
 		return
 	}
 
@@ -229,9 +236,15 @@ func (r *FolderResource) Update(ctx context.Context, req resource.UpdateRequest,
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
-	updatedObject, _, err := updateReq.Execute()
+	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error updating folders", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no folders on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error updating folders", err.Error())
+		}
 		return
 	}
 

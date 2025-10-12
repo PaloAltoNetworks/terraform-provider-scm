@@ -156,9 +156,15 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 	// Step 3 - Make read api call with id = id from state tfid
 	tflog.Debug(ctx, "Reading auto_vpn_clusters from SCM API", map[string]interface{}{"id": objectId})
 	getReq := r.client.AutoVPNClustersAPI.GetAutoVPNClustersByID(ctx, objectId)
-	scmObject, _, err := getReq.Execute()
+	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error reading auto_vpn_clusters", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no auto_vpn_clusters on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error reading auto_vpn_clusters", err.Error())
+		}
 		return
 	}
 
@@ -286,9 +292,15 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
-	updatedObject, _, err := updateReq.Execute()
+	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error updating auto_vpn_clusters", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no auto_vpn_clusters on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error updating auto_vpn_clusters", err.Error())
+		}
 		return
 	}
 

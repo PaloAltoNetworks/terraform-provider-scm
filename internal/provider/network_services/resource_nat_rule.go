@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -169,9 +170,15 @@ func (r *NatRuleResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Step 3 - Make read api call with id = id from state tfid
 	tflog.Debug(ctx, "Reading nat_rules from SCM API", map[string]interface{}{"id": objectId})
 	getReq := r.client.NATRulesAPI.GetNatRulesByID(ctx, objectId)
-	scmObject, _, err := getReq.Execute()
+	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error reading nat_rules", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no nat_rules on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error reading nat_rules", err.Error())
+		}
 		return
 	}
 
@@ -306,9 +313,15 @@ func (r *NatRuleResource) Update(ctx context.Context, req resource.UpdateRequest
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
-	updatedObject, _, err := updateReq.Execute()
+	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error updating nat_rules", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no nat_rules on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error updating nat_rules", err.Error())
+		}
 		return
 	}
 

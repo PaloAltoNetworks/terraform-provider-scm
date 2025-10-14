@@ -13,12 +13,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	setup "github.com/paloaltonetworks/scm-go"
 
+	"github.com/paloaltonetworks/scm-go/generated/config_setup"
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 	"github.com/paloaltonetworks/scm-go/generated/identity_services"
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 	"github.com/paloaltonetworks/scm-go/generated/objects"
 	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
+	tfProviderConfig_setup "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_setup"
 	tfProviderDeployment_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
 	tfProviderIdentity_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/identity_services"
 	tfProviderNetwork_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/network_services"
@@ -189,6 +191,7 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 	// Create a client container with all service-specific clients
 	// Create clients map
 	clients := map[string]interface{}{
+		"config_setup":        p.getConfig_setupAPIClient(setupClient),
 		"deployment_services": p.getDeployment_servicesAPIClient(setupClient),
 		"identity_services":   p.getIdentity_servicesAPIClient(setupClient),
 		"network_services":    p.getNetwork_servicesAPIClient(setupClient),
@@ -199,6 +202,20 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 	resp.DataSourceData = clients
 	resp.ResourceData = clients
 	tflog.Info(ctx, "Configured client", map[string]any{"success": true})
+}
+
+func (p *ScmProvider) getConfig_setupAPIClient(setupClient *setup.Client) *config_setup.APIClient {
+	// Create the config_setup API client
+	config_setupConfig := config_setup.NewConfiguration()
+	config_setupConfig.Host = setupClient.GetHost()
+	config_setupConfig.Scheme = "https"
+	config_setupConfig.HTTPClient = setupClient.HttpClient
+	// Set up the default header with JWT
+	config_setupConfig.DefaultHeader = make(map[string]string)
+	config_setupConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
+	config_setupConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
+	config_setupApiClient := config_setup.NewAPIClient(config_setupConfig)
+	return config_setupApiClient
 }
 
 func (p *ScmProvider) getDeployment_servicesAPIClient(setupClient *setup.Client) *deployment_services.APIClient {
@@ -274,6 +291,8 @@ func (p *ScmProvider) getSecurity_servicesAPIClient(setupClient *setup.Client) *
 // DataSources defines the data sources for this provider.
 func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	var dataSources []func() datasource.DataSource
+	// Add config_setup package data sources
+	dataSources = append(dataSources, tfProviderConfig_setup.GetDataSources()...)
 	// Add deployment_services package data sources
 	dataSources = append(dataSources, tfProviderDeployment_services.GetDataSources()...)
 	// Add identity_services package data sources
@@ -290,6 +309,8 @@ func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataS
 // Resources defines the resources for this provider.
 func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource {
 	var resources []func() resource.Resource
+	// Add config_setup package resources
+	resources = append(resources, tfProviderConfig_setup.GetResources()...)
 	// Add deployment_services package resources
 	resources = append(resources, tfProviderDeployment_services.GetResources()...)
 	// Add identity_services package resources

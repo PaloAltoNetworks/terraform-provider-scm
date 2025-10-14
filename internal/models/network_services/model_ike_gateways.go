@@ -563,7 +563,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -580,11 +580,11 @@ var IkeGatewaysResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -645,8 +645,8 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				"dynamic": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("fqdn"),
+							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
 					MarkdownDescription: "Dynamic",
@@ -656,8 +656,8 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				"fqdn": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("dynamic"),
+							path.MatchRelative().AtParent().AtName("ip"),
 						),
 						stringvalidator.LengthAtMost(255),
 					},
@@ -667,8 +667,8 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				"ip": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("fqdn"),
 							path.MatchRelative().AtParent().AtName("dynamic"),
+							path.MatchRelative().AtParent().AtName("fqdn"),
 						),
 					},
 					MarkdownDescription: "peer gateway has static IP address",
@@ -788,17 +788,18 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					MarkdownDescription: "Passive mode",
 					Optional:            true,
 					Computed:            true,
+					Default:             booldefault.StaticBool(false),
 				},
 			},
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,

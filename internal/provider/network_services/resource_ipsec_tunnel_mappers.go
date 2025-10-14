@@ -1216,7 +1216,7 @@ func unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolToSdk(ctx context.Context, o
 	// Handling Objects
 	if !model.Udp.IsNull() && !model.Udp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Udp")
-		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpToSdk(ctx, model.Udp)
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdInnerProtocolUdpToSdk(ctx, model.Udp)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Udp"})
@@ -1264,14 +1264,14 @@ func packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolFromSdk(ctx context.Context, s
 	// This is a regular nested object that has its own packer.
 	if sdk.Udp != nil {
 		tflog.Debug(ctx, "Packing nested object for field Udp")
-		packed, d := packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpFromSdk(ctx, *sdk.Udp)
+		packed, d := packIpsecTunnelsAutoKeyProxyIdInnerProtocolUdpFromSdk(ctx, *sdk.Udp)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Udp"})
 		}
 		model.Udp = packed
 	} else {
-		model.Udp = basetypes.NewObjectNull(models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp{}.AttrTypes())
+		model.Udp = basetypes.NewObjectNull(models.IpsecTunnelsAutoKeyProxyIdInnerProtocolUdp{}.AttrTypes())
 	}
 	diags.Append(d...)
 

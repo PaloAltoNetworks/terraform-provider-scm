@@ -195,7 +195,7 @@ var NatRulesResourceSchema = schema.Schema{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -232,7 +232,7 @@ var NatRulesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -284,7 +284,7 @@ var NatRulesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -304,9 +304,9 @@ var NatRulesResourceSchema = schema.Schema{
 				"bi_directional": schema.BoolAttribute{
 					Validators: []validator.Bool{
 						boolvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("fallback"),
 							path.MatchRelative().AtParent().AtName("interface"),
 							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("fallback"),
 							path.MatchRelative().AtParent().AtName("translated_address_single"),
 						),
 					},
@@ -316,9 +316,9 @@ var NatRulesResourceSchema = schema.Schema{
 				"fallback": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("bi_directional"),
 							path.MatchRelative().AtParent().AtName("interface"),
 							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("bi_directional"),
 							path.MatchRelative().AtParent().AtName("translated_address_single"),
 						),
 					},
@@ -334,9 +334,9 @@ var NatRulesResourceSchema = schema.Schema{
 				"interface": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("fallback"),
 							path.MatchRelative().AtParent().AtName("bi_directional"),
+							path.MatchRelative().AtParent().AtName("fallback"),
+							path.MatchRelative().AtParent().AtName("translated_address_array"),
 							path.MatchRelative().AtParent().AtName("translated_address_single"),
 						),
 					},
@@ -348,9 +348,9 @@ var NatRulesResourceSchema = schema.Schema{
 					MarkdownDescription: "Translated IP addresses",
 					Validators: []validator.List{
 						listvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("interface"),
-							path.MatchRelative().AtParent().AtName("fallback"),
 							path.MatchRelative().AtParent().AtName("bi_directional"),
+							path.MatchRelative().AtParent().AtName("fallback"),
+							path.MatchRelative().AtParent().AtName("interface"),
 							path.MatchRelative().AtParent().AtName("translated_address_single"),
 						),
 					},
@@ -359,10 +359,10 @@ var NatRulesResourceSchema = schema.Schema{
 				"translated_address_single": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("bi_directional"),
+							path.MatchRelative().AtParent().AtName("fallback"),
 							path.MatchRelative().AtParent().AtName("interface"),
 							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("fallback"),
-							path.MatchRelative().AtParent().AtName("bi_directional"),
 						),
 					},
 					MarkdownDescription: "Translated IP address",

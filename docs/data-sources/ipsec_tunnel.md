@@ -73,7 +73,7 @@ Read-Only:
 
 - `local` (String) Local
 - `name` (String) Name
-- `protocol` (Attributes) Protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id--protocol))
+- `protocol` (Attributes) IPv4 type of proxy_id protocol values for TCP protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id--protocol))
 - `remote` (String) Remote
 
 <a id="nestedatt--auto_key--proxy_id--protocol"></a>
@@ -82,8 +82,8 @@ Read-Only:
 Read-Only:
 
 - `number` (Number) IP protocol number
-- `tcp` (Attributes) TCP (see [below for nested schema](#nestedatt--auto_key--proxy_id--protocol--tcp))
-- `udp` (Attributes) UDP (see [below for nested schema](#nestedatt--auto_key--proxy_id--protocol--udp))
+- `tcp` (Attributes) IPv4 type of proxy_id protocol values for TCP protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id--protocol--tcp))
+- `udp` (Attributes) IPv6 type of proxy_id protocol values for UDP protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id--protocol--udp))
 
 <a id="nestedatt--auto_key--proxy_id--protocol--tcp"></a>
 ### Nested Schema for `auto_key.proxy_id.protocol.tcp`
@@ -112,7 +112,7 @@ Read-Only:
 
 - `local` (String) Local
 - `name` (String) Name
-- `protocol` (Attributes) Protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6--protocol))
+- `protocol` (Attributes) IPv6 type of proxy_id protocol values for protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6--protocol))
 - `remote` (String) Remote
 
 <a id="nestedatt--auto_key--proxy_id_v6--protocol"></a>
@@ -121,8 +121,8 @@ Read-Only:
 Read-Only:
 
 - `number` (Number) IP protocol number
-- `tcp` (Attributes) Tcp (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6--protocol--tcp))
-- `udp` (Attributes) Udp (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6--protocol--udp))
+- `tcp` (Attributes) IPv6 type of proxy_id protocol values for TCP protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6--protocol--tcp))
+- `udp` (Attributes) IPv6 type of proxy_id protocol values for UDP protocol (see [below for nested schema](#nestedatt--auto_key--proxy_id_v6--protocol--udp))
 
 <a id="nestedatt--auto_key--proxy_id_v6--protocol--tcp"></a>
 ### Nested Schema for `auto_key.proxy_id_v6.protocol.tcp`

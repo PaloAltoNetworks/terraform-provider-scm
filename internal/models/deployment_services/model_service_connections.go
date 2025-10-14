@@ -22,7 +22,6 @@ type ServiceConnections struct {
 	EncryptedValues      basetypes.MapValue    `tfsdk:"encrypted_values"`
 	BackupSC             basetypes.StringValue `tfsdk:"backup__s_c"`
 	BgpPeer              basetypes.ObjectValue `tfsdk:"bgp_peer"`
-	Folder               basetypes.StringValue `tfsdk:"folder"`
 	Id                   basetypes.StringValue `tfsdk:"id"`
 	IpsecTunnel          basetypes.StringValue `tfsdk:"ipsec_tunnel"`
 	Name                 basetypes.StringValue `tfsdk:"name"`
@@ -85,7 +84,6 @@ func (o ServiceConnections) AttrTypes() map[string]attr.Type {
 				"secret":             basetypes.StringType{},
 			},
 		},
-		"folder":              basetypes.StringType{},
 		"id":                  basetypes.StringType{},
 		"ipsec_tunnel":        basetypes.StringType{},
 		"name":                basetypes.StringType{},
@@ -250,13 +248,6 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 			MarkdownDescription: "Map of sensitive values returned from the API.",
 			Computed:            true,
 			Sensitive:           true,
-		},
-		"folder": schema.StringAttribute{
-			MarkdownDescription: "The folder containing the service connection",
-			Required:            true,
-			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.RequiresReplace(),
-			},
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the service connection",
@@ -423,10 +414,6 @@ var ServiceConnectionsDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Map of sensitive values returned from the API.",
 			Computed:            true,
 			Sensitive:           true,
-		},
-		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder containing the service connection",
-			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
 			MarkdownDescription: "The UUID of the service connection",

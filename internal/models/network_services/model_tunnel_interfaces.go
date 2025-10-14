@@ -34,6 +34,11 @@ type TunnelInterfaces struct {
 	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
 }
 
+// TunnelInterfacesIp represents a nested structure within the TunnelInterfaces model
+type TunnelInterfacesIp struct {
+	Ip basetypes.ListValue `tfsdk:"ip"`
+}
+
 // AttrTypes defines the attribute types for the TunnelInterfaces model.
 func (o TunnelInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -62,6 +67,20 @@ func (o TunnelInterfaces) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the TunnelInterfacesIp model.
+func (o TunnelInterfacesIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ip": basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of TunnelInterfacesIp objects.
+func (o TunnelInterfacesIp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // TunnelInterfacesResourceSchema defines the schema for TunnelInterfaces resource
 var TunnelInterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "TunnelInterface resource",
@@ -81,7 +100,7 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -92,11 +111,11 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -116,12 +135,12 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"ip": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "tunnel interfaces ip parent",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "tunnel interfaces IP address(es)",
 					Optional:            true,
 				},
 			},
@@ -140,11 +159,11 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -191,12 +210,12 @@ var TunnelInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ip": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "tunnel interfaces ip parent",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "tunnel interfaces IP address(es)",
 					Computed:            true,
 				},
 			},

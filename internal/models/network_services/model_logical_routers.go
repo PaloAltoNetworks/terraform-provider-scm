@@ -12832,7 +12832,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -12843,11 +12843,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -12876,11 +12876,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -13389,8 +13389,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"no": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
 																	objectvalidator.ExactlyOneOf(
-																		path.MatchRelative().AtParent().AtName("yes"),
 																		path.MatchRelative().AtParent().AtName("ipv4"),
+																		path.MatchRelative().AtParent().AtName("yes"),
 																	),
 																},
 																MarkdownDescription: "No",
@@ -13525,8 +13525,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"ebgp": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
-															path.MatchRelative().AtParent().AtName("ibgp"),
 															path.MatchRelative().AtParent().AtName("ebgp_confed"),
+															path.MatchRelative().AtParent().AtName("ibgp"),
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
 														),
 													},
@@ -13550,9 +13550,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"ebgp_confed": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
+															path.MatchRelative().AtParent().AtName("ebgp"),
 															path.MatchRelative().AtParent().AtName("ibgp"),
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
-															path.MatchRelative().AtParent().AtName("ebgp"),
 														),
 													},
 													MarkdownDescription: "Ebgp confed",
@@ -13567,9 +13567,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"ibgp": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
+															path.MatchRelative().AtParent().AtName("ebgp"),
 															path.MatchRelative().AtParent().AtName("ebgp_confed"),
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
-															path.MatchRelative().AtParent().AtName("ebgp"),
 														),
 													},
 													MarkdownDescription: "Ibgp",
@@ -13584,9 +13584,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"ibgp_confed": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
-															path.MatchRelative().AtParent().AtName("ibgp"),
-															path.MatchRelative().AtParent().AtName("ebgp_confed"),
 															path.MatchRelative().AtParent().AtName("ebgp"),
+															path.MatchRelative().AtParent().AtName("ebgp_confed"),
+															path.MatchRelative().AtParent().AtName("ibgp"),
 														),
 													},
 													MarkdownDescription: "Ibgp confed",
@@ -13730,8 +13730,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
 																				objectvalidator.ExactlyOneOf(
-																					path.MatchRelative().AtParent().AtName("remove"),
 																					path.MatchRelative().AtParent().AtName("prepend"),
+																					path.MatchRelative().AtParent().AtName("remove"),
 																					path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																				),
 																			},
@@ -13775,9 +13775,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			Validators: []validator.List{
 																				listvalidator.ExactlyOneOf(
 																					path.MatchRelative().AtParent().AtName("none"),
+																					path.MatchRelative().AtParent().AtName("overwrite"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
-																					path.MatchRelative().AtParent().AtName("overwrite"),
 																				),
 																			},
 																			Optional: true,
@@ -13785,10 +13785,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
 																				objectvalidator.ExactlyOneOf(
-																					path.MatchRelative().AtParent().AtName("remove_all"),
-																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
+																					path.MatchRelative().AtParent().AtName("remove_all"),
+																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
 																			MarkdownDescription: "None",
@@ -13800,10 +13800,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			MarkdownDescription: "Overwrite",
 																			Validators: []validator.List{
 																				listvalidator.ExactlyOneOf(
+																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
-																					path.MatchRelative().AtParent().AtName("append"),
 																				),
 																			},
 																			Optional: true,
@@ -13811,10 +13811,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		"remove_all": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
 																				objectvalidator.ExactlyOneOf(
-																					path.MatchRelative().AtParent().AtName("none"),
-																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																					path.MatchRelative().AtParent().AtName("append"),
+																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
+																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
 																			MarkdownDescription: "Remove all",
@@ -13824,10 +13824,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		"remove_regex": schema.StringAttribute{
 																			Validators: []validator.String{
 																				stringvalidator.ExactlyOneOf(
-																					path.MatchRelative().AtParent().AtName("none"),
-																					path.MatchRelative().AtParent().AtName("remove_all"),
 																					path.MatchRelative().AtParent().AtName("append"),
+																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
+																					path.MatchRelative().AtParent().AtName("remove_all"),
 																				),
 																			},
 																			MarkdownDescription: "Remove regex",
@@ -13845,9 +13845,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			Validators: []validator.List{
 																				listvalidator.ExactlyOneOf(
 																					path.MatchRelative().AtParent().AtName("none"),
+																					path.MatchRelative().AtParent().AtName("overwrite"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
-																					path.MatchRelative().AtParent().AtName("overwrite"),
 																				),
 																			},
 																			Optional: true,
@@ -13855,10 +13855,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
 																				objectvalidator.ExactlyOneOf(
-																					path.MatchRelative().AtParent().AtName("remove_all"),
-																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
+																					path.MatchRelative().AtParent().AtName("remove_all"),
+																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
 																			MarkdownDescription: "None",
@@ -13870,10 +13870,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			MarkdownDescription: "Overwrite",
 																			Validators: []validator.List{
 																				listvalidator.ExactlyOneOf(
+																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
-																					path.MatchRelative().AtParent().AtName("append"),
 																				),
 																			},
 																			Optional: true,
@@ -13881,10 +13881,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		"remove_all": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
 																				objectvalidator.ExactlyOneOf(
-																					path.MatchRelative().AtParent().AtName("none"),
-																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																					path.MatchRelative().AtParent().AtName("append"),
+																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
+																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
 																			MarkdownDescription: "Remove all",
@@ -13894,10 +13894,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		"remove_regex": schema.StringAttribute{
 																			Validators: []validator.String{
 																				stringvalidator.ExactlyOneOf(
-																					path.MatchRelative().AtParent().AtName("none"),
-																					path.MatchRelative().AtParent().AtName("remove_all"),
 																					path.MatchRelative().AtParent().AtName("append"),
+																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
+																					path.MatchRelative().AtParent().AtName("remove_all"),
 																				),
 																			},
 																			MarkdownDescription: "Remove regex",
@@ -14324,8 +14324,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("remove"),
 																									path.MatchRelative().AtParent().AtName("prepend"),
+																									path.MatchRelative().AtParent().AtName("remove"),
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
@@ -14369,9 +14369,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
 																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("overwrite"),
 																								),
 																							},
 																							Optional: true,
@@ -14379,10 +14379,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("remove_all"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "None",
@@ -14394,10 +14394,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
+																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("append"),
 																								),
 																							},
 																							Optional: true,
@@ -14405,10 +14405,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "Remove all",
@@ -14418,10 +14418,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
 																								stringvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
 																							MarkdownDescription: "Remove regex",
@@ -14439,9 +14439,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
 																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("overwrite"),
 																								),
 																							},
 																							Optional: true,
@@ -14449,10 +14449,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("remove_all"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "None",
@@ -14464,10 +14464,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
+																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("append"),
 																								),
 																							},
 																							Optional: true,
@@ -14475,10 +14475,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "Remove all",
@@ -14488,10 +14488,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
 																								stringvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
 																							MarkdownDescription: "Remove regex",
@@ -14676,8 +14676,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("remove"),
 																									path.MatchRelative().AtParent().AtName("prepend"),
+																									path.MatchRelative().AtParent().AtName("remove"),
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
@@ -14721,9 +14721,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
 																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("overwrite"),
 																								),
 																							},
 																							Optional: true,
@@ -14731,10 +14731,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("remove_all"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "None",
@@ -14746,10 +14746,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
+																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("append"),
 																								),
 																							},
 																							Optional: true,
@@ -14757,10 +14757,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "Remove all",
@@ -14770,10 +14770,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
 																								stringvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
 																							MarkdownDescription: "Remove regex",
@@ -14791,9 +14791,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
 																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("overwrite"),
 																								),
 																							},
 																							Optional: true,
@@ -14801,10 +14801,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("remove_all"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "None",
@@ -14816,10 +14816,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ExactlyOneOf(
+																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
-																									path.MatchRelative().AtParent().AtName("append"),
 																								),
 																							},
 																							Optional: true,
@@ -14827,10 +14827,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
 																								objectvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
 																							MarkdownDescription: "Remove all",
@@ -14840,10 +14840,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
 																								stringvalidator.ExactlyOneOf(
-																									path.MatchRelative().AtParent().AtName("none"),
-																									path.MatchRelative().AtParent().AtName("remove_all"),
 																									path.MatchRelative().AtParent().AtName("append"),
+																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
+																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
 																							MarkdownDescription: "Remove regex",
@@ -15107,8 +15107,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"balanced_round_robin": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
-												path.MatchRelative().AtParent().AtName("ip_modulo"),
 												path.MatchRelative().AtParent().AtName("ip_hash"),
+												path.MatchRelative().AtParent().AtName("ip_modulo"),
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
 											),
 										},
@@ -15119,9 +15119,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"ip_hash": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
+												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
 												path.MatchRelative().AtParent().AtName("ip_modulo"),
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
-												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
 											),
 										},
 										MarkdownDescription: "Ip hash",
@@ -15144,9 +15144,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"ip_modulo": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
+												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
 												path.MatchRelative().AtParent().AtName("ip_hash"),
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
-												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
 											),
 										},
 										MarkdownDescription: "Ip modulo",
@@ -15156,9 +15156,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"weighted_round_robin": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
 											objectvalidator.ExactlyOneOf(
-												path.MatchRelative().AtParent().AtName("ip_modulo"),
-												path.MatchRelative().AtParent().AtName("ip_hash"),
 												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
+												path.MatchRelative().AtParent().AtName("ip_hash"),
+												path.MatchRelative().AtParent().AtName("ip_modulo"),
 											),
 										},
 										MarkdownDescription: "Weighted round robin",
@@ -15991,8 +15991,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"broadcast": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
 																	objectvalidator.ExactlyOneOf(
-																		path.MatchRelative().AtParent().AtName("p2p"),
 																		path.MatchRelative().AtParent().AtName("p2mp"),
+																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
 																},
 																MarkdownDescription: "Broadcast",
@@ -16124,8 +16124,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"normal": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
-															path.MatchRelative().AtParent().AtName("stub"),
 															path.MatchRelative().AtParent().AtName("nssa"),
+															path.MatchRelative().AtParent().AtName("stub"),
 														),
 													},
 													MarkdownDescription: "Normal",
@@ -16702,8 +16702,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"broadcast": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
 																	objectvalidator.ExactlyOneOf(
-																		path.MatchRelative().AtParent().AtName("p2p"),
 																		path.MatchRelative().AtParent().AtName("p2mp"),
+																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
 																},
 																MarkdownDescription: "Broadcast",
@@ -16843,8 +16843,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"normal": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
-															path.MatchRelative().AtParent().AtName("stub"),
 															path.MatchRelative().AtParent().AtName("nssa"),
+															path.MatchRelative().AtParent().AtName("stub"),
 														),
 													},
 													MarkdownDescription: "Normal",
@@ -17233,10 +17233,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"sha1": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
+															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha256"),
 															path.MatchRelative().AtParent().AtName("sha384"),
 															path.MatchRelative().AtParent().AtName("sha512"),
-															path.MatchRelative().AtParent().AtName("md5"),
 														),
 													},
 													MarkdownDescription: "Sha1",
@@ -17251,10 +17251,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"sha256": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
+															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha1"),
 															path.MatchRelative().AtParent().AtName("sha384"),
 															path.MatchRelative().AtParent().AtName("sha512"),
-															path.MatchRelative().AtParent().AtName("md5"),
 														),
 													},
 													MarkdownDescription: "Sha256",
@@ -17269,10 +17269,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"sha384": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
+															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha1"),
 															path.MatchRelative().AtParent().AtName("sha256"),
 															path.MatchRelative().AtParent().AtName("sha512"),
-															path.MatchRelative().AtParent().AtName("md5"),
 														),
 													},
 													MarkdownDescription: "Sha384",
@@ -17287,10 +17287,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"sha512": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
 														objectvalidator.ExactlyOneOf(
+															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha1"),
 															path.MatchRelative().AtParent().AtName("sha256"),
 															path.MatchRelative().AtParent().AtName("sha384"),
-															path.MatchRelative().AtParent().AtName("md5"),
 														),
 													},
 													MarkdownDescription: "Sha512",
@@ -17315,11 +17315,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"md5": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
+																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
 																	path.MatchRelative().AtParent().AtName("sha384"),
 																	path.MatchRelative().AtParent().AtName("sha512"),
-																	path.MatchRelative().AtParent().AtName("none"),
 																),
 															},
 															MarkdownDescription: "Md5",
@@ -17334,11 +17334,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"none": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
+																	path.MatchRelative().AtParent().AtName("md5"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
 																	path.MatchRelative().AtParent().AtName("sha384"),
 																	path.MatchRelative().AtParent().AtName("sha512"),
-																	path.MatchRelative().AtParent().AtName("md5"),
 																),
 															},
 															MarkdownDescription: "None",
@@ -17348,11 +17348,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"sha1": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
+																	path.MatchRelative().AtParent().AtName("md5"),
+																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
 																	path.MatchRelative().AtParent().AtName("sha384"),
 																	path.MatchRelative().AtParent().AtName("sha512"),
-																	path.MatchRelative().AtParent().AtName("md5"),
-																	path.MatchRelative().AtParent().AtName("none"),
 																),
 															},
 															MarkdownDescription: "Sha1",
@@ -17367,11 +17367,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"sha256": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
+																	path.MatchRelative().AtParent().AtName("md5"),
+																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
 																	path.MatchRelative().AtParent().AtName("sha384"),
 																	path.MatchRelative().AtParent().AtName("sha512"),
-																	path.MatchRelative().AtParent().AtName("md5"),
-																	path.MatchRelative().AtParent().AtName("none"),
 																),
 															},
 															MarkdownDescription: "Sha256",
@@ -17386,11 +17386,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"sha384": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
+																	path.MatchRelative().AtParent().AtName("md5"),
+																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
 																	path.MatchRelative().AtParent().AtName("sha512"),
-																	path.MatchRelative().AtParent().AtName("md5"),
-																	path.MatchRelative().AtParent().AtName("none"),
 																),
 															},
 															MarkdownDescription: "Sha384",
@@ -17405,11 +17405,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"sha512": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
+																	path.MatchRelative().AtParent().AtName("md5"),
+																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
 																	path.MatchRelative().AtParent().AtName("sha384"),
-																	path.MatchRelative().AtParent().AtName("md5"),
-																	path.MatchRelative().AtParent().AtName("none"),
 																),
 															},
 															MarkdownDescription: "Sha512",
@@ -17826,11 +17826,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"discard": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -17841,11 +17841,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -17855,11 +17855,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"ipv6_address": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -17869,11 +17869,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"next_lr": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -17883,11 +17883,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"next_vr": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -17898,8 +17898,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
@@ -17912,12 +17912,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"tunnel": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																),
 															},
 															MarkdownDescription: "Tunnel",
@@ -17989,9 +17989,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"both": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("unicast"),
 																	path.MatchRelative().AtParent().AtName("multicast"),
 																	path.MatchRelative().AtParent().AtName("no_install"),
+																	path.MatchRelative().AtParent().AtName("unicast"),
 																),
 															},
 															MarkdownDescription: "Both",
@@ -18001,9 +18001,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"multicast": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("unicast"),
 																	path.MatchRelative().AtParent().AtName("both"),
 																	path.MatchRelative().AtParent().AtName("no_install"),
+																	path.MatchRelative().AtParent().AtName("unicast"),
 																),
 															},
 															MarkdownDescription: "Multicast",
@@ -18013,9 +18013,9 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"no_install": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("unicast"),
-																	path.MatchRelative().AtParent().AtName("multicast"),
 																	path.MatchRelative().AtParent().AtName("both"),
+																	path.MatchRelative().AtParent().AtName("multicast"),
+																	path.MatchRelative().AtParent().AtName("unicast"),
 																),
 															},
 															MarkdownDescription: "No install",
@@ -18025,8 +18025,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"unicast": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("multicast"),
 																	path.MatchRelative().AtParent().AtName("both"),
+																	path.MatchRelative().AtParent().AtName("multicast"),
 																	path.MatchRelative().AtParent().AtName("no_install"),
 																),
 															},
@@ -18087,11 +18087,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"discard": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -18102,11 +18102,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -18116,11 +18116,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"ipv6_address": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -18130,11 +18130,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"next_lr": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -18144,11 +18144,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"next_vr": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
@@ -18159,8 +18159,8 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.Object{
 																objectvalidator.ExactlyOneOf(
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
 																	path.MatchRelative().AtParent().AtName("tunnel"),
@@ -18173,12 +18173,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"tunnel": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ExactlyOneOf(
-																	path.MatchRelative().AtParent().AtName("receive"),
 																	path.MatchRelative().AtParent().AtName("discard"),
-																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
 																),
 															},
 															MarkdownDescription: "Tunnel",

@@ -79,7 +79,7 @@ Read-Only:
 
 Read-Only:
 
-- `arp` (Attributes List) ARP configuration (see [below for nested schema](#nestedatt--data--layer3--arp))
+- `arp` (Attributes List) Aggregate Ethernet ARP configuration (see [below for nested schema](#nestedatt--data--layer3--arp))
 - `ddns_config` (Attributes) Ddns config (see [below for nested schema](#nestedatt--data--layer3--ddns_config))
 - `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile

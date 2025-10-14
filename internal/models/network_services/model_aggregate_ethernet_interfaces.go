@@ -64,6 +64,37 @@ type AggregateEthernetInterfacesLayer3 struct {
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 }
 
+// AggEthernetArpInner represents a nested structure within the AggregateEthernetInterfaces model
+type AggEthernetArpInner struct {
+	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
+	Name      basetypes.StringValue `tfsdk:"name"`
+}
+
+// AggregateEthernetInterfacesLayer3DdnsConfig represents a nested structure within the AggregateEthernetInterfaces model
+type AggregateEthernetInterfacesLayer3DdnsConfig struct {
+	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
+	DdnsEnabled        basetypes.BoolValue   `tfsdk:"ddns_enabled"`
+	DdnsHostname       basetypes.StringValue `tfsdk:"ddns_hostname"`
+	DdnsIp             basetypes.StringValue `tfsdk:"ddns_ip"`
+	DdnsUpdateInterval basetypes.Int64Value  `tfsdk:"ddns_update_interval"`
+	DdnsVendor         basetypes.StringValue `tfsdk:"ddns_vendor"`
+	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
+}
+
+// AggEthernetDhcpClientDhcpClient represents a nested structure within the AggregateEthernetInterfaces model
+type AggEthernetDhcpClientDhcpClient struct {
+	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
+	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
+	Enable             basetypes.BoolValue   `tfsdk:"enable"`
+	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
+}
+
+// AggEthernetDhcpClientDhcpClientSendHostname represents a nested structure within the AggregateEthernetInterfaces model
+type AggEthernetDhcpClientDhcpClientSendHostname struct {
+	Enable   basetypes.BoolValue   `tfsdk:"enable"`
+	Hostname basetypes.StringValue `tfsdk:"hostname"`
+}
+
 // AttrTypes defines the attribute types for the AggregateEthernetInterfaces model.
 func (o AggregateEthernetInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -246,6 +277,78 @@ func (o AggregateEthernetInterfacesLayer3) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the AggEthernetArpInner model.
+func (o AggEthernetArpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"hw_address": basetypes.StringType{},
+		"name":       basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggEthernetArpInner objects.
+func (o AggEthernetArpInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DdnsConfig model.
+func (o AggregateEthernetInterfacesLayer3DdnsConfig) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ddns_cert_profile":    basetypes.StringType{},
+		"ddns_enabled":         basetypes.BoolType{},
+		"ddns_hostname":        basetypes.StringType{},
+		"ddns_ip":              basetypes.StringType{},
+		"ddns_update_interval": basetypes.Int64Type{},
+		"ddns_vendor":          basetypes.StringType{},
+		"ddns_vendor_config":   basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DdnsConfig objects.
+func (o AggregateEthernetInterfacesLayer3DdnsConfig) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggEthernetDhcpClientDhcpClient model.
+func (o AggEthernetDhcpClientDhcpClient) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"create_default_route": basetypes.BoolType{},
+		"default_route_metric": basetypes.Int64Type{},
+		"enable":               basetypes.BoolType{},
+		"send_hostname": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":   basetypes.BoolType{},
+				"hostname": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggEthernetDhcpClientDhcpClient objects.
+func (o AggEthernetDhcpClientDhcpClient) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AggEthernetDhcpClientDhcpClientSendHostname model.
+func (o AggEthernetDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable":   basetypes.BoolType{},
+		"hostname": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggEthernetDhcpClientDhcpClientSendHostname objects.
+func (o AggEthernetDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AggregateEthernetInterfacesResourceSchema defines the schema for AggregateEthernetInterfaces resource
 var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "AggregateEthernetInterface resource",
@@ -264,7 +367,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -275,7 +378,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -350,7 +453,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"arp": schema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Aggregate Ethernet ARP configuration",
 					Optional:            true,
 					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
@@ -523,7 +626,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -610,7 +713,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Aggregate Ethernet ARP configuration",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{

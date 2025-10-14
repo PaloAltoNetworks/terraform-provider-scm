@@ -45,7 +45,7 @@ Read-Only:
 
 - `arp` (Attributes List) ARP configuration (see [below for nested schema](#nestedatt--data--arp))
 - `comment` (String) Description
-- `ddns_config` (Attributes) Ddns config (see [below for nested schema](#nestedatt--data--ddns_config))
+- `ddns_config` (Attributes) Dynamic DNS configuration specific to the Vlan Interfaces. (see [below for nested schema](#nestedatt--data--ddns_config))
 - `default_value` (String) Default value
 - `device` (String) The device in which the resource is defined
 - `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--data--dhcp_client))

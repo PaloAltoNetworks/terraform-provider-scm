@@ -59,9 +59,40 @@ type EthernetInterfacesLayer3 struct {
 	Pppoe                      basetypes.ObjectValue `tfsdk:"pppoe"`
 }
 
-// DhcpClient represents a nested structure within the EthernetInterfaces model
-type DhcpClient struct {
+// EthernetInterfacesArpInner represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesArpInner struct {
+	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
+	Name      basetypes.StringValue `tfsdk:"name"`
+}
+
+// EthernetInterfacesLayer3DdnsConfig represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3DdnsConfig struct {
+	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
+	DdnsEnabled        basetypes.BoolValue   `tfsdk:"ddns_enabled"`
+	DdnsHostname       basetypes.StringValue `tfsdk:"ddns_hostname"`
+	DdnsIp             basetypes.StringValue `tfsdk:"ddns_ip"`
+	DdnsUpdateInterval basetypes.Int64Value  `tfsdk:"ddns_update_interval"`
+	DdnsVendor         basetypes.StringValue `tfsdk:"ddns_vendor"`
+	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
+}
+
+// EthernetInterfacesDhcpClient represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesDhcpClient struct {
 	DhcpClient basetypes.ObjectValue `tfsdk:"dhcp_client"`
+}
+
+// EthernetInterfacesDhcpClientDhcpClient represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesDhcpClientDhcpClient struct {
+	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
+	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
+	Enable             basetypes.BoolValue   `tfsdk:"enable"`
+	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
+}
+
+// EthernetInterfacesDhcpClientDhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesDhcpClientDhcpClientSendHostname struct {
+	Enable   basetypes.BoolValue   `tfsdk:"enable"`
+	Hostname basetypes.StringValue `tfsdk:"hostname"`
 }
 
 // EthernetInterfacesLayer3Pppoe represents a nested structure within the EthernetInterfaces model
@@ -266,8 +297,43 @@ func (o EthernetInterfacesLayer3) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the DhcpClient model.
-func (o DhcpClient) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the EthernetInterfacesArpInner model.
+func (o EthernetInterfacesArpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"hw_address": basetypes.StringType{},
+		"name":       basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesArpInner objects.
+func (o EthernetInterfacesArpInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3DdnsConfig model.
+func (o EthernetInterfacesLayer3DdnsConfig) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"ddns_cert_profile":    basetypes.StringType{},
+		"ddns_enabled":         basetypes.BoolType{},
+		"ddns_hostname":        basetypes.StringType{},
+		"ddns_ip":              basetypes.StringType{},
+		"ddns_update_interval": basetypes.Int64Type{},
+		"ddns_vendor":          basetypes.StringType{},
+		"ddns_vendor_config":   basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3DdnsConfig objects.
+func (o EthernetInterfacesLayer3DdnsConfig) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClient model.
+func (o EthernetInterfacesDhcpClient) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"dhcp_client": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -285,8 +351,45 @@ func (o DhcpClient) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of DhcpClient objects.
-func (o DhcpClient) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClient objects.
+func (o EthernetInterfacesDhcpClient) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClient model.
+func (o EthernetInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"create_default_route": basetypes.BoolType{},
+		"default_route_metric": basetypes.Int64Type{},
+		"enable":               basetypes.BoolType{},
+		"send_hostname": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":   basetypes.BoolType{},
+				"hostname": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClient objects.
+func (o EthernetInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClientSendHostname model.
+func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable":   basetypes.BoolType{},
+		"hostname": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClientSendHostname objects.
+func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -365,7 +468,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -382,7 +485,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -413,7 +516,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"arp": schema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Optional:            true,
 					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
@@ -546,8 +649,8 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"pppoe": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
+							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
 					MarkdownDescription: "Pppoe",
@@ -658,7 +761,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -727,7 +830,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
-					MarkdownDescription: "ARP configuration",
+					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{

@@ -37,14 +37,14 @@ type Layer3Subinterfaces struct {
 	Tag                        basetypes.Float64Value `tfsdk:"tag"`
 }
 
-// ArpInner represents a nested structure within the Layer3Subinterfaces model
-type ArpInner struct {
+// Layer3SubinterfacesArpInner represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubinterfacesArpInner struct {
 	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
 	Name      basetypes.StringValue `tfsdk:"name"`
 }
 
-// DdnsConfig represents a nested structure within the Layer3Subinterfaces model
-type DdnsConfig struct {
+// Layer3SubinterfacesDdnsConfig represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubinterfacesDdnsConfig struct {
 	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
 	DdnsEnabled        basetypes.BoolValue   `tfsdk:"ddns_enabled"`
 	DdnsHostname       basetypes.StringValue `tfsdk:"ddns_hostname"`
@@ -54,16 +54,16 @@ type DdnsConfig struct {
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
 }
 
-// AggregateEthernetInterfacesLayer3DhcpClient represents a nested structure within the Layer3Subinterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClient struct {
+// Layer3SubInterfacesDhcpClientDhcpClient represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubInterfacesDhcpClientDhcpClient struct {
 	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
 	Enable             basetypes.BoolValue   `tfsdk:"enable"`
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
-// AggregateEthernetInterfacesLayer3DhcpClientSendHostname represents a nested structure within the Layer3Subinterfaces model
-type AggregateEthernetInterfacesLayer3DhcpClientSendHostname struct {
+// Layer3SubInterfacesDhcpClientDhcpClientSendHostname represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubInterfacesDhcpClientDhcpClientSendHostname struct {
 	Enable   basetypes.BoolValue   `tfsdk:"enable"`
 	Hostname basetypes.StringValue `tfsdk:"hostname"`
 }
@@ -123,23 +123,23 @@ func (o Layer3Subinterfaces) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the ArpInner model.
-func (o ArpInner) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the Layer3SubinterfacesArpInner model.
+func (o Layer3SubinterfacesArpInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"hw_address": basetypes.StringType{},
 		"name":       basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of ArpInner objects.
-func (o ArpInner) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of Layer3SubinterfacesArpInner objects.
+func (o Layer3SubinterfacesArpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the DdnsConfig model.
-func (o DdnsConfig) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the Layer3SubinterfacesDdnsConfig model.
+func (o Layer3SubinterfacesDdnsConfig) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"ddns_cert_profile":    basetypes.StringType{},
 		"ddns_enabled":         basetypes.BoolType{},
@@ -151,15 +151,15 @@ func (o DdnsConfig) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of DdnsConfig objects.
-func (o DdnsConfig) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of Layer3SubinterfacesDdnsConfig objects.
+func (o Layer3SubinterfacesDdnsConfig) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClient model.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the Layer3SubInterfacesDhcpClientDhcpClient model.
+func (o Layer3SubInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"create_default_route": basetypes.BoolType{},
 		"default_route_metric": basetypes.Int64Type{},
@@ -173,23 +173,23 @@ func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr
 	}
 }
 
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClient objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClient) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of Layer3SubInterfacesDhcpClientDhcpClient objects.
+func (o Layer3SubInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DhcpClientSendHostname model.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the Layer3SubInterfacesDhcpClientDhcpClientSendHostname model.
+func (o Layer3SubInterfacesDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":   basetypes.BoolType{},
 		"hostname": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DhcpClientSendHostname objects.
-func (o AggregateEthernetInterfacesLayer3DhcpClientSendHostname) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of Layer3SubInterfacesDhcpClientDhcpClientSendHostname objects.
+func (o Layer3SubInterfacesDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -200,7 +200,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "Layer3Subinterface resource",
 	Attributes: map[string]schema.Attribute{
 		"arp": schema.ListNestedAttribute{
-			MarkdownDescription: "ARP configuration",
+			MarkdownDescription: "Layer 3 sub Interfaces ARP configuration",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
@@ -220,7 +220,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"ddns_config": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ddns config",
+			MarkdownDescription: "Dynamic DNS configuration specific to the Layer 3 sub Interfaces.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ddns_cert_profile": schema.StringAttribute{
@@ -256,7 +256,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -299,7 +299,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -341,7 +341,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -371,7 +371,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "Layer3Subinterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"arp": dsschema.ListNestedAttribute{
-			MarkdownDescription: "ARP configuration",
+			MarkdownDescription: "Layer 3 sub Interfaces ARP configuration",
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
@@ -391,7 +391,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ddns_config": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ddns config",
+			MarkdownDescription: "Dynamic DNS configuration specific to the Layer 3 sub Interfaces.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ddns_cert_profile": dsschema.StringAttribute{

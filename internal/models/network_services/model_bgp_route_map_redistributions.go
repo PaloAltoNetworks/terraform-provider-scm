@@ -82,6 +82,18 @@ type BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address struct {
 	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
 }
 
+// BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4NextHop represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4NextHop struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4RouteSource represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4RouteSource struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
 // BgpRouteMapRedistributionsBgpOspfRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
 type BgpRouteMapRedistributionsBgpOspfRouteMapInnerSet struct {
 	Metric     basetypes.ObjectValue `tfsdk:"metric"`
@@ -107,6 +119,46 @@ type BgpRouteMapRedistributionsBgpRibRouteMapInner struct {
 	Match       basetypes.ObjectValue `tfsdk:"match"`
 	Name        basetypes.Int64Value  `tfsdk:"name"`
 	Set         basetypes.ObjectValue `tfsdk:"set"`
+}
+
+// BgpRouteMapRedistributionsBgpRibRouteMapInnerMatch represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsBgpRibRouteMapInnerMatch struct {
+	AsPathAccessList  basetypes.StringValue `tfsdk:"as_path_access_list"`
+	ExtendedCommunity basetypes.StringValue `tfsdk:"extended_community"`
+	Interface         basetypes.StringValue `tfsdk:"interface"`
+	Ipv4              basetypes.ObjectValue `tfsdk:"ipv4"`
+	LargeCommunity    basetypes.StringValue `tfsdk:"large_community"`
+	LocalPreference   basetypes.Int64Value  `tfsdk:"local_preference"`
+	Metric            basetypes.Int64Value  `tfsdk:"metric"`
+	Origin            basetypes.StringValue `tfsdk:"origin"`
+	Peer              basetypes.StringValue `tfsdk:"peer"`
+	RegularCommunity  basetypes.StringValue `tfsdk:"regular_community"`
+	Tag               basetypes.Int64Value  `tfsdk:"tag"`
+}
+
+// BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4 represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4 struct {
+	Address     basetypes.ObjectValue `tfsdk:"address"`
+	NextHop     basetypes.ObjectValue `tfsdk:"next_hop"`
+	RouteSource basetypes.ObjectValue `tfsdk:"route_source"`
+}
+
+// BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4Address represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4Address struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
 }
 
 // BgpRouteMapRedistributionsBgpRibRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
@@ -196,6 +248,19 @@ type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInner struct {
 	Set         basetypes.ObjectValue `tfsdk:"set"`
 }
 
+// BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatch represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatch struct {
+	Interface basetypes.StringValue `tfsdk:"interface"`
+	Ipv4      basetypes.ObjectValue `tfsdk:"ipv4"`
+	Metric    basetypes.Int64Value  `tfsdk:"metric"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4 represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4 struct {
+	Address basetypes.ObjectValue `tfsdk:"address"`
+	NextHop basetypes.ObjectValue `tfsdk:"next_hop"`
+}
+
 // BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
 type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet struct {
 	Metric     basetypes.ObjectValue `tfsdk:"metric"`
@@ -215,6 +280,19 @@ type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInner struct {
 	Match       basetypes.ObjectValue `tfsdk:"match"`
 	Name        basetypes.Int64Value  `tfsdk:"name"`
 	Set         basetypes.ObjectValue `tfsdk:"set"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatch represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatch struct {
+	Interface basetypes.StringValue `tfsdk:"interface"`
+	Ipv4      basetypes.ObjectValue `tfsdk:"ipv4"`
+	Metric    basetypes.Int64Value  `tfsdk:"metric"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4 represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4 struct {
+	Address basetypes.ObjectValue `tfsdk:"address"`
+	NextHop basetypes.ObjectValue `tfsdk:"next_hop"`
 }
 
 // BgpRouteMapRedistributionsOspf represents a nested structure within the BgpRouteMapRedistributions model
@@ -244,6 +322,40 @@ type BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatch struct {
 	Metric    basetypes.Int64Value  `tfsdk:"metric"`
 	NextHop   basetypes.ObjectValue `tfsdk:"next_hop"`
 	Tag       basetypes.Int64Value  `tfsdk:"tag"`
+}
+
+// BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchAddress represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchAddress struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchNextHop represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchNextHop struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsOspfBgpRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfBgpRouteMapInnerSet struct {
+	Aggregator       basetypes.ObjectValue `tfsdk:"aggregator"`
+	AspathPrepend    basetypes.ListValue   `tfsdk:"aspath_prepend"`
+	AtomicAggregate  basetypes.BoolValue   `tfsdk:"atomic_aggregate"`
+	Ipv4             basetypes.ObjectValue `tfsdk:"ipv4"`
+	LargeCommunity   basetypes.ListValue   `tfsdk:"large_community"`
+	LocalPreference  basetypes.Int64Value  `tfsdk:"local_preference"`
+	Metric           basetypes.ObjectValue `tfsdk:"metric"`
+	Origin           basetypes.StringValue `tfsdk:"origin"`
+	OriginatorId     basetypes.StringValue `tfsdk:"originator_id"`
+	RegularCommunity basetypes.ListValue   `tfsdk:"regular_community"`
+	Tag              basetypes.Int64Value  `tfsdk:"tag"`
+	Weight           basetypes.Int64Value  `tfsdk:"weight"`
+}
+
+// BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator struct {
+	As       basetypes.Int64Value  `tfsdk:"as"`
+	RouterId basetypes.StringValue `tfsdk:"router_id"`
 }
 
 // BgpRouteMapRedistributionsOspfRib represents a nested structure within the BgpRouteMapRedistributions model
@@ -1002,6 +1114,36 @@ func (o BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4Address) AttrType
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4NextHop model.
+func (o BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4NextHop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4NextHop objects.
+func (o BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4NextHop) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4RouteSource model.
+func (o BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4RouteSource) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4RouteSource objects.
+func (o BgpRouteMapRedistributionsBgpOspfRouteMapInnerMatchIpv4RouteSource) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpOspfRouteMapInnerSet model.
 func (o BgpRouteMapRedistributionsBgpOspfRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -1151,6 +1293,127 @@ func (o BgpRouteMapRedistributionsBgpRibRouteMapInner) AttrTypes() map[string]at
 
 // AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpRibRouteMapInner objects.
 func (o BgpRouteMapRedistributionsBgpRibRouteMapInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpRibRouteMapInnerMatch model.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatch) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"as_path_access_list": basetypes.StringType{},
+		"extended_community":  basetypes.StringType{},
+		"interface":           basetypes.StringType{},
+		"ipv4": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"address": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"access_list": basetypes.StringType{},
+						"prefix_list": basetypes.StringType{},
+					},
+				},
+				"next_hop": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"access_list": basetypes.StringType{},
+						"prefix_list": basetypes.StringType{},
+					},
+				},
+				"route_source": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"access_list": basetypes.StringType{},
+						"prefix_list": basetypes.StringType{},
+					},
+				},
+			},
+		},
+		"large_community":   basetypes.StringType{},
+		"local_preference":  basetypes.Int64Type{},
+		"metric":            basetypes.Int64Type{},
+		"origin":            basetypes.StringType{},
+		"peer":              basetypes.StringType{},
+		"regular_community": basetypes.StringType{},
+		"tag":               basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpRibRouteMapInnerMatch objects.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatch) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4 model.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"next_hop": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"route_source": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4 objects.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4Address model.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4Address) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4Address objects.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4Address) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop model.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop objects.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4NextHop) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource model.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource objects.
+func (o BgpRouteMapRedistributionsBgpRibRouteMapInnerMatchIpv4RouteSource) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -1717,6 +1980,62 @@ func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInner) AttrType() a
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatch model.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatch) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"interface": basetypes.StringType{},
+		"ipv4": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"address": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"access_list": basetypes.StringType{},
+						"prefix_list": basetypes.StringType{},
+					},
+				},
+				"next_hop": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"access_list": basetypes.StringType{},
+						"prefix_list": basetypes.StringType{},
+					},
+				},
+			},
+		},
+		"metric": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatch objects.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatch) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4 model.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"next_hop": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4 objects.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet model.
 func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -1823,6 +2142,62 @@ func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInner) AttrTypes() m
 
 // AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticRibRouteMapInner objects.
 func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatch model.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatch) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"interface": basetypes.StringType{},
+		"ipv4": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"address": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"access_list": basetypes.StringType{},
+						"prefix_list": basetypes.StringType{},
+					},
+				},
+				"next_hop": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"access_list": basetypes.StringType{},
+						"prefix_list": basetypes.StringType{},
+					},
+				},
+			},
+		},
+		"metric": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatch objects.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatch) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4 model.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"next_hop": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4 objects.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -2101,6 +2476,91 @@ func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatch) AttrType() attr.Typ
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchAddress model.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchAddress) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchAddress objects.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchAddress) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchNextHop model.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchNextHop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchNextHop objects.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerMatchNextHop) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfBgpRouteMapInnerSet model.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSet) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"aggregator": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"as":        basetypes.Int64Type{},
+				"router_id": basetypes.StringType{},
+			},
+		},
+		"aspath_prepend":   basetypes.ListType{ElemType: basetypes.Int64Type{}},
+		"atomic_aggregate": basetypes.BoolType{},
+		"ipv4": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"next_hop":       basetypes.StringType{},
+				"source_address": basetypes.StringType{},
+			},
+		},
+		"large_community":  basetypes.ListType{ElemType: basetypes.StringType{}},
+		"local_preference": basetypes.Int64Type{},
+		"metric": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"action": basetypes.StringType{},
+				"value":  basetypes.Int64Type{},
+			},
+		},
+		"origin":            basetypes.StringType{},
+		"originator_id":     basetypes.StringType{},
+		"regular_community": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"tag":               basetypes.Int64Type{},
+		"weight":            basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfBgpRouteMapInnerSet objects.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSet) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator model.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"as":        basetypes.Int64Type{},
+		"router_id": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator objects.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfRib model.
 func (o BgpRouteMapRedistributionsOspfRib) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -2263,11 +2723,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "bgp-route-map-redistributions ipv4 object",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 object address",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
@@ -2281,7 +2741,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														},
 													},
 													"next_hop": schema.SingleNestedAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 object next_hop",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
@@ -2295,7 +2755,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														},
 													},
 													"route_source": schema.SingleNestedAttribute{
-														MarkdownDescription: "Route source",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 object route_source",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
@@ -2450,7 +2910,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 rib object address",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
@@ -2464,7 +2924,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														},
 													},
 													"next_hop": schema.SingleNestedAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 rib object next_hop",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
@@ -2598,7 +3058,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "bgp-route-map-redistributions connected-static ipv4",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
@@ -2652,7 +3112,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"aggregator": schema.SingleNestedAttribute{
-												MarkdownDescription: "Aggregator",
+												MarkdownDescription: "bgp-route-map-redistributions connected_static aggregator",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"as": schema.Int64Attribute{
@@ -2795,7 +3255,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "bgp-route-map-redistributions connected-static match ipv4",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
@@ -2997,7 +3457,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -3008,7 +3468,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -3061,7 +3521,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"address": schema.SingleNestedAttribute{
-												MarkdownDescription: "Address",
+												MarkdownDescription: "bgp-route-map-redistributions ospf address",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"access_list": schema.StringAttribute{
@@ -3086,7 +3546,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 											},
 											"next_hop": schema.SingleNestedAttribute{
-												MarkdownDescription: "Next hop",
+												MarkdownDescription: "bgp-route-map-redistributions ospf next_hop",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"access_list": schema.StringAttribute{
@@ -3120,7 +3580,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"aggregator": schema.SingleNestedAttribute{
-												MarkdownDescription: "Aggregator",
+												MarkdownDescription: "bgp-route-map-redistributions set aggregator",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"as": schema.Int64Attribute{
@@ -3332,7 +3792,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -3392,11 +3852,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "bgp-route-map-redistributions ipv4 object",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 object address",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
@@ -3410,7 +3870,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"next_hop": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 object next_hop",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
@@ -3424,7 +3884,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"route_source": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Route source",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 object route_source",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
@@ -3544,7 +4004,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 rib object address",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
@@ -3558,7 +4018,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"next_hop": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "bgp-route-map-redistributions ipv4 rib object next_hop",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
@@ -3668,7 +4128,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "bgp-route-map-redistributions connected-static ipv4",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
@@ -3716,7 +4176,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"aggregator": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Aggregator",
+												MarkdownDescription: "bgp-route-map-redistributions connected_static aggregator",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"as": dsschema.Int64Attribute{
@@ -3829,7 +4289,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "bgp-route-map-redistributions connected-static match ipv4",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
@@ -4038,7 +4498,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"address": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Address",
+												MarkdownDescription: "bgp-route-map-redistributions ospf address",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"access_list": dsschema.StringAttribute{
@@ -4060,7 +4520,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 											},
 											"next_hop": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Next hop",
+												MarkdownDescription: "bgp-route-map-redistributions ospf next_hop",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"access_list": dsschema.StringAttribute{
@@ -4088,7 +4548,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"aggregator": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Aggregator",
+												MarkdownDescription: "bgp-route-map-redistributions set aggregator",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"as": dsschema.Int64Attribute{

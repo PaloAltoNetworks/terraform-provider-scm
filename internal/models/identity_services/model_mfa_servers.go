@@ -280,7 +280,7 @@ var MfaServersResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -297,11 +297,11 @@ var MfaServersResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -378,9 +378,9 @@ var MfaServersResourceSchema = schema.Schema{
 				"okta_adaptive_v1": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 							path.MatchRelative().AtParent().AtName("ping_identity_v1"),
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
-							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 						),
 					},
 					MarkdownDescription: "Integration with [Okta Adaptive MFA](https://www.okta.com/products/adaptive-multi-factor-authentication)",
@@ -425,9 +425,9 @@ var MfaServersResourceSchema = schema.Schema{
 				"ping_identity_v1": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 							path.MatchRelative().AtParent().AtName("okta_adaptive_v1"),
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
-							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 						),
 					},
 					MarkdownDescription: "Integation with [Ping Identity](https://www.pingidentity.com/en/platform.html)",
@@ -483,9 +483,9 @@ var MfaServersResourceSchema = schema.Schema{
 				"rsa_securid_access_v1": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 							path.MatchRelative().AtParent().AtName("okta_adaptive_v1"),
 							path.MatchRelative().AtParent().AtName("ping_identity_v1"),
-							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 						),
 					},
 					MarkdownDescription: "Integration with [RSA SecurID](https://www.rsa.com/products/securid/)",
@@ -554,11 +554,11 @@ var MfaServersResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,

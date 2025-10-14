@@ -670,9 +670,9 @@ var ApplicationsResourceSchema = schema.Schema{
 				"ident_by_icmp6_type": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("port"),
-							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
 							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
+							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
+							path.MatchRelative().AtParent().AtName("port"),
 						),
 					},
 					MarkdownDescription: "Ident by icmp6 type",
@@ -691,9 +691,9 @@ var ApplicationsResourceSchema = schema.Schema{
 				"ident_by_icmp_type": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("port"),
-							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
 							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
+							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
+							path.MatchRelative().AtParent().AtName("port"),
 						),
 					},
 					MarkdownDescription: "Ident by icmp type",
@@ -712,9 +712,9 @@ var ApplicationsResourceSchema = schema.Schema{
 				"ident_by_ip_protocol": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("port"),
-							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
 							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
+							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
+							path.MatchRelative().AtParent().AtName("port"),
 						),
 					},
 					MarkdownDescription: "Ident by ip protocol",
@@ -725,9 +725,9 @@ var ApplicationsResourceSchema = schema.Schema{
 					MarkdownDescription: "Port",
 					Validators: []validator.List{
 						listvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
-							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
 							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
+							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
+							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
 						),
 						listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(63)),
 					},
@@ -749,7 +749,7 @@ var ApplicationsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -768,11 +768,11 @@ var ApplicationsResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -857,9 +857,9 @@ var ApplicationsResourceSchema = schema.Schema{
 													"equal_to": schema.SingleNestedAttribute{
 														Validators: []validator.Object{
 															objectvalidator.ExactlyOneOf(
-																path.MatchRelative().AtParent().AtName("pattern_match"),
 																path.MatchRelative().AtParent().AtName("greater_than"),
 																path.MatchRelative().AtParent().AtName("less_than"),
+																path.MatchRelative().AtParent().AtName("pattern_match"),
 															),
 														},
 														MarkdownDescription: "Equal to",
@@ -896,9 +896,9 @@ var ApplicationsResourceSchema = schema.Schema{
 													"greater_than": schema.SingleNestedAttribute{
 														Validators: []validator.Object{
 															objectvalidator.ExactlyOneOf(
-																path.MatchRelative().AtParent().AtName("pattern_match"),
-																path.MatchRelative().AtParent().AtName("less_than"),
 																path.MatchRelative().AtParent().AtName("equal_to"),
+																path.MatchRelative().AtParent().AtName("less_than"),
+																path.MatchRelative().AtParent().AtName("pattern_match"),
 															),
 														},
 														MarkdownDescription: "Greater than",
@@ -942,9 +942,9 @@ var ApplicationsResourceSchema = schema.Schema{
 													"less_than": schema.SingleNestedAttribute{
 														Validators: []validator.Object{
 															objectvalidator.ExactlyOneOf(
-																path.MatchRelative().AtParent().AtName("pattern_match"),
-																path.MatchRelative().AtParent().AtName("greater_than"),
 																path.MatchRelative().AtParent().AtName("equal_to"),
+																path.MatchRelative().AtParent().AtName("greater_than"),
+																path.MatchRelative().AtParent().AtName("pattern_match"),
 															),
 														},
 														MarkdownDescription: "Less than",
@@ -988,9 +988,9 @@ var ApplicationsResourceSchema = schema.Schema{
 													"pattern_match": schema.SingleNestedAttribute{
 														Validators: []validator.Object{
 															objectvalidator.ExactlyOneOf(
+																path.MatchRelative().AtParent().AtName("equal_to"),
 																path.MatchRelative().AtParent().AtName("greater_than"),
 																path.MatchRelative().AtParent().AtName("less_than"),
-																path.MatchRelative().AtParent().AtName("equal_to"),
 															),
 														},
 														MarkdownDescription: "Pattern match",
@@ -1074,11 +1074,11 @@ var ApplicationsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,

@@ -1007,7 +1007,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -1024,11 +1024,11 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -1046,7 +1046,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.LengthAtMost(63),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[ a-zA-Z\\d.-_]+$"), "pattern must match "+"^[ a-zA-Z\\d.-_]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[ a-zA-Z\\d.\\-_]+$"), "pattern must match "+"^[ a-zA-Z\\d.\\-_]+$"),
 			},
 			MarkdownDescription: "The name of the external dynamic list",
 			Required:            true,
@@ -1054,11 +1054,11 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -1081,12 +1081,12 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				"domain": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("imei"),
+							path.MatchRelative().AtParent().AtName("imsi"),
+							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("predefined_ip"),
 							path.MatchRelative().AtParent().AtName("predefined_url"),
-							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("url"),
-							path.MatchRelative().AtParent().AtName("imsi"),
-							path.MatchRelative().AtParent().AtName("imei"),
 						),
 					},
 					MarkdownDescription: "Domain",
@@ -1151,10 +1151,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"daily": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Daily",
@@ -1174,10 +1174,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"five_minute": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Five minute",
@@ -1187,10 +1187,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"hourly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Hourly",
@@ -1200,9 +1200,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"monthly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
@@ -1230,9 +1230,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"weekly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
@@ -1271,12 +1271,12 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				"imei": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("domain"),
+							path.MatchRelative().AtParent().AtName("imsi"),
+							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("predefined_ip"),
 							path.MatchRelative().AtParent().AtName("predefined_url"),
-							path.MatchRelative().AtParent().AtName("ip"),
-							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("url"),
-							path.MatchRelative().AtParent().AtName("imsi"),
 						),
 					},
 					MarkdownDescription: "Imei",
@@ -1337,8 +1337,8 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("weekly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Daily",
@@ -1358,10 +1358,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"five_minute": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Five minute",
@@ -1371,10 +1371,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"hourly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Hourly",
@@ -1384,9 +1384,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"monthly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
@@ -1414,9 +1414,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"weekly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
@@ -1455,12 +1455,12 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				"imsi": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("domain"),
+							path.MatchRelative().AtParent().AtName("imei"),
+							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("predefined_ip"),
 							path.MatchRelative().AtParent().AtName("predefined_url"),
-							path.MatchRelative().AtParent().AtName("ip"),
-							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("url"),
-							path.MatchRelative().AtParent().AtName("imei"),
 						),
 					},
 					MarkdownDescription: "Imsi",
@@ -1521,8 +1521,8 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("weekly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Daily",
@@ -1542,10 +1542,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"five_minute": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Five minute",
@@ -1555,10 +1555,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"hourly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Hourly",
@@ -1568,9 +1568,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"monthly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
@@ -1598,9 +1598,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"weekly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
@@ -1639,12 +1639,12 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				"ip": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("domain"),
+							path.MatchRelative().AtParent().AtName("imei"),
+							path.MatchRelative().AtParent().AtName("imsi"),
 							path.MatchRelative().AtParent().AtName("predefined_ip"),
 							path.MatchRelative().AtParent().AtName("predefined_url"),
-							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("url"),
-							path.MatchRelative().AtParent().AtName("imsi"),
-							path.MatchRelative().AtParent().AtName("imei"),
 						),
 					},
 					MarkdownDescription: "Ip",
@@ -1706,8 +1706,8 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 										objectvalidator.ExactlyOneOf(
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("weekly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Daily",
@@ -1727,10 +1727,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"five_minute": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Five minute",
@@ -1740,10 +1740,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"hourly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Hourly",
@@ -1753,9 +1753,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"monthly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
@@ -1783,9 +1783,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"weekly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("daily"),
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
@@ -1824,12 +1824,12 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				"predefined_ip": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("predefined_url"),
-							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("domain"),
-							path.MatchRelative().AtParent().AtName("url"),
-							path.MatchRelative().AtParent().AtName("imsi"),
 							path.MatchRelative().AtParent().AtName("imei"),
+							path.MatchRelative().AtParent().AtName("imsi"),
+							path.MatchRelative().AtParent().AtName("ip"),
+							path.MatchRelative().AtParent().AtName("predefined_url"),
+							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
 					MarkdownDescription: "Predefined ip",
@@ -1862,12 +1862,12 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				"predefined_url": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("predefined_ip"),
-							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("domain"),
-							path.MatchRelative().AtParent().AtName("url"),
-							path.MatchRelative().AtParent().AtName("imsi"),
 							path.MatchRelative().AtParent().AtName("imei"),
+							path.MatchRelative().AtParent().AtName("imsi"),
+							path.MatchRelative().AtParent().AtName("ip"),
+							path.MatchRelative().AtParent().AtName("predefined_ip"),
+							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
 					MarkdownDescription: "Predefined url",
@@ -1900,12 +1900,12 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				"url": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("domain"),
+							path.MatchRelative().AtParent().AtName("imei"),
+							path.MatchRelative().AtParent().AtName("imsi"),
+							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("predefined_ip"),
 							path.MatchRelative().AtParent().AtName("predefined_url"),
-							path.MatchRelative().AtParent().AtName("ip"),
-							path.MatchRelative().AtParent().AtName("domain"),
-							path.MatchRelative().AtParent().AtName("imsi"),
-							path.MatchRelative().AtParent().AtName("imei"),
 						),
 					},
 					MarkdownDescription: "Url",
@@ -1964,10 +1964,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"daily": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("five_minute"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Daily",
@@ -1987,10 +1987,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"five_minute": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Five minute",
@@ -2000,10 +2000,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"hourly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
-											path.MatchRelative().AtParent().AtName("weekly"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("monthly"),
+											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
 									MarkdownDescription: "Hourly",
@@ -2013,9 +2013,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"monthly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
@@ -2043,9 +2043,9 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								"weekly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("hourly"),
-											path.MatchRelative().AtParent().AtName("five_minute"),
 											path.MatchRelative().AtParent().AtName("daily"),
+											path.MatchRelative().AtParent().AtName("five_minute"),
+											path.MatchRelative().AtParent().AtName("hourly"),
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},

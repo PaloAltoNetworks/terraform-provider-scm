@@ -55,6 +55,13 @@ type BgpRouteMapsRouteMapInnerMatch struct {
 	Tag               basetypes.Int64Value  `tfsdk:"tag"`
 }
 
+// BgpRouteMapsRouteMapInnerMatchIpv4 represents a nested structure within the BgpRouteMaps model
+type BgpRouteMapsRouteMapInnerMatchIpv4 struct {
+	Address     basetypes.ObjectValue `tfsdk:"address"`
+	NextHop     basetypes.ObjectValue `tfsdk:"next_hop"`
+	RouteSource basetypes.ObjectValue `tfsdk:"route_source"`
+}
+
 // BgpRouteMapsRouteMapInnerSet represents a nested structure within the BgpRouteMaps model
 type BgpRouteMapsRouteMapInnerSet struct {
 	Aggregator                basetypes.ObjectValue `tfsdk:"aggregator"`
@@ -74,6 +81,12 @@ type BgpRouteMapsRouteMapInnerSet struct {
 	RemoveRegularCommunity    basetypes.StringValue `tfsdk:"remove_regular_community"`
 	Tag                       basetypes.Int64Value  `tfsdk:"tag"`
 	Weight                    basetypes.Int64Value  `tfsdk:"weight"`
+}
+
+// BgpRouteMapsRouteMapInnerSetAggregator represents a nested structure within the BgpRouteMaps model
+type BgpRouteMapsRouteMapInnerSetAggregator struct {
+	As       basetypes.Int64Value  `tfsdk:"as"`
+	RouterId basetypes.StringValue `tfsdk:"router_id"`
 }
 
 // AttrTypes defines the attribute types for the BgpRouteMaps model.
@@ -308,6 +321,37 @@ func (o BgpRouteMapsRouteMapInnerMatch) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerMatchIpv4 model.
+func (o BgpRouteMapsRouteMapInnerMatchIpv4) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"next_hop": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+		"route_source": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_list": basetypes.StringType{},
+				"prefix_list": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapsRouteMapInnerMatchIpv4 objects.
+func (o BgpRouteMapsRouteMapInnerMatchIpv4) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerSet model.
 func (o BgpRouteMapsRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -353,6 +397,21 @@ func (o BgpRouteMapsRouteMapInnerSet) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerSetAggregator model.
+func (o BgpRouteMapsRouteMapInnerSetAggregator) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"as":        basetypes.Int64Type{},
+		"router_id": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapsRouteMapInnerSetAggregator objects.
+func (o BgpRouteMapsRouteMapInnerSetAggregator) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // BgpRouteMapsResourceSchema defines the schema for BgpRouteMaps resource
 var BgpRouteMapsResourceSchema = schema.Schema{
 	MarkdownDescription: "BgpRouteMap resource",
@@ -368,7 +427,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -379,11 +438,11 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -435,7 +494,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								Optional:            true,
 							},
 							"ipv4": schema.SingleNestedAttribute{
-								MarkdownDescription: "Ipv4",
+								MarkdownDescription: "bgp-route-maps ipv4 object",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
 									"address": schema.SingleNestedAttribute{
@@ -536,7 +595,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 						Optional:            true,
 						Attributes: map[string]schema.Attribute{
 							"aggregator": schema.SingleNestedAttribute{
-								MarkdownDescription: "Aggregator",
+								MarkdownDescription: "bgp-route-maps aggregator",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
 									"as": schema.Int64Attribute{
@@ -666,11 +725,11 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -743,7 +802,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 							},
 							"ipv4": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Ipv4",
+								MarkdownDescription: "bgp-route-maps ipv4 object",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"address": dsschema.SingleNestedAttribute{
@@ -829,7 +888,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
 							"aggregator": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Aggregator",
+								MarkdownDescription: "bgp-route-maps aggregator",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"as": dsschema.Int64Attribute{

@@ -42,6 +42,113 @@ type AntiSpywareSignatures struct {
 	Vendor        basetypes.ListValue   `tfsdk:"vendor"`
 }
 
+// AntiSpywareSignaturesDefaultAction represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesDefaultAction struct {
+	Alert       basetypes.ObjectValue `tfsdk:"alert"`
+	Allow       basetypes.ObjectValue `tfsdk:"allow"`
+	BlockIp     basetypes.ObjectValue `tfsdk:"block_ip"`
+	Drop        basetypes.ObjectValue `tfsdk:"drop"`
+	ResetBoth   basetypes.ObjectValue `tfsdk:"reset_both"`
+	ResetClient basetypes.ObjectValue `tfsdk:"reset_client"`
+	ResetServer basetypes.ObjectValue `tfsdk:"reset_server"`
+}
+
+// AntiSpywareSignaturesDefaultActionBlockIp represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesDefaultActionBlockIp struct {
+	Duration basetypes.Int64Value  `tfsdk:"duration"`
+	TrackBy  basetypes.StringValue `tfsdk:"track_by"`
+}
+
+// AntiSpywareSignaturesSignature represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignature struct {
+	Combination basetypes.ObjectValue `tfsdk:"combination"`
+	Standard    basetypes.ListValue   `tfsdk:"standard"`
+}
+
+// AntiSpywareSignaturesSignatureCombination represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureCombination struct {
+	AndCondition  basetypes.ListValue   `tfsdk:"and_condition"`
+	OrderFree     basetypes.BoolValue   `tfsdk:"order_free"`
+	TimeAttribute basetypes.ObjectValue `tfsdk:"time_attribute"`
+}
+
+// AntiSpywareSignaturesSignatureCombinationAndConditionInner represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureCombinationAndConditionInner struct {
+	Name        basetypes.StringValue `tfsdk:"name"`
+	OrCondition basetypes.ListValue   `tfsdk:"or_condition"`
+}
+
+// AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner struct {
+	Name     basetypes.StringValue `tfsdk:"name"`
+	ThreatId basetypes.StringValue `tfsdk:"threat_id"`
+}
+
+// AntiSpywareSignaturesSignatureCombinationTimeAttribute represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureCombinationTimeAttribute struct {
+	Interval  basetypes.Int64Value  `tfsdk:"interval"`
+	Threshold basetypes.Int64Value  `tfsdk:"threshold"`
+	TrackBy   basetypes.StringValue `tfsdk:"track_by"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInner represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInner struct {
+	AndCondition basetypes.ListValue   `tfsdk:"and_condition"`
+	Comment      basetypes.StringValue `tfsdk:"comment"`
+	Name         basetypes.StringValue `tfsdk:"name"`
+	OrderFree    basetypes.BoolValue   `tfsdk:"order_free"`
+	Scope        basetypes.StringValue `tfsdk:"scope"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInnerAndConditionInner represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInnerAndConditionInner struct {
+	Name        basetypes.StringValue `tfsdk:"name"`
+	OrCondition basetypes.ListValue   `tfsdk:"or_condition"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInner represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInner struct {
+	Name     basetypes.StringValue `tfsdk:"name"`
+	Operator basetypes.ObjectValue `tfsdk:"operator"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperator represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperator struct {
+	EqualTo      basetypes.ObjectValue `tfsdk:"equal_to"`
+	GreaterThan  basetypes.ObjectValue `tfsdk:"greater_than"`
+	LessThan     basetypes.ObjectValue `tfsdk:"less_than"`
+	PatternMatch basetypes.ObjectValue `tfsdk:"pattern_match"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualTo represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualTo struct {
+	Context   basetypes.StringValue `tfsdk:"context"`
+	Negate    basetypes.BoolValue   `tfsdk:"negate"`
+	Qualifier basetypes.ListValue   `tfsdk:"qualifier"`
+	Value     basetypes.Int64Value  `tfsdk:"value"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualToQualifierInner represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualToQualifierInner struct {
+	Name  basetypes.StringValue `tfsdk:"name"`
+	Value basetypes.StringValue `tfsdk:"value"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorGreaterThan represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorGreaterThan struct {
+	Context   basetypes.StringValue `tfsdk:"context"`
+	Qualifier basetypes.ListValue   `tfsdk:"qualifier"`
+	Value     basetypes.Int64Value  `tfsdk:"value"`
+}
+
+// AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorPatternMatch represents a nested structure within the AntiSpywareSignatures model
+type AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorPatternMatch struct {
+	Context   basetypes.StringValue `tfsdk:"context"`
+	Negate    basetypes.BoolValue   `tfsdk:"negate"`
+	Pattern   basetypes.StringValue `tfsdk:"pattern"`
+	Qualifier basetypes.ListValue   `tfsdk:"qualifier"`
+}
+
 // AttrTypes defines the attribute types for the AntiSpywareSignatures model.
 func (o AntiSpywareSignatures) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -196,6 +303,614 @@ func (o AntiSpywareSignatures) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesDefaultAction model.
+func (o AntiSpywareSignaturesDefaultAction) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"alert": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"allow": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"block_ip": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"duration": basetypes.Int64Type{},
+				"track_by": basetypes.StringType{},
+			},
+		},
+		"drop": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"reset_both": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"reset_client": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"reset_server": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesDefaultAction objects.
+func (o AntiSpywareSignaturesDefaultAction) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesDefaultActionBlockIp model.
+func (o AntiSpywareSignaturesDefaultActionBlockIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"duration": basetypes.Int64Type{},
+		"track_by": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesDefaultActionBlockIp objects.
+func (o AntiSpywareSignaturesDefaultActionBlockIp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignature model.
+func (o AntiSpywareSignaturesSignature) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"combination": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"and_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name": basetypes.StringType{},
+						"or_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"name":      basetypes.StringType{},
+								"threat_id": basetypes.StringType{},
+							},
+						}},
+					},
+				}},
+				"order_free": basetypes.BoolType{},
+				"time_attribute": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"interval":  basetypes.Int64Type{},
+						"threshold": basetypes.Int64Type{},
+						"track_by":  basetypes.StringType{},
+					},
+				},
+			},
+		},
+		"standard": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"and_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name": basetypes.StringType{},
+						"or_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"name": basetypes.StringType{},
+								"operator": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"equal_to": basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"context": basetypes.StringType{},
+												"negate":  basetypes.BoolType{},
+												"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+													AttrTypes: map[string]attr.Type{
+														"name":  basetypes.StringType{},
+														"value": basetypes.StringType{},
+													},
+												}},
+												"value": basetypes.Int64Type{},
+											},
+										},
+										"greater_than": basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"context": basetypes.StringType{},
+												"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+													AttrTypes: map[string]attr.Type{
+														"name":  basetypes.StringType{},
+														"value": basetypes.StringType{},
+													},
+												}},
+												"value": basetypes.Int64Type{},
+											},
+										},
+										"less_than": basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"context": basetypes.StringType{},
+												"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+													AttrTypes: map[string]attr.Type{
+														"name":  basetypes.StringType{},
+														"value": basetypes.StringType{},
+													},
+												}},
+												"value": basetypes.Int64Type{},
+											},
+										},
+										"pattern_match": basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"context": basetypes.StringType{},
+												"negate":  basetypes.BoolType{},
+												"pattern": basetypes.StringType{},
+												"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+													AttrTypes: map[string]attr.Type{
+														"name":  basetypes.StringType{},
+														"value": basetypes.StringType{},
+													},
+												}},
+											},
+										},
+									},
+								},
+							},
+						}},
+					},
+				}},
+				"comment":    basetypes.StringType{},
+				"name":       basetypes.StringType{},
+				"order_free": basetypes.BoolType{},
+				"scope":      basetypes.StringType{},
+			},
+		}},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignature objects.
+func (o AntiSpywareSignaturesSignature) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureCombination model.
+func (o AntiSpywareSignaturesSignatureCombination) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"and_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+				"or_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name":      basetypes.StringType{},
+						"threat_id": basetypes.StringType{},
+					},
+				}},
+			},
+		}},
+		"order_free": basetypes.BoolType{},
+		"time_attribute": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"interval":  basetypes.Int64Type{},
+				"threshold": basetypes.Int64Type{},
+				"track_by":  basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureCombination objects.
+func (o AntiSpywareSignaturesSignatureCombination) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureCombinationAndConditionInner model.
+func (o AntiSpywareSignaturesSignatureCombinationAndConditionInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+		"or_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name":      basetypes.StringType{},
+				"threat_id": basetypes.StringType{},
+			},
+		}},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureCombinationAndConditionInner objects.
+func (o AntiSpywareSignaturesSignatureCombinationAndConditionInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner model.
+func (o AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name":      basetypes.StringType{},
+		"threat_id": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner objects.
+func (o AntiSpywareSignaturesSignatureCombinationAndConditionInnerOrConditionInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureCombinationTimeAttribute model.
+func (o AntiSpywareSignaturesSignatureCombinationTimeAttribute) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"interval":  basetypes.Int64Type{},
+		"threshold": basetypes.Int64Type{},
+		"track_by":  basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureCombinationTimeAttribute objects.
+func (o AntiSpywareSignaturesSignatureCombinationTimeAttribute) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInner model.
+func (o AntiSpywareSignaturesSignatureStandardInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"and_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+				"or_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name": basetypes.StringType{},
+						"operator": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"equal_to": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"context": basetypes.StringType{},
+										"negate":  basetypes.BoolType{},
+										"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"name":  basetypes.StringType{},
+												"value": basetypes.StringType{},
+											},
+										}},
+										"value": basetypes.Int64Type{},
+									},
+								},
+								"greater_than": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"context": basetypes.StringType{},
+										"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"name":  basetypes.StringType{},
+												"value": basetypes.StringType{},
+											},
+										}},
+										"value": basetypes.Int64Type{},
+									},
+								},
+								"less_than": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"context": basetypes.StringType{},
+										"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"name":  basetypes.StringType{},
+												"value": basetypes.StringType{},
+											},
+										}},
+										"value": basetypes.Int64Type{},
+									},
+								},
+								"pattern_match": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"context": basetypes.StringType{},
+										"negate":  basetypes.BoolType{},
+										"pattern": basetypes.StringType{},
+										"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"name":  basetypes.StringType{},
+												"value": basetypes.StringType{},
+											},
+										}},
+									},
+								},
+							},
+						},
+					},
+				}},
+			},
+		}},
+		"comment":    basetypes.StringType{},
+		"name":       basetypes.StringType{},
+		"order_free": basetypes.BoolType{},
+		"scope":      basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInner objects.
+func (o AntiSpywareSignaturesSignatureStandardInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInnerAndConditionInner model.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+		"or_condition": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+				"operator": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"equal_to": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"context": basetypes.StringType{},
+								"negate":  basetypes.BoolType{},
+								"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"name":  basetypes.StringType{},
+										"value": basetypes.StringType{},
+									},
+								}},
+								"value": basetypes.Int64Type{},
+							},
+						},
+						"greater_than": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"context": basetypes.StringType{},
+								"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"name":  basetypes.StringType{},
+										"value": basetypes.StringType{},
+									},
+								}},
+								"value": basetypes.Int64Type{},
+							},
+						},
+						"less_than": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"context": basetypes.StringType{},
+								"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"name":  basetypes.StringType{},
+										"value": basetypes.StringType{},
+									},
+								}},
+								"value": basetypes.Int64Type{},
+							},
+						},
+						"pattern_match": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"context": basetypes.StringType{},
+								"negate":  basetypes.BoolType{},
+								"pattern": basetypes.StringType{},
+								"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"name":  basetypes.StringType{},
+										"value": basetypes.StringType{},
+									},
+								}},
+							},
+						},
+					},
+				},
+			},
+		}},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInnerAndConditionInner objects.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInner model.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+		"operator": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"equal_to": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"context": basetypes.StringType{},
+						"negate":  basetypes.BoolType{},
+						"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"name":  basetypes.StringType{},
+								"value": basetypes.StringType{},
+							},
+						}},
+						"value": basetypes.Int64Type{},
+					},
+				},
+				"greater_than": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"context": basetypes.StringType{},
+						"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"name":  basetypes.StringType{},
+								"value": basetypes.StringType{},
+							},
+						}},
+						"value": basetypes.Int64Type{},
+					},
+				},
+				"less_than": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"context": basetypes.StringType{},
+						"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"name":  basetypes.StringType{},
+								"value": basetypes.StringType{},
+							},
+						}},
+						"value": basetypes.Int64Type{},
+					},
+				},
+				"pattern_match": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"context": basetypes.StringType{},
+						"negate":  basetypes.BoolType{},
+						"pattern": basetypes.StringType{},
+						"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"name":  basetypes.StringType{},
+								"value": basetypes.StringType{},
+							},
+						}},
+					},
+				},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInner objects.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperator model.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperator) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"equal_to": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"context": basetypes.StringType{},
+				"negate":  basetypes.BoolType{},
+				"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name":  basetypes.StringType{},
+						"value": basetypes.StringType{},
+					},
+				}},
+				"value": basetypes.Int64Type{},
+			},
+		},
+		"greater_than": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"context": basetypes.StringType{},
+				"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name":  basetypes.StringType{},
+						"value": basetypes.StringType{},
+					},
+				}},
+				"value": basetypes.Int64Type{},
+			},
+		},
+		"less_than": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"context": basetypes.StringType{},
+				"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name":  basetypes.StringType{},
+						"value": basetypes.StringType{},
+					},
+				}},
+				"value": basetypes.Int64Type{},
+			},
+		},
+		"pattern_match": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"context": basetypes.StringType{},
+				"negate":  basetypes.BoolType{},
+				"pattern": basetypes.StringType{},
+				"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name":  basetypes.StringType{},
+						"value": basetypes.StringType{},
+					},
+				}},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperator objects.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperator) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualTo model.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualTo) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"context": basetypes.StringType{},
+		"negate":  basetypes.BoolType{},
+		"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name":  basetypes.StringType{},
+				"value": basetypes.StringType{},
+			},
+		}},
+		"value": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualTo objects.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualTo) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualToQualifierInner model.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualToQualifierInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name":  basetypes.StringType{},
+		"value": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualToQualifierInner objects.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorEqualToQualifierInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorGreaterThan model.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorGreaterThan) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"context": basetypes.StringType{},
+		"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name":  basetypes.StringType{},
+				"value": basetypes.StringType{},
+			},
+		}},
+		"value": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorGreaterThan objects.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorGreaterThan) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorPatternMatch model.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorPatternMatch) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"context": basetypes.StringType{},
+		"negate":  basetypes.BoolType{},
+		"pattern": basetypes.StringType{},
+		"qualifier": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name":  basetypes.StringType{},
+				"value": basetypes.StringType{},
+			},
+		}},
+	}
+}
+
+// AttrType returns the attribute type for a list of AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorPatternMatch objects.
+func (o AntiSpywareSignaturesSignatureStandardInnerAndConditionInnerOrConditionInnerOperatorPatternMatch) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AntiSpywareSignaturesResourceSchema defines the schema for AntiSpywareSignatures resource
 var AntiSpywareSignaturesResourceSchema = schema.Schema{
 	MarkdownDescription: "AntiSpywareSignature resource",
@@ -218,18 +933,18 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"default_action": schema.SingleNestedAttribute{
-			MarkdownDescription: "Default action",
+			MarkdownDescription: "anti spyware signature default action",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"alert": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("allow"),
+							path.MatchRelative().AtParent().AtName("block_ip"),
 							path.MatchRelative().AtParent().AtName("drop"),
+							path.MatchRelative().AtParent().AtName("reset_both"),
 							path.MatchRelative().AtParent().AtName("reset_client"),
 							path.MatchRelative().AtParent().AtName("reset_server"),
-							path.MatchRelative().AtParent().AtName("reset_both"),
-							path.MatchRelative().AtParent().AtName("block_ip"),
 						),
 					},
 					MarkdownDescription: "Alert",
@@ -240,11 +955,11 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("alert"),
+							path.MatchRelative().AtParent().AtName("block_ip"),
 							path.MatchRelative().AtParent().AtName("drop"),
+							path.MatchRelative().AtParent().AtName("reset_both"),
 							path.MatchRelative().AtParent().AtName("reset_client"),
 							path.MatchRelative().AtParent().AtName("reset_server"),
-							path.MatchRelative().AtParent().AtName("reset_both"),
-							path.MatchRelative().AtParent().AtName("block_ip"),
 						),
 					},
 					MarkdownDescription: "Allow",
@@ -254,15 +969,15 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				"block_ip": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("alert"),
+							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("drop"),
+							path.MatchRelative().AtParent().AtName("reset_both"),
 							path.MatchRelative().AtParent().AtName("reset_client"),
 							path.MatchRelative().AtParent().AtName("reset_server"),
-							path.MatchRelative().AtParent().AtName("reset_both"),
 						),
 					},
-					MarkdownDescription: "Block ip",
+					MarkdownDescription: "anti spyware signature block ip",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"duration": schema.Int64Attribute{
@@ -284,12 +999,12 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				"drop": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("alert"),
+							path.MatchRelative().AtParent().AtName("allow"),
+							path.MatchRelative().AtParent().AtName("block_ip"),
+							path.MatchRelative().AtParent().AtName("reset_both"),
 							path.MatchRelative().AtParent().AtName("reset_client"),
 							path.MatchRelative().AtParent().AtName("reset_server"),
-							path.MatchRelative().AtParent().AtName("reset_both"),
-							path.MatchRelative().AtParent().AtName("block_ip"),
 						),
 					},
 					MarkdownDescription: "Drop",
@@ -299,12 +1014,12 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				"reset_both": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("alert"),
+							path.MatchRelative().AtParent().AtName("allow"),
+							path.MatchRelative().AtParent().AtName("block_ip"),
 							path.MatchRelative().AtParent().AtName("drop"),
 							path.MatchRelative().AtParent().AtName("reset_client"),
 							path.MatchRelative().AtParent().AtName("reset_server"),
-							path.MatchRelative().AtParent().AtName("block_ip"),
 						),
 					},
 					MarkdownDescription: "Reset both",
@@ -314,12 +1029,12 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				"reset_client": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("alert"),
-							path.MatchRelative().AtParent().AtName("drop"),
-							path.MatchRelative().AtParent().AtName("reset_server"),
-							path.MatchRelative().AtParent().AtName("reset_both"),
+							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
+							path.MatchRelative().AtParent().AtName("drop"),
+							path.MatchRelative().AtParent().AtName("reset_both"),
+							path.MatchRelative().AtParent().AtName("reset_server"),
 						),
 					},
 					MarkdownDescription: "Reset client",
@@ -329,12 +1044,12 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				"reset_server": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("alert"),
-							path.MatchRelative().AtParent().AtName("drop"),
-							path.MatchRelative().AtParent().AtName("reset_client"),
-							path.MatchRelative().AtParent().AtName("reset_both"),
+							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
+							path.MatchRelative().AtParent().AtName("drop"),
+							path.MatchRelative().AtParent().AtName("reset_both"),
+							path.MatchRelative().AtParent().AtName("reset_client"),
 						),
 					},
 					MarkdownDescription: "Reset server",
@@ -350,7 +1065,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -368,11 +1083,11 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -400,7 +1115,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"signature": schema.SingleNestedAttribute{
-			MarkdownDescription: "Signature",
+			MarkdownDescription: "anti spyware signature",
 			Optional:            true,
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
@@ -410,7 +1125,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("standard"),
 						),
 					},
-					MarkdownDescription: "Combination",
+					MarkdownDescription: "anti spyware signature combination",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -450,7 +1165,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							Default:             booldefault.StaticBool(false),
 						},
 						"time_attribute": schema.SingleNestedAttribute{
-							MarkdownDescription: "Time attribute",
+							MarkdownDescription: "anti spyware time attribute",
 							Optional:            true,
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
@@ -713,11 +1428,11 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -773,7 +1488,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"default_action": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Default action",
+			MarkdownDescription: "anti spyware signature default action",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"alert": dsschema.SingleNestedAttribute{
@@ -787,7 +1502,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"block_ip": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Block ip",
+					MarkdownDescription: "anti spyware signature block ip",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"duration": dsschema.Int64Attribute{
@@ -848,11 +1563,11 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"signature": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Signature",
+			MarkdownDescription: "anti spyware signature",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"combination": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Combination",
+					MarkdownDescription: "anti spyware signature combination",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"and_condition": dsschema.ListNestedAttribute{
@@ -888,7 +1603,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"time_attribute": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Time attribute",
+							MarkdownDescription: "anti spyware time attribute",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"interval": dsschema.Int64Attribute{

@@ -100,7 +100,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -111,11 +111,11 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -135,12 +135,12 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"ip": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "loopback ip parent",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "Loopback IP address(es)",
 					Optional:            true,
 				},
 			},
@@ -159,11 +159,11 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
@@ -210,12 +210,12 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ip": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ip",
+			MarkdownDescription: "loopback ip parent",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "IP address(es)",
+					MarkdownDescription: "Loopback IP address(es)",
 					Computed:            true,
 				},
 			},

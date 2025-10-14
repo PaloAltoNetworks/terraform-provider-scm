@@ -43,9 +43,9 @@ Optional:
 
 Read-Only:
 
-- `arp` (Attributes List) ARP configuration (see [below for nested schema](#nestedatt--data--arp))
+- `arp` (Attributes List) Layer 3 sub Interfaces ARP configuration (see [below for nested schema](#nestedatt--data--arp))
 - `comment` (String) Description
-- `ddns_config` (Attributes) Ddns config (see [below for nested schema](#nestedatt--data--ddns_config))
+- `ddns_config` (Attributes) Dynamic DNS configuration specific to the Layer 3 sub Interfaces. (see [below for nested schema](#nestedatt--data--ddns_config))
 - `device` (String) The device in which the resource is defined
 - `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--data--dhcp_client))
 - `folder` (String) The folder in which the resource is defined

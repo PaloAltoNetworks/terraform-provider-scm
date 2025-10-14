@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -157,9 +158,15 @@ func (r *TrafficSteeringRuleResource) Read(ctx context.Context, req resource.Rea
 	// Step 3 - Make read api call with id = id from state tfid
 	tflog.Debug(ctx, "Reading traffic_steering_rules from SCM API", map[string]interface{}{"id": objectId})
 	getReq := r.client.TrafficSteeringRulesAPI.GetTrafficSteeringRulesByID(ctx, objectId)
-	scmObject, _, err := getReq.Execute()
+	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error reading traffic_steering_rules", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no traffic_steering_rules on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error reading traffic_steering_rules", err.Error())
+		}
 		return
 	}
 
@@ -181,11 +188,27 @@ func (r *TrafficSteeringRuleResource) Read(ctx context.Context, req resource.Rea
 
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
-	if tokens[0] != "" {
-		data.Folder = basetypes.NewStringValue(tokens[0])
-	} else {
-		data.Folder = basetypes.NewStringNull()
+	// --- FOLDER RESTORATION (tokens[0]) ---
+
+	// Use reflection to safely restore the Folder field from the TFID token 0.
+	vFolder := reflect.ValueOf(&data).Elem() // Unique variable: vFolder
+	fFolder := vFolder.FieldByName("Folder") // Unique variable: fFolder
+
+	if fFolder.IsValid() && fFolder.CanSet() {
+		tokenValue := tokens[0]
+
+		if tokenValue != "" {
+			newStringValue := basetypes.NewStringValue(tokenValue)
+			fFolder.Set(reflect.ValueOf(newStringValue))
+		} else {
+			newNullValue := basetypes.NewStringNull()
+			fFolder.Set(reflect.ValueOf(newNullValue))
+		}
 	}
+
+	// --- SNIPPET RESTORATION (tokens[1]) ---
+
+	// --- DEVICE RESTORATION (tokens[2]) ---
 
 	// Step 10 - Set data back into tf state and done
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -242,9 +265,15 @@ func (r *TrafficSteeringRuleResource) Update(ctx context.Context, req resource.U
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
-	updatedObject, _, err := updateReq.Execute()
+	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error updating traffic_steering_rules", err.Error())
+		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
+			tflog.Debug(ctx, "Got no traffic_steering_rules on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			resp.State.RemoveResource(ctx)
+		} else {
+			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
+			resp.Diagnostics.AddError("Error updating traffic_steering_rules", err.Error())
+		}
 		return
 	}
 

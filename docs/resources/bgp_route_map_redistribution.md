@@ -68,7 +68,7 @@ Optional:
 - `as_path_access_list` (String) AS path access list
 - `extended_community` (String) Extended community
 - `interface` (String) Interface
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4))
+- `ipv4` (Attributes) bgp-route-map-redistributions ipv4 object (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4))
 - `large_community` (String) Large community
 - `local_preference` (Number) Local preference
 - `metric` (Number) Metric
@@ -82,9 +82,9 @@ Optional:
 
 Optional:
 
-- `address` (Attributes) Address (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4--address))
-- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4--next_hop))
-- `route_source` (Attributes) Route source (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4--route_source))
+- `address` (Attributes) bgp-route-map-redistributions ipv4 object address (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4--address))
+- `next_hop` (Attributes) bgp-route-map-redistributions ipv4 object next_hop (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4--next_hop))
+- `route_source` (Attributes) bgp-route-map-redistributions ipv4 object route_source (see [below for nested schema](#nestedatt--bgp--ospf--route_map--match--ipv4--route_source))
 
 <a id="nestedatt--bgp--ospf--route_map--match--ipv4--address"></a>
 ### Nested Schema for `bgp.ospf.route_map.match.ipv4.address`
@@ -176,8 +176,8 @@ Optional:
 
 Optional:
 
-- `address` (Attributes) Address (see [below for nested schema](#nestedatt--bgp--rib--route_map--match--ipv4--address))
-- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--bgp--rib--route_map--match--ipv4--next_hop))
+- `address` (Attributes) bgp-route-map-redistributions ipv4 rib object address (see [below for nested schema](#nestedatt--bgp--rib--route_map--match--ipv4--address))
+- `next_hop` (Attributes) bgp-route-map-redistributions ipv4 rib object next_hop (see [below for nested schema](#nestedatt--bgp--rib--route_map--match--ipv4--next_hop))
 - `route_source` (Attributes) Route source (see [below for nested schema](#nestedatt--bgp--rib--route_map--match--ipv4--route_source))
 
 <a id="nestedatt--bgp--rib--route_map--match--ipv4--address"></a>
@@ -253,7 +253,7 @@ Optional:
 Optional:
 
 - `interface` (String) Interface
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--connected_static--bgp--route_map--match--ipv4))
+- `ipv4` (Attributes) bgp-route-map-redistributions connected-static ipv4 (see [below for nested schema](#nestedatt--connected_static--bgp--route_map--match--ipv4))
 - `metric` (Number) Metric
 
 <a id="nestedatt--connected_static--bgp--route_map--match--ipv4"></a>
@@ -289,7 +289,7 @@ Optional:
 
 Optional:
 
-- `aggregator` (Attributes) Aggregator (see [below for nested schema](#nestedatt--connected_static--bgp--route_map--set--aggregator))
+- `aggregator` (Attributes) bgp-route-map-redistributions connected_static aggregator (see [below for nested schema](#nestedatt--connected_static--bgp--route_map--set--aggregator))
 - `aspath_prepend` (List of Number) AS numbers
 - `atomic_aggregate` (Boolean) Enable BGP atomic aggregate?
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--connected_static--bgp--route_map--set--ipv4))
@@ -356,7 +356,7 @@ Optional:
 Optional:
 
 - `interface` (String) Interface
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--connected_static--ospf--route_map--match--ipv4))
+- `ipv4` (Attributes) bgp-route-map-redistributions connected-static match ipv4 (see [below for nested schema](#nestedatt--connected_static--ospf--route_map--match--ipv4))
 - `metric` (Number) Metric
 
 <a id="nestedatt--connected_static--ospf--route_map--match--ipv4"></a>
@@ -505,10 +505,10 @@ Optional:
 
 Optional:
 
-- `address` (Attributes) Address (see [below for nested schema](#nestedatt--ospf--bgp--route_map--match--address))
+- `address` (Attributes) bgp-route-map-redistributions ospf address (see [below for nested schema](#nestedatt--ospf--bgp--route_map--match--address))
 - `interface` (String) Interface
 - `metric` (Number) Metric
-- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--ospf--bgp--route_map--match--next_hop))
+- `next_hop` (Attributes) bgp-route-map-redistributions ospf next_hop (see [below for nested schema](#nestedatt--ospf--bgp--route_map--match--next_hop))
 - `tag` (Number) Tag
 
 <a id="nestedatt--ospf--bgp--route_map--match--address"></a>
@@ -535,7 +535,7 @@ Optional:
 
 Optional:
 
-- `aggregator` (Attributes) Aggregator (see [below for nested schema](#nestedatt--ospf--bgp--route_map--set--aggregator))
+- `aggregator` (Attributes) bgp-route-map-redistributions set aggregator (see [below for nested schema](#nestedatt--ospf--bgp--route_map--set--aggregator))
 - `aspath_prepend` (List of Number) AS numbers
 - `atomic_aggregate` (Boolean) Enable BGP atomic aggregate?
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--ospf--bgp--route_map--set--ipv4))

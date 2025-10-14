@@ -634,7 +634,7 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -645,11 +645,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -679,12 +679,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"conditional_advertisement": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("filter_list"),
+											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
 											path.MatchRelative().AtParent().AtName("inherit"),
 											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
 											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
 										),
 									},
 									MarkdownDescription: "Conditional advertisement",
@@ -723,12 +723,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"filter_list": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
+											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
 											path.MatchRelative().AtParent().AtName("inherit"),
 											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
 											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
 										),
 									},
 									MarkdownDescription: "Filter list",
@@ -747,12 +747,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"inbound_network_filters": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
+											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inherit"),
 											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
 											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("filter_list"),
 										),
 									},
 									MarkdownDescription: "Inbound network filters",
@@ -771,12 +771,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"inherit": schema.BoolAttribute{
 									Validators: []validator.Bool{
 										boolvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
+											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 										),
 									},
 									MarkdownDescription: "Inherit from unicast",
@@ -785,12 +785,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"outbound_network_filters": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
+											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 										),
 									},
 									MarkdownDescription: "Outbound network filters",
@@ -809,12 +809,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"route_maps": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
 										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("unsuppress_map"),
 										),
 									},
 									MarkdownDescription: "Route maps",
@@ -833,12 +833,12 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 								"unsuppress_map": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
 											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
 											path.MatchRelative().AtParent().AtName("filter_list"),
 											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("inherit"),
+											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
+											path.MatchRelative().AtParent().AtName("route_maps"),
 										),
 									},
 									MarkdownDescription: "Unsuppress map",
@@ -957,11 +957,11 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,

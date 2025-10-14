@@ -926,7 +926,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
@@ -1097,8 +1097,8 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						"activate_rate": schema.Int64Attribute{
 							Validators: []validator.Int64{
 								int64validator.ExactlyOneOf(
-									path.MatchRelative().AtParent().AtName("maximal_rate"),
 									path.MatchRelative().AtParent().AtName("alarm_rate"),
+									path.MatchRelative().AtParent().AtName("maximal_rate"),
 								),
 								int64validator.Between(0, 2000000),
 							},
@@ -1108,8 +1108,8 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						"alarm_rate": schema.Int64Attribute{
 							Validators: []validator.Int64{
 								int64validator.ExactlyOneOf(
-									path.MatchRelative().AtParent().AtName("maximal_rate"),
 									path.MatchRelative().AtParent().AtName("activate_rate"),
+									path.MatchRelative().AtParent().AtName("maximal_rate"),
 								),
 								int64validator.Between(0, 2000000),
 							},
@@ -1175,11 +1175,11 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("snippet"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -1484,11 +1484,11 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
 					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,

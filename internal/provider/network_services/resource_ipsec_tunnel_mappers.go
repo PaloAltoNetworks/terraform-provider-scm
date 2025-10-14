@@ -307,7 +307,7 @@ func unpackIpsecTunnelsAutoKeyToSdk(ctx context.Context, obj types.Object) (*net
 	// Handling Lists
 	if !model.ProxyIdV6.IsNull() && !model.ProxyIdV6.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field ProxyIdV6")
-		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdInnerListToSdk(ctx, model.ProxyIdV6)
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdV6InnerListToSdk(ctx, model.ProxyIdV6)
 		diags.Append(d...)
 		sdk.ProxyIdV6 = unpacked
 	}
@@ -350,11 +350,11 @@ func packIpsecTunnelsAutoKeyFromSdk(ctx context.Context, sdk network_services.Ip
 	// Handling Lists
 	if sdk.ProxyIdV6 != nil {
 		tflog.Debug(ctx, "Packing list of objects for field ProxyIdV6")
-		packed, d := packIpsecTunnelsAutoKeyProxyIdInnerListFromSdk(ctx, sdk.ProxyIdV6)
+		packed, d := packIpsecTunnelsAutoKeyProxyIdV6InnerListFromSdk(ctx, sdk.ProxyIdV6)
 		diags.Append(d...)
 		model.ProxyIdV6 = packed
 	} else {
-		model.ProxyIdV6 = basetypes.NewListNull(models.IpsecTunnelsAutoKeyProxyIdInner{}.AttrType())
+		model.ProxyIdV6 = basetypes.NewListNull(models.IpsecTunnelsAutoKeyProxyIdV6Inner{}.AttrType())
 	}
 	diags.Append(d...)
 
@@ -1030,6 +1030,416 @@ func packIpsecTunnelsAutoKeyProxyIdInnerProtocolUdpListFromSdk(ctx context.Conte
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.IpsecTunnelsAutoKeyProxyIdInnerProtocolUdp", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdInnerProtocolUdp{}.AttrType(), data)
+}
+
+// --- Unpacker for IpsecTunnelsAutoKeyProxyIdV6Inner ---
+func unpackIpsecTunnelsAutoKeyProxyIdV6InnerToSdk(ctx context.Context, obj types.Object) (*network_services.IpsecTunnelsAutoKeyProxyIdV6Inner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.IpsecTunnelsAutoKeyProxyIdV6Inner
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.IpsecTunnelsAutoKeyProxyIdV6Inner
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Local.IsNull() && !model.Local.IsUnknown() {
+		sdk.Local = model.Local.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Local", "value": *sdk.Local})
+	}
+
+	// Handling Primitives
+	if !model.Name.IsNull() && !model.Name.IsUnknown() {
+		sdk.Name = model.Name.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	}
+
+	// Handling Objects
+	if !model.Protocol.IsNull() && !model.Protocol.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Protocol")
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolToSdk(ctx, model.Protocol)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Protocol"})
+		}
+		if unpacked != nil {
+			sdk.Protocol = unpacked
+		}
+	}
+
+	// Handling Primitives
+	if !model.Remote.IsNull() && !model.Remote.IsUnknown() {
+		sdk.Remote = model.Remote.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Remote", "value": *sdk.Remote})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for IpsecTunnelsAutoKeyProxyIdV6Inner ---
+func packIpsecTunnelsAutoKeyProxyIdV6InnerFromSdk(ctx context.Context, sdk network_services.IpsecTunnelsAutoKeyProxyIdV6Inner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.IpsecTunnelsAutoKeyProxyIdV6Inner
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Local != nil {
+		model.Local = basetypes.NewStringValue(*sdk.Local)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Local", "value": *sdk.Local})
+	} else {
+		model.Local = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	model.Name = basetypes.NewStringValue(sdk.Name)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Protocol != nil {
+		tflog.Debug(ctx, "Packing nested object for field Protocol")
+		packed, d := packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolFromSdk(ctx, *sdk.Protocol)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Protocol"})
+		}
+		model.Protocol = packed
+	} else {
+		model.Protocol = basetypes.NewObjectNull(models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol{}.AttrTypes())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Remote != nil {
+		model.Remote = basetypes.NewStringValue(*sdk.Remote)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Remote", "value": *sdk.Remote})
+	} else {
+		model.Remote = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6Inner{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for IpsecTunnelsAutoKeyProxyIdV6Inner ---
+func unpackIpsecTunnelsAutoKeyProxyIdV6InnerListToSdk(ctx context.Context, list types.List) ([]network_services.IpsecTunnelsAutoKeyProxyIdV6Inner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner")
+	diags := diag.Diagnostics{}
+	var data []models.IpsecTunnelsAutoKeyProxyIdV6Inner
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.IpsecTunnelsAutoKeyProxyIdV6Inner, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6Inner{}.AttrTypes(), &item)
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdV6InnerToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for IpsecTunnelsAutoKeyProxyIdV6Inner ---
+func packIpsecTunnelsAutoKeyProxyIdV6InnerListFromSdk(ctx context.Context, sdks []network_services.IpsecTunnelsAutoKeyProxyIdV6Inner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner")
+	diags := diag.Diagnostics{}
+	var data []models.IpsecTunnelsAutoKeyProxyIdV6Inner
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.IpsecTunnelsAutoKeyProxyIdV6Inner
+		obj, d := packIpsecTunnelsAutoKeyProxyIdV6InnerFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.IpsecTunnelsAutoKeyProxyIdV6Inner{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.IpsecTunnelsAutoKeyProxyIdV6Inner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6Inner{}.AttrType(), data)
+}
+
+// --- Unpacker for IpsecTunnelsAutoKeyProxyIdV6InnerProtocol ---
+func unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolToSdk(ctx context.Context, obj types.Object) (*network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Number.IsNull() && !model.Number.IsUnknown() {
+		val := int32(model.Number.ValueInt64())
+		sdk.Number = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Number", "value": *sdk.Number})
+	}
+
+	// Handling Objects
+	if !model.Tcp.IsNull() && !model.Tcp.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Tcp")
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpToSdk(ctx, model.Tcp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Tcp"})
+		}
+		if unpacked != nil {
+			sdk.Tcp = unpacked
+		}
+	}
+
+	// Handling Objects
+	if !model.Udp.IsNull() && !model.Udp.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Udp")
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdInnerProtocolUdpToSdk(ctx, model.Udp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Udp"})
+		}
+		if unpacked != nil {
+			sdk.Udp = unpacked
+		}
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for IpsecTunnelsAutoKeyProxyIdV6InnerProtocol ---
+func packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolFromSdk(ctx context.Context, sdk network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Number != nil {
+		model.Number = basetypes.NewInt64Value(int64(*sdk.Number))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Number", "value": *sdk.Number})
+	} else {
+		model.Number = basetypes.NewInt64Null()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Tcp != nil {
+		tflog.Debug(ctx, "Packing nested object for field Tcp")
+		packed, d := packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpFromSdk(ctx, *sdk.Tcp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Tcp"})
+		}
+		model.Tcp = packed
+	} else {
+		model.Tcp = basetypes.NewObjectNull(models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp{}.AttrTypes())
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Udp != nil {
+		tflog.Debug(ctx, "Packing nested object for field Udp")
+		packed, d := packIpsecTunnelsAutoKeyProxyIdInnerProtocolUdpFromSdk(ctx, *sdk.Udp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Udp"})
+		}
+		model.Udp = packed
+	} else {
+		model.Udp = basetypes.NewObjectNull(models.IpsecTunnelsAutoKeyProxyIdInnerProtocolUdp{}.AttrTypes())
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for IpsecTunnelsAutoKeyProxyIdV6InnerProtocol ---
+func unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolListToSdk(ctx context.Context, list types.List) ([]network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol")
+	diags := diag.Diagnostics{}
+	var data []models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol{}.AttrTypes(), &item)
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for IpsecTunnelsAutoKeyProxyIdV6InnerProtocol ---
+func packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolListFromSdk(ctx context.Context, sdks []network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol")
+	diags := diag.Diagnostics{}
+	var data []models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol
+		obj, d := packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocol{}.AttrType(), data)
+}
+
+// --- Unpacker for IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp ---
+func unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpToSdk(ctx context.Context, obj types.Object) (*network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.LocalPort.IsNull() && !model.LocalPort.IsUnknown() {
+		val := int32(model.LocalPort.ValueInt64())
+		sdk.LocalPort = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalPort", "value": *sdk.LocalPort})
+	}
+
+	// Handling Primitives
+	if !model.RemotePort.IsNull() && !model.RemotePort.IsUnknown() {
+		val := int32(model.RemotePort.ValueInt64())
+		sdk.RemotePort = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RemotePort", "value": *sdk.RemotePort})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp ---
+func packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpFromSdk(ctx context.Context, sdk network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.LocalPort != nil {
+		model.LocalPort = basetypes.NewInt64Value(int64(*sdk.LocalPort))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalPort", "value": *sdk.LocalPort})
+	} else {
+		model.LocalPort = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.RemotePort != nil {
+		model.RemotePort = basetypes.NewInt64Value(int64(*sdk.RemotePort))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RemotePort", "value": *sdk.RemotePort})
+	} else {
+		model.RemotePort = basetypes.NewInt64Null()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp ---
+func unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpListToSdk(ctx context.Context, list types.List) ([]network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp")
+	diags := diag.Diagnostics{}
+	var data []models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp{}.AttrTypes(), &item)
+		unpacked, d := unpackIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp ---
+func packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpListFromSdk(ctx context.Context, sdks []network_services.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp")
+	diags := diag.Diagnostics{}
+	var data []models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp
+		obj, d := packIpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcpFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.IpsecTunnelsAutoKeyProxyIdV6InnerProtocolTcp{}.AttrType(), data)
 }
 
 // --- Unpacker for IpsecTunnelsTunnelMonitor ---

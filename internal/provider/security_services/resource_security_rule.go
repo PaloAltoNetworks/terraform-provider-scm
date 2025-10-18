@@ -15,6 +15,7 @@ import (
 
 	"github.com/paloaltonetworks/scm-go/generated/security_services"
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // RESOURCE for SCM SecurityRule (Package: security_services)
@@ -134,6 +135,12 @@ func (r *SecurityRuleResource) Create(ctx context.Context, req resource.CreateRe
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating security_rules", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -216,6 +223,12 @@ func (r *SecurityRuleResource) Read(ctx context.Context, req resource.ReadReques
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading security_rules", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -356,6 +369,12 @@ func (r *SecurityRuleResource) Update(ctx context.Context, req resource.UpdateRe
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating security_rules", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -405,6 +424,12 @@ func (r *SecurityRuleResource) Delete(ctx context.Context, req resource.DeleteRe
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting security_rules", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 

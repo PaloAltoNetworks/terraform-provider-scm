@@ -15,6 +15,7 @@ import (
 
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // RESOURCE for SCM IpsecTunnel (Package: network_services)
@@ -93,6 +94,12 @@ func (r *IpsecTunnelResource) Create(ctx context.Context, req resource.CreateReq
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating ipsec_tunnels", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -174,6 +181,12 @@ func (r *IpsecTunnelResource) Read(ctx context.Context, req resource.ReadRequest
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading ipsec_tunnels", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -313,6 +326,12 @@ func (r *IpsecTunnelResource) Update(ctx context.Context, req resource.UpdateReq
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating ipsec_tunnels", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -361,6 +380,12 @@ func (r *IpsecTunnelResource) Delete(ctx context.Context, req resource.DeleteReq
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting ipsec_tunnels", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 

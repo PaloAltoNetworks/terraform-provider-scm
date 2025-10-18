@@ -46,7 +46,7 @@ Read-Only:
 - `cache` (Attributes) Cache (see [below for nested schema](#nestedatt--data--cache))
 - `default` (Attributes) Default (see [below for nested schema](#nestedatt--data--default))
 - `device` (String) The device in which the resource is defined
-- `domain_servers` (Attributes List) Domain servers (see [below for nested schema](#nestedatt--data--domain_servers))
+- `domain_servers` (Attributes List) DNS proxy rules (see [below for nested schema](#nestedatt--data--domain_servers))
 - `enabled` (Boolean) Enable DNS proxy?
 - `folder` (String) The folder in which the resource is defined
 - `interface` (List of String) Interfaces on which to enable DNS proxy service
@@ -61,7 +61,7 @@ Read-Only:
 
 Read-Only:
 
-- `cache_edns` (Boolean) Cache edns
+- `cache_edns` (Boolean) Cache EDNS UDP response
 - `enabled` (Boolean) Turn on caching for this DNS object
 - `max_ttl` (Attributes) Max ttl (see [below for nested schema](#nestedatt--data--cache--max_ttl))
 
@@ -70,8 +70,8 @@ Read-Only:
 
 Read-Only:
 
-- `enabled` (Boolean) Enabled
-- `time_to_live` (Number) Time to live
+- `enabled` (Boolean) Enable max ttl for this DNS object
+- `time_to_live` (Number) Time in seconds after which entry is cleared
 
 
 
@@ -98,11 +98,11 @@ Read-Only:
 
 Read-Only:
 
-- `cacheable` (Boolean) Cacheable
-- `domain_name` (List of String) Domain name
-- `name` (String) Name
-- `primary` (String) Primary
-- `secondary` (String) Secondary
+- `cacheable` (Boolean) Enable caching for this DNS proxy rule?
+- `domain_name` (List of String) Domain names(s) that will be matched
+- `name` (String) Proxy rule name
+- `primary` (String) Primary DNS server IP address
+- `secondary` (String) Secondary DNS server IP address
 
 
 <a id="nestedatt--data--static_entries"></a>
@@ -111,8 +111,8 @@ Read-Only:
 Read-Only:
 
 - `address` (List of String) Address
-- `domain` (String) Domain
-- `name` (String) Name
+- `domain` (String) Fully qualified domain name
+- `name` (String) Static entry name
 
 
 <a id="nestedatt--data--tcp_queries"></a>
@@ -120,8 +120,8 @@ Read-Only:
 
 Read-Only:
 
-- `enabled` (Boolean) Enabled
-- `max_pending_requests` (Number) Max pending requests
+- `enabled` (Boolean) Turn on forwarding of TCP DNS queries?
+- `max_pending_requests` (Number) Upper limit on number of concurrent TCP DNS requests
 
 
 <a id="nestedatt--data--udp_queries"></a>
@@ -136,5 +136,5 @@ Read-Only:
 
 Read-Only:
 
-- `attempts` (Number) Attempts
-- `interval` (Number) Interval
+- `attempts` (Number) Maximum number of retries before trying next name server
+- `interval` (Number) Time in seconds for another request to be sent

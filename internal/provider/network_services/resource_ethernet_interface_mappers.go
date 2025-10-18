@@ -523,8 +523,10 @@ func unpackEthernetInterfacesLayer3ToSdk(ctx context.Context, obj types.Object) 
 
 	// Handling Lists
 	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field Ip")
-		diags.Append(model.Ip.ElementsAs(ctx, &sdk.Ip, false)...)
+		tflog.Debug(ctx, "Unpacking list of objects for field Ip")
+		unpacked, d := unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx, model.Ip)
+		diags.Append(d...)
+		sdk.Ip = unpacked
 	}
 
 	// Handling Primitives
@@ -605,16 +607,12 @@ func packEthernetInterfacesLayer3FromSdk(ctx context.Context, sdk network_servic
 	}
 	// Handling Lists
 	if sdk.Ip != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field Ip")
-		var d diag.Diagnostics
-		// This logic now dynamically determines the element type based on the SDK's Go type.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.Ip, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Ip)
+		tflog.Debug(ctx, "Packing list of objects for field Ip")
+		packed, d := packEthernetInterfacesLayer3IpInnerListFromSdk(ctx, sdk.Ip)
 		diags.Append(d...)
+		model.Ip = packed
 	} else {
-		// This logic now creates a correctly typed null list.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.Ip = basetypes.NewListNull(elemType)
+		model.Ip = basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing

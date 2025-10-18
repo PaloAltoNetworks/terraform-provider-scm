@@ -84,6 +84,11 @@ func (d *AutoTagActionListDataSource) Read(ctx context.Context, req datasource.R
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing AutoTagActionss", fmt.Sprintf("Could not list AutoTagActionss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

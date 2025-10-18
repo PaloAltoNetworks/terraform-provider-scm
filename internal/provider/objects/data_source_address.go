@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/objects"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM Address (Package: objects)
@@ -101,6 +102,11 @@ func (d *AddressDataSource) Read(ctx context.Context, req datasource.ReadRequest
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading Addresses", fmt.Sprintf("Could not read Addresses with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *AddressDataSource) Read(ctx context.Context, req datasource.ReadRequest
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing Addressess", fmt.Sprintf("Could not list Addressess: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

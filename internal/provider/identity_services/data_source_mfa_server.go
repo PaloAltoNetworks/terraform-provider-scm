@@ -103,6 +103,11 @@ func (d *MfaServerDataSource) Read(ctx context.Context, req datasource.ReadReque
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading MfaServers", fmt.Sprintf("Could not read MfaServers with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +159,11 @@ func (d *MfaServerDataSource) Read(ctx context.Context, req datasource.ReadReque
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing MfaServerss", fmt.Sprintf("Could not list MfaServerss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

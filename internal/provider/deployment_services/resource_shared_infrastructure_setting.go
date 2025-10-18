@@ -92,6 +92,12 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating shared_infrastructure_settings", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -150,6 +156,12 @@ func (r *SharedInfrastructureSettingResource) Read(ctx context.Context, req reso
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading shared_infrastructure_settings", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -238,6 +250,12 @@ func (r *SharedInfrastructureSettingResource) Update(ctx context.Context, req re
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating shared_infrastructure_settings", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -280,6 +298,12 @@ func (r *SharedInfrastructureSettingResource) Delete(ctx context.Context, req re
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting shared_infrastructure_settings", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 

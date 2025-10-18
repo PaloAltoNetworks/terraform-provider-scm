@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/objects"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM Application (Package: objects)
@@ -101,6 +102,11 @@ func (d *ApplicationDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading Applications", fmt.Sprintf("Could not read Applications with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *ApplicationDataSource) Read(ctx context.Context, req datasource.ReadReq
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing Applicationss", fmt.Sprintf("Could not list Applicationss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

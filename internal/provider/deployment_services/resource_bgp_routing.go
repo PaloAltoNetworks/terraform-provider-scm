@@ -92,6 +92,12 @@ func (r *BgpRoutingResource) Create(ctx context.Context, req resource.CreateRequ
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating bgp_routing", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -150,6 +156,12 @@ func (r *BgpRoutingResource) Read(ctx context.Context, req resource.ReadRequest,
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading bgp_routing", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -238,6 +250,12 @@ func (r *BgpRoutingResource) Update(ctx context.Context, req resource.UpdateRequ
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating bgp_routing", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -280,6 +298,12 @@ func (r *BgpRoutingResource) Delete(ctx context.Context, req resource.DeleteRequ
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting bgp_routing", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 

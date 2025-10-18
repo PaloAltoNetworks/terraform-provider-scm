@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -90,7 +91,10 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"default_value": schema.Int64Attribute{
-			MarkdownDescription: "Default value",
+			Validators: []validator.Int64{
+				int64validator.Between(1, 9999),
+			},
+			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
 		},
 		"device": schema.StringAttribute{
@@ -190,7 +194,7 @@ var TunnelInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"default_value": dsschema.Int64Attribute{
-			MarkdownDescription: "Default value",
+			MarkdownDescription: "Default interface assignment",
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{

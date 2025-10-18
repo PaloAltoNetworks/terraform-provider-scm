@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/identity_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/identity_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM ScepProfile (Package: identity_services)
@@ -101,6 +102,11 @@ func (d *ScepProfileDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading ScepProfiles", fmt.Sprintf("Could not read ScepProfiles with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *ScepProfileDataSource) Read(ctx context.Context, req datasource.ReadReq
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing ScepProfiless", fmt.Sprintf("Could not list ScepProfiless: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

@@ -92,6 +92,12 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating auto_vpn_clusters", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -164,6 +170,12 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading auto_vpn_clusters", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -300,6 +312,12 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating auto_vpn_clusters", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -344,6 +362,12 @@ func (r *AutoVpnClusterResource) Delete(ctx context.Context, req resource.Delete
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting auto_vpn_clusters", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 

@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM DecryptionRule (Package: security_services)
@@ -101,6 +102,11 @@ func (d *DecryptionRuleDataSource) Read(ctx context.Context, req datasource.Read
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading DecryptionRules", fmt.Sprintf("Could not read DecryptionRules with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *DecryptionRuleDataSource) Read(ctx context.Context, req datasource.Read
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing DecryptionRuless", fmt.Sprintf("Could not list DecryptionRuless: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

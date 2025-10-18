@@ -235,7 +235,7 @@ func unpackSdwanPathQualityProfilesMetricToSdk(ctx context.Context, obj types.Ob
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "PktLoss"})
 		}
 		if unpacked != nil {
-			sdk.PktLoss = *unpacked
+			sdk.PktLoss = unpacked
 		}
 	}
 
@@ -276,11 +276,13 @@ func packSdwanPathQualityProfilesMetricFromSdk(ctx context.Context, sdk network_
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
-	// Logic for non-pointer / value-type nested objects
-	if !reflect.ValueOf(sdk.PktLoss).IsZero() {
+	if sdk.PktLoss != nil {
 		tflog.Debug(ctx, "Packing nested object for field PktLoss")
-		packed, d := packSdwanPathQualityProfilesMetricPktLossFromSdk(ctx, sdk.PktLoss)
+		packed, d := packSdwanPathQualityProfilesMetricPktLossFromSdk(ctx, *sdk.PktLoss)
 		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "PktLoss"})
+		}
 		model.PktLoss = packed
 	} else {
 		model.PktLoss = basetypes.NewObjectNull(models.SdwanPathQualityProfilesMetricPktLoss{}.AttrTypes())

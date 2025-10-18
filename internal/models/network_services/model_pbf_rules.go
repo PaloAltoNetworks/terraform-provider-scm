@@ -341,7 +341,7 @@ var PbfRulesResourceSchema = schema.Schema{
 									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									MarkdownDescription: "Monitor IP address",
 									Optional:            true,
 								},
 								"profile": schema.StringAttribute{
@@ -364,7 +364,12 @@ var PbfRulesResourceSchema = schema.Schema{
 									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									Validators: []validator.String{
+										stringvalidator.ExactlyOneOf(
+											path.MatchRelative().AtParent().AtName("fqdn"),
+										),
+									},
+									MarkdownDescription: "Next hop IP address",
 									Optional:            true,
 								},
 							},
@@ -566,7 +571,7 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"ip_address": dsschema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									MarkdownDescription: "Monitor IP address",
 									Computed:            true,
 								},
 								"profile": dsschema.StringAttribute{
@@ -584,7 +589,7 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"ip_address": dsschema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									MarkdownDescription: "Next hop IP address",
 									Computed:            true,
 								},
 							},

@@ -81,5 +81,5 @@ Read-Only:
 
 Read-Only:
 
-- `sensitivity` (String) Sensitivity
-- `threshold` (Number) Threshold
+- `sensitivity` (String) Packet loss sensitivity
+- `threshold` (Number) Packet loss threshold (percentage)

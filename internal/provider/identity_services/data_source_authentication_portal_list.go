@@ -98,6 +98,11 @@ func (d *AuthenticationPortalListDataSource) Read(ctx context.Context, req datas
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing AuthenticationPortalss", fmt.Sprintf("Could not list AuthenticationPortalss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

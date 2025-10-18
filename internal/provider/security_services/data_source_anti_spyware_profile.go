@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM AntiSpywareProfile (Package: security_services)
@@ -101,6 +102,11 @@ func (d *AntiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading AntiSpywareProfiles", fmt.Sprintf("Could not read AntiSpywareProfiles with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *AntiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing AntiSpywareProfiless", fmt.Sprintf("Could not list AntiSpywareProfiless: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

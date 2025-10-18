@@ -13,6 +13,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 var (
@@ -97,6 +98,11 @@ func (d *BgpFilteringProfileListDataSource) Read(ctx context.Context, req dataso
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing BgpFilteringProfiless", fmt.Sprintf("Could not list BgpFilteringProfiless: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

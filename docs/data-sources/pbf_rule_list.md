@@ -87,7 +87,7 @@ Read-Only:
 Read-Only:
 
 - `disable_if_unreachable` (Boolean) Disable this rule if nexthop/monitor ip is unreachable?
-- `ip_address` (String) Ip address
+- `ip_address` (String) Monitor IP address
 - `profile` (String) Monitoring profile
 
 
@@ -97,7 +97,7 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) Next hop FQDN
-- `ip_address` (String) Ip address
+- `ip_address` (String) Next hop IP address
 
 
 

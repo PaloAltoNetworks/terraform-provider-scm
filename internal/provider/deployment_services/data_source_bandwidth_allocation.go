@@ -103,6 +103,11 @@ func (d *BandwidthAllocationDataSource) Read(ctx context.Context, req datasource
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading BandwidthAllocations", fmt.Sprintf("Could not read BandwidthAllocations with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -140,6 +145,11 @@ func (d *BandwidthAllocationDataSource) Read(ctx context.Context, req datasource
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing BandwidthAllocationss", fmt.Sprintf("Could not list BandwidthAllocationss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

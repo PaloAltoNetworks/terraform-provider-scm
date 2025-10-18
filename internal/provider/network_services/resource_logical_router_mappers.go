@@ -11905,7 +11905,7 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimToSdk(ctx contex
 	// Handling Lists
 	if !model.AllowedNeighbors.IsNull() && !model.AllowedNeighbors.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field AllowedNeighbors")
-		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx, model.AllowedNeighbors)
+		unpacked, d := unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx, model.AllowedNeighbors)
 		diags.Append(d...)
 		sdk.AllowedNeighbors = unpacked
 	}
@@ -11966,11 +11966,11 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimFromSdk(ctx contex
 	// Handling Lists
 	if sdk.AllowedNeighbors != nil {
 		tflog.Debug(ctx, "Packing list of objects for field AllowedNeighbors")
-		packed, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx, sdk.AllowedNeighbors)
+		packed, d := packEthernetInterfacesLayer3IpInnerListFromSdk(ctx, sdk.AllowedNeighbors)
 		diags.Append(d...)
 		model.AllowedNeighbors = packed
 	} else {
-		model.AllowedNeighbors = basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType())
+		model.AllowedNeighbors = basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -12076,11 +12076,11 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimListFromSdk(ctx co
 	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim{}.AttrType(), data)
 }
 
-// --- Unpacker for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerToSdk(ctx context.Context, obj types.Object) (*network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for EthernetInterfacesLayer3IpInner ---
+func unpackEthernetInterfacesLayer3IpInnerToSdk(ctx context.Context, obj types.Object) (*network_services.EthernetInterfacesLayer3IpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.EthernetInterfacesLayer3IpInner", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	var model models.EthernetInterfacesLayer3IpInner
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -12088,7 +12088,7 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighbors
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	var sdk network_services.EthernetInterfacesLayer3IpInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Name.IsNull() && !model.Name.IsUnknown() {
@@ -12098,16 +12098,16 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighbors
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.EthernetInterfacesLayer3IpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerFromSdk(ctx context.Context, sdk network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for EthernetInterfacesLayer3IpInner ---
+func packEthernetInterfacesLayer3IpInnerFromSdk(ctx context.Context, sdk network_services.EthernetInterfacesLayer3IpInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.EthernetInterfacesLayer3IpInner", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	var model models.EthernetInterfacesLayer3IpInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -12115,58 +12115,58 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsIn
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3IpInner{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.EthernetInterfacesLayer3IpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx context.Context, list types.List) ([]network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner")
+// --- List Unpacker for EthernetInterfacesLayer3IpInner ---
+func unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx context.Context, list types.List) ([]network_services.EthernetInterfacesLayer3IpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.EthernetInterfacesLayer3IpInner")
 	diags := diag.Diagnostics{}
-	var data []models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	var data []models.EthernetInterfacesLayer3IpInner
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, 0, len(data))
+	ans := make([]network_services.EthernetInterfacesLayer3IpInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrTypes(), &item)
-		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3IpInner{}.AttrTypes(), &item)
+		unpacked, d := unpackEthernetInterfacesLayer3IpInnerToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.EthernetInterfacesLayer3IpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx context.Context, sdks []network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner")
+// --- List Packer for EthernetInterfacesLayer3IpInner ---
+func packEthernetInterfacesLayer3IpInnerListFromSdk(ctx context.Context, sdks []network_services.EthernetInterfacesLayer3IpInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.EthernetInterfacesLayer3IpInner")
 	diags := diag.Diagnostics{}
-	var data []models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	var data []models.EthernetInterfacesLayer3IpInner
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
-		obj, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerFromSdk(ctx, sdk)
+		var model models.EthernetInterfacesLayer3IpInner
+		obj, d := packEthernetInterfacesLayer3IpInnerFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType()), diags
+			return basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.EthernetInterfacesLayer3IpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer3IpInner{}.AttrType(), data)
 }
 
 // --- Unpacker for LogicalRoutersVrfInnerMulticastMsdp ---
@@ -19945,7 +19945,7 @@ func unpackLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerToSdk(ctx context.
 	// Handling Lists
 	if !model.Neighbor.IsNull() && !model.Neighbor.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Neighbor")
-		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx, model.Neighbor)
+		unpacked, d := unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx, model.Neighbor)
 		diags.Append(d...)
 		sdk.Neighbor = unpacked
 	}
@@ -20068,11 +20068,11 @@ func packLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerFromSdk(ctx context.
 	// Handling Lists
 	if sdk.Neighbor != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Neighbor")
-		packed, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx, sdk.Neighbor)
+		packed, d := packEthernetInterfacesLayer3IpInnerListFromSdk(ctx, sdk.Neighbor)
 		diags.Append(d...)
 		model.Neighbor = packed
 	} else {
-		model.Neighbor = basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType())
+		model.Neighbor = basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing

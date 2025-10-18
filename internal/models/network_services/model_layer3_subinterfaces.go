@@ -4,11 +4,15 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -205,7 +209,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"hw_address": schema.StringAttribute{
-						MarkdownDescription: "Hw address",
+						MarkdownDescription: "MAC address",
 						Optional:            true,
 					},
 					"name": schema.StringAttribute{
@@ -222,34 +226,53 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"ddns_config": schema.SingleNestedAttribute{
 			MarkdownDescription: "Dynamic DNS configuration specific to the Layer 3 sub Interfaces.",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ddns_cert_profile": schema.StringAttribute{
-					MarkdownDescription: "Ddns cert profile",
-					Optional:            true,
+					MarkdownDescription: "Certificate profile",
+					Required:            true,
 				},
 				"ddns_enabled": schema.BoolAttribute{
-					MarkdownDescription: "Ddns enabled",
+					MarkdownDescription: "Enable DDNS?",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(false),
 				},
 				"ddns_hostname": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(255),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\.\\-]+$"), "pattern must match "+"^[a-zA-Z0-9_\\.\\-]+$"),
+					},
 					MarkdownDescription: "Ddns hostname",
-					Optional:            true,
+					Required:            true,
 				},
 				"ddns_ip": schema.StringAttribute{
-					MarkdownDescription: "Ddns ip",
+					MarkdownDescription: "IP to register (static only)",
 					Optional:            true,
+					Computed:            true,
 				},
 				"ddns_update_interval": schema.Int64Attribute{
-					MarkdownDescription: "Ddns update interval",
+					Validators: []validator.Int64{
+						int64validator.Between(1, 30),
+					},
+					MarkdownDescription: "Update interval (days)",
 					Optional:            true,
+					Computed:            true,
+					Default:             int64default.StaticInt64(1),
 				},
 				"ddns_vendor": schema.StringAttribute{
-					MarkdownDescription: "Ddns vendor",
-					Optional:            true,
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(127),
+					},
+					MarkdownDescription: "DDNS vendor",
+					Required:            true,
 				},
 				"ddns_vendor_config": schema.StringAttribute{
-					MarkdownDescription: "Ddns vendor config",
-					Optional:            true,
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(255),
+					},
+					MarkdownDescription: "DDNS vendor",
+					Required:            true,
 				},
 			},
 		},
@@ -265,32 +288,52 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"dhcp_client": schema.SingleNestedAttribute{
-			MarkdownDescription: "Dhcp client",
+			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"create_default_route": schema.BoolAttribute{
-					MarkdownDescription: "Create default route",
+					MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(true),
 				},
 				"default_route_metric": schema.Int64Attribute{
-					MarkdownDescription: "Default route metric",
+					Validators: []validator.Int64{
+						int64validator.Between(1, 65535),
+					},
+					MarkdownDescription: "Metric of the default route created",
 					Optional:            true,
+					Computed:            true,
+					Default:             int64default.StaticInt64(10),
 				},
 				"enable": schema.BoolAttribute{
-					MarkdownDescription: "Enable",
+					MarkdownDescription: "Enable DHCP?",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(true),
 				},
 				"send_hostname": schema.SingleNestedAttribute{
-					MarkdownDescription: "Send hostname",
+					MarkdownDescription: "Layer3 sub interfaces DHCP Client Send hostname",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
 							Optional:            true,
+							Computed:            true,
+							Default:             booldefault.StaticBool(true),
 						},
 						"hostname": schema.StringAttribute{
-							MarkdownDescription: "Hostname",
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(64),
+								stringvalidator.LengthAtLeast(1),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\._-]+$"), "pattern must match "+"^[a-zA-Z0-9\\._-]+$"),
+							},
+							MarkdownDescription: "Set interface hostname",
 							Optional:            true,
+							Computed:            true,
+							Default:             stringdefault.StaticString("system-hostname"),
 						},
 					},
 				},
@@ -376,7 +419,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"hw_address": dsschema.StringAttribute{
-						MarkdownDescription: "Hw address",
+						MarkdownDescription: "MAC address",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
@@ -395,11 +438,11 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ddns_cert_profile": dsschema.StringAttribute{
-					MarkdownDescription: "Ddns cert profile",
+					MarkdownDescription: "Certificate profile",
 					Computed:            true,
 				},
 				"ddns_enabled": dsschema.BoolAttribute{
-					MarkdownDescription: "Ddns enabled",
+					MarkdownDescription: "Enable DDNS?",
 					Computed:            true,
 				},
 				"ddns_hostname": dsschema.StringAttribute{
@@ -407,19 +450,19 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"ddns_ip": dsschema.StringAttribute{
-					MarkdownDescription: "Ddns ip",
+					MarkdownDescription: "IP to register (static only)",
 					Computed:            true,
 				},
 				"ddns_update_interval": dsschema.Int64Attribute{
-					MarkdownDescription: "Ddns update interval",
+					MarkdownDescription: "Update interval (days)",
 					Computed:            true,
 				},
 				"ddns_vendor": dsschema.StringAttribute{
-					MarkdownDescription: "Ddns vendor",
+					MarkdownDescription: "DDNS vendor",
 					Computed:            true,
 				},
 				"ddns_vendor_config": dsschema.StringAttribute{
-					MarkdownDescription: "Ddns vendor config",
+					MarkdownDescription: "DDNS vendor",
 					Computed:            true,
 				},
 			},
@@ -429,23 +472,23 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"dhcp_client": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Dhcp client",
+			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"create_default_route": dsschema.BoolAttribute{
-					MarkdownDescription: "Create default route",
+					MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
 					Computed:            true,
 				},
 				"default_route_metric": dsschema.Int64Attribute{
-					MarkdownDescription: "Default route metric",
+					MarkdownDescription: "Metric of the default route created",
 					Computed:            true,
 				},
 				"enable": dsschema.BoolAttribute{
-					MarkdownDescription: "Enable",
+					MarkdownDescription: "Enable DHCP?",
 					Computed:            true,
 				},
 				"send_hostname": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Send hostname",
+					MarkdownDescription: "Layer3 sub interfaces DHCP Client Send hostname",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"enable": dsschema.BoolAttribute{
@@ -453,7 +496,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"hostname": dsschema.StringAttribute{
-							MarkdownDescription: "Hostname",
+							MarkdownDescription: "Set interface hostname",
 							Computed:            true,
 						},
 					},

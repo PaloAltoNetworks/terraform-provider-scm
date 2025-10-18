@@ -3,6 +3,7 @@ package models
 import (
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -129,7 +130,10 @@ var Layer2SubinterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"vlan_tag": schema.Float64Attribute{
-			MarkdownDescription: "Vlan tag",
+			Validators: []validator.Float64{
+				float64validator.Between(1.000000, 9999.000000),
+			},
+			MarkdownDescription: "VLAN tag",
 			Optional:            true,
 		},
 	},
@@ -173,7 +177,7 @@ var Layer2SubinterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"vlan_tag": dsschema.Float64Attribute{
-			MarkdownDescription: "Vlan tag",
+			MarkdownDescription: "VLAN tag",
 			Computed:            true,
 		},
 	},

@@ -3,11 +3,15 @@ package models
 import (
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -330,10 +334,13 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"cache": schema.SingleNestedAttribute{
 			MarkdownDescription: "Cache",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"cache_edns": schema.BoolAttribute{
-					MarkdownDescription: "Cache edns",
+					MarkdownDescription: "Cache EDNS UDP response",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(true),
 				},
 				"enabled": schema.BoolAttribute{
 					MarkdownDescription: "Turn on caching for this DNS object",
@@ -342,14 +349,19 @@ var DnsProxiesResourceSchema = schema.Schema{
 				"max_ttl": schema.SingleNestedAttribute{
 					MarkdownDescription: "Max ttl",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enabled": schema.BoolAttribute{
-							MarkdownDescription: "Enabled",
-							Optional:            true,
+							MarkdownDescription: "Enable max ttl for this DNS object",
+							Required:            true,
 						},
 						"time_to_live": schema.Int64Attribute{
-							MarkdownDescription: "Time to live",
+							Validators: []validator.Int64{
+								int64validator.Between(60, 86400),
+							},
+							MarkdownDescription: "Time in seconds after which entry is cleared",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
@@ -395,29 +407,32 @@ var DnsProxiesResourceSchema = schema.Schema{
 			},
 		},
 		"domain_servers": schema.ListNestedAttribute{
-			MarkdownDescription: "Domain servers",
+			MarkdownDescription: "DNS proxy rules",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"cacheable": schema.BoolAttribute{
-						MarkdownDescription: "Cacheable",
+						MarkdownDescription: "Enable caching for this DNS proxy rule?",
 						Optional:            true,
 					},
 					"domain_name": schema.ListAttribute{
 						ElementType:         types.StringType,
-						MarkdownDescription: "Domain name",
-						Optional:            true,
+						MarkdownDescription: "Domain names(s) that will be matched",
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(128)),
+						},
+						Optional: true,
 					},
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name",
-						Optional:            true,
+						MarkdownDescription: "Proxy rule name",
+						Required:            true,
 					},
 					"primary": schema.StringAttribute{
-						MarkdownDescription: "Primary",
-						Optional:            true,
+						MarkdownDescription: "Primary DNS server IP address",
+						Required:            true,
 					},
 					"secondary": schema.StringAttribute{
-						MarkdownDescription: "Secondary",
+						MarkdownDescription: "Secondary DNS server IP address",
 						Optional:            true,
 					},
 				},
@@ -484,15 +499,24 @@ var DnsProxiesResourceSchema = schema.Schema{
 					"address": schema.ListAttribute{
 						ElementType:         types.StringType,
 						MarkdownDescription: "Address",
-						Optional:            true,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(63)),
+						},
+						Required: true,
 					},
 					"domain": schema.StringAttribute{
-						MarkdownDescription: "Domain",
-						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.LengthAtMost(255),
+						},
+						MarkdownDescription: "Fully qualified domain name",
+						Required:            true,
 					},
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name",
-						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.LengthAtMost(31),
+						},
+						MarkdownDescription: "Static entry name",
+						Required:            true,
 					},
 				},
 			},
@@ -500,14 +524,20 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"tcp_queries": schema.SingleNestedAttribute{
 			MarkdownDescription: "Tcp queries",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"enabled": schema.BoolAttribute{
-					MarkdownDescription: "Enabled",
-					Optional:            true,
+					MarkdownDescription: "Turn on forwarding of TCP DNS queries?",
+					Required:            true,
 				},
 				"max_pending_requests": schema.Int64Attribute{
-					MarkdownDescription: "Max pending requests",
+					Validators: []validator.Int64{
+						int64validator.Between(64, 256),
+					},
+					MarkdownDescription: "Upper limit on number of concurrent TCP DNS requests",
 					Optional:            true,
+					Computed:            true,
+					Default:             int64default.StaticInt64(64),
 				},
 			},
 		},
@@ -521,18 +551,30 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"udp_queries": schema.SingleNestedAttribute{
 			MarkdownDescription: "Udp queries",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"retries": schema.SingleNestedAttribute{
 					MarkdownDescription: "Retries",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"attempts": schema.Int64Attribute{
-							MarkdownDescription: "Attempts",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 30),
+							},
+							MarkdownDescription: "Maximum number of retries before trying next name server",
 							Optional:            true,
+							Computed:            true,
+							Default:             int64default.StaticInt64(5),
 						},
 						"interval": schema.Int64Attribute{
-							MarkdownDescription: "Interval",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 30),
+							},
+							MarkdownDescription: "Time in seconds for another request to be sent",
 							Optional:            true,
+							Computed:            true,
+							Default:             int64default.StaticInt64(2),
 						},
 					},
 				},
@@ -550,7 +592,7 @@ var DnsProxiesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"cache_edns": dsschema.BoolAttribute{
-					MarkdownDescription: "Cache edns",
+					MarkdownDescription: "Cache EDNS UDP response",
 					Computed:            true,
 				},
 				"enabled": dsschema.BoolAttribute{
@@ -562,11 +604,11 @@ var DnsProxiesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"enabled": dsschema.BoolAttribute{
-							MarkdownDescription: "Enabled",
+							MarkdownDescription: "Enable max ttl for this DNS object",
 							Computed:            true,
 						},
 						"time_to_live": dsschema.Int64Attribute{
-							MarkdownDescription: "Time to live",
+							MarkdownDescription: "Time in seconds after which entry is cleared",
 							Computed:            true,
 						},
 					},
@@ -602,29 +644,29 @@ var DnsProxiesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"domain_servers": dsschema.ListNestedAttribute{
-			MarkdownDescription: "Domain servers",
+			MarkdownDescription: "DNS proxy rules",
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"cacheable": dsschema.BoolAttribute{
-						MarkdownDescription: "Cacheable",
+						MarkdownDescription: "Enable caching for this DNS proxy rule?",
 						Computed:            true,
 					},
 					"domain_name": dsschema.ListAttribute{
 						ElementType:         types.StringType,
-						MarkdownDescription: "Domain name",
+						MarkdownDescription: "Domain names(s) that will be matched",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
-						MarkdownDescription: "Name",
+						MarkdownDescription: "Proxy rule name",
 						Computed:            true,
 					},
 					"primary": dsschema.StringAttribute{
-						MarkdownDescription: "Primary",
+						MarkdownDescription: "Primary DNS server IP address",
 						Computed:            true,
 					},
 					"secondary": dsschema.StringAttribute{
-						MarkdownDescription: "Secondary",
+						MarkdownDescription: "Secondary DNS server IP address",
 						Computed:            true,
 					},
 				},
@@ -667,11 +709,11 @@ var DnsProxiesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"domain": dsschema.StringAttribute{
-						MarkdownDescription: "Domain",
+						MarkdownDescription: "Fully qualified domain name",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
-						MarkdownDescription: "Name",
+						MarkdownDescription: "Static entry name",
 						Computed:            true,
 					},
 				},
@@ -682,11 +724,11 @@ var DnsProxiesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"enabled": dsschema.BoolAttribute{
-					MarkdownDescription: "Enabled",
+					MarkdownDescription: "Turn on forwarding of TCP DNS queries?",
 					Computed:            true,
 				},
 				"max_pending_requests": dsschema.Int64Attribute{
-					MarkdownDescription: "Max pending requests",
+					MarkdownDescription: "Upper limit on number of concurrent TCP DNS requests",
 					Computed:            true,
 				},
 			},
@@ -704,11 +746,11 @@ var DnsProxiesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"attempts": dsschema.Int64Attribute{
-							MarkdownDescription: "Attempts",
+							MarkdownDescription: "Maximum number of retries before trying next name server",
 							Computed:            true,
 						},
 						"interval": dsschema.Int64Attribute{
-							MarkdownDescription: "Interval",
+							MarkdownDescription: "Time in seconds for another request to be sent",
 							Computed:            true,
 						},
 					},

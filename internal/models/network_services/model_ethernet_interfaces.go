@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -171,8 +172,12 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 					},
 				},
 				"interface_management_profile": basetypes.StringType{},
-				"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
-				"mtu":                          basetypes.Int64Type{},
+				"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name": basetypes.StringType{},
+					},
+				}},
+				"mtu": basetypes.Int64Type{},
 				"pppoe": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"access_concentrator":  basetypes.StringType{},
@@ -268,8 +273,12 @@ func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 			},
 		},
 		"interface_management_profile": basetypes.StringType{},
-		"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
-		"mtu":                          basetypes.Int64Type{},
+		"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+			},
+		}},
+		"mtu": basetypes.Int64Type{},
 		"pppoe": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"access_concentrator":  basetypes.StringType{},
@@ -462,7 +471,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"default_value": schema.StringAttribute{
-			MarkdownDescription: "Default value",
+			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
 		},
 		"device": schema.StringAttribute{
@@ -505,7 +514,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"vlan_tag": schema.Int64Attribute{
-					MarkdownDescription: "Vlan tag",
+					Validators: []validator.Int64{
+						int64validator.Between(1, 9999),
+					},
+					MarkdownDescription: "Assign interface to VLAN tag",
 					Optional:            true,
 				},
 			},
@@ -522,7 +534,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"hw_address": schema.StringAttribute{
-								MarkdownDescription: "Hw address",
+								MarkdownDescription: "MAC address",
 								Optional:            true,
 							},
 							"name": schema.StringAttribute{
@@ -533,74 +545,97 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 				},
 				"ddns_config": schema.SingleNestedAttribute{
-					MarkdownDescription: "Ddns config",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Ethernet Interfaces.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ddns_cert_profile": schema.StringAttribute{
-							MarkdownDescription: "Ddns cert profile",
-							Optional:            true,
-							Computed:            true,
+							MarkdownDescription: "Certificate profile",
+							Required:            true,
 						},
 						"ddns_enabled": schema.BoolAttribute{
-							MarkdownDescription: "Ddns enabled",
+							MarkdownDescription: "Enable DDNS?",
 							Optional:            true,
 							Computed:            true,
+							Default:             booldefault.StaticBool(false),
 						},
 						"ddns_hostname": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\.\\-]+$"), "pattern must match "+"^[a-zA-Z0-9_\\.\\-]+$"),
+							},
 							MarkdownDescription: "Ddns hostname",
-							Optional:            true,
-							Computed:            true,
+							Required:            true,
 						},
 						"ddns_ip": schema.StringAttribute{
-							MarkdownDescription: "Ddns ip",
+							MarkdownDescription: "IP to register (static only)",
 							Optional:            true,
 							Computed:            true,
 						},
 						"ddns_update_interval": schema.Int64Attribute{
-							MarkdownDescription: "Ddns update interval",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 30),
+							},
+							MarkdownDescription: "Update interval (days)",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(1),
 						},
 						"ddns_vendor": schema.StringAttribute{
-							MarkdownDescription: "Ddns vendor",
-							Optional:            true,
-							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(127),
+							},
+							MarkdownDescription: "DDNS vendor",
+							Required:            true,
 						},
 						"ddns_vendor_config": schema.StringAttribute{
-							MarkdownDescription: "Ddns vendor config",
-							Optional:            true,
-							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+							},
+							MarkdownDescription: "DDNS vendor",
+							Required:            true,
 						},
 					},
 				},
 				"dhcp_client": schema.SingleNestedAttribute{
-					MarkdownDescription: "Dhcp client",
+					Validators: []validator.Object{
+						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("ip"),
+							path.MatchRelative().AtParent().AtName("pppoe"),
+						),
+					},
+					MarkdownDescription: "Ethernet Interfaces DHCP Client",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dhcp_client": schema.SingleNestedAttribute{
-							MarkdownDescription: "Dhcp client",
+							MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 							Optional:            true,
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"create_default_route": schema.BoolAttribute{
-									MarkdownDescription: "Create default route",
+									MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
 									Optional:            true,
 									Computed:            true,
+									Default:             booldefault.StaticBool(true),
 								},
 								"default_route_metric": schema.Int64Attribute{
-									MarkdownDescription: "Default route metric",
+									Validators: []validator.Int64{
+										int64validator.Between(1, 65535),
+									},
+									MarkdownDescription: "Metric of the default route created",
 									Optional:            true,
 									Computed:            true,
+									Default:             int64default.StaticInt64(10),
 								},
 								"enable": schema.BoolAttribute{
-									MarkdownDescription: "Enable",
+									MarkdownDescription: "Enable DHCP?",
 									Optional:            true,
 									Computed:            true,
+									Default:             booldefault.StaticBool(true),
 								},
 								"send_hostname": schema.SingleNestedAttribute{
-									MarkdownDescription: "Send hostname",
+									MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 									Optional:            true,
 									Computed:            true,
 									Attributes: map[string]schema.Attribute{
@@ -608,11 +643,18 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 											MarkdownDescription: "Enable",
 											Optional:            true,
 											Computed:            true,
+											Default:             booldefault.StaticBool(true),
 										},
 										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname",
+											Validators: []validator.String{
+												stringvalidator.LengthAtMost(64),
+												stringvalidator.LengthAtLeast(1),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\._-]+$"), "pattern must match "+"^[a-zA-Z0-9\\._-]+$"),
+											},
+											MarkdownDescription: "Set interface hostname",
 											Optional:            true,
 											Computed:            true,
+											Default:             stringdefault.StaticString("system-hostname"),
 										},
 									},
 								},
@@ -621,21 +663,31 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 				},
 				"interface_management_profile": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(31),
+					},
 					MarkdownDescription: "Interface management profile",
 					Optional:            true,
 					Computed:            true,
 				},
-				"ip": schema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "Interface IP addresses",
+				"ip": schema.ListNestedAttribute{
 					Validators: []validator.List{
 						listvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					Optional: true,
-					Computed: true,
+					MarkdownDescription: "Interface IP addresses",
+					Optional:            true,
+					Computed:            true,
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "Name",
+								Required:            true,
+							},
+						},
+					},
 				},
 				"mtu": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -658,6 +710,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"access_concentrator": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+								stringvalidator.LengthAtLeast(1),
+							},
 							MarkdownDescription: "Access concentrator",
 							Optional:            true,
 							Computed:            true,
@@ -671,9 +727,13 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Computed:            true,
 						},
 						"default_route_metric": schema.Int64Attribute{
-							MarkdownDescription: "Default route metric",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 65535),
+							},
+							MarkdownDescription: "Metric of the default route created",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(10),
 						},
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -710,9 +770,11 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "Ip",
-									Optional:            true,
-									Computed:            true,
+									Validators: []validator.String{
+										stringvalidator.LengthAtMost(63),
+									},
+									MarkdownDescription: "Static IP address",
+									Required:            true,
 								},
 							},
 						},
@@ -729,16 +791,31 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"link_duplex": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("auto", "half", "full"),
+			},
 			MarkdownDescription: "Link duplex",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("auto"),
 		},
 		"link_speed": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("auto", "10", "100", "1000", "10000", "40000", "100000"),
+			},
 			MarkdownDescription: "Link speed",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("auto"),
 		},
 		"link_state": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("auto", "up", "down"),
+			},
 			MarkdownDescription: "Link state",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("auto"),
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "Interface name",
@@ -747,14 +824,22 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		"poe": schema.SingleNestedAttribute{
 			MarkdownDescription: "Poe",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"poe_enabled": schema.BoolAttribute{
-					MarkdownDescription: "Poe enabled",
+					MarkdownDescription: "Enabled PoE?",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(false),
 				},
 				"poe_rsvd_pwr": schema.Int64Attribute{
-					MarkdownDescription: "Poe rsvd pwr",
+					Validators: []validator.Int64{
+						int64validator.Between(0, 90),
+					},
+					MarkdownDescription: "PoE reserved power",
 					Optional:            true,
+					Computed:            true,
+					Default:             int64default.StaticInt64(0),
 				},
 			},
 		},
@@ -794,7 +879,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"default_value": dsschema.StringAttribute{
-			MarkdownDescription: "Default value",
+			MarkdownDescription: "Default interface assignment",
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
@@ -820,7 +905,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"vlan_tag": dsschema.Int64Attribute{
-					MarkdownDescription: "Vlan tag",
+					MarkdownDescription: "Assign interface to VLAN tag",
 					Computed:            true,
 				},
 			},
@@ -835,7 +920,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
 							"hw_address": dsschema.StringAttribute{
-								MarkdownDescription: "Hw address",
+								MarkdownDescription: "MAC address",
 								Computed:            true,
 							},
 							"name": dsschema.StringAttribute{
@@ -846,15 +931,15 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ddns_config": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ddns config",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Ethernet Interfaces.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"ddns_cert_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns cert profile",
+							MarkdownDescription: "Certificate profile",
 							Computed:            true,
 						},
 						"ddns_enabled": dsschema.BoolAttribute{
-							MarkdownDescription: "Ddns enabled",
+							MarkdownDescription: "Enable DDNS?",
 							Computed:            true,
 						},
 						"ddns_hostname": dsschema.StringAttribute{
@@ -862,45 +947,45 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"ddns_ip": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns ip",
+							MarkdownDescription: "IP to register (static only)",
 							Computed:            true,
 						},
 						"ddns_update_interval": dsschema.Int64Attribute{
-							MarkdownDescription: "Ddns update interval",
+							MarkdownDescription: "Update interval (days)",
 							Computed:            true,
 						},
 						"ddns_vendor": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns vendor",
+							MarkdownDescription: "DDNS vendor",
 							Computed:            true,
 						},
 						"ddns_vendor_config": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns vendor config",
+							MarkdownDescription: "DDNS vendor",
 							Computed:            true,
 						},
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dhcp client",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"dhcp_client": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Dhcp client",
+							MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"create_default_route": dsschema.BoolAttribute{
-									MarkdownDescription: "Create default route",
+									MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
 									Computed:            true,
 								},
 								"default_route_metric": dsschema.Int64Attribute{
-									MarkdownDescription: "Default route metric",
+									MarkdownDescription: "Metric of the default route created",
 									Computed:            true,
 								},
 								"enable": dsschema.BoolAttribute{
-									MarkdownDescription: "Enable",
+									MarkdownDescription: "Enable DHCP?",
 									Computed:            true,
 								},
 								"send_hostname": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Send hostname",
+									MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"enable": dsschema.BoolAttribute{
@@ -908,7 +993,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"hostname": dsschema.StringAttribute{
-											MarkdownDescription: "Hostname",
+											MarkdownDescription: "Set interface hostname",
 											Computed:            true,
 										},
 									},
@@ -921,10 +1006,17 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Interface management profile",
 					Computed:            true,
 				},
-				"ip": dsschema.ListAttribute{
-					ElementType:         types.StringType,
+				"ip": dsschema.ListNestedAttribute{
 					MarkdownDescription: "Interface IP addresses",
 					Computed:            true,
+					NestedObject: dsschema.NestedAttributeObject{
+						Attributes: map[string]dsschema.Attribute{
+							"name": dsschema.StringAttribute{
+								MarkdownDescription: "Name",
+								Computed:            true,
+							},
+						},
+					},
 				},
 				"mtu": dsschema.Int64Attribute{
 					MarkdownDescription: "MTU",
@@ -943,7 +1035,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"default_route_metric": dsschema.Int64Attribute{
-							MarkdownDescription: "Default route metric",
+							MarkdownDescription: "Metric of the default route created",
 							Computed:            true,
 						},
 						"enable": dsschema.BoolAttribute{
@@ -968,7 +1060,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"ip": dsschema.StringAttribute{
-									MarkdownDescription: "Ip",
+									MarkdownDescription: "Static IP address",
 									Computed:            true,
 								},
 							},
@@ -1003,11 +1095,11 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"poe_enabled": dsschema.BoolAttribute{
-					MarkdownDescription: "Poe enabled",
+					MarkdownDescription: "Enabled PoE?",
 					Computed:            true,
 				},
 				"poe_rsvd_pwr": dsschema.Int64Attribute{
-					MarkdownDescription: "Poe rsvd pwr",
+					MarkdownDescription: "PoE reserved power",
 					Computed:            true,
 				},
 			},

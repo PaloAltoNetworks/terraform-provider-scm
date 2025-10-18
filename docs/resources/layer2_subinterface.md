@@ -26,7 +26,7 @@ Layer2Subinterface resource
 - `folder` (String) The folder in which the resource is defined
 - `parent_interface` (String) Parent interface
 - `snippet` (String) The snippet in which the resource is defined
-- `vlan_tag` (Number) Vlan tag
+- `vlan_tag` (Number) VLAN tag
 
 ### Read-Only
 

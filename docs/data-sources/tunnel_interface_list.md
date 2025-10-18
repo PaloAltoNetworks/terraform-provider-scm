@@ -44,7 +44,7 @@ Optional:
 Read-Only:
 
 - `comment` (String) Description
-- `default_value` (Number) Default value
+- `default_value` (Number) Default interface assignment
 - `device` (String) The device in which the resource is defined
 - `folder` (String) The folder in which the resource is defined
 - `interface_management_profile` (String) Interface management profile

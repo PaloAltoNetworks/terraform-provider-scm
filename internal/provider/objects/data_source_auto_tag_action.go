@@ -103,6 +103,11 @@ func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadR
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading AutoTagActions", fmt.Sprintf("Could not read AutoTagActions with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -140,6 +145,11 @@ func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadR
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing AutoTagActionss", fmt.Sprintf("Could not list AutoTagActionss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

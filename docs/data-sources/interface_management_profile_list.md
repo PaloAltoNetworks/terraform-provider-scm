@@ -46,15 +46,15 @@ Read-Only:
 - `device` (String) The device in which the resource is defined
 - `folder` (String) The folder in which the resource is defined
 - `http` (Boolean) Allow HTTP?
-- `http_ocsp` (Boolean) Http ocsp
+- `http_ocsp` (Boolean) Allow HTTP OCSP?
 - `https` (Boolean) Allow HTTPS?
-- `permitted_ip` (List of String) Permitted ip
+- `permitted_ip` (List of String) Allowed IP address(es)
 - `ping` (Boolean) Allow ping?
-- `response_pages` (String) Response pages
+- `response_pages` (String) Allow response pages?
 - `snippet` (String) The snippet in which the resource is defined
 - `ssh` (Boolean) Allow SSH?
 - `telnet` (Boolean) Allow telnet? Seriously, why would you do this?!?
 - `tfid` (String) The Terraform ID.
-- `userid_service` (Boolean) Userid service
-- `userid_syslog_listener_ssl` (Boolean) Userid syslog listener ssl
-- `userid_syslog_listener_udp` (Boolean) Userid syslog listener udp
+- `userid_service` (Boolean) Allow User-ID?
+- `userid_syslog_listener_ssl` (Boolean) Allow User-ID syslog listener (SSL)?
+- `userid_syslog_listener_udp` (Boolean) Allow User-ID syslog listener (UDP)?

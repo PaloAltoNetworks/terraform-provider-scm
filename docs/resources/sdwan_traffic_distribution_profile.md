@@ -23,7 +23,7 @@ SdwanTrafficDistributionProfile resource
 
 - `device` (String) The device in which the resource is defined
 - `folder` (String) The folder in which the resource is defined
-- `link_tags` (Attributes List) Link tags (see [below for nested schema](#nestedatt--link_tags))
+- `link_tags` (Attributes List) Link-Tags for interfaces identified by defined tags (see [below for nested schema](#nestedatt--link_tags))
 - `snippet` (String) The snippet in which the resource is defined
 - `traffic_distribution` (String) Traffic distribution
 
@@ -35,7 +35,10 @@ SdwanTrafficDistributionProfile resource
 <a id="nestedatt--link_tags"></a>
 ### Nested Schema for `link_tags`
 
+Required:
+
+- `name` (String) Link-Tag used for identifying a set of interfaces
+
 Optional:
 
-- `name` (String) Name
-- `weight` (Number) Weight
+- `weight` (Number) Weight (percentage) (only used when `traffic-distribution` is `Weighted Session Distribution`)

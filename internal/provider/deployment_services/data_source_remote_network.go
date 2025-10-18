@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM RemoteNetwork (Package: deployment_services)
@@ -101,6 +102,11 @@ func (d *RemoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading RemoteNetworks", fmt.Sprintf("Could not read RemoteNetworks with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -142,6 +148,11 @@ func (d *RemoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing RemoteNetworkss", fmt.Sprintf("Could not list RemoteNetworkss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

@@ -84,6 +84,11 @@ func (d *BandwidthAllocationListDataSource) Read(ctx context.Context, req dataso
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing BandwidthAllocationss", fmt.Sprintf("Could not list BandwidthAllocationss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

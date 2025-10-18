@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM ServiceConnectionGroup (Package: deployment_services)
@@ -101,6 +102,11 @@ func (d *ServiceConnectionGroupDataSource) Read(ctx context.Context, req datasou
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading ServiceConnectionGroups", fmt.Sprintf("Could not read ServiceConnectionGroups with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -142,6 +148,11 @@ func (d *ServiceConnectionGroupDataSource) Read(ctx context.Context, req datasou
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing ServiceConnectionGroupss", fmt.Sprintf("Could not list ServiceConnectionGroupss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

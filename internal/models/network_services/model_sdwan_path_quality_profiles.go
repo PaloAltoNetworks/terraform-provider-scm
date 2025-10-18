@@ -262,12 +262,18 @@ var SdwanPathQualityProfilesResourceSchema = schema.Schema{
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"sensitivity": schema.StringAttribute{
-							MarkdownDescription: "Sensitivity",
-							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.OneOf("low", "medium", "high"),
+							},
+							MarkdownDescription: "Packet loss sensitivity",
+							Required:            true,
 						},
 						"threshold": schema.Int64Attribute{
-							MarkdownDescription: "Threshold",
-							Optional:            true,
+							Validators: []validator.Int64{
+								int64validator.Between(1, 100),
+							},
+							MarkdownDescription: "Packet loss threshold (percentage)",
+							Required:            true,
 						},
 					},
 				},
@@ -358,11 +364,11 @@ var SdwanPathQualityProfilesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"sensitivity": dsschema.StringAttribute{
-							MarkdownDescription: "Sensitivity",
+							MarkdownDescription: "Packet loss sensitivity",
 							Computed:            true,
 						},
 						"threshold": dsschema.Int64Attribute{
-							MarkdownDescription: "Threshold",
+							MarkdownDescription: "Packet loss threshold (percentage)",
 							Computed:            true,
 						},
 					},

@@ -49,4 +49,4 @@ Read-Only:
 - `parent_interface` (String) Parent interface
 - `snippet` (String) The snippet in which the resource is defined
 - `tfid` (String) The Terraform ID.
-- `vlan_tag` (Number) Vlan tag
+- `vlan_tag` (Number) VLAN tag

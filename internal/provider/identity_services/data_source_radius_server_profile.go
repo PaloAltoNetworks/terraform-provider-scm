@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/identity_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/identity_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM RadiusServerProfile (Package: identity_services)
@@ -101,6 +102,11 @@ func (d *RadiusServerProfileDataSource) Read(ctx context.Context, req datasource
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading RadiusServerProfiles", fmt.Sprintf("Could not read RadiusServerProfiles with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *RadiusServerProfileDataSource) Read(ctx context.Context, req datasource
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing RadiusServerProfiless", fmt.Sprintf("Could not list RadiusServerProfiless: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

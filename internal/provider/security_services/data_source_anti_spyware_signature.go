@@ -14,6 +14,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM AntiSpywareSignature (Package: security_services)
@@ -100,6 +101,11 @@ func (d *AntiSpywareSignatureDataSource) Read(ctx context.Context, req datasourc
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading AntiSpywareSignatures", fmt.Sprintf("Could not read AntiSpywareSignatures with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

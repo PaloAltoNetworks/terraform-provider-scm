@@ -29,7 +29,7 @@ Layer3Subinterface data source
 - `comment` (String) Description
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Layer 3 sub Interfaces. (see [below for nested schema](#nestedatt--ddns_config))
 - `device` (String) The device in which the resource is defined
-- `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--dhcp_client))
+- `dhcp_client` (Attributes) Layer3 sub interfaces DHCP Client Object (see [below for nested schema](#nestedatt--dhcp_client))
 - `folder` (String) The folder in which the resource is defined
 - `interface_management_profile` (String) Interface management profile
 - `ip` (List of String) Ip
@@ -44,7 +44,7 @@ Layer3Subinterface data source
 
 Read-Only:
 
-- `hw_address` (String) Hw address
+- `hw_address` (String) MAC address
 - `name` (String) IP address
 
 
@@ -53,13 +53,13 @@ Read-Only:
 
 Read-Only:
 
-- `ddns_cert_profile` (String) Ddns cert profile
-- `ddns_enabled` (Boolean) Ddns enabled
+- `ddns_cert_profile` (String) Certificate profile
+- `ddns_enabled` (Boolean) Enable DDNS?
 - `ddns_hostname` (String) Ddns hostname
-- `ddns_ip` (String) Ddns ip
-- `ddns_update_interval` (Number) Ddns update interval
-- `ddns_vendor` (String) Ddns vendor
-- `ddns_vendor_config` (String) Ddns vendor config
+- `ddns_ip` (String) IP to register (static only)
+- `ddns_update_interval` (Number) Update interval (days)
+- `ddns_vendor` (String) DDNS vendor
+- `ddns_vendor_config` (String) DDNS vendor
 
 
 <a id="nestedatt--dhcp_client"></a>
@@ -67,10 +67,10 @@ Read-Only:
 
 Read-Only:
 
-- `create_default_route` (Boolean) Create default route
-- `default_route_metric` (Number) Default route metric
-- `enable` (Boolean) Enable
-- `send_hostname` (Attributes) Send hostname (see [below for nested schema](#nestedatt--dhcp_client--send_hostname))
+- `create_default_route` (Boolean) Automatically create default route pointing to default gateway provided by server
+- `default_route_metric` (Number) Metric of the default route created
+- `enable` (Boolean) Enable DHCP?
+- `send_hostname` (Attributes) Layer3 sub interfaces DHCP Client Send hostname (see [below for nested schema](#nestedatt--dhcp_client--send_hostname))
 
 <a id="nestedatt--dhcp_client--send_hostname"></a>
 ### Nested Schema for `dhcp_client.send_hostname`
@@ -78,4 +78,4 @@ Read-Only:
 Read-Only:
 
 - `enable` (Boolean) Enable
-- `hostname` (String) Hostname
+- `hostname` (String) Set interface hostname

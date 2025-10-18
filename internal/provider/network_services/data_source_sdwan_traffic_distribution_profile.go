@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM SdwanTrafficDistributionProfile (Package: network_services)
@@ -101,6 +102,11 @@ func (d *SdwanTrafficDistributionProfileDataSource) Read(ctx context.Context, re
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading SdwanTrafficDistributionProfiles", fmt.Sprintf("Could not read SdwanTrafficDistributionProfiles with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *SdwanTrafficDistributionProfileDataSource) Read(ctx context.Context, re
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing SdwanTrafficDistributionProfiless", fmt.Sprintf("Could not list SdwanTrafficDistributionProfiless: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

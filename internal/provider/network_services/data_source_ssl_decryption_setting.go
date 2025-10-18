@@ -103,6 +103,11 @@ func (d *SslDecryptionSettingDataSource) Read(ctx context.Context, req datasourc
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading SslDecryptionSettings", fmt.Sprintf("Could not read SslDecryptionSettings with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

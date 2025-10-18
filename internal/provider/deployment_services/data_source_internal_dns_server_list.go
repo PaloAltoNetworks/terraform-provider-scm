@@ -84,6 +84,11 @@ func (d *InternalDnsServerListDataSource) Read(ctx context.Context, req datasour
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing InternalDnsServerss", fmt.Sprintf("Could not list InternalDnsServerss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

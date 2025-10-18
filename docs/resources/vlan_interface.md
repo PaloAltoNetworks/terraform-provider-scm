@@ -24,15 +24,15 @@ VlanInterface resource
 - `arp` (Attributes List) ARP configuration (see [below for nested schema](#nestedatt--arp))
 - `comment` (String) Description
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Vlan Interfaces. (see [below for nested schema](#nestedatt--ddns_config))
-- `default_value` (String) Default value
+- `default_value` (String) Default interface assignment
 - `device` (String) The device in which the resource is defined
-- `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--dhcp_client))
+- `dhcp_client` (Attributes) Vlan interfaces DHCP Client Object (see [below for nested schema](#nestedatt--dhcp_client))
 - `folder` (String) The folder in which the resource is defined
 - `interface_management_profile` (String) Interface management profile
 - `ip` (List of String) Ip
 - `mtu` (Number) MTU
 - `snippet` (String) The snippet in which the resource is defined
-- `vlan_tag` (Number) Vlan tag
+- `vlan_tag` (Number) VLAN tag
 
 ### Read-Only
 
@@ -44,7 +44,7 @@ VlanInterface resource
 
 Optional:
 
-- `hw_address` (String) Hw address
+- `hw_address` (String) MAC address
 - `interface` (String) ARP interface
 - `name` (String) IP address
 
@@ -52,15 +52,18 @@ Optional:
 <a id="nestedatt--ddns_config"></a>
 ### Nested Schema for `ddns_config`
 
+Required:
+
+- `ddns_cert_profile` (String) Certificate profile
+- `ddns_hostname` (String) Ddns hostname
+- `ddns_vendor` (String) DDNS vendor
+- `ddns_vendor_config` (String) DDNS vendor
+
 Optional:
 
-- `ddns_cert_profile` (String) Ddns cert profile
-- `ddns_enabled` (Boolean) Ddns enabled
-- `ddns_hostname` (String) Ddns hostname
-- `ddns_ip` (String) Ddns ip
-- `ddns_update_interval` (Number) Ddns update interval
-- `ddns_vendor` (String) Ddns vendor
-- `ddns_vendor_config` (String) Ddns vendor config
+- `ddns_enabled` (Boolean) Enable DDNS?
+- `ddns_ip` (String) IP to register (static only)
+- `ddns_update_interval` (Number) Update interval (days)
 
 
 <a id="nestedatt--dhcp_client"></a>
@@ -68,9 +71,9 @@ Optional:
 
 Optional:
 
-- `create_default_route` (Boolean) Create default route
-- `default_route_metric` (Number) Default route metric
-- `enable` (Boolean) Enable
+- `create_default_route` (Boolean) Automatically create default route pointing to default gateway provided by server
+- `default_route_metric` (Number) Metric of the default route created
+- `enable` (Boolean) Enable DHCP?
 - `send_hostname` (Attributes) Send hostname (see [below for nested schema](#nestedatt--dhcp_client--send_hostname))
 
 <a id="nestedatt--dhcp_client--send_hostname"></a>
@@ -79,4 +82,4 @@ Optional:
 Optional:
 
 - `enable` (Boolean) Enable
-- `hostname` (String) Hostname
+- `hostname` (String) Set interface hostname

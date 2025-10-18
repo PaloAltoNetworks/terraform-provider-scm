@@ -657,11 +657,6 @@ type LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim struct {
 	JoinPruneInterval basetypes.Float64Value `tfsdk:"join_prune_interval"`
 }
 
-// EthernetInterfacesLayer3IpInner represents a nested structure within the LogicalRouters model
-type EthernetInterfacesLayer3IpInner struct {
-	Name basetypes.StringValue `tfsdk:"name"`
-}
-
 // LogicalRoutersVrfInnerMulticastMsdp represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastMsdp struct {
 	Enable               basetypes.BoolValue   `tfsdk:"enable"`
@@ -9208,20 +9203,6 @@ func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim) AttrTypes() map[s
 
 // AttrType returns the attribute type for a list of LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim objects.
 func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer3IpInner model.
-func (o EthernetInterfacesLayer3IpInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"name": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer3IpInner objects.
-func (o EthernetInterfacesLayer3IpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

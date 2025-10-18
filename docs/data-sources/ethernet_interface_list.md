@@ -73,7 +73,7 @@ Read-Only:
 
 - `arp` (Attributes List) Ethernet Interfaces ARP configuration (see [below for nested schema](#nestedatt--data--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Ethernet Interfaces. (see [below for nested schema](#nestedatt--data--layer3--ddns_config))
-- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
+- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) Interface IP addresses (see [below for nested schema](#nestedatt--data--layer3--ip))
 - `mtu` (Number) MTU
@@ -107,26 +107,18 @@ Read-Only:
 
 Read-Only:
 
-- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object (see [below for nested schema](#nestedatt--data--layer3--dhcp_client--dhcp_client))
-
-<a id="nestedatt--data--layer3--dhcp_client--dhcp_client"></a>
-### Nested Schema for `data.layer3.dhcp_client.dhcp_client`
-
-Read-Only:
-
 - `create_default_route` (Boolean) Automatically create default route pointing to default gateway provided by server
 - `default_route_metric` (Number) Metric of the default route created
 - `enable` (Boolean) Enable DHCP?
-- `send_hostname` (Attributes) Ethernet Interfaces DHCP ClientSend hostname (see [below for nested schema](#nestedatt--data--layer3--dhcp_client--dhcp_client--send_hostname))
+- `send_hostname` (Attributes) Ethernet Interfaces DHCP ClientSend hostname (see [below for nested schema](#nestedatt--data--layer3--dhcp_client--send_hostname))
 
-<a id="nestedatt--data--layer3--dhcp_client--dhcp_client--send_hostname"></a>
-### Nested Schema for `data.layer3.dhcp_client.dhcp_client.send_hostname`
+<a id="nestedatt--data--layer3--dhcp_client--send_hostname"></a>
+### Nested Schema for `data.layer3.dhcp_client.send_hostname`
 
 Read-Only:
 
 - `enable` (Boolean) Enable
 - `hostname` (String) Set interface hostname
-
 
 
 

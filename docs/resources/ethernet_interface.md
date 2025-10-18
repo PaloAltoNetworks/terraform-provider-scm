@@ -55,7 +55,7 @@ Optional:
 
 - `arp` (Attributes List) Ethernet Interfaces ARP configuration (see [below for nested schema](#nestedatt--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Ethernet Interfaces. (see [below for nested schema](#nestedatt--layer3--ddns_config))
-- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client (see [below for nested schema](#nestedatt--layer3--dhcp_client))
+- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object (see [below for nested schema](#nestedatt--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) Interface IP addresses (see [below for nested schema](#nestedatt--layer3--ip))
 - `mtu` (Number) MTU
@@ -92,26 +92,18 @@ Optional:
 
 Optional:
 
-- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object (see [below for nested schema](#nestedatt--layer3--dhcp_client--dhcp_client))
-
-<a id="nestedatt--layer3--dhcp_client--dhcp_client"></a>
-### Nested Schema for `layer3.dhcp_client.dhcp_client`
-
-Optional:
-
 - `create_default_route` (Boolean) Automatically create default route pointing to default gateway provided by server
 - `default_route_metric` (Number) Metric of the default route created
 - `enable` (Boolean) Enable DHCP?
-- `send_hostname` (Attributes) Ethernet Interfaces DHCP ClientSend hostname (see [below for nested schema](#nestedatt--layer3--dhcp_client--dhcp_client--send_hostname))
+- `send_hostname` (Attributes) Ethernet Interfaces DHCP ClientSend hostname (see [below for nested schema](#nestedatt--layer3--dhcp_client--send_hostname))
 
-<a id="nestedatt--layer3--dhcp_client--dhcp_client--send_hostname"></a>
-### Nested Schema for `layer3.dhcp_client.dhcp_client.send_hostname`
+<a id="nestedatt--layer3--dhcp_client--send_hostname"></a>
+### Nested Schema for `layer3.dhcp_client.send_hostname`
 
 Optional:
 
 - `enable` (Boolean) Enable
 - `hostname` (String) Set interface hostname
-
 
 
 

@@ -77,23 +77,23 @@ type EthernetInterfacesLayer3DdnsConfig struct {
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
 }
 
-// EthernetInterfacesDhcpClient represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesDhcpClient struct {
-	DhcpClient basetypes.ObjectValue `tfsdk:"dhcp_client"`
-}
-
-// EthernetInterfacesDhcpClientDhcpClient represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesDhcpClientDhcpClient struct {
+// EthernetInterfacesLayer3DhcpClient represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3DhcpClient struct {
 	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
 	Enable             basetypes.BoolValue   `tfsdk:"enable"`
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
-// EthernetInterfacesDhcpClientDhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesDhcpClientDhcpClientSendHostname struct {
+// EthernetInterfacesLayer3DhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3DhcpClientSendHostname struct {
 	Enable   basetypes.BoolValue   `tfsdk:"enable"`
 	Hostname basetypes.StringValue `tfsdk:"hostname"`
+}
+
+// EthernetInterfacesLayer3IpInner represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3IpInner struct {
+	Name basetypes.StringValue `tfsdk:"name"`
 }
 
 // EthernetInterfacesLayer3Pppoe represents a nested structure within the EthernetInterfaces model
@@ -156,17 +156,13 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 				},
 				"dhcp_client": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"dhcp_client": basetypes.ObjectType{
+						"create_default_route": basetypes.BoolType{},
+						"default_route_metric": basetypes.Int64Type{},
+						"enable":               basetypes.BoolType{},
+						"send_hostname": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"create_default_route": basetypes.BoolType{},
-								"default_route_metric": basetypes.Int64Type{},
-								"enable":               basetypes.BoolType{},
-								"send_hostname": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"enable":   basetypes.BoolType{},
-										"hostname": basetypes.StringType{},
-									},
-								},
+								"enable":   basetypes.BoolType{},
+								"hostname": basetypes.StringType{},
 							},
 						},
 					},
@@ -257,17 +253,13 @@ func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 		},
 		"dhcp_client": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"dhcp_client": basetypes.ObjectType{
+				"create_default_route": basetypes.BoolType{},
+				"default_route_metric": basetypes.Int64Type{},
+				"enable":               basetypes.BoolType{},
+				"send_hostname": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"create_default_route": basetypes.BoolType{},
-						"default_route_metric": basetypes.Int64Type{},
-						"enable":               basetypes.BoolType{},
-						"send_hostname": basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{
-								"enable":   basetypes.BoolType{},
-								"hostname": basetypes.StringType{},
-							},
-						},
+						"enable":   basetypes.BoolType{},
+						"hostname": basetypes.StringType{},
 					},
 				},
 			},
@@ -341,34 +333,8 @@ func (o EthernetInterfacesLayer3DdnsConfig) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClient model.
-func (o EthernetInterfacesDhcpClient) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"dhcp_client": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"create_default_route": basetypes.BoolType{},
-				"default_route_metric": basetypes.Int64Type{},
-				"enable":               basetypes.BoolType{},
-				"send_hostname": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"enable":   basetypes.BoolType{},
-						"hostname": basetypes.StringType{},
-					},
-				},
-			},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClient objects.
-func (o EthernetInterfacesDhcpClient) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClient model.
-func (o EthernetInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3DhcpClient model.
+func (o EthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"create_default_route": basetypes.BoolType{},
 		"default_route_metric": basetypes.Int64Type{},
@@ -382,23 +348,37 @@ func (o EthernetInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClient objects.
-func (o EthernetInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3DhcpClient objects.
+func (o EthernetInterfacesLayer3DhcpClient) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClientSendHostname model.
-func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3DhcpClientSendHostname model.
+func (o EthernetInterfacesLayer3DhcpClientSendHostname) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":   basetypes.BoolType{},
 		"hostname": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClientSendHostname objects.
-func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3DhcpClientSendHostname objects.
+func (o EthernetInterfacesLayer3DhcpClientSendHostname) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3IpInner model.
+func (o EthernetInterfacesLayer3IpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3IpInner objects.
+func (o EthernetInterfacesLayer3IpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -604,59 +584,52 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					MarkdownDescription: "Ethernet Interfaces DHCP Client",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
-						"dhcp_client": schema.SingleNestedAttribute{
-							MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
+						"create_default_route": schema.BoolAttribute{
+							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
+							Optional:            true,
+							Computed:            true,
+							Default:             booldefault.StaticBool(true),
+						},
+						"default_route_metric": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(1, 65535),
+							},
+							MarkdownDescription: "Metric of the default route created",
+							Optional:            true,
+							Computed:            true,
+							Default:             int64default.StaticInt64(10),
+						},
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable DHCP?",
+							Optional:            true,
+							Computed:            true,
+							Default:             booldefault.StaticBool(true),
+						},
+						"send_hostname": schema.SingleNestedAttribute{
+							MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 							Optional:            true,
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
-								"create_default_route": schema.BoolAttribute{
-									MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
-									Optional:            true,
-									Computed:            true,
-									Default:             booldefault.StaticBool(true),
-								},
-								"default_route_metric": schema.Int64Attribute{
-									Validators: []validator.Int64{
-										int64validator.Between(1, 65535),
-									},
-									MarkdownDescription: "Metric of the default route created",
-									Optional:            true,
-									Computed:            true,
-									Default:             int64default.StaticInt64(10),
-								},
 								"enable": schema.BoolAttribute{
-									MarkdownDescription: "Enable DHCP?",
+									MarkdownDescription: "Enable",
 									Optional:            true,
 									Computed:            true,
 									Default:             booldefault.StaticBool(true),
 								},
-								"send_hostname": schema.SingleNestedAttribute{
-									MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
+								"hostname": schema.StringAttribute{
+									Validators: []validator.String{
+										stringvalidator.LengthAtMost(64),
+										stringvalidator.LengthAtLeast(1),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\._-]+$"), "pattern must match "+"^[a-zA-Z0-9\\._-]+$"),
+									},
+									MarkdownDescription: "Set interface hostname",
 									Optional:            true,
 									Computed:            true,
-									Attributes: map[string]schema.Attribute{
-										"enable": schema.BoolAttribute{
-											MarkdownDescription: "Enable",
-											Optional:            true,
-											Computed:            true,
-											Default:             booldefault.StaticBool(true),
-										},
-										"hostname": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.LengthAtMost(64),
-												stringvalidator.LengthAtLeast(1),
-												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\._-]+$"), "pattern must match "+"^[a-zA-Z0-9\\._-]+$"),
-											},
-											MarkdownDescription: "Set interface hostname",
-											Optional:            true,
-											Computed:            true,
-											Default:             stringdefault.StaticString("system-hostname"),
-										},
-									},
+									Default:             stringdefault.StaticString("system-hostname"),
 								},
 							},
 						},
@@ -965,38 +938,32 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ethernet Interfaces DHCP Client",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"dhcp_client": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
+						"create_default_route": dsschema.BoolAttribute{
+							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
+							Computed:            true,
+						},
+						"default_route_metric": dsschema.Int64Attribute{
+							MarkdownDescription: "Metric of the default route created",
+							Computed:            true,
+						},
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable DHCP?",
+							Computed:            true,
+						},
+						"send_hostname": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
-								"create_default_route": dsschema.BoolAttribute{
-									MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
-									Computed:            true,
-								},
-								"default_route_metric": dsschema.Int64Attribute{
-									MarkdownDescription: "Metric of the default route created",
-									Computed:            true,
-								},
 								"enable": dsschema.BoolAttribute{
-									MarkdownDescription: "Enable DHCP?",
+									MarkdownDescription: "Enable",
 									Computed:            true,
 								},
-								"send_hostname": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
+								"hostname": dsschema.StringAttribute{
+									MarkdownDescription: "Set interface hostname",
 									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"enable": dsschema.BoolAttribute{
-											MarkdownDescription: "Enable",
-											Computed:            true,
-										},
-										"hostname": dsschema.StringAttribute{
-											MarkdownDescription: "Set interface hostname",
-											Computed:            true,
-										},
-									},
 								},
 							},
 						},

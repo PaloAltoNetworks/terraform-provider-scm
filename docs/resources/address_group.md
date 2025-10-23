@@ -42,14 +42,14 @@ resource "scm_address_group" "scm_address_group_1" {
 
 # Create tags to be used for dynamic address group
 resource "scm_tag" "scm_addressgroup_tag_1" {
-  folder   = "Shared"
+  folder   = "All"
   name     = "scm_addressgroup_tag_1"
   comments = "Managed by Terraform"
   color    = "Orange"
 }
 
 resource "scm_tag" "scm_addressgroup_tag_2" {
-  folder   = "Shared"
+  folder   = "All"
   name     = "scm_addressgroup_tag_2"
   comments = "Managed by Terraform"
   color    = "Blue"

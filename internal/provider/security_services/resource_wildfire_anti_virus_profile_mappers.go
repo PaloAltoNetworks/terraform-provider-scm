@@ -27,6 +27,7 @@ func unpackWildfireAntiVirusProfilesToSdk(ctx context.Context, obj types.Object)
 
 	var sdk security_services.WildfireAntiVirusProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

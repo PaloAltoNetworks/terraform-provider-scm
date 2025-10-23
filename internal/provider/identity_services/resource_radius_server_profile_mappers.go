@@ -28,6 +28,7 @@ func unpackRadiusServerProfilesToSdk(ctx context.Context, obj types.Object) (*id
 
 	var sdk identity_services.RadiusServerProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

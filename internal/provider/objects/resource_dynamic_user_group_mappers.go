@@ -27,6 +27,7 @@ func unpackDynamicUserGroupsToSdk(ctx context.Context, obj types.Object) (*objec
 
 	var sdk objects.DynamicUserGroups
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

@@ -28,6 +28,7 @@ func unpackAntiSpywareProfilesToSdk(ctx context.Context, obj types.Object) (*sec
 
 	var sdk security_services.AntiSpywareProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.CloudInlineAnalysis.IsNull() && !model.CloudInlineAnalysis.IsUnknown() {
 		sdk.CloudInlineAnalysis = model.CloudInlineAnalysis.ValueBoolPointer()

@@ -28,6 +28,7 @@ func unpackAntiSpywareSignaturesToSdk(ctx context.Context, obj types.Object) (*s
 
 	var sdk security_services.AntiSpywareSignatures
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.Bugtraq.IsNull() && !model.Bugtraq.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field Bugtraq")

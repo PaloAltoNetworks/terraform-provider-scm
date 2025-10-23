@@ -34,7 +34,7 @@ type Layer3Subinterfaces struct {
 	Id                         basetypes.StringValue  `tfsdk:"id"`
 	InterfaceManagementProfile basetypes.StringValue  `tfsdk:"interface_management_profile"`
 	Ip                         basetypes.ListValue    `tfsdk:"ip"`
-	Mtu                        basetypes.Float64Value `tfsdk:"mtu"`
+	Mtu                        basetypes.Int64Value   `tfsdk:"mtu"`
 	Name                       basetypes.StringValue  `tfsdk:"name"`
 	ParentInterface            basetypes.StringValue  `tfsdk:"parent_interface"`
 	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
@@ -112,7 +112,7 @@ func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 		"id":                           basetypes.StringType{},
 		"interface_management_profile": basetypes.StringType{},
 		"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
-		"mtu":                          basetypes.NumberType{},
+		"mtu":                          basetypes.Int64Type{},
 		"name":                         basetypes.StringType{},
 		"parent_interface":             basetypes.StringType{},
 		"snippet":                      basetypes.StringType{},
@@ -366,9 +366,9 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Ip",
 			Optional:            true,
 		},
-		"mtu": schema.Float64Attribute{
-			Validators: []validator.Float64{
-				float64validator.Between(576.000000, 9216.000000),
+		"mtu": schema.Int64Attribute{
+			Validators: []validator.Int64{
+				int64validator.Between(576, 9216),
 			},
 			MarkdownDescription: "MTU",
 			Optional:            true,
@@ -520,7 +520,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Ip",
 			Computed:            true,
 		},
-		"mtu": dsschema.Float64Attribute{
+		"mtu": dsschema.Int64Attribute{
 			MarkdownDescription: "MTU",
 			Computed:            true,
 		},

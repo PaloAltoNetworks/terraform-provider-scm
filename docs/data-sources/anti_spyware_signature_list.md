@@ -15,7 +15,7 @@ Retrieves a listing of config items.
 ```terraform
 # Fetch a list of all anti-spyware profiles
 data "scm_anti_spyware_signature_list" "all_anti_spyware_signatures" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Output the raw list of all anti-spyware profiles

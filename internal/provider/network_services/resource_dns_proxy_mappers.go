@@ -28,6 +28,7 @@ func unpackDnsProxiesToSdk(ctx context.Context, obj types.Object) (*network_serv
 
 	var sdk network_services.DnsProxies
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Cache.IsNull() && !model.Cache.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Cache")

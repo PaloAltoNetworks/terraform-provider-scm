@@ -3,7 +3,6 @@ package models
 import (
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -22,22 +21,22 @@ import (
 
 // TunnelInterfaces represents the Terraform model for TunnelInterfaces
 type TunnelInterfaces struct {
-	Tfid                       types.String           `tfsdk:"tfid"`
-	Comment                    basetypes.StringValue  `tfsdk:"comment"`
-	DefaultValue               basetypes.Int64Value   `tfsdk:"default_value"`
-	Device                     basetypes.StringValue  `tfsdk:"device"`
-	Folder                     basetypes.StringValue  `tfsdk:"folder"`
-	Id                         basetypes.StringValue  `tfsdk:"id"`
-	InterfaceManagementProfile basetypes.StringValue  `tfsdk:"interface_management_profile"`
-	Ip                         basetypes.ObjectValue  `tfsdk:"ip"`
-	Mtu                        basetypes.Float64Value `tfsdk:"mtu"`
-	Name                       basetypes.StringValue  `tfsdk:"name"`
-	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
+	Tfid                       types.String          `tfsdk:"tfid"`
+	Comment                    basetypes.StringValue `tfsdk:"comment"`
+	DefaultValue               basetypes.StringValue `tfsdk:"default_value"`
+	Device                     basetypes.StringValue `tfsdk:"device"`
+	Folder                     basetypes.StringValue `tfsdk:"folder"`
+	Id                         basetypes.StringValue `tfsdk:"id"`
+	InterfaceManagementProfile basetypes.StringValue `tfsdk:"interface_management_profile"`
+	Ip                         basetypes.ListValue   `tfsdk:"ip"`
+	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
+	Name                       basetypes.StringValue `tfsdk:"name"`
+	Snippet                    basetypes.StringValue `tfsdk:"snippet"`
 }
 
-// TunnelInterfacesIp represents a nested structure within the TunnelInterfaces model
-type TunnelInterfacesIp struct {
-	Ip basetypes.ListValue `tfsdk:"ip"`
+// TunnelInterfacesIpInner represents a nested structure within the TunnelInterfaces model
+type TunnelInterfacesIpInner struct {
+	Name basetypes.StringValue `tfsdk:"name"`
 }
 
 // AttrTypes defines the attribute types for the TunnelInterfaces model.
@@ -45,17 +44,17 @@ func (o TunnelInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":                         basetypes.StringType{},
 		"comment":                      basetypes.StringType{},
-		"default_value":                basetypes.Int64Type{},
+		"default_value":                basetypes.StringType{},
 		"device":                       basetypes.StringType{},
 		"folder":                       basetypes.StringType{},
 		"id":                           basetypes.StringType{},
 		"interface_management_profile": basetypes.StringType{},
-		"ip": basetypes.ObjectType{
+		"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"ip": basetypes.ListType{ElemType: basetypes.StringType{}},
+				"name": basetypes.StringType{},
 			},
-		},
-		"mtu":     basetypes.NumberType{},
+		}},
+		"mtu":     basetypes.Int64Type{},
 		"name":    basetypes.StringType{},
 		"snippet": basetypes.StringType{},
 	}
@@ -68,15 +67,15 @@ func (o TunnelInterfaces) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the TunnelInterfacesIp model.
-func (o TunnelInterfacesIp) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the TunnelInterfacesIpInner model.
+func (o TunnelInterfacesIpInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"ip": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"name": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of TunnelInterfacesIp objects.
-func (o TunnelInterfacesIp) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of TunnelInterfacesIpInner objects.
+func (o TunnelInterfacesIpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -90,9 +89,9 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Description",
 			Optional:            true,
 		},
-		"default_value": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(1, 9999),
+		"default_value": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.RegexMatches(regexp.MustCompile("^tunnel\\.([1-9][0-9]{0,3})$"), "pattern must match "+"^tunnel\\.([1-9][0-9]{0,3})$"),
 			},
 			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
@@ -138,20 +137,21 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Interface management profile",
 			Optional:            true,
 		},
-		"ip": schema.SingleNestedAttribute{
-			MarkdownDescription: "tunnel interfaces ip parent",
+		"ip": schema.ListNestedAttribute{
+			MarkdownDescription: "Tunnel Interface IP Parent",
 			Optional:            true,
-			Attributes: map[string]schema.Attribute{
-				"ip": schema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "tunnel interfaces IP address(es)",
-					Optional:            true,
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"name": schema.StringAttribute{
+						MarkdownDescription: "Tunnel Interface IP address(es)",
+						Required:            true,
+					},
 				},
 			},
 		},
-		"mtu": schema.Float64Attribute{
-			Validators: []validator.Float64{
-				float64validator.Between(576.000000, 9216.000000),
+		"mtu": schema.Int64Attribute{
+			Validators: []validator.Int64{
+				int64validator.Between(576, 9216),
 			},
 			MarkdownDescription: "MTU",
 			Optional:            true,
@@ -193,7 +193,7 @@ var TunnelInterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Description",
 			Computed:            true,
 		},
-		"default_value": dsschema.Int64Attribute{
+		"default_value": dsschema.StringAttribute{
 			MarkdownDescription: "Default interface assignment",
 			Computed:            true,
 		},
@@ -213,18 +213,19 @@ var TunnelInterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Interface management profile",
 			Computed:            true,
 		},
-		"ip": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "tunnel interfaces ip parent",
+		"ip": dsschema.ListNestedAttribute{
+			MarkdownDescription: "Tunnel Interface IP Parent",
 			Computed:            true,
-			Attributes: map[string]dsschema.Attribute{
-				"ip": dsschema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "tunnel interfaces IP address(es)",
-					Computed:            true,
+			NestedObject: dsschema.NestedAttributeObject{
+				Attributes: map[string]dsschema.Attribute{
+					"name": dsschema.StringAttribute{
+						MarkdownDescription: "Tunnel Interface IP address(es)",
+						Computed:            true,
+					},
 				},
 			},
 		},
-		"mtu": dsschema.Float64Attribute{
+		"mtu": dsschema.Int64Attribute{
 			MarkdownDescription: "MTU",
 			Computed:            true,
 		},

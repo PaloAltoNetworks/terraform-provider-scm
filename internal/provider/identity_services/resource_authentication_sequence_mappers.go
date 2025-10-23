@@ -27,6 +27,7 @@ func unpackAuthenticationSequencesToSdk(ctx context.Context, obj types.Object) (
 
 	var sdk identity_services.AuthenticationSequences
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.AuthenticationProfiles.IsNull() && !model.AuthenticationProfiles.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field AuthenticationProfiles")

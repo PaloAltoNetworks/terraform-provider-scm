@@ -27,6 +27,7 @@ func unpackNatRulesToSdk(ctx context.Context, obj types.Object) (*network_servic
 
 	var sdk network_services.NatRules
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.ActiveActiveDeviceBinding.IsNull() && !model.ActiveActiveDeviceBinding.IsUnknown() {
 		sdk.ActiveActiveDeviceBinding = model.ActiveActiveDeviceBinding.ValueStringPointer()

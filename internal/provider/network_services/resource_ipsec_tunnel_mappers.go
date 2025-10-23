@@ -27,6 +27,7 @@ func unpackIpsecTunnelsToSdk(ctx context.Context, obj types.Object) (*network_se
 
 	var sdk network_services.IpsecTunnels
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AntiReplay.IsNull() && !model.AntiReplay.IsUnknown() {
 		sdk.AntiReplay = model.AntiReplay.ValueBoolPointer()

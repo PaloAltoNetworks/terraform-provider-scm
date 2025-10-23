@@ -28,6 +28,7 @@ func unpackHipObjectsToSdk(ctx context.Context, obj types.Object) (*objects.HipO
 
 	var sdk objects.HipObjects
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.AntiMalware.IsNull() && !model.AntiMalware.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field AntiMalware")

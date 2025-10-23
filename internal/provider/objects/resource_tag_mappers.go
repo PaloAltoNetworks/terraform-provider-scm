@@ -26,6 +26,7 @@ func unpackTagsToSdk(ctx context.Context, obj types.Object) (*objects.Tags, diag
 
 	var sdk objects.Tags
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Color.IsNull() && !model.Color.IsUnknown() {
 		sdk.Color = model.Color.ValueStringPointer()

@@ -5,6 +5,8 @@ package provider
 import (
 	"context"
 	"fmt"
+	"io"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -71,6 +73,8 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 
 
 
+
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.OcspResponders{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
@@ -82,6 +86,8 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 	if resp.Diagnostics.HasError() { return }
 
 	tflog.Debug(ctx, "Creating ocsp_responders on SCM API")
+
+
 
 	// 3. Initiate the API request with the body.
 	createReq := r.client.OCSPRespondersAPI.CreateOCSPResponders(ctx).OcspResponders(*unpackedScmObject)
@@ -101,12 +107,16 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 		return
 	}
 
+
+
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packOcspRespondersFromSdk(ctx, *createdObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
+
+
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
     //    This is necessary for parameters that are sent to the API but not returned in the response.
@@ -196,6 +206,8 @@ func (r *OcspResponderResource) Read(ctx context.Context, req resource.ReadReque
 
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
 
+
+
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
 	// --- FOLDER RESTORATION (tokens[0]) ---
@@ -283,6 +295,8 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 
+
+
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
 	unpackedScmObject.Id = ""
@@ -322,6 +336,8 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 		return
 	}
 
+
+
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packOcspRespondersFromSdk(ctx, *updatedObject)
 	resp.Diagnostics.Append(diags...)
@@ -340,6 +356,8 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 	plan.Tfid = state.Tfid
 
     // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
+
+
 
 	tflog.Debug(ctx, "Updated ocsp_responders", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -374,6 +392,8 @@ func (r *OcspResponderResource) Delete(ctx context.Context, req resource.DeleteR
 func (r *OcspResponderResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }
+
+
 
 
 

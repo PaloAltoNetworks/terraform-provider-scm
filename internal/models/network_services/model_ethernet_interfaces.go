@@ -102,11 +102,16 @@ type EthernetInterfacesLayer3Pppoe struct {
 	Authentication     basetypes.StringValue `tfsdk:"authentication"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
 	Enable             basetypes.BoolValue   `tfsdk:"enable"`
-	Passive            basetypes.BoolValue   `tfsdk:"passive"`
+	Passive            basetypes.ObjectValue `tfsdk:"passive"`
 	Password           basetypes.StringValue `tfsdk:"password"`
 	Service            basetypes.StringValue `tfsdk:"service"`
 	StaticAddress      basetypes.ObjectValue `tfsdk:"static_address"`
 	Username           basetypes.StringValue `tfsdk:"username"`
+}
+
+// EthernetInterfacesLayer3PppoePassive represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3PppoePassive struct {
+	Enable basetypes.BoolValue `tfsdk:"enable"`
 }
 
 // EthernetInterfacesLayer3PppoeStaticAddress represents a nested structure within the EthernetInterfaces model
@@ -180,9 +185,13 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 						"authentication":       basetypes.StringType{},
 						"default_route_metric": basetypes.Int64Type{},
 						"enable":               basetypes.BoolType{},
-						"passive":              basetypes.BoolType{},
-						"password":             basetypes.StringType{},
-						"service":              basetypes.StringType{},
+						"passive": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"enable": basetypes.BoolType{},
+							},
+						},
+						"password": basetypes.StringType{},
+						"service":  basetypes.StringType{},
 						"static_address": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"ip": basetypes.StringType{},
@@ -277,9 +286,13 @@ func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 				"authentication":       basetypes.StringType{},
 				"default_route_metric": basetypes.Int64Type{},
 				"enable":               basetypes.BoolType{},
-				"passive":              basetypes.BoolType{},
-				"password":             basetypes.StringType{},
-				"service":              basetypes.StringType{},
+				"passive": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+					},
+				},
+				"password": basetypes.StringType{},
+				"service":  basetypes.StringType{},
 				"static_address": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"ip": basetypes.StringType{},
@@ -391,9 +404,13 @@ func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
 		"authentication":       basetypes.StringType{},
 		"default_route_metric": basetypes.Int64Type{},
 		"enable":               basetypes.BoolType{},
-		"passive":              basetypes.BoolType{},
-		"password":             basetypes.StringType{},
-		"service":              basetypes.StringType{},
+		"passive": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable": basetypes.BoolType{},
+			},
+		},
+		"password": basetypes.StringType{},
+		"service":  basetypes.StringType{},
 		"static_address": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"ip": basetypes.StringType{},
@@ -405,6 +422,20 @@ func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of EthernetInterfacesLayer3Pppoe objects.
 func (o EthernetInterfacesLayer3Pppoe) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3PppoePassive model.
+func (o EthernetInterfacesLayer3PppoePassive) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable": basetypes.BoolType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3PppoePassive objects.
+func (o EthernetInterfacesLayer3PppoePassive) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -714,11 +745,16 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Computed:            true,
 							Default:             booldefault.StaticBool(true),
 						},
-						"passive": schema.BoolAttribute{
+						"passive": schema.SingleNestedAttribute{
 							MarkdownDescription: "Passive",
 							Optional:            true,
 							Computed:            true,
-							Default:             booldefault.StaticBool(false),
+							Attributes: map[string]schema.Attribute{
+								"enable": schema.BoolAttribute{
+									MarkdownDescription: "Passive Mode enabled",
+									Required:            true,
+								},
+							},
 						},
 						"password": schema.StringAttribute{
 							Validators: []validator.String{
@@ -1009,9 +1045,15 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							MarkdownDescription: "Enable",
 							Computed:            true,
 						},
-						"passive": dsschema.BoolAttribute{
+						"passive": dsschema.SingleNestedAttribute{
 							MarkdownDescription: "Passive",
 							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"enable": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive Mode enabled",
+									Computed:            true,
+								},
+							},
 						},
 						"password": dsschema.StringAttribute{
 							MarkdownDescription: "Password",

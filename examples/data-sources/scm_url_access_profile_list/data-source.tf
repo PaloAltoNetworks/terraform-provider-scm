@@ -4,7 +4,7 @@
 
 # Example 1: Fetch a list of all URL Access Profiles in the "Shared" folder.
 data "scm_url_access_profile_list" "all_shared" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Output the list of all URL Access Profile objects from the "Shared" folder.

@@ -27,6 +27,7 @@ func unpackSharedInfrastructureSettingsToSdk(ctx context.Context, obj types.Obje
 
 	var sdk deployment_services.SharedInfrastructureSettings
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.ApiKey.IsNull() && !model.ApiKey.IsUnknown() {
 		sdk.ApiKey = model.ApiKey.ValueStringPointer()

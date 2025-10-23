@@ -67,6 +67,7 @@ func unpackBgpAuthProfilesToSdk(ctx context.Context, obj types.Object) (*network
 
 	var sdk network_services.BgpAuthProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

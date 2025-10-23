@@ -41,6 +41,7 @@ func unpackQuarantinedDevicesToSdk(ctx context.Context, obj types.Object) (*obje
 
     var sdk objects.QuarantinedDevices
     var d diag.Diagnostics
+
     // Handling Primitives
     if !model.HostId.IsNull() && !model.HostId.IsUnknown() {
         sdk.HostId = model.HostId.ValueString()

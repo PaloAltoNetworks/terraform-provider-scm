@@ -26,6 +26,7 @@ func unpackSdwanTrafficDistributionProfilesToSdk(ctx context.Context, obj types.
 
 	var sdk network_services.SdwanTrafficDistributionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

@@ -27,6 +27,7 @@ func unpackAggregateEthernetInterfacesToSdk(ctx context.Context, obj types.Objec
 
 	var sdk network_services.AggregateEthernetInterfaces
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Comment.IsNull() && !model.Comment.IsUnknown() {
 		sdk.Comment = model.Comment.ValueStringPointer()

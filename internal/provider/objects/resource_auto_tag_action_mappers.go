@@ -41,6 +41,7 @@ func unpackAutoTagActionsToSdk(ctx context.Context, obj types.Object) (*objects.
 
     var sdk objects.AutoTagActions
     var d diag.Diagnostics
+
     // Handling Lists
     if !model.Actions.IsNull() && !model.Actions.IsUnknown() {
         tflog.Debug(ctx, "Unpacking list of objects for field Actions")

@@ -41,6 +41,7 @@ func unpackAuthenticationPortalsToSdk(ctx context.Context, obj types.Object) (*i
 
     var sdk identity_services.AuthenticationPortals
     var d diag.Diagnostics
+
     // Handling Primitives
     if !model.AuthenticationProfile.IsNull() && !model.AuthenticationProfile.IsUnknown() {
         sdk.AuthenticationProfile = model.AuthenticationProfile.ValueStringPointer()

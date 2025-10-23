@@ -41,6 +41,7 @@ func unpackAutoVpnClustersToSdk(ctx context.Context, obj types.Object) (*network
 
     var sdk network_services.AutoVpnClusters
     var d diag.Diagnostics
+
     // Handling Lists
     if !model.Branches.IsNull() && !model.Branches.IsUnknown() {
         tflog.Debug(ctx, "Unpacking list of objects for field Branches")

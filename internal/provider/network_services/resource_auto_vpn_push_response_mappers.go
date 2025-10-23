@@ -41,6 +41,7 @@ func unpackAutoVpnPushResponseToSdk(ctx context.Context, obj types.Object) (*net
 
     var sdk network_services.AutoVpnPushResponse
     var d diag.Diagnostics
+
     // Handling Primitives
     if !model.Job.IsNull() && !model.Job.IsUnknown() {
         sdk.Job = model.Job.ValueStringPointer()
@@ -166,6 +167,7 @@ func unpackAutoVpnPushConfigToSdk(ctx context.Context, obj types.Object) (*netwo
 
     var sdk network_services.AutoVpnPushConfig
     var d diag.Diagnostics
+
     // Handling Lists
     if !model.AutoVpnDevices.IsNull() && !model.AutoVpnDevices.IsUnknown() {
         tflog.Debug(ctx, "Unpacking list of objects for field AutoVpnDevices")

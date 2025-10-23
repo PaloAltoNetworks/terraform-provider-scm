@@ -109,6 +109,7 @@ func unpackMfaServersToSdk(ctx context.Context, obj types.Object) (*identity_ser
 
 	var sdk identity_services.MfaServers
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

@@ -69,6 +69,7 @@ func unpackIkeGatewaysToSdk(ctx context.Context, obj types.Object) (*network_ser
 
 	var sdk network_services.IkeGateways
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Authentication.IsNull() && !model.Authentication.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Authentication")

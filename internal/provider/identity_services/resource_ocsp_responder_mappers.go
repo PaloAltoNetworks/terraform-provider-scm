@@ -41,6 +41,7 @@ func unpackOcspRespondersToSdk(ctx context.Context, obj types.Object) (*identity
 
     var sdk identity_services.OcspResponders
     var d diag.Diagnostics
+
     // Handling Primitives
     if !model.Device.IsNull() && !model.Device.IsUnknown() {
         sdk.Device = model.Device.ValueStringPointer()

@@ -26,6 +26,7 @@ func unpackRouteAccessListsToSdk(ctx context.Context, obj types.Object) (*networ
 
 	var sdk network_services.RouteAccessLists
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

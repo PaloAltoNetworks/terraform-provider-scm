@@ -5,6 +5,8 @@ package provider
 import (
 	"context"
 	"fmt"
+	"io"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -71,6 +73,8 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 
 
 
+
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.BandwidthAllocations{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
@@ -82,6 +86,8 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 	if resp.Diagnostics.HasError() { return }
 
 	tflog.Debug(ctx, "Creating bandwidth_allocations on SCM API")
+
+
 
 	// 3. Initiate the API request with the body.
 	createReq := r.client.BandwidthAllocationsAPI.CreateBandwidthAllocations(ctx).BandwidthAllocations(*unpackedScmObject)
@@ -101,12 +107,16 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 		return
 	}
 
+
+
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *createdObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
+
+
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
     //    This is necessary for parameters that are sent to the API but not returned in the response.
@@ -182,6 +192,8 @@ func (r *BandwidthAllocationResource) Read(ctx context.Context, req resource.Rea
 
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
 
+
+
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
 	// --- FOLDER RESTORATION (tokens[0]) ---
@@ -220,6 +232,8 @@ func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.U
 	unpackedScmObject, diags := unpackBandwidthAllocationsToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
@@ -260,6 +274,8 @@ func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.U
 		return
 	}
 
+
+
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *updatedObject)
 	resp.Diagnostics.Append(diags...)
@@ -276,6 +292,8 @@ func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.U
 	plan.Tfid = state.Tfid
 
     // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
+
+
 
 	tflog.Debug(ctx, "Updated bandwidth_allocations", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -310,6 +328,8 @@ func (r *BandwidthAllocationResource) Delete(ctx context.Context, req resource.D
 func (r *BandwidthAllocationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }
+
+
 
 
 

@@ -130,61 +130,6 @@ func (d *BandwidthAllocationDataSource) Read(ctx context.Context, req datasource
 			return
 		}
 
-	}  else if !data.Name.IsNull() {
-		objectName := data.Name.ValueString()
-		tflog.Debug(ctx, "Reading BandwidthAllocations data source by Name", map[string]interface{}{"name": objectName})
-
-		listReq := d.client.BandwidthAllocationsAPI.ListBandwidthAllocations(ctx)
-
-		// Use reflection to dynamically check for and apply scope filters.
-
-
-
-
-
-		listResponse, httpRes, err := listReq.Execute()
-		if err != nil {
-			resp.Diagnostics.AddError("Error Listing BandwidthAllocationss", fmt.Sprintf("Could not list BandwidthAllocationss: %s", err.Error()))
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
-				detailedMessage,
-			)
-			return
-		}
-		if httpRes.StatusCode != 200 {
-			resp.Diagnostics.AddError("Unexpected HTTP status code", fmt.Sprintf("Expected 200, got %d", httpRes.StatusCode))
-			return
-		}
-
-		// Find the specific object from the list.
-		var foundObject *deployment_services.BandwidthAllocations
-		for i := range listResponse.GetData() {
-			item := listResponse.GetData()[i]
-			if item.GetName() == objectName {
-				foundObject = &item
-				break
-			}
-		}
-
-		if foundObject == nil {
-			resp.Diagnostics.AddError("BandwidthAllocations Not Found", fmt.Sprintf("No BandwidthAllocations found with name: %s", objectName))
-			return
-		}
-
-		// Create a packed object from the SCM response.
-		packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *foundObject)
-		resp.Diagnostics.Append(diags...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-		// Load the packed object into the data model.
-		resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
 	}  else {
 		resp.Diagnostics.AddError("Missing Identifier", "Either 'id' or 'name' must be provided for the BandwidthAllocations data source.")
 		return

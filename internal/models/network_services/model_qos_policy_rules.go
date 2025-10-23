@@ -22,17 +22,19 @@ import (
 
 // QosPolicyRules represents the Terraform model for QosPolicyRules
 type QosPolicyRules struct {
-	Tfid        types.String          `tfsdk:"tfid"`
-	Action      basetypes.ObjectValue `tfsdk:"action"`
-	Description basetypes.StringValue `tfsdk:"description"`
-	Device      basetypes.StringValue `tfsdk:"device"`
-	DscpTos     basetypes.ObjectValue `tfsdk:"dscp_tos"`
-	Folder      basetypes.StringValue `tfsdk:"folder"`
-	Id          basetypes.StringValue `tfsdk:"id"`
-	Name        basetypes.StringValue `tfsdk:"name"`
-	Schedule    basetypes.StringValue `tfsdk:"schedule"`
-	Snippet     basetypes.StringValue `tfsdk:"snippet"`
-	Position    basetypes.StringValue `tfsdk:"position"`
+	Tfid             types.String          `tfsdk:"tfid"`
+	RelativePosition basetypes.StringValue `tfsdk:"relative_position"`
+	TargetRule       basetypes.StringValue `tfsdk:"target_rule"`
+	Action           basetypes.ObjectValue `tfsdk:"action"`
+	Description      basetypes.StringValue `tfsdk:"description"`
+	Device           basetypes.StringValue `tfsdk:"device"`
+	DscpTos          basetypes.ObjectValue `tfsdk:"dscp_tos"`
+	Folder           basetypes.StringValue `tfsdk:"folder"`
+	Id               basetypes.StringValue `tfsdk:"id"`
+	Name             basetypes.StringValue `tfsdk:"name"`
+	Schedule         basetypes.StringValue `tfsdk:"schedule"`
+	Snippet          basetypes.StringValue `tfsdk:"snippet"`
+	Position         basetypes.StringValue `tfsdk:"position"`
 }
 
 // QosPolicyRulesAction represents a nested structure within the QosPolicyRules model
@@ -79,7 +81,9 @@ type QosPolicyRulesDscpTosCodepointsInnerTypeCustomCodepoint struct {
 // AttrTypes defines the attribute types for the QosPolicyRules model.
 func (o QosPolicyRules) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid": basetypes.StringType{},
+		"tfid":              basetypes.StringType{},
+		"relative_position": basetypes.StringType{},
+		"target_rule":       basetypes.StringType{},
 		"action": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"class": basetypes.StringType{},
@@ -533,6 +537,13 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
+		"relative_position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("before", "after", "top", "bottom"),
+			},
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Optional:            true,
+		},
 		"schedule": schema.StringAttribute{
 			MarkdownDescription: "Schedule",
 			Optional:            true,
@@ -551,6 +562,10 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
 			},
+		},
+		"target_rule": schema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

@@ -27,6 +27,7 @@ func unpackLicenseResultToSdk(ctx context.Context, obj types.Object) (*network_s
 
 	var sdk network_services.LicenseResult
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.ConfiguredLicenses.IsNull() && !model.ConfiguredLicenses.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field ConfiguredLicenses")

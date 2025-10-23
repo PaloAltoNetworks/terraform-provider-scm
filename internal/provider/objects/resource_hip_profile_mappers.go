@@ -26,6 +26,7 @@ func unpackHipProfilesToSdk(ctx context.Context, obj types.Object) (*objects.Hip
 
 	var sdk objects.HipProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

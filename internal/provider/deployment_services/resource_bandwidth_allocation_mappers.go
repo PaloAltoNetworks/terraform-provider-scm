@@ -27,6 +27,7 @@ func unpackBandwidthAllocationsToSdk(ctx context.Context, obj types.Object) (*de
 
 	var sdk deployment_services.BandwidthAllocations
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AllocatedBandwidth.IsNull() && !model.AllocatedBandwidth.IsUnknown() {
 		sdk.AllocatedBandwidth = float32(model.AllocatedBandwidth.ValueFloat64())

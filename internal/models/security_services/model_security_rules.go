@@ -22,6 +22,8 @@ import (
 // SecurityRules represents the Terraform model for SecurityRules
 type SecurityRules struct {
 	Tfid                   types.String          `tfsdk:"tfid"`
+	RelativePosition       basetypes.StringValue `tfsdk:"relative_position"`
+	TargetRule             basetypes.StringValue `tfsdk:"target_rule"`
 	Action                 basetypes.StringValue `tfsdk:"action"`
 	AllowUrlCategory       basetypes.ListValue   `tfsdk:"allow_url_category"`
 	AllowWebApplication    basetypes.ListValue   `tfsdk:"allow_web_application"`
@@ -143,8 +145,10 @@ type InternetRuleTypeSecuritySettings struct {
 // AttrTypes defines the attribute types for the SecurityRules model.
 func (o SecurityRules) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":   basetypes.StringType{},
-		"action": basetypes.StringType{},
+		"tfid":              basetypes.StringType{},
+		"relative_position": basetypes.StringType{},
+		"target_rule":       basetypes.StringType{},
+		"action":            basetypes.StringType{},
 		"allow_url_category": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"additional_action":      basetypes.StringType{},
@@ -889,6 +893,13 @@ var SecurityRulesResourceSchema = schema.Schema{
 				},
 			},
 		},
+		"relative_position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("before", "after", "top", "bottom"),
+			},
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Optional:            true,
+		},
 		"schedule": schema.StringAttribute{
 			MarkdownDescription: "Schedule in which this rule will be applied",
 			Optional:            true,
@@ -962,6 +973,10 @@ var SecurityRulesResourceSchema = schema.Schema{
 		"tag": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "The tags associated with the security rule",
+			Optional:            true,
+		},
+		"target_rule": schema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tenant_restrictions": schema.ListAttribute{

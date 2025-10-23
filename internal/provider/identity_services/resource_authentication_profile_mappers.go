@@ -28,6 +28,7 @@ func unpackAuthenticationProfilesToSdk(ctx context.Context, obj types.Object) (*
 
 	var sdk identity_services.AuthenticationProfiles
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.AllowList.IsNull() && !model.AllowList.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field AllowList")

@@ -26,6 +26,7 @@ func unpackDecryptionProfilesToSdk(ctx context.Context, obj types.Object) (*secu
 
 	var sdk security_services.DecryptionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

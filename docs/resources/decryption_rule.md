@@ -41,9 +41,11 @@ DecryptionRule resource
 - `negate_source` (Boolean) Negate the source addresses?
 - `position` (String) The position of a security rule
 - `profile` (String) The decryption profile associated with the decryption rule
+- `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
 - `source_hip` (List of String) Source hip
 - `tag` (List of String) The tags associated with the decryption rule
+- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `type` (Attributes) The type of decryption (see [below for nested schema](#nestedatt--type))
 
 ### Read-Only

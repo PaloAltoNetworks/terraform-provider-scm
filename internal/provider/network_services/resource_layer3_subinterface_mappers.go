@@ -27,6 +27,7 @@ func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 
 	var sdk network_services.Layer3Subinterfaces
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
@@ -99,7 +100,7 @@ func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 
 	// Handling Primitives
 	if !model.Mtu.IsNull() && !model.Mtu.IsUnknown() {
-		val := float32(model.Mtu.ValueFloat64())
+		val := int32(model.Mtu.ValueInt64())
 		sdk.Mtu = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	}
@@ -233,10 +234,10 @@ func packLayer3SubinterfacesFromSdk(ctx context.Context, sdk network_services.La
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Mtu != nil {
-		model.Mtu = basetypes.NewFloat64Value(float64(*sdk.Mtu))
+		model.Mtu = basetypes.NewInt64Value(int64(*sdk.Mtu))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	} else {
-		model.Mtu = basetypes.NewFloat64Null()
+		model.Mtu = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing

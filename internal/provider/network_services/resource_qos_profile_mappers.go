@@ -26,6 +26,7 @@ func unpackQosProfilesToSdk(ctx context.Context, obj types.Object) (*network_ser
 
 	var sdk network_services.QosProfiles
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.AggregateBandwidth.IsNull() && !model.AggregateBandwidth.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field AggregateBandwidth")

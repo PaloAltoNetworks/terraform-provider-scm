@@ -27,6 +27,7 @@ func unpackRouteCommunityListsToSdk(ctx context.Context, obj types.Object) (*net
 
 	var sdk network_services.RouteCommunityLists
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

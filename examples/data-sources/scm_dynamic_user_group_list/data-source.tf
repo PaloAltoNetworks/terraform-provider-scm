@@ -1,6 +1,6 @@
 # 1. Use a single data block to fetch ALL dynamic user groups in the "Shared" folder. [cite: 2]
 data "scm_dynamic_user_group_list" "all_shared_dugs" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # 2. Use a 'for' expression to transform the list into a map. [cite: 4]
@@ -12,7 +12,7 @@ output "dug_results_from_list" {
 
 # This data source block shows an example of pagination.
 data "scm_dynamic_user_group_list" "paginated_dugs_example" {
-  folder = "Shared"
+  folder = "All"
   limit  = 5
   offset = 0
 }

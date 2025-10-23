@@ -27,6 +27,7 @@ func unpackRegionsToSdk(ctx context.Context, obj types.Object) (*objects.Regions
 
 	var sdk objects.Regions
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.Address.IsNull() && !model.Address.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field Address")

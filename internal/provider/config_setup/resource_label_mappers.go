@@ -26,6 +26,7 @@ func unpackLabelsToSdk(ctx context.Context, obj types.Object) (*config_setup.Lab
 
 	var sdk config_setup.Labels
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

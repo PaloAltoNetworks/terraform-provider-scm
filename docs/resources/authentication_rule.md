@@ -40,10 +40,12 @@ AuthenticationRule resource
 - `negate_destination` (Boolean) Are the destination addresses negated?
 - `negate_source` (Boolean) Are the source addresses negated?
 - `position` (String) The relative position of the rule
+- `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) Snippet
 - `source_hip` (List of String) The source Host Integrity Profile (HIP)
 - `source_user` (List of String) The source users
 - `tag` (List of String) The authentication rule tags
+- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `timeout` (Number) The authentication session timeout (seconds)
 
 ### Read-Only

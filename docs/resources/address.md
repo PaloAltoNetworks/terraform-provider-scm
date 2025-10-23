@@ -15,19 +15,19 @@ Address resource
 ```terraform
 # This file is embedded using go:embed
 resource "scm_tag" "scm_addr_tag_1" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_addr_tag_1"
   color  = "Red"
 }
 
 resource "scm_tag" "scm_addr_tag_2" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_addr_tag_2"
   color  = "Blue"
 }
 
 resource "scm_tag" "scm_addr_tag_3" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_addr_tag_3"
   color  = "Orange"
 }

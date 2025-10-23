@@ -27,6 +27,7 @@ func unpackFoldersToSdk(ctx context.Context, obj types.Object) (*config_setup.Fo
 
 	var sdk config_setup.Folders
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

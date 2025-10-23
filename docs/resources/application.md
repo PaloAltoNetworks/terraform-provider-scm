@@ -15,7 +15,7 @@ Application resource
 ```terraform
 # Custom Application
 resource "scm_application" "scm_media_app" {
-  folder                  = "Shared"
+  folder                  = "All"
   name                    = "scm_media_app"
   description             = "Managed by Terraform"
   category                = "media"
@@ -31,7 +31,7 @@ resource "scm_application" "scm_media_app" {
 
 # Custom Application with tweaked timeouts and additional settings
 resource "scm_application" "scm_risky_app" {
-  folder                   = "Shared"
+  folder                   = "All"
   name                     = "scm_risky_app"
   description              = "Managed by Terraform"
   category                 = "media"
@@ -55,7 +55,7 @@ resource "scm_application" "scm_risky_app" {
 
 # Custom Application based on Custom Signature
 resource "scm_application" "scm_custom_app" {
-  folder      = "Shared"
+  folder      = "All"
   name        = "scm_custom_app"
   description = "Managed by Terraform"
   category    = "media"

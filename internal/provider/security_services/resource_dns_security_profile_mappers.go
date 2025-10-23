@@ -28,6 +28,7 @@ func unpackDnsSecurityProfilesToSdk(ctx context.Context, obj types.Object) (*sec
 
 	var sdk security_services.DnsSecurityProfiles
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.BotnetDomains.IsNull() && !model.BotnetDomains.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field BotnetDomains")

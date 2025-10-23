@@ -26,6 +26,7 @@ func unpackDecryptionExclusionsToSdk(ctx context.Context, obj types.Object) (*se
 
 	var sdk security_services.DecryptionExclusions
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

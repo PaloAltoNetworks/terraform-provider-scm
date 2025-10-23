@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -23,6 +24,8 @@ import (
 // AppOverrideRules represents the Terraform model for AppOverrideRules
 type AppOverrideRules struct {
 	Tfid              types.String          `tfsdk:"tfid"`
+	RelativePosition  basetypes.StringValue `tfsdk:"relative_position"`
+	TargetRule        basetypes.StringValue `tfsdk:"target_rule"`
 	Application       basetypes.StringValue `tfsdk:"application"`
 	Description       basetypes.StringValue `tfsdk:"description"`
 	Destination       basetypes.ListValue   `tfsdk:"destination"`
@@ -41,12 +44,15 @@ type AppOverrideRules struct {
 	Source            basetypes.ListValue   `tfsdk:"source"`
 	Tag               basetypes.ListValue   `tfsdk:"tag"`
 	To                basetypes.ListValue   `tfsdk:"to"`
+	Position          basetypes.StringValue `tfsdk:"position"`
 }
 
 // AttrTypes defines the attribute types for the AppOverrideRules model.
 func (o AppOverrideRules) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":               basetypes.StringType{},
+		"relative_position":  basetypes.StringType{},
+		"target_rule":        basetypes.StringType{},
 		"application":        basetypes.StringType{},
 		"description":        basetypes.StringType{},
 		"destination":        basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -65,6 +71,7 @@ func (o AppOverrideRules) AttrTypes() map[string]attr.Type {
 		"source":             basetypes.ListType{ElemType: basetypes.StringType{}},
 		"tag":                basetypes.ListType{ElemType: basetypes.StringType{}},
 		"to":                 basetypes.ListType{ElemType: basetypes.StringType{}},
+		"position":           basetypes.StringType{},
 	}
 }
 
@@ -174,12 +181,31 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "Port",
 			Required:            true,
 		},
+		"position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("pre", "post"),
+			},
+			MarkdownDescription: "The position of a security rule\n",
+			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("pre"),
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
+			},
+		},
 		"protocol": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.OneOf("tcp", "udp"),
 			},
 			MarkdownDescription: "Protocol",
 			Required:            true,
+		},
+		"relative_position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("before", "after", "top", "bottom"),
+			},
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Optional:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -204,6 +230,10 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"tag": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Tag",
+			Optional:            true,
+		},
+		"target_rule": schema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{

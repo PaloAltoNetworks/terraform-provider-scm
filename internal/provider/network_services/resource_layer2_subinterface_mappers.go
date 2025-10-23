@@ -26,6 +26,7 @@ func unpackLayer2SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 
 	var sdk network_services.Layer2Subinterfaces
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Comment.IsNull() && !model.Comment.IsUnknown() {
 		sdk.Comment = model.Comment.ValueStringPointer()

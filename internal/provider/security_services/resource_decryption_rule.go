@@ -3,6 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"io"
 	"net/http"
 	"reflect"
 	"strings"
@@ -69,6 +70,17 @@ func (r *DecryptionRuleResource) Create(ctx context.Context, req resource.Create
 		return
 	}
 
+	// --- START: Save original synthetic values ---
+	var originalRelativePosition basetypes.StringValue
+	var originalTargetRule basetypes.StringValue
+	if !data.RelativePosition.IsNull() {
+		originalRelativePosition = data.RelativePosition
+	}
+	if !data.TargetRule.IsNull() {
+		originalTargetRule = data.TargetRule
+	}
+	// --- END: Save original synthetic values ---
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.DecryptionRules{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
@@ -106,6 +118,22 @@ func (r *DecryptionRuleResource) Create(ctx context.Context, req resource.Create
 		return
 	}
 
+	// If positioning attributes are set, move the rule after creation.
+	if !data.RelativePosition.IsNull() && createdObject != nil && createdObject.Id != nil {
+		relPos := data.RelativePosition.ValueString()
+		targetRule := data.TargetRule.ValueString()
+		ruleID := *createdObject.Id
+		rulebase := data.Position.ValueString()
+		if data.Position.IsNull() {
+			rulebase = "pre"
+		} // Default rulebase
+
+		tflog.Debug(ctx, "Attempting to move newly created decryption_rule rule", map[string]any{"rule_id": ruleID, "relative_position": relPos, "target_rule": targetRule, "rulebase": rulebase})
+		if err := r.moveRule(ctx, ruleID, relPos, targetRule, rulebase); err != nil {
+			resp.Diagnostics.AddWarning("Failed to position decryption_rule rule after create", fmt.Sprintf("Rule created but move failed: %s.", err.Error()))
+		}
+	}
+
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packDecryptionRulesFromSdk(ctx, *createdObject)
 	resp.Diagnostics.Append(diags...)
@@ -116,6 +144,10 @@ func (r *DecryptionRuleResource) Create(ctx context.Context, req resource.Create
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Explicitly restore synthetic Terraform attributes using the saved original values.
+	data.RelativePosition = originalRelativePosition
+	data.TargetRule = originalTargetRule
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
@@ -212,6 +244,10 @@ func (r *DecryptionRuleResource) Read(ctx context.Context, req resource.ReadRequ
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
 	data.Position = savestate.Position
 
+	// Explicitly restore synthetic Terraform attributes from prior state.
+	data.RelativePosition = savestate.RelativePosition
+	data.TargetRule = savestate.TargetRule
+
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
 	// --- FOLDER RESTORATION (tokens[0]) ---
@@ -303,8 +339,8 @@ func (r *DecryptionRuleResource) Update(ctx context.Context, req resource.Update
 	}
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
-	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
-	unpackedScmObject.Id = ""
+	// ID is a pointer, so we nil it out to omit it from the update payload.
+	unpackedScmObject.Id = nil
 
 	// Step 6: Get id from token and make update call
 	tokens := strings.Split(state.Tfid.ValueString(), ":")
@@ -341,6 +377,40 @@ func (r *DecryptionRuleResource) Update(ctx context.Context, req resource.Update
 		return
 	}
 
+	// If positioning attributes changed in the plan, move the rule after update.
+	if updatedObject != nil && updatedObject.Id != nil {
+		needsMove := false
+		if plan.RelativePosition.IsNull() && !state.RelativePosition.IsNull() {
+			// If relative_position is removed, we don't need to call move API.
+			needsMove = false
+			tflog.Debug(ctx, "Relative position removed, skipping move for rule", map[string]any{"rule_id": *updatedObject.Id})
+		} else if !plan.RelativePosition.IsNull() {
+			// Check if position or target actually changed
+			positionChanged := state.RelativePosition.IsNull() || !state.RelativePosition.Equal(plan.RelativePosition)
+			targetChanged := (state.TargetRule.IsNull() != plan.TargetRule.IsNull()) || (!state.TargetRule.IsNull() && !state.TargetRule.Equal(plan.TargetRule))
+			if positionChanged || targetChanged {
+				needsMove = true
+			}
+		}
+		if needsMove {
+			relPos := plan.RelativePosition.ValueString()
+			targetRule := plan.TargetRule.ValueString()
+			ruleID := *updatedObject.Id
+			rulebase := plan.Position.ValueString()
+			if plan.Position.IsNull() {
+				rulebase = "pre"
+			} // Default rulebase
+
+			tflog.Debug(ctx, "Attempting to move updated decryption_rule rule", map[string]any{"rule_id": ruleID, "relative_position": relPos, "target_rule": targetRule, "rulebase": rulebase})
+			if err := r.moveRule(ctx, ruleID, relPos, targetRule, rulebase); err != nil {
+				resp.Diagnostics.AddWarning("Failed to position decryption_rule rule after update", fmt.Sprintf("Rule updated but move failed: %s.", err.Error()))
+			}
+		} else if !plan.RelativePosition.IsNull() {
+			// Log only if a position was specified but didn't change
+			tflog.Debug(ctx, "Positioning attributes unchanged, skipping move for rule", map[string]any{"rule_id": *updatedObject.Id})
+		}
+	}
+
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packDecryptionRulesFromSdk(ctx, *updatedObject)
 	resp.Diagnostics.Append(diags...)
@@ -362,6 +432,10 @@ func (r *DecryptionRuleResource) Update(ctx context.Context, req resource.Update
 
 	// Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
 	plan.Position = state.Position
+
+	// Explicitly restore synthetic Terraform attributes from prior state.
+	plan.RelativePosition = state.RelativePosition
+	plan.TargetRule = state.TargetRule
 
 	tflog.Debug(ctx, "Updated decryption_rules", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -397,4 +471,66 @@ func (r *DecryptionRuleResource) Delete(ctx context.Context, req resource.Delete
 
 func (r *DecryptionRuleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
+}
+
+// moveRule moves a rule using the SCM Go SDK.
+func (r *DecryptionRuleResource) moveRule(ctx context.Context, ruleID string, relativePosition string, targetRule string, rulebase string) error {
+	if relativePosition == "" {
+		tflog.Debug(ctx, "No relative_position specified, skipping move.", map[string]any{"rule_id": ruleID})
+		return nil
+	}
+	if rulebase == "" {
+		// Default rulebase if not provided, adjust if necessary for your API
+		rulebase = "pre"
+		tflog.Debug(ctx, "Rulebase not specified, defaulting to 'pre'.", map[string]any{"rule_id": ruleID})
+	}
+
+	// Validate that target_rule is provided when needed
+	if (relativePosition == "before" || relativePosition == "after") && targetRule == "" {
+		// Allow empty target for specific resources if needed, otherwise enforce.
+		// Example: return fmt.Errorf("target_rule must be specified when relative_position is 'before' or 'after' for rule %s", ruleID)
+		tflog.Warn(ctx, "target_rule is empty for relative position '"+relativePosition+"', proceeding but API might require it.", map[string]any{"rule_id": ruleID})
+	}
+
+	// Ensure the client is configured
+	if r.client == nil {
+		return fmt.Errorf("SCM client is not configured, cannot move rule %s", ruleID)
+	}
+
+	// Prepare the SDK request payload for the move operation.
+	sdkMovePayload := security_services.RuleBasedMove{
+		Destination: relativePosition,
+		Rulebase:    rulebase,
+		// Only set DestinationRule if targetRule is provided
+	}
+	if targetRule != "" {
+		sdkMovePayload.DestinationRule = &targetRule
+	}
+
+	// Construct and execute the SDK request.
+	moveReq := r.client.DecryptionRulesAPI.MoveDecryptionRulesByID(ctx, ruleID).RuleBasedMove(sdkMovePayload) // Use MoveOperationID here
+	httpResp, err := moveReq.Execute()
+
+	// Handle potential errors
+	if err != nil {
+		tflog.Error(ctx, "Move request failed", map[string]any{"rule_id": ruleID, "error": err.Error()})
+		// Attempt to get more detailed error message
+		var statusCode int
+		if httpResp != nil {
+			statusCode = httpResp.StatusCode
+		}
+		tflog.Error(ctx, "Move request failed", map[string]any{"rule_id": ruleID, "error": err.Error(), "status_code": statusCode})
+		detailedMessage := utils.PrintScmError(err) // Assuming utils.PrintScmError handles nil httpResp gracefully
+		return fmt.Errorf("move request for rule %s failed: %s. API response details: %s", ruleID, err.Error(), detailedMessage)
+	}
+
+	// Check HTTP status code for success (typically 200 OK for move)
+	if httpResp.StatusCode != http.StatusOK {
+		bodyBytes, _ := io.ReadAll(httpResp.Body)
+		tflog.Error(ctx, "Move request returned non-OK status", map[string]any{"rule_id": ruleID, "status_code": httpResp.StatusCode, "response_body": string(bodyBytes)})
+		return fmt.Errorf("move request for rule %s returned status %d: %s", ruleID, httpResp.StatusCode, string(bodyBytes))
+	}
+
+	tflog.Info(ctx, "Successfully moved rule", map[string]any{"rule_id": ruleID, "position": relativePosition, "target": targetRule, "rulebase": rulebase})
+	return nil
 }

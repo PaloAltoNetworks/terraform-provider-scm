@@ -26,6 +26,7 @@ func unpackSitesToSdk(ctx context.Context, obj types.Object) (*deployment_servic
 
 	var sdk deployment_services.Sites
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AddressLine1.IsNull() && !model.AddressLine1.IsUnknown() {
 		sdk.AddressLine1 = model.AddressLine1.ValueStringPointer()

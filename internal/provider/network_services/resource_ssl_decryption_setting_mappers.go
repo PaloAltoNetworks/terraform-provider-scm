@@ -41,6 +41,7 @@ func unpackSslDecryptionSettingsToSdk(ctx context.Context, obj types.Object) (*n
 
     var sdk network_services.SslDecryptionSettings
     var d diag.Diagnostics
+
     // Handling Lists
     if !model.DisabledSslExcludeCertFromPredefined.IsNull() && !model.DisabledSslExcludeCertFromPredefined.IsUnknown() {
         tflog.Debug(ctx, "Unpacking list of primitives for field DisabledSslExcludeCertFromPredefined")

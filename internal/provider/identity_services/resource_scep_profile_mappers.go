@@ -68,6 +68,7 @@ func unpackScepProfilesToSdk(ctx context.Context, obj types.Object) (*identity_s
 
 	var sdk identity_services.ScepProfiles
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Algorithm.IsNull() && !model.Algorithm.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Algorithm")

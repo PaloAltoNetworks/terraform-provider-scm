@@ -23,6 +23,8 @@ import (
 // DecryptionRules represents the Terraform model for DecryptionRules
 type DecryptionRules struct {
 	Tfid              types.String          `tfsdk:"tfid"`
+	RelativePosition  basetypes.StringValue `tfsdk:"relative_position"`
+	TargetRule        basetypes.StringValue `tfsdk:"target_rule"`
 	Action            basetypes.StringValue `tfsdk:"action"`
 	Category          basetypes.ListValue   `tfsdk:"category"`
 	Description       basetypes.StringValue `tfsdk:"description"`
@@ -61,6 +63,8 @@ type DecryptionRulesType struct {
 func (o DecryptionRules) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":               basetypes.StringType{},
+		"relative_position":  basetypes.StringType{},
+		"target_rule":        basetypes.StringType{},
 		"action":             basetypes.StringType{},
 		"category":           basetypes.ListType{ElemType: basetypes.StringType{}},
 		"description":        basetypes.StringType{},
@@ -237,6 +241,13 @@ var DecryptionRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The decryption profile associated with the decryption rule",
 			Optional:            true,
 		},
+		"relative_position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("before", "after", "top", "bottom"),
+			},
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Optional:            true,
+		},
 		"service": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "The destination services and/or service groups",
@@ -275,6 +286,10 @@ var DecryptionRulesResourceSchema = schema.Schema{
 		"tag": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "The tags associated with the decryption rule",
+			Optional:            true,
+		},
+		"target_rule": schema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{

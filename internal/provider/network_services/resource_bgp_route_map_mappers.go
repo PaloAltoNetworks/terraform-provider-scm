@@ -27,6 +27,7 @@ func unpackBgpRouteMapsToSdk(ctx context.Context, obj types.Object) (*network_se
 
 	var sdk network_services.BgpRouteMaps
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

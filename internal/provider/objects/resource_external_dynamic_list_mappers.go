@@ -69,6 +69,7 @@ func unpackExternalDynamicListsToSdk(ctx context.Context, obj types.Object) (*ob
 
 	var sdk objects.ExternalDynamicLists
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

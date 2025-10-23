@@ -27,6 +27,7 @@ func unpackSdwanErrorCorrectionProfilesToSdk(ctx context.Context, obj types.Obje
 
 	var sdk network_services.SdwanErrorCorrectionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.ActivationThreshold.IsNull() && !model.ActivationThreshold.IsUnknown() {
 		sdk.ActivationThreshold = float32(model.ActivationThreshold.ValueFloat64())

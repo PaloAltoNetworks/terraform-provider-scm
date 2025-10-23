@@ -26,6 +26,7 @@ func unpackDosProtectionProfilesToSdk(ctx context.Context, obj types.Object) (*s
 
 	var sdk security_services.DosProtectionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

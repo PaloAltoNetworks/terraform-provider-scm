@@ -1,7 +1,7 @@
 # Fetch a list of all application objects.
 # This data source will call the "List" API endpoint.
 data "scm_application_list" "all_apps" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Output the raw list of all application objects

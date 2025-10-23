@@ -1,7 +1,7 @@
 # This resource creates a domain-based External Dynamic List (EDL).
 # The EDL will fetch a list of domains from the specified URL daily.
 resource "scm_external_dynamic_list" "scm_edl_1" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_edl_1"
 
   type = {
@@ -18,7 +18,7 @@ resource "scm_external_dynamic_list" "scm_edl_1" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_2" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_edl_2"
 
   type = {
@@ -33,7 +33,7 @@ resource "scm_external_dynamic_list" "scm_edl_2" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_3" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_edl_3"
 
   type = {
@@ -51,7 +51,7 @@ resource "scm_external_dynamic_list" "scm_edl_3" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_4" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_edl_4"
 
   type = {
@@ -63,7 +63,7 @@ resource "scm_external_dynamic_list" "scm_edl_4" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_5" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_edl_5"
 
   type = {

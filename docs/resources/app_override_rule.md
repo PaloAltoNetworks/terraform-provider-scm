@@ -35,8 +35,11 @@ AppOverrideRule resource
 - `group_tag` (String) Group tag
 - `negate_destination` (Boolean) Negate destination
 - `negate_source` (Boolean) Negate source
+- `position` (String) The position of a security rule
+- `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
 - `tag` (List of String) Tag
+- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 
 ### Read-Only
 

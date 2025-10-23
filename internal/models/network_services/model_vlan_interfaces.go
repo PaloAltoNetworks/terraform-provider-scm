@@ -35,7 +35,7 @@ type VlanInterfaces struct {
 	Id                         basetypes.StringValue  `tfsdk:"id"`
 	InterfaceManagementProfile basetypes.StringValue  `tfsdk:"interface_management_profile"`
 	Ip                         basetypes.ListValue    `tfsdk:"ip"`
-	Mtu                        basetypes.Float64Value `tfsdk:"mtu"`
+	Mtu                        basetypes.Int64Value   `tfsdk:"mtu"`
 	Name                       basetypes.StringValue  `tfsdk:"name"`
 	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
 	VlanTag                    basetypes.Float64Value `tfsdk:"vlan_tag"`
@@ -115,7 +115,7 @@ func (o VlanInterfaces) AttrTypes() map[string]attr.Type {
 		"id":                           basetypes.StringType{},
 		"interface_management_profile": basetypes.StringType{},
 		"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
-		"mtu":                          basetypes.NumberType{},
+		"mtu":                          basetypes.Int64Type{},
 		"name":                         basetypes.StringType{},
 		"snippet":                      basetypes.StringType{},
 		"vlan_tag":                     basetypes.NumberType{},
@@ -284,6 +284,9 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"default_value": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.RegexMatches(regexp.MustCompile("^vlan\\.([1-9][0-9]{0,3})$"), "pattern must match "+"^vlan\\.([1-9][0-9]{0,3})$"),
+			},
 			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
 		},
@@ -377,9 +380,9 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Ip",
 			Optional:            true,
 		},
-		"mtu": schema.Float64Attribute{
-			Validators: []validator.Float64{
-				float64validator.Between(576.000000, 9216.000000),
+		"mtu": schema.Int64Attribute{
+			Validators: []validator.Int64{
+				int64validator.Between(576, 9216),
 			},
 			MarkdownDescription: "MTU",
 			Optional:            true,
@@ -535,7 +538,7 @@ var VlanInterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Ip",
 			Computed:            true,
 		},
-		"mtu": dsschema.Float64Attribute{
+		"mtu": dsschema.Int64Attribute{
 			MarkdownDescription: "MTU",
 			Computed:            true,
 		},

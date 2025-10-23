@@ -15,7 +15,7 @@ Retrieves a listing of config items.
 ```terraform
 # Data source to fetch all services in the "Shared" folder.
 data "scm_service_list" "all_shared_services" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Creates a map where the key is the service ID and the value is the full object.
@@ -26,7 +26,7 @@ output "all_shared_services_map" {
 
 # Example of using pagination to get the first 5 services.
 data "scm_service_list" "paginated_services" {
-  folder = "Shared"
+  folder = "All"
   limit  = 5
   offset = 0
 }

@@ -28,6 +28,7 @@ func unpackDhcpInterfacesToSdk(ctx context.Context, obj types.Object) (*network_
 
 	var sdk network_services.DhcpInterfaces
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

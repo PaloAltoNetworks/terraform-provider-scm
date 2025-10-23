@@ -27,6 +27,7 @@ func unpackAuthenticationRulesToSdk(ctx context.Context, obj types.Object) (*ide
 
 	var sdk identity_services.AuthenticationRules
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AuthenticationEnforcement.IsNull() && !model.AuthenticationEnforcement.IsUnknown() {
 		sdk.AuthenticationEnforcement = model.AuthenticationEnforcement.ValueStringPointer()
@@ -95,8 +96,8 @@ func unpackAuthenticationRulesToSdk(ctx context.Context, obj types.Object) (*ide
 
 	// Handling Primitives
 	if !model.Id.IsNull() && !model.Id.IsUnknown() {
-		sdk.Id = model.Id.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+		sdk.Id = model.Id.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
 	}
 
 	// Handling Primitives
@@ -306,8 +307,12 @@ func packAuthenticationRulesFromSdk(ctx context.Context, sdk identity_services.A
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Id = basetypes.NewStringValue(sdk.Id)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+	if sdk.Id != nil {
+		model.Id = basetypes.NewStringValue(*sdk.Id)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
+	} else {
+		model.Id = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LogAuthenticationTimeout != nil {

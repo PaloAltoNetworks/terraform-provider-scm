@@ -28,6 +28,7 @@ func unpackUrlAccessProfilesToSdk(ctx context.Context, obj types.Object) (*secur
 
 	var sdk security_services.UrlAccessProfiles
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.Alert.IsNull() && !model.Alert.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field Alert")

@@ -27,8 +27,10 @@ QosPolicyRule resource
 - `dscp_tos` (Attributes) Dscp tos (see [below for nested schema](#nestedatt--dscp_tos))
 - `folder` (String) The folder in which the resource is defined
 - `position` (String) The relative position of the rule
+- `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `schedule` (String) Schedule
 - `snippet` (String) The snippet in which the resource is defined
+- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 
 ### Read-Only
 

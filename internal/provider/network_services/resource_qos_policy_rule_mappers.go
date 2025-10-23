@@ -28,6 +28,7 @@ func unpackQosPolicyRulesToSdk(ctx context.Context, obj types.Object) (*network_
 
 	var sdk network_services.QosPolicyRules
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Action.IsNull() && !model.Action.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Action")

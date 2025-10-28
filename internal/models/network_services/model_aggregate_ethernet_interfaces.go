@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -559,7 +560,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 				"dhcp_client": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ConflictsWith(
-							path.MatchRelative().AtParent().AtName("static"),
+							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
 					MarkdownDescription: "Aggregate Ethernet DHCP Client Object",
@@ -624,8 +625,13 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 				"ip": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Interface IP addresses",
-					Optional:            true,
-					Computed:            true,
+					Validators: []validator.List{
+						listvalidator.ConflictsWith(
+							path.MatchRelative().AtParent().AtName("dhcp_client"),
+						),
+					},
+					Optional: true,
+					Computed: true,
 				},
 				"lacp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Lacp",

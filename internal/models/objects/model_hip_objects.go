@@ -3678,62 +3678,22 @@ var HipObjectsResourceSchema = schema.Schema{
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"apple": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("google"),
-													path.MatchRelative().AtParent().AtName("linux"),
-													path.MatchRelative().AtParent().AtName("microsoft"),
-													path.MatchRelative().AtParent().AtName("other"),
-												),
-											},
 											MarkdownDescription: "Apple",
 											Optional:            true,
 										},
 										"google": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("apple"),
-													path.MatchRelative().AtParent().AtName("linux"),
-													path.MatchRelative().AtParent().AtName("microsoft"),
-													path.MatchRelative().AtParent().AtName("other"),
-												),
-											},
 											MarkdownDescription: "Google",
 											Optional:            true,
 										},
 										"linux": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("apple"),
-													path.MatchRelative().AtParent().AtName("google"),
-													path.MatchRelative().AtParent().AtName("microsoft"),
-													path.MatchRelative().AtParent().AtName("other"),
-												),
-											},
 											MarkdownDescription: "Linux",
 											Optional:            true,
 										},
 										"microsoft": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("apple"),
-													path.MatchRelative().AtParent().AtName("google"),
-													path.MatchRelative().AtParent().AtName("linux"),
-													path.MatchRelative().AtParent().AtName("other"),
-												),
-											},
 											MarkdownDescription: "Microsoft",
 											Optional:            true,
 										},
 										"other": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("apple"),
-													path.MatchRelative().AtParent().AtName("google"),
-													path.MatchRelative().AtParent().AtName("linux"),
-													path.MatchRelative().AtParent().AtName("microsoft"),
-												),
-											},
 											MarkdownDescription: "Other",
 											Optional:            true,
 										},

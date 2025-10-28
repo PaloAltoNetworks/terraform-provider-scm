@@ -23,53 +23,81 @@ import (
 
 // NatRules represents the Terraform model for NatRules
 type NatRules struct {
-	Tfid                      types.String          `tfsdk:"tfid"`
-	ActiveActiveDeviceBinding basetypes.StringValue `tfsdk:"active_active_device_binding"`
-	Description               basetypes.StringValue `tfsdk:"description"`
-	Destination               basetypes.ListValue   `tfsdk:"destination"`
-	Device                    basetypes.StringValue `tfsdk:"device"`
-	Disabled                  basetypes.BoolValue   `tfsdk:"disabled"`
-	Distribution              basetypes.StringValue `tfsdk:"distribution"`
-	DnsRewrite                basetypes.ObjectValue `tfsdk:"dns_rewrite"`
-	Folder                    basetypes.StringValue `tfsdk:"folder"`
-	From                      basetypes.ListValue   `tfsdk:"from"`
-	Id                        basetypes.StringValue `tfsdk:"id"`
-	Name                      basetypes.StringValue `tfsdk:"name"`
-	NatType                   basetypes.StringValue `tfsdk:"nat_type"`
-	Service                   basetypes.StringValue `tfsdk:"service"`
-	Snippet                   basetypes.StringValue `tfsdk:"snippet"`
-	Source                    basetypes.ListValue   `tfsdk:"source"`
-	SourceTranslation         basetypes.ObjectValue `tfsdk:"source_translation"`
-	Tag                       basetypes.ListValue   `tfsdk:"tag"`
-	To                        basetypes.ListValue   `tfsdk:"to"`
-	ToInterface               basetypes.StringValue `tfsdk:"to_interface"`
-	TranslatedAddress         basetypes.StringValue `tfsdk:"translated_address"`
-	TranslatedPort            basetypes.Int64Value  `tfsdk:"translated_port"`
-	Position                  basetypes.StringValue `tfsdk:"position"`
+	Tfid                          types.String          `tfsdk:"tfid"`
+	ActiveActiveDeviceBinding     basetypes.StringValue `tfsdk:"active_active_device_binding"`
+	Description                   basetypes.StringValue `tfsdk:"description"`
+	Destination                   basetypes.ListValue   `tfsdk:"destination"`
+	DestinationTranslation        basetypes.ObjectValue `tfsdk:"destination_translation"`
+	Device                        basetypes.StringValue `tfsdk:"device"`
+	Disabled                      basetypes.BoolValue   `tfsdk:"disabled"`
+	DynamicDestinationTranslation basetypes.ObjectValue `tfsdk:"dynamic_destination_translation"`
+	Folder                        basetypes.StringValue `tfsdk:"folder"`
+	From                          basetypes.ListValue   `tfsdk:"from"`
+	Id                            basetypes.StringValue `tfsdk:"id"`
+	Name                          basetypes.StringValue `tfsdk:"name"`
+	NatType                       basetypes.StringValue `tfsdk:"nat_type"`
+	Service                       basetypes.StringValue `tfsdk:"service"`
+	Snippet                       basetypes.StringValue `tfsdk:"snippet"`
+	Source                        basetypes.ListValue   `tfsdk:"source"`
+	SourceTranslation             basetypes.ObjectValue `tfsdk:"source_translation"`
+	Tag                           basetypes.ListValue   `tfsdk:"tag"`
+	To                            basetypes.ListValue   `tfsdk:"to"`
+	ToInterface                   basetypes.StringValue `tfsdk:"to_interface"`
+	Position                      basetypes.StringValue `tfsdk:"position"`
 }
 
-// NatRulesDnsRewrite represents a nested structure within the NatRules model
-type NatRulesDnsRewrite struct {
+// NatRulesDestinationTranslation represents a nested structure within the NatRules model
+type NatRulesDestinationTranslation struct {
+	DnsRewrite        basetypes.ObjectValue `tfsdk:"dns_rewrite"`
+	TranslatedAddress basetypes.StringValue `tfsdk:"translated_address"`
+	TranslatedPort    basetypes.Int64Value  `tfsdk:"translated_port"`
+}
+
+// NatRulesDestinationTranslationDnsRewrite represents a nested structure within the NatRules model
+type NatRulesDestinationTranslationDnsRewrite struct {
 	Direction basetypes.StringValue `tfsdk:"direction"`
+}
+
+// NatRulesDynamicDestinationTranslation represents a nested structure within the NatRules model
+type NatRulesDynamicDestinationTranslation struct {
+	Distribution      basetypes.StringValue `tfsdk:"distribution"`
+	TranslatedAddress basetypes.StringValue `tfsdk:"translated_address"`
+	TranslatedPort    basetypes.Int64Value  `tfsdk:"translated_port"`
 }
 
 // NatRulesSourceTranslation represents a nested structure within the NatRules model
 type NatRulesSourceTranslation struct {
-	BiDirectional          basetypes.BoolValue   `tfsdk:"bi_directional"`
+	DynamicIp        basetypes.ObjectValue `tfsdk:"dynamic_ip"`
+	DynamicIpAndPort basetypes.ObjectValue `tfsdk:"dynamic_ip_and_port"`
+	StaticIp         basetypes.ObjectValue `tfsdk:"static_ip"`
+}
+
+// NatRulesSourceTranslationDynamicIp represents a nested structure within the NatRules model
+type NatRulesSourceTranslationDynamicIp struct {
 	Fallback               basetypes.ObjectValue `tfsdk:"fallback"`
-	FloatingIp             basetypes.StringValue `tfsdk:"floating_ip"`
-	Interface              basetypes.StringValue `tfsdk:"interface"`
-	Ip                     basetypes.StringValue `tfsdk:"ip"`
-	TranslatedAddress      basetypes.StringValue `tfsdk:"translated_address"`
 	TranslatedAddressArray basetypes.ListValue   `tfsdk:"translated_address_array"`
 }
 
-// NatRulesSourceTranslationFallback represents a nested structure within the NatRules model
-type NatRulesSourceTranslationFallback struct {
+// NatRulesSourceTranslationDynamicIpFallback represents a nested structure within the NatRules model
+type NatRulesSourceTranslationDynamicIpFallback struct {
 	FloatingIp             basetypes.StringValue `tfsdk:"floating_ip"`
 	Interface              basetypes.StringValue `tfsdk:"interface"`
 	Ip                     basetypes.StringValue `tfsdk:"ip"`
 	TranslatedAddressArray basetypes.ListValue   `tfsdk:"translated_address_array"`
+}
+
+// NatRulesSourceTranslationDynamicIpAndPort represents a nested structure within the NatRules model
+type NatRulesSourceTranslationDynamicIpAndPort struct {
+	FloatingIp             basetypes.StringValue `tfsdk:"floating_ip"`
+	Interface              basetypes.StringValue `tfsdk:"interface"`
+	Ip                     basetypes.StringValue `tfsdk:"ip"`
+	TranslatedAddressArray basetypes.ListValue   `tfsdk:"translated_address_array"`
+}
+
+// NatRulesSourceTranslationStaticIp represents a nested structure within the NatRules model
+type NatRulesSourceTranslationStaticIp struct {
+	BiDirectional     basetypes.BoolValue   `tfsdk:"bi_directional"`
+	TranslatedAddress basetypes.StringValue `tfsdk:"translated_address"`
 }
 
 // AttrTypes defines the attribute types for the NatRules model.
@@ -79,12 +107,24 @@ func (o NatRules) AttrTypes() map[string]attr.Type {
 		"active_active_device_binding": basetypes.StringType{},
 		"description":                  basetypes.StringType{},
 		"destination":                  basetypes.ListType{ElemType: basetypes.StringType{}},
-		"device":                       basetypes.StringType{},
-		"disabled":                     basetypes.BoolType{},
-		"distribution":                 basetypes.StringType{},
-		"dns_rewrite": basetypes.ObjectType{
+		"destination_translation": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"direction": basetypes.StringType{},
+				"dns_rewrite": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"direction": basetypes.StringType{},
+					},
+				},
+				"translated_address": basetypes.StringType{},
+				"translated_port":    basetypes.Int64Type{},
+			},
+		},
+		"device":   basetypes.StringType{},
+		"disabled": basetypes.BoolType{},
+		"dynamic_destination_translation": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"distribution":       basetypes.StringType{},
+				"translated_address": basetypes.StringType{},
+				"translated_port":    basetypes.Int64Type{},
 			},
 		},
 		"folder":   basetypes.StringType{},
@@ -97,8 +137,20 @@ func (o NatRules) AttrTypes() map[string]attr.Type {
 		"source":   basetypes.ListType{ElemType: basetypes.StringType{}},
 		"source_translation": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"bi_directional": basetypes.BoolType{},
-				"fallback": basetypes.ObjectType{
+				"dynamic_ip": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"fallback": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"floating_ip":              basetypes.StringType{},
+								"interface":                basetypes.StringType{},
+								"ip":                       basetypes.StringType{},
+								"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+							},
+						},
+						"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+					},
+				},
+				"dynamic_ip_and_port": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"floating_ip":              basetypes.StringType{},
 						"interface":                basetypes.StringType{},
@@ -106,19 +158,18 @@ func (o NatRules) AttrTypes() map[string]attr.Type {
 						"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
 					},
 				},
-				"floating_ip":              basetypes.StringType{},
-				"interface":                basetypes.StringType{},
-				"ip":                       basetypes.StringType{},
-				"translated_address":       basetypes.StringType{},
-				"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+				"static_ip": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"bi_directional":     basetypes.BoolType{},
+						"translated_address": basetypes.StringType{},
+					},
+				},
 			},
 		},
-		"tag":                basetypes.ListType{ElemType: basetypes.StringType{}},
-		"to":                 basetypes.ListType{ElemType: basetypes.StringType{}},
-		"to_interface":       basetypes.StringType{},
-		"translated_address": basetypes.StringType{},
-		"translated_port":    basetypes.Int64Type{},
-		"position":           basetypes.StringType{},
+		"tag":          basetypes.ListType{ElemType: basetypes.StringType{}},
+		"to":           basetypes.ListType{ElemType: basetypes.StringType{}},
+		"to_interface": basetypes.StringType{},
+		"position":     basetypes.StringType{},
 	}
 }
 
@@ -129,15 +180,51 @@ func (o NatRules) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the NatRulesDnsRewrite model.
-func (o NatRulesDnsRewrite) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the NatRulesDestinationTranslation model.
+func (o NatRulesDestinationTranslation) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"dns_rewrite": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"direction": basetypes.StringType{},
+			},
+		},
+		"translated_address": basetypes.StringType{},
+		"translated_port":    basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of NatRulesDestinationTranslation objects.
+func (o NatRulesDestinationTranslation) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the NatRulesDestinationTranslationDnsRewrite model.
+func (o NatRulesDestinationTranslationDnsRewrite) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"direction": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of NatRulesDnsRewrite objects.
-func (o NatRulesDnsRewrite) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of NatRulesDestinationTranslationDnsRewrite objects.
+func (o NatRulesDestinationTranslationDnsRewrite) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the NatRulesDynamicDestinationTranslation model.
+func (o NatRulesDynamicDestinationTranslation) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"distribution":       basetypes.StringType{},
+		"translated_address": basetypes.StringType{},
+		"translated_port":    basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of NatRulesDynamicDestinationTranslation objects.
+func (o NatRulesDynamicDestinationTranslation) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -146,8 +233,20 @@ func (o NatRulesDnsRewrite) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the NatRulesSourceTranslation model.
 func (o NatRulesSourceTranslation) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"bi_directional": basetypes.BoolType{},
-		"fallback": basetypes.ObjectType{
+		"dynamic_ip": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"fallback": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"floating_ip":              basetypes.StringType{},
+						"interface":                basetypes.StringType{},
+						"ip":                       basetypes.StringType{},
+						"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+					},
+				},
+				"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+			},
+		},
+		"dynamic_ip_and_port": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"floating_ip":              basetypes.StringType{},
 				"interface":                basetypes.StringType{},
@@ -155,11 +254,12 @@ func (o NatRulesSourceTranslation) AttrTypes() map[string]attr.Type {
 				"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
 			},
 		},
-		"floating_ip":              basetypes.StringType{},
-		"interface":                basetypes.StringType{},
-		"ip":                       basetypes.StringType{},
-		"translated_address":       basetypes.StringType{},
-		"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"static_ip": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"bi_directional":     basetypes.BoolType{},
+				"translated_address": basetypes.StringType{},
+			},
+		},
 	}
 }
 
@@ -170,8 +270,30 @@ func (o NatRulesSourceTranslation) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the NatRulesSourceTranslationFallback model.
-func (o NatRulesSourceTranslationFallback) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the NatRulesSourceTranslationDynamicIp model.
+func (o NatRulesSourceTranslationDynamicIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"fallback": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"floating_ip":              basetypes.StringType{},
+				"interface":                basetypes.StringType{},
+				"ip":                       basetypes.StringType{},
+				"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+			},
+		},
+		"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of NatRulesSourceTranslationDynamicIp objects.
+func (o NatRulesSourceTranslationDynamicIp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the NatRulesSourceTranslationDynamicIpFallback model.
+func (o NatRulesSourceTranslationDynamicIpFallback) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"floating_ip":              basetypes.StringType{},
 		"interface":                basetypes.StringType{},
@@ -180,8 +302,40 @@ func (o NatRulesSourceTranslationFallback) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of NatRulesSourceTranslationFallback objects.
-func (o NatRulesSourceTranslationFallback) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of NatRulesSourceTranslationDynamicIpFallback objects.
+func (o NatRulesSourceTranslationDynamicIpFallback) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the NatRulesSourceTranslationDynamicIpAndPort model.
+func (o NatRulesSourceTranslationDynamicIpAndPort) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"floating_ip":              basetypes.StringType{},
+		"interface":                basetypes.StringType{},
+		"ip":                       basetypes.StringType{},
+		"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of NatRulesSourceTranslationDynamicIpAndPort objects.
+func (o NatRulesSourceTranslationDynamicIpAndPort) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the NatRulesSourceTranslationStaticIp model.
+func (o NatRulesSourceTranslationStaticIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"bi_directional":     basetypes.BoolType{},
+		"translated_address": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of NatRulesSourceTranslationStaticIp objects.
+func (o NatRulesSourceTranslationStaticIp) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -207,6 +361,36 @@ var NatRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "Destination address(es) of the original packet",
 			Required:            true,
 		},
+		"destination_translation": schema.SingleNestedAttribute{
+			MarkdownDescription: "Destination translation configuration (Static/P-D-N-T).",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"dns_rewrite": schema.SingleNestedAttribute{
+					MarkdownDescription: "Dns rewrite",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"direction": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.OneOf("reverse", "forward"),
+							},
+							MarkdownDescription: "Direction",
+							Optional:            true,
+						},
+					},
+				},
+				"translated_address": schema.StringAttribute{
+					MarkdownDescription: "Translated address",
+					Optional:            true,
+				},
+				"translated_port": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(1, 65535),
+					},
+					MarkdownDescription: "Translated port",
+					Optional:            true,
+				},
+			},
+		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
@@ -228,22 +412,26 @@ var NatRulesResourceSchema = schema.Schema{
 			Computed:            true,
 			Default:             booldefault.StaticBool(false),
 		},
-		"distribution": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.OneOf("round-robin", "source-ip-hash", "ip-modulo", "ip-hash", "least-sessions"),
-			},
-			MarkdownDescription: "Distribution method",
-			Optional:            true,
-		},
-		"dns_rewrite": schema.SingleNestedAttribute{
-			MarkdownDescription: "DNS rewrite",
+		"dynamic_destination_translation": schema.SingleNestedAttribute{
+			MarkdownDescription: "Dynamic destination translation configuration.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
-				"direction": schema.StringAttribute{
+				"distribution": schema.StringAttribute{
 					Validators: []validator.String{
-						stringvalidator.OneOf("reverse", "forward"),
+						stringvalidator.OneOf("round-robin", "source-ip-hash", "ip-modulo", "ip-hash", "least-sessions"),
 					},
-					MarkdownDescription: "Direction",
+					MarkdownDescription: "Distribution",
+					Optional:            true,
+				},
+				"translated_address": schema.StringAttribute{
+					MarkdownDescription: "Translated address",
+					Optional:            true,
+				},
+				"translated_port": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(1, 65535),
+					},
+					MarkdownDescription: "Translated port",
 					Optional:            true,
 				},
 			},
@@ -325,15 +513,45 @@ var NatRulesResourceSchema = schema.Schema{
 			Required:            true,
 		},
 		"source_translation": schema.SingleNestedAttribute{
-			MarkdownDescription: "Source translation",
+			MarkdownDescription: "Source translation configuration (Static/P-D-N-T).",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
-				"bi_directional": schema.BoolAttribute{
-					MarkdownDescription: "Bi directional",
+				"dynamic_ip": schema.SingleNestedAttribute{
+					MarkdownDescription: "Dynamic IP",
 					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"fallback": schema.SingleNestedAttribute{
+							MarkdownDescription: "Fallback",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"floating_ip": schema.StringAttribute{
+									MarkdownDescription: "Floating IP address",
+									Optional:            true,
+								},
+								"interface": schema.StringAttribute{
+									MarkdownDescription: "Interface name",
+									Optional:            true,
+								},
+								"ip": schema.StringAttribute{
+									MarkdownDescription: "IP address",
+									Optional:            true,
+								},
+								"translated_address_array": schema.ListAttribute{
+									ElementType:         types.StringType,
+									MarkdownDescription: "Fallback IP addresses",
+									Optional:            true,
+								},
+							},
+						},
+						"translated_address_array": schema.ListAttribute{
+							ElementType:         types.StringType,
+							MarkdownDescription: "Translated IP addresses",
+							Optional:            true,
+						},
+					},
 				},
-				"fallback": schema.SingleNestedAttribute{
-					MarkdownDescription: "Fallback",
+				"dynamic_ip_and_port": schema.SingleNestedAttribute{
+					MarkdownDescription: "Dynamic IP and port",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"floating_ip": schema.StringAttribute{
@@ -345,36 +563,29 @@ var NatRulesResourceSchema = schema.Schema{
 							Optional:            true,
 						},
 						"ip": schema.StringAttribute{
-							MarkdownDescription: "IP address",
+							MarkdownDescription: "Translated source IP address",
 							Optional:            true,
 						},
 						"translated_address_array": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Fallback IP addresses",
+							MarkdownDescription: "Translated source IP addresses",
 							Optional:            true,
 						},
 					},
 				},
-				"floating_ip": schema.StringAttribute{
-					MarkdownDescription: "Floating IP address",
+				"static_ip": schema.SingleNestedAttribute{
+					MarkdownDescription: "Static IP",
 					Optional:            true,
-				},
-				"interface": schema.StringAttribute{
-					MarkdownDescription: "Interface name",
-					Optional:            true,
-				},
-				"ip": schema.StringAttribute{
-					MarkdownDescription: "Translated source IP address",
-					Optional:            true,
-				},
-				"translated_address": schema.StringAttribute{
-					MarkdownDescription: "Translated IP address",
-					Optional:            true,
-				},
-				"translated_address_array": schema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "Translated source IP addresses",
-					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"bi_directional": schema.BoolAttribute{
+							MarkdownDescription: "Bi directional",
+							Optional:            true,
+						},
+						"translated_address": schema.StringAttribute{
+							MarkdownDescription: "Translated IP address",
+							Optional:            true,
+						},
+					},
 				},
 			},
 		},
@@ -399,17 +610,6 @@ var NatRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "Destination interface of the original packet",
 			Optional:            true,
 		},
-		"translated_address": schema.StringAttribute{
-			MarkdownDescription: "Translated destination IP address",
-			Optional:            true,
-		},
-		"translated_port": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(1, 65535),
-			},
-			MarkdownDescription: "Translated destination port",
-			Optional:            true,
-		},
 	},
 }
 
@@ -430,6 +630,30 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Destination address(es) of the original packet",
 			Computed:            true,
 		},
+		"destination_translation": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Destination translation configuration (Static/P-D-N-T).",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"dns_rewrite": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Dns rewrite",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"direction": dsschema.StringAttribute{
+							MarkdownDescription: "Direction",
+							Computed:            true,
+						},
+					},
+				},
+				"translated_address": dsschema.StringAttribute{
+					MarkdownDescription: "Translated address",
+					Computed:            true,
+				},
+				"translated_port": dsschema.Int64Attribute{
+					MarkdownDescription: "Translated port",
+					Computed:            true,
+				},
+			},
+		},
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",
 			Computed:            true,
@@ -438,16 +662,20 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Disable NAT rule?",
 			Computed:            true,
 		},
-		"distribution": dsschema.StringAttribute{
-			MarkdownDescription: "Distribution method",
-			Computed:            true,
-		},
-		"dns_rewrite": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "DNS rewrite",
+		"dynamic_destination_translation": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Dynamic destination translation configuration.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"direction": dsschema.StringAttribute{
-					MarkdownDescription: "Direction",
+				"distribution": dsschema.StringAttribute{
+					MarkdownDescription: "Distribution",
+					Computed:            true,
+				},
+				"translated_address": dsschema.StringAttribute{
+					MarkdownDescription: "Translated address",
+					Computed:            true,
+				},
+				"translated_port": dsschema.Int64Attribute{
+					MarkdownDescription: "Translated port",
 					Computed:            true,
 				},
 			},
@@ -492,15 +720,45 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"source_translation": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Source translation",
+			MarkdownDescription: "Source translation configuration (Static/P-D-N-T).",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"bi_directional": dsschema.BoolAttribute{
-					MarkdownDescription: "Bi directional",
+				"dynamic_ip": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Dynamic IP",
 					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"fallback": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Fallback",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"floating_ip": dsschema.StringAttribute{
+									MarkdownDescription: "Floating IP address",
+									Computed:            true,
+								},
+								"interface": dsschema.StringAttribute{
+									MarkdownDescription: "Interface name",
+									Computed:            true,
+								},
+								"ip": dsschema.StringAttribute{
+									MarkdownDescription: "IP address",
+									Computed:            true,
+								},
+								"translated_address_array": dsschema.ListAttribute{
+									ElementType:         types.StringType,
+									MarkdownDescription: "Fallback IP addresses",
+									Computed:            true,
+								},
+							},
+						},
+						"translated_address_array": dsschema.ListAttribute{
+							ElementType:         types.StringType,
+							MarkdownDescription: "Translated IP addresses",
+							Computed:            true,
+						},
+					},
 				},
-				"fallback": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Fallback",
+				"dynamic_ip_and_port": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Dynamic IP and port",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"floating_ip": dsschema.StringAttribute{
@@ -512,36 +770,29 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"ip": dsschema.StringAttribute{
-							MarkdownDescription: "IP address",
+							MarkdownDescription: "Translated source IP address",
 							Computed:            true,
 						},
 						"translated_address_array": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Fallback IP addresses",
+							MarkdownDescription: "Translated source IP addresses",
 							Computed:            true,
 						},
 					},
 				},
-				"floating_ip": dsschema.StringAttribute{
-					MarkdownDescription: "Floating IP address",
+				"static_ip": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Static IP",
 					Computed:            true,
-				},
-				"interface": dsschema.StringAttribute{
-					MarkdownDescription: "Interface name",
-					Computed:            true,
-				},
-				"ip": dsschema.StringAttribute{
-					MarkdownDescription: "Translated source IP address",
-					Computed:            true,
-				},
-				"translated_address": dsschema.StringAttribute{
-					MarkdownDescription: "Translated IP address",
-					Computed:            true,
-				},
-				"translated_address_array": dsschema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "Translated source IP addresses",
-					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"bi_directional": dsschema.BoolAttribute{
+							MarkdownDescription: "Bi directional",
+							Computed:            true,
+						},
+						"translated_address": dsschema.StringAttribute{
+							MarkdownDescription: "Translated IP address",
+							Computed:            true,
+						},
+					},
 				},
 			},
 		},
@@ -561,14 +812,6 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 		},
 		"to_interface": dsschema.StringAttribute{
 			MarkdownDescription: "Destination interface of the original packet",
-			Computed:            true,
-		},
-		"translated_address": dsschema.StringAttribute{
-			MarkdownDescription: "Translated destination IP address",
-			Computed:            true,
-		},
-		"translated_port": dsschema.Int64Attribute{
-			MarkdownDescription: "Translated destination port",
 			Computed:            true,
 		},
 	},

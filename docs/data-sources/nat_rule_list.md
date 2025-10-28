@@ -50,10 +50,10 @@ Read-Only:
 - `active_active_device_binding` (String) Active active device binding
 - `description` (String) NAT rule description
 - `destination` (List of String) Destination address(es) of the original packet
+- `destination_translation` (Attributes) Destination translation configuration (Static/P-D-N-T). (see [below for nested schema](#nestedatt--data--destination_translation))
 - `device` (String) The device in which the resource is defined
 - `disabled` (Boolean) Disable NAT rule?
-- `distribution` (String) Distribution method
-- `dns_rewrite` (Attributes) DNS rewrite (see [below for nested schema](#nestedatt--data--dns_rewrite))
+- `dynamic_destination_translation` (Attributes) Dynamic destination translation configuration. (see [below for nested schema](#nestedatt--data--dynamic_destination_translation))
 - `folder` (String) The folder in which the resource is defined
 - `from` (List of String) Source zone(s) of the original packet
 - `nat_type` (String) NAT type
@@ -61,20 +61,38 @@ Read-Only:
 - `service` (String) The service of the original packet
 - `snippet` (String) The snippet in which the resource is defined
 - `source` (List of String) Source address(es) of the original packet
-- `source_translation` (Attributes) Source translation (see [below for nested schema](#nestedatt--data--source_translation))
+- `source_translation` (Attributes) Source translation configuration (Static/P-D-N-T). (see [below for nested schema](#nestedatt--data--source_translation))
 - `tag` (List of String) NAT rule tags
 - `tfid` (String) The Terraform ID.
 - `to` (List of String) Destination zone of the original packet
 - `to_interface` (String) Destination interface of the original packet
-- `translated_address` (String) Translated destination IP address
-- `translated_port` (Number) Translated destination port
 
-<a id="nestedatt--data--dns_rewrite"></a>
-### Nested Schema for `data.dns_rewrite`
+<a id="nestedatt--data--destination_translation"></a>
+### Nested Schema for `data.destination_translation`
+
+Read-Only:
+
+- `dns_rewrite` (Attributes) Dns rewrite (see [below for nested schema](#nestedatt--data--destination_translation--dns_rewrite))
+- `translated_address` (String) Translated address
+- `translated_port` (Number) Translated port
+
+<a id="nestedatt--data--destination_translation--dns_rewrite"></a>
+### Nested Schema for `data.destination_translation.dns_rewrite`
 
 Read-Only:
 
 - `direction` (String) Direction
+
+
+
+<a id="nestedatt--data--dynamic_destination_translation"></a>
+### Nested Schema for `data.dynamic_destination_translation`
+
+Read-Only:
+
+- `distribution` (String) Distribution
+- `translated_address` (String) Translated address
+- `translated_port` (Number) Translated port
 
 
 <a id="nestedatt--data--source_translation"></a>
@@ -82,16 +100,20 @@ Read-Only:
 
 Read-Only:
 
-- `bi_directional` (Boolean) Bi directional
-- `fallback` (Attributes) Fallback (see [below for nested schema](#nestedatt--data--source_translation--fallback))
-- `floating_ip` (String) Floating IP address
-- `interface` (String) Interface name
-- `ip` (String) Translated source IP address
-- `translated_address` (String) Translated IP address
-- `translated_address_array` (List of String) Translated source IP addresses
+- `dynamic_ip` (Attributes) Dynamic IP (see [below for nested schema](#nestedatt--data--source_translation--dynamic_ip))
+- `dynamic_ip_and_port` (Attributes) Dynamic IP and port (see [below for nested schema](#nestedatt--data--source_translation--dynamic_ip_and_port))
+- `static_ip` (Attributes) Static IP (see [below for nested schema](#nestedatt--data--source_translation--static_ip))
 
-<a id="nestedatt--data--source_translation--fallback"></a>
-### Nested Schema for `data.source_translation.fallback`
+<a id="nestedatt--data--source_translation--dynamic_ip"></a>
+### Nested Schema for `data.source_translation.dynamic_ip`
+
+Read-Only:
+
+- `fallback` (Attributes) Fallback (see [below for nested schema](#nestedatt--data--source_translation--dynamic_ip--fallback))
+- `translated_address_array` (List of String) Translated IP addresses
+
+<a id="nestedatt--data--source_translation--dynamic_ip--fallback"></a>
+### Nested Schema for `data.source_translation.dynamic_ip.fallback`
 
 Read-Only:
 
@@ -99,3 +121,24 @@ Read-Only:
 - `interface` (String) Interface name
 - `ip` (String) IP address
 - `translated_address_array` (List of String) Fallback IP addresses
+
+
+
+<a id="nestedatt--data--source_translation--dynamic_ip_and_port"></a>
+### Nested Schema for `data.source_translation.dynamic_ip_and_port`
+
+Read-Only:
+
+- `floating_ip` (String) Floating IP address
+- `interface` (String) Interface name
+- `ip` (String) Translated source IP address
+- `translated_address_array` (List of String) Translated source IP addresses
+
+
+<a id="nestedatt--data--source_translation--static_ip"></a>
+### Nested Schema for `data.source_translation.static_ip`
+
+Read-Only:
+
+- `bi_directional` (Boolean) Bi directional
+- `translated_address` (String) Translated IP address

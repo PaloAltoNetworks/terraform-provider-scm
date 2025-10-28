@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -670,8 +671,8 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"dhcp_client": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ConflictsWith(
+							path.MatchRelative().AtParent().AtName("ip"),
 							path.MatchRelative().AtParent().AtName("pppoe"),
-							path.MatchRelative().AtParent().AtName("static"),
 						),
 					},
 					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
@@ -734,6 +735,12 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					Computed:            true,
 				},
 				"ip": schema.ListNestedAttribute{
+					Validators: []validator.List{
+						listvalidator.ConflictsWith(
+							path.MatchRelative().AtParent().AtName("dhcp_client"),
+							path.MatchRelative().AtParent().AtName("pppoe"),
+						),
+					},
 					MarkdownDescription: "Interface IP addresses",
 					Optional:            true,
 					Computed:            true,
@@ -759,7 +766,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					Validators: []validator.Object{
 						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
-							path.MatchRelative().AtParent().AtName("static"),
+							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
 					MarkdownDescription: "Pppoe",

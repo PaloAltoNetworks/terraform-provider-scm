@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -332,7 +333,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 		"dhcp_client": schema.SingleNestedAttribute{
 			Validators: []validator.Object{
 				objectvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("static"),
+					path.MatchRelative().AtParent().AtName("ip"),
 				),
 			},
 			MarkdownDescription: "Vlan interfaces DHCP Client Object",
@@ -413,6 +414,11 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"ip": schema.ListNestedAttribute{
+			Validators: []validator.List{
+				listvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("dhcp_client"),
+				),
+			},
 			MarkdownDescription: "VLAN Interface IP Parent",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{

@@ -9,6 +9,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
@@ -92,6 +93,13 @@ func (d *SecurityRuleListDataSource) Read(ctx context.Context, req datasource.Re
 	}
 	if !data.Offset.IsNull() {
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
+	}
+
+	if !data.Position.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "position", "value": data.Position})
+		listReq = listReq.Position(data.Position.ValueString())
+		// END: Add dynamic query parameter handling
 	}
 
 	// Execute the request.

@@ -661,7 +661,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
@@ -671,7 +671,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
@@ -741,7 +741,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
@@ -751,7 +751,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
@@ -839,7 +839,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
@@ -848,7 +848,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
@@ -914,7 +914,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
@@ -923,7 +923,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},

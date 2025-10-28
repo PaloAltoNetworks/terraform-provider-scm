@@ -1,5 +1,47 @@
 #
-# Creates a ethernet interface with static ip address
+# Creates a layer 2 ethernet interface without vlan configuration
+#
+
+resource "scm_ethernet_interface" "scm_l2_intf" {
+  name        = "$scm_l2_intf"
+  comment     = "Managed by Terraform"
+  folder      = "ngfw-shared"
+  link_speed  = "auto"
+  link_duplex = "full"
+  link_state  = "auto"
+  layer2      = {}
+}
+
+#
+# Creates a tap ethernet interface without vlan configuration
+#
+
+resource "scm_ethernet_interface" "scm_tap_intf" {
+  name        = "$scm_tap_intf"
+  comment     = "Managed by Terraform"
+  folder      = "ngfw-shared"
+  link_speed  = "auto"
+  link_duplex = "full"
+  link_state  = "auto"
+  tap         = {}
+}
+
+#
+# Creates a layer3 ethernet interface without ip configuration
+#
+
+resource "scm_ethernet_interface" "scm_l3_intf" {
+  name        = "$scm_l3_intf"
+  comment     = "Managed by Terraform"
+  folder      = "ngfw-shared"
+  link_speed  = "auto"
+  link_duplex = "full"
+  link_state  = "auto"
+  layer3      = {}
+}
+
+#
+# Creates a layer3 ethernet interface with static ip address
 #
 
 resource "scm_ethernet_interface" "scm_l3_intf_static" {
@@ -16,7 +58,7 @@ resource "scm_ethernet_interface" "scm_l3_intf_static" {
 }
 
 #
-# Creates a ethernet interface with dhcp-assigned ip address
+# Creates a layer3 ethernet interface with dhcp-assigned ip address
 #
 
 resource "scm_ethernet_interface" "scm_l3_intf_dhcp" {
@@ -33,7 +75,7 @@ resource "scm_ethernet_interface" "scm_l3_intf_dhcp" {
 }
 
 #
-# Creates a ethernet interface with pppoe
+# Creates a layer3 ethernet interface with pppoe
 #
 
 resource "scm_ethernet_interface" "scm_l3_intf_pppoe" {
@@ -54,7 +96,7 @@ resource "scm_ethernet_interface" "scm_l3_intf_pppoe" {
 }
 
 #
-# Creates a ethernet interface with multiple static ip addresses
+# Creates a layer3 ethernet interface with multiple static ip addresses
 #
 
 resource "scm_ethernet_interface" "scm_l3_intf_complex" {

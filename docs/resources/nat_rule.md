@@ -39,7 +39,7 @@ NatRule resource
 - `source_translation` (Attributes) Source translation (see [below for nested schema](#nestedatt--source_translation))
 - `tag` (List of String) NAT rule tags
 - `to_interface` (String) Destination interface of the original packet
-- `translated_address_single` (String) Translated destination IP address
+- `translated_address` (String) Translated destination IP address
 - `translated_port` (Number) Translated destination port
 
 ### Read-Only
@@ -62,13 +62,18 @@ Optional:
 
 - `bi_directional` (Boolean) Bi directional
 - `fallback` (Attributes) Fallback (see [below for nested schema](#nestedatt--source_translation--fallback))
+- `floating_ip` (String) Floating IP address
 - `interface` (String) Interface name
-- `translated_address_array` (List of String) Translated IP addresses
-- `translated_address_single` (String) Translated IP address
+- `ip` (String) Translated source IP address
+- `translated_address` (String) Translated IP address
+- `translated_address_array` (List of String) Translated source IP addresses
 
 <a id="nestedatt--source_translation--fallback"></a>
 ### Nested Schema for `source_translation.fallback`
 
 Optional:
 
+- `floating_ip` (String) Floating IP address
 - `interface` (String) Interface name
+- `ip` (String) IP address
+- `translated_address_array` (List of String) Fallback IP addresses

@@ -9,6 +9,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
@@ -92,6 +93,13 @@ func (d *LogicalRouterListDataSource) Read(ctx context.Context, req datasource.R
 	}
 	if !data.Offset.IsNull() {
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
+	}
+
+	if !data.Pagination.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "pagination", "value": data.Pagination})
+		listReq = listReq.Pagination(data.Pagination.ValueBool())
+		// END: Add dynamic query parameter handling
 	}
 
 	// Execute the request.

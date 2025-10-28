@@ -354,7 +354,7 @@ var QosProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"mbps": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("percentage"),
 						),
 					},
@@ -409,7 +409,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				},
 				"percentage": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("mbps"),
 						),
 					},

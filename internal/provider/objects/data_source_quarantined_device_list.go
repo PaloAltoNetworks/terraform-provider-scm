@@ -79,6 +79,18 @@ func (d *QuarantinedDeviceListDataSource) Read(ctx context.Context, req datasour
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
 	}
 
+	if !data.HostId.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "host_id", "value": data.HostId })
+		listReq = listReq.HostId(data.HostId.ValueString())
+		// END: Add dynamic query parameter handling
+	}
+	if !data.SerialNumber.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "serial_number", "value": data.SerialNumber })
+		listReq = listReq.SerialNumber(data.SerialNumber.ValueString())
+		// END: Add dynamic query parameter handling
+	}
 
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()

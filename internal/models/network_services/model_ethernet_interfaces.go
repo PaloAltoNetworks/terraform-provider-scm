@@ -4,7 +4,6 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -46,7 +45,13 @@ type EthernetInterfaces struct {
 
 // EthernetInterfacesLayer2 represents a nested structure within the EthernetInterfaces model
 type EthernetInterfacesLayer2 struct {
-	VlanTag basetypes.Int64Value `tfsdk:"vlan_tag"`
+	Lldp    basetypes.ObjectValue `tfsdk:"lldp"`
+	VlanTag basetypes.StringValue `tfsdk:"vlan_tag"`
+}
+
+// EthernetInterfacesLayer2Lldp represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer2Lldp struct {
+	Enable basetypes.BoolValue `tfsdk:"enable"`
 }
 
 // EthernetInterfacesLayer3 represents a nested structure within the EthernetInterfaces model
@@ -137,7 +142,12 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 		"id":               basetypes.StringType{},
 		"layer2": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"vlan_tag": basetypes.Int64Type{},
+				"lldp": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+					},
+				},
+				"vlan_tag": basetypes.StringType{},
 			},
 		},
 		"layer3": basetypes.ObjectType{
@@ -229,12 +239,31 @@ func (o EthernetInterfaces) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the EthernetInterfacesLayer2 model.
 func (o EthernetInterfacesLayer2) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"vlan_tag": basetypes.Int64Type{},
+		"lldp": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable": basetypes.BoolType{},
+			},
+		},
+		"vlan_tag": basetypes.StringType{},
 	}
 }
 
 // AttrType returns the attribute type for a list of EthernetInterfacesLayer2 objects.
 func (o EthernetInterfacesLayer2) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer2Lldp model.
+func (o EthernetInterfacesLayer2Lldp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable": basetypes.BoolType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer2Lldp objects.
+func (o EthernetInterfacesLayer2Lldp) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -487,6 +516,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -504,6 +537,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -521,12 +558,28 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"layer2": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer3"),
+					path.MatchRelative().AtParent().AtName("tap"),
+				),
+			},
 			MarkdownDescription: "Layer2",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
-				"vlan_tag": schema.Int64Attribute{
-					Validators: []validator.Int64{
-						int64validator.Between(1, 9999),
+				"lldp": schema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP Settings",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Required:            true,
+						},
+					},
+				},
+				"vlan_tag": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.RegexMatches(regexp.MustCompile("^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"), "pattern must match "+"^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"),
 					},
 					MarkdownDescription: "Assign interface to VLAN tag",
 					Optional:            true,
@@ -534,6 +587,12 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"layer3": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer2"),
+					path.MatchRelative().AtParent().AtName("tap"),
+				),
+			},
 			MarkdownDescription: "Layer3",
 			Optional:            true,
 			Computed:            true,
@@ -610,9 +669,9 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				},
 				"dhcp_client": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("ip"),
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("pppoe"),
+							path.MatchRelative().AtParent().AtName("static"),
 						),
 					},
 					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
@@ -675,12 +734,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					Computed:            true,
 				},
 				"ip": schema.ListNestedAttribute{
-					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("dhcp_client"),
-							path.MatchRelative().AtParent().AtName("pppoe"),
-						),
-					},
 					MarkdownDescription: "Interface IP addresses",
 					Optional:            true,
 					Computed:            true,
@@ -704,9 +757,9 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				},
 				"pppoe": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
-							path.MatchRelative().AtParent().AtName("ip"),
+							path.MatchRelative().AtParent().AtName("static"),
 						),
 					},
 					MarkdownDescription: "Pppoe",
@@ -854,6 +907,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -864,9 +921,14 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"tap": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer2"),
+					path.MatchRelative().AtParent().AtName("layer3"),
+				),
+			},
 			MarkdownDescription: "Tap",
 			Optional:            true,
-			Computed:            true,
 			Attributes:          map[string]schema.Attribute{},
 		},
 		"tfid": schema.StringAttribute{
@@ -913,7 +975,17 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Layer2",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"vlan_tag": dsschema.Int64Attribute{
+				"lldp": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP Settings",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Computed:            true,
+						},
+					},
+				},
+				"vlan_tag": dsschema.StringAttribute{
 					MarkdownDescription: "Assign interface to VLAN tag",
 					Computed:            true,
 				},

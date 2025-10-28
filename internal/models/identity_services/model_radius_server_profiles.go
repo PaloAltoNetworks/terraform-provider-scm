@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -257,10 +258,26 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			Required:            true,
 			Attributes: map[string]schema.Attribute{
 				"c_h_a_p": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("e_a_p__t_t_l_s_with__p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p__m_s_c_h_a_pv2"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p_with__g_t_c"),
+						),
+					},
 					MarkdownDescription: "C h a p",
 					Optional:            true,
 				},
 				"e_a_p__t_t_l_s_with__p_a_p": schema.SingleNestedAttribute{
+					Validators: []validator.Object{
+						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("c_h_a_p"),
+							path.MatchRelative().AtParent().AtName("p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p__m_s_c_h_a_pv2"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p_with__g_t_c"),
+						),
+					},
 					MarkdownDescription: "E a p t t l s with p a p",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
@@ -275,10 +292,26 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 					},
 				},
 				"p_a_p": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("c_h_a_p"),
+							path.MatchRelative().AtParent().AtName("e_a_p__t_t_l_s_with__p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p__m_s_c_h_a_pv2"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p_with__g_t_c"),
+						),
+					},
 					MarkdownDescription: "P a p",
 					Optional:            true,
 				},
 				"p_e_a_p__m_s_c_h_a_pv2": schema.SingleNestedAttribute{
+					Validators: []validator.Object{
+						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("c_h_a_p"),
+							path.MatchRelative().AtParent().AtName("e_a_p__t_t_l_s_with__p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p_with__g_t_c"),
+						),
+					},
 					MarkdownDescription: "P e a p m s c h a pv2",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
@@ -297,6 +330,14 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 					},
 				},
 				"p_e_a_p_with__g_t_c": schema.SingleNestedAttribute{
+					Validators: []validator.Object{
+						objectvalidator.ExactlyOneOf(
+							path.MatchRelative().AtParent().AtName("c_h_a_p"),
+							path.MatchRelative().AtParent().AtName("e_a_p__t_t_l_s_with__p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_a_p"),
+							path.MatchRelative().AtParent().AtName("p_e_a_p__m_s_c_h_a_pv2"),
+						),
+					},
 					MarkdownDescription: "P e a p with g t c",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{

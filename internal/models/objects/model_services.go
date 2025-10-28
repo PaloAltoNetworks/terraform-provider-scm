@@ -288,7 +288,7 @@ var ServicesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"tcp": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("udp"),
 						),
 					},
@@ -351,7 +351,7 @@ var ServicesResourceSchema = schema.Schema{
 				},
 				"udp": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("tcp"),
 						),
 					},

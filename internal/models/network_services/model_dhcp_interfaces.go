@@ -529,6 +529,10 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -540,6 +544,10 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -561,6 +569,11 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 			Required:            true,
 		},
 		"relay": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("server"),
+				),
+			},
 			MarkdownDescription: "Relay",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
@@ -582,6 +595,11 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"server": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("relay"),
+				),
+			},
 			MarkdownDescription: "Server",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
@@ -639,7 +657,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"timeout": schema.Int64Attribute{
 									Validators: []validator.Int64{
-										int64validator.ExactlyOneOf(
+										int64validator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("unlimited"),
 										),
 										int64validator.Between(0, 1000000),
@@ -649,7 +667,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 								},
 								"unlimited": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("timeout"),
 										),
 									},
@@ -781,6 +799,10 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},

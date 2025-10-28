@@ -247,7 +247,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"dnsname": schema.StringAttribute{
 					Validators: []validator.String{
-						stringvalidator.ExactlyOneOf(
+						stringvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("rfc822name"),
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
@@ -257,7 +257,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				},
 				"rfc822name": schema.StringAttribute{
 					Validators: []validator.String{
-						stringvalidator.ExactlyOneOf(
+						stringvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dnsname"),
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
@@ -267,7 +267,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				},
 				"uniform_resource_identifier": schema.StringAttribute{
 					Validators: []validator.String{
-						stringvalidator.ExactlyOneOf(
+						stringvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dnsname"),
 							path.MatchRelative().AtParent().AtName("rfc822name"),
 						),

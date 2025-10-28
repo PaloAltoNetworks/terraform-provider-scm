@@ -366,7 +366,8 @@ func (r *NatRuleResource) Update(ctx context.Context, req resource.UpdateRequest
 	plan.Tfid = state.Tfid
 
 	// Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
-	plan.Position = state.Position
+	// Restore parameter position from plan
+	_ = req.Plan.GetAttribute(ctx, path.Root("position"), &plan.Position)
 
 	tflog.Debug(ctx, "Updated nat_rules", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)

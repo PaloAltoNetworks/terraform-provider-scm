@@ -253,7 +253,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"no_tag": schema.BoolAttribute{
 					Validators: []validator.Bool{
-						boolvalidator.ExactlyOneOf(
+						boolvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("tag"),
 						),
 					},
@@ -264,7 +264,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Tag",
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("no_tag"),
 						),
 						listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(127)),

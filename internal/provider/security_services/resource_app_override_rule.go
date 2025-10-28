@@ -431,11 +431,12 @@ func (r *AppOverrideRuleResource) Update(ctx context.Context, req resource.Updat
 	plan.Tfid = state.Tfid
 
 	// Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
-	plan.Position = state.Position
+	// Restore parameter position from plan
+	_ = req.Plan.GetAttribute(ctx, path.Root("position"), &plan.Position)
 
-	// Explicitly restore synthetic Terraform attributes from prior state.
-	plan.RelativePosition = state.RelativePosition
-	plan.TargetRule = state.TargetRule
+	// Explicitly restore synthetic move attributes from the PLAN.
+	_ = req.Plan.GetAttribute(ctx, path.Root("relative_position"), &plan.RelativePosition)
+	_ = req.Plan.GetAttribute(ctx, path.Root("target_rule"), &plan.TargetRule)
 
 	tflog.Debug(ctx, "Updated app_override_rules", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)

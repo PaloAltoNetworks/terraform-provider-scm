@@ -3,8 +3,6 @@ package models
 import (
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -677,16 +675,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
 								"conditional_advertisement": schema.SingleNestedAttribute{
-									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-										),
-									},
 									MarkdownDescription: "Conditional advertisement",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
@@ -721,16 +709,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									},
 								},
 								"filter_list": schema.SingleNestedAttribute{
-									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-										),
-									},
 									MarkdownDescription: "Filter list",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
@@ -745,16 +723,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									},
 								},
 								"inbound_network_filters": schema.SingleNestedAttribute{
-									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-										),
-									},
 									MarkdownDescription: "Inbound network filters",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
@@ -769,30 +737,10 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									},
 								},
 								"inherit": schema.BoolAttribute{
-									Validators: []validator.Bool{
-										boolvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-										),
-									},
 									MarkdownDescription: "Inherit from unicast",
 									Optional:            true,
 								},
 								"outbound_network_filters": schema.SingleNestedAttribute{
-									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-										),
-									},
 									MarkdownDescription: "Outbound network filters",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
@@ -807,16 +755,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									},
 								},
 								"route_maps": schema.SingleNestedAttribute{
-									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("unsuppress_map"),
-										),
-									},
 									MarkdownDescription: "Route maps",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
@@ -831,16 +769,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 									},
 								},
 								"unsuppress_map": schema.StringAttribute{
-									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
-											path.MatchRelative().AtParent().AtName("conditional_advertisement"),
-											path.MatchRelative().AtParent().AtName("filter_list"),
-											path.MatchRelative().AtParent().AtName("inbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("inherit"),
-											path.MatchRelative().AtParent().AtName("outbound_network_filters"),
-											path.MatchRelative().AtParent().AtName("route_maps"),
-										),
-									},
 									MarkdownDescription: "Unsuppress map",
 									Optional:            true,
 								},

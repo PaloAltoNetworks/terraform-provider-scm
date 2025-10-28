@@ -22,6 +22,44 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 By using this software, you agree to these terms.
 
+## Release Notes
+
+*   **v1.0.3 (10/24/2025)**
+
+- Change Shared in examples (which was incorrect) to All
+- Error handling enhanced - Instead of a generic 400 error, the actual api error is echoed back to terraform.
+- Rule re-order - Now supports placing a rule in a desired location while the resource is managed through terraform.
+- Examples added for ethernet, loopback, tunnel, layer3 interfaces
+- Examples added for folder, snippet, authentication rule, app override rule, decryption rule, qos rule, nat rule, pbf rule
+- Ipv6 is not supported for all interfaces - coming soon
+- Layer3 interface without ip settings is not supported - coming soon
+- Rest of the interfaces - coming soon
+
+*   **v1.0.2 (10/13/2025)**
+
+Data source / resource added for:
+
+- folder, folder_list
+- label, label_list
+- snippet, snippet_list
+- variable, variable_list
+
+Data source / Resource examples added for:
+
+- anti_spyware_profile, anti_spyware_profile_list
+- anti_spyware_signature, anti_spyware_signature_list
+- service_connection, service_connection_list
+- service_connection_group, service_connection_group_list
+- vulnerability_protection_profile, vulnerability_protection_profile_list
+
+*   **v1.0.1 (10/03/2025)**
+
+Beta disclaimer added
+
+*   **v1.0.0 (10/03/2025)**
+
+Initial Release - Please note: No backwards compatibility to v0.x.y
+
 ## Warranty
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

@@ -4,7 +4,6 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -367,6 +366,10 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -378,6 +381,10 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -395,6 +402,11 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"layer2": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer3"),
+				),
+			},
 			MarkdownDescription: "Layer2",
 			Optional:            true,
 			Computed:            true,
@@ -456,7 +468,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 				},
 				"vlan_tag": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.Between(1, 9999),
+						int64validator.Between(1, 4096),
 					},
 					MarkdownDescription: "Assign interface to VLAN tag",
 					Optional:            true,
@@ -465,6 +477,11 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"layer3": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer2"),
+				),
+			},
 			MarkdownDescription: "Layer3",
 			Optional:            true,
 			Computed:            true,
@@ -541,8 +558,8 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 				},
 				"dhcp_client": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("ip"),
+						objectvalidator.ConflictsWith(
+							path.MatchRelative().AtParent().AtName("static"),
 						),
 					},
 					MarkdownDescription: "Aggregate Ethernet DHCP Client Object",
@@ -607,13 +624,8 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 				"ip": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Interface IP addresses",
-					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("dhcp_client"),
-						),
-					},
-					Optional: true,
-					Computed: true,
+					Optional:            true,
+					Computed:            true,
 				},
 				"lacp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Lacp",
@@ -687,6 +699,10 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},

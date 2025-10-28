@@ -309,7 +309,7 @@ var PbfRulesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"discard": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("forward"),
 							path.MatchRelative().AtParent().AtName("no_pbf"),
 						),
@@ -320,7 +320,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				},
 				"forward": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("discard"),
 							path.MatchRelative().AtParent().AtName("no_pbf"),
 						),
@@ -356,7 +356,7 @@ var PbfRulesResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"fqdn": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("ip_address"),
 										),
 									},
@@ -365,7 +365,7 @@ var PbfRulesResourceSchema = schema.Schema{
 								},
 								"ip_address": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("fqdn"),
 										),
 									},
@@ -378,7 +378,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				},
 				"no_pbf": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("discard"),
 							path.MatchRelative().AtParent().AtName("forward"),
 						),
@@ -463,7 +463,7 @@ var PbfRulesResourceSchema = schema.Schema{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Source interfaces",
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("zone"),
 						),
 					},
@@ -473,7 +473,7 @@ var PbfRulesResourceSchema = schema.Schema{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Source zones",
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("interface"),
 						),
 					},

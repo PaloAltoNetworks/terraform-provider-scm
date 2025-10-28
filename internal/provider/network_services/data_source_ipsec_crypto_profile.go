@@ -87,7 +87,7 @@ func (d *IpsecCryptoProfileDataSource) Read(ctx context.Context, req datasource.
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading IpsecCryptoProfiles data source by ID", map[string]interface{}{"id": objectId})
 
-		getReq := d.client.IPsecCryptoProfilesAPI.GetIPsecCrytoProfilesByID(ctx, objectId)
+		getReq := d.client.IPsecCryptoProfilesAPI.GetIPsecCryptoProfilesByID(ctx, objectId)
 		scmObject, httpRes, err := getReq.Execute()
 
 		var statusCode int

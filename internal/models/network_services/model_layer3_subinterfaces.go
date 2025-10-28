@@ -3,11 +3,12 @@ package models
 import (
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
@@ -24,21 +25,21 @@ import (
 
 // Layer3Subinterfaces represents the Terraform model for Layer3Subinterfaces
 type Layer3Subinterfaces struct {
-	Tfid                       types.String           `tfsdk:"tfid"`
-	Arp                        basetypes.ListValue    `tfsdk:"arp"`
-	Comment                    basetypes.StringValue  `tfsdk:"comment"`
-	DdnsConfig                 basetypes.ObjectValue  `tfsdk:"ddns_config"`
-	Device                     basetypes.StringValue  `tfsdk:"device"`
-	DhcpClient                 basetypes.ObjectValue  `tfsdk:"dhcp_client"`
-	Folder                     basetypes.StringValue  `tfsdk:"folder"`
-	Id                         basetypes.StringValue  `tfsdk:"id"`
-	InterfaceManagementProfile basetypes.StringValue  `tfsdk:"interface_management_profile"`
-	Ip                         basetypes.ListValue    `tfsdk:"ip"`
-	Mtu                        basetypes.Int64Value   `tfsdk:"mtu"`
-	Name                       basetypes.StringValue  `tfsdk:"name"`
-	ParentInterface            basetypes.StringValue  `tfsdk:"parent_interface"`
-	Snippet                    basetypes.StringValue  `tfsdk:"snippet"`
-	Tag                        basetypes.Float64Value `tfsdk:"tag"`
+	Tfid                       types.String          `tfsdk:"tfid"`
+	Arp                        basetypes.ListValue   `tfsdk:"arp"`
+	Comment                    basetypes.StringValue `tfsdk:"comment"`
+	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
+	Device                     basetypes.StringValue `tfsdk:"device"`
+	DhcpClient                 basetypes.ObjectValue `tfsdk:"dhcp_client"`
+	Folder                     basetypes.StringValue `tfsdk:"folder"`
+	Id                         basetypes.StringValue `tfsdk:"id"`
+	InterfaceManagementProfile basetypes.StringValue `tfsdk:"interface_management_profile"`
+	Ip                         basetypes.ListValue   `tfsdk:"ip"`
+	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
+	Name                       basetypes.StringValue `tfsdk:"name"`
+	ParentInterface            basetypes.StringValue `tfsdk:"parent_interface"`
+	Snippet                    basetypes.StringValue `tfsdk:"snippet"`
+	Tag                        basetypes.Int64Value  `tfsdk:"tag"`
 }
 
 // Layer3SubinterfacesArpInner represents a nested structure within the Layer3Subinterfaces model
@@ -70,6 +71,11 @@ type Layer3SubInterfacesDhcpClientDhcpClient struct {
 type Layer3SubInterfacesDhcpClientDhcpClientSendHostname struct {
 	Enable   basetypes.BoolValue   `tfsdk:"enable"`
 	Hostname basetypes.StringValue `tfsdk:"hostname"`
+}
+
+// Layer3SubinterfacesIpInner represents a nested structure within the Layer3Subinterfaces model
+type Layer3SubinterfacesIpInner struct {
+	Name basetypes.StringValue `tfsdk:"name"`
 }
 
 // AttrTypes defines the attribute types for the Layer3Subinterfaces model.
@@ -111,12 +117,16 @@ func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 		"folder":                       basetypes.StringType{},
 		"id":                           basetypes.StringType{},
 		"interface_management_profile": basetypes.StringType{},
-		"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
-		"mtu":                          basetypes.Int64Type{},
-		"name":                         basetypes.StringType{},
-		"parent_interface":             basetypes.StringType{},
-		"snippet":                      basetypes.StringType{},
-		"tag":                          basetypes.NumberType{},
+		"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+			},
+		}},
+		"mtu":              basetypes.Int64Type{},
+		"name":             basetypes.StringType{},
+		"parent_interface": basetypes.StringType{},
+		"snippet":          basetypes.StringType{},
+		"tag":              basetypes.Int64Type{},
 	}
 }
 
@@ -194,6 +204,20 @@ func (o Layer3SubInterfacesDhcpClientDhcpClientSendHostname) AttrTypes() map[str
 
 // AttrType returns the attribute type for a list of Layer3SubInterfacesDhcpClientDhcpClientSendHostname objects.
 func (o Layer3SubInterfacesDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the Layer3SubinterfacesIpInner model.
+func (o Layer3SubinterfacesIpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of Layer3SubinterfacesIpInner objects.
+func (o Layer3SubinterfacesIpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -278,6 +302,10 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -288,6 +316,11 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"dhcp_client": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("static"),
+				),
+			},
 			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object",
 			Optional:            true,
 			Computed:            true,
@@ -341,6 +374,10 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -361,10 +398,17 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Interface management profile",
 			Optional:            true,
 		},
-		"ip": schema.ListAttribute{
-			ElementType:         types.StringType,
-			MarkdownDescription: "Ip",
+		"ip": schema.ListNestedAttribute{
+			MarkdownDescription: "L3 sub-interface IP Parent",
 			Optional:            true,
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"name": schema.StringAttribute{
+						MarkdownDescription: "L3 sub-interface IP address(es)",
+						Required:            true,
+					},
+				},
+			},
 		},
 		"mtu": schema.Int64Attribute{
 			Validators: []validator.Int64{
@@ -383,6 +427,10 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -392,9 +440,9 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
-		"tag": schema.Float64Attribute{
-			Validators: []validator.Float64{
-				float64validator.Between(1.000000, 4096.000000),
+		"tag": schema.Int64Attribute{
+			Validators: []validator.Int64{
+				int64validator.Between(1, 4096),
 			},
 			MarkdownDescription: "VLAN tag",
 			Optional:            true,
@@ -515,10 +563,17 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Interface management profile",
 			Computed:            true,
 		},
-		"ip": dsschema.ListAttribute{
-			ElementType:         types.StringType,
-			MarkdownDescription: "Ip",
+		"ip": dsschema.ListNestedAttribute{
+			MarkdownDescription: "L3 sub-interface IP Parent",
 			Computed:            true,
+			NestedObject: dsschema.NestedAttributeObject{
+				Attributes: map[string]dsschema.Attribute{
+					"name": dsschema.StringAttribute{
+						MarkdownDescription: "L3 sub-interface IP address(es)",
+						Computed:            true,
+					},
+				},
+			},
 		},
 		"mtu": dsschema.Int64Attribute{
 			MarkdownDescription: "MTU",
@@ -537,7 +592,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Computed:            true,
 		},
-		"tag": dsschema.Float64Attribute{
+		"tag": dsschema.Int64Attribute{
 			MarkdownDescription: "VLAN tag",
 			Computed:            true,
 		},

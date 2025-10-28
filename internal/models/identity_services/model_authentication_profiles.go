@@ -440,7 +440,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"cloud": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("ldap"),
 							path.MatchRelative().AtParent().AtName("local_database"),
@@ -460,7 +460,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				},
 				"kerberos": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("cloud"),
 							path.MatchRelative().AtParent().AtName("ldap"),
 							path.MatchRelative().AtParent().AtName("local_database"),
@@ -484,7 +484,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				},
 				"ldap": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("cloud"),
 							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("local_database"),
@@ -512,7 +512,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				},
 				"local_database": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("cloud"),
 							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("ldap"),
@@ -527,7 +527,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				},
 				"radius": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("cloud"),
 							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("ldap"),
@@ -551,7 +551,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				},
 				"saml_idp": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("cloud"),
 							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("ldap"),
@@ -608,7 +608,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				},
 				"tacplus": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("cloud"),
 							path.MatchRelative().AtParent().AtName("kerberos"),
 							path.MatchRelative().AtParent().AtName("ldap"),

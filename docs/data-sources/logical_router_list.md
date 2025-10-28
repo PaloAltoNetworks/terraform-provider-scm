@@ -22,6 +22,7 @@ Retrieves a listing of config items.
 - `limit` (Number) The max number of items to return. Default: 200.
 - `name` (String) The name of the item.
 - `offset` (Number) The offset of the first item to return.
+- `pagination` (Boolean) The parameter to mention if the response should be paginated. By default, its set to false
 - `snippet` (String) The snippet of the item.
 
 ### Read-Only

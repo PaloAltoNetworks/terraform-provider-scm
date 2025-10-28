@@ -102,7 +102,7 @@ func unpackAppOverrideRulesToSdk(ctx context.Context, obj types.Object) (*securi
 
 	// Handling Primitives
 	if !model.Port.IsNull() && !model.Port.IsUnknown() {
-		sdk.Port = int32(model.Port.ValueInt64())
+		sdk.Port = model.Port.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Port", "value": sdk.Port})
 	}
 
@@ -249,7 +249,7 @@ func packAppOverrideRulesFromSdk(ctx context.Context, sdk security_services.AppO
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Port = basetypes.NewInt64Value(int64(sdk.Port))
+	model.Port = basetypes.NewStringValue(sdk.Port)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Port", "value": sdk.Port})
 	// Handling Primitives
 	// Standard primitive packing

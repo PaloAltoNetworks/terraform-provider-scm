@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -438,10 +439,46 @@ func unpackZonesNetworkToSdk(ctx context.Context, obj types.Object) (*network_se
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "EnablePacketBufferProtection", "value": *sdk.EnablePacketBufferProtection})
 	}
 
+	// Handling Lists
+	if !model.External.IsNull() && !model.External.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field External")
+		diags.Append(model.External.ElementsAs(ctx, &sdk.External, false)...)
+	}
+
+	// Handling Lists
+	if !model.Layer2.IsNull() && !model.Layer2.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Layer2")
+		diags.Append(model.Layer2.ElementsAs(ctx, &sdk.Layer2, false)...)
+	}
+
+	// Handling Lists
+	if !model.Layer3.IsNull() && !model.Layer3.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Layer3")
+		diags.Append(model.Layer3.ElementsAs(ctx, &sdk.Layer3, false)...)
+	}
+
 	// Handling Primitives
 	if !model.LogSetting.IsNull() && !model.LogSetting.IsUnknown() {
 		sdk.LogSetting = model.LogSetting.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LogSetting", "value": *sdk.LogSetting})
+	}
+
+	// Handling Lists
+	if !model.Tap.IsNull() && !model.Tap.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Tap")
+		diags.Append(model.Tap.ElementsAs(ctx, &sdk.Tap, false)...)
+	}
+
+	// Handling Typeless Objects
+	if !model.Tunnel.IsNull() && !model.Tunnel.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Tunnel")
+		sdk.Tunnel = make(map[string]interface{})
+	}
+
+	// Handling Lists
+	if !model.VirtualWire.IsNull() && !model.VirtualWire.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field VirtualWire")
+		diags.Append(model.VirtualWire.ElementsAs(ctx, &sdk.VirtualWire, false)...)
 	}
 
 	// Handling Primitives
@@ -471,6 +508,45 @@ func packZonesNetworkFromSdk(ctx context.Context, sdk network_services.ZonesNetw
 	} else {
 		model.EnablePacketBufferProtection = basetypes.NewBoolNull()
 	}
+	// Handling Lists
+	if sdk.External != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field External")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.External, d = basetypes.NewListValueFrom(ctx, elemType, sdk.External)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.External = basetypes.NewListNull(elemType)
+	}
+	// Handling Lists
+	if sdk.Layer2 != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Layer2")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Layer2, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Layer2)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Layer2 = basetypes.NewListNull(elemType)
+	}
+	// Handling Lists
+	if sdk.Layer3 != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Layer3")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Layer3, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Layer3)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Layer3 = basetypes.NewListNull(elemType)
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LogSetting != nil {
@@ -478,6 +554,45 @@ func packZonesNetworkFromSdk(ctx context.Context, sdk network_services.ZonesNetw
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LogSetting", "value": *sdk.LogSetting})
 	} else {
 		model.LogSetting = basetypes.NewStringNull()
+	}
+	// Handling Lists
+	if sdk.Tap != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Tap")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Tap, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Tap)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Tap = basetypes.NewListNull(elemType)
+	}
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Tunnel != nil && !reflect.ValueOf(sdk.Tunnel).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Tunnel")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Tunnel, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Tunnel = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
+	// Handling Lists
+	if sdk.VirtualWire != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field VirtualWire")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.VirtualWire, d = basetypes.NewListValueFrom(ctx, elemType, sdk.VirtualWire)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.VirtualWire = basetypes.NewListNull(elemType)
 	}
 	// Handling Primitives
 	// Standard primitive packing

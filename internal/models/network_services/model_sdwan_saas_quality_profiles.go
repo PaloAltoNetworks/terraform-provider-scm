@@ -310,7 +310,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 					Attributes: map[string]schema.Attribute{
 						"fqdn": schema.SingleNestedAttribute{
 							Validators: []validator.Object{
-								objectvalidator.ExactlyOneOf(
+								objectvalidator.ConflictsWith(
 									path.MatchRelative().AtParent().AtName("ip_address"),
 								),
 							},
@@ -332,7 +332,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 						},
 						"ip_address": schema.ListNestedAttribute{
 							Validators: []validator.List{
-								listvalidator.ExactlyOneOf(
+								listvalidator.ConflictsWith(
 									path.MatchRelative().AtParent().AtName("fqdn"),
 								),
 							},

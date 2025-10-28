@@ -1286,6 +1286,10 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Policy type",
 			Computed:            true,
 		},
+		"position": dsschema.StringAttribute{
+			MarkdownDescription: "The position of a security rule\n",
+			Computed:            true,
+		},
 		"profile_setting": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "The security profile object",
 			Computed:            true,
@@ -1296,6 +1300,10 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 			},
+		},
+		"relative_position": dsschema.StringAttribute{
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Computed:            true,
 		},
 		"schedule": dsschema.StringAttribute{
 			MarkdownDescription: "Schedule in which this rule will be applied",
@@ -1348,6 +1356,10 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The tags associated with the security rule",
 			Computed:            true,
 		},
+		"target_rule": dsschema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			Computed:            true,
+		},
 		"tenant_restrictions": dsschema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Tenant restrictions",
@@ -1367,15 +1379,16 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 
 // SecurityRulesListModel represents the data model for a list data source.
 type SecurityRulesListModel struct {
-	Tfid    types.String    `tfsdk:"tfid"`
-	Data    []SecurityRules `tfsdk:"data"`
-	Limit   types.Int64     `tfsdk:"limit"`
-	Offset  types.Int64     `tfsdk:"offset"`
-	Name    types.String    `tfsdk:"name"`
-	Total   types.Int64     `tfsdk:"total"`
-	Folder  types.String    `tfsdk:"folder"`
-	Snippet types.String    `tfsdk:"snippet"`
-	Device  types.String    `tfsdk:"device"`
+	Tfid     types.String          `tfsdk:"tfid"`
+	Data     []SecurityRules       `tfsdk:"data"`
+	Limit    types.Int64           `tfsdk:"limit"`
+	Offset   types.Int64           `tfsdk:"offset"`
+	Name     types.String          `tfsdk:"name"`
+	Total    types.Int64           `tfsdk:"total"`
+	Folder   types.String          `tfsdk:"folder"`
+	Snippet  types.String          `tfsdk:"snippet"`
+	Device   types.String          `tfsdk:"device"`
+	Position basetypes.StringValue `tfsdk:"position"`
 }
 
 // SecurityRulesListDataSourceSchema defines the schema for a list data source.
@@ -1397,5 +1410,9 @@ var SecurityRulesListDataSourceSchema = dsschema.Schema{
 		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
 		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
 		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+		"position": dsschema.StringAttribute{
+			Description: "The position of a security rule\n",
+			Required:    true,
+		},
 	},
 }

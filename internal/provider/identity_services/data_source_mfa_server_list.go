@@ -93,6 +93,12 @@ func (d *MfaServerListDataSource) Read(ctx context.Context, req datasource.ReadR
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
 	}
 
+	if !data.Position.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "position", "value": data.Position })
+		listReq = listReq.Position(data.Position.ValueString())
+		// END: Add dynamic query parameter handling
+	}
 
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()

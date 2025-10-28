@@ -384,10 +384,22 @@ func unpackEthernetInterfacesLayer2ToSdk(ctx context.Context, obj types.Object) 
 
 	var sdk network_services.EthernetInterfacesLayer2
 	var d diag.Diagnostics
+	// Handling Objects
+	if !model.Lldp.IsNull() && !model.Lldp.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Lldp")
+		unpacked, d := unpackEthernetInterfacesLayer2LldpToSdk(ctx, model.Lldp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Lldp"})
+		}
+		if unpacked != nil {
+			sdk.Lldp = unpacked
+		}
+	}
+
 	// Handling Primitives
 	if !model.VlanTag.IsNull() && !model.VlanTag.IsUnknown() {
-		val := int32(model.VlanTag.ValueInt64())
-		sdk.VlanTag = &val
+		sdk.VlanTag = model.VlanTag.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "VlanTag", "value": *sdk.VlanTag})
 	}
 
@@ -404,13 +416,26 @@ func packEthernetInterfacesLayer2FromSdk(ctx context.Context, sdk network_servic
 	diags := diag.Diagnostics{}
 	var model models.EthernetInterfacesLayer2
 	var d diag.Diagnostics
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Lldp != nil {
+		tflog.Debug(ctx, "Packing nested object for field Lldp")
+		packed, d := packEthernetInterfacesLayer2LldpFromSdk(ctx, *sdk.Lldp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Lldp"})
+		}
+		model.Lldp = packed
+	} else {
+		model.Lldp = basetypes.NewObjectNull(models.EthernetInterfacesLayer2Lldp{}.AttrTypes())
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.VlanTag != nil {
-		model.VlanTag = basetypes.NewInt64Value(int64(*sdk.VlanTag))
+		model.VlanTag = basetypes.NewStringValue(*sdk.VlanTag)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "VlanTag", "value": *sdk.VlanTag})
 	} else {
-		model.VlanTag = basetypes.NewInt64Null()
+		model.VlanTag = basetypes.NewStringNull()
 	}
 	diags.Append(d...)
 
@@ -466,6 +491,99 @@ func packEthernetInterfacesLayer2ListFromSdk(ctx context.Context, sdks []network
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.EthernetInterfacesLayer2", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer2{}.AttrType(), data)
+}
+
+// --- Unpacker for EthernetInterfacesLayer2Lldp ---
+func unpackEthernetInterfacesLayer2LldpToSdk(ctx context.Context, obj types.Object) (*network_services.EthernetInterfacesLayer2Lldp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.EthernetInterfacesLayer2Lldp", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.EthernetInterfacesLayer2Lldp
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.EthernetInterfacesLayer2Lldp
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Enable.IsNull() && !model.Enable.IsUnknown() {
+		sdk.Enable = model.Enable.ValueBool()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Enable", "value": sdk.Enable})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.EthernetInterfacesLayer2Lldp", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for EthernetInterfacesLayer2Lldp ---
+func packEthernetInterfacesLayer2LldpFromSdk(ctx context.Context, sdk network_services.EthernetInterfacesLayer2Lldp) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.EthernetInterfacesLayer2Lldp", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.EthernetInterfacesLayer2Lldp
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	model.Enable = basetypes.NewBoolValue(sdk.Enable)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Enable", "value": sdk.Enable})
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer2Lldp{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.EthernetInterfacesLayer2Lldp", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for EthernetInterfacesLayer2Lldp ---
+func unpackEthernetInterfacesLayer2LldpListToSdk(ctx context.Context, list types.List) ([]network_services.EthernetInterfacesLayer2Lldp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.EthernetInterfacesLayer2Lldp")
+	diags := diag.Diagnostics{}
+	var data []models.EthernetInterfacesLayer2Lldp
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.EthernetInterfacesLayer2Lldp, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer2Lldp{}.AttrTypes(), &item)
+		unpacked, d := unpackEthernetInterfacesLayer2LldpToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.EthernetInterfacesLayer2Lldp", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for EthernetInterfacesLayer2Lldp ---
+func packEthernetInterfacesLayer2LldpListFromSdk(ctx context.Context, sdks []network_services.EthernetInterfacesLayer2Lldp) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.EthernetInterfacesLayer2Lldp")
+	diags := diag.Diagnostics{}
+	var data []models.EthernetInterfacesLayer2Lldp
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.EthernetInterfacesLayer2Lldp
+		obj, d := packEthernetInterfacesLayer2LldpFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.EthernetInterfacesLayer2Lldp{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.EthernetInterfacesLayer2Lldp", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer2Lldp{}.AttrType(), data)
 }
 
 // --- Unpacker for EthernetInterfacesLayer3 ---

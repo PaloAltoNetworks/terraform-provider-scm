@@ -503,7 +503,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 								Attributes: map[string]schema.Attribute{
 									"number": schema.Int64Attribute{
 										Validators: []validator.Int64{
-											int64validator.ExactlyOneOf(
+											int64validator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("tcp"),
 												path.MatchRelative().AtParent().AtName("udp"),
 											),
@@ -515,7 +515,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 									},
 									"tcp": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("number"),
 												path.MatchRelative().AtParent().AtName("udp"),
 											),
@@ -546,7 +546,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 									},
 									"udp": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("number"),
 												path.MatchRelative().AtParent().AtName("tcp"),
 											),
@@ -604,7 +604,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 								Attributes: map[string]schema.Attribute{
 									"number": schema.Int64Attribute{
 										Validators: []validator.Int64{
-											int64validator.ExactlyOneOf(
+											int64validator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("tcp"),
 												path.MatchRelative().AtParent().AtName("udp"),
 											),
@@ -616,7 +616,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 									},
 									"tcp": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("number"),
 												path.MatchRelative().AtParent().AtName("udp"),
 											),
@@ -647,7 +647,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 									},
 									"udp": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("number"),
 												path.MatchRelative().AtParent().AtName("tcp"),
 											),

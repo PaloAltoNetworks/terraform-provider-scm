@@ -1,14 +1,11 @@
 package models
 
 import (
-	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 )
@@ -119,11 +116,6 @@ var TrafficSteeringRulesResourceSchema = schema.Schema{
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"forward": schema.SingleNestedAttribute{
-					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("no_pbf"),
-						),
-					},
 					MarkdownDescription: "Forward",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{

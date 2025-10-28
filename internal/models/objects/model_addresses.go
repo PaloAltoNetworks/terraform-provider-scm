@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -72,6 +73,10 @@ var AddressesResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -83,6 +88,10 @@ var AddressesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -94,6 +103,11 @@ var AddressesResourceSchema = schema.Schema{
 		},
 		"fqdn": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("ip_netmask"),
+					path.MatchRelative().AtParent().AtName("ip_range"),
+					path.MatchRelative().AtParent().AtName("ip_wildcard"),
+				),
 				stringvalidator.LengthAtMost(255),
 				stringvalidator.LengthAtLeast(1),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$"), "pattern must match "+"^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$"),
@@ -109,14 +123,35 @@ var AddressesResourceSchema = schema.Schema{
 			},
 		},
 		"ip_netmask": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("fqdn"),
+					path.MatchRelative().AtParent().AtName("ip_range"),
+					path.MatchRelative().AtParent().AtName("ip_wildcard"),
+				),
+			},
 			MarkdownDescription: "IP address with or without CIDR notation",
 			Optional:            true,
 		},
 		"ip_range": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("fqdn"),
+					path.MatchRelative().AtParent().AtName("ip_netmask"),
+					path.MatchRelative().AtParent().AtName("ip_wildcard"),
+				),
+			},
 			MarkdownDescription: "Ip range",
 			Optional:            true,
 		},
 		"ip_wildcard": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("fqdn"),
+					path.MatchRelative().AtParent().AtName("ip_netmask"),
+					path.MatchRelative().AtParent().AtName("ip_range"),
+				),
+			},
 			MarkdownDescription: "IP wildcard mask",
 			Optional:            true,
 		},
@@ -129,6 +164,10 @@ var AddressesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},

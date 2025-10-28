@@ -172,7 +172,7 @@ func (r *IpsecCryptoProfileResource) Read(ctx context.Context, req resource.Read
 
 	// Step 3 - Make read api call with id = id from state tfid
 	tflog.Debug(ctx, "Reading ipsec_crypto_profiles from SCM API", map[string]interface{}{"id": objectId})
-	getReq := r.client.IPsecCryptoProfilesAPI.GetIPsecCrytoProfilesByID(ctx, objectId)
+	getReq := r.client.IPsecCryptoProfilesAPI.GetIPsecCryptoProfilesByID(ctx, objectId)
 	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {

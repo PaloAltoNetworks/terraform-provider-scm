@@ -18,7 +18,7 @@ data "scm_ethernet_interface_list" "all_ethernet_interfaces" {
   folder = "ngfw-shared"
 }
 
-# Output the raw list of all anti-spyware profiles
+# Output the raw list of all ethernet interfaces
 output "scm_ethernet_interface_list" {
   description = "A list of all ethernet interfaces from the 'All Firewalls' folder."
   value       = { for interface in data.scm_ethernet_interface_list.all_ethernet_interfaces.data : interface.name => interface }
@@ -76,7 +76,16 @@ Read-Only:
 
 Read-Only:
 
-- `vlan_tag` (Number) Assign interface to VLAN tag
+- `lldp` (Attributes) LLDP Settings (see [below for nested schema](#nestedatt--data--layer2--lldp))
+- `vlan_tag` (String) Assign interface to VLAN tag
+
+<a id="nestedatt--data--layer2--lldp"></a>
+### Nested Schema for `data.layer2.lldp`
+
+Read-Only:
+
+- `enable` (Boolean) Enable LLDP on Interface
+
 
 
 <a id="nestedatt--data--layer3"></a>

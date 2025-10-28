@@ -157,9 +157,9 @@ func unpackNatRulesToSdk(ctx context.Context, obj types.Object) (*network_servic
 	}
 
 	// Handling Primitives
-	if !model.TranslatedAddressSingle.IsNull() && !model.TranslatedAddressSingle.IsUnknown() {
-		sdk.TranslatedAddressSingle = model.TranslatedAddressSingle.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TranslatedAddressSingle", "value": *sdk.TranslatedAddressSingle})
+	if !model.TranslatedAddress.IsNull() && !model.TranslatedAddress.IsUnknown() {
+		sdk.TranslatedAddress = model.TranslatedAddress.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TranslatedAddress", "value": *sdk.TranslatedAddress})
 	}
 
 	// Handling Primitives
@@ -359,11 +359,11 @@ func packNatRulesFromSdk(ctx context.Context, sdk network_services.NatRules) (ty
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.TranslatedAddressSingle != nil {
-		model.TranslatedAddressSingle = basetypes.NewStringValue(*sdk.TranslatedAddressSingle)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TranslatedAddressSingle", "value": *sdk.TranslatedAddressSingle})
+	if sdk.TranslatedAddress != nil {
+		model.TranslatedAddress = basetypes.NewStringValue(*sdk.TranslatedAddress)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TranslatedAddress", "value": *sdk.TranslatedAddress})
 	} else {
-		model.TranslatedAddressSingle = basetypes.NewStringNull()
+		model.TranslatedAddress = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -560,21 +560,33 @@ func unpackNatRulesSourceTranslationToSdk(ctx context.Context, obj types.Object)
 	}
 
 	// Handling Primitives
+	if !model.FloatingIp.IsNull() && !model.FloatingIp.IsUnknown() {
+		sdk.FloatingIp = model.FloatingIp.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
+	}
+
+	// Handling Primitives
 	if !model.Interface.IsNull() && !model.Interface.IsUnknown() {
 		sdk.Interface = model.Interface.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
+	}
+
+	// Handling Primitives
+	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
+		sdk.Ip = model.Ip.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	}
+
+	// Handling Primitives
+	if !model.TranslatedAddress.IsNull() && !model.TranslatedAddress.IsUnknown() {
+		sdk.TranslatedAddress = model.TranslatedAddress.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TranslatedAddress", "value": *sdk.TranslatedAddress})
 	}
 
 	// Handling Lists
 	if !model.TranslatedAddressArray.IsNull() && !model.TranslatedAddressArray.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddressArray")
 		diags.Append(model.TranslatedAddressArray.ElementsAs(ctx, &sdk.TranslatedAddressArray, false)...)
-	}
-
-	// Handling Primitives
-	if !model.TranslatedAddressSingle.IsNull() && !model.TranslatedAddressSingle.IsUnknown() {
-		sdk.TranslatedAddressSingle = model.TranslatedAddressSingle.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TranslatedAddressSingle", "value": *sdk.TranslatedAddressSingle})
 	}
 
 	diags.Append(d...)
@@ -613,11 +625,35 @@ func packNatRulesSourceTranslationFromSdk(ctx context.Context, sdk network_servi
 	}
 	// Handling Primitives
 	// Standard primitive packing
+	if sdk.FloatingIp != nil {
+		model.FloatingIp = basetypes.NewStringValue(*sdk.FloatingIp)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
+	} else {
+		model.FloatingIp = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
 	if sdk.Interface != nil {
 		model.Interface = basetypes.NewStringValue(*sdk.Interface)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
 	} else {
 		model.Interface = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ip != nil {
+		model.Ip = basetypes.NewStringValue(*sdk.Ip)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	} else {
+		model.Ip = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.TranslatedAddress != nil {
+		model.TranslatedAddress = basetypes.NewStringValue(*sdk.TranslatedAddress)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TranslatedAddress", "value": *sdk.TranslatedAddress})
+	} else {
+		model.TranslatedAddress = basetypes.NewStringNull()
 	}
 	// Handling Lists
 	if sdk.TranslatedAddressArray != nil {
@@ -631,14 +667,6 @@ func packNatRulesSourceTranslationFromSdk(ctx context.Context, sdk network_servi
 		// This logic now creates a correctly typed null list.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
 		model.TranslatedAddressArray = basetypes.NewListNull(elemType)
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.TranslatedAddressSingle != nil {
-		model.TranslatedAddressSingle = basetypes.NewStringValue(*sdk.TranslatedAddressSingle)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TranslatedAddressSingle", "value": *sdk.TranslatedAddressSingle})
-	} else {
-		model.TranslatedAddressSingle = basetypes.NewStringNull()
 	}
 	diags.Append(d...)
 
@@ -711,9 +739,27 @@ func unpackNatRulesSourceTranslationFallbackToSdk(ctx context.Context, obj types
 	var sdk network_services.NatRulesSourceTranslationFallback
 	var d diag.Diagnostics
 	// Handling Primitives
+	if !model.FloatingIp.IsNull() && !model.FloatingIp.IsUnknown() {
+		sdk.FloatingIp = model.FloatingIp.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
+	}
+
+	// Handling Primitives
 	if !model.Interface.IsNull() && !model.Interface.IsUnknown() {
 		sdk.Interface = model.Interface.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
+	}
+
+	// Handling Primitives
+	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
+		sdk.Ip = model.Ip.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	}
+
+	// Handling Lists
+	if !model.TranslatedAddressArray.IsNull() && !model.TranslatedAddressArray.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddressArray")
+		diags.Append(model.TranslatedAddressArray.ElementsAs(ctx, &sdk.TranslatedAddressArray, false)...)
 	}
 
 	diags.Append(d...)
@@ -731,11 +777,40 @@ func packNatRulesSourceTranslationFallbackFromSdk(ctx context.Context, sdk netwo
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
+	if sdk.FloatingIp != nil {
+		model.FloatingIp = basetypes.NewStringValue(*sdk.FloatingIp)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
+	} else {
+		model.FloatingIp = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
 	if sdk.Interface != nil {
 		model.Interface = basetypes.NewStringValue(*sdk.Interface)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
 	} else {
 		model.Interface = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ip != nil {
+		model.Ip = basetypes.NewStringValue(*sdk.Ip)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	} else {
+		model.Ip = basetypes.NewStringNull()
+	}
+	// Handling Lists
+	if sdk.TranslatedAddressArray != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field TranslatedAddressArray")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.TranslatedAddressArray, d = basetypes.NewListValueFrom(ctx, elemType, sdk.TranslatedAddressArray)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.TranslatedAddressArray = basetypes.NewListNull(elemType)
 	}
 	diags.Append(d...)
 

@@ -64,7 +64,16 @@ output "ethernet_interface_data_source_results" {
 
 Read-Only:
 
-- `vlan_tag` (Number) Assign interface to VLAN tag
+- `lldp` (Attributes) LLDP Settings (see [below for nested schema](#nestedatt--layer2--lldp))
+- `vlan_tag` (String) Assign interface to VLAN tag
+
+<a id="nestedatt--layer2--lldp"></a>
+### Nested Schema for `layer2.lldp`
+
+Read-Only:
+
+- `enable` (Boolean) Enable LLDP on Interface
+
 
 
 <a id="nestedatt--layer3"></a>

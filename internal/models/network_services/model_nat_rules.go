@@ -3,10 +3,7 @@ package models
 import (
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -46,7 +43,7 @@ type NatRules struct {
 	Tag                       basetypes.ListValue   `tfsdk:"tag"`
 	To                        basetypes.ListValue   `tfsdk:"to"`
 	ToInterface               basetypes.StringValue `tfsdk:"to_interface"`
-	TranslatedAddressSingle   basetypes.StringValue `tfsdk:"translated_address_single"`
+	TranslatedAddress         basetypes.StringValue `tfsdk:"translated_address"`
 	TranslatedPort            basetypes.Int64Value  `tfsdk:"translated_port"`
 	Position                  basetypes.StringValue `tfsdk:"position"`
 }
@@ -58,16 +55,21 @@ type NatRulesDnsRewrite struct {
 
 // NatRulesSourceTranslation represents a nested structure within the NatRules model
 type NatRulesSourceTranslation struct {
-	BiDirectional           basetypes.BoolValue   `tfsdk:"bi_directional"`
-	Fallback                basetypes.ObjectValue `tfsdk:"fallback"`
-	Interface               basetypes.StringValue `tfsdk:"interface"`
-	TranslatedAddressArray  basetypes.ListValue   `tfsdk:"translated_address_array"`
-	TranslatedAddressSingle basetypes.StringValue `tfsdk:"translated_address_single"`
+	BiDirectional          basetypes.BoolValue   `tfsdk:"bi_directional"`
+	Fallback               basetypes.ObjectValue `tfsdk:"fallback"`
+	FloatingIp             basetypes.StringValue `tfsdk:"floating_ip"`
+	Interface              basetypes.StringValue `tfsdk:"interface"`
+	Ip                     basetypes.StringValue `tfsdk:"ip"`
+	TranslatedAddress      basetypes.StringValue `tfsdk:"translated_address"`
+	TranslatedAddressArray basetypes.ListValue   `tfsdk:"translated_address_array"`
 }
 
 // NatRulesSourceTranslationFallback represents a nested structure within the NatRules model
 type NatRulesSourceTranslationFallback struct {
-	Interface basetypes.StringValue `tfsdk:"interface"`
+	FloatingIp             basetypes.StringValue `tfsdk:"floating_ip"`
+	Interface              basetypes.StringValue `tfsdk:"interface"`
+	Ip                     basetypes.StringValue `tfsdk:"ip"`
+	TranslatedAddressArray basetypes.ListValue   `tfsdk:"translated_address_array"`
 }
 
 // AttrTypes defines the attribute types for the NatRules model.
@@ -98,20 +100,25 @@ func (o NatRules) AttrTypes() map[string]attr.Type {
 				"bi_directional": basetypes.BoolType{},
 				"fallback": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"interface": basetypes.StringType{},
+						"floating_ip":              basetypes.StringType{},
+						"interface":                basetypes.StringType{},
+						"ip":                       basetypes.StringType{},
+						"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
 					},
 				},
-				"interface":                 basetypes.StringType{},
-				"translated_address_array":  basetypes.ListType{ElemType: basetypes.StringType{}},
-				"translated_address_single": basetypes.StringType{},
+				"floating_ip":              basetypes.StringType{},
+				"interface":                basetypes.StringType{},
+				"ip":                       basetypes.StringType{},
+				"translated_address":       basetypes.StringType{},
+				"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
 			},
 		},
-		"tag":                       basetypes.ListType{ElemType: basetypes.StringType{}},
-		"to":                        basetypes.ListType{ElemType: basetypes.StringType{}},
-		"to_interface":              basetypes.StringType{},
-		"translated_address_single": basetypes.StringType{},
-		"translated_port":           basetypes.Int64Type{},
-		"position":                  basetypes.StringType{},
+		"tag":                basetypes.ListType{ElemType: basetypes.StringType{}},
+		"to":                 basetypes.ListType{ElemType: basetypes.StringType{}},
+		"to_interface":       basetypes.StringType{},
+		"translated_address": basetypes.StringType{},
+		"translated_port":    basetypes.Int64Type{},
+		"position":           basetypes.StringType{},
 	}
 }
 
@@ -142,12 +149,17 @@ func (o NatRulesSourceTranslation) AttrTypes() map[string]attr.Type {
 		"bi_directional": basetypes.BoolType{},
 		"fallback": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"interface": basetypes.StringType{},
+				"floating_ip":              basetypes.StringType{},
+				"interface":                basetypes.StringType{},
+				"ip":                       basetypes.StringType{},
+				"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
 			},
 		},
-		"interface":                 basetypes.StringType{},
-		"translated_address_array":  basetypes.ListType{ElemType: basetypes.StringType{}},
-		"translated_address_single": basetypes.StringType{},
+		"floating_ip":              basetypes.StringType{},
+		"interface":                basetypes.StringType{},
+		"ip":                       basetypes.StringType{},
+		"translated_address":       basetypes.StringType{},
+		"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
 	}
 }
 
@@ -161,7 +173,10 @@ func (o NatRulesSourceTranslation) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the NatRulesSourceTranslationFallback model.
 func (o NatRulesSourceTranslationFallback) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"interface": basetypes.StringType{},
+		"floating_ip":              basetypes.StringType{},
+		"interface":                basetypes.StringType{},
+		"ip":                       basetypes.StringType{},
+		"translated_address_array": basetypes.ListType{ElemType: basetypes.StringType{}},
 	}
 }
 
@@ -194,6 +209,10 @@ var NatRulesResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -231,6 +250,10 @@ var NatRulesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -283,6 +306,10 @@ var NatRulesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -302,70 +329,51 @@ var NatRulesResourceSchema = schema.Schema{
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bi_directional": schema.BoolAttribute{
-					Validators: []validator.Bool{
-						boolvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("fallback"),
-							path.MatchRelative().AtParent().AtName("interface"),
-							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("translated_address_single"),
-						),
-					},
 					MarkdownDescription: "Bi directional",
 					Optional:            true,
 				},
 				"fallback": schema.SingleNestedAttribute{
-					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("bi_directional"),
-							path.MatchRelative().AtParent().AtName("interface"),
-							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("translated_address_single"),
-						),
-					},
 					MarkdownDescription: "Fallback",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
+						"floating_ip": schema.StringAttribute{
+							MarkdownDescription: "Floating IP address",
+							Optional:            true,
+						},
 						"interface": schema.StringAttribute{
 							MarkdownDescription: "Interface name",
 							Optional:            true,
 						},
+						"ip": schema.StringAttribute{
+							MarkdownDescription: "IP address",
+							Optional:            true,
+						},
+						"translated_address_array": schema.ListAttribute{
+							ElementType:         types.StringType,
+							MarkdownDescription: "Fallback IP addresses",
+							Optional:            true,
+						},
 					},
 				},
+				"floating_ip": schema.StringAttribute{
+					MarkdownDescription: "Floating IP address",
+					Optional:            true,
+				},
 				"interface": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("bi_directional"),
-							path.MatchRelative().AtParent().AtName("fallback"),
-							path.MatchRelative().AtParent().AtName("translated_address_array"),
-							path.MatchRelative().AtParent().AtName("translated_address_single"),
-						),
-					},
 					MarkdownDescription: "Interface name",
+					Optional:            true,
+				},
+				"ip": schema.StringAttribute{
+					MarkdownDescription: "Translated source IP address",
+					Optional:            true,
+				},
+				"translated_address": schema.StringAttribute{
+					MarkdownDescription: "Translated IP address",
 					Optional:            true,
 				},
 				"translated_address_array": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Translated IP addresses",
-					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("bi_directional"),
-							path.MatchRelative().AtParent().AtName("fallback"),
-							path.MatchRelative().AtParent().AtName("interface"),
-							path.MatchRelative().AtParent().AtName("translated_address_single"),
-						),
-					},
-					Optional: true,
-				},
-				"translated_address_single": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.ExactlyOneOf(
-							path.MatchRelative().AtParent().AtName("bi_directional"),
-							path.MatchRelative().AtParent().AtName("fallback"),
-							path.MatchRelative().AtParent().AtName("interface"),
-							path.MatchRelative().AtParent().AtName("translated_address_array"),
-						),
-					},
-					MarkdownDescription: "Translated IP address",
+					MarkdownDescription: "Translated source IP addresses",
 					Optional:            true,
 				},
 			},
@@ -391,7 +399,7 @@ var NatRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "Destination interface of the original packet",
 			Optional:            true,
 		},
-		"translated_address_single": schema.StringAttribute{
+		"translated_address": schema.StringAttribute{
 			MarkdownDescription: "Translated destination IP address",
 			Optional:            true,
 		},
@@ -466,6 +474,10 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "NAT type",
 			Computed:            true,
 		},
+		"position": dsschema.StringAttribute{
+			MarkdownDescription: "The relative position of the rule",
+			Computed:            true,
+		},
 		"service": dsschema.StringAttribute{
 			MarkdownDescription: "The service of the original packet",
 			Computed:            true,
@@ -491,23 +503,44 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Fallback",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
+						"floating_ip": dsschema.StringAttribute{
+							MarkdownDescription: "Floating IP address",
+							Computed:            true,
+						},
 						"interface": dsschema.StringAttribute{
 							MarkdownDescription: "Interface name",
 							Computed:            true,
 						},
+						"ip": dsschema.StringAttribute{
+							MarkdownDescription: "IP address",
+							Computed:            true,
+						},
+						"translated_address_array": dsschema.ListAttribute{
+							ElementType:         types.StringType,
+							MarkdownDescription: "Fallback IP addresses",
+							Computed:            true,
+						},
 					},
+				},
+				"floating_ip": dsschema.StringAttribute{
+					MarkdownDescription: "Floating IP address",
+					Computed:            true,
 				},
 				"interface": dsschema.StringAttribute{
 					MarkdownDescription: "Interface name",
 					Computed:            true,
 				},
-				"translated_address_array": dsschema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "Translated IP addresses",
+				"ip": dsschema.StringAttribute{
+					MarkdownDescription: "Translated source IP address",
 					Computed:            true,
 				},
-				"translated_address_single": dsschema.StringAttribute{
+				"translated_address": dsschema.StringAttribute{
 					MarkdownDescription: "Translated IP address",
+					Computed:            true,
+				},
+				"translated_address_array": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Translated source IP addresses",
 					Computed:            true,
 				},
 			},
@@ -530,7 +563,7 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Destination interface of the original packet",
 			Computed:            true,
 		},
-		"translated_address_single": dsschema.StringAttribute{
+		"translated_address": dsschema.StringAttribute{
 			MarkdownDescription: "Translated destination IP address",
 			Computed:            true,
 		},
@@ -543,15 +576,16 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 
 // NatRulesListModel represents the data model for a list data source.
 type NatRulesListModel struct {
-	Tfid    types.String `tfsdk:"tfid"`
-	Data    []NatRules   `tfsdk:"data"`
-	Limit   types.Int64  `tfsdk:"limit"`
-	Offset  types.Int64  `tfsdk:"offset"`
-	Name    types.String `tfsdk:"name"`
-	Total   types.Int64  `tfsdk:"total"`
-	Folder  types.String `tfsdk:"folder"`
-	Snippet types.String `tfsdk:"snippet"`
-	Device  types.String `tfsdk:"device"`
+	Tfid     types.String          `tfsdk:"tfid"`
+	Data     []NatRules            `tfsdk:"data"`
+	Limit    types.Int64           `tfsdk:"limit"`
+	Offset   types.Int64           `tfsdk:"offset"`
+	Name     types.String          `tfsdk:"name"`
+	Total    types.Int64           `tfsdk:"total"`
+	Folder   types.String          `tfsdk:"folder"`
+	Snippet  types.String          `tfsdk:"snippet"`
+	Device   types.String          `tfsdk:"device"`
+	Position basetypes.StringValue `tfsdk:"position"`
 }
 
 // NatRulesListDataSourceSchema defines the schema for a list data source.
@@ -573,5 +607,9 @@ var NatRulesListDataSourceSchema = dsschema.Schema{
 		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
 		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
 		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+		"position": dsschema.StringAttribute{
+			Description: "The relative position of the rule",
+			Required:    true,
+		},
 	},
 }

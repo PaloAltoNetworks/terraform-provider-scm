@@ -962,9 +962,9 @@ func unpackNatRulesSourceTranslationDynamicIpToSdk(ctx context.Context, obj type
 	}
 
 	// Handling Lists
-	if !model.TranslatedAddressArray.IsNull() && !model.TranslatedAddressArray.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddressArray")
-		diags.Append(model.TranslatedAddressArray.ElementsAs(ctx, &sdk.TranslatedAddressArray, false)...)
+	if !model.TranslatedAddress.IsNull() && !model.TranslatedAddress.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddress")
+		diags.Append(model.TranslatedAddress.ElementsAs(ctx, &sdk.TranslatedAddress, false)...)
 	}
 
 	diags.Append(d...)
@@ -994,17 +994,17 @@ func packNatRulesSourceTranslationDynamicIpFromSdk(ctx context.Context, sdk netw
 		model.Fallback = basetypes.NewObjectNull(models.NatRulesSourceTranslationDynamicIpFallback{}.AttrTypes())
 	}
 	// Handling Lists
-	if sdk.TranslatedAddressArray != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field TranslatedAddressArray")
+	if sdk.TranslatedAddress != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field TranslatedAddress")
 		var d diag.Diagnostics
 		// This logic now dynamically determines the element type based on the SDK's Go type.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.TranslatedAddressArray, d = basetypes.NewListValueFrom(ctx, elemType, sdk.TranslatedAddressArray)
+		model.TranslatedAddress, d = basetypes.NewListValueFrom(ctx, elemType, sdk.TranslatedAddress)
 		diags.Append(d...)
 	} else {
 		// This logic now creates a correctly typed null list.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.TranslatedAddressArray = basetypes.NewListNull(elemType)
+		model.TranslatedAddress = basetypes.NewListNull(elemType)
 	}
 	diags.Append(d...)
 
@@ -1095,9 +1095,9 @@ func unpackNatRulesSourceTranslationDynamicIpFallbackToSdk(ctx context.Context, 
 	}
 
 	// Handling Lists
-	if !model.TranslatedAddressArray.IsNull() && !model.TranslatedAddressArray.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddressArray")
-		diags.Append(model.TranslatedAddressArray.ElementsAs(ctx, &sdk.TranslatedAddressArray, false)...)
+	if !model.TranslatedAddress.IsNull() && !model.TranslatedAddress.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddress")
+		diags.Append(model.TranslatedAddress.ElementsAs(ctx, &sdk.TranslatedAddress, false)...)
 	}
 
 	diags.Append(d...)
@@ -1138,17 +1138,17 @@ func packNatRulesSourceTranslationDynamicIpFallbackFromSdk(ctx context.Context, 
 		model.Ip = basetypes.NewStringNull()
 	}
 	// Handling Lists
-	if sdk.TranslatedAddressArray != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field TranslatedAddressArray")
+	if sdk.TranslatedAddress != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field TranslatedAddress")
 		var d diag.Diagnostics
 		// This logic now dynamically determines the element type based on the SDK's Go type.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.TranslatedAddressArray, d = basetypes.NewListValueFrom(ctx, elemType, sdk.TranslatedAddressArray)
+		model.TranslatedAddress, d = basetypes.NewListValueFrom(ctx, elemType, sdk.TranslatedAddress)
 		diags.Append(d...)
 	} else {
 		// This logic now creates a correctly typed null list.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.TranslatedAddressArray = basetypes.NewListNull(elemType)
+		model.TranslatedAddress = basetypes.NewListNull(elemType)
 	}
 	diags.Append(d...)
 
@@ -1239,9 +1239,9 @@ func unpackNatRulesSourceTranslationDynamicIpAndPortToSdk(ctx context.Context, o
 	}
 
 	// Handling Lists
-	if !model.TranslatedAddressArray.IsNull() && !model.TranslatedAddressArray.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddressArray")
-		diags.Append(model.TranslatedAddressArray.ElementsAs(ctx, &sdk.TranslatedAddressArray, false)...)
+	if !model.TranslatedAddress.IsNull() && !model.TranslatedAddress.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddress")
+		diags.Append(model.TranslatedAddress.ElementsAs(ctx, &sdk.TranslatedAddress, false)...)
 	}
 
 	diags.Append(d...)
@@ -1282,17 +1282,17 @@ func packNatRulesSourceTranslationDynamicIpAndPortFromSdk(ctx context.Context, s
 		model.Ip = basetypes.NewStringNull()
 	}
 	// Handling Lists
-	if sdk.TranslatedAddressArray != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field TranslatedAddressArray")
+	if sdk.TranslatedAddress != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field TranslatedAddress")
 		var d diag.Diagnostics
 		// This logic now dynamically determines the element type based on the SDK's Go type.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.TranslatedAddressArray, d = basetypes.NewListValueFrom(ctx, elemType, sdk.TranslatedAddressArray)
+		model.TranslatedAddress, d = basetypes.NewListValueFrom(ctx, elemType, sdk.TranslatedAddress)
 		diags.Append(d...)
 	} else {
 		// This logic now creates a correctly typed null list.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.TranslatedAddressArray = basetypes.NewListNull(elemType)
+		model.TranslatedAddress = basetypes.NewListNull(elemType)
 	}
 	diags.Append(d...)
 
@@ -1366,7 +1366,7 @@ func unpackNatRulesSourceTranslationStaticIpToSdk(ctx context.Context, obj types
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.BiDirectional.IsNull() && !model.BiDirectional.IsUnknown() {
-		sdk.BiDirectional = model.BiDirectional.ValueBoolPointer()
+		sdk.BiDirectional = model.BiDirectional.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "BiDirectional", "value": *sdk.BiDirectional})
 	}
 
@@ -1392,10 +1392,10 @@ func packNatRulesSourceTranslationStaticIpFromSdk(ctx context.Context, sdk netwo
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.BiDirectional != nil {
-		model.BiDirectional = basetypes.NewBoolValue(*sdk.BiDirectional)
+		model.BiDirectional = basetypes.NewStringValue(*sdk.BiDirectional)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "BiDirectional", "value": *sdk.BiDirectional})
 	} else {
-		model.BiDirectional = basetypes.NewBoolNull()
+		model.BiDirectional = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing

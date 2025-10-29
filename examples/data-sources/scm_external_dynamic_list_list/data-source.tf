@@ -1,6 +1,6 @@
 # Data source to fetch all external dynamic lists in the "Shared" folder.
 data "scm_external_dynamic_list_list" "all_shared_edls" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Creates a map where the key is the EDL ID and the value is the full object.
@@ -12,7 +12,7 @@ output "all_shared_edls_map" {
 
 # Example of using pagination to get the first 5 EDLs.
 data "scm_external_dynamic_list_list" "paginated_edls" {
-  folder = "Shared"
+  folder = "All"
   limit  = 5
   offset = 0
 }

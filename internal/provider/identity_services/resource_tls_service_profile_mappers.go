@@ -27,6 +27,7 @@ func unpackTlsServiceProfilesToSdk(ctx context.Context, obj types.Object) (*iden
 
 	var sdk identity_services.TlsServiceProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Certificate.IsNull() && !model.Certificate.IsUnknown() {
 		sdk.Certificate = model.Certificate.ValueString()

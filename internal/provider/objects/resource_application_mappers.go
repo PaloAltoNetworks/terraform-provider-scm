@@ -29,6 +29,7 @@ func unpackApplicationsToSdk(ctx context.Context, obj types.Object) (*objects.Ap
 
 	var sdk objects.Applications
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AbleToTransferFile.IsNull() && !model.AbleToTransferFile.IsUnknown() {
 		sdk.AbleToTransferFile = model.AbleToTransferFile.ValueBoolPointer()

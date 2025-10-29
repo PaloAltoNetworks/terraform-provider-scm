@@ -13,6 +13,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/config_setup"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/config_setup"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM Label (Package: config_setup)
@@ -99,6 +100,11 @@ func (d *LabelDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading Labels", fmt.Sprintf("Could not read Labels with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -132,6 +138,11 @@ func (d *LabelDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing Labelss", fmt.Sprintf("Could not list Labelss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

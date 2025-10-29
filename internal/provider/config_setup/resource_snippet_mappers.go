@@ -27,6 +27,7 @@ func unpackSnippetsToSdk(ctx context.Context, obj types.Object) (*config_setup.S
 
 	var sdk config_setup.Snippets
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

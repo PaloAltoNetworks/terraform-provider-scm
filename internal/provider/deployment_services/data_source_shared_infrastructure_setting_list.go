@@ -84,6 +84,11 @@ func (d *SharedInfrastructureSettingListDataSource) Read(ctx context.Context, re
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing SharedInfrastructureSettingss", fmt.Sprintf("Could not list SharedInfrastructureSettingss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

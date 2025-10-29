@@ -27,6 +27,7 @@ func unpackInternalDnsServersToSdk(ctx context.Context, obj types.Object) (*depl
 
 	var sdk deployment_services.InternalDnsServers
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.DomainName.IsNull() && !model.DomainName.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field DomainName")

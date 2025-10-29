@@ -15,7 +15,7 @@ AntiSpywareProfile resource
 ```terraform
 # Basic Anti-Spyware Profile
 resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_1" {
-  folder                = "Shared"
+  folder                = "All"
   name                  = "scm_anti_spyware_profile_1"
   description           = "Managed by Terraform"
   cloud_inline_analysis = true
@@ -32,7 +32,7 @@ resource "scm_address" "scm_address_1" {
 
 # Anti-Spyware Profile with exception EDL
 resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_2" {
-  folder                = "Shared"
+  folder                = "All"
   name                  = "scm_anti_spyware_profile_2"
   description           = "Managed by Terraform"
   cloud_inline_analysis = true
@@ -45,7 +45,7 @@ resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_2" {
 
 # Anti-Spyware Profile with rules
 resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_3" {
-  folder                = "Shared"
+  folder                = "All"
   name                  = "scm_anti_spyware_profile_3"
   description           = "Managed by Terraform"
   cloud_inline_analysis = true

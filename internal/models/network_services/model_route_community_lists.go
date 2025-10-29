@@ -364,7 +364,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"extended": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("large"),
 							path.MatchRelative().AtParent().AtName("regular"),
 						),
@@ -406,7 +406,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				},
 				"large": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("extended"),
 							path.MatchRelative().AtParent().AtName("regular"),
 						),
@@ -448,7 +448,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				},
 				"regular": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("extended"),
 							path.MatchRelative().AtParent().AtName("large"),
 						),

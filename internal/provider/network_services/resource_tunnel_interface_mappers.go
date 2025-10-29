@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -27,6 +26,7 @@ func unpackTunnelInterfacesToSdk(ctx context.Context, obj types.Object) (*networ
 
 	var sdk network_services.TunnelInterfaces
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Comment.IsNull() && !model.Comment.IsUnknown() {
 		sdk.Comment = model.Comment.ValueStringPointer()
@@ -35,8 +35,7 @@ func unpackTunnelInterfacesToSdk(ctx context.Context, obj types.Object) (*networ
 
 	// Handling Primitives
 	if !model.DefaultValue.IsNull() && !model.DefaultValue.IsUnknown() {
-		val := int32(model.DefaultValue.ValueInt64())
-		sdk.DefaultValue = &val
+		sdk.DefaultValue = model.DefaultValue.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DefaultValue", "value": *sdk.DefaultValue})
 	}
 
@@ -64,22 +63,17 @@ func unpackTunnelInterfacesToSdk(ctx context.Context, obj types.Object) (*networ
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InterfaceManagementProfile", "value": *sdk.InterfaceManagementProfile})
 	}
 
-	// Handling Objects
+	// Handling Lists
 	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field Ip")
-		unpacked, d := unpackTunnelInterfacesIpToSdk(ctx, model.Ip)
+		tflog.Debug(ctx, "Unpacking list of objects for field Ip")
+		unpacked, d := unpackTunnelInterfacesIpInnerListToSdk(ctx, model.Ip)
 		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Ip"})
-		}
-		if unpacked != nil {
-			sdk.Ip = unpacked
-		}
+		sdk.Ip = unpacked
 	}
 
 	// Handling Primitives
 	if !model.Mtu.IsNull() && !model.Mtu.IsUnknown() {
-		val := float32(model.Mtu.ValueFloat64())
+		val := int32(model.Mtu.ValueInt64())
 		sdk.Mtu = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	}
@@ -120,10 +114,10 @@ func packTunnelInterfacesFromSdk(ctx context.Context, sdk network_services.Tunne
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DefaultValue != nil {
-		model.DefaultValue = basetypes.NewInt64Value(int64(*sdk.DefaultValue))
+		model.DefaultValue = basetypes.NewStringValue(*sdk.DefaultValue)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DefaultValue", "value": *sdk.DefaultValue})
 	} else {
-		model.DefaultValue = basetypes.NewInt64Null()
+		model.DefaultValue = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -157,26 +151,22 @@ func packTunnelInterfacesFromSdk(ctx context.Context, sdk network_services.Tunne
 	} else {
 		model.InterfaceManagementProfile = basetypes.NewStringNull()
 	}
-	// Handling Objects
-	// This is a regular nested object that has its own packer.
+	// Handling Lists
 	if sdk.Ip != nil {
-		tflog.Debug(ctx, "Packing nested object for field Ip")
-		packed, d := packTunnelInterfacesIpFromSdk(ctx, *sdk.Ip)
+		tflog.Debug(ctx, "Packing list of objects for field Ip")
+		packed, d := packTunnelInterfacesIpInnerListFromSdk(ctx, sdk.Ip)
 		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Ip"})
-		}
 		model.Ip = packed
 	} else {
-		model.Ip = basetypes.NewObjectNull(models.TunnelInterfacesIp{}.AttrTypes())
+		model.Ip = basetypes.NewListNull(models.TunnelInterfacesIpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Mtu != nil {
-		model.Mtu = basetypes.NewFloat64Value(float64(*sdk.Mtu))
+		model.Mtu = basetypes.NewInt64Value(int64(*sdk.Mtu))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	} else {
-		model.Mtu = basetypes.NewFloat64Null()
+		model.Mtu = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -246,11 +236,11 @@ func packTunnelInterfacesListFromSdk(ctx context.Context, sdks []network_service
 	return basetypes.NewListValueFrom(ctx, models.TunnelInterfaces{}.AttrType(), data)
 }
 
-// --- Unpacker for TunnelInterfacesIp ---
-func unpackTunnelInterfacesIpToSdk(ctx context.Context, obj types.Object) (*network_services.TunnelInterfacesIp, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.TunnelInterfacesIp", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for TunnelInterfacesIpInner ---
+func unpackTunnelInterfacesIpInnerToSdk(ctx context.Context, obj types.Object) (*network_services.TunnelInterfacesIpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.TunnelInterfacesIpInner", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.TunnelInterfacesIp
+	var model models.TunnelInterfacesIpInner
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -258,92 +248,83 @@ func unpackTunnelInterfacesIpToSdk(ctx context.Context, obj types.Object) (*netw
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.TunnelInterfacesIp
+	var sdk network_services.TunnelInterfacesIpInner
 	var d diag.Diagnostics
-	// Handling Lists
-	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field Ip")
-		diags.Append(model.Ip.ElementsAs(ctx, &sdk.Ip, false)...)
+	// Handling Primitives
+	if !model.Name.IsNull() && !model.Name.IsUnknown() {
+		sdk.Name = model.Name.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	}
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.TunnelInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.TunnelInterfacesIpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for TunnelInterfacesIp ---
-func packTunnelInterfacesIpFromSdk(ctx context.Context, sdk network_services.TunnelInterfacesIp) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.TunnelInterfacesIp", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for TunnelInterfacesIpInner ---
+func packTunnelInterfacesIpInnerFromSdk(ctx context.Context, sdk network_services.TunnelInterfacesIpInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.TunnelInterfacesIpInner", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.TunnelInterfacesIp
+	var model models.TunnelInterfacesIpInner
 	var d diag.Diagnostics
-	// Handling Lists
-	if sdk.Ip != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field Ip")
-		var d diag.Diagnostics
-		// This logic now dynamically determines the element type based on the SDK's Go type.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.Ip, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Ip)
-		diags.Append(d...)
-	} else {
-		// This logic now creates a correctly typed null list.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.Ip = basetypes.NewListNull(elemType)
-	}
+	// Handling Primitives
+	// Standard primitive packing
+	model.Name = basetypes.NewStringValue(sdk.Name)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.TunnelInterfacesIp{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.TunnelInterfacesIpInner{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.TunnelInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.TunnelInterfacesIpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for TunnelInterfacesIp ---
-func unpackTunnelInterfacesIpListToSdk(ctx context.Context, list types.List) ([]network_services.TunnelInterfacesIp, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.TunnelInterfacesIp")
+// --- List Unpacker for TunnelInterfacesIpInner ---
+func unpackTunnelInterfacesIpInnerListToSdk(ctx context.Context, list types.List) ([]network_services.TunnelInterfacesIpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.TunnelInterfacesIpInner")
 	diags := diag.Diagnostics{}
-	var data []models.TunnelInterfacesIp
+	var data []models.TunnelInterfacesIpInner
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.TunnelInterfacesIp, 0, len(data))
+	ans := make([]network_services.TunnelInterfacesIpInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.TunnelInterfacesIp{}.AttrTypes(), &item)
-		unpacked, d := unpackTunnelInterfacesIpToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.TunnelInterfacesIpInner{}.AttrTypes(), &item)
+		unpacked, d := unpackTunnelInterfacesIpInnerToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.TunnelInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.TunnelInterfacesIpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for TunnelInterfacesIp ---
-func packTunnelInterfacesIpListFromSdk(ctx context.Context, sdks []network_services.TunnelInterfacesIp) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.TunnelInterfacesIp")
+// --- List Packer for TunnelInterfacesIpInner ---
+func packTunnelInterfacesIpInnerListFromSdk(ctx context.Context, sdks []network_services.TunnelInterfacesIpInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.TunnelInterfacesIpInner")
 	diags := diag.Diagnostics{}
-	var data []models.TunnelInterfacesIp
+	var data []models.TunnelInterfacesIpInner
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.TunnelInterfacesIp
-		obj, d := packTunnelInterfacesIpFromSdk(ctx, sdk)
+		var model models.TunnelInterfacesIpInner
+		obj, d := packTunnelInterfacesIpInnerFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.TunnelInterfacesIp{}.AttrType()), diags
+			return basetypes.NewListNull(models.TunnelInterfacesIpInner{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.TunnelInterfacesIp", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.TunnelInterfacesIp{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.TunnelInterfacesIpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.TunnelInterfacesIpInner{}.AttrType(), data)
 }

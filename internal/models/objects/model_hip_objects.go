@@ -2556,7 +2556,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_within"),
 											path.MatchRelative().AtParent().AtName("within"),
 										),
@@ -2568,7 +2568,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_available"),
 											path.MatchRelative().AtParent().AtName("within"),
 										),
@@ -2579,7 +2579,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("hours"),
 												),
 												int64validator.Between(1, 65535),
@@ -2590,7 +2590,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("days"),
 												),
 												int64validator.Between(1, 65535),
@@ -2603,7 +2603,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_available"),
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
@@ -2614,7 +2614,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("hours"),
 												),
 												int64validator.Between(1, 65535),
@@ -2625,7 +2625,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("days"),
 												),
 												int64validator.Between(1, 65535),
@@ -2645,7 +2645,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
@@ -2663,7 +2663,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"greater_equal": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
 											path.MatchRelative().AtParent().AtName("is"),
@@ -2681,7 +2681,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"greater_than": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("is"),
@@ -2699,7 +2699,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
@@ -2717,7 +2717,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
@@ -2735,7 +2735,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"less_equal": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
@@ -2753,7 +2753,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"less_than": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
@@ -2771,7 +2771,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
@@ -2797,7 +2797,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("greater_equal"),
 											path.MatchRelative().AtParent().AtName("greater_than"),
@@ -2838,7 +2838,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
@@ -2848,7 +2848,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("versions"),
 												),
 												int64validator.Between(1, 65535),
@@ -2859,7 +2859,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("days"),
 												),
 												int64validator.Between(1, 65535),
@@ -2872,7 +2872,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
@@ -2882,7 +2882,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("versions"),
 												),
 												int64validator.Between(1, 65535),
@@ -2893,7 +2893,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("days"),
 												),
 												int64validator.Between(1, 65535),
@@ -3220,7 +3220,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_within"),
 											path.MatchRelative().AtParent().AtName("within"),
 										),
@@ -3232,7 +3232,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_available"),
 											path.MatchRelative().AtParent().AtName("within"),
 										),
@@ -3243,7 +3243,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("hours"),
 												),
 												int64validator.Between(1, 65535),
@@ -3254,7 +3254,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("days"),
 												),
 												int64validator.Between(1, 65535),
@@ -3267,7 +3267,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_available"),
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
@@ -3278,7 +3278,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("hours"),
 												),
 												int64validator.Between(1, 65535),
@@ -3289,7 +3289,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("days"),
 												),
 												int64validator.Between(1, 65535),
@@ -3358,7 +3358,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										Attributes: map[string]schema.Attribute{
 											"is": schema.StringAttribute{
 												Validators: []validator.String{
-													stringvalidator.ExactlyOneOf(
+													stringvalidator.ConflictsWith(
 														path.MatchRelative().AtParent().AtName("is_not"),
 													),
 													stringvalidator.OneOf("encrypted", "unencrypted", "partial", "unknown"),
@@ -3368,7 +3368,7 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											"is_not": schema.StringAttribute{
 												Validators: []validator.String{
-													stringvalidator.ExactlyOneOf(
+													stringvalidator.ConflictsWith(
 														path.MatchRelative().AtParent().AtName("is"),
 													),
 													stringvalidator.OneOf("encrypted", "unencrypted", "partial", "unknown"),
@@ -3515,7 +3515,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3526,7 +3526,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3537,7 +3537,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -3554,7 +3554,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3565,7 +3565,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3576,7 +3576,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -3593,7 +3593,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3604,7 +3604,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3615,7 +3615,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -3632,7 +3632,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3643,7 +3643,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3654,7 +3654,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -3707,7 +3707,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3718,7 +3718,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3729,7 +3729,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -3769,7 +3769,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"no": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("yes"),
 												),
 											},
@@ -3779,7 +3779,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"yes": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("no"),
 												),
 											},
@@ -3868,7 +3868,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3879,7 +3879,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3890,7 +3890,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -3911,7 +3911,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
@@ -3929,7 +3929,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
@@ -3953,7 +3953,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3964,7 +3964,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -3975,7 +3975,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -3996,7 +3996,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -4007,7 +4007,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -4018,7 +4018,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -4035,7 +4035,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -4046,7 +4046,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
@@ -4057,7 +4057,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("contains"),
 											path.MatchRelative().AtParent().AtName("is"),
 										),
@@ -4094,7 +4094,7 @@ var HipObjectsResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"is": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
 									},
@@ -4103,7 +4103,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"mobile": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("unknown"),
 													path.MatchRelative().AtParent().AtName("wifi"),
 												),
@@ -4123,7 +4123,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"unknown": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("wifi"),
 												),
@@ -4134,7 +4134,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"wifi": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("unknown"),
 												),
@@ -4156,7 +4156,7 @@ var HipObjectsResourceSchema = schema.Schema{
 								},
 								"is_not": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
-										objectvalidator.ExactlyOneOf(
+										objectvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("is"),
 										),
 									},
@@ -4165,7 +4165,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"ethernet": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("unknown"),
 													path.MatchRelative().AtParent().AtName("wifi"),
@@ -4177,7 +4177,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"mobile": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("ethernet"),
 													path.MatchRelative().AtParent().AtName("unknown"),
 													path.MatchRelative().AtParent().AtName("wifi"),
@@ -4198,7 +4198,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"unknown": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("ethernet"),
 													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("wifi"),
@@ -4210,7 +4210,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"wifi": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("ethernet"),
 													path.MatchRelative().AtParent().AtName("mobile"),
 													path.MatchRelative().AtParent().AtName("unknown"),
@@ -4289,7 +4289,7 @@ var HipObjectsResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"greater_equal": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("greater_than"),
 													path.MatchRelative().AtParent().AtName("is"),
 													path.MatchRelative().AtParent().AtName("is_not"),
@@ -4304,7 +4304,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"greater_than": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("greater_equal"),
 													path.MatchRelative().AtParent().AtName("is"),
 													path.MatchRelative().AtParent().AtName("is_not"),
@@ -4319,7 +4319,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"is": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("greater_equal"),
 													path.MatchRelative().AtParent().AtName("greater_than"),
 													path.MatchRelative().AtParent().AtName("is_not"),
@@ -4334,7 +4334,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"is_not": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("greater_equal"),
 													path.MatchRelative().AtParent().AtName("greater_than"),
 													path.MatchRelative().AtParent().AtName("is"),
@@ -4349,7 +4349,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"less_equal": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("greater_equal"),
 													path.MatchRelative().AtParent().AtName("greater_than"),
 													path.MatchRelative().AtParent().AtName("is"),
@@ -4364,7 +4364,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										},
 										"less_than": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("greater_equal"),
 													path.MatchRelative().AtParent().AtName("greater_than"),
 													path.MatchRelative().AtParent().AtName("is"),

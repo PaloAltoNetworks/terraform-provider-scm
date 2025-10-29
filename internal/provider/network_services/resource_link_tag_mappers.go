@@ -26,6 +26,7 @@ func unpackLinkTagsToSdk(ctx context.Context, obj types.Object) (*network_servic
 
 	var sdk network_services.LinkTags
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Color.IsNull() && !model.Color.IsUnknown() {
 		sdk.Color = model.Color.ValueStringPointer()

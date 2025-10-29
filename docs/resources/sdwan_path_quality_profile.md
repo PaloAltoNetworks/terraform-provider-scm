@@ -64,7 +64,7 @@ Required:
 <a id="nestedatt--metric--pkt_loss"></a>
 ### Nested Schema for `metric.pkt_loss`
 
-Optional:
+Required:
 
-- `sensitivity` (String) Sensitivity
-- `threshold` (Number) Threshold
+- `sensitivity` (String) Packet loss sensitivity
+- `threshold` (Number) Packet loss threshold (percentage)

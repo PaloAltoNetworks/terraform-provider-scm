@@ -21,14 +21,14 @@ import (
 
 // SdwanErrorCorrectionProfiles represents the Terraform model for SdwanErrorCorrectionProfiles
 type SdwanErrorCorrectionProfiles struct {
-	Tfid                types.String           `tfsdk:"tfid"`
-	ActivationThreshold basetypes.Float64Value `tfsdk:"activation_threshold"`
-	Device              basetypes.StringValue  `tfsdk:"device"`
-	Folder              basetypes.StringValue  `tfsdk:"folder"`
-	Id                  basetypes.StringValue  `tfsdk:"id"`
-	Mode                basetypes.ObjectValue  `tfsdk:"mode"`
-	Name                basetypes.StringValue  `tfsdk:"name"`
-	Snippet             basetypes.StringValue  `tfsdk:"snippet"`
+	Tfid                types.String          `tfsdk:"tfid"`
+	ActivationThreshold basetypes.Int64Value  `tfsdk:"activation_threshold"`
+	Device              basetypes.StringValue `tfsdk:"device"`
+	Folder              basetypes.StringValue `tfsdk:"folder"`
+	Id                  basetypes.StringValue `tfsdk:"id"`
+	Mode                basetypes.ObjectValue `tfsdk:"mode"`
+	Name                basetypes.StringValue `tfsdk:"name"`
+	Snippet             basetypes.StringValue `tfsdk:"snippet"`
 }
 
 // SdwanErrorCorrectionProfilesMode represents a nested structure within the SdwanErrorCorrectionProfiles model
@@ -39,20 +39,20 @@ type SdwanErrorCorrectionProfilesMode struct {
 
 // SdwanErrorCorrectionProfilesModeForwardErrorCorrection represents a nested structure within the SdwanErrorCorrectionProfiles model
 type SdwanErrorCorrectionProfilesModeForwardErrorCorrection struct {
-	Ratio            basetypes.StringValue  `tfsdk:"ratio"`
-	RecoveryDuration basetypes.Float64Value `tfsdk:"recovery_duration"`
+	Ratio            basetypes.StringValue `tfsdk:"ratio"`
+	RecoveryDuration basetypes.Int64Value  `tfsdk:"recovery_duration"`
 }
 
 // SdwanErrorCorrectionProfilesModePacketDuplication represents a nested structure within the SdwanErrorCorrectionProfiles model
 type SdwanErrorCorrectionProfilesModePacketDuplication struct {
-	RecoveryDurationPd basetypes.Float64Value `tfsdk:"recovery_duration_pd"`
+	RecoveryDurationPd basetypes.Int64Value `tfsdk:"recovery_duration_pd"`
 }
 
 // AttrTypes defines the attribute types for the SdwanErrorCorrectionProfiles model.
 func (o SdwanErrorCorrectionProfiles) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":                 basetypes.StringType{},
-		"activation_threshold": basetypes.NumberType{},
+		"activation_threshold": basetypes.Int64Type{},
 		"device":               basetypes.StringType{},
 		"folder":               basetypes.StringType{},
 		"id":                   basetypes.StringType{},
@@ -61,12 +61,12 @@ func (o SdwanErrorCorrectionProfiles) AttrTypes() map[string]attr.Type {
 				"forward_error_correction": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"ratio":             basetypes.StringType{},
-						"recovery_duration": basetypes.NumberType{},
+						"recovery_duration": basetypes.Int64Type{},
 					},
 				},
 				"packet_duplication": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"recovery_duration_pd": basetypes.NumberType{},
+						"recovery_duration_pd": basetypes.Int64Type{},
 					},
 				},
 			},
@@ -89,12 +89,12 @@ func (o SdwanErrorCorrectionProfilesMode) AttrTypes() map[string]attr.Type {
 		"forward_error_correction": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"ratio":             basetypes.StringType{},
-				"recovery_duration": basetypes.NumberType{},
+				"recovery_duration": basetypes.Int64Type{},
 			},
 		},
 		"packet_duplication": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"recovery_duration_pd": basetypes.NumberType{},
+				"recovery_duration_pd": basetypes.Int64Type{},
 			},
 		},
 	}
@@ -111,7 +111,7 @@ func (o SdwanErrorCorrectionProfilesMode) AttrType() attr.Type {
 func (o SdwanErrorCorrectionProfilesModeForwardErrorCorrection) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"ratio":             basetypes.StringType{},
-		"recovery_duration": basetypes.NumberType{},
+		"recovery_duration": basetypes.Int64Type{},
 	}
 }
 
@@ -125,7 +125,7 @@ func (o SdwanErrorCorrectionProfilesModeForwardErrorCorrection) AttrType() attr.
 // AttrTypes defines the attribute types for the SdwanErrorCorrectionProfilesModePacketDuplication model.
 func (o SdwanErrorCorrectionProfilesModePacketDuplication) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"recovery_duration_pd": basetypes.NumberType{},
+		"recovery_duration_pd": basetypes.Int64Type{},
 	}
 }
 
@@ -140,7 +140,7 @@ func (o SdwanErrorCorrectionProfilesModePacketDuplication) AttrType() attr.Type 
 var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 	MarkdownDescription: "SdwanErrorCorrectionProfile resource",
 	Attributes: map[string]schema.Attribute{
-		"activation_threshold": schema.Float64Attribute{
+		"activation_threshold": schema.Int64Attribute{
 			MarkdownDescription: "Activation threshold",
 			Required:            true,
 		},
@@ -198,7 +198,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 							MarkdownDescription: "Ratio",
 							Required:            true,
 						},
-						"recovery_duration": schema.Float64Attribute{
+						"recovery_duration": schema.Int64Attribute{
 							MarkdownDescription: "Recovery duration",
 							Required:            true,
 						},
@@ -213,7 +213,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 					MarkdownDescription: "Packet duplication",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
-						"recovery_duration_pd": schema.Float64Attribute{
+						"recovery_duration_pd": schema.Int64Attribute{
 							MarkdownDescription: "Recovery duration pd",
 							Required:            true,
 						},
@@ -254,7 +254,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "SdwanErrorCorrectionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
-		"activation_threshold": dsschema.Float64Attribute{
+		"activation_threshold": dsschema.Int64Attribute{
 			MarkdownDescription: "Activation threshold",
 			Computed:            true,
 		},
@@ -282,7 +282,7 @@ var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
 							MarkdownDescription: "Ratio",
 							Computed:            true,
 						},
-						"recovery_duration": dsschema.Float64Attribute{
+						"recovery_duration": dsschema.Int64Attribute{
 							MarkdownDescription: "Recovery duration",
 							Computed:            true,
 						},
@@ -292,7 +292,7 @@ var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Packet duplication",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"recovery_duration_pd": dsschema.Float64Attribute{
+						"recovery_duration_pd": dsschema.Int64Attribute{
 							MarkdownDescription: "Recovery duration pd",
 							Computed:            true,
 						},

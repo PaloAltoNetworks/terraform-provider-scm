@@ -27,6 +27,7 @@ func unpackUrlCategoriesToSdk(ctx context.Context, obj types.Object) (*security_
 
 	var sdk security_services.UrlCategories
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

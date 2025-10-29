@@ -27,6 +27,7 @@ func unpackLogForwardingProfilesToSdk(ctx context.Context, obj types.Object) (*o
 
 	var sdk objects.LogForwardingProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

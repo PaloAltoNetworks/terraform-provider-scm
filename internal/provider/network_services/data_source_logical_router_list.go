@@ -9,10 +9,12 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 var (
@@ -93,10 +95,22 @@ func (d *LogicalRouterListDataSource) Read(ctx context.Context, req datasource.R
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
 	}
 
+	if !data.Pagination.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "pagination", "value": data.Pagination})
+		listReq = listReq.Pagination(data.Pagination.ValueBool())
+		// END: Add dynamic query parameter handling
+	}
+
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing LogicalRouterss", fmt.Sprintf("Could not list LogicalRouterss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

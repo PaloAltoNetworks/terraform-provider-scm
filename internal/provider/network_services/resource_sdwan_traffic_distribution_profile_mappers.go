@@ -26,6 +26,7 @@ func unpackSdwanTrafficDistributionProfilesToSdk(ctx context.Context, obj types.
 
 	var sdk network_services.SdwanTrafficDistributionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()
@@ -66,8 +67,8 @@ func unpackSdwanTrafficDistributionProfilesToSdk(ctx context.Context, obj types.
 
 	// Handling Primitives
 	if !model.TrafficDistribution.IsNull() && !model.TrafficDistribution.IsUnknown() {
-		sdk.TrafficDistribution = model.TrafficDistribution.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "TrafficDistribution", "value": sdk.TrafficDistribution})
+		sdk.TrafficDistribution = model.TrafficDistribution.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TrafficDistribution", "value": *sdk.TrafficDistribution})
 	}
 
 	diags.Append(d...)
@@ -130,8 +131,12 @@ func packSdwanTrafficDistributionProfilesFromSdk(ctx context.Context, sdk networ
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.TrafficDistribution = basetypes.NewStringValue(sdk.TrafficDistribution)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "TrafficDistribution", "value": sdk.TrafficDistribution})
+	if sdk.TrafficDistribution != nil {
+		model.TrafficDistribution = basetypes.NewStringValue(*sdk.TrafficDistribution)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TrafficDistribution", "value": *sdk.TrafficDistribution})
+	} else {
+		model.TrafficDistribution = basetypes.NewStringNull()
+	}
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.SdwanTrafficDistributionProfiles{}.AttrTypes(), &model)

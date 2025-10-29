@@ -268,7 +268,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 								Attributes: map[string]schema.Attribute{
 									"entry": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("network"),
 											),
 										},
@@ -297,7 +297,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 									},
 									"network": schema.StringAttribute{
 										Validators: []validator.String{
-											stringvalidator.ExactlyOneOf(
+											stringvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("entry"),
 											),
 											stringvalidator.OneOf("any"),

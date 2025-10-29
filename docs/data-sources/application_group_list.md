@@ -15,7 +15,7 @@ Retrieves a listing of config items.
 ```terraform
 # 1. Use a single data block to fetch ALL application groups in the "Shared" folder.
 data "scm_application_group_list" "all_shared" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # 2. Use a 'for' expression to transform the list into a map.
@@ -27,7 +27,7 @@ output "application_groups_data_source_results_from_list" {
 
 # Example of using pagination to get a subset of application groups.
 data "scm_application_group_list" "paginated_example" {
-  folder = "Shared"
+  folder = "All"
   limit  = 5
   offset = 0
 }

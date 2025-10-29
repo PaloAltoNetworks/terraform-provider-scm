@@ -28,6 +28,7 @@ func unpackLogicalRoutersToSdk(ctx context.Context, obj types.Object) (*network_
 
 	var sdk network_services.LogicalRouters
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()
@@ -249,7 +250,7 @@ func unpackLogicalRoutersVrfInnerToSdk(ctx context.Context, obj types.Object) (*
 
 	// Handling Primitives
 	if !model.GlobalVrid.IsNull() && !model.GlobalVrid.IsUnknown() {
-		val := float32(model.GlobalVrid.ValueFloat64())
+		val := int32(model.GlobalVrid.ValueInt64())
 		sdk.GlobalVrid = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "GlobalVrid", "value": *sdk.GlobalVrid})
 	}
@@ -424,10 +425,10 @@ func packLogicalRoutersVrfInnerFromSdk(ctx context.Context, sdk network_services
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.GlobalVrid != nil {
-		model.GlobalVrid = basetypes.NewFloat64Value(float64(*sdk.GlobalVrid))
+		model.GlobalVrid = basetypes.NewInt64Value(int64(*sdk.GlobalVrid))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "GlobalVrid", "value": *sdk.GlobalVrid})
 	} else {
-		model.GlobalVrid = basetypes.NewFloat64Null()
+		model.GlobalVrid = basetypes.NewInt64Null()
 	}
 	// Handling Lists
 	if sdk.Interface != nil {
@@ -625,84 +626,84 @@ func unpackLogicalRoutersVrfInnerAdminDistsToSdk(ctx context.Context, obj types.
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.BgpExternal.IsNull() && !model.BgpExternal.IsUnknown() {
-		val := float32(model.BgpExternal.ValueFloat64())
+		val := int32(model.BgpExternal.ValueInt64())
 		sdk.BgpExternal = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "BgpExternal", "value": *sdk.BgpExternal})
 	}
 
 	// Handling Primitives
 	if !model.BgpInternal.IsNull() && !model.BgpInternal.IsUnknown() {
-		val := float32(model.BgpInternal.ValueFloat64())
+		val := int32(model.BgpInternal.ValueInt64())
 		sdk.BgpInternal = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "BgpInternal", "value": *sdk.BgpInternal})
 	}
 
 	// Handling Primitives
 	if !model.BgpLocal.IsNull() && !model.BgpLocal.IsUnknown() {
-		val := float32(model.BgpLocal.ValueFloat64())
+		val := int32(model.BgpLocal.ValueInt64())
 		sdk.BgpLocal = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "BgpLocal", "value": *sdk.BgpLocal})
 	}
 
 	// Handling Primitives
 	if !model.OspfExt.IsNull() && !model.OspfExt.IsUnknown() {
-		val := float32(model.OspfExt.ValueFloat64())
+		val := int32(model.OspfExt.ValueInt64())
 		sdk.OspfExt = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "OspfExt", "value": *sdk.OspfExt})
 	}
 
 	// Handling Primitives
 	if !model.OspfInter.IsNull() && !model.OspfInter.IsUnknown() {
-		val := float32(model.OspfInter.ValueFloat64())
+		val := int32(model.OspfInter.ValueInt64())
 		sdk.OspfInter = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "OspfInter", "value": *sdk.OspfInter})
 	}
 
 	// Handling Primitives
 	if !model.OspfIntra.IsNull() && !model.OspfIntra.IsUnknown() {
-		val := float32(model.OspfIntra.ValueFloat64())
+		val := int32(model.OspfIntra.ValueInt64())
 		sdk.OspfIntra = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "OspfIntra", "value": *sdk.OspfIntra})
 	}
 
 	// Handling Primitives
 	if !model.Ospfv3Ext.IsNull() && !model.Ospfv3Ext.IsUnknown() {
-		val := float32(model.Ospfv3Ext.ValueFloat64())
+		val := int32(model.Ospfv3Ext.ValueInt64())
 		sdk.Ospfv3Ext = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ospfv3Ext", "value": *sdk.Ospfv3Ext})
 	}
 
 	// Handling Primitives
 	if !model.Ospfv3Inter.IsNull() && !model.Ospfv3Inter.IsUnknown() {
-		val := float32(model.Ospfv3Inter.ValueFloat64())
+		val := int32(model.Ospfv3Inter.ValueInt64())
 		sdk.Ospfv3Inter = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ospfv3Inter", "value": *sdk.Ospfv3Inter})
 	}
 
 	// Handling Primitives
 	if !model.Ospfv3Intra.IsNull() && !model.Ospfv3Intra.IsUnknown() {
-		val := float32(model.Ospfv3Intra.ValueFloat64())
+		val := int32(model.Ospfv3Intra.ValueInt64())
 		sdk.Ospfv3Intra = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ospfv3Intra", "value": *sdk.Ospfv3Intra})
 	}
 
 	// Handling Primitives
 	if !model.Rip.IsNull() && !model.Rip.IsUnknown() {
-		val := float32(model.Rip.ValueFloat64())
+		val := int32(model.Rip.ValueInt64())
 		sdk.Rip = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Rip", "value": *sdk.Rip})
 	}
 
 	// Handling Primitives
 	if !model.Static.IsNull() && !model.Static.IsUnknown() {
-		val := float32(model.Static.ValueFloat64())
+		val := int32(model.Static.ValueInt64())
 		sdk.Static = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Static", "value": *sdk.Static})
 	}
 
 	// Handling Primitives
 	if !model.StaticIpv6.IsNull() && !model.StaticIpv6.IsUnknown() {
-		val := float32(model.StaticIpv6.ValueFloat64())
+		val := int32(model.StaticIpv6.ValueInt64())
 		sdk.StaticIpv6 = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "StaticIpv6", "value": *sdk.StaticIpv6})
 	}
@@ -723,98 +724,98 @@ func packLogicalRoutersVrfInnerAdminDistsFromSdk(ctx context.Context, sdk networ
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.BgpExternal != nil {
-		model.BgpExternal = basetypes.NewFloat64Value(float64(*sdk.BgpExternal))
+		model.BgpExternal = basetypes.NewInt64Value(int64(*sdk.BgpExternal))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "BgpExternal", "value": *sdk.BgpExternal})
 	} else {
-		model.BgpExternal = basetypes.NewFloat64Null()
+		model.BgpExternal = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.BgpInternal != nil {
-		model.BgpInternal = basetypes.NewFloat64Value(float64(*sdk.BgpInternal))
+		model.BgpInternal = basetypes.NewInt64Value(int64(*sdk.BgpInternal))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "BgpInternal", "value": *sdk.BgpInternal})
 	} else {
-		model.BgpInternal = basetypes.NewFloat64Null()
+		model.BgpInternal = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.BgpLocal != nil {
-		model.BgpLocal = basetypes.NewFloat64Value(float64(*sdk.BgpLocal))
+		model.BgpLocal = basetypes.NewInt64Value(int64(*sdk.BgpLocal))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "BgpLocal", "value": *sdk.BgpLocal})
 	} else {
-		model.BgpLocal = basetypes.NewFloat64Null()
+		model.BgpLocal = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.OspfExt != nil {
-		model.OspfExt = basetypes.NewFloat64Value(float64(*sdk.OspfExt))
+		model.OspfExt = basetypes.NewInt64Value(int64(*sdk.OspfExt))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "OspfExt", "value": *sdk.OspfExt})
 	} else {
-		model.OspfExt = basetypes.NewFloat64Null()
+		model.OspfExt = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.OspfInter != nil {
-		model.OspfInter = basetypes.NewFloat64Value(float64(*sdk.OspfInter))
+		model.OspfInter = basetypes.NewInt64Value(int64(*sdk.OspfInter))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "OspfInter", "value": *sdk.OspfInter})
 	} else {
-		model.OspfInter = basetypes.NewFloat64Null()
+		model.OspfInter = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.OspfIntra != nil {
-		model.OspfIntra = basetypes.NewFloat64Value(float64(*sdk.OspfIntra))
+		model.OspfIntra = basetypes.NewInt64Value(int64(*sdk.OspfIntra))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "OspfIntra", "value": *sdk.OspfIntra})
 	} else {
-		model.OspfIntra = basetypes.NewFloat64Null()
+		model.OspfIntra = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Ospfv3Ext != nil {
-		model.Ospfv3Ext = basetypes.NewFloat64Value(float64(*sdk.Ospfv3Ext))
+		model.Ospfv3Ext = basetypes.NewInt64Value(int64(*sdk.Ospfv3Ext))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ospfv3Ext", "value": *sdk.Ospfv3Ext})
 	} else {
-		model.Ospfv3Ext = basetypes.NewFloat64Null()
+		model.Ospfv3Ext = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Ospfv3Inter != nil {
-		model.Ospfv3Inter = basetypes.NewFloat64Value(float64(*sdk.Ospfv3Inter))
+		model.Ospfv3Inter = basetypes.NewInt64Value(int64(*sdk.Ospfv3Inter))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ospfv3Inter", "value": *sdk.Ospfv3Inter})
 	} else {
-		model.Ospfv3Inter = basetypes.NewFloat64Null()
+		model.Ospfv3Inter = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Ospfv3Intra != nil {
-		model.Ospfv3Intra = basetypes.NewFloat64Value(float64(*sdk.Ospfv3Intra))
+		model.Ospfv3Intra = basetypes.NewInt64Value(int64(*sdk.Ospfv3Intra))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ospfv3Intra", "value": *sdk.Ospfv3Intra})
 	} else {
-		model.Ospfv3Intra = basetypes.NewFloat64Null()
+		model.Ospfv3Intra = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Rip != nil {
-		model.Rip = basetypes.NewFloat64Value(float64(*sdk.Rip))
+		model.Rip = basetypes.NewInt64Value(int64(*sdk.Rip))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Rip", "value": *sdk.Rip})
 	} else {
-		model.Rip = basetypes.NewFloat64Null()
+		model.Rip = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Static != nil {
-		model.Static = basetypes.NewFloat64Value(float64(*sdk.Static))
+		model.Static = basetypes.NewInt64Value(int64(*sdk.Static))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Static", "value": *sdk.Static})
 	} else {
-		model.Static = basetypes.NewFloat64Null()
+		model.Static = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.StaticIpv6 != nil {
-		model.StaticIpv6 = basetypes.NewFloat64Value(float64(*sdk.StaticIpv6))
+		model.StaticIpv6 = basetypes.NewInt64Value(int64(*sdk.StaticIpv6))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "StaticIpv6", "value": *sdk.StaticIpv6})
 	} else {
-		model.StaticIpv6 = basetypes.NewFloat64Null()
+		model.StaticIpv6 = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -946,7 +947,7 @@ func unpackLogicalRoutersVrfInnerBgpToSdk(ctx context.Context, obj types.Object)
 
 	// Handling Primitives
 	if !model.DefaultLocalPreference.IsNull() && !model.DefaultLocalPreference.IsUnknown() {
-		val := float32(model.DefaultLocalPreference.ValueFloat64())
+		val := int32(model.DefaultLocalPreference.ValueInt64())
 		sdk.DefaultLocalPreference = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DefaultLocalPreference", "value": *sdk.DefaultLocalPreference})
 	}
@@ -1169,10 +1170,10 @@ func packLogicalRoutersVrfInnerBgpFromSdk(ctx context.Context, sdk network_servi
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DefaultLocalPreference != nil {
-		model.DefaultLocalPreference = basetypes.NewFloat64Value(float64(*sdk.DefaultLocalPreference))
+		model.DefaultLocalPreference = basetypes.NewInt64Value(int64(*sdk.DefaultLocalPreference))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DefaultLocalPreference", "value": *sdk.DefaultLocalPreference})
 	} else {
-		model.DefaultLocalPreference = basetypes.NewFloat64Null()
+		model.DefaultLocalPreference = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -2627,21 +2628,21 @@ func unpackLogicalRoutersVrfInnerBgpGracefulRestartToSdk(ctx context.Context, ob
 
 	// Handling Primitives
 	if !model.LocalRestartTime.IsNull() && !model.LocalRestartTime.IsUnknown() {
-		val := float32(model.LocalRestartTime.ValueFloat64())
+		val := int32(model.LocalRestartTime.ValueInt64())
 		sdk.LocalRestartTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalRestartTime", "value": *sdk.LocalRestartTime})
 	}
 
 	// Handling Primitives
 	if !model.MaxPeerRestartTime.IsNull() && !model.MaxPeerRestartTime.IsUnknown() {
-		val := float32(model.MaxPeerRestartTime.ValueFloat64())
+		val := int32(model.MaxPeerRestartTime.ValueInt64())
 		sdk.MaxPeerRestartTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaxPeerRestartTime", "value": *sdk.MaxPeerRestartTime})
 	}
 
 	// Handling Primitives
 	if !model.StaleRouteTime.IsNull() && !model.StaleRouteTime.IsUnknown() {
-		val := float32(model.StaleRouteTime.ValueFloat64())
+		val := int32(model.StaleRouteTime.ValueInt64())
 		sdk.StaleRouteTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "StaleRouteTime", "value": *sdk.StaleRouteTime})
 	}
@@ -2670,26 +2671,26 @@ func packLogicalRoutersVrfInnerBgpGracefulRestartFromSdk(ctx context.Context, sd
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LocalRestartTime != nil {
-		model.LocalRestartTime = basetypes.NewFloat64Value(float64(*sdk.LocalRestartTime))
+		model.LocalRestartTime = basetypes.NewInt64Value(int64(*sdk.LocalRestartTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalRestartTime", "value": *sdk.LocalRestartTime})
 	} else {
-		model.LocalRestartTime = basetypes.NewFloat64Null()
+		model.LocalRestartTime = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MaxPeerRestartTime != nil {
-		model.MaxPeerRestartTime = basetypes.NewFloat64Value(float64(*sdk.MaxPeerRestartTime))
+		model.MaxPeerRestartTime = basetypes.NewInt64Value(int64(*sdk.MaxPeerRestartTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaxPeerRestartTime", "value": *sdk.MaxPeerRestartTime})
 	} else {
-		model.MaxPeerRestartTime = basetypes.NewFloat64Null()
+		model.MaxPeerRestartTime = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.StaleRouteTime != nil {
-		model.StaleRouteTime = basetypes.NewFloat64Value(float64(*sdk.StaleRouteTime))
+		model.StaleRouteTime = basetypes.NewInt64Value(int64(*sdk.StaleRouteTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "StaleRouteTime", "value": *sdk.StaleRouteTime})
 	} else {
-		model.StaleRouteTime = basetypes.NewFloat64Null()
+		model.StaleRouteTime = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -3253,7 +3254,7 @@ func unpackLogicalRoutersVrfInnerBgpPeerGroupInnerConnectionOptionsToSdk(ctx con
 
 	// Handling Primitives
 	if !model.Multihop.IsNull() && !model.Multihop.IsUnknown() {
-		val := float32(model.Multihop.ValueFloat64())
+		val := int32(model.Multihop.ValueInt64())
 		sdk.Multihop = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Multihop", "value": *sdk.Multihop})
 	}
@@ -3296,10 +3297,10 @@ func packLogicalRoutersVrfInnerBgpPeerGroupInnerConnectionOptionsFromSdk(ctx con
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Multihop != nil {
-		model.Multihop = basetypes.NewFloat64Value(float64(*sdk.Multihop))
+		model.Multihop = basetypes.NewInt64Value(int64(*sdk.Multihop))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Multihop", "value": *sdk.Multihop})
 	} else {
-		model.Multihop = basetypes.NewFloat64Null()
+		model.Multihop = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -3851,7 +3852,7 @@ func unpackLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfdMultihopToSdk(ctx 
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.MinReceivedTtl.IsNull() && !model.MinReceivedTtl.IsUnknown() {
-		val := float32(model.MinReceivedTtl.ValueFloat64())
+		val := int32(model.MinReceivedTtl.ValueInt64())
 		sdk.MinReceivedTtl = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MinReceivedTtl", "value": *sdk.MinReceivedTtl})
 	}
@@ -3872,10 +3873,10 @@ func packLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfdMultihopFromSdk(ctx 
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MinReceivedTtl != nil {
-		model.MinReceivedTtl = basetypes.NewFloat64Value(float64(*sdk.MinReceivedTtl))
+		model.MinReceivedTtl = basetypes.NewInt64Value(int64(*sdk.MinReceivedTtl))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MinReceivedTtl", "value": *sdk.MinReceivedTtl})
 	} else {
-		model.MinReceivedTtl = basetypes.NewFloat64Null()
+		model.MinReceivedTtl = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -3967,7 +3968,7 @@ func unpackLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsToSd
 
 	// Handling Primitives
 	if !model.IdleHoldTime.IsNull() && !model.IdleHoldTime.IsUnknown() {
-		val := float32(model.IdleHoldTime.ValueFloat64())
+		val := int32(model.IdleHoldTime.ValueInt64())
 		sdk.IdleHoldTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "IdleHoldTime", "value": *sdk.IdleHoldTime})
 	}
@@ -3999,7 +4000,7 @@ func unpackLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsToSd
 
 	// Handling Primitives
 	if !model.MinRouteAdvInterval.IsNull() && !model.MinRouteAdvInterval.IsUnknown() {
-		val := float32(model.MinRouteAdvInterval.ValueFloat64())
+		val := int32(model.MinRouteAdvInterval.ValueInt64())
 		sdk.MinRouteAdvInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MinRouteAdvInterval", "value": *sdk.MinRouteAdvInterval})
 	}
@@ -4012,7 +4013,7 @@ func unpackLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsToSd
 
 	// Handling Primitives
 	if !model.OpenDelayTime.IsNull() && !model.OpenDelayTime.IsUnknown() {
-		val := float32(model.OpenDelayTime.ValueFloat64())
+		val := int32(model.OpenDelayTime.ValueInt64())
 		sdk.OpenDelayTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "OpenDelayTime", "value": *sdk.OpenDelayTime})
 	}
@@ -4076,10 +4077,10 @@ func packLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsFromSd
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.IdleHoldTime != nil {
-		model.IdleHoldTime = basetypes.NewFloat64Value(float64(*sdk.IdleHoldTime))
+		model.IdleHoldTime = basetypes.NewInt64Value(int64(*sdk.IdleHoldTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "IdleHoldTime", "value": *sdk.IdleHoldTime})
 	} else {
-		model.IdleHoldTime = basetypes.NewFloat64Null()
+		model.IdleHoldTime = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -4113,10 +4114,10 @@ func packLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsFromSd
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MinRouteAdvInterval != nil {
-		model.MinRouteAdvInterval = basetypes.NewFloat64Value(float64(*sdk.MinRouteAdvInterval))
+		model.MinRouteAdvInterval = basetypes.NewInt64Value(int64(*sdk.MinRouteAdvInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MinRouteAdvInterval", "value": *sdk.MinRouteAdvInterval})
 	} else {
-		model.MinRouteAdvInterval = basetypes.NewFloat64Null()
+		model.MinRouteAdvInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -4129,10 +4130,10 @@ func packLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsFromSd
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.OpenDelayTime != nil {
-		model.OpenDelayTime = basetypes.NewFloat64Value(float64(*sdk.OpenDelayTime))
+		model.OpenDelayTime = basetypes.NewInt64Value(int64(*sdk.OpenDelayTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "OpenDelayTime", "value": *sdk.OpenDelayTime})
 	} else {
-		model.OpenDelayTime = basetypes.NewFloat64Null()
+		model.OpenDelayTime = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -4233,7 +4234,7 @@ func unpackLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsInco
 
 	// Handling Primitives
 	if !model.RemotePort.IsNull() && !model.RemotePort.IsUnknown() {
-		val := float32(model.RemotePort.ValueFloat64())
+		val := int32(model.RemotePort.ValueInt64())
 		sdk.RemotePort = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RemotePort", "value": *sdk.RemotePort})
 	}
@@ -4262,10 +4263,10 @@ func packLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsIncomi
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RemotePort != nil {
-		model.RemotePort = basetypes.NewFloat64Value(float64(*sdk.RemotePort))
+		model.RemotePort = basetypes.NewInt64Value(int64(*sdk.RemotePort))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RemotePort", "value": *sdk.RemotePort})
 	} else {
-		model.RemotePort = basetypes.NewFloat64Null()
+		model.RemotePort = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -4345,7 +4346,7 @@ func unpackLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsOutg
 
 	// Handling Primitives
 	if !model.LocalPort.IsNull() && !model.LocalPort.IsUnknown() {
-		val := float32(model.LocalPort.ValueFloat64())
+		val := int32(model.LocalPort.ValueInt64())
 		sdk.LocalPort = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalPort", "value": *sdk.LocalPort})
 	}
@@ -4374,10 +4375,10 @@ func packLogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsOutgoi
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LocalPort != nil {
-		model.LocalPort = basetypes.NewFloat64Value(float64(*sdk.LocalPort))
+		model.LocalPort = basetypes.NewInt64Value(int64(*sdk.LocalPort))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalPort", "value": *sdk.LocalPort})
 	} else {
-		model.LocalPort = basetypes.NewFloat64Null()
+		model.LocalPort = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -6144,7 +6145,7 @@ func unpackLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFilter
 
 	// Handling Primitives
 	if !model.Med.IsNull() && !model.Med.IsUnknown() {
-		val := float32(model.Med.ValueFloat64())
+		val := int32(model.Med.ValueInt64())
 		sdk.Med = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	}
@@ -6252,10 +6253,10 @@ func packLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersI
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Med != nil {
-		model.Med = basetypes.NewFloat64Value(float64(*sdk.Med))
+		model.Med = basetypes.NewInt64Value(int64(*sdk.Med))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	} else {
-		model.Med = basetypes.NewFloat64Null()
+		model.Med = basetypes.NewInt64Null()
 	}
 	// Handling Lists
 	if sdk.Nexthop != nil {
@@ -6575,7 +6576,7 @@ func unpackLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteA
 
 	// Handling Primitives
 	if !model.AsPathLimit.IsNull() && !model.AsPathLimit.IsUnknown() {
-		val := float32(model.AsPathLimit.ValueFloat64())
+		val := int32(model.AsPathLimit.ValueInt64())
 		sdk.AsPathLimit = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AsPathLimit", "value": *sdk.AsPathLimit})
 	}
@@ -6608,14 +6609,14 @@ func unpackLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteA
 
 	// Handling Primitives
 	if !model.LocalPreference.IsNull() && !model.LocalPreference.IsUnknown() {
-		val := float32(model.LocalPreference.ValueFloat64())
+		val := int32(model.LocalPreference.ValueInt64())
 		sdk.LocalPreference = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalPreference", "value": *sdk.LocalPreference})
 	}
 
 	// Handling Primitives
 	if !model.Med.IsNull() && !model.Med.IsUnknown() {
-		val := float32(model.Med.ValueFloat64())
+		val := int32(model.Med.ValueInt64())
 		sdk.Med = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	}
@@ -6634,7 +6635,7 @@ func unpackLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteA
 
 	// Handling Primitives
 	if !model.Weight.IsNull() && !model.Weight.IsUnknown() {
-		val := float32(model.Weight.ValueFloat64())
+		val := int32(model.Weight.ValueInt64())
 		sdk.Weight = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Weight", "value": *sdk.Weight})
 	}
@@ -6668,10 +6669,10 @@ func packLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAtt
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.AsPathLimit != nil {
-		model.AsPathLimit = basetypes.NewFloat64Value(float64(*sdk.AsPathLimit))
+		model.AsPathLimit = basetypes.NewInt64Value(int64(*sdk.AsPathLimit))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AsPathLimit", "value": *sdk.AsPathLimit})
 	} else {
-		model.AsPathLimit = basetypes.NewFloat64Null()
+		model.AsPathLimit = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -6702,18 +6703,18 @@ func packLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAtt
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LocalPreference != nil {
-		model.LocalPreference = basetypes.NewFloat64Value(float64(*sdk.LocalPreference))
+		model.LocalPreference = basetypes.NewInt64Value(int64(*sdk.LocalPreference))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalPreference", "value": *sdk.LocalPreference})
 	} else {
-		model.LocalPreference = basetypes.NewFloat64Null()
+		model.LocalPreference = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Med != nil {
-		model.Med = basetypes.NewFloat64Value(float64(*sdk.Med))
+		model.Med = basetypes.NewInt64Value(int64(*sdk.Med))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	} else {
-		model.Med = basetypes.NewFloat64Null()
+		model.Med = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -6734,10 +6735,10 @@ func packLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAtt
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Weight != nil {
-		model.Weight = basetypes.NewFloat64Value(float64(*sdk.Weight))
+		model.Weight = basetypes.NewInt64Value(int64(*sdk.Weight))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Weight", "value": *sdk.Weight})
 	} else {
-		model.Weight = basetypes.NewFloat64Null()
+		model.Weight = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -6817,7 +6818,7 @@ func unpackLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteA
 
 	// Handling Primitives
 	if !model.Prepend.IsNull() && !model.Prepend.IsUnknown() {
-		val := float32(model.Prepend.ValueFloat64())
+		val := int32(model.Prepend.ValueInt64())
 		sdk.Prepend = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Prepend", "value": *sdk.Prepend})
 	}
@@ -6830,7 +6831,7 @@ func unpackLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteA
 
 	// Handling Primitives
 	if !model.RemoveAndPrepend.IsNull() && !model.RemoveAndPrepend.IsUnknown() {
-		val := float32(model.RemoveAndPrepend.ValueFloat64())
+		val := int32(model.RemoveAndPrepend.ValueInt64())
 		sdk.RemoveAndPrepend = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RemoveAndPrepend", "value": *sdk.RemoveAndPrepend})
 	}
@@ -6864,10 +6865,10 @@ func packLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAtt
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Prepend != nil {
-		model.Prepend = basetypes.NewFloat64Value(float64(*sdk.Prepend))
+		model.Prepend = basetypes.NewInt64Value(int64(*sdk.Prepend))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Prepend", "value": *sdk.Prepend})
 	} else {
-		model.Prepend = basetypes.NewFloat64Null()
+		model.Prepend = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
@@ -6885,10 +6886,10 @@ func packLogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAtt
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RemoveAndPrepend != nil {
-		model.RemoveAndPrepend = basetypes.NewFloat64Value(float64(*sdk.RemoveAndPrepend))
+		model.RemoveAndPrepend = basetypes.NewInt64Value(int64(*sdk.RemoveAndPrepend))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RemoveAndPrepend", "value": *sdk.RemoveAndPrepend})
 	} else {
-		model.RemoveAndPrepend = basetypes.NewFloat64Null()
+		model.RemoveAndPrepend = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -7923,7 +7924,7 @@ func unpackLogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdateToSdk
 
 	// Handling Primitives
 	if !model.AsPathLimit.IsNull() && !model.AsPathLimit.IsUnknown() {
-		val := float32(model.AsPathLimit.ValueFloat64())
+		val := int32(model.AsPathLimit.ValueInt64())
 		sdk.AsPathLimit = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AsPathLimit", "value": *sdk.AsPathLimit})
 	}
@@ -7956,14 +7957,14 @@ func unpackLogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdateToSdk
 
 	// Handling Primitives
 	if !model.LocalPreference.IsNull() && !model.LocalPreference.IsUnknown() {
-		val := float32(model.LocalPreference.ValueFloat64())
+		val := int32(model.LocalPreference.ValueInt64())
 		sdk.LocalPreference = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalPreference", "value": *sdk.LocalPreference})
 	}
 
 	// Handling Primitives
 	if !model.Med.IsNull() && !model.Med.IsUnknown() {
-		val := float32(model.Med.ValueFloat64())
+		val := int32(model.Med.ValueInt64())
 		sdk.Med = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	}
@@ -8009,10 +8010,10 @@ func packLogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdateFromSdk
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.AsPathLimit != nil {
-		model.AsPathLimit = basetypes.NewFloat64Value(float64(*sdk.AsPathLimit))
+		model.AsPathLimit = basetypes.NewInt64Value(int64(*sdk.AsPathLimit))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AsPathLimit", "value": *sdk.AsPathLimit})
 	} else {
-		model.AsPathLimit = basetypes.NewFloat64Null()
+		model.AsPathLimit = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -8043,18 +8044,18 @@ func packLogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdateFromSdk
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LocalPreference != nil {
-		model.LocalPreference = basetypes.NewFloat64Value(float64(*sdk.LocalPreference))
+		model.LocalPreference = basetypes.NewInt64Value(int64(*sdk.LocalPreference))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalPreference", "value": *sdk.LocalPreference})
 	} else {
-		model.LocalPreference = basetypes.NewFloat64Null()
+		model.LocalPreference = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Med != nil {
-		model.Med = basetypes.NewFloat64Value(float64(*sdk.Med))
+		model.Med = basetypes.NewInt64Value(int64(*sdk.Med))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	} else {
-		model.Med = basetypes.NewFloat64Null()
+		model.Med = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -8203,7 +8204,7 @@ func unpackLogicalRoutersVrfInnerBgpPolicyExportRulesInnerMatchToSdk(ctx context
 
 	// Handling Primitives
 	if !model.Med.IsNull() && !model.Med.IsUnknown() {
-		val := float32(model.Med.ValueFloat64())
+		val := int32(model.Med.ValueInt64())
 		sdk.Med = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	}
@@ -8311,10 +8312,10 @@ func packLogicalRoutersVrfInnerBgpPolicyExportRulesInnerMatchFromSdk(ctx context
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Med != nil {
-		model.Med = basetypes.NewFloat64Value(float64(*sdk.Med))
+		model.Med = basetypes.NewInt64Value(int64(*sdk.Med))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Med", "value": *sdk.Med})
 	} else {
-		model.Med = basetypes.NewFloat64Null()
+		model.Med = basetypes.NewInt64Null()
 	}
 	// Handling Lists
 	if sdk.Nexthop != nil {
@@ -9069,7 +9070,7 @@ func unpackLogicalRoutersVrfInnerBgpRedistRulesInnerToSdk(ctx context.Context, o
 
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -9088,7 +9089,7 @@ func unpackLogicalRoutersVrfInnerBgpRedistRulesInnerToSdk(ctx context.Context, o
 
 	// Handling Primitives
 	if !model.SetAsPathLimit.IsNull() && !model.SetAsPathLimit.IsUnknown() {
-		val := float32(model.SetAsPathLimit.ValueFloat64())
+		val := int32(model.SetAsPathLimit.ValueInt64())
 		sdk.SetAsPathLimit = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SetAsPathLimit", "value": *sdk.SetAsPathLimit})
 	}
@@ -9107,14 +9108,14 @@ func unpackLogicalRoutersVrfInnerBgpRedistRulesInnerToSdk(ctx context.Context, o
 
 	// Handling Primitives
 	if !model.SetLocalPreference.IsNull() && !model.SetLocalPreference.IsUnknown() {
-		val := float32(model.SetLocalPreference.ValueFloat64())
+		val := int32(model.SetLocalPreference.ValueInt64())
 		sdk.SetLocalPreference = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SetLocalPreference", "value": *sdk.SetLocalPreference})
 	}
 
 	// Handling Primitives
 	if !model.SetMed.IsNull() && !model.SetMed.IsUnknown() {
-		val := float32(model.SetMed.ValueFloat64())
+		val := int32(model.SetMed.ValueInt64())
 		sdk.SetMed = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SetMed", "value": *sdk.SetMed})
 	}
@@ -9157,10 +9158,10 @@ func packLogicalRoutersVrfInnerBgpRedistRulesInnerFromSdk(ctx context.Context, s
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -9177,10 +9178,10 @@ func packLogicalRoutersVrfInnerBgpRedistRulesInnerFromSdk(ctx context.Context, s
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.SetAsPathLimit != nil {
-		model.SetAsPathLimit = basetypes.NewFloat64Value(float64(*sdk.SetAsPathLimit))
+		model.SetAsPathLimit = basetypes.NewInt64Value(int64(*sdk.SetAsPathLimit))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SetAsPathLimit", "value": *sdk.SetAsPathLimit})
 	} else {
-		model.SetAsPathLimit = basetypes.NewFloat64Null()
+		model.SetAsPathLimit = basetypes.NewInt64Null()
 	}
 	// Handling Lists
 	if sdk.SetCommunity != nil {
@@ -9211,18 +9212,18 @@ func packLogicalRoutersVrfInnerBgpRedistRulesInnerFromSdk(ctx context.Context, s
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.SetLocalPreference != nil {
-		model.SetLocalPreference = basetypes.NewFloat64Value(float64(*sdk.SetLocalPreference))
+		model.SetLocalPreference = basetypes.NewInt64Value(int64(*sdk.SetLocalPreference))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SetLocalPreference", "value": *sdk.SetLocalPreference})
 	} else {
-		model.SetLocalPreference = basetypes.NewFloat64Null()
+		model.SetLocalPreference = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.SetMed != nil {
-		model.SetMed = basetypes.NewFloat64Value(float64(*sdk.SetMed))
+		model.SetMed = basetypes.NewInt64Value(int64(*sdk.SetMed))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SetMed", "value": *sdk.SetMed})
 	} else {
-		model.SetMed = basetypes.NewFloat64Null()
+		model.SetMed = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -9555,7 +9556,7 @@ func unpackLogicalRoutersVrfInnerEcmpToSdk(ctx context.Context, obj types.Object
 
 	// Handling Primitives
 	if !model.MaxPath.IsNull() && !model.MaxPath.IsUnknown() {
-		val := float32(model.MaxPath.ValueFloat64())
+		val := int32(model.MaxPath.ValueInt64())
 		sdk.MaxPath = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaxPath", "value": *sdk.MaxPath})
 	}
@@ -9609,10 +9610,10 @@ func packLogicalRoutersVrfInnerEcmpFromSdk(ctx context.Context, sdk network_serv
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MaxPath != nil {
-		model.MaxPath = basetypes.NewFloat64Value(float64(*sdk.MaxPath))
+		model.MaxPath = basetypes.NewInt64Value(int64(*sdk.MaxPath))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaxPath", "value": *sdk.MaxPath})
 	} else {
-		model.MaxPath = basetypes.NewFloat64Null()
+		model.MaxPath = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -9875,7 +9876,7 @@ func unpackLogicalRoutersVrfInnerEcmpAlgorithmIpHashToSdk(ctx context.Context, o
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.HashSeed.IsNull() && !model.HashSeed.IsUnknown() {
-		val := float32(model.HashSeed.ValueFloat64())
+		val := int32(model.HashSeed.ValueInt64())
 		sdk.HashSeed = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "HashSeed", "value": *sdk.HashSeed})
 	}
@@ -9908,10 +9909,10 @@ func packLogicalRoutersVrfInnerEcmpAlgorithmIpHashFromSdk(ctx context.Context, s
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.HashSeed != nil {
-		model.HashSeed = basetypes.NewFloat64Value(float64(*sdk.HashSeed))
+		model.HashSeed = basetypes.NewInt64Value(int64(*sdk.HashSeed))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "HashSeed", "value": *sdk.HashSeed})
 	} else {
-		model.HashSeed = basetypes.NewFloat64Null()
+		model.HashSeed = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -10107,7 +10108,7 @@ func unpackLogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobinInterfaceInnerTo
 
 	// Handling Primitives
 	if !model.Weight.IsNull() && !model.Weight.IsUnknown() {
-		val := float32(model.Weight.ValueFloat64())
+		val := int32(model.Weight.ValueInt64())
 		sdk.Weight = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Weight", "value": *sdk.Weight})
 	}
@@ -10132,10 +10133,10 @@ func packLogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobinInterfaceInnerFrom
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Weight != nil {
-		model.Weight = basetypes.NewFloat64Value(float64(*sdk.Weight))
+		model.Weight = basetypes.NewInt64Value(int64(*sdk.Weight))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Weight", "value": *sdk.Weight})
 	} else {
-		model.Weight = basetypes.NewFloat64Null()
+		model.Weight = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -10274,7 +10275,7 @@ func unpackLogicalRoutersVrfInnerMulticastToSdk(ctx context.Context, obj types.O
 
 	// Handling Primitives
 	if !model.RouteAgeoutTime.IsNull() && !model.RouteAgeoutTime.IsUnknown() {
-		val := float32(model.RouteAgeoutTime.ValueFloat64())
+		val := int32(model.RouteAgeoutTime.ValueInt64())
 		sdk.RouteAgeoutTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RouteAgeoutTime", "value": *sdk.RouteAgeoutTime})
 	}
@@ -10404,10 +10405,10 @@ func packLogicalRoutersVrfInnerMulticastFromSdk(ctx context.Context, sdk network
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RouteAgeoutTime != nil {
-		model.RouteAgeoutTime = basetypes.NewFloat64Value(float64(*sdk.RouteAgeoutTime))
+		model.RouteAgeoutTime = basetypes.NewInt64Value(int64(*sdk.RouteAgeoutTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RouteAgeoutTime", "value": *sdk.RouteAgeoutTime})
 	} else {
-		model.RouteAgeoutTime = basetypes.NewFloat64Null()
+		model.RouteAgeoutTime = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -11676,7 +11677,7 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmpToSdk(ctx conte
 
 	// Handling Primitives
 	if !model.LastMemberQueryInterval.IsNull() && !model.LastMemberQueryInterval.IsUnknown() {
-		val := float32(model.LastMemberQueryInterval.ValueFloat64())
+		val := int32(model.LastMemberQueryInterval.ValueInt64())
 		sdk.LastMemberQueryInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LastMemberQueryInterval", "value": *sdk.LastMemberQueryInterval})
 	}
@@ -11689,7 +11690,7 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmpToSdk(ctx conte
 
 	// Handling Primitives
 	if !model.MaxQueryResponseTime.IsNull() && !model.MaxQueryResponseTime.IsUnknown() {
-		val := float32(model.MaxQueryResponseTime.ValueFloat64())
+		val := int32(model.MaxQueryResponseTime.ValueInt64())
 		sdk.MaxQueryResponseTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaxQueryResponseTime", "value": *sdk.MaxQueryResponseTime})
 	}
@@ -11708,7 +11709,7 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmpToSdk(ctx conte
 
 	// Handling Primitives
 	if !model.QueryInterval.IsNull() && !model.QueryInterval.IsUnknown() {
-		val := float32(model.QueryInterval.ValueFloat64())
+		val := int32(model.QueryInterval.ValueInt64())
 		sdk.QueryInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "QueryInterval", "value": *sdk.QueryInterval})
 	}
@@ -11763,10 +11764,10 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmpFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LastMemberQueryInterval != nil {
-		model.LastMemberQueryInterval = basetypes.NewFloat64Value(float64(*sdk.LastMemberQueryInterval))
+		model.LastMemberQueryInterval = basetypes.NewInt64Value(int64(*sdk.LastMemberQueryInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LastMemberQueryInterval", "value": *sdk.LastMemberQueryInterval})
 	} else {
-		model.LastMemberQueryInterval = basetypes.NewFloat64Null()
+		model.LastMemberQueryInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -11779,10 +11780,10 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmpFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MaxQueryResponseTime != nil {
-		model.MaxQueryResponseTime = basetypes.NewFloat64Value(float64(*sdk.MaxQueryResponseTime))
+		model.MaxQueryResponseTime = basetypes.NewInt64Value(int64(*sdk.MaxQueryResponseTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaxQueryResponseTime", "value": *sdk.MaxQueryResponseTime})
 	} else {
-		model.MaxQueryResponseTime = basetypes.NewFloat64Null()
+		model.MaxQueryResponseTime = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -11803,10 +11804,10 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmpFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.QueryInterval != nil {
-		model.QueryInterval = basetypes.NewFloat64Value(float64(*sdk.QueryInterval))
+		model.QueryInterval = basetypes.NewInt64Value(int64(*sdk.QueryInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "QueryInterval", "value": *sdk.QueryInterval})
 	} else {
-		model.QueryInterval = basetypes.NewFloat64Null()
+		model.QueryInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -11905,14 +11906,14 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimToSdk(ctx contex
 	// Handling Lists
 	if !model.AllowedNeighbors.IsNull() && !model.AllowedNeighbors.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field AllowedNeighbors")
-		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx, model.AllowedNeighbors)
+		unpacked, d := unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx, model.AllowedNeighbors)
 		diags.Append(d...)
 		sdk.AllowedNeighbors = unpacked
 	}
 
 	// Handling Primitives
 	if !model.AssertInterval.IsNull() && !model.AssertInterval.IsUnknown() {
-		val := float32(model.AssertInterval.ValueFloat64())
+		val := int32(model.AssertInterval.ValueInt64())
 		sdk.AssertInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AssertInterval", "value": *sdk.AssertInterval})
 	}
@@ -11925,7 +11926,7 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimToSdk(ctx contex
 
 	// Handling Primitives
 	if !model.DrPriority.IsNull() && !model.DrPriority.IsUnknown() {
-		val := float32(model.DrPriority.ValueFloat64())
+		val := int32(model.DrPriority.ValueInt64())
 		sdk.DrPriority = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DrPriority", "value": *sdk.DrPriority})
 	}
@@ -11938,14 +11939,14 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimToSdk(ctx contex
 
 	// Handling Primitives
 	if !model.HelloInterval.IsNull() && !model.HelloInterval.IsUnknown() {
-		val := float32(model.HelloInterval.ValueFloat64())
+		val := int32(model.HelloInterval.ValueInt64())
 		sdk.HelloInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "HelloInterval", "value": *sdk.HelloInterval})
 	}
 
 	// Handling Primitives
 	if !model.JoinPruneInterval.IsNull() && !model.JoinPruneInterval.IsUnknown() {
-		val := float32(model.JoinPruneInterval.ValueFloat64())
+		val := int32(model.JoinPruneInterval.ValueInt64())
 		sdk.JoinPruneInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "JoinPruneInterval", "value": *sdk.JoinPruneInterval})
 	}
@@ -11966,19 +11967,19 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimFromSdk(ctx contex
 	// Handling Lists
 	if sdk.AllowedNeighbors != nil {
 		tflog.Debug(ctx, "Packing list of objects for field AllowedNeighbors")
-		packed, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx, sdk.AllowedNeighbors)
+		packed, d := packEthernetInterfacesLayer3IpInnerListFromSdk(ctx, sdk.AllowedNeighbors)
 		diags.Append(d...)
 		model.AllowedNeighbors = packed
 	} else {
-		model.AllowedNeighbors = basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType())
+		model.AllowedNeighbors = basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.AssertInterval != nil {
-		model.AssertInterval = basetypes.NewFloat64Value(float64(*sdk.AssertInterval))
+		model.AssertInterval = basetypes.NewInt64Value(int64(*sdk.AssertInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AssertInterval", "value": *sdk.AssertInterval})
 	} else {
-		model.AssertInterval = basetypes.NewFloat64Null()
+		model.AssertInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -11991,10 +11992,10 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimFromSdk(ctx contex
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DrPriority != nil {
-		model.DrPriority = basetypes.NewFloat64Value(float64(*sdk.DrPriority))
+		model.DrPriority = basetypes.NewInt64Value(int64(*sdk.DrPriority))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DrPriority", "value": *sdk.DrPriority})
 	} else {
-		model.DrPriority = basetypes.NewFloat64Null()
+		model.DrPriority = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -12007,18 +12008,18 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimFromSdk(ctx contex
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.HelloInterval != nil {
-		model.HelloInterval = basetypes.NewFloat64Value(float64(*sdk.HelloInterval))
+		model.HelloInterval = basetypes.NewInt64Value(int64(*sdk.HelloInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "HelloInterval", "value": *sdk.HelloInterval})
 	} else {
-		model.HelloInterval = basetypes.NewFloat64Null()
+		model.HelloInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.JoinPruneInterval != nil {
-		model.JoinPruneInterval = basetypes.NewFloat64Value(float64(*sdk.JoinPruneInterval))
+		model.JoinPruneInterval = basetypes.NewInt64Value(int64(*sdk.JoinPruneInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "JoinPruneInterval", "value": *sdk.JoinPruneInterval})
 	} else {
-		model.JoinPruneInterval = basetypes.NewFloat64Null()
+		model.JoinPruneInterval = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -12074,99 +12075,6 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimListFromSdk(ctx co
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim{}.AttrType(), data)
-}
-
-// --- Unpacker for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerToSdk(ctx context.Context, obj types.Object) (*network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"tf_object": obj})
-	diags := diag.Diagnostics{}
-	var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
-	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
-
-	var sdk network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
-	var d diag.Diagnostics
-	// Handling Primitives
-	if !model.Name.IsNull() && !model.Name.IsUnknown() {
-		sdk.Name = model.Name.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
-	}
-
-	diags.Append(d...)
-
-	tflog.Debug(ctx, "Exiting unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return &sdk, diags
-
-}
-
-// --- Packer for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerFromSdk(ctx context.Context, sdk network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"sdk_struct": sdk})
-	diags := diag.Diagnostics{}
-	var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
-	var d diag.Diagnostics
-	// Handling Primitives
-	// Standard primitive packing
-	model.Name = basetypes.NewStringValue(sdk.Name)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
-	diags.Append(d...)
-
-	obj, d := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrTypes(), &model)
-	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
-	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return obj, diags
-
-}
-
-// --- List Unpacker for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx context.Context, list types.List) ([]network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner")
-	diags := diag.Diagnostics{}
-	var data []models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
-	diags.Append(list.ElementsAs(ctx, &data, false)...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-
-	ans := make([]network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, 0, len(data))
-	for i, item := range data {
-		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrTypes(), &item)
-		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerToSdk(ctx, obj)
-		diags.Append(d...)
-		if unpacked != nil {
-			ans = append(ans, *unpacked)
-		}
-	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return ans, diags
-}
-
-// --- List Packer for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
-func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx context.Context, sdks []network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner")
-	diags := diag.Diagnostics{}
-	var data []models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
-
-	for i, sdk := range sdks {
-		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
-		obj, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerFromSdk(ctx, sdk)
-		diags.Append(d...)
-		if diags.HasError() {
-			return basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType()), diags
-		}
-		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-		data = append(data, model)
-	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType(), data)
 }
 
 // --- Unpacker for LogicalRoutersVrfInnerMulticastMsdp ---
@@ -12384,7 +12292,7 @@ func unpackLogicalRoutersVrfInnerMulticastMsdpPeerInnerToSdk(ctx context.Context
 
 	// Handling Primitives
 	if !model.MaxSa.IsNull() && !model.MaxSa.IsUnknown() {
-		val := float32(model.MaxSa.ValueFloat64())
+		val := int32(model.MaxSa.ValueInt64())
 		sdk.MaxSa = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaxSa", "value": *sdk.MaxSa})
 	}
@@ -12473,10 +12381,10 @@ func packLogicalRoutersVrfInnerMulticastMsdpPeerInnerFromSdk(ctx context.Context
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MaxSa != nil {
-		model.MaxSa = basetypes.NewFloat64Value(float64(*sdk.MaxSa))
+		model.MaxSa = basetypes.NewInt64Value(int64(*sdk.MaxSa))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaxSa", "value": *sdk.MaxSa})
 	} else {
-		model.MaxSa = basetypes.NewFloat64Null()
+		model.MaxSa = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -12609,7 +12517,7 @@ func unpackLogicalRoutersVrfInnerMulticastPimToSdk(ctx context.Context, obj type
 
 	// Handling Primitives
 	if !model.RouteAgeoutTime.IsNull() && !model.RouteAgeoutTime.IsUnknown() {
-		val := float32(model.RouteAgeoutTime.ValueFloat64())
+		val := int32(model.RouteAgeoutTime.ValueInt64())
 		sdk.RouteAgeoutTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RouteAgeoutTime", "value": *sdk.RouteAgeoutTime})
 	}
@@ -12703,10 +12611,10 @@ func packLogicalRoutersVrfInnerMulticastPimFromSdk(ctx context.Context, sdk netw
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RouteAgeoutTime != nil {
-		model.RouteAgeoutTime = basetypes.NewFloat64Value(float64(*sdk.RouteAgeoutTime))
+		model.RouteAgeoutTime = basetypes.NewInt64Value(int64(*sdk.RouteAgeoutTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RouteAgeoutTime", "value": *sdk.RouteAgeoutTime})
 	} else {
-		model.RouteAgeoutTime = basetypes.NewFloat64Null()
+		model.RouteAgeoutTime = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -12829,7 +12737,7 @@ func unpackLogicalRoutersVrfInnerMulticastPimInterfaceInnerToSdk(ctx context.Con
 
 	// Handling Primitives
 	if !model.DrPriority.IsNull() && !model.DrPriority.IsUnknown() {
-		val := float32(model.DrPriority.ValueFloat64())
+		val := int32(model.DrPriority.ValueInt64())
 		sdk.DrPriority = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DrPriority", "value": *sdk.DrPriority})
 	}
@@ -12882,10 +12790,10 @@ func packLogicalRoutersVrfInnerMulticastPimInterfaceInnerFromSdk(ctx context.Con
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DrPriority != nil {
-		model.DrPriority = basetypes.NewFloat64Value(float64(*sdk.DrPriority))
+		model.DrPriority = basetypes.NewInt64Value(int64(*sdk.DrPriority))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DrPriority", "value": *sdk.DrPriority})
 	} else {
-		model.DrPriority = basetypes.NewFloat64Null()
+		model.DrPriority = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -13379,7 +13287,7 @@ func unpackLogicalRoutersVrfInnerMulticastPimRpLocalRpCandidateRpToSdk(ctx conte
 
 	// Handling Primitives
 	if !model.AdvertisementInterval.IsNull() && !model.AdvertisementInterval.IsUnknown() {
-		val := float32(model.AdvertisementInterval.ValueFloat64())
+		val := int32(model.AdvertisementInterval.ValueInt64())
 		sdk.AdvertisementInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AdvertisementInterval", "value": *sdk.AdvertisementInterval})
 	}
@@ -13398,7 +13306,7 @@ func unpackLogicalRoutersVrfInnerMulticastPimRpLocalRpCandidateRpToSdk(ctx conte
 
 	// Handling Primitives
 	if !model.Priority.IsNull() && !model.Priority.IsUnknown() {
-		val := float32(model.Priority.ValueFloat64())
+		val := int32(model.Priority.ValueInt64())
 		sdk.Priority = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	}
@@ -13427,10 +13335,10 @@ func packLogicalRoutersVrfInnerMulticastPimRpLocalRpCandidateRpFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.AdvertisementInterval != nil {
-		model.AdvertisementInterval = basetypes.NewFloat64Value(float64(*sdk.AdvertisementInterval))
+		model.AdvertisementInterval = basetypes.NewInt64Value(int64(*sdk.AdvertisementInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AdvertisementInterval", "value": *sdk.AdvertisementInterval})
 	} else {
-		model.AdvertisementInterval = basetypes.NewFloat64Null()
+		model.AdvertisementInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -13451,10 +13359,10 @@ func packLogicalRoutersVrfInnerMulticastPimRpLocalRpCandidateRpFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Priority != nil {
-		model.Priority = basetypes.NewFloat64Value(float64(*sdk.Priority))
+		model.Priority = basetypes.NewInt64Value(int64(*sdk.Priority))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	} else {
-		model.Priority = basetypes.NewFloat64Null()
+		model.Priority = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -14264,7 +14172,7 @@ func unpackLogicalRoutersVrfInnerMulticastRpLocalRpCandidateRpToSdk(ctx context.
 
 	// Handling Primitives
 	if !model.AdvertisementInterval.IsNull() && !model.AdvertisementInterval.IsUnknown() {
-		val := float32(model.AdvertisementInterval.ValueFloat64())
+		val := int32(model.AdvertisementInterval.ValueInt64())
 		sdk.AdvertisementInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AdvertisementInterval", "value": *sdk.AdvertisementInterval})
 	}
@@ -14283,7 +14191,7 @@ func unpackLogicalRoutersVrfInnerMulticastRpLocalRpCandidateRpToSdk(ctx context.
 
 	// Handling Primitives
 	if !model.Priority.IsNull() && !model.Priority.IsUnknown() {
-		val := float32(model.Priority.ValueFloat64())
+		val := int32(model.Priority.ValueInt64())
 		sdk.Priority = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	}
@@ -14312,10 +14220,10 @@ func packLogicalRoutersVrfInnerMulticastRpLocalRpCandidateRpFromSdk(ctx context.
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.AdvertisementInterval != nil {
-		model.AdvertisementInterval = basetypes.NewFloat64Value(float64(*sdk.AdvertisementInterval))
+		model.AdvertisementInterval = basetypes.NewInt64Value(int64(*sdk.AdvertisementInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AdvertisementInterval", "value": *sdk.AdvertisementInterval})
 	} else {
-		model.AdvertisementInterval = basetypes.NewFloat64Null()
+		model.AdvertisementInterval = basetypes.NewInt64Null()
 	}
 	// Handling Lists
 	if sdk.GroupAddresses != nil {
@@ -14341,10 +14249,10 @@ func packLogicalRoutersVrfInnerMulticastRpLocalRpCandidateRpFromSdk(ctx context.
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Priority != nil {
-		model.Priority = basetypes.NewFloat64Value(float64(*sdk.Priority))
+		model.Priority = basetypes.NewInt64Value(int64(*sdk.Priority))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	} else {
-		model.Priority = basetypes.NewFloat64Null()
+		model.Priority = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -14593,7 +14501,7 @@ func unpackLogicalRoutersVrfInnerMulticastStaticRouteInnerToSdk(ctx context.Cont
 
 	// Handling Primitives
 	if !model.Preference.IsNull() && !model.Preference.IsUnknown() {
-		val := float32(model.Preference.ValueFloat64())
+		val := int32(model.Preference.ValueInt64())
 		sdk.Preference = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Preference", "value": *sdk.Preference})
 	}
@@ -14647,10 +14555,10 @@ func packLogicalRoutersVrfInnerMulticastStaticRouteInnerFromSdk(ctx context.Cont
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Preference != nil {
-		model.Preference = basetypes.NewFloat64Value(float64(*sdk.Preference))
+		model.Preference = basetypes.NewInt64Value(int64(*sdk.Preference))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Preference", "value": *sdk.Preference})
 	} else {
-		model.Preference = basetypes.NewFloat64Null()
+		model.Preference = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -15410,7 +15318,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerToSdk(ctx context.Co
 
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -15435,7 +15343,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerToSdk(ctx context.Co
 
 	// Handling Primitives
 	if !model.Priority.IsNull() && !model.Priority.IsUnknown() {
-		val := float32(model.Priority.ValueFloat64())
+		val := int32(model.Priority.ValueInt64())
 		sdk.Priority = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	}
@@ -15517,10 +15425,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerFromSdk(ctx context.Co
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -15545,10 +15453,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerFromSdk(ctx context.Co
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Priority != nil {
-		model.Priority = basetypes.NewFloat64Value(float64(*sdk.Priority))
+		model.Priority = basetypes.NewInt64Value(int64(*sdk.Priority))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	} else {
-		model.Priority = basetypes.NewFloat64Null()
+		model.Priority = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -15896,7 +15804,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mpNeighbor
 
 	// Handling Primitives
 	if !model.Priority.IsNull() && !model.Priority.IsUnknown() {
-		val := float32(model.Priority.ValueFloat64())
+		val := int32(model.Priority.ValueInt64())
 		sdk.Priority = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	}
@@ -15921,10 +15829,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mpNeighborIn
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Priority != nil {
-		model.Priority = basetypes.NewFloat64Value(float64(*sdk.Priority))
+		model.Priority = basetypes.NewInt64Value(int64(*sdk.Priority))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	} else {
-		model.Priority = basetypes.NewFloat64Null()
+		model.Priority = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -15998,35 +15906,35 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerVrTimingToSdk(ctx co
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.DeadCounts.IsNull() && !model.DeadCounts.IsUnknown() {
-		val := float32(model.DeadCounts.ValueFloat64())
+		val := int32(model.DeadCounts.ValueInt64())
 		sdk.DeadCounts = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DeadCounts", "value": *sdk.DeadCounts})
 	}
 
 	// Handling Primitives
 	if !model.GrDelay.IsNull() && !model.GrDelay.IsUnknown() {
-		val := float32(model.GrDelay.ValueFloat64())
+		val := int32(model.GrDelay.ValueInt64())
 		sdk.GrDelay = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "GrDelay", "value": *sdk.GrDelay})
 	}
 
 	// Handling Primitives
 	if !model.HelloInterval.IsNull() && !model.HelloInterval.IsUnknown() {
-		val := float32(model.HelloInterval.ValueFloat64())
+		val := int32(model.HelloInterval.ValueInt64())
 		sdk.HelloInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "HelloInterval", "value": *sdk.HelloInterval})
 	}
 
 	// Handling Primitives
 	if !model.RetransmitInterval.IsNull() && !model.RetransmitInterval.IsUnknown() {
-		val := float32(model.RetransmitInterval.ValueFloat64())
+		val := int32(model.RetransmitInterval.ValueInt64())
 		sdk.RetransmitInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RetransmitInterval", "value": *sdk.RetransmitInterval})
 	}
 
 	// Handling Primitives
 	if !model.TransitDelay.IsNull() && !model.TransitDelay.IsUnknown() {
-		val := float32(model.TransitDelay.ValueFloat64())
+		val := int32(model.TransitDelay.ValueInt64())
 		sdk.TransitDelay = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TransitDelay", "value": *sdk.TransitDelay})
 	}
@@ -16047,42 +15955,42 @@ func packLogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerVrTimingFromSdk(ctx co
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DeadCounts != nil {
-		model.DeadCounts = basetypes.NewFloat64Value(float64(*sdk.DeadCounts))
+		model.DeadCounts = basetypes.NewInt64Value(int64(*sdk.DeadCounts))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DeadCounts", "value": *sdk.DeadCounts})
 	} else {
-		model.DeadCounts = basetypes.NewFloat64Null()
+		model.DeadCounts = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.GrDelay != nil {
-		model.GrDelay = basetypes.NewFloat64Value(float64(*sdk.GrDelay))
+		model.GrDelay = basetypes.NewInt64Value(int64(*sdk.GrDelay))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "GrDelay", "value": *sdk.GrDelay})
 	} else {
-		model.GrDelay = basetypes.NewFloat64Null()
+		model.GrDelay = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.HelloInterval != nil {
-		model.HelloInterval = basetypes.NewFloat64Value(float64(*sdk.HelloInterval))
+		model.HelloInterval = basetypes.NewInt64Value(int64(*sdk.HelloInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "HelloInterval", "value": *sdk.HelloInterval})
 	} else {
-		model.HelloInterval = basetypes.NewFloat64Null()
+		model.HelloInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RetransmitInterval != nil {
-		model.RetransmitInterval = basetypes.NewFloat64Value(float64(*sdk.RetransmitInterval))
+		model.RetransmitInterval = basetypes.NewInt64Value(int64(*sdk.RetransmitInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RetransmitInterval", "value": *sdk.RetransmitInterval})
 	} else {
-		model.RetransmitInterval = basetypes.NewFloat64Null()
+		model.RetransmitInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.TransitDelay != nil {
-		model.TransitDelay = basetypes.NewFloat64Value(float64(*sdk.TransitDelay))
+		model.TransitDelay = basetypes.NewInt64Value(int64(*sdk.TransitDelay))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TransitDelay", "value": *sdk.TransitDelay})
 	} else {
-		model.TransitDelay = basetypes.NewFloat64Null()
+		model.TransitDelay = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -17060,7 +16968,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbrNssaExtRangeInnerToSdk(
 
 	// Handling Primitives
 	if !model.RouteTag.IsNull() && !model.RouteTag.IsUnknown() {
-		val := float32(model.RouteTag.ValueFloat64())
+		val := int32(model.RouteTag.ValueInt64())
 		sdk.RouteTag = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RouteTag", "value": *sdk.RouteTag})
 	}
@@ -17093,10 +17001,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbrNssaExtRangeInnerFromSdk(
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RouteTag != nil {
-		model.RouteTag = basetypes.NewFloat64Value(float64(*sdk.RouteTag))
+		model.RouteTag = basetypes.NewInt64Value(int64(*sdk.RouteTag))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RouteTag", "value": *sdk.RouteTag})
 	} else {
-		model.RouteTag = basetypes.NewFloat64Null()
+		model.RouteTag = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -17170,7 +17078,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultInformationOriginat
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -17197,10 +17105,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultInformationOriginateF
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -17410,7 +17318,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRouteAdvertiseToSdk
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -17437,10 +17345,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRouteAdvertiseFromSdk
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -17685,7 +17593,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerTypeStubToSdk(ctx context.Context,
 
 	// Handling Primitives
 	if !model.DefaultRouteMetric.IsNull() && !model.DefaultRouteMetric.IsUnknown() {
-		val := float32(model.DefaultRouteMetric.ValueFloat64())
+		val := int32(model.DefaultRouteMetric.ValueInt64())
 		sdk.DefaultRouteMetric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DefaultRouteMetric", "value": *sdk.DefaultRouteMetric})
 	}
@@ -17746,10 +17654,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerTypeStubFromSdk(ctx context.Context,
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DefaultRouteMetric != nil {
-		model.DefaultRouteMetric = basetypes.NewFloat64Value(float64(*sdk.DefaultRouteMetric))
+		model.DefaultRouteMetric = basetypes.NewInt64Value(int64(*sdk.DefaultRouteMetric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DefaultRouteMetric", "value": *sdk.DefaultRouteMetric})
 	} else {
-		model.DefaultRouteMetric = basetypes.NewFloat64Null()
+		model.DefaultRouteMetric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -17959,7 +17867,7 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRouteAdvertiseToSdk
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -17980,10 +17888,10 @@ func packLogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRouteAdvertiseFromSdk
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -18082,14 +17990,14 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerToSdk(ctx context.
 
 	// Handling Primitives
 	if !model.InstanceId.IsNull() && !model.InstanceId.IsUnknown() {
-		val := float32(model.InstanceId.ValueFloat64())
+		val := int32(model.InstanceId.ValueInt64())
 		sdk.InstanceId = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InstanceId", "value": *sdk.InstanceId})
 	}
 
 	// Handling Primitives
 	if !model.InterfaceId.IsNull() && !model.InterfaceId.IsUnknown() {
-		val := float32(model.InterfaceId.ValueFloat64())
+		val := int32(model.InterfaceId.ValueInt64())
 		sdk.InterfaceId = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
 	}
@@ -18182,18 +18090,18 @@ func packLogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerFromSdk(ctx context.
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.InstanceId != nil {
-		model.InstanceId = basetypes.NewFloat64Value(float64(*sdk.InstanceId))
+		model.InstanceId = basetypes.NewInt64Value(int64(*sdk.InstanceId))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "InstanceId", "value": *sdk.InstanceId})
 	} else {
-		model.InstanceId = basetypes.NewFloat64Null()
+		model.InstanceId = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.InterfaceId != nil {
-		model.InterfaceId = basetypes.NewFloat64Value(float64(*sdk.InterfaceId))
+		model.InterfaceId = basetypes.NewInt64Value(int64(*sdk.InterfaceId))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
 	} else {
-		model.InterfaceId = basetypes.NewFloat64Null()
+		model.InterfaceId = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -18316,28 +18224,28 @@ func unpackLogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerVrTimingToSdk(ctx 
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.DeadCounts.IsNull() && !model.DeadCounts.IsUnknown() {
-		val := float32(model.DeadCounts.ValueFloat64())
+		val := int32(model.DeadCounts.ValueInt64())
 		sdk.DeadCounts = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DeadCounts", "value": *sdk.DeadCounts})
 	}
 
 	// Handling Primitives
 	if !model.HelloInterval.IsNull() && !model.HelloInterval.IsUnknown() {
-		val := float32(model.HelloInterval.ValueFloat64())
+		val := int32(model.HelloInterval.ValueInt64())
 		sdk.HelloInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "HelloInterval", "value": *sdk.HelloInterval})
 	}
 
 	// Handling Primitives
 	if !model.RetransmitInterval.IsNull() && !model.RetransmitInterval.IsUnknown() {
-		val := float32(model.RetransmitInterval.ValueFloat64())
+		val := int32(model.RetransmitInterval.ValueInt64())
 		sdk.RetransmitInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RetransmitInterval", "value": *sdk.RetransmitInterval})
 	}
 
 	// Handling Primitives
 	if !model.TransitDelay.IsNull() && !model.TransitDelay.IsUnknown() {
-		val := float32(model.TransitDelay.ValueFloat64())
+		val := int32(model.TransitDelay.ValueInt64())
 		sdk.TransitDelay = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TransitDelay", "value": *sdk.TransitDelay})
 	}
@@ -18358,34 +18266,34 @@ func packLogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerVrTimingFromSdk(ctx 
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DeadCounts != nil {
-		model.DeadCounts = basetypes.NewFloat64Value(float64(*sdk.DeadCounts))
+		model.DeadCounts = basetypes.NewInt64Value(int64(*sdk.DeadCounts))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DeadCounts", "value": *sdk.DeadCounts})
 	} else {
-		model.DeadCounts = basetypes.NewFloat64Null()
+		model.DeadCounts = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.HelloInterval != nil {
-		model.HelloInterval = basetypes.NewFloat64Value(float64(*sdk.HelloInterval))
+		model.HelloInterval = basetypes.NewInt64Value(int64(*sdk.HelloInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "HelloInterval", "value": *sdk.HelloInterval})
 	} else {
-		model.HelloInterval = basetypes.NewFloat64Null()
+		model.HelloInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RetransmitInterval != nil {
-		model.RetransmitInterval = basetypes.NewFloat64Value(float64(*sdk.RetransmitInterval))
+		model.RetransmitInterval = basetypes.NewInt64Value(int64(*sdk.RetransmitInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RetransmitInterval", "value": *sdk.RetransmitInterval})
 	} else {
-		model.RetransmitInterval = basetypes.NewFloat64Null()
+		model.RetransmitInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.TransitDelay != nil {
-		model.TransitDelay = basetypes.NewFloat64Value(float64(*sdk.TransitDelay))
+		model.TransitDelay = basetypes.NewInt64Value(int64(*sdk.TransitDelay))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TransitDelay", "value": *sdk.TransitDelay})
 	} else {
-		model.TransitDelay = basetypes.NewFloat64Null()
+		model.TransitDelay = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -18704,7 +18612,7 @@ func unpackLogicalRoutersVrfInnerOspfExportRulesInnerToSdk(ctx context.Context, 
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -18743,10 +18651,10 @@ func packLogicalRoutersVrfInnerOspfExportRulesInnerFromSdk(ctx context.Context, 
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -18981,7 +18889,7 @@ func unpackLogicalRoutersVrfInnerOspfFloodPreventionHelloToSdk(ctx context.Conte
 
 	// Handling Primitives
 	if !model.MaxPacket.IsNull() && !model.MaxPacket.IsUnknown() {
-		val := float32(model.MaxPacket.ValueFloat64())
+		val := int32(model.MaxPacket.ValueInt64())
 		sdk.MaxPacket = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaxPacket", "value": *sdk.MaxPacket})
 	}
@@ -19010,10 +18918,10 @@ func packLogicalRoutersVrfInnerOspfFloodPreventionHelloFromSdk(ctx context.Conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MaxPacket != nil {
-		model.MaxPacket = basetypes.NewFloat64Value(float64(*sdk.MaxPacket))
+		model.MaxPacket = basetypes.NewInt64Value(int64(*sdk.MaxPacket))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaxPacket", "value": *sdk.MaxPacket})
 	} else {
-		model.MaxPacket = basetypes.NewFloat64Null()
+		model.MaxPacket = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -19093,7 +19001,7 @@ func unpackLogicalRoutersVrfInnerOspfGracefulRestartToSdk(ctx context.Context, o
 
 	// Handling Primitives
 	if !model.GracePeriod.IsNull() && !model.GracePeriod.IsUnknown() {
-		val := float32(model.GracePeriod.ValueFloat64())
+		val := int32(model.GracePeriod.ValueInt64())
 		sdk.GracePeriod = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "GracePeriod", "value": *sdk.GracePeriod})
 	}
@@ -19106,7 +19014,7 @@ func unpackLogicalRoutersVrfInnerOspfGracefulRestartToSdk(ctx context.Context, o
 
 	// Handling Primitives
 	if !model.MaxNeighborRestartTime.IsNull() && !model.MaxNeighborRestartTime.IsUnknown() {
-		val := float32(model.MaxNeighborRestartTime.ValueFloat64())
+		val := int32(model.MaxNeighborRestartTime.ValueInt64())
 		sdk.MaxNeighborRestartTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaxNeighborRestartTime", "value": *sdk.MaxNeighborRestartTime})
 	}
@@ -19141,10 +19049,10 @@ func packLogicalRoutersVrfInnerOspfGracefulRestartFromSdk(ctx context.Context, s
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.GracePeriod != nil {
-		model.GracePeriod = basetypes.NewFloat64Value(float64(*sdk.GracePeriod))
+		model.GracePeriod = basetypes.NewInt64Value(int64(*sdk.GracePeriod))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "GracePeriod", "value": *sdk.GracePeriod})
 	} else {
-		model.GracePeriod = basetypes.NewFloat64Null()
+		model.GracePeriod = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -19157,10 +19065,10 @@ func packLogicalRoutersVrfInnerOspfGracefulRestartFromSdk(ctx context.Context, s
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.MaxNeighborRestartTime != nil {
-		model.MaxNeighborRestartTime = basetypes.NewFloat64Value(float64(*sdk.MaxNeighborRestartTime))
+		model.MaxNeighborRestartTime = basetypes.NewInt64Value(int64(*sdk.MaxNeighborRestartTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaxNeighborRestartTime", "value": *sdk.MaxNeighborRestartTime})
 	} else {
-		model.MaxNeighborRestartTime = basetypes.NewFloat64Null()
+		model.MaxNeighborRestartTime = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -19242,14 +19150,14 @@ func unpackLogicalRoutersVrfInnerOspfVrTimersToSdk(ctx context.Context, obj type
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.LsaInterval.IsNull() && !model.LsaInterval.IsUnknown() {
-		val := float32(model.LsaInterval.ValueFloat64())
+		val := int32(model.LsaInterval.ValueInt64())
 		sdk.LsaInterval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LsaInterval", "value": *sdk.LsaInterval})
 	}
 
 	// Handling Primitives
 	if !model.SpfCalculationDelay.IsNull() && !model.SpfCalculationDelay.IsUnknown() {
-		val := float32(model.SpfCalculationDelay.ValueFloat64())
+		val := int32(model.SpfCalculationDelay.ValueInt64())
 		sdk.SpfCalculationDelay = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SpfCalculationDelay", "value": *sdk.SpfCalculationDelay})
 	}
@@ -19270,18 +19178,18 @@ func packLogicalRoutersVrfInnerOspfVrTimersFromSdk(ctx context.Context, sdk netw
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.LsaInterval != nil {
-		model.LsaInterval = basetypes.NewFloat64Value(float64(*sdk.LsaInterval))
+		model.LsaInterval = basetypes.NewInt64Value(int64(*sdk.LsaInterval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LsaInterval", "value": *sdk.LsaInterval})
 	} else {
-		model.LsaInterval = basetypes.NewFloat64Null()
+		model.LsaInterval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.SpfCalculationDelay != nil {
-		model.SpfCalculationDelay = basetypes.NewFloat64Value(float64(*sdk.SpfCalculationDelay))
+		model.SpfCalculationDelay = basetypes.NewInt64Value(int64(*sdk.SpfCalculationDelay))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SpfCalculationDelay", "value": *sdk.SpfCalculationDelay})
 	} else {
-		model.SpfCalculationDelay = basetypes.NewFloat64Null()
+		model.SpfCalculationDelay = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -19905,7 +19813,7 @@ func unpackLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerToSdk(ctx context.
 
 	// Handling Primitives
 	if !model.InstanceId.IsNull() && !model.InstanceId.IsUnknown() {
-		val := float32(model.InstanceId.ValueFloat64())
+		val := int32(model.InstanceId.ValueInt64())
 		sdk.InstanceId = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InstanceId", "value": *sdk.InstanceId})
 	}
@@ -19925,7 +19833,7 @@ func unpackLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerToSdk(ctx context.
 
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -19945,7 +19853,7 @@ func unpackLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerToSdk(ctx context.
 	// Handling Lists
 	if !model.Neighbor.IsNull() && !model.Neighbor.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Neighbor")
-		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx, model.Neighbor)
+		unpacked, d := unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx, model.Neighbor)
 		diags.Append(d...)
 		sdk.Neighbor = unpacked
 	}
@@ -19958,7 +19866,7 @@ func unpackLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerToSdk(ctx context.
 
 	// Handling Primitives
 	if !model.Priority.IsNull() && !model.Priority.IsUnknown() {
-		val := float32(model.Priority.ValueFloat64())
+		val := int32(model.Priority.ValueInt64())
 		sdk.Priority = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	}
@@ -20027,10 +19935,10 @@ func packLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerFromSdk(ctx context.
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.InstanceId != nil {
-		model.InstanceId = basetypes.NewFloat64Value(float64(*sdk.InstanceId))
+		model.InstanceId = basetypes.NewInt64Value(int64(*sdk.InstanceId))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "InstanceId", "value": *sdk.InstanceId})
 	} else {
-		model.InstanceId = basetypes.NewFloat64Null()
+		model.InstanceId = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -20048,10 +19956,10 @@ func packLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerFromSdk(ctx context.
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -20068,11 +19976,11 @@ func packLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerFromSdk(ctx context.
 	// Handling Lists
 	if sdk.Neighbor != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Neighbor")
-		packed, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx, sdk.Neighbor)
+		packed, d := packEthernetInterfacesLayer3IpInnerListFromSdk(ctx, sdk.Neighbor)
 		diags.Append(d...)
 		model.Neighbor = packed
 	} else {
-		model.Neighbor = basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType())
+		model.Neighbor = basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -20085,10 +19993,10 @@ func packLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerFromSdk(ctx context.
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Priority != nil {
-		model.Priority = basetypes.NewFloat64Value(float64(*sdk.Priority))
+		model.Priority = basetypes.NewInt64Value(int64(*sdk.Priority))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Priority", "value": *sdk.Priority})
 	} else {
-		model.Priority = basetypes.NewFloat64Null()
+		model.Priority = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -20825,7 +20733,7 @@ func unpackLogicalRoutersVrfInnerOspfv3AreaInnerTypeNssaAbrNssaExtRangeInnerToSd
 
 	// Handling Primitives
 	if !model.RouteTag.IsNull() && !model.RouteTag.IsUnknown() {
-		val := float32(model.RouteTag.ValueFloat64())
+		val := int32(model.RouteTag.ValueInt64())
 		sdk.RouteTag = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RouteTag", "value": *sdk.RouteTag})
 	}
@@ -20869,10 +20777,10 @@ func packLogicalRoutersVrfInnerOspfv3AreaInnerTypeNssaAbrNssaExtRangeInnerFromSd
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.RouteTag != nil {
-		model.RouteTag = basetypes.NewFloat64Value(float64(*sdk.RouteTag))
+		model.RouteTag = basetypes.NewInt64Value(int64(*sdk.RouteTag))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RouteTag", "value": *sdk.RouteTag})
 	} else {
-		model.RouteTag = basetypes.NewFloat64Null()
+		model.RouteTag = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
@@ -23064,7 +22972,7 @@ func unpackLogicalRoutersVrfInnerRipInterfaceInnerInterfaceInboundDistributeList
 
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -23093,10 +23001,10 @@ func packLogicalRoutersVrfInnerRipInterfaceInnerInterfaceInboundDistributeListFr
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 
@@ -23405,7 +23313,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerToSdk(ctx context
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.AdminDist.IsNull() && !model.AdminDist.IsUnknown() {
-		val := float32(model.AdminDist.ValueFloat64())
+		val := int32(model.AdminDist.ValueInt64())
 		sdk.AdminDist = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AdminDist", "value": *sdk.AdminDist})
 	}
@@ -23437,7 +23345,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerToSdk(ctx context
 
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -23503,10 +23411,10 @@ func packLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerFromSdk(ctx context
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.AdminDist != nil {
-		model.AdminDist = basetypes.NewFloat64Value(float64(*sdk.AdminDist))
+		model.AdminDist = basetypes.NewInt64Value(int64(*sdk.AdminDist))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AdminDist", "value": *sdk.AdminDist})
 	} else {
-		model.AdminDist = basetypes.NewFloat64Null()
+		model.AdminDist = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -23540,10 +23448,10 @@ func packLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerFromSdk(ctx context
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -23863,7 +23771,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorToSdk(
 
 	// Handling Primitives
 	if !model.HoldTime.IsNull() && !model.HoldTime.IsUnknown() {
-		val := float32(model.HoldTime.ValueFloat64())
+		val := int32(model.HoldTime.ValueInt64())
 		sdk.HoldTime = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "HoldTime", "value": *sdk.HoldTime})
 	}
@@ -23908,10 +23816,10 @@ func packLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorFromSdk(
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.HoldTime != nil {
-		model.HoldTime = basetypes.NewFloat64Value(float64(*sdk.HoldTime))
+		model.HoldTime = basetypes.NewInt64Value(int64(*sdk.HoldTime))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "HoldTime", "value": *sdk.HoldTime})
 	} else {
-		model.HoldTime = basetypes.NewFloat64Null()
+		model.HoldTime = basetypes.NewInt64Null()
 	}
 	// Handling Lists
 	if sdk.MonitorDestinations != nil {
@@ -23994,7 +23902,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonito
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Count.IsNull() && !model.Count.IsUnknown() {
-		val := float32(model.Count.ValueFloat64())
+		val := int32(model.Count.ValueInt64())
 		sdk.Count = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Count", "value": *sdk.Count})
 	}
@@ -24019,7 +23927,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonito
 
 	// Handling Primitives
 	if !model.Interval.IsNull() && !model.Interval.IsUnknown() {
-		val := float32(model.Interval.ValueFloat64())
+		val := int32(model.Interval.ValueInt64())
 		sdk.Interval = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Interval", "value": *sdk.Interval})
 	}
@@ -24052,10 +23960,10 @@ func packLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonitorD
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Count != nil {
-		model.Count = basetypes.NewFloat64Value(float64(*sdk.Count))
+		model.Count = basetypes.NewInt64Value(int64(*sdk.Count))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Count", "value": *sdk.Count})
 	} else {
-		model.Count = basetypes.NewFloat64Null()
+		model.Count = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -24084,10 +23992,10 @@ func packLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonitorD
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Interval != nil {
-		model.Interval = basetypes.NewFloat64Value(float64(*sdk.Interval))
+		model.Interval = basetypes.NewInt64Value(int64(*sdk.Interval))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Interval", "value": *sdk.Interval})
 	} else {
-		model.Interval = basetypes.NewFloat64Null()
+		model.Interval = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -24432,7 +24340,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerToSdk(ctx conte
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.AdminDist.IsNull() && !model.AdminDist.IsUnknown() {
-		val := float32(model.AdminDist.ValueFloat64())
+		val := int32(model.AdminDist.ValueInt64())
 		sdk.AdminDist = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AdminDist", "value": *sdk.AdminDist})
 	}
@@ -24464,7 +24372,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerToSdk(ctx conte
 
 	// Handling Primitives
 	if !model.Metric.IsNull() && !model.Metric.IsUnknown() {
-		val := float32(model.Metric.ValueFloat64())
+		val := int32(model.Metric.ValueInt64())
 		sdk.Metric = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	}
@@ -24543,10 +24451,10 @@ func packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.AdminDist != nil {
-		model.AdminDist = basetypes.NewFloat64Value(float64(*sdk.AdminDist))
+		model.AdminDist = basetypes.NewInt64Value(int64(*sdk.AdminDist))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AdminDist", "value": *sdk.AdminDist})
 	} else {
-		model.AdminDist = basetypes.NewFloat64Null()
+		model.AdminDist = basetypes.NewInt64Null()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -24580,10 +24488,10 @@ func packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Metric != nil {
-		model.Metric = basetypes.NewFloat64Value(float64(*sdk.Metric))
+		model.Metric = basetypes.NewInt64Value(int64(*sdk.Metric))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Metric", "value": *sdk.Metric})
 	} else {
-		model.Metric = basetypes.NewFloat64Null()
+		model.Metric = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -24815,63 +24723,63 @@ func unpackLogicalRoutersVrfInnerVrAdminDistsToSdk(ctx context.Context, obj type
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Ebgp.IsNull() && !model.Ebgp.IsUnknown() {
-		val := float32(model.Ebgp.ValueFloat64())
+		val := int32(model.Ebgp.ValueInt64())
 		sdk.Ebgp = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ebgp", "value": *sdk.Ebgp})
 	}
 
 	// Handling Primitives
 	if !model.Ibgp.IsNull() && !model.Ibgp.IsUnknown() {
-		val := float32(model.Ibgp.ValueFloat64())
+		val := int32(model.Ibgp.ValueInt64())
 		sdk.Ibgp = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ibgp", "value": *sdk.Ibgp})
 	}
 
 	// Handling Primitives
 	if !model.OspfExt.IsNull() && !model.OspfExt.IsUnknown() {
-		val := float32(model.OspfExt.ValueFloat64())
+		val := int32(model.OspfExt.ValueInt64())
 		sdk.OspfExt = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "OspfExt", "value": *sdk.OspfExt})
 	}
 
 	// Handling Primitives
 	if !model.OspfInt.IsNull() && !model.OspfInt.IsUnknown() {
-		val := float32(model.OspfInt.ValueFloat64())
+		val := int32(model.OspfInt.ValueInt64())
 		sdk.OspfInt = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "OspfInt", "value": *sdk.OspfInt})
 	}
 
 	// Handling Primitives
 	if !model.Ospfv3Ext.IsNull() && !model.Ospfv3Ext.IsUnknown() {
-		val := float32(model.Ospfv3Ext.ValueFloat64())
+		val := int32(model.Ospfv3Ext.ValueInt64())
 		sdk.Ospfv3Ext = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ospfv3Ext", "value": *sdk.Ospfv3Ext})
 	}
 
 	// Handling Primitives
 	if !model.Ospfv3Int.IsNull() && !model.Ospfv3Int.IsUnknown() {
-		val := float32(model.Ospfv3Int.ValueFloat64())
+		val := int32(model.Ospfv3Int.ValueInt64())
 		sdk.Ospfv3Int = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ospfv3Int", "value": *sdk.Ospfv3Int})
 	}
 
 	// Handling Primitives
 	if !model.Rip.IsNull() && !model.Rip.IsUnknown() {
-		val := float32(model.Rip.ValueFloat64())
+		val := int32(model.Rip.ValueInt64())
 		sdk.Rip = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Rip", "value": *sdk.Rip})
 	}
 
 	// Handling Primitives
 	if !model.Static.IsNull() && !model.Static.IsUnknown() {
-		val := float32(model.Static.ValueFloat64())
+		val := int32(model.Static.ValueInt64())
 		sdk.Static = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Static", "value": *sdk.Static})
 	}
 
 	// Handling Primitives
 	if !model.StaticIpv6.IsNull() && !model.StaticIpv6.IsUnknown() {
-		val := float32(model.StaticIpv6.ValueFloat64())
+		val := int32(model.StaticIpv6.ValueInt64())
 		sdk.StaticIpv6 = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "StaticIpv6", "value": *sdk.StaticIpv6})
 	}
@@ -24892,74 +24800,74 @@ func packLogicalRoutersVrfInnerVrAdminDistsFromSdk(ctx context.Context, sdk netw
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Ebgp != nil {
-		model.Ebgp = basetypes.NewFloat64Value(float64(*sdk.Ebgp))
+		model.Ebgp = basetypes.NewInt64Value(int64(*sdk.Ebgp))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ebgp", "value": *sdk.Ebgp})
 	} else {
-		model.Ebgp = basetypes.NewFloat64Null()
+		model.Ebgp = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Ibgp != nil {
-		model.Ibgp = basetypes.NewFloat64Value(float64(*sdk.Ibgp))
+		model.Ibgp = basetypes.NewInt64Value(int64(*sdk.Ibgp))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ibgp", "value": *sdk.Ibgp})
 	} else {
-		model.Ibgp = basetypes.NewFloat64Null()
+		model.Ibgp = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.OspfExt != nil {
-		model.OspfExt = basetypes.NewFloat64Value(float64(*sdk.OspfExt))
+		model.OspfExt = basetypes.NewInt64Value(int64(*sdk.OspfExt))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "OspfExt", "value": *sdk.OspfExt})
 	} else {
-		model.OspfExt = basetypes.NewFloat64Null()
+		model.OspfExt = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.OspfInt != nil {
-		model.OspfInt = basetypes.NewFloat64Value(float64(*sdk.OspfInt))
+		model.OspfInt = basetypes.NewInt64Value(int64(*sdk.OspfInt))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "OspfInt", "value": *sdk.OspfInt})
 	} else {
-		model.OspfInt = basetypes.NewFloat64Null()
+		model.OspfInt = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Ospfv3Ext != nil {
-		model.Ospfv3Ext = basetypes.NewFloat64Value(float64(*sdk.Ospfv3Ext))
+		model.Ospfv3Ext = basetypes.NewInt64Value(int64(*sdk.Ospfv3Ext))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ospfv3Ext", "value": *sdk.Ospfv3Ext})
 	} else {
-		model.Ospfv3Ext = basetypes.NewFloat64Null()
+		model.Ospfv3Ext = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Ospfv3Int != nil {
-		model.Ospfv3Int = basetypes.NewFloat64Value(float64(*sdk.Ospfv3Int))
+		model.Ospfv3Int = basetypes.NewInt64Value(int64(*sdk.Ospfv3Int))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ospfv3Int", "value": *sdk.Ospfv3Int})
 	} else {
-		model.Ospfv3Int = basetypes.NewFloat64Null()
+		model.Ospfv3Int = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Rip != nil {
-		model.Rip = basetypes.NewFloat64Value(float64(*sdk.Rip))
+		model.Rip = basetypes.NewInt64Value(int64(*sdk.Rip))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Rip", "value": *sdk.Rip})
 	} else {
-		model.Rip = basetypes.NewFloat64Null()
+		model.Rip = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Static != nil {
-		model.Static = basetypes.NewFloat64Value(float64(*sdk.Static))
+		model.Static = basetypes.NewInt64Value(int64(*sdk.Static))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Static", "value": *sdk.Static})
 	} else {
-		model.Static = basetypes.NewFloat64Null()
+		model.Static = basetypes.NewInt64Null()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.StaticIpv6 != nil {
-		model.StaticIpv6 = basetypes.NewFloat64Value(float64(*sdk.StaticIpv6))
+		model.StaticIpv6 = basetypes.NewInt64Value(int64(*sdk.StaticIpv6))
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "StaticIpv6", "value": *sdk.StaticIpv6})
 	} else {
-		model.StaticIpv6 = basetypes.NewFloat64Null()
+		model.StaticIpv6 = basetypes.NewInt64Null()
 	}
 	diags.Append(d...)
 

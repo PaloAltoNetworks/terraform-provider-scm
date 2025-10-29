@@ -27,6 +27,7 @@ func unpackBgpRedistributionProfilesToSdk(ctx context.Context, obj types.Object)
 
 	var sdk network_services.BgpRedistributionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

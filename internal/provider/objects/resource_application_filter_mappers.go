@@ -27,6 +27,7 @@ func unpackApplicationFiltersToSdk(ctx context.Context, obj types.Object) (*obje
 
 	var sdk objects.ApplicationFilters
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.Category.IsNull() && !model.Category.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field Category")

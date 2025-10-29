@@ -28,6 +28,7 @@ func unpackTrafficSteeringRulesToSdk(ctx context.Context, obj types.Object) (*de
 
 	var sdk deployment_services.TrafficSteeringRules
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Action.IsNull() && !model.Action.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Action")

@@ -27,6 +27,7 @@ func unpackBgpRouteMapRedistributionsToSdk(ctx context.Context, obj types.Object
 
 	var sdk network_services.BgpRouteMapRedistributions
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Bgp.IsNull() && !model.Bgp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Bgp")

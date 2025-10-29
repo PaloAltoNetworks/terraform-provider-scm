@@ -27,6 +27,7 @@ func unpackProfileGroupsToSdk(ctx context.Context, obj types.Object) (*security_
 
 	var sdk security_services.ProfileGroups
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.AiSecurity.IsNull() && !model.AiSecurity.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field AiSecurity")

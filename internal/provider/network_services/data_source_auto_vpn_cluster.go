@@ -103,6 +103,11 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading AutoVpnClusters", fmt.Sprintf("Could not read AutoVpnClusters with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +159,11 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing AutoVpnClusterss", fmt.Sprintf("Could not list AutoVpnClusterss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

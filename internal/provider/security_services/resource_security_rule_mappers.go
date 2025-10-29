@@ -27,6 +27,7 @@ func unpackSecurityRulesToSdk(ctx context.Context, obj types.Object) (*security_
 
 	var sdk security_services.SecurityRules
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Action.IsNull() && !model.Action.IsUnknown() {
 		sdk.Action = model.Action.ValueStringPointer()

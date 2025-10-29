@@ -67,6 +67,7 @@ func unpackOspfAuthProfilesToSdk(ctx context.Context, obj types.Object) (*networ
 
 	var sdk network_services.OspfAuthProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

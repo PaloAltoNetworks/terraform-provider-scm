@@ -15,19 +15,19 @@ DynamicUserGroup resource
 ```terraform
 # First, create the tags that will be used in the dynamic user group's filter.
 resource "scm_tag" "scm_dug_tag_1" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_dug_tag_1"
   color  = "Red"
 }
 
 resource "scm_tag" "scm_dug_tag_2" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_dug_tag_2"
   color  = "Blue"
 }
 
 resource "scm_tag" "scm_dug_tag_3" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_dug_tag_3"
   color  = "Green"
 }

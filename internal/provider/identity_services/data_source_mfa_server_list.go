@@ -93,11 +93,22 @@ func (d *MfaServerListDataSource) Read(ctx context.Context, req datasource.ReadR
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
 	}
 
+	if !data.Position.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "position", "value": data.Position })
+		listReq = listReq.Position(data.Position.ValueString())
+		// END: Add dynamic query parameter handling
+	}
 
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing MfaServerss", fmt.Sprintf("Could not list MfaServerss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

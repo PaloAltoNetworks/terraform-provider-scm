@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -45,7 +46,13 @@ type EthernetInterfaces struct {
 
 // EthernetInterfacesLayer2 represents a nested structure within the EthernetInterfaces model
 type EthernetInterfacesLayer2 struct {
-	VlanTag basetypes.Int64Value `tfsdk:"vlan_tag"`
+	Lldp    basetypes.ObjectValue `tfsdk:"lldp"`
+	VlanTag basetypes.StringValue `tfsdk:"vlan_tag"`
+}
+
+// EthernetInterfacesLayer2Lldp represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer2Lldp struct {
+	Enable basetypes.BoolValue `tfsdk:"enable"`
 }
 
 // EthernetInterfacesLayer3 represents a nested structure within the EthernetInterfaces model
@@ -76,23 +83,23 @@ type EthernetInterfacesLayer3DdnsConfig struct {
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
 }
 
-// EthernetInterfacesDhcpClient represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesDhcpClient struct {
-	DhcpClient basetypes.ObjectValue `tfsdk:"dhcp_client"`
-}
-
-// EthernetInterfacesDhcpClientDhcpClient represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesDhcpClientDhcpClient struct {
+// EthernetInterfacesLayer3DhcpClient represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3DhcpClient struct {
 	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
 	Enable             basetypes.BoolValue   `tfsdk:"enable"`
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
-// EthernetInterfacesDhcpClientDhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesDhcpClientDhcpClientSendHostname struct {
+// EthernetInterfacesLayer3DhcpClientSendHostname represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3DhcpClientSendHostname struct {
 	Enable   basetypes.BoolValue   `tfsdk:"enable"`
 	Hostname basetypes.StringValue `tfsdk:"hostname"`
+}
+
+// EthernetInterfacesLayer3IpInner represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3IpInner struct {
+	Name basetypes.StringValue `tfsdk:"name"`
 }
 
 // EthernetInterfacesLayer3Pppoe represents a nested structure within the EthernetInterfaces model
@@ -101,11 +108,16 @@ type EthernetInterfacesLayer3Pppoe struct {
 	Authentication     basetypes.StringValue `tfsdk:"authentication"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
 	Enable             basetypes.BoolValue   `tfsdk:"enable"`
-	Passive            basetypes.BoolValue   `tfsdk:"passive"`
+	Passive            basetypes.ObjectValue `tfsdk:"passive"`
 	Password           basetypes.StringValue `tfsdk:"password"`
 	Service            basetypes.StringValue `tfsdk:"service"`
 	StaticAddress      basetypes.ObjectValue `tfsdk:"static_address"`
 	Username           basetypes.StringValue `tfsdk:"username"`
+}
+
+// EthernetInterfacesLayer3PppoePassive represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesLayer3PppoePassive struct {
+	Enable basetypes.BoolValue `tfsdk:"enable"`
 }
 
 // EthernetInterfacesLayer3PppoeStaticAddress represents a nested structure within the EthernetInterfaces model
@@ -131,7 +143,12 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 		"id":               basetypes.StringType{},
 		"layer2": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"vlan_tag": basetypes.Int64Type{},
+				"lldp": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+					},
+				},
+				"vlan_tag": basetypes.StringType{},
 			},
 		},
 		"layer3": basetypes.ObjectType{
@@ -155,33 +172,37 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 				},
 				"dhcp_client": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"dhcp_client": basetypes.ObjectType{
+						"create_default_route": basetypes.BoolType{},
+						"default_route_metric": basetypes.Int64Type{},
+						"enable":               basetypes.BoolType{},
+						"send_hostname": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"create_default_route": basetypes.BoolType{},
-								"default_route_metric": basetypes.Int64Type{},
-								"enable":               basetypes.BoolType{},
-								"send_hostname": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"enable":   basetypes.BoolType{},
-										"hostname": basetypes.StringType{},
-									},
-								},
+								"enable":   basetypes.BoolType{},
+								"hostname": basetypes.StringType{},
 							},
 						},
 					},
 				},
 				"interface_management_profile": basetypes.StringType{},
-				"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
-				"mtu":                          basetypes.Int64Type{},
+				"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name": basetypes.StringType{},
+					},
+				}},
+				"mtu": basetypes.Int64Type{},
 				"pppoe": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"access_concentrator":  basetypes.StringType{},
 						"authentication":       basetypes.StringType{},
 						"default_route_metric": basetypes.Int64Type{},
 						"enable":               basetypes.BoolType{},
-						"passive":              basetypes.BoolType{},
-						"password":             basetypes.StringType{},
-						"service":              basetypes.StringType{},
+						"passive": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"enable": basetypes.BoolType{},
+							},
+						},
+						"password": basetypes.StringType{},
+						"service":  basetypes.StringType{},
 						"static_address": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"ip": basetypes.StringType{},
@@ -219,12 +240,31 @@ func (o EthernetInterfaces) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the EthernetInterfacesLayer2 model.
 func (o EthernetInterfacesLayer2) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"vlan_tag": basetypes.Int64Type{},
+		"lldp": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable": basetypes.BoolType{},
+			},
+		},
+		"vlan_tag": basetypes.StringType{},
 	}
 }
 
 // AttrType returns the attribute type for a list of EthernetInterfacesLayer2 objects.
 func (o EthernetInterfacesLayer2) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer2Lldp model.
+func (o EthernetInterfacesLayer2Lldp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable": basetypes.BoolType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer2Lldp objects.
+func (o EthernetInterfacesLayer2Lldp) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -252,33 +292,37 @@ func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 		},
 		"dhcp_client": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"dhcp_client": basetypes.ObjectType{
+				"create_default_route": basetypes.BoolType{},
+				"default_route_metric": basetypes.Int64Type{},
+				"enable":               basetypes.BoolType{},
+				"send_hostname": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"create_default_route": basetypes.BoolType{},
-						"default_route_metric": basetypes.Int64Type{},
-						"enable":               basetypes.BoolType{},
-						"send_hostname": basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{
-								"enable":   basetypes.BoolType{},
-								"hostname": basetypes.StringType{},
-							},
-						},
+						"enable":   basetypes.BoolType{},
+						"hostname": basetypes.StringType{},
 					},
 				},
 			},
 		},
 		"interface_management_profile": basetypes.StringType{},
-		"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
-		"mtu":                          basetypes.Int64Type{},
+		"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+			},
+		}},
+		"mtu": basetypes.Int64Type{},
 		"pppoe": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"access_concentrator":  basetypes.StringType{},
 				"authentication":       basetypes.StringType{},
 				"default_route_metric": basetypes.Int64Type{},
 				"enable":               basetypes.BoolType{},
-				"passive":              basetypes.BoolType{},
-				"password":             basetypes.StringType{},
-				"service":              basetypes.StringType{},
+				"passive": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+					},
+				},
+				"password": basetypes.StringType{},
+				"service":  basetypes.StringType{},
 				"static_address": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"ip": basetypes.StringType{},
@@ -332,34 +376,8 @@ func (o EthernetInterfacesLayer3DdnsConfig) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClient model.
-func (o EthernetInterfacesDhcpClient) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"dhcp_client": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"create_default_route": basetypes.BoolType{},
-				"default_route_metric": basetypes.Int64Type{},
-				"enable":               basetypes.BoolType{},
-				"send_hostname": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"enable":   basetypes.BoolType{},
-						"hostname": basetypes.StringType{},
-					},
-				},
-			},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClient objects.
-func (o EthernetInterfacesDhcpClient) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClient model.
-func (o EthernetInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3DhcpClient model.
+func (o EthernetInterfacesLayer3DhcpClient) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"create_default_route": basetypes.BoolType{},
 		"default_route_metric": basetypes.Int64Type{},
@@ -373,23 +391,37 @@ func (o EthernetInterfacesDhcpClientDhcpClient) AttrTypes() map[string]attr.Type
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClient objects.
-func (o EthernetInterfacesDhcpClientDhcpClient) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3DhcpClient objects.
+func (o EthernetInterfacesLayer3DhcpClient) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesDhcpClientDhcpClientSendHostname model.
-func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3DhcpClientSendHostname model.
+func (o EthernetInterfacesLayer3DhcpClientSendHostname) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":   basetypes.BoolType{},
 		"hostname": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesDhcpClientDhcpClientSendHostname objects.
-func (o EthernetInterfacesDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3DhcpClientSendHostname objects.
+func (o EthernetInterfacesLayer3DhcpClientSendHostname) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3IpInner model.
+func (o EthernetInterfacesLayer3IpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3IpInner objects.
+func (o EthernetInterfacesLayer3IpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -402,9 +434,13 @@ func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
 		"authentication":       basetypes.StringType{},
 		"default_route_metric": basetypes.Int64Type{},
 		"enable":               basetypes.BoolType{},
-		"passive":              basetypes.BoolType{},
-		"password":             basetypes.StringType{},
-		"service":              basetypes.StringType{},
+		"passive": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable": basetypes.BoolType{},
+			},
+		},
+		"password": basetypes.StringType{},
+		"service":  basetypes.StringType{},
 		"static_address": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"ip": basetypes.StringType{},
@@ -416,6 +452,20 @@ func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of EthernetInterfacesLayer3Pppoe objects.
 func (o EthernetInterfacesLayer3Pppoe) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the EthernetInterfacesLayer3PppoePassive model.
+func (o EthernetInterfacesLayer3PppoePassive) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable": basetypes.BoolType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesLayer3PppoePassive objects.
+func (o EthernetInterfacesLayer3PppoePassive) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -462,11 +512,15 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"default_value": schema.StringAttribute{
-			MarkdownDescription: "Default value",
+			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -484,6 +538,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -501,16 +559,41 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"layer2": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer3"),
+					path.MatchRelative().AtParent().AtName("tap"),
+				),
+			},
 			MarkdownDescription: "Layer2",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
-				"vlan_tag": schema.Int64Attribute{
-					MarkdownDescription: "Vlan tag",
+				"lldp": schema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP Settings",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Required:            true,
+						},
+					},
+				},
+				"vlan_tag": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.RegexMatches(regexp.MustCompile("^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"), "pattern must match "+"^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"),
+					},
+					MarkdownDescription: "Assign interface to VLAN tag",
 					Optional:            true,
 				},
 			},
 		},
 		"layer3": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer2"),
+					path.MatchRelative().AtParent().AtName("tap"),
+				),
+			},
 			MarkdownDescription: "Layer3",
 			Optional:            true,
 			Computed:            true,
@@ -522,7 +605,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"hw_address": schema.StringAttribute{
-								MarkdownDescription: "Hw address",
+								MarkdownDescription: "MAC address",
 								Optional:            true,
 							},
 							"name": schema.StringAttribute{
@@ -533,109 +616,142 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 				},
 				"ddns_config": schema.SingleNestedAttribute{
-					MarkdownDescription: "Ddns config",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Ethernet Interfaces.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ddns_cert_profile": schema.StringAttribute{
-							MarkdownDescription: "Ddns cert profile",
-							Optional:            true,
-							Computed:            true,
+							MarkdownDescription: "Certificate profile",
+							Required:            true,
 						},
 						"ddns_enabled": schema.BoolAttribute{
-							MarkdownDescription: "Ddns enabled",
+							MarkdownDescription: "Enable DDNS?",
 							Optional:            true,
 							Computed:            true,
+							Default:             booldefault.StaticBool(false),
 						},
 						"ddns_hostname": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\.\\-]+$"), "pattern must match "+"^[a-zA-Z0-9_\\.\\-]+$"),
+							},
 							MarkdownDescription: "Ddns hostname",
-							Optional:            true,
-							Computed:            true,
+							Required:            true,
 						},
 						"ddns_ip": schema.StringAttribute{
-							MarkdownDescription: "Ddns ip",
+							MarkdownDescription: "IP to register (static only)",
 							Optional:            true,
 							Computed:            true,
 						},
 						"ddns_update_interval": schema.Int64Attribute{
-							MarkdownDescription: "Ddns update interval",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 30),
+							},
+							MarkdownDescription: "Update interval (days)",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(1),
 						},
 						"ddns_vendor": schema.StringAttribute{
-							MarkdownDescription: "Ddns vendor",
-							Optional:            true,
-							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(127),
+							},
+							MarkdownDescription: "DDNS vendor",
+							Required:            true,
 						},
 						"ddns_vendor_config": schema.StringAttribute{
-							MarkdownDescription: "Ddns vendor config",
-							Optional:            true,
-							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+							},
+							MarkdownDescription: "DDNS vendor",
+							Required:            true,
 						},
 					},
 				},
 				"dhcp_client": schema.SingleNestedAttribute{
-					MarkdownDescription: "Dhcp client",
+					Validators: []validator.Object{
+						objectvalidator.ConflictsWith(
+							path.MatchRelative().AtParent().AtName("ip"),
+							path.MatchRelative().AtParent().AtName("pppoe"),
+						),
+					},
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
-						"dhcp_client": schema.SingleNestedAttribute{
-							MarkdownDescription: "Dhcp client",
+						"create_default_route": schema.BoolAttribute{
+							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
+							Optional:            true,
+							Computed:            true,
+							Default:             booldefault.StaticBool(true),
+						},
+						"default_route_metric": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(1, 65535),
+							},
+							MarkdownDescription: "Metric of the default route created",
+							Optional:            true,
+							Computed:            true,
+							Default:             int64default.StaticInt64(10),
+						},
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable DHCP?",
+							Optional:            true,
+							Computed:            true,
+							Default:             booldefault.StaticBool(true),
+						},
+						"send_hostname": schema.SingleNestedAttribute{
+							MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 							Optional:            true,
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
-								"create_default_route": schema.BoolAttribute{
-									MarkdownDescription: "Create default route",
-									Optional:            true,
-									Computed:            true,
-								},
-								"default_route_metric": schema.Int64Attribute{
-									MarkdownDescription: "Default route metric",
-									Optional:            true,
-									Computed:            true,
-								},
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable",
 									Optional:            true,
 									Computed:            true,
+									Default:             booldefault.StaticBool(true),
 								},
-								"send_hostname": schema.SingleNestedAttribute{
-									MarkdownDescription: "Send hostname",
+								"hostname": schema.StringAttribute{
+									Validators: []validator.String{
+										stringvalidator.LengthAtMost(64),
+										stringvalidator.LengthAtLeast(1),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\._-]+$"), "pattern must match "+"^[a-zA-Z0-9\\._-]+$"),
+									},
+									MarkdownDescription: "Set interface hostname",
 									Optional:            true,
 									Computed:            true,
-									Attributes: map[string]schema.Attribute{
-										"enable": schema.BoolAttribute{
-											MarkdownDescription: "Enable",
-											Optional:            true,
-											Computed:            true,
-										},
-										"hostname": schema.StringAttribute{
-											MarkdownDescription: "Hostname",
-											Optional:            true,
-											Computed:            true,
-										},
-									},
+									Default:             stringdefault.StaticString("system-hostname"),
 								},
 							},
 						},
 					},
 				},
 				"interface_management_profile": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(31),
+					},
 					MarkdownDescription: "Interface management profile",
 					Optional:            true,
 					Computed:            true,
 				},
-				"ip": schema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "Interface IP addresses",
+				"ip": schema.ListNestedAttribute{
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					Optional: true,
-					Computed: true,
+					MarkdownDescription: "Interface IP addresses",
+					Optional:            true,
+					Computed:            true,
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "Name",
+								Required:            true,
+							},
+						},
+					},
 				},
 				"mtu": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -648,7 +764,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				},
 				"pppoe": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
 							path.MatchRelative().AtParent().AtName("ip"),
 						),
@@ -658,6 +774,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"access_concentrator": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+								stringvalidator.LengthAtLeast(1),
+							},
 							MarkdownDescription: "Access concentrator",
 							Optional:            true,
 							Computed:            true,
@@ -671,9 +791,13 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Computed:            true,
 						},
 						"default_route_metric": schema.Int64Attribute{
-							MarkdownDescription: "Default route metric",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 65535),
+							},
+							MarkdownDescription: "Metric of the default route created",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(10),
 						},
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -681,11 +805,16 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Computed:            true,
 							Default:             booldefault.StaticBool(true),
 						},
-						"passive": schema.BoolAttribute{
+						"passive": schema.SingleNestedAttribute{
 							MarkdownDescription: "Passive",
 							Optional:            true,
 							Computed:            true,
-							Default:             booldefault.StaticBool(false),
+							Attributes: map[string]schema.Attribute{
+								"enable": schema.BoolAttribute{
+									MarkdownDescription: "Passive Mode enabled",
+									Required:            true,
+								},
+							},
 						},
 						"password": schema.StringAttribute{
 							Validators: []validator.String{
@@ -710,9 +839,11 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "Ip",
-									Optional:            true,
-									Computed:            true,
+									Validators: []validator.String{
+										stringvalidator.LengthAtMost(63),
+									},
+									MarkdownDescription: "Static IP address",
+									Required:            true,
 								},
 							},
 						},
@@ -729,16 +860,31 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"link_duplex": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("auto", "half", "full"),
+			},
 			MarkdownDescription: "Link duplex",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("auto"),
 		},
 		"link_speed": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("auto", "10", "100", "1000", "10000", "40000", "100000"),
+			},
 			MarkdownDescription: "Link speed",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("auto"),
 		},
 		"link_state": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("auto", "up", "down"),
+			},
 			MarkdownDescription: "Link state",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("auto"),
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "Interface name",
@@ -747,19 +893,31 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		"poe": schema.SingleNestedAttribute{
 			MarkdownDescription: "Poe",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"poe_enabled": schema.BoolAttribute{
-					MarkdownDescription: "Poe enabled",
+					MarkdownDescription: "Enabled PoE?",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(false),
 				},
 				"poe_rsvd_pwr": schema.Int64Attribute{
-					MarkdownDescription: "Poe rsvd pwr",
+					Validators: []validator.Int64{
+						int64validator.Between(0, 90),
+					},
+					MarkdownDescription: "PoE reserved power",
 					Optional:            true,
+					Computed:            true,
+					Default:             int64default.StaticInt64(0),
 				},
 			},
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -770,9 +928,14 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"tap": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer2"),
+					path.MatchRelative().AtParent().AtName("layer3"),
+				),
+			},
 			MarkdownDescription: "Tap",
 			Optional:            true,
-			Computed:            true,
 			Attributes:          map[string]schema.Attribute{},
 		},
 		"tfid": schema.StringAttribute{
@@ -794,7 +957,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"default_value": dsschema.StringAttribute{
-			MarkdownDescription: "Default value",
+			MarkdownDescription: "Default interface assignment",
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
@@ -819,8 +982,18 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Layer2",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"vlan_tag": dsschema.Int64Attribute{
-					MarkdownDescription: "Vlan tag",
+				"lldp": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP Settings",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Computed:            true,
+						},
+					},
+				},
+				"vlan_tag": dsschema.StringAttribute{
+					MarkdownDescription: "Assign interface to VLAN tag",
 					Computed:            true,
 				},
 			},
@@ -835,7 +1008,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
 							"hw_address": dsschema.StringAttribute{
-								MarkdownDescription: "Hw address",
+								MarkdownDescription: "MAC address",
 								Computed:            true,
 							},
 							"name": dsschema.StringAttribute{
@@ -846,15 +1019,15 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ddns_config": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ddns config",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Ethernet Interfaces.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"ddns_cert_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns cert profile",
+							MarkdownDescription: "Certificate profile",
 							Computed:            true,
 						},
 						"ddns_enabled": dsschema.BoolAttribute{
-							MarkdownDescription: "Ddns enabled",
+							MarkdownDescription: "Enable DDNS?",
 							Computed:            true,
 						},
 						"ddns_hostname": dsschema.StringAttribute{
@@ -862,56 +1035,50 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"ddns_ip": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns ip",
+							MarkdownDescription: "IP to register (static only)",
 							Computed:            true,
 						},
 						"ddns_update_interval": dsschema.Int64Attribute{
-							MarkdownDescription: "Ddns update interval",
+							MarkdownDescription: "Update interval (days)",
 							Computed:            true,
 						},
 						"ddns_vendor": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns vendor",
+							MarkdownDescription: "DDNS vendor",
 							Computed:            true,
 						},
 						"ddns_vendor_config": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns vendor config",
+							MarkdownDescription: "DDNS vendor",
 							Computed:            true,
 						},
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dhcp client",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"dhcp_client": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Dhcp client",
+						"create_default_route": dsschema.BoolAttribute{
+							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
+							Computed:            true,
+						},
+						"default_route_metric": dsschema.Int64Attribute{
+							MarkdownDescription: "Metric of the default route created",
+							Computed:            true,
+						},
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable DHCP?",
+							Computed:            true,
+						},
+						"send_hostname": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
-								"create_default_route": dsschema.BoolAttribute{
-									MarkdownDescription: "Create default route",
-									Computed:            true,
-								},
-								"default_route_metric": dsschema.Int64Attribute{
-									MarkdownDescription: "Default route metric",
-									Computed:            true,
-								},
 								"enable": dsschema.BoolAttribute{
 									MarkdownDescription: "Enable",
 									Computed:            true,
 								},
-								"send_hostname": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Send hostname",
+								"hostname": dsschema.StringAttribute{
+									MarkdownDescription: "Set interface hostname",
 									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"enable": dsschema.BoolAttribute{
-											MarkdownDescription: "Enable",
-											Computed:            true,
-										},
-										"hostname": dsschema.StringAttribute{
-											MarkdownDescription: "Hostname",
-											Computed:            true,
-										},
-									},
 								},
 							},
 						},
@@ -921,10 +1088,17 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Interface management profile",
 					Computed:            true,
 				},
-				"ip": dsschema.ListAttribute{
-					ElementType:         types.StringType,
+				"ip": dsschema.ListNestedAttribute{
 					MarkdownDescription: "Interface IP addresses",
 					Computed:            true,
+					NestedObject: dsschema.NestedAttributeObject{
+						Attributes: map[string]dsschema.Attribute{
+							"name": dsschema.StringAttribute{
+								MarkdownDescription: "Name",
+								Computed:            true,
+							},
+						},
+					},
 				},
 				"mtu": dsschema.Int64Attribute{
 					MarkdownDescription: "MTU",
@@ -943,16 +1117,22 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"default_route_metric": dsschema.Int64Attribute{
-							MarkdownDescription: "Default route metric",
+							MarkdownDescription: "Metric of the default route created",
 							Computed:            true,
 						},
 						"enable": dsschema.BoolAttribute{
 							MarkdownDescription: "Enable",
 							Computed:            true,
 						},
-						"passive": dsschema.BoolAttribute{
+						"passive": dsschema.SingleNestedAttribute{
 							MarkdownDescription: "Passive",
 							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"enable": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive Mode enabled",
+									Computed:            true,
+								},
+							},
 						},
 						"password": dsschema.StringAttribute{
 							MarkdownDescription: "Password",
@@ -968,7 +1148,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"ip": dsschema.StringAttribute{
-									MarkdownDescription: "Ip",
+									MarkdownDescription: "Static IP address",
 									Computed:            true,
 								},
 							},
@@ -1003,11 +1183,11 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"poe_enabled": dsschema.BoolAttribute{
-					MarkdownDescription: "Poe enabled",
+					MarkdownDescription: "Enabled PoE?",
 					Computed:            true,
 				},
 				"poe_rsvd_pwr": dsschema.Int64Attribute{
-					MarkdownDescription: "Poe rsvd pwr",
+					MarkdownDescription: "PoE reserved power",
 					Computed:            true,
 				},
 			},

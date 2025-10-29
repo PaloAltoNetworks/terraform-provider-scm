@@ -79,15 +79,17 @@ var QuarantinedDevicesDataSourceSchema = dsschema.Schema{
 
 // QuarantinedDevicesListModel represents the data model for a list data source.
 type QuarantinedDevicesListModel struct {
-	Tfid    types.String         `tfsdk:"tfid"`
-	Data    []QuarantinedDevices `tfsdk:"data"`
-	Limit   types.Int64          `tfsdk:"limit"`
-	Offset  types.Int64          `tfsdk:"offset"`
-	Name    types.String         `tfsdk:"name"`
-	Total   types.Int64          `tfsdk:"total"`
-	Folder  types.String         `tfsdk:"folder"`
-	Snippet types.String         `tfsdk:"snippet"`
-	Device  types.String         `tfsdk:"device"`
+	Tfid         types.String          `tfsdk:"tfid"`
+	Data         []QuarantinedDevices  `tfsdk:"data"`
+	Limit        types.Int64           `tfsdk:"limit"`
+	Offset       types.Int64           `tfsdk:"offset"`
+	Name         types.String          `tfsdk:"name"`
+	Total        types.Int64           `tfsdk:"total"`
+	Folder       types.String          `tfsdk:"folder"`
+	Snippet      types.String          `tfsdk:"snippet"`
+	Device       types.String          `tfsdk:"device"`
+	HostId       basetypes.StringValue `tfsdk:"host_id"`
+	SerialNumber basetypes.StringValue `tfsdk:"serial_number"`
 }
 
 // QuarantinedDevicesListDataSourceSchema defines the schema for a list data source.
@@ -109,5 +111,13 @@ var QuarantinedDevicesListDataSourceSchema = dsschema.Schema{
 		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
 		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
 		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+		"host_id": dsschema.StringAttribute{
+			Description: "Device host ID\n",
+			Optional:    true,
+		},
+		"serial_number": dsschema.StringAttribute{
+			Description: "Device serial number\n",
+			Optional:    true,
+		},
 	},
 }

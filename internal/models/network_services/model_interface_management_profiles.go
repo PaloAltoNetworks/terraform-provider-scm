@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -108,7 +109,7 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"http_ocsp": schema.BoolAttribute{
-			MarkdownDescription: "Http ocsp",
+			MarkdownDescription: "Allow HTTP OCSP?",
 			Optional:            true,
 		},
 		"https": schema.BoolAttribute{
@@ -128,7 +129,7 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 		},
 		"permitted_ip": schema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Permitted ip",
+			MarkdownDescription: "Allowed IP address(es)",
 			Optional:            true,
 		},
 		"ping": schema.BoolAttribute{
@@ -136,8 +137,10 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"response_pages": schema.StringAttribute{
-			MarkdownDescription: "Response pages",
+			MarkdownDescription: "Allow response pages?",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("boolean"),
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -170,15 +173,15 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 			},
 		},
 		"userid_service": schema.BoolAttribute{
-			MarkdownDescription: "Userid service",
+			MarkdownDescription: "Allow User-ID?",
 			Optional:            true,
 		},
 		"userid_syslog_listener_ssl": schema.BoolAttribute{
-			MarkdownDescription: "Userid syslog listener ssl",
+			MarkdownDescription: "Allow User-ID syslog listener (SSL)?",
 			Optional:            true,
 		},
 		"userid_syslog_listener_udp": schema.BoolAttribute{
-			MarkdownDescription: "Userid syslog listener udp",
+			MarkdownDescription: "Allow User-ID syslog listener (UDP)?",
 			Optional:            true,
 		},
 	},
@@ -201,7 +204,7 @@ var InterfaceManagementProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"http_ocsp": dsschema.BoolAttribute{
-			MarkdownDescription: "Http ocsp",
+			MarkdownDescription: "Allow HTTP OCSP?",
 			Computed:            true,
 		},
 		"https": dsschema.BoolAttribute{
@@ -219,7 +222,7 @@ var InterfaceManagementProfilesDataSourceSchema = dsschema.Schema{
 		},
 		"permitted_ip": dsschema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Permitted ip",
+			MarkdownDescription: "Allowed IP address(es)",
 			Computed:            true,
 		},
 		"ping": dsschema.BoolAttribute{
@@ -227,7 +230,7 @@ var InterfaceManagementProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"response_pages": dsschema.StringAttribute{
-			MarkdownDescription: "Response pages",
+			MarkdownDescription: "Allow response pages?",
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
@@ -247,15 +250,15 @@ var InterfaceManagementProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"userid_service": dsschema.BoolAttribute{
-			MarkdownDescription: "Userid service",
+			MarkdownDescription: "Allow User-ID?",
 			Computed:            true,
 		},
 		"userid_syslog_listener_ssl": dsschema.BoolAttribute{
-			MarkdownDescription: "Userid syslog listener ssl",
+			MarkdownDescription: "Allow User-ID syslog listener (SSL)?",
 			Computed:            true,
 		},
 		"userid_syslog_listener_udp": dsschema.BoolAttribute{
-			MarkdownDescription: "Userid syslog listener udp",
+			MarkdownDescription: "Allow User-ID syslog listener (UDP)?",
 			Computed:            true,
 		},
 	},

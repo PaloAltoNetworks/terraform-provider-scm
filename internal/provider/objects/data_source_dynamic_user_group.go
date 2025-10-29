@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/objects"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM DynamicUserGroup (Package: objects)
@@ -101,6 +102,11 @@ func (d *DynamicUserGroupDataSource) Read(ctx context.Context, req datasource.Re
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading DynamicUserGroups", fmt.Sprintf("Could not read DynamicUserGroups with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *DynamicUserGroupDataSource) Read(ctx context.Context, req datasource.Re
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing DynamicUserGroupss", fmt.Sprintf("Could not list DynamicUserGroupss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

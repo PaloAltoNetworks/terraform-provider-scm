@@ -5,6 +5,8 @@ package provider
 import (
 	"context"
 	"fmt"
+	"io"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -71,6 +73,8 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 
 
 
+
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.AutoVpnClusters{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
@@ -83,6 +87,8 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 
 	tflog.Debug(ctx, "Creating auto_vpn_clusters on SCM API")
 
+
+
 	// 3. Initiate the API request with the body.
 	createReq := r.client.AutoVPNClustersAPI.CreateAutoVPNClusters(ctx).AutoVpnClusters(*unpackedScmObject)
 
@@ -92,8 +98,16 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating auto_vpn_clusters", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
+
+
 
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packAutoVpnClustersFromSdk(ctx, *createdObject)
@@ -101,6 +115,8 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 	if resp.Diagnostics.HasError() { return }
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
+
+
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
     //    This is necessary for parameters that are sent to the API but not returned in the response.
@@ -164,6 +180,12 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading auto_vpn_clusters", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -183,6 +205,8 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 	data.Tfid = savestate.Tfid
 
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
+
+
 
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
@@ -271,6 +295,8 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 
+
+
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a pointer, so we nil it out to omit it from the update payload.
 	unpackedScmObject.Id = nil
@@ -300,9 +326,17 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating auto_vpn_clusters", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
+
+
 
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packAutoVpnClustersFromSdk(ctx, *updatedObject)
@@ -322,6 +356,8 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 	plan.Tfid = state.Tfid
 
     // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
+
+
 
 	tflog.Debug(ctx, "Updated auto_vpn_clusters", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -344,12 +380,20 @@ func (r *AutoVpnClusterResource) Delete(ctx context.Context, req resource.Delete
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting auto_vpn_clusters", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 
 func (r *AutoVpnClusterResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }
+
+
 
 
 

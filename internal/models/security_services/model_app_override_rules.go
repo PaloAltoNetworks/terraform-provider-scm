@@ -3,7 +3,6 @@ package models
 import (
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -11,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -23,6 +23,8 @@ import (
 // AppOverrideRules represents the Terraform model for AppOverrideRules
 type AppOverrideRules struct {
 	Tfid              types.String          `tfsdk:"tfid"`
+	RelativePosition  basetypes.StringValue `tfsdk:"relative_position"`
+	TargetRule        basetypes.StringValue `tfsdk:"target_rule"`
 	Application       basetypes.StringValue `tfsdk:"application"`
 	Description       basetypes.StringValue `tfsdk:"description"`
 	Destination       basetypes.ListValue   `tfsdk:"destination"`
@@ -35,18 +37,21 @@ type AppOverrideRules struct {
 	Name              basetypes.StringValue `tfsdk:"name"`
 	NegateDestination basetypes.BoolValue   `tfsdk:"negate_destination"`
 	NegateSource      basetypes.BoolValue   `tfsdk:"negate_source"`
-	Port              basetypes.Int64Value  `tfsdk:"port"`
+	Port              basetypes.StringValue `tfsdk:"port"`
 	Protocol          basetypes.StringValue `tfsdk:"protocol"`
 	Snippet           basetypes.StringValue `tfsdk:"snippet"`
 	Source            basetypes.ListValue   `tfsdk:"source"`
 	Tag               basetypes.ListValue   `tfsdk:"tag"`
 	To                basetypes.ListValue   `tfsdk:"to"`
+	Position          basetypes.StringValue `tfsdk:"position"`
 }
 
 // AttrTypes defines the attribute types for the AppOverrideRules model.
 func (o AppOverrideRules) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":               basetypes.StringType{},
+		"relative_position":  basetypes.StringType{},
+		"target_rule":        basetypes.StringType{},
 		"application":        basetypes.StringType{},
 		"description":        basetypes.StringType{},
 		"destination":        basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -59,12 +64,13 @@ func (o AppOverrideRules) AttrTypes() map[string]attr.Type {
 		"name":               basetypes.StringType{},
 		"negate_destination": basetypes.BoolType{},
 		"negate_source":      basetypes.BoolType{},
-		"port":               basetypes.Int64Type{},
+		"port":               basetypes.StringType{},
 		"protocol":           basetypes.StringType{},
 		"snippet":            basetypes.StringType{},
 		"source":             basetypes.ListType{ElemType: basetypes.StringType{}},
 		"tag":                basetypes.ListType{ElemType: basetypes.StringType{}},
 		"to":                 basetypes.ListType{ElemType: basetypes.StringType{}},
+		"position":           basetypes.StringType{},
 	}
 }
 
@@ -167,12 +173,21 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			Computed:            true,
 			Default:             booldefault.StaticBool(false),
 		},
-		"port": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(0, 65535),
-			},
+		"port": schema.StringAttribute{
 			MarkdownDescription: "Port",
 			Required:            true,
+		},
+		"position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("pre", "post"),
+			},
+			MarkdownDescription: "The position of a security rule\n",
+			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("pre"),
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
+			},
 		},
 		"protocol": schema.StringAttribute{
 			Validators: []validator.String{
@@ -180,6 +195,13 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Protocol",
 			Required:            true,
+		},
+		"relative_position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("before", "after", "top", "bottom"),
+			},
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Optional:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -204,6 +226,10 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"tag": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Tag",
+			Optional:            true,
+		},
+		"target_rule": schema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{
@@ -276,12 +302,20 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Negate source",
 			Computed:            true,
 		},
-		"port": dsschema.Int64Attribute{
+		"port": dsschema.StringAttribute{
 			MarkdownDescription: "Port",
+			Computed:            true,
+		},
+		"position": dsschema.StringAttribute{
+			MarkdownDescription: "The position of a security rule\n",
 			Computed:            true,
 		},
 		"protocol": dsschema.StringAttribute{
 			MarkdownDescription: "Protocol",
+			Computed:            true,
+		},
+		"relative_position": dsschema.StringAttribute{
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
@@ -298,6 +332,10 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Tag",
 			Computed:            true,
 		},
+		"target_rule": dsschema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			Computed:            true,
+		},
 		"tfid": dsschema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
 			Computed:            true,
@@ -312,15 +350,16 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 
 // AppOverrideRulesListModel represents the data model for a list data source.
 type AppOverrideRulesListModel struct {
-	Tfid    types.String       `tfsdk:"tfid"`
-	Data    []AppOverrideRules `tfsdk:"data"`
-	Limit   types.Int64        `tfsdk:"limit"`
-	Offset  types.Int64        `tfsdk:"offset"`
-	Name    types.String       `tfsdk:"name"`
-	Total   types.Int64        `tfsdk:"total"`
-	Folder  types.String       `tfsdk:"folder"`
-	Snippet types.String       `tfsdk:"snippet"`
-	Device  types.String       `tfsdk:"device"`
+	Tfid     types.String          `tfsdk:"tfid"`
+	Data     []AppOverrideRules    `tfsdk:"data"`
+	Limit    types.Int64           `tfsdk:"limit"`
+	Offset   types.Int64           `tfsdk:"offset"`
+	Name     types.String          `tfsdk:"name"`
+	Total    types.Int64           `tfsdk:"total"`
+	Folder   types.String          `tfsdk:"folder"`
+	Snippet  types.String          `tfsdk:"snippet"`
+	Device   types.String          `tfsdk:"device"`
+	Position basetypes.StringValue `tfsdk:"position"`
 }
 
 // AppOverrideRulesListDataSourceSchema defines the schema for a list data source.
@@ -342,5 +381,9 @@ var AppOverrideRulesListDataSourceSchema = dsschema.Schema{
 		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
 		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
 		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+		"position": dsschema.StringAttribute{
+			Description: "The position of a security rule\n",
+			Required:    true,
+		},
 	},
 }

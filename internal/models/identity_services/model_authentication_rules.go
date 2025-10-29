@@ -22,6 +22,8 @@ import (
 // AuthenticationRules represents the Terraform model for AuthenticationRules
 type AuthenticationRules struct {
 	Tfid                      types.String          `tfsdk:"tfid"`
+	RelativePosition          basetypes.StringValue `tfsdk:"relative_position"`
+	TargetRule                basetypes.StringValue `tfsdk:"target_rule"`
 	AuthenticationEnforcement basetypes.StringValue `tfsdk:"authentication_enforcement"`
 	Category                  basetypes.ListValue   `tfsdk:"category"`
 	Description               basetypes.StringValue `tfsdk:"description"`
@@ -54,6 +56,8 @@ type AuthenticationRules struct {
 func (o AuthenticationRules) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":                       basetypes.StringType{},
+		"relative_position":          basetypes.StringType{},
+		"target_rule":                basetypes.StringType{},
 		"authentication_enforcement": basetypes.StringType{},
 		"category":                   basetypes.ListType{ElemType: basetypes.StringType{}},
 		"description":                basetypes.StringType{},
@@ -208,6 +212,13 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
+		"relative_position": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("before", "after", "top", "bottom"),
+			},
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Optional:            true,
+		},
 		"service": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "The destination ports",
@@ -244,6 +255,10 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 		"tag": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "The authentication rule tags",
+			Optional:            true,
+		},
+		"target_rule": schema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{
@@ -346,6 +361,14 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Are the source addresses negated?",
 			Computed:            true,
 		},
+		"position": dsschema.StringAttribute{
+			MarkdownDescription: "The relative position of the rule\n",
+			Computed:            true,
+		},
+		"relative_position": dsschema.StringAttribute{
+			MarkdownDescription: "Relative positioning rule. String must be one of these: `\"before\"`, `\"after\"`, `\"top\"`, `\"bottom\"`. If not specified, rule is created at the bottom of the ruleset.",
+			Computed:            true,
+		},
 		"service": dsschema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "The destination ports",
@@ -375,6 +398,10 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The authentication rule tags",
 			Computed:            true,
 		},
+		"target_rule": dsschema.StringAttribute{
+			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			Computed:            true,
+		},
 		"tfid": dsschema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
 			Computed:            true,
@@ -393,15 +420,16 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 
 // AuthenticationRulesListModel represents the data model for a list data source.
 type AuthenticationRulesListModel struct {
-	Tfid    types.String          `tfsdk:"tfid"`
-	Data    []AuthenticationRules `tfsdk:"data"`
-	Limit   types.Int64           `tfsdk:"limit"`
-	Offset  types.Int64           `tfsdk:"offset"`
-	Name    types.String          `tfsdk:"name"`
-	Total   types.Int64           `tfsdk:"total"`
-	Folder  types.String          `tfsdk:"folder"`
-	Snippet types.String          `tfsdk:"snippet"`
-	Device  types.String          `tfsdk:"device"`
+	Tfid     types.String          `tfsdk:"tfid"`
+	Data     []AuthenticationRules `tfsdk:"data"`
+	Limit    types.Int64           `tfsdk:"limit"`
+	Offset   types.Int64           `tfsdk:"offset"`
+	Name     types.String          `tfsdk:"name"`
+	Total    types.Int64           `tfsdk:"total"`
+	Folder   types.String          `tfsdk:"folder"`
+	Snippet  types.String          `tfsdk:"snippet"`
+	Device   types.String          `tfsdk:"device"`
+	Position basetypes.StringValue `tfsdk:"position"`
 }
 
 // AuthenticationRulesListDataSourceSchema defines the schema for a list data source.
@@ -423,5 +451,9 @@ var AuthenticationRulesListDataSourceSchema = dsschema.Schema{
 		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
 		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
 		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+		"position": dsschema.StringAttribute{
+			Description: "The relative position of the rule\n",
+			Required:    true,
+		},
 	},
 }

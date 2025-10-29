@@ -27,6 +27,7 @@ func unpackServicesToSdk(ctx context.Context, obj types.Object) (*objects.Servic
 
 	var sdk objects.Services
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

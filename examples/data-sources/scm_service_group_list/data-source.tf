@@ -1,7 +1,7 @@
 # Fetch a list of all service group objects.
 # This data source will call the "List" API endpoint.
 data "scm_service_group_list" "all_service_groups" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Output the raw list of all service group objects

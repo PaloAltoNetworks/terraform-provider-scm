@@ -103,6 +103,11 @@ func (d *AuthenticationPortalDataSource) Read(ctx context.Context, req datasourc
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading AuthenticationPortals", fmt.Sprintf("Could not read AuthenticationPortals with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +159,11 @@ func (d *AuthenticationPortalDataSource) Read(ctx context.Context, req datasourc
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing AuthenticationPortalss", fmt.Sprintf("Could not list AuthenticationPortalss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

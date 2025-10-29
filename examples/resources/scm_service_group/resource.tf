@@ -27,7 +27,7 @@ resource "scm_service" "scm_service_udp_port" {
 
 # Service Group containing multiple services
 resource "scm_service_group" "scm_servicegroup" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_servicegroup"
   members = [
     scm_service.scm_service_tcp_ports.name,
@@ -37,7 +37,7 @@ resource "scm_service_group" "scm_servicegroup" {
 
 # Service Group containing multiple services and another servicegroup
 resource "scm_service_group" "scm_servicegroup_nested" {
-  folder = "Shared"
+  folder = "All"
   name   = "scm_servicegroup_nested"
   members = [
     scm_service.scm_service_tcp_ports.name,

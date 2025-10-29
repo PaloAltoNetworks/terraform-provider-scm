@@ -159,7 +159,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"days": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("hours"),
 							path.MatchRelative().AtParent().AtName("minutes"),
 							path.MatchRelative().AtParent().AtName("seconds"),
@@ -171,7 +171,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				},
 				"hours": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("days"),
 							path.MatchRelative().AtParent().AtName("minutes"),
 							path.MatchRelative().AtParent().AtName("seconds"),
@@ -183,7 +183,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				},
 				"minutes": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("days"),
 							path.MatchRelative().AtParent().AtName("hours"),
 							path.MatchRelative().AtParent().AtName("seconds"),
@@ -195,7 +195,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				},
 				"seconds": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("days"),
 							path.MatchRelative().AtParent().AtName("hours"),
 							path.MatchRelative().AtParent().AtName("minutes"),

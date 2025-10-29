@@ -327,7 +327,7 @@ var MfaServersResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"duo_security_v2": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("okta_adaptive_v1"),
 							path.MatchRelative().AtParent().AtName("ping_identity_v1"),
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
@@ -377,7 +377,7 @@ var MfaServersResourceSchema = schema.Schema{
 				},
 				"okta_adaptive_v1": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 							path.MatchRelative().AtParent().AtName("ping_identity_v1"),
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
@@ -424,7 +424,7 @@ var MfaServersResourceSchema = schema.Schema{
 				},
 				"ping_identity_v1": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 							path.MatchRelative().AtParent().AtName("okta_adaptive_v1"),
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
@@ -482,7 +482,7 @@ var MfaServersResourceSchema = schema.Schema{
 				},
 				"rsa_securid_access_v1": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("duo_security_v2"),
 							path.MatchRelative().AtParent().AtName("okta_adaptive_v1"),
 							path.MatchRelative().AtParent().AtName("ping_identity_v1"),
@@ -742,15 +742,16 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 
 // MfaServersListModel represents the data model for a list data source.
 type MfaServersListModel struct {
-	Tfid    types.String `tfsdk:"tfid"`
-	Data    []MfaServers `tfsdk:"data"`
-	Limit   types.Int64  `tfsdk:"limit"`
-	Offset  types.Int64  `tfsdk:"offset"`
-	Name    types.String `tfsdk:"name"`
-	Total   types.Int64  `tfsdk:"total"`
-	Folder  types.String `tfsdk:"folder"`
-	Snippet types.String `tfsdk:"snippet"`
-	Device  types.String `tfsdk:"device"`
+	Tfid     types.String          `tfsdk:"tfid"`
+	Data     []MfaServers          `tfsdk:"data"`
+	Limit    types.Int64           `tfsdk:"limit"`
+	Offset   types.Int64           `tfsdk:"offset"`
+	Name     types.String          `tfsdk:"name"`
+	Total    types.Int64           `tfsdk:"total"`
+	Folder   types.String          `tfsdk:"folder"`
+	Snippet  types.String          `tfsdk:"snippet"`
+	Device   types.String          `tfsdk:"device"`
+	Position basetypes.StringValue `tfsdk:"position"`
 }
 
 // MfaServersListDataSourceSchema defines the schema for a list data source.
@@ -772,5 +773,9 @@ var MfaServersListDataSourceSchema = dsschema.Schema{
 		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
 		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
 		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+		"position": dsschema.StringAttribute{
+			Description: "The relative position of the rule\n",
+			Required:    true,
+		},
 	},
 }

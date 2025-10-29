@@ -4,6 +4,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -177,6 +178,11 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 	MarkdownDescription: "IpsecCryptoProfile resource",
 	Attributes: map[string]schema.Attribute{
 		"ah": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("esp"),
+				),
+			},
 			MarkdownDescription: "Ah",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
@@ -189,6 +195,10 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -208,6 +218,11 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 			Default:             stringdefault.StaticString("group2"),
 		},
 		"esp": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("ah"),
+				),
+			},
 			MarkdownDescription: "Esp",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
@@ -225,6 +240,10 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -247,7 +266,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"gb": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("kb"),
 							path.MatchRelative().AtParent().AtName("mb"),
 							path.MatchRelative().AtParent().AtName("tb"),
@@ -259,7 +278,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				},
 				"kb": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("gb"),
 							path.MatchRelative().AtParent().AtName("mb"),
 							path.MatchRelative().AtParent().AtName("tb"),
@@ -271,7 +290,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				},
 				"mb": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("gb"),
 							path.MatchRelative().AtParent().AtName("kb"),
 							path.MatchRelative().AtParent().AtName("tb"),
@@ -283,7 +302,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				},
 				"tb": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.ExactlyOneOf(
+						int64validator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("gb"),
 							path.MatchRelative().AtParent().AtName("kb"),
 							path.MatchRelative().AtParent().AtName("mb"),
@@ -358,6 +377,10 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},

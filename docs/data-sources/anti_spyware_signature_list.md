@@ -15,7 +15,7 @@ Retrieves a listing of config items.
 ```terraform
 # Fetch a list of all anti-spyware profiles
 data "scm_anti_spyware_signature_list" "all_anti_spyware_signatures" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Output the raw list of all anti-spyware profiles
@@ -64,7 +64,7 @@ Read-Only:
 - `signature` (Attributes) anti spyware signature (see [below for nested schema](#nestedatt--data--signature))
 - `snippet` (String) The snippet in which the resource is defined
 - `tfid` (String) The Terraform ID.
-- `threat_id` (Number) threat id range <15000-18000> and <6900001-7000000>
+- `threat_id` (String) threat id range <15000-18000> and <6900001-7000000>
 - `threatname` (String) Threatname
 - `vendor` (List of String) Vendor
 

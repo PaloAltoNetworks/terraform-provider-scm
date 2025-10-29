@@ -103,6 +103,11 @@ func (d *SharedInfrastructureSettingDataSource) Read(ctx context.Context, req da
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading SharedInfrastructureSettings", fmt.Sprintf("Could not read SharedInfrastructureSettings with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

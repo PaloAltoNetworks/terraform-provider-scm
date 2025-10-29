@@ -15,6 +15,7 @@ import (
 
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // RESOURCE for SCM NatRule (Package: network_services)
@@ -96,6 +97,12 @@ func (r *NatRuleResource) Create(ctx context.Context, req resource.CreateRequest
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating nat_rules", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -178,6 +185,12 @@ func (r *NatRuleResource) Read(ctx context.Context, req resource.ReadRequest, re
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading nat_rules", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -321,6 +334,12 @@ func (r *NatRuleResource) Update(ctx context.Context, req resource.UpdateRequest
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating nat_rules", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -347,7 +366,8 @@ func (r *NatRuleResource) Update(ctx context.Context, req resource.UpdateRequest
 	plan.Tfid = state.Tfid
 
 	// Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
-	plan.Position = state.Position
+	// Restore parameter position from plan
+	_ = req.Plan.GetAttribute(ctx, path.Root("position"), &plan.Position)
 
 	tflog.Debug(ctx, "Updated nat_rules", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -372,6 +392,12 @@ func (r *NatRuleResource) Delete(ctx context.Context, req resource.DeleteRequest
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting nat_rules", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 

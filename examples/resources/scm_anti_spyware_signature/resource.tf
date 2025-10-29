@@ -1,5 +1,5 @@
 resource "scm_anti_spyware_signature" "scm_anti_spyware_signature_1" {
-  folder     = "Shared"
+  folder     = "All"
   threat_id  = 6900001
   comment    = "Managed by Terraform"
   direction  = "client2server"

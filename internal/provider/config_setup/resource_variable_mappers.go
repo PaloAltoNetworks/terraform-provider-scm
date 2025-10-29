@@ -28,6 +28,7 @@ func unpackVariablesToSdk(ctx context.Context, obj types.Object) (*config_setup.
 
 	var sdk config_setup.Variables
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

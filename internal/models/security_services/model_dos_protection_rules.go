@@ -244,7 +244,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"allow": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("deny"),
 							path.MatchRelative().AtParent().AtName("protect"),
 						),
@@ -255,7 +255,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				},
 				"deny": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("protect"),
 						),
@@ -266,7 +266,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				},
 				"protect": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("deny"),
 						),
@@ -365,7 +365,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"aggregate": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("classified"),
 						),
 					},
@@ -380,7 +380,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				},
 				"classified": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("aggregate"),
 						),
 					},

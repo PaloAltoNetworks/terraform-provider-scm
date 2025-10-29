@@ -27,6 +27,7 @@ func unpackApplicationGroupsToSdk(ctx context.Context, obj types.Object) (*objec
 
 	var sdk objects.ApplicationGroups
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

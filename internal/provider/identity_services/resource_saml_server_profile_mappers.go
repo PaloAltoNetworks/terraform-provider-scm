@@ -26,6 +26,7 @@ func unpackSamlServerProfilesToSdk(ctx context.Context, obj types.Object) (*iden
 
 	var sdk identity_services.SamlServerProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Certificate.IsNull() && !model.Certificate.IsUnknown() {
 		sdk.Certificate = model.Certificate.ValueString()

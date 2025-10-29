@@ -26,6 +26,7 @@ func unpackLayer2SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 
 	var sdk network_services.Layer2Subinterfaces
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Comment.IsNull() && !model.Comment.IsUnknown() {
 		sdk.Comment = model.Comment.ValueStringPointer()
@@ -70,7 +71,7 @@ func unpackLayer2SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 
 	// Handling Primitives
 	if !model.VlanTag.IsNull() && !model.VlanTag.IsUnknown() {
-		sdk.VlanTag = float32(model.VlanTag.ValueFloat64())
+		sdk.VlanTag = model.VlanTag.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "VlanTag", "value": sdk.VlanTag})
 	}
 
@@ -141,7 +142,7 @@ func packLayer2SubinterfacesFromSdk(ctx context.Context, sdk network_services.La
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.VlanTag = basetypes.NewFloat64Value(float64(sdk.VlanTag))
+	model.VlanTag = basetypes.NewStringValue(sdk.VlanTag)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "VlanTag", "value": sdk.VlanTag})
 	diags.Append(d...)
 

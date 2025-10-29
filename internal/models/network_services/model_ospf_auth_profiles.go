@@ -4,9 +4,11 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -88,6 +90,10 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 	Attributes: map[string]schema.Attribute{
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -105,6 +111,10 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -122,6 +132,11 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 			},
 		},
 		"md5": schema.ListNestedAttribute{
+			Validators: []validator.List{
+				listvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("password"),
+				),
+			},
 			MarkdownDescription: "MD5s",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
@@ -153,12 +168,21 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 			Required:            true,
 		},
 		"password": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("md5"),
+				),
+			},
 			MarkdownDescription: "Password",
 			Optional:            true,
 			Sensitive:           true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},

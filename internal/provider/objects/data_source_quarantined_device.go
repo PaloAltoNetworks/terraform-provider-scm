@@ -103,6 +103,11 @@ func (d *QuarantinedDeviceDataSource) Read(ctx context.Context, req datasource.R
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading QuarantinedDevices", fmt.Sprintf("Could not read QuarantinedDevices with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

@@ -27,9 +27,10 @@ func unpackSdwanErrorCorrectionProfilesToSdk(ctx context.Context, obj types.Obje
 
 	var sdk network_services.SdwanErrorCorrectionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.ActivationThreshold.IsNull() && !model.ActivationThreshold.IsUnknown() {
-		sdk.ActivationThreshold = float32(model.ActivationThreshold.ValueFloat64())
+		sdk.ActivationThreshold = int32(model.ActivationThreshold.ValueInt64())
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ActivationThreshold", "value": sdk.ActivationThreshold})
 	}
 
@@ -91,7 +92,7 @@ func packSdwanErrorCorrectionProfilesFromSdk(ctx context.Context, sdk network_se
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.ActivationThreshold = basetypes.NewFloat64Value(float64(sdk.ActivationThreshold))
+	model.ActivationThreshold = basetypes.NewInt64Value(int64(sdk.ActivationThreshold))
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ActivationThreshold", "value": sdk.ActivationThreshold})
 	// Handling Primitives
 	// Standard primitive packing
@@ -353,7 +354,7 @@ func unpackSdwanErrorCorrectionProfilesModeForwardErrorCorrectionToSdk(ctx conte
 
 	// Handling Primitives
 	if !model.RecoveryDuration.IsNull() && !model.RecoveryDuration.IsUnknown() {
-		sdk.RecoveryDuration = float32(model.RecoveryDuration.ValueFloat64())
+		sdk.RecoveryDuration = int32(model.RecoveryDuration.ValueInt64())
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "RecoveryDuration", "value": sdk.RecoveryDuration})
 	}
 
@@ -376,7 +377,7 @@ func packSdwanErrorCorrectionProfilesModeForwardErrorCorrectionFromSdk(ctx conte
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Ratio", "value": sdk.Ratio})
 	// Handling Primitives
 	// Standard primitive packing
-	model.RecoveryDuration = basetypes.NewFloat64Value(float64(sdk.RecoveryDuration))
+	model.RecoveryDuration = basetypes.NewInt64Value(int64(sdk.RecoveryDuration))
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "RecoveryDuration", "value": sdk.RecoveryDuration})
 	diags.Append(d...)
 
@@ -450,7 +451,7 @@ func unpackSdwanErrorCorrectionProfilesModePacketDuplicationToSdk(ctx context.Co
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.RecoveryDurationPd.IsNull() && !model.RecoveryDurationPd.IsUnknown() {
-		sdk.RecoveryDurationPd = float32(model.RecoveryDurationPd.ValueFloat64())
+		sdk.RecoveryDurationPd = int32(model.RecoveryDurationPd.ValueInt64())
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "RecoveryDurationPd", "value": sdk.RecoveryDurationPd})
 	}
 
@@ -469,7 +470,7 @@ func packSdwanErrorCorrectionProfilesModePacketDuplicationFromSdk(ctx context.Co
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.RecoveryDurationPd = basetypes.NewFloat64Value(float64(sdk.RecoveryDurationPd))
+	model.RecoveryDurationPd = basetypes.NewInt64Value(int64(sdk.RecoveryDurationPd))
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "RecoveryDurationPd", "value": sdk.RecoveryDurationPd})
 	diags.Append(d...)
 

@@ -309,7 +309,7 @@ var PbfRulesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"discard": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("forward"),
 							path.MatchRelative().AtParent().AtName("no_pbf"),
 						),
@@ -320,7 +320,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				},
 				"forward": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("discard"),
 							path.MatchRelative().AtParent().AtName("no_pbf"),
 						),
@@ -341,7 +341,7 @@ var PbfRulesResourceSchema = schema.Schema{
 									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									MarkdownDescription: "Monitor IP address",
 									Optional:            true,
 								},
 								"profile": schema.StringAttribute{
@@ -356,7 +356,7 @@ var PbfRulesResourceSchema = schema.Schema{
 							Attributes: map[string]schema.Attribute{
 								"fqdn": schema.StringAttribute{
 									Validators: []validator.String{
-										stringvalidator.ExactlyOneOf(
+										stringvalidator.ConflictsWith(
 											path.MatchRelative().AtParent().AtName("ip_address"),
 										),
 									},
@@ -364,7 +364,12 @@ var PbfRulesResourceSchema = schema.Schema{
 									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("fqdn"),
+										),
+									},
+									MarkdownDescription: "Next hop IP address",
 									Optional:            true,
 								},
 							},
@@ -373,7 +378,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				},
 				"no_pbf": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("discard"),
 							path.MatchRelative().AtParent().AtName("forward"),
 						),
@@ -458,7 +463,7 @@ var PbfRulesResourceSchema = schema.Schema{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Source interfaces",
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("zone"),
 						),
 					},
@@ -468,7 +473,7 @@ var PbfRulesResourceSchema = schema.Schema{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Source zones",
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("interface"),
 						),
 					},
@@ -566,7 +571,7 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"ip_address": dsschema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									MarkdownDescription: "Monitor IP address",
 									Computed:            true,
 								},
 								"profile": dsschema.StringAttribute{
@@ -584,7 +589,7 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"ip_address": dsschema.StringAttribute{
-									MarkdownDescription: "Ip address",
+									MarkdownDescription: "Next hop IP address",
 									Computed:            true,
 								},
 							},

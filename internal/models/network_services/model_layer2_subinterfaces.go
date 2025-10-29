@@ -20,15 +20,15 @@ import (
 
 // Layer2Subinterfaces represents the Terraform model for Layer2Subinterfaces
 type Layer2Subinterfaces struct {
-	Tfid            types.String           `tfsdk:"tfid"`
-	Comment         basetypes.StringValue  `tfsdk:"comment"`
-	Device          basetypes.StringValue  `tfsdk:"device"`
-	Folder          basetypes.StringValue  `tfsdk:"folder"`
-	Id              basetypes.StringValue  `tfsdk:"id"`
-	Name            basetypes.StringValue  `tfsdk:"name"`
-	ParentInterface basetypes.StringValue  `tfsdk:"parent_interface"`
-	Snippet         basetypes.StringValue  `tfsdk:"snippet"`
-	VlanTag         basetypes.Float64Value `tfsdk:"vlan_tag"`
+	Tfid            types.String          `tfsdk:"tfid"`
+	Comment         basetypes.StringValue `tfsdk:"comment"`
+	Device          basetypes.StringValue `tfsdk:"device"`
+	Folder          basetypes.StringValue `tfsdk:"folder"`
+	Id              basetypes.StringValue `tfsdk:"id"`
+	Name            basetypes.StringValue `tfsdk:"name"`
+	ParentInterface basetypes.StringValue `tfsdk:"parent_interface"`
+	Snippet         basetypes.StringValue `tfsdk:"snippet"`
+	VlanTag         basetypes.StringValue `tfsdk:"vlan_tag"`
 }
 
 // AttrTypes defines the attribute types for the Layer2Subinterfaces model.
@@ -42,7 +42,7 @@ func (o Layer2Subinterfaces) AttrTypes() map[string]attr.Type {
 		"name":             basetypes.StringType{},
 		"parent_interface": basetypes.StringType{},
 		"snippet":          basetypes.StringType{},
-		"vlan_tag":         basetypes.NumberType{},
+		"vlan_tag":         basetypes.StringType{},
 	}
 }
 
@@ -128,9 +128,12 @@ var Layer2SubinterfacesResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
-		"vlan_tag": schema.Float64Attribute{
-			MarkdownDescription: "Vlan tag",
-			Optional:            true,
+		"vlan_tag": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.RegexMatches(regexp.MustCompile("^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"), "pattern must match "+"^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"),
+			},
+			MarkdownDescription: "VLAN tag",
+			Required:            true,
 		},
 	},
 }
@@ -172,8 +175,8 @@ var Layer2SubinterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The Terraform ID.",
 			Computed:            true,
 		},
-		"vlan_tag": dsschema.Float64Attribute{
-			MarkdownDescription: "Vlan tag",
+		"vlan_tag": dsschema.StringAttribute{
+			MarkdownDescription: "VLAN tag",
 			Computed:            true,
 		},
 	},

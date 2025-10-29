@@ -28,6 +28,7 @@ func unpackSdwanRulesToSdk(ctx context.Context, obj types.Object) (*network_serv
 
 	var sdk network_services.SdwanRules
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Action.IsNull() && !model.Action.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Action")

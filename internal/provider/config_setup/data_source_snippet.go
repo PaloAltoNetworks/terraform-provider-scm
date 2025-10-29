@@ -13,6 +13,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/config_setup"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/config_setup"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM Snippet (Package: config_setup)
@@ -99,6 +100,11 @@ func (d *SnippetDataSource) Read(ctx context.Context, req datasource.ReadRequest
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading Snippets", fmt.Sprintf("Could not read Snippets with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -132,6 +138,11 @@ func (d *SnippetDataSource) Read(ctx context.Context, req datasource.ReadRequest
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing Snippetss", fmt.Sprintf("Could not list Snippetss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

@@ -27,6 +27,7 @@ func unpackAddressGroupsToSdk(ctx context.Context, obj types.Object) (*objects.A
 
 	var sdk objects.AddressGroups
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

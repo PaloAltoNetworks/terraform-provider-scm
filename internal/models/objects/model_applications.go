@@ -669,7 +669,7 @@ var ApplicationsResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"ident_by_icmp6_type": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
 							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
 							path.MatchRelative().AtParent().AtName("port"),
@@ -690,7 +690,7 @@ var ApplicationsResourceSchema = schema.Schema{
 				},
 				"ident_by_icmp_type": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
 							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
 							path.MatchRelative().AtParent().AtName("port"),
@@ -711,7 +711,7 @@ var ApplicationsResourceSchema = schema.Schema{
 				},
 				"ident_by_ip_protocol": schema.StringAttribute{
 					Validators: []validator.String{
-						stringvalidator.ExactlyOneOf(
+						stringvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
 							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
 							path.MatchRelative().AtParent().AtName("port"),
@@ -724,7 +724,7 @@ var ApplicationsResourceSchema = schema.Schema{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Port",
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
 							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
 							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),

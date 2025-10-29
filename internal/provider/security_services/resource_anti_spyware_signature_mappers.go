@@ -28,6 +28,7 @@ func unpackAntiSpywareSignaturesToSdk(ctx context.Context, obj types.Object) (*s
 
 	var sdk security_services.AntiSpywareSignatures
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.Bugtraq.IsNull() && !model.Bugtraq.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field Bugtraq")
@@ -116,7 +117,7 @@ func unpackAntiSpywareSignaturesToSdk(ctx context.Context, obj types.Object) (*s
 
 	// Handling Primitives
 	if !model.ThreatId.IsNull() && !model.ThreatId.IsUnknown() {
-		sdk.ThreatId = int32(model.ThreatId.ValueInt64())
+		sdk.ThreatId = model.ThreatId.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ThreatId", "value": sdk.ThreatId})
 	}
 
@@ -264,7 +265,7 @@ func packAntiSpywareSignaturesFromSdk(ctx context.Context, sdk security_services
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.ThreatId = basetypes.NewInt64Value(int64(sdk.ThreatId))
+	model.ThreatId = basetypes.NewStringValue(sdk.ThreatId)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ThreatId", "value": sdk.ThreatId})
 	// Handling Primitives
 	// Standard primitive packing

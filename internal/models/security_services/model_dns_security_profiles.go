@@ -355,7 +355,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 								Attributes: map[string]schema.Attribute{
 									"alert": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("allow"),
 												path.MatchRelative().AtParent().AtName("block"),
 												path.MatchRelative().AtParent().AtName("sinkhole"),
@@ -367,7 +367,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 									},
 									"allow": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("alert"),
 												path.MatchRelative().AtParent().AtName("block"),
 												path.MatchRelative().AtParent().AtName("sinkhole"),
@@ -379,7 +379,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 									},
 									"block": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("alert"),
 												path.MatchRelative().AtParent().AtName("allow"),
 												path.MatchRelative().AtParent().AtName("sinkhole"),
@@ -391,7 +391,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 									},
 									"sinkhole": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("alert"),
 												path.MatchRelative().AtParent().AtName("allow"),
 												path.MatchRelative().AtParent().AtName("block"),

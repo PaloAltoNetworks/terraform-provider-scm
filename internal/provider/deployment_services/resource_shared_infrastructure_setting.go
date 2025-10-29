@@ -5,6 +5,8 @@ package provider
 import (
 	"context"
 	"fmt"
+	"io"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -71,6 +73,8 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 
 
 
+
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.SharedInfrastructureSettings{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
@@ -83,6 +87,8 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 
 	tflog.Debug(ctx, "Creating shared_infrastructure_settings on SCM API")
 
+
+
 	// 3. Initiate the API request with the body.
 	createReq := r.client.SharedInfrastructureSettingsAPI.(ctx).SharedInfrastructureSettings(*unpackedScmObject)
 
@@ -92,8 +98,16 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating shared_infrastructure_settings", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
+
+
 
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packSharedInfrastructureSettingsFromSdk(ctx, *createdObject)
@@ -101,6 +115,8 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 	if resp.Diagnostics.HasError() { return }
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
+
+
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
     //    This is necessary for parameters that are sent to the API but not returned in the response.
@@ -150,6 +166,12 @@ func (r *SharedInfrastructureSettingResource) Read(ctx context.Context, req reso
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading shared_infrastructure_settings", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -169,6 +191,8 @@ func (r *SharedInfrastructureSettingResource) Read(ctx context.Context, req reso
 	data.Tfid = savestate.Tfid
 
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
+
+
 
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
@@ -209,6 +233,8 @@ func (r *SharedInfrastructureSettingResource) Update(ctx context.Context, req re
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 
+
+
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
 	unpackedScmObject.Id = ""
@@ -238,9 +264,17 @@ func (r *SharedInfrastructureSettingResource) Update(ctx context.Context, req re
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating shared_infrastructure_settings", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
+
+
 
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packSharedInfrastructureSettingsFromSdk(ctx, *updatedObject)
@@ -258,6 +292,8 @@ func (r *SharedInfrastructureSettingResource) Update(ctx context.Context, req re
 	plan.Tfid = state.Tfid
 
     // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
+
+
 
 	tflog.Debug(ctx, "Updated shared_infrastructure_settings", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -280,12 +316,20 @@ func (r *SharedInfrastructureSettingResource) Delete(ctx context.Context, req re
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting shared_infrastructure_settings", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 
 func (r *SharedInfrastructureSettingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }
+
+
 
 
 

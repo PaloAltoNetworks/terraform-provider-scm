@@ -15,7 +15,7 @@ Retrieves a listing of config items.
 ```terraform
 # Fetch a list of all certificate profile objects from the "Shared" folder.
 data "scm_certificate_profile_list" "all_profiles" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Output the raw list of all certificate profile objects found.

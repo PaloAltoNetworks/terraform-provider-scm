@@ -5,6 +5,8 @@ package provider
 import (
 	"context"
 	"fmt"
+	"io"
+	"net/http"
 	"reflect"
 	"strings"
 
@@ -71,6 +73,8 @@ func (r *QuarantinedDeviceResource) Create(ctx context.Context, req resource.Cre
 
 
 
+
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.QuarantinedDevices{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
@@ -83,6 +87,8 @@ func (r *QuarantinedDeviceResource) Create(ctx context.Context, req resource.Cre
 
 	tflog.Debug(ctx, "Creating quarantined_devices on SCM API")
 
+
+
 	// 3. Initiate the API request with the body.
 	createReq := r.client.QuarantinedDevicesAPI.CreateQuarantinedDevices(ctx).QuarantinedDevices(*unpackedScmObject)
 
@@ -92,8 +98,16 @@ func (r *QuarantinedDeviceResource) Create(ctx context.Context, req resource.Cre
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating quarantined_devices", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
+
+
 
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packQuarantinedDevicesFromSdk(ctx, *createdObject)
@@ -101,6 +115,8 @@ func (r *QuarantinedDeviceResource) Create(ctx context.Context, req resource.Cre
 	if resp.Diagnostics.HasError() { return }
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
+
+
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
     //    This is necessary for parameters that are sent to the API but not returned in the response.
@@ -150,6 +166,12 @@ func (r *QuarantinedDeviceResource) Read(ctx context.Context, req resource.ReadR
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading quarantined_devices", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
@@ -169,6 +191,8 @@ func (r *QuarantinedDeviceResource) Read(ctx context.Context, req resource.ReadR
 	data.Tfid = savestate.Tfid
 
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
+
+
 
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
@@ -209,6 +233,8 @@ func (r *QuarantinedDeviceResource) Update(ctx context.Context, req resource.Upd
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 
+
+
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
 	unpackedScmObject.Id = ""
@@ -238,9 +264,17 @@ func (r *QuarantinedDeviceResource) Update(ctx context.Context, req resource.Upd
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating quarantined_devices", err.Error())
+			detailedMessage := utils.PrintScmError(err)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
+
+
 
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packQuarantinedDevicesFromSdk(ctx, *updatedObject)
@@ -258,6 +292,8 @@ func (r *QuarantinedDeviceResource) Update(ctx context.Context, req resource.Upd
 	plan.Tfid = state.Tfid
 
     // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
+
+
 
 	tflog.Debug(ctx, "Updated quarantined_devices", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -280,12 +316,20 @@ func (r *QuarantinedDeviceResource) Delete(ctx context.Context, req resource.Del
 	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting quarantined_devices", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 	}
 }
 
 func (r *QuarantinedDeviceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }
+
+
 
 
 

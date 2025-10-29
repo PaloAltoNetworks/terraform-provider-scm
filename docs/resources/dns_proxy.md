@@ -24,7 +24,7 @@ DnsProxy resource
 
 - `cache` (Attributes) Cache (see [below for nested schema](#nestedatt--cache))
 - `device` (String) The device in which the resource is defined
-- `domain_servers` (Attributes List) Domain servers (see [below for nested schema](#nestedatt--domain_servers))
+- `domain_servers` (Attributes List) DNS proxy rules (see [below for nested schema](#nestedatt--domain_servers))
 - `enabled` (Boolean) Enable DNS proxy?
 - `folder` (String) The folder in which the resource is defined
 - `interface` (List of String) Interfaces on which to enable DNS proxy service
@@ -68,48 +68,57 @@ Required:
 
 Optional:
 
-- `cache_edns` (Boolean) Cache edns
+- `cache_edns` (Boolean) Cache EDNS UDP response
 - `max_ttl` (Attributes) Max ttl (see [below for nested schema](#nestedatt--cache--max_ttl))
 
 <a id="nestedatt--cache--max_ttl"></a>
 ### Nested Schema for `cache.max_ttl`
 
+Required:
+
+- `enabled` (Boolean) Enable max ttl for this DNS object
+
 Optional:
 
-- `enabled` (Boolean) Enabled
-- `time_to_live` (Number) Time to live
+- `time_to_live` (Number) Time in seconds after which entry is cleared
 
 
 
 <a id="nestedatt--domain_servers"></a>
 ### Nested Schema for `domain_servers`
 
+Required:
+
+- `name` (String) Proxy rule name
+- `primary` (String) Primary DNS server IP address
+
 Optional:
 
-- `cacheable` (Boolean) Cacheable
-- `domain_name` (List of String) Domain name
-- `name` (String) Name
-- `primary` (String) Primary
-- `secondary` (String) Secondary
+- `cacheable` (Boolean) Enable caching for this DNS proxy rule?
+- `domain_name` (List of String) Domain names(s) that will be matched
+- `secondary` (String) Secondary DNS server IP address
 
 
 <a id="nestedatt--static_entries"></a>
 ### Nested Schema for `static_entries`
 
-Optional:
+Required:
 
 - `address` (List of String) Address
-- `domain` (String) Domain
-- `name` (String) Name
+- `domain` (String) Fully qualified domain name
+- `name` (String) Static entry name
 
 
 <a id="nestedatt--tcp_queries"></a>
 ### Nested Schema for `tcp_queries`
 
+Required:
+
+- `enabled` (Boolean) Turn on forwarding of TCP DNS queries?
+
 Optional:
 
-- `enabled` (Boolean) Enabled
-- `max_pending_requests` (Number) Max pending requests
+- `max_pending_requests` (Number) Upper limit on number of concurrent TCP DNS requests
 
 
 <a id="nestedatt--udp_queries"></a>
@@ -124,5 +133,5 @@ Optional:
 
 Optional:
 
-- `attempts` (Number) Attempts
-- `interval` (Number) Interval
+- `attempts` (Number) Maximum number of retries before trying next name server
+- `interval` (Number) Time in seconds for another request to be sent

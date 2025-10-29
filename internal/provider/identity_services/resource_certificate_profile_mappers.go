@@ -26,6 +26,7 @@ func unpackCertificateProfilesToSdk(ctx context.Context, obj types.Object) (*ide
 
 	var sdk identity_services.CertificateProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.BlockExpiredCert.IsNull() && !model.BlockExpiredCert.IsUnknown() {
 		sdk.BlockExpiredCert = model.BlockExpiredCert.ValueBoolPointer()

@@ -28,6 +28,7 @@ func unpackDosProtectionRulesToSdk(ctx context.Context, obj types.Object) (*secu
 
 	var sdk security_services.DosProtectionRules
 	var d diag.Diagnostics
+
 	// Handling Objects
 	if !model.Action.IsNull() && !model.Action.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Action")

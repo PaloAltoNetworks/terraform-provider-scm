@@ -83,6 +83,7 @@ func unpackRemoteNetworksToSdk(ctx context.Context, obj types.Object) (*deployme
 
 	var sdk deployment_services.RemoteNetworks
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.EcmpLoadBalancing.IsNull() && !model.EcmpLoadBalancing.IsUnknown() {
 		sdk.EcmpLoadBalancing = model.EcmpLoadBalancing.ValueStringPointer()

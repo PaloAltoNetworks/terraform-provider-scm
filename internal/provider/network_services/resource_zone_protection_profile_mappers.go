@@ -2,7 +2,9 @@ package provider
 
 import (
 	"context"
+	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -26,6 +28,7 @@ func unpackZoneProtectionProfilesToSdk(ctx context.Context, obj types.Object) (*
 
 	var sdk network_services.ZoneProtectionProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AsymmetricPath.IsNull() && !model.AsymmetricPath.IsUnknown() {
 		sdk.AsymmetricPath = model.AsymmetricPath.ValueStringPointer()
@@ -3444,6 +3447,24 @@ func unpackZoneProtectionProfilesScanInnerActionToSdk(ctx context.Context, obj t
 
 	var sdk network_services.ZoneProtectionProfilesScanInnerAction
 	var d diag.Diagnostics
+	// Handling Typeless Objects
+	if !model.Alert.IsNull() && !model.Alert.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Alert")
+		sdk.Alert = make(map[string]interface{})
+	}
+
+	// Handling Typeless Objects
+	if !model.Allow.IsNull() && !model.Allow.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Allow")
+		sdk.Allow = make(map[string]interface{})
+	}
+
+	// Handling Typeless Objects
+	if !model.Block.IsNull() && !model.Block.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Block")
+		sdk.Block = make(map[string]interface{})
+	}
+
 	// Handling Primitives
 	if !model.Duration.IsNull() && !model.Duration.IsUnknown() {
 		val := int32(model.Duration.ValueInt64())
@@ -3470,6 +3491,45 @@ func packZoneProtectionProfilesScanInnerActionFromSdk(ctx context.Context, sdk n
 	diags := diag.Diagnostics{}
 	var model models.ZoneProtectionProfilesScanInnerAction
 	var d diag.Diagnostics
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Alert != nil && !reflect.ValueOf(sdk.Alert).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Alert")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Alert, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Alert = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Allow != nil && !reflect.ValueOf(sdk.Allow).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Allow")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Allow, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Allow = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Block != nil && !reflect.ValueOf(sdk.Block).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Block")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Block, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Block = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Duration != nil {
@@ -3557,6 +3617,18 @@ func unpackZoneProtectionProfilesScanWhiteListInnerToSdk(ctx context.Context, ob
 	var sdk network_services.ZoneProtectionProfilesScanWhiteListInner
 	var d diag.Diagnostics
 	// Handling Primitives
+	if !model.Ipv4.IsNull() && !model.Ipv4.IsUnknown() {
+		sdk.Ipv4 = model.Ipv4.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ipv4", "value": *sdk.Ipv4})
+	}
+
+	// Handling Primitives
+	if !model.Ipv6.IsNull() && !model.Ipv6.IsUnknown() {
+		sdk.Ipv6 = model.Ipv6.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ipv6", "value": *sdk.Ipv6})
+	}
+
+	// Handling Primitives
 	if !model.Name.IsNull() && !model.Name.IsUnknown() {
 		sdk.Name = model.Name.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
@@ -3575,6 +3647,22 @@ func packZoneProtectionProfilesScanWhiteListInnerFromSdk(ctx context.Context, sd
 	diags := diag.Diagnostics{}
 	var model models.ZoneProtectionProfilesScanWhiteListInner
 	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ipv4 != nil {
+		model.Ipv4 = basetypes.NewStringValue(*sdk.Ipv4)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ipv4", "value": *sdk.Ipv4})
+	} else {
+		model.Ipv4 = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ipv6 != nil {
+		model.Ipv6 = basetypes.NewStringValue(*sdk.Ipv6)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ipv6", "value": *sdk.Ipv6})
+	} else {
+		model.Ipv6 = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)

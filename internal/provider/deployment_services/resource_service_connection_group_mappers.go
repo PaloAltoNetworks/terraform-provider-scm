@@ -27,6 +27,7 @@ func unpackServiceConnectionGroupsToSdk(ctx context.Context, obj types.Object) (
 
 	var sdk deployment_services.ServiceConnectionGroups
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.DisableSnat.IsNull() && !model.DisableSnat.IsUnknown() {
 		sdk.DisableSnat = model.DisableSnat.ValueBoolPointer()

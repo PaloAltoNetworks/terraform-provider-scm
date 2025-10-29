@@ -103,6 +103,11 @@ func (d *BgpRoutingDataSource) Read(ctx context.Context, req datasource.ReadRequ
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading BgpRouting", fmt.Sprintf("Could not read BgpRouting with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

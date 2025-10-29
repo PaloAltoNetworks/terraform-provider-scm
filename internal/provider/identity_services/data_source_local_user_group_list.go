@@ -13,6 +13,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/identity_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/identity_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 var (
@@ -97,6 +98,11 @@ func (d *LocalUserGroupListDataSource) Read(ctx context.Context, req datasource.
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error Listing LocalUserGroupss", fmt.Sprintf("Could not list LocalUserGroupss: %s", err.Error()))
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Tag Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

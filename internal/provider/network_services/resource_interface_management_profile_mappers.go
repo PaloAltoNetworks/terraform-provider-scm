@@ -29,6 +29,7 @@ func unpackInterfaceManagementProfilesToSdk(ctx context.Context, obj types.Objec
 
 	var sdk network_services.InterfaceManagementProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

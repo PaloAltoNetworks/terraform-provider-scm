@@ -5,6 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -361,11 +362,15 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"default_value": schema.StringAttribute{
-			MarkdownDescription: "Default value",
+			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -377,6 +382,10 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -394,6 +403,11 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"layer2": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer3"),
+				),
+			},
 			MarkdownDescription: "Layer2",
 			Optional:            true,
 			Computed:            true,
@@ -413,11 +427,16 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 							MarkdownDescription: "Fast failover",
 							Optional:            true,
 							Computed:            true,
+							Default:             booldefault.StaticBool(false),
 						},
 						"max_ports": schema.Int64Attribute{
-							MarkdownDescription: "Max ports",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 8),
+							},
+							MarkdownDescription: "Maximum number of physical ports bundled in the LAG",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(8),
 						},
 						"mode": schema.StringAttribute{
 							Validators: []validator.String{
@@ -429,25 +448,41 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 							Default:             stringdefault.StaticString("passive"),
 						},
 						"system_priority": schema.Int64Attribute{
-							MarkdownDescription: "System priority",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 65535),
+							},
+							MarkdownDescription: "LACP system priority in system ID",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(32768),
 						},
 						"transmission_rate": schema.StringAttribute{
-							MarkdownDescription: "Transmission rate",
+							Validators: []validator.String{
+								stringvalidator.OneOf("fast", "slow"),
+							},
+							MarkdownDescription: "Transmission mode",
 							Optional:            true,
 							Computed:            true,
+							Default:             stringdefault.StaticString("slow"),
 						},
 					},
 				},
 				"vlan_tag": schema.Int64Attribute{
-					MarkdownDescription: "Vlan tag",
+					Validators: []validator.Int64{
+						int64validator.Between(1, 4096),
+					},
+					MarkdownDescription: "Assign interface to VLAN tag",
 					Optional:            true,
 					Computed:            true,
 				},
 			},
 		},
 		"layer3": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("layer2"),
+				),
+			},
 			MarkdownDescription: "Layer3",
 			Optional:            true,
 			Computed:            true,
@@ -459,7 +494,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"hw_address": schema.StringAttribute{
-								MarkdownDescription: "Hw address",
+								MarkdownDescription: "MAC address",
 								Optional:            true,
 							},
 							"name": schema.StringAttribute{
@@ -470,69 +505,91 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 					},
 				},
 				"ddns_config": schema.SingleNestedAttribute{
-					MarkdownDescription: "Ddns config",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Aggregate Ethernet Interface.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ddns_cert_profile": schema.StringAttribute{
-							MarkdownDescription: "Ddns cert profile",
-							Optional:            true,
-							Computed:            true,
+							MarkdownDescription: "Certificate profile",
+							Required:            true,
 						},
 						"ddns_enabled": schema.BoolAttribute{
-							MarkdownDescription: "Ddns enabled",
+							MarkdownDescription: "Enable DDNS?",
 							Optional:            true,
 							Computed:            true,
+							Default:             booldefault.StaticBool(false),
 						},
 						"ddns_hostname": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\.\\-]+$"), "pattern must match "+"^[a-zA-Z0-9_\\.\\-]+$"),
+							},
 							MarkdownDescription: "Ddns hostname",
-							Optional:            true,
-							Computed:            true,
+							Required:            true,
 						},
 						"ddns_ip": schema.StringAttribute{
-							MarkdownDescription: "Ddns ip",
+							MarkdownDescription: "IP to register (static only)",
 							Optional:            true,
 							Computed:            true,
 						},
 						"ddns_update_interval": schema.Int64Attribute{
-							MarkdownDescription: "Ddns update interval",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 30),
+							},
+							MarkdownDescription: "Update interval (days)",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(1),
 						},
 						"ddns_vendor": schema.StringAttribute{
-							MarkdownDescription: "Ddns vendor",
-							Optional:            true,
-							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(127),
+							},
+							MarkdownDescription: "DDNS vendor",
+							Required:            true,
 						},
 						"ddns_vendor_config": schema.StringAttribute{
-							MarkdownDescription: "Ddns vendor config",
-							Optional:            true,
-							Computed:            true,
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(255),
+							},
+							MarkdownDescription: "DDNS vendor",
+							Required:            true,
 						},
 					},
 				},
 				"dhcp_client": schema.SingleNestedAttribute{
-					MarkdownDescription: "Dhcp client",
+					Validators: []validator.Object{
+						objectvalidator.ConflictsWith(
+							path.MatchRelative().AtParent().AtName("ip"),
+						),
+					},
+					MarkdownDescription: "Aggregate Ethernet DHCP Client Object",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"create_default_route": schema.BoolAttribute{
-							MarkdownDescription: "Create default route",
+							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
 							Optional:            true,
 							Computed:            true,
+							Default:             booldefault.StaticBool(true),
 						},
 						"default_route_metric": schema.Int64Attribute{
-							MarkdownDescription: "Default route metric",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 65535),
+							},
+							MarkdownDescription: "Metric of the default route created",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(10),
 						},
 						"enable": schema.BoolAttribute{
-							MarkdownDescription: "Enable",
+							MarkdownDescription: "Enable DHCP?",
 							Optional:            true,
 							Computed:            true,
+							Default:             booldefault.StaticBool(true),
 						},
 						"send_hostname": schema.SingleNestedAttribute{
-							MarkdownDescription: "Send hostname",
+							MarkdownDescription: "Aggregate Ethernet DHCP Client Send hostname",
 							Optional:            true,
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
@@ -540,17 +597,27 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 									MarkdownDescription: "Enable",
 									Optional:            true,
 									Computed:            true,
+									Default:             booldefault.StaticBool(true),
 								},
 								"hostname": schema.StringAttribute{
-									MarkdownDescription: "Hostname",
+									Validators: []validator.String{
+										stringvalidator.LengthAtMost(64),
+										stringvalidator.LengthAtLeast(1),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\._-]+$"), "pattern must match "+"^[a-zA-Z0-9\\._-]+$"),
+									},
+									MarkdownDescription: "Set interface hostname",
 									Optional:            true,
 									Computed:            true,
+									Default:             stringdefault.StaticString("system-hostname"),
 								},
 							},
 						},
 					},
 				},
 				"interface_management_profile": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(31),
+					},
 					MarkdownDescription: "Interface management profile",
 					Optional:            true,
 					Computed:            true,
@@ -559,7 +626,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Interface IP addresses",
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
 						),
 					},
@@ -581,11 +648,16 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 							MarkdownDescription: "Fast failover",
 							Optional:            true,
 							Computed:            true,
+							Default:             booldefault.StaticBool(false),
 						},
 						"max_ports": schema.Int64Attribute{
-							MarkdownDescription: "Max ports",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 8),
+							},
+							MarkdownDescription: "Maximum number of physical ports bundled in the LAG",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(8),
 						},
 						"mode": schema.StringAttribute{
 							Validators: []validator.String{
@@ -597,14 +669,22 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 							Default:             stringdefault.StaticString("passive"),
 						},
 						"system_priority": schema.Int64Attribute{
-							MarkdownDescription: "System priority",
+							Validators: []validator.Int64{
+								int64validator.Between(1, 65535),
+							},
+							MarkdownDescription: "LACP system priority in system ID",
 							Optional:            true,
 							Computed:            true,
+							Default:             int64default.StaticInt64(32768),
 						},
 						"transmission_rate": schema.StringAttribute{
-							MarkdownDescription: "Transmission rate",
+							Validators: []validator.String{
+								stringvalidator.OneOf("fast", "slow"),
+							},
+							MarkdownDescription: "Transmission mode",
 							Optional:            true,
 							Computed:            true,
+							Default:             stringdefault.StaticString("slow"),
 						},
 					},
 				},
@@ -625,6 +705,10 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -653,7 +737,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"default_value": dsschema.StringAttribute{
-			MarkdownDescription: "Default value",
+			MarkdownDescription: "Default interface assignment",
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
@@ -685,7 +769,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"max_ports": dsschema.Int64Attribute{
-							MarkdownDescription: "Max ports",
+							MarkdownDescription: "Maximum number of physical ports bundled in the LAG",
 							Computed:            true,
 						},
 						"mode": dsschema.StringAttribute{
@@ -693,17 +777,17 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"system_priority": dsschema.Int64Attribute{
-							MarkdownDescription: "System priority",
+							MarkdownDescription: "LACP system priority in system ID",
 							Computed:            true,
 						},
 						"transmission_rate": dsschema.StringAttribute{
-							MarkdownDescription: "Transmission rate",
+							MarkdownDescription: "Transmission mode",
 							Computed:            true,
 						},
 					},
 				},
 				"vlan_tag": dsschema.Int64Attribute{
-					MarkdownDescription: "Vlan tag",
+					MarkdownDescription: "Assign interface to VLAN tag",
 					Computed:            true,
 				},
 			},
@@ -718,7 +802,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
 							"hw_address": dsschema.StringAttribute{
-								MarkdownDescription: "Hw address",
+								MarkdownDescription: "MAC address",
 								Computed:            true,
 							},
 							"name": dsschema.StringAttribute{
@@ -729,15 +813,15 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ddns_config": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ddns config",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Aggregate Ethernet Interface.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"ddns_cert_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns cert profile",
+							MarkdownDescription: "Certificate profile",
 							Computed:            true,
 						},
 						"ddns_enabled": dsschema.BoolAttribute{
-							MarkdownDescription: "Ddns enabled",
+							MarkdownDescription: "Enable DDNS?",
 							Computed:            true,
 						},
 						"ddns_hostname": dsschema.StringAttribute{
@@ -745,41 +829,41 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"ddns_ip": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns ip",
+							MarkdownDescription: "IP to register (static only)",
 							Computed:            true,
 						},
 						"ddns_update_interval": dsschema.Int64Attribute{
-							MarkdownDescription: "Ddns update interval",
+							MarkdownDescription: "Update interval (days)",
 							Computed:            true,
 						},
 						"ddns_vendor": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns vendor",
+							MarkdownDescription: "DDNS vendor",
 							Computed:            true,
 						},
 						"ddns_vendor_config": dsschema.StringAttribute{
-							MarkdownDescription: "Ddns vendor config",
+							MarkdownDescription: "DDNS vendor",
 							Computed:            true,
 						},
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dhcp client",
+					MarkdownDescription: "Aggregate Ethernet DHCP Client Object",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"create_default_route": dsschema.BoolAttribute{
-							MarkdownDescription: "Create default route",
+							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
 							Computed:            true,
 						},
 						"default_route_metric": dsschema.Int64Attribute{
-							MarkdownDescription: "Default route metric",
+							MarkdownDescription: "Metric of the default route created",
 							Computed:            true,
 						},
 						"enable": dsschema.BoolAttribute{
-							MarkdownDescription: "Enable",
+							MarkdownDescription: "Enable DHCP?",
 							Computed:            true,
 						},
 						"send_hostname": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Send hostname",
+							MarkdownDescription: "Aggregate Ethernet DHCP Client Send hostname",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"enable": dsschema.BoolAttribute{
@@ -787,7 +871,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"hostname": dsschema.StringAttribute{
-									MarkdownDescription: "Hostname",
+									MarkdownDescription: "Set interface hostname",
 									Computed:            true,
 								},
 							},
@@ -816,7 +900,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"max_ports": dsschema.Int64Attribute{
-							MarkdownDescription: "Max ports",
+							MarkdownDescription: "Maximum number of physical ports bundled in the LAG",
 							Computed:            true,
 						},
 						"mode": dsschema.StringAttribute{
@@ -824,11 +908,11 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"system_priority": dsschema.Int64Attribute{
-							MarkdownDescription: "System priority",
+							MarkdownDescription: "LACP system priority in system ID",
 							Computed:            true,
 						},
 						"transmission_rate": dsschema.StringAttribute{
-							MarkdownDescription: "Transmission rate",
+							MarkdownDescription: "Transmission mode",
 							Computed:            true,
 						},
 					},

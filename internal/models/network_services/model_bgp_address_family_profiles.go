@@ -1030,7 +1030,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"occurrence": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("origin"),
 												),
 												int64validator.Between(1, 10),
@@ -1040,7 +1040,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"origin": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("occurrence"),
 												),
 											},
@@ -1076,7 +1076,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											Attributes: map[string]schema.Attribute{
 												"restart": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("warning_only"),
 														),
 													},
@@ -1094,7 +1094,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 												},
 												"warning_only": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("restart"),
 														),
 													},
@@ -1126,7 +1126,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"self": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("self_force"),
 												),
 											},
@@ -1136,7 +1136,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"self_force": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("self"),
 												),
 											},
@@ -1183,7 +1183,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"all": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("extended"),
 													path.MatchRelative().AtParent().AtName("large"),
@@ -1196,7 +1196,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"both": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("extended"),
 													path.MatchRelative().AtParent().AtName("large"),
@@ -1209,7 +1209,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"extended": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("large"),
@@ -1222,7 +1222,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"large": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("extended"),
@@ -1235,7 +1235,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"standard": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("extended"),
@@ -1278,7 +1278,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"occurrence": schema.Int64Attribute{
 											Validators: []validator.Int64{
-												int64validator.ExactlyOneOf(
+												int64validator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("origin"),
 												),
 												int64validator.Between(1, 10),
@@ -1288,7 +1288,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"origin": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("occurrence"),
 												),
 											},
@@ -1324,7 +1324,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											Attributes: map[string]schema.Attribute{
 												"restart": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("warning_only"),
 														),
 													},
@@ -1342,7 +1342,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 												},
 												"warning_only": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("restart"),
 														),
 													},
@@ -1374,7 +1374,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"self": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("self_force"),
 												),
 											},
@@ -1384,7 +1384,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"self_force": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("self"),
 												),
 											},
@@ -1431,7 +1431,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Attributes: map[string]schema.Attribute{
 										"all": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("extended"),
 													path.MatchRelative().AtParent().AtName("large"),
@@ -1444,7 +1444,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"both": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("extended"),
 													path.MatchRelative().AtParent().AtName("large"),
@@ -1457,7 +1457,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"extended": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("large"),
@@ -1470,7 +1470,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"large": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("extended"),
@@ -1483,7 +1483,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 										"standard": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
-												objectvalidator.ExactlyOneOf(
+												objectvalidator.ConflictsWith(
 													path.MatchRelative().AtParent().AtName("all"),
 													path.MatchRelative().AtParent().AtName("both"),
 													path.MatchRelative().AtParent().AtName("extended"),

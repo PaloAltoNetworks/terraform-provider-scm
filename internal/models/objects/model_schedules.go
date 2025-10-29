@@ -246,7 +246,7 @@ var SchedulesResourceSchema = schema.Schema{
 							ElementType:         types.StringType,
 							MarkdownDescription: "Daily",
 							Validators: []validator.List{
-								listvalidator.ExactlyOneOf(
+								listvalidator.ConflictsWith(
 									path.MatchRelative().AtParent().AtName("weekly"),
 								),
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(11)),
@@ -255,7 +255,7 @@ var SchedulesResourceSchema = schema.Schema{
 						},
 						"weekly": schema.SingleNestedAttribute{
 							Validators: []validator.Object{
-								objectvalidator.ExactlyOneOf(
+								objectvalidator.ConflictsWith(
 									path.MatchRelative().AtParent().AtName("daily"),
 								),
 							},

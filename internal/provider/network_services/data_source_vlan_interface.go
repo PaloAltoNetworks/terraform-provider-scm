@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM VlanInterface (Package: network_services)
@@ -101,6 +102,11 @@ func (d *VlanInterfaceDataSource) Read(ctx context.Context, req datasource.ReadR
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading VlanInterfaces", fmt.Sprintf("Could not read VlanInterfaces with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *VlanInterfaceDataSource) Read(ctx context.Context, req datasource.ReadR
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing VlanInterfacess", fmt.Sprintf("Could not list VlanInterfacess: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

@@ -67,6 +67,7 @@ func unpackLdapServerProfilesToSdk(ctx context.Context, obj types.Object) (*iden
 
 	var sdk identity_services.LdapServerProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Base.IsNull() && !model.Base.IsUnknown() {
 		sdk.Base = model.Base.ValueStringPointer()

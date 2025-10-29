@@ -10,7 +10,183 @@ description: |-
 
 NatRule resource
 
+## Example Usage
 
+```terraform
+resource "scm_tag" "example_tag" {
+  folder = "All"
+  name   = "example-tag"
+  color  = "Red"
+}
+
+#Source Translation (SNAT) - Dynamic IP and Port
+resource "scm_nat_rule" "example_nat_rule" {
+  # Required Attributes
+  name        = "snat-to-internet-1"
+  from        = ["any"]         # Source zone(s) of the original packet
+  to          = ["untrust"]     # Destination zone of the original packet
+  source      = ["any"]         # Source address(es) of the original packet
+  destination = ["any"]         # Destination address(es) of the original packet
+  service     = "service-https" # The service of the original packet
+
+  # Optional Attributes
+  description = "Dynamic SNAT for internal traffic accessing the internet. Updating"
+  disabled    = false
+  nat_type    = "ipv4" # Default value, explicitly setting for clarity
+
+  # Scope (Use either folder, device, or snippet)
+  folder = "All"
+
+  # Apply the created tag
+  tag = [
+    scm_tag.example_tag.name,
+  ]
+
+  # Source Translation (SNAT) - Dynamic IP and Port
+  source_translation = {
+    dynamic_ip_and_port = {
+      translated_address = ["1.1.1.1", "1.1.1.5"]
+    }
+    # NOTE: You must only specify one of: dynamic_ip, dynamic_ip_and_port, or static_ip
+  }
+
+  # Destination Translation (DNAT) is for Inbound NAT, usually used alone or with Static SNAT.
+  destination_translation = {
+    translated_address = "192.168.1.10"
+    translated_port    = 8080
+  }
+
+  active_active_device_binding = "1"
+
+}
+
+#Source Translation (SNAT) - Static IP - Bidirectional - no
+resource "scm_nat_rule" "example_nat_static_rule" {
+  # Required Attributes
+  name        = "snat-to-bid-1"
+  from        = ["any"]         # Source zone(s) of the original packet
+  to          = ["untrust"]     # Destination zone of the original packet
+  source      = ["any"]         # Source address(es) of the original packet
+  destination = ["any"]         # Destination address(es) of the original packet
+  service     = "service-https" # The service of the original packet
+
+  # Optional Attributes
+  description = "Dynamic SNAT for internal traffic accessing the internet. Updating"
+  disabled    = false
+  nat_type    = "ipv4" # Default value, explicitly setting for clarity
+
+  # Scope (Use either folder, device, or snippet)
+  folder = "All"
+
+  # Apply the created tag
+  tag = [
+    scm_tag.example_tag.name,
+  ]
+
+  # Source Translation (SNAT) - Dynamic IP and Port
+  source_translation = {
+    static_ip = {
+      translated_address = "1.1.1.5",
+      bi_directional     = "no"
+    }
+    # NOTE: You must only specify one of: dynamic_ip, dynamic_ip_and_port, or static_ip
+  }
+
+  # Destination Translation (DNAT) is for Inbound NAT, usually used alone or with Static SNAT.
+  destination_translation = {
+    translated_address = "192.168.1.10"
+    translated_port    = 8080
+  }
+
+  active_active_device_binding = "1"
+
+}
+
+#Source Translation (SNAT) - Static IP - Bidirectional - yes
+resource "scm_nat_rule" "example_nat_static_rule_2" {
+  # Required Attributes
+  name        = "snat-to-bid-yes-1"
+  from        = ["any"]         # Source zone(s) of the original packet
+  to          = ["untrust"]     # Destination zone of the original packet
+  source      = ["any"]         # Source address(es) of the original packet
+  destination = ["any"]         # Destination address(es) of the original packet
+  service     = "service-https" # The service of the original packet
+
+  # Optional Attributes
+  description = "Dynamic SNAT for internal traffic accessing the internet. Updating"
+  disabled    = false
+  nat_type    = "ipv4" # Default value, explicitly setting for clarity
+
+  # Scope (Use either folder, device, or snippet)
+  folder = "All"
+
+  # Apply the created tag
+  tag = [
+    scm_tag.example_tag.name,
+  ]
+
+  # Source Translation (SNAT) - Dynamic IP and Port
+  source_translation = {
+    static_ip = {
+      translated_address = "1.1.1.5",
+      bi_directional     = "yes"
+    }
+    # NOTE: You must only specify one of: dynamic_ip, dynamic_ip_and_port, or static_ip
+  }
+
+  active_active_device_binding = "1"
+
+}
+
+
+#Source Translation (SNAT) - Dynamic IP 
+resource "scm_nat_rule" "example_nat_dynamic_rule" {
+  # Required Attributes
+  name        = "snat-to-dyanamic-1"
+  from        = ["any"]         # Source zone(s) of the original packet
+  to          = ["untrust"]     # Destination zone of the original packet
+  source      = ["any"]         # Source address(es) of the original packet
+  destination = ["any"]         # Destination address(es) of the original packet
+  service     = "service-https" # The service of the original packet
+
+  # Optional Attributes
+  description = "Dynamic SNAT for internal traffic accessing the internet. Updating"
+  disabled    = false
+  nat_type    = "ipv4" # Default value, explicitly setting for clarity
+
+  # Scope (Use either folder, device, or snippet)
+  folder = "All"
+
+  # Apply the created tag
+  tag = [
+    scm_tag.example_tag.name,
+  ]
+
+  # Source Translation (SNAT) - Dynamic IP and Port
+  source_translation = {
+    dynamic_ip = {
+      translated_address = ["1.1.1.0/24"],
+      fallback = {
+        translated_address = ["1.1.1.0"],
+        interface_address = {
+          interface = "ethernet1/1",
+          ip        = "1.1.1.5"
+        }
+      }
+    }
+    # NOTE: You must only specify one of: dynamic_ip, dynamic_ip_and_port, or static_ip
+  }
+
+  # Destination Translation (DNAT) is for Inbound NAT, usually used alone or with Static SNAT.
+  destination_translation = {
+    translated_address = "192.168.1.10"
+    translated_port    = 8080
+  }
+
+  active_active_device_binding = "1"
+
+}
+```
 
 <!-- schema generated by tfplugindocs -->
 ## Schema
@@ -28,31 +204,49 @@ NatRule resource
 
 - `active_active_device_binding` (String) Active active device binding
 - `description` (String) NAT rule description
+- `destination_translation` (Attributes) Destination translation configuration (Static/P-D-N-T). (see [below for nested schema](#nestedatt--destination_translation))
 - `device` (String) The device in which the resource is defined
 - `disabled` (Boolean) Disable NAT rule?
-- `distribution` (String) Distribution method
-- `dns_rewrite` (Attributes) DNS rewrite (see [below for nested schema](#nestedatt--dns_rewrite))
+- `dynamic_destination_translation` (Attributes) Dynamic destination translation configuration. (see [below for nested schema](#nestedatt--dynamic_destination_translation))
 - `folder` (String) The folder in which the resource is defined
 - `nat_type` (String) NAT type
 - `position` (String) The relative position of the rule
 - `snippet` (String) The snippet in which the resource is defined
-- `source_translation` (Attributes) Source translation (see [below for nested schema](#nestedatt--source_translation))
+- `source_translation` (Attributes) Source translation configuration (Static/P-D-N-T). (see [below for nested schema](#nestedatt--source_translation))
 - `tag` (List of String) NAT rule tags
 - `to_interface` (String) Destination interface of the original packet
-- `translated_address_single` (String) Translated destination IP address
-- `translated_port` (Number) Translated destination port
 
 ### Read-Only
 
 - `id` (String) UUID of the resource
 - `tfid` (String) The Terraform ID.
 
-<a id="nestedatt--dns_rewrite"></a>
-### Nested Schema for `dns_rewrite`
+<a id="nestedatt--destination_translation"></a>
+### Nested Schema for `destination_translation`
+
+Optional:
+
+- `dns_rewrite` (Attributes) Dns rewrite (see [below for nested schema](#nestedatt--destination_translation--dns_rewrite))
+- `translated_address` (String) Translated address
+- `translated_port` (Number) Translated port
+
+<a id="nestedatt--destination_translation--dns_rewrite"></a>
+### Nested Schema for `destination_translation.dns_rewrite`
 
 Optional:
 
 - `direction` (String) Direction
+
+
+
+<a id="nestedatt--dynamic_destination_translation"></a>
+### Nested Schema for `dynamic_destination_translation`
+
+Optional:
+
+- `distribution` (String) Distribution
+- `translated_address` (String) Translated address
+- `translated_port` (Number) Translated port
 
 
 <a id="nestedatt--source_translation"></a>
@@ -60,15 +254,45 @@ Optional:
 
 Optional:
 
-- `bi_directional` (Boolean) Bi directional
-- `fallback` (Attributes) Fallback (see [below for nested schema](#nestedatt--source_translation--fallback))
-- `interface` (String) Interface name
-- `translated_address_array` (List of String) Translated IP addresses
-- `translated_address_single` (String) Translated IP address
+- `dynamic_ip` (Attributes) Dynamic IP (see [below for nested schema](#nestedatt--source_translation--dynamic_ip))
+- `dynamic_ip_and_port` (Attributes) Dynamic IP and port (see [below for nested schema](#nestedatt--source_translation--dynamic_ip_and_port))
+- `static_ip` (Attributes) Static IP (see [below for nested schema](#nestedatt--source_translation--static_ip))
 
-<a id="nestedatt--source_translation--fallback"></a>
-### Nested Schema for `source_translation.fallback`
+<a id="nestedatt--source_translation--dynamic_ip"></a>
+### Nested Schema for `source_translation.dynamic_ip`
 
 Optional:
 
+- `fallback` (Attributes) Fallback (see [below for nested schema](#nestedatt--source_translation--dynamic_ip--fallback))
+- `translated_address` (List of String) Translated IP addresses
+
+<a id="nestedatt--source_translation--dynamic_ip--fallback"></a>
+### Nested Schema for `source_translation.dynamic_ip.fallback`
+
+Optional:
+
+- `floating_ip` (String) Floating IP address
 - `interface` (String) Interface name
+- `ip` (String) IP address
+- `translated_address` (List of String) Fallback IP addresses
+
+
+
+<a id="nestedatt--source_translation--dynamic_ip_and_port"></a>
+### Nested Schema for `source_translation.dynamic_ip_and_port`
+
+Optional:
+
+- `floating_ip` (String) Floating IP address
+- `interface` (String) Interface name
+- `ip` (String) Translated source IP address
+- `translated_address` (List of String) Translated source IP addresses
+
+
+<a id="nestedatt--source_translation--static_ip"></a>
+### Nested Schema for `source_translation.static_ip`
+
+Optional:
+
+- `bi_directional` (String) Bi directional
+- `translated_address` (String) Translated IP address

@@ -14,7 +14,7 @@ AntiSpywareSignature resource
 
 ```terraform
 resource "scm_anti_spyware_signature" "scm_anti_spyware_signature_1" {
-  folder     = "Shared"
+  folder     = "All"
   threat_id  = 6900001
   comment    = "Managed by Terraform"
   direction  = "client2server"
@@ -52,7 +52,7 @@ resource "scm_anti_spyware_signature" "scm_anti_spyware_signature_1" {
 
 ### Required
 
-- `threat_id` (Number) threat id range <15000-18000> and <6900001-7000000>
+- `threat_id` (String) threat id range <15000-18000> and <6900001-7000000>
 - `threatname` (String) Threatname
 
 ### Optional

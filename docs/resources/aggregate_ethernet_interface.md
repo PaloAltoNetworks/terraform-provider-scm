@@ -22,7 +22,7 @@ AggregateEthernetInterface resource
 ### Optional
 
 - `comment` (String) Aggregate interface description
-- `default_value` (String) Default value
+- `default_value` (String) Default interface assignment
 - `device` (String) The device in which the resource is defined
 - `folder` (String) The folder in which the resource is defined
 - `layer2` (Attributes) Layer2 (see [below for nested schema](#nestedatt--layer2))
@@ -40,7 +40,7 @@ AggregateEthernetInterface resource
 Optional:
 
 - `lacp` (Attributes) Lacp (see [below for nested schema](#nestedatt--layer2--lacp))
-- `vlan_tag` (Number) Vlan tag
+- `vlan_tag` (Number) Assign interface to VLAN tag
 
 <a id="nestedatt--layer2--lacp"></a>
 ### Nested Schema for `layer2.lacp`
@@ -49,10 +49,10 @@ Optional:
 
 - `enable` (Boolean) Enable LACP?
 - `fast_failover` (Boolean) Fast failover
-- `max_ports` (Number) Max ports
+- `max_ports` (Number) Maximum number of physical ports bundled in the LAG
 - `mode` (String) Mode
-- `system_priority` (Number) System priority
-- `transmission_rate` (String) Transmission rate
+- `system_priority` (Number) LACP system priority in system ID
+- `transmission_rate` (String) Transmission mode
 
 
 
@@ -62,8 +62,8 @@ Optional:
 Optional:
 
 - `arp` (Attributes List) Aggregate Ethernet ARP configuration (see [below for nested schema](#nestedatt--layer3--arp))
-- `ddns_config` (Attributes) Ddns config (see [below for nested schema](#nestedatt--layer3--ddns_config))
-- `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--layer3--dhcp_client))
+- `ddns_config` (Attributes) Dynamic DNS configuration specific to the Aggregate Ethernet Interface. (see [below for nested schema](#nestedatt--layer3--ddns_config))
+- `dhcp_client` (Attributes) Aggregate Ethernet DHCP Client Object (see [below for nested schema](#nestedatt--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
 - `ip` (List of String) Interface IP addresses
 - `lacp` (Attributes) Lacp (see [below for nested schema](#nestedatt--layer3--lacp))
@@ -74,22 +74,25 @@ Optional:
 
 Optional:
 
-- `hw_address` (String) Hw address
+- `hw_address` (String) MAC address
 - `name` (String) IP address
 
 
 <a id="nestedatt--layer3--ddns_config"></a>
 ### Nested Schema for `layer3.ddns_config`
 
+Required:
+
+- `ddns_cert_profile` (String) Certificate profile
+- `ddns_hostname` (String) Ddns hostname
+- `ddns_vendor` (String) DDNS vendor
+- `ddns_vendor_config` (String) DDNS vendor
+
 Optional:
 
-- `ddns_cert_profile` (String) Ddns cert profile
-- `ddns_enabled` (Boolean) Ddns enabled
-- `ddns_hostname` (String) Ddns hostname
-- `ddns_ip` (String) Ddns ip
-- `ddns_update_interval` (Number) Ddns update interval
-- `ddns_vendor` (String) Ddns vendor
-- `ddns_vendor_config` (String) Ddns vendor config
+- `ddns_enabled` (Boolean) Enable DDNS?
+- `ddns_ip` (String) IP to register (static only)
+- `ddns_update_interval` (Number) Update interval (days)
 
 
 <a id="nestedatt--layer3--dhcp_client"></a>
@@ -97,10 +100,10 @@ Optional:
 
 Optional:
 
-- `create_default_route` (Boolean) Create default route
-- `default_route_metric` (Number) Default route metric
-- `enable` (Boolean) Enable
-- `send_hostname` (Attributes) Send hostname (see [below for nested schema](#nestedatt--layer3--dhcp_client--send_hostname))
+- `create_default_route` (Boolean) Automatically create default route pointing to default gateway provided by server
+- `default_route_metric` (Number) Metric of the default route created
+- `enable` (Boolean) Enable DHCP?
+- `send_hostname` (Attributes) Aggregate Ethernet DHCP Client Send hostname (see [below for nested schema](#nestedatt--layer3--dhcp_client--send_hostname))
 
 <a id="nestedatt--layer3--dhcp_client--send_hostname"></a>
 ### Nested Schema for `layer3.dhcp_client.send_hostname`
@@ -108,7 +111,7 @@ Optional:
 Optional:
 
 - `enable` (Boolean) Enable
-- `hostname` (String) Hostname
+- `hostname` (String) Set interface hostname
 
 
 
@@ -119,7 +122,7 @@ Optional:
 
 - `enable` (Boolean) Enable LACP?
 - `fast_failover` (Boolean) Fast failover
-- `max_ports` (Number) Max ports
+- `max_ports` (Number) Maximum number of physical ports bundled in the LAG
 - `mode` (String) Mode
-- `system_priority` (Number) System priority
-- `transmission_rate` (String) Transmission rate
+- `system_priority` (Number) LACP system priority in system ID
+- `transmission_rate` (String) Transmission mode

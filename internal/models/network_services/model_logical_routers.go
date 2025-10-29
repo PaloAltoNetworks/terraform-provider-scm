@@ -3,6 +3,7 @@ package models
 import (
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -34,65 +35,65 @@ type LogicalRouters struct {
 
 // LogicalRoutersVrfInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInner struct {
-	AdminDists   basetypes.ObjectValue  `tfsdk:"admin_dists"`
-	Bgp          basetypes.ObjectValue  `tfsdk:"bgp"`
-	Ecmp         basetypes.ObjectValue  `tfsdk:"ecmp"`
-	GlobalVrid   basetypes.Float64Value `tfsdk:"global_vrid"`
-	Interface    basetypes.ListValue    `tfsdk:"interface"`
-	Multicast    basetypes.ObjectValue  `tfsdk:"multicast"`
-	Name         basetypes.StringValue  `tfsdk:"name"`
-	Ospf         basetypes.ObjectValue  `tfsdk:"ospf"`
-	Ospfv3       basetypes.ObjectValue  `tfsdk:"ospfv3"`
-	RibFilter    basetypes.ObjectValue  `tfsdk:"rib_filter"`
-	Rip          basetypes.ObjectValue  `tfsdk:"rip"`
-	RoutingTable basetypes.ObjectValue  `tfsdk:"routing_table"`
-	SdwanType    basetypes.StringValue  `tfsdk:"sdwan_type"`
-	VrAdminDists basetypes.ObjectValue  `tfsdk:"vr_admin_dists"`
-	ZoneName     basetypes.StringValue  `tfsdk:"zone_name"`
+	AdminDists   basetypes.ObjectValue `tfsdk:"admin_dists"`
+	Bgp          basetypes.ObjectValue `tfsdk:"bgp"`
+	Ecmp         basetypes.ObjectValue `tfsdk:"ecmp"`
+	GlobalVrid   basetypes.Int64Value  `tfsdk:"global_vrid"`
+	Interface    basetypes.ListValue   `tfsdk:"interface"`
+	Multicast    basetypes.ObjectValue `tfsdk:"multicast"`
+	Name         basetypes.StringValue `tfsdk:"name"`
+	Ospf         basetypes.ObjectValue `tfsdk:"ospf"`
+	Ospfv3       basetypes.ObjectValue `tfsdk:"ospfv3"`
+	RibFilter    basetypes.ObjectValue `tfsdk:"rib_filter"`
+	Rip          basetypes.ObjectValue `tfsdk:"rip"`
+	RoutingTable basetypes.ObjectValue `tfsdk:"routing_table"`
+	SdwanType    basetypes.StringValue `tfsdk:"sdwan_type"`
+	VrAdminDists basetypes.ObjectValue `tfsdk:"vr_admin_dists"`
+	ZoneName     basetypes.StringValue `tfsdk:"zone_name"`
 }
 
 // LogicalRoutersVrfInnerAdminDists represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerAdminDists struct {
-	BgpExternal basetypes.Float64Value `tfsdk:"bgp_external"`
-	BgpInternal basetypes.Float64Value `tfsdk:"bgp_internal"`
-	BgpLocal    basetypes.Float64Value `tfsdk:"bgp_local"`
-	OspfExt     basetypes.Float64Value `tfsdk:"ospf_ext"`
-	OspfInter   basetypes.Float64Value `tfsdk:"ospf_inter"`
-	OspfIntra   basetypes.Float64Value `tfsdk:"ospf_intra"`
-	Ospfv3Ext   basetypes.Float64Value `tfsdk:"ospfv3_ext"`
-	Ospfv3Inter basetypes.Float64Value `tfsdk:"ospfv3_inter"`
-	Ospfv3Intra basetypes.Float64Value `tfsdk:"ospfv3_intra"`
-	Rip         basetypes.Float64Value `tfsdk:"rip"`
-	Static      basetypes.Float64Value `tfsdk:"static"`
-	StaticIpv6  basetypes.Float64Value `tfsdk:"static_ipv6"`
+	BgpExternal basetypes.Int64Value `tfsdk:"bgp_external"`
+	BgpInternal basetypes.Int64Value `tfsdk:"bgp_internal"`
+	BgpLocal    basetypes.Int64Value `tfsdk:"bgp_local"`
+	OspfExt     basetypes.Int64Value `tfsdk:"ospf_ext"`
+	OspfInter   basetypes.Int64Value `tfsdk:"ospf_inter"`
+	OspfIntra   basetypes.Int64Value `tfsdk:"ospf_intra"`
+	Ospfv3Ext   basetypes.Int64Value `tfsdk:"ospfv3_ext"`
+	Ospfv3Inter basetypes.Int64Value `tfsdk:"ospfv3_inter"`
+	Ospfv3Intra basetypes.Int64Value `tfsdk:"ospfv3_intra"`
+	Rip         basetypes.Int64Value `tfsdk:"rip"`
+	Static      basetypes.Int64Value `tfsdk:"static"`
+	StaticIpv6  basetypes.Int64Value `tfsdk:"static_ipv6"`
 }
 
 // LogicalRoutersVrfInnerBgp represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgp struct {
-	AdvertiseNetwork            basetypes.ObjectValue  `tfsdk:"advertise_network"`
-	Aggregate                   basetypes.ObjectValue  `tfsdk:"aggregate"`
-	AggregateRoutes             basetypes.ListValue    `tfsdk:"aggregate_routes"`
-	AllowRedistDefaultRoute     basetypes.BoolValue    `tfsdk:"allow_redist_default_route"`
-	AlwaysAdvertiseNetworkRoute basetypes.BoolValue    `tfsdk:"always_advertise_network_route"`
-	AsFormat                    basetypes.StringValue  `tfsdk:"as_format"`
-	ConfederationMemberAs       basetypes.StringValue  `tfsdk:"confederation_member_as"`
-	DefaultLocalPreference      basetypes.Float64Value `tfsdk:"default_local_preference"`
-	EcmpMultiAs                 basetypes.BoolValue    `tfsdk:"ecmp_multi_as"`
-	Enable                      basetypes.BoolValue    `tfsdk:"enable"`
-	EnforceFirstAs              basetypes.BoolValue    `tfsdk:"enforce_first_as"`
-	FastExternalFailover        basetypes.BoolValue    `tfsdk:"fast_external_failover"`
-	GlobalBfd                   basetypes.ObjectValue  `tfsdk:"global_bfd"`
-	GracefulRestart             basetypes.ObjectValue  `tfsdk:"graceful_restart"`
-	GracefulShutdown            basetypes.BoolValue    `tfsdk:"graceful_shutdown"`
-	InstallRoute                basetypes.BoolValue    `tfsdk:"install_route"`
-	LocalAs                     basetypes.StringValue  `tfsdk:"local_as"`
-	Med                         basetypes.ObjectValue  `tfsdk:"med"`
-	PeerGroup                   basetypes.ListValue    `tfsdk:"peer_group"`
-	Policy                      basetypes.ObjectValue  `tfsdk:"policy"`
-	RedistRules                 basetypes.ListValue    `tfsdk:"redist_rules"`
-	RedistributionProfile       basetypes.ObjectValue  `tfsdk:"redistribution_profile"`
-	RejectDefaultRoute          basetypes.BoolValue    `tfsdk:"reject_default_route"`
-	RouterId                    basetypes.StringValue  `tfsdk:"router_id"`
+	AdvertiseNetwork            basetypes.ObjectValue `tfsdk:"advertise_network"`
+	Aggregate                   basetypes.ObjectValue `tfsdk:"aggregate"`
+	AggregateRoutes             basetypes.ListValue   `tfsdk:"aggregate_routes"`
+	AllowRedistDefaultRoute     basetypes.BoolValue   `tfsdk:"allow_redist_default_route"`
+	AlwaysAdvertiseNetworkRoute basetypes.BoolValue   `tfsdk:"always_advertise_network_route"`
+	AsFormat                    basetypes.StringValue `tfsdk:"as_format"`
+	ConfederationMemberAs       basetypes.StringValue `tfsdk:"confederation_member_as"`
+	DefaultLocalPreference      basetypes.Int64Value  `tfsdk:"default_local_preference"`
+	EcmpMultiAs                 basetypes.BoolValue   `tfsdk:"ecmp_multi_as"`
+	Enable                      basetypes.BoolValue   `tfsdk:"enable"`
+	EnforceFirstAs              basetypes.BoolValue   `tfsdk:"enforce_first_as"`
+	FastExternalFailover        basetypes.BoolValue   `tfsdk:"fast_external_failover"`
+	GlobalBfd                   basetypes.ObjectValue `tfsdk:"global_bfd"`
+	GracefulRestart             basetypes.ObjectValue `tfsdk:"graceful_restart"`
+	GracefulShutdown            basetypes.BoolValue   `tfsdk:"graceful_shutdown"`
+	InstallRoute                basetypes.BoolValue   `tfsdk:"install_route"`
+	LocalAs                     basetypes.StringValue `tfsdk:"local_as"`
+	Med                         basetypes.ObjectValue `tfsdk:"med"`
+	PeerGroup                   basetypes.ListValue   `tfsdk:"peer_group"`
+	Policy                      basetypes.ObjectValue `tfsdk:"policy"`
+	RedistRules                 basetypes.ListValue   `tfsdk:"redist_rules"`
+	RedistributionProfile       basetypes.ObjectValue `tfsdk:"redistribution_profile"`
+	RejectDefaultRoute          basetypes.BoolValue   `tfsdk:"reject_default_route"`
+	RouterId                    basetypes.StringValue `tfsdk:"router_id"`
 }
 
 // LogicalRoutersVrfInnerBgpAdvertiseNetwork represents a nested structure within the LogicalRouters model
@@ -161,10 +162,10 @@ type LogicalRoutersVrfInnerBgpGlobalBfd struct {
 
 // LogicalRoutersVrfInnerBgpGracefulRestart represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpGracefulRestart struct {
-	Enable             basetypes.BoolValue    `tfsdk:"enable"`
-	LocalRestartTime   basetypes.Float64Value `tfsdk:"local_restart_time"`
-	MaxPeerRestartTime basetypes.Float64Value `tfsdk:"max_peer_restart_time"`
-	StaleRouteTime     basetypes.Float64Value `tfsdk:"stale_route_time"`
+	Enable             basetypes.BoolValue  `tfsdk:"enable"`
+	LocalRestartTime   basetypes.Int64Value `tfsdk:"local_restart_time"`
+	MaxPeerRestartTime basetypes.Int64Value `tfsdk:"max_peer_restart_time"`
+	StaleRouteTime     basetypes.Int64Value `tfsdk:"stale_route_time"`
 }
 
 // LogicalRoutersVrfInnerBgpMed represents a nested structure within the LogicalRouters model
@@ -194,10 +195,10 @@ type LogicalRoutersVrfInnerBgpPeerGroupInnerAddressFamily struct {
 
 // LogicalRoutersVrfInnerBgpPeerGroupInnerConnectionOptions represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPeerGroupInnerConnectionOptions struct {
-	Authentication basetypes.StringValue  `tfsdk:"authentication"`
-	Dampening      basetypes.StringValue  `tfsdk:"dampening"`
-	Multihop       basetypes.Float64Value `tfsdk:"multihop"`
-	Timers         basetypes.StringValue  `tfsdk:"timers"`
+	Authentication basetypes.StringValue `tfsdk:"authentication"`
+	Dampening      basetypes.StringValue `tfsdk:"dampening"`
+	Multihop       basetypes.Int64Value  `tfsdk:"multihop"`
+	Timers         basetypes.StringValue `tfsdk:"timers"`
 }
 
 // LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInner represents a nested structure within the LogicalRouters model
@@ -226,35 +227,35 @@ type LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfd struct {
 
 // LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfdMultihop represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfdMultihop struct {
-	MinReceivedTtl basetypes.Float64Value `tfsdk:"min_received_ttl"`
+	MinReceivedTtl basetypes.Int64Value `tfsdk:"min_received_ttl"`
 }
 
 // LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptions represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptions struct {
-	Authentication        basetypes.StringValue  `tfsdk:"authentication"`
-	Dampening             basetypes.StringValue  `tfsdk:"dampening"`
-	HoldTime              basetypes.StringValue  `tfsdk:"hold_time"`
-	IdleHoldTime          basetypes.Float64Value `tfsdk:"idle_hold_time"`
-	IncomingBgpConnection basetypes.ObjectValue  `tfsdk:"incoming_bgp_connection"`
-	KeepAliveInterval     basetypes.StringValue  `tfsdk:"keep_alive_interval"`
-	MaxPrefixes           basetypes.StringValue  `tfsdk:"max_prefixes"`
-	MinRouteAdvInterval   basetypes.Float64Value `tfsdk:"min_route_adv_interval"`
-	Multihop              basetypes.StringValue  `tfsdk:"multihop"`
-	OpenDelayTime         basetypes.Float64Value `tfsdk:"open_delay_time"`
-	OutgoingBgpConnection basetypes.ObjectValue  `tfsdk:"outgoing_bgp_connection"`
-	Timers                basetypes.StringValue  `tfsdk:"timers"`
+	Authentication        basetypes.StringValue `tfsdk:"authentication"`
+	Dampening             basetypes.StringValue `tfsdk:"dampening"`
+	HoldTime              basetypes.StringValue `tfsdk:"hold_time"`
+	IdleHoldTime          basetypes.Int64Value  `tfsdk:"idle_hold_time"`
+	IncomingBgpConnection basetypes.ObjectValue `tfsdk:"incoming_bgp_connection"`
+	KeepAliveInterval     basetypes.StringValue `tfsdk:"keep_alive_interval"`
+	MaxPrefixes           basetypes.StringValue `tfsdk:"max_prefixes"`
+	MinRouteAdvInterval   basetypes.Int64Value  `tfsdk:"min_route_adv_interval"`
+	Multihop              basetypes.StringValue `tfsdk:"multihop"`
+	OpenDelayTime         basetypes.Int64Value  `tfsdk:"open_delay_time"`
+	OutgoingBgpConnection basetypes.ObjectValue `tfsdk:"outgoing_bgp_connection"`
+	Timers                basetypes.StringValue `tfsdk:"timers"`
 }
 
 // LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsIncomingBgpConnection represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsIncomingBgpConnection struct {
-	Allow      basetypes.BoolValue    `tfsdk:"allow"`
-	RemotePort basetypes.Float64Value `tfsdk:"remote_port"`
+	Allow      basetypes.BoolValue  `tfsdk:"allow"`
+	RemotePort basetypes.Int64Value `tfsdk:"remote_port"`
 }
 
 // LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsOutgoingBgpConnection represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsOutgoingBgpConnection struct {
-	Allow     basetypes.BoolValue    `tfsdk:"allow"`
-	LocalPort basetypes.Float64Value `tfsdk:"local_port"`
+	Allow     basetypes.BoolValue  `tfsdk:"allow"`
+	LocalPort basetypes.Int64Value `tfsdk:"local_port"`
 }
 
 // LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerInherit represents a nested structure within the LogicalRouters model
@@ -341,16 +342,16 @@ type LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersInner
 
 // LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersInnerMatch represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersInnerMatch struct {
-	AddressPrefix     basetypes.ListValue    `tfsdk:"address_prefix"`
-	Afi               basetypes.StringValue  `tfsdk:"afi"`
-	AsPath            basetypes.ObjectValue  `tfsdk:"as_path"`
-	Community         basetypes.ObjectValue  `tfsdk:"community"`
-	ExtendedCommunity basetypes.ObjectValue  `tfsdk:"extended_community"`
-	FromPeer          basetypes.ListValue    `tfsdk:"from_peer"`
-	Med               basetypes.Float64Value `tfsdk:"med"`
-	Nexthop           basetypes.ListValue    `tfsdk:"nexthop"`
-	RouteTable        basetypes.StringValue  `tfsdk:"route_table"`
-	Safi              basetypes.StringValue  `tfsdk:"safi"`
+	AddressPrefix     basetypes.ListValue   `tfsdk:"address_prefix"`
+	Afi               basetypes.StringValue `tfsdk:"afi"`
+	AsPath            basetypes.ObjectValue `tfsdk:"as_path"`
+	Community         basetypes.ObjectValue `tfsdk:"community"`
+	ExtendedCommunity basetypes.ObjectValue `tfsdk:"extended_community"`
+	FromPeer          basetypes.ListValue   `tfsdk:"from_peer"`
+	Med               basetypes.Int64Value  `tfsdk:"med"`
+	Nexthop           basetypes.ListValue   `tfsdk:"nexthop"`
+	RouteTable        basetypes.StringValue `tfsdk:"route_table"`
+	Safi              basetypes.StringValue `tfsdk:"safi"`
 }
 
 // LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersInnerMatchAddressPrefixInner represents a nested structure within the LogicalRouters model
@@ -366,23 +367,23 @@ type LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersInner
 
 // LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttributes represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttributes struct {
-	AsPath            basetypes.ObjectValue  `tfsdk:"as_path"`
-	AsPathLimit       basetypes.Float64Value `tfsdk:"as_path_limit"`
-	Community         basetypes.ObjectValue  `tfsdk:"community"`
-	ExtendedCommunity basetypes.ObjectValue  `tfsdk:"extended_community"`
-	LocalPreference   basetypes.Float64Value `tfsdk:"local_preference"`
-	Med               basetypes.Float64Value `tfsdk:"med"`
-	Nexthop           basetypes.StringValue  `tfsdk:"nexthop"`
-	Origin            basetypes.StringValue  `tfsdk:"origin"`
-	Weight            basetypes.Float64Value `tfsdk:"weight"`
+	AsPath            basetypes.ObjectValue `tfsdk:"as_path"`
+	AsPathLimit       basetypes.Int64Value  `tfsdk:"as_path_limit"`
+	Community         basetypes.ObjectValue `tfsdk:"community"`
+	ExtendedCommunity basetypes.ObjectValue `tfsdk:"extended_community"`
+	LocalPreference   basetypes.Int64Value  `tfsdk:"local_preference"`
+	Med               basetypes.Int64Value  `tfsdk:"med"`
+	Nexthop           basetypes.StringValue `tfsdk:"nexthop"`
+	Origin            basetypes.StringValue `tfsdk:"origin"`
+	Weight            basetypes.Int64Value  `tfsdk:"weight"`
 }
 
 // LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttributesAsPath represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttributesAsPath struct {
-	None             basetypes.ObjectValue  `tfsdk:"none"`
-	Prepend          basetypes.Float64Value `tfsdk:"prepend"`
-	Remove           basetypes.ObjectValue  `tfsdk:"remove"`
-	RemoveAndPrepend basetypes.Float64Value `tfsdk:"remove_and_prepend"`
+	None             basetypes.ObjectValue `tfsdk:"none"`
+	Prepend          basetypes.Int64Value  `tfsdk:"prepend"`
+	Remove           basetypes.ObjectValue `tfsdk:"remove"`
+	RemoveAndPrepend basetypes.Int64Value  `tfsdk:"remove_and_prepend"`
 }
 
 // LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttributesCommunity represents a nested structure within the LogicalRouters model
@@ -435,28 +436,28 @@ type LogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllow struct {
 
 // LogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdate represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdate struct {
-	AsPath            basetypes.ObjectValue  `tfsdk:"as_path"`
-	AsPathLimit       basetypes.Float64Value `tfsdk:"as_path_limit"`
-	Community         basetypes.ObjectValue  `tfsdk:"community"`
-	ExtendedCommunity basetypes.ObjectValue  `tfsdk:"extended_community"`
-	LocalPreference   basetypes.Float64Value `tfsdk:"local_preference"`
-	Med               basetypes.Float64Value `tfsdk:"med"`
-	Nexthop           basetypes.StringValue  `tfsdk:"nexthop"`
-	Origin            basetypes.StringValue  `tfsdk:"origin"`
+	AsPath            basetypes.ObjectValue `tfsdk:"as_path"`
+	AsPathLimit       basetypes.Int64Value  `tfsdk:"as_path_limit"`
+	Community         basetypes.ObjectValue `tfsdk:"community"`
+	ExtendedCommunity basetypes.ObjectValue `tfsdk:"extended_community"`
+	LocalPreference   basetypes.Int64Value  `tfsdk:"local_preference"`
+	Med               basetypes.Int64Value  `tfsdk:"med"`
+	Nexthop           basetypes.StringValue `tfsdk:"nexthop"`
+	Origin            basetypes.StringValue `tfsdk:"origin"`
 }
 
 // LogicalRoutersVrfInnerBgpPolicyExportRulesInnerMatch represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpPolicyExportRulesInnerMatch struct {
-	AddressPrefix     basetypes.ListValue    `tfsdk:"address_prefix"`
-	Afi               basetypes.StringValue  `tfsdk:"afi"`
-	AsPath            basetypes.ObjectValue  `tfsdk:"as_path"`
-	Community         basetypes.ObjectValue  `tfsdk:"community"`
-	ExtendedCommunity basetypes.ObjectValue  `tfsdk:"extended_community"`
-	FromPeer          basetypes.ListValue    `tfsdk:"from_peer"`
-	Med               basetypes.Float64Value `tfsdk:"med"`
-	Nexthop           basetypes.ListValue    `tfsdk:"nexthop"`
-	RouteTable        basetypes.StringValue  `tfsdk:"route_table"`
-	Safi              basetypes.StringValue  `tfsdk:"safi"`
+	AddressPrefix     basetypes.ListValue   `tfsdk:"address_prefix"`
+	Afi               basetypes.StringValue `tfsdk:"afi"`
+	AsPath            basetypes.ObjectValue `tfsdk:"as_path"`
+	Community         basetypes.ObjectValue `tfsdk:"community"`
+	ExtendedCommunity basetypes.ObjectValue `tfsdk:"extended_community"`
+	FromPeer          basetypes.ListValue   `tfsdk:"from_peer"`
+	Med               basetypes.Int64Value  `tfsdk:"med"`
+	Nexthop           basetypes.ListValue   `tfsdk:"nexthop"`
+	RouteTable        basetypes.StringValue `tfsdk:"route_table"`
+	Safi              basetypes.StringValue `tfsdk:"safi"`
 }
 
 // LogicalRoutersVrfInnerBgpPolicyExportRulesInnerMatchAddressPrefixInner represents a nested structure within the LogicalRouters model
@@ -493,17 +494,17 @@ type LogicalRoutersVrfInnerBgpPolicyImportRulesInnerActionAllow struct {
 
 // LogicalRoutersVrfInnerBgpRedistRulesInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerBgpRedistRulesInner struct {
-	AddressFamilyIdentifier basetypes.StringValue  `tfsdk:"address_family_identifier"`
-	Enable                  basetypes.BoolValue    `tfsdk:"enable"`
-	Metric                  basetypes.Float64Value `tfsdk:"metric"`
-	Name                    basetypes.StringValue  `tfsdk:"name"`
-	RouteTable              basetypes.StringValue  `tfsdk:"route_table"`
-	SetAsPathLimit          basetypes.Float64Value `tfsdk:"set_as_path_limit"`
-	SetCommunity            basetypes.ListValue    `tfsdk:"set_community"`
-	SetExtendedCommunity    basetypes.ListValue    `tfsdk:"set_extended_community"`
-	SetLocalPreference      basetypes.Float64Value `tfsdk:"set_local_preference"`
-	SetMed                  basetypes.Float64Value `tfsdk:"set_med"`
-	SetOrigin               basetypes.StringValue  `tfsdk:"set_origin"`
+	AddressFamilyIdentifier basetypes.StringValue `tfsdk:"address_family_identifier"`
+	Enable                  basetypes.BoolValue   `tfsdk:"enable"`
+	Metric                  basetypes.Int64Value  `tfsdk:"metric"`
+	Name                    basetypes.StringValue `tfsdk:"name"`
+	RouteTable              basetypes.StringValue `tfsdk:"route_table"`
+	SetAsPathLimit          basetypes.Int64Value  `tfsdk:"set_as_path_limit"`
+	SetCommunity            basetypes.ListValue   `tfsdk:"set_community"`
+	SetExtendedCommunity    basetypes.ListValue   `tfsdk:"set_extended_community"`
+	SetLocalPreference      basetypes.Int64Value  `tfsdk:"set_local_preference"`
+	SetMed                  basetypes.Int64Value  `tfsdk:"set_med"`
+	SetOrigin               basetypes.StringValue `tfsdk:"set_origin"`
 }
 
 // LogicalRoutersVrfInnerBgpRedistributionProfile represents a nested structure within the LogicalRouters model
@@ -519,11 +520,11 @@ type LogicalRoutersVrfInnerBgpRedistributionProfileIpv4 struct {
 
 // LogicalRoutersVrfInnerEcmp represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerEcmp struct {
-	Algorithm        basetypes.ObjectValue  `tfsdk:"algorithm"`
-	Enable           basetypes.BoolValue    `tfsdk:"enable"`
-	MaxPath          basetypes.Float64Value `tfsdk:"max_path"`
-	StrictSourcePath basetypes.BoolValue    `tfsdk:"strict_source_path"`
-	SymmetricReturn  basetypes.BoolValue    `tfsdk:"symmetric_return"`
+	Algorithm        basetypes.ObjectValue `tfsdk:"algorithm"`
+	Enable           basetypes.BoolValue   `tfsdk:"enable"`
+	MaxPath          basetypes.Int64Value  `tfsdk:"max_path"`
+	StrictSourcePath basetypes.BoolValue   `tfsdk:"strict_source_path"`
+	SymmetricReturn  basetypes.BoolValue   `tfsdk:"symmetric_return"`
 }
 
 // LogicalRoutersVrfInnerEcmpAlgorithm represents a nested structure within the LogicalRouters model
@@ -536,9 +537,9 @@ type LogicalRoutersVrfInnerEcmpAlgorithm struct {
 
 // LogicalRoutersVrfInnerEcmpAlgorithmIpHash represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerEcmpAlgorithmIpHash struct {
-	HashSeed basetypes.Float64Value `tfsdk:"hash_seed"`
-	SrcOnly  basetypes.BoolValue    `tfsdk:"src_only"`
-	UsePort  basetypes.BoolValue    `tfsdk:"use_port"`
+	HashSeed basetypes.Int64Value `tfsdk:"hash_seed"`
+	SrcOnly  basetypes.BoolValue  `tfsdk:"src_only"`
+	UsePort  basetypes.BoolValue  `tfsdk:"use_port"`
 }
 
 // LogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobin represents a nested structure within the LogicalRouters model
@@ -548,24 +549,24 @@ type LogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobin struct {
 
 // LogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobinInterfaceInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobinInterfaceInner struct {
-	Name   basetypes.StringValue  `tfsdk:"name"`
-	Weight basetypes.Float64Value `tfsdk:"weight"`
+	Name   basetypes.StringValue `tfsdk:"name"`
+	Weight basetypes.Int64Value  `tfsdk:"weight"`
 }
 
 // LogicalRoutersVrfInnerMulticast represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticast struct {
-	Enable          basetypes.BoolValue    `tfsdk:"enable"`
-	EnableV6        basetypes.BoolValue    `tfsdk:"enable_v6"`
-	Igmp            basetypes.ObjectValue  `tfsdk:"igmp"`
-	InterfaceGroup  basetypes.ListValue    `tfsdk:"interface_group"`
-	Mode            basetypes.StringValue  `tfsdk:"mode"`
-	Msdp            basetypes.ObjectValue  `tfsdk:"msdp"`
-	Pim             basetypes.ObjectValue  `tfsdk:"pim"`
-	RouteAgeoutTime basetypes.Float64Value `tfsdk:"route_ageout_time"`
-	Rp              basetypes.ObjectValue  `tfsdk:"rp"`
-	SptThreshold    basetypes.ListValue    `tfsdk:"spt_threshold"`
-	SsmAddressSpace basetypes.ListValue    `tfsdk:"ssm_address_space"`
-	StaticRoute     basetypes.ListValue    `tfsdk:"static_route"`
+	Enable          basetypes.BoolValue   `tfsdk:"enable"`
+	EnableV6        basetypes.BoolValue   `tfsdk:"enable_v6"`
+	Igmp            basetypes.ObjectValue `tfsdk:"igmp"`
+	InterfaceGroup  basetypes.ListValue   `tfsdk:"interface_group"`
+	Mode            basetypes.StringValue `tfsdk:"mode"`
+	Msdp            basetypes.ObjectValue `tfsdk:"msdp"`
+	Pim             basetypes.ObjectValue `tfsdk:"pim"`
+	RouteAgeoutTime basetypes.Int64Value  `tfsdk:"route_ageout_time"`
+	Rp              basetypes.ObjectValue `tfsdk:"rp"`
+	SptThreshold    basetypes.ListValue   `tfsdk:"spt_threshold"`
+	SsmAddressSpace basetypes.ListValue   `tfsdk:"ssm_address_space"`
+	StaticRoute     basetypes.ListValue   `tfsdk:"static_route"`
 }
 
 // LogicalRoutersVrfInnerMulticastIgmp represents a nested structure within the LogicalRouters model
@@ -633,33 +634,28 @@ type LogicalRoutersVrfInnerMulticastInterfaceGroupInnerGroupPermissionSourceSpec
 
 // LogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmp represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmp struct {
-	Enable                  basetypes.BoolValue    `tfsdk:"enable"`
-	ImmediateLeave          basetypes.BoolValue    `tfsdk:"immediate_leave"`
-	LastMemberQueryInterval basetypes.Float64Value `tfsdk:"last_member_query_interval"`
-	MaxGroups               basetypes.StringValue  `tfsdk:"max_groups"`
-	MaxQueryResponseTime    basetypes.Float64Value `tfsdk:"max_query_response_time"`
-	MaxSources              basetypes.StringValue  `tfsdk:"max_sources"`
-	Mode                    basetypes.StringValue  `tfsdk:"mode"`
-	QueryInterval           basetypes.Float64Value `tfsdk:"query_interval"`
-	Robustness              basetypes.StringValue  `tfsdk:"robustness"`
-	RouterAlertPolicing     basetypes.BoolValue    `tfsdk:"router_alert_policing"`
-	Version                 basetypes.StringValue  `tfsdk:"version"`
+	Enable                  basetypes.BoolValue   `tfsdk:"enable"`
+	ImmediateLeave          basetypes.BoolValue   `tfsdk:"immediate_leave"`
+	LastMemberQueryInterval basetypes.Int64Value  `tfsdk:"last_member_query_interval"`
+	MaxGroups               basetypes.StringValue `tfsdk:"max_groups"`
+	MaxQueryResponseTime    basetypes.Int64Value  `tfsdk:"max_query_response_time"`
+	MaxSources              basetypes.StringValue `tfsdk:"max_sources"`
+	Mode                    basetypes.StringValue `tfsdk:"mode"`
+	QueryInterval           basetypes.Int64Value  `tfsdk:"query_interval"`
+	Robustness              basetypes.StringValue `tfsdk:"robustness"`
+	RouterAlertPolicing     basetypes.BoolValue   `tfsdk:"router_alert_policing"`
+	Version                 basetypes.StringValue `tfsdk:"version"`
 }
 
 // LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim struct {
-	AllowedNeighbors  basetypes.ListValue    `tfsdk:"allowed_neighbors"`
-	AssertInterval    basetypes.Float64Value `tfsdk:"assert_interval"`
-	BsrBorder         basetypes.BoolValue    `tfsdk:"bsr_border"`
-	DrPriority        basetypes.Float64Value `tfsdk:"dr_priority"`
-	Enable            basetypes.BoolValue    `tfsdk:"enable"`
-	HelloInterval     basetypes.Float64Value `tfsdk:"hello_interval"`
-	JoinPruneInterval basetypes.Float64Value `tfsdk:"join_prune_interval"`
-}
-
-// LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner represents a nested structure within the LogicalRouters model
-type LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner struct {
-	Name basetypes.StringValue `tfsdk:"name"`
+	AllowedNeighbors  basetypes.ListValue  `tfsdk:"allowed_neighbors"`
+	AssertInterval    basetypes.Int64Value `tfsdk:"assert_interval"`
+	BsrBorder         basetypes.BoolValue  `tfsdk:"bsr_border"`
+	DrPriority        basetypes.Int64Value `tfsdk:"dr_priority"`
+	Enable            basetypes.BoolValue  `tfsdk:"enable"`
+	HelloInterval     basetypes.Int64Value `tfsdk:"hello_interval"`
+	JoinPruneInterval basetypes.Int64Value `tfsdk:"join_prune_interval"`
 }
 
 // LogicalRoutersVrfInnerMulticastMsdp represents a nested structure within the LogicalRouters model
@@ -673,38 +669,38 @@ type LogicalRoutersVrfInnerMulticastMsdp struct {
 
 // LogicalRoutersVrfInnerMulticastMsdpPeerInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastMsdpPeerInner struct {
-	Authentication   basetypes.StringValue  `tfsdk:"authentication"`
-	Enable           basetypes.BoolValue    `tfsdk:"enable"`
-	InboundSaFilter  basetypes.StringValue  `tfsdk:"inbound_sa_filter"`
-	LocalAddress     basetypes.ObjectValue  `tfsdk:"local_address"`
-	MaxSa            basetypes.Float64Value `tfsdk:"max_sa"`
-	Name             basetypes.StringValue  `tfsdk:"name"`
-	OutboundSaFilter basetypes.StringValue  `tfsdk:"outbound_sa_filter"`
-	PeerAddress      basetypes.ObjectValue  `tfsdk:"peer_address"`
-	PeerAs           basetypes.StringValue  `tfsdk:"peer_as"`
+	Authentication   basetypes.StringValue `tfsdk:"authentication"`
+	Enable           basetypes.BoolValue   `tfsdk:"enable"`
+	InboundSaFilter  basetypes.StringValue `tfsdk:"inbound_sa_filter"`
+	LocalAddress     basetypes.ObjectValue `tfsdk:"local_address"`
+	MaxSa            basetypes.Int64Value  `tfsdk:"max_sa"`
+	Name             basetypes.StringValue `tfsdk:"name"`
+	OutboundSaFilter basetypes.StringValue `tfsdk:"outbound_sa_filter"`
+	PeerAddress      basetypes.ObjectValue `tfsdk:"peer_address"`
+	PeerAs           basetypes.StringValue `tfsdk:"peer_as"`
 }
 
 // LogicalRoutersVrfInnerMulticastPim represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastPim struct {
-	Enable          basetypes.BoolValue    `tfsdk:"enable"`
-	GroupPermission basetypes.StringValue  `tfsdk:"group_permission"`
-	IfTimerGlobal   basetypes.StringValue  `tfsdk:"if_timer_global"`
-	Interface       basetypes.ListValue    `tfsdk:"interface"`
-	RouteAgeoutTime basetypes.Float64Value `tfsdk:"route_ageout_time"`
-	Rp              basetypes.ObjectValue  `tfsdk:"rp"`
-	RpfLookupMode   basetypes.StringValue  `tfsdk:"rpf_lookup_mode"`
-	SptThreshold    basetypes.ListValue    `tfsdk:"spt_threshold"`
-	SsmAddressSpace basetypes.ObjectValue  `tfsdk:"ssm_address_space"`
+	Enable          basetypes.BoolValue   `tfsdk:"enable"`
+	GroupPermission basetypes.StringValue `tfsdk:"group_permission"`
+	IfTimerGlobal   basetypes.StringValue `tfsdk:"if_timer_global"`
+	Interface       basetypes.ListValue   `tfsdk:"interface"`
+	RouteAgeoutTime basetypes.Int64Value  `tfsdk:"route_ageout_time"`
+	Rp              basetypes.ObjectValue `tfsdk:"rp"`
+	RpfLookupMode   basetypes.StringValue `tfsdk:"rpf_lookup_mode"`
+	SptThreshold    basetypes.ListValue   `tfsdk:"spt_threshold"`
+	SsmAddressSpace basetypes.ObjectValue `tfsdk:"ssm_address_space"`
 }
 
 // LogicalRoutersVrfInnerMulticastPimInterfaceInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastPimInterfaceInner struct {
-	Description    basetypes.StringValue  `tfsdk:"description"`
-	DrPriority     basetypes.Float64Value `tfsdk:"dr_priority"`
-	IfTimer        basetypes.StringValue  `tfsdk:"if_timer"`
-	Name           basetypes.StringValue  `tfsdk:"name"`
-	NeighborFilter basetypes.StringValue  `tfsdk:"neighbor_filter"`
-	SendBsm        basetypes.BoolValue    `tfsdk:"send_bsm"`
+	Description    basetypes.StringValue `tfsdk:"description"`
+	DrPriority     basetypes.Int64Value  `tfsdk:"dr_priority"`
+	IfTimer        basetypes.StringValue `tfsdk:"if_timer"`
+	Name           basetypes.StringValue `tfsdk:"name"`
+	NeighborFilter basetypes.StringValue `tfsdk:"neighbor_filter"`
+	SendBsm        basetypes.BoolValue   `tfsdk:"send_bsm"`
 }
 
 // LogicalRoutersVrfInnerMulticastPimRp represents a nested structure within the LogicalRouters model
@@ -728,11 +724,11 @@ type LogicalRoutersVrfInnerMulticastPimRpLocalRp struct {
 
 // LogicalRoutersVrfInnerMulticastPimRpLocalRpCandidateRp represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastPimRpLocalRpCandidateRp struct {
-	Address               basetypes.StringValue  `tfsdk:"address"`
-	AdvertisementInterval basetypes.Float64Value `tfsdk:"advertisement_interval"`
-	GroupList             basetypes.StringValue  `tfsdk:"group_list"`
-	Interface             basetypes.StringValue  `tfsdk:"interface"`
-	Priority              basetypes.Float64Value `tfsdk:"priority"`
+	Address               basetypes.StringValue `tfsdk:"address"`
+	AdvertisementInterval basetypes.Int64Value  `tfsdk:"advertisement_interval"`
+	GroupList             basetypes.StringValue `tfsdk:"group_list"`
+	Interface             basetypes.StringValue `tfsdk:"interface"`
+	Priority              basetypes.Int64Value  `tfsdk:"priority"`
 }
 
 // LogicalRoutersVrfInnerMulticastPimRpLocalRpStaticRp represents a nested structure within the LogicalRouters model
@@ -775,11 +771,11 @@ type LogicalRoutersVrfInnerMulticastRpLocalRp struct {
 
 // LogicalRoutersVrfInnerMulticastRpLocalRpCandidateRp represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastRpLocalRpCandidateRp struct {
-	Address               basetypes.StringValue  `tfsdk:"address"`
-	AdvertisementInterval basetypes.Float64Value `tfsdk:"advertisement_interval"`
-	GroupAddresses        basetypes.ListValue    `tfsdk:"group_addresses"`
-	Interface             basetypes.StringValue  `tfsdk:"interface"`
-	Priority              basetypes.Float64Value `tfsdk:"priority"`
+	Address               basetypes.StringValue `tfsdk:"address"`
+	AdvertisementInterval basetypes.Int64Value  `tfsdk:"advertisement_interval"`
+	GroupAddresses        basetypes.ListValue   `tfsdk:"group_addresses"`
+	Interface             basetypes.StringValue `tfsdk:"interface"`
+	Priority              basetypes.Int64Value  `tfsdk:"priority"`
 }
 
 // LogicalRoutersVrfInnerMulticastRpLocalRpStaticRp represents a nested structure within the LogicalRouters model
@@ -792,11 +788,11 @@ type LogicalRoutersVrfInnerMulticastRpLocalRpStaticRp struct {
 
 // LogicalRoutersVrfInnerMulticastStaticRouteInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastStaticRouteInner struct {
-	Destination basetypes.StringValue  `tfsdk:"destination"`
-	Interface   basetypes.StringValue  `tfsdk:"interface"`
-	Name        basetypes.StringValue  `tfsdk:"name"`
-	Nexthop     basetypes.ObjectValue  `tfsdk:"nexthop"`
-	Preference  basetypes.Float64Value `tfsdk:"preference"`
+	Destination basetypes.StringValue `tfsdk:"destination"`
+	Interface   basetypes.StringValue `tfsdk:"interface"`
+	Name        basetypes.StringValue `tfsdk:"name"`
+	Nexthop     basetypes.ObjectValue `tfsdk:"nexthop"`
+	Preference  basetypes.Int64Value  `tfsdk:"preference"`
 }
 
 // LogicalRoutersVrfInnerMulticastStaticRouteInnerNexthop represents a nested structure within the LogicalRouters model
@@ -836,17 +832,17 @@ type LogicalRoutersVrfInnerOspfAreaInner struct {
 
 // LogicalRoutersVrfInnerOspfAreaInnerInterfaceInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerInterfaceInner struct {
-	Authentication basetypes.StringValue  `tfsdk:"authentication"`
-	Bfd            basetypes.ObjectValue  `tfsdk:"bfd"`
-	Enable         basetypes.BoolValue    `tfsdk:"enable"`
-	LinkType       basetypes.ObjectValue  `tfsdk:"link_type"`
-	Metric         basetypes.Float64Value `tfsdk:"metric"`
-	MtuIgnore      basetypes.BoolValue    `tfsdk:"mtu_ignore"`
-	Name           basetypes.StringValue  `tfsdk:"name"`
-	Passive        basetypes.BoolValue    `tfsdk:"passive"`
-	Priority       basetypes.Float64Value `tfsdk:"priority"`
-	Timing         basetypes.StringValue  `tfsdk:"timing"`
-	VrTiming       basetypes.ObjectValue  `tfsdk:"vr_timing"`
+	Authentication basetypes.StringValue `tfsdk:"authentication"`
+	Bfd            basetypes.ObjectValue `tfsdk:"bfd"`
+	Enable         basetypes.BoolValue   `tfsdk:"enable"`
+	LinkType       basetypes.ObjectValue `tfsdk:"link_type"`
+	Metric         basetypes.Int64Value  `tfsdk:"metric"`
+	MtuIgnore      basetypes.BoolValue   `tfsdk:"mtu_ignore"`
+	Name           basetypes.StringValue `tfsdk:"name"`
+	Passive        basetypes.BoolValue   `tfsdk:"passive"`
+	Priority       basetypes.Int64Value  `tfsdk:"priority"`
+	Timing         basetypes.StringValue `tfsdk:"timing"`
+	VrTiming       basetypes.ObjectValue `tfsdk:"vr_timing"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkType represents a nested structure within the LogicalRouters model
@@ -863,17 +859,17 @@ type LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mp struct {
 
 // LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mpNeighborInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mpNeighborInner struct {
-	Name     basetypes.StringValue  `tfsdk:"name"`
-	Priority basetypes.Float64Value `tfsdk:"priority"`
+	Name     basetypes.StringValue `tfsdk:"name"`
+	Priority basetypes.Int64Value  `tfsdk:"priority"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerVrTiming represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerVrTiming struct {
-	DeadCounts         basetypes.Float64Value `tfsdk:"dead_counts"`
-	GrDelay            basetypes.Float64Value `tfsdk:"gr_delay"`
-	HelloInterval      basetypes.Float64Value `tfsdk:"hello_interval"`
-	RetransmitInterval basetypes.Float64Value `tfsdk:"retransmit_interval"`
-	TransitDelay       basetypes.Float64Value `tfsdk:"transit_delay"`
+	DeadCounts         basetypes.Int64Value `tfsdk:"dead_counts"`
+	GrDelay            basetypes.Int64Value `tfsdk:"gr_delay"`
+	HelloInterval      basetypes.Int64Value `tfsdk:"hello_interval"`
+	RetransmitInterval basetypes.Int64Value `tfsdk:"retransmit_interval"`
+	TransitDelay       basetypes.Int64Value `tfsdk:"transit_delay"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerRangeInner represents a nested structure within the LogicalRouters model
@@ -924,15 +920,15 @@ type LogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbr struct {
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbrNssaExtRangeInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbrNssaExtRangeInner struct {
-	Advertise basetypes.BoolValue    `tfsdk:"advertise"`
-	Name      basetypes.StringValue  `tfsdk:"name"`
-	RouteTag  basetypes.Float64Value `tfsdk:"route_tag"`
+	Advertise basetypes.BoolValue   `tfsdk:"advertise"`
+	Name      basetypes.StringValue `tfsdk:"name"`
+	RouteTag  basetypes.Int64Value  `tfsdk:"route_tag"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultInformationOriginate represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultInformationOriginate struct {
-	Metric     basetypes.Float64Value `tfsdk:"metric"`
-	MetricType basetypes.StringValue  `tfsdk:"metric_type"`
+	Metric     basetypes.Int64Value  `tfsdk:"metric"`
+	MetricType basetypes.StringValue `tfsdk:"metric_type"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRoute represents a nested structure within the LogicalRouters model
@@ -943,8 +939,8 @@ type LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRoute struct {
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRouteAdvertise represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRouteAdvertise struct {
-	Metric basetypes.Float64Value `tfsdk:"metric"`
-	Type   basetypes.StringValue  `tfsdk:"type"`
+	Metric basetypes.Int64Value  `tfsdk:"metric"`
+	Type   basetypes.StringValue `tfsdk:"type"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeNssaNssaExtRangeInner represents a nested structure within the LogicalRouters model
@@ -956,11 +952,11 @@ type LogicalRoutersVrfInnerOspfAreaInnerTypeNssaNssaExtRangeInner struct {
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeStub represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerTypeStub struct {
-	Abr                basetypes.ObjectValue  `tfsdk:"abr"`
-	AcceptSummary      basetypes.BoolValue    `tfsdk:"accept_summary"`
-	DefaultRoute       basetypes.ObjectValue  `tfsdk:"default_route"`
-	DefaultRouteMetric basetypes.Float64Value `tfsdk:"default_route_metric"`
-	NoSummary          basetypes.BoolValue    `tfsdk:"no_summary"`
+	Abr                basetypes.ObjectValue `tfsdk:"abr"`
+	AcceptSummary      basetypes.BoolValue   `tfsdk:"accept_summary"`
+	DefaultRoute       basetypes.ObjectValue `tfsdk:"default_route"`
+	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
+	NoSummary          basetypes.BoolValue   `tfsdk:"no_summary"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRoute represents a nested structure within the LogicalRouters model
@@ -971,30 +967,30 @@ type LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRoute struct {
 
 // LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRouteAdvertise represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRouteAdvertise struct {
-	Metric basetypes.Float64Value `tfsdk:"metric"`
+	Metric basetypes.Int64Value `tfsdk:"metric"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInner struct {
-	Authentication basetypes.StringValue  `tfsdk:"authentication"`
-	Bfd            basetypes.ObjectValue  `tfsdk:"bfd"`
-	Enable         basetypes.BoolValue    `tfsdk:"enable"`
-	InstanceId     basetypes.Float64Value `tfsdk:"instance_id"`
-	InterfaceId    basetypes.Float64Value `tfsdk:"interface_id"`
-	Name           basetypes.StringValue  `tfsdk:"name"`
-	NeighborId     basetypes.StringValue  `tfsdk:"neighbor_id"`
-	Passive        basetypes.BoolValue    `tfsdk:"passive"`
-	Timing         basetypes.StringValue  `tfsdk:"timing"`
-	TransitAreaId  basetypes.StringValue  `tfsdk:"transit_area_id"`
-	VrTiming       basetypes.ObjectValue  `tfsdk:"vr_timing"`
+	Authentication basetypes.StringValue `tfsdk:"authentication"`
+	Bfd            basetypes.ObjectValue `tfsdk:"bfd"`
+	Enable         basetypes.BoolValue   `tfsdk:"enable"`
+	InstanceId     basetypes.Int64Value  `tfsdk:"instance_id"`
+	InterfaceId    basetypes.Int64Value  `tfsdk:"interface_id"`
+	Name           basetypes.StringValue `tfsdk:"name"`
+	NeighborId     basetypes.StringValue `tfsdk:"neighbor_id"`
+	Passive        basetypes.BoolValue   `tfsdk:"passive"`
+	Timing         basetypes.StringValue `tfsdk:"timing"`
+	TransitAreaId  basetypes.StringValue `tfsdk:"transit_area_id"`
+	VrTiming       basetypes.ObjectValue `tfsdk:"vr_timing"`
 }
 
 // LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerVrTiming represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerVrTiming struct {
-	DeadCounts         basetypes.Float64Value `tfsdk:"dead_counts"`
-	HelloInterval      basetypes.Float64Value `tfsdk:"hello_interval"`
-	RetransmitInterval basetypes.Float64Value `tfsdk:"retransmit_interval"`
-	TransitDelay       basetypes.Float64Value `tfsdk:"transit_delay"`
+	DeadCounts         basetypes.Int64Value `tfsdk:"dead_counts"`
+	HelloInterval      basetypes.Int64Value `tfsdk:"hello_interval"`
+	RetransmitInterval basetypes.Int64Value `tfsdk:"retransmit_interval"`
+	TransitDelay       basetypes.Int64Value `tfsdk:"transit_delay"`
 }
 
 // LogicalRoutersVrfInnerOspfAuthProfileInner represents a nested structure within the LogicalRouters model
@@ -1013,10 +1009,10 @@ type LogicalRoutersVrfInnerOspfAuthProfileInnerMd5Inner struct {
 
 // LogicalRoutersVrfInnerOspfExportRulesInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfExportRulesInner struct {
-	Metric      basetypes.Float64Value `tfsdk:"metric"`
-	Name        basetypes.StringValue  `tfsdk:"name"`
-	NewPathType basetypes.StringValue  `tfsdk:"new_path_type"`
-	NewTag      basetypes.StringValue  `tfsdk:"new_tag"`
+	Metric      basetypes.Int64Value  `tfsdk:"metric"`
+	Name        basetypes.StringValue `tfsdk:"name"`
+	NewPathType basetypes.StringValue `tfsdk:"new_path_type"`
+	NewTag      basetypes.StringValue `tfsdk:"new_tag"`
 }
 
 // LogicalRoutersVrfInnerOspfFloodPrevention represents a nested structure within the LogicalRouters model
@@ -1027,23 +1023,23 @@ type LogicalRoutersVrfInnerOspfFloodPrevention struct {
 
 // LogicalRoutersVrfInnerOspfFloodPreventionHello represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfFloodPreventionHello struct {
-	Enable    basetypes.BoolValue    `tfsdk:"enable"`
-	MaxPacket basetypes.Float64Value `tfsdk:"max_packet"`
+	Enable    basetypes.BoolValue  `tfsdk:"enable"`
+	MaxPacket basetypes.Int64Value `tfsdk:"max_packet"`
 }
 
 // LogicalRoutersVrfInnerOspfGracefulRestart represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfGracefulRestart struct {
-	Enable                 basetypes.BoolValue    `tfsdk:"enable"`
-	GracePeriod            basetypes.Float64Value `tfsdk:"grace_period"`
-	HelperEnable           basetypes.BoolValue    `tfsdk:"helper_enable"`
-	MaxNeighborRestartTime basetypes.Float64Value `tfsdk:"max_neighbor_restart_time"`
-	StrictLSAChecking      basetypes.BoolValue    `tfsdk:"strict__l_s_a_checking"`
+	Enable                 basetypes.BoolValue  `tfsdk:"enable"`
+	GracePeriod            basetypes.Int64Value `tfsdk:"grace_period"`
+	HelperEnable           basetypes.BoolValue  `tfsdk:"helper_enable"`
+	MaxNeighborRestartTime basetypes.Int64Value `tfsdk:"max_neighbor_restart_time"`
+	StrictLSAChecking      basetypes.BoolValue  `tfsdk:"strict__l_s_a_checking"`
 }
 
 // LogicalRoutersVrfInnerOspfVrTimers represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfVrTimers struct {
-	LsaInterval         basetypes.Float64Value `tfsdk:"lsa_interval"`
-	SpfCalculationDelay basetypes.Float64Value `tfsdk:"spf_calculation_delay"`
+	LsaInterval         basetypes.Int64Value `tfsdk:"lsa_interval"`
+	SpfCalculationDelay basetypes.Int64Value `tfsdk:"spf_calculation_delay"`
 }
 
 // LogicalRoutersVrfInnerOspfv3 represents a nested structure within the LogicalRouters model
@@ -1077,19 +1073,19 @@ type LogicalRoutersVrfInnerOspfv3AreaInner struct {
 
 // LogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInner struct {
-	Authentication basetypes.StringValue  `tfsdk:"authentication"`
-	Bfd            basetypes.ObjectValue  `tfsdk:"bfd"`
-	Enable         basetypes.BoolValue    `tfsdk:"enable"`
-	InstanceId     basetypes.Float64Value `tfsdk:"instance_id"`
-	LinkType       basetypes.ObjectValue  `tfsdk:"link_type"`
-	Metric         basetypes.Float64Value `tfsdk:"metric"`
-	MtuIgnore      basetypes.BoolValue    `tfsdk:"mtu_ignore"`
-	Name           basetypes.StringValue  `tfsdk:"name"`
-	Neighbor       basetypes.ListValue    `tfsdk:"neighbor"`
-	Passive        basetypes.BoolValue    `tfsdk:"passive"`
-	Priority       basetypes.Float64Value `tfsdk:"priority"`
-	Timing         basetypes.StringValue  `tfsdk:"timing"`
-	VrTiming       basetypes.ObjectValue  `tfsdk:"vr_timing"`
+	Authentication basetypes.StringValue `tfsdk:"authentication"`
+	Bfd            basetypes.ObjectValue `tfsdk:"bfd"`
+	Enable         basetypes.BoolValue   `tfsdk:"enable"`
+	InstanceId     basetypes.Int64Value  `tfsdk:"instance_id"`
+	LinkType       basetypes.ObjectValue `tfsdk:"link_type"`
+	Metric         basetypes.Int64Value  `tfsdk:"metric"`
+	MtuIgnore      basetypes.BoolValue   `tfsdk:"mtu_ignore"`
+	Name           basetypes.StringValue `tfsdk:"name"`
+	Neighbor       basetypes.ListValue   `tfsdk:"neighbor"`
+	Passive        basetypes.BoolValue   `tfsdk:"passive"`
+	Priority       basetypes.Int64Value  `tfsdk:"priority"`
+	Timing         basetypes.StringValue `tfsdk:"timing"`
+	VrTiming       basetypes.ObjectValue `tfsdk:"vr_timing"`
 }
 
 // LogicalRoutersVrfInnerOspfv3AreaInnerRangeInner represents a nested structure within the LogicalRouters model
@@ -1126,10 +1122,10 @@ type LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssaAbr struct {
 
 // LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssaAbrNssaExtRangeInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssaAbrNssaExtRangeInner struct {
-	Advertise basetypes.ObjectValue  `tfsdk:"advertise"`
-	Name      basetypes.StringValue  `tfsdk:"name"`
-	RouteTag  basetypes.Float64Value `tfsdk:"route_tag"`
-	Suppress  basetypes.ObjectValue  `tfsdk:"suppress"`
+	Advertise basetypes.ObjectValue `tfsdk:"advertise"`
+	Name      basetypes.StringValue `tfsdk:"name"`
+	RouteTag  basetypes.Int64Value  `tfsdk:"route_tag"`
+	Suppress  basetypes.ObjectValue `tfsdk:"suppress"`
 }
 
 // LogicalRoutersVrfInnerOspfv3AuthProfileInner represents a nested structure within the LogicalRouters model
@@ -1234,8 +1230,8 @@ type LogicalRoutersVrfInnerRipInterfaceInner struct {
 
 // LogicalRoutersVrfInnerRipInterfaceInnerInterfaceInboundDistributeList represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerRipInterfaceInnerInterfaceInboundDistributeList struct {
-	AccessList basetypes.StringValue  `tfsdk:"access_list"`
-	Metric     basetypes.Float64Value `tfsdk:"metric"`
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	Metric     basetypes.Int64Value  `tfsdk:"metric"`
 }
 
 // LogicalRoutersVrfInnerRoutingTable represents a nested structure within the LogicalRouters model
@@ -1251,15 +1247,15 @@ type LogicalRoutersVrfInnerRoutingTableIp struct {
 
 // LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner struct {
-	AdminDist   basetypes.Float64Value `tfsdk:"admin_dist"`
-	Bfd         basetypes.ObjectValue  `tfsdk:"bfd"`
-	Destination basetypes.StringValue  `tfsdk:"destination"`
-	Interface   basetypes.StringValue  `tfsdk:"interface"`
-	Metric      basetypes.Float64Value `tfsdk:"metric"`
-	Name        basetypes.StringValue  `tfsdk:"name"`
-	Nexthop     basetypes.ObjectValue  `tfsdk:"nexthop"`
-	PathMonitor basetypes.ObjectValue  `tfsdk:"path_monitor"`
-	RouteTable  basetypes.ObjectValue  `tfsdk:"route_table"`
+	AdminDist   basetypes.Int64Value  `tfsdk:"admin_dist"`
+	Bfd         basetypes.ObjectValue `tfsdk:"bfd"`
+	Destination basetypes.StringValue `tfsdk:"destination"`
+	Interface   basetypes.StringValue `tfsdk:"interface"`
+	Metric      basetypes.Int64Value  `tfsdk:"metric"`
+	Name        basetypes.StringValue `tfsdk:"name"`
+	Nexthop     basetypes.ObjectValue `tfsdk:"nexthop"`
+	PathMonitor basetypes.ObjectValue `tfsdk:"path_monitor"`
+	RouteTable  basetypes.ObjectValue `tfsdk:"route_table"`
 }
 
 // LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthop represents a nested structure within the LogicalRouters model
@@ -1275,21 +1271,21 @@ type LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthop struct {
 
 // LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitor represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitor struct {
-	Enable              basetypes.BoolValue    `tfsdk:"enable"`
-	FailureCondition    basetypes.StringValue  `tfsdk:"failure_condition"`
-	HoldTime            basetypes.Float64Value `tfsdk:"hold_time"`
-	MonitorDestinations basetypes.ListValue    `tfsdk:"monitor_destinations"`
+	Enable              basetypes.BoolValue   `tfsdk:"enable"`
+	FailureCondition    basetypes.StringValue `tfsdk:"failure_condition"`
+	HoldTime            basetypes.Int64Value  `tfsdk:"hold_time"`
+	MonitorDestinations basetypes.ListValue   `tfsdk:"monitor_destinations"`
 }
 
 // LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonitorDestinationsInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonitorDestinationsInner struct {
-	Count           basetypes.Float64Value `tfsdk:"count"`
-	Destination     basetypes.StringValue  `tfsdk:"destination"`
-	DestinationFqdn basetypes.StringValue  `tfsdk:"destination_fqdn"`
-	Enable          basetypes.BoolValue    `tfsdk:"enable"`
-	Interval        basetypes.Float64Value `tfsdk:"interval"`
-	Name            basetypes.StringValue  `tfsdk:"name"`
-	Source          basetypes.StringValue  `tfsdk:"source"`
+	Count           basetypes.Int64Value  `tfsdk:"count"`
+	Destination     basetypes.StringValue `tfsdk:"destination"`
+	DestinationFqdn basetypes.StringValue `tfsdk:"destination_fqdn"`
+	Enable          basetypes.BoolValue   `tfsdk:"enable"`
+	Interval        basetypes.Int64Value  `tfsdk:"interval"`
+	Name            basetypes.StringValue `tfsdk:"name"`
+	Source          basetypes.StringValue `tfsdk:"source"`
 }
 
 // LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerRouteTable represents a nested structure within the LogicalRouters model
@@ -1307,16 +1303,16 @@ type LogicalRoutersVrfInnerRoutingTableIpv6 struct {
 
 // LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner struct {
-	AdminDist   basetypes.Float64Value `tfsdk:"admin_dist"`
-	Bfd         basetypes.ObjectValue  `tfsdk:"bfd"`
-	Destination basetypes.StringValue  `tfsdk:"destination"`
-	Interface   basetypes.StringValue  `tfsdk:"interface"`
-	Metric      basetypes.Float64Value `tfsdk:"metric"`
-	Name        basetypes.StringValue  `tfsdk:"name"`
-	Nexthop     basetypes.ObjectValue  `tfsdk:"nexthop"`
-	Option      basetypes.ObjectValue  `tfsdk:"option"`
-	PathMonitor basetypes.ObjectValue  `tfsdk:"path_monitor"`
-	RouteTable  basetypes.ObjectValue  `tfsdk:"route_table"`
+	AdminDist   basetypes.Int64Value  `tfsdk:"admin_dist"`
+	Bfd         basetypes.ObjectValue `tfsdk:"bfd"`
+	Destination basetypes.StringValue `tfsdk:"destination"`
+	Interface   basetypes.StringValue `tfsdk:"interface"`
+	Metric      basetypes.Int64Value  `tfsdk:"metric"`
+	Name        basetypes.StringValue `tfsdk:"name"`
+	Nexthop     basetypes.ObjectValue `tfsdk:"nexthop"`
+	Option      basetypes.ObjectValue `tfsdk:"option"`
+	PathMonitor basetypes.ObjectValue `tfsdk:"path_monitor"`
+	RouteTable  basetypes.ObjectValue `tfsdk:"route_table"`
 }
 
 // LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerOption represents a nested structure within the LogicalRouters model
@@ -1326,15 +1322,15 @@ type LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerOption struct {
 
 // LogicalRoutersVrfInnerVrAdminDists represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerVrAdminDists struct {
-	Ebgp       basetypes.Float64Value `tfsdk:"ebgp"`
-	Ibgp       basetypes.Float64Value `tfsdk:"ibgp"`
-	OspfExt    basetypes.Float64Value `tfsdk:"ospf_ext"`
-	OspfInt    basetypes.Float64Value `tfsdk:"ospf_int"`
-	Ospfv3Ext  basetypes.Float64Value `tfsdk:"ospfv3_ext"`
-	Ospfv3Int  basetypes.Float64Value `tfsdk:"ospfv3_int"`
-	Rip        basetypes.Float64Value `tfsdk:"rip"`
-	Static     basetypes.Float64Value `tfsdk:"static"`
-	StaticIpv6 basetypes.Float64Value `tfsdk:"static_ipv6"`
+	Ebgp       basetypes.Int64Value `tfsdk:"ebgp"`
+	Ibgp       basetypes.Int64Value `tfsdk:"ibgp"`
+	OspfExt    basetypes.Int64Value `tfsdk:"ospf_ext"`
+	OspfInt    basetypes.Int64Value `tfsdk:"ospf_int"`
+	Ospfv3Ext  basetypes.Int64Value `tfsdk:"ospfv3_ext"`
+	Ospfv3Int  basetypes.Int64Value `tfsdk:"ospfv3_int"`
+	Rip        basetypes.Int64Value `tfsdk:"rip"`
+	Static     basetypes.Int64Value `tfsdk:"static"`
+	StaticIpv6 basetypes.Int64Value `tfsdk:"static_ipv6"`
 }
 
 // AttrTypes defines the attribute types for the LogicalRouters model.
@@ -1351,18 +1347,18 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"admin_dists": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"bgp_external": basetypes.NumberType{},
-						"bgp_internal": basetypes.NumberType{},
-						"bgp_local":    basetypes.NumberType{},
-						"ospf_ext":     basetypes.NumberType{},
-						"ospf_inter":   basetypes.NumberType{},
-						"ospf_intra":   basetypes.NumberType{},
-						"ospfv3_ext":   basetypes.NumberType{},
-						"ospfv3_inter": basetypes.NumberType{},
-						"ospfv3_intra": basetypes.NumberType{},
-						"rip":          basetypes.NumberType{},
-						"static":       basetypes.NumberType{},
-						"static_ipv6":  basetypes.NumberType{},
+						"bgp_external": basetypes.Int64Type{},
+						"bgp_internal": basetypes.Int64Type{},
+						"bgp_local":    basetypes.Int64Type{},
+						"ospf_ext":     basetypes.Int64Type{},
+						"ospf_inter":   basetypes.Int64Type{},
+						"ospf_intra":   basetypes.Int64Type{},
+						"ospfv3_ext":   basetypes.Int64Type{},
+						"ospfv3_inter": basetypes.Int64Type{},
+						"ospfv3_intra": basetypes.Int64Type{},
+						"rip":          basetypes.Int64Type{},
+						"static":       basetypes.Int64Type{},
+						"static_ipv6":  basetypes.Int64Type{},
 					},
 				},
 				"bgp": basetypes.ObjectType{
@@ -1430,7 +1426,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"always_advertise_network_route": basetypes.BoolType{},
 						"as_format":                      basetypes.StringType{},
 						"confederation_member_as":        basetypes.StringType{},
-						"default_local_preference":       basetypes.NumberType{},
+						"default_local_preference":       basetypes.Int64Type{},
 						"ecmp_multi_as":                  basetypes.BoolType{},
 						"enable":                         basetypes.BoolType{},
 						"enforce_first_as":               basetypes.BoolType{},
@@ -1443,9 +1439,9 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"graceful_restart": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"enable":                basetypes.BoolType{},
-								"local_restart_time":    basetypes.NumberType{},
-								"max_peer_restart_time": basetypes.NumberType{},
-								"stale_route_time":      basetypes.NumberType{},
+								"local_restart_time":    basetypes.Int64Type{},
+								"max_peer_restart_time": basetypes.Int64Type{},
+								"stale_route_time":      basetypes.Int64Type{},
 							},
 						},
 						"graceful_shutdown": basetypes.BoolType{},
@@ -1470,7 +1466,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"authentication": basetypes.StringType{},
 										"dampening":      basetypes.StringType{},
-										"multihop":       basetypes.NumberType{},
+										"multihop":       basetypes.Int64Type{},
 										"timers":         basetypes.StringType{},
 									},
 								},
@@ -1488,7 +1484,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"multihop": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"min_received_ttl": basetypes.NumberType{},
+														"min_received_ttl": basetypes.Int64Type{},
 													},
 												},
 												"profile": basetypes.StringType{},
@@ -1499,22 +1495,22 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												"authentication": basetypes.StringType{},
 												"dampening":      basetypes.StringType{},
 												"hold_time":      basetypes.StringType{},
-												"idle_hold_time": basetypes.NumberType{},
+												"idle_hold_time": basetypes.Int64Type{},
 												"incoming_bgp_connection": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"allow":       basetypes.BoolType{},
-														"remote_port": basetypes.NumberType{},
+														"remote_port": basetypes.Int64Type{},
 													},
 												},
 												"keep_alive_interval":    basetypes.StringType{},
 												"max_prefixes":           basetypes.StringType{},
-												"min_route_adv_interval": basetypes.NumberType{},
+												"min_route_adv_interval": basetypes.Int64Type{},
 												"multihop":               basetypes.StringType{},
-												"open_delay_time":        basetypes.NumberType{},
+												"open_delay_time":        basetypes.Int64Type{},
 												"outgoing_bgp_connection": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"allow":      basetypes.BoolType{},
-														"local_port": basetypes.NumberType{},
+														"local_port": basetypes.Int64Type{},
 													},
 												},
 												"timers": basetypes.StringType{},
@@ -1634,7 +1630,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																	},
 																},
 																"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-																"med":         basetypes.NumberType{},
+																"med":         basetypes.Int64Type{},
 																"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 																"route_table": basetypes.StringType{},
 																"safi":        basetypes.StringType{},
@@ -1650,14 +1646,14 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																"none": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{},
 																},
-																"prepend": basetypes.NumberType{},
+																"prepend": basetypes.Int64Type{},
 																"remove": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{},
 																},
-																"remove_and_prepend": basetypes.NumberType{},
+																"remove_and_prepend": basetypes.Int64Type{},
 															},
 														},
-														"as_path_limit": basetypes.NumberType{},
+														"as_path_limit": basetypes.Int64Type{},
 														"community": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
 																"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -1684,11 +1680,11 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																"remove_regex": basetypes.StringType{},
 															},
 														},
-														"local_preference": basetypes.NumberType{},
-														"med":              basetypes.NumberType{},
+														"local_preference": basetypes.Int64Type{},
+														"med":              basetypes.Int64Type{},
 														"nexthop":          basetypes.StringType{},
 														"origin":           basetypes.StringType{},
-														"weight":           basetypes.NumberType{},
+														"weight":           basetypes.Int64Type{},
 													},
 												},
 												"as_set":  basetypes.BoolType{},
@@ -1724,7 +1720,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																	},
 																},
 																"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-																"med":         basetypes.NumberType{},
+																"med":         basetypes.Int64Type{},
 																"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 																"route_table": basetypes.StringType{},
 																"safi":        basetypes.StringType{},
@@ -1769,7 +1765,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																	},
 																},
 																"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-																"med":         basetypes.NumberType{},
+																"med":         basetypes.Int64Type{},
 																"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 																"route_table": basetypes.StringType{},
 																"safi":        basetypes.StringType{},
@@ -1808,7 +1804,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																	},
 																},
 																"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-																"med":         basetypes.NumberType{},
+																"med":         basetypes.Int64Type{},
 																"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 																"route_table": basetypes.StringType{},
 																"safi":        basetypes.StringType{},
@@ -1839,14 +1835,14 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																				"none": basetypes.ObjectType{
 																					AttrTypes: map[string]attr.Type{},
 																				},
-																				"prepend": basetypes.NumberType{},
+																				"prepend": basetypes.Int64Type{},
 																				"remove": basetypes.ObjectType{
 																					AttrTypes: map[string]attr.Type{},
 																				},
-																				"remove_and_prepend": basetypes.NumberType{},
+																				"remove_and_prepend": basetypes.Int64Type{},
 																			},
 																		},
-																		"as_path_limit": basetypes.NumberType{},
+																		"as_path_limit": basetypes.Int64Type{},
 																		"community": basetypes.ObjectType{
 																			AttrTypes: map[string]attr.Type{
 																				"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -1873,8 +1869,8 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																				"remove_regex": basetypes.StringType{},
 																			},
 																		},
-																		"local_preference": basetypes.NumberType{},
-																		"med":              basetypes.NumberType{},
+																		"local_preference": basetypes.Int64Type{},
+																		"med":              basetypes.Int64Type{},
 																		"nexthop":          basetypes.StringType{},
 																		"origin":           basetypes.StringType{},
 																	},
@@ -1912,7 +1908,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 															},
 														},
 														"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-														"med":         basetypes.NumberType{},
+														"med":         basetypes.Int64Type{},
 														"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 														"route_table": basetypes.StringType{},
 														"safi":        basetypes.StringType{},
@@ -1940,14 +1936,14 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																				"none": basetypes.ObjectType{
 																					AttrTypes: map[string]attr.Type{},
 																				},
-																				"prepend": basetypes.NumberType{},
+																				"prepend": basetypes.Int64Type{},
 																				"remove": basetypes.ObjectType{
 																					AttrTypes: map[string]attr.Type{},
 																				},
-																				"remove_and_prepend": basetypes.NumberType{},
+																				"remove_and_prepend": basetypes.Int64Type{},
 																			},
 																		},
-																		"as_path_limit": basetypes.NumberType{},
+																		"as_path_limit": basetypes.Int64Type{},
 																		"community": basetypes.ObjectType{
 																			AttrTypes: map[string]attr.Type{
 																				"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -1974,11 +1970,11 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																				"remove_regex": basetypes.StringType{},
 																			},
 																		},
-																		"local_preference": basetypes.NumberType{},
-																		"med":              basetypes.NumberType{},
+																		"local_preference": basetypes.Int64Type{},
+																		"med":              basetypes.Int64Type{},
 																		"nexthop":          basetypes.StringType{},
 																		"origin":           basetypes.StringType{},
-																		"weight":           basetypes.NumberType{},
+																		"weight":           basetypes.Int64Type{},
 																	},
 																},
 															},
@@ -2014,7 +2010,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 															},
 														},
 														"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-														"med":         basetypes.NumberType{},
+														"med":         basetypes.Int64Type{},
 														"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 														"route_table": basetypes.StringType{},
 														"safi":        basetypes.StringType{},
@@ -2032,14 +2028,14 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"address_family_identifier": basetypes.StringType{},
 								"enable":                    basetypes.BoolType{},
-								"metric":                    basetypes.NumberType{},
+								"metric":                    basetypes.Int64Type{},
 								"name":                      basetypes.StringType{},
 								"route_table":               basetypes.StringType{},
-								"set_as_path_limit":         basetypes.NumberType{},
+								"set_as_path_limit":         basetypes.Int64Type{},
 								"set_community":             basetypes.ListType{ElemType: basetypes.StringType{}},
 								"set_extended_community":    basetypes.ListType{ElemType: basetypes.StringType{}},
-								"set_local_preference":      basetypes.NumberType{},
-								"set_med":                   basetypes.NumberType{},
+								"set_local_preference":      basetypes.Int64Type{},
+								"set_med":                   basetypes.Int64Type{},
 								"set_origin":                basetypes.StringType{},
 							},
 						}},
@@ -2070,7 +2066,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								},
 								"ip_hash": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"hash_seed": basetypes.NumberType{},
+										"hash_seed": basetypes.Int64Type{},
 										"src_only":  basetypes.BoolType{},
 										"use_port":  basetypes.BoolType{},
 									},
@@ -2083,7 +2079,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 										"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"name":   basetypes.StringType{},
-												"weight": basetypes.NumberType{},
+												"weight": basetypes.Int64Type{},
 											},
 										}},
 									},
@@ -2091,12 +2087,12 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 							},
 						},
 						"enable":             basetypes.BoolType{},
-						"max_path":           basetypes.NumberType{},
+						"max_path":           basetypes.Int64Type{},
 						"strict_source_path": basetypes.BoolType{},
 						"symmetric_return":   basetypes.BoolType{},
 					},
 				},
-				"global_vrid": basetypes.NumberType{},
+				"global_vrid": basetypes.Int64Type{},
 				"interface":   basetypes.ListType{ElemType: basetypes.StringType{}},
 				"multicast": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
@@ -2157,12 +2153,12 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"enable":                     basetypes.BoolType{},
 										"immediate_leave":            basetypes.BoolType{},
-										"last_member_query_interval": basetypes.NumberType{},
+										"last_member_query_interval": basetypes.Int64Type{},
 										"max_groups":                 basetypes.StringType{},
-										"max_query_response_time":    basetypes.NumberType{},
+										"max_query_response_time":    basetypes.Int64Type{},
 										"max_sources":                basetypes.StringType{},
 										"mode":                       basetypes.StringType{},
-										"query_interval":             basetypes.NumberType{},
+										"query_interval":             basetypes.Int64Type{},
 										"robustness":                 basetypes.StringType{},
 										"router_alert_policing":      basetypes.BoolType{},
 										"version":                    basetypes.StringType{},
@@ -2177,12 +2173,12 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												"name": basetypes.StringType{},
 											},
 										}},
-										"assert_interval":     basetypes.NumberType{},
+										"assert_interval":     basetypes.Int64Type{},
 										"bsr_border":          basetypes.BoolType{},
-										"dr_priority":         basetypes.NumberType{},
+										"dr_priority":         basetypes.Int64Type{},
 										"enable":              basetypes.BoolType{},
-										"hello_interval":      basetypes.NumberType{},
-										"join_prune_interval": basetypes.NumberType{},
+										"hello_interval":      basetypes.Int64Type{},
+										"join_prune_interval": basetypes.Int64Type{},
 									},
 								},
 							},
@@ -2210,7 +2206,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												"ip":        basetypes.StringType{},
 											},
 										},
-										"max_sa":             basetypes.NumberType{},
+										"max_sa":             basetypes.Int64Type{},
 										"name":               basetypes.StringType{},
 										"outbound_sa_filter": basetypes.StringType{},
 										"peer_address": basetypes.ObjectType{
@@ -2232,14 +2228,14 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"description":     basetypes.StringType{},
-										"dr_priority":     basetypes.NumberType{},
+										"dr_priority":     basetypes.Int64Type{},
 										"if_timer":        basetypes.StringType{},
 										"name":            basetypes.StringType{},
 										"neighbor_filter": basetypes.StringType{},
 										"send_bsm":        basetypes.BoolType{},
 									},
 								}},
-								"route_ageout_time": basetypes.NumberType{},
+								"route_ageout_time": basetypes.Int64Type{},
 								"rp": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"external_rp": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -2254,10 +2250,10 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												"candidate_rp": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"address":                basetypes.StringType{},
-														"advertisement_interval": basetypes.NumberType{},
+														"advertisement_interval": basetypes.Int64Type{},
 														"group_list":             basetypes.StringType{},
 														"interface":              basetypes.StringType{},
-														"priority":               basetypes.NumberType{},
+														"priority":               basetypes.Int64Type{},
 													},
 												},
 												"static_rp": basetypes.ObjectType{
@@ -2286,7 +2282,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								},
 							},
 						},
-						"route_ageout_time": basetypes.NumberType{},
+						"route_ageout_time": basetypes.Int64Type{},
 						"rp": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"external_rp": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -2301,10 +2297,10 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 										"candidate_rp": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"address":                basetypes.StringType{},
-												"advertisement_interval": basetypes.NumberType{},
+												"advertisement_interval": basetypes.Int64Type{},
 												"group_addresses":        basetypes.ListType{ElemType: basetypes.StringType{}},
 												"interface":              basetypes.StringType{},
-												"priority":               basetypes.NumberType{},
+												"priority":               basetypes.Int64Type{},
 											},
 										},
 										"static_rp": basetypes.ObjectType{
@@ -2342,7 +2338,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 										"ip_address": basetypes.StringType{},
 									},
 								},
-								"preference": basetypes.NumberType{},
+								"preference": basetypes.Int64Type{},
 							},
 						}},
 					},
@@ -2373,7 +2369,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 														"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
 																"name":     basetypes.StringType{},
-																"priority": basetypes.NumberType{},
+																"priority": basetypes.Int64Type{},
 															},
 														}},
 													},
@@ -2383,19 +2379,19 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												},
 											},
 										},
-										"metric":     basetypes.NumberType{},
+										"metric":     basetypes.Int64Type{},
 										"mtu_ignore": basetypes.BoolType{},
 										"name":       basetypes.StringType{},
 										"passive":    basetypes.BoolType{},
-										"priority":   basetypes.NumberType{},
+										"priority":   basetypes.Int64Type{},
 										"timing":     basetypes.StringType{},
 										"vr_timing": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"dead_counts":         basetypes.NumberType{},
-												"gr_delay":            basetypes.NumberType{},
-												"hello_interval":      basetypes.NumberType{},
-												"retransmit_interval": basetypes.NumberType{},
-												"transit_delay":       basetypes.NumberType{},
+												"dead_counts":         basetypes.Int64Type{},
+												"gr_delay":            basetypes.Int64Type{},
+												"hello_interval":      basetypes.Int64Type{},
+												"retransmit_interval": basetypes.Int64Type{},
+												"transit_delay":       basetypes.Int64Type{},
 											},
 										},
 									},
@@ -2433,7 +2429,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 															AttrTypes: map[string]attr.Type{
 																"advertise": basetypes.BoolType{},
 																"name":      basetypes.StringType{},
-																"route_tag": basetypes.NumberType{},
+																"route_tag": basetypes.Int64Type{},
 															},
 														}},
 														"outbound_filter_list": basetypes.StringType{},
@@ -2442,7 +2438,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												"accept_summary": basetypes.BoolType{},
 												"default_information_originate": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"metric":      basetypes.NumberType{},
+														"metric":      basetypes.Int64Type{},
 														"metric_type": basetypes.StringType{},
 													},
 												},
@@ -2450,7 +2446,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{
 														"advertise": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
-																"metric": basetypes.NumberType{},
+																"metric": basetypes.Int64Type{},
 																"type":   basetypes.StringType{},
 															},
 														},
@@ -2488,7 +2484,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{
 														"advertise": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
-																"metric": basetypes.NumberType{},
+																"metric": basetypes.Int64Type{},
 															},
 														},
 														"disable": basetypes.ObjectType{
@@ -2496,7 +2492,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 														},
 													},
 												},
-												"default_route_metric": basetypes.NumberType{},
+												"default_route_metric": basetypes.Int64Type{},
 												"no_summary":           basetypes.BoolType{},
 											},
 										},
@@ -2511,8 +2507,8 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"enable":          basetypes.BoolType{},
-										"instance_id":     basetypes.NumberType{},
-										"interface_id":    basetypes.NumberType{},
+										"instance_id":     basetypes.Int64Type{},
+										"interface_id":    basetypes.Int64Type{},
 										"name":            basetypes.StringType{},
 										"neighbor_id":     basetypes.StringType{},
 										"passive":         basetypes.BoolType{},
@@ -2520,10 +2516,10 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 										"transit_area_id": basetypes.StringType{},
 										"vr_timing": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"dead_counts":         basetypes.NumberType{},
-												"hello_interval":      basetypes.NumberType{},
-												"retransmit_interval": basetypes.NumberType{},
-												"transit_delay":       basetypes.NumberType{},
+												"dead_counts":         basetypes.Int64Type{},
+												"hello_interval":      basetypes.Int64Type{},
+												"retransmit_interval": basetypes.Int64Type{},
+												"transit_delay":       basetypes.Int64Type{},
 											},
 										},
 									},
@@ -2557,7 +2553,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"enable": basetypes.BoolType{},
 						"export_rules": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric":        basetypes.NumberType{},
+								"metric":        basetypes.Int64Type{},
 								"name":          basetypes.StringType{},
 								"new_path_type": basetypes.StringType{},
 								"new_tag":       basetypes.StringType{},
@@ -2568,13 +2564,13 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								"hello": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"enable":     basetypes.BoolType{},
-										"max_packet": basetypes.NumberType{},
+										"max_packet": basetypes.Int64Type{},
 									},
 								},
 								"lsa": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"enable":     basetypes.BoolType{},
-										"max_packet": basetypes.NumberType{},
+										"max_packet": basetypes.Int64Type{},
 									},
 								},
 							},
@@ -2588,9 +2584,9 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"graceful_restart": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"enable":                    basetypes.BoolType{},
-								"grace_period":              basetypes.NumberType{},
+								"grace_period":              basetypes.Int64Type{},
 								"helper_enable":             basetypes.BoolType{},
-								"max_neighbor_restart_time": basetypes.NumberType{},
+								"max_neighbor_restart_time": basetypes.Int64Type{},
 								"strict__l_s_a_checking":    basetypes.BoolType{},
 							},
 						},
@@ -2601,8 +2597,8 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"spf_timer":              basetypes.StringType{},
 						"vr_timers": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"lsa_interval":          basetypes.NumberType{},
-								"spf_calculation_delay": basetypes.NumberType{},
+								"lsa_interval":          basetypes.Int64Type{},
+								"spf_calculation_delay": basetypes.Int64Type{},
 							},
 						},
 					},
@@ -2622,7 +2618,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"enable":      basetypes.BoolType{},
-										"instance_id": basetypes.NumberType{},
+										"instance_id": basetypes.Int64Type{},
 										"link_type": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"broadcast": basetypes.ObjectType{
@@ -2633,7 +2629,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 														"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
 																"name":     basetypes.StringType{},
-																"priority": basetypes.NumberType{},
+																"priority": basetypes.Int64Type{},
 															},
 														}},
 													},
@@ -2643,7 +2639,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												},
 											},
 										},
-										"metric":     basetypes.NumberType{},
+										"metric":     basetypes.Int64Type{},
 										"mtu_ignore": basetypes.BoolType{},
 										"name":       basetypes.StringType{},
 										"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -2652,15 +2648,15 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 											},
 										}},
 										"passive":  basetypes.BoolType{},
-										"priority": basetypes.NumberType{},
+										"priority": basetypes.Int64Type{},
 										"timing":   basetypes.StringType{},
 										"vr_timing": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"dead_counts":         basetypes.NumberType{},
-												"gr_delay":            basetypes.NumberType{},
-												"hello_interval":      basetypes.NumberType{},
-												"retransmit_interval": basetypes.NumberType{},
-												"transit_delay":       basetypes.NumberType{},
+												"dead_counts":         basetypes.Int64Type{},
+												"gr_delay":            basetypes.Int64Type{},
+												"hello_interval":      basetypes.Int64Type{},
+												"retransmit_interval": basetypes.Int64Type{},
+												"transit_delay":       basetypes.Int64Type{},
 											},
 										},
 									},
@@ -2699,7 +2695,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 																	AttrTypes: map[string]attr.Type{},
 																},
 																"name":      basetypes.StringType{},
-																"route_tag": basetypes.NumberType{},
+																"route_tag": basetypes.Int64Type{},
 																"suppress": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{},
 																},
@@ -2711,7 +2707,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 												"accept_summary": basetypes.BoolType{},
 												"default_information_originate": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"metric":      basetypes.NumberType{},
+														"metric":      basetypes.Int64Type{},
 														"metric_type": basetypes.StringType{},
 													},
 												},
@@ -2719,7 +2715,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{
 														"advertise": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
-																"metric": basetypes.NumberType{},
+																"metric": basetypes.Int64Type{},
 																"type":   basetypes.StringType{},
 															},
 														},
@@ -2735,7 +2731,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 															AttrTypes: map[string]attr.Type{},
 														},
 														"name":      basetypes.StringType{},
-														"route_tag": basetypes.NumberType{},
+														"route_tag": basetypes.Int64Type{},
 														"suppress": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
@@ -2758,7 +2754,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{
 														"advertise": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
-																"metric": basetypes.NumberType{},
+																"metric": basetypes.Int64Type{},
 															},
 														},
 														"disable": basetypes.ObjectType{
@@ -2766,7 +2762,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 														},
 													},
 												},
-												"default_route_metric": basetypes.NumberType{},
+												"default_route_metric": basetypes.Int64Type{},
 												"no_summary":           basetypes.BoolType{},
 											},
 										},
@@ -2781,8 +2777,8 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"enable":          basetypes.BoolType{},
-										"instance_id":     basetypes.NumberType{},
-										"interface_id":    basetypes.NumberType{},
+										"instance_id":     basetypes.Int64Type{},
+										"interface_id":    basetypes.Int64Type{},
 										"name":            basetypes.StringType{},
 										"neighbor_id":     basetypes.StringType{},
 										"passive":         basetypes.BoolType{},
@@ -2790,10 +2786,10 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 										"transit_area_id": basetypes.StringType{},
 										"vr_timing": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"dead_counts":         basetypes.NumberType{},
-												"hello_interval":      basetypes.NumberType{},
-												"retransmit_interval": basetypes.NumberType{},
-												"transit_delay":       basetypes.NumberType{},
+												"dead_counts":         basetypes.Int64Type{},
+												"hello_interval":      basetypes.Int64Type{},
+												"retransmit_interval": basetypes.Int64Type{},
+												"transit_delay":       basetypes.Int64Type{},
 											},
 										},
 									},
@@ -2892,7 +2888,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"enable":                  basetypes.BoolType{},
 						"export_rules": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric":        basetypes.NumberType{},
+								"metric":        basetypes.Int64Type{},
 								"name":          basetypes.StringType{},
 								"new_path_type": basetypes.StringType{},
 								"new_tag":       basetypes.StringType{},
@@ -2907,9 +2903,9 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"graceful_restart": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"enable":                    basetypes.BoolType{},
-								"grace_period":              basetypes.NumberType{},
+								"grace_period":              basetypes.Int64Type{},
 								"helper_enable":             basetypes.BoolType{},
-								"max_neighbor_restart_time": basetypes.NumberType{},
+								"max_neighbor_restart_time": basetypes.Int64Type{},
 								"strict__l_s_a_checking":    basetypes.BoolType{},
 							},
 						},
@@ -2919,8 +2915,8 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 						"spf_timer":              basetypes.StringType{},
 						"vr_timers": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"lsa_interval":          basetypes.NumberType{},
-								"spf_calculation_delay": basetypes.NumberType{},
+								"lsa_interval":          basetypes.Int64Type{},
+								"spf_calculation_delay": basetypes.Int64Type{},
 							},
 						},
 					},
@@ -3005,13 +3001,13 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								"interface_inbound_distribute_list": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"access_list": basetypes.StringType{},
-										"metric":      basetypes.NumberType{},
+										"metric":      basetypes.Int64Type{},
 									},
 								},
 								"interface_outbound_distribute_list": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"access_list": basetypes.StringType{},
-										"metric":      basetypes.NumberType{},
+										"metric":      basetypes.Int64Type{},
 									},
 								},
 								"mode":          basetypes.StringType{},
@@ -3028,7 +3024,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"admin_dist": basetypes.NumberType{},
+										"admin_dist": basetypes.Int64Type{},
 										"bfd": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"profile": basetypes.StringType{},
@@ -3036,7 +3032,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 										},
 										"destination": basetypes.StringType{},
 										"interface":   basetypes.StringType{},
-										"metric":      basetypes.NumberType{},
+										"metric":      basetypes.Int64Type{},
 										"name":        basetypes.StringType{},
 										"nexthop": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
@@ -3057,14 +3053,14 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"enable":            basetypes.BoolType{},
 												"failure_condition": basetypes.StringType{},
-												"hold_time":         basetypes.NumberType{},
+												"hold_time":         basetypes.Int64Type{},
 												"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"count":            basetypes.NumberType{},
+														"count":            basetypes.Int64Type{},
 														"destination":      basetypes.StringType{},
 														"destination_fqdn": basetypes.StringType{},
 														"enable":           basetypes.BoolType{},
-														"interval":         basetypes.NumberType{},
+														"interval":         basetypes.Int64Type{},
 														"name":             basetypes.StringType{},
 														"source":           basetypes.StringType{},
 													},
@@ -3095,7 +3091,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"admin_dist": basetypes.NumberType{},
+										"admin_dist": basetypes.Int64Type{},
 										"bfd": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"profile": basetypes.StringType{},
@@ -3103,7 +3099,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 										},
 										"destination": basetypes.StringType{},
 										"interface":   basetypes.StringType{},
-										"metric":      basetypes.NumberType{},
+										"metric":      basetypes.Int64Type{},
 										"name":        basetypes.StringType{},
 										"nexthop": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
@@ -3131,14 +3127,14 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"enable":            basetypes.BoolType{},
 												"failure_condition": basetypes.StringType{},
-												"hold_time":         basetypes.NumberType{},
+												"hold_time":         basetypes.Int64Type{},
 												"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"count":            basetypes.NumberType{},
+														"count":            basetypes.Int64Type{},
 														"destination":      basetypes.StringType{},
 														"destination_fqdn": basetypes.StringType{},
 														"enable":           basetypes.BoolType{},
-														"interval":         basetypes.NumberType{},
+														"interval":         basetypes.Int64Type{},
 														"name":             basetypes.StringType{},
 														"source":           basetypes.StringType{},
 													},
@@ -3170,15 +3166,15 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 				"sdwan_type": basetypes.StringType{},
 				"vr_admin_dists": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"ebgp":        basetypes.NumberType{},
-						"ibgp":        basetypes.NumberType{},
-						"ospf_ext":    basetypes.NumberType{},
-						"ospf_int":    basetypes.NumberType{},
-						"ospfv3_ext":  basetypes.NumberType{},
-						"ospfv3_int":  basetypes.NumberType{},
-						"rip":         basetypes.NumberType{},
-						"static":      basetypes.NumberType{},
-						"static_ipv6": basetypes.NumberType{},
+						"ebgp":        basetypes.Int64Type{},
+						"ibgp":        basetypes.Int64Type{},
+						"ospf_ext":    basetypes.Int64Type{},
+						"ospf_int":    basetypes.Int64Type{},
+						"ospfv3_ext":  basetypes.Int64Type{},
+						"ospfv3_int":  basetypes.Int64Type{},
+						"rip":         basetypes.Int64Type{},
+						"static":      basetypes.Int64Type{},
+						"static_ipv6": basetypes.Int64Type{},
 					},
 				},
 				"zone_name": basetypes.StringType{},
@@ -3199,18 +3195,18 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"admin_dists": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"bgp_external": basetypes.NumberType{},
-				"bgp_internal": basetypes.NumberType{},
-				"bgp_local":    basetypes.NumberType{},
-				"ospf_ext":     basetypes.NumberType{},
-				"ospf_inter":   basetypes.NumberType{},
-				"ospf_intra":   basetypes.NumberType{},
-				"ospfv3_ext":   basetypes.NumberType{},
-				"ospfv3_inter": basetypes.NumberType{},
-				"ospfv3_intra": basetypes.NumberType{},
-				"rip":          basetypes.NumberType{},
-				"static":       basetypes.NumberType{},
-				"static_ipv6":  basetypes.NumberType{},
+				"bgp_external": basetypes.Int64Type{},
+				"bgp_internal": basetypes.Int64Type{},
+				"bgp_local":    basetypes.Int64Type{},
+				"ospf_ext":     basetypes.Int64Type{},
+				"ospf_inter":   basetypes.Int64Type{},
+				"ospf_intra":   basetypes.Int64Type{},
+				"ospfv3_ext":   basetypes.Int64Type{},
+				"ospfv3_inter": basetypes.Int64Type{},
+				"ospfv3_intra": basetypes.Int64Type{},
+				"rip":          basetypes.Int64Type{},
+				"static":       basetypes.Int64Type{},
+				"static_ipv6":  basetypes.Int64Type{},
 			},
 		},
 		"bgp": basetypes.ObjectType{
@@ -3278,7 +3274,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"always_advertise_network_route": basetypes.BoolType{},
 				"as_format":                      basetypes.StringType{},
 				"confederation_member_as":        basetypes.StringType{},
-				"default_local_preference":       basetypes.NumberType{},
+				"default_local_preference":       basetypes.Int64Type{},
 				"ecmp_multi_as":                  basetypes.BoolType{},
 				"enable":                         basetypes.BoolType{},
 				"enforce_first_as":               basetypes.BoolType{},
@@ -3291,9 +3287,9 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"graceful_restart": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"enable":                basetypes.BoolType{},
-						"local_restart_time":    basetypes.NumberType{},
-						"max_peer_restart_time": basetypes.NumberType{},
-						"stale_route_time":      basetypes.NumberType{},
+						"local_restart_time":    basetypes.Int64Type{},
+						"max_peer_restart_time": basetypes.Int64Type{},
+						"stale_route_time":      basetypes.Int64Type{},
 					},
 				},
 				"graceful_shutdown": basetypes.BoolType{},
@@ -3318,7 +3314,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"authentication": basetypes.StringType{},
 								"dampening":      basetypes.StringType{},
-								"multihop":       basetypes.NumberType{},
+								"multihop":       basetypes.Int64Type{},
 								"timers":         basetypes.StringType{},
 							},
 						},
@@ -3336,7 +3332,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"multihop": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"min_received_ttl": basetypes.NumberType{},
+												"min_received_ttl": basetypes.Int64Type{},
 											},
 										},
 										"profile": basetypes.StringType{},
@@ -3347,22 +3343,22 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										"authentication": basetypes.StringType{},
 										"dampening":      basetypes.StringType{},
 										"hold_time":      basetypes.StringType{},
-										"idle_hold_time": basetypes.NumberType{},
+										"idle_hold_time": basetypes.Int64Type{},
 										"incoming_bgp_connection": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"allow":       basetypes.BoolType{},
-												"remote_port": basetypes.NumberType{},
+												"remote_port": basetypes.Int64Type{},
 											},
 										},
 										"keep_alive_interval":    basetypes.StringType{},
 										"max_prefixes":           basetypes.StringType{},
-										"min_route_adv_interval": basetypes.NumberType{},
+										"min_route_adv_interval": basetypes.Int64Type{},
 										"multihop":               basetypes.StringType{},
-										"open_delay_time":        basetypes.NumberType{},
+										"open_delay_time":        basetypes.Int64Type{},
 										"outgoing_bgp_connection": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"allow":      basetypes.BoolType{},
-												"local_port": basetypes.NumberType{},
+												"local_port": basetypes.Int64Type{},
 											},
 										},
 										"timers": basetypes.StringType{},
@@ -3482,7 +3478,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 															},
 														},
 														"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-														"med":         basetypes.NumberType{},
+														"med":         basetypes.Int64Type{},
 														"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 														"route_table": basetypes.StringType{},
 														"safi":        basetypes.StringType{},
@@ -3498,14 +3494,14 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 														"none": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
-														"prepend": basetypes.NumberType{},
+														"prepend": basetypes.Int64Type{},
 														"remove": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
-														"remove_and_prepend": basetypes.NumberType{},
+														"remove_and_prepend": basetypes.Int64Type{},
 													},
 												},
-												"as_path_limit": basetypes.NumberType{},
+												"as_path_limit": basetypes.Int64Type{},
 												"community": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -3532,11 +3528,11 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 														"remove_regex": basetypes.StringType{},
 													},
 												},
-												"local_preference": basetypes.NumberType{},
-												"med":              basetypes.NumberType{},
+												"local_preference": basetypes.Int64Type{},
+												"med":              basetypes.Int64Type{},
 												"nexthop":          basetypes.StringType{},
 												"origin":           basetypes.StringType{},
-												"weight":           basetypes.NumberType{},
+												"weight":           basetypes.Int64Type{},
 											},
 										},
 										"as_set":  basetypes.BoolType{},
@@ -3572,7 +3568,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 															},
 														},
 														"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-														"med":         basetypes.NumberType{},
+														"med":         basetypes.Int64Type{},
 														"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 														"route_table": basetypes.StringType{},
 														"safi":        basetypes.StringType{},
@@ -3617,7 +3613,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 															},
 														},
 														"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-														"med":         basetypes.NumberType{},
+														"med":         basetypes.Int64Type{},
 														"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 														"route_table": basetypes.StringType{},
 														"safi":        basetypes.StringType{},
@@ -3656,7 +3652,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 															},
 														},
 														"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-														"med":         basetypes.NumberType{},
+														"med":         basetypes.Int64Type{},
 														"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 														"route_table": basetypes.StringType{},
 														"safi":        basetypes.StringType{},
@@ -3687,14 +3683,14 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 																		"none": basetypes.ObjectType{
 																			AttrTypes: map[string]attr.Type{},
 																		},
-																		"prepend": basetypes.NumberType{},
+																		"prepend": basetypes.Int64Type{},
 																		"remove": basetypes.ObjectType{
 																			AttrTypes: map[string]attr.Type{},
 																		},
-																		"remove_and_prepend": basetypes.NumberType{},
+																		"remove_and_prepend": basetypes.Int64Type{},
 																	},
 																},
-																"as_path_limit": basetypes.NumberType{},
+																"as_path_limit": basetypes.Int64Type{},
 																"community": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{
 																		"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -3721,8 +3717,8 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 																		"remove_regex": basetypes.StringType{},
 																	},
 																},
-																"local_preference": basetypes.NumberType{},
-																"med":              basetypes.NumberType{},
+																"local_preference": basetypes.Int64Type{},
+																"med":              basetypes.Int64Type{},
 																"nexthop":          basetypes.StringType{},
 																"origin":           basetypes.StringType{},
 															},
@@ -3760,7 +3756,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 													},
 												},
 												"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-												"med":         basetypes.NumberType{},
+												"med":         basetypes.Int64Type{},
 												"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 												"route_table": basetypes.StringType{},
 												"safi":        basetypes.StringType{},
@@ -3788,14 +3784,14 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 																		"none": basetypes.ObjectType{
 																			AttrTypes: map[string]attr.Type{},
 																		},
-																		"prepend": basetypes.NumberType{},
+																		"prepend": basetypes.Int64Type{},
 																		"remove": basetypes.ObjectType{
 																			AttrTypes: map[string]attr.Type{},
 																		},
-																		"remove_and_prepend": basetypes.NumberType{},
+																		"remove_and_prepend": basetypes.Int64Type{},
 																	},
 																},
-																"as_path_limit": basetypes.NumberType{},
+																"as_path_limit": basetypes.Int64Type{},
 																"community": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{
 																		"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -3822,11 +3818,11 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 																		"remove_regex": basetypes.StringType{},
 																	},
 																},
-																"local_preference": basetypes.NumberType{},
-																"med":              basetypes.NumberType{},
+																"local_preference": basetypes.Int64Type{},
+																"med":              basetypes.Int64Type{},
 																"nexthop":          basetypes.StringType{},
 																"origin":           basetypes.StringType{},
-																"weight":           basetypes.NumberType{},
+																"weight":           basetypes.Int64Type{},
 															},
 														},
 													},
@@ -3862,7 +3858,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 													},
 												},
 												"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-												"med":         basetypes.NumberType{},
+												"med":         basetypes.Int64Type{},
 												"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 												"route_table": basetypes.StringType{},
 												"safi":        basetypes.StringType{},
@@ -3880,14 +3876,14 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"address_family_identifier": basetypes.StringType{},
 						"enable":                    basetypes.BoolType{},
-						"metric":                    basetypes.NumberType{},
+						"metric":                    basetypes.Int64Type{},
 						"name":                      basetypes.StringType{},
 						"route_table":               basetypes.StringType{},
-						"set_as_path_limit":         basetypes.NumberType{},
+						"set_as_path_limit":         basetypes.Int64Type{},
 						"set_community":             basetypes.ListType{ElemType: basetypes.StringType{}},
 						"set_extended_community":    basetypes.ListType{ElemType: basetypes.StringType{}},
-						"set_local_preference":      basetypes.NumberType{},
-						"set_med":                   basetypes.NumberType{},
+						"set_local_preference":      basetypes.Int64Type{},
+						"set_med":                   basetypes.Int64Type{},
 						"set_origin":                basetypes.StringType{},
 					},
 				}},
@@ -3918,7 +3914,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						},
 						"ip_hash": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"hash_seed": basetypes.NumberType{},
+								"hash_seed": basetypes.Int64Type{},
 								"src_only":  basetypes.BoolType{},
 								"use_port":  basetypes.BoolType{},
 							},
@@ -3931,7 +3927,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 								"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"name":   basetypes.StringType{},
-										"weight": basetypes.NumberType{},
+										"weight": basetypes.Int64Type{},
 									},
 								}},
 							},
@@ -3939,12 +3935,12 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 					},
 				},
 				"enable":             basetypes.BoolType{},
-				"max_path":           basetypes.NumberType{},
+				"max_path":           basetypes.Int64Type{},
 				"strict_source_path": basetypes.BoolType{},
 				"symmetric_return":   basetypes.BoolType{},
 			},
 		},
-		"global_vrid": basetypes.NumberType{},
+		"global_vrid": basetypes.Int64Type{},
 		"interface":   basetypes.ListType{ElemType: basetypes.StringType{}},
 		"multicast": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -4005,12 +4001,12 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"enable":                     basetypes.BoolType{},
 								"immediate_leave":            basetypes.BoolType{},
-								"last_member_query_interval": basetypes.NumberType{},
+								"last_member_query_interval": basetypes.Int64Type{},
 								"max_groups":                 basetypes.StringType{},
-								"max_query_response_time":    basetypes.NumberType{},
+								"max_query_response_time":    basetypes.Int64Type{},
 								"max_sources":                basetypes.StringType{},
 								"mode":                       basetypes.StringType{},
-								"query_interval":             basetypes.NumberType{},
+								"query_interval":             basetypes.Int64Type{},
 								"robustness":                 basetypes.StringType{},
 								"router_alert_policing":      basetypes.BoolType{},
 								"version":                    basetypes.StringType{},
@@ -4025,12 +4021,12 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										"name": basetypes.StringType{},
 									},
 								}},
-								"assert_interval":     basetypes.NumberType{},
+								"assert_interval":     basetypes.Int64Type{},
 								"bsr_border":          basetypes.BoolType{},
-								"dr_priority":         basetypes.NumberType{},
+								"dr_priority":         basetypes.Int64Type{},
 								"enable":              basetypes.BoolType{},
-								"hello_interval":      basetypes.NumberType{},
-								"join_prune_interval": basetypes.NumberType{},
+								"hello_interval":      basetypes.Int64Type{},
+								"join_prune_interval": basetypes.Int64Type{},
 							},
 						},
 					},
@@ -4058,7 +4054,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										"ip":        basetypes.StringType{},
 									},
 								},
-								"max_sa":             basetypes.NumberType{},
+								"max_sa":             basetypes.Int64Type{},
 								"name":               basetypes.StringType{},
 								"outbound_sa_filter": basetypes.StringType{},
 								"peer_address": basetypes.ObjectType{
@@ -4080,14 +4076,14 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"description":     basetypes.StringType{},
-								"dr_priority":     basetypes.NumberType{},
+								"dr_priority":     basetypes.Int64Type{},
 								"if_timer":        basetypes.StringType{},
 								"name":            basetypes.StringType{},
 								"neighbor_filter": basetypes.StringType{},
 								"send_bsm":        basetypes.BoolType{},
 							},
 						}},
-						"route_ageout_time": basetypes.NumberType{},
+						"route_ageout_time": basetypes.Int64Type{},
 						"rp": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"external_rp": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -4102,10 +4098,10 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										"candidate_rp": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"address":                basetypes.StringType{},
-												"advertisement_interval": basetypes.NumberType{},
+												"advertisement_interval": basetypes.Int64Type{},
 												"group_list":             basetypes.StringType{},
 												"interface":              basetypes.StringType{},
-												"priority":               basetypes.NumberType{},
+												"priority":               basetypes.Int64Type{},
 											},
 										},
 										"static_rp": basetypes.ObjectType{
@@ -4134,7 +4130,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						},
 					},
 				},
-				"route_ageout_time": basetypes.NumberType{},
+				"route_ageout_time": basetypes.Int64Type{},
 				"rp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"external_rp": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -4149,10 +4145,10 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 								"candidate_rp": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"address":                basetypes.StringType{},
-										"advertisement_interval": basetypes.NumberType{},
+										"advertisement_interval": basetypes.Int64Type{},
 										"group_addresses":        basetypes.ListType{ElemType: basetypes.StringType{}},
 										"interface":              basetypes.StringType{},
-										"priority":               basetypes.NumberType{},
+										"priority":               basetypes.Int64Type{},
 									},
 								},
 								"static_rp": basetypes.ObjectType{
@@ -4190,7 +4186,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 								"ip_address": basetypes.StringType{},
 							},
 						},
-						"preference": basetypes.NumberType{},
+						"preference": basetypes.Int64Type{},
 					},
 				}},
 			},
@@ -4221,7 +4217,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 												"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"name":     basetypes.StringType{},
-														"priority": basetypes.NumberType{},
+														"priority": basetypes.Int64Type{},
 													},
 												}},
 											},
@@ -4231,19 +4227,19 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										},
 									},
 								},
-								"metric":     basetypes.NumberType{},
+								"metric":     basetypes.Int64Type{},
 								"mtu_ignore": basetypes.BoolType{},
 								"name":       basetypes.StringType{},
 								"passive":    basetypes.BoolType{},
-								"priority":   basetypes.NumberType{},
+								"priority":   basetypes.Int64Type{},
 								"timing":     basetypes.StringType{},
 								"vr_timing": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"dead_counts":         basetypes.NumberType{},
-										"gr_delay":            basetypes.NumberType{},
-										"hello_interval":      basetypes.NumberType{},
-										"retransmit_interval": basetypes.NumberType{},
-										"transit_delay":       basetypes.NumberType{},
+										"dead_counts":         basetypes.Int64Type{},
+										"gr_delay":            basetypes.Int64Type{},
+										"hello_interval":      basetypes.Int64Type{},
+										"retransmit_interval": basetypes.Int64Type{},
+										"transit_delay":       basetypes.Int64Type{},
 									},
 								},
 							},
@@ -4281,7 +4277,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{
 														"advertise": basetypes.BoolType{},
 														"name":      basetypes.StringType{},
-														"route_tag": basetypes.NumberType{},
+														"route_tag": basetypes.Int64Type{},
 													},
 												}},
 												"outbound_filter_list": basetypes.StringType{},
@@ -4290,7 +4286,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										"accept_summary": basetypes.BoolType{},
 										"default_information_originate": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"metric":      basetypes.NumberType{},
+												"metric":      basetypes.Int64Type{},
 												"metric_type": basetypes.StringType{},
 											},
 										},
@@ -4298,7 +4294,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"advertise": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"metric": basetypes.NumberType{},
+														"metric": basetypes.Int64Type{},
 														"type":   basetypes.StringType{},
 													},
 												},
@@ -4336,7 +4332,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"advertise": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"metric": basetypes.NumberType{},
+														"metric": basetypes.Int64Type{},
 													},
 												},
 												"disable": basetypes.ObjectType{
@@ -4344,7 +4340,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 												},
 											},
 										},
-										"default_route_metric": basetypes.NumberType{},
+										"default_route_metric": basetypes.Int64Type{},
 										"no_summary":           basetypes.BoolType{},
 									},
 								},
@@ -4359,8 +4355,8 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 									},
 								},
 								"enable":          basetypes.BoolType{},
-								"instance_id":     basetypes.NumberType{},
-								"interface_id":    basetypes.NumberType{},
+								"instance_id":     basetypes.Int64Type{},
+								"interface_id":    basetypes.Int64Type{},
 								"name":            basetypes.StringType{},
 								"neighbor_id":     basetypes.StringType{},
 								"passive":         basetypes.BoolType{},
@@ -4368,10 +4364,10 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 								"transit_area_id": basetypes.StringType{},
 								"vr_timing": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"dead_counts":         basetypes.NumberType{},
-										"hello_interval":      basetypes.NumberType{},
-										"retransmit_interval": basetypes.NumberType{},
-										"transit_delay":       basetypes.NumberType{},
+										"dead_counts":         basetypes.Int64Type{},
+										"hello_interval":      basetypes.Int64Type{},
+										"retransmit_interval": basetypes.Int64Type{},
+										"transit_delay":       basetypes.Int64Type{},
 									},
 								},
 							},
@@ -4405,7 +4401,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"enable": basetypes.BoolType{},
 				"export_rules": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"metric":        basetypes.NumberType{},
+						"metric":        basetypes.Int64Type{},
 						"name":          basetypes.StringType{},
 						"new_path_type": basetypes.StringType{},
 						"new_tag":       basetypes.StringType{},
@@ -4416,13 +4412,13 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						"hello": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"enable":     basetypes.BoolType{},
-								"max_packet": basetypes.NumberType{},
+								"max_packet": basetypes.Int64Type{},
 							},
 						},
 						"lsa": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"enable":     basetypes.BoolType{},
-								"max_packet": basetypes.NumberType{},
+								"max_packet": basetypes.Int64Type{},
 							},
 						},
 					},
@@ -4436,9 +4432,9 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"graceful_restart": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"enable":                    basetypes.BoolType{},
-						"grace_period":              basetypes.NumberType{},
+						"grace_period":              basetypes.Int64Type{},
 						"helper_enable":             basetypes.BoolType{},
-						"max_neighbor_restart_time": basetypes.NumberType{},
+						"max_neighbor_restart_time": basetypes.Int64Type{},
 						"strict__l_s_a_checking":    basetypes.BoolType{},
 					},
 				},
@@ -4449,8 +4445,8 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"spf_timer":              basetypes.StringType{},
 				"vr_timers": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"lsa_interval":          basetypes.NumberType{},
-						"spf_calculation_delay": basetypes.NumberType{},
+						"lsa_interval":          basetypes.Int64Type{},
+						"spf_calculation_delay": basetypes.Int64Type{},
 					},
 				},
 			},
@@ -4470,7 +4466,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 									},
 								},
 								"enable":      basetypes.BoolType{},
-								"instance_id": basetypes.NumberType{},
+								"instance_id": basetypes.Int64Type{},
 								"link_type": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"broadcast": basetypes.ObjectType{
@@ -4481,7 +4477,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 												"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"name":     basetypes.StringType{},
-														"priority": basetypes.NumberType{},
+														"priority": basetypes.Int64Type{},
 													},
 												}},
 											},
@@ -4491,7 +4487,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										},
 									},
 								},
-								"metric":     basetypes.NumberType{},
+								"metric":     basetypes.Int64Type{},
 								"mtu_ignore": basetypes.BoolType{},
 								"name":       basetypes.StringType{},
 								"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -4500,15 +4496,15 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 									},
 								}},
 								"passive":  basetypes.BoolType{},
-								"priority": basetypes.NumberType{},
+								"priority": basetypes.Int64Type{},
 								"timing":   basetypes.StringType{},
 								"vr_timing": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"dead_counts":         basetypes.NumberType{},
-										"gr_delay":            basetypes.NumberType{},
-										"hello_interval":      basetypes.NumberType{},
-										"retransmit_interval": basetypes.NumberType{},
-										"transit_delay":       basetypes.NumberType{},
+										"dead_counts":         basetypes.Int64Type{},
+										"gr_delay":            basetypes.Int64Type{},
+										"hello_interval":      basetypes.Int64Type{},
+										"retransmit_interval": basetypes.Int64Type{},
+										"transit_delay":       basetypes.Int64Type{},
 									},
 								},
 							},
@@ -4547,7 +4543,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 															AttrTypes: map[string]attr.Type{},
 														},
 														"name":      basetypes.StringType{},
-														"route_tag": basetypes.NumberType{},
+														"route_tag": basetypes.Int64Type{},
 														"suppress": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
@@ -4559,7 +4555,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 										"accept_summary": basetypes.BoolType{},
 										"default_information_originate": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"metric":      basetypes.NumberType{},
+												"metric":      basetypes.Int64Type{},
 												"metric_type": basetypes.StringType{},
 											},
 										},
@@ -4567,7 +4563,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"advertise": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"metric": basetypes.NumberType{},
+														"metric": basetypes.Int64Type{},
 														"type":   basetypes.StringType{},
 													},
 												},
@@ -4583,7 +4579,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{},
 												},
 												"name":      basetypes.StringType{},
-												"route_tag": basetypes.NumberType{},
+												"route_tag": basetypes.Int64Type{},
 												"suppress": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
@@ -4606,7 +4602,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"advertise": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
-														"metric": basetypes.NumberType{},
+														"metric": basetypes.Int64Type{},
 													},
 												},
 												"disable": basetypes.ObjectType{
@@ -4614,7 +4610,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 												},
 											},
 										},
-										"default_route_metric": basetypes.NumberType{},
+										"default_route_metric": basetypes.Int64Type{},
 										"no_summary":           basetypes.BoolType{},
 									},
 								},
@@ -4629,8 +4625,8 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 									},
 								},
 								"enable":          basetypes.BoolType{},
-								"instance_id":     basetypes.NumberType{},
-								"interface_id":    basetypes.NumberType{},
+								"instance_id":     basetypes.Int64Type{},
+								"interface_id":    basetypes.Int64Type{},
 								"name":            basetypes.StringType{},
 								"neighbor_id":     basetypes.StringType{},
 								"passive":         basetypes.BoolType{},
@@ -4638,10 +4634,10 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 								"transit_area_id": basetypes.StringType{},
 								"vr_timing": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"dead_counts":         basetypes.NumberType{},
-										"hello_interval":      basetypes.NumberType{},
-										"retransmit_interval": basetypes.NumberType{},
-										"transit_delay":       basetypes.NumberType{},
+										"dead_counts":         basetypes.Int64Type{},
+										"hello_interval":      basetypes.Int64Type{},
+										"retransmit_interval": basetypes.Int64Type{},
+										"transit_delay":       basetypes.Int64Type{},
 									},
 								},
 							},
@@ -4740,7 +4736,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"enable":                  basetypes.BoolType{},
 				"export_rules": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"metric":        basetypes.NumberType{},
+						"metric":        basetypes.Int64Type{},
 						"name":          basetypes.StringType{},
 						"new_path_type": basetypes.StringType{},
 						"new_tag":       basetypes.StringType{},
@@ -4755,9 +4751,9 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"graceful_restart": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"enable":                    basetypes.BoolType{},
-						"grace_period":              basetypes.NumberType{},
+						"grace_period":              basetypes.Int64Type{},
 						"helper_enable":             basetypes.BoolType{},
-						"max_neighbor_restart_time": basetypes.NumberType{},
+						"max_neighbor_restart_time": basetypes.Int64Type{},
 						"strict__l_s_a_checking":    basetypes.BoolType{},
 					},
 				},
@@ -4767,8 +4763,8 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 				"spf_timer":              basetypes.StringType{},
 				"vr_timers": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"lsa_interval":          basetypes.NumberType{},
-						"spf_calculation_delay": basetypes.NumberType{},
+						"lsa_interval":          basetypes.Int64Type{},
+						"spf_calculation_delay": basetypes.Int64Type{},
 					},
 				},
 			},
@@ -4853,13 +4849,13 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						"interface_inbound_distribute_list": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"access_list": basetypes.StringType{},
-								"metric":      basetypes.NumberType{},
+								"metric":      basetypes.Int64Type{},
 							},
 						},
 						"interface_outbound_distribute_list": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"access_list": basetypes.StringType{},
-								"metric":      basetypes.NumberType{},
+								"metric":      basetypes.Int64Type{},
 							},
 						},
 						"mode":          basetypes.StringType{},
@@ -4876,7 +4872,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"admin_dist": basetypes.NumberType{},
+								"admin_dist": basetypes.Int64Type{},
 								"bfd": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"profile": basetypes.StringType{},
@@ -4884,7 +4880,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 								},
 								"destination": basetypes.StringType{},
 								"interface":   basetypes.StringType{},
-								"metric":      basetypes.NumberType{},
+								"metric":      basetypes.Int64Type{},
 								"name":        basetypes.StringType{},
 								"nexthop": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
@@ -4905,14 +4901,14 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"enable":            basetypes.BoolType{},
 										"failure_condition": basetypes.StringType{},
-										"hold_time":         basetypes.NumberType{},
+										"hold_time":         basetypes.Int64Type{},
 										"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"count":            basetypes.NumberType{},
+												"count":            basetypes.Int64Type{},
 												"destination":      basetypes.StringType{},
 												"destination_fqdn": basetypes.StringType{},
 												"enable":           basetypes.BoolType{},
-												"interval":         basetypes.NumberType{},
+												"interval":         basetypes.Int64Type{},
 												"name":             basetypes.StringType{},
 												"source":           basetypes.StringType{},
 											},
@@ -4943,7 +4939,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"admin_dist": basetypes.NumberType{},
+								"admin_dist": basetypes.Int64Type{},
 								"bfd": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"profile": basetypes.StringType{},
@@ -4951,7 +4947,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 								},
 								"destination": basetypes.StringType{},
 								"interface":   basetypes.StringType{},
-								"metric":      basetypes.NumberType{},
+								"metric":      basetypes.Int64Type{},
 								"name":        basetypes.StringType{},
 								"nexthop": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
@@ -4979,14 +4975,14 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"enable":            basetypes.BoolType{},
 										"failure_condition": basetypes.StringType{},
-										"hold_time":         basetypes.NumberType{},
+										"hold_time":         basetypes.Int64Type{},
 										"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"count":            basetypes.NumberType{},
+												"count":            basetypes.Int64Type{},
 												"destination":      basetypes.StringType{},
 												"destination_fqdn": basetypes.StringType{},
 												"enable":           basetypes.BoolType{},
-												"interval":         basetypes.NumberType{},
+												"interval":         basetypes.Int64Type{},
 												"name":             basetypes.StringType{},
 												"source":           basetypes.StringType{},
 											},
@@ -5018,15 +5014,15 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 		"sdwan_type": basetypes.StringType{},
 		"vr_admin_dists": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"ebgp":        basetypes.NumberType{},
-				"ibgp":        basetypes.NumberType{},
-				"ospf_ext":    basetypes.NumberType{},
-				"ospf_int":    basetypes.NumberType{},
-				"ospfv3_ext":  basetypes.NumberType{},
-				"ospfv3_int":  basetypes.NumberType{},
-				"rip":         basetypes.NumberType{},
-				"static":      basetypes.NumberType{},
-				"static_ipv6": basetypes.NumberType{},
+				"ebgp":        basetypes.Int64Type{},
+				"ibgp":        basetypes.Int64Type{},
+				"ospf_ext":    basetypes.Int64Type{},
+				"ospf_int":    basetypes.Int64Type{},
+				"ospfv3_ext":  basetypes.Int64Type{},
+				"ospfv3_int":  basetypes.Int64Type{},
+				"rip":         basetypes.Int64Type{},
+				"static":      basetypes.Int64Type{},
+				"static_ipv6": basetypes.Int64Type{},
 			},
 		},
 		"zone_name": basetypes.StringType{},
@@ -5043,18 +5039,18 @@ func (o LogicalRoutersVrfInner) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerAdminDists model.
 func (o LogicalRoutersVrfInnerAdminDists) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"bgp_external": basetypes.NumberType{},
-		"bgp_internal": basetypes.NumberType{},
-		"bgp_local":    basetypes.NumberType{},
-		"ospf_ext":     basetypes.NumberType{},
-		"ospf_inter":   basetypes.NumberType{},
-		"ospf_intra":   basetypes.NumberType{},
-		"ospfv3_ext":   basetypes.NumberType{},
-		"ospfv3_inter": basetypes.NumberType{},
-		"ospfv3_intra": basetypes.NumberType{},
-		"rip":          basetypes.NumberType{},
-		"static":       basetypes.NumberType{},
-		"static_ipv6":  basetypes.NumberType{},
+		"bgp_external": basetypes.Int64Type{},
+		"bgp_internal": basetypes.Int64Type{},
+		"bgp_local":    basetypes.Int64Type{},
+		"ospf_ext":     basetypes.Int64Type{},
+		"ospf_inter":   basetypes.Int64Type{},
+		"ospf_intra":   basetypes.Int64Type{},
+		"ospfv3_ext":   basetypes.Int64Type{},
+		"ospfv3_inter": basetypes.Int64Type{},
+		"ospfv3_intra": basetypes.Int64Type{},
+		"rip":          basetypes.Int64Type{},
+		"static":       basetypes.Int64Type{},
+		"static_ipv6":  basetypes.Int64Type{},
 	}
 }
 
@@ -5131,7 +5127,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 		"always_advertise_network_route": basetypes.BoolType{},
 		"as_format":                      basetypes.StringType{},
 		"confederation_member_as":        basetypes.StringType{},
-		"default_local_preference":       basetypes.NumberType{},
+		"default_local_preference":       basetypes.Int64Type{},
 		"ecmp_multi_as":                  basetypes.BoolType{},
 		"enable":                         basetypes.BoolType{},
 		"enforce_first_as":               basetypes.BoolType{},
@@ -5144,9 +5140,9 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 		"graceful_restart": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable":                basetypes.BoolType{},
-				"local_restart_time":    basetypes.NumberType{},
-				"max_peer_restart_time": basetypes.NumberType{},
-				"stale_route_time":      basetypes.NumberType{},
+				"local_restart_time":    basetypes.Int64Type{},
+				"max_peer_restart_time": basetypes.Int64Type{},
+				"stale_route_time":      basetypes.Int64Type{},
 			},
 		},
 		"graceful_shutdown": basetypes.BoolType{},
@@ -5171,7 +5167,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"authentication": basetypes.StringType{},
 						"dampening":      basetypes.StringType{},
-						"multihop":       basetypes.NumberType{},
+						"multihop":       basetypes.Int64Type{},
 						"timers":         basetypes.StringType{},
 					},
 				},
@@ -5189,7 +5185,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"multihop": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"min_received_ttl": basetypes.NumberType{},
+										"min_received_ttl": basetypes.Int64Type{},
 									},
 								},
 								"profile": basetypes.StringType{},
@@ -5200,22 +5196,22 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 								"authentication": basetypes.StringType{},
 								"dampening":      basetypes.StringType{},
 								"hold_time":      basetypes.StringType{},
-								"idle_hold_time": basetypes.NumberType{},
+								"idle_hold_time": basetypes.Int64Type{},
 								"incoming_bgp_connection": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"allow":       basetypes.BoolType{},
-										"remote_port": basetypes.NumberType{},
+										"remote_port": basetypes.Int64Type{},
 									},
 								},
 								"keep_alive_interval":    basetypes.StringType{},
 								"max_prefixes":           basetypes.StringType{},
-								"min_route_adv_interval": basetypes.NumberType{},
+								"min_route_adv_interval": basetypes.Int64Type{},
 								"multihop":               basetypes.StringType{},
-								"open_delay_time":        basetypes.NumberType{},
+								"open_delay_time":        basetypes.Int64Type{},
 								"outgoing_bgp_connection": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"allow":      basetypes.BoolType{},
-										"local_port": basetypes.NumberType{},
+										"local_port": basetypes.Int64Type{},
 									},
 								},
 								"timers": basetypes.StringType{},
@@ -5335,7 +5331,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 													},
 												},
 												"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-												"med":         basetypes.NumberType{},
+												"med":         basetypes.Int64Type{},
 												"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 												"route_table": basetypes.StringType{},
 												"safi":        basetypes.StringType{},
@@ -5351,14 +5347,14 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 												"none": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
-												"prepend": basetypes.NumberType{},
+												"prepend": basetypes.Int64Type{},
 												"remove": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
-												"remove_and_prepend": basetypes.NumberType{},
+												"remove_and_prepend": basetypes.Int64Type{},
 											},
 										},
-										"as_path_limit": basetypes.NumberType{},
+										"as_path_limit": basetypes.Int64Type{},
 										"community": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -5385,11 +5381,11 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 												"remove_regex": basetypes.StringType{},
 											},
 										},
-										"local_preference": basetypes.NumberType{},
-										"med":              basetypes.NumberType{},
+										"local_preference": basetypes.Int64Type{},
+										"med":              basetypes.Int64Type{},
 										"nexthop":          basetypes.StringType{},
 										"origin":           basetypes.StringType{},
-										"weight":           basetypes.NumberType{},
+										"weight":           basetypes.Int64Type{},
 									},
 								},
 								"as_set":  basetypes.BoolType{},
@@ -5425,7 +5421,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 													},
 												},
 												"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-												"med":         basetypes.NumberType{},
+												"med":         basetypes.Int64Type{},
 												"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 												"route_table": basetypes.StringType{},
 												"safi":        basetypes.StringType{},
@@ -5470,7 +5466,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 													},
 												},
 												"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-												"med":         basetypes.NumberType{},
+												"med":         basetypes.Int64Type{},
 												"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 												"route_table": basetypes.StringType{},
 												"safi":        basetypes.StringType{},
@@ -5509,7 +5505,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 													},
 												},
 												"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-												"med":         basetypes.NumberType{},
+												"med":         basetypes.Int64Type{},
 												"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 												"route_table": basetypes.StringType{},
 												"safi":        basetypes.StringType{},
@@ -5540,14 +5536,14 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 																"none": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{},
 																},
-																"prepend": basetypes.NumberType{},
+																"prepend": basetypes.Int64Type{},
 																"remove": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{},
 																},
-																"remove_and_prepend": basetypes.NumberType{},
+																"remove_and_prepend": basetypes.Int64Type{},
 															},
 														},
-														"as_path_limit": basetypes.NumberType{},
+														"as_path_limit": basetypes.Int64Type{},
 														"community": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
 																"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -5574,8 +5570,8 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 																"remove_regex": basetypes.StringType{},
 															},
 														},
-														"local_preference": basetypes.NumberType{},
-														"med":              basetypes.NumberType{},
+														"local_preference": basetypes.Int64Type{},
+														"med":              basetypes.Int64Type{},
 														"nexthop":          basetypes.StringType{},
 														"origin":           basetypes.StringType{},
 													},
@@ -5613,7 +5609,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-										"med":         basetypes.NumberType{},
+										"med":         basetypes.Int64Type{},
 										"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 										"route_table": basetypes.StringType{},
 										"safi":        basetypes.StringType{},
@@ -5641,14 +5637,14 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 																"none": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{},
 																},
-																"prepend": basetypes.NumberType{},
+																"prepend": basetypes.Int64Type{},
 																"remove": basetypes.ObjectType{
 																	AttrTypes: map[string]attr.Type{},
 																},
-																"remove_and_prepend": basetypes.NumberType{},
+																"remove_and_prepend": basetypes.Int64Type{},
 															},
 														},
-														"as_path_limit": basetypes.NumberType{},
+														"as_path_limit": basetypes.Int64Type{},
 														"community": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{
 																"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -5675,11 +5671,11 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 																"remove_regex": basetypes.StringType{},
 															},
 														},
-														"local_preference": basetypes.NumberType{},
-														"med":              basetypes.NumberType{},
+														"local_preference": basetypes.Int64Type{},
+														"med":              basetypes.Int64Type{},
 														"nexthop":          basetypes.StringType{},
 														"origin":           basetypes.StringType{},
-														"weight":           basetypes.NumberType{},
+														"weight":           basetypes.Int64Type{},
 													},
 												},
 											},
@@ -5715,7 +5711,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-										"med":         basetypes.NumberType{},
+										"med":         basetypes.Int64Type{},
 										"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 										"route_table": basetypes.StringType{},
 										"safi":        basetypes.StringType{},
@@ -5733,14 +5729,14 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"address_family_identifier": basetypes.StringType{},
 				"enable":                    basetypes.BoolType{},
-				"metric":                    basetypes.NumberType{},
+				"metric":                    basetypes.Int64Type{},
 				"name":                      basetypes.StringType{},
 				"route_table":               basetypes.StringType{},
-				"set_as_path_limit":         basetypes.NumberType{},
+				"set_as_path_limit":         basetypes.Int64Type{},
 				"set_community":             basetypes.ListType{ElemType: basetypes.StringType{}},
 				"set_extended_community":    basetypes.ListType{ElemType: basetypes.StringType{}},
-				"set_local_preference":      basetypes.NumberType{},
-				"set_med":                   basetypes.NumberType{},
+				"set_local_preference":      basetypes.Int64Type{},
+				"set_med":                   basetypes.Int64Type{},
 				"set_origin":                basetypes.StringType{},
 			},
 		}},
@@ -5989,9 +5985,9 @@ func (o LogicalRoutersVrfInnerBgpGlobalBfd) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerBgpGracefulRestart) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":                basetypes.BoolType{},
-		"local_restart_time":    basetypes.NumberType{},
-		"max_peer_restart_time": basetypes.NumberType{},
-		"stale_route_time":      basetypes.NumberType{},
+		"local_restart_time":    basetypes.Int64Type{},
+		"max_peer_restart_time": basetypes.Int64Type{},
+		"stale_route_time":      basetypes.Int64Type{},
 	}
 }
 
@@ -6031,7 +6027,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInner) AttrTypes() map[string]attr.Typ
 			AttrTypes: map[string]attr.Type{
 				"authentication": basetypes.StringType{},
 				"dampening":      basetypes.StringType{},
-				"multihop":       basetypes.NumberType{},
+				"multihop":       basetypes.Int64Type{},
 				"timers":         basetypes.StringType{},
 			},
 		},
@@ -6049,7 +6045,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInner) AttrTypes() map[string]attr.Typ
 					AttrTypes: map[string]attr.Type{
 						"multihop": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"min_received_ttl": basetypes.NumberType{},
+								"min_received_ttl": basetypes.Int64Type{},
 							},
 						},
 						"profile": basetypes.StringType{},
@@ -6060,22 +6056,22 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInner) AttrTypes() map[string]attr.Typ
 						"authentication": basetypes.StringType{},
 						"dampening":      basetypes.StringType{},
 						"hold_time":      basetypes.StringType{},
-						"idle_hold_time": basetypes.NumberType{},
+						"idle_hold_time": basetypes.Int64Type{},
 						"incoming_bgp_connection": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"allow":       basetypes.BoolType{},
-								"remote_port": basetypes.NumberType{},
+								"remote_port": basetypes.Int64Type{},
 							},
 						},
 						"keep_alive_interval":    basetypes.StringType{},
 						"max_prefixes":           basetypes.StringType{},
-						"min_route_adv_interval": basetypes.NumberType{},
+						"min_route_adv_interval": basetypes.Int64Type{},
 						"multihop":               basetypes.StringType{},
-						"open_delay_time":        basetypes.NumberType{},
+						"open_delay_time":        basetypes.Int64Type{},
 						"outgoing_bgp_connection": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"allow":      basetypes.BoolType{},
-								"local_port": basetypes.NumberType{},
+								"local_port": basetypes.Int64Type{},
 							},
 						},
 						"timers": basetypes.StringType{},
@@ -6189,7 +6185,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerConnectionOptions) AttrTypes() ma
 	return map[string]attr.Type{
 		"authentication": basetypes.StringType{},
 		"dampening":      basetypes.StringType{},
-		"multihop":       basetypes.NumberType{},
+		"multihop":       basetypes.Int64Type{},
 		"timers":         basetypes.StringType{},
 	}
 }
@@ -6208,7 +6204,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInner) AttrTypes() map[string
 			AttrTypes: map[string]attr.Type{
 				"multihop": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"min_received_ttl": basetypes.NumberType{},
+						"min_received_ttl": basetypes.Int64Type{},
 					},
 				},
 				"profile": basetypes.StringType{},
@@ -6219,22 +6215,22 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInner) AttrTypes() map[string
 				"authentication": basetypes.StringType{},
 				"dampening":      basetypes.StringType{},
 				"hold_time":      basetypes.StringType{},
-				"idle_hold_time": basetypes.NumberType{},
+				"idle_hold_time": basetypes.Int64Type{},
 				"incoming_bgp_connection": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"allow":       basetypes.BoolType{},
-						"remote_port": basetypes.NumberType{},
+						"remote_port": basetypes.Int64Type{},
 					},
 				},
 				"keep_alive_interval":    basetypes.StringType{},
 				"max_prefixes":           basetypes.StringType{},
-				"min_route_adv_interval": basetypes.NumberType{},
+				"min_route_adv_interval": basetypes.Int64Type{},
 				"multihop":               basetypes.StringType{},
-				"open_delay_time":        basetypes.NumberType{},
+				"open_delay_time":        basetypes.Int64Type{},
 				"outgoing_bgp_connection": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"allow":      basetypes.BoolType{},
-						"local_port": basetypes.NumberType{},
+						"local_port": basetypes.Int64Type{},
 					},
 				},
 				"timers": basetypes.StringType{},
@@ -6304,7 +6300,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfd) AttrTypes() map[str
 	return map[string]attr.Type{
 		"multihop": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"min_received_ttl": basetypes.NumberType{},
+				"min_received_ttl": basetypes.Int64Type{},
 			},
 		},
 		"profile": basetypes.StringType{},
@@ -6321,7 +6317,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfd) AttrType() attr.Typ
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfdMultihop model.
 func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerBfdMultihop) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"min_received_ttl": basetypes.NumberType{},
+		"min_received_ttl": basetypes.Int64Type{},
 	}
 }
 
@@ -6338,22 +6334,22 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptions) AttrT
 		"authentication": basetypes.StringType{},
 		"dampening":      basetypes.StringType{},
 		"hold_time":      basetypes.StringType{},
-		"idle_hold_time": basetypes.NumberType{},
+		"idle_hold_time": basetypes.Int64Type{},
 		"incoming_bgp_connection": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"allow":       basetypes.BoolType{},
-				"remote_port": basetypes.NumberType{},
+				"remote_port": basetypes.Int64Type{},
 			},
 		},
 		"keep_alive_interval":    basetypes.StringType{},
 		"max_prefixes":           basetypes.StringType{},
-		"min_route_adv_interval": basetypes.NumberType{},
+		"min_route_adv_interval": basetypes.Int64Type{},
 		"multihop":               basetypes.StringType{},
-		"open_delay_time":        basetypes.NumberType{},
+		"open_delay_time":        basetypes.Int64Type{},
 		"outgoing_bgp_connection": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"allow":      basetypes.BoolType{},
-				"local_port": basetypes.NumberType{},
+				"local_port": basetypes.Int64Type{},
 			},
 		},
 		"timers": basetypes.StringType{},
@@ -6371,7 +6367,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptions) AttrT
 func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsIncomingBgpConnection) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"allow":       basetypes.BoolType{},
-		"remote_port": basetypes.NumberType{},
+		"remote_port": basetypes.Int64Type{},
 	}
 }
 
@@ -6386,7 +6382,7 @@ func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsIncomin
 func (o LogicalRoutersVrfInnerBgpPeerGroupInnerPeerInnerConnectionOptionsOutgoingBgpConnection) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"allow":      basetypes.BoolType{},
-		"local_port": basetypes.NumberType{},
+		"local_port": basetypes.Int64Type{},
 	}
 }
 
@@ -6599,7 +6595,7 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-										"med":         basetypes.NumberType{},
+										"med":         basetypes.Int64Type{},
 										"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 										"route_table": basetypes.StringType{},
 										"safi":        basetypes.StringType{},
@@ -6615,14 +6611,14 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 										"none": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"prepend": basetypes.NumberType{},
+										"prepend": basetypes.Int64Type{},
 										"remove": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"remove_and_prepend": basetypes.NumberType{},
+										"remove_and_prepend": basetypes.Int64Type{},
 									},
 								},
-								"as_path_limit": basetypes.NumberType{},
+								"as_path_limit": basetypes.Int64Type{},
 								"community": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -6649,11 +6645,11 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 										"remove_regex": basetypes.StringType{},
 									},
 								},
-								"local_preference": basetypes.NumberType{},
-								"med":              basetypes.NumberType{},
+								"local_preference": basetypes.Int64Type{},
+								"med":              basetypes.Int64Type{},
 								"nexthop":          basetypes.StringType{},
 								"origin":           basetypes.StringType{},
-								"weight":           basetypes.NumberType{},
+								"weight":           basetypes.Int64Type{},
 							},
 						},
 						"as_set":  basetypes.BoolType{},
@@ -6689,7 +6685,7 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-										"med":         basetypes.NumberType{},
+										"med":         basetypes.Int64Type{},
 										"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 										"route_table": basetypes.StringType{},
 										"safi":        basetypes.StringType{},
@@ -6734,7 +6730,7 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-										"med":         basetypes.NumberType{},
+										"med":         basetypes.Int64Type{},
 										"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 										"route_table": basetypes.StringType{},
 										"safi":        basetypes.StringType{},
@@ -6773,7 +6769,7 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 											},
 										},
 										"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-										"med":         basetypes.NumberType{},
+										"med":         basetypes.Int64Type{},
 										"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 										"route_table": basetypes.StringType{},
 										"safi":        basetypes.StringType{},
@@ -6804,14 +6800,14 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 														"none": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
-														"prepend": basetypes.NumberType{},
+														"prepend": basetypes.Int64Type{},
 														"remove": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
-														"remove_and_prepend": basetypes.NumberType{},
+														"remove_and_prepend": basetypes.Int64Type{},
 													},
 												},
-												"as_path_limit": basetypes.NumberType{},
+												"as_path_limit": basetypes.Int64Type{},
 												"community": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -6838,8 +6834,8 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 														"remove_regex": basetypes.StringType{},
 													},
 												},
-												"local_preference": basetypes.NumberType{},
-												"med":              basetypes.NumberType{},
+												"local_preference": basetypes.Int64Type{},
+												"med":              basetypes.Int64Type{},
 												"nexthop":          basetypes.StringType{},
 												"origin":           basetypes.StringType{},
 											},
@@ -6877,7 +6873,7 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 									},
 								},
 								"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-								"med":         basetypes.NumberType{},
+								"med":         basetypes.Int64Type{},
 								"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 								"route_table": basetypes.StringType{},
 								"safi":        basetypes.StringType{},
@@ -6905,14 +6901,14 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 														"none": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
-														"prepend": basetypes.NumberType{},
+														"prepend": basetypes.Int64Type{},
 														"remove": basetypes.ObjectType{
 															AttrTypes: map[string]attr.Type{},
 														},
-														"remove_and_prepend": basetypes.NumberType{},
+														"remove_and_prepend": basetypes.Int64Type{},
 													},
 												},
-												"as_path_limit": basetypes.NumberType{},
+												"as_path_limit": basetypes.Int64Type{},
 												"community": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{
 														"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -6939,11 +6935,11 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 														"remove_regex": basetypes.StringType{},
 													},
 												},
-												"local_preference": basetypes.NumberType{},
-												"med":              basetypes.NumberType{},
+												"local_preference": basetypes.Int64Type{},
+												"med":              basetypes.Int64Type{},
 												"nexthop":          basetypes.StringType{},
 												"origin":           basetypes.StringType{},
-												"weight":           basetypes.NumberType{},
+												"weight":           basetypes.Int64Type{},
 											},
 										},
 									},
@@ -6979,7 +6975,7 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 									},
 								},
 								"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-								"med":         basetypes.NumberType{},
+								"med":         basetypes.Int64Type{},
 								"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 								"route_table": basetypes.StringType{},
 								"safi":        basetypes.StringType{},
@@ -7034,7 +7030,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregation) AttrTypes() map[string]attr.
 									},
 								},
 								"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-								"med":         basetypes.NumberType{},
+								"med":         basetypes.Int64Type{},
 								"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 								"route_table": basetypes.StringType{},
 								"safi":        basetypes.StringType{},
@@ -7050,14 +7046,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregation) AttrTypes() map[string]attr.
 								"none": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"prepend": basetypes.NumberType{},
+								"prepend": basetypes.Int64Type{},
 								"remove": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"remove_and_prepend": basetypes.NumberType{},
+								"remove_and_prepend": basetypes.Int64Type{},
 							},
 						},
-						"as_path_limit": basetypes.NumberType{},
+						"as_path_limit": basetypes.Int64Type{},
 						"community": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -7084,11 +7080,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregation) AttrTypes() map[string]attr.
 								"remove_regex": basetypes.StringType{},
 							},
 						},
-						"local_preference": basetypes.NumberType{},
-						"med":              basetypes.NumberType{},
+						"local_preference": basetypes.Int64Type{},
+						"med":              basetypes.Int64Type{},
 						"nexthop":          basetypes.StringType{},
 						"origin":           basetypes.StringType{},
-						"weight":           basetypes.NumberType{},
+						"weight":           basetypes.Int64Type{},
 					},
 				},
 				"as_set":  basetypes.BoolType{},
@@ -7124,7 +7120,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregation) AttrTypes() map[string]attr.
 									},
 								},
 								"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-								"med":         basetypes.NumberType{},
+								"med":         basetypes.Int64Type{},
 								"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 								"route_table": basetypes.StringType{},
 								"safi":        basetypes.StringType{},
@@ -7176,7 +7172,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInner) AttrTypes() map[
 							},
 						},
 						"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-						"med":         basetypes.NumberType{},
+						"med":         basetypes.Int64Type{},
 						"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 						"route_table": basetypes.StringType{},
 						"safi":        basetypes.StringType{},
@@ -7192,14 +7188,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInner) AttrTypes() map[
 						"none": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"prepend": basetypes.NumberType{},
+						"prepend": basetypes.Int64Type{},
 						"remove": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"remove_and_prepend": basetypes.NumberType{},
+						"remove_and_prepend": basetypes.Int64Type{},
 					},
 				},
-				"as_path_limit": basetypes.NumberType{},
+				"as_path_limit": basetypes.Int64Type{},
 				"community": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -7226,11 +7222,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInner) AttrTypes() map[
 						"remove_regex": basetypes.StringType{},
 					},
 				},
-				"local_preference": basetypes.NumberType{},
-				"med":              basetypes.NumberType{},
+				"local_preference": basetypes.Int64Type{},
+				"med":              basetypes.Int64Type{},
 				"nexthop":          basetypes.StringType{},
 				"origin":           basetypes.StringType{},
-				"weight":           basetypes.NumberType{},
+				"weight":           basetypes.Int64Type{},
 			},
 		},
 		"as_set":  basetypes.BoolType{},
@@ -7266,7 +7262,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInner) AttrTypes() map[
 							},
 						},
 						"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-						"med":         basetypes.NumberType{},
+						"med":         basetypes.Int64Type{},
 						"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 						"route_table": basetypes.StringType{},
 						"safi":        basetypes.StringType{},
@@ -7314,7 +7310,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersIn
 					},
 				},
 				"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-				"med":         basetypes.NumberType{},
+				"med":         basetypes.Int64Type{},
 				"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 				"route_table": basetypes.StringType{},
 				"safi":        basetypes.StringType{},
@@ -7357,7 +7353,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAdvertiseFiltersIn
 			},
 		},
 		"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-		"med":         basetypes.NumberType{},
+		"med":         basetypes.Int64Type{},
 		"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 		"route_table": basetypes.StringType{},
 		"safi":        basetypes.StringType{},
@@ -7408,14 +7404,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttr
 				"none": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"prepend": basetypes.NumberType{},
+				"prepend": basetypes.Int64Type{},
 				"remove": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"remove_and_prepend": basetypes.NumberType{},
+				"remove_and_prepend": basetypes.Int64Type{},
 			},
 		},
-		"as_path_limit": basetypes.NumberType{},
+		"as_path_limit": basetypes.Int64Type{},
 		"community": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -7442,11 +7438,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttr
 				"remove_regex": basetypes.StringType{},
 			},
 		},
-		"local_preference": basetypes.NumberType{},
-		"med":              basetypes.NumberType{},
+		"local_preference": basetypes.Int64Type{},
+		"med":              basetypes.Int64Type{},
 		"nexthop":          basetypes.StringType{},
 		"origin":           basetypes.StringType{},
-		"weight":           basetypes.NumberType{},
+		"weight":           basetypes.Int64Type{},
 	}
 }
 
@@ -7463,11 +7459,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyAggregationAddressInnerAggregateRouteAttr
 		"none": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
-		"prepend": basetypes.NumberType{},
+		"prepend": basetypes.Int64Type{},
 		"remove": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
-		"remove_and_prepend": basetypes.NumberType{},
+		"remove_and_prepend": basetypes.Int64Type{},
 	}
 }
 
@@ -7533,7 +7529,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyConditionalAdvertisement) AttrTypes() map
 									},
 								},
 								"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-								"med":         basetypes.NumberType{},
+								"med":         basetypes.Int64Type{},
 								"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 								"route_table": basetypes.StringType{},
 								"safi":        basetypes.StringType{},
@@ -7572,7 +7568,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyConditionalAdvertisement) AttrTypes() map
 									},
 								},
 								"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-								"med":         basetypes.NumberType{},
+								"med":         basetypes.Int64Type{},
 								"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 								"route_table": basetypes.StringType{},
 								"safi":        basetypes.StringType{},
@@ -7627,7 +7623,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyConditionalAdvertisementPolicyInner) Attr
 							},
 						},
 						"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-						"med":         basetypes.NumberType{},
+						"med":         basetypes.Int64Type{},
 						"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 						"route_table": basetypes.StringType{},
 						"safi":        basetypes.StringType{},
@@ -7666,7 +7662,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyConditionalAdvertisementPolicyInner) Attr
 							},
 						},
 						"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-						"med":         basetypes.NumberType{},
+						"med":         basetypes.Int64Type{},
 						"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 						"route_table": basetypes.StringType{},
 						"safi":        basetypes.StringType{},
@@ -7704,14 +7700,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyExport) AttrTypes() map[string]attr.Type 
 												"none": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
-												"prepend": basetypes.NumberType{},
+												"prepend": basetypes.Int64Type{},
 												"remove": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
-												"remove_and_prepend": basetypes.NumberType{},
+												"remove_and_prepend": basetypes.Int64Type{},
 											},
 										},
-										"as_path_limit": basetypes.NumberType{},
+										"as_path_limit": basetypes.Int64Type{},
 										"community": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -7738,8 +7734,8 @@ func (o LogicalRoutersVrfInnerBgpPolicyExport) AttrTypes() map[string]attr.Type 
 												"remove_regex": basetypes.StringType{},
 											},
 										},
-										"local_preference": basetypes.NumberType{},
-										"med":              basetypes.NumberType{},
+										"local_preference": basetypes.Int64Type{},
+										"med":              basetypes.Int64Type{},
 										"nexthop":          basetypes.StringType{},
 										"origin":           basetypes.StringType{},
 									},
@@ -7777,7 +7773,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyExport) AttrTypes() map[string]attr.Type 
 							},
 						},
 						"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-						"med":         basetypes.NumberType{},
+						"med":         basetypes.Int64Type{},
 						"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 						"route_table": basetypes.StringType{},
 						"safi":        basetypes.StringType{},
@@ -7811,14 +7807,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInner) AttrTypes() map[string]
 										"none": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"prepend": basetypes.NumberType{},
+										"prepend": basetypes.Int64Type{},
 										"remove": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"remove_and_prepend": basetypes.NumberType{},
+										"remove_and_prepend": basetypes.Int64Type{},
 									},
 								},
-								"as_path_limit": basetypes.NumberType{},
+								"as_path_limit": basetypes.Int64Type{},
 								"community": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -7845,8 +7841,8 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInner) AttrTypes() map[string]
 										"remove_regex": basetypes.StringType{},
 									},
 								},
-								"local_preference": basetypes.NumberType{},
-								"med":              basetypes.NumberType{},
+								"local_preference": basetypes.Int64Type{},
+								"med":              basetypes.Int64Type{},
 								"nexthop":          basetypes.StringType{},
 								"origin":           basetypes.StringType{},
 							},
@@ -7884,7 +7880,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInner) AttrTypes() map[string]
 					},
 				},
 				"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-				"med":         basetypes.NumberType{},
+				"med":         basetypes.Int64Type{},
 				"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 				"route_table": basetypes.StringType{},
 				"safi":        basetypes.StringType{},
@@ -7914,14 +7910,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInnerAction) AttrTypes() map[s
 								"none": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"prepend": basetypes.NumberType{},
+								"prepend": basetypes.Int64Type{},
 								"remove": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"remove_and_prepend": basetypes.NumberType{},
+								"remove_and_prepend": basetypes.Int64Type{},
 							},
 						},
-						"as_path_limit": basetypes.NumberType{},
+						"as_path_limit": basetypes.Int64Type{},
 						"community": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -7948,8 +7944,8 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInnerAction) AttrTypes() map[s
 								"remove_regex": basetypes.StringType{},
 							},
 						},
-						"local_preference": basetypes.NumberType{},
-						"med":              basetypes.NumberType{},
+						"local_preference": basetypes.Int64Type{},
+						"med":              basetypes.Int64Type{},
 						"nexthop":          basetypes.StringType{},
 						"origin":           basetypes.StringType{},
 					},
@@ -7979,14 +7975,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllow) AttrTypes() 
 						"none": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"prepend": basetypes.NumberType{},
+						"prepend": basetypes.Int64Type{},
 						"remove": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"remove_and_prepend": basetypes.NumberType{},
+						"remove_and_prepend": basetypes.Int64Type{},
 					},
 				},
-				"as_path_limit": basetypes.NumberType{},
+				"as_path_limit": basetypes.Int64Type{},
 				"community": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -8013,8 +8009,8 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllow) AttrTypes() 
 						"remove_regex": basetypes.StringType{},
 					},
 				},
-				"local_preference": basetypes.NumberType{},
-				"med":              basetypes.NumberType{},
+				"local_preference": basetypes.Int64Type{},
+				"med":              basetypes.Int64Type{},
 				"nexthop":          basetypes.StringType{},
 				"origin":           basetypes.StringType{},
 			},
@@ -8037,14 +8033,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdate) AttrTy
 				"none": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"prepend": basetypes.NumberType{},
+				"prepend": basetypes.Int64Type{},
 				"remove": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"remove_and_prepend": basetypes.NumberType{},
+				"remove_and_prepend": basetypes.Int64Type{},
 			},
 		},
-		"as_path_limit": basetypes.NumberType{},
+		"as_path_limit": basetypes.Int64Type{},
 		"community": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -8071,8 +8067,8 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInnerActionAllowUpdate) AttrTy
 				"remove_regex": basetypes.StringType{},
 			},
 		},
-		"local_preference": basetypes.NumberType{},
-		"med":              basetypes.NumberType{},
+		"local_preference": basetypes.Int64Type{},
+		"med":              basetypes.Int64Type{},
 		"nexthop":          basetypes.StringType{},
 		"origin":           basetypes.StringType{},
 	}
@@ -8111,7 +8107,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyExportRulesInnerMatch) AttrTypes() map[st
 			},
 		},
 		"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-		"med":         basetypes.NumberType{},
+		"med":         basetypes.Int64Type{},
 		"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 		"route_table": basetypes.StringType{},
 		"safi":        basetypes.StringType{},
@@ -8157,14 +8153,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyImport) AttrTypes() map[string]attr.Type 
 												"none": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
-												"prepend": basetypes.NumberType{},
+												"prepend": basetypes.Int64Type{},
 												"remove": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
-												"remove_and_prepend": basetypes.NumberType{},
+												"remove_and_prepend": basetypes.Int64Type{},
 											},
 										},
-										"as_path_limit": basetypes.NumberType{},
+										"as_path_limit": basetypes.Int64Type{},
 										"community": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -8191,11 +8187,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyImport) AttrTypes() map[string]attr.Type 
 												"remove_regex": basetypes.StringType{},
 											},
 										},
-										"local_preference": basetypes.NumberType{},
-										"med":              basetypes.NumberType{},
+										"local_preference": basetypes.Int64Type{},
+										"med":              basetypes.Int64Type{},
 										"nexthop":          basetypes.StringType{},
 										"origin":           basetypes.StringType{},
-										"weight":           basetypes.NumberType{},
+										"weight":           basetypes.Int64Type{},
 									},
 								},
 							},
@@ -8231,7 +8227,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyImport) AttrTypes() map[string]attr.Type 
 							},
 						},
 						"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-						"med":         basetypes.NumberType{},
+						"med":         basetypes.Int64Type{},
 						"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 						"route_table": basetypes.StringType{},
 						"safi":        basetypes.StringType{},
@@ -8266,14 +8262,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyImportRulesInner) AttrTypes() map[string]
 										"none": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"prepend": basetypes.NumberType{},
+										"prepend": basetypes.Int64Type{},
 										"remove": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"remove_and_prepend": basetypes.NumberType{},
+										"remove_and_prepend": basetypes.Int64Type{},
 									},
 								},
-								"as_path_limit": basetypes.NumberType{},
+								"as_path_limit": basetypes.Int64Type{},
 								"community": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -8300,11 +8296,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyImportRulesInner) AttrTypes() map[string]
 										"remove_regex": basetypes.StringType{},
 									},
 								},
-								"local_preference": basetypes.NumberType{},
-								"med":              basetypes.NumberType{},
+								"local_preference": basetypes.Int64Type{},
+								"med":              basetypes.Int64Type{},
 								"nexthop":          basetypes.StringType{},
 								"origin":           basetypes.StringType{},
-								"weight":           basetypes.NumberType{},
+								"weight":           basetypes.Int64Type{},
 							},
 						},
 					},
@@ -8340,7 +8336,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyImportRulesInner) AttrTypes() map[string]
 					},
 				},
 				"from_peer":   basetypes.ListType{ElemType: basetypes.StringType{}},
-				"med":         basetypes.NumberType{},
+				"med":         basetypes.Int64Type{},
 				"nexthop":     basetypes.ListType{ElemType: basetypes.StringType{}},
 				"route_table": basetypes.StringType{},
 				"safi":        basetypes.StringType{},
@@ -8371,14 +8367,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyImportRulesInnerAction) AttrTypes() map[s
 								"none": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"prepend": basetypes.NumberType{},
+								"prepend": basetypes.Int64Type{},
 								"remove": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"remove_and_prepend": basetypes.NumberType{},
+								"remove_and_prepend": basetypes.Int64Type{},
 							},
 						},
-						"as_path_limit": basetypes.NumberType{},
+						"as_path_limit": basetypes.Int64Type{},
 						"community": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -8405,11 +8401,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyImportRulesInnerAction) AttrTypes() map[s
 								"remove_regex": basetypes.StringType{},
 							},
 						},
-						"local_preference": basetypes.NumberType{},
-						"med":              basetypes.NumberType{},
+						"local_preference": basetypes.Int64Type{},
+						"med":              basetypes.Int64Type{},
 						"nexthop":          basetypes.StringType{},
 						"origin":           basetypes.StringType{},
-						"weight":           basetypes.NumberType{},
+						"weight":           basetypes.Int64Type{},
 					},
 				},
 			},
@@ -8438,14 +8434,14 @@ func (o LogicalRoutersVrfInnerBgpPolicyImportRulesInnerActionAllow) AttrTypes() 
 						"none": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"prepend": basetypes.NumberType{},
+						"prepend": basetypes.Int64Type{},
 						"remove": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"remove_and_prepend": basetypes.NumberType{},
+						"remove_and_prepend": basetypes.Int64Type{},
 					},
 				},
-				"as_path_limit": basetypes.NumberType{},
+				"as_path_limit": basetypes.Int64Type{},
 				"community": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"append": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -8472,11 +8468,11 @@ func (o LogicalRoutersVrfInnerBgpPolicyImportRulesInnerActionAllow) AttrTypes() 
 						"remove_regex": basetypes.StringType{},
 					},
 				},
-				"local_preference": basetypes.NumberType{},
-				"med":              basetypes.NumberType{},
+				"local_preference": basetypes.Int64Type{},
+				"med":              basetypes.Int64Type{},
 				"nexthop":          basetypes.StringType{},
 				"origin":           basetypes.StringType{},
-				"weight":           basetypes.NumberType{},
+				"weight":           basetypes.Int64Type{},
 			},
 		},
 	}
@@ -8494,14 +8490,14 @@ func (o LogicalRoutersVrfInnerBgpRedistRulesInner) AttrTypes() map[string]attr.T
 	return map[string]attr.Type{
 		"address_family_identifier": basetypes.StringType{},
 		"enable":                    basetypes.BoolType{},
-		"metric":                    basetypes.NumberType{},
+		"metric":                    basetypes.Int64Type{},
 		"name":                      basetypes.StringType{},
 		"route_table":               basetypes.StringType{},
-		"set_as_path_limit":         basetypes.NumberType{},
+		"set_as_path_limit":         basetypes.Int64Type{},
 		"set_community":             basetypes.ListType{ElemType: basetypes.StringType{}},
 		"set_extended_community":    basetypes.ListType{ElemType: basetypes.StringType{}},
-		"set_local_preference":      basetypes.NumberType{},
-		"set_med":                   basetypes.NumberType{},
+		"set_local_preference":      basetypes.Int64Type{},
+		"set_med":                   basetypes.Int64Type{},
 		"set_origin":                basetypes.StringType{},
 	}
 }
@@ -8560,7 +8556,7 @@ func (o LogicalRoutersVrfInnerEcmp) AttrTypes() map[string]attr.Type {
 				},
 				"ip_hash": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"hash_seed": basetypes.NumberType{},
+						"hash_seed": basetypes.Int64Type{},
 						"src_only":  basetypes.BoolType{},
 						"use_port":  basetypes.BoolType{},
 					},
@@ -8573,7 +8569,7 @@ func (o LogicalRoutersVrfInnerEcmp) AttrTypes() map[string]attr.Type {
 						"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"name":   basetypes.StringType{},
-								"weight": basetypes.NumberType{},
+								"weight": basetypes.Int64Type{},
 							},
 						}},
 					},
@@ -8581,7 +8577,7 @@ func (o LogicalRoutersVrfInnerEcmp) AttrTypes() map[string]attr.Type {
 			},
 		},
 		"enable":             basetypes.BoolType{},
-		"max_path":           basetypes.NumberType{},
+		"max_path":           basetypes.Int64Type{},
 		"strict_source_path": basetypes.BoolType{},
 		"symmetric_return":   basetypes.BoolType{},
 	}
@@ -8602,7 +8598,7 @@ func (o LogicalRoutersVrfInnerEcmpAlgorithm) AttrTypes() map[string]attr.Type {
 		},
 		"ip_hash": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"hash_seed": basetypes.NumberType{},
+				"hash_seed": basetypes.Int64Type{},
 				"src_only":  basetypes.BoolType{},
 				"use_port":  basetypes.BoolType{},
 			},
@@ -8615,7 +8611,7 @@ func (o LogicalRoutersVrfInnerEcmpAlgorithm) AttrTypes() map[string]attr.Type {
 				"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"name":   basetypes.StringType{},
-						"weight": basetypes.NumberType{},
+						"weight": basetypes.Int64Type{},
 					},
 				}},
 			},
@@ -8633,7 +8629,7 @@ func (o LogicalRoutersVrfInnerEcmpAlgorithm) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerEcmpAlgorithmIpHash model.
 func (o LogicalRoutersVrfInnerEcmpAlgorithmIpHash) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"hash_seed": basetypes.NumberType{},
+		"hash_seed": basetypes.Int64Type{},
 		"src_only":  basetypes.BoolType{},
 		"use_port":  basetypes.BoolType{},
 	}
@@ -8652,7 +8648,7 @@ func (o LogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobin) AttrTypes() map[s
 		"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"name":   basetypes.StringType{},
-				"weight": basetypes.NumberType{},
+				"weight": basetypes.Int64Type{},
 			},
 		}},
 	}
@@ -8669,7 +8665,7 @@ func (o LogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobin) AttrType() attr.T
 func (o LogicalRoutersVrfInnerEcmpAlgorithmWeightedRoundRobinInterfaceInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"name":   basetypes.StringType{},
-		"weight": basetypes.NumberType{},
+		"weight": basetypes.Int64Type{},
 	}
 }
 
@@ -8740,12 +8736,12 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"enable":                     basetypes.BoolType{},
 						"immediate_leave":            basetypes.BoolType{},
-						"last_member_query_interval": basetypes.NumberType{},
+						"last_member_query_interval": basetypes.Int64Type{},
 						"max_groups":                 basetypes.StringType{},
-						"max_query_response_time":    basetypes.NumberType{},
+						"max_query_response_time":    basetypes.Int64Type{},
 						"max_sources":                basetypes.StringType{},
 						"mode":                       basetypes.StringType{},
-						"query_interval":             basetypes.NumberType{},
+						"query_interval":             basetypes.Int64Type{},
 						"robustness":                 basetypes.StringType{},
 						"router_alert_policing":      basetypes.BoolType{},
 						"version":                    basetypes.StringType{},
@@ -8760,12 +8756,12 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 								"name": basetypes.StringType{},
 							},
 						}},
-						"assert_interval":     basetypes.NumberType{},
+						"assert_interval":     basetypes.Int64Type{},
 						"bsr_border":          basetypes.BoolType{},
-						"dr_priority":         basetypes.NumberType{},
+						"dr_priority":         basetypes.Int64Type{},
 						"enable":              basetypes.BoolType{},
-						"hello_interval":      basetypes.NumberType{},
-						"join_prune_interval": basetypes.NumberType{},
+						"hello_interval":      basetypes.Int64Type{},
+						"join_prune_interval": basetypes.Int64Type{},
 					},
 				},
 			},
@@ -8793,7 +8789,7 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 								"ip":        basetypes.StringType{},
 							},
 						},
-						"max_sa":             basetypes.NumberType{},
+						"max_sa":             basetypes.Int64Type{},
 						"name":               basetypes.StringType{},
 						"outbound_sa_filter": basetypes.StringType{},
 						"peer_address": basetypes.ObjectType{
@@ -8815,14 +8811,14 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 				"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"description":     basetypes.StringType{},
-						"dr_priority":     basetypes.NumberType{},
+						"dr_priority":     basetypes.Int64Type{},
 						"if_timer":        basetypes.StringType{},
 						"name":            basetypes.StringType{},
 						"neighbor_filter": basetypes.StringType{},
 						"send_bsm":        basetypes.BoolType{},
 					},
 				}},
-				"route_ageout_time": basetypes.NumberType{},
+				"route_ageout_time": basetypes.Int64Type{},
 				"rp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"external_rp": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -8837,10 +8833,10 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 								"candidate_rp": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"address":                basetypes.StringType{},
-										"advertisement_interval": basetypes.NumberType{},
+										"advertisement_interval": basetypes.Int64Type{},
 										"group_list":             basetypes.StringType{},
 										"interface":              basetypes.StringType{},
-										"priority":               basetypes.NumberType{},
+										"priority":               basetypes.Int64Type{},
 									},
 								},
 								"static_rp": basetypes.ObjectType{
@@ -8869,7 +8865,7 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 				},
 			},
 		},
-		"route_ageout_time": basetypes.NumberType{},
+		"route_ageout_time": basetypes.Int64Type{},
 		"rp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"external_rp": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -8884,10 +8880,10 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 						"candidate_rp": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"address":                basetypes.StringType{},
-								"advertisement_interval": basetypes.NumberType{},
+								"advertisement_interval": basetypes.Int64Type{},
 								"group_addresses":        basetypes.ListType{ElemType: basetypes.StringType{}},
 								"interface":              basetypes.StringType{},
-								"priority":               basetypes.NumberType{},
+								"priority":               basetypes.Int64Type{},
 							},
 						},
 						"static_rp": basetypes.ObjectType{
@@ -8925,7 +8921,7 @@ func (o LogicalRoutersVrfInnerMulticast) AttrTypes() map[string]attr.Type {
 						"ip_address": basetypes.StringType{},
 					},
 				},
-				"preference": basetypes.NumberType{},
+				"preference": basetypes.Int64Type{},
 			},
 		}},
 	}
@@ -9066,12 +9062,12 @@ func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInner) AttrTypes() map[stri
 			AttrTypes: map[string]attr.Type{
 				"enable":                     basetypes.BoolType{},
 				"immediate_leave":            basetypes.BoolType{},
-				"last_member_query_interval": basetypes.NumberType{},
+				"last_member_query_interval": basetypes.Int64Type{},
 				"max_groups":                 basetypes.StringType{},
-				"max_query_response_time":    basetypes.NumberType{},
+				"max_query_response_time":    basetypes.Int64Type{},
 				"max_sources":                basetypes.StringType{},
 				"mode":                       basetypes.StringType{},
-				"query_interval":             basetypes.NumberType{},
+				"query_interval":             basetypes.Int64Type{},
 				"robustness":                 basetypes.StringType{},
 				"router_alert_policing":      basetypes.BoolType{},
 				"version":                    basetypes.StringType{},
@@ -9086,12 +9082,12 @@ func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInner) AttrTypes() map[stri
 						"name": basetypes.StringType{},
 					},
 				}},
-				"assert_interval":     basetypes.NumberType{},
+				"assert_interval":     basetypes.Int64Type{},
 				"bsr_border":          basetypes.BoolType{},
-				"dr_priority":         basetypes.NumberType{},
+				"dr_priority":         basetypes.Int64Type{},
 				"enable":              basetypes.BoolType{},
-				"hello_interval":      basetypes.NumberType{},
-				"join_prune_interval": basetypes.NumberType{},
+				"hello_interval":      basetypes.Int64Type{},
+				"join_prune_interval": basetypes.Int64Type{},
 			},
 		},
 	}
@@ -9170,12 +9166,12 @@ func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerIgmp) AttrTypes() map[
 	return map[string]attr.Type{
 		"enable":                     basetypes.BoolType{},
 		"immediate_leave":            basetypes.BoolType{},
-		"last_member_query_interval": basetypes.NumberType{},
+		"last_member_query_interval": basetypes.Int64Type{},
 		"max_groups":                 basetypes.StringType{},
-		"max_query_response_time":    basetypes.NumberType{},
+		"max_query_response_time":    basetypes.Int64Type{},
 		"max_sources":                basetypes.StringType{},
 		"mode":                       basetypes.StringType{},
-		"query_interval":             basetypes.NumberType{},
+		"query_interval":             basetypes.Int64Type{},
 		"robustness":                 basetypes.StringType{},
 		"router_alert_policing":      basetypes.BoolType{},
 		"version":                    basetypes.StringType{},
@@ -9197,31 +9193,17 @@ func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim) AttrTypes() map[s
 				"name": basetypes.StringType{},
 			},
 		}},
-		"assert_interval":     basetypes.NumberType{},
+		"assert_interval":     basetypes.Int64Type{},
 		"bsr_border":          basetypes.BoolType{},
-		"dr_priority":         basetypes.NumberType{},
+		"dr_priority":         basetypes.Int64Type{},
 		"enable":              basetypes.BoolType{},
-		"hello_interval":      basetypes.NumberType{},
-		"join_prune_interval": basetypes.NumberType{},
+		"hello_interval":      basetypes.Int64Type{},
+		"join_prune_interval": basetypes.Int64Type{},
 	}
 }
 
 // AttrType returns the attribute type for a list of LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim objects.
 func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner model.
-func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"name": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner objects.
-func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -9250,7 +9232,7 @@ func (o LogicalRoutersVrfInnerMulticastMsdp) AttrTypes() map[string]attr.Type {
 						"ip":        basetypes.StringType{},
 					},
 				},
-				"max_sa":             basetypes.NumberType{},
+				"max_sa":             basetypes.Int64Type{},
 				"name":               basetypes.StringType{},
 				"outbound_sa_filter": basetypes.StringType{},
 				"peer_address": basetypes.ObjectType{
@@ -9284,7 +9266,7 @@ func (o LogicalRoutersVrfInnerMulticastMsdpPeerInner) AttrTypes() map[string]att
 				"ip":        basetypes.StringType{},
 			},
 		},
-		"max_sa":             basetypes.NumberType{},
+		"max_sa":             basetypes.Int64Type{},
 		"name":               basetypes.StringType{},
 		"outbound_sa_filter": basetypes.StringType{},
 		"peer_address": basetypes.ObjectType{
@@ -9313,14 +9295,14 @@ func (o LogicalRoutersVrfInnerMulticastPim) AttrTypes() map[string]attr.Type {
 		"interface": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"description":     basetypes.StringType{},
-				"dr_priority":     basetypes.NumberType{},
+				"dr_priority":     basetypes.Int64Type{},
 				"if_timer":        basetypes.StringType{},
 				"name":            basetypes.StringType{},
 				"neighbor_filter": basetypes.StringType{},
 				"send_bsm":        basetypes.BoolType{},
 			},
 		}},
-		"route_ageout_time": basetypes.NumberType{},
+		"route_ageout_time": basetypes.Int64Type{},
 		"rp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"external_rp": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -9335,10 +9317,10 @@ func (o LogicalRoutersVrfInnerMulticastPim) AttrTypes() map[string]attr.Type {
 						"candidate_rp": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"address":                basetypes.StringType{},
-								"advertisement_interval": basetypes.NumberType{},
+								"advertisement_interval": basetypes.Int64Type{},
 								"group_list":             basetypes.StringType{},
 								"interface":              basetypes.StringType{},
-								"priority":               basetypes.NumberType{},
+								"priority":               basetypes.Int64Type{},
 							},
 						},
 						"static_rp": basetypes.ObjectType{
@@ -9379,7 +9361,7 @@ func (o LogicalRoutersVrfInnerMulticastPim) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerMulticastPimInterfaceInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"description":     basetypes.StringType{},
-		"dr_priority":     basetypes.NumberType{},
+		"dr_priority":     basetypes.Int64Type{},
 		"if_timer":        basetypes.StringType{},
 		"name":            basetypes.StringType{},
 		"neighbor_filter": basetypes.StringType{},
@@ -9409,10 +9391,10 @@ func (o LogicalRoutersVrfInnerMulticastPimRp) AttrTypes() map[string]attr.Type {
 				"candidate_rp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"address":                basetypes.StringType{},
-						"advertisement_interval": basetypes.NumberType{},
+						"advertisement_interval": basetypes.Int64Type{},
 						"group_list":             basetypes.StringType{},
 						"interface":              basetypes.StringType{},
-						"priority":               basetypes.NumberType{},
+						"priority":               basetypes.Int64Type{},
 					},
 				},
 				"static_rp": basetypes.ObjectType{
@@ -9457,10 +9439,10 @@ func (o LogicalRoutersVrfInnerMulticastPimRpLocalRp) AttrTypes() map[string]attr
 		"candidate_rp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"address":                basetypes.StringType{},
-				"advertisement_interval": basetypes.NumberType{},
+				"advertisement_interval": basetypes.Int64Type{},
 				"group_list":             basetypes.StringType{},
 				"interface":              basetypes.StringType{},
-				"priority":               basetypes.NumberType{},
+				"priority":               basetypes.Int64Type{},
 			},
 		},
 		"static_rp": basetypes.ObjectType{
@@ -9485,10 +9467,10 @@ func (o LogicalRoutersVrfInnerMulticastPimRpLocalRp) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerMulticastPimRpLocalRpCandidateRp) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"address":                basetypes.StringType{},
-		"advertisement_interval": basetypes.NumberType{},
+		"advertisement_interval": basetypes.Int64Type{},
 		"group_list":             basetypes.StringType{},
 		"interface":              basetypes.StringType{},
-		"priority":               basetypes.NumberType{},
+		"priority":               basetypes.Int64Type{},
 	}
 }
 
@@ -9560,10 +9542,10 @@ func (o LogicalRoutersVrfInnerMulticastRp) AttrTypes() map[string]attr.Type {
 				"candidate_rp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"address":                basetypes.StringType{},
-						"advertisement_interval": basetypes.NumberType{},
+						"advertisement_interval": basetypes.Int64Type{},
 						"group_addresses":        basetypes.ListType{ElemType: basetypes.StringType{}},
 						"interface":              basetypes.StringType{},
-						"priority":               basetypes.NumberType{},
+						"priority":               basetypes.Int64Type{},
 					},
 				},
 				"static_rp": basetypes.ObjectType{
@@ -9608,10 +9590,10 @@ func (o LogicalRoutersVrfInnerMulticastRpLocalRp) AttrTypes() map[string]attr.Ty
 		"candidate_rp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"address":                basetypes.StringType{},
-				"advertisement_interval": basetypes.NumberType{},
+				"advertisement_interval": basetypes.Int64Type{},
 				"group_addresses":        basetypes.ListType{ElemType: basetypes.StringType{}},
 				"interface":              basetypes.StringType{},
-				"priority":               basetypes.NumberType{},
+				"priority":               basetypes.Int64Type{},
 			},
 		},
 		"static_rp": basetypes.ObjectType{
@@ -9636,10 +9618,10 @@ func (o LogicalRoutersVrfInnerMulticastRpLocalRp) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerMulticastRpLocalRpCandidateRp) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"address":                basetypes.StringType{},
-		"advertisement_interval": basetypes.NumberType{},
+		"advertisement_interval": basetypes.Int64Type{},
 		"group_addresses":        basetypes.ListType{ElemType: basetypes.StringType{}},
 		"interface":              basetypes.StringType{},
-		"priority":               basetypes.NumberType{},
+		"priority":               basetypes.Int64Type{},
 	}
 }
 
@@ -9678,7 +9660,7 @@ func (o LogicalRoutersVrfInnerMulticastStaticRouteInner) AttrTypes() map[string]
 				"ip_address": basetypes.StringType{},
 			},
 		},
-		"preference": basetypes.NumberType{},
+		"preference": basetypes.Int64Type{},
 	}
 }
 
@@ -9729,7 +9711,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 										"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"name":     basetypes.StringType{},
-												"priority": basetypes.NumberType{},
+												"priority": basetypes.Int64Type{},
 											},
 										}},
 									},
@@ -9739,19 +9721,19 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 								},
 							},
 						},
-						"metric":     basetypes.NumberType{},
+						"metric":     basetypes.Int64Type{},
 						"mtu_ignore": basetypes.BoolType{},
 						"name":       basetypes.StringType{},
 						"passive":    basetypes.BoolType{},
-						"priority":   basetypes.NumberType{},
+						"priority":   basetypes.Int64Type{},
 						"timing":     basetypes.StringType{},
 						"vr_timing": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"dead_counts":         basetypes.NumberType{},
-								"gr_delay":            basetypes.NumberType{},
-								"hello_interval":      basetypes.NumberType{},
-								"retransmit_interval": basetypes.NumberType{},
-								"transit_delay":       basetypes.NumberType{},
+								"dead_counts":         basetypes.Int64Type{},
+								"gr_delay":            basetypes.Int64Type{},
+								"hello_interval":      basetypes.Int64Type{},
+								"retransmit_interval": basetypes.Int64Type{},
+								"transit_delay":       basetypes.Int64Type{},
 							},
 						},
 					},
@@ -9789,7 +9771,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{
 												"advertise": basetypes.BoolType{},
 												"name":      basetypes.StringType{},
-												"route_tag": basetypes.NumberType{},
+												"route_tag": basetypes.Int64Type{},
 											},
 										}},
 										"outbound_filter_list": basetypes.StringType{},
@@ -9798,7 +9780,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 								"accept_summary": basetypes.BoolType{},
 								"default_information_originate": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"metric":      basetypes.NumberType{},
+										"metric":      basetypes.Int64Type{},
 										"metric_type": basetypes.StringType{},
 									},
 								},
@@ -9806,7 +9788,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"advertise": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"metric": basetypes.NumberType{},
+												"metric": basetypes.Int64Type{},
 												"type":   basetypes.StringType{},
 											},
 										},
@@ -9844,7 +9826,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"advertise": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"metric": basetypes.NumberType{},
+												"metric": basetypes.Int64Type{},
 											},
 										},
 										"disable": basetypes.ObjectType{
@@ -9852,7 +9834,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 										},
 									},
 								},
-								"default_route_metric": basetypes.NumberType{},
+								"default_route_metric": basetypes.Int64Type{},
 								"no_summary":           basetypes.BoolType{},
 							},
 						},
@@ -9867,8 +9849,8 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 							},
 						},
 						"enable":          basetypes.BoolType{},
-						"instance_id":     basetypes.NumberType{},
-						"interface_id":    basetypes.NumberType{},
+						"instance_id":     basetypes.Int64Type{},
+						"interface_id":    basetypes.Int64Type{},
 						"name":            basetypes.StringType{},
 						"neighbor_id":     basetypes.StringType{},
 						"passive":         basetypes.BoolType{},
@@ -9876,10 +9858,10 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 						"transit_area_id": basetypes.StringType{},
 						"vr_timing": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"dead_counts":         basetypes.NumberType{},
-								"hello_interval":      basetypes.NumberType{},
-								"retransmit_interval": basetypes.NumberType{},
-								"transit_delay":       basetypes.NumberType{},
+								"dead_counts":         basetypes.Int64Type{},
+								"hello_interval":      basetypes.Int64Type{},
+								"retransmit_interval": basetypes.Int64Type{},
+								"transit_delay":       basetypes.Int64Type{},
 							},
 						},
 					},
@@ -9913,7 +9895,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 		"enable": basetypes.BoolType{},
 		"export_rules": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"metric":        basetypes.NumberType{},
+				"metric":        basetypes.Int64Type{},
 				"name":          basetypes.StringType{},
 				"new_path_type": basetypes.StringType{},
 				"new_tag":       basetypes.StringType{},
@@ -9924,13 +9906,13 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 				"hello": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"enable":     basetypes.BoolType{},
-						"max_packet": basetypes.NumberType{},
+						"max_packet": basetypes.Int64Type{},
 					},
 				},
 				"lsa": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"enable":     basetypes.BoolType{},
-						"max_packet": basetypes.NumberType{},
+						"max_packet": basetypes.Int64Type{},
 					},
 				},
 			},
@@ -9944,9 +9926,9 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 		"graceful_restart": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable":                    basetypes.BoolType{},
-				"grace_period":              basetypes.NumberType{},
+				"grace_period":              basetypes.Int64Type{},
 				"helper_enable":             basetypes.BoolType{},
-				"max_neighbor_restart_time": basetypes.NumberType{},
+				"max_neighbor_restart_time": basetypes.Int64Type{},
 				"strict__l_s_a_checking":    basetypes.BoolType{},
 			},
 		},
@@ -9957,8 +9939,8 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 		"spf_timer":              basetypes.StringType{},
 		"vr_timers": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"lsa_interval":          basetypes.NumberType{},
-				"spf_calculation_delay": basetypes.NumberType{},
+				"lsa_interval":          basetypes.Int64Type{},
+				"spf_calculation_delay": basetypes.Int64Type{},
 			},
 		},
 	}
@@ -9994,7 +9976,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 								"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"name":     basetypes.StringType{},
-										"priority": basetypes.NumberType{},
+										"priority": basetypes.Int64Type{},
 									},
 								}},
 							},
@@ -10004,19 +9986,19 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 						},
 					},
 				},
-				"metric":     basetypes.NumberType{},
+				"metric":     basetypes.Int64Type{},
 				"mtu_ignore": basetypes.BoolType{},
 				"name":       basetypes.StringType{},
 				"passive":    basetypes.BoolType{},
-				"priority":   basetypes.NumberType{},
+				"priority":   basetypes.Int64Type{},
 				"timing":     basetypes.StringType{},
 				"vr_timing": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"dead_counts":         basetypes.NumberType{},
-						"gr_delay":            basetypes.NumberType{},
-						"hello_interval":      basetypes.NumberType{},
-						"retransmit_interval": basetypes.NumberType{},
-						"transit_delay":       basetypes.NumberType{},
+						"dead_counts":         basetypes.Int64Type{},
+						"gr_delay":            basetypes.Int64Type{},
+						"hello_interval":      basetypes.Int64Type{},
+						"retransmit_interval": basetypes.Int64Type{},
+						"transit_delay":       basetypes.Int64Type{},
 					},
 				},
 			},
@@ -10054,7 +10036,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"advertise": basetypes.BoolType{},
 										"name":      basetypes.StringType{},
-										"route_tag": basetypes.NumberType{},
+										"route_tag": basetypes.Int64Type{},
 									},
 								}},
 								"outbound_filter_list": basetypes.StringType{},
@@ -10063,7 +10045,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 						"accept_summary": basetypes.BoolType{},
 						"default_information_originate": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric":      basetypes.NumberType{},
+								"metric":      basetypes.Int64Type{},
 								"metric_type": basetypes.StringType{},
 							},
 						},
@@ -10071,7 +10053,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"advertise": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"metric": basetypes.NumberType{},
+										"metric": basetypes.Int64Type{},
 										"type":   basetypes.StringType{},
 									},
 								},
@@ -10109,7 +10091,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"advertise": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"metric": basetypes.NumberType{},
+										"metric": basetypes.Int64Type{},
 									},
 								},
 								"disable": basetypes.ObjectType{
@@ -10117,7 +10099,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 								},
 							},
 						},
-						"default_route_metric": basetypes.NumberType{},
+						"default_route_metric": basetypes.Int64Type{},
 						"no_summary":           basetypes.BoolType{},
 					},
 				},
@@ -10132,8 +10114,8 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 					},
 				},
 				"enable":          basetypes.BoolType{},
-				"instance_id":     basetypes.NumberType{},
-				"interface_id":    basetypes.NumberType{},
+				"instance_id":     basetypes.Int64Type{},
+				"interface_id":    basetypes.Int64Type{},
 				"name":            basetypes.StringType{},
 				"neighbor_id":     basetypes.StringType{},
 				"passive":         basetypes.BoolType{},
@@ -10141,10 +10123,10 @@ func (o LogicalRoutersVrfInnerOspfAreaInner) AttrTypes() map[string]attr.Type {
 				"transit_area_id": basetypes.StringType{},
 				"vr_timing": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"dead_counts":         basetypes.NumberType{},
-						"hello_interval":      basetypes.NumberType{},
-						"retransmit_interval": basetypes.NumberType{},
-						"transit_delay":       basetypes.NumberType{},
+						"dead_counts":         basetypes.Int64Type{},
+						"hello_interval":      basetypes.Int64Type{},
+						"retransmit_interval": basetypes.Int64Type{},
+						"transit_delay":       basetypes.Int64Type{},
 					},
 				},
 			},
@@ -10190,7 +10172,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInner) AttrTypes() map[strin
 						"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"name":     basetypes.StringType{},
-								"priority": basetypes.NumberType{},
+								"priority": basetypes.Int64Type{},
 							},
 						}},
 					},
@@ -10200,19 +10182,19 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInner) AttrTypes() map[strin
 				},
 			},
 		},
-		"metric":     basetypes.NumberType{},
+		"metric":     basetypes.Int64Type{},
 		"mtu_ignore": basetypes.BoolType{},
 		"name":       basetypes.StringType{},
 		"passive":    basetypes.BoolType{},
-		"priority":   basetypes.NumberType{},
+		"priority":   basetypes.Int64Type{},
 		"timing":     basetypes.StringType{},
 		"vr_timing": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"dead_counts":         basetypes.NumberType{},
-				"gr_delay":            basetypes.NumberType{},
-				"hello_interval":      basetypes.NumberType{},
-				"retransmit_interval": basetypes.NumberType{},
-				"transit_delay":       basetypes.NumberType{},
+				"dead_counts":         basetypes.Int64Type{},
+				"gr_delay":            basetypes.Int64Type{},
+				"hello_interval":      basetypes.Int64Type{},
+				"retransmit_interval": basetypes.Int64Type{},
+				"transit_delay":       basetypes.Int64Type{},
 			},
 		},
 	}
@@ -10236,7 +10218,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkType) AttrTypes() m
 				"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"name":     basetypes.StringType{},
-						"priority": basetypes.NumberType{},
+						"priority": basetypes.Int64Type{},
 					},
 				}},
 			},
@@ -10260,7 +10242,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mp) AttrTypes
 		"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"name":     basetypes.StringType{},
-				"priority": basetypes.NumberType{},
+				"priority": basetypes.Int64Type{},
 			},
 		}},
 	}
@@ -10277,7 +10259,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mp) AttrType(
 func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mpNeighborInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"name":     basetypes.StringType{},
-		"priority": basetypes.NumberType{},
+		"priority": basetypes.Int64Type{},
 	}
 }
 
@@ -10291,11 +10273,11 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerLinkTypeP2mpNeighborInn
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerVrTiming model.
 func (o LogicalRoutersVrfInnerOspfAreaInnerInterfaceInnerVrTiming) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"dead_counts":         basetypes.NumberType{},
-		"gr_delay":            basetypes.NumberType{},
-		"hello_interval":      basetypes.NumberType{},
-		"retransmit_interval": basetypes.NumberType{},
-		"transit_delay":       basetypes.NumberType{},
+		"dead_counts":         basetypes.Int64Type{},
+		"gr_delay":            basetypes.Int64Type{},
+		"hello_interval":      basetypes.Int64Type{},
+		"retransmit_interval": basetypes.Int64Type{},
+		"transit_delay":       basetypes.Int64Type{},
 	}
 }
 
@@ -10348,7 +10330,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerType) AttrTypes() map[string]attr.Typ
 							AttrTypes: map[string]attr.Type{
 								"advertise": basetypes.BoolType{},
 								"name":      basetypes.StringType{},
-								"route_tag": basetypes.NumberType{},
+								"route_tag": basetypes.Int64Type{},
 							},
 						}},
 						"outbound_filter_list": basetypes.StringType{},
@@ -10357,7 +10339,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerType) AttrTypes() map[string]attr.Typ
 				"accept_summary": basetypes.BoolType{},
 				"default_information_originate": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"metric":      basetypes.NumberType{},
+						"metric":      basetypes.Int64Type{},
 						"metric_type": basetypes.StringType{},
 					},
 				},
@@ -10365,7 +10347,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerType) AttrTypes() map[string]attr.Typ
 					AttrTypes: map[string]attr.Type{
 						"advertise": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric": basetypes.NumberType{},
+								"metric": basetypes.Int64Type{},
 								"type":   basetypes.StringType{},
 							},
 						},
@@ -10403,7 +10385,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerType) AttrTypes() map[string]attr.Typ
 					AttrTypes: map[string]attr.Type{
 						"advertise": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric": basetypes.NumberType{},
+								"metric": basetypes.Int64Type{},
 							},
 						},
 						"disable": basetypes.ObjectType{
@@ -10411,7 +10393,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerType) AttrTypes() map[string]attr.Typ
 						},
 					},
 				},
-				"default_route_metric": basetypes.NumberType{},
+				"default_route_metric": basetypes.Int64Type{},
 				"no_summary":           basetypes.BoolType{},
 			},
 		},
@@ -10475,7 +10457,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssa) AttrTypes() map[string]attr
 					AttrTypes: map[string]attr.Type{
 						"advertise": basetypes.BoolType{},
 						"name":      basetypes.StringType{},
-						"route_tag": basetypes.NumberType{},
+						"route_tag": basetypes.Int64Type{},
 					},
 				}},
 				"outbound_filter_list": basetypes.StringType{},
@@ -10484,7 +10466,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssa) AttrTypes() map[string]attr
 		"accept_summary": basetypes.BoolType{},
 		"default_information_originate": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"metric":      basetypes.NumberType{},
+				"metric":      basetypes.Int64Type{},
 				"metric_type": basetypes.StringType{},
 			},
 		},
@@ -10492,7 +10474,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssa) AttrTypes() map[string]attr
 			AttrTypes: map[string]attr.Type{
 				"advertise": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"metric": basetypes.NumberType{},
+						"metric": basetypes.Int64Type{},
 						"type":   basetypes.StringType{},
 					},
 				},
@@ -10533,7 +10515,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbr) AttrTypes() map[string]a
 			AttrTypes: map[string]attr.Type{
 				"advertise": basetypes.BoolType{},
 				"name":      basetypes.StringType{},
-				"route_tag": basetypes.NumberType{},
+				"route_tag": basetypes.Int64Type{},
 			},
 		}},
 		"outbound_filter_list": basetypes.StringType{},
@@ -10552,7 +10534,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbrNssaExtRangeInner) AttrTyp
 	return map[string]attr.Type{
 		"advertise": basetypes.BoolType{},
 		"name":      basetypes.StringType{},
-		"route_tag": basetypes.NumberType{},
+		"route_tag": basetypes.Int64Type{},
 	}
 }
 
@@ -10566,7 +10548,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssaAbrNssaExtRangeInner) AttrTyp
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultInformationOriginate model.
 func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultInformationOriginate) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"metric":      basetypes.NumberType{},
+		"metric":      basetypes.Int64Type{},
 		"metric_type": basetypes.StringType{},
 	}
 }
@@ -10583,7 +10565,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRoute) AttrTypes() map
 	return map[string]attr.Type{
 		"advertise": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"metric": basetypes.NumberType{},
+				"metric": basetypes.Int64Type{},
 				"type":   basetypes.StringType{},
 			},
 		},
@@ -10603,7 +10585,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRoute) AttrType() attr
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRouteAdvertise model.
 func (o LogicalRoutersVrfInnerOspfAreaInnerTypeNssaDefaultRouteAdvertise) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"metric": basetypes.NumberType{},
+		"metric": basetypes.Int64Type{},
 		"type":   basetypes.StringType{},
 	}
 }
@@ -10651,7 +10633,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeStub) AttrTypes() map[string]attr
 			AttrTypes: map[string]attr.Type{
 				"advertise": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"metric": basetypes.NumberType{},
+						"metric": basetypes.Int64Type{},
 					},
 				},
 				"disable": basetypes.ObjectType{
@@ -10659,7 +10641,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeStub) AttrTypes() map[string]attr
 				},
 			},
 		},
-		"default_route_metric": basetypes.NumberType{},
+		"default_route_metric": basetypes.Int64Type{},
 		"no_summary":           basetypes.BoolType{},
 	}
 }
@@ -10676,7 +10658,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRoute) AttrTypes() map
 	return map[string]attr.Type{
 		"advertise": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"metric": basetypes.NumberType{},
+				"metric": basetypes.Int64Type{},
 			},
 		},
 		"disable": basetypes.ObjectType{
@@ -10695,7 +10677,7 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRoute) AttrType() attr
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRouteAdvertise model.
 func (o LogicalRoutersVrfInnerOspfAreaInnerTypeStubDefaultRouteAdvertise) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"metric": basetypes.NumberType{},
+		"metric": basetypes.Int64Type{},
 	}
 }
 
@@ -10716,8 +10698,8 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInner) AttrTypes() map[str
 			},
 		},
 		"enable":          basetypes.BoolType{},
-		"instance_id":     basetypes.NumberType{},
-		"interface_id":    basetypes.NumberType{},
+		"instance_id":     basetypes.Int64Type{},
+		"interface_id":    basetypes.Int64Type{},
 		"name":            basetypes.StringType{},
 		"neighbor_id":     basetypes.StringType{},
 		"passive":         basetypes.BoolType{},
@@ -10725,10 +10707,10 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInner) AttrTypes() map[str
 		"transit_area_id": basetypes.StringType{},
 		"vr_timing": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"dead_counts":         basetypes.NumberType{},
-				"hello_interval":      basetypes.NumberType{},
-				"retransmit_interval": basetypes.NumberType{},
-				"transit_delay":       basetypes.NumberType{},
+				"dead_counts":         basetypes.Int64Type{},
+				"hello_interval":      basetypes.Int64Type{},
+				"retransmit_interval": basetypes.Int64Type{},
+				"transit_delay":       basetypes.Int64Type{},
 			},
 		},
 	}
@@ -10744,10 +10726,10 @@ func (o LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInner) AttrType() attr.Typ
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerVrTiming model.
 func (o LogicalRoutersVrfInnerOspfAreaInnerVirtualLinkInnerVrTiming) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"dead_counts":         basetypes.NumberType{},
-		"hello_interval":      basetypes.NumberType{},
-		"retransmit_interval": basetypes.NumberType{},
-		"transit_delay":       basetypes.NumberType{},
+		"dead_counts":         basetypes.Int64Type{},
+		"hello_interval":      basetypes.Int64Type{},
+		"retransmit_interval": basetypes.Int64Type{},
+		"transit_delay":       basetypes.Int64Type{},
 	}
 }
 
@@ -10799,7 +10781,7 @@ func (o LogicalRoutersVrfInnerOspfAuthProfileInnerMd5Inner) AttrType() attr.Type
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerOspfExportRulesInner model.
 func (o LogicalRoutersVrfInnerOspfExportRulesInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"metric":        basetypes.NumberType{},
+		"metric":        basetypes.Int64Type{},
 		"name":          basetypes.StringType{},
 		"new_path_type": basetypes.StringType{},
 		"new_tag":       basetypes.StringType{},
@@ -10819,13 +10801,13 @@ func (o LogicalRoutersVrfInnerOspfFloodPrevention) AttrTypes() map[string]attr.T
 		"hello": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable":     basetypes.BoolType{},
-				"max_packet": basetypes.NumberType{},
+				"max_packet": basetypes.Int64Type{},
 			},
 		},
 		"lsa": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable":     basetypes.BoolType{},
-				"max_packet": basetypes.NumberType{},
+				"max_packet": basetypes.Int64Type{},
 			},
 		},
 	}
@@ -10842,7 +10824,7 @@ func (o LogicalRoutersVrfInnerOspfFloodPrevention) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerOspfFloodPreventionHello) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":     basetypes.BoolType{},
-		"max_packet": basetypes.NumberType{},
+		"max_packet": basetypes.Int64Type{},
 	}
 }
 
@@ -10857,9 +10839,9 @@ func (o LogicalRoutersVrfInnerOspfFloodPreventionHello) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerOspfGracefulRestart) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable":                    basetypes.BoolType{},
-		"grace_period":              basetypes.NumberType{},
+		"grace_period":              basetypes.Int64Type{},
 		"helper_enable":             basetypes.BoolType{},
-		"max_neighbor_restart_time": basetypes.NumberType{},
+		"max_neighbor_restart_time": basetypes.Int64Type{},
 		"strict__l_s_a_checking":    basetypes.BoolType{},
 	}
 }
@@ -10874,8 +10856,8 @@ func (o LogicalRoutersVrfInnerOspfGracefulRestart) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerOspfVrTimers model.
 func (o LogicalRoutersVrfInnerOspfVrTimers) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"lsa_interval":          basetypes.NumberType{},
-		"spf_calculation_delay": basetypes.NumberType{},
+		"lsa_interval":          basetypes.Int64Type{},
+		"spf_calculation_delay": basetypes.Int64Type{},
 	}
 }
 
@@ -10902,7 +10884,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 							},
 						},
 						"enable":      basetypes.BoolType{},
-						"instance_id": basetypes.NumberType{},
+						"instance_id": basetypes.Int64Type{},
 						"link_type": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"broadcast": basetypes.ObjectType{
@@ -10913,7 +10895,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 										"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
 												"name":     basetypes.StringType{},
-												"priority": basetypes.NumberType{},
+												"priority": basetypes.Int64Type{},
 											},
 										}},
 									},
@@ -10923,7 +10905,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 								},
 							},
 						},
-						"metric":     basetypes.NumberType{},
+						"metric":     basetypes.Int64Type{},
 						"mtu_ignore": basetypes.BoolType{},
 						"name":       basetypes.StringType{},
 						"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -10932,15 +10914,15 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 							},
 						}},
 						"passive":  basetypes.BoolType{},
-						"priority": basetypes.NumberType{},
+						"priority": basetypes.Int64Type{},
 						"timing":   basetypes.StringType{},
 						"vr_timing": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"dead_counts":         basetypes.NumberType{},
-								"gr_delay":            basetypes.NumberType{},
-								"hello_interval":      basetypes.NumberType{},
-								"retransmit_interval": basetypes.NumberType{},
-								"transit_delay":       basetypes.NumberType{},
+								"dead_counts":         basetypes.Int64Type{},
+								"gr_delay":            basetypes.Int64Type{},
+								"hello_interval":      basetypes.Int64Type{},
+								"retransmit_interval": basetypes.Int64Type{},
+								"transit_delay":       basetypes.Int64Type{},
 							},
 						},
 					},
@@ -10979,7 +10961,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{},
 												},
 												"name":      basetypes.StringType{},
-												"route_tag": basetypes.NumberType{},
+												"route_tag": basetypes.Int64Type{},
 												"suppress": basetypes.ObjectType{
 													AttrTypes: map[string]attr.Type{},
 												},
@@ -10991,7 +10973,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 								"accept_summary": basetypes.BoolType{},
 								"default_information_originate": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"metric":      basetypes.NumberType{},
+										"metric":      basetypes.Int64Type{},
 										"metric_type": basetypes.StringType{},
 									},
 								},
@@ -10999,7 +10981,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"advertise": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"metric": basetypes.NumberType{},
+												"metric": basetypes.Int64Type{},
 												"type":   basetypes.StringType{},
 											},
 										},
@@ -11015,7 +10997,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{},
 										},
 										"name":      basetypes.StringType{},
-										"route_tag": basetypes.NumberType{},
+										"route_tag": basetypes.Int64Type{},
 										"suppress": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
@@ -11038,7 +11020,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{
 										"advertise": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{
-												"metric": basetypes.NumberType{},
+												"metric": basetypes.Int64Type{},
 											},
 										},
 										"disable": basetypes.ObjectType{
@@ -11046,7 +11028,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 										},
 									},
 								},
-								"default_route_metric": basetypes.NumberType{},
+								"default_route_metric": basetypes.Int64Type{},
 								"no_summary":           basetypes.BoolType{},
 							},
 						},
@@ -11061,8 +11043,8 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 							},
 						},
 						"enable":          basetypes.BoolType{},
-						"instance_id":     basetypes.NumberType{},
-						"interface_id":    basetypes.NumberType{},
+						"instance_id":     basetypes.Int64Type{},
+						"interface_id":    basetypes.Int64Type{},
 						"name":            basetypes.StringType{},
 						"neighbor_id":     basetypes.StringType{},
 						"passive":         basetypes.BoolType{},
@@ -11070,10 +11052,10 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 						"transit_area_id": basetypes.StringType{},
 						"vr_timing": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"dead_counts":         basetypes.NumberType{},
-								"hello_interval":      basetypes.NumberType{},
-								"retransmit_interval": basetypes.NumberType{},
-								"transit_delay":       basetypes.NumberType{},
+								"dead_counts":         basetypes.Int64Type{},
+								"hello_interval":      basetypes.Int64Type{},
+								"retransmit_interval": basetypes.Int64Type{},
+								"transit_delay":       basetypes.Int64Type{},
 							},
 						},
 					},
@@ -11172,7 +11154,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 		"enable":                  basetypes.BoolType{},
 		"export_rules": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"metric":        basetypes.NumberType{},
+				"metric":        basetypes.Int64Type{},
 				"name":          basetypes.StringType{},
 				"new_path_type": basetypes.StringType{},
 				"new_tag":       basetypes.StringType{},
@@ -11187,9 +11169,9 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 		"graceful_restart": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable":                    basetypes.BoolType{},
-				"grace_period":              basetypes.NumberType{},
+				"grace_period":              basetypes.Int64Type{},
 				"helper_enable":             basetypes.BoolType{},
-				"max_neighbor_restart_time": basetypes.NumberType{},
+				"max_neighbor_restart_time": basetypes.Int64Type{},
 				"strict__l_s_a_checking":    basetypes.BoolType{},
 			},
 		},
@@ -11199,8 +11181,8 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 		"spf_timer":              basetypes.StringType{},
 		"vr_timers": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"lsa_interval":          basetypes.NumberType{},
-				"spf_calculation_delay": basetypes.NumberType{},
+				"lsa_interval":          basetypes.Int64Type{},
+				"spf_calculation_delay": basetypes.Int64Type{},
 			},
 		},
 	}
@@ -11226,7 +11208,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 					},
 				},
 				"enable":      basetypes.BoolType{},
-				"instance_id": basetypes.NumberType{},
+				"instance_id": basetypes.Int64Type{},
 				"link_type": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"broadcast": basetypes.ObjectType{
@@ -11237,7 +11219,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 								"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"name":     basetypes.StringType{},
-										"priority": basetypes.NumberType{},
+										"priority": basetypes.Int64Type{},
 									},
 								}},
 							},
@@ -11247,7 +11229,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 						},
 					},
 				},
-				"metric":     basetypes.NumberType{},
+				"metric":     basetypes.Int64Type{},
 				"mtu_ignore": basetypes.BoolType{},
 				"name":       basetypes.StringType{},
 				"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -11256,15 +11238,15 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 					},
 				}},
 				"passive":  basetypes.BoolType{},
-				"priority": basetypes.NumberType{},
+				"priority": basetypes.Int64Type{},
 				"timing":   basetypes.StringType{},
 				"vr_timing": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"dead_counts":         basetypes.NumberType{},
-						"gr_delay":            basetypes.NumberType{},
-						"hello_interval":      basetypes.NumberType{},
-						"retransmit_interval": basetypes.NumberType{},
-						"transit_delay":       basetypes.NumberType{},
+						"dead_counts":         basetypes.Int64Type{},
+						"gr_delay":            basetypes.Int64Type{},
+						"hello_interval":      basetypes.Int64Type{},
+						"retransmit_interval": basetypes.Int64Type{},
+						"transit_delay":       basetypes.Int64Type{},
 					},
 				},
 			},
@@ -11303,7 +11285,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 											AttrTypes: map[string]attr.Type{},
 										},
 										"name":      basetypes.StringType{},
-										"route_tag": basetypes.NumberType{},
+										"route_tag": basetypes.Int64Type{},
 										"suppress": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
@@ -11315,7 +11297,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 						"accept_summary": basetypes.BoolType{},
 						"default_information_originate": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric":      basetypes.NumberType{},
+								"metric":      basetypes.Int64Type{},
 								"metric_type": basetypes.StringType{},
 							},
 						},
@@ -11323,7 +11305,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 							AttrTypes: map[string]attr.Type{
 								"advertise": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"metric": basetypes.NumberType{},
+										"metric": basetypes.Int64Type{},
 										"type":   basetypes.StringType{},
 									},
 								},
@@ -11339,7 +11321,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 									AttrTypes: map[string]attr.Type{},
 								},
 								"name":      basetypes.StringType{},
-								"route_tag": basetypes.NumberType{},
+								"route_tag": basetypes.Int64Type{},
 								"suppress": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
@@ -11362,7 +11344,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 							AttrTypes: map[string]attr.Type{
 								"advertise": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"metric": basetypes.NumberType{},
+										"metric": basetypes.Int64Type{},
 									},
 								},
 								"disable": basetypes.ObjectType{
@@ -11370,7 +11352,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 								},
 							},
 						},
-						"default_route_metric": basetypes.NumberType{},
+						"default_route_metric": basetypes.Int64Type{},
 						"no_summary":           basetypes.BoolType{},
 					},
 				},
@@ -11385,8 +11367,8 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 					},
 				},
 				"enable":          basetypes.BoolType{},
-				"instance_id":     basetypes.NumberType{},
-				"interface_id":    basetypes.NumberType{},
+				"instance_id":     basetypes.Int64Type{},
+				"interface_id":    basetypes.Int64Type{},
 				"name":            basetypes.StringType{},
 				"neighbor_id":     basetypes.StringType{},
 				"passive":         basetypes.BoolType{},
@@ -11394,10 +11376,10 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInner) AttrTypes() map[string]attr.Type 
 				"transit_area_id": basetypes.StringType{},
 				"vr_timing": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"dead_counts":         basetypes.NumberType{},
-						"hello_interval":      basetypes.NumberType{},
-						"retransmit_interval": basetypes.NumberType{},
-						"transit_delay":       basetypes.NumberType{},
+						"dead_counts":         basetypes.Int64Type{},
+						"hello_interval":      basetypes.Int64Type{},
+						"retransmit_interval": basetypes.Int64Type{},
+						"transit_delay":       basetypes.Int64Type{},
 					},
 				},
 			},
@@ -11433,7 +11415,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInner) AttrTypes() map[str
 			},
 		},
 		"enable":      basetypes.BoolType{},
-		"instance_id": basetypes.NumberType{},
+		"instance_id": basetypes.Int64Type{},
 		"link_type": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"broadcast": basetypes.ObjectType{
@@ -11444,7 +11426,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInner) AttrTypes() map[str
 						"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"name":     basetypes.StringType{},
-								"priority": basetypes.NumberType{},
+								"priority": basetypes.Int64Type{},
 							},
 						}},
 					},
@@ -11454,7 +11436,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInner) AttrTypes() map[str
 				},
 			},
 		},
-		"metric":     basetypes.NumberType{},
+		"metric":     basetypes.Int64Type{},
 		"mtu_ignore": basetypes.BoolType{},
 		"name":       basetypes.StringType{},
 		"neighbor": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -11463,15 +11445,15 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInner) AttrTypes() map[str
 			},
 		}},
 		"passive":  basetypes.BoolType{},
-		"priority": basetypes.NumberType{},
+		"priority": basetypes.Int64Type{},
 		"timing":   basetypes.StringType{},
 		"vr_timing": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"dead_counts":         basetypes.NumberType{},
-				"gr_delay":            basetypes.NumberType{},
-				"hello_interval":      basetypes.NumberType{},
-				"retransmit_interval": basetypes.NumberType{},
-				"transit_delay":       basetypes.NumberType{},
+				"dead_counts":         basetypes.Int64Type{},
+				"gr_delay":            basetypes.Int64Type{},
+				"hello_interval":      basetypes.Int64Type{},
+				"retransmit_interval": basetypes.Int64Type{},
+				"transit_delay":       basetypes.Int64Type{},
 			},
 		},
 	}
@@ -11527,7 +11509,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerType) AttrTypes() map[string]attr.T
 									AttrTypes: map[string]attr.Type{},
 								},
 								"name":      basetypes.StringType{},
-								"route_tag": basetypes.NumberType{},
+								"route_tag": basetypes.Int64Type{},
 								"suppress": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
@@ -11539,7 +11521,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerType) AttrTypes() map[string]attr.T
 				"accept_summary": basetypes.BoolType{},
 				"default_information_originate": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"metric":      basetypes.NumberType{},
+						"metric":      basetypes.Int64Type{},
 						"metric_type": basetypes.StringType{},
 					},
 				},
@@ -11547,7 +11529,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerType) AttrTypes() map[string]attr.T
 					AttrTypes: map[string]attr.Type{
 						"advertise": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric": basetypes.NumberType{},
+								"metric": basetypes.Int64Type{},
 								"type":   basetypes.StringType{},
 							},
 						},
@@ -11563,7 +11545,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerType) AttrTypes() map[string]attr.T
 							AttrTypes: map[string]attr.Type{},
 						},
 						"name":      basetypes.StringType{},
-						"route_tag": basetypes.NumberType{},
+						"route_tag": basetypes.Int64Type{},
 						"suppress": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
@@ -11586,7 +11568,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerType) AttrTypes() map[string]attr.T
 					AttrTypes: map[string]attr.Type{
 						"advertise": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"metric": basetypes.NumberType{},
+								"metric": basetypes.Int64Type{},
 							},
 						},
 						"disable": basetypes.ObjectType{
@@ -11594,7 +11576,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerType) AttrTypes() map[string]attr.T
 						},
 					},
 				},
-				"default_route_metric": basetypes.NumberType{},
+				"default_route_metric": basetypes.Int64Type{},
 				"no_summary":           basetypes.BoolType{},
 			},
 		},
@@ -11622,7 +11604,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssa) AttrTypes() map[string]at
 							AttrTypes: map[string]attr.Type{},
 						},
 						"name":      basetypes.StringType{},
-						"route_tag": basetypes.NumberType{},
+						"route_tag": basetypes.Int64Type{},
 						"suppress": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
@@ -11634,7 +11616,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssa) AttrTypes() map[string]at
 		"accept_summary": basetypes.BoolType{},
 		"default_information_originate": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"metric":      basetypes.NumberType{},
+				"metric":      basetypes.Int64Type{},
 				"metric_type": basetypes.StringType{},
 			},
 		},
@@ -11642,7 +11624,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssa) AttrTypes() map[string]at
 			AttrTypes: map[string]attr.Type{
 				"advertise": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"metric": basetypes.NumberType{},
+						"metric": basetypes.Int64Type{},
 						"type":   basetypes.StringType{},
 					},
 				},
@@ -11658,7 +11640,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssa) AttrTypes() map[string]at
 					AttrTypes: map[string]attr.Type{},
 				},
 				"name":      basetypes.StringType{},
-				"route_tag": basetypes.NumberType{},
+				"route_tag": basetypes.Int64Type{},
 				"suppress": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
@@ -11686,7 +11668,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssaAbr) AttrTypes() map[string
 					AttrTypes: map[string]attr.Type{},
 				},
 				"name":      basetypes.StringType{},
-				"route_tag": basetypes.NumberType{},
+				"route_tag": basetypes.Int64Type{},
 				"suppress": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
@@ -11710,7 +11692,7 @@ func (o LogicalRoutersVrfInnerOspfv3AreaInnerTypeNssaAbrNssaExtRangeInner) AttrT
 			AttrTypes: map[string]attr.Type{},
 		},
 		"name":      basetypes.StringType{},
-		"route_tag": basetypes.NumberType{},
+		"route_tag": basetypes.Int64Type{},
 		"suppress": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
@@ -12134,13 +12116,13 @@ func (o LogicalRoutersVrfInnerRip) AttrTypes() map[string]attr.Type {
 				"interface_inbound_distribute_list": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"access_list": basetypes.StringType{},
-						"metric":      basetypes.NumberType{},
+						"metric":      basetypes.Int64Type{},
 					},
 				},
 				"interface_outbound_distribute_list": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"access_list": basetypes.StringType{},
-						"metric":      basetypes.NumberType{},
+						"metric":      basetypes.Int64Type{},
 					},
 				},
 				"mode":          basetypes.StringType{},
@@ -12186,13 +12168,13 @@ func (o LogicalRoutersVrfInnerRipInterfaceInner) AttrTypes() map[string]attr.Typ
 		"interface_inbound_distribute_list": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"access_list": basetypes.StringType{},
-				"metric":      basetypes.NumberType{},
+				"metric":      basetypes.Int64Type{},
 			},
 		},
 		"interface_outbound_distribute_list": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"access_list": basetypes.StringType{},
-				"metric":      basetypes.NumberType{},
+				"metric":      basetypes.Int64Type{},
 			},
 		},
 		"mode":          basetypes.StringType{},
@@ -12212,7 +12194,7 @@ func (o LogicalRoutersVrfInnerRipInterfaceInner) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerRipInterfaceInnerInterfaceInboundDistributeList) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"access_list": basetypes.StringType{},
-		"metric":      basetypes.NumberType{},
+		"metric":      basetypes.Int64Type{},
 	}
 }
 
@@ -12230,7 +12212,7 @@ func (o LogicalRoutersVrfInnerRoutingTable) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"admin_dist": basetypes.NumberType{},
+						"admin_dist": basetypes.Int64Type{},
 						"bfd": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"profile": basetypes.StringType{},
@@ -12238,7 +12220,7 @@ func (o LogicalRoutersVrfInnerRoutingTable) AttrTypes() map[string]attr.Type {
 						},
 						"destination": basetypes.StringType{},
 						"interface":   basetypes.StringType{},
-						"metric":      basetypes.NumberType{},
+						"metric":      basetypes.Int64Type{},
 						"name":        basetypes.StringType{},
 						"nexthop": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
@@ -12259,14 +12241,14 @@ func (o LogicalRoutersVrfInnerRoutingTable) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"enable":            basetypes.BoolType{},
 								"failure_condition": basetypes.StringType{},
-								"hold_time":         basetypes.NumberType{},
+								"hold_time":         basetypes.Int64Type{},
 								"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"count":            basetypes.NumberType{},
+										"count":            basetypes.Int64Type{},
 										"destination":      basetypes.StringType{},
 										"destination_fqdn": basetypes.StringType{},
 										"enable":           basetypes.BoolType{},
-										"interval":         basetypes.NumberType{},
+										"interval":         basetypes.Int64Type{},
 										"name":             basetypes.StringType{},
 										"source":           basetypes.StringType{},
 									},
@@ -12297,7 +12279,7 @@ func (o LogicalRoutersVrfInnerRoutingTable) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"admin_dist": basetypes.NumberType{},
+						"admin_dist": basetypes.Int64Type{},
 						"bfd": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"profile": basetypes.StringType{},
@@ -12305,7 +12287,7 @@ func (o LogicalRoutersVrfInnerRoutingTable) AttrTypes() map[string]attr.Type {
 						},
 						"destination": basetypes.StringType{},
 						"interface":   basetypes.StringType{},
-						"metric":      basetypes.NumberType{},
+						"metric":      basetypes.Int64Type{},
 						"name":        basetypes.StringType{},
 						"nexthop": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
@@ -12333,14 +12315,14 @@ func (o LogicalRoutersVrfInnerRoutingTable) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"enable":            basetypes.BoolType{},
 								"failure_condition": basetypes.StringType{},
-								"hold_time":         basetypes.NumberType{},
+								"hold_time":         basetypes.Int64Type{},
 								"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"count":            basetypes.NumberType{},
+										"count":            basetypes.Int64Type{},
 										"destination":      basetypes.StringType{},
 										"destination_fqdn": basetypes.StringType{},
 										"enable":           basetypes.BoolType{},
-										"interval":         basetypes.NumberType{},
+										"interval":         basetypes.Int64Type{},
 										"name":             basetypes.StringType{},
 										"source":           basetypes.StringType{},
 									},
@@ -12382,7 +12364,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIp) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"admin_dist": basetypes.NumberType{},
+				"admin_dist": basetypes.Int64Type{},
 				"bfd": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"profile": basetypes.StringType{},
@@ -12390,7 +12372,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIp) AttrTypes() map[string]attr.Type {
 				},
 				"destination": basetypes.StringType{},
 				"interface":   basetypes.StringType{},
-				"metric":      basetypes.NumberType{},
+				"metric":      basetypes.Int64Type{},
 				"name":        basetypes.StringType{},
 				"nexthop": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
@@ -12411,14 +12393,14 @@ func (o LogicalRoutersVrfInnerRoutingTableIp) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"enable":            basetypes.BoolType{},
 						"failure_condition": basetypes.StringType{},
-						"hold_time":         basetypes.NumberType{},
+						"hold_time":         basetypes.Int64Type{},
 						"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"count":            basetypes.NumberType{},
+								"count":            basetypes.Int64Type{},
 								"destination":      basetypes.StringType{},
 								"destination_fqdn": basetypes.StringType{},
 								"enable":           basetypes.BoolType{},
-								"interval":         basetypes.NumberType{},
+								"interval":         basetypes.Int64Type{},
 								"name":             basetypes.StringType{},
 								"source":           basetypes.StringType{},
 							},
@@ -12456,7 +12438,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIp) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner model.
 func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"admin_dist": basetypes.NumberType{},
+		"admin_dist": basetypes.Int64Type{},
 		"bfd": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"profile": basetypes.StringType{},
@@ -12464,7 +12446,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner) AttrTypes() map[st
 		},
 		"destination": basetypes.StringType{},
 		"interface":   basetypes.StringType{},
-		"metric":      basetypes.NumberType{},
+		"metric":      basetypes.Int64Type{},
 		"name":        basetypes.StringType{},
 		"nexthop": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -12485,14 +12467,14 @@ func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner) AttrTypes() map[st
 			AttrTypes: map[string]attr.Type{
 				"enable":            basetypes.BoolType{},
 				"failure_condition": basetypes.StringType{},
-				"hold_time":         basetypes.NumberType{},
+				"hold_time":         basetypes.Int64Type{},
 				"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"count":            basetypes.NumberType{},
+						"count":            basetypes.Int64Type{},
 						"destination":      basetypes.StringType{},
 						"destination_fqdn": basetypes.StringType{},
 						"enable":           basetypes.BoolType{},
-						"interval":         basetypes.NumberType{},
+						"interval":         basetypes.Int64Type{},
 						"name":             basetypes.StringType{},
 						"source":           basetypes.StringType{},
 					},
@@ -12554,14 +12536,14 @@ func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitor) AttrTyp
 	return map[string]attr.Type{
 		"enable":            basetypes.BoolType{},
 		"failure_condition": basetypes.StringType{},
-		"hold_time":         basetypes.NumberType{},
+		"hold_time":         basetypes.Int64Type{},
 		"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"count":            basetypes.NumberType{},
+				"count":            basetypes.Int64Type{},
 				"destination":      basetypes.StringType{},
 				"destination_fqdn": basetypes.StringType{},
 				"enable":           basetypes.BoolType{},
-				"interval":         basetypes.NumberType{},
+				"interval":         basetypes.Int64Type{},
 				"name":             basetypes.StringType{},
 				"source":           basetypes.StringType{},
 			},
@@ -12579,11 +12561,11 @@ func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitor) AttrTyp
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonitorDestinationsInner model.
 func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerPathMonitorMonitorDestinationsInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"count":            basetypes.NumberType{},
+		"count":            basetypes.Int64Type{},
 		"destination":      basetypes.StringType{},
 		"destination_fqdn": basetypes.StringType{},
 		"enable":           basetypes.BoolType{},
-		"interval":         basetypes.NumberType{},
+		"interval":         basetypes.Int64Type{},
 		"name":             basetypes.StringType{},
 		"source":           basetypes.StringType{},
 	}
@@ -12626,7 +12608,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6) AttrTypes() map[string]attr.Type
 	return map[string]attr.Type{
 		"static_route": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"admin_dist": basetypes.NumberType{},
+				"admin_dist": basetypes.Int64Type{},
 				"bfd": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"profile": basetypes.StringType{},
@@ -12634,7 +12616,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6) AttrTypes() map[string]attr.Type
 				},
 				"destination": basetypes.StringType{},
 				"interface":   basetypes.StringType{},
-				"metric":      basetypes.NumberType{},
+				"metric":      basetypes.Int64Type{},
 				"name":        basetypes.StringType{},
 				"nexthop": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
@@ -12662,14 +12644,14 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6) AttrTypes() map[string]attr.Type
 					AttrTypes: map[string]attr.Type{
 						"enable":            basetypes.BoolType{},
 						"failure_condition": basetypes.StringType{},
-						"hold_time":         basetypes.NumberType{},
+						"hold_time":         basetypes.Int64Type{},
 						"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"count":            basetypes.NumberType{},
+								"count":            basetypes.Int64Type{},
 								"destination":      basetypes.StringType{},
 								"destination_fqdn": basetypes.StringType{},
 								"enable":           basetypes.BoolType{},
-								"interval":         basetypes.NumberType{},
+								"interval":         basetypes.Int64Type{},
 								"name":             basetypes.StringType{},
 								"source":           basetypes.StringType{},
 							},
@@ -12707,7 +12689,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner model.
 func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"admin_dist": basetypes.NumberType{},
+		"admin_dist": basetypes.Int64Type{},
 		"bfd": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"profile": basetypes.StringType{},
@@ -12715,7 +12697,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner) AttrTypes() map[
 		},
 		"destination": basetypes.StringType{},
 		"interface":   basetypes.StringType{},
-		"metric":      basetypes.NumberType{},
+		"metric":      basetypes.Int64Type{},
 		"name":        basetypes.StringType{},
 		"nexthop": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -12743,14 +12725,14 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner) AttrTypes() map[
 			AttrTypes: map[string]attr.Type{
 				"enable":            basetypes.BoolType{},
 				"failure_condition": basetypes.StringType{},
-				"hold_time":         basetypes.NumberType{},
+				"hold_time":         basetypes.Int64Type{},
 				"monitor_destinations": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"count":            basetypes.NumberType{},
+						"count":            basetypes.Int64Type{},
 						"destination":      basetypes.StringType{},
 						"destination_fqdn": basetypes.StringType{},
 						"enable":           basetypes.BoolType{},
-						"interval":         basetypes.NumberType{},
+						"interval":         basetypes.Int64Type{},
 						"name":             basetypes.StringType{},
 						"source":           basetypes.StringType{},
 					},
@@ -12802,15 +12784,15 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerOption) AttrType()
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerVrAdminDists model.
 func (o LogicalRoutersVrfInnerVrAdminDists) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"ebgp":        basetypes.NumberType{},
-		"ibgp":        basetypes.NumberType{},
-		"ospf_ext":    basetypes.NumberType{},
-		"ospf_int":    basetypes.NumberType{},
-		"ospfv3_ext":  basetypes.NumberType{},
-		"ospfv3_int":  basetypes.NumberType{},
-		"rip":         basetypes.NumberType{},
-		"static":      basetypes.NumberType{},
-		"static_ipv6": basetypes.NumberType{},
+		"ebgp":        basetypes.Int64Type{},
+		"ibgp":        basetypes.Int64Type{},
+		"ospf_ext":    basetypes.Int64Type{},
+		"ospf_int":    basetypes.Int64Type{},
+		"ospfv3_ext":  basetypes.Int64Type{},
+		"ospfv3_int":  basetypes.Int64Type{},
+		"rip":         basetypes.Int64Type{},
+		"static":      basetypes.Int64Type{},
+		"static_ipv6": basetypes.Int64Type{},
 	}
 }
 
@@ -12904,51 +12886,51 @@ var LogicalRoutersResourceSchema = schema.Schema{
 						MarkdownDescription: "Admin dists",
 						Optional:            true,
 						Attributes: map[string]schema.Attribute{
-							"bgp_external": schema.Float64Attribute{
+							"bgp_external": schema.Int64Attribute{
 								MarkdownDescription: "Bgp external",
 								Optional:            true,
 							},
-							"bgp_internal": schema.Float64Attribute{
+							"bgp_internal": schema.Int64Attribute{
 								MarkdownDescription: "Bgp internal",
 								Optional:            true,
 							},
-							"bgp_local": schema.Float64Attribute{
+							"bgp_local": schema.Int64Attribute{
 								MarkdownDescription: "Bgp local",
 								Optional:            true,
 							},
-							"ospf_ext": schema.Float64Attribute{
+							"ospf_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospf ext",
 								Optional:            true,
 							},
-							"ospf_inter": schema.Float64Attribute{
+							"ospf_inter": schema.Int64Attribute{
 								MarkdownDescription: "Ospf inter",
 								Optional:            true,
 							},
-							"ospf_intra": schema.Float64Attribute{
+							"ospf_intra": schema.Int64Attribute{
 								MarkdownDescription: "Ospf intra",
 								Optional:            true,
 							},
-							"ospfv3_ext": schema.Float64Attribute{
+							"ospfv3_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 ext",
 								Optional:            true,
 							},
-							"ospfv3_inter": schema.Float64Attribute{
+							"ospfv3_inter": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 inter",
 								Optional:            true,
 							},
-							"ospfv3_intra": schema.Float64Attribute{
+							"ospfv3_intra": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 intra",
 								Optional:            true,
 							},
-							"rip": schema.Float64Attribute{
+							"rip": schema.Int64Attribute{
 								MarkdownDescription: "Rip",
 								Optional:            true,
 							},
-							"static": schema.Float64Attribute{
+							"static": schema.Int64Attribute{
 								MarkdownDescription: "Static",
 								Optional:            true,
 							},
-							"static_ipv6": schema.Float64Attribute{
+							"static_ipv6": schema.Int64Attribute{
 								MarkdownDescription: "Static ipv6",
 								Optional:            true,
 							},
@@ -13061,7 +13043,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("ipv6"),
 														),
 													},
@@ -13084,7 +13066,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"ipv6": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("ipv4"),
 														),
 													},
@@ -13126,7 +13108,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								MarkdownDescription: "Confederation member as",
 								Optional:            true,
 							},
-							"default_local_preference": schema.Float64Attribute{
+							"default_local_preference": schema.Int64Attribute{
 								MarkdownDescription: "Default local preference",
 								Optional:            true,
 							},
@@ -13164,15 +13146,15 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Enable",
 										Optional:            true,
 									},
-									"local_restart_time": schema.Float64Attribute{
+									"local_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Local restart time",
 										Optional:            true,
 									},
-									"max_peer_restart_time": schema.Float64Attribute{
+									"max_peer_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Max peer restart time",
 										Optional:            true,
 									},
-									"stale_route_time": schema.Float64Attribute{
+									"stale_route_time": schema.Int64Attribute{
 										MarkdownDescription: "Stale route time",
 										Optional:            true,
 									},
@@ -13239,7 +13221,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Dampening",
 													Optional:            true,
 												},
-												"multihop": schema.Float64Attribute{
+												"multihop": schema.Int64Attribute{
 													MarkdownDescription: "Multihop",
 													Optional:            true,
 												},
@@ -13284,7 +13266,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																MarkdownDescription: "Multihop",
 																Optional:            true,
 																Attributes: map[string]schema.Attribute{
-																	"min_received_ttl": schema.Float64Attribute{
+																	"min_received_ttl": schema.Int64Attribute{
 																		MarkdownDescription: "Min received ttl",
 																		Optional:            true,
 																	},
@@ -13312,7 +13294,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																MarkdownDescription: "Hold time",
 																Optional:            true,
 															},
-															"idle_hold_time": schema.Float64Attribute{
+															"idle_hold_time": schema.Int64Attribute{
 																MarkdownDescription: "Idle hold time",
 																Optional:            true,
 															},
@@ -13324,7 +13306,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		MarkdownDescription: "Allow",
 																		Optional:            true,
 																	},
-																	"remote_port": schema.Float64Attribute{
+																	"remote_port": schema.Int64Attribute{
 																		MarkdownDescription: "Remote port",
 																		Optional:            true,
 																	},
@@ -13338,7 +13320,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																MarkdownDescription: "Max prefixes",
 																Optional:            true,
 															},
-															"min_route_adv_interval": schema.Float64Attribute{
+															"min_route_adv_interval": schema.Int64Attribute{
 																MarkdownDescription: "Min route adv interval",
 																Optional:            true,
 															},
@@ -13346,7 +13328,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																MarkdownDescription: "Multihop",
 																Optional:            true,
 															},
-															"open_delay_time": schema.Float64Attribute{
+															"open_delay_time": schema.Int64Attribute{
 																MarkdownDescription: "Open delay time",
 																Optional:            true,
 															},
@@ -13358,7 +13340,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		MarkdownDescription: "Allow",
 																		Optional:            true,
 																	},
-																	"local_port": schema.Float64Attribute{
+																	"local_port": schema.Int64Attribute{
 																		MarkdownDescription: "Local port",
 																		Optional:            true,
 																	},
@@ -13388,7 +13370,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														Attributes: map[string]schema.Attribute{
 															"no": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("ipv4"),
 																		path.MatchRelative().AtParent().AtName("yes"),
 																	),
@@ -13428,7 +13410,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															"yes": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("ipv4"),
 																		path.MatchRelative().AtParent().AtName("no"),
 																	),
@@ -13467,7 +13449,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														Attributes: map[string]schema.Attribute{
 															"fqdn": schema.StringAttribute{
 																Validators: []validator.String{
-																	stringvalidator.ExactlyOneOf(
+																	stringvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("ip"),
 																	),
 																},
@@ -13476,7 +13458,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															"ip": schema.StringAttribute{
 																Validators: []validator.String{
-																	stringvalidator.ExactlyOneOf(
+																	stringvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("fqdn"),
 																	),
 																},
@@ -13524,7 +13506,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Attributes: map[string]schema.Attribute{
 												"ebgp": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("ebgp_confed"),
 															path.MatchRelative().AtParent().AtName("ibgp"),
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
@@ -13549,7 +13531,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"ebgp_confed": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("ebgp"),
 															path.MatchRelative().AtParent().AtName("ibgp"),
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
@@ -13566,7 +13548,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"ibgp": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("ebgp"),
 															path.MatchRelative().AtParent().AtName("ebgp_confed"),
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
@@ -13583,7 +13565,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"ibgp_confed": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("ebgp"),
 															path.MatchRelative().AtParent().AtName("ebgp_confed"),
 															path.MatchRelative().AtParent().AtName("ibgp"),
@@ -13687,7 +13669,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
 																			},
-																			"med": schema.Float64Attribute{
+																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
 																			},
@@ -13729,7 +13711,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Attributes: map[string]schema.Attribute{
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
-																				objectvalidator.ExactlyOneOf(
+																				objectvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("prepend"),
 																					path.MatchRelative().AtParent().AtName("remove"),
 																					path.MatchRelative().AtParent().AtName("remove_and_prepend"),
@@ -13739,13 +13721,20 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
-																		"prepend": schema.Float64Attribute{
+																		"prepend": schema.Int64Attribute{
+																			Validators: []validator.Int64{
+																				int64validator.ConflictsWith(
+																					path.MatchRelative().AtParent().AtName("none"),
+																					path.MatchRelative().AtParent().AtName("remove"),
+																					path.MatchRelative().AtParent().AtName("remove_and_prepend"),
+																				),
+																			},
 																			MarkdownDescription: "Prepend",
 																			Optional:            true,
 																		},
 																		"remove": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
-																				objectvalidator.ExactlyOneOf(
+																				objectvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("prepend"),
 																					path.MatchRelative().AtParent().AtName("remove_and_prepend"),
@@ -13755,13 +13744,20 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
-																		"remove_and_prepend": schema.Float64Attribute{
+																		"remove_and_prepend": schema.Int64Attribute{
+																			Validators: []validator.Int64{
+																				int64validator.ConflictsWith(
+																					path.MatchRelative().AtParent().AtName("none"),
+																					path.MatchRelative().AtParent().AtName("prepend"),
+																					path.MatchRelative().AtParent().AtName("remove"),
+																				),
+																			},
 																			MarkdownDescription: "Remove and prepend",
 																			Optional:            true,
 																		},
 																	},
 																},
-																"as_path_limit": schema.Float64Attribute{
+																"as_path_limit": schema.Int64Attribute{
 																	MarkdownDescription: "As path limit",
 																	Optional:            true,
 																},
@@ -13773,7 +13769,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			ElementType:         types.StringType,
 																			MarkdownDescription: "Append",
 																			Validators: []validator.List{
-																				listvalidator.ExactlyOneOf(
+																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
@@ -13784,7 +13780,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		},
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
-																				objectvalidator.ExactlyOneOf(
+																				objectvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
@@ -13799,7 +13795,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			ElementType:         types.StringType,
 																			MarkdownDescription: "Overwrite",
 																			Validators: []validator.List{
-																				listvalidator.ExactlyOneOf(
+																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
@@ -13810,7 +13806,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		},
 																		"remove_all": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
-																				objectvalidator.ExactlyOneOf(
+																				objectvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
@@ -13823,7 +13819,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		},
 																		"remove_regex": schema.StringAttribute{
 																			Validators: []validator.String{
-																				stringvalidator.ExactlyOneOf(
+																				stringvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
@@ -13843,7 +13839,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			ElementType:         types.StringType,
 																			MarkdownDescription: "Append",
 																			Validators: []validator.List{
-																				listvalidator.ExactlyOneOf(
+																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
@@ -13854,7 +13850,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		},
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
-																				objectvalidator.ExactlyOneOf(
+																				objectvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
@@ -13869,7 +13865,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			ElementType:         types.StringType,
 																			MarkdownDescription: "Overwrite",
 																			Validators: []validator.List{
-																				listvalidator.ExactlyOneOf(
+																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("remove_all"),
@@ -13880,7 +13876,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		},
 																		"remove_all": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
-																				objectvalidator.ExactlyOneOf(
+																				objectvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
@@ -13893,7 +13889,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		},
 																		"remove_regex": schema.StringAttribute{
 																			Validators: []validator.String{
-																				stringvalidator.ExactlyOneOf(
+																				stringvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
 																					path.MatchRelative().AtParent().AtName("none"),
 																					path.MatchRelative().AtParent().AtName("overwrite"),
@@ -13905,11 +13901,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		},
 																	},
 																},
-																"local_preference": schema.Float64Attribute{
+																"local_preference": schema.Int64Attribute{
 																	MarkdownDescription: "Local preference",
 																	Optional:            true,
 																},
-																"med": schema.Float64Attribute{
+																"med": schema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Optional:            true,
 																},
@@ -13924,7 +13920,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	MarkdownDescription: "Origin",
 																	Optional:            true,
 																},
-																"weight": schema.Float64Attribute{
+																"weight": schema.Int64Attribute{
 																	MarkdownDescription: "Weight",
 																	Optional:            true,
 																},
@@ -14021,7 +14017,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
 																			},
-																			"med": schema.Float64Attribute{
+																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
 																			},
@@ -14138,7 +14134,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
 																			},
-																			"med": schema.Float64Attribute{
+																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
 																			},
@@ -14249,7 +14245,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
 																			},
-																			"med": schema.Float64Attribute{
+																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
 																			},
@@ -14306,7 +14302,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Attributes: map[string]schema.Attribute{
 																"allow": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("deny"),
 																		),
 																	},
@@ -14323,7 +14319,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Attributes: map[string]schema.Attribute{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("prepend"),
 																									path.MatchRelative().AtParent().AtName("remove"),
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
@@ -14333,13 +14329,20 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
-																						"prepend": schema.Float64Attribute{
+																						"prepend": schema.Int64Attribute{
+																							Validators: []validator.Int64{
+																								int64validator.ConflictsWith(
+																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("remove"),
+																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
+																								),
+																							},
 																							MarkdownDescription: "Prepend",
 																							Optional:            true,
 																						},
 																						"remove": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("prepend"),
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
@@ -14349,13 +14352,20 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
-																						"remove_and_prepend": schema.Float64Attribute{
+																						"remove_and_prepend": schema.Int64Attribute{
+																							Validators: []validator.Int64{
+																								int64validator.ConflictsWith(
+																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("prepend"),
+																									path.MatchRelative().AtParent().AtName("remove"),
+																								),
+																							},
 																							MarkdownDescription: "Remove and prepend",
 																							Optional:            true,
 																						},
 																					},
 																				},
-																				"as_path_limit": schema.Float64Attribute{
+																				"as_path_limit": schema.Int64Attribute{
 																					MarkdownDescription: "As path limit",
 																					Optional:            true,
 																				},
@@ -14367,7 +14377,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14378,7 +14388,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14393,7 +14403,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14404,7 +14414,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14417,7 +14427,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
-																								stringvalidator.ExactlyOneOf(
+																								stringvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14437,7 +14447,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14448,7 +14458,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14463,7 +14473,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14474,7 +14484,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14487,7 +14497,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
-																								stringvalidator.ExactlyOneOf(
+																								stringvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14499,11 +14509,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																					},
 																				},
-																				"local_preference": schema.Float64Attribute{
+																				"local_preference": schema.Int64Attribute{
 																					MarkdownDescription: "Local preference",
 																					Optional:            true,
 																				},
-																				"med": schema.Float64Attribute{
+																				"med": schema.Int64Attribute{
 																					MarkdownDescription: "Med",
 																					Optional:            true,
 																				},
@@ -14524,7 +14534,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																"deny": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("allow"),
 																		),
 																	},
@@ -14600,7 +14610,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	MarkdownDescription: "From peer",
 																	Optional:            true,
 																},
-																"med": schema.Float64Attribute{
+																"med": schema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Optional:            true,
 																},
@@ -14654,7 +14664,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Attributes: map[string]schema.Attribute{
 																"allow": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("deny"),
 																		),
 																	},
@@ -14675,7 +14685,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Attributes: map[string]schema.Attribute{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("prepend"),
 																									path.MatchRelative().AtParent().AtName("remove"),
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
@@ -14685,13 +14695,20 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
-																						"prepend": schema.Float64Attribute{
+																						"prepend": schema.Int64Attribute{
+																							Validators: []validator.Int64{
+																								int64validator.ConflictsWith(
+																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("remove"),
+																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
+																								),
+																							},
 																							MarkdownDescription: "Prepend",
 																							Optional:            true,
 																						},
 																						"remove": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("prepend"),
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
@@ -14701,13 +14718,20 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
-																						"remove_and_prepend": schema.Float64Attribute{
+																						"remove_and_prepend": schema.Int64Attribute{
+																							Validators: []validator.Int64{
+																								int64validator.ConflictsWith(
+																									path.MatchRelative().AtParent().AtName("none"),
+																									path.MatchRelative().AtParent().AtName("prepend"),
+																									path.MatchRelative().AtParent().AtName("remove"),
+																								),
+																							},
 																							MarkdownDescription: "Remove and prepend",
 																							Optional:            true,
 																						},
 																					},
 																				},
-																				"as_path_limit": schema.Float64Attribute{
+																				"as_path_limit": schema.Int64Attribute{
 																					MarkdownDescription: "As path limit",
 																					Optional:            true,
 																				},
@@ -14719,7 +14743,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14730,7 +14754,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14745,7 +14769,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14756,7 +14780,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14769,7 +14793,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
-																								stringvalidator.ExactlyOneOf(
+																								stringvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14789,7 +14813,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14800,7 +14824,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14815,7 +14839,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							ElementType:         types.StringType,
 																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
-																								listvalidator.ExactlyOneOf(
+																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("remove_all"),
@@ -14826,7 +14850,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
-																								objectvalidator.ExactlyOneOf(
+																								objectvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14839,7 +14863,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																						"remove_regex": schema.StringAttribute{
 																							Validators: []validator.String{
-																								stringvalidator.ExactlyOneOf(
+																								stringvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
 																									path.MatchRelative().AtParent().AtName("none"),
 																									path.MatchRelative().AtParent().AtName("overwrite"),
@@ -14851,11 +14875,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																						},
 																					},
 																				},
-																				"local_preference": schema.Float64Attribute{
+																				"local_preference": schema.Int64Attribute{
 																					MarkdownDescription: "Local preference",
 																					Optional:            true,
 																				},
-																				"med": schema.Float64Attribute{
+																				"med": schema.Int64Attribute{
 																					MarkdownDescription: "Med",
 																					Optional:            true,
 																				},
@@ -14870,7 +14894,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					MarkdownDescription: "Origin",
 																					Optional:            true,
 																				},
-																				"weight": schema.Float64Attribute{
+																				"weight": schema.Int64Attribute{
 																					MarkdownDescription: "Weight",
 																					Optional:            true,
 																				},
@@ -14880,7 +14904,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																"deny": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("allow"),
 																		),
 																	},
@@ -14956,7 +14980,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	MarkdownDescription: "From peer",
 																	Optional:            true,
 																},
-																"med": schema.Float64Attribute{
+																"med": schema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Optional:            true,
 																},
@@ -15013,7 +15037,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											MarkdownDescription: "Enable",
 											Optional:            true,
 										},
-										"metric": schema.Float64Attribute{
+										"metric": schema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Optional:            true,
 										},
@@ -15028,7 +15052,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											MarkdownDescription: "Route table",
 											Optional:            true,
 										},
-										"set_as_path_limit": schema.Float64Attribute{
+										"set_as_path_limit": schema.Int64Attribute{
 											MarkdownDescription: "Set as path limit",
 											Optional:            true,
 										},
@@ -15042,11 +15066,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											MarkdownDescription: "Set extended community",
 											Optional:            true,
 										},
-										"set_local_preference": schema.Float64Attribute{
+										"set_local_preference": schema.Int64Attribute{
 											MarkdownDescription: "Set local preference",
 											Optional:            true,
 										},
-										"set_med": schema.Float64Attribute{
+										"set_med": schema.Int64Attribute{
 											MarkdownDescription: "Set med",
 											Optional:            true,
 										},
@@ -15106,7 +15130,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								Attributes: map[string]schema.Attribute{
 									"balanced_round_robin": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("ip_hash"),
 												path.MatchRelative().AtParent().AtName("ip_modulo"),
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
@@ -15118,7 +15142,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									},
 									"ip_hash": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
 												path.MatchRelative().AtParent().AtName("ip_modulo"),
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
@@ -15127,7 +15151,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Ip hash",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
-											"hash_seed": schema.Float64Attribute{
+											"hash_seed": schema.Int64Attribute{
 												MarkdownDescription: "Hash seed",
 												Optional:            true,
 											},
@@ -15143,7 +15167,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									},
 									"ip_modulo": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
 												path.MatchRelative().AtParent().AtName("ip_hash"),
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
@@ -15155,7 +15179,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									},
 									"weighted_round_robin": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
-											objectvalidator.ExactlyOneOf(
+											objectvalidator.ConflictsWith(
 												path.MatchRelative().AtParent().AtName("balanced_round_robin"),
 												path.MatchRelative().AtParent().AtName("ip_hash"),
 												path.MatchRelative().AtParent().AtName("ip_modulo"),
@@ -15173,7 +15197,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															MarkdownDescription: "Name",
 															Required:            true,
 														},
-														"weight": schema.Float64Attribute{
+														"weight": schema.Int64Attribute{
 															MarkdownDescription: "Weight",
 															Optional:            true,
 														},
@@ -15188,7 +15212,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								MarkdownDescription: "Enable",
 								Optional:            true,
 							},
-							"max_path": schema.Float64Attribute{
+							"max_path": schema.Int64Attribute{
 								MarkdownDescription: "Max path",
 								Optional:            true,
 							},
@@ -15202,7 +15226,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							},
 						},
 					},
-					"global_vrid": schema.Float64Attribute{
+					"global_vrid": schema.Int64Attribute{
 						MarkdownDescription: "Global vrid",
 						Optional:            true,
 					},
@@ -15380,7 +15404,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Immediate leave",
 													Optional:            true,
 												},
-												"last_member_query_interval": schema.Float64Attribute{
+												"last_member_query_interval": schema.Int64Attribute{
 													MarkdownDescription: "Last member query interval",
 													Optional:            true,
 												},
@@ -15388,7 +15412,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Max groups",
 													Optional:            true,
 												},
-												"max_query_response_time": schema.Float64Attribute{
+												"max_query_response_time": schema.Int64Attribute{
 													MarkdownDescription: "Max query response time",
 													Optional:            true,
 												},
@@ -15403,7 +15427,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Mode",
 													Optional:            true,
 												},
-												"query_interval": schema.Float64Attribute{
+												"query_interval": schema.Int64Attribute{
 													MarkdownDescription: "Query interval",
 													Optional:            true,
 												},
@@ -15452,7 +15476,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 													},
 												},
-												"assert_interval": schema.Float64Attribute{
+												"assert_interval": schema.Int64Attribute{
 													MarkdownDescription: "Assert interval",
 													Optional:            true,
 												},
@@ -15460,7 +15484,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Bsr border",
 													Optional:            true,
 												},
-												"dr_priority": schema.Float64Attribute{
+												"dr_priority": schema.Int64Attribute{
 													MarkdownDescription: "Dr priority",
 													Optional:            true,
 												},
@@ -15468,11 +15492,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Enable",
 													Optional:            true,
 												},
-												"hello_interval": schema.Float64Attribute{
+												"hello_interval": schema.Int64Attribute{
 													MarkdownDescription: "Hello interval",
 													Optional:            true,
 												},
-												"join_prune_interval": schema.Float64Attribute{
+												"join_prune_interval": schema.Int64Attribute{
 													MarkdownDescription: "Join prune interval",
 													Optional:            true,
 												},
@@ -15549,7 +15573,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 													},
 												},
-												"max_sa": schema.Float64Attribute{
+												"max_sa": schema.Int64Attribute{
 													MarkdownDescription: "Max sa",
 													Optional:            true,
 												},
@@ -15567,7 +15591,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("ip"),
 																),
 															},
@@ -15576,7 +15600,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"ip": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
@@ -15619,7 +15643,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Description",
 													Optional:            true,
 												},
-												"dr_priority": schema.Float64Attribute{
+												"dr_priority": schema.Int64Attribute{
 													MarkdownDescription: "Dr priority",
 													Optional:            true,
 												},
@@ -15642,7 +15666,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 										},
 									},
-									"route_ageout_time": schema.Float64Attribute{
+									"route_ageout_time": schema.Int64Attribute{
 										MarkdownDescription: "Route ageout time",
 										Optional:            true,
 									},
@@ -15676,7 +15700,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												Attributes: map[string]schema.Attribute{
 													"candidate_rp": schema.SingleNestedAttribute{
 														Validators: []validator.Object{
-															objectvalidator.ExactlyOneOf(
+															objectvalidator.ConflictsWith(
 																path.MatchRelative().AtParent().AtName("static_rp"),
 															),
 														},
@@ -15687,7 +15711,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																MarkdownDescription: "Address",
 																Optional:            true,
 															},
-															"advertisement_interval": schema.Float64Attribute{
+															"advertisement_interval": schema.Int64Attribute{
 																MarkdownDescription: "Advertisement interval",
 																Optional:            true,
 															},
@@ -15699,7 +15723,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																MarkdownDescription: "Interface",
 																Optional:            true,
 															},
-															"priority": schema.Float64Attribute{
+															"priority": schema.Int64Attribute{
 																MarkdownDescription: "Priority",
 																Optional:            true,
 															},
@@ -15707,7 +15731,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													"static_rp": schema.SingleNestedAttribute{
 														Validators: []validator.Object{
-															objectvalidator.ExactlyOneOf(
+															objectvalidator.ConflictsWith(
 																path.MatchRelative().AtParent().AtName("candidate_rp"),
 															),
 														},
@@ -15771,7 +15795,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									},
 								},
 							},
-							"route_ageout_time": schema.Float64Attribute{
+							"route_ageout_time": schema.Int64Attribute{
 								MarkdownDescription: "Route ageout time",
 								Optional:            true,
 							},
@@ -15806,7 +15830,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										Attributes: map[string]schema.Attribute{
 											"candidate_rp": schema.SingleNestedAttribute{
 												Validators: []validator.Object{
-													objectvalidator.ExactlyOneOf(
+													objectvalidator.ConflictsWith(
 														path.MatchRelative().AtParent().AtName("static_rp"),
 													),
 												},
@@ -15817,7 +15841,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Address",
 														Optional:            true,
 													},
-													"advertisement_interval": schema.Float64Attribute{
+													"advertisement_interval": schema.Int64Attribute{
 														MarkdownDescription: "Advertisement interval",
 														Optional:            true,
 													},
@@ -15830,7 +15854,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Interface",
 														Optional:            true,
 													},
-													"priority": schema.Float64Attribute{
+													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Optional:            true,
 													},
@@ -15838,7 +15862,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											"static_rp": schema.SingleNestedAttribute{
 												Validators: []validator.Object{
-													objectvalidator.ExactlyOneOf(
+													objectvalidator.ConflictsWith(
 														path.MatchRelative().AtParent().AtName("candidate_rp"),
 													),
 												},
@@ -15931,7 +15955,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 											},
 										},
-										"preference": schema.Float64Attribute{
+										"preference": schema.Int64Attribute{
 											MarkdownDescription: "Preference",
 											Optional:            true,
 										},
@@ -15990,7 +16014,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														Attributes: map[string]schema.Attribute{
 															"broadcast": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("p2mp"),
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
@@ -16001,7 +16025,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															"p2mp": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("broadcast"),
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
@@ -16018,7 +16042,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					MarkdownDescription: "Name",
 																					Required:            true,
 																				},
-																				"priority": schema.Float64Attribute{
+																				"priority": schema.Int64Attribute{
 																					MarkdownDescription: "Priority",
 																					Optional:            true,
 																				},
@@ -16029,7 +16053,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															"p2p": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("broadcast"),
 																		path.MatchRelative().AtParent().AtName("p2mp"),
 																	),
@@ -16040,7 +16064,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 														},
 													},
-													"metric": schema.Float64Attribute{
+													"metric": schema.Int64Attribute{
 														MarkdownDescription: "Metric",
 														Optional:            true,
 													},
@@ -16056,7 +16080,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Passive",
 														Optional:            true,
 													},
-													"priority": schema.Float64Attribute{
+													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Optional:            true,
 													},
@@ -16068,23 +16092,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
-															"dead_counts": schema.Float64Attribute{
+															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
 															},
-															"gr_delay": schema.Float64Attribute{
+															"gr_delay": schema.Int64Attribute{
 																MarkdownDescription: "Gr delay",
 																Optional:            true,
 															},
-															"hello_interval": schema.Float64Attribute{
+															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
 															},
-															"retransmit_interval": schema.Float64Attribute{
+															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
 															},
-															"transit_delay": schema.Float64Attribute{
+															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
 															},
@@ -16123,7 +16147,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Attributes: map[string]schema.Attribute{
 												"normal": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("nssa"),
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
@@ -16157,7 +16181,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"nssa": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("normal"),
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
@@ -16194,7 +16218,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				MarkdownDescription: "Name",
 																				Required:            true,
 																			},
-																			"route_tag": schema.Float64Attribute{
+																			"route_tag": schema.Int64Attribute{
 																				MarkdownDescription: "Route tag",
 																				Optional:            true,
 																			},
@@ -16215,7 +16239,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															MarkdownDescription: "Default information originate",
 															Optional:            true,
 															Attributes: map[string]schema.Attribute{
-																"metric": schema.Float64Attribute{
+																"metric": schema.Int64Attribute{
 																	MarkdownDescription: "Metric",
 																	Optional:            true,
 																},
@@ -16234,14 +16258,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
 																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
-																		"metric": schema.Float64Attribute{
+																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
 																		},
@@ -16256,7 +16280,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																"disable": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
@@ -16296,7 +16320,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"stub": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("normal"),
 															path.MatchRelative().AtParent().AtName("nssa"),
 														),
@@ -16336,14 +16360,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
 																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
-																		"metric": schema.Float64Attribute{
+																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
 																		},
@@ -16351,7 +16375,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																"disable": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
@@ -16361,7 +16385,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 															},
 														},
-														"default_route_metric": schema.Float64Attribute{
+														"default_route_metric": schema.Int64Attribute{
 															MarkdownDescription: "Default route metric",
 															Optional:            true,
 														},
@@ -16396,11 +16420,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Enable",
 														Optional:            true,
 													},
-													"instance_id": schema.Float64Attribute{
+													"instance_id": schema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Optional:            true,
 													},
-													"interface_id": schema.Float64Attribute{
+													"interface_id": schema.Int64Attribute{
 														MarkdownDescription: "Interface id",
 														Optional:            true,
 													},
@@ -16428,19 +16452,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
-															"dead_counts": schema.Float64Attribute{
+															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
 															},
-															"hello_interval": schema.Float64Attribute{
+															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
 															},
-															"retransmit_interval": schema.Float64Attribute{
+															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
 															},
-															"transit_delay": schema.Float64Attribute{
+															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
 															},
@@ -16519,7 +16543,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								Optional:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
-										"metric": schema.Float64Attribute{
+										"metric": schema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Optional:            true,
 										},
@@ -16553,7 +16577,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												MarkdownDescription: "Enable",
 												Optional:            true,
 											},
-											"max_packet": schema.Float64Attribute{
+											"max_packet": schema.Int64Attribute{
 												MarkdownDescription: "Max packet",
 												Optional:            true,
 											},
@@ -16567,7 +16591,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												MarkdownDescription: "Enable",
 												Optional:            true,
 											},
-											"max_packet": schema.Float64Attribute{
+											"max_packet": schema.Int64Attribute{
 												MarkdownDescription: "Max packet",
 												Optional:            true,
 											},
@@ -16597,7 +16621,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Enable",
 										Optional:            true,
 									},
-									"grace_period": schema.Float64Attribute{
+									"grace_period": schema.Int64Attribute{
 										MarkdownDescription: "Grace period",
 										Optional:            true,
 									},
@@ -16605,7 +16629,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Helper enable",
 										Optional:            true,
 									},
-									"max_neighbor_restart_time": schema.Float64Attribute{
+									"max_neighbor_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Max neighbor restart time",
 										Optional:            true,
 									},
@@ -16639,11 +16663,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								MarkdownDescription: "Vr timers",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
-									"lsa_interval": schema.Float64Attribute{
+									"lsa_interval": schema.Int64Attribute{
 										MarkdownDescription: "Lsa interval",
 										Optional:            true,
 									},
-									"spf_calculation_delay": schema.Float64Attribute{
+									"spf_calculation_delay": schema.Int64Attribute{
 										MarkdownDescription: "Spf calculation delay",
 										Optional:            true,
 									},
@@ -16691,7 +16715,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Enable",
 														Optional:            true,
 													},
-													"instance_id": schema.Float64Attribute{
+													"instance_id": schema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Optional:            true,
 													},
@@ -16701,7 +16725,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														Attributes: map[string]schema.Attribute{
 															"broadcast": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("p2mp"),
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
@@ -16712,7 +16736,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															"p2mp": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("broadcast"),
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
@@ -16729,7 +16753,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					MarkdownDescription: "Name",
 																					Required:            true,
 																				},
-																				"priority": schema.Float64Attribute{
+																				"priority": schema.Int64Attribute{
 																					MarkdownDescription: "Priority",
 																					Optional:            true,
 																				},
@@ -16740,7 +16764,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															"p2p": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
-																	objectvalidator.ExactlyOneOf(
+																	objectvalidator.ConflictsWith(
 																		path.MatchRelative().AtParent().AtName("broadcast"),
 																		path.MatchRelative().AtParent().AtName("p2mp"),
 																	),
@@ -16751,7 +16775,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 														},
 													},
-													"metric": schema.Float64Attribute{
+													"metric": schema.Int64Attribute{
 														MarkdownDescription: "Metric",
 														Optional:            true,
 													},
@@ -16779,7 +16803,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Passive",
 														Optional:            true,
 													},
-													"priority": schema.Float64Attribute{
+													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Optional:            true,
 													},
@@ -16791,23 +16815,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
-															"dead_counts": schema.Float64Attribute{
+															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
 															},
-															"gr_delay": schema.Float64Attribute{
+															"gr_delay": schema.Int64Attribute{
 																MarkdownDescription: "Gr delay",
 																Optional:            true,
 															},
-															"hello_interval": schema.Float64Attribute{
+															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
 															},
-															"retransmit_interval": schema.Float64Attribute{
+															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
 															},
-															"transit_delay": schema.Float64Attribute{
+															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
 															},
@@ -16842,7 +16866,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Attributes: map[string]schema.Attribute{
 												"normal": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("nssa"),
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
@@ -16876,7 +16900,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"nssa": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("normal"),
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
@@ -16914,7 +16938,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				MarkdownDescription: "Name",
 																				Required:            true,
 																			},
-																			"route_tag": schema.Float64Attribute{
+																			"route_tag": schema.Int64Attribute{
 																				MarkdownDescription: "Route tag",
 																				Optional:            true,
 																			},
@@ -16940,7 +16964,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															MarkdownDescription: "Default information originate",
 															Optional:            true,
 															Attributes: map[string]schema.Attribute{
-																"metric": schema.Float64Attribute{
+																"metric": schema.Int64Attribute{
 																	MarkdownDescription: "Metric",
 																	Optional:            true,
 																},
@@ -16959,14 +16983,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
 																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
-																		"metric": schema.Float64Attribute{
+																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
 																		},
@@ -16981,7 +17005,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																"disable": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
@@ -17009,7 +17033,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		MarkdownDescription: "Name",
 																		Required:            true,
 																	},
-																	"route_tag": schema.Float64Attribute{
+																	"route_tag": schema.Int64Attribute{
 																		MarkdownDescription: "Route tag",
 																		Optional:            true,
 																	},
@@ -17025,7 +17049,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"stub": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("normal"),
 															path.MatchRelative().AtParent().AtName("nssa"),
 														),
@@ -17065,14 +17089,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
 																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
-																		"metric": schema.Float64Attribute{
+																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
 																		},
@@ -17080,7 +17104,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																"disable": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
-																		objectvalidator.ExactlyOneOf(
+																		objectvalidator.ConflictsWith(
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
@@ -17090,7 +17114,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 															},
 														},
-														"default_route_metric": schema.Float64Attribute{
+														"default_route_metric": schema.Int64Attribute{
 															MarkdownDescription: "Default route metric",
 															Optional:            true,
 														},
@@ -17125,11 +17149,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Enable",
 														Optional:            true,
 													},
-													"instance_id": schema.Float64Attribute{
+													"instance_id": schema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Optional:            true,
 													},
-													"interface_id": schema.Float64Attribute{
+													"interface_id": schema.Int64Attribute{
 														MarkdownDescription: "Interface id",
 														Optional:            true,
 													},
@@ -17157,19 +17181,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
-															"dead_counts": schema.Float64Attribute{
+															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
 															},
-															"hello_interval": schema.Float64Attribute{
+															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
 															},
-															"retransmit_interval": schema.Float64Attribute{
+															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
 															},
-															"transit_delay": schema.Float64Attribute{
+															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
 															},
@@ -17214,7 +17238,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Attributes: map[string]schema.Attribute{
 												"md5": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("sha1"),
 															path.MatchRelative().AtParent().AtName("sha256"),
 															path.MatchRelative().AtParent().AtName("sha384"),
@@ -17232,7 +17256,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"sha1": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha256"),
 															path.MatchRelative().AtParent().AtName("sha384"),
@@ -17250,7 +17274,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"sha256": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha1"),
 															path.MatchRelative().AtParent().AtName("sha384"),
@@ -17268,7 +17292,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"sha384": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha1"),
 															path.MatchRelative().AtParent().AtName("sha256"),
@@ -17286,7 +17310,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												"sha512": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
-														objectvalidator.ExactlyOneOf(
+														objectvalidator.ConflictsWith(
 															path.MatchRelative().AtParent().AtName("md5"),
 															path.MatchRelative().AtParent().AtName("sha1"),
 															path.MatchRelative().AtParent().AtName("sha256"),
@@ -17314,7 +17338,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"md5": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
@@ -17333,7 +17357,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"none": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("md5"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
@@ -17347,7 +17371,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"sha1": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("md5"),
 																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha256"),
@@ -17366,7 +17390,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"sha256": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("md5"),
 																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
@@ -17385,7 +17409,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"sha384": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("md5"),
 																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
@@ -17404,7 +17428,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"sha512": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("md5"),
 																	path.MatchRelative().AtParent().AtName("none"),
 																	path.MatchRelative().AtParent().AtName("sha1"),
@@ -17466,7 +17490,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								Optional:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
-										"metric": schema.Float64Attribute{
+										"metric": schema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Optional:            true,
 										},
@@ -17510,7 +17534,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Enable",
 										Optional:            true,
 									},
-									"grace_period": schema.Float64Attribute{
+									"grace_period": schema.Int64Attribute{
 										MarkdownDescription: "Grace period",
 										Optional:            true,
 									},
@@ -17518,7 +17542,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Helper enable",
 										Optional:            true,
 									},
-									"max_neighbor_restart_time": schema.Float64Attribute{
+									"max_neighbor_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Max neighbor restart time",
 										Optional:            true,
 									},
@@ -17548,11 +17572,11 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								MarkdownDescription: "Vr timers",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
-									"lsa_interval": schema.Float64Attribute{
+									"lsa_interval": schema.Int64Attribute{
 										MarkdownDescription: "Lsa interval",
 										Optional:            true,
 									},
-									"spf_calculation_delay": schema.Float64Attribute{
+									"spf_calculation_delay": schema.Int64Attribute{
 										MarkdownDescription: "Spf calculation delay",
 										Optional:            true,
 									},
@@ -17729,7 +17753,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Access list",
 													Optional:            true,
 												},
-												"metric": schema.Float64Attribute{
+												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
 												},
@@ -17743,7 +17767,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Access list",
 													Optional:            true,
 												},
-												"metric": schema.Float64Attribute{
+												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
 												},
@@ -17789,7 +17813,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										Optional:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
-												"admin_dist": schema.Float64Attribute{
+												"admin_dist": schema.Int64Attribute{
 													MarkdownDescription: "Admin dist",
 													Optional:            true,
 												},
@@ -17811,7 +17835,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Interface",
 													Optional:            true,
 												},
-												"metric": schema.Float64Attribute{
+												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
 												},
@@ -17825,7 +17849,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"discard": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
@@ -17840,7 +17864,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
@@ -17854,7 +17878,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"ipv6_address": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
@@ -17868,7 +17892,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"next_lr": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -17882,7 +17906,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"next_vr": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -17896,7 +17920,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"receive": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -17911,7 +17935,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"tunnel": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -17940,7 +17964,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															MarkdownDescription: "Failure condition",
 															Optional:            true,
 														},
-														"hold_time": schema.Float64Attribute{
+														"hold_time": schema.Int64Attribute{
 															MarkdownDescription: "Hold time",
 															Optional:            true,
 														},
@@ -17949,7 +17973,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Optional:            true,
 															NestedObject: schema.NestedAttributeObject{
 																Attributes: map[string]schema.Attribute{
-																	"count": schema.Float64Attribute{
+																	"count": schema.Int64Attribute{
 																		MarkdownDescription: "Count",
 																		Optional:            true,
 																	},
@@ -17965,7 +17989,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
 																	},
-																	"interval": schema.Float64Attribute{
+																	"interval": schema.Int64Attribute{
 																		MarkdownDescription: "Interval",
 																		Optional:            true,
 																	},
@@ -17988,7 +18012,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"both": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("multicast"),
 																	path.MatchRelative().AtParent().AtName("no_install"),
 																	path.MatchRelative().AtParent().AtName("unicast"),
@@ -18000,7 +18024,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"multicast": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("both"),
 																	path.MatchRelative().AtParent().AtName("no_install"),
 																	path.MatchRelative().AtParent().AtName("unicast"),
@@ -18012,7 +18036,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"no_install": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("both"),
 																	path.MatchRelative().AtParent().AtName("multicast"),
 																	path.MatchRelative().AtParent().AtName("unicast"),
@@ -18024,7 +18048,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"unicast": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("both"),
 																	path.MatchRelative().AtParent().AtName("multicast"),
 																	path.MatchRelative().AtParent().AtName("no_install"),
@@ -18050,7 +18074,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										Optional:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
-												"admin_dist": schema.Float64Attribute{
+												"admin_dist": schema.Int64Attribute{
 													MarkdownDescription: "Admin dist",
 													Optional:            true,
 												},
@@ -18072,7 +18096,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													MarkdownDescription: "Interface",
 													Optional:            true,
 												},
-												"metric": schema.Float64Attribute{
+												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
 												},
@@ -18086,7 +18110,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Attributes: map[string]schema.Attribute{
 														"discard": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
@@ -18101,7 +18125,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
@@ -18115,7 +18139,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"ipv6_address": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
@@ -18129,7 +18153,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"next_lr": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -18143,7 +18167,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"next_vr": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -18157,7 +18181,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"receive": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
-																objectvalidator.ExactlyOneOf(
+																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -18172,7 +18196,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														"tunnel": schema.StringAttribute{
 															Validators: []validator.String{
-																stringvalidator.ExactlyOneOf(
+																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
@@ -18212,7 +18236,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															MarkdownDescription: "Failure condition",
 															Optional:            true,
 														},
-														"hold_time": schema.Float64Attribute{
+														"hold_time": schema.Int64Attribute{
 															MarkdownDescription: "Hold time",
 															Optional:            true,
 														},
@@ -18221,7 +18245,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Optional:            true,
 															NestedObject: schema.NestedAttributeObject{
 																Attributes: map[string]schema.Attribute{
-																	"count": schema.Float64Attribute{
+																	"count": schema.Int64Attribute{
 																		MarkdownDescription: "Count",
 																		Optional:            true,
 																	},
@@ -18237,7 +18261,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
 																	},
-																	"interval": schema.Float64Attribute{
+																	"interval": schema.Int64Attribute{
 																		MarkdownDescription: "Interval",
 																		Optional:            true,
 																	},
@@ -18295,39 +18319,39 @@ var LogicalRoutersResourceSchema = schema.Schema{
 						MarkdownDescription: "Vr admin dists",
 						Optional:            true,
 						Attributes: map[string]schema.Attribute{
-							"ebgp": schema.Float64Attribute{
+							"ebgp": schema.Int64Attribute{
 								MarkdownDescription: "Ebgp",
 								Optional:            true,
 							},
-							"ibgp": schema.Float64Attribute{
+							"ibgp": schema.Int64Attribute{
 								MarkdownDescription: "Ibgp",
 								Optional:            true,
 							},
-							"ospf_ext": schema.Float64Attribute{
+							"ospf_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospf ext",
 								Optional:            true,
 							},
-							"ospf_int": schema.Float64Attribute{
+							"ospf_int": schema.Int64Attribute{
 								MarkdownDescription: "Ospf int",
 								Optional:            true,
 							},
-							"ospfv3_ext": schema.Float64Attribute{
+							"ospfv3_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 ext",
 								Optional:            true,
 							},
-							"ospfv3_int": schema.Float64Attribute{
+							"ospfv3_int": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 int",
 								Optional:            true,
 							},
-							"rip": schema.Float64Attribute{
+							"rip": schema.Int64Attribute{
 								MarkdownDescription: "Rip",
 								Optional:            true,
 							},
-							"static": schema.Float64Attribute{
+							"static": schema.Int64Attribute{
 								MarkdownDescription: "Static",
 								Optional:            true,
 							},
-							"static_ipv6": schema.Float64Attribute{
+							"static_ipv6": schema.Int64Attribute{
 								MarkdownDescription: "Static ipv6",
 								Optional:            true,
 							},
@@ -18385,51 +18409,51 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 						MarkdownDescription: "Admin dists",
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
-							"bgp_external": dsschema.Float64Attribute{
+							"bgp_external": dsschema.Int64Attribute{
 								MarkdownDescription: "Bgp external",
 								Computed:            true,
 							},
-							"bgp_internal": dsschema.Float64Attribute{
+							"bgp_internal": dsschema.Int64Attribute{
 								MarkdownDescription: "Bgp internal",
 								Computed:            true,
 							},
-							"bgp_local": dsschema.Float64Attribute{
+							"bgp_local": dsschema.Int64Attribute{
 								MarkdownDescription: "Bgp local",
 								Computed:            true,
 							},
-							"ospf_ext": dsschema.Float64Attribute{
+							"ospf_ext": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospf ext",
 								Computed:            true,
 							},
-							"ospf_inter": dsschema.Float64Attribute{
+							"ospf_inter": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospf inter",
 								Computed:            true,
 							},
-							"ospf_intra": dsschema.Float64Attribute{
+							"ospf_intra": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospf intra",
 								Computed:            true,
 							},
-							"ospfv3_ext": dsschema.Float64Attribute{
+							"ospfv3_ext": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 ext",
 								Computed:            true,
 							},
-							"ospfv3_inter": dsschema.Float64Attribute{
+							"ospfv3_inter": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 inter",
 								Computed:            true,
 							},
-							"ospfv3_intra": dsschema.Float64Attribute{
+							"ospfv3_intra": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 intra",
 								Computed:            true,
 							},
-							"rip": dsschema.Float64Attribute{
+							"rip": dsschema.Int64Attribute{
 								MarkdownDescription: "Rip",
 								Computed:            true,
 							},
-							"static": dsschema.Float64Attribute{
+							"static": dsschema.Int64Attribute{
 								MarkdownDescription: "Static",
 								Computed:            true,
 							},
-							"static_ipv6": dsschema.Float64Attribute{
+							"static_ipv6": dsschema.Int64Attribute{
 								MarkdownDescription: "Static ipv6",
 								Computed:            true,
 							},
@@ -18597,7 +18621,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								MarkdownDescription: "Confederation member as",
 								Computed:            true,
 							},
-							"default_local_preference": dsschema.Float64Attribute{
+							"default_local_preference": dsschema.Int64Attribute{
 								MarkdownDescription: "Default local preference",
 								Computed:            true,
 							},
@@ -18635,15 +18659,15 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Enable",
 										Computed:            true,
 									},
-									"local_restart_time": dsschema.Float64Attribute{
+									"local_restart_time": dsschema.Int64Attribute{
 										MarkdownDescription: "Local restart time",
 										Computed:            true,
 									},
-									"max_peer_restart_time": dsschema.Float64Attribute{
+									"max_peer_restart_time": dsschema.Int64Attribute{
 										MarkdownDescription: "Max peer restart time",
 										Computed:            true,
 									},
-									"stale_route_time": dsschema.Float64Attribute{
+									"stale_route_time": dsschema.Int64Attribute{
 										MarkdownDescription: "Stale route time",
 										Computed:            true,
 									},
@@ -18710,7 +18734,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Dampening",
 													Computed:            true,
 												},
-												"multihop": dsschema.Float64Attribute{
+												"multihop": dsschema.Int64Attribute{
 													MarkdownDescription: "Multihop",
 													Computed:            true,
 												},
@@ -18755,7 +18779,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																MarkdownDescription: "Multihop",
 																Computed:            true,
 																Attributes: map[string]dsschema.Attribute{
-																	"min_received_ttl": dsschema.Float64Attribute{
+																	"min_received_ttl": dsschema.Int64Attribute{
 																		MarkdownDescription: "Min received ttl",
 																		Computed:            true,
 																	},
@@ -18783,7 +18807,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																MarkdownDescription: "Hold time",
 																Computed:            true,
 															},
-															"idle_hold_time": dsschema.Float64Attribute{
+															"idle_hold_time": dsschema.Int64Attribute{
 																MarkdownDescription: "Idle hold time",
 																Computed:            true,
 															},
@@ -18795,7 +18819,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																		MarkdownDescription: "Allow",
 																		Computed:            true,
 																	},
-																	"remote_port": dsschema.Float64Attribute{
+																	"remote_port": dsschema.Int64Attribute{
 																		MarkdownDescription: "Remote port",
 																		Computed:            true,
 																	},
@@ -18809,7 +18833,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																MarkdownDescription: "Max prefixes",
 																Computed:            true,
 															},
-															"min_route_adv_interval": dsschema.Float64Attribute{
+															"min_route_adv_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Min route adv interval",
 																Computed:            true,
 															},
@@ -18817,7 +18841,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																MarkdownDescription: "Multihop",
 																Computed:            true,
 															},
-															"open_delay_time": dsschema.Float64Attribute{
+															"open_delay_time": dsschema.Int64Attribute{
 																MarkdownDescription: "Open delay time",
 																Computed:            true,
 															},
@@ -18829,7 +18853,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																		MarkdownDescription: "Allow",
 																		Computed:            true,
 																	},
-																	"local_port": dsschema.Float64Attribute{
+																	"local_port": dsschema.Int64Attribute{
 																		MarkdownDescription: "Local port",
 																		Computed:            true,
 																	},
@@ -19105,7 +19129,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				MarkdownDescription: "From peer",
 																				Computed:            true,
 																			},
-																			"med": dsschema.Float64Attribute{
+																			"med": dsschema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Computed:            true,
 																			},
@@ -19144,7 +19168,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
-																		"prepend": dsschema.Float64Attribute{
+																		"prepend": dsschema.Int64Attribute{
 																			MarkdownDescription: "Prepend",
 																			Computed:            true,
 																		},
@@ -19153,13 +19177,13 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
-																		"remove_and_prepend": dsschema.Float64Attribute{
+																		"remove_and_prepend": dsschema.Int64Attribute{
 																			MarkdownDescription: "Remove and prepend",
 																			Computed:            true,
 																		},
 																	},
 																},
-																"as_path_limit": dsschema.Float64Attribute{
+																"as_path_limit": dsschema.Int64Attribute{
 																	MarkdownDescription: "As path limit",
 																	Computed:            true,
 																},
@@ -19223,11 +19247,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																		},
 																	},
 																},
-																"local_preference": dsschema.Float64Attribute{
+																"local_preference": dsschema.Int64Attribute{
 																	MarkdownDescription: "Local preference",
 																	Computed:            true,
 																},
-																"med": dsschema.Float64Attribute{
+																"med": dsschema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Computed:            true,
 																},
@@ -19239,7 +19263,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	MarkdownDescription: "Origin",
 																	Computed:            true,
 																},
-																"weight": dsschema.Float64Attribute{
+																"weight": dsschema.Int64Attribute{
 																	MarkdownDescription: "Weight",
 																	Computed:            true,
 																},
@@ -19333,7 +19357,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				MarkdownDescription: "From peer",
 																				Computed:            true,
 																			},
-																			"med": dsschema.Float64Attribute{
+																			"med": dsschema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Computed:            true,
 																			},
@@ -19441,7 +19465,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				MarkdownDescription: "From peer",
 																				Computed:            true,
 																			},
-																			"med": dsschema.Float64Attribute{
+																			"med": dsschema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Computed:            true,
 																			},
@@ -19543,7 +19567,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				MarkdownDescription: "From peer",
 																				Computed:            true,
 																			},
-																			"med": dsschema.Float64Attribute{
+																			"med": dsschema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Computed:            true,
 																			},
@@ -19609,7 +19633,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
-																						"prepend": dsschema.Float64Attribute{
+																						"prepend": dsschema.Int64Attribute{
 																							MarkdownDescription: "Prepend",
 																							Computed:            true,
 																						},
@@ -19618,13 +19642,13 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
-																						"remove_and_prepend": dsschema.Float64Attribute{
+																						"remove_and_prepend": dsschema.Int64Attribute{
 																							MarkdownDescription: "Remove and prepend",
 																							Computed:            true,
 																						},
 																					},
 																				},
-																				"as_path_limit": dsschema.Float64Attribute{
+																				"as_path_limit": dsschema.Int64Attribute{
 																					MarkdownDescription: "As path limit",
 																					Computed:            true,
 																				},
@@ -19688,11 +19712,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																						},
 																					},
 																				},
-																				"local_preference": dsschema.Float64Attribute{
+																				"local_preference": dsschema.Int64Attribute{
 																					MarkdownDescription: "Local preference",
 																					Computed:            true,
 																				},
-																				"med": dsschema.Float64Attribute{
+																				"med": dsschema.Int64Attribute{
 																					MarkdownDescription: "Med",
 																					Computed:            true,
 																				},
@@ -19778,7 +19802,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	MarkdownDescription: "From peer",
 																	Computed:            true,
 																},
-																"med": dsschema.Float64Attribute{
+																"med": dsschema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Computed:            true,
 																},
@@ -19845,7 +19869,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
-																						"prepend": dsschema.Float64Attribute{
+																						"prepend": dsschema.Int64Attribute{
 																							MarkdownDescription: "Prepend",
 																							Computed:            true,
 																						},
@@ -19854,13 +19878,13 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
-																						"remove_and_prepend": dsschema.Float64Attribute{
+																						"remove_and_prepend": dsschema.Int64Attribute{
 																							MarkdownDescription: "Remove and prepend",
 																							Computed:            true,
 																						},
 																					},
 																				},
-																				"as_path_limit": dsschema.Float64Attribute{
+																				"as_path_limit": dsschema.Int64Attribute{
 																					MarkdownDescription: "As path limit",
 																					Computed:            true,
 																				},
@@ -19924,11 +19948,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																						},
 																					},
 																				},
-																				"local_preference": dsschema.Float64Attribute{
+																				"local_preference": dsschema.Int64Attribute{
 																					MarkdownDescription: "Local preference",
 																					Computed:            true,
 																				},
-																				"med": dsschema.Float64Attribute{
+																				"med": dsschema.Int64Attribute{
 																					MarkdownDescription: "Med",
 																					Computed:            true,
 																				},
@@ -19940,7 +19964,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					MarkdownDescription: "Origin",
 																					Computed:            true,
 																				},
-																				"weight": dsschema.Float64Attribute{
+																				"weight": dsschema.Int64Attribute{
 																					MarkdownDescription: "Weight",
 																					Computed:            true,
 																				},
@@ -20018,7 +20042,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	MarkdownDescription: "From peer",
 																	Computed:            true,
 																},
-																"med": dsschema.Float64Attribute{
+																"med": dsschema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Computed:            true,
 																},
@@ -20066,7 +20090,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											MarkdownDescription: "Enable",
 											Computed:            true,
 										},
-										"metric": dsschema.Float64Attribute{
+										"metric": dsschema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Computed:            true,
 										},
@@ -20078,7 +20102,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											MarkdownDescription: "Route table",
 											Computed:            true,
 										},
-										"set_as_path_limit": dsschema.Float64Attribute{
+										"set_as_path_limit": dsschema.Int64Attribute{
 											MarkdownDescription: "Set as path limit",
 											Computed:            true,
 										},
@@ -20092,11 +20116,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											MarkdownDescription: "Set extended community",
 											Computed:            true,
 										},
-										"set_local_preference": dsschema.Float64Attribute{
+										"set_local_preference": dsschema.Int64Attribute{
 											MarkdownDescription: "Set local preference",
 											Computed:            true,
 										},
-										"set_med": dsschema.Float64Attribute{
+										"set_med": dsschema.Int64Attribute{
 											MarkdownDescription: "Set med",
 											Computed:            true,
 										},
@@ -20160,7 +20184,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Ip hash",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
-											"hash_seed": dsschema.Float64Attribute{
+											"hash_seed": dsschema.Int64Attribute{
 												MarkdownDescription: "Hash seed",
 												Computed:            true,
 											},
@@ -20192,7 +20216,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															MarkdownDescription: "Name",
 															Computed:            true,
 														},
-														"weight": dsschema.Float64Attribute{
+														"weight": dsschema.Int64Attribute{
 															MarkdownDescription: "Weight",
 															Computed:            true,
 														},
@@ -20207,7 +20231,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								MarkdownDescription: "Enable",
 								Computed:            true,
 							},
-							"max_path": dsschema.Float64Attribute{
+							"max_path": dsschema.Int64Attribute{
 								MarkdownDescription: "Max path",
 								Computed:            true,
 							},
@@ -20221,7 +20245,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 							},
 						},
 					},
-					"global_vrid": dsschema.Float64Attribute{
+					"global_vrid": dsschema.Int64Attribute{
 						MarkdownDescription: "Global vrid",
 						Computed:            true,
 					},
@@ -20393,7 +20417,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Immediate leave",
 													Computed:            true,
 												},
-												"last_member_query_interval": dsschema.Float64Attribute{
+												"last_member_query_interval": dsschema.Int64Attribute{
 													MarkdownDescription: "Last member query interval",
 													Computed:            true,
 												},
@@ -20401,7 +20425,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Max groups",
 													Computed:            true,
 												},
-												"max_query_response_time": dsschema.Float64Attribute{
+												"max_query_response_time": dsschema.Int64Attribute{
 													MarkdownDescription: "Max query response time",
 													Computed:            true,
 												},
@@ -20413,7 +20437,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Mode",
 													Computed:            true,
 												},
-												"query_interval": dsschema.Float64Attribute{
+												"query_interval": dsschema.Int64Attribute{
 													MarkdownDescription: "Query interval",
 													Computed:            true,
 												},
@@ -20456,7 +20480,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														},
 													},
 												},
-												"assert_interval": dsschema.Float64Attribute{
+												"assert_interval": dsschema.Int64Attribute{
 													MarkdownDescription: "Assert interval",
 													Computed:            true,
 												},
@@ -20464,7 +20488,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Bsr border",
 													Computed:            true,
 												},
-												"dr_priority": dsschema.Float64Attribute{
+												"dr_priority": dsschema.Int64Attribute{
 													MarkdownDescription: "Dr priority",
 													Computed:            true,
 												},
@@ -20472,11 +20496,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Enable",
 													Computed:            true,
 												},
-												"hello_interval": dsschema.Float64Attribute{
+												"hello_interval": dsschema.Int64Attribute{
 													MarkdownDescription: "Hello interval",
 													Computed:            true,
 												},
-												"join_prune_interval": dsschema.Float64Attribute{
+												"join_prune_interval": dsschema.Int64Attribute{
 													MarkdownDescription: "Join prune interval",
 													Computed:            true,
 												},
@@ -20550,7 +20574,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														},
 													},
 												},
-												"max_sa": dsschema.Float64Attribute{
+												"max_sa": dsschema.Int64Attribute{
 													MarkdownDescription: "Max sa",
 													Computed:            true,
 												},
@@ -20610,7 +20634,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Description",
 													Computed:            true,
 												},
-												"dr_priority": dsschema.Float64Attribute{
+												"dr_priority": dsschema.Int64Attribute{
 													MarkdownDescription: "Dr priority",
 													Computed:            true,
 												},
@@ -20633,7 +20657,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											},
 										},
 									},
-									"route_ageout_time": dsschema.Float64Attribute{
+									"route_ageout_time": dsschema.Int64Attribute{
 										MarkdownDescription: "Route ageout time",
 										Computed:            true,
 									},
@@ -20673,7 +20697,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																MarkdownDescription: "Address",
 																Computed:            true,
 															},
-															"advertisement_interval": dsschema.Float64Attribute{
+															"advertisement_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Advertisement interval",
 																Computed:            true,
 															},
@@ -20685,7 +20709,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																MarkdownDescription: "Interface",
 																Computed:            true,
 															},
-															"priority": dsschema.Float64Attribute{
+															"priority": dsschema.Int64Attribute{
 																MarkdownDescription: "Priority",
 																Computed:            true,
 															},
@@ -20749,7 +20773,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 									},
 								},
 							},
-							"route_ageout_time": dsschema.Float64Attribute{
+							"route_ageout_time": dsschema.Int64Attribute{
 								MarkdownDescription: "Route ageout time",
 								Computed:            true,
 							},
@@ -20790,7 +20814,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Address",
 														Computed:            true,
 													},
-													"advertisement_interval": dsschema.Float64Attribute{
+													"advertisement_interval": dsschema.Int64Attribute{
 														MarkdownDescription: "Advertisement interval",
 														Computed:            true,
 													},
@@ -20803,7 +20827,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Interface",
 														Computed:            true,
 													},
-													"priority": dsschema.Float64Attribute{
+													"priority": dsschema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Computed:            true,
 													},
@@ -20899,7 +20923,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 												},
 											},
 										},
-										"preference": dsschema.Float64Attribute{
+										"preference": dsschema.Int64Attribute{
 											MarkdownDescription: "Preference",
 											Computed:            true,
 										},
@@ -20974,7 +20998,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					MarkdownDescription: "Name",
 																					Computed:            true,
 																				},
-																				"priority": dsschema.Float64Attribute{
+																				"priority": dsschema.Int64Attribute{
 																					MarkdownDescription: "Priority",
 																					Computed:            true,
 																				},
@@ -20990,7 +21014,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															},
 														},
 													},
-													"metric": dsschema.Float64Attribute{
+													"metric": dsschema.Int64Attribute{
 														MarkdownDescription: "Metric",
 														Computed:            true,
 													},
@@ -21006,7 +21030,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Passive",
 														Computed:            true,
 													},
-													"priority": dsschema.Float64Attribute{
+													"priority": dsschema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Computed:            true,
 													},
@@ -21018,23 +21042,23 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Vr timing",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
-															"dead_counts": dsschema.Float64Attribute{
+															"dead_counts": dsschema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Computed:            true,
 															},
-															"gr_delay": dsschema.Float64Attribute{
+															"gr_delay": dsschema.Int64Attribute{
 																MarkdownDescription: "Gr delay",
 																Computed:            true,
 															},
-															"hello_interval": dsschema.Float64Attribute{
+															"hello_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Computed:            true,
 															},
-															"retransmit_interval": dsschema.Float64Attribute{
+															"retransmit_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Computed:            true,
 															},
-															"transit_delay": dsschema.Float64Attribute{
+															"transit_delay": dsschema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Computed:            true,
 															},
@@ -21132,7 +21156,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				MarkdownDescription: "Name",
 																				Computed:            true,
 																			},
-																			"route_tag": dsschema.Float64Attribute{
+																			"route_tag": dsschema.Int64Attribute{
 																				MarkdownDescription: "Route tag",
 																				Computed:            true,
 																			},
@@ -21153,7 +21177,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															MarkdownDescription: "Default information originate",
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
-																"metric": dsschema.Float64Attribute{
+																"metric": dsschema.Int64Attribute{
 																	MarkdownDescription: "Metric",
 																	Computed:            true,
 																},
@@ -21171,7 +21195,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
-																		"metric": dsschema.Float64Attribute{
+																		"metric": dsschema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Computed:            true,
 																		},
@@ -21254,7 +21278,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
-																		"metric": dsschema.Float64Attribute{
+																		"metric": dsschema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Computed:            true,
 																		},
@@ -21267,7 +21291,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																},
 															},
 														},
-														"default_route_metric": dsschema.Float64Attribute{
+														"default_route_metric": dsschema.Int64Attribute{
 															MarkdownDescription: "Default route metric",
 															Computed:            true,
 														},
@@ -21302,11 +21326,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Enable",
 														Computed:            true,
 													},
-													"instance_id": dsschema.Float64Attribute{
+													"instance_id": dsschema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Computed:            true,
 													},
-													"interface_id": dsschema.Float64Attribute{
+													"interface_id": dsschema.Int64Attribute{
 														MarkdownDescription: "Interface id",
 														Computed:            true,
 													},
@@ -21334,19 +21358,19 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Vr timing",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
-															"dead_counts": dsschema.Float64Attribute{
+															"dead_counts": dsschema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Computed:            true,
 															},
-															"hello_interval": dsschema.Float64Attribute{
+															"hello_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Computed:            true,
 															},
-															"retransmit_interval": dsschema.Float64Attribute{
+															"retransmit_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Computed:            true,
 															},
-															"transit_delay": dsschema.Float64Attribute{
+															"transit_delay": dsschema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Computed:            true,
 															},
@@ -21425,7 +21449,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								NestedObject: dsschema.NestedAttributeObject{
 									Attributes: map[string]dsschema.Attribute{
-										"metric": dsschema.Float64Attribute{
+										"metric": dsschema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Computed:            true,
 										},
@@ -21456,7 +21480,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 												MarkdownDescription: "Enable",
 												Computed:            true,
 											},
-											"max_packet": dsschema.Float64Attribute{
+											"max_packet": dsschema.Int64Attribute{
 												MarkdownDescription: "Max packet",
 												Computed:            true,
 											},
@@ -21470,7 +21494,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 												MarkdownDescription: "Enable",
 												Computed:            true,
 											},
-											"max_packet": dsschema.Float64Attribute{
+											"max_packet": dsschema.Int64Attribute{
 												MarkdownDescription: "Max packet",
 												Computed:            true,
 											},
@@ -21500,7 +21524,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Enable",
 										Computed:            true,
 									},
-									"grace_period": dsschema.Float64Attribute{
+									"grace_period": dsschema.Int64Attribute{
 										MarkdownDescription: "Grace period",
 										Computed:            true,
 									},
@@ -21508,7 +21532,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Helper enable",
 										Computed:            true,
 									},
-									"max_neighbor_restart_time": dsschema.Float64Attribute{
+									"max_neighbor_restart_time": dsschema.Int64Attribute{
 										MarkdownDescription: "Max neighbor restart time",
 										Computed:            true,
 									},
@@ -21542,11 +21566,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								MarkdownDescription: "Vr timers",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
-									"lsa_interval": dsschema.Float64Attribute{
+									"lsa_interval": dsschema.Int64Attribute{
 										MarkdownDescription: "Lsa interval",
 										Computed:            true,
 									},
-									"spf_calculation_delay": dsschema.Float64Attribute{
+									"spf_calculation_delay": dsschema.Int64Attribute{
 										MarkdownDescription: "Spf calculation delay",
 										Computed:            true,
 									},
@@ -21594,7 +21618,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Enable",
 														Computed:            true,
 													},
-													"instance_id": dsschema.Float64Attribute{
+													"instance_id": dsschema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Computed:            true,
 													},
@@ -21620,7 +21644,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					MarkdownDescription: "Name",
 																					Computed:            true,
 																				},
-																				"priority": dsschema.Float64Attribute{
+																				"priority": dsschema.Int64Attribute{
 																					MarkdownDescription: "Priority",
 																					Computed:            true,
 																				},
@@ -21636,7 +21660,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															},
 														},
 													},
-													"metric": dsschema.Float64Attribute{
+													"metric": dsschema.Int64Attribute{
 														MarkdownDescription: "Metric",
 														Computed:            true,
 													},
@@ -21664,7 +21688,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Passive",
 														Computed:            true,
 													},
-													"priority": dsschema.Float64Attribute{
+													"priority": dsschema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Computed:            true,
 													},
@@ -21676,23 +21700,23 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Vr timing",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
-															"dead_counts": dsschema.Float64Attribute{
+															"dead_counts": dsschema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Computed:            true,
 															},
-															"gr_delay": dsschema.Float64Attribute{
+															"gr_delay": dsschema.Int64Attribute{
 																MarkdownDescription: "Gr delay",
 																Computed:            true,
 															},
-															"hello_interval": dsschema.Float64Attribute{
+															"hello_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Computed:            true,
 															},
-															"retransmit_interval": dsschema.Float64Attribute{
+															"retransmit_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Computed:            true,
 															},
-															"transit_delay": dsschema.Float64Attribute{
+															"transit_delay": dsschema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Computed:            true,
 															},
@@ -21787,7 +21811,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				MarkdownDescription: "Name",
 																				Computed:            true,
 																			},
-																			"route_tag": dsschema.Float64Attribute{
+																			"route_tag": dsschema.Int64Attribute{
 																				MarkdownDescription: "Route tag",
 																				Computed:            true,
 																			},
@@ -21813,7 +21837,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															MarkdownDescription: "Default information originate",
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
-																"metric": dsschema.Float64Attribute{
+																"metric": dsschema.Int64Attribute{
 																	MarkdownDescription: "Metric",
 																	Computed:            true,
 																},
@@ -21831,7 +21855,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
-																		"metric": dsschema.Float64Attribute{
+																		"metric": dsschema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Computed:            true,
 																		},
@@ -21866,7 +21890,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																		MarkdownDescription: "Name",
 																		Computed:            true,
 																	},
-																	"route_tag": dsschema.Float64Attribute{
+																	"route_tag": dsschema.Int64Attribute{
 																		MarkdownDescription: "Route tag",
 																		Computed:            true,
 																	},
@@ -21918,7 +21942,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
-																		"metric": dsschema.Float64Attribute{
+																		"metric": dsschema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Computed:            true,
 																		},
@@ -21931,7 +21955,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																},
 															},
 														},
-														"default_route_metric": dsschema.Float64Attribute{
+														"default_route_metric": dsschema.Int64Attribute{
 															MarkdownDescription: "Default route metric",
 															Computed:            true,
 														},
@@ -21966,11 +21990,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Enable",
 														Computed:            true,
 													},
-													"instance_id": dsschema.Float64Attribute{
+													"instance_id": dsschema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Computed:            true,
 													},
-													"interface_id": dsschema.Float64Attribute{
+													"interface_id": dsschema.Int64Attribute{
 														MarkdownDescription: "Interface id",
 														Computed:            true,
 													},
@@ -21998,19 +22022,19 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														MarkdownDescription: "Vr timing",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
-															"dead_counts": dsschema.Float64Attribute{
+															"dead_counts": dsschema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Computed:            true,
 															},
-															"hello_interval": dsschema.Float64Attribute{
+															"hello_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Computed:            true,
 															},
-															"retransmit_interval": dsschema.Float64Attribute{
+															"retransmit_interval": dsschema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Computed:            true,
 															},
-															"transit_delay": dsschema.Float64Attribute{
+															"transit_delay": dsschema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Computed:            true,
 															},
@@ -22210,7 +22234,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								NestedObject: dsschema.NestedAttributeObject{
 									Attributes: map[string]dsschema.Attribute{
-										"metric": dsschema.Float64Attribute{
+										"metric": dsschema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Computed:            true,
 										},
@@ -22251,7 +22275,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Enable",
 										Computed:            true,
 									},
-									"grace_period": dsschema.Float64Attribute{
+									"grace_period": dsschema.Int64Attribute{
 										MarkdownDescription: "Grace period",
 										Computed:            true,
 									},
@@ -22259,7 +22283,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Helper enable",
 										Computed:            true,
 									},
-									"max_neighbor_restart_time": dsschema.Float64Attribute{
+									"max_neighbor_restart_time": dsschema.Int64Attribute{
 										MarkdownDescription: "Max neighbor restart time",
 										Computed:            true,
 									},
@@ -22289,11 +22313,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								MarkdownDescription: "Vr timers",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
-									"lsa_interval": dsschema.Float64Attribute{
+									"lsa_interval": dsschema.Int64Attribute{
 										MarkdownDescription: "Lsa interval",
 										Computed:            true,
 									},
-									"spf_calculation_delay": dsschema.Float64Attribute{
+									"spf_calculation_delay": dsschema.Int64Attribute{
 										MarkdownDescription: "Spf calculation delay",
 										Computed:            true,
 									},
@@ -22470,7 +22494,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Access list",
 													Computed:            true,
 												},
-												"metric": dsschema.Float64Attribute{
+												"metric": dsschema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Computed:            true,
 												},
@@ -22484,7 +22508,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Access list",
 													Computed:            true,
 												},
-												"metric": dsschema.Float64Attribute{
+												"metric": dsschema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Computed:            true,
 												},
@@ -22524,7 +22548,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										NestedObject: dsschema.NestedAttributeObject{
 											Attributes: map[string]dsschema.Attribute{
-												"admin_dist": dsschema.Float64Attribute{
+												"admin_dist": dsschema.Int64Attribute{
 													MarkdownDescription: "Admin dist",
 													Computed:            true,
 												},
@@ -22546,7 +22570,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Interface",
 													Computed:            true,
 												},
-												"metric": dsschema.Float64Attribute{
+												"metric": dsschema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Computed:            true,
 												},
@@ -22602,7 +22626,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															MarkdownDescription: "Failure condition",
 															Computed:            true,
 														},
-														"hold_time": dsschema.Float64Attribute{
+														"hold_time": dsschema.Int64Attribute{
 															MarkdownDescription: "Hold time",
 															Computed:            true,
 														},
@@ -22611,7 +22635,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															NestedObject: dsschema.NestedAttributeObject{
 																Attributes: map[string]dsschema.Attribute{
-																	"count": dsschema.Float64Attribute{
+																	"count": dsschema.Int64Attribute{
 																		MarkdownDescription: "Count",
 																		Computed:            true,
 																	},
@@ -22627,7 +22651,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																		MarkdownDescription: "Enable",
 																		Computed:            true,
 																	},
-																	"interval": dsschema.Float64Attribute{
+																	"interval": dsschema.Int64Attribute{
 																		MarkdownDescription: "Interval",
 																		Computed:            true,
 																	},
@@ -22684,7 +22708,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										NestedObject: dsschema.NestedAttributeObject{
 											Attributes: map[string]dsschema.Attribute{
-												"admin_dist": dsschema.Float64Attribute{
+												"admin_dist": dsschema.Int64Attribute{
 													MarkdownDescription: "Admin dist",
 													Computed:            true,
 												},
@@ -22706,7 +22730,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													MarkdownDescription: "Interface",
 													Computed:            true,
 												},
-												"metric": dsschema.Float64Attribute{
+												"metric": dsschema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Computed:            true,
 												},
@@ -22773,7 +22797,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															MarkdownDescription: "Failure condition",
 															Computed:            true,
 														},
-														"hold_time": dsschema.Float64Attribute{
+														"hold_time": dsschema.Int64Attribute{
 															MarkdownDescription: "Hold time",
 															Computed:            true,
 														},
@@ -22782,7 +22806,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															NestedObject: dsschema.NestedAttributeObject{
 																Attributes: map[string]dsschema.Attribute{
-																	"count": dsschema.Float64Attribute{
+																	"count": dsschema.Int64Attribute{
 																		MarkdownDescription: "Count",
 																		Computed:            true,
 																	},
@@ -22798,7 +22822,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																		MarkdownDescription: "Enable",
 																		Computed:            true,
 																	},
-																	"interval": dsschema.Float64Attribute{
+																	"interval": dsschema.Int64Attribute{
 																		MarkdownDescription: "Interval",
 																		Computed:            true,
 																	},
@@ -22856,39 +22880,39 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 						MarkdownDescription: "Vr admin dists",
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
-							"ebgp": dsschema.Float64Attribute{
+							"ebgp": dsschema.Int64Attribute{
 								MarkdownDescription: "Ebgp",
 								Computed:            true,
 							},
-							"ibgp": dsschema.Float64Attribute{
+							"ibgp": dsschema.Int64Attribute{
 								MarkdownDescription: "Ibgp",
 								Computed:            true,
 							},
-							"ospf_ext": dsschema.Float64Attribute{
+							"ospf_ext": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospf ext",
 								Computed:            true,
 							},
-							"ospf_int": dsschema.Float64Attribute{
+							"ospf_int": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospf int",
 								Computed:            true,
 							},
-							"ospfv3_ext": dsschema.Float64Attribute{
+							"ospfv3_ext": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 ext",
 								Computed:            true,
 							},
-							"ospfv3_int": dsschema.Float64Attribute{
+							"ospfv3_int": dsschema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 int",
 								Computed:            true,
 							},
-							"rip": dsschema.Float64Attribute{
+							"rip": dsschema.Int64Attribute{
 								MarkdownDescription: "Rip",
 								Computed:            true,
 							},
-							"static": dsschema.Float64Attribute{
+							"static": dsschema.Int64Attribute{
 								MarkdownDescription: "Static",
 								Computed:            true,
 							},
-							"static_ipv6": dsschema.Float64Attribute{
+							"static_ipv6": dsschema.Int64Attribute{
 								MarkdownDescription: "Static ipv6",
 								Computed:            true,
 							},
@@ -22906,15 +22930,16 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 
 // LogicalRoutersListModel represents the data model for a list data source.
 type LogicalRoutersListModel struct {
-	Tfid    types.String     `tfsdk:"tfid"`
-	Data    []LogicalRouters `tfsdk:"data"`
-	Limit   types.Int64      `tfsdk:"limit"`
-	Offset  types.Int64      `tfsdk:"offset"`
-	Name    types.String     `tfsdk:"name"`
-	Total   types.Int64      `tfsdk:"total"`
-	Folder  types.String     `tfsdk:"folder"`
-	Snippet types.String     `tfsdk:"snippet"`
-	Device  types.String     `tfsdk:"device"`
+	Tfid       types.String        `tfsdk:"tfid"`
+	Data       []LogicalRouters    `tfsdk:"data"`
+	Limit      types.Int64         `tfsdk:"limit"`
+	Offset     types.Int64         `tfsdk:"offset"`
+	Name       types.String        `tfsdk:"name"`
+	Total      types.Int64         `tfsdk:"total"`
+	Folder     types.String        `tfsdk:"folder"`
+	Snippet    types.String        `tfsdk:"snippet"`
+	Device     types.String        `tfsdk:"device"`
+	Pagination basetypes.BoolValue `tfsdk:"pagination"`
 }
 
 // LogicalRoutersListDataSourceSchema defines the schema for a list data source.
@@ -22936,5 +22961,9 @@ var LogicalRoutersListDataSourceSchema = dsschema.Schema{
 		"folder":  dsschema.StringAttribute{Description: "The folder of the item. Default: Shared.", Optional: true},
 		"snippet": dsschema.StringAttribute{Description: "The snippet of the item.", Optional: true},
 		"device":  dsschema.StringAttribute{Description: "The device of the item.", Optional: true},
+		"pagination": dsschema.BoolAttribute{
+			Description: "The parameter to mention if the response should be paginated. By default, its set to false",
+			Optional:    true,
+		},
 	},
 }

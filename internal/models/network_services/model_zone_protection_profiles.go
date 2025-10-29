@@ -217,12 +217,17 @@ type ZoneProtectionProfilesScanInner struct {
 
 // ZoneProtectionProfilesScanInnerAction represents a nested structure within the ZoneProtectionProfiles model
 type ZoneProtectionProfilesScanInnerAction struct {
+	Alert    basetypes.ObjectValue `tfsdk:"alert"`
+	Allow    basetypes.ObjectValue `tfsdk:"allow"`
+	Block    basetypes.ObjectValue `tfsdk:"block"`
 	Duration basetypes.Int64Value  `tfsdk:"duration"`
 	TrackBy  basetypes.StringValue `tfsdk:"track_by"`
 }
 
 // ZoneProtectionProfilesScanWhiteListInner represents a nested structure within the ZoneProtectionProfiles model
 type ZoneProtectionProfilesScanWhiteListInner struct {
+	Ipv4 basetypes.StringValue `tfsdk:"ipv4"`
+	Ipv6 basetypes.StringValue `tfsdk:"ipv6"`
 	Name basetypes.StringValue `tfsdk:"name"`
 }
 
@@ -379,6 +384,15 @@ func (o ZoneProtectionProfiles) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"action": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
+						"alert": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
+						"allow": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
+						"block": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
 						"duration": basetypes.Int64Type{},
 						"track_by": basetypes.StringType{},
 					},
@@ -390,6 +404,8 @@ func (o ZoneProtectionProfiles) AttrTypes() map[string]attr.Type {
 		}},
 		"scan_white_list": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"ipv4": basetypes.StringType{},
+				"ipv6": basetypes.StringType{},
 				"name": basetypes.StringType{},
 			},
 		}},
@@ -855,6 +871,15 @@ func (o ZoneProtectionProfilesScanInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"action": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"alert": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
+				"allow": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
+				"block": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
 				"duration": basetypes.Int64Type{},
 				"track_by": basetypes.StringType{},
 			},
@@ -875,6 +900,15 @@ func (o ZoneProtectionProfilesScanInner) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the ZoneProtectionProfilesScanInnerAction model.
 func (o ZoneProtectionProfilesScanInnerAction) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"alert": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"allow": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"block": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
 		"duration": basetypes.Int64Type{},
 		"track_by": basetypes.StringType{},
 	}
@@ -890,6 +924,8 @@ func (o ZoneProtectionProfilesScanInnerAction) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the ZoneProtectionProfilesScanWhiteListInner model.
 func (o ZoneProtectionProfilesScanWhiteListInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"ipv4": basetypes.StringType{},
+		"ipv6": basetypes.StringType{},
 		"name": basetypes.StringType{},
 	}
 }
@@ -1096,10 +1132,6 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 					Attributes: map[string]schema.Attribute{
 						"activate_rate": schema.Int64Attribute{
 							Validators: []validator.Int64{
-								int64validator.ExactlyOneOf(
-									path.MatchRelative().AtParent().AtName("alarm_rate"),
-									path.MatchRelative().AtParent().AtName("maximal_rate"),
-								),
 								int64validator.Between(0, 2000000),
 							},
 							MarkdownDescription: "When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.",
@@ -1107,10 +1139,6 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						},
 						"alarm_rate": schema.Int64Attribute{
 							Validators: []validator.Int64{
-								int64validator.ExactlyOneOf(
-									path.MatchRelative().AtParent().AtName("activate_rate"),
-									path.MatchRelative().AtParent().AtName("maximal_rate"),
-								),
 								int64validator.Between(0, 2000000),
 							},
 							MarkdownDescription: "When the flow exceeds the `alert_rate`` threshold, an alarm is generated.",
@@ -1122,10 +1150,6 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						},
 						"maximal_rate": schema.Int64Attribute{
 							Validators: []validator.Int64{
-								int64validator.ExactlyOneOf(
-									path.MatchRelative().AtParent().AtName("activate_rate"),
-									path.MatchRelative().AtParent().AtName("alarm_rate"),
-								),
 								int64validator.Between(0, 2000000),
 							},
 							MarkdownDescription: "When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.",
@@ -1387,7 +1411,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 								Optional:            true,
 							},
 							"ether_type": schema.StringAttribute{
-								MarkdownDescription: "Enter an Ethertype code (protocol) preceded by 0x to indicate hexadecimal (range is 0x0000 to 0xFFFF). A list can have a maximum of 64 Ethertypes. Some sources of Ethertype codes are:\n* [IEEE hexadecimal Ethertype](http://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)\n* [standards.ieee.org/develop/regauth/ethertype/eth.txt](http://standards-oui.ieee.org/ethertype/eth.txt)\n* [http://www.cavebear.com/archive/cavebear/Ethernet/type.html](http://www.cavebear.com/archive/cavebear/Ethernet/type.html)\n",
+								MarkdownDescription: "Enter an Ethertype code (protocol) preceded by 0x to indicate hexadecimal (range is 0x0000 to 0xFFFF). A list can have a maximum of 64 Ethertypes. Some sources of Ethertype codes are:\n* [IEEE hexadecimal Ethertype](https://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)\n* [standards.ieee.org/develop/regauth/ethertype/eth.txt](https://standards-oui.ieee.org/ethertype/eth.txt)\n* [www.cavebear.com/archive/cavebear/Ethernet/type.html](https://www.cavebear.com/archive/cavebear/Ethernet/type.html)\n",
 								Required:            true,
 							},
 							"name": schema.StringAttribute{
@@ -1419,11 +1443,23 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						MarkdownDescription: "Action",
 						Optional:            true,
 						Attributes: map[string]schema.Attribute{
+							"alert": schema.SingleNestedAttribute{
+								MarkdownDescription: "Alert",
+								Optional:            true,
+								Attributes:          map[string]schema.Attribute{},
+							},
+							"allow": schema.SingleNestedAttribute{
+								MarkdownDescription: "Allow",
+								Optional:            true,
+								Attributes:          map[string]schema.Attribute{},
+							},
+							"block": schema.SingleNestedAttribute{
+								MarkdownDescription: "Block",
+								Optional:            true,
+								Attributes:          map[string]schema.Attribute{},
+							},
 							"duration": schema.Int64Attribute{
 								Validators: []validator.Int64{
-									int64validator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("track_by"),
-									),
 									int64validator.Between(1, 3600),
 								},
 								MarkdownDescription: "Duration",
@@ -1431,9 +1467,6 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 							},
 							"track_by": schema.StringAttribute{
 								Validators: []validator.String{
-									stringvalidator.ExactlyOneOf(
-										path.MatchRelative().AtParent().AtName("duration"),
-									),
 									stringvalidator.OneOf("source-and-destination", "source"),
 								},
 								MarkdownDescription: "Track by",
@@ -1470,6 +1503,14 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
+					"ipv4": schema.StringAttribute{
+						MarkdownDescription: "Ipv4",
+						Optional:            true,
+					},
+					"ipv6": schema.StringAttribute{
+						MarkdownDescription: "Ipv6",
+						Optional:            true,
+					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "A descriptive name for the address to exclude.",
 						Required:            true,
@@ -1941,7 +1982,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 							},
 							"ether_type": dsschema.StringAttribute{
-								MarkdownDescription: "Enter an Ethertype code (protocol) preceded by 0x to indicate hexadecimal (range is 0x0000 to 0xFFFF). A list can have a maximum of 64 Ethertypes. Some sources of Ethertype codes are:\n* [IEEE hexadecimal Ethertype](http://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)\n* [standards.ieee.org/develop/regauth/ethertype/eth.txt](http://standards-oui.ieee.org/ethertype/eth.txt)\n* [http://www.cavebear.com/archive/cavebear/Ethernet/type.html](http://www.cavebear.com/archive/cavebear/Ethernet/type.html)\n",
+								MarkdownDescription: "Enter an Ethertype code (protocol) preceded by 0x to indicate hexadecimal (range is 0x0000 to 0xFFFF). A list can have a maximum of 64 Ethertypes. Some sources of Ethertype codes are:\n* [IEEE hexadecimal Ethertype](https://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)\n* [standards.ieee.org/develop/regauth/ethertype/eth.txt](https://standards-oui.ieee.org/ethertype/eth.txt)\n* [www.cavebear.com/archive/cavebear/Ethernet/type.html](https://www.cavebear.com/archive/cavebear/Ethernet/type.html)\n",
 								Computed:            true,
 							},
 							"name": dsschema.StringAttribute{
@@ -1970,6 +2011,21 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 						MarkdownDescription: "Action",
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
+							"alert": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Alert",
+								Computed:            true,
+								Attributes:          map[string]dsschema.Attribute{},
+							},
+							"allow": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Allow",
+								Computed:            true,
+								Attributes:          map[string]dsschema.Attribute{},
+							},
+							"block": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Block",
+								Computed:            true,
+								Attributes:          map[string]dsschema.Attribute{},
+							},
 							"duration": dsschema.Int64Attribute{
 								MarkdownDescription: "Duration",
 								Computed:            true,
@@ -2000,6 +2056,14 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
+					"ipv4": dsschema.StringAttribute{
+						MarkdownDescription: "Ipv4",
+						Computed:            true,
+					},
+					"ipv6": dsschema.StringAttribute{
+						MarkdownDescription: "Ipv6",
+						Computed:            true,
+					},
 					"name": dsschema.StringAttribute{
 						MarkdownDescription: "A descriptive name for the address to exclude.",
 						Computed:            true,

@@ -275,9 +275,9 @@ Optional:
 Required:
 
 - `ether_type` (String) Enter an Ethertype code (protocol) preceded by 0x to indicate hexadecimal (range is 0x0000 to 0xFFFF). A list can have a maximum of 64 Ethertypes. Some sources of Ethertype codes are:
-* [IEEE hexadecimal Ethertype](http://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)
-* [standards.ieee.org/develop/regauth/ethertype/eth.txt](http://standards-oui.ieee.org/ethertype/eth.txt)
-* [http://www.cavebear.com/archive/cavebear/Ethernet/type.html](http://www.cavebear.com/archive/cavebear/Ethernet/type.html)
+* [IEEE hexadecimal Ethertype](https://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)
+* [standards.ieee.org/develop/regauth/ethertype/eth.txt](https://standards-oui.ieee.org/ethertype/eth.txt)
+* [www.cavebear.com/archive/cavebear/Ethernet/type.html](https://www.cavebear.com/archive/cavebear/Ethernet/type.html)
 - `name` (String) Enter the protocol name that corresponds to the Ethertype code you are adding to the list. The firewall does not verify that the protocol name matches the Ethertype code but the Ethertype code does determine the protocol filter.
 
 Optional:
@@ -308,8 +308,23 @@ Optional:
 
 Optional:
 
+- `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--scan--action--alert))
+- `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--scan--action--allow))
+- `block` (Attributes) Block (see [below for nested schema](#nestedatt--scan--action--block))
 - `duration` (Number) Duration
 - `track_by` (String) Track by
+
+<a id="nestedatt--scan--action--alert"></a>
+### Nested Schema for `scan.action.alert`
+
+
+<a id="nestedatt--scan--action--allow"></a>
+### Nested Schema for `scan.action.allow`
+
+
+<a id="nestedatt--scan--action--block"></a>
+### Nested Schema for `scan.action.block`
+
 
 
 
@@ -319,3 +334,8 @@ Optional:
 Required:
 
 - `name` (String) A descriptive name for the address to exclude.
+
+Optional:
+
+- `ipv4` (String) Ipv4
+- `ipv6` (String) Ipv6

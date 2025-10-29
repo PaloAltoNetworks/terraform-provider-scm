@@ -26,6 +26,7 @@ func unpackRoutePathAccessListsToSdk(ctx context.Context, obj types.Object) (*ne
 
 	var sdk network_services.RoutePathAccessLists
 	var d diag.Diagnostics
+
 	// Handling Lists
 	if !model.AspathEntry.IsNull() && !model.AspathEntry.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field AspathEntry")

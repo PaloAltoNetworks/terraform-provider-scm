@@ -112,7 +112,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"default": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("hot_potato_routing"),
 						),
 					},
@@ -122,7 +122,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 				},
 				"hot_potato_routing": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("default"),
 						),
 					},

@@ -27,6 +27,7 @@ func unpackIkeCryptoProfilesToSdk(ctx context.Context, obj types.Object) (*netwo
 
 	var sdk network_services.IkeCryptoProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AuthenticationMultiple.IsNull() && !model.AuthenticationMultiple.IsUnknown() {
 		val := int32(model.AuthenticationMultiple.ValueInt64())

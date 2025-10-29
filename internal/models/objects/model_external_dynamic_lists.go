@@ -1080,7 +1080,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"domain": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("imei"),
 							path.MatchRelative().AtParent().AtName("imsi"),
 							path.MatchRelative().AtParent().AtName("ip"),
@@ -1270,7 +1270,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				},
 				"imei": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("imsi"),
 							path.MatchRelative().AtParent().AtName("ip"),
@@ -1454,7 +1454,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				},
 				"imsi": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("imei"),
 							path.MatchRelative().AtParent().AtName("ip"),
@@ -1638,7 +1638,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				},
 				"ip": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("imei"),
 							path.MatchRelative().AtParent().AtName("imsi"),
@@ -1823,7 +1823,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				},
 				"predefined_ip": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("imei"),
 							path.MatchRelative().AtParent().AtName("imsi"),
@@ -1861,7 +1861,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				},
 				"predefined_url": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("imei"),
 							path.MatchRelative().AtParent().AtName("imsi"),
@@ -1899,7 +1899,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				},
 				"url": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("domain"),
 							path.MatchRelative().AtParent().AtName("imei"),
 							path.MatchRelative().AtParent().AtName("imsi"),

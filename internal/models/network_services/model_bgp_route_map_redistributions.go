@@ -2678,12 +2678,18 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 	MarkdownDescription: "BgpRouteMapRedistribution resource",
 	Attributes: map[string]schema.Attribute{
 		"bgp": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("connected_static"),
+					path.MatchRelative().AtParent().AtName("ospf"),
+				),
+			},
 			MarkdownDescription: "Bgp",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ospf": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
@@ -2866,7 +2872,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				},
 				"rib": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ospf"),
 						),
 					},
@@ -3020,12 +3026,18 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 			},
 		},
 		"connected_static": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("bgp"),
+					path.MatchRelative().AtParent().AtName("ospf"),
+				),
+			},
 			MarkdownDescription: "Connected static",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ospf"),
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
@@ -3222,7 +3234,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				},
 				"ospf": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("bgp"),
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
@@ -3351,7 +3363,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				},
 				"rib": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("bgp"),
 							path.MatchRelative().AtParent().AtName("ospf"),
 						),
@@ -3456,6 +3468,10 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -3467,6 +3483,10 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
@@ -3488,12 +3508,18 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 			Required:            true,
 		},
 		"ospf": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("bgp"),
+					path.MatchRelative().AtParent().AtName("connected_static"),
+				),
+			},
 			MarkdownDescription: "Ospf",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
@@ -3690,7 +3716,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				},
 				"rib": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("bgp"),
 						),
 					},
@@ -3791,6 +3817,10 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},

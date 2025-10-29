@@ -44,7 +44,13 @@ type ZonesDeviceAcl struct {
 // ZonesNetwork represents a nested structure within the Zones model
 type ZonesNetwork struct {
 	EnablePacketBufferProtection basetypes.BoolValue   `tfsdk:"enable_packet_buffer_protection"`
+	External                     basetypes.ListValue   `tfsdk:"external"`
+	Layer2                       basetypes.ListValue   `tfsdk:"layer2"`
+	Layer3                       basetypes.ListValue   `tfsdk:"layer3"`
 	LogSetting                   basetypes.StringValue `tfsdk:"log_setting"`
+	Tap                          basetypes.ListValue   `tfsdk:"tap"`
+	Tunnel                       basetypes.ObjectValue `tfsdk:"tunnel"`
+	VirtualWire                  basetypes.ListValue   `tfsdk:"virtual_wire"`
 	ZoneProtectionProfile        basetypes.StringValue `tfsdk:"zone_protection_profile"`
 }
 
@@ -69,8 +75,16 @@ func (o Zones) AttrTypes() map[string]attr.Type {
 		"network": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable_packet_buffer_protection": basetypes.BoolType{},
+				"external":                        basetypes.ListType{ElemType: basetypes.StringType{}},
+				"layer2":                          basetypes.ListType{ElemType: basetypes.StringType{}},
+				"layer3":                          basetypes.ListType{ElemType: basetypes.StringType{}},
 				"log_setting":                     basetypes.StringType{},
-				"zone_protection_profile":         basetypes.StringType{},
+				"tap":                             basetypes.ListType{ElemType: basetypes.StringType{}},
+				"tunnel": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
+				"virtual_wire":            basetypes.ListType{ElemType: basetypes.StringType{}},
+				"zone_protection_profile": basetypes.StringType{},
 			},
 		},
 		"snippet": basetypes.StringType{},
@@ -109,8 +123,16 @@ func (o ZonesDeviceAcl) AttrType() attr.Type {
 func (o ZonesNetwork) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable_packet_buffer_protection": basetypes.BoolType{},
+		"external":                        basetypes.ListType{ElemType: basetypes.StringType{}},
+		"layer2":                          basetypes.ListType{ElemType: basetypes.StringType{}},
+		"layer3":                          basetypes.ListType{ElemType: basetypes.StringType{}},
 		"log_setting":                     basetypes.StringType{},
-		"zone_protection_profile":         basetypes.StringType{},
+		"tap":                             basetypes.ListType{ElemType: basetypes.StringType{}},
+		"tunnel": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"virtual_wire":            basetypes.ListType{ElemType: basetypes.StringType{}},
+		"zone_protection_profile": basetypes.StringType{},
 	}
 }
 
@@ -207,8 +229,38 @@ var ZonesResourceSchema = schema.Schema{
 					MarkdownDescription: "Enable packet buffer protection",
 					Optional:            true,
 				},
+				"external": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "External",
+					Optional:            true,
+				},
+				"layer2": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Layer2",
+					Optional:            true,
+				},
+				"layer3": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Layer3",
+					Optional:            true,
+				},
 				"log_setting": schema.StringAttribute{
 					MarkdownDescription: "Log setting",
+					Optional:            true,
+				},
+				"tap": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Tap",
+					Optional:            true,
+				},
+				"tunnel": schema.SingleNestedAttribute{
+					MarkdownDescription: "Tunnel",
+					Optional:            true,
+					Attributes:          map[string]schema.Attribute{},
+				},
+				"virtual_wire": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Virtual wire",
 					Optional:            true,
 				},
 				"zone_protection_profile": schema.StringAttribute{
@@ -319,8 +371,38 @@ var ZonesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Enable packet buffer protection",
 					Computed:            true,
 				},
+				"external": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "External",
+					Computed:            true,
+				},
+				"layer2": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Layer2",
+					Computed:            true,
+				},
+				"layer3": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Layer3",
+					Computed:            true,
+				},
 				"log_setting": dsschema.StringAttribute{
 					MarkdownDescription: "Log setting",
+					Computed:            true,
+				},
+				"tap": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Tap",
+					Computed:            true,
+				},
+				"tunnel": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Tunnel",
+					Computed:            true,
+					Attributes:          map[string]dsschema.Attribute{},
+				},
+				"virtual_wire": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Virtual wire",
 					Computed:            true,
 				},
 				"zone_protection_profile": dsschema.StringAttribute{

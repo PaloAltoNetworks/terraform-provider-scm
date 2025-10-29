@@ -27,6 +27,7 @@ func unpackFileBlockingProfilesToSdk(ctx context.Context, obj types.Object) (*se
 
 	var sdk security_services.FileBlockingProfiles
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()

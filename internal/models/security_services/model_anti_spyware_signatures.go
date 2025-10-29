@@ -37,7 +37,7 @@ type AntiSpywareSignatures struct {
 	Severity      basetypes.StringValue `tfsdk:"severity"`
 	Signature     basetypes.ObjectValue `tfsdk:"signature"`
 	Snippet       basetypes.StringValue `tfsdk:"snippet"`
-	ThreatId      basetypes.Int64Value  `tfsdk:"threat_id"`
+	ThreatId      basetypes.StringValue `tfsdk:"threat_id"`
 	Threatname    basetypes.StringValue `tfsdk:"threatname"`
 	Vendor        basetypes.ListValue   `tfsdk:"vendor"`
 }
@@ -290,7 +290,7 @@ func (o AntiSpywareSignatures) AttrTypes() map[string]attr.Type {
 			},
 		},
 		"snippet":    basetypes.StringType{},
-		"threat_id":  basetypes.Int64Type{},
+		"threat_id":  basetypes.StringType{},
 		"threatname": basetypes.StringType{},
 		"vendor":     basetypes.ListType{ElemType: basetypes.StringType{}},
 	}
@@ -938,7 +938,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"alert": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
 							path.MatchRelative().AtParent().AtName("drop"),
@@ -953,7 +953,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				},
 				"allow": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("alert"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
 							path.MatchRelative().AtParent().AtName("drop"),
@@ -968,7 +968,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				},
 				"block_ip": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("alert"),
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("drop"),
@@ -998,7 +998,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				},
 				"drop": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("alert"),
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
@@ -1013,7 +1013,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				},
 				"reset_both": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("alert"),
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
@@ -1028,7 +1028,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				},
 				"reset_client": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("alert"),
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
@@ -1043,7 +1043,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				},
 				"reset_server": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("alert"),
 							path.MatchRelative().AtParent().AtName("allow"),
 							path.MatchRelative().AtParent().AtName("block_ip"),
@@ -1121,7 +1121,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"combination": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ExactlyOneOf(
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("standard"),
 						),
 					},
@@ -1199,7 +1199,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				},
 				"standard": schema.ListNestedAttribute{
 					Validators: []validator.List{
-						listvalidator.ExactlyOneOf(
+						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("combination"),
 						),
 					},
@@ -1447,10 +1447,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
-		"threat_id": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(15000, 70000000),
-			},
+		"threat_id": schema.StringAttribute{
 			MarkdownDescription: "threat id range <15000-18000> and <6900001-7000000>",
 			Required:            true,
 		},
@@ -1814,7 +1811,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The Terraform ID.",
 			Computed:            true,
 		},
-		"threat_id": dsschema.Int64Attribute{
+		"threat_id": dsschema.StringAttribute{
 			MarkdownDescription: "threat id range <15000-18000> and <6900001-7000000>",
 			Computed:            true,
 		},

@@ -3,7 +3,7 @@
 
 # 1. Use a single data block to fetch ALL addresses in the "Shared" folder.
 data "scm_address_group_list" "all_shared" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # 2. Use a 'for' expression to transform the list into a map.
@@ -14,7 +14,7 @@ output "address_groups_data_source_results_from_list" {
 }
 
 data "scm_address_group_list" "paginated_address_groups_example" {
-  folder = "Shared"
+  folder = "All"
   limit  = 5
   offset = 0
 }

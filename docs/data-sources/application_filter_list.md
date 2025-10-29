@@ -18,7 +18,7 @@ Retrieves a listing of config items.
 
 # 1. Use a single data block to fetch ALL application filters in the "Shared" folder.
 data "scm_application_filter_list" "all_shared" {
-  folder = "Shared"
+  folder = "All"
 }
 
 # Alternative approach - just output the raw data to see what we get
@@ -29,7 +29,7 @@ output "application_filters_raw_data" {
 
 # Simplified pagination example with error handling
 data "scm_application_filter_list" "paginated_application_filters_example" {
-  folder = "Shared"
+  folder = "All"
   limit  = 5
   offset = 0
 }

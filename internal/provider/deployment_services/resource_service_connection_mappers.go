@@ -82,6 +82,7 @@ func unpackServiceConnectionsToSdk(ctx context.Context, obj types.Object) (*depl
 
 	var sdk deployment_services.ServiceConnections
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.BackupSC.IsNull() && !model.BackupSC.IsUnknown() {
 		sdk.BackupSC = model.BackupSC.ValueStringPointer()

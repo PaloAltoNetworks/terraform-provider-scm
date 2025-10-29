@@ -3,12 +3,14 @@ package models
 import (
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -119,16 +121,22 @@ var SdwanTrafficDistributionProfilesResourceSchema = schema.Schema{
 			},
 		},
 		"link_tags": schema.ListNestedAttribute{
-			MarkdownDescription: "Link tags",
+			MarkdownDescription: "Link-Tags for interfaces identified by defined tags",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name",
-						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.LengthAtMost(255),
+						},
+						MarkdownDescription: "Link-Tag used for identifying a set of interfaces",
+						Required:            true,
 					},
 					"weight": schema.Int64Attribute{
-						MarkdownDescription: "Weight",
+						Validators: []validator.Int64{
+							int64validator.Between(0, 100),
+						},
+						MarkdownDescription: "Weight (percentage) (only used when `traffic-distribution` is `Weighted Session Distribution`)",
 						Optional:            true,
 					},
 				},
@@ -164,8 +172,13 @@ var SdwanTrafficDistributionProfilesResourceSchema = schema.Schema{
 			},
 		},
 		"traffic_distribution": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.OneOf("Best Available Path", "Top Down Priority", "Weighted Session Distribution"),
+			},
 			MarkdownDescription: "Traffic distribution",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("Best Available Path"),
 		},
 	},
 }
@@ -187,16 +200,16 @@ var SdwanTrafficDistributionProfilesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"link_tags": dsschema.ListNestedAttribute{
-			MarkdownDescription: "Link tags",
+			MarkdownDescription: "Link-Tags for interfaces identified by defined tags",
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"name": dsschema.StringAttribute{
-						MarkdownDescription: "Name",
+						MarkdownDescription: "Link-Tag used for identifying a set of interfaces",
 						Computed:            true,
 					},
 					"weight": dsschema.Int64Attribute{
-						MarkdownDescription: "Weight",
+						MarkdownDescription: "Weight (percentage) (only used when `traffic-distribution` is `Weighted Session Distribution`)",
 						Computed:            true,
 					},
 				},

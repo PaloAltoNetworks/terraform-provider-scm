@@ -326,22 +326,10 @@ var RouteAccessListsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"address": schema.StringAttribute{
-												Validators: []validator.String{
-													stringvalidator.ExactlyOneOf(
-														path.MatchRelative().AtParent().AtName("entry"),
-														path.MatchRelative().AtParent().AtName("wildcard"),
-													),
-												},
 												MarkdownDescription: "Destination IP address",
 												Optional:            true,
 											},
 											"wildcard": schema.StringAttribute{
-												Validators: []validator.String{
-													stringvalidator.ExactlyOneOf(
-														path.MatchRelative().AtParent().AtName("address"),
-														path.MatchRelative().AtParent().AtName("entry"),
-													),
-												},
 												MarkdownDescription: "Destination IP wildcard",
 												Optional:            true,
 											},
@@ -359,22 +347,10 @@ var RouteAccessListsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"address": schema.StringAttribute{
-												Validators: []validator.String{
-													stringvalidator.ExactlyOneOf(
-														path.MatchRelative().AtParent().AtName("entry"),
-														path.MatchRelative().AtParent().AtName("wildcard"),
-													),
-												},
 												MarkdownDescription: "Source IP address",
 												Optional:            true,
 											},
 											"wildcard": schema.StringAttribute{
-												Validators: []validator.String{
-													stringvalidator.ExactlyOneOf(
-														path.MatchRelative().AtParent().AtName("address"),
-														path.MatchRelative().AtParent().AtName("entry"),
-													),
-												},
 												MarkdownDescription: "Source IP wildcard",
 												Optional:            true,
 											},

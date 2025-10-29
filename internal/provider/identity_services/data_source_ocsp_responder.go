@@ -103,6 +103,11 @@ func (d *OcspResponderDataSource) Read(ctx context.Context, req datasource.ReadR
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading OcspResponders", fmt.Sprintf("Could not read OcspResponders with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +159,11 @@ func (d *OcspResponderDataSource) Read(ctx context.Context, req datasource.ReadR
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing OcspResponderss", fmt.Sprintf("Could not list OcspResponderss: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

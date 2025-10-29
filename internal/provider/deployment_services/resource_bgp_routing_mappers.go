@@ -28,6 +28,7 @@ func unpackBgpRoutingToSdk(ctx context.Context, obj types.Object) (*deployment_s
 
 	var sdk deployment_services.BgpRouting
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.AcceptRouteOverSC.IsNull() && !model.AcceptRouteOverSC.IsUnknown() {
 		sdk.AcceptRouteOverSC = model.AcceptRouteOverSC.ValueBoolPointer()

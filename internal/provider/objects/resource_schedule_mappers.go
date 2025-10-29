@@ -28,6 +28,7 @@ func unpackSchedulesToSdk(ctx context.Context, obj types.Object) (*objects.Sched
 
 	var sdk objects.Schedules
 	var d diag.Diagnostics
+
 	// Handling Primitives
 	if !model.Device.IsNull() && !model.Device.IsUnknown() {
 		sdk.Device = model.Device.ValueStringPointer()

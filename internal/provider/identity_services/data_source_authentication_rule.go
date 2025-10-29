@@ -15,6 +15,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/identity_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/identity_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM AuthenticationRule (Package: identity_services)
@@ -101,6 +102,11 @@ func (d *AuthenticationRuleDataSource) Read(ctx context.Context, req datasource.
 
 		if err != nil {
 			resp.Diagnostics.AddError("Error Reading AuthenticationRules", fmt.Sprintf("Could not read AuthenticationRules with ID %s: %s", objectId, err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {
@@ -154,6 +160,11 @@ func (d *AuthenticationRuleDataSource) Read(ctx context.Context, req datasource.
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing AuthenticationRuless", fmt.Sprintf("Could not list AuthenticationRuless: %s", err.Error()))
+			detailedMessage := utils.PrintScmError(err)
+			resp.Diagnostics.AddError(
+				"Tag Listing Failed: API Request Failed",
+				detailedMessage,
+			)
 			return
 		}
 		if httpRes.StatusCode != 200 {

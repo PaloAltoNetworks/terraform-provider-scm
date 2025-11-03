@@ -276,12 +276,6 @@ func unpackTrafficSteeringRulesActionToSdk(ctx context.Context, obj types.Object
 		}
 	}
 
-	// Handling Typeless Objects
-	if !model.NoPbf.IsNull() && !model.NoPbf.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking typeless object for field NoPbf")
-		sdk.NoPbf = make(map[string]interface{})
-	}
-
 	diags.Append(d...)
 
 	tflog.Debug(ctx, "Exiting unpack helper for models.TrafficSteeringRulesAction", map[string]interface{}{"has_errors": diags.HasError()})
@@ -307,19 +301,6 @@ func packTrafficSteeringRulesActionFromSdk(ctx context.Context, sdk deployment_s
 		model.Forward = packed
 	} else {
 		model.Forward = basetypes.NewObjectNull(models.TrafficSteeringRulesActionForward{}.AttrTypes())
-	}
-	// Handling Objects
-	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
-	if sdk.NoPbf != nil && !reflect.ValueOf(sdk.NoPbf).IsNil() {
-		tflog.Debug(ctx, "Packing typeless object for field NoPbf")
-		var d diag.Diagnostics
-		// Create an empty object with no attributes, which signifies its presence.
-		model.NoPbf, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
-		diags.Append(d...)
-	} else {
-		// Since this field is part of a oneOf, being nil means it's not selected.
-		// We make the object null with an empty attribute map.
-		model.NoPbf = basetypes.NewObjectNull(map[string]attr.Type{})
 	}
 	diags.Append(d...)
 
@@ -391,10 +372,23 @@ func unpackTrafficSteeringRulesActionForwardToSdk(ctx context.Context, obj types
 
 	var sdk deployment_services.TrafficSteeringRulesActionForward
 	var d diag.Diagnostics
-	// Handling Primitives
-	if !model.Target.IsNull() && !model.Target.IsUnknown() {
-		sdk.Target = model.Target.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Target", "value": *sdk.Target})
+	// Handling Objects
+	if !model.Forward.IsNull() && !model.Forward.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Forward")
+		unpacked, d := unpackTrafficSteeringRulesActionForwardForwardToSdk(ctx, model.Forward)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Forward"})
+		}
+		if unpacked != nil {
+			sdk.Forward = unpacked
+		}
+	}
+
+	// Handling Typeless Objects
+	if !model.NoPbf.IsNull() && !model.NoPbf.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field NoPbf")
+		sdk.NoPbf = make(map[string]interface{})
 	}
 
 	diags.Append(d...)
@@ -410,13 +404,31 @@ func packTrafficSteeringRulesActionForwardFromSdk(ctx context.Context, sdk deplo
 	diags := diag.Diagnostics{}
 	var model models.TrafficSteeringRulesActionForward
 	var d diag.Diagnostics
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.Target != nil {
-		model.Target = basetypes.NewStringValue(*sdk.Target)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Target", "value": *sdk.Target})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Forward != nil {
+		tflog.Debug(ctx, "Packing nested object for field Forward")
+		packed, d := packTrafficSteeringRulesActionForwardForwardFromSdk(ctx, *sdk.Forward)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Forward"})
+		}
+		model.Forward = packed
 	} else {
-		model.Target = basetypes.NewStringNull()
+		model.Forward = basetypes.NewObjectNull(models.TrafficSteeringRulesActionForwardForward{}.AttrTypes())
+	}
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.NoPbf != nil && !reflect.ValueOf(sdk.NoPbf).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field NoPbf")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.NoPbf, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.NoPbf = basetypes.NewObjectNull(map[string]attr.Type{})
 	}
 	diags.Append(d...)
 
@@ -472,4 +484,101 @@ func packTrafficSteeringRulesActionForwardListFromSdk(ctx context.Context, sdks 
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.TrafficSteeringRulesActionForward", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.TrafficSteeringRulesActionForward{}.AttrType(), data)
+}
+
+// --- Unpacker for TrafficSteeringRulesActionForwardForward ---
+func unpackTrafficSteeringRulesActionForwardForwardToSdk(ctx context.Context, obj types.Object) (*deployment_services.TrafficSteeringRulesActionForwardForward, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.TrafficSteeringRulesActionForwardForward", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.TrafficSteeringRulesActionForwardForward
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk deployment_services.TrafficSteeringRulesActionForwardForward
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Target.IsNull() && !model.Target.IsUnknown() {
+		sdk.Target = model.Target.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Target", "value": *sdk.Target})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.TrafficSteeringRulesActionForwardForward", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for TrafficSteeringRulesActionForwardForward ---
+func packTrafficSteeringRulesActionForwardForwardFromSdk(ctx context.Context, sdk deployment_services.TrafficSteeringRulesActionForwardForward) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.TrafficSteeringRulesActionForwardForward", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.TrafficSteeringRulesActionForwardForward
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Target != nil {
+		model.Target = basetypes.NewStringValue(*sdk.Target)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Target", "value": *sdk.Target})
+	} else {
+		model.Target = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.TrafficSteeringRulesActionForwardForward{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.TrafficSteeringRulesActionForwardForward", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for TrafficSteeringRulesActionForwardForward ---
+func unpackTrafficSteeringRulesActionForwardForwardListToSdk(ctx context.Context, list types.List) ([]deployment_services.TrafficSteeringRulesActionForwardForward, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.TrafficSteeringRulesActionForwardForward")
+	diags := diag.Diagnostics{}
+	var data []models.TrafficSteeringRulesActionForwardForward
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]deployment_services.TrafficSteeringRulesActionForwardForward, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.TrafficSteeringRulesActionForwardForward{}.AttrTypes(), &item)
+		unpacked, d := unpackTrafficSteeringRulesActionForwardForwardToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.TrafficSteeringRulesActionForwardForward", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for TrafficSteeringRulesActionForwardForward ---
+func packTrafficSteeringRulesActionForwardForwardListFromSdk(ctx context.Context, sdks []deployment_services.TrafficSteeringRulesActionForwardForward) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.TrafficSteeringRulesActionForwardForward")
+	diags := diag.Diagnostics{}
+	var data []models.TrafficSteeringRulesActionForwardForward
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.TrafficSteeringRulesActionForwardForward
+		obj, d := packTrafficSteeringRulesActionForwardForwardFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.TrafficSteeringRulesActionForwardForward{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.TrafficSteeringRulesActionForwardForward", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.TrafficSteeringRulesActionForwardForward{}.AttrType(), data)
 }

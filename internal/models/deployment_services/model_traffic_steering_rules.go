@@ -30,11 +30,16 @@ type TrafficSteeringRules struct {
 // TrafficSteeringRulesAction represents a nested structure within the TrafficSteeringRules model
 type TrafficSteeringRulesAction struct {
 	Forward basetypes.ObjectValue `tfsdk:"forward"`
-	NoPbf   basetypes.ObjectValue `tfsdk:"no_pbf"`
 }
 
 // TrafficSteeringRulesActionForward represents a nested structure within the TrafficSteeringRules model
 type TrafficSteeringRulesActionForward struct {
+	Forward basetypes.ObjectValue `tfsdk:"forward"`
+	NoPbf   basetypes.ObjectValue `tfsdk:"no_pbf"`
+}
+
+// TrafficSteeringRulesActionForwardForward represents a nested structure within the TrafficSteeringRules model
+type TrafficSteeringRulesActionForwardForward struct {
 	Target basetypes.StringValue `tfsdk:"target"`
 }
 
@@ -46,11 +51,15 @@ func (o TrafficSteeringRules) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"forward": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"target": basetypes.StringType{},
+						"forward": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"target": basetypes.StringType{},
+							},
+						},
+						"no_pbf": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
 					},
-				},
-				"no_pbf": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{},
 				},
 			},
 		},
@@ -77,11 +86,15 @@ func (o TrafficSteeringRulesAction) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"forward": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"target": basetypes.StringType{},
+				"forward": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"target": basetypes.StringType{},
+					},
+				},
+				"no_pbf": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
 			},
-		},
-		"no_pbf": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
 		},
 	}
 }
@@ -96,12 +109,33 @@ func (o TrafficSteeringRulesAction) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the TrafficSteeringRulesActionForward model.
 func (o TrafficSteeringRulesActionForward) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"target": basetypes.StringType{},
+		"forward": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"target": basetypes.StringType{},
+			},
+		},
+		"no_pbf": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
 	}
 }
 
 // AttrType returns the attribute type for a list of TrafficSteeringRulesActionForward objects.
 func (o TrafficSteeringRulesActionForward) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the TrafficSteeringRulesActionForwardForward model.
+func (o TrafficSteeringRulesActionForwardForward) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"target": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of TrafficSteeringRulesActionForwardForward objects.
+func (o TrafficSteeringRulesActionForwardForward) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -119,15 +153,21 @@ var TrafficSteeringRulesResourceSchema = schema.Schema{
 					MarkdownDescription: "Forward",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
-						"target": schema.StringAttribute{
-							MarkdownDescription: "Target",
+						"forward": schema.SingleNestedAttribute{
+							MarkdownDescription: "Forward",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"target": schema.StringAttribute{
+									MarkdownDescription: "Target",
+									Optional:            true,
+								},
+							},
+						},
+						"no_pbf": schema.StringAttribute{
+							MarkdownDescription: "No pbf",
 							Optional:            true,
 						},
 					},
-				},
-				"no_pbf": schema.StringAttribute{
-					MarkdownDescription: "No pbf",
-					Optional:            true,
 				},
 			},
 		},
@@ -198,15 +238,21 @@ var TrafficSteeringRulesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Forward",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"target": dsschema.StringAttribute{
-							MarkdownDescription: "Target",
+						"forward": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Forward",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"target": dsschema.StringAttribute{
+									MarkdownDescription: "Target",
+									Computed:            true,
+								},
+							},
+						},
+						"no_pbf": dsschema.StringAttribute{
+							MarkdownDescription: "No pbf",
 							Computed:            true,
 						},
 					},
-				},
-				"no_pbf": dsschema.StringAttribute{
-					MarkdownDescription: "No pbf",
-					Computed:            true,
 				},
 			},
 		},

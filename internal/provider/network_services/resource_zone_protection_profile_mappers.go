@@ -1878,30 +1878,35 @@ func unpackZoneProtectionProfilesFloodTcpSynToSdk(ctx context.Context, obj types
 	var sdk network_services.ZoneProtectionProfilesFloodTcpSyn
 	var d diag.Diagnostics
 	// Handling Primitives
-	if !model.ActivateRate.IsNull() && !model.ActivateRate.IsUnknown() {
-		val := int32(model.ActivateRate.ValueInt64())
-		sdk.ActivateRate = &val
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ActivateRate", "value": *sdk.ActivateRate})
-	}
-
-	// Handling Primitives
-	if !model.AlarmRate.IsNull() && !model.AlarmRate.IsUnknown() {
-		val := int32(model.AlarmRate.ValueInt64())
-		sdk.AlarmRate = &val
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AlarmRate", "value": *sdk.AlarmRate})
-	}
-
-	// Handling Primitives
 	if !model.Enable.IsNull() && !model.Enable.IsUnknown() {
 		sdk.Enable = model.Enable.ValueBoolPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Enable", "value": *sdk.Enable})
 	}
 
-	// Handling Primitives
-	if !model.MaximalRate.IsNull() && !model.MaximalRate.IsUnknown() {
-		val := int32(model.MaximalRate.ValueInt64())
-		sdk.MaximalRate = &val
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaximalRate", "value": *sdk.MaximalRate})
+	// Handling Objects
+	if !model.Red.IsNull() && !model.Red.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Red")
+		unpacked, d := unpackZoneProtectionProfilesFloodTcpSynRedToSdk(ctx, model.Red)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Red"})
+		}
+		if unpacked != nil {
+			sdk.Red = unpacked
+		}
+	}
+
+	// Handling Objects
+	if !model.SynCookies.IsNull() && !model.SynCookies.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field SynCookies")
+		unpacked, d := unpackZoneProtectionProfilesFloodTcpSynSynCookiesToSdk(ctx, model.SynCookies)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "SynCookies"})
+		}
+		if unpacked != nil {
+			sdk.SynCookies = unpacked
+		}
 	}
 
 	diags.Append(d...)
@@ -1919,35 +1924,37 @@ func packZoneProtectionProfilesFloodTcpSynFromSdk(ctx context.Context, sdk netwo
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.ActivateRate != nil {
-		model.ActivateRate = basetypes.NewInt64Value(int64(*sdk.ActivateRate))
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "ActivateRate", "value": *sdk.ActivateRate})
-	} else {
-		model.ActivateRate = basetypes.NewInt64Null()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.AlarmRate != nil {
-		model.AlarmRate = basetypes.NewInt64Value(int64(*sdk.AlarmRate))
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AlarmRate", "value": *sdk.AlarmRate})
-	} else {
-		model.AlarmRate = basetypes.NewInt64Null()
-	}
-	// Handling Primitives
-	// Standard primitive packing
 	if sdk.Enable != nil {
 		model.Enable = basetypes.NewBoolValue(*sdk.Enable)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Enable", "value": *sdk.Enable})
 	} else {
 		model.Enable = basetypes.NewBoolNull()
 	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.MaximalRate != nil {
-		model.MaximalRate = basetypes.NewInt64Value(int64(*sdk.MaximalRate))
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaximalRate", "value": *sdk.MaximalRate})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Red != nil {
+		tflog.Debug(ctx, "Packing nested object for field Red")
+		packed, d := packZoneProtectionProfilesFloodTcpSynRedFromSdk(ctx, *sdk.Red)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Red"})
+		}
+		model.Red = packed
 	} else {
-		model.MaximalRate = basetypes.NewInt64Null()
+		model.Red = basetypes.NewObjectNull(models.ZoneProtectionProfilesFloodTcpSynRed{}.AttrTypes())
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.SynCookies != nil {
+		tflog.Debug(ctx, "Packing nested object for field SynCookies")
+		packed, d := packZoneProtectionProfilesFloodTcpSynSynCookiesFromSdk(ctx, *sdk.SynCookies)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "SynCookies"})
+		}
+		model.SynCookies = packed
+	} else {
+		model.SynCookies = basetypes.NewObjectNull(models.ZoneProtectionProfilesFloodTcpSynSynCookies{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -2003,6 +2010,232 @@ func packZoneProtectionProfilesFloodTcpSynListFromSdk(ctx context.Context, sdks 
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.ZoneProtectionProfilesFloodTcpSyn", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.ZoneProtectionProfilesFloodTcpSyn{}.AttrType(), data)
+}
+
+// --- Unpacker for ZoneProtectionProfilesFloodTcpSynRed ---
+func unpackZoneProtectionProfilesFloodTcpSynRedToSdk(ctx context.Context, obj types.Object) (*network_services.ZoneProtectionProfilesFloodTcpSynRed, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.ZoneProtectionProfilesFloodTcpSynRed", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.ZoneProtectionProfilesFloodTcpSynRed
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.ZoneProtectionProfilesFloodTcpSynRed
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.ActivateRate.IsNull() && !model.ActivateRate.IsUnknown() {
+		sdk.ActivateRate = int32(model.ActivateRate.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
+	}
+
+	// Handling Primitives
+	if !model.AlarmRate.IsNull() && !model.AlarmRate.IsUnknown() {
+		sdk.AlarmRate = int32(model.AlarmRate.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
+	}
+
+	// Handling Primitives
+	if !model.MaximalRate.IsNull() && !model.MaximalRate.IsUnknown() {
+		sdk.MaximalRate = int32(model.MaximalRate.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.ZoneProtectionProfilesFloodTcpSynRed", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for ZoneProtectionProfilesFloodTcpSynRed ---
+func packZoneProtectionProfilesFloodTcpSynRedFromSdk(ctx context.Context, sdk network_services.ZoneProtectionProfilesFloodTcpSynRed) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.ZoneProtectionProfilesFloodTcpSynRed", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.ZoneProtectionProfilesFloodTcpSynRed
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	model.ActivateRate = basetypes.NewInt64Value(int64(sdk.ActivateRate))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
+	// Handling Primitives
+	// Standard primitive packing
+	model.AlarmRate = basetypes.NewInt64Value(int64(sdk.AlarmRate))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
+	// Handling Primitives
+	// Standard primitive packing
+	model.MaximalRate = basetypes.NewInt64Value(int64(sdk.MaximalRate))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.ZoneProtectionProfilesFloodTcpSynRed{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.ZoneProtectionProfilesFloodTcpSynRed", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for ZoneProtectionProfilesFloodTcpSynRed ---
+func unpackZoneProtectionProfilesFloodTcpSynRedListToSdk(ctx context.Context, list types.List) ([]network_services.ZoneProtectionProfilesFloodTcpSynRed, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.ZoneProtectionProfilesFloodTcpSynRed")
+	diags := diag.Diagnostics{}
+	var data []models.ZoneProtectionProfilesFloodTcpSynRed
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.ZoneProtectionProfilesFloodTcpSynRed, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.ZoneProtectionProfilesFloodTcpSynRed{}.AttrTypes(), &item)
+		unpacked, d := unpackZoneProtectionProfilesFloodTcpSynRedToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.ZoneProtectionProfilesFloodTcpSynRed", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for ZoneProtectionProfilesFloodTcpSynRed ---
+func packZoneProtectionProfilesFloodTcpSynRedListFromSdk(ctx context.Context, sdks []network_services.ZoneProtectionProfilesFloodTcpSynRed) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.ZoneProtectionProfilesFloodTcpSynRed")
+	diags := diag.Diagnostics{}
+	var data []models.ZoneProtectionProfilesFloodTcpSynRed
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.ZoneProtectionProfilesFloodTcpSynRed
+		obj, d := packZoneProtectionProfilesFloodTcpSynRedFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.ZoneProtectionProfilesFloodTcpSynRed{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.ZoneProtectionProfilesFloodTcpSynRed", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.ZoneProtectionProfilesFloodTcpSynRed{}.AttrType(), data)
+}
+
+// --- Unpacker for ZoneProtectionProfilesFloodTcpSynSynCookies ---
+func unpackZoneProtectionProfilesFloodTcpSynSynCookiesToSdk(ctx context.Context, obj types.Object) (*network_services.ZoneProtectionProfilesFloodTcpSynSynCookies, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.ZoneProtectionProfilesFloodTcpSynSynCookies
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.ZoneProtectionProfilesFloodTcpSynSynCookies
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.ActivateRate.IsNull() && !model.ActivateRate.IsUnknown() {
+		sdk.ActivateRate = int32(model.ActivateRate.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
+	}
+
+	// Handling Primitives
+	if !model.AlarmRate.IsNull() && !model.AlarmRate.IsUnknown() {
+		sdk.AlarmRate = int32(model.AlarmRate.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
+	}
+
+	// Handling Primitives
+	if !model.MaximalRate.IsNull() && !model.MaximalRate.IsUnknown() {
+		sdk.MaximalRate = int32(model.MaximalRate.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for ZoneProtectionProfilesFloodTcpSynSynCookies ---
+func packZoneProtectionProfilesFloodTcpSynSynCookiesFromSdk(ctx context.Context, sdk network_services.ZoneProtectionProfilesFloodTcpSynSynCookies) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.ZoneProtectionProfilesFloodTcpSynSynCookies
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	model.ActivateRate = basetypes.NewInt64Value(int64(sdk.ActivateRate))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
+	// Handling Primitives
+	// Standard primitive packing
+	model.AlarmRate = basetypes.NewInt64Value(int64(sdk.AlarmRate))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
+	// Handling Primitives
+	// Standard primitive packing
+	model.MaximalRate = basetypes.NewInt64Value(int64(sdk.MaximalRate))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.ZoneProtectionProfilesFloodTcpSynSynCookies{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for ZoneProtectionProfilesFloodTcpSynSynCookies ---
+func unpackZoneProtectionProfilesFloodTcpSynSynCookiesListToSdk(ctx context.Context, list types.List) ([]network_services.ZoneProtectionProfilesFloodTcpSynSynCookies, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies")
+	diags := diag.Diagnostics{}
+	var data []models.ZoneProtectionProfilesFloodTcpSynSynCookies
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.ZoneProtectionProfilesFloodTcpSynSynCookies, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.ZoneProtectionProfilesFloodTcpSynSynCookies{}.AttrTypes(), &item)
+		unpacked, d := unpackZoneProtectionProfilesFloodTcpSynSynCookiesToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for ZoneProtectionProfilesFloodTcpSynSynCookies ---
+func packZoneProtectionProfilesFloodTcpSynSynCookiesListFromSdk(ctx context.Context, sdks []network_services.ZoneProtectionProfilesFloodTcpSynSynCookies) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies")
+	diags := diag.Diagnostics{}
+	var data []models.ZoneProtectionProfilesFloodTcpSynSynCookies
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.ZoneProtectionProfilesFloodTcpSynSynCookies
+		obj, d := packZoneProtectionProfilesFloodTcpSynSynCookiesFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.ZoneProtectionProfilesFloodTcpSynSynCookies{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.ZoneProtectionProfilesFloodTcpSynSynCookies", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.ZoneProtectionProfilesFloodTcpSynSynCookies{}.AttrType(), data)
 }
 
 // --- Unpacker for ZoneProtectionProfilesFloodUdp ---
@@ -3465,17 +3698,17 @@ func unpackZoneProtectionProfilesScanInnerActionToSdk(ctx context.Context, obj t
 		sdk.Block = make(map[string]interface{})
 	}
 
-	// Handling Primitives
-	if !model.Duration.IsNull() && !model.Duration.IsUnknown() {
-		val := int32(model.Duration.ValueInt64())
-		sdk.Duration = &val
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Duration", "value": *sdk.Duration})
-	}
-
-	// Handling Primitives
-	if !model.TrackBy.IsNull() && !model.TrackBy.IsUnknown() {
-		sdk.TrackBy = model.TrackBy.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "TrackBy", "value": *sdk.TrackBy})
+	// Handling Objects
+	if !model.BlockIp.IsNull() && !model.BlockIp.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field BlockIp")
+		unpacked, d := unpackZoneProtectionProfilesScanInnerActionBlockIpToSdk(ctx, model.BlockIp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "BlockIp"})
+		}
+		if unpacked != nil {
+			sdk.BlockIp = unpacked
+		}
 	}
 
 	diags.Append(d...)
@@ -3530,21 +3763,18 @@ func packZoneProtectionProfilesScanInnerActionFromSdk(ctx context.Context, sdk n
 		// We make the object null with an empty attribute map.
 		model.Block = basetypes.NewObjectNull(map[string]attr.Type{})
 	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.Duration != nil {
-		model.Duration = basetypes.NewInt64Value(int64(*sdk.Duration))
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Duration", "value": *sdk.Duration})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.BlockIp != nil {
+		tflog.Debug(ctx, "Packing nested object for field BlockIp")
+		packed, d := packZoneProtectionProfilesScanInnerActionBlockIpFromSdk(ctx, *sdk.BlockIp)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "BlockIp"})
+		}
+		model.BlockIp = packed
 	} else {
-		model.Duration = basetypes.NewInt64Null()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.TrackBy != nil {
-		model.TrackBy = basetypes.NewStringValue(*sdk.TrackBy)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "TrackBy", "value": *sdk.TrackBy})
-	} else {
-		model.TrackBy = basetypes.NewStringNull()
+		model.BlockIp = basetypes.NewObjectNull(models.ZoneProtectionProfilesScanInnerActionBlockIp{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -3600,6 +3830,109 @@ func packZoneProtectionProfilesScanInnerActionListFromSdk(ctx context.Context, s
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.ZoneProtectionProfilesScanInnerAction", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.ZoneProtectionProfilesScanInnerAction{}.AttrType(), data)
+}
+
+// --- Unpacker for ZoneProtectionProfilesScanInnerActionBlockIp ---
+func unpackZoneProtectionProfilesScanInnerActionBlockIpToSdk(ctx context.Context, obj types.Object) (*network_services.ZoneProtectionProfilesScanInnerActionBlockIp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.ZoneProtectionProfilesScanInnerActionBlockIp
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.ZoneProtectionProfilesScanInnerActionBlockIp
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Duration.IsNull() && !model.Duration.IsUnknown() {
+		sdk.Duration = int32(model.Duration.ValueInt64())
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Duration", "value": sdk.Duration})
+	}
+
+	// Handling Primitives
+	if !model.TrackBy.IsNull() && !model.TrackBy.IsUnknown() {
+		sdk.TrackBy = model.TrackBy.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "TrackBy", "value": sdk.TrackBy})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for ZoneProtectionProfilesScanInnerActionBlockIp ---
+func packZoneProtectionProfilesScanInnerActionBlockIpFromSdk(ctx context.Context, sdk network_services.ZoneProtectionProfilesScanInnerActionBlockIp) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.ZoneProtectionProfilesScanInnerActionBlockIp
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	model.Duration = basetypes.NewInt64Value(int64(sdk.Duration))
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Duration", "value": sdk.Duration})
+	// Handling Primitives
+	// Standard primitive packing
+	model.TrackBy = basetypes.NewStringValue(sdk.TrackBy)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "TrackBy", "value": sdk.TrackBy})
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.ZoneProtectionProfilesScanInnerActionBlockIp{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for ZoneProtectionProfilesScanInnerActionBlockIp ---
+func unpackZoneProtectionProfilesScanInnerActionBlockIpListToSdk(ctx context.Context, list types.List) ([]network_services.ZoneProtectionProfilesScanInnerActionBlockIp, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp")
+	diags := diag.Diagnostics{}
+	var data []models.ZoneProtectionProfilesScanInnerActionBlockIp
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.ZoneProtectionProfilesScanInnerActionBlockIp, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.ZoneProtectionProfilesScanInnerActionBlockIp{}.AttrTypes(), &item)
+		unpacked, d := unpackZoneProtectionProfilesScanInnerActionBlockIpToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for ZoneProtectionProfilesScanInnerActionBlockIp ---
+func packZoneProtectionProfilesScanInnerActionBlockIpListFromSdk(ctx context.Context, sdks []network_services.ZoneProtectionProfilesScanInnerActionBlockIp) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp")
+	diags := diag.Diagnostics{}
+	var data []models.ZoneProtectionProfilesScanInnerActionBlockIp
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.ZoneProtectionProfilesScanInnerActionBlockIp
+		obj, d := packZoneProtectionProfilesScanInnerActionBlockIpFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.ZoneProtectionProfilesScanInnerActionBlockIp{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.ZoneProtectionProfilesScanInnerActionBlockIp", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.ZoneProtectionProfilesScanInnerActionBlockIp{}.AttrType(), data)
 }
 
 // --- Unpacker for ZoneProtectionProfilesScanWhiteListInner ---

@@ -168,10 +168,29 @@ Required:
 
 Optional:
 
+- `enable` (Boolean) Enable protection against SYN floods?
+- `red` (Attributes) Red (see [below for nested schema](#nestedatt--flood--tcp_syn--red))
+- `syn_cookies` (Attributes) Syn cookies (see [below for nested schema](#nestedatt--flood--tcp_syn--syn_cookies))
+
+<a id="nestedatt--flood--tcp_syn--red"></a>
+### Nested Schema for `flood.tcp_syn.red`
+
+Required:
+
 - `activate_rate` (Number) When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.
 - `alarm_rate` (Number) When the flow exceeds the `alert_rate`` threshold, an alarm is generated.
-- `enable` (Boolean) Enable protection against SYN floods?
 - `maximal_rate` (Number) When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.
+
+
+<a id="nestedatt--flood--tcp_syn--syn_cookies"></a>
+### Nested Schema for `flood.tcp_syn.syn_cookies`
+
+Required:
+
+- `activate_rate` (Number) When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.
+- `alarm_rate` (Number) When the flow exceeds the `alert_rate`` threshold, an alarm is generated.
+- `maximal_rate` (Number) When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.
+
 
 
 <a id="nestedatt--flood--udp"></a>
@@ -311,8 +330,7 @@ Optional:
 - `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--scan--action--alert))
 - `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--scan--action--allow))
 - `block` (Attributes) Block (see [below for nested schema](#nestedatt--scan--action--block))
-- `duration` (Number) Duration
-- `track_by` (String) Track by
+- `block_ip` (Attributes) Block ip (see [below for nested schema](#nestedatt--scan--action--block_ip))
 
 <a id="nestedatt--scan--action--alert"></a>
 ### Nested Schema for `scan.action.alert`
@@ -324,6 +342,15 @@ Optional:
 
 <a id="nestedatt--scan--action--block"></a>
 ### Nested Schema for `scan.action.block`
+
+
+<a id="nestedatt--scan--action--block_ip"></a>
+### Nested Schema for `scan.action.block_ip`
+
+Required:
+
+- `duration` (Number) Duration
+- `track_by` (String) Track by
 
 
 

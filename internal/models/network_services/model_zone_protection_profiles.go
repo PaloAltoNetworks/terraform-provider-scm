@@ -128,9 +128,22 @@ type ZoneProtectionProfilesFloodSctpInitRed struct {
 
 // ZoneProtectionProfilesFloodTcpSyn represents a nested structure within the ZoneProtectionProfiles model
 type ZoneProtectionProfilesFloodTcpSyn struct {
+	Enable     basetypes.BoolValue   `tfsdk:"enable"`
+	Red        basetypes.ObjectValue `tfsdk:"red"`
+	SynCookies basetypes.ObjectValue `tfsdk:"syn_cookies"`
+}
+
+// ZoneProtectionProfilesFloodTcpSynRed represents a nested structure within the ZoneProtectionProfiles model
+type ZoneProtectionProfilesFloodTcpSynRed struct {
 	ActivateRate basetypes.Int64Value `tfsdk:"activate_rate"`
 	AlarmRate    basetypes.Int64Value `tfsdk:"alarm_rate"`
-	Enable       basetypes.BoolValue  `tfsdk:"enable"`
+	MaximalRate  basetypes.Int64Value `tfsdk:"maximal_rate"`
+}
+
+// ZoneProtectionProfilesFloodTcpSynSynCookies represents a nested structure within the ZoneProtectionProfiles model
+type ZoneProtectionProfilesFloodTcpSynSynCookies struct {
+	ActivateRate basetypes.Int64Value `tfsdk:"activate_rate"`
+	AlarmRate    basetypes.Int64Value `tfsdk:"alarm_rate"`
 	MaximalRate  basetypes.Int64Value `tfsdk:"maximal_rate"`
 }
 
@@ -217,9 +230,14 @@ type ZoneProtectionProfilesScanInner struct {
 
 // ZoneProtectionProfilesScanInnerAction represents a nested structure within the ZoneProtectionProfiles model
 type ZoneProtectionProfilesScanInnerAction struct {
-	Alert    basetypes.ObjectValue `tfsdk:"alert"`
-	Allow    basetypes.ObjectValue `tfsdk:"allow"`
-	Block    basetypes.ObjectValue `tfsdk:"block"`
+	Alert   basetypes.ObjectValue `tfsdk:"alert"`
+	Allow   basetypes.ObjectValue `tfsdk:"allow"`
+	Block   basetypes.ObjectValue `tfsdk:"block"`
+	BlockIp basetypes.ObjectValue `tfsdk:"block_ip"`
+}
+
+// ZoneProtectionProfilesScanInnerActionBlockIp represents a nested structure within the ZoneProtectionProfiles model
+type ZoneProtectionProfilesScanInnerActionBlockIp struct {
 	Duration basetypes.Int64Value  `tfsdk:"duration"`
 	TrackBy  basetypes.StringValue `tfsdk:"track_by"`
 }
@@ -291,10 +309,21 @@ func (o ZoneProtectionProfiles) AttrTypes() map[string]attr.Type {
 				},
 				"tcp_syn": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"activate_rate": basetypes.Int64Type{},
-						"alarm_rate":    basetypes.Int64Type{},
-						"enable":        basetypes.BoolType{},
-						"maximal_rate":  basetypes.Int64Type{},
+						"enable": basetypes.BoolType{},
+						"red": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"activate_rate": basetypes.Int64Type{},
+								"alarm_rate":    basetypes.Int64Type{},
+								"maximal_rate":  basetypes.Int64Type{},
+							},
+						},
+						"syn_cookies": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"activate_rate": basetypes.Int64Type{},
+								"alarm_rate":    basetypes.Int64Type{},
+								"maximal_rate":  basetypes.Int64Type{},
+							},
+						},
 					},
 				},
 				"udp": basetypes.ObjectType{
@@ -393,8 +422,12 @@ func (o ZoneProtectionProfiles) AttrTypes() map[string]attr.Type {
 						"block": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"duration": basetypes.Int64Type{},
-						"track_by": basetypes.StringType{},
+						"block_ip": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"duration": basetypes.Int64Type{},
+								"track_by": basetypes.StringType{},
+							},
+						},
 					},
 				},
 				"interval":  basetypes.Int64Type{},
@@ -487,10 +520,21 @@ func (o ZoneProtectionProfilesFlood) AttrTypes() map[string]attr.Type {
 		},
 		"tcp_syn": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"activate_rate": basetypes.Int64Type{},
-				"alarm_rate":    basetypes.Int64Type{},
-				"enable":        basetypes.BoolType{},
-				"maximal_rate":  basetypes.Int64Type{},
+				"enable": basetypes.BoolType{},
+				"red": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"activate_rate": basetypes.Int64Type{},
+						"alarm_rate":    basetypes.Int64Type{},
+						"maximal_rate":  basetypes.Int64Type{},
+					},
+				},
+				"syn_cookies": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"activate_rate": basetypes.Int64Type{},
+						"alarm_rate":    basetypes.Int64Type{},
+						"maximal_rate":  basetypes.Int64Type{},
+					},
+				},
 			},
 		},
 		"udp": basetypes.ObjectType{
@@ -666,15 +710,58 @@ func (o ZoneProtectionProfilesFloodSctpInitRed) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the ZoneProtectionProfilesFloodTcpSyn model.
 func (o ZoneProtectionProfilesFloodTcpSyn) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"activate_rate": basetypes.Int64Type{},
-		"alarm_rate":    basetypes.Int64Type{},
-		"enable":        basetypes.BoolType{},
-		"maximal_rate":  basetypes.Int64Type{},
+		"enable": basetypes.BoolType{},
+		"red": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"activate_rate": basetypes.Int64Type{},
+				"alarm_rate":    basetypes.Int64Type{},
+				"maximal_rate":  basetypes.Int64Type{},
+			},
+		},
+		"syn_cookies": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"activate_rate": basetypes.Int64Type{},
+				"alarm_rate":    basetypes.Int64Type{},
+				"maximal_rate":  basetypes.Int64Type{},
+			},
+		},
 	}
 }
 
 // AttrType returns the attribute type for a list of ZoneProtectionProfilesFloodTcpSyn objects.
 func (o ZoneProtectionProfilesFloodTcpSyn) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ZoneProtectionProfilesFloodTcpSynRed model.
+func (o ZoneProtectionProfilesFloodTcpSynRed) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"activate_rate": basetypes.Int64Type{},
+		"alarm_rate":    basetypes.Int64Type{},
+		"maximal_rate":  basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ZoneProtectionProfilesFloodTcpSynRed objects.
+func (o ZoneProtectionProfilesFloodTcpSynRed) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ZoneProtectionProfilesFloodTcpSynSynCookies model.
+func (o ZoneProtectionProfilesFloodTcpSynSynCookies) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"activate_rate": basetypes.Int64Type{},
+		"alarm_rate":    basetypes.Int64Type{},
+		"maximal_rate":  basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ZoneProtectionProfilesFloodTcpSynSynCookies objects.
+func (o ZoneProtectionProfilesFloodTcpSynSynCookies) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -880,8 +967,12 @@ func (o ZoneProtectionProfilesScanInner) AttrTypes() map[string]attr.Type {
 				"block": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"duration": basetypes.Int64Type{},
-				"track_by": basetypes.StringType{},
+				"block_ip": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"duration": basetypes.Int64Type{},
+						"track_by": basetypes.StringType{},
+					},
+				},
 			},
 		},
 		"interval":  basetypes.Int64Type{},
@@ -909,13 +1000,32 @@ func (o ZoneProtectionProfilesScanInnerAction) AttrTypes() map[string]attr.Type 
 		"block": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
-		"duration": basetypes.Int64Type{},
-		"track_by": basetypes.StringType{},
+		"block_ip": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"duration": basetypes.Int64Type{},
+				"track_by": basetypes.StringType{},
+			},
+		},
 	}
 }
 
 // AttrType returns the attribute type for a list of ZoneProtectionProfilesScanInnerAction objects.
 func (o ZoneProtectionProfilesScanInnerAction) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ZoneProtectionProfilesScanInnerActionBlockIp model.
+func (o ZoneProtectionProfilesScanInnerActionBlockIp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"duration": basetypes.Int64Type{},
+		"track_by": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ZoneProtectionProfilesScanInnerActionBlockIp objects.
+func (o ZoneProtectionProfilesScanInnerActionBlockIp) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -1130,30 +1240,63 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 					MarkdownDescription: "Tcp syn",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
-						"activate_rate": schema.Int64Attribute{
-							Validators: []validator.Int64{
-								int64validator.Between(0, 2000000),
-							},
-							MarkdownDescription: "When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.",
-							Optional:            true,
-						},
-						"alarm_rate": schema.Int64Attribute{
-							Validators: []validator.Int64{
-								int64validator.Between(0, 2000000),
-							},
-							MarkdownDescription: "When the flow exceeds the `alert_rate`` threshold, an alarm is generated.",
-							Optional:            true,
-						},
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable protection against SYN floods?",
 							Optional:            true,
 						},
-						"maximal_rate": schema.Int64Attribute{
-							Validators: []validator.Int64{
-								int64validator.Between(0, 2000000),
-							},
-							MarkdownDescription: "When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.",
+						"red": schema.SingleNestedAttribute{
+							MarkdownDescription: "Red",
 							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"activate_rate": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(0, 2000000),
+									},
+									MarkdownDescription: "When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.",
+									Required:            true,
+								},
+								"alarm_rate": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(0, 2000000),
+									},
+									MarkdownDescription: "When the flow exceeds the `alert_rate`` threshold, an alarm is generated.",
+									Required:            true,
+								},
+								"maximal_rate": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(0, 2000000),
+									},
+									MarkdownDescription: "When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.",
+									Required:            true,
+								},
+							},
+						},
+						"syn_cookies": schema.SingleNestedAttribute{
+							MarkdownDescription: "Syn cookies",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"activate_rate": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(0, 2000000),
+									},
+									MarkdownDescription: "When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.",
+									Required:            true,
+								},
+								"alarm_rate": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(0, 2000000),
+									},
+									MarkdownDescription: "When the flow exceeds the `alert_rate`` threshold, an alarm is generated.",
+									Required:            true,
+								},
+								"maximal_rate": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(0, 2000000),
+									},
+									MarkdownDescription: "When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.",
+									Required:            true,
+								},
+							},
 						},
 					},
 				},
@@ -1458,19 +1601,25 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
-							"duration": schema.Int64Attribute{
-								Validators: []validator.Int64{
-									int64validator.Between(1, 3600),
-								},
-								MarkdownDescription: "Duration",
+							"block_ip": schema.SingleNestedAttribute{
+								MarkdownDescription: "Block ip",
 								Optional:            true,
-							},
-							"track_by": schema.StringAttribute{
-								Validators: []validator.String{
-									stringvalidator.OneOf("source-and-destination", "source"),
+								Attributes: map[string]schema.Attribute{
+									"duration": schema.Int64Attribute{
+										Validators: []validator.Int64{
+											int64validator.Between(1, 3600),
+										},
+										MarkdownDescription: "Duration",
+										Required:            true,
+									},
+									"track_by": schema.StringAttribute{
+										Validators: []validator.String{
+											stringvalidator.OneOf("source-and-destination", "source"),
+										},
+										MarkdownDescription: "Track by",
+										Required:            true,
+									},
 								},
-								MarkdownDescription: "Track by",
-								Optional:            true,
 							},
 						},
 					},
@@ -1743,21 +1892,45 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Tcp syn",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"activate_rate": dsschema.Int64Attribute{
-							MarkdownDescription: "When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.",
-							Computed:            true,
-						},
-						"alarm_rate": dsschema.Int64Attribute{
-							MarkdownDescription: "When the flow exceeds the `alert_rate`` threshold, an alarm is generated.",
-							Computed:            true,
-						},
 						"enable": dsschema.BoolAttribute{
 							MarkdownDescription: "Enable protection against SYN floods?",
 							Computed:            true,
 						},
-						"maximal_rate": dsschema.Int64Attribute{
-							MarkdownDescription: "When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.",
+						"red": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Red",
 							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"activate_rate": dsschema.Int64Attribute{
+									MarkdownDescription: "When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.",
+									Computed:            true,
+								},
+								"alarm_rate": dsschema.Int64Attribute{
+									MarkdownDescription: "When the flow exceeds the `alert_rate`` threshold, an alarm is generated.",
+									Computed:            true,
+								},
+								"maximal_rate": dsschema.Int64Attribute{
+									MarkdownDescription: "When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.",
+									Computed:            true,
+								},
+							},
+						},
+						"syn_cookies": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Syn cookies",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"activate_rate": dsschema.Int64Attribute{
+									MarkdownDescription: "When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.",
+									Computed:            true,
+								},
+								"alarm_rate": dsschema.Int64Attribute{
+									MarkdownDescription: "When the flow exceeds the `alert_rate`` threshold, an alarm is generated.",
+									Computed:            true,
+								},
+								"maximal_rate": dsschema.Int64Attribute{
+									MarkdownDescription: "When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.",
+									Computed:            true,
+								},
+							},
 						},
 					},
 				},
@@ -2026,13 +2199,19 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
-							"duration": dsschema.Int64Attribute{
-								MarkdownDescription: "Duration",
+							"block_ip": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Block ip",
 								Computed:            true,
-							},
-							"track_by": dsschema.StringAttribute{
-								MarkdownDescription: "Track by",
-								Computed:            true,
+								Attributes: map[string]dsschema.Attribute{
+									"duration": dsschema.Int64Attribute{
+										MarkdownDescription: "Duration",
+										Computed:            true,
+									},
+									"track_by": dsschema.StringAttribute{
+										MarkdownDescription: "Track by",
+										Computed:            true,
+									},
+								},
 							},
 						},
 					},

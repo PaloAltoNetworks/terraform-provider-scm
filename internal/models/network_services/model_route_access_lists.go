@@ -51,12 +51,24 @@ type RouteAccessListsTypeIpv4Ipv4EntryInner struct {
 
 // RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddress represents a nested structure within the RouteAccessLists model
 type RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddress struct {
+	Address basetypes.StringValue `tfsdk:"address"`
+	Entry   basetypes.ObjectValue `tfsdk:"entry"`
+}
+
+// RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry represents a nested structure within the RouteAccessLists model
+type RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry struct {
 	Address  basetypes.StringValue `tfsdk:"address"`
 	Wildcard basetypes.StringValue `tfsdk:"wildcard"`
 }
 
 // RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress represents a nested structure within the RouteAccessLists model
 type RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress struct {
+	Address basetypes.StringValue `tfsdk:"address"`
+	Entry   basetypes.ObjectValue `tfsdk:"entry"`
+}
+
+// RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry represents a nested structure within the RouteAccessLists model
+type RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry struct {
 	Address  basetypes.StringValue `tfsdk:"address"`
 	Wildcard basetypes.StringValue `tfsdk:"wildcard"`
 }
@@ -80,15 +92,25 @@ func (o RouteAccessLists) AttrTypes() map[string]attr.Type {
 								"action": basetypes.StringType{},
 								"destination_address": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"address":  basetypes.StringType{},
-										"wildcard": basetypes.StringType{},
+										"address": basetypes.StringType{},
+										"entry": basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"address":  basetypes.StringType{},
+												"wildcard": basetypes.StringType{},
+											},
+										},
 									},
 								},
 								"name": basetypes.Int64Type{},
 								"source_address": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"address":  basetypes.StringType{},
-										"wildcard": basetypes.StringType{},
+										"address": basetypes.StringType{},
+										"entry": basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"address":  basetypes.StringType{},
+												"wildcard": basetypes.StringType{},
+											},
+										},
 									},
 								},
 							},
@@ -117,15 +139,25 @@ func (o RouteAccessListsType) AttrTypes() map[string]attr.Type {
 						"action": basetypes.StringType{},
 						"destination_address": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"address":  basetypes.StringType{},
-								"wildcard": basetypes.StringType{},
+								"address": basetypes.StringType{},
+								"entry": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"address":  basetypes.StringType{},
+										"wildcard": basetypes.StringType{},
+									},
+								},
 							},
 						},
 						"name": basetypes.Int64Type{},
 						"source_address": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"address":  basetypes.StringType{},
-								"wildcard": basetypes.StringType{},
+								"address": basetypes.StringType{},
+								"entry": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"address":  basetypes.StringType{},
+										"wildcard": basetypes.StringType{},
+									},
+								},
 							},
 						},
 					},
@@ -150,15 +182,25 @@ func (o RouteAccessListsTypeIpv4) AttrTypes() map[string]attr.Type {
 				"action": basetypes.StringType{},
 				"destination_address": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"address":  basetypes.StringType{},
-						"wildcard": basetypes.StringType{},
+						"address": basetypes.StringType{},
+						"entry": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"address":  basetypes.StringType{},
+								"wildcard": basetypes.StringType{},
+							},
+						},
 					},
 				},
 				"name": basetypes.Int64Type{},
 				"source_address": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"address":  basetypes.StringType{},
-						"wildcard": basetypes.StringType{},
+						"address": basetypes.StringType{},
+						"entry": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"address":  basetypes.StringType{},
+								"wildcard": basetypes.StringType{},
+							},
+						},
 					},
 				},
 			},
@@ -179,15 +221,25 @@ func (o RouteAccessListsTypeIpv4Ipv4EntryInner) AttrTypes() map[string]attr.Type
 		"action": basetypes.StringType{},
 		"destination_address": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"address":  basetypes.StringType{},
-				"wildcard": basetypes.StringType{},
+				"address": basetypes.StringType{},
+				"entry": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"address":  basetypes.StringType{},
+						"wildcard": basetypes.StringType{},
+					},
+				},
 			},
 		},
 		"name": basetypes.Int64Type{},
 		"source_address": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"address":  basetypes.StringType{},
-				"wildcard": basetypes.StringType{},
+				"address": basetypes.StringType{},
+				"entry": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"address":  basetypes.StringType{},
+						"wildcard": basetypes.StringType{},
+					},
+				},
 			},
 		},
 	}
@@ -203,8 +255,13 @@ func (o RouteAccessListsTypeIpv4Ipv4EntryInner) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddress model.
 func (o RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddress) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"address":  basetypes.StringType{},
-		"wildcard": basetypes.StringType{},
+		"address": basetypes.StringType{},
+		"entry": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"address":  basetypes.StringType{},
+				"wildcard": basetypes.StringType{},
+			},
+		},
 	}
 }
 
@@ -215,16 +272,51 @@ func (o RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddress) AttrType() att
 	}
 }
 
-// AttrTypes defines the attribute types for the RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress model.
-func (o RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry model.
+func (o RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"address":  basetypes.StringType{},
 		"wildcard": basetypes.StringType{},
 	}
 }
 
+// AttrType returns the attribute type for a list of RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry objects.
+func (o RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress model.
+func (o RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address": basetypes.StringType{},
+		"entry": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"address":  basetypes.StringType{},
+				"wildcard": basetypes.StringType{},
+			},
+		},
+	}
+}
+
 // AttrType returns the attribute type for a list of RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress objects.
 func (o RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry model.
+func (o RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address":  basetypes.StringType{},
+		"wildcard": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry objects.
+func (o RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -329,9 +421,19 @@ var RouteAccessListsResourceSchema = schema.Schema{
 												MarkdownDescription: "Destination IP address",
 												Optional:            true,
 											},
-											"wildcard": schema.StringAttribute{
-												MarkdownDescription: "Destination IP wildcard",
+											"entry": schema.SingleNestedAttribute{
+												MarkdownDescription: "Entry",
 												Optional:            true,
+												Attributes: map[string]schema.Attribute{
+													"address": schema.StringAttribute{
+														MarkdownDescription: "Destination IP address",
+														Optional:            true,
+													},
+													"wildcard": schema.StringAttribute{
+														MarkdownDescription: "Destination IP wildcard",
+														Optional:            true,
+													},
+												},
 											},
 										},
 									},
@@ -350,9 +452,19 @@ var RouteAccessListsResourceSchema = schema.Schema{
 												MarkdownDescription: "Source IP address",
 												Optional:            true,
 											},
-											"wildcard": schema.StringAttribute{
-												MarkdownDescription: "Source IP wildcard",
+											"entry": schema.SingleNestedAttribute{
+												MarkdownDescription: "Entry",
 												Optional:            true,
+												Attributes: map[string]schema.Attribute{
+													"address": schema.StringAttribute{
+														MarkdownDescription: "Source IP address",
+														Optional:            true,
+													},
+													"wildcard": schema.StringAttribute{
+														MarkdownDescription: "Source IP wildcard",
+														Optional:            true,
+													},
+												},
 											},
 										},
 									},
@@ -424,9 +536,19 @@ var RouteAccessListsDataSourceSchema = dsschema.Schema{
 												MarkdownDescription: "Destination IP address",
 												Computed:            true,
 											},
-											"wildcard": dsschema.StringAttribute{
-												MarkdownDescription: "Destination IP wildcard",
+											"entry": dsschema.SingleNestedAttribute{
+												MarkdownDescription: "Entry",
 												Computed:            true,
+												Attributes: map[string]dsschema.Attribute{
+													"address": dsschema.StringAttribute{
+														MarkdownDescription: "Destination IP address",
+														Computed:            true,
+													},
+													"wildcard": dsschema.StringAttribute{
+														MarkdownDescription: "Destination IP wildcard",
+														Computed:            true,
+													},
+												},
 											},
 										},
 									},
@@ -442,9 +564,19 @@ var RouteAccessListsDataSourceSchema = dsschema.Schema{
 												MarkdownDescription: "Source IP address",
 												Computed:            true,
 											},
-											"wildcard": dsschema.StringAttribute{
-												MarkdownDescription: "Source IP wildcard",
+											"entry": dsschema.SingleNestedAttribute{
+												MarkdownDescription: "Entry",
 												Computed:            true,
+												Attributes: map[string]dsschema.Attribute{
+													"address": dsschema.StringAttribute{
+														MarkdownDescription: "Source IP address",
+														Computed:            true,
+													},
+													"wildcard": dsschema.StringAttribute{
+														MarkdownDescription: "Source IP wildcard",
+														Computed:            true,
+													},
+												},
 											},
 										},
 									},

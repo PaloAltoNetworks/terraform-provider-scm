@@ -40,10 +40,17 @@ TrafficSteeringRule resource
 Optional:
 
 - `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--action--forward))
-- `no_pbf` (String) No pbf
 
 <a id="nestedatt--action--forward"></a>
 ### Nested Schema for `action.forward`
+
+Optional:
+
+- `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--action--forward--forward))
+- `no_pbf` (String) No pbf
+
+<a id="nestedatt--action--forward--forward"></a>
+### Nested Schema for `action.forward.forward`
 
 Optional:
 

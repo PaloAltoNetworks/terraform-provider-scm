@@ -186,10 +186,29 @@ Read-Only:
 
 Read-Only:
 
+- `enable` (Boolean) Enable protection against SYN floods?
+- `red` (Attributes) Red (see [below for nested schema](#nestedatt--data--flood--tcp_syn--red))
+- `syn_cookies` (Attributes) Syn cookies (see [below for nested schema](#nestedatt--data--flood--tcp_syn--syn_cookies))
+
+<a id="nestedatt--data--flood--tcp_syn--red"></a>
+### Nested Schema for `data.flood.tcp_syn.red`
+
+Read-Only:
+
 - `activate_rate` (Number) When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.
 - `alarm_rate` (Number) When the flow exceeds the `alert_rate`` threshold, an alarm is generated.
-- `enable` (Boolean) Enable protection against SYN floods?
 - `maximal_rate` (Number) When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.
+
+
+<a id="nestedatt--data--flood--tcp_syn--syn_cookies"></a>
+### Nested Schema for `data.flood.tcp_syn.syn_cookies`
+
+Read-Only:
+
+- `activate_rate` (Number) When the flow exceeds the `activate_rate`` threshold, the firewall drops individual SYN packets randomly to restrict the flow.
+- `alarm_rate` (Number) When the flow exceeds the `alert_rate`` threshold, an alarm is generated.
+- `maximal_rate` (Number) When the flow exceeds the `maximal_rate` threshold, 100% of incoming SYN packets are dropped.
+
 
 
 <a id="nestedatt--data--flood--udp"></a>
@@ -320,8 +339,7 @@ Read-Only:
 - `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--data--scan--action--alert))
 - `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--data--scan--action--allow))
 - `block` (Attributes) Block (see [below for nested schema](#nestedatt--data--scan--action--block))
-- `duration` (Number) Duration
-- `track_by` (String) Track by
+- `block_ip` (Attributes) Block ip (see [below for nested schema](#nestedatt--data--scan--action--block_ip))
 
 <a id="nestedatt--data--scan--action--alert"></a>
 ### Nested Schema for `data.scan.action.alert`
@@ -333,6 +351,15 @@ Read-Only:
 
 <a id="nestedatt--data--scan--action--block"></a>
 ### Nested Schema for `data.scan.action.block`
+
+
+<a id="nestedatt--data--scan--action--block_ip"></a>
+### Nested Schema for `data.scan.action.block_ip`
+
+Read-Only:
+
+- `duration` (Number) Duration
+- `track_by` (String) Track by
 
 
 

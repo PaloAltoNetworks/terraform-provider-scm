@@ -28,14 +28,11 @@ By using this software, you agree to these terms.
 
 - Change Shared in examples (which is incorrect) to All
 - Error handling enhanced - Instead of a generic 400 error, the actual api error is echoed back to terraform.
-- Rule re-order - Now supports placing a rule in a desired location while the resource is managed through terraform. (except nat, pbf, dos protection)
-- Examples added for ethernet, loopback, tunnel, vlan interfaces, layer2 subinterface, layer3 subinterface, - Interfaces corrected to use underscores in schema instead of incorrect hyphens
+- Rule re-order - Now supports placing a rule in a desired location while the resource is managed through terraform.
+- Examples added for ethernet, loopback, tunnel, layer2, layer3, vlan interfaces
 - Examples added for folder, snippet, security rule, authentication rule, app override rule, decryption rule, qos rule, nat rule, pbf rule
 - Examples added for decryption profile
-- Examples added for zones (+ bug fixes)
-- Tests added for scm-go sdk - snippet, security rule, authentication rule, app override rule, decryption rule, qos rule, nat rule, pbf rule
-- Tests added for scm-go sdk - decryption profile
-- Ipv6 is not tested for all interfaces - coming soon
+- Ipv6 is not supported for all interfaces - coming soon
 - Rest of the interfaces - coming soon
 
 *   **v1.0.2 (10/13/2025)**

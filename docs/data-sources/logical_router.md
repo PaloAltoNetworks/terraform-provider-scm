@@ -2073,7 +2073,7 @@ Read-Only:
 - `grace_period` (Number) Grace period
 - `helper_enable` (Boolean) Helper enable
 - `max_neighbor_restart_time` (Number) Max neighbor restart time
-- `strict__l_s_a_checking` (Boolean) Strict l s a checking
+- `strict_lsa_checking` (Boolean) Strict l s a checking
 
 
 <a id="nestedatt--vrf--ospf--vr_timers"></a>
@@ -2600,7 +2600,7 @@ Read-Only:
 - `grace_period` (Number) Grace period
 - `helper_enable` (Boolean) Helper enable
 - `max_neighbor_restart_time` (Number) Max neighbor restart time
-- `strict__l_s_a_checking` (Boolean) Strict l s a checking
+- `strict_lsa_checking` (Boolean) Strict l s a checking
 
 
 <a id="nestedatt--vrf--ospfv3--vr_timers"></a>

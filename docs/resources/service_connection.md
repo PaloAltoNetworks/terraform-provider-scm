@@ -118,7 +118,7 @@ resource "scm_service_connection" "site_a_vpn_sc" {
 
 ### Optional
 
-- `backup__s_c` (String) Backup s c
+- `backup_sc` (String) Backup s c
 - `bgp_peer` (Attributes) Bgp peer (see [below for nested schema](#nestedatt--bgp_peer))
 - `nat_pool` (String) Nat pool
 - `no_export_community` (String) No export community

@@ -53,7 +53,7 @@ type BgpAddressFamily struct {
 	MaximumPrefix              basetypes.ObjectValue `tfsdk:"maximum_prefix"`
 	NextHop                    basetypes.ObjectValue `tfsdk:"next_hop"`
 	Orf                        basetypes.ObjectValue `tfsdk:"orf"`
-	RemovePrivateAS            basetypes.ObjectValue `tfsdk:"remove_private__a_s"`
+	RemovePrivateAS            basetypes.ObjectValue `tfsdk:"remove_private_as"`
 	RouteReflectorClient       basetypes.BoolValue   `tfsdk:"route_reflector_client"`
 	SendCommunity              basetypes.ObjectValue `tfsdk:"send_community"`
 	SoftReconfigWithStoredInfo basetypes.BoolValue   `tfsdk:"soft_reconfig_with_stored_info"`
@@ -62,7 +62,7 @@ type BgpAddressFamily struct {
 // BgpAddressFamilyAddPath represents a nested structure within the BgpAddressFamilyProfiles model
 type BgpAddressFamilyAddPath struct {
 	TxAllPaths      basetypes.BoolValue `tfsdk:"tx_all_paths"`
-	TxBestpathPerAS basetypes.BoolValue `tfsdk:"tx_bestpath_per__a_s"`
+	TxBestpathPerAS basetypes.BoolValue `tfsdk:"tx_bestpath_per_as"`
 }
 
 // BgpAddressFamilyAllowasIn represents a nested structure within the BgpAddressFamilyProfiles model
@@ -103,7 +103,7 @@ type BgpAddressFamilyOrf struct {
 // BgpAddressFamilyRemovePrivateAS represents a nested structure within the BgpAddressFamilyProfiles model
 type BgpAddressFamilyRemovePrivateAS struct {
 	All       basetypes.ObjectValue `tfsdk:"all"`
-	ReplaceAS basetypes.ObjectValue `tfsdk:"replace__a_s"`
+	ReplaceAS basetypes.ObjectValue `tfsdk:"replace_as"`
 }
 
 // BgpAddressFamilySendCommunity represents a nested structure within the BgpAddressFamilyProfiles model
@@ -130,8 +130,8 @@ func (o BgpAddressFamilyProfiles) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"add_path": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"tx_all_paths":         basetypes.BoolType{},
-										"tx_bestpath_per__a_s": basetypes.BoolType{},
+										"tx_all_paths":       basetypes.BoolType{},
+										"tx_bestpath_per_as": basetypes.BoolType{},
 									},
 								},
 								"allowas_in": basetypes.ObjectType{
@@ -179,12 +179,12 @@ func (o BgpAddressFamilyProfiles) AttrTypes() map[string]attr.Type {
 										"orf_prefix_list": basetypes.StringType{},
 									},
 								},
-								"remove_private__a_s": basetypes.ObjectType{
+								"remove_private_as": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"all": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"replace__a_s": basetypes.ObjectType{
+										"replace_as": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
 									},
@@ -216,8 +216,8 @@ func (o BgpAddressFamilyProfiles) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{
 								"add_path": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
-										"tx_all_paths":         basetypes.BoolType{},
-										"tx_bestpath_per__a_s": basetypes.BoolType{},
+										"tx_all_paths":       basetypes.BoolType{},
+										"tx_bestpath_per_as": basetypes.BoolType{},
 									},
 								},
 								"allowas_in": basetypes.ObjectType{
@@ -265,12 +265,12 @@ func (o BgpAddressFamilyProfiles) AttrTypes() map[string]attr.Type {
 										"orf_prefix_list": basetypes.StringType{},
 									},
 								},
-								"remove_private__a_s": basetypes.ObjectType{
+								"remove_private_as": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"all": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
-										"replace__a_s": basetypes.ObjectType{
+										"replace_as": basetypes.ObjectType{
 											AttrTypes: map[string]attr.Type{},
 										},
 									},
@@ -323,8 +323,8 @@ func (o BgpAddressFamilyProfilesIpv4) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"add_path": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"tx_all_paths":         basetypes.BoolType{},
-								"tx_bestpath_per__a_s": basetypes.BoolType{},
+								"tx_all_paths":       basetypes.BoolType{},
+								"tx_bestpath_per_as": basetypes.BoolType{},
 							},
 						},
 						"allowas_in": basetypes.ObjectType{
@@ -372,12 +372,12 @@ func (o BgpAddressFamilyProfilesIpv4) AttrTypes() map[string]attr.Type {
 								"orf_prefix_list": basetypes.StringType{},
 							},
 						},
-						"remove_private__a_s": basetypes.ObjectType{
+						"remove_private_as": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"all": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"replace__a_s": basetypes.ObjectType{
+								"replace_as": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
 							},
@@ -409,8 +409,8 @@ func (o BgpAddressFamilyProfilesIpv4) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"add_path": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
-								"tx_all_paths":         basetypes.BoolType{},
-								"tx_bestpath_per__a_s": basetypes.BoolType{},
+								"tx_all_paths":       basetypes.BoolType{},
+								"tx_bestpath_per_as": basetypes.BoolType{},
 							},
 						},
 						"allowas_in": basetypes.ObjectType{
@@ -458,12 +458,12 @@ func (o BgpAddressFamilyProfilesIpv4) AttrTypes() map[string]attr.Type {
 								"orf_prefix_list": basetypes.StringType{},
 							},
 						},
-						"remove_private__a_s": basetypes.ObjectType{
+						"remove_private_as": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"all": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
-								"replace__a_s": basetypes.ObjectType{
+								"replace_as": basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{},
 								},
 							},
@@ -510,8 +510,8 @@ func (o BgpAddressFamilyProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"add_path": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"tx_all_paths":         basetypes.BoolType{},
-						"tx_bestpath_per__a_s": basetypes.BoolType{},
+						"tx_all_paths":       basetypes.BoolType{},
+						"tx_bestpath_per_as": basetypes.BoolType{},
 					},
 				},
 				"allowas_in": basetypes.ObjectType{
@@ -559,12 +559,12 @@ func (o BgpAddressFamilyProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
 						"orf_prefix_list": basetypes.StringType{},
 					},
 				},
-				"remove_private__a_s": basetypes.ObjectType{
+				"remove_private_as": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"all": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"replace__a_s": basetypes.ObjectType{
+						"replace_as": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
 					},
@@ -596,8 +596,8 @@ func (o BgpAddressFamilyProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"add_path": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"tx_all_paths":         basetypes.BoolType{},
-						"tx_bestpath_per__a_s": basetypes.BoolType{},
+						"tx_all_paths":       basetypes.BoolType{},
+						"tx_bestpath_per_as": basetypes.BoolType{},
 					},
 				},
 				"allowas_in": basetypes.ObjectType{
@@ -645,12 +645,12 @@ func (o BgpAddressFamilyProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
 						"orf_prefix_list": basetypes.StringType{},
 					},
 				},
-				"remove_private__a_s": basetypes.ObjectType{
+				"remove_private_as": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"all": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
-						"replace__a_s": basetypes.ObjectType{
+						"replace_as": basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{},
 						},
 					},
@@ -693,8 +693,8 @@ func (o BgpAddressFamily) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"add_path": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"tx_all_paths":         basetypes.BoolType{},
-				"tx_bestpath_per__a_s": basetypes.BoolType{},
+				"tx_all_paths":       basetypes.BoolType{},
+				"tx_bestpath_per_as": basetypes.BoolType{},
 			},
 		},
 		"allowas_in": basetypes.ObjectType{
@@ -742,12 +742,12 @@ func (o BgpAddressFamily) AttrTypes() map[string]attr.Type {
 				"orf_prefix_list": basetypes.StringType{},
 			},
 		},
-		"remove_private__a_s": basetypes.ObjectType{
+		"remove_private_as": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"all": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"replace__a_s": basetypes.ObjectType{
+				"replace_as": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
 			},
@@ -786,8 +786,8 @@ func (o BgpAddressFamily) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the BgpAddressFamilyAddPath model.
 func (o BgpAddressFamilyAddPath) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tx_all_paths":         basetypes.BoolType{},
-		"tx_bestpath_per__a_s": basetypes.BoolType{},
+		"tx_all_paths":       basetypes.BoolType{},
+		"tx_bestpath_per_as": basetypes.BoolType{},
 	}
 }
 
@@ -916,7 +916,7 @@ func (o BgpAddressFamilyRemovePrivateAS) AttrTypes() map[string]attr.Type {
 		"all": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
-		"replace__a_s": basetypes.ObjectType{
+		"replace_as": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
 	}
@@ -1018,7 +1018,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											MarkdownDescription: "Advertise all paths to peer?",
 											Optional:            true,
 										},
-										"tx_bestpath_per__a_s": schema.BoolAttribute{
+										"tx_bestpath_per_as": schema.BoolAttribute{
 											MarkdownDescription: "Tx bestpath per a s",
 											Optional:            true,
 										},
@@ -1159,7 +1159,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 									},
 								},
-								"remove_private__a_s": schema.SingleNestedAttribute{
+								"remove_private_as": schema.SingleNestedAttribute{
 									MarkdownDescription: "Remove private a s",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
@@ -1168,7 +1168,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
-										"replace__a_s": schema.SingleNestedAttribute{
+										"replace_as": schema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
@@ -1268,7 +1268,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											MarkdownDescription: "Advertise all paths to peer?",
 											Optional:            true,
 										},
-										"tx_bestpath_per__a_s": schema.BoolAttribute{
+										"tx_bestpath_per_as": schema.BoolAttribute{
 											MarkdownDescription: "Tx bestpath per a s",
 											Optional:            true,
 										},
@@ -1409,7 +1409,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										},
 									},
 								},
-								"remove_private__a_s": schema.SingleNestedAttribute{
+								"remove_private_as": schema.SingleNestedAttribute{
 									MarkdownDescription: "Remove private a s",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
@@ -1418,7 +1418,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
-										"replace__a_s": schema.SingleNestedAttribute{
+										"replace_as": schema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
@@ -1575,7 +1575,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 											MarkdownDescription: "Advertise all paths to peer?",
 											Computed:            true,
 										},
-										"tx_bestpath_per__a_s": dsschema.BoolAttribute{
+										"tx_bestpath_per_as": dsschema.BoolAttribute{
 											MarkdownDescription: "Tx bestpath per a s",
 											Computed:            true,
 										},
@@ -1673,7 +1673,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 										},
 									},
 								},
-								"remove_private__a_s": dsschema.SingleNestedAttribute{
+								"remove_private_as": dsschema.SingleNestedAttribute{
 									MarkdownDescription: "Remove private a s",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
@@ -1682,7 +1682,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
-										"replace__a_s": dsschema.SingleNestedAttribute{
+										"replace_as": dsschema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
@@ -1742,7 +1742,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 											MarkdownDescription: "Advertise all paths to peer?",
 											Computed:            true,
 										},
-										"tx_bestpath_per__a_s": dsschema.BoolAttribute{
+										"tx_bestpath_per_as": dsschema.BoolAttribute{
 											MarkdownDescription: "Tx bestpath per a s",
 											Computed:            true,
 										},
@@ -1840,7 +1840,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 										},
 									},
 								},
-								"remove_private__a_s": dsschema.SingleNestedAttribute{
+								"remove_private_as": dsschema.SingleNestedAttribute{
 									MarkdownDescription: "Remove private a s",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
@@ -1849,7 +1849,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
-										"replace__a_s": dsschema.SingleNestedAttribute{
+										"replace_as": dsschema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},

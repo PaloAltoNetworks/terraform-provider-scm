@@ -72,7 +72,7 @@ Optional:
 
 Read-Only:
 
-- `backup__s_c` (String) Backup s c
+- `backup_sc` (String) Backup s c
 - `bgp_peer` (Attributes) Bgp peer (see [below for nested schema](#nestedatt--data--bgp_peer))
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `ipsec_tunnel` (String) Ipsec tunnel

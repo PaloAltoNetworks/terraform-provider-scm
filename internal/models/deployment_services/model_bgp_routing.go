@@ -20,7 +20,7 @@ import (
 // BgpRouting represents the Terraform model for BgpRouting
 type BgpRouting struct {
 	Tfid                      types.String          `tfsdk:"tfid"`
-	AcceptRouteOverSC         basetypes.BoolValue   `tfsdk:"accept_route_over__s_c"`
+	AcceptRouteOverSC         basetypes.BoolValue   `tfsdk:"accept_route_over_sc"`
 	AddHostRouteToIkePeer     basetypes.BoolValue   `tfsdk:"add_host_route_to_ike_peer"`
 	BackboneRouting           basetypes.StringValue `tfsdk:"backbone_routing"`
 	OutboundRoutesForServices basetypes.ListValue   `tfsdk:"outbound_routes_for_services"`
@@ -38,7 +38,7 @@ type BgpRoutingRoutingPreference struct {
 func (o BgpRouting) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":                         basetypes.StringType{},
-		"accept_route_over__s_c":       basetypes.BoolType{},
+		"accept_route_over_sc":         basetypes.BoolType{},
 		"add_host_route_to_ike_peer":   basetypes.BoolType{},
 		"backbone_routing":             basetypes.StringType{},
 		"outbound_routes_for_services": basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -86,7 +86,7 @@ func (o BgpRoutingRoutingPreference) AttrType() attr.Type {
 var BgpRoutingResourceSchema = schema.Schema{
 	MarkdownDescription: "BgpRouting resource",
 	Attributes: map[string]schema.Attribute{
-		"accept_route_over__s_c": schema.BoolAttribute{
+		"accept_route_over_sc": schema.BoolAttribute{
 			MarkdownDescription: "Accept route over s c",
 			Optional:            true,
 		},
@@ -150,7 +150,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 var BgpRoutingDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "BgpRouting data source",
 	Attributes: map[string]dsschema.Attribute{
-		"accept_route_over__s_c": dsschema.BoolAttribute{
+		"accept_route_over_sc": dsschema.BoolAttribute{
 			MarkdownDescription: "Accept route over s c",
 			Computed:            true,
 		},

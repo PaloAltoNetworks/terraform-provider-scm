@@ -1038,7 +1038,7 @@ type LogicalRoutersVrfInnerOspfGracefulRestart struct {
 	GracePeriod            basetypes.Int64Value `tfsdk:"grace_period"`
 	HelperEnable           basetypes.BoolValue  `tfsdk:"helper_enable"`
 	MaxNeighborRestartTime basetypes.Int64Value `tfsdk:"max_neighbor_restart_time"`
-	StrictLSAChecking      basetypes.BoolValue  `tfsdk:"strict__l_s_a_checking"`
+	StrictLSAChecking      basetypes.BoolValue  `tfsdk:"strict_lsa_checking"`
 }
 
 // LogicalRoutersVrfInnerOspfVrTimers represents a nested structure within the LogicalRouters model
@@ -2602,7 +2602,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								"grace_period":              basetypes.Int64Type{},
 								"helper_enable":             basetypes.BoolType{},
 								"max_neighbor_restart_time": basetypes.Int64Type{},
-								"strict__l_s_a_checking":    basetypes.BoolType{},
+								"strict_lsa_checking":       basetypes.BoolType{},
 							},
 						},
 						"redistribution_profile": basetypes.StringType{},
@@ -2921,7 +2921,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								"grace_period":              basetypes.Int64Type{},
 								"helper_enable":             basetypes.BoolType{},
 								"max_neighbor_restart_time": basetypes.Int64Type{},
-								"strict__l_s_a_checking":    basetypes.BoolType{},
+								"strict_lsa_checking":       basetypes.BoolType{},
 							},
 						},
 						"redistribution_profile": basetypes.StringType{},
@@ -4449,7 +4449,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						"grace_period":              basetypes.Int64Type{},
 						"helper_enable":             basetypes.BoolType{},
 						"max_neighbor_restart_time": basetypes.Int64Type{},
-						"strict__l_s_a_checking":    basetypes.BoolType{},
+						"strict_lsa_checking":       basetypes.BoolType{},
 					},
 				},
 				"redistribution_profile": basetypes.StringType{},
@@ -4768,7 +4768,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						"grace_period":              basetypes.Int64Type{},
 						"helper_enable":             basetypes.BoolType{},
 						"max_neighbor_restart_time": basetypes.Int64Type{},
-						"strict__l_s_a_checking":    basetypes.BoolType{},
+						"strict_lsa_checking":       basetypes.BoolType{},
 					},
 				},
 				"redistribution_profile": basetypes.StringType{},
@@ -9950,7 +9950,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 				"grace_period":              basetypes.Int64Type{},
 				"helper_enable":             basetypes.BoolType{},
 				"max_neighbor_restart_time": basetypes.Int64Type{},
-				"strict__l_s_a_checking":    basetypes.BoolType{},
+				"strict_lsa_checking":       basetypes.BoolType{},
 			},
 		},
 		"redistribution_profile": basetypes.StringType{},
@@ -10863,7 +10863,7 @@ func (o LogicalRoutersVrfInnerOspfGracefulRestart) AttrTypes() map[string]attr.T
 		"grace_period":              basetypes.Int64Type{},
 		"helper_enable":             basetypes.BoolType{},
 		"max_neighbor_restart_time": basetypes.Int64Type{},
-		"strict__l_s_a_checking":    basetypes.BoolType{},
+		"strict_lsa_checking":       basetypes.BoolType{},
 	}
 }
 
@@ -11193,7 +11193,7 @@ func (o LogicalRoutersVrfInnerOspfv3) AttrTypes() map[string]attr.Type {
 				"grace_period":              basetypes.Int64Type{},
 				"helper_enable":             basetypes.BoolType{},
 				"max_neighbor_restart_time": basetypes.Int64Type{},
-				"strict__l_s_a_checking":    basetypes.BoolType{},
+				"strict_lsa_checking":       basetypes.BoolType{},
 			},
 		},
 		"redistribution_profile": basetypes.StringType{},
@@ -16682,7 +16682,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Max neighbor restart time",
 										Optional:            true,
 									},
-									"strict__l_s_a_checking": schema.BoolAttribute{
+									"strict_lsa_checking": schema.BoolAttribute{
 										MarkdownDescription: "Strict l s a checking",
 										Optional:            true,
 									},
@@ -17595,7 +17595,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										MarkdownDescription: "Max neighbor restart time",
 										Optional:            true,
 									},
-									"strict__l_s_a_checking": schema.BoolAttribute{
+									"strict_lsa_checking": schema.BoolAttribute{
 										MarkdownDescription: "Strict l s a checking",
 										Optional:            true,
 									},
@@ -21607,7 +21607,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Max neighbor restart time",
 										Computed:            true,
 									},
-									"strict__l_s_a_checking": dsschema.BoolAttribute{
+									"strict_lsa_checking": dsschema.BoolAttribute{
 										MarkdownDescription: "Strict l s a checking",
 										Computed:            true,
 									},
@@ -22358,7 +22358,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Max neighbor restart time",
 										Computed:            true,
 									},
-									"strict__l_s_a_checking": dsschema.BoolAttribute{
+									"strict_lsa_checking": dsschema.BoolAttribute{
 										MarkdownDescription: "Strict l s a checking",
 										Computed:            true,
 									},

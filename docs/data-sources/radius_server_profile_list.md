@@ -75,18 +75,18 @@ Read-Only:
 
 Read-Only:
 
-- `c_h_a_p` (Attributes) C h a p (see [below for nested schema](#nestedatt--data--protocol--c_h_a_p))
-- `e_a_p__t_t_l_s_with__p_a_p` (Attributes) E a p t t l s with p a p (see [below for nested schema](#nestedatt--data--protocol--e_a_p__t_t_l_s_with__p_a_p))
-- `p_a_p` (Attributes) P a p (see [below for nested schema](#nestedatt--data--protocol--p_a_p))
-- `p_e_a_p__m_s_c_h_a_pv2` (Attributes) P e a p m s c h a pv2 (see [below for nested schema](#nestedatt--data--protocol--p_e_a_p__m_s_c_h_a_pv2))
-- `p_e_a_p_with__g_t_c` (Attributes) P e a p with g t c (see [below for nested schema](#nestedatt--data--protocol--p_e_a_p_with__g_t_c))
+- `chap` (Attributes) C h a p (see [below for nested schema](#nestedatt--data--protocol--chap))
+- `eap_ttls_with_pap` (Attributes) E a p t t l s with p a p (see [below for nested schema](#nestedatt--data--protocol--eap_ttls_with_pap))
+- `pap` (Attributes) P a p (see [below for nested schema](#nestedatt--data--protocol--pap))
+- `peap_mscha_pv2` (Attributes) P e a p m s c h a pv2 (see [below for nested schema](#nestedatt--data--protocol--peap_mscha_pv2))
+- `peap_with_gtc` (Attributes) P e a p with g t c (see [below for nested schema](#nestedatt--data--protocol--peap_with_gtc))
 
-<a id="nestedatt--data--protocol--c_h_a_p"></a>
-### Nested Schema for `data.protocol.c_h_a_p`
+<a id="nestedatt--data--protocol--chap"></a>
+### Nested Schema for `data.protocol.chap`
 
 
-<a id="nestedatt--data--protocol--e_a_p__t_t_l_s_with__p_a_p"></a>
-### Nested Schema for `data.protocol.e_a_p__t_t_l_s_with__p_a_p`
+<a id="nestedatt--data--protocol--eap_ttls_with_pap"></a>
+### Nested Schema for `data.protocol.eap_ttls_with_pap`
 
 Read-Only:
 
@@ -94,12 +94,12 @@ Read-Only:
 - `radius_cert_profile` (String) Radius cert profile
 
 
-<a id="nestedatt--data--protocol--p_a_p"></a>
-### Nested Schema for `data.protocol.p_a_p`
+<a id="nestedatt--data--protocol--pap"></a>
+### Nested Schema for `data.protocol.pap`
 
 
-<a id="nestedatt--data--protocol--p_e_a_p__m_s_c_h_a_pv2"></a>
-### Nested Schema for `data.protocol.p_e_a_p__m_s_c_h_a_pv2`
+<a id="nestedatt--data--protocol--peap_mscha_pv2"></a>
+### Nested Schema for `data.protocol.peap_mscha_pv2`
 
 Read-Only:
 
@@ -108,8 +108,8 @@ Read-Only:
 - `radius_cert_profile` (String) Radius cert profile
 
 
-<a id="nestedatt--data--protocol--p_e_a_p_with__g_t_c"></a>
-### Nested Schema for `data.protocol.p_e_a_p_with__g_t_c`
+<a id="nestedatt--data--protocol--peap_with_gtc"></a>
+### Nested Schema for `data.protocol.peap_with_gtc`
 
 Read-Only:
 

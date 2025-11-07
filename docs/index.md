@@ -9,7 +9,7 @@ description: |-
 The `scm` provider provides resources and data sources to manage and query Strata Cloud Manager.
 
 This provider covers the following aspects of Strata Cloud Manager:
-* Unified Networking Security
+* NGFW & Prisma Access
 
 ## Beta Release Disclaimer
 
@@ -24,41 +24,108 @@ By using this software, you agree to these terms.
 
 ## Release Notes
 
-*   **v1.0.3 (10/28/2025)**
+### v1.0.4
 
-- Change Shared in examples (which is incorrect) to All
-- Error handling enhanced - Instead of a generic 400 error, the actual api error is echoed back to terraform.
-- Rule re-order - Now supports placing a rule in a desired location while the resource is managed through terraform.
-- Examples added for ethernet, loopback, tunnel, layer2, layer3, vlan interfaces
-- Examples added for folder, snippet, security rule, authentication rule, app override rule, decryption rule, qos rule, nat rule, pbf rule
-- Examples added for decryption profile
-- Ipv6 is not supported for all interfaces - coming soon
-- Rest of the interfaces - coming soon
+#### ENHANCEMENTS
 
-*   **v1.0.2 (10/13/2025)**
+* resource/scm_logical_router: Added additional tests and examples (resource, data-source)
+* resource/scm_decryption_profile: Added additional tests and examples (resource, data-source)
+* resource/scm_interface_management_profile: Added additional tests and examples (resource, data-source)
+* resource/scm_radius_server_profile: Added additional tests and examples (resource, data-source)
+* resource/scm_dns_security_profile: Added additional tests and examples (resource, data-source)
+* resource/scm_ethernet_interface: Added additional tests
+* resource/scm_vlan_interface: Added additional tests
+* resource/scm_loopback_interface: Added additional tests
+* resource/scm_tunnel_interface: Added additional tests
+* resource/scm_zone: Added additional tests
 
-Data source / resource added for:
 
-- folder, folder_list
-- label, label_list
-- snippet, snippet_list
-- variable, variable_list
+#### BUG FIXES
 
-Data source / Resource examples added for:
+* resource/scm_nat_rule: Fixed various errors in model definition
+* resource/scm_radius_server_profile: Fixed missing `name` property in model definition (#35)
+* resource/scm_vulnerability_protection_profile: Added support for missing category options (#42)
+* resource/scm_aggregate_interface: Added correct api-path (#50) and fixed missing model properties
+* resource/scm_logical_router: Fixed issue with model definition that caused failures during crud operations (#58)
+* resource/scm_interface_management_profile: Fixed issue with model definition that caused payload unmarshal error (#59)
 
-- anti_spyware_profile, anti_spyware_profile_list
-- anti_spyware_signature, anti_spyware_signature_list
-- service_connection, service_connection_list
-- service_connection_group, service_connection_group_list
-- vulnerability_protection_profile, vulnerability_protection_profile_list
 
-*   **v1.0.1 (10/03/2025)**
+### v1.0.3
 
-Beta disclaimer added
+#### FEATURES
 
-*   **v1.0.0 (10/03/2025)**
+* Rule re-ordering: Support for placing a rule in a desired location while the resource is managed through terraform
 
-Initial Release - Please note: No backwards compatibility to v0.x.y
+#### ENHANCEMENTS
+
+* Improved Error Handling: Include API Errors by default in terraform logs
+* Doc Improvement: Adapted default folder for examples from `Shared` (Prisma Access)  to `All` (Global)
+* resource/scm_ethernet_interface: Added additional tests and examples (resource, data-source)
+* resource/scm_loopback_interface: Added additional tests and examples (resource, data-source)
+* resource/scm_tunnel_interface: Added additional tests and examples (resource, data-source)
+* resource/scm_layer2_subinterface: Added additional tests and examples (resource, data-source)
+* resource/scm_layer3_subinterface: Added additional tests and examples (resource, data-source)
+* resource/scm_vlan_interface: Added additional tests and examples (resource, data-source)
+* resource/scm_folder: Added additional tests and examples (resource, data-source)
+* resource/scm_snippet: Added additional tests and examples (resource, data-source)
+* resource/scm_app_override_rule: Added additional tests and examples (resource, data-source)
+* resource/scm_authentication_rule: Added additional tests and examples (resource, data-source)
+* resource/scm_decryption_rule: Added additional tests and examples (resource, data-source)
+* resource/scm_qos_rule: Added additional tests and examples (resource, data-source)
+* resource/scm_nat_rule: Added additional tests and examples (resource, data-source)
+* resource/scm_pdf_rule: Added additional tests and examples (resource, data-source)
+* resource/scm_security_rule: Added additional tests and examples (resource, data-source)
+* resource/scm_decryption_profile: Added additional tests and examples (resource, data-source)
+
+#### BUG FIXES
+
+* resource/scm_service_connection: Fixed pushing a ike_gateway object for Service Connection (#21)
+* resource/scm_addresses: Fixed referesh operation for scm_address (#22)
+* resource/scm_security_rule: Fixed Rule ordering (#27)
+* resource/scm_ethernet: Fixed errors in model definition that resulted in resource failures (#36)
+* resource/scm_radius_server_profile: Fixed nat rule bidirectional property (#36)
+* resource/scm_external_dynamic_list: Added support for handling sestive values (#38)
+* resource/scm_security_rule: Added Support for 'tenant_restrictions' field (#41)
+* resource/scm_ethernet: Fixed errors in `layer3` model definition that resulted in resource failures (#51, #52)
+* resource/scm_zone: Fixed errors in model definition that resulted in resource failures (#53)
+* resource/scm_tunnel_interface: Fixed errors in model definition that resulted in resource failures (#55)
+
+### v1.0.2
+
+#### FEATURES
+
+* Added support for recreating for out-of-band deleted resources
+* **New Resource**: `scm_folder`
+* **New Resource**: `scm_snippet`
+* **New Resource**: `scm_folder`
+
+#### ENHANCEMENTS
+
+* resource/scm_antispyware_profile: Added additional tests and examples (resource, data-source)
+* resource/scm_vulnerability_protection_profile: Added additional tests and examples (resource, data-source)
+* resource/scm_service_connection: Added additional tests and examples (resource, data-source)
+* resource/scm_address_group: Added additional examples
+* resource/service_group: Added additional examples
+* resource/service: Added additional examples
+
+
+#### BUG FIXES
+
+* resource/scm_antispyware_profile: Fixed min length of name in model definition
+* resource/scm_service_connection: Fixed incorrect folder reference in model definition
+* resource/<multiple-resources>: Fixed issue with pattern matching where hyphen was not correctly escaped
+
+### v1.0.1
+
+#### ENHANCEMENTS
+
+* Beta disclaimer added
+
+### v1.0.0
+
+#### FEATURES
+
+* Initial Release - No backwards compatibility to v0.x.y
 
 ## Warranty
 

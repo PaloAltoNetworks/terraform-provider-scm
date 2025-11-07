@@ -500,7 +500,7 @@ func unpackAutoTagActionsActionsInnerTypeTaggingToSdk(ctx context.Context, obj t
 
     // Handling Primitives
     if !model.Timeout.IsNull() && !model.Timeout.IsUnknown() {
-        val := float32(model.Timeout.ValueFloat64())
+        val := int32(model.Timeout.ValueInt64())
         sdk.Timeout = &val
         tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Timeout", "value": *sdk.Timeout})
     }
@@ -542,10 +542,10 @@ func packAutoTagActionsActionsInnerTypeTaggingFromSdk(ctx context.Context, sdk o
     // Handling Primitives
     // Standard primitive packing
     if sdk.Timeout != nil {
-        model.Timeout = basetypes.NewFloat64Value(float64(*sdk.Timeout))
+        model.Timeout = basetypes.NewInt64Value(int64(*sdk.Timeout))
         tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Timeout", "value": *sdk.Timeout})
     } else {
-        model.Timeout = basetypes.NewFloat64Null()
+        model.Timeout = basetypes.NewInt64Null()
     }
 diags.Append(d...)
 

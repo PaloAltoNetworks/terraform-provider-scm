@@ -1163,13 +1163,15 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									MarkdownDescription: "Remove private a s",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
-										"all": schema.StringAttribute{
+										"all": schema.SingleNestedAttribute{
 											MarkdownDescription: "All",
 											Optional:            true,
+											Attributes:          map[string]schema.Attribute{},
 										},
-										"replace__a_s": schema.StringAttribute{
+										"replace__a_s": schema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Optional:            true,
+											Attributes:          map[string]schema.Attribute{},
 										},
 									},
 								},
@@ -1411,13 +1413,15 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									MarkdownDescription: "Remove private a s",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
-										"all": schema.StringAttribute{
+										"all": schema.SingleNestedAttribute{
 											MarkdownDescription: "All",
 											Optional:            true,
+											Attributes:          map[string]schema.Attribute{},
 										},
-										"replace__a_s": schema.StringAttribute{
+										"replace__a_s": schema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Optional:            true,
+											Attributes:          map[string]schema.Attribute{},
 										},
 									},
 								},
@@ -1673,13 +1677,15 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 									MarkdownDescription: "Remove private a s",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
-										"all": dsschema.StringAttribute{
+										"all": dsschema.SingleNestedAttribute{
 											MarkdownDescription: "All",
 											Computed:            true,
+											Attributes:          map[string]dsschema.Attribute{},
 										},
-										"replace__a_s": dsschema.StringAttribute{
+										"replace__a_s": dsschema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Computed:            true,
+											Attributes:          map[string]dsschema.Attribute{},
 										},
 									},
 								},
@@ -1838,13 +1844,15 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 									MarkdownDescription: "Remove private a s",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
-										"all": dsschema.StringAttribute{
+										"all": dsschema.SingleNestedAttribute{
 											MarkdownDescription: "All",
 											Computed:            true,
+											Attributes:          map[string]dsschema.Attribute{},
 										},
-										"replace__a_s": dsschema.StringAttribute{
+										"replace__a_s": dsschema.SingleNestedAttribute{
 											MarkdownDescription: "Replace a s",
 											Computed:            true,
+											Attributes:          map[string]dsschema.Attribute{},
 										},
 									},
 								},

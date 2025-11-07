@@ -57,8 +57,8 @@ func (o Sites) AttrTypes() map[string]attr.Type {
 		"city":           basetypes.StringType{},
 		"country":        basetypes.StringType{},
 		"id":             basetypes.StringType{},
-		"latitude":       basetypes.NumberType{},
-		"longitude":      basetypes.NumberType{},
+		"latitude":       basetypes.Float64Type{},
+		"longitude":      basetypes.Float64Type{},
 		"members": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"id":             basetypes.StringType{},
@@ -70,8 +70,8 @@ func (o Sites) AttrTypes() map[string]attr.Type {
 		"name": basetypes.StringType{},
 		"qos": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"backup_cir": basetypes.NumberType{},
-				"cir":        basetypes.NumberType{},
+				"backup_cir": basetypes.Float64Type{},
+				"cir":        basetypes.Float64Type{},
 				"profile":    basetypes.StringType{},
 			},
 		},
@@ -108,8 +108,8 @@ func (o SitesMembersInner) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the SitesQos model.
 func (o SitesQos) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"backup_cir": basetypes.NumberType{},
-		"cir":        basetypes.NumberType{},
+		"backup_cir": basetypes.Float64Type{},
+		"cir":        basetypes.Float64Type{},
 		"profile":    basetypes.StringType{},
 	}
 }

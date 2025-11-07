@@ -163,9 +163,10 @@ var TrafficSteeringRulesResourceSchema = schema.Schema{
 								},
 							},
 						},
-						"no_pbf": schema.StringAttribute{
+						"no_pbf": schema.SingleNestedAttribute{
 							MarkdownDescription: "No pbf",
 							Optional:            true,
+							Attributes:          map[string]schema.Attribute{},
 						},
 					},
 				},
@@ -248,9 +249,10 @@ var TrafficSteeringRulesDataSourceSchema = dsschema.Schema{
 								},
 							},
 						},
-						"no_pbf": dsschema.StringAttribute{
+						"no_pbf": dsschema.SingleNestedAttribute{
 							MarkdownDescription: "No pbf",
 							Computed:            true,
+							Attributes:          map[string]dsschema.Attribute{},
 						},
 					},
 				},

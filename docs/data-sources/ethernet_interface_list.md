@@ -62,7 +62,7 @@ Read-Only:
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `folder` (String) The folder in which the resource is defined
 - `layer2` (Attributes) Layer2 (see [below for nested schema](#nestedatt--data--layer2))
-- `layer3` (Attributes) Layer3 (see [below for nested schema](#nestedatt--data--layer3))
+- `layer3` (Attributes) Ethernet Interface Layer 3 configuration (see [below for nested schema](#nestedatt--data--layer3))
 - `link_duplex` (String) Link duplex
 - `link_speed` (String) Link speed
 - `link_state` (String) Link state
@@ -97,7 +97,7 @@ Read-Only:
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Ethernet Interfaces. (see [below for nested schema](#nestedatt--data--layer3--ddns_config))
 - `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
-- `ip` (Attributes List) Interface IP addresses (see [below for nested schema](#nestedatt--data--layer3--ip))
+- `ip` (Attributes List) Ethernet Interface IP addresses (see [below for nested schema](#nestedatt--data--layer3--ip))
 - `mtu` (Number) MTU
 - `pppoe` (Attributes) Pppoe (see [below for nested schema](#nestedatt--data--layer3--pppoe))
 
@@ -149,7 +149,7 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) Name
+- `name` (String) Ethernet Interface IP addresses name
 
 
 <a id="nestedatt--data--layer3--pppoe"></a>

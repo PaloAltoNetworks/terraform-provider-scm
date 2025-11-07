@@ -18,34 +18,34 @@ import (
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// DATA SOURCE for SCM AggregateEthernetInterface (Package: network_services)
+// DATA SOURCE for SCM AggregateInterface (Package: network_services)
 var (
-	_ datasource.DataSource              = &AggregateEthernetInterfaceDataSource{}
-	_ datasource.DataSourceWithConfigure = &AggregateEthernetInterfaceDataSource{}
+	_ datasource.DataSource              = &AggregateInterfaceDataSource{}
+	_ datasource.DataSourceWithConfigure = &AggregateInterfaceDataSource{}
 )
 
-func NewAggregateEthernetInterfaceDataSource() datasource.DataSource {
-	return &AggregateEthernetInterfaceDataSource{}
+func NewAggregateInterfaceDataSource() datasource.DataSource {
+	return &AggregateInterfaceDataSource{}
 }
 
-// AggregateEthernetInterfaceDataSource defines the data source implementation.
-type AggregateEthernetInterfaceDataSource struct {
+// AggregateInterfaceDataSource defines the data source implementation.
+type AggregateInterfaceDataSource struct {
 	client *network_services.APIClient
 }
 
-func (d *AggregateEthernetInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	tflog.Debug(ctx, "--- ENTER: AggregateEthernetInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_aggregate_ethernet_interface"
+func (d *AggregateInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	tflog.Debug(ctx, "--- ENTER: AggregateInterfaceDataSource.Metadata ---")
+	resp.TypeName = req.ProviderTypeName + "_aggregate_interface"
 }
 
-func (d *AggregateEthernetInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
-	tflog.Debug(ctx, "--- ENTER: AggregateEthernetInterfaceDataSource.Schema ---")
+func (d *AggregateInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+	tflog.Debug(ctx, "--- ENTER: AggregateInterfaceDataSource.Schema ---")
 	// Use the pre-generated schema from the model file.
-	resp.Schema = models.AggregateEthernetInterfacesDataSourceSchema
+	resp.Schema = models.AggregateInterfacesDataSourceSchema
 }
 
-func (d *AggregateEthernetInterfaceDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
-	tflog.Debug(ctx, "--- ENTER: AggregateEthernetInterfacesDataSource.Configure ---")
+func (d *AggregateInterfaceDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+	tflog.Debug(ctx, "--- ENTER: AggregateInterfacesDataSource.Configure ---")
 	if req.ProviderData == nil {
 		return
 	}
@@ -62,10 +62,10 @@ func (d *AggregateEthernetInterfaceDataSource) Configure(ctx context.Context, re
 	d.client = client
 }
 
-func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	tflog.Debug(ctx, "--- ENTER: AggregateEthernetInterfaceDataSource.Read ---")
+func (d *AggregateInterfaceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	tflog.Debug(ctx, "--- ENTER: AggregateInterfaceDataSource.Read ---")
 
-	var data models.AggregateEthernetInterfaces
+	var data models.AggregateInterfaces
 
 	// TF LOGGING ADDED: Log before the potentially crashing line.
 	tflog.Debug(ctx, "--- VERIFICATION LOG: About to call req.Config.Get() ---")
@@ -85,9 +85,9 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 	// We prioritize reading by ID if it is provided.
 	if !data.Id.IsNull() {
 		objectId := data.Id.ValueString()
-		tflog.Debug(ctx, "Reading AggregateEthernetInterfaces data source by ID", map[string]interface{}{"id": objectId})
+		tflog.Debug(ctx, "Reading AggregateInterfaces data source by ID", map[string]interface{}{"id": objectId})
 
-		getReq := d.client.AggregateEthernetInterfacesAPI.GetAggregateEthernetInterfacesByID(ctx, objectId)
+		getReq := d.client.AggregateInterfacesAPI.GetAggregateInterfacesByID(ctx, objectId)
 		scmObject, httpRes, err := getReq.Execute()
 
 		var statusCode int
@@ -101,7 +101,7 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 		})
 
 		if err != nil {
-			resp.Diagnostics.AddError("Error Reading AggregateEthernetInterfaces", fmt.Sprintf("Could not read AggregateEthernetInterfaces with ID %s: %s", objectId, err.Error()))
+			resp.Diagnostics.AddError("Error Reading AggregateInterfaces", fmt.Sprintf("Could not read AggregateInterfaces with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
 				"Tag Listing Failed: API Request Failed",
@@ -117,7 +117,7 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 		tflog.Debug(ctx, "--- DATA SOURCE READ: API call successful. About to call the packer.")
 
 		// Create a packed object from the SCM response.
-		packedObject, diags := packAggregateEthernetInterfacesFromSdk(ctx, *scmObject)
+		packedObject, diags := packAggregateInterfacesFromSdk(ctx, *scmObject)
 		resp.Diagnostics.Append(diags...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -131,9 +131,9 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 
 	} else if !data.Name.IsNull() {
 		objectName := data.Name.ValueString()
-		tflog.Debug(ctx, "Reading AggregateEthernetInterfaces data source by Name", map[string]interface{}{"name": objectName})
+		tflog.Debug(ctx, "Reading AggregateInterfaces data source by Name", map[string]interface{}{"name": objectName})
 
-		listReq := d.client.AggregateEthernetInterfacesAPI.ListAggregateEthernetInterfaces(ctx)
+		listReq := d.client.AggregateInterfacesAPI.ListAggregateInterfaces(ctx)
 
 		// Use reflection to dynamically check for and apply scope filters.
 
@@ -159,7 +159,7 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
-			resp.Diagnostics.AddError("Error Listing AggregateEthernetInterfacess", fmt.Sprintf("Could not list AggregateEthernetInterfacess: %s", err.Error()))
+			resp.Diagnostics.AddError("Error Listing AggregateInterfacess", fmt.Sprintf("Could not list AggregateInterfacess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
 				"Tag Listing Failed: API Request Failed",
@@ -173,7 +173,7 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 		}
 
 		// Find the specific object from the list.
-		var foundObject *network_services.AggregateEthernetInterfaces
+		var foundObject *network_services.AggregateInterfaces
 		for i := range listResponse.GetData() {
 			item := listResponse.GetData()[i]
 			if item.GetName() == objectName {
@@ -183,12 +183,12 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 		}
 
 		if foundObject == nil {
-			resp.Diagnostics.AddError("AggregateEthernetInterfaces Not Found", fmt.Sprintf("No AggregateEthernetInterfaces found with name: %s", objectName))
+			resp.Diagnostics.AddError("AggregateInterfaces Not Found", fmt.Sprintf("No AggregateInterfaces found with name: %s", objectName))
 			return
 		}
 
 		// Create a packed object from the SCM response.
-		packedObject, diags := packAggregateEthernetInterfacesFromSdk(ctx, *foundObject)
+		packedObject, diags := packAggregateInterfacesFromSdk(ctx, *foundObject)
 		resp.Diagnostics.Append(diags...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -201,7 +201,7 @@ func (d *AggregateEthernetInterfaceDataSource) Read(ctx context.Context, req dat
 		}
 
 	} else {
-		resp.Diagnostics.AddError("Missing Identifier", "Either 'id' or 'name' must be provided for the AggregateEthernetInterfaces data source.")
+		resp.Diagnostics.AddError("Missing Identifier", "Either 'id' or 'name' must be provided for the AggregateInterfaces data source.")
 		return
 	}
 

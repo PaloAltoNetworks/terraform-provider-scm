@@ -67,7 +67,7 @@ func (o AutoTagActions) AttrTypes() map[string]attr.Type {
 								"action":  basetypes.StringType{},
 								"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 								"target":  basetypes.StringType{},
-								"timeout": basetypes.NumberType{},
+								"timeout": basetypes.Float64Type{},
 							},
 						},
 					},
@@ -104,7 +104,7 @@ func (o AutoTagActionsActionsInner) AttrTypes() map[string]attr.Type {
 						"action":  basetypes.StringType{},
 						"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 						"target":  basetypes.StringType{},
-						"timeout": basetypes.NumberType{},
+						"timeout": basetypes.Float64Type{},
 					},
 				},
 			},
@@ -127,7 +127,7 @@ func (o AutoTagActionsActionsInnerType) AttrTypes() map[string]attr.Type {
 				"action":  basetypes.StringType{},
 				"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 				"target":  basetypes.StringType{},
-				"timeout": basetypes.NumberType{},
+				"timeout": basetypes.Float64Type{},
 			},
 		},
 	}
@@ -146,7 +146,7 @@ func (o AutoTagActionsActionsInnerTypeTagging) AttrTypes() map[string]attr.Type 
 		"action":  basetypes.StringType{},
 		"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 		"target":  basetypes.StringType{},
-		"timeout": basetypes.NumberType{},
+		"timeout": basetypes.Float64Type{},
 	}
 }
 

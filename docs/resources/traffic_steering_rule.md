@@ -47,7 +47,7 @@ Optional:
 Optional:
 
 - `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--action--forward--forward))
-- `no_pbf` (String) No pbf
+- `no_pbf` (Attributes) No pbf (see [below for nested schema](#nestedatt--action--forward--no_pbf))
 
 <a id="nestedatt--action--forward--forward"></a>
 ### Nested Schema for `action.forward.forward`
@@ -55,3 +55,7 @@ Optional:
 Optional:
 
 - `target` (String) Target
+
+
+<a id="nestedatt--action--forward--no_pbf"></a>
+### Nested Schema for `action.forward.no_pbf`

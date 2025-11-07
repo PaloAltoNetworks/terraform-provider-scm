@@ -17,28 +17,28 @@ import (
 )
 
 var (
-	_ datasource.DataSource              = &AggregateEthernetInterfaceListDataSource{}
-	_ datasource.DataSourceWithConfigure = &AggregateEthernetInterfaceListDataSource{}
+	_ datasource.DataSource              = &AggregateInterfaceListDataSource{}
+	_ datasource.DataSourceWithConfigure = &AggregateInterfaceListDataSource{}
 )
 
-func NewAggregateEthernetInterfaceListDataSource() datasource.DataSource {
-	return &AggregateEthernetInterfaceListDataSource{}
+func NewAggregateInterfaceListDataSource() datasource.DataSource {
+	return &AggregateInterfaceListDataSource{}
 }
 
-// AggregateEthernetInterfaceListDataSource defines the data source implementation.
-type AggregateEthernetInterfaceListDataSource struct {
+// AggregateInterfaceListDataSource defines the data source implementation.
+type AggregateInterfaceListDataSource struct {
 	client *network_services.APIClient
 }
 
-func (d *AggregateEthernetInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_aggregate_ethernet_interface_list"
+func (d *AggregateInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_aggregate_interface_list"
 }
 
-func (d *AggregateEthernetInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
-	resp.Schema = models.AggregateEthernetInterfacesListDataSourceSchema
+func (d *AggregateInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+	resp.Schema = models.AggregateInterfacesListDataSourceSchema
 }
 
-func (d *AggregateEthernetInterfaceListDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+func (d *AggregateInterfaceListDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -55,15 +55,15 @@ func (d *AggregateEthernetInterfaceListDataSource) Configure(ctx context.Context
 	d.client = client
 }
 
-func (d *AggregateEthernetInterfaceListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
-	var data models.AggregateEthernetInterfacesListModel
+func (d *AggregateInterfaceListDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	var data models.AggregateInterfacesListModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
 	// Create the API request.
-	listReq := d.client.AggregateEthernetInterfacesAPI.ListAggregateEthernetInterfaces(ctx)
+	listReq := d.client.AggregateInterfacesAPI.ListAggregateInterfaces(ctx)
 
 	// Apply filters from the configuration.
 
@@ -97,7 +97,7 @@ func (d *AggregateEthernetInterfaceListDataSource) Read(ctx context.Context, req
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error Listing AggregateEthernetInterfacess", fmt.Sprintf("Could not list AggregateEthernetInterfacess: %s", err.Error()))
+		resp.Diagnostics.AddError("Error Listing AggregateInterfacess", fmt.Sprintf("Could not list AggregateInterfacess: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
 			"Tag Listing Failed: API Request Failed",
@@ -118,7 +118,7 @@ func (d *AggregateEthernetInterfaceListDataSource) Read(ctx context.Context, req
 
 	// =================== START: THE IMPROVEMENT ===================
 	// Use the generated list packer to pack the SCM items into a TF list.
-	packedList, diags := packAggregateEthernetInterfacesListFromSdk(ctx, listResponse.GetData())
+	packedList, diags := packAggregateInterfacesListFromSdk(ctx, listResponse.GetData())
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return

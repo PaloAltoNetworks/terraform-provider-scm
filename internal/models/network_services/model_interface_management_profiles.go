@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -31,7 +30,7 @@ type InterfaceManagementProfiles struct {
 	Name                    basetypes.StringValue `tfsdk:"name"`
 	PermittedIp             basetypes.ListValue   `tfsdk:"permitted_ip"`
 	Ping                    basetypes.BoolValue   `tfsdk:"ping"`
-	ResponsePages           basetypes.StringValue `tfsdk:"response_pages"`
+	ResponsePages           basetypes.BoolValue   `tfsdk:"response_pages"`
 	Snippet                 basetypes.StringValue `tfsdk:"snippet"`
 	Ssh                     basetypes.BoolValue   `tfsdk:"ssh"`
 	Telnet                  basetypes.BoolValue   `tfsdk:"telnet"`
@@ -40,20 +39,29 @@ type InterfaceManagementProfiles struct {
 	UseridSyslogListenerUdp basetypes.BoolValue   `tfsdk:"userid_syslog_listener_udp"`
 }
 
+// InterfaceManagementProfilesPermittedIpInner represents a nested structure within the InterfaceManagementProfiles model
+type InterfaceManagementProfilesPermittedIpInner struct {
+	Name basetypes.StringValue `tfsdk:"name"`
+}
+
 // AttrTypes defines the attribute types for the InterfaceManagementProfiles model.
 func (o InterfaceManagementProfiles) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":                       basetypes.StringType{},
-		"device":                     basetypes.StringType{},
-		"folder":                     basetypes.StringType{},
-		"http":                       basetypes.BoolType{},
-		"http_ocsp":                  basetypes.BoolType{},
-		"https":                      basetypes.BoolType{},
-		"id":                         basetypes.StringType{},
-		"name":                       basetypes.StringType{},
-		"permitted_ip":               basetypes.ListType{ElemType: basetypes.StringType{}},
+		"tfid":      basetypes.StringType{},
+		"device":    basetypes.StringType{},
+		"folder":    basetypes.StringType{},
+		"http":      basetypes.BoolType{},
+		"http_ocsp": basetypes.BoolType{},
+		"https":     basetypes.BoolType{},
+		"id":        basetypes.StringType{},
+		"name":      basetypes.StringType{},
+		"permitted_ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+			},
+		}},
 		"ping":                       basetypes.BoolType{},
-		"response_pages":             basetypes.StringType{},
+		"response_pages":             basetypes.BoolType{},
 		"snippet":                    basetypes.StringType{},
 		"ssh":                        basetypes.BoolType{},
 		"telnet":                     basetypes.BoolType{},
@@ -65,6 +73,20 @@ func (o InterfaceManagementProfiles) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of InterfaceManagementProfiles objects.
 func (o InterfaceManagementProfiles) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the InterfaceManagementProfilesPermittedIpInner model.
+func (o InterfaceManagementProfilesPermittedIpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of InterfaceManagementProfilesPermittedIpInner objects.
+func (o InterfaceManagementProfilesPermittedIpInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -127,20 +149,25 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "Name",
 			Required:            true,
 		},
-		"permitted_ip": schema.ListAttribute{
-			ElementType:         types.StringType,
+		"permitted_ip": schema.ListNestedAttribute{
 			MarkdownDescription: "Allowed IP address(es)",
 			Optional:            true,
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"name": schema.StringAttribute{
+						MarkdownDescription: "The allowed IP address or CIDR block.",
+						Required:            true,
+					},
+				},
+			},
 		},
 		"ping": schema.BoolAttribute{
 			MarkdownDescription: "Allow ping?",
 			Optional:            true,
 		},
-		"response_pages": schema.StringAttribute{
+		"response_pages": schema.BoolAttribute{
 			MarkdownDescription: "Allow response pages?",
 			Optional:            true,
-			Computed:            true,
-			Default:             stringdefault.StaticString("boolean"),
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -220,16 +247,23 @@ var InterfaceManagementProfilesDataSourceSchema = dsschema.Schema{
 			Optional:            true,
 			Computed:            true,
 		},
-		"permitted_ip": dsschema.ListAttribute{
-			ElementType:         types.StringType,
+		"permitted_ip": dsschema.ListNestedAttribute{
 			MarkdownDescription: "Allowed IP address(es)",
 			Computed:            true,
+			NestedObject: dsschema.NestedAttributeObject{
+				Attributes: map[string]dsschema.Attribute{
+					"name": dsschema.StringAttribute{
+						MarkdownDescription: "The allowed IP address or CIDR block.",
+						Computed:            true,
+					},
+				},
+			},
 		},
 		"ping": dsschema.BoolAttribute{
 			MarkdownDescription: "Allow ping?",
 			Computed:            true,
 		},
-		"response_pages": dsschema.StringAttribute{
+		"response_pages": dsschema.BoolAttribute{
 			MarkdownDescription: "Allow response pages?",
 			Computed:            true,
 		},

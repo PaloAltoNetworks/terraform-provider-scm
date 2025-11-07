@@ -43,8 +43,8 @@ func unpackRadiusServerProfilesToSdk(ctx context.Context, obj types.Object) (*id
 
 	// Handling Primitives
 	if !model.Id.IsNull() && !model.Id.IsUnknown() {
-		sdk.Id = model.Id.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+		sdk.Id = model.Id.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
 	}
 
 	// Handling Primitives
@@ -125,8 +125,12 @@ func packRadiusServerProfilesFromSdk(ctx context.Context, sdk identity_services.
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Id = basetypes.NewStringValue(sdk.Id)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+	if sdk.Id != nil {
+		model.Id = basetypes.NewStringValue(*sdk.Id)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
+	} else {
+		model.Id = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)

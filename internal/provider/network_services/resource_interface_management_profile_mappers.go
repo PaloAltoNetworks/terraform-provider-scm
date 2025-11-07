@@ -2,10 +2,7 @@ package provider
 
 import (
 	"context"
-	"reflect"
-	"strconv"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -74,8 +71,10 @@ func unpackInterfaceManagementProfilesToSdk(ctx context.Context, obj types.Objec
 
 	// Handling Lists
 	if !model.PermittedIp.IsNull() && !model.PermittedIp.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field PermittedIp")
-		diags.Append(model.PermittedIp.ElementsAs(ctx, &sdk.PermittedIp, false)...)
+		tflog.Debug(ctx, "Unpacking list of objects for field PermittedIp")
+		unpacked, d := unpackInterfaceManagementProfilesPermittedIpInnerListToSdk(ctx, model.PermittedIp)
+		diags.Append(d...)
+		sdk.PermittedIp = unpacked
 	}
 
 	// Handling Primitives
@@ -86,8 +85,8 @@ func unpackInterfaceManagementProfilesToSdk(ctx context.Context, obj types.Objec
 
 	// Handling Primitives
 	if !model.ResponsePages.IsNull() && !model.ResponsePages.IsUnknown() {
-		sdk.ResponsePages = model.ResponsePages.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ResponsePages", "value": sdk.ResponsePages})
+		sdk.ResponsePages = model.ResponsePages.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ResponsePages", "value": *sdk.ResponsePages})
 	}
 
 	// Handling Primitives
@@ -193,16 +192,12 @@ func packInterfaceManagementProfilesFromSdk(ctx context.Context, sdk network_ser
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	// Handling Lists
 	if sdk.PermittedIp != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field PermittedIp")
-		var d diag.Diagnostics
-		// This logic now dynamically determines the element type based on the SDK's Go type.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.PermittedIp, d = basetypes.NewListValueFrom(ctx, elemType, sdk.PermittedIp)
+		tflog.Debug(ctx, "Packing list of objects for field PermittedIp")
+		packed, d := packInterfaceManagementProfilesPermittedIpInnerListFromSdk(ctx, sdk.PermittedIp)
 		diags.Append(d...)
+		model.PermittedIp = packed
 	} else {
-		// This logic now creates a correctly typed null list.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.PermittedIp = basetypes.NewListNull(elemType)
+		model.PermittedIp = basetypes.NewListNull(models.InterfaceManagementProfilesPermittedIpInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -213,27 +208,12 @@ func packInterfaceManagementProfilesFromSdk(ctx context.Context, sdk network_ser
 		model.Ping = basetypes.NewBoolNull()
 	}
 	// Handling Primitives
-	// Universal packer for interface{} types that are mapped to a StringValue in the model.
-	// All underlying primitive types will be converted to their string representation.
+	// Standard primitive packing
 	if sdk.ResponsePages != nil {
-		tflog.Debug(ctx, "Packing interface value for field ResponsePages")
-		switch v := sdk.ResponsePages.(type) {
-		case string:
-			model.ResponsePages = basetypes.NewStringValue(v)
-		case int:
-			model.ResponsePages = basetypes.NewStringValue(strconv.Itoa(v))
-		case int64:
-			model.ResponsePages = basetypes.NewStringValue(strconv.FormatInt(v, 10))
-		case bool:
-			model.ResponsePages = basetypes.NewStringValue(strconv.FormatBool(v))
-		case float64:
-			model.ResponsePages = basetypes.NewStringValue(strconv.FormatFloat(v, 'f', -1, 64))
-		default:
-			tflog.Warn(ctx, "Unexpected type for interface field", map[string]interface{}{"field": "ResponsePages", "type": reflect.TypeOf(v).String()})
-			model.ResponsePages = basetypes.NewStringNull()
-		}
+		model.ResponsePages = basetypes.NewBoolValue(*sdk.ResponsePages)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "ResponsePages", "value": *sdk.ResponsePages})
 	} else {
-		model.ResponsePages = basetypes.NewStringNull()
+		model.ResponsePages = basetypes.NewBoolNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -337,4 +317,97 @@ func packInterfaceManagementProfilesListFromSdk(ctx context.Context, sdks []netw
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.InterfaceManagementProfiles", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.InterfaceManagementProfiles{}.AttrType(), data)
+}
+
+// --- Unpacker for InterfaceManagementProfilesPermittedIpInner ---
+func unpackInterfaceManagementProfilesPermittedIpInnerToSdk(ctx context.Context, obj types.Object) (*network_services.InterfaceManagementProfilesPermittedIpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.InterfaceManagementProfilesPermittedIpInner", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.InterfaceManagementProfilesPermittedIpInner
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.InterfaceManagementProfilesPermittedIpInner
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Name.IsNull() && !model.Name.IsUnknown() {
+		sdk.Name = model.Name.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.InterfaceManagementProfilesPermittedIpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for InterfaceManagementProfilesPermittedIpInner ---
+func packInterfaceManagementProfilesPermittedIpInnerFromSdk(ctx context.Context, sdk network_services.InterfaceManagementProfilesPermittedIpInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.InterfaceManagementProfilesPermittedIpInner", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.InterfaceManagementProfilesPermittedIpInner
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	model.Name = basetypes.NewStringValue(sdk.Name)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.InterfaceManagementProfilesPermittedIpInner{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.InterfaceManagementProfilesPermittedIpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for InterfaceManagementProfilesPermittedIpInner ---
+func unpackInterfaceManagementProfilesPermittedIpInnerListToSdk(ctx context.Context, list types.List) ([]network_services.InterfaceManagementProfilesPermittedIpInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.InterfaceManagementProfilesPermittedIpInner")
+	diags := diag.Diagnostics{}
+	var data []models.InterfaceManagementProfilesPermittedIpInner
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.InterfaceManagementProfilesPermittedIpInner, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.InterfaceManagementProfilesPermittedIpInner{}.AttrTypes(), &item)
+		unpacked, d := unpackInterfaceManagementProfilesPermittedIpInnerToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.InterfaceManagementProfilesPermittedIpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for InterfaceManagementProfilesPermittedIpInner ---
+func packInterfaceManagementProfilesPermittedIpInnerListFromSdk(ctx context.Context, sdks []network_services.InterfaceManagementProfilesPermittedIpInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.InterfaceManagementProfilesPermittedIpInner")
+	diags := diag.Diagnostics{}
+	var data []models.InterfaceManagementProfilesPermittedIpInner
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.InterfaceManagementProfilesPermittedIpInner
+		obj, d := packInterfaceManagementProfilesPermittedIpInnerFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.InterfaceManagementProfilesPermittedIpInner{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.InterfaceManagementProfilesPermittedIpInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.InterfaceManagementProfilesPermittedIpInner{}.AttrType(), data)
 }

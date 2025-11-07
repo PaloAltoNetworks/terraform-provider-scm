@@ -7,7 +7,7 @@ import (
 // GetDataSources returns the list of data sources for this package.
 func GetDataSources() []func() datasource.DataSource {
 	return []func() datasource.DataSource{
-		NewAggregateEthernetInterfaceDataSource,
+		NewAggregateInterfaceDataSource,
 		// 		NewAutoVpnClusterDataSource,
 		NewBgpAddressFamilyProfileDataSource,
 		NewBgpAuthProfileDataSource,
@@ -47,7 +47,7 @@ func GetDataSources() []func() datasource.DataSource {
 		NewVlanInterfaceDataSource,
 		NewZoneDataSource,
 		NewZoneProtectionProfileDataSource,
-		NewAggregateEthernetInterfaceListDataSource,
+		NewAggregateInterfaceListDataSource,
 		// 		NewAutoVpnClusterListDataSource,
 		NewBgpAddressFamilyProfileListDataSource,
 		NewBgpAuthProfileListDataSource,

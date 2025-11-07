@@ -18,31 +18,31 @@ import (
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// RESOURCE for SCM AggregateEthernetInterface (Package: network_services)
+// RESOURCE for SCM AggregateInterface (Package: network_services)
 var (
-	_ resource.Resource                = &AggregateEthernetInterfaceResource{}
-	_ resource.ResourceWithConfigure   = &AggregateEthernetInterfaceResource{}
-	_ resource.ResourceWithImportState = &AggregateEthernetInterfaceResource{}
+	_ resource.Resource                = &AggregateInterfaceResource{}
+	_ resource.ResourceWithConfigure   = &AggregateInterfaceResource{}
+	_ resource.ResourceWithImportState = &AggregateInterfaceResource{}
 )
 
-func NewAggregateEthernetInterfaceResource() resource.Resource {
-	return &AggregateEthernetInterfaceResource{}
+func NewAggregateInterfaceResource() resource.Resource {
+	return &AggregateInterfaceResource{}
 }
 
-// AggregateEthernetInterfaceResource defines the resource implementation.
-type AggregateEthernetInterfaceResource struct {
+// AggregateInterfaceResource defines the resource implementation.
+type AggregateInterfaceResource struct {
 	client *network_services.APIClient
 }
 
-func (r *AggregateEthernetInterfaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_aggregate_ethernet_interface"
+func (r *AggregateInterfaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_aggregate_interface"
 }
 
-func (r *AggregateEthernetInterfaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
-	resp.Schema = models.AggregateEthernetInterfacesResourceSchema
+func (r *AggregateInterfaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+	resp.Schema = models.AggregateInterfacesResourceSchema
 }
 
-func (r *AggregateEthernetInterfaceResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *AggregateInterfaceResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -59,9 +59,9 @@ func (r *AggregateEthernetInterfaceResource) Configure(ctx context.Context, req 
 	r.client = client
 }
 
-func (r *AggregateEthernetInterfaceResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	tflog.Debug(ctx, "Starting Create function for AggregateEthernetInterface")
-	var data models.AggregateEthernetInterfaces
+func (r *AggregateInterfaceResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	tflog.Debug(ctx, "Starting Create function for AggregateInterface")
+	var data models.AggregateInterfaces
 
 	// 1. Get the plan from Terraform into the data model.
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -70,30 +70,30 @@ func (r *AggregateEthernetInterfaceResource) Create(ctx context.Context, req res
 	}
 
 	// Unpack the plan to an SCM SDK object.
-	planObject, diags := types.ObjectValueFrom(ctx, models.AggregateEthernetInterfaces{}.AttrTypes(), &data)
+	planObject, diags := types.ObjectValueFrom(ctx, models.AggregateInterfaces{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
 	// 2. Unpack the request BODY from data into an SDK object.
-	unpackedScmObject, diags := unpackAggregateEthernetInterfacesToSdk(ctx, planObject)
+	unpackedScmObject, diags := unpackAggregateInterfacesToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	tflog.Debug(ctx, "Creating aggregate_ethernet_interfaces on SCM API")
+	tflog.Debug(ctx, "Creating aggregate_interfaces on SCM API")
 
 	// 3. Initiate the API request with the body.
-	createReq := r.client.AggregateEthernetInterfacesAPI.CreateAggregateEthernetInterfaces(ctx).AggregateEthernetInterfaces(*unpackedScmObject)
+	createReq := r.client.AggregateInterfacesAPI.CreateAggregateInterfaces(ctx).AggregateInterfaces(*unpackedScmObject)
 
 	// 4. BLOCK 1: Add the request PARAMETERS to the API call.
 
 	// 5. Execute the API call.
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error creating aggregate_ethernet_interfaces", err.Error())
+		resp.Diagnostics.AddError("Error creating aggregate_interfaces", err.Error())
 		detailedMessage := utils.PrintScmError(err)
 
 		resp.Diagnostics.AddError(
@@ -104,7 +104,7 @@ func (r *AggregateEthernetInterfaceResource) Create(ctx context.Context, req res
 	}
 
 	// 6. Pack the API response back into a Terraform model data.
-	packedObject, diags := packAggregateEthernetInterfacesFromSdk(ctx, *createdObject)
+	packedObject, diags := packAggregateInterfacesFromSdk(ctx, *createdObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -148,14 +148,14 @@ func (r *AggregateEthernetInterfaceResource) Create(ctx context.Context, req res
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 
-	tflog.Debug(ctx, "Created aggregate_ethernet_interfaces", map[string]interface{}{"tfid": data.Tfid.ValueString()})
+	tflog.Debug(ctx, "Created aggregate_interfaces", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *AggregateEthernetInterfaceResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	// Step 1 - Initialize a data and savestate of type models.AggregateEthernetInterfaces - which is the TF schema struct
-	tflog.Debug(ctx, "Starting Read function for AggregateEthernetInterface")
-	var data, savestate models.AggregateEthernetInterfaces
+func (r *AggregateInterfaceResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	// Step 1 - Initialize a data and savestate of type models.AggregateInterfaces - which is the TF schema struct
+	tflog.Debug(ctx, "Starting Read function for AggregateInterface")
+	var data, savestate models.AggregateInterfaces
 
 	// Step 2 - Fetch the state into savestate
 	resp.Diagnostics.Append(req.State.Get(ctx, &savestate)...)
@@ -171,16 +171,16 @@ func (r *AggregateEthernetInterfaceResource) Read(ctx context.Context, req resou
 	objectId := tokens[3]
 
 	// Step 3 - Make read api call with id = id from state tfid
-	tflog.Debug(ctx, "Reading aggregate_ethernet_interfaces from SCM API", map[string]interface{}{"id": objectId})
-	getReq := r.client.AggregateEthernetInterfacesAPI.GetAggregateEthernetInterfacesByID(ctx, objectId)
+	tflog.Debug(ctx, "Reading aggregate_interfaces from SCM API", map[string]interface{}{"id": objectId})
+	getReq := r.client.AggregateInterfacesAPI.GetAggregateInterfacesByID(ctx, objectId)
 	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
-			tflog.Debug(ctx, "Got no aggregate_ethernet_interfaces on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			tflog.Debug(ctx, "Got no aggregate_interfaces on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
 			resp.State.RemoveResource(ctx)
 		} else {
 			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
-			resp.Diagnostics.AddError("Error reading aggregate_ethernet_interfaces", err.Error())
+			resp.Diagnostics.AddError("Error reading aggregate_interfaces", err.Error())
 			detailedMessage := utils.PrintScmError(err)
 
 			resp.Diagnostics.AddError(
@@ -192,7 +192,7 @@ func (r *AggregateEthernetInterfaceResource) Read(ctx context.Context, req resou
 	}
 
 	// Step 5 - Pack the scm object into a terraform model and put it in data we initialized in step 1
-	packedObject, diags := packAggregateEthernetInterfacesFromSdk(ctx, *scmObject)
+	packedObject, diags := packAggregateInterfacesFromSdk(ctx, *scmObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -267,11 +267,11 @@ func (r *AggregateEthernetInterfaceResource) Read(ctx context.Context, req resou
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *AggregateEthernetInterfaceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+func (r *AggregateInterfaceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 
-	// Step 1: Initialize a plan and state of type models.AggregateEthernetInterfaces which is the terraform schema struct
-	tflog.Debug(ctx, "Starting Update function for AggregateEthernetInterface")
-	var plan, state models.AggregateEthernetInterfaces
+	// Step 1: Initialize a plan and state of type models.AggregateInterfaces which is the terraform schema struct
+	tflog.Debug(ctx, "Starting Update function for AggregateInterface")
+	var plan, state models.AggregateInterfaces
 
 	// Step 2: Get the plan from plan file (resource.tf) into plan and state from tfstate into state
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
@@ -284,14 +284,14 @@ func (r *AggregateEthernetInterfaceResource) Update(ctx context.Context, req res
 	}
 
 	// Step 3: Creates a plan object from the plan
-	planObject, diags := types.ObjectValueFrom(ctx, models.AggregateEthernetInterfaces{}.AttrTypes(), &plan)
+	planObject, diags := types.ObjectValueFrom(ctx, models.AggregateInterfaces{}.AttrTypes(), &plan)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
 	// Step 4: Unpack the plan object to an SCM Object
-	unpackedScmObject, diags := unpackAggregateEthernetInterfacesToSdk(ctx, planObject)
+	unpackedScmObject, diags := unpackAggregateInterfacesToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -309,8 +309,8 @@ func (r *AggregateEthernetInterfaceResource) Update(ctx context.Context, req res
 	}
 	objectId := tokens[3]
 
-	tflog.Debug(ctx, "Updating aggregate_ethernet_interfaces on SCM API", map[string]interface{}{"id": objectId})
-	updateReq := r.client.AggregateEthernetInterfacesAPI.UpdateAggregateEthernetInterfacesByID(ctx, objectId).AggregateEthernetInterfaces(*unpackedScmObject)
+	tflog.Debug(ctx, "Updating aggregate_interfaces on SCM API", map[string]interface{}{"id": objectId})
+	updateReq := r.client.AggregateInterfacesAPI.UpdateAggregateInterfacesByID(ctx, objectId).AggregateInterfaces(*unpackedScmObject)
 
 	// Step 7: Retain update parameters so we dont lose them
 	// ======================== START: ADD THIS BLOCK ========================
@@ -321,11 +321,11 @@ func (r *AggregateEthernetInterfaceResource) Update(ctx context.Context, req res
 	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
-			tflog.Debug(ctx, "Got no aggregate_ethernet_interfaces on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
+			tflog.Debug(ctx, "Got no aggregate_interfaces on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
 			resp.State.RemoveResource(ctx)
 		} else {
 			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
-			resp.Diagnostics.AddError("Error updating aggregate_ethernet_interfaces", err.Error())
+			resp.Diagnostics.AddError("Error updating aggregate_interfaces", err.Error())
 			detailedMessage := utils.PrintScmError(err)
 
 			resp.Diagnostics.AddError(
@@ -337,7 +337,7 @@ func (r *AggregateEthernetInterfaceResource) Update(ctx context.Context, req res
 	}
 
 	// Step 9: Pack the SCM updatedObject into a TF object
-	packedObject, diags := packAggregateEthernetInterfacesFromSdk(ctx, *updatedObject)
+	packedObject, diags := packAggregateInterfacesFromSdk(ctx, *updatedObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -357,12 +357,12 @@ func (r *AggregateEthernetInterfaceResource) Update(ctx context.Context, req res
 
 	// Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
 
-	tflog.Debug(ctx, "Updated aggregate_ethernet_interfaces", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
+	tflog.Debug(ctx, "Updated aggregate_interfaces", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
 }
 
-func (r *AggregateEthernetInterfaceResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data models.AggregateEthernetInterfaces
+func (r *AggregateInterfaceResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data models.AggregateInterfaces
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -375,11 +375,11 @@ func (r *AggregateEthernetInterfaceResource) Delete(ctx context.Context, req res
 	}
 	objectId := tokens[3]
 
-	tflog.Debug(ctx, "Deleting aggregate_ethernet_interfaces", map[string]interface{}{"id": objectId})
-	deleteReq := r.client.AggregateEthernetInterfacesAPI.DeleteAggregateEthernetInterfacesByID(ctx, objectId)
+	tflog.Debug(ctx, "Deleting aggregate_interfaces", map[string]interface{}{"id": objectId})
+	deleteReq := r.client.AggregateInterfacesAPI.DeleteAggregateInterfacesByID(ctx, objectId)
 	_, err := deleteReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error deleting aggregate_ethernet_interfaces", err.Error())
+		resp.Diagnostics.AddError("Error deleting aggregate_interfaces", err.Error())
 		detailedMessage := utils.PrintScmError(err)
 
 		resp.Diagnostics.AddError(
@@ -389,6 +389,6 @@ func (r *AggregateEthernetInterfaceResource) Delete(ctx context.Context, req res
 	}
 }
 
-func (r *AggregateEthernetInterfaceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *AggregateInterfaceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }

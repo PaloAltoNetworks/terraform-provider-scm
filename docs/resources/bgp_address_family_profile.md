@@ -148,8 +148,16 @@ Optional:
 
 Optional:
 
-- `all` (String) All
-- `replace__a_s` (String) Replace a s
+- `all` (Attributes) All (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--remove_private__a_s--all))
+- `replace__a_s` (Attributes) Replace a s (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--remove_private__a_s--replace__a_s))
+
+<a id="nestedatt--ipv4--ipv4--multicast--remove_private__a_s--all"></a>
+### Nested Schema for `ipv4.ipv4.multicast.remove_private__a_s.all`
+
+
+<a id="nestedatt--ipv4--ipv4--multicast--remove_private__a_s--replace__a_s"></a>
+### Nested Schema for `ipv4.ipv4.multicast.remove_private__a_s.replace__a_s`
+
 
 
 <a id="nestedatt--ipv4--ipv4--multicast--send_community"></a>
@@ -287,8 +295,16 @@ Optional:
 
 Optional:
 
-- `all` (String) All
-- `replace__a_s` (String) Replace a s
+- `all` (Attributes) All (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--remove_private__a_s--all))
+- `replace__a_s` (Attributes) Replace a s (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--remove_private__a_s--replace__a_s))
+
+<a id="nestedatt--ipv4--ipv4--unicast--remove_private__a_s--all"></a>
+### Nested Schema for `ipv4.ipv4.unicast.remove_private__a_s.all`
+
+
+<a id="nestedatt--ipv4--ipv4--unicast--remove_private__a_s--replace__a_s"></a>
+### Nested Schema for `ipv4.ipv4.unicast.remove_private__a_s.replace__a_s`
+
 
 
 <a id="nestedatt--ipv4--ipv4--unicast--send_community"></a>

@@ -256,9 +256,10 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The RADIUS authentication protocol",
 			Required:            true,
 			Attributes: map[string]schema.Attribute{
-				"c_h_a_p": schema.StringAttribute{
+				"c_h_a_p": schema.SingleNestedAttribute{
 					MarkdownDescription: "C h a p",
 					Optional:            true,
+					Attributes:          map[string]schema.Attribute{},
 				},
 				"e_a_p__t_t_l_s_with__p_a_p": schema.SingleNestedAttribute{
 					MarkdownDescription: "E a p t t l s with p a p",
@@ -274,9 +275,10 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 						},
 					},
 				},
-				"p_a_p": schema.StringAttribute{
+				"p_a_p": schema.SingleNestedAttribute{
 					MarkdownDescription: "P a p",
 					Optional:            true,
+					Attributes:          map[string]schema.Attribute{},
 				},
 				"p_e_a_p__m_s_c_h_a_pv2": schema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p m s c h a pv2",
@@ -407,9 +409,10 @@ var RadiusServerProfilesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The RADIUS authentication protocol",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"c_h_a_p": dsschema.StringAttribute{
+				"c_h_a_p": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "C h a p",
 					Computed:            true,
+					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"e_a_p__t_t_l_s_with__p_a_p": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "E a p t t l s with p a p",
@@ -425,9 +428,10 @@ var RadiusServerProfilesDataSourceSchema = dsschema.Schema{
 						},
 					},
 				},
-				"p_a_p": dsschema.StringAttribute{
+				"p_a_p": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "P a p",
 					Computed:            true,
+					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"p_e_a_p__m_s_c_h_a_pv2": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p m s c h a pv2",

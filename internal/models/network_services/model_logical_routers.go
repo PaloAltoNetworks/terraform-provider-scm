@@ -658,6 +658,11 @@ type LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim struct {
 	JoinPruneInterval basetypes.Int64Value `tfsdk:"join_prune_interval"`
 }
 
+// LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner represents a nested structure within the LogicalRouters model
+type LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner struct {
+	Name basetypes.StringValue `tfsdk:"name"`
+}
+
 // LogicalRoutersVrfInnerMulticastMsdp represents a nested structure within the LogicalRouters model
 type LogicalRoutersVrfInnerMulticastMsdp struct {
 	Enable               basetypes.BoolValue   `tfsdk:"enable"`
@@ -1262,6 +1267,7 @@ type LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner struct {
 type LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthop struct {
 	Discard     basetypes.ObjectValue `tfsdk:"discard"`
 	Fqdn        basetypes.StringValue `tfsdk:"fqdn"`
+	IpAddress   basetypes.StringValue `tfsdk:"ip_address"`
 	Ipv6Address basetypes.StringValue `tfsdk:"ipv6_address"`
 	NextLr      basetypes.StringValue `tfsdk:"next_lr"`
 	NextVr      basetypes.StringValue `tfsdk:"next_vr"`
@@ -1313,6 +1319,17 @@ type LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner struct {
 	Option      basetypes.ObjectValue `tfsdk:"option"`
 	PathMonitor basetypes.ObjectValue `tfsdk:"path_monitor"`
 	RouteTable  basetypes.ObjectValue `tfsdk:"route_table"`
+}
+
+// LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop represents a nested structure within the LogicalRouters model
+type LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop struct {
+	Discard     basetypes.ObjectValue `tfsdk:"discard"`
+	Fqdn        basetypes.StringValue `tfsdk:"fqdn"`
+	Ipv6Address basetypes.StringValue `tfsdk:"ipv6_address"`
+	NextLr      basetypes.StringValue `tfsdk:"next_lr"`
+	NextVr      basetypes.StringValue `tfsdk:"next_vr"`
+	Receive     basetypes.ObjectValue `tfsdk:"receive"`
+	Tunnel      basetypes.StringValue `tfsdk:"tunnel"`
 }
 
 // LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerOption represents a nested structure within the LogicalRouters model
@@ -1813,9 +1830,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 														"name": basetypes.StringType{},
 													},
 												}},
-												"used_by": basetypes.ListType{ElemType: basetypes.ObjectType{
-													AttrTypes: map[string]attr.Type{},
-												}},
+												"used_by": basetypes.ListType{ElemType: basetypes.StringType{}},
 											},
 										}},
 									},
@@ -2542,7 +2557,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 								"md5": basetypes.ListType{ElemType: basetypes.ObjectType{
 									AttrTypes: map[string]attr.Type{
 										"key":       basetypes.StringType{},
-										"name":      basetypes.NumberType{},
+										"name":      basetypes.Float64Type{},
 										"preferred": basetypes.BoolType{},
 									},
 								}},
@@ -3040,6 +3055,7 @@ func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 													AttrTypes: map[string]attr.Type{},
 												},
 												"fqdn":         basetypes.StringType{},
+												"ip_address":   basetypes.StringType{},
 												"ipv6_address": basetypes.StringType{},
 												"next_lr":      basetypes.StringType{},
 												"next_vr":      basetypes.StringType{},
@@ -3661,9 +3677,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 												"name": basetypes.StringType{},
 											},
 										}},
-										"used_by": basetypes.ListType{ElemType: basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										}},
+										"used_by": basetypes.ListType{ElemType: basetypes.StringType{}},
 									},
 								}},
 							},
@@ -4390,7 +4404,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 						"md5": basetypes.ListType{ElemType: basetypes.ObjectType{
 							AttrTypes: map[string]attr.Type{
 								"key":       basetypes.StringType{},
-								"name":      basetypes.NumberType{},
+								"name":      basetypes.Float64Type{},
 								"preferred": basetypes.BoolType{},
 							},
 						}},
@@ -4888,6 +4902,7 @@ func (o LogicalRoutersVrfInner) AttrTypes() map[string]attr.Type {
 											AttrTypes: map[string]attr.Type{},
 										},
 										"fqdn":         basetypes.StringType{},
+										"ip_address":   basetypes.StringType{},
 										"ipv6_address": basetypes.StringType{},
 										"next_lr":      basetypes.StringType{},
 										"next_vr":      basetypes.StringType{},
@@ -5514,9 +5529,7 @@ func (o LogicalRoutersVrfInnerBgp) AttrTypes() map[string]attr.Type {
 										"name": basetypes.StringType{},
 									},
 								}},
-								"used_by": basetypes.ListType{ElemType: basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{},
-								}},
+								"used_by": basetypes.ListType{ElemType: basetypes.StringType{}},
 							},
 						}},
 					},
@@ -6778,9 +6791,7 @@ func (o LogicalRoutersVrfInnerBgpPolicy) AttrTypes() map[string]attr.Type {
 								"name": basetypes.StringType{},
 							},
 						}},
-						"used_by": basetypes.ListType{ElemType: basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{},
-						}},
+						"used_by": basetypes.ListType{ElemType: basetypes.StringType{}},
 					},
 				}},
 			},
@@ -7577,9 +7588,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyConditionalAdvertisement) AttrTypes() map
 						"name": basetypes.StringType{},
 					},
 				}},
-				"used_by": basetypes.ListType{ElemType: basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{},
-				}},
+				"used_by": basetypes.ListType{ElemType: basetypes.StringType{}},
 			},
 		}},
 	}
@@ -7671,9 +7680,7 @@ func (o LogicalRoutersVrfInnerBgpPolicyConditionalAdvertisementPolicyInner) Attr
 				"name": basetypes.StringType{},
 			},
 		}},
-		"used_by": basetypes.ListType{ElemType: basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		}},
+		"used_by": basetypes.ListType{ElemType: basetypes.StringType{}},
 	}
 }
 
@@ -9209,6 +9216,20 @@ func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim) AttrType() attr.T
 	}
 }
 
+// AttrTypes defines the attribute types for the LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner model.
+func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner objects.
+func (o LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the LogicalRoutersVrfInnerMulticastMsdp model.
 func (o LogicalRoutersVrfInnerMulticastMsdp) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -9884,7 +9905,7 @@ func (o LogicalRoutersVrfInnerOspf) AttrTypes() map[string]attr.Type {
 				"md5": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"key":       basetypes.StringType{},
-						"name":      basetypes.NumberType{},
+						"name":      basetypes.Float64Type{},
 						"preferred": basetypes.BoolType{},
 					},
 				}},
@@ -10746,7 +10767,7 @@ func (o LogicalRoutersVrfInnerOspfAuthProfileInner) AttrTypes() map[string]attr.
 		"md5": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"key":       basetypes.StringType{},
-				"name":      basetypes.NumberType{},
+				"name":      basetypes.Float64Type{},
 				"preferred": basetypes.BoolType{},
 			},
 		}},
@@ -10766,7 +10787,7 @@ func (o LogicalRoutersVrfInnerOspfAuthProfileInner) AttrType() attr.Type {
 func (o LogicalRoutersVrfInnerOspfAuthProfileInnerMd5Inner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"key":       basetypes.StringType{},
-		"name":      basetypes.NumberType{},
+		"name":      basetypes.Float64Type{},
 		"preferred": basetypes.BoolType{},
 	}
 }
@@ -12228,6 +12249,7 @@ func (o LogicalRoutersVrfInnerRoutingTable) AttrTypes() map[string]attr.Type {
 									AttrTypes: map[string]attr.Type{},
 								},
 								"fqdn":         basetypes.StringType{},
+								"ip_address":   basetypes.StringType{},
 								"ipv6_address": basetypes.StringType{},
 								"next_lr":      basetypes.StringType{},
 								"next_vr":      basetypes.StringType{},
@@ -12380,6 +12402,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIp) AttrTypes() map[string]attr.Type {
 							AttrTypes: map[string]attr.Type{},
 						},
 						"fqdn":         basetypes.StringType{},
+						"ip_address":   basetypes.StringType{},
 						"ipv6_address": basetypes.StringType{},
 						"next_lr":      basetypes.StringType{},
 						"next_vr":      basetypes.StringType{},
@@ -12454,6 +12477,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInner) AttrTypes() map[st
 					AttrTypes: map[string]attr.Type{},
 				},
 				"fqdn":         basetypes.StringType{},
+				"ip_address":   basetypes.StringType{},
 				"ipv6_address": basetypes.StringType{},
 				"next_lr":      basetypes.StringType{},
 				"next_vr":      basetypes.StringType{},
@@ -12514,6 +12538,7 @@ func (o LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthop) AttrTypes()
 			AttrTypes: map[string]attr.Type{},
 		},
 		"fqdn":         basetypes.StringType{},
+		"ip_address":   basetypes.StringType{},
 		"ipv6_address": basetypes.StringType{},
 		"next_lr":      basetypes.StringType{},
 		"next_vr":      basetypes.StringType{},
@@ -12760,6 +12785,30 @@ func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner) AttrTypes() map[
 
 // AttrType returns the attribute type for a list of LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner objects.
 func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop model.
+func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"discard": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"fqdn":         basetypes.StringType{},
+		"ipv6_address": basetypes.StringType{},
+		"next_lr":      basetypes.StringType{},
+		"next_vr":      basetypes.StringType{},
+		"receive": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"tunnel": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop objects.
+func (o LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -17851,6 +17900,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.Object{
 																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ip_address"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
@@ -17866,6 +17916,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.String{
 																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
+																	path.MatchRelative().AtParent().AtName("ip_address"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
@@ -17876,11 +17927,27 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															MarkdownDescription: "Fqdn",
 															Optional:            true,
 														},
+														"ip_address": schema.StringAttribute{
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("discard"),
+																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ipv6_address"),
+																	path.MatchRelative().AtParent().AtName("next_lr"),
+																	path.MatchRelative().AtParent().AtName("next_vr"),
+																	path.MatchRelative().AtParent().AtName("receive"),
+																	path.MatchRelative().AtParent().AtName("tunnel"),
+																),
+															},
+															MarkdownDescription: "Ip address",
+															Optional:            true,
+														},
 														"ipv6_address": schema.StringAttribute{
 															Validators: []validator.String{
 																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ip_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
 																	path.MatchRelative().AtParent().AtName("receive"),
@@ -17895,6 +17962,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ip_address"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
 																	path.MatchRelative().AtParent().AtName("receive"),
@@ -17909,6 +17977,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ip_address"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("receive"),
@@ -17923,6 +17992,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																objectvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ip_address"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
@@ -17938,6 +18008,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																stringvalidator.ConflictsWith(
 																	path.MatchRelative().AtParent().AtName("discard"),
 																	path.MatchRelative().AtParent().AtName("fqdn"),
+																	path.MatchRelative().AtParent().AtName("ip_address"),
 																	path.MatchRelative().AtParent().AtName("ipv6_address"),
 																	path.MatchRelative().AtParent().AtName("next_lr"),
 																	path.MatchRelative().AtParent().AtName("next_vr"),
@@ -22589,6 +22660,10 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														},
 														"fqdn": dsschema.StringAttribute{
 															MarkdownDescription: "Fqdn",
+															Computed:            true,
+														},
+														"ip_address": dsschema.StringAttribute{
+															MarkdownDescription: "Ip address",
 															Computed:            true,
 														},
 														"ipv6_address": dsschema.StringAttribute{

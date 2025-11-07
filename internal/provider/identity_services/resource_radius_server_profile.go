@@ -298,8 +298,8 @@ func (r *RadiusServerProfileResource) Update(ctx context.Context, req resource.U
 	}
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
-	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
-	unpackedScmObject.Id = ""
+	// ID is a pointer, so we nil it out to omit it from the update payload.
+	unpackedScmObject.Id = nil
 
 	// Step 6: Get id from token and make update call
 	tokens := strings.Split(state.Tfid.ValueString(), ":")

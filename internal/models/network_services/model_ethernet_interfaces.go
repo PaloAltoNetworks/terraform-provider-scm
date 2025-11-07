@@ -594,7 +594,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("tap"),
 				),
 			},
-			MarkdownDescription: "Layer3",
+			MarkdownDescription: "Ethernet Interface Layer 3 configuration",
 			Optional:            true,
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
@@ -741,13 +741,13 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					MarkdownDescription: "Interface IP addresses",
+					MarkdownDescription: "Ethernet Interface IP addresses",
 					Optional:            true,
 					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name",
+								MarkdownDescription: "Ethernet Interface IP addresses name",
 								Required:            true,
 							},
 						},
@@ -999,7 +999,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"layer3": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Layer3",
+			MarkdownDescription: "Ethernet Interface Layer 3 configuration",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
@@ -1089,12 +1089,12 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"ip": dsschema.ListNestedAttribute{
-					MarkdownDescription: "Interface IP addresses",
+					MarkdownDescription: "Ethernet Interface IP addresses",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
 							"name": dsschema.StringAttribute{
-								MarkdownDescription: "Name",
+								MarkdownDescription: "Ethernet Interface IP addresses name",
 								Computed:            true,
 							},
 						},

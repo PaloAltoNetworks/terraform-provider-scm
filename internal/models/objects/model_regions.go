@@ -46,8 +46,8 @@ func (o Regions) AttrTypes() map[string]attr.Type {
 		"folder":  basetypes.StringType{},
 		"geo_location": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"latitude":  basetypes.NumberType{},
-				"longitude": basetypes.NumberType{},
+				"latitude":  basetypes.Float64Type{},
+				"longitude": basetypes.Float64Type{},
 			},
 		},
 		"id":      basetypes.StringType{},
@@ -66,8 +66,8 @@ func (o Regions) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the RegionsGeoLocation model.
 func (o RegionsGeoLocation) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"latitude":  basetypes.NumberType{},
-		"longitude": basetypes.NumberType{},
+		"latitude":  basetypes.Float64Type{},
+		"longitude": basetypes.Float64Type{},
 	}
 }
 

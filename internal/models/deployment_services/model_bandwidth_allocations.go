@@ -34,13 +34,13 @@ type BandwidthAllocationsQos struct {
 func (o BandwidthAllocations) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":                basetypes.StringType{},
-		"allocated_bandwidth": basetypes.NumberType{},
+		"allocated_bandwidth": basetypes.Float64Type{},
 		"name":                basetypes.StringType{},
 		"qos": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"customized":       basetypes.BoolType{},
 				"enabled":          basetypes.BoolType{},
-				"guaranteed_ratio": basetypes.NumberType{},
+				"guaranteed_ratio": basetypes.Float64Type{},
 				"profile":          basetypes.StringType{},
 			},
 		},
@@ -60,7 +60,7 @@ func (o BandwidthAllocationsQos) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"customized":       basetypes.BoolType{},
 		"enabled":          basetypes.BoolType{},
-		"guaranteed_ratio": basetypes.NumberType{},
+		"guaranteed_ratio": basetypes.Float64Type{},
 		"profile":          basetypes.StringType{},
 	}
 }

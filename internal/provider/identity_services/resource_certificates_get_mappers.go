@@ -363,11 +363,11 @@ func packCertificatesGetListFromSdk(ctx context.Context, sdks []identity_service
 	return basetypes.NewListValueFrom(ctx, models.CertificatesGet{}.AttrType(), data)
 }
 
-// --- Unpacker for ExportCertificatePayload ---
-func unpackExportCertificatePayloadToSdk(ctx context.Context, obj types.Object) (*identity_services.ExportCertificatePayload, diag.Diagnostics) {
-    tflog.Debug(ctx, "Entering unpack helper for models.ExportCertificatePayload", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for CertificatesImport ---
+func unpackCertificatesImportToSdk(ctx context.Context, obj types.Object) (*identity_services.CertificatesImport, diag.Diagnostics) {
+    tflog.Debug(ctx, "Entering unpack helper for models.CertificatesImport", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
-    var model models.ExportCertificatePayload
+    var model models.CertificatesImport
     diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
     if diags.HasError() {
         tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -375,8 +375,27 @@ func unpackExportCertificatePayloadToSdk(ctx context.Context, obj types.Object) 
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk identity_services.ExportCertificatePayload
+    var sdk identity_services.CertificatesImport
     var d diag.Diagnostics
+
+
+    // Handling Primitives
+    if !model.CertificateFile.IsNull() && !model.CertificateFile.IsUnknown() {
+        sdk.CertificateFile = model.CertificateFile.ValueString()
+        tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "CertificateFile", "value": sdk.CertificateFile})
+    }
+
+    // Handling Primitives
+    if !model.Device.IsNull() && !model.Device.IsUnknown() {
+        sdk.Device = model.Device.ValueStringPointer()
+        tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+    }
+
+    // Handling Primitives
+    if !model.Folder.IsNull() && !model.Folder.IsUnknown() {
+        sdk.Folder = model.Folder.ValueStringPointer()
+        tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+    }
 
     // Handling Primitives
     if !model.Format.IsNull() && !model.Format.IsUnknown() {
@@ -385,28 +404,78 @@ func unpackExportCertificatePayloadToSdk(ctx context.Context, obj types.Object) 
     }
 
     // Handling Primitives
+    if !model.KeyFile.IsNull() && !model.KeyFile.IsUnknown() {
+        sdk.KeyFile = model.KeyFile.ValueStringPointer()
+        tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "KeyFile", "value": *sdk.KeyFile})
+    }
+
+    // Handling Primitives
+    if !model.Name.IsNull() && !model.Name.IsUnknown() {
+        sdk.Name = model.Name.ValueString()
+        tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+    }
+
+    // Handling Primitives
     if !model.Passphrase.IsNull() && !model.Passphrase.IsUnknown() {
         sdk.Passphrase = model.Passphrase.ValueStringPointer()
         tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Passphrase", "value": *sdk.Passphrase})
     }
 
+    // Handling Primitives
+    if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
+        sdk.Snippet = model.Snippet.ValueStringPointer()
+        tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+    }
+
 diags.Append(d...)
 
-    tflog.Debug(ctx, "Exiting unpack helper for models.ExportCertificatePayload", map[string]interface{}{"has_errors": diags.HasError()})
+    tflog.Debug(ctx, "Exiting unpack helper for models.CertificatesImport", map[string]interface{}{"has_errors": diags.HasError()})
     return &sdk, diags
 
 }
 
-// --- Packer for ExportCertificatePayload ---
-func packExportCertificatePayloadFromSdk(ctx context.Context, sdk identity_services.ExportCertificatePayload) (types.Object, diag.Diagnostics) {
-    tflog.Debug(ctx, "Entering pack helper for models.ExportCertificatePayload", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for CertificatesImport ---
+func packCertificatesImportFromSdk(ctx context.Context, sdk identity_services.CertificatesImport) (types.Object, diag.Diagnostics) {
+    tflog.Debug(ctx, "Entering pack helper for models.CertificatesImport", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
-    var model models.ExportCertificatePayload
+    var model models.CertificatesImport
     var d diag.Diagnostics
+    // Handling Primitives
+    // Standard primitive packing
+    model.CertificateFile = basetypes.NewStringValue(sdk.CertificateFile)
+    tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "CertificateFile", "value": sdk.CertificateFile})
+    // Handling Primitives
+    // Standard primitive packing
+    if sdk.Device != nil {
+        model.Device = basetypes.NewStringValue(*sdk.Device)
+        tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+    } else {
+        model.Device = basetypes.NewStringNull()
+    }
+    // Handling Primitives
+    // Standard primitive packing
+    if sdk.Folder != nil {
+        model.Folder = basetypes.NewStringValue(*sdk.Folder)
+        tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+    } else {
+        model.Folder = basetypes.NewStringNull()
+    }
     // Handling Primitives
     // Standard primitive packing
     model.Format = basetypes.NewStringValue(sdk.Format)
     tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Format", "value": sdk.Format})
+    // Handling Primitives
+    // Standard primitive packing
+    if sdk.KeyFile != nil {
+        model.KeyFile = basetypes.NewStringValue(*sdk.KeyFile)
+        tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "KeyFile", "value": *sdk.KeyFile})
+    } else {
+        model.KeyFile = basetypes.NewStringNull()
+    }
+    // Handling Primitives
+    // Standard primitive packing
+    model.Name = basetypes.NewStringValue(sdk.Name)
+    tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
     // Handling Primitives
     // Standard primitive packing
     if sdk.Passphrase != nil {
@@ -415,60 +484,68 @@ func packExportCertificatePayloadFromSdk(ctx context.Context, sdk identity_servi
     } else {
         model.Passphrase = basetypes.NewStringNull()
     }
+    // Handling Primitives
+    // Standard primitive packing
+    if sdk.Snippet != nil {
+        model.Snippet = basetypes.NewStringValue(*sdk.Snippet)
+        tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+    } else {
+        model.Snippet = basetypes.NewStringNull()
+    }
 diags.Append(d...)
 
-    obj, d := types.ObjectValueFrom(ctx, models.ExportCertificatePayload{}.AttrTypes(), &model)
+    obj, d := types.ObjectValueFrom(ctx, models.CertificatesImport{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
     diags.Append(d...)
-    tflog.Debug(ctx, "Exiting pack helper for models.ExportCertificatePayload", map[string]interface{}{"has_errors": diags.HasError()})
+    tflog.Debug(ctx, "Exiting pack helper for models.CertificatesImport", map[string]interface{}{"has_errors": diags.HasError()})
     return obj, diags
 
 }
 
-// --- List Unpacker for ExportCertificatePayload ---
-func unpackExportCertificatePayloadListToSdk(ctx context.Context, list types.List) ([]identity_services.ExportCertificatePayload, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.ExportCertificatePayload")
+// --- List Unpacker for CertificatesImport ---
+func unpackCertificatesImportListToSdk(ctx context.Context, list types.List) ([]identity_services.CertificatesImport, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.CertificatesImport")
 	diags := diag.Diagnostics{}
-	var data []models.ExportCertificatePayload
+	var data []models.CertificatesImport
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]identity_services.ExportCertificatePayload, 0, len(data))
+	ans := make([]identity_services.CertificatesImport, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.ExportCertificatePayload{}.AttrTypes(), &item)
-		unpacked, d := unpackExportCertificatePayloadToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.CertificatesImport{}.AttrTypes(), &item)
+		unpacked, d := unpackCertificatesImportToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.ExportCertificatePayload", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.CertificatesImport", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for ExportCertificatePayload ---
-func packExportCertificatePayloadListFromSdk(ctx context.Context, sdks []identity_services.ExportCertificatePayload) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.ExportCertificatePayload")
+// --- List Packer for CertificatesImport ---
+func packCertificatesImportListFromSdk(ctx context.Context, sdks []identity_services.CertificatesImport) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.CertificatesImport")
 	diags := diag.Diagnostics{}
-	var data []models.ExportCertificatePayload
+	var data []models.CertificatesImport
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.ExportCertificatePayload
-		obj, d := packExportCertificatePayloadFromSdk(ctx, sdk)
+		var model models.CertificatesImport
+		obj, d := packCertificatesImportFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.ExportCertificatePayload{}.AttrType()), diags
+			return basetypes.NewListNull(models.CertificatesImport{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.ExportCertificatePayload", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.ExportCertificatePayload{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.CertificatesImport", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.CertificatesImport{}.AttrType(), data)
 }
 
 

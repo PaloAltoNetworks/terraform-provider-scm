@@ -62,6 +62,12 @@ type BgpRouteMapsRouteMapInnerMatchIpv4 struct {
 	RouteSource basetypes.ObjectValue `tfsdk:"route_source"`
 }
 
+// BgpRouteMapsRouteMapInnerMatchIpv4Address represents a nested structure within the BgpRouteMaps model
+type BgpRouteMapsRouteMapInnerMatchIpv4Address struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
 // BgpRouteMapsRouteMapInnerSet represents a nested structure within the BgpRouteMaps model
 type BgpRouteMapsRouteMapInnerSet struct {
 	Aggregator                basetypes.ObjectValue `tfsdk:"aggregator"`
@@ -87,6 +93,18 @@ type BgpRouteMapsRouteMapInnerSet struct {
 type BgpRouteMapsRouteMapInnerSetAggregator struct {
 	As       basetypes.Int64Value  `tfsdk:"as"`
 	RouterId basetypes.StringValue `tfsdk:"router_id"`
+}
+
+// BgpRouteMapsRouteMapInnerSetIpv4 represents a nested structure within the BgpRouteMaps model
+type BgpRouteMapsRouteMapInnerSetIpv4 struct {
+	NextHop       basetypes.StringValue `tfsdk:"next_hop"`
+	SourceAddress basetypes.StringValue `tfsdk:"source_address"`
+}
+
+// BgpRouteMapsRouteMapInnerSetMetric represents a nested structure within the BgpRouteMaps model
+type BgpRouteMapsRouteMapInnerSetMetric struct {
+	Action basetypes.StringValue `tfsdk:"action"`
+	Value  basetypes.Int64Value  `tfsdk:"value"`
 }
 
 // AttrTypes defines the attribute types for the BgpRouteMaps model.
@@ -352,6 +370,21 @@ func (o BgpRouteMapsRouteMapInnerMatchIpv4) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerMatchIpv4Address model.
+func (o BgpRouteMapsRouteMapInnerMatchIpv4Address) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapsRouteMapInnerMatchIpv4Address objects.
+func (o BgpRouteMapsRouteMapInnerMatchIpv4Address) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerSet model.
 func (o BgpRouteMapsRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -407,6 +440,36 @@ func (o BgpRouteMapsRouteMapInnerSetAggregator) AttrTypes() map[string]attr.Type
 
 // AttrType returns the attribute type for a list of BgpRouteMapsRouteMapInnerSetAggregator objects.
 func (o BgpRouteMapsRouteMapInnerSetAggregator) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerSetIpv4 model.
+func (o BgpRouteMapsRouteMapInnerSetIpv4) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"next_hop":       basetypes.StringType{},
+		"source_address": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapsRouteMapInnerSetIpv4 objects.
+func (o BgpRouteMapsRouteMapInnerSetIpv4) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapsRouteMapInnerSetMetric model.
+func (o BgpRouteMapsRouteMapInnerSetMetric) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"action": basetypes.StringType{},
+		"value":  basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapsRouteMapInnerSetMetric objects.
+func (o BgpRouteMapsRouteMapInnerSetMetric) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

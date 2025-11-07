@@ -76,6 +76,7 @@ By using this software, you agree to these terms.
 * resource/scm_pdf_rule: Added additional tests and examples (resource, data-source)
 * resource/scm_security_rule: Added additional tests and examples (resource, data-source)
 * resource/scm_decryption_profile: Added additional tests and examples (resource, data-source)
+* resource/scm_radius_server_profile: Fixed issue related to the All Caps property and the unintended underscores.
 
 #### BUG FIXES
 

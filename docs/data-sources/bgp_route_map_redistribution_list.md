@@ -35,17 +35,17 @@ Retrieves a listing of config items.
 
 Required:
 
-- `id` (String) UUID of the resource
+- `id` (String) BGP Route Map Redistributions UUID of the resource
 
 Optional:
 
-- `name` (String) Name
+- `name` (String) BGP Route Map Redistributions Name
 
 Read-Only:
 
 - `bgp` (Attributes) Bgp (see [below for nested schema](#nestedatt--data--bgp))
 - `connected_static` (Attributes) Connected static (see [below for nested schema](#nestedatt--data--connected_static))
-- `description` (String) Description
+- `description` (String) BGP Route Map Redistributions Description
 - `device` (String) The device in which the resource is defined
 - `folder` (String) The folder in which the resource is defined
 - `ospf` (Attributes) Ospf (see [below for nested schema](#nestedatt--data--ospf))
@@ -58,59 +58,59 @@ Read-Only:
 Read-Only:
 
 - `ospf` (Attributes) Ospf (see [below for nested schema](#nestedatt--data--bgp--ospf))
-- `rib` (Attributes) Rib (see [below for nested schema](#nestedatt--data--bgp--rib))
+- `rib` (Attributes) BGP Root RIB (see [below for nested schema](#nestedatt--data--bgp--rib))
 
 <a id="nestedatt--data--bgp--ospf"></a>
 ### Nested Schema for `data.bgp.ospf`
 
 Read-Only:
 
-- `route_map` (Attributes List) Route maps (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map))
+- `route_map` (Attributes List) BGP Root OSPF Route maps (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map))
 
 <a id="nestedatt--data--bgp--ospf--route_map"></a>
 ### Nested Schema for `data.bgp.ospf.route_map`
 
 Read-Only:
 
-- `action` (String) Action
-- `description` (String) Description
+- `action` (String) BGP Root OSPF Route maps Action
+- `description` (String) BGP Root OSPF Route maps Description
 - `match` (Attributes) Match (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match))
-- `name` (Number) Sequence number
-- `set` (Attributes) Set (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--set))
+- `name` (Number) BGP Root OSPF Route maps Sequence number
+- `set` (Attributes) BGP Root OSPF Set (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--set))
 
 <a id="nestedatt--data--bgp--ospf--route_map--match"></a>
 ### Nested Schema for `data.bgp.ospf.route_map.match`
 
 Read-Only:
 
-- `as_path_access_list` (String) AS path access list
-- `extended_community` (String) Extended community
-- `interface` (String) Interface
-- `ipv4` (Attributes) bgp-route-map-redistributions ipv4 object (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4))
-- `large_community` (String) Large community
-- `local_preference` (Number) Local preference
-- `metric` (Number) Metric
-- `origin` (String) Origin
-- `peer` (String) Peer
-- `regular_community` (String) Regular community
-- `tag` (Number) Tag
+- `as_path_access_list` (String) BGP Root OSPF Route maps match AS path access list
+- `extended_community` (String) EBGP Root OSPF Route maps match xtended community
+- `interface` (String) BGP Root OSPF Route maps match Interface
+- `ipv4` (Attributes) BGP Root OSPF Route maps match bgp-route-map-redistributions ipv4 object (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4))
+- `large_community` (String) BGP Root OSPF Route maps match Large community
+- `local_preference` (Number) BGP Root OSPF Route maps match Local preference
+- `metric` (Number) BGP Root OSPF Route maps match Metric
+- `origin` (String) BGP Root OSPF Route maps match Origin
+- `peer` (String) BGP Root OSPF Route maps match Peer
+- `regular_community` (String) BGP Root OSPF Route maps match Regular community
+- `tag` (Number) BGP Root OSPF Route maps match Tag
 
 <a id="nestedatt--data--bgp--ospf--route_map--match--ipv4"></a>
 ### Nested Schema for `data.bgp.ospf.route_map.match.ipv4`
 
 Read-Only:
 
-- `address` (Attributes) bgp-route-map-redistributions ipv4 object address (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4--address))
-- `next_hop` (Attributes) bgp-route-map-redistributions ipv4 object next_hop (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4--next_hop))
-- `route_source` (Attributes) bgp-route-map-redistributions ipv4 object route_source (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4--route_source))
+- `address` (Attributes) BGP Root OSPF Route maps match bgp-route-map-redistributions ipv4 object address (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4--address))
+- `next_hop` (Attributes) BGP Root OSPF Route maps match  bgp-route-map-redistributions ipv4 object next_hop (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4--next_hop))
+- `route_source` (Attributes) BGP Root OSPF Route maps ipv4 bgp-route-map-redistributions ipv4 object route_source (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--match--ipv4--route_source))
 
 <a id="nestedatt--data--bgp--ospf--route_map--match--ipv4--address"></a>
 ### Nested Schema for `data.bgp.ospf.route_map.match.ipv4.address`
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) BGP Root OSPF Route maps match ipv4 Access list
+- `prefix_list` (String) BGP Root OSPF Route maps match ipv4 Prefix list
 
 
 <a id="nestedatt--data--bgp--ospf--route_map--match--ipv4--next_hop"></a>
@@ -118,8 +118,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) BGP Root OSPF Route maps ipv4 next_vr hop Access list
+- `prefix_list` (String) BGP Root OSPF Route maps ipv4 next hop Prefix list
 
 
 <a id="nestedatt--data--bgp--ospf--route_map--match--ipv4--route_source"></a>
@@ -127,8 +127,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) BGP Root OSPF Route maps ipv4 route source Access list
+- `prefix_list` (String) BGP Root OSPF Route maps ipv4 route source Prefix list
 
 
 
@@ -139,16 +139,16 @@ Read-Only:
 Read-Only:
 
 - `metric` (Attributes) Metric (see [below for nested schema](#nestedatt--data--bgp--ospf--route_map--set--metric))
-- `metric_type` (String) Metric type
-- `tag` (Number) Tag
+- `metric_type` (String) BGP Root OSPF Route maps set Metric type
+- `tag` (Number) BGP Root OSPF Route maps set Tag
 
 <a id="nestedatt--data--bgp--ospf--route_map--set--metric"></a>
 ### Nested Schema for `data.bgp.ospf.route_map.set.metric`
 
 Read-Only:
 
-- `action` (String) Metric action
-- `value` (Number) Metric value
+- `action` (String) BGP Root OSPF Route maps set Metric action
+- `value` (Number) BGP Root OSPF Route maps set Metric value
 
 
 
@@ -159,35 +159,35 @@ Read-Only:
 
 Read-Only:
 
-- `route_map` (Attributes List) Route maps (see [below for nested schema](#nestedatt--data--bgp--rib--route_map))
+- `route_map` (Attributes List) BGP Root RIB Route maps (see [below for nested schema](#nestedatt--data--bgp--rib--route_map))
 
 <a id="nestedatt--data--bgp--rib--route_map"></a>
 ### Nested Schema for `data.bgp.rib.route_map`
 
 Read-Only:
 
-- `action` (String) Action
-- `description` (String) Description
-- `match` (Attributes) Match (see [below for nested schema](#nestedatt--data--bgp--rib--route_map--match))
-- `name` (Number) Sequence number
-- `set` (Attributes) Set (see [below for nested schema](#nestedatt--data--bgp--rib--route_map--set))
+- `action` (String) BGP Root RIB Route maps Action
+- `description` (String) BGP Root RIB Route maps Description
+- `match` (Attributes) match attribute for BG Rib route map (see [below for nested schema](#nestedatt--data--bgp--rib--route_map--match))
+- `name` (Number) BGP Root RIB Route maps Sequence number
+- `set` (Attributes) Set attributes for BGP route map (see [below for nested schema](#nestedatt--data--bgp--rib--route_map--set))
 
 <a id="nestedatt--data--bgp--rib--route_map--match"></a>
 ### Nested Schema for `data.bgp.rib.route_map.match`
 
 Read-Only:
 
-- `as_path_access_list` (String) AS path access list
-- `extended_community` (String) Extended community
-- `interface` (String) Interface
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--bgp--rib--route_map--match--ipv4))
-- `large_community` (String) Large community
-- `local_preference` (Number) Local preference
-- `metric` (Number) Metric
-- `origin` (String) Origin
-- `peer` (String) Peer
-- `regular_community` (String) Regular community
-- `tag` (Number) Tag
+- `as_path_access_list` (String) BGP Root RIB Route maps match AS path access list
+- `extended_community` (String) BGP Root RIB Route maps match Extended community
+- `interface` (String) BGP Root RIB Route maps match Interface
+- `ipv4` (Attributes) BGP Route Map Redistributions Root BGP rib Route Map IPv4 (see [below for nested schema](#nestedatt--data--bgp--rib--route_map--match--ipv4))
+- `large_community` (String) BGP Root RIB Route maps match Large community
+- `local_preference` (Number) BGP Root RIB Route maps match Local preference
+- `metric` (Number) BGP Root RIB Route maps match Metric
+- `origin` (String) BGP Root RIB Route maps match Origin
+- `peer` (String) BGP Root RIB Route maps match Peer
+- `regular_community` (String) BGP Root RIB Route maps match Regular community
+- `tag` (Number) BGP Root RIB Route maps match Tag
 
 <a id="nestedatt--data--bgp--rib--route_map--match--ipv4"></a>
 ### Nested Schema for `data.bgp.rib.route_map.match.ipv4`
@@ -203,8 +203,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) BGP Root RIB Route maps match ipv Access list
+- `prefix_list` (String) BGP Root RIB Route maps match ipv Prefix list
 
 
 <a id="nestedatt--data--bgp--rib--route_map--match--ipv4--next_hop"></a>
@@ -212,8 +212,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) BGP Root RIB Route maps match ipv next hop Access list
+- `prefix_list` (String) BGP Root RIB Route maps match ipv next hop Prefix list
 
 
 <a id="nestedatt--data--bgp--rib--route_map--match--ipv4--route_source"></a>
@@ -221,8 +221,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) BGP Root RIB Route maps match ipv route source Access list
+- `prefix_list` (String) BGP Root RIB Route maps match ipv route source Prefix list
 
 
 
@@ -232,7 +232,7 @@ Read-Only:
 
 Read-Only:
 
-- `source_address` (String) Source address
+- `source_address` (String) BGP Root RIB Route maps set Source address
 
 
 
@@ -243,7 +243,7 @@ Read-Only:
 
 Read-Only:
 
-- `bgp` (Attributes) Bgp (see [below for nested schema](#nestedatt--data--connected_static--bgp))
+- `bgp` (Attributes) Connected Static Root BGP (see [below for nested schema](#nestedatt--data--connected_static--bgp))
 - `ospf` (Attributes) Ospf (see [below for nested schema](#nestedatt--data--connected_static--ospf))
 - `rib` (Attributes) Rib (see [below for nested schema](#nestedatt--data--connected_static--rib))
 
@@ -252,17 +252,17 @@ Read-Only:
 
 Read-Only:
 
-- `route_map` (Attributes List) Route maps (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map))
+- `route_map` (Attributes List) Connected Static BGP Route maps (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map))
 
 <a id="nestedatt--data--connected_static--bgp--route_map"></a>
 ### Nested Schema for `data.connected_static.bgp.route_map`
 
 Read-Only:
 
-- `action` (String) Action
-- `description` (String) Description
+- `action` (String) Connected Static BGP Route maps Action
+- `description` (String) Connected Static BGP Route maps Description
 - `match` (Attributes) Match (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--match))
-- `name` (Number) Sequence number
+- `name` (Number) Connected Static BGP Route maps Sequence number
 - `set` (Attributes) Set (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--set))
 
 <a id="nestedatt--data--connected_static--bgp--route_map--match"></a>
@@ -270,9 +270,9 @@ Read-Only:
 
 Read-Only:
 
-- `interface` (String) Interface
+- `interface` (String) Connected Static BGP Route maps match Interface
 - `ipv4` (Attributes) bgp-route-map-redistributions connected-static ipv4 (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--match--ipv4))
-- `metric` (Number) Metric
+- `metric` (Number) Connected Static BGP Route maps match Metric
 
 <a id="nestedatt--data--connected_static--bgp--route_map--match--ipv4"></a>
 ### Nested Schema for `data.connected_static.bgp.route_map.match.ipv4`
@@ -287,8 +287,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) Connected Static BGP Route maps match ip4 Access list
+- `prefix_list` (String) Connected Static BGP Route maps match ip4  Prefix list
 
 
 <a id="nestedatt--data--connected_static--bgp--route_map--match--ipv4--next_hop"></a>
@@ -296,8 +296,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) Connected Static BGP Route maps match ip4 next hop Access list
+- `prefix_list` (String) Connected Static BGP Route maps match ip4 next hop Prefix list
 
 
 
@@ -308,25 +308,25 @@ Read-Only:
 Read-Only:
 
 - `aggregator` (Attributes) bgp-route-map-redistributions connected_static aggregator (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--set--aggregator))
-- `aspath_prepend` (List of Number) AS numbers
-- `atomic_aggregate` (Boolean) Enable BGP atomic aggregate?
+- `aspath_prepend` (List of Number) Connected Static BGP Route maps set AS numbers
+- `atomic_aggregate` (Boolean) Connected Static BGP Route maps set Enable BGP atomic aggregate?
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--set--ipv4))
-- `large_community` (List of String) Large communities
-- `local_preference` (Number) Local preference
+- `large_community` (List of String) Connected Static  BGP Route maps set Large communities
+- `local_preference` (Number) Connected Static BGP Route maps set Local preference
 - `metric` (Attributes) Metric (see [below for nested schema](#nestedatt--data--connected_static--bgp--route_map--set--metric))
-- `origin` (String) Origin
-- `originator_id` (String) Originator ID
-- `regular_community` (List of String) Regular communities
-- `tag` (Number) Tag
-- `weight` (Number) Weight
+- `origin` (String) Connected Static BGP Route maps set Origin
+- `originator_id` (String) Connected Static BGP Route maps set Originator ID
+- `regular_community` (List of String) Connected Static  BGP Route maps set Regular communities
+- `tag` (Number) Connected Static BGP Route maps set Tag
+- `weight` (Number) Connected Static BGP Route maps set Weight
 
 <a id="nestedatt--data--connected_static--bgp--route_map--set--aggregator"></a>
 ### Nested Schema for `data.connected_static.bgp.route_map.set.aggregator`
 
 Read-Only:
 
-- `as` (Number) Aggregator AS
-- `router_id` (String) Router ID
+- `as` (Number) Connected Static BGP Route maps set Aggregator AS
+- `router_id` (String) Connected Static BGP Route maps set Router ID
 
 
 <a id="nestedatt--data--connected_static--bgp--route_map--set--ipv4"></a>
@@ -334,8 +334,8 @@ Read-Only:
 
 Read-Only:
 
-- `next_hop` (String) Next hop
-- `source_address` (String) Source address
+- `next_hop` (String) Connected Static BGP Route maps set Next ipv4 hop
+- `source_address` (String) Connected Static BGP Route maps set ipv4 Source address
 
 
 <a id="nestedatt--data--connected_static--bgp--route_map--set--metric"></a>
@@ -343,8 +343,8 @@ Read-Only:
 
 Read-Only:
 
-- `action` (String) Metric action
-- `value` (Number) Metric value
+- `action` (String) Connected Static BGP Route maps set Metric action
+- `value` (Number) Connected Static BGP Route maps set Metric value
 
 
 
@@ -355,34 +355,34 @@ Read-Only:
 
 Read-Only:
 
-- `route_map` (Attributes List) Route maps (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map))
+- `route_map` (Attributes List) Connected Static  BGP OSPF Route maps (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map))
 
 <a id="nestedatt--data--connected_static--ospf--route_map"></a>
 ### Nested Schema for `data.connected_static.ospf.route_map`
 
 Read-Only:
 
-- `action` (String) Action
-- `description` (String) Description
+- `action` (String) Connected Static BGP OSPF Route map Action
+- `description` (String) Connected Static BGP OSPF Route map Description
 - `match` (Attributes) Match (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--match))
-- `name` (Number) Sequence number
-- `set` (Attributes) Set (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--set))
+- `name` (Number) Connected Static BGP OSPF Route map Sequence number
+- `set` (Attributes) Connected Static Root OSPF Set (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--set))
 
 <a id="nestedatt--data--connected_static--ospf--route_map--match"></a>
 ### Nested Schema for `data.connected_static.ospf.route_map.match`
 
 Read-Only:
 
-- `interface` (String) Interface
+- `interface` (String) Connected Static BGP OSPF Route map Interface
 - `ipv4` (Attributes) bgp-route-map-redistributions connected-static match ipv4 (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--match--ipv4))
-- `metric` (Number) Metric
+- `metric` (Number) Connected Static BGP OSPF Route map Metric
 
 <a id="nestedatt--data--connected_static--ospf--route_map--match--ipv4"></a>
 ### Nested Schema for `data.connected_static.ospf.route_map.match.ipv4`
 
 Read-Only:
 
-- `address` (Attributes) Address (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--match--ipv4--address))
+- `address` (Attributes) Connected Static Root OSPF Address (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--match--ipv4--address))
 - `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--match--ipv4--next_hop))
 
 <a id="nestedatt--data--connected_static--ospf--route_map--match--ipv4--address"></a>
@@ -390,8 +390,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) Connected Static BGP OSPF Route map ipv4 Access list
+- `prefix_list` (String) Connected Static BGP OSPF Route map ipv4 Prefix list
 
 
 <a id="nestedatt--data--connected_static--ospf--route_map--match--ipv4--next_hop"></a>
@@ -399,8 +399,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) Connected Static BGP OSPF Route map ipv4 next hop Access list
+- `prefix_list` (String) Connected Static BGP OSPF Route map ipv4 next hop Prefix list
 
 
 
@@ -411,16 +411,16 @@ Read-Only:
 Read-Only:
 
 - `metric` (Attributes) Metric (see [below for nested schema](#nestedatt--data--connected_static--ospf--route_map--set--metric))
-- `metric_type` (String) Metric type
-- `tag` (Number) Tag
+- `metric_type` (String) Connected Static BGP OSPF Route map set Metric type
+- `tag` (Number) Connected Static BGP OSPF Route map set Tag
 
 <a id="nestedatt--data--connected_static--ospf--route_map--set--metric"></a>
 ### Nested Schema for `data.connected_static.ospf.route_map.set.metric`
 
 Read-Only:
 
-- `action` (String) Metric action
-- `value` (Number) Metric value
+- `action` (String) Connected Static BGP OSPF Route map set Metric action
+- `value` (Number) Connected Static BGP OSPF Route map set Metric value
 
 
 
@@ -431,34 +431,34 @@ Read-Only:
 
 Read-Only:
 
-- `route_map` (Attributes List) Route maps (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map))
+- `route_map` (Attributes List) Connected Static BGP Rib Route maps (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map))
 
 <a id="nestedatt--data--connected_static--rib--route_map"></a>
 ### Nested Schema for `data.connected_static.rib.route_map`
 
 Read-Only:
 
-- `action` (String) Action
-- `description` (String) Description
+- `action` (String) Connected Static BGP Rib Route maps Action
+- `description` (String) Connected Static BGP Rib Route maps Description
 - `match` (Attributes) Match (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map--match))
-- `name` (Number) Sequence number
-- `set` (Attributes) Set (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map--set))
+- `name` (Number) Connected Static BGP Rib Route maps Sequence number
+- `set` (Attributes) Connected Static Root RIB set (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map--set))
 
 <a id="nestedatt--data--connected_static--rib--route_map--match"></a>
 ### Nested Schema for `data.connected_static.rib.route_map.match`
 
 Read-Only:
 
-- `interface` (String) Interface
+- `interface` (String) Connected Static BGP Rib Route maps Interface
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map--match--ipv4))
-- `metric` (Number) Metric
+- `metric` (Number) Connected Static BGP Rib Route maps Metric
 
 <a id="nestedatt--data--connected_static--rib--route_map--match--ipv4"></a>
 ### Nested Schema for `data.connected_static.rib.route_map.match.ipv4`
 
 Read-Only:
 
-- `address` (Attributes) Address (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map--match--ipv4--address))
+- `address` (Attributes) Connected Static BGP Rib Route maps ipv4 address (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map--match--ipv4--address))
 - `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--data--connected_static--rib--route_map--match--ipv4--next_hop))
 
 <a id="nestedatt--data--connected_static--rib--route_map--match--ipv4--address"></a>
@@ -466,8 +466,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) Connected Static BGP Rib Route maps ipv4 Access list
+- `prefix_list` (String) Connected Static BGP Rib Route maps ipv4 Prefix list
 
 
 <a id="nestedatt--data--connected_static--rib--route_map--match--ipv4--next_hop"></a>
@@ -475,8 +475,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) Connected Static BGP Rib Route maps ipv4 nect hop Access list
+- `prefix_list` (String) Connected Static BGP Rib Route maps ipv4 next hop Prefix list
 
 
 
@@ -486,7 +486,7 @@ Read-Only:
 
 Read-Only:
 
-- `source_address` (String) Source address
+- `source_address` (String) Connected Static BGP Rib Route Map Distribution Source address
 
 
 
@@ -497,7 +497,7 @@ Read-Only:
 
 Read-Only:
 
-- `bgp` (Attributes) Bgp (see [below for nested schema](#nestedatt--data--ospf--bgp))
+- `bgp` (Attributes) OSPF Root BGP (see [below for nested schema](#nestedatt--data--ospf--bgp))
 - `rib` (Attributes) Rib (see [below for nested schema](#nestedatt--data--ospf--rib))
 
 <a id="nestedatt--data--ospf--bgp"></a>
@@ -505,18 +505,18 @@ Read-Only:
 
 Read-Only:
 
-- `route_map` (Attributes List) Route maps (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map))
+- `route_map` (Attributes List) OSPF BGP Route maps (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map))
 
 <a id="nestedatt--data--ospf--bgp--route_map"></a>
 ### Nested Schema for `data.ospf.bgp.route_map`
 
 Read-Only:
 
-- `action` (String) Action
-- `description` (String) Description
+- `action` (String) OSPF BGP Route maps Action
+- `description` (String) OSPF BGP Route maps Description
 - `match` (Attributes) Match (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--match))
-- `name` (Number) Sequence number
-- `set` (Attributes) Set (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set))
+- `name` (Number) OSPF BGP Route maps Sequence number
+- `set` (Attributes) OSPF Root Set (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set))
 
 <a id="nestedatt--data--ospf--bgp--route_map--match"></a>
 ### Nested Schema for `data.ospf.bgp.route_map.match`
@@ -524,18 +524,18 @@ Read-Only:
 Read-Only:
 
 - `address` (Attributes) bgp-route-map-redistributions ospf address (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--match--address))
-- `interface` (String) Interface
-- `metric` (Number) Metric
+- `interface` (String) OSPF BGP Route maps Interface
+- `metric` (Number) OSPF BGP Route maps Metric
 - `next_hop` (Attributes) bgp-route-map-redistributions ospf next_hop (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--match--next_hop))
-- `tag` (Number) Tag
+- `tag` (Number) OSPF BGP Route maps Tag
 
 <a id="nestedatt--data--ospf--bgp--route_map--match--address"></a>
 ### Nested Schema for `data.ospf.bgp.route_map.match.address`
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) OSPF BGP Route maps match Access list
+- `prefix_list` (String) OSPF BGP Route maps match Prefix list
 
 
 <a id="nestedatt--data--ospf--bgp--route_map--match--next_hop"></a>
@@ -543,8 +543,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) OSPF BGP Route maps next_hop Access list
+- `prefix_list` (String) OSPF BGP Route maps next_hop Prefix list
 
 
 
@@ -554,25 +554,25 @@ Read-Only:
 Read-Only:
 
 - `aggregator` (Attributes) bgp-route-map-redistributions set aggregator (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set--aggregator))
-- `aspath_prepend` (List of Number) AS numbers
-- `atomic_aggregate` (Boolean) Enable BGP atomic aggregate?
+- `aspath_prepend` (List of Number) OSPF BGP Route maps set AS numbers
+- `atomic_aggregate` (Boolean) OSPF BGP Route maps set Enable BGP atomic aggregate?
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set--ipv4))
-- `large_community` (List of String) Large communities
-- `local_preference` (Number) Local preference
+- `large_community` (List of String) OSPF BGP Route maps set Large communities
+- `local_preference` (Number) OSPF BGP Route maps set Local preference
 - `metric` (Attributes) Metric (see [below for nested schema](#nestedatt--data--ospf--bgp--route_map--set--metric))
-- `origin` (String) Origin
-- `originator_id` (String) Originator ID
-- `regular_community` (List of String) Regular communities
-- `tag` (Number) Tag
-- `weight` (Number) Weight
+- `origin` (String) OSPF BGP Route maps set Origin
+- `originator_id` (String) OSPF BGP Route maps set Originator ID
+- `regular_community` (List of String) OSPF BGP Route maps set Regular communities
+- `tag` (Number) OSPF BGP Route maps set Tag
+- `weight` (Number) OSPF BGP Route maps set Weight
 
 <a id="nestedatt--data--ospf--bgp--route_map--set--aggregator"></a>
 ### Nested Schema for `data.ospf.bgp.route_map.set.aggregator`
 
 Read-Only:
 
-- `as` (Number) Aggregator AS
-- `router_id` (String) Router ID
+- `as` (Number) OSPF BGP Route maps set Aggregator AS
+- `router_id` (String) OSPF BGP Route maps set Router ID
 
 
 <a id="nestedatt--data--ospf--bgp--route_map--set--ipv4"></a>
@@ -580,8 +580,8 @@ Read-Only:
 
 Read-Only:
 
-- `next_hop` (String) Next hop
-- `source_address` (String) Source address
+- `next_hop` (String) OSPF BGP Route maps set ipv4 Next hop
+- `source_address` (String) OSPF BGP Route maps set ipv4 Source address
 
 
 <a id="nestedatt--data--ospf--bgp--route_map--set--metric"></a>
@@ -589,8 +589,8 @@ Read-Only:
 
 Read-Only:
 
-- `action` (String) Metric action
-- `value` (Number) Metric value
+- `action` (String) OSPF BGP Route maps set Metric action
+- `value` (Number) OSPF BGP Route maps set Metric value
 
 
 
@@ -601,37 +601,37 @@ Read-Only:
 
 Read-Only:
 
-- `route_map` (Attributes List) Route maps (see [below for nested schema](#nestedatt--data--ospf--rib--route_map))
+- `route_map` (Attributes List) OSPF RIB Route maps set Route maps (see [below for nested schema](#nestedatt--data--ospf--rib--route_map))
 
 <a id="nestedatt--data--ospf--rib--route_map"></a>
 ### Nested Schema for `data.ospf.rib.route_map`
 
 Read-Only:
 
-- `action` (String) Action
-- `description` (String) Description
+- `action` (String) OSPF RIB Route maps Action
+- `description` (String) OSPF RIB Route maps Description
 - `match` (Attributes) Match (see [below for nested schema](#nestedatt--data--ospf--rib--route_map--match))
-- `name` (Number) Sequence number
-- `set` (Attributes) Set (see [below for nested schema](#nestedatt--data--ospf--rib--route_map--set))
+- `name` (Number) OSPF RIB Route mapsSequence number
+- `set` (Attributes) OSPF RIB Route maps set (see [below for nested schema](#nestedatt--data--ospf--rib--route_map--set))
 
 <a id="nestedatt--data--ospf--rib--route_map--match"></a>
 ### Nested Schema for `data.ospf.rib.route_map.match`
 
 Read-Only:
 
-- `address` (Attributes) Address (see [below for nested schema](#nestedatt--data--ospf--rib--route_map--match--address))
-- `interface` (String) Interface
-- `metric` (Number) Metric
-- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--data--ospf--rib--route_map--match--next_hop))
-- `tag` (Number) Tag
+- `address` (Attributes) OSPF RIB Route maps address (see [below for nested schema](#nestedatt--data--ospf--rib--route_map--match--address))
+- `interface` (String) OSPF RIB Route maps Interface
+- `metric` (Number) OSPF RIB Route maps Metric
+- `next_hop` (Attributes) OSPF RIB Route maps next_hop (see [below for nested schema](#nestedatt--data--ospf--rib--route_map--match--next_hop))
+- `tag` (Number) OSPF RIB Route maps tag
 
 <a id="nestedatt--data--ospf--rib--route_map--match--address"></a>
 ### Nested Schema for `data.ospf.rib.route_map.match.address`
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) OSPF RIB Route maps address Access list
+- `prefix_list` (String) OSPF RIB Route maps address Prefix list
 
 
 <a id="nestedatt--data--ospf--rib--route_map--match--next_hop"></a>
@@ -639,8 +639,8 @@ Read-Only:
 
 Read-Only:
 
-- `access_list` (String) Access list
-- `prefix_list` (String) Prefix list
+- `access_list` (String) OSPF RIB Route maps next_hop Access list
+- `prefix_list` (String) OSPF RIB Route maps next_hop Prefix list
 
 
 
@@ -649,4 +649,4 @@ Read-Only:
 
 Read-Only:
 
-- `source_address` (String) Source address
+- `source_address` (String) OSPF RIB Route maps set Source address

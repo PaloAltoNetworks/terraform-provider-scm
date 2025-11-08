@@ -1076,22 +1076,17 @@ func unpackNatRulesSourceTranslationDynamicIpFallbackToSdk(ctx context.Context, 
 
 	var sdk network_services.NatRulesSourceTranslationDynamicIpFallback
 	var d diag.Diagnostics
-	// Handling Primitives
-	if !model.FloatingIp.IsNull() && !model.FloatingIp.IsUnknown() {
-		sdk.FloatingIp = model.FloatingIp.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
-	}
-
-	// Handling Primitives
-	if !model.Interface.IsNull() && !model.Interface.IsUnknown() {
-		sdk.Interface = model.Interface.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
-	}
-
-	// Handling Primitives
-	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
-		sdk.Ip = model.Ip.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	// Handling Objects
+	if !model.InterfaceAddress.IsNull() && !model.InterfaceAddress.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field InterfaceAddress")
+		unpacked, d := unpackNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressToSdk(ctx, model.InterfaceAddress)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "InterfaceAddress"})
+		}
+		if unpacked != nil {
+			sdk.InterfaceAddress = unpacked
+		}
 	}
 
 	// Handling Lists
@@ -1113,29 +1108,18 @@ func packNatRulesSourceTranslationDynamicIpFallbackFromSdk(ctx context.Context, 
 	diags := diag.Diagnostics{}
 	var model models.NatRulesSourceTranslationDynamicIpFallback
 	var d diag.Diagnostics
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.FloatingIp != nil {
-		model.FloatingIp = basetypes.NewStringValue(*sdk.FloatingIp)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.InterfaceAddress != nil {
+		tflog.Debug(ctx, "Packing nested object for field InterfaceAddress")
+		packed, d := packNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressFromSdk(ctx, *sdk.InterfaceAddress)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "InterfaceAddress"})
+		}
+		model.InterfaceAddress = packed
 	} else {
-		model.FloatingIp = basetypes.NewStringNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.Interface != nil {
-		model.Interface = basetypes.NewStringValue(*sdk.Interface)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
-	} else {
-		model.Interface = basetypes.NewStringNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.Ip != nil {
-		model.Ip = basetypes.NewStringValue(*sdk.Ip)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
-	} else {
-		model.Ip = basetypes.NewStringNull()
+		model.InterfaceAddress = basetypes.NewObjectNull(models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress{}.AttrTypes())
 	}
 	// Handling Lists
 	if sdk.TranslatedAddress != nil {
@@ -1206,11 +1190,11 @@ func packNatRulesSourceTranslationDynamicIpFallbackListFromSdk(ctx context.Conte
 	return basetypes.NewListValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpFallback{}.AttrType(), data)
 }
 
-// --- Unpacker for NatRulesSourceTranslationDynamicIpAndPort ---
-func unpackNatRulesSourceTranslationDynamicIpAndPortToSdk(ctx context.Context, obj types.Object) (*network_services.NatRulesSourceTranslationDynamicIpAndPort, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.NatRulesSourceTranslationDynamicIpAndPort", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress ---
+func unpackNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressToSdk(ctx context.Context, obj types.Object) (*network_services.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.NatRulesSourceTranslationDynamicIpAndPort
+	var model models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1218,7 +1202,7 @@ func unpackNatRulesSourceTranslationDynamicIpAndPortToSdk(ctx context.Context, o
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.NatRulesSourceTranslationDynamicIpAndPort
+	var sdk network_services.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.FloatingIp.IsNull() && !model.FloatingIp.IsUnknown() {
@@ -1238,24 +1222,18 @@ func unpackNatRulesSourceTranslationDynamicIpAndPortToSdk(ctx context.Context, o
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
 	}
 
-	// Handling Lists
-	if !model.TranslatedAddress.IsNull() && !model.TranslatedAddress.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddress")
-		diags.Append(model.TranslatedAddress.ElementsAs(ctx, &sdk.TranslatedAddress, false)...)
-	}
-
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.NatRulesSourceTranslationDynamicIpAndPort", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for NatRulesSourceTranslationDynamicIpAndPort ---
-func packNatRulesSourceTranslationDynamicIpAndPortFromSdk(ctx context.Context, sdk network_services.NatRulesSourceTranslationDynamicIpAndPort) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.NatRulesSourceTranslationDynamicIpAndPort", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress ---
+func packNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressFromSdk(ctx context.Context, sdk network_services.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.NatRulesSourceTranslationDynamicIpAndPort
+	var model models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1280,6 +1258,121 @@ func packNatRulesSourceTranslationDynamicIpAndPortFromSdk(ctx context.Context, s
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
 	} else {
 		model.Ip = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress ---
+func unpackNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressListToSdk(ctx context.Context, list types.List) ([]network_services.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress")
+	diags := diag.Diagnostics{}
+	var data []models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress{}.AttrTypes(), &item)
+		unpacked, d := unpackNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress ---
+func packNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressListFromSdk(ctx context.Context, sdks []network_services.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress")
+	diags := diag.Diagnostics{}
+	var data []models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress
+		obj, d := packNatRulesSourceTranslationDynamicIpFallbackInterfaceAddressFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpFallbackInterfaceAddress{}.AttrType(), data)
+}
+
+// --- Unpacker for NatRulesSourceTranslationDynamicIpAndPort ---
+func unpackNatRulesSourceTranslationDynamicIpAndPortToSdk(ctx context.Context, obj types.Object) (*network_services.NatRulesSourceTranslationDynamicIpAndPort, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.NatRulesSourceTranslationDynamicIpAndPort", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.NatRulesSourceTranslationDynamicIpAndPort
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.NatRulesSourceTranslationDynamicIpAndPort
+	var d diag.Diagnostics
+	// Handling Objects
+	if !model.InterfaceAddress.IsNull() && !model.InterfaceAddress.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field InterfaceAddress")
+		unpacked, d := unpackNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressToSdk(ctx, model.InterfaceAddress)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "InterfaceAddress"})
+		}
+		if unpacked != nil {
+			sdk.InterfaceAddress = unpacked
+		}
+	}
+
+	// Handling Lists
+	if !model.TranslatedAddress.IsNull() && !model.TranslatedAddress.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field TranslatedAddress")
+		diags.Append(model.TranslatedAddress.ElementsAs(ctx, &sdk.TranslatedAddress, false)...)
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.NatRulesSourceTranslationDynamicIpAndPort", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for NatRulesSourceTranslationDynamicIpAndPort ---
+func packNatRulesSourceTranslationDynamicIpAndPortFromSdk(ctx context.Context, sdk network_services.NatRulesSourceTranslationDynamicIpAndPort) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.NatRulesSourceTranslationDynamicIpAndPort", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.NatRulesSourceTranslationDynamicIpAndPort
+	var d diag.Diagnostics
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.InterfaceAddress != nil {
+		tflog.Debug(ctx, "Packing nested object for field InterfaceAddress")
+		packed, d := packNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressFromSdk(ctx, *sdk.InterfaceAddress)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "InterfaceAddress"})
+		}
+		model.InterfaceAddress = packed
+	} else {
+		model.InterfaceAddress = basetypes.NewObjectNull(models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress{}.AttrTypes())
 	}
 	// Handling Lists
 	if sdk.TranslatedAddress != nil {
@@ -1348,6 +1441,131 @@ func packNatRulesSourceTranslationDynamicIpAndPortListFromSdk(ctx context.Contex
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.NatRulesSourceTranslationDynamicIpAndPort", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpAndPort{}.AttrType(), data)
+}
+
+// --- Unpacker for NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress ---
+func unpackNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressToSdk(ctx context.Context, obj types.Object) (*network_services.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.FloatingIp.IsNull() && !model.FloatingIp.IsUnknown() {
+		sdk.FloatingIp = model.FloatingIp.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
+	}
+
+	// Handling Primitives
+	if !model.Interface.IsNull() && !model.Interface.IsUnknown() {
+		sdk.Interface = model.Interface.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
+	}
+
+	// Handling Primitives
+	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
+		sdk.Ip = model.Ip.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress ---
+func packNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressFromSdk(ctx context.Context, sdk network_services.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.FloatingIp != nil {
+		model.FloatingIp = basetypes.NewStringValue(*sdk.FloatingIp)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "FloatingIp", "value": *sdk.FloatingIp})
+	} else {
+		model.FloatingIp = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Interface != nil {
+		model.Interface = basetypes.NewStringValue(*sdk.Interface)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
+	} else {
+		model.Interface = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ip != nil {
+		model.Ip = basetypes.NewStringValue(*sdk.Ip)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	} else {
+		model.Ip = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress ---
+func unpackNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressListToSdk(ctx context.Context, list types.List) ([]network_services.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress")
+	diags := diag.Diagnostics{}
+	var data []models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress{}.AttrTypes(), &item)
+		unpacked, d := unpackNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress ---
+func packNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressListFromSdk(ctx context.Context, sdks []network_services.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress")
+	diags := diag.Diagnostics{}
+	var data []models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress
+		obj, d := packNatRulesSourceTranslationDynamicIpAndPortInterfaceAddressFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.NatRulesSourceTranslationDynamicIpAndPortInterfaceAddress{}.AttrType(), data)
 }
 
 // --- Unpacker for NatRulesSourceTranslationStaticIp ---

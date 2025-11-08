@@ -62,11 +62,28 @@ Optional:
 Optional:
 
 - `address` (String) Destination IP address
+- `entry` (Attributes) Entry (see [below for nested schema](#nestedatt--type--ipv4--ipv4_entry--destination_address--entry))
+
+<a id="nestedatt--type--ipv4--ipv4_entry--destination_address--entry"></a>
+### Nested Schema for `type.ipv4.ipv4_entry.destination_address.entry`
+
+Optional:
+
+- `address` (String) Destination IP address
 - `wildcard` (String) Destination IP wildcard
+
 
 
 <a id="nestedatt--type--ipv4--ipv4_entry--source_address"></a>
 ### Nested Schema for `type.ipv4.ipv4_entry.source_address`
+
+Optional:
+
+- `address` (String) Source IP address
+- `entry` (Attributes) Entry (see [below for nested schema](#nestedatt--type--ipv4--ipv4_entry--source_address--entry))
+
+<a id="nestedatt--type--ipv4--ipv4_entry--source_address--entry"></a>
+### Nested Schema for `type.ipv4.ipv4_entry.source_address.entry`
 
 Optional:
 

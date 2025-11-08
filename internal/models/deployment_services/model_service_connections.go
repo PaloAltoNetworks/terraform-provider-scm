@@ -20,7 +20,7 @@ import (
 type ServiceConnections struct {
 	Tfid                 types.String          `tfsdk:"tfid"`
 	EncryptedValues      basetypes.MapValue    `tfsdk:"encrypted_values"`
-	BackupSC             basetypes.StringValue `tfsdk:"backup__s_c"`
+	BackupSC             basetypes.StringValue `tfsdk:"backup_sc"`
 	BgpPeer              basetypes.ObjectValue `tfsdk:"bgp_peer"`
 	Id                   basetypes.StringValue `tfsdk:"id"`
 	IpsecTunnel          basetypes.StringValue `tfsdk:"ipsec_tunnel"`
@@ -74,7 +74,7 @@ func (o ServiceConnections) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":             basetypes.StringType{},
 		"encrypted_values": basetypes.MapType{ElemType: basetypes.StringType{}},
-		"backup__s_c":      basetypes.StringType{},
+		"backup_sc":        basetypes.StringType{},
 		"bgp_peer": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"local_ip_address":   basetypes.StringType{},
@@ -212,7 +212,7 @@ func (o ServiceConnectionsQos) AttrType() attr.Type {
 var ServiceConnectionsResourceSchema = schema.Schema{
 	MarkdownDescription: "ServiceConnection resource",
 	Attributes: map[string]schema.Attribute{
-		"backup__s_c": schema.StringAttribute{
+		"backup_sc": schema.StringAttribute{
 			MarkdownDescription: "Backup s c",
 			Optional:            true,
 		},
@@ -378,7 +378,7 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 var ServiceConnectionsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ServiceConnection data source",
 	Attributes: map[string]dsschema.Attribute{
-		"backup__s_c": dsschema.StringAttribute{
+		"backup_sc": dsschema.StringAttribute{
 			MarkdownDescription: "Backup s c",
 			Computed:            true,
 		},

@@ -204,15 +204,15 @@ resource "scm_nat_rule" "example_nat_dynamic_rule" {
 
 - `active_active_device_binding` (String) Active active device binding
 - `description` (String) NAT rule description
-- `destination_translation` (Attributes) Destination translation configuration (Static/P-D-N-T). (see [below for nested schema](#nestedatt--destination_translation))
+- `destination_translation` (Attributes) Destination translation (see [below for nested schema](#nestedatt--destination_translation))
 - `device` (String) The device in which the resource is defined
 - `disabled` (Boolean) Disable NAT rule?
-- `dynamic_destination_translation` (Attributes) Dynamic destination translation configuration. (see [below for nested schema](#nestedatt--dynamic_destination_translation))
+- `dynamic_destination_translation` (Attributes) Dynamic destination translation (see [below for nested schema](#nestedatt--dynamic_destination_translation))
 - `folder` (String) The folder in which the resource is defined
 - `nat_type` (String) NAT type
 - `position` (String) The relative position of the rule
 - `snippet` (String) The snippet in which the resource is defined
-- `source_translation` (Attributes) Source translation configuration (Static/P-D-N-T). (see [below for nested schema](#nestedatt--source_translation))
+- `source_translation` (Attributes) Source translation (see [below for nested schema](#nestedatt--source_translation))
 - `tag` (List of String) NAT rule tags
 - `to_interface` (String) Destination interface of the original packet
 
@@ -226,9 +226,9 @@ resource "scm_nat_rule" "example_nat_dynamic_rule" {
 
 Optional:
 
-- `dns_rewrite` (Attributes) Dns rewrite (see [below for nested schema](#nestedatt--destination_translation--dns_rewrite))
-- `translated_address` (String) Translated address
-- `translated_port` (Number) Translated port
+- `dns_rewrite` (Attributes) DNS rewrite (see [below for nested schema](#nestedatt--destination_translation--dns_rewrite))
+- `translated_address` (String) Translated destination IP address
+- `translated_port` (Number) Translated destination port
 
 <a id="nestedatt--destination_translation--dns_rewrite"></a>
 ### Nested Schema for `destination_translation.dns_rewrite`
@@ -244,9 +244,9 @@ Optional:
 
 Optional:
 
-- `distribution` (String) Distribution
-- `translated_address` (String) Translated address
-- `translated_port` (Number) Translated port
+- `distribution` (String) Distribution method
+- `translated_address` (String) Translated destination IP address
+- `translated_port` (Number) Translated destination port
 
 
 <a id="nestedatt--source_translation"></a>
@@ -271,10 +271,18 @@ Optional:
 
 Optional:
 
+- `interface_address` (Attributes) Fallback interface (see [below for nested schema](#nestedatt--source_translation--dynamic_ip--fallback--interface_address))
+- `translated_address` (List of String) Fallback IP addresses
+
+<a id="nestedatt--source_translation--dynamic_ip--fallback--interface_address"></a>
+### Nested Schema for `source_translation.dynamic_ip.fallback.interface_address`
+
+Optional:
+
 - `floating_ip` (String) Floating IP address
 - `interface` (String) Interface name
 - `ip` (String) IP address
-- `translated_address` (List of String) Fallback IP addresses
+
 
 
 
@@ -283,10 +291,18 @@ Optional:
 
 Optional:
 
+- `interface_address` (Attributes) Translated source interface (see [below for nested schema](#nestedatt--source_translation--dynamic_ip_and_port--interface_address))
+- `translated_address` (List of String) Translated source IP addresses
+
+<a id="nestedatt--source_translation--dynamic_ip_and_port--interface_address"></a>
+### Nested Schema for `source_translation.dynamic_ip_and_port.interface_address`
+
+Optional:
+
 - `floating_ip` (String) Floating IP address
 - `interface` (String) Interface name
 - `ip` (String) Translated source IP address
-- `translated_address` (List of String) Translated source IP addresses
+
 
 
 <a id="nestedatt--source_translation--static_ip"></a>

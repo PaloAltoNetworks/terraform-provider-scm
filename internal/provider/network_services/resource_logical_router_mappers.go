@@ -11906,7 +11906,7 @@ func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimToSdk(ctx contex
 	// Handling Lists
 	if !model.AllowedNeighbors.IsNull() && !model.AllowedNeighbors.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field AllowedNeighbors")
-		unpacked, d := unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx, model.AllowedNeighbors)
+		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx, model.AllowedNeighbors)
 		diags.Append(d...)
 		sdk.AllowedNeighbors = unpacked
 	}
@@ -11967,11 +11967,11 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimFromSdk(ctx contex
 	// Handling Lists
 	if sdk.AllowedNeighbors != nil {
 		tflog.Debug(ctx, "Packing list of objects for field AllowedNeighbors")
-		packed, d := packEthernetInterfacesLayer3IpInnerListFromSdk(ctx, sdk.AllowedNeighbors)
+		packed, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx, sdk.AllowedNeighbors)
 		diags.Append(d...)
 		model.AllowedNeighbors = packed
 	} else {
-		model.AllowedNeighbors = basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType())
+		model.AllowedNeighbors = basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -12075,6 +12075,99 @@ func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimListFromSdk(ctx co
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPim{}.AttrType(), data)
+}
+
+// --- Unpacker for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
+func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerToSdk(ctx context.Context, obj types.Object) (*network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Name.IsNull() && !model.Name.IsUnknown() {
+		sdk.Name = model.Name.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
+func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerFromSdk(ctx context.Context, sdk network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	model.Name = basetypes.NewStringValue(sdk.Name)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
+func unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx context.Context, list types.List) ([]network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner")
+	diags := diag.Diagnostics{}
+	var data []models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrTypes(), &item)
+		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner ---
+func packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx context.Context, sdks []network_services.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner")
+	diags := diag.Diagnostics{}
+	var data []models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner
+		obj, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType(), data)
 }
 
 // --- Unpacker for LogicalRoutersVrfInnerMulticastMsdp ---
@@ -19853,7 +19946,7 @@ func unpackLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerToSdk(ctx context.
 	// Handling Lists
 	if !model.Neighbor.IsNull() && !model.Neighbor.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Neighbor")
-		unpacked, d := unpackEthernetInterfacesLayer3IpInnerListToSdk(ctx, model.Neighbor)
+		unpacked, d := unpackLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListToSdk(ctx, model.Neighbor)
 		diags.Append(d...)
 		sdk.Neighbor = unpacked
 	}
@@ -19976,11 +20069,11 @@ func packLogicalRoutersVrfInnerOspfv3AreaInnerInterfaceInnerFromSdk(ctx context.
 	// Handling Lists
 	if sdk.Neighbor != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Neighbor")
-		packed, d := packEthernetInterfacesLayer3IpInnerListFromSdk(ctx, sdk.Neighbor)
+		packed, d := packLogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInnerListFromSdk(ctx, sdk.Neighbor)
 		diags.Append(d...)
 		model.Neighbor = packed
 	} else {
-		model.Neighbor = basetypes.NewListNull(models.EthernetInterfacesLayer3IpInner{}.AttrType())
+		model.Neighbor = basetypes.NewListNull(models.LogicalRoutersVrfInnerMulticastInterfaceGroupInnerPimAllowedNeighborsInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -23579,6 +23672,12 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthopToSdk(ctx 
 	}
 
 	// Handling Primitives
+	if !model.IpAddress.IsNull() && !model.IpAddress.IsUnknown() {
+		sdk.IpAddress = model.IpAddress.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "IpAddress", "value": *sdk.IpAddress})
+	}
+
+	// Handling Primitives
 	if !model.Ipv6Address.IsNull() && !model.Ipv6Address.IsUnknown() {
 		sdk.Ipv6Address = model.Ipv6Address.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ipv6Address", "value": *sdk.Ipv6Address})
@@ -23641,6 +23740,14 @@ func packLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthopFromSdk(ctx 
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Fqdn", "value": *sdk.Fqdn})
 	} else {
 		model.Fqdn = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.IpAddress != nil {
+		model.IpAddress = basetypes.NewStringValue(*sdk.IpAddress)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "IpAddress", "value": *sdk.IpAddress})
+	} else {
+		model.IpAddress = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -24386,7 +24493,7 @@ func unpackLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerToSdk(ctx conte
 	// Handling Objects
 	if !model.Nexthop.IsNull() && !model.Nexthop.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Nexthop")
-		unpacked, d := unpackLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthopToSdk(ctx, model.Nexthop)
+		unpacked, d := unpackLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopToSdk(ctx, model.Nexthop)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Nexthop"})
@@ -24501,14 +24608,14 @@ func packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerFromSdk(ctx conte
 	// This is a regular nested object that has its own packer.
 	if sdk.Nexthop != nil {
 		tflog.Debug(ctx, "Packing nested object for field Nexthop")
-		packed, d := packLogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthopFromSdk(ctx, *sdk.Nexthop)
+		packed, d := packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopFromSdk(ctx, *sdk.Nexthop)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Nexthop"})
 		}
 		model.Nexthop = packed
 	} else {
-		model.Nexthop = basetypes.NewObjectNull(models.LogicalRoutersVrfInnerRoutingTableIpStaticRouteInnerNexthop{}.AttrTypes())
+		model.Nexthop = basetypes.NewObjectNull(models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop{}.AttrTypes())
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -24603,6 +24710,197 @@ func packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerListFromSdk(ctx c
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInner{}.AttrType(), data)
+}
+
+// --- Unpacker for LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop ---
+func unpackLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopToSdk(ctx context.Context, obj types.Object) (*network_services.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop
+	var d diag.Diagnostics
+	// Handling Typeless Objects
+	if !model.Discard.IsNull() && !model.Discard.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Discard")
+		sdk.Discard = make(map[string]interface{})
+	}
+
+	// Handling Primitives
+	if !model.Fqdn.IsNull() && !model.Fqdn.IsUnknown() {
+		sdk.Fqdn = model.Fqdn.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Fqdn", "value": *sdk.Fqdn})
+	}
+
+	// Handling Primitives
+	if !model.Ipv6Address.IsNull() && !model.Ipv6Address.IsUnknown() {
+		sdk.Ipv6Address = model.Ipv6Address.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ipv6Address", "value": *sdk.Ipv6Address})
+	}
+
+	// Handling Primitives
+	if !model.NextLr.IsNull() && !model.NextLr.IsUnknown() {
+		sdk.NextLr = model.NextLr.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NextLr", "value": *sdk.NextLr})
+	}
+
+	// Handling Primitives
+	if !model.NextVr.IsNull() && !model.NextVr.IsUnknown() {
+		sdk.NextVr = model.NextVr.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NextVr", "value": *sdk.NextVr})
+	}
+
+	// Handling Typeless Objects
+	if !model.Receive.IsNull() && !model.Receive.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Receive")
+		sdk.Receive = make(map[string]interface{})
+	}
+
+	// Handling Primitives
+	if !model.Tunnel.IsNull() && !model.Tunnel.IsUnknown() {
+		sdk.Tunnel = model.Tunnel.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Tunnel", "value": *sdk.Tunnel})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop ---
+func packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopFromSdk(ctx context.Context, sdk network_services.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop
+	var d diag.Diagnostics
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Discard != nil && !reflect.ValueOf(sdk.Discard).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Discard")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Discard, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Discard = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Fqdn != nil {
+		model.Fqdn = basetypes.NewStringValue(*sdk.Fqdn)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Fqdn", "value": *sdk.Fqdn})
+	} else {
+		model.Fqdn = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ipv6Address != nil {
+		model.Ipv6Address = basetypes.NewStringValue(*sdk.Ipv6Address)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ipv6Address", "value": *sdk.Ipv6Address})
+	} else {
+		model.Ipv6Address = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NextLr != nil {
+		model.NextLr = basetypes.NewStringValue(*sdk.NextLr)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NextLr", "value": *sdk.NextLr})
+	} else {
+		model.NextLr = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NextVr != nil {
+		model.NextVr = basetypes.NewStringValue(*sdk.NextVr)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NextVr", "value": *sdk.NextVr})
+	} else {
+		model.NextVr = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Receive != nil && !reflect.ValueOf(sdk.Receive).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Receive")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Receive, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Receive = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Tunnel != nil {
+		model.Tunnel = basetypes.NewStringValue(*sdk.Tunnel)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Tunnel", "value": *sdk.Tunnel})
+	} else {
+		model.Tunnel = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop ---
+func unpackLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopListToSdk(ctx context.Context, list types.List) ([]network_services.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop")
+	diags := diag.Diagnostics{}
+	var data []models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop{}.AttrTypes(), &item)
+		unpacked, d := unpackLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop ---
+func packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopListFromSdk(ctx context.Context, sdks []network_services.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop")
+	diags := diag.Diagnostics{}
+	var data []models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop
+		obj, d := packLogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthopFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerNexthop{}.AttrType(), data)
 }
 
 // --- Unpacker for LogicalRoutersVrfInnerRoutingTableIpv6StaticRouteInnerOption ---

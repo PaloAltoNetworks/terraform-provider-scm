@@ -40,11 +40,22 @@ TrafficSteeringRule data source
 Read-Only:
 
 - `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--action--forward))
-- `no_pbf` (String) No pbf
 
 <a id="nestedatt--action--forward"></a>
 ### Nested Schema for `action.forward`
 
 Read-Only:
 
+- `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--action--forward--forward))
+- `no_pbf` (Attributes) No pbf (see [below for nested schema](#nestedatt--action--forward--no_pbf))
+
+<a id="nestedatt--action--forward--forward"></a>
+### Nested Schema for `action.forward.forward`
+
+Read-Only:
+
 - `target` (String) Target
+
+
+<a id="nestedatt--action--forward--no_pbf"></a>
+### Nested Schema for `action.forward.no_pbf`

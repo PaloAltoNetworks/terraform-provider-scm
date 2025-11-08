@@ -21,7 +21,7 @@ type SslDecryptionSettings struct {
 	ForwardUntrustCertificate            basetypes.ObjectValue `tfsdk:"forward_untrust_certificate"`
 	RootCaExcludeList                    basetypes.ListValue   `tfsdk:"root_ca_exclude_list"`
 	SslExcludeCert                       basetypes.ListValue   `tfsdk:"ssl_exclude_cert"`
-	TrustedRootCA                        basetypes.ListValue   `tfsdk:"trusted_root__c_a"`
+	TrustedRootCA                        basetypes.ListValue   `tfsdk:"trusted_root_ca"`
 }
 
 // SslDecryptionSettingsForwardTrustCertificate represents a nested structure within the SslDecryptionSettings model
@@ -66,7 +66,7 @@ func (o SslDecryptionSettings) AttrTypes() map[string]attr.Type {
 				"name":        basetypes.StringType{},
 			},
 		}},
-		"trusted_root__c_a": basetypes.ListType{ElemType: basetypes.ObjectType{
+		"trusted_root_ca": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		}},
 	}
@@ -179,7 +179,7 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
-		"trusted_root__c_a": schema.ListAttribute{
+		"trusted_root_ca": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Trusted root c a",
 			Optional:            true,
@@ -253,7 +253,7 @@ var SslDecryptionSettingsDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The Terraform ID.",
 			Computed:            true,
 		},
-		"trusted_root__c_a": dsschema.ListAttribute{
+		"trusted_root_ca": dsschema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Trusted root c a",
 			Computed:            true,

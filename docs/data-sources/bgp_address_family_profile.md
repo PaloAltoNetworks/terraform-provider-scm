@@ -60,7 +60,7 @@ Read-Only:
 - `maximum_prefix` (Attributes) Maximum prefix (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--maximum_prefix))
 - `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--next_hop))
 - `orf` (Attributes) Orf (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--orf))
-- `remove_private__a_s` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--remove_private__a_s))
+- `remove_private_as` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--remove_private_as))
 - `route_reflector_client` (Boolean) Route reflector client?
 - `send_community` (Attributes) Send community (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--send_community))
 - `soft_reconfig_with_stored_info` (Boolean) Soft reconfiguration of peer with stored routes?
@@ -71,7 +71,7 @@ Read-Only:
 Read-Only:
 
 - `tx_all_paths` (Boolean) Advertise all paths to peer?
-- `tx_bestpath_per__a_s` (Boolean) Tx bestpath per a s
+- `tx_bestpath_per_as` (Boolean) Tx bestpath per a s
 
 
 <a id="nestedatt--ipv4--ipv4--multicast--allowas_in"></a>
@@ -143,13 +143,21 @@ Read-Only:
 - `orf_prefix_list` (String) ORF prefix list
 
 
-<a id="nestedatt--ipv4--ipv4--multicast--remove_private__a_s"></a>
-### Nested Schema for `ipv4.ipv4.multicast.remove_private__a_s`
+<a id="nestedatt--ipv4--ipv4--multicast--remove_private_as"></a>
+### Nested Schema for `ipv4.ipv4.multicast.remove_private_as`
 
 Read-Only:
 
-- `all` (String) All
-- `replace__a_s` (String) Replace a s
+- `all` (Attributes) All (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--remove_private_as--all))
+- `replace_as` (Attributes) Replace a s (see [below for nested schema](#nestedatt--ipv4--ipv4--multicast--remove_private_as--replace_as))
+
+<a id="nestedatt--ipv4--ipv4--multicast--remove_private_as--all"></a>
+### Nested Schema for `ipv4.ipv4.multicast.remove_private_as.all`
+
+
+<a id="nestedatt--ipv4--ipv4--multicast--remove_private_as--replace_as"></a>
+### Nested Schema for `ipv4.ipv4.multicast.remove_private_as.replace_as`
+
 
 
 <a id="nestedatt--ipv4--ipv4--multicast--send_community"></a>
@@ -199,7 +207,7 @@ Read-Only:
 - `maximum_prefix` (Attributes) Maximum prefix (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--maximum_prefix))
 - `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--next_hop))
 - `orf` (Attributes) Orf (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--orf))
-- `remove_private__a_s` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--remove_private__a_s))
+- `remove_private_as` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--remove_private_as))
 - `route_reflector_client` (Boolean) Route reflector client?
 - `send_community` (Attributes) Send community (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--send_community))
 - `soft_reconfig_with_stored_info` (Boolean) Soft reconfiguration of peer with stored routes?
@@ -210,7 +218,7 @@ Read-Only:
 Read-Only:
 
 - `tx_all_paths` (Boolean) Advertise all paths to peer?
-- `tx_bestpath_per__a_s` (Boolean) Tx bestpath per a s
+- `tx_bestpath_per_as` (Boolean) Tx bestpath per a s
 
 
 <a id="nestedatt--ipv4--ipv4--unicast--allowas_in"></a>
@@ -282,13 +290,21 @@ Read-Only:
 - `orf_prefix_list` (String) ORF prefix list
 
 
-<a id="nestedatt--ipv4--ipv4--unicast--remove_private__a_s"></a>
-### Nested Schema for `ipv4.ipv4.unicast.remove_private__a_s`
+<a id="nestedatt--ipv4--ipv4--unicast--remove_private_as"></a>
+### Nested Schema for `ipv4.ipv4.unicast.remove_private_as`
 
 Read-Only:
 
-- `all` (String) All
-- `replace__a_s` (String) Replace a s
+- `all` (Attributes) All (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--remove_private_as--all))
+- `replace_as` (Attributes) Replace a s (see [below for nested schema](#nestedatt--ipv4--ipv4--unicast--remove_private_as--replace_as))
+
+<a id="nestedatt--ipv4--ipv4--unicast--remove_private_as--all"></a>
+### Nested Schema for `ipv4.ipv4.unicast.remove_private_as.all`
+
+
+<a id="nestedatt--ipv4--ipv4--unicast--remove_private_as--replace_as"></a>
+### Nested Schema for `ipv4.ipv4.unicast.remove_private_as.replace_as`
+
 
 
 <a id="nestedatt--ipv4--ipv4--unicast--send_community"></a>

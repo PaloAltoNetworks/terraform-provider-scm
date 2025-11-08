@@ -35,11 +35,11 @@ type RadiusServerProfiles struct {
 
 // RadiusServerProfilesProtocol represents a nested structure within the RadiusServerProfiles model
 type RadiusServerProfilesProtocol struct {
-	CHAP           basetypes.ObjectValue `tfsdk:"c_h_a_p"`
-	EAPTTLSWithPAP basetypes.ObjectValue `tfsdk:"e_a_p__t_t_l_s_with__p_a_p"`
-	PAP            basetypes.ObjectValue `tfsdk:"p_a_p"`
-	PEAPMSCHAPv2   basetypes.ObjectValue `tfsdk:"p_e_a_p__m_s_c_h_a_pv2"`
-	PEAPWithGTC    basetypes.ObjectValue `tfsdk:"p_e_a_p_with__g_t_c"`
+	CHAP           basetypes.ObjectValue `tfsdk:"chap"`
+	EAPTTLSWithPAP basetypes.ObjectValue `tfsdk:"eap_ttls_with_pap"`
+	PAP            basetypes.ObjectValue `tfsdk:"pap"`
+	PEAPMSCHAPv2   basetypes.ObjectValue `tfsdk:"peap_mscha_pv2"`
+	PEAPWithGTC    basetypes.ObjectValue `tfsdk:"peap_with_gtc"`
 }
 
 // RadiusServerProfilesProtocolEAPTTLSWithPAP represents a nested structure within the RadiusServerProfiles model
@@ -73,26 +73,26 @@ func (o RadiusServerProfiles) AttrTypes() map[string]attr.Type {
 		"name":   basetypes.StringType{},
 		"protocol": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"c_h_a_p": basetypes.ObjectType{
+				"chap": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"e_a_p__t_t_l_s_with__p_a_p": basetypes.ObjectType{
+				"eap_ttls_with_pap": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"anon_outer_id":       basetypes.BoolType{},
 						"radius_cert_profile": basetypes.StringType{},
 					},
 				},
-				"p_a_p": basetypes.ObjectType{
+				"pap": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"p_e_a_p__m_s_c_h_a_pv2": basetypes.ObjectType{
+				"peap_mscha_pv2": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"allow_pwd_change":    basetypes.BoolType{},
 						"anon_outer_id":       basetypes.BoolType{},
 						"radius_cert_profile": basetypes.StringType{},
 					},
 				},
-				"p_e_a_p_with__g_t_c": basetypes.ObjectType{
+				"peap_with_gtc": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"anon_outer_id":       basetypes.BoolType{},
 						"radius_cert_profile": basetypes.StringType{},
@@ -124,26 +124,26 @@ func (o RadiusServerProfiles) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the RadiusServerProfilesProtocol model.
 func (o RadiusServerProfilesProtocol) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"c_h_a_p": basetypes.ObjectType{
+		"chap": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
-		"e_a_p__t_t_l_s_with__p_a_p": basetypes.ObjectType{
+		"eap_ttls_with_pap": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"anon_outer_id":       basetypes.BoolType{},
 				"radius_cert_profile": basetypes.StringType{},
 			},
 		},
-		"p_a_p": basetypes.ObjectType{
+		"pap": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
-		"p_e_a_p__m_s_c_h_a_pv2": basetypes.ObjectType{
+		"peap_mscha_pv2": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"allow_pwd_change":    basetypes.BoolType{},
 				"anon_outer_id":       basetypes.BoolType{},
 				"radius_cert_profile": basetypes.StringType{},
 			},
 		},
-		"p_e_a_p_with__g_t_c": basetypes.ObjectType{
+		"peap_with_gtc": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"anon_outer_id":       basetypes.BoolType{},
 				"radius_cert_profile": basetypes.StringType{},
@@ -256,11 +256,12 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The RADIUS authentication protocol",
 			Required:            true,
 			Attributes: map[string]schema.Attribute{
-				"c_h_a_p": schema.StringAttribute{
+				"chap": schema.SingleNestedAttribute{
 					MarkdownDescription: "C h a p",
 					Optional:            true,
+					Attributes:          map[string]schema.Attribute{},
 				},
-				"e_a_p__t_t_l_s_with__p_a_p": schema.SingleNestedAttribute{
+				"eap_ttls_with_pap": schema.SingleNestedAttribute{
 					MarkdownDescription: "E a p t t l s with p a p",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
@@ -274,11 +275,12 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 						},
 					},
 				},
-				"p_a_p": schema.StringAttribute{
+				"pap": schema.SingleNestedAttribute{
 					MarkdownDescription: "P a p",
 					Optional:            true,
+					Attributes:          map[string]schema.Attribute{},
 				},
-				"p_e_a_p__m_s_c_h_a_pv2": schema.SingleNestedAttribute{
+				"peap_mscha_pv2": schema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p m s c h a pv2",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
@@ -296,7 +298,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 						},
 					},
 				},
-				"p_e_a_p_with__g_t_c": schema.SingleNestedAttribute{
+				"peap_with_gtc": schema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p with g t c",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
@@ -407,11 +409,12 @@ var RadiusServerProfilesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The RADIUS authentication protocol",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"c_h_a_p": dsschema.StringAttribute{
+				"chap": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "C h a p",
 					Computed:            true,
+					Attributes:          map[string]dsschema.Attribute{},
 				},
-				"e_a_p__t_t_l_s_with__p_a_p": dsschema.SingleNestedAttribute{
+				"eap_ttls_with_pap": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "E a p t t l s with p a p",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
@@ -425,11 +428,12 @@ var RadiusServerProfilesDataSourceSchema = dsschema.Schema{
 						},
 					},
 				},
-				"p_a_p": dsschema.StringAttribute{
+				"pap": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "P a p",
 					Computed:            true,
+					Attributes:          map[string]dsschema.Attribute{},
 				},
-				"p_e_a_p__m_s_c_h_a_pv2": dsschema.SingleNestedAttribute{
+				"peap_mscha_pv2": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p m s c h a pv2",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
@@ -447,7 +451,7 @@ var RadiusServerProfilesDataSourceSchema = dsschema.Schema{
 						},
 					},
 				},
-				"p_e_a_p_with__g_t_c": dsschema.SingleNestedAttribute{
+				"peap_with_gtc": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p with g t c",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{

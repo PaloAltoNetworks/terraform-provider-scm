@@ -80,11 +80,28 @@ Read-Only:
 Read-Only:
 
 - `address` (String) Destination IP address
+- `entry` (Attributes) Entry (see [below for nested schema](#nestedatt--data--type--ipv4--ipv4_entry--destination_address--entry))
+
+<a id="nestedatt--data--type--ipv4--ipv4_entry--destination_address--entry"></a>
+### Nested Schema for `data.type.ipv4.ipv4_entry.destination_address.entry`
+
+Read-Only:
+
+- `address` (String) Destination IP address
 - `wildcard` (String) Destination IP wildcard
+
 
 
 <a id="nestedatt--data--type--ipv4--ipv4_entry--source_address"></a>
 ### Nested Schema for `data.type.ipv4.ipv4_entry.source_address`
+
+Read-Only:
+
+- `address` (String) Source IP address
+- `entry` (Attributes) Entry (see [below for nested schema](#nestedatt--data--type--ipv4--ipv4_entry--source_address--entry))
+
+<a id="nestedatt--data--type--ipv4--ipv4_entry--source_address--entry"></a>
+### Nested Schema for `data.type.ipv4.ipv4_entry.source_address.entry`
 
 Read-Only:
 

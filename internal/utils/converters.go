@@ -16,24 +16,43 @@ package utils
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
+	"unicode"
 )
 
 // Look for logs like "Terraform Provider HTTP REQUEST" and "Terraform Provider HTTP RESPONSE" if you want to check the TF_LOGS
 
-// toSnakeCase converts a CamelCase string to snake_case.
-func toSnakeCase(s string) string {
-	// First, replace any hyphens with underscores to satisfy Terraform's naming requirements.
-	s = strings.ReplaceAll(s, "-", "_")
+var (
+	// This one handles acronyms at the start: "EAPTTLS" -> "EAP_TTLS"
+	matchAcronym = regexp.MustCompile("([A-Z]+)([A-Z][a-z])")
+	// This one handles caps in the middle: "WithPAP" -> "With_PAP"
+	matchCap = regexp.MustCompile("([a-z\\d])([A-Z])")
+)
 
-	var result []rune
-	for i, r := range s {
-		if i > 0 && 'A' <= r && r <= 'Z' {
-			result = append(result, '_')
+// toSnakeCase converts a string to snake_case.
+func toSnakeCase(str string) string {
+	// First, check if the string is all-caps, digits, and underscores.
+	// This handles tags like "EAP_TTLS_with_PAP" or "CHAP".
+	isAllUpperAndUnderscore := true
+	for _, r := range str {
+		if !(unicode.IsUpper(r) || unicode.IsDigit(r) || r == '_') {
+			isAllUpperAndUnderscore = false
+			break
 		}
-		result = append(result, r)
 	}
-	return strings.ToLower(string(result))
+	if isAllUpperAndUnderscore {
+		// If so, just lowercase it.
+		// "EAP_TTLS_with_PAP" -> "eap_ttls_with_pap"
+		// "CHAP" -> "chap"
+		return strings.ToLower(str)
+	}
+
+	// If not, it's likely camelCase (e.g., "EAPTTLSWithPAP" or "RadiusCertProfile").
+	// Apply standard camelCase to snake_case logic.
+	snake := matchAcronym.ReplaceAllString(str, "${1}_${2}")
+	snake = matchCap.ReplaceAllString(snake, "${1}_${2}")
+	return strings.ToLower(strings.ReplaceAll(snake, "-", "_"))
 }
 
 // getPrimitivePacker returns the correct Terraform framework function call for "packing" a

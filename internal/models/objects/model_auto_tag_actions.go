@@ -47,10 +47,10 @@ type AutoTagActionsActionsInnerType struct {
 
 // AutoTagActionsActionsInnerTypeTagging represents a nested structure within the AutoTagActions model
 type AutoTagActionsActionsInnerTypeTagging struct {
-	Action  basetypes.StringValue  `tfsdk:"action"`
-	Tags    basetypes.ListValue    `tfsdk:"tags"`
-	Target  basetypes.StringValue  `tfsdk:"target"`
-	Timeout basetypes.Float64Value `tfsdk:"timeout"`
+	Action  basetypes.StringValue `tfsdk:"action"`
+	Tags    basetypes.ListValue   `tfsdk:"tags"`
+	Target  basetypes.StringValue `tfsdk:"target"`
+	Timeout basetypes.Int64Value  `tfsdk:"timeout"`
 }
 
 // AttrTypes defines the attribute types for the AutoTagActions model.
@@ -67,7 +67,7 @@ func (o AutoTagActions) AttrTypes() map[string]attr.Type {
 								"action":  basetypes.StringType{},
 								"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 								"target":  basetypes.StringType{},
-								"timeout": basetypes.NumberType{},
+								"timeout": basetypes.Int64Type{},
 							},
 						},
 					},
@@ -104,7 +104,7 @@ func (o AutoTagActionsActionsInner) AttrTypes() map[string]attr.Type {
 						"action":  basetypes.StringType{},
 						"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 						"target":  basetypes.StringType{},
-						"timeout": basetypes.NumberType{},
+						"timeout": basetypes.Int64Type{},
 					},
 				},
 			},
@@ -127,7 +127,7 @@ func (o AutoTagActionsActionsInnerType) AttrTypes() map[string]attr.Type {
 				"action":  basetypes.StringType{},
 				"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 				"target":  basetypes.StringType{},
-				"timeout": basetypes.NumberType{},
+				"timeout": basetypes.Int64Type{},
 			},
 		},
 	}
@@ -146,7 +146,7 @@ func (o AutoTagActionsActionsInnerTypeTagging) AttrTypes() map[string]attr.Type 
 		"action":  basetypes.StringType{},
 		"tags":    basetypes.ListType{ElemType: basetypes.StringType{}},
 		"target":  basetypes.StringType{},
-		"timeout": basetypes.NumberType{},
+		"timeout": basetypes.Int64Type{},
 	}
 }
 
@@ -198,7 +198,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 										MarkdownDescription: "Source or Destination Address, User, X-Forwarded-For Address",
 										Required:            true,
 									},
-									"timeout": schema.Float64Attribute{
+									"timeout": schema.Int64Attribute{
 										MarkdownDescription: "Timeout",
 										Optional:            true,
 									},
@@ -331,7 +331,7 @@ var AutoTagActionsDataSourceSchema = dsschema.Schema{
 										MarkdownDescription: "Source or Destination Address, User, X-Forwarded-For Address",
 										Computed:            true,
 									},
-									"timeout": dsschema.Float64Attribute{
+									"timeout": dsschema.Int64Attribute{
 										MarkdownDescription: "Timeout",
 										Computed:            true,
 									},

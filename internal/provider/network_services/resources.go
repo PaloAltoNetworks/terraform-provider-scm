@@ -7,7 +7,7 @@ import (
 // GetResources returns all resources for the network_services package
 func GetResources() []func() resource.Resource {
 	return []func() resource.Resource{
-		NewAggregateEthernetInterfaceResource,
+		NewAggregateInterfaceResource,
 		// 		NewAutoVpnClusterResource,
 		// 		NewAutoVpnPushResponseResource,
 		NewBgpAddressFamilyProfileResource,

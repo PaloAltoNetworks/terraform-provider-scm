@@ -15,11 +15,11 @@ import (
 
 // BandwidthAllocations represents the Terraform model for BandwidthAllocations
 type BandwidthAllocations struct {
-	Tfid               types.String           `tfsdk:"tfid"`
-	AllocatedBandwidth basetypes.Float64Value `tfsdk:"allocated_bandwidth"`
-	Name               basetypes.StringValue  `tfsdk:"name"`
-	Qos                basetypes.ObjectValue  `tfsdk:"qos"`
-	SpnNameList        basetypes.ListValue    `tfsdk:"spn_name_list"`
+	Tfid               types.String          `tfsdk:"tfid"`
+	AllocatedBandwidth basetypes.Int64Value  `tfsdk:"allocated_bandwidth"`
+	Name               basetypes.StringValue `tfsdk:"name"`
+	Qos                basetypes.ObjectValue `tfsdk:"qos"`
+	SpnNameList        basetypes.ListValue   `tfsdk:"spn_name_list"`
 }
 
 // BandwidthAllocationsQos represents a nested structure within the BandwidthAllocations model
@@ -34,13 +34,13 @@ type BandwidthAllocationsQos struct {
 func (o BandwidthAllocations) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":                basetypes.StringType{},
-		"allocated_bandwidth": basetypes.NumberType{},
+		"allocated_bandwidth": basetypes.Int64Type{},
 		"name":                basetypes.StringType{},
 		"qos": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"customized":       basetypes.BoolType{},
 				"enabled":          basetypes.BoolType{},
-				"guaranteed_ratio": basetypes.NumberType{},
+				"guaranteed_ratio": basetypes.Float64Type{},
 				"profile":          basetypes.StringType{},
 			},
 		},
@@ -60,7 +60,7 @@ func (o BandwidthAllocationsQos) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"customized":       basetypes.BoolType{},
 		"enabled":          basetypes.BoolType{},
-		"guaranteed_ratio": basetypes.NumberType{},
+		"guaranteed_ratio": basetypes.Float64Type{},
 		"profile":          basetypes.StringType{},
 	}
 }
@@ -76,7 +76,7 @@ func (o BandwidthAllocationsQos) AttrType() attr.Type {
 var BandwidthAllocationsResourceSchema = schema.Schema{
 	MarkdownDescription: "BandwidthAllocation resource",
 	Attributes: map[string]schema.Attribute{
-		"allocated_bandwidth": schema.Float64Attribute{
+		"allocated_bandwidth": schema.Int64Attribute{
 			MarkdownDescription: "bandwidth to allocate in Mbps",
 			Required:            true,
 		},
@@ -125,7 +125,7 @@ var BandwidthAllocationsResourceSchema = schema.Schema{
 var BandwidthAllocationsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "BandwidthAllocation data source",
 	Attributes: map[string]dsschema.Attribute{
-		"allocated_bandwidth": dsschema.Float64Attribute{
+		"allocated_bandwidth": dsschema.Int64Attribute{
 			MarkdownDescription: "bandwidth to allocate in Mbps",
 			Computed:            true,
 		},

@@ -200,6 +200,18 @@ type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4 struct {
 	NextHop basetypes.ObjectValue `tfsdk:"next_hop"`
 }
 
+// BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4Address represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4Address struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4NextHop represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4NextHop struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
 // BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
 type BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSet struct {
 	Aggregator       basetypes.ObjectValue `tfsdk:"aggregator"`
@@ -261,11 +273,29 @@ type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4 struct 
 	NextHop basetypes.ObjectValue `tfsdk:"next_hop"`
 }
 
+// BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4Address represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4Address struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4NextHop represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4NextHop struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
 // BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
 type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet struct {
 	Metric     basetypes.ObjectValue `tfsdk:"metric"`
 	MetricType basetypes.StringValue `tfsdk:"metric_type"`
 	Tag        basetypes.Int64Value  `tfsdk:"tag"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSetMetric represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSetMetric struct {
+	Action basetypes.StringValue `tfsdk:"action"`
+	Value  basetypes.Int64Value  `tfsdk:"value"`
 }
 
 // BgpRouteMapRedistributionsConnectedStaticRib represents a nested structure within the BgpRouteMapRedistributions model
@@ -293,6 +323,23 @@ type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatch struct {
 type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4 struct {
 	Address basetypes.ObjectValue `tfsdk:"address"`
 	NextHop basetypes.ObjectValue `tfsdk:"next_hop"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4Address represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4Address struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4NextHop represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4NextHop struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerSet struct {
+	SourceAddress basetypes.StringValue `tfsdk:"source_address"`
 }
 
 // BgpRouteMapRedistributionsOspf represents a nested structure within the BgpRouteMapRedistributions model
@@ -358,6 +405,18 @@ type BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator struct {
 	RouterId basetypes.StringValue `tfsdk:"router_id"`
 }
 
+// BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetIpv4 represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetIpv4 struct {
+	NextHop       basetypes.StringValue `tfsdk:"next_hop"`
+	SourceAddress basetypes.StringValue `tfsdk:"source_address"`
+}
+
+// BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetMetric represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetMetric struct {
+	Action basetypes.StringValue `tfsdk:"action"`
+	Value  basetypes.Int64Value  `tfsdk:"value"`
+}
+
 // BgpRouteMapRedistributionsOspfRib represents a nested structure within the BgpRouteMapRedistributions model
 type BgpRouteMapRedistributionsOspfRib struct {
 	RouteMap basetypes.ListValue `tfsdk:"route_map"`
@@ -379,6 +438,23 @@ type BgpRouteMapRedistributionsOspfRibRouteMapInnerMatch struct {
 	Metric    basetypes.Int64Value  `tfsdk:"metric"`
 	NextHop   basetypes.ObjectValue `tfsdk:"next_hop"`
 	Tag       basetypes.Int64Value  `tfsdk:"tag"`
+}
+
+// BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchAddress represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchAddress struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchNextHop represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchNextHop struct {
+	AccessList basetypes.StringValue `tfsdk:"access_list"`
+	PrefixList basetypes.StringValue `tfsdk:"prefix_list"`
+}
+
+// BgpRouteMapRedistributionsOspfRibRouteMapInnerSet represents a nested structure within the BgpRouteMapRedistributions model
+type BgpRouteMapRedistributionsOspfRibRouteMapInnerSet struct {
+	SourceAddress basetypes.StringValue `tfsdk:"source_address"`
 }
 
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributions model.
@@ -1791,6 +1867,36 @@ func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4) Attr
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4Address model.
+func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4Address) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4Address objects.
+func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4Address) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4NextHop model.
+func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4NextHop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4NextHop objects.
+func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerMatchIpv4NextHop) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSet model.
 func (o BgpRouteMapRedistributionsConnectedStaticBgpRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -2036,6 +2142,36 @@ func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4) Att
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4Address model.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4Address) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4Address objects.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4Address) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4NextHop model.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4NextHop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4NextHop objects.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerMatchIpv4NextHop) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet model.
 func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -2052,6 +2188,21 @@ func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet) AttrTypes
 
 // AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet objects.
 func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSet) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSetMetric model.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSetMetric) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"action": basetypes.StringType{},
+		"value":  basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSetMetric objects.
+func (o BgpRouteMapRedistributionsConnectedStaticOspfRouteMapInnerSetMetric) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -2198,6 +2349,50 @@ func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4) Attr
 
 // AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4 objects.
 func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4Address model.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4Address) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4Address objects.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4Address) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4NextHop model.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4NextHop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4NextHop objects.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerMatchIpv4NextHop) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerSet model.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerSet) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"source_address": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerSet objects.
+func (o BgpRouteMapRedistributionsConnectedStaticRibRouteMapInnerSet) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -2561,6 +2756,36 @@ func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetAggregator) AttrType() 
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetIpv4 model.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetIpv4) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"next_hop":       basetypes.StringType{},
+		"source_address": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetIpv4 objects.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetIpv4) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetMetric model.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetMetric) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"action": basetypes.StringType{},
+		"value":  basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetMetric objects.
+func (o BgpRouteMapRedistributionsOspfBgpRouteMapInnerSetMetric) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfRib model.
 func (o BgpRouteMapRedistributionsOspfRib) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -2673,6 +2898,50 @@ func (o BgpRouteMapRedistributionsOspfRibRouteMapInnerMatch) AttrType() attr.Typ
 	}
 }
 
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchAddress model.
+func (o BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchAddress) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchAddress objects.
+func (o BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchAddress) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchNextHop model.
+func (o BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchNextHop) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"access_list": basetypes.StringType{},
+		"prefix_list": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchNextHop objects.
+func (o BgpRouteMapRedistributionsOspfRibRouteMapInnerMatchNextHop) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the BgpRouteMapRedistributionsOspfRibRouteMapInnerSet model.
+func (o BgpRouteMapRedistributionsOspfRibRouteMapInnerSet) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"source_address": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of BgpRouteMapRedistributionsOspfRibRouteMapInnerSet objects.
+func (o BgpRouteMapRedistributionsOspfRibRouteMapInnerSet) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // BgpRouteMapRedistributionsResourceSchema defines the schema for BgpRouteMapRedistributions resource
 var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 	MarkdownDescription: "BgpRouteMapRedistribution resource",
@@ -2697,7 +2966,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "BGP Root OSPF Route maps",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -2705,11 +2974,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Action",
+										MarkdownDescription: "BGP Root OSPF Route maps Action",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "BGP Root OSPF Route maps Description",
 										Optional:            true,
 									},
 									"match": schema.SingleNestedAttribute{
@@ -2717,59 +2986,59 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"as_path_access_list": schema.StringAttribute{
-												MarkdownDescription: "AS path access list",
+												MarkdownDescription: "BGP Root OSPF Route maps match AS path access list",
 												Optional:            true,
 											},
 											"extended_community": schema.StringAttribute{
-												MarkdownDescription: "Extended community",
+												MarkdownDescription: "EBGP Root OSPF Route maps match xtended community",
 												Optional:            true,
 											},
 											"interface": schema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "BGP Root OSPF Route maps match Interface",
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
-												MarkdownDescription: "bgp-route-map-redistributions ipv4 object",
+												MarkdownDescription: "BGP Root OSPF Route maps match bgp-route-map-redistributions ipv4 object",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
-														MarkdownDescription: "bgp-route-map-redistributions ipv4 object address",
+														MarkdownDescription: "BGP Root OSPF Route maps match bgp-route-map-redistributions ipv4 object address",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root OSPF Route maps match ipv4 Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root OSPF Route maps match ipv4 Prefix list",
 																Optional:            true,
 															},
 														},
 													},
 													"next_hop": schema.SingleNestedAttribute{
-														MarkdownDescription: "bgp-route-map-redistributions ipv4 object next_hop",
+														MarkdownDescription: "BGP Root OSPF Route maps match  bgp-route-map-redistributions ipv4 object next_hop",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 next_vr hop Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 next hop Prefix list",
 																Optional:            true,
 															},
 														},
 													},
 													"route_source": schema.SingleNestedAttribute{
-														MarkdownDescription: "bgp-route-map-redistributions ipv4 object route_source",
+														MarkdownDescription: "BGP Root OSPF Route maps ipv4 bgp-route-map-redistributions ipv4 object route_source",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 route source Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 route source Prefix list",
 																Optional:            true,
 															},
 														},
@@ -2777,43 +3046,43 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												},
 											},
 											"large_community": schema.StringAttribute{
-												MarkdownDescription: "Large community",
+												MarkdownDescription: "BGP Root OSPF Route maps match Large community",
 												Optional:            true,
 											},
 											"local_preference": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "BGP Root OSPF Route maps match Local preference",
 												Optional:            true,
 											},
 											"metric": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "BGP Root OSPF Route maps match Metric",
 												Optional:            true,
 											},
 											"origin": schema.StringAttribute{
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "BGP Root OSPF Route maps match Origin",
 												Optional:            true,
 											},
 											"peer": schema.StringAttribute{
 												Validators: []validator.String{
 													stringvalidator.OneOf("local", "none"),
 												},
-												MarkdownDescription: "Peer",
+												MarkdownDescription: "BGP Root OSPF Route maps match Peer",
 												Optional:            true,
 											},
 											"regular_community": schema.StringAttribute{
-												MarkdownDescription: "Regular community",
+												MarkdownDescription: "BGP Root OSPF Route maps match Regular community",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "BGP Root OSPF Route maps match Tag",
 												Optional:            true,
 											},
 										},
@@ -2822,11 +3091,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.Int64{
 											int64validator.Between(1, 65535),
 										},
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "BGP Root OSPF Route maps Sequence number",
 										Optional:            true,
 									},
 									"set": schema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "BGP Root OSPF Set",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.SingleNestedAttribute{
@@ -2837,14 +3106,14 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "subtract"),
 														},
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "BGP Root OSPF Route maps set Metric action",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
 														Validators: []validator.Int64{
 															int64validator.Between(0, 4294967295),
 														},
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "BGP Root OSPF Route maps set Metric value",
 														Optional:            true,
 													},
 												},
@@ -2853,14 +3122,14 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("type-1", "type-2"),
 												},
-												MarkdownDescription: "Metric type",
+												MarkdownDescription: "BGP Root OSPF Route maps set Metric type",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "BGP Root OSPF Route maps set Tag",
 												Optional:            true,
 											},
 										},
@@ -2876,11 +3145,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ospf"),
 						),
 					},
-					MarkdownDescription: "Rib",
+					MarkdownDescription: "BGP Root RIB",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "BGP Root RIB Route maps",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -2888,31 +3157,31 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Action",
+										MarkdownDescription: "BGP Root RIB Route maps Action",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "BGP Root RIB Route maps Description",
 										Optional:            true,
 									},
 									"match": schema.SingleNestedAttribute{
-										MarkdownDescription: "Match",
+										MarkdownDescription: "match attribute for BG Rib route map",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"as_path_access_list": schema.StringAttribute{
-												MarkdownDescription: "AS path access list",
+												MarkdownDescription: "BGP Root RIB Route maps match AS path access list",
 												Optional:            true,
 											},
 											"extended_community": schema.StringAttribute{
-												MarkdownDescription: "Extended community",
+												MarkdownDescription: "BGP Root RIB Route maps match Extended community",
 												Optional:            true,
 											},
 											"interface": schema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "BGP Root RIB Route maps match Interface",
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "BGP Route Map Redistributions Root BGP rib Route Map IPv4",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
@@ -2920,11 +3189,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv Prefix list",
 																Optional:            true,
 															},
 														},
@@ -2934,11 +3203,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv next hop Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv next hop Prefix list",
 																Optional:            true,
 															},
 														},
@@ -2948,11 +3217,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv route source Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv route source Prefix list",
 																Optional:            true,
 															},
 														},
@@ -2960,43 +3229,43 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												},
 											},
 											"large_community": schema.StringAttribute{
-												MarkdownDescription: "Large community",
+												MarkdownDescription: "BGP Root RIB Route maps match Large community",
 												Optional:            true,
 											},
 											"local_preference": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "BGP Root RIB Route maps match Local preference",
 												Optional:            true,
 											},
 											"metric": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "BGP Root RIB Route maps match Metric",
 												Optional:            true,
 											},
 											"origin": schema.StringAttribute{
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "BGP Root RIB Route maps match Origin",
 												Optional:            true,
 											},
 											"peer": schema.StringAttribute{
 												Validators: []validator.String{
 													stringvalidator.OneOf("local", "none"),
 												},
-												MarkdownDescription: "Peer",
+												MarkdownDescription: "BGP Root RIB Route maps match Peer",
 												Optional:            true,
 											},
 											"regular_community": schema.StringAttribute{
-												MarkdownDescription: "Regular community",
+												MarkdownDescription: "BGP Root RIB Route maps match Regular community",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "BGP Root RIB Route maps match Tag",
 												Optional:            true,
 											},
 										},
@@ -3005,15 +3274,15 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.Int64{
 											int64validator.Between(1, 65535),
 										},
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "BGP Root RIB Route maps Sequence number",
 										Optional:            true,
 									},
 									"set": schema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "Set attributes for BGP route map",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"source_address": schema.StringAttribute{
-												MarkdownDescription: "Source address",
+												MarkdownDescription: "BGP Root RIB Route maps set Source address",
 												Optional:            true,
 											},
 										},
@@ -3042,11 +3311,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Bgp",
+					MarkdownDescription: "Connected Static Root BGP",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "Connected Static BGP Route maps",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -3054,11 +3323,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Action",
+										MarkdownDescription: "Connected Static BGP Route maps Action",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "Connected Static BGP Route maps Description",
 										Optional:            true,
 									},
 									"match": schema.SingleNestedAttribute{
@@ -3066,7 +3335,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"interface": schema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "Connected Static BGP Route maps match Interface",
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
@@ -3078,11 +3347,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4 Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4  Prefix list",
 																Optional:            true,
 															},
 														},
@@ -3092,11 +3361,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4 next hop Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4 next hop Prefix list",
 																Optional:            true,
 															},
 														},
@@ -3107,7 +3376,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "Connected Static BGP Route maps match Metric",
 												Optional:            true,
 											},
 										},
@@ -3116,7 +3385,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.Int64{
 											int64validator.Between(1, 65535),
 										},
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "Connected Static BGP Route maps Sequence number",
 										Optional:            true,
 									},
 									"set": schema.SingleNestedAttribute{
@@ -3131,22 +3400,22 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.Int64{
 															int64validator.Between(1, 4294967295),
 														},
-														MarkdownDescription: "Aggregator AS",
+														MarkdownDescription: "Connected Static BGP Route maps set Aggregator AS",
 														Optional:            true,
 													},
 													"router_id": schema.StringAttribute{
-														MarkdownDescription: "Router ID",
+														MarkdownDescription: "Connected Static BGP Route maps set Router ID",
 														Optional:            true,
 													},
 												},
 											},
 											"aspath_prepend": schema.ListAttribute{
 												ElementType:         types.Int64Type,
-												MarkdownDescription: "AS numbers",
+												MarkdownDescription: "Connected Static BGP Route maps set AS numbers",
 												Optional:            true,
 											},
 											"atomic_aggregate": schema.BoolAttribute{
-												MarkdownDescription: "Enable BGP atomic aggregate?",
+												MarkdownDescription: "Connected Static BGP Route maps set Enable BGP atomic aggregate?",
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
@@ -3154,25 +3423,25 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"next_hop": schema.StringAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "Connected Static BGP Route maps set Next ipv4 hop",
 														Optional:            true,
 													},
 													"source_address": schema.StringAttribute{
-														MarkdownDescription: "Source address",
+														MarkdownDescription: "Connected Static BGP Route maps set ipv4 Source address",
 														Optional:            true,
 													},
 												},
 											},
 											"large_community": schema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Large communities",
+												MarkdownDescription: "Connected Static  BGP Route maps set Large communities",
 												Optional:            true,
 											},
 											"local_preference": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "Connected Static BGP Route maps set Local preference",
 												Optional:            true,
 											},
 											"metric": schema.SingleNestedAttribute{
@@ -3183,14 +3452,14 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "substract"),
 														},
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "Connected Static BGP Route maps set Metric action",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
 														Validators: []validator.Int64{
 															int64validator.Between(0, 4294967295),
 														},
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "Connected Static BGP Route maps set Metric value",
 														Optional:            true,
 													},
 												},
@@ -3199,30 +3468,30 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("none", "egp", "igp", "incomplete"),
 												},
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "Connected Static BGP Route maps set Origin",
 												Optional:            true,
 											},
 											"originator_id": schema.StringAttribute{
-												MarkdownDescription: "Originator ID",
+												MarkdownDescription: "Connected Static BGP Route maps set Originator ID",
 												Optional:            true,
 											},
 											"regular_community": schema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Regular communities",
+												MarkdownDescription: "Connected Static  BGP Route maps set Regular communities",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "Connected Static BGP Route maps set Tag",
 												Optional:            true,
 											},
 											"weight": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Weight",
+												MarkdownDescription: "Connected Static BGP Route maps set Weight",
 												Optional:            true,
 											},
 										},
@@ -3243,7 +3512,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "Connected Static  BGP OSPF Route maps",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -3251,11 +3520,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Action",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Action",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Description",
 										Optional:            true,
 									},
 									"match": schema.SingleNestedAttribute{
@@ -3263,7 +3532,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"interface": schema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "Connected Static BGP OSPF Route map Interface",
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
@@ -3271,15 +3540,15 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "Connected Static Root OSPF Address",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 Prefix list",
 																Optional:            true,
 															},
 														},
@@ -3289,11 +3558,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 next hop Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 next hop Prefix list",
 																Optional:            true,
 															},
 														},
@@ -3304,7 +3573,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "Connected Static BGP OSPF Route map Metric",
 												Optional:            true,
 											},
 										},
@@ -3313,11 +3582,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.Int64{
 											int64validator.Between(1, 65535),
 										},
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Sequence number",
 										Optional:            true,
 									},
 									"set": schema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "Connected Static Root OSPF Set",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.SingleNestedAttribute{
@@ -3328,14 +3597,14 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "substract"),
 														},
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric action",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
 														Validators: []validator.Int64{
 															int64validator.Between(0, 4294967295),
 														},
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric value",
 														Optional:            true,
 													},
 												},
@@ -3344,14 +3613,14 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("type-1", "type-2"),
 												},
-												MarkdownDescription: "Metric type",
+												MarkdownDescription: "Connected Static BGP OSPF Route map set Metric type",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "Connected Static BGP OSPF Route map set Tag",
 												Optional:            true,
 											},
 										},
@@ -3372,7 +3641,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "Connected Static BGP Rib Route maps",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -3380,11 +3649,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Action",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Action",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Description",
 										Optional:            true,
 									},
 									"match": schema.SingleNestedAttribute{
@@ -3392,7 +3661,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"interface": schema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "Connected Static BGP Rib Route maps Interface",
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
@@ -3400,15 +3669,15 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 address",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 Prefix list",
 																Optional:            true,
 															},
 														},
@@ -3418,11 +3687,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"access_list": schema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 nect hop Access list",
 																Optional:            true,
 															},
 															"prefix_list": schema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 next hop Prefix list",
 																Optional:            true,
 															},
 														},
@@ -3433,7 +3702,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "Connected Static BGP Rib Route maps Metric",
 												Optional:            true,
 											},
 										},
@@ -3442,15 +3711,15 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.Int64{
 											int64validator.Between(1, 65535),
 										},
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Sequence number",
 										Optional:            true,
 									},
 									"set": schema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "Connected Static Root RIB set",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"source_address": schema.StringAttribute{
-												MarkdownDescription: "Source address",
+												MarkdownDescription: "Connected Static BGP Rib Route Map Distribution Source address",
 												Optional:            true,
 											},
 										},
@@ -3463,7 +3732,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 			},
 		},
 		"description": schema.StringAttribute{
-			MarkdownDescription: "Description",
+			MarkdownDescription: "BGP Route Map Redistributions Description",
 			Optional:            true,
 		},
 		"device": schema.StringAttribute{
@@ -3497,14 +3766,14 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 			},
 		},
 		"id": schema.StringAttribute{
-			MarkdownDescription: "UUID of the resource",
+			MarkdownDescription: "BGP Route Map Redistributions UUID of the resource",
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
 		"name": schema.StringAttribute{
-			MarkdownDescription: "Name",
+			MarkdownDescription: "BGP Route Map Redistributions Name",
 			Required:            true,
 		},
 		"ospf": schema.SingleNestedAttribute{
@@ -3523,11 +3792,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Bgp",
+					MarkdownDescription: "OSPF Root BGP",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "OSPF BGP Route maps",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -3535,11 +3804,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Action",
+										MarkdownDescription: "OSPF BGP Route maps Action",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "OSPF BGP Route maps Description",
 										Optional:            true,
 									},
 									"match": schema.SingleNestedAttribute{
@@ -3551,24 +3820,24 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"access_list": schema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF BGP Route maps match Access list",
 														Optional:            true,
 													},
 													"prefix_list": schema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF BGP Route maps match Prefix list",
 														Optional:            true,
 													},
 												},
 											},
 											"interface": schema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "OSPF BGP Route maps Interface",
 												Optional:            true,
 											},
 											"metric": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "OSPF BGP Route maps Metric",
 												Optional:            true,
 											},
 											"next_hop": schema.SingleNestedAttribute{
@@ -3576,11 +3845,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"access_list": schema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF BGP Route maps next_hop Access list",
 														Optional:            true,
 													},
 													"prefix_list": schema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF BGP Route maps next_hop Prefix list",
 														Optional:            true,
 													},
 												},
@@ -3589,7 +3858,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "OSPF BGP Route maps Tag",
 												Optional:            true,
 											},
 										},
@@ -3598,11 +3867,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.Int64{
 											int64validator.Between(1, 65535),
 										},
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "OSPF BGP Route maps Sequence number",
 										Optional:            true,
 									},
 									"set": schema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "OSPF Root Set",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"aggregator": schema.SingleNestedAttribute{
@@ -3613,22 +3882,22 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.Int64{
 															int64validator.Between(1, 4294967295),
 														},
-														MarkdownDescription: "Aggregator AS",
+														MarkdownDescription: "OSPF BGP Route maps set Aggregator AS",
 														Optional:            true,
 													},
 													"router_id": schema.StringAttribute{
-														MarkdownDescription: "Router ID",
+														MarkdownDescription: "OSPF BGP Route maps set Router ID",
 														Optional:            true,
 													},
 												},
 											},
 											"aspath_prepend": schema.ListAttribute{
 												ElementType:         types.Int64Type,
-												MarkdownDescription: "AS numbers",
+												MarkdownDescription: "OSPF BGP Route maps set AS numbers",
 												Optional:            true,
 											},
 											"atomic_aggregate": schema.BoolAttribute{
-												MarkdownDescription: "Enable BGP atomic aggregate?",
+												MarkdownDescription: "OSPF BGP Route maps set Enable BGP atomic aggregate?",
 												Optional:            true,
 											},
 											"ipv4": schema.SingleNestedAttribute{
@@ -3636,25 +3905,25 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"next_hop": schema.StringAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "OSPF BGP Route maps set ipv4 Next hop",
 														Optional:            true,
 													},
 													"source_address": schema.StringAttribute{
-														MarkdownDescription: "Source address",
+														MarkdownDescription: "OSPF BGP Route maps set ipv4 Source address",
 														Optional:            true,
 													},
 												},
 											},
 											"large_community": schema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Large communities",
+												MarkdownDescription: "OSPF BGP Route maps set Large communities",
 												Optional:            true,
 											},
 											"local_preference": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "OSPF BGP Route maps set Local preference",
 												Optional:            true,
 											},
 											"metric": schema.SingleNestedAttribute{
@@ -3665,14 +3934,14 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "substract"),
 														},
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "OSPF BGP Route maps set Metric action",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
 														Validators: []validator.Int64{
 															int64validator.Between(0, 4294967295),
 														},
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "OSPF BGP Route maps set Metric value",
 														Optional:            true,
 													},
 												},
@@ -3681,30 +3950,30 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("none", "egp", "igp", "incomplete"),
 												},
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "OSPF BGP Route maps set Origin",
 												Optional:            true,
 											},
 											"originator_id": schema.StringAttribute{
-												MarkdownDescription: "Originator ID",
+												MarkdownDescription: "OSPF BGP Route maps set Originator ID",
 												Optional:            true,
 											},
 											"regular_community": schema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Regular communities",
+												MarkdownDescription: "OSPF BGP Route maps set Regular communities",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "OSPF BGP Route maps set Tag",
 												Optional:            true,
 											},
 											"weight": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Weight",
+												MarkdownDescription: "OSPF BGP Route maps set Weight",
 												Optional:            true,
 											},
 										},
@@ -3724,7 +3993,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "OSPF RIB Route maps set Route maps",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -3732,11 +4001,11 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Action",
+										MarkdownDescription: "OSPF RIB Route maps Action",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "OSPF RIB Route maps Description",
 										Optional:            true,
 									},
 									"match": schema.SingleNestedAttribute{
@@ -3744,40 +4013,40 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"address": schema.SingleNestedAttribute{
-												MarkdownDescription: "Address",
+												MarkdownDescription: "OSPF RIB Route maps address",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"access_list": schema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF RIB Route maps address Access list",
 														Optional:            true,
 													},
 													"prefix_list": schema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF RIB Route maps address Prefix list",
 														Optional:            true,
 													},
 												},
 											},
 											"interface": schema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "OSPF RIB Route maps Interface",
 												Optional:            true,
 											},
 											"metric": schema.Int64Attribute{
 												Validators: []validator.Int64{
 													int64validator.Between(0, 4294967295),
 												},
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "OSPF RIB Route maps Metric",
 												Optional:            true,
 											},
 											"next_hop": schema.SingleNestedAttribute{
-												MarkdownDescription: "Next hop",
+												MarkdownDescription: "OSPF RIB Route maps next_hop",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"access_list": schema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF RIB Route maps next_hop Access list",
 														Optional:            true,
 													},
 													"prefix_list": schema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF RIB Route maps next_hop Prefix list",
 														Optional:            true,
 													},
 												},
@@ -3786,7 +4055,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.Int64{
 													int64validator.Between(1, 4294967295),
 												},
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "OSPF RIB Route maps tag",
 												Optional:            true,
 											},
 										},
@@ -3795,15 +4064,15 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.Int64{
 											int64validator.Between(1, 65535),
 										},
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "OSPF RIB Route mapsSequence number",
 										Optional:            true,
 									},
 									"set": schema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "OSPF RIB Route maps set",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"source_address": schema.StringAttribute{
-												MarkdownDescription: "Source address",
+												MarkdownDescription: "OSPF RIB Route maps set Source address",
 												Optional:            true,
 											},
 										},
@@ -3853,16 +4122,16 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "BGP Root OSPF Route maps",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Action",
+										MarkdownDescription: "BGP Root OSPF Route maps Action",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "BGP Root OSPF Route maps Description",
 										Computed:            true,
 									},
 									"match": dsschema.SingleNestedAttribute{
@@ -3870,59 +4139,59 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"as_path_access_list": dsschema.StringAttribute{
-												MarkdownDescription: "AS path access list",
+												MarkdownDescription: "BGP Root OSPF Route maps match AS path access list",
 												Computed:            true,
 											},
 											"extended_community": dsschema.StringAttribute{
-												MarkdownDescription: "Extended community",
+												MarkdownDescription: "EBGP Root OSPF Route maps match xtended community",
 												Computed:            true,
 											},
 											"interface": dsschema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "BGP Root OSPF Route maps match Interface",
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "bgp-route-map-redistributions ipv4 object",
+												MarkdownDescription: "BGP Root OSPF Route maps match bgp-route-map-redistributions ipv4 object",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "bgp-route-map-redistributions ipv4 object address",
+														MarkdownDescription: "BGP Root OSPF Route maps match bgp-route-map-redistributions ipv4 object address",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root OSPF Route maps match ipv4 Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root OSPF Route maps match ipv4 Prefix list",
 																Computed:            true,
 															},
 														},
 													},
 													"next_hop": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "bgp-route-map-redistributions ipv4 object next_hop",
+														MarkdownDescription: "BGP Root OSPF Route maps match  bgp-route-map-redistributions ipv4 object next_hop",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 next_vr hop Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 next hop Prefix list",
 																Computed:            true,
 															},
 														},
 													},
 													"route_source": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "bgp-route-map-redistributions ipv4 object route_source",
+														MarkdownDescription: "BGP Root OSPF Route maps ipv4 bgp-route-map-redistributions ipv4 object route_source",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 route source Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root OSPF Route maps ipv4 route source Prefix list",
 																Computed:            true,
 															},
 														},
@@ -3930,41 +4199,41 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"large_community": dsschema.StringAttribute{
-												MarkdownDescription: "Large community",
+												MarkdownDescription: "BGP Root OSPF Route maps match Large community",
 												Computed:            true,
 											},
 											"local_preference": dsschema.Int64Attribute{
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "BGP Root OSPF Route maps match Local preference",
 												Computed:            true,
 											},
 											"metric": dsschema.Int64Attribute{
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "BGP Root OSPF Route maps match Metric",
 												Computed:            true,
 											},
 											"origin": dsschema.StringAttribute{
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "BGP Root OSPF Route maps match Origin",
 												Computed:            true,
 											},
 											"peer": dsschema.StringAttribute{
-												MarkdownDescription: "Peer",
+												MarkdownDescription: "BGP Root OSPF Route maps match Peer",
 												Computed:            true,
 											},
 											"regular_community": dsschema.StringAttribute{
-												MarkdownDescription: "Regular community",
+												MarkdownDescription: "BGP Root OSPF Route maps match Regular community",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "BGP Root OSPF Route maps match Tag",
 												Computed:            true,
 											},
 										},
 									},
 									"name": dsschema.Int64Attribute{
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "BGP Root OSPF Route maps Sequence number",
 										Computed:            true,
 									},
 									"set": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "BGP Root OSPF Set",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"metric": dsschema.SingleNestedAttribute{
@@ -3972,21 +4241,21 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "BGP Root OSPF Route maps set Metric action",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "BGP Root OSPF Route maps set Metric value",
 														Computed:            true,
 													},
 												},
 											},
 											"metric_type": dsschema.StringAttribute{
-												MarkdownDescription: "Metric type",
+												MarkdownDescription: "BGP Root OSPF Route maps set Metric type",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "BGP Root OSPF Route maps set Tag",
 												Computed:            true,
 											},
 										},
@@ -3997,40 +4266,40 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rib": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Rib",
+					MarkdownDescription: "BGP Root RIB",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "BGP Root RIB Route maps",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Action",
+										MarkdownDescription: "BGP Root RIB Route maps Action",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "BGP Root RIB Route maps Description",
 										Computed:            true,
 									},
 									"match": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Match",
+										MarkdownDescription: "match attribute for BG Rib route map",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"as_path_access_list": dsschema.StringAttribute{
-												MarkdownDescription: "AS path access list",
+												MarkdownDescription: "BGP Root RIB Route maps match AS path access list",
 												Computed:            true,
 											},
 											"extended_community": dsschema.StringAttribute{
-												MarkdownDescription: "Extended community",
+												MarkdownDescription: "BGP Root RIB Route maps match Extended community",
 												Computed:            true,
 											},
 											"interface": dsschema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "BGP Root RIB Route maps match Interface",
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Ipv4",
+												MarkdownDescription: "BGP Route Map Redistributions Root BGP rib Route Map IPv4",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
@@ -4038,11 +4307,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4052,11 +4321,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv next hop Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv next hop Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4066,11 +4335,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv route source Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "BGP Root RIB Route maps match ipv route source Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4078,45 +4347,45 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"large_community": dsschema.StringAttribute{
-												MarkdownDescription: "Large community",
+												MarkdownDescription: "BGP Root RIB Route maps match Large community",
 												Computed:            true,
 											},
 											"local_preference": dsschema.Int64Attribute{
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "BGP Root RIB Route maps match Local preference",
 												Computed:            true,
 											},
 											"metric": dsschema.Int64Attribute{
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "BGP Root RIB Route maps match Metric",
 												Computed:            true,
 											},
 											"origin": dsschema.StringAttribute{
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "BGP Root RIB Route maps match Origin",
 												Computed:            true,
 											},
 											"peer": dsschema.StringAttribute{
-												MarkdownDescription: "Peer",
+												MarkdownDescription: "BGP Root RIB Route maps match Peer",
 												Computed:            true,
 											},
 											"regular_community": dsschema.StringAttribute{
-												MarkdownDescription: "Regular community",
+												MarkdownDescription: "BGP Root RIB Route maps match Regular community",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "BGP Root RIB Route maps match Tag",
 												Computed:            true,
 											},
 										},
 									},
 									"name": dsschema.Int64Attribute{
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "BGP Root RIB Route maps Sequence number",
 										Computed:            true,
 									},
 									"set": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "Set attributes for BGP route map",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"source_address": dsschema.StringAttribute{
-												MarkdownDescription: "Source address",
+												MarkdownDescription: "BGP Root RIB Route maps set Source address",
 												Computed:            true,
 											},
 										},
@@ -4133,20 +4402,20 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"bgp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Bgp",
+					MarkdownDescription: "Connected Static Root BGP",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "Connected Static BGP Route maps",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Action",
+										MarkdownDescription: "Connected Static BGP Route maps Action",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "Connected Static BGP Route maps Description",
 										Computed:            true,
 									},
 									"match": dsschema.SingleNestedAttribute{
@@ -4154,7 +4423,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"interface": dsschema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "Connected Static BGP Route maps match Interface",
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
@@ -4166,11 +4435,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4 Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4  Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4180,11 +4449,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4 next hop Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Route maps match ip4 next hop Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4192,13 +4461,13 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"metric": dsschema.Int64Attribute{
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "Connected Static BGP Route maps match Metric",
 												Computed:            true,
 											},
 										},
 									},
 									"name": dsschema.Int64Attribute{
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "Connected Static BGP Route maps Sequence number",
 										Computed:            true,
 									},
 									"set": dsschema.SingleNestedAttribute{
@@ -4210,22 +4479,22 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"as": dsschema.Int64Attribute{
-														MarkdownDescription: "Aggregator AS",
+														MarkdownDescription: "Connected Static BGP Route maps set Aggregator AS",
 														Computed:            true,
 													},
 													"router_id": dsschema.StringAttribute{
-														MarkdownDescription: "Router ID",
+														MarkdownDescription: "Connected Static BGP Route maps set Router ID",
 														Computed:            true,
 													},
 												},
 											},
 											"aspath_prepend": dsschema.ListAttribute{
 												ElementType:         types.Int64Type,
-												MarkdownDescription: "AS numbers",
+												MarkdownDescription: "Connected Static BGP Route maps set AS numbers",
 												Computed:            true,
 											},
 											"atomic_aggregate": dsschema.BoolAttribute{
-												MarkdownDescription: "Enable BGP atomic aggregate?",
+												MarkdownDescription: "Connected Static BGP Route maps set Enable BGP atomic aggregate?",
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
@@ -4233,22 +4502,22 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"next_hop": dsschema.StringAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "Connected Static BGP Route maps set Next ipv4 hop",
 														Computed:            true,
 													},
 													"source_address": dsschema.StringAttribute{
-														MarkdownDescription: "Source address",
+														MarkdownDescription: "Connected Static BGP Route maps set ipv4 Source address",
 														Computed:            true,
 													},
 												},
 											},
 											"large_community": dsschema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Large communities",
+												MarkdownDescription: "Connected Static  BGP Route maps set Large communities",
 												Computed:            true,
 											},
 											"local_preference": dsschema.Int64Attribute{
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "Connected Static BGP Route maps set Local preference",
 												Computed:            true,
 											},
 											"metric": dsschema.SingleNestedAttribute{
@@ -4256,34 +4525,34 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "Connected Static BGP Route maps set Metric action",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "Connected Static BGP Route maps set Metric value",
 														Computed:            true,
 													},
 												},
 											},
 											"origin": dsschema.StringAttribute{
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "Connected Static BGP Route maps set Origin",
 												Computed:            true,
 											},
 											"originator_id": dsschema.StringAttribute{
-												MarkdownDescription: "Originator ID",
+												MarkdownDescription: "Connected Static BGP Route maps set Originator ID",
 												Computed:            true,
 											},
 											"regular_community": dsschema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Regular communities",
+												MarkdownDescription: "Connected Static  BGP Route maps set Regular communities",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "Connected Static BGP Route maps set Tag",
 												Computed:            true,
 											},
 											"weight": dsschema.Int64Attribute{
-												MarkdownDescription: "Weight",
+												MarkdownDescription: "Connected Static BGP Route maps set Weight",
 												Computed:            true,
 											},
 										},
@@ -4298,16 +4567,16 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "Connected Static  BGP OSPF Route maps",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Action",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Action",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Description",
 										Computed:            true,
 									},
 									"match": dsschema.SingleNestedAttribute{
@@ -4315,7 +4584,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"interface": dsschema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "Connected Static BGP OSPF Route map Interface",
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
@@ -4323,15 +4592,15 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "Connected Static Root OSPF Address",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4341,11 +4610,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 next hop Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP OSPF Route map ipv4 next hop Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4353,17 +4622,17 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"metric": dsschema.Int64Attribute{
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "Connected Static BGP OSPF Route map Metric",
 												Computed:            true,
 											},
 										},
 									},
 									"name": dsschema.Int64Attribute{
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Sequence number",
 										Computed:            true,
 									},
 									"set": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "Connected Static Root OSPF Set",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"metric": dsschema.SingleNestedAttribute{
@@ -4371,21 +4640,21 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric action",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric value",
 														Computed:            true,
 													},
 												},
 											},
 											"metric_type": dsschema.StringAttribute{
-												MarkdownDescription: "Metric type",
+												MarkdownDescription: "Connected Static BGP OSPF Route map set Metric type",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "Connected Static BGP OSPF Route map set Tag",
 												Computed:            true,
 											},
 										},
@@ -4400,16 +4669,16 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "Connected Static BGP Rib Route maps",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Action",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Action",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Description",
 										Computed:            true,
 									},
 									"match": dsschema.SingleNestedAttribute{
@@ -4417,7 +4686,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"interface": dsschema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "Connected Static BGP Rib Route maps Interface",
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
@@ -4425,15 +4694,15 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Address",
+														MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 address",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4443,11 +4712,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"access_list": dsschema.StringAttribute{
-																MarkdownDescription: "Access list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 nect hop Access list",
 																Computed:            true,
 															},
 															"prefix_list": dsschema.StringAttribute{
-																MarkdownDescription: "Prefix list",
+																MarkdownDescription: "Connected Static BGP Rib Route maps ipv4 next hop Prefix list",
 																Computed:            true,
 															},
 														},
@@ -4455,21 +4724,21 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"metric": dsschema.Int64Attribute{
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "Connected Static BGP Rib Route maps Metric",
 												Computed:            true,
 											},
 										},
 									},
 									"name": dsschema.Int64Attribute{
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Sequence number",
 										Computed:            true,
 									},
 									"set": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "Connected Static Root RIB set",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"source_address": dsschema.StringAttribute{
-												MarkdownDescription: "Source address",
+												MarkdownDescription: "Connected Static BGP Rib Route Map Distribution Source address",
 												Computed:            true,
 											},
 										},
@@ -4482,7 +4751,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"description": dsschema.StringAttribute{
-			MarkdownDescription: "Description",
+			MarkdownDescription: "BGP Route Map Redistributions Description",
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
@@ -4494,11 +4763,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
-			MarkdownDescription: "UUID of the resource",
+			MarkdownDescription: "BGP Route Map Redistributions UUID of the resource",
 			Required:            true,
 		},
 		"name": dsschema.StringAttribute{
-			MarkdownDescription: "Name",
+			MarkdownDescription: "BGP Route Map Redistributions Name",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -4507,20 +4776,20 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"bgp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Bgp",
+					MarkdownDescription: "OSPF Root BGP",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "OSPF BGP Route maps",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Action",
+										MarkdownDescription: "OSPF BGP Route maps Action",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "OSPF BGP Route maps Description",
 										Computed:            true,
 									},
 									"match": dsschema.SingleNestedAttribute{
@@ -4532,21 +4801,21 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"access_list": dsschema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF BGP Route maps match Access list",
 														Computed:            true,
 													},
 													"prefix_list": dsschema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF BGP Route maps match Prefix list",
 														Computed:            true,
 													},
 												},
 											},
 											"interface": dsschema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "OSPF BGP Route maps Interface",
 												Computed:            true,
 											},
 											"metric": dsschema.Int64Attribute{
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "OSPF BGP Route maps Metric",
 												Computed:            true,
 											},
 											"next_hop": dsschema.SingleNestedAttribute{
@@ -4554,27 +4823,27 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"access_list": dsschema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF BGP Route maps next_hop Access list",
 														Computed:            true,
 													},
 													"prefix_list": dsschema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF BGP Route maps next_hop Prefix list",
 														Computed:            true,
 													},
 												},
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "OSPF BGP Route maps Tag",
 												Computed:            true,
 											},
 										},
 									},
 									"name": dsschema.Int64Attribute{
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "OSPF BGP Route maps Sequence number",
 										Computed:            true,
 									},
 									"set": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "OSPF Root Set",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"aggregator": dsschema.SingleNestedAttribute{
@@ -4582,22 +4851,22 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"as": dsschema.Int64Attribute{
-														MarkdownDescription: "Aggregator AS",
+														MarkdownDescription: "OSPF BGP Route maps set Aggregator AS",
 														Computed:            true,
 													},
 													"router_id": dsschema.StringAttribute{
-														MarkdownDescription: "Router ID",
+														MarkdownDescription: "OSPF BGP Route maps set Router ID",
 														Computed:            true,
 													},
 												},
 											},
 											"aspath_prepend": dsschema.ListAttribute{
 												ElementType:         types.Int64Type,
-												MarkdownDescription: "AS numbers",
+												MarkdownDescription: "OSPF BGP Route maps set AS numbers",
 												Computed:            true,
 											},
 											"atomic_aggregate": dsschema.BoolAttribute{
-												MarkdownDescription: "Enable BGP atomic aggregate?",
+												MarkdownDescription: "OSPF BGP Route maps set Enable BGP atomic aggregate?",
 												Computed:            true,
 											},
 											"ipv4": dsschema.SingleNestedAttribute{
@@ -4605,22 +4874,22 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"next_hop": dsschema.StringAttribute{
-														MarkdownDescription: "Next hop",
+														MarkdownDescription: "OSPF BGP Route maps set ipv4 Next hop",
 														Computed:            true,
 													},
 													"source_address": dsschema.StringAttribute{
-														MarkdownDescription: "Source address",
+														MarkdownDescription: "OSPF BGP Route maps set ipv4 Source address",
 														Computed:            true,
 													},
 												},
 											},
 											"large_community": dsschema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Large communities",
+												MarkdownDescription: "OSPF BGP Route maps set Large communities",
 												Computed:            true,
 											},
 											"local_preference": dsschema.Int64Attribute{
-												MarkdownDescription: "Local preference",
+												MarkdownDescription: "OSPF BGP Route maps set Local preference",
 												Computed:            true,
 											},
 											"metric": dsschema.SingleNestedAttribute{
@@ -4628,34 +4897,34 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "Metric action",
+														MarkdownDescription: "OSPF BGP Route maps set Metric action",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
-														MarkdownDescription: "Metric value",
+														MarkdownDescription: "OSPF BGP Route maps set Metric value",
 														Computed:            true,
 													},
 												},
 											},
 											"origin": dsschema.StringAttribute{
-												MarkdownDescription: "Origin",
+												MarkdownDescription: "OSPF BGP Route maps set Origin",
 												Computed:            true,
 											},
 											"originator_id": dsschema.StringAttribute{
-												MarkdownDescription: "Originator ID",
+												MarkdownDescription: "OSPF BGP Route maps set Originator ID",
 												Computed:            true,
 											},
 											"regular_community": dsschema.ListAttribute{
 												ElementType:         types.StringType,
-												MarkdownDescription: "Regular communities",
+												MarkdownDescription: "OSPF BGP Route maps set Regular communities",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "OSPF BGP Route maps set Tag",
 												Computed:            true,
 											},
 											"weight": dsschema.Int64Attribute{
-												MarkdownDescription: "Weight",
+												MarkdownDescription: "OSPF BGP Route maps set Weight",
 												Computed:            true,
 											},
 										},
@@ -4670,16 +4939,16 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
-							MarkdownDescription: "Route maps",
+							MarkdownDescription: "OSPF RIB Route maps set Route maps",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Action",
+										MarkdownDescription: "OSPF RIB Route maps Action",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
-										MarkdownDescription: "Description",
+										MarkdownDescription: "OSPF RIB Route maps Description",
 										Computed:            true,
 									},
 									"match": dsschema.SingleNestedAttribute{
@@ -4687,57 +4956,57 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"address": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Address",
+												MarkdownDescription: "OSPF RIB Route maps address",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"access_list": dsschema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF RIB Route maps address Access list",
 														Computed:            true,
 													},
 													"prefix_list": dsschema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF RIB Route maps address Prefix list",
 														Computed:            true,
 													},
 												},
 											},
 											"interface": dsschema.StringAttribute{
-												MarkdownDescription: "Interface",
+												MarkdownDescription: "OSPF RIB Route maps Interface",
 												Computed:            true,
 											},
 											"metric": dsschema.Int64Attribute{
-												MarkdownDescription: "Metric",
+												MarkdownDescription: "OSPF RIB Route maps Metric",
 												Computed:            true,
 											},
 											"next_hop": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Next hop",
+												MarkdownDescription: "OSPF RIB Route maps next_hop",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"access_list": dsschema.StringAttribute{
-														MarkdownDescription: "Access list",
+														MarkdownDescription: "OSPF RIB Route maps next_hop Access list",
 														Computed:            true,
 													},
 													"prefix_list": dsschema.StringAttribute{
-														MarkdownDescription: "Prefix list",
+														MarkdownDescription: "OSPF RIB Route maps next_hop Prefix list",
 														Computed:            true,
 													},
 												},
 											},
 											"tag": dsschema.Int64Attribute{
-												MarkdownDescription: "Tag",
+												MarkdownDescription: "OSPF RIB Route maps tag",
 												Computed:            true,
 											},
 										},
 									},
 									"name": dsschema.Int64Attribute{
-										MarkdownDescription: "Sequence number",
+										MarkdownDescription: "OSPF RIB Route mapsSequence number",
 										Computed:            true,
 									},
 									"set": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Set",
+										MarkdownDescription: "OSPF RIB Route maps set",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"source_address": dsschema.StringAttribute{
-												MarkdownDescription: "Source address",
+												MarkdownDescription: "OSPF RIB Route maps set Source address",
 												Computed:            true,
 											},
 										},

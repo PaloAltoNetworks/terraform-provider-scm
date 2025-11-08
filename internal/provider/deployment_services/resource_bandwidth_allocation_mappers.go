@@ -30,7 +30,7 @@ func unpackBandwidthAllocationsToSdk(ctx context.Context, obj types.Object) (*de
 
 	// Handling Primitives
 	if !model.AllocatedBandwidth.IsNull() && !model.AllocatedBandwidth.IsUnknown() {
-		sdk.AllocatedBandwidth = float32(model.AllocatedBandwidth.ValueFloat64())
+		sdk.AllocatedBandwidth = int32(model.AllocatedBandwidth.ValueInt64())
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "AllocatedBandwidth", "value": sdk.AllocatedBandwidth})
 	}
 
@@ -74,7 +74,7 @@ func packBandwidthAllocationsFromSdk(ctx context.Context, sdk deployment_service
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.AllocatedBandwidth = basetypes.NewFloat64Value(float64(sdk.AllocatedBandwidth))
+	model.AllocatedBandwidth = basetypes.NewInt64Value(int64(sdk.AllocatedBandwidth))
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "AllocatedBandwidth", "value": sdk.AllocatedBandwidth})
 	// Handling Primitives
 	// Standard primitive packing

@@ -24,8 +24,8 @@ import (
 // Package: network_services
 // This file contains models for the network_services SDK package
 
-// AggregateEthernetInterfaces represents the Terraform model for AggregateEthernetInterfaces
-type AggregateEthernetInterfaces struct {
+// AggregateInterfaces represents the Terraform model for AggregateInterfaces
+type AggregateInterfaces struct {
 	Tfid         types.String          `tfsdk:"tfid"`
 	Comment      basetypes.StringValue `tfsdk:"comment"`
 	DefaultValue basetypes.StringValue `tfsdk:"default_value"`
@@ -38,13 +38,13 @@ type AggregateEthernetInterfaces struct {
 	Snippet      basetypes.StringValue `tfsdk:"snippet"`
 }
 
-// AggregateEthernetInterfacesLayer2 represents a nested structure within the AggregateEthernetInterfaces model
-type AggregateEthernetInterfacesLayer2 struct {
+// AggregateInterfacesLayer2 represents a nested structure within the AggregateInterfaces model
+type AggregateInterfacesLayer2 struct {
 	Lacp    basetypes.ObjectValue `tfsdk:"lacp"`
-	VlanTag basetypes.Int64Value  `tfsdk:"vlan_tag"`
+	VlanTag basetypes.StringValue `tfsdk:"vlan_tag"`
 }
 
-// Lacp represents a nested structure within the AggregateEthernetInterfaces model
+// Lacp represents a nested structure within the AggregateInterfaces model
 type Lacp struct {
 	Enable           basetypes.BoolValue   `tfsdk:"enable"`
 	FastFailover     basetypes.BoolValue   `tfsdk:"fast_failover"`
@@ -54,8 +54,8 @@ type Lacp struct {
 	TransmissionRate basetypes.StringValue `tfsdk:"transmission_rate"`
 }
 
-// AggregateEthernetInterfacesLayer3 represents a nested structure within the AggregateEthernetInterfaces model
-type AggregateEthernetInterfacesLayer3 struct {
+// AggregateInterfacesLayer3 represents a nested structure within the AggregateInterfaces model
+type AggregateInterfacesLayer3 struct {
 	Arp                        basetypes.ListValue   `tfsdk:"arp"`
 	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
 	DhcpClient                 basetypes.ObjectValue `tfsdk:"dhcp_client"`
@@ -65,14 +65,14 @@ type AggregateEthernetInterfacesLayer3 struct {
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 }
 
-// AggEthernetArpInner represents a nested structure within the AggregateEthernetInterfaces model
+// AggEthernetArpInner represents a nested structure within the AggregateInterfaces model
 type AggEthernetArpInner struct {
 	HwAddress basetypes.StringValue `tfsdk:"hw_address"`
 	Name      basetypes.StringValue `tfsdk:"name"`
 }
 
-// AggregateEthernetInterfacesLayer3DdnsConfig represents a nested structure within the AggregateEthernetInterfaces model
-type AggregateEthernetInterfacesLayer3DdnsConfig struct {
+// AggregateInterfacesLayer3DdnsConfig represents a nested structure within the AggregateInterfaces model
+type AggregateInterfacesLayer3DdnsConfig struct {
 	DdnsCertProfile    basetypes.StringValue `tfsdk:"ddns_cert_profile"`
 	DdnsEnabled        basetypes.BoolValue   `tfsdk:"ddns_enabled"`
 	DdnsHostname       basetypes.StringValue `tfsdk:"ddns_hostname"`
@@ -82,7 +82,7 @@ type AggregateEthernetInterfacesLayer3DdnsConfig struct {
 	DdnsVendorConfig   basetypes.StringValue `tfsdk:"ddns_vendor_config"`
 }
 
-// AggEthernetDhcpClientDhcpClient represents a nested structure within the AggregateEthernetInterfaces model
+// AggEthernetDhcpClientDhcpClient represents a nested structure within the AggregateInterfaces model
 type AggEthernetDhcpClientDhcpClient struct {
 	CreateDefaultRoute basetypes.BoolValue   `tfsdk:"create_default_route"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
@@ -90,14 +90,19 @@ type AggEthernetDhcpClientDhcpClient struct {
 	SendHostname       basetypes.ObjectValue `tfsdk:"send_hostname"`
 }
 
-// AggEthernetDhcpClientDhcpClientSendHostname represents a nested structure within the AggregateEthernetInterfaces model
+// AggEthernetDhcpClientDhcpClientSendHostname represents a nested structure within the AggregateInterfaces model
 type AggEthernetDhcpClientDhcpClientSendHostname struct {
 	Enable   basetypes.BoolValue   `tfsdk:"enable"`
 	Hostname basetypes.StringValue `tfsdk:"hostname"`
 }
 
-// AttrTypes defines the attribute types for the AggregateEthernetInterfaces model.
-func (o AggregateEthernetInterfaces) AttrTypes() map[string]attr.Type {
+// AggregateInterfacesLayer3IpInner represents a nested structure within the AggregateInterfaces model
+type AggregateInterfacesLayer3IpInner struct {
+	Name basetypes.StringValue `tfsdk:"name"`
+}
+
+// AttrTypes defines the attribute types for the AggregateInterfaces model.
+func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":          basetypes.StringType{},
 		"comment":       basetypes.StringType{},
@@ -117,7 +122,7 @@ func (o AggregateEthernetInterfaces) AttrTypes() map[string]attr.Type {
 						"transmission_rate": basetypes.StringType{},
 					},
 				},
-				"vlan_tag": basetypes.Int64Type{},
+				"vlan_tag": basetypes.StringType{},
 			},
 		},
 		"layer3": basetypes.ObjectType{
@@ -153,7 +158,11 @@ func (o AggregateEthernetInterfaces) AttrTypes() map[string]attr.Type {
 					},
 				},
 				"interface_management_profile": basetypes.StringType{},
-				"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
+				"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"name": basetypes.StringType{},
+					},
+				}},
 				"lacp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"enable":            basetypes.BoolType{},
@@ -172,15 +181,15 @@ func (o AggregateEthernetInterfaces) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of AggregateEthernetInterfaces objects.
-func (o AggregateEthernetInterfaces) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of AggregateInterfaces objects.
+func (o AggregateInterfaces) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer2 model.
-func (o AggregateEthernetInterfacesLayer2) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the AggregateInterfacesLayer2 model.
+func (o AggregateInterfacesLayer2) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"lacp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -192,12 +201,12 @@ func (o AggregateEthernetInterfacesLayer2) AttrTypes() map[string]attr.Type {
 				"transmission_rate": basetypes.StringType{},
 			},
 		},
-		"vlan_tag": basetypes.Int64Type{},
+		"vlan_tag": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer2 objects.
-func (o AggregateEthernetInterfacesLayer2) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of AggregateInterfacesLayer2 objects.
+func (o AggregateInterfacesLayer2) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -222,8 +231,8 @@ func (o Lacp) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3 model.
-func (o AggregateEthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the AggregateInterfacesLayer3 model.
+func (o AggregateInterfacesLayer3) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -256,7 +265,11 @@ func (o AggregateEthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 			},
 		},
 		"interface_management_profile": basetypes.StringType{},
-		"ip":                           basetypes.ListType{ElemType: basetypes.StringType{}},
+		"ip": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"name": basetypes.StringType{},
+			},
+		}},
 		"lacp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable":            basetypes.BoolType{},
@@ -271,8 +284,8 @@ func (o AggregateEthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3 objects.
-func (o AggregateEthernetInterfacesLayer3) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of AggregateInterfacesLayer3 objects.
+func (o AggregateInterfacesLayer3) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -293,8 +306,8 @@ func (o AggEthernetArpInner) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the AggregateEthernetInterfacesLayer3DdnsConfig model.
-func (o AggregateEthernetInterfacesLayer3DdnsConfig) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the AggregateInterfacesLayer3DdnsConfig model.
+func (o AggregateInterfacesLayer3DdnsConfig) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"ddns_cert_profile":    basetypes.StringType{},
 		"ddns_enabled":         basetypes.BoolType{},
@@ -306,8 +319,8 @@ func (o AggregateEthernetInterfacesLayer3DdnsConfig) AttrTypes() map[string]attr
 	}
 }
 
-// AttrType returns the attribute type for a list of AggregateEthernetInterfacesLayer3DdnsConfig objects.
-func (o AggregateEthernetInterfacesLayer3DdnsConfig) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of AggregateInterfacesLayer3DdnsConfig objects.
+func (o AggregateInterfacesLayer3DdnsConfig) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -350,9 +363,23 @@ func (o AggEthernetDhcpClientDhcpClientSendHostname) AttrType() attr.Type {
 	}
 }
 
-// AggregateEthernetInterfacesResourceSchema defines the schema for AggregateEthernetInterfaces resource
-var AggregateEthernetInterfacesResourceSchema = schema.Schema{
-	MarkdownDescription: "AggregateEthernetInterface resource",
+// AttrTypes defines the attribute types for the AggregateInterfacesLayer3IpInner model.
+func (o AggregateInterfacesLayer3IpInner) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"name": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AggregateInterfacesLayer3IpInner objects.
+func (o AggregateInterfacesLayer3IpInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AggregateInterfacesResourceSchema defines the schema for AggregateInterfaces resource
+var AggregateInterfacesResourceSchema = schema.Schema{
+	MarkdownDescription: "AggregateInterface resource",
 	Attributes: map[string]schema.Attribute{
 		"comment": schema.StringAttribute{
 			Validators: []validator.String{
@@ -467,11 +494,11 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 						},
 					},
 				},
-				"vlan_tag": schema.Int64Attribute{
-					Validators: []validator.Int64{
-						int64validator.Between(1, 4096),
+				"vlan_tag": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.RegexMatches(regexp.MustCompile("^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"), "pattern must match "+"^([1-9]\\d{0,2}|[1-3]\\d{3}|40[0-8]\\d|409[0-6])$"),
 					},
-					MarkdownDescription: "Assign interface to VLAN tag",
+					MarkdownDescription: "VLAN tag",
 					Optional:            true,
 					Computed:            true,
 				},
@@ -483,7 +510,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("layer2"),
 				),
 			},
-			MarkdownDescription: "Layer3",
+			MarkdownDescription: "Aggregate Interface Layer 3 configuration",
 			Optional:            true,
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
@@ -505,7 +532,7 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 					},
 				},
 				"ddns_config": schema.SingleNestedAttribute{
-					MarkdownDescription: "Dynamic DNS configuration specific to the Aggregate Ethernet Interface.",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Aggregate Interface.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -622,16 +649,23 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 					Optional:            true,
 					Computed:            true,
 				},
-				"ip": schema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "Interface IP addresses",
+				"ip": schema.ListNestedAttribute{
 					Validators: []validator.List{
 						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
 						),
 					},
-					Optional: true,
-					Computed: true,
+					MarkdownDescription: "Aggregate Interface IP addresses",
+					Optional:            true,
+					Computed:            true,
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "Aggregate Interface IP addresses name",
+								Required:            true,
+							},
+						},
+					},
 				},
 				"lacp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Lacp",
@@ -728,9 +762,9 @@ var AggregateEthernetInterfacesResourceSchema = schema.Schema{
 	},
 }
 
-// AggregateEthernetInterfacesDataSourceSchema defines the schema for AggregateEthernetInterfaces data source
-var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "AggregateEthernetInterface data source",
+// AggregateInterfacesDataSourceSchema defines the schema for AggregateInterfaces data source
+var AggregateInterfacesDataSourceSchema = dsschema.Schema{
+	MarkdownDescription: "AggregateInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"comment": dsschema.StringAttribute{
 			MarkdownDescription: "Aggregate interface description",
@@ -786,14 +820,14 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 						},
 					},
 				},
-				"vlan_tag": dsschema.Int64Attribute{
-					MarkdownDescription: "Assign interface to VLAN tag",
+				"vlan_tag": dsschema.StringAttribute{
+					MarkdownDescription: "VLAN tag",
 					Computed:            true,
 				},
 			},
 		},
 		"layer3": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Layer3",
+			MarkdownDescription: "Aggregate Interface Layer 3 configuration",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
@@ -813,7 +847,7 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ddns_config": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dynamic DNS configuration specific to the Aggregate Ethernet Interface.",
+					MarkdownDescription: "Dynamic DNS configuration specific to the Aggregate Interface.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"ddns_cert_profile": dsschema.StringAttribute{
@@ -882,10 +916,17 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Interface management profile",
 					Computed:            true,
 				},
-				"ip": dsschema.ListAttribute{
-					ElementType:         types.StringType,
-					MarkdownDescription: "Interface IP addresses",
+				"ip": dsschema.ListNestedAttribute{
+					MarkdownDescription: "Aggregate Interface IP addresses",
 					Computed:            true,
+					NestedObject: dsschema.NestedAttributeObject{
+						Attributes: map[string]dsschema.Attribute{
+							"name": dsschema.StringAttribute{
+								MarkdownDescription: "Aggregate Interface IP addresses name",
+								Computed:            true,
+							},
+						},
+					},
 				},
 				"lacp": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "Lacp",
@@ -939,21 +980,21 @@ var AggregateEthernetInterfacesDataSourceSchema = dsschema.Schema{
 	},
 }
 
-// AggregateEthernetInterfacesListModel represents the data model for a list data source.
-type AggregateEthernetInterfacesListModel struct {
-	Tfid    types.String                  `tfsdk:"tfid"`
-	Data    []AggregateEthernetInterfaces `tfsdk:"data"`
-	Limit   types.Int64                   `tfsdk:"limit"`
-	Offset  types.Int64                   `tfsdk:"offset"`
-	Name    types.String                  `tfsdk:"name"`
-	Total   types.Int64                   `tfsdk:"total"`
-	Folder  types.String                  `tfsdk:"folder"`
-	Snippet types.String                  `tfsdk:"snippet"`
-	Device  types.String                  `tfsdk:"device"`
+// AggregateInterfacesListModel represents the data model for a list data source.
+type AggregateInterfacesListModel struct {
+	Tfid    types.String          `tfsdk:"tfid"`
+	Data    []AggregateInterfaces `tfsdk:"data"`
+	Limit   types.Int64           `tfsdk:"limit"`
+	Offset  types.Int64           `tfsdk:"offset"`
+	Name    types.String          `tfsdk:"name"`
+	Total   types.Int64           `tfsdk:"total"`
+	Folder  types.String          `tfsdk:"folder"`
+	Snippet types.String          `tfsdk:"snippet"`
+	Device  types.String          `tfsdk:"device"`
 }
 
-// AggregateEthernetInterfacesListDataSourceSchema defines the schema for a list data source.
-var AggregateEthernetInterfacesListDataSourceSchema = dsschema.Schema{
+// AggregateInterfacesListDataSourceSchema defines the schema for a list data source.
+var AggregateInterfacesListDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "Retrieves a listing of config items.",
 	Attributes: map[string]dsschema.Attribute{
 		"tfid": dsschema.StringAttribute{Description: "The Terraform ID.", Computed: true},
@@ -961,7 +1002,7 @@ var AggregateEthernetInterfacesListDataSourceSchema = dsschema.Schema{
 			Description: "The data.",
 			Computed:    true,
 			NestedObject: dsschema.NestedAttributeObject{
-				Attributes: AggregateEthernetInterfacesDataSourceSchema.Attributes,
+				Attributes: AggregateInterfacesDataSourceSchema.Attributes,
 			},
 		},
 		"limit":   dsschema.Int64Attribute{Description: "The max number of items to return. Default: 200.", Optional: true},

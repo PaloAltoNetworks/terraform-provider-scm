@@ -58,11 +58,22 @@ Read-Only:
 Read-Only:
 
 - `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--data--action--forward))
-- `no_pbf` (String) No pbf
 
 <a id="nestedatt--data--action--forward"></a>
 ### Nested Schema for `data.action.forward`
 
 Read-Only:
 
+- `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--data--action--forward--forward))
+- `no_pbf` (Attributes) No pbf (see [below for nested schema](#nestedatt--data--action--forward--no_pbf))
+
+<a id="nestedatt--data--action--forward--forward"></a>
+### Nested Schema for `data.action.forward.forward`
+
+Read-Only:
+
 - `target` (String) Target
+
+
+<a id="nestedatt--data--action--forward--no_pbf"></a>
+### Nested Schema for `data.action.forward.no_pbf`

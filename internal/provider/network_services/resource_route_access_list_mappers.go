@@ -595,10 +595,17 @@ func unpackRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressToSdk(ctx con
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Address", "value": *sdk.Address})
 	}
 
-	// Handling Primitives
-	if !model.Wildcard.IsNull() && !model.Wildcard.IsUnknown() {
-		sdk.Wildcard = model.Wildcard.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	// Handling Objects
+	if !model.Entry.IsNull() && !model.Entry.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Entry")
+		unpacked, d := unpackRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryToSdk(ctx, model.Entry)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Entry"})
+		}
+		if unpacked != nil {
+			sdk.Entry = unpacked
+		}
 	}
 
 	diags.Append(d...)
@@ -622,13 +629,18 @@ func packRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressFromSdk(ctx con
 	} else {
 		model.Address = basetypes.NewStringNull()
 	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.Wildcard != nil {
-		model.Wildcard = basetypes.NewStringValue(*sdk.Wildcard)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Entry != nil {
+		tflog.Debug(ctx, "Packing nested object for field Entry")
+		packed, d := packRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryFromSdk(ctx, *sdk.Entry)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Entry"})
+		}
+		model.Entry = packed
 	} else {
-		model.Wildcard = basetypes.NewStringNull()
+		model.Entry = basetypes.NewObjectNull(models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -686,6 +698,117 @@ func packRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressListFromSdk(ctx
 	return basetypes.NewListValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddress{}.AttrType(), data)
 }
 
+// --- Unpacker for RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry ---
+func unpackRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryToSdk(ctx context.Context, obj types.Object) (*network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Address.IsNull() && !model.Address.IsUnknown() {
+		sdk.Address = model.Address.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Address", "value": *sdk.Address})
+	}
+
+	// Handling Primitives
+	if !model.Wildcard.IsNull() && !model.Wildcard.IsUnknown() {
+		sdk.Wildcard = model.Wildcard.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry ---
+func packRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryFromSdk(ctx context.Context, sdk network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Address != nil {
+		model.Address = basetypes.NewStringValue(*sdk.Address)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Address", "value": *sdk.Address})
+	} else {
+		model.Address = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Wildcard != nil {
+		model.Wildcard = basetypes.NewStringValue(*sdk.Wildcard)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	} else {
+		model.Wildcard = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry ---
+func unpackRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryListToSdk(ctx context.Context, list types.List) ([]network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry")
+	diags := diag.Diagnostics{}
+	var data []models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry{}.AttrTypes(), &item)
+		unpacked, d := unpackRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry ---
+func packRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryListFromSdk(ctx context.Context, sdks []network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry")
+	diags := diag.Diagnostics{}
+	var data []models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry
+		obj, d := packRouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntryFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerDestinationAddressEntry{}.AttrType(), data)
+}
+
 // --- Unpacker for RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress ---
 func unpackRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressToSdk(ctx context.Context, obj types.Object) (*network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress", map[string]interface{}{"tf_object": obj})
@@ -706,10 +829,17 @@ func unpackRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressToSdk(ctx context.
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Address", "value": *sdk.Address})
 	}
 
-	// Handling Primitives
-	if !model.Wildcard.IsNull() && !model.Wildcard.IsUnknown() {
-		sdk.Wildcard = model.Wildcard.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	// Handling Objects
+	if !model.Entry.IsNull() && !model.Entry.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Entry")
+		unpacked, d := unpackRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryToSdk(ctx, model.Entry)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Entry"})
+		}
+		if unpacked != nil {
+			sdk.Entry = unpacked
+		}
 	}
 
 	diags.Append(d...)
@@ -733,13 +863,18 @@ func packRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressFromSdk(ctx context.
 	} else {
 		model.Address = basetypes.NewStringNull()
 	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.Wildcard != nil {
-		model.Wildcard = basetypes.NewStringValue(*sdk.Wildcard)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Entry != nil {
+		tflog.Debug(ctx, "Packing nested object for field Entry")
+		packed, d := packRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryFromSdk(ctx, *sdk.Entry)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Entry"})
+		}
+		model.Entry = packed
 	} else {
-		model.Wildcard = basetypes.NewStringNull()
+		model.Entry = basetypes.NewObjectNull(models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -795,4 +930,115 @@ func packRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressListFromSdk(ctx cont
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddress{}.AttrType(), data)
+}
+
+// --- Unpacker for RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry ---
+func unpackRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryToSdk(ctx context.Context, obj types.Object) (*network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Address.IsNull() && !model.Address.IsUnknown() {
+		sdk.Address = model.Address.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Address", "value": *sdk.Address})
+	}
+
+	// Handling Primitives
+	if !model.Wildcard.IsNull() && !model.Wildcard.IsUnknown() {
+		sdk.Wildcard = model.Wildcard.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry ---
+func packRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryFromSdk(ctx context.Context, sdk network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Address != nil {
+		model.Address = basetypes.NewStringValue(*sdk.Address)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Address", "value": *sdk.Address})
+	} else {
+		model.Address = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Wildcard != nil {
+		model.Wildcard = basetypes.NewStringValue(*sdk.Wildcard)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Wildcard", "value": *sdk.Wildcard})
+	} else {
+		model.Wildcard = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry ---
+func unpackRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryListToSdk(ctx context.Context, list types.List) ([]network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry")
+	diags := diag.Diagnostics{}
+	var data []models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry{}.AttrTypes(), &item)
+		unpacked, d := unpackRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry ---
+func packRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryListFromSdk(ctx context.Context, sdks []network_services.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry")
+	diags := diag.Diagnostics{}
+	var data []models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry
+		obj, d := packRouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntryFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.RouteAccessListsTypeIpv4Ipv4EntryInnerSourceAddressEntry{}.AttrType(), data)
 }

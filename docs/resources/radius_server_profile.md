@@ -21,7 +21,7 @@ resource "scm_radius_server_profile" "chap_radius_profile" {
   timeout = 60
 
   protocol = {
-    c_h_a_p = {}
+    chap = {}
   }
 
   # Server list
@@ -43,7 +43,7 @@ resource "scm_radius_server_profile" "pap_radius_profile" {
   timeout = 60
 
   protocol = {
-    p_a_p = {}
+    pap = {}
   }
 
   # Server list

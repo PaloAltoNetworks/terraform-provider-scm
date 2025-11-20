@@ -57,14 +57,20 @@ Optional:
 Read-Only:
 
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `device_acl` (Attributes) Device acl (see [below for nested schema](#nestedatt--data--device_acl))
 - `dos_log_setting` (String) Dos log setting
 - `dos_profile` (String) Dos profile
 - `enable_device_identification` (Boolean) Enable device identification
 - `enable_user_identification` (Boolean) Enable user identification
 - `folder` (String) Folder
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `network` (Attributes) Network (see [below for nested schema](#nestedatt--data--network))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `user_acl` (Attributes) User acl (see [below for nested schema](#nestedatt--data--user_acl))
 

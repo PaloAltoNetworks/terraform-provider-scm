@@ -26,10 +26,20 @@ DhcpInterface data source
 ### Read-Only
 
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-- `relay` (Attributes) Relay (see [below for nested schema](#nestedatt--relay))
-- `server` (Attributes) Server (see [below for nested schema](#nestedatt--server))
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `relay` (Attributes) Relay
+
+> ℹ️ **Note:** You must specify exactly one of `relay` and `server`. (see [below for nested schema](#nestedatt--relay))
+- `server` (Attributes) Server
+
+> ℹ️ **Note:** You must specify exactly one of `relay` and `server`. (see [below for nested schema](#nestedatt--server))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--relay"></a>
@@ -101,7 +111,11 @@ Read-Only:
 Read-Only:
 
 - `timeout` (Number) DHCP lease timeout (minutes)
-- `unlimited` (Attributes) Unlimited (see [below for nested schema](#nestedatt--server--option--lease--unlimited))
+
+> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.
+- `unlimited` (Attributes) Unlimited
+
+> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`. (see [below for nested schema](#nestedatt--server--option--lease--unlimited))
 
 <a id="nestedatt--server--option--lease--unlimited"></a>
 ### Nested Schema for `server.option.lease.unlimited`

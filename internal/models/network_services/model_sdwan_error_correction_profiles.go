@@ -153,7 +153,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -168,7 +168,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -191,7 +191,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("packet_duplication"),
 						),
 					},
-					MarkdownDescription: "Forward error correction",
+					MarkdownDescription: "Forward error correction\n\n> ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"ratio": schema.StringAttribute{
@@ -210,7 +210,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("forward_error_correction"),
 						),
 					},
-					MarkdownDescription: "Packet duplication",
+					MarkdownDescription: "Packet duplication\n\n> ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"recovery_duration_pd": schema.Int64Attribute{
@@ -234,7 +234,7 @@ var SdwanErrorCorrectionProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -259,11 +259,11 @@ var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -275,7 +275,7 @@ var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"forward_error_correction": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Forward error correction",
+					MarkdownDescription: "Forward error correction\n\n> ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"ratio": dsschema.StringAttribute{
@@ -289,7 +289,7 @@ var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"packet_duplication": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Packet duplication",
+					MarkdownDescription: "Packet duplication\n\n> ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"recovery_duration_pd": dsschema.Int64Attribute{
@@ -306,7 +306,7 @@ var SdwanErrorCorrectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

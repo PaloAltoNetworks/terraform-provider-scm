@@ -128,7 +128,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 			},
-			MarkdownDescription: "Device",
+			MarkdownDescription: "Device\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -147,7 +147,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 			},
-			MarkdownDescription: "Folder",
+			MarkdownDescription: "Folder\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -231,7 +231,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("folder"),
 				),
 			},
-			MarkdownDescription: "Snippet",
+			MarkdownDescription: "Snippet\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -311,7 +311,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "Device",
+			MarkdownDescription: "Device\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"disabled": dsschema.BoolAttribute{
@@ -319,7 +319,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "Folder",
+			MarkdownDescription: "Folder\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"from": dsschema.ListAttribute{
@@ -375,7 +375,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "Snippet",
+			MarkdownDescription: "Snippet\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"source": dsschema.ListAttribute{

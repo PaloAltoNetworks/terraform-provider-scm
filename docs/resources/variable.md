@@ -148,9 +148,15 @@ resource "scm_variable" "scm_variable_zone" {
 
 - `description` (String) The description of the variable
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `overridden` (Boolean) Is the variable overridden?
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 

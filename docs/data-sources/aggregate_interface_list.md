@@ -59,10 +59,20 @@ Read-Only:
 - `comment` (String) Aggregate interface description
 - `default_value` (String) Default interface assignment
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-- `layer2` (Attributes) Layer2 (see [below for nested schema](#nestedatt--data--layer2))
-- `layer3` (Attributes) Aggregate Interface Layer 3 configuration (see [below for nested schema](#nestedatt--data--layer3))
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `layer2` (Attributes) Layer2
+
+> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`. (see [below for nested schema](#nestedatt--data--layer2))
+- `layer3` (Attributes) Aggregate Interface Layer 3 configuration
+
+> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`. (see [below for nested schema](#nestedatt--data--layer3))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--layer2"></a>
@@ -94,9 +104,13 @@ Read-Only:
 
 - `arp` (Attributes List) Aggregate Ethernet ARP configuration (see [below for nested schema](#nestedatt--data--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Aggregate Interface. (see [below for nested schema](#nestedatt--data--layer3--ddns_config))
-- `dhcp_client` (Attributes) Aggregate Ethernet DHCP Client Object (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
+- `dhcp_client` (Attributes) Aggregate Ethernet DHCP Client Object
+
+> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
-- `ip` (Attributes List) Aggregate Interface IP addresses (see [below for nested schema](#nestedatt--data--layer3--ip))
+- `ip` (Attributes List) Aggregate Interface IP addresses
+
+> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--layer3--ip))
 - `lacp` (Attributes) Lacp (see [below for nested schema](#nestedatt--data--layer3--lacp))
 - `mtu` (Number) MTU
 

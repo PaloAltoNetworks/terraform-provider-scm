@@ -74,8 +74,12 @@ Read-Only:
 
 - `authentication` (Attributes) Authentication (see [below for nested schema](#nestedatt--data--authentication))
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `local_address` (Attributes) Local address (see [below for nested schema](#nestedatt--data--local_address))
 - `local_id` (Attributes) Local id (see [below for nested schema](#nestedatt--data--local_id))
 - `peer_address` (Attributes) Peer address (see [below for nested schema](#nestedatt--data--peer_address))
@@ -83,6 +87,8 @@ Read-Only:
 - `protocol` (Attributes) Protocol (see [below for nested schema](#nestedatt--data--protocol))
 - `protocol_common` (Attributes) Protocol common (see [below for nested schema](#nestedatt--data--protocol_common))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--authentication"></a>
@@ -90,8 +96,12 @@ Read-Only:
 
 Read-Only:
 
-- `certificate` (Attributes) Certificate (see [below for nested schema](#nestedatt--data--authentication--certificate))
-- `pre_shared_key` (Attributes) Pre shared key (see [below for nested schema](#nestedatt--data--authentication--pre_shared_key))
+- `certificate` (Attributes) Certificate
+
+> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`. (see [below for nested schema](#nestedatt--data--authentication--certificate))
+- `pre_shared_key` (Attributes) Pre shared key
+
+> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`. (see [below for nested schema](#nestedatt--data--authentication--pre_shared_key))
 
 <a id="nestedatt--data--authentication--certificate"></a>
 ### Nested Schema for `data.authentication.certificate`
@@ -144,9 +154,15 @@ Read-Only:
 
 Read-Only:
 
-- `dynamic` (Attributes) Dynamic (see [below for nested schema](#nestedatt--data--peer_address--dynamic))
+- `dynamic` (Attributes) Dynamic
+
+> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`. (see [below for nested schema](#nestedatt--data--peer_address--dynamic))
 - `fqdn` (String) peer gateway FQDN name
+
+> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.
 - `ip` (String) peer gateway has static IP address
+
+> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.
 
 <a id="nestedatt--data--peer_address--dynamic"></a>
 ### Nested Schema for `data.peer_address.dynamic`

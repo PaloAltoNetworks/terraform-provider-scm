@@ -88,6 +88,12 @@ type AuthenticationProfilesMethodSamlIdp struct {
 	ServerProfile             basetypes.StringValue `tfsdk:"server_profile"`
 }
 
+// AuthenticationProfilesMethodTacplus represents a nested structure within the AuthenticationProfiles model
+type AuthenticationProfilesMethodTacplus struct {
+	Checkgroup    basetypes.BoolValue   `tfsdk:"checkgroup"`
+	ServerProfile basetypes.StringValue `tfsdk:"server_profile"`
+}
+
 // AuthenticationProfilesMultiFactorAuth represents a nested structure within the AuthenticationProfiles model
 type AuthenticationProfilesMultiFactorAuth struct {
 	Factors   basetypes.ListValue `tfsdk:"factors"`
@@ -337,6 +343,21 @@ func (o AuthenticationProfilesMethodSamlIdp) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the AuthenticationProfilesMethodTacplus model.
+func (o AuthenticationProfilesMethodTacplus) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"checkgroup":     basetypes.BoolType{},
+		"server_profile": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AuthenticationProfilesMethodTacplus objects.
+func (o AuthenticationProfilesMethodTacplus) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the AuthenticationProfilesMultiFactorAuth model.
 func (o AuthenticationProfilesMultiFactorAuth) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -373,7 +394,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 	Attributes: map[string]schema.Attribute{
 		"allow_list": schema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Allow list",
+			MarkdownDescription: "The allow_list of the authentication profile",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -386,7 +407,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -401,7 +422,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -415,27 +436,27 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 			},
 		},
 		"lockout": schema.SingleNestedAttribute{
-			MarkdownDescription: "Lockout",
+			MarkdownDescription: "Lockout object of the authentication profile",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"failed_attempts": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.Between(0, 10),
 					},
-					MarkdownDescription: "Failed attempts",
+					MarkdownDescription: "Lockout object - failed_attempts of authentication profile",
 					Optional:            true,
 				},
 				"lockout_time": schema.Int64Attribute{
 					Validators: []validator.Int64{
 						int64validator.Between(0, 60),
 					},
-					MarkdownDescription: "Lockout time",
+					MarkdownDescription: "Lockout object - lockout-time of authentication profile",
 					Optional:            true,
 				},
 			},
 		},
 		"method": schema.SingleNestedAttribute{
-			MarkdownDescription: "Method",
+			MarkdownDescription: "method object of authentication profile",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"cloud": schema.SingleNestedAttribute{
@@ -449,7 +470,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Cloud",
+					MarkdownDescription: "Cloud\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"profile_name": schema.StringAttribute{
@@ -469,15 +490,15 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Kerberos",
+					MarkdownDescription: "Kerberos\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"realm": schema.StringAttribute{
-							MarkdownDescription: "Realm",
+							MarkdownDescription: "method kerberos object realm of authentication profile",
 							Optional:            true,
 						},
 						"server_profile": schema.StringAttribute{
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method kerberos object server profile of authentication profile",
 							Optional:            true,
 						},
 					},
@@ -493,7 +514,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Ldap",
+					MarkdownDescription: "Ldap\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"login_attribute": schema.StringAttribute{
@@ -521,7 +542,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Local database",
+					MarkdownDescription: "Local database\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -536,15 +557,15 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Radius",
+					MarkdownDescription: "Radius\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"checkgroup": schema.BoolAttribute{
-							MarkdownDescription: "Checkgroup",
+							MarkdownDescription: "method radius object check group of authentication profile",
 							Optional:            true,
 						},
 						"server_profile": schema.StringAttribute{
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method radius object server profile of authentication profile",
 							Optional:            true,
 						},
 					},
@@ -560,7 +581,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Saml idp",
+					MarkdownDescription: "Saml idp\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"attribute_name_usergroup": schema.StringAttribute{
@@ -583,7 +604,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(31),
 							},
-							MarkdownDescription: "Certificate profile",
+							MarkdownDescription: "method object saml idp certificate profile of authentication profile",
 							Optional:            true,
 						},
 						"enable_single_logout": schema.BoolAttribute{
@@ -601,7 +622,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(63),
 							},
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method object saml idp server profile of authentication profile",
 							Optional:            true,
 						},
 					},
@@ -617,15 +638,15 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("saml_idp"),
 						),
 					},
-					MarkdownDescription: "Tacplus",
+					MarkdownDescription: "Tacplus\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"checkgroup": schema.BoolAttribute{
-							MarkdownDescription: "Checkgroup",
+							MarkdownDescription: "method tacplus object check group of authentication profile",
 							Optional:            true,
 						},
 						"server_profile": schema.StringAttribute{
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method tacplus object check group of authentication profile",
 							Optional:            true,
 						},
 					},
@@ -680,7 +701,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -716,15 +737,15 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 	Attributes: map[string]dsschema.Attribute{
 		"allow_list": dsschema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Allow list",
+			MarkdownDescription: "The allow_list of the authentication profile",
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -732,25 +753,25 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"lockout": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Lockout",
+			MarkdownDescription: "Lockout object of the authentication profile",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"failed_attempts": dsschema.Int64Attribute{
-					MarkdownDescription: "Failed attempts",
+					MarkdownDescription: "Lockout object - failed_attempts of authentication profile",
 					Computed:            true,
 				},
 				"lockout_time": dsschema.Int64Attribute{
-					MarkdownDescription: "Lockout time",
+					MarkdownDescription: "Lockout object - lockout-time of authentication profile",
 					Computed:            true,
 				},
 			},
 		},
 		"method": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Method",
+			MarkdownDescription: "method object of authentication profile",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"cloud": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Cloud",
+					MarkdownDescription: "Cloud\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"profile_name": dsschema.StringAttribute{
@@ -760,21 +781,21 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"kerberos": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Kerberos",
+					MarkdownDescription: "Kerberos\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"realm": dsschema.StringAttribute{
-							MarkdownDescription: "Realm",
+							MarkdownDescription: "method kerberos object realm of authentication profile",
 							Computed:            true,
 						},
 						"server_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method kerberos object server profile of authentication profile",
 							Computed:            true,
 						},
 					},
 				},
 				"ldap": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ldap",
+					MarkdownDescription: "Ldap\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"login_attribute": dsschema.StringAttribute{
@@ -792,26 +813,26 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"local_database": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Local database",
+					MarkdownDescription: "Local database\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"radius": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Radius",
+					MarkdownDescription: "Radius\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"checkgroup": dsschema.BoolAttribute{
-							MarkdownDescription: "Checkgroup",
+							MarkdownDescription: "method radius object check group of authentication profile",
 							Computed:            true,
 						},
 						"server_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method radius object server profile of authentication profile",
 							Computed:            true,
 						},
 					},
 				},
 				"saml_idp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Saml idp",
+					MarkdownDescription: "Saml idp\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"attribute_name_usergroup": dsschema.StringAttribute{
@@ -823,7 +844,7 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"certificate_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Certificate profile",
+							MarkdownDescription: "method object saml idp certificate profile of authentication profile",
 							Computed:            true,
 						},
 						"enable_single_logout": dsschema.BoolAttribute{
@@ -835,21 +856,21 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"server_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method object saml idp server profile of authentication profile",
 							Computed:            true,
 						},
 					},
 				},
 				"tacplus": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Tacplus",
+					MarkdownDescription: "Tacplus\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"checkgroup": dsschema.BoolAttribute{
-							MarkdownDescription: "Checkgroup",
+							MarkdownDescription: "method tacplus object check group of authentication profile",
 							Computed:            true,
 						},
 						"server_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Server profile",
+							MarkdownDescription: "method tacplus object check group of authentication profile",
 							Computed:            true,
 						},
 					},
@@ -891,7 +912,7 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

@@ -155,8 +155,12 @@ resource "scm_authentication_rule" "rule_after_anchor" {
 - `description` (String) The description of the authentication rule
 - `destination_hip` (List of String) The destination Host Integrity Profile (HIP)
 - `device` (String) Device
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Is the authentication rule disabled?
 - `folder` (String) Folder
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `group_tag` (String) Group tag
 - `hip_profiles` (List of String) The source Host Integrity Profile (HIP)
 - `log_authentication_timeout` (Boolean) Log authentication timeouts?
@@ -166,6 +170,8 @@ resource "scm_authentication_rule" "rule_after_anchor" {
 - `position` (String) The relative position of the rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) Snippet
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source_hip` (List of String) The source Host Integrity Profile (HIP)
 - `source_user` (List of String) The source users
 - `tag` (List of String) The authentication rule tags

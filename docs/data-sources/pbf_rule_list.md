@@ -69,12 +69,18 @@ Read-Only:
 - `description` (String) Description
 - `destination` (List of String) Destination addresses
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `enforce_symmetric_return` (Attributes) Enforce symmetric return (see [below for nested schema](#nestedatt--data--enforce_symmetric_return))
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (Attributes) From (see [below for nested schema](#nestedatt--data--from))
 - `schedule` (String) Schedule
 - `service` (List of String) Services
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) Source addresses
 - `source_user` (List of String) Source users
 - `tag` (List of String) Tags
@@ -85,9 +91,15 @@ Read-Only:
 
 Read-Only:
 
-- `discard` (Attributes) Discard (see [below for nested schema](#nestedatt--data--action--discard))
-- `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--data--action--forward))
-- `no_pbf` (Attributes) No pbf (see [below for nested schema](#nestedatt--data--action--no_pbf))
+- `discard` (Attributes) Discard
+
+> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--data--action--discard))
+- `forward` (Attributes) Forward
+
+> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--data--action--forward))
+- `no_pbf` (Attributes) No pbf
+
+> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--data--action--no_pbf))
 
 <a id="nestedatt--data--action--discard"></a>
 ### Nested Schema for `data.action.discard`
@@ -118,7 +130,11 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) Next hop FQDN
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) Next hop IP address
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -150,4 +166,8 @@ Read-Only:
 Read-Only:
 
 - `interface` (List of String) Source interfaces
+
+> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.
 - `zone` (List of String) Source zones
+
+> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.

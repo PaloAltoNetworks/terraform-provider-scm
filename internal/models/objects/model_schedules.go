@@ -182,7 +182,7 @@ var SchedulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -197,7 +197,7 @@ var SchedulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -224,7 +224,7 @@ var SchedulesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"non_recurring": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Non recurring",
+					MarkdownDescription: "Non recurring\n\n> ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`.",
 					Validators: []validator.List{
 						listvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("recurring"),
@@ -239,12 +239,12 @@ var SchedulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("non_recurring"),
 						),
 					},
-					MarkdownDescription: "Recurring",
+					MarkdownDescription: "Recurring\n\n> ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"daily": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Daily",
+							MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`.",
 							Validators: []validator.List{
 								listvalidator.ConflictsWith(
 									path.MatchRelative().AtParent().AtName("weekly"),
@@ -259,7 +259,7 @@ var SchedulesResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("daily"),
 								),
 							},
-							MarkdownDescription: "Weekly",
+							MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`.",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
 								"friday": schema.ListAttribute{
@@ -333,7 +333,7 @@ var SchedulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -354,11 +354,11 @@ var SchedulesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "Schedule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -376,20 +376,20 @@ var SchedulesDataSourceSchema = dsschema.Schema{
 			Attributes: map[string]dsschema.Attribute{
 				"non_recurring": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Non recurring",
+					MarkdownDescription: "Non recurring\n\n> ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`.",
 					Computed:            true,
 				},
 				"recurring": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Recurring",
+					MarkdownDescription: "Recurring\n\n> ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"daily": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Daily",
+							MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`.",
 							Computed:            true,
 						},
 						"weekly": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Weekly",
+							MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`.",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"friday": dsschema.ListAttribute{
@@ -434,7 +434,7 @@ var SchedulesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

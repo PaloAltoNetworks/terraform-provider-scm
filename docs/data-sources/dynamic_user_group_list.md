@@ -81,8 +81,14 @@ Read-Only:
 
 - `description` (String) The description of the dynamic address group
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `filter` (String) The tag-based filter for the dynamic user group
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag` (List of String) Tags associated with the dynamic user group
 - `tfid` (String) The Terraform ID.

@@ -536,7 +536,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -551,7 +551,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -574,7 +574,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("server"),
 				),
 			},
-			MarkdownDescription: "Relay",
+			MarkdownDescription: "Relay\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip": schema.SingleNestedAttribute{
@@ -600,7 +600,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("relay"),
 				),
 			},
-			MarkdownDescription: "Server",
+			MarkdownDescription: "Server\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip_pool": schema.ListAttribute{
@@ -662,7 +662,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 										),
 										int64validator.Between(0, 1000000),
 									},
-									MarkdownDescription: "DHCP lease timeout (minutes)",
+									MarkdownDescription: "DHCP lease timeout (minutes)\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
 									Optional:            true,
 								},
 								"unlimited": schema.SingleNestedAttribute{
@@ -671,7 +671,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("timeout"),
 										),
 									},
-									MarkdownDescription: "Unlimited",
+									MarkdownDescription: "Unlimited\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -806,7 +806,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -827,11 +827,11 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "DhcpInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -844,7 +844,7 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"relay": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Relay",
+			MarkdownDescription: "Relay\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip": dsschema.SingleNestedAttribute{
@@ -865,7 +865,7 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"server": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Server",
+			MarkdownDescription: "Server\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip_pool": dsschema.ListAttribute{
@@ -918,11 +918,11 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"timeout": dsschema.Int64Attribute{
-									MarkdownDescription: "DHCP lease timeout (minutes)",
+									MarkdownDescription: "DHCP lease timeout (minutes)\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
 									Computed:            true,
 								},
 								"unlimited": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Unlimited",
+									MarkdownDescription: "Unlimited\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1046,7 +1046,7 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

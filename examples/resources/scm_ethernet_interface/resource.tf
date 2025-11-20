@@ -1,4 +1,15 @@
 #
+# Creates various resources used for subsequent examples
+#
+
+resource "scm_aggregate_interface" "scm_ae_intf" {
+  name    = "$scm_ae_intf"
+  comment = "Managed by Terraform"
+  folder  = "ngfw-shared"
+  layer2  = {}
+}
+
+#
 # Creates a layer 2 ethernet interface without vlan configuration
 #
 
@@ -115,4 +126,34 @@ resource "scm_ethernet_interface" "scm_l3_intf_complex" {
     ]
     mtu = 1500
   }
+}
+
+#
+# Creates an ethernet interface assigned to an AggregateEthernet Interface
+#
+
+resource "scm_ethernet_interface" "scm_ae_member_1" {
+  name            = "$scm_ae_member_1"
+  comment         = "Managed by Terraform"
+  folder          = "ngfw-shared"
+  aggregate_group = "$scm_ae_intf"
+  link_speed      = "auto"
+  link_duplex     = "full"
+  link_state      = "auto"
+  depends_on      = [scm_aggregate_interface.scm_ae_intf]
+}
+
+#
+# Creates an ethernet interface assigned to an AggregateEthernet Interface
+#
+
+resource "scm_ethernet_interface" "scm_ae_member_2" {
+  name            = "$scm_ae_member_2"
+  comment         = "Managed by Terraform"
+  folder          = "ngfw-shared"
+  aggregate_group = "$scm_ae_intf"
+  link_speed      = "auto"
+  link_duplex     = "full"
+  link_state      = "auto"
+  depends_on      = [scm_aggregate_interface.scm_ae_intf]
 }

@@ -27,9 +27,15 @@ SdwanErrorCorrectionProfile data source
 
 - `activation_threshold` (Number) Activation threshold
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `mode` (Attributes) Mode (see [below for nested schema](#nestedatt--mode))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--mode"></a>
@@ -37,8 +43,12 @@ SdwanErrorCorrectionProfile data source
 
 Read-Only:
 
-- `forward_error_correction` (Attributes) Forward error correction (see [below for nested schema](#nestedatt--mode--forward_error_correction))
-- `packet_duplication` (Attributes) Packet duplication (see [below for nested schema](#nestedatt--mode--packet_duplication))
+- `forward_error_correction` (Attributes) Forward error correction
+
+> ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`. (see [below for nested schema](#nestedatt--mode--forward_error_correction))
+- `packet_duplication` (Attributes) Packet duplication
+
+> ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`. (see [below for nested schema](#nestedatt--mode--packet_duplication))
 
 <a id="nestedatt--mode--forward_error_correction"></a>
 ### Nested Schema for `mode.forward_error_correction`

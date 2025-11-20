@@ -45,9 +45,15 @@ Read-Only:
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ipv4))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--ipv4"></a>
@@ -71,8 +77,12 @@ Read-Only:
 
 Read-Only:
 
-- `entry` (Attributes) Entry (see [below for nested schema](#nestedatt--data--ipv4--ipv4_entry--prefix--entry))
+- `entry` (Attributes) Entry
+
+> ℹ️ **Note:** You must specify exactly one of `entry` and `network`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4_entry--prefix--entry))
 - `network` (String) Network
+
+> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.
 
 <a id="nestedatt--data--ipv4--ipv4_entry--prefix--entry"></a>
 ### Nested Schema for `data.ipv4.ipv4_entry.prefix.entry`

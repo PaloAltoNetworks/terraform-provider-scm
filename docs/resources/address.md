@@ -95,12 +95,26 @@ resource "scm_address" "scm_address_5" {
 
 - `description` (String) The description of the address object
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `fqdn` (String) Fully qualified domain name
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.
 - `ip_netmask` (String) IP address with or without CIDR notation
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.
 - `ip_range` (String) Ip range
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.
 - `ip_wildcard` (String) IP wildcard mask
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag` (List of String) Tags assocaited with the address object
 
 ### Read-Only

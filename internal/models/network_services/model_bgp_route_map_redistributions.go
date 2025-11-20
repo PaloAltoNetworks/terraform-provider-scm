@@ -2953,7 +2953,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ospf"),
 				),
 			},
-			MarkdownDescription: "Bgp",
+			MarkdownDescription: "Bgp\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ospf": schema.SingleNestedAttribute{
@@ -2962,7 +2962,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Ospf",
+					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3145,7 +3145,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ospf"),
 						),
 					},
-					MarkdownDescription: "BGP Root RIB",
+					MarkdownDescription: "BGP Root RIB\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3301,7 +3301,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ospf"),
 				),
 			},
-			MarkdownDescription: "Connected static",
+			MarkdownDescription: "Connected static\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
@@ -3311,7 +3311,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Connected Static Root BGP",
+					MarkdownDescription: "Connected Static Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3508,7 +3508,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Ospf",
+					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3637,7 +3637,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ospf"),
 						),
 					},
-					MarkdownDescription: "Rib",
+					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3744,7 +3744,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -3759,7 +3759,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -3783,7 +3783,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("connected_static"),
 				),
 			},
-			MarkdownDescription: "Ospf",
+			MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
@@ -3792,7 +3792,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "OSPF Root BGP",
+					MarkdownDescription: "OSPF Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3989,7 +3989,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("bgp"),
 						),
 					},
-					MarkdownDescription: "Rib",
+					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -4093,7 +4093,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -4114,11 +4114,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "BgpRouteMapRedistribution data source",
 	Attributes: map[string]dsschema.Attribute{
 		"bgp": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Bgp",
+			MarkdownDescription: "Bgp\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ospf": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ospf",
+					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4266,7 +4266,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rib": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "BGP Root RIB",
+					MarkdownDescription: "BGP Root RIB\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4398,11 +4398,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"connected_static": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Connected static",
+			MarkdownDescription: "Connected static\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"bgp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Connected Static Root BGP",
+					MarkdownDescription: "Connected Static Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4563,7 +4563,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ospf": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ospf",
+					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4665,7 +4665,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rib": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Rib",
+					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4755,11 +4755,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -4772,11 +4772,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ospf": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ospf",
+			MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"bgp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "OSPF Root BGP",
+					MarkdownDescription: "OSPF Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4935,7 +4935,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rib": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Rib",
+					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -5019,7 +5019,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

@@ -23,8 +23,14 @@ RouteCommunityList resource
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `type` (Attributes) Type (see [below for nested schema](#nestedatt--type))
 
 ### Read-Only
@@ -37,9 +43,15 @@ RouteCommunityList resource
 
 Optional:
 
-- `extended` (Attributes) Extended (see [below for nested schema](#nestedatt--type--extended))
-- `large` (Attributes) Large (see [below for nested schema](#nestedatt--type--large))
-- `regular` (Attributes) Regular (see [below for nested schema](#nestedatt--type--regular))
+- `extended` (Attributes) Extended
+
+> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`. (see [below for nested schema](#nestedatt--type--extended))
+- `large` (Attributes) Large
+
+> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`. (see [below for nested schema](#nestedatt--type--large))
+- `regular` (Attributes) Regular
+
+> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`. (see [below for nested schema](#nestedatt--type--regular))
 
 <a id="nestedatt--type--extended"></a>
 ### Nested Schema for `type.extended`

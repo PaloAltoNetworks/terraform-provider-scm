@@ -255,7 +255,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 		},
 		"log_type": schema.StringAttribute{
 			MarkdownDescription: "Log type",
-			Required:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			Validators: []validator.String{

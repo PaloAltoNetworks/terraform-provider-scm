@@ -2,7 +2,6 @@ package provider
 
 import (
 	"context"
-	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -218,15 +217,28 @@ func unpackBgpFilteringProfilesIpv4ToSdk(ctx context.Context, obj types.Object) 
 	var sdk network_services.BgpFilteringProfilesIpv4
 	var d diag.Diagnostics
 	// Handling Objects
-	if !model.Ipv4.IsNull() && !model.Ipv4.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field Ipv4")
-		unpacked, d := unpackBgpFilteringProfilesIpv4Ipv4ToSdk(ctx, model.Ipv4)
+	if !model.Multicast.IsNull() && !model.Multicast.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Multicast")
+		unpacked, d := unpackBgpFilteringProfilesIpv4MulticastToSdk(ctx, model.Multicast)
 		diags.Append(d...)
 		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Ipv4"})
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Multicast"})
 		}
 		if unpacked != nil {
-			sdk.Ipv4 = *unpacked
+			sdk.Multicast = unpacked
+		}
+	}
+
+	// Handling Objects
+	if !model.Unicast.IsNull() && !model.Unicast.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Unicast")
+		unpacked, d := unpackBgpFilterToSdk(ctx, model.Unicast)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Unicast"})
+		}
+		if unpacked != nil {
+			sdk.Unicast = unpacked
 		}
 	}
 
@@ -245,14 +257,29 @@ func packBgpFilteringProfilesIpv4FromSdk(ctx context.Context, sdk network_servic
 	var d diag.Diagnostics
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
-	// Logic for non-pointer / value-type nested objects
-	if !reflect.ValueOf(sdk.Ipv4).IsZero() {
-		tflog.Debug(ctx, "Packing nested object for field Ipv4")
-		packed, d := packBgpFilteringProfilesIpv4Ipv4FromSdk(ctx, sdk.Ipv4)
+	if sdk.Multicast != nil {
+		tflog.Debug(ctx, "Packing nested object for field Multicast")
+		packed, d := packBgpFilteringProfilesIpv4MulticastFromSdk(ctx, *sdk.Multicast)
 		diags.Append(d...)
-		model.Ipv4 = packed
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Multicast"})
+		}
+		model.Multicast = packed
 	} else {
-		model.Ipv4 = basetypes.NewObjectNull(models.BgpFilteringProfilesIpv4Ipv4{}.AttrTypes())
+		model.Multicast = basetypes.NewObjectNull(models.BgpFilteringProfilesIpv4Multicast{}.AttrTypes())
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Unicast != nil {
+		tflog.Debug(ctx, "Packing nested object for field Unicast")
+		packed, d := packBgpFilterFromSdk(ctx, *sdk.Unicast)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Unicast"})
+		}
+		model.Unicast = packed
+	} else {
+		model.Unicast = basetypes.NewObjectNull(models.BgpFilter{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -310,11 +337,11 @@ func packBgpFilteringProfilesIpv4ListFromSdk(ctx context.Context, sdks []network
 	return basetypes.NewListValueFrom(ctx, models.BgpFilteringProfilesIpv4{}.AttrType(), data)
 }
 
-// --- Unpacker for BgpFilteringProfilesIpv4Ipv4 ---
-func unpackBgpFilteringProfilesIpv4Ipv4ToSdk(ctx context.Context, obj types.Object) (*network_services.BgpFilteringProfilesIpv4Ipv4, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.BgpFilteringProfilesIpv4Ipv4", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for BgpFilteringProfilesIpv4Multicast ---
+func unpackBgpFilteringProfilesIpv4MulticastToSdk(ctx context.Context, obj types.Object) (*network_services.BgpFilteringProfilesIpv4Multicast, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.BgpFilteringProfilesIpv4Multicast", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.BgpFilteringProfilesIpv4Ipv4
+	var model models.BgpFilteringProfilesIpv4Multicast
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -322,142 +349,7 @@ func unpackBgpFilteringProfilesIpv4Ipv4ToSdk(ctx context.Context, obj types.Obje
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.BgpFilteringProfilesIpv4Ipv4
-	var d diag.Diagnostics
-	// Handling Objects
-	if !model.Multicast.IsNull() && !model.Multicast.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field Multicast")
-		unpacked, d := unpackBgpFilteringProfilesIpv4Ipv4MulticastToSdk(ctx, model.Multicast)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Multicast"})
-		}
-		if unpacked != nil {
-			sdk.Multicast = unpacked
-		}
-	}
-
-	// Handling Objects
-	if !model.Unicast.IsNull() && !model.Unicast.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field Unicast")
-		unpacked, d := unpackBgpFilterToSdk(ctx, model.Unicast)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Unicast"})
-		}
-		if unpacked != nil {
-			sdk.Unicast = unpacked
-		}
-	}
-
-	diags.Append(d...)
-
-	tflog.Debug(ctx, "Exiting unpack helper for models.BgpFilteringProfilesIpv4Ipv4", map[string]interface{}{"has_errors": diags.HasError()})
-	return &sdk, diags
-
-}
-
-// --- Packer for BgpFilteringProfilesIpv4Ipv4 ---
-func packBgpFilteringProfilesIpv4Ipv4FromSdk(ctx context.Context, sdk network_services.BgpFilteringProfilesIpv4Ipv4) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.BgpFilteringProfilesIpv4Ipv4", map[string]interface{}{"sdk_struct": sdk})
-	diags := diag.Diagnostics{}
-	var model models.BgpFilteringProfilesIpv4Ipv4
-	var d diag.Diagnostics
-	// Handling Objects
-	// This is a regular nested object that has its own packer.
-	if sdk.Multicast != nil {
-		tflog.Debug(ctx, "Packing nested object for field Multicast")
-		packed, d := packBgpFilteringProfilesIpv4Ipv4MulticastFromSdk(ctx, *sdk.Multicast)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Multicast"})
-		}
-		model.Multicast = packed
-	} else {
-		model.Multicast = basetypes.NewObjectNull(models.BgpFilteringProfilesIpv4Ipv4Multicast{}.AttrTypes())
-	}
-	// Handling Objects
-	// This is a regular nested object that has its own packer.
-	if sdk.Unicast != nil {
-		tflog.Debug(ctx, "Packing nested object for field Unicast")
-		packed, d := packBgpFilterFromSdk(ctx, *sdk.Unicast)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Unicast"})
-		}
-		model.Unicast = packed
-	} else {
-		model.Unicast = basetypes.NewObjectNull(models.BgpFilter{}.AttrTypes())
-	}
-	diags.Append(d...)
-
-	obj, d := types.ObjectValueFrom(ctx, models.BgpFilteringProfilesIpv4Ipv4{}.AttrTypes(), &model)
-	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
-	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.BgpFilteringProfilesIpv4Ipv4", map[string]interface{}{"has_errors": diags.HasError()})
-	return obj, diags
-
-}
-
-// --- List Unpacker for BgpFilteringProfilesIpv4Ipv4 ---
-func unpackBgpFilteringProfilesIpv4Ipv4ListToSdk(ctx context.Context, list types.List) ([]network_services.BgpFilteringProfilesIpv4Ipv4, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.BgpFilteringProfilesIpv4Ipv4")
-	diags := diag.Diagnostics{}
-	var data []models.BgpFilteringProfilesIpv4Ipv4
-	diags.Append(list.ElementsAs(ctx, &data, false)...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-
-	ans := make([]network_services.BgpFilteringProfilesIpv4Ipv4, 0, len(data))
-	for i, item := range data {
-		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.BgpFilteringProfilesIpv4Ipv4{}.AttrTypes(), &item)
-		unpacked, d := unpackBgpFilteringProfilesIpv4Ipv4ToSdk(ctx, obj)
-		diags.Append(d...)
-		if unpacked != nil {
-			ans = append(ans, *unpacked)
-		}
-	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpFilteringProfilesIpv4Ipv4", map[string]interface{}{"has_errors": diags.HasError()})
-	return ans, diags
-}
-
-// --- List Packer for BgpFilteringProfilesIpv4Ipv4 ---
-func packBgpFilteringProfilesIpv4Ipv4ListFromSdk(ctx context.Context, sdks []network_services.BgpFilteringProfilesIpv4Ipv4) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.BgpFilteringProfilesIpv4Ipv4")
-	diags := diag.Diagnostics{}
-	var data []models.BgpFilteringProfilesIpv4Ipv4
-
-	for i, sdk := range sdks {
-		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.BgpFilteringProfilesIpv4Ipv4
-		obj, d := packBgpFilteringProfilesIpv4Ipv4FromSdk(ctx, sdk)
-		diags.Append(d...)
-		if diags.HasError() {
-			return basetypes.NewListNull(models.BgpFilteringProfilesIpv4Ipv4{}.AttrType()), diags
-		}
-		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-		data = append(data, model)
-	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.BgpFilteringProfilesIpv4Ipv4", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.BgpFilteringProfilesIpv4Ipv4{}.AttrType(), data)
-}
-
-// --- Unpacker for BgpFilteringProfilesIpv4Ipv4Multicast ---
-func unpackBgpFilteringProfilesIpv4Ipv4MulticastToSdk(ctx context.Context, obj types.Object) (*network_services.BgpFilteringProfilesIpv4Ipv4Multicast, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast", map[string]interface{}{"tf_object": obj})
-	diags := diag.Diagnostics{}
-	var model models.BgpFilteringProfilesIpv4Ipv4Multicast
-	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
-
-	var sdk network_services.BgpFilteringProfilesIpv4Ipv4Multicast
+	var sdk network_services.BgpFilteringProfilesIpv4Multicast
 	var d diag.Diagnostics
 	// Handling Objects
 	if !model.ConditionalAdvertisement.IsNull() && !model.ConditionalAdvertisement.IsUnknown() {
@@ -538,16 +430,16 @@ func unpackBgpFilteringProfilesIpv4Ipv4MulticastToSdk(ctx context.Context, obj t
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.BgpFilteringProfilesIpv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for BgpFilteringProfilesIpv4Ipv4Multicast ---
-func packBgpFilteringProfilesIpv4Ipv4MulticastFromSdk(ctx context.Context, sdk network_services.BgpFilteringProfilesIpv4Ipv4Multicast) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for BgpFilteringProfilesIpv4Multicast ---
+func packBgpFilteringProfilesIpv4MulticastFromSdk(ctx context.Context, sdk network_services.BgpFilteringProfilesIpv4Multicast) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.BgpFilteringProfilesIpv4Multicast", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.BgpFilteringProfilesIpv4Ipv4Multicast
+	var model models.BgpFilteringProfilesIpv4Multicast
 	var d diag.Diagnostics
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -632,58 +524,58 @@ func packBgpFilteringProfilesIpv4Ipv4MulticastFromSdk(ctx context.Context, sdk n
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.BgpFilteringProfilesIpv4Ipv4Multicast{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.BgpFilteringProfilesIpv4Multicast{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.BgpFilteringProfilesIpv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for BgpFilteringProfilesIpv4Ipv4Multicast ---
-func unpackBgpFilteringProfilesIpv4Ipv4MulticastListToSdk(ctx context.Context, list types.List) ([]network_services.BgpFilteringProfilesIpv4Ipv4Multicast, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast")
+// --- List Unpacker for BgpFilteringProfilesIpv4Multicast ---
+func unpackBgpFilteringProfilesIpv4MulticastListToSdk(ctx context.Context, list types.List) ([]network_services.BgpFilteringProfilesIpv4Multicast, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.BgpFilteringProfilesIpv4Multicast")
 	diags := diag.Diagnostics{}
-	var data []models.BgpFilteringProfilesIpv4Ipv4Multicast
+	var data []models.BgpFilteringProfilesIpv4Multicast
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.BgpFilteringProfilesIpv4Ipv4Multicast, 0, len(data))
+	ans := make([]network_services.BgpFilteringProfilesIpv4Multicast, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.BgpFilteringProfilesIpv4Ipv4Multicast{}.AttrTypes(), &item)
-		unpacked, d := unpackBgpFilteringProfilesIpv4Ipv4MulticastToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.BgpFilteringProfilesIpv4Multicast{}.AttrTypes(), &item)
+		unpacked, d := unpackBgpFilteringProfilesIpv4MulticastToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.BgpFilteringProfilesIpv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for BgpFilteringProfilesIpv4Ipv4Multicast ---
-func packBgpFilteringProfilesIpv4Ipv4MulticastListFromSdk(ctx context.Context, sdks []network_services.BgpFilteringProfilesIpv4Ipv4Multicast) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast")
+// --- List Packer for BgpFilteringProfilesIpv4Multicast ---
+func packBgpFilteringProfilesIpv4MulticastListFromSdk(ctx context.Context, sdks []network_services.BgpFilteringProfilesIpv4Multicast) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.BgpFilteringProfilesIpv4Multicast")
 	diags := diag.Diagnostics{}
-	var data []models.BgpFilteringProfilesIpv4Ipv4Multicast
+	var data []models.BgpFilteringProfilesIpv4Multicast
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.BgpFilteringProfilesIpv4Ipv4Multicast
-		obj, d := packBgpFilteringProfilesIpv4Ipv4MulticastFromSdk(ctx, sdk)
+		var model models.BgpFilteringProfilesIpv4Multicast
+		obj, d := packBgpFilteringProfilesIpv4MulticastFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.BgpFilteringProfilesIpv4Ipv4Multicast{}.AttrType()), diags
+			return basetypes.NewListNull(models.BgpFilteringProfilesIpv4Multicast{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.BgpFilteringProfilesIpv4Ipv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.BgpFilteringProfilesIpv4Ipv4Multicast{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.BgpFilteringProfilesIpv4Multicast", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.BgpFilteringProfilesIpv4Multicast{}.AttrType(), data)
 }
 
 // --- Unpacker for BgpFilterConditionalAdvertisement ---

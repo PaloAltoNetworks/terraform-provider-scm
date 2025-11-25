@@ -13,34 +13,8 @@ AuthenticationRule data source
 ## Example Usage
 
 ```terraform
-resource "scm_authentication_rule" "rule_to_fetch" {
-  name        = "rule-to-be-queried-scm-105"
-  description = "This rule is created purely to test the data source functionality."
-  position    = "pre" # Default rulebase is 'pre'
-  folder      = "All"
-
-  # Core fields (REQUIRED by the API)
-  destination = ["any"]
-  from        = ["any"]
-  to          = ["any"]
-  source      = ["any"]
-  service     = ["service-http", "service-https"]
-
-  # Identity and Enforcement
-  source_user = ["any"]
-
-  # Optional fields
-  timeout            = 1200
-  negate_source      = false
-  negate_destination = false
-}
-
 data "scm_authentication_rule" "rule_data" {
-  # To look up the rule by name, you must provide both the 'name' and the 'folder'.
-  # The 'folder' is necessary as it's part of the API scope for listing/fetching rules.
-
-  id = scm_authentication_rule.rule_to_fetch.id
-
+  id = "1f1e08af-fe7b-4c36-882a-411101ad36d7"
 }
 
 output "fetched_rule_id" {
@@ -48,9 +22,9 @@ output "fetched_rule_id" {
   value       = data.scm_authentication_rule.rule_data.id
 }
 
-output "fetched_rule_timeout" {
+output "fetched_rule_data" {
   description = "The timeout value for the fetched authentication rule."
-  value       = data.scm_authentication_rule.rule_data.timeout
+  value       = data.scm_authentication_rule.rule_data
 }
 ```
 

@@ -13,13 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	setup "github.com/paloaltonetworks/scm-go"
 
-	"github.com/paloaltonetworks/scm-go/generated/config_setup"
-	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
-	"github.com/paloaltonetworks/scm-go/generated/identity_services"
-	"github.com/paloaltonetworks/scm-go/generated/network_services"
-	"github.com/paloaltonetworks/scm-go/generated/objects"
-	"github.com/paloaltonetworks/scm-go/generated/security_services"
-
 	tfProviderConfig_setup "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_setup"
 	tfProviderDeployment_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
 	tfProviderIdentity_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/identity_services"
@@ -191,101 +184,17 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 	// Create a client container with all service-specific clients
 	// Create clients map
 	clients := map[string]interface{}{
-		"config_setup":        p.getConfig_setupAPIClient(setupClient),
-		"deployment_services": p.getDeployment_servicesAPIClient(setupClient),
-		"identity_services":   p.getIdentity_servicesAPIClient(setupClient),
-		"network_services":    p.getNetwork_servicesAPIClient(setupClient),
-		"objects":             p.getObjectsAPIClient(setupClient),
-		"security_services":   p.getSecurity_servicesAPIClient(setupClient),
+		"config_setup":        setup.GetConfig_setupAPIClient(setupClient),
+		"deployment_services": setup.GetDeployment_servicesAPIClient(setupClient),
+		"identity_services":   setup.GetIdentity_servicesAPIClient(setupClient),
+		"network_services":    setup.GetNetwork_servicesAPIClient(setupClient),
+		"objects":             setup.GetObjectsAPIClient(setupClient),
+		"security_services":   setup.GetSecurity_servicesAPIClient(setupClient),
 	}
 
 	resp.DataSourceData = clients
 	resp.ResourceData = clients
 	tflog.Info(ctx, "Configured client", map[string]any{"success": true})
-}
-
-func (p *ScmProvider) getConfig_setupAPIClient(setupClient *setup.Client) *config_setup.APIClient {
-	// Create the config_setup API client
-	config_setupConfig := config_setup.NewConfiguration()
-	config_setupConfig.Host = setupClient.GetHost()
-	config_setupConfig.Scheme = "https"
-	config_setupConfig.HTTPClient = setupClient.HttpClient
-	// Set up the default header with JWT
-	config_setupConfig.DefaultHeader = make(map[string]string)
-	config_setupConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
-	config_setupConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
-	config_setupApiClient := config_setup.NewAPIClient(config_setupConfig)
-	return config_setupApiClient
-}
-
-func (p *ScmProvider) getDeployment_servicesAPIClient(setupClient *setup.Client) *deployment_services.APIClient {
-	// Create the deployment_services API client
-	deployment_servicesConfig := deployment_services.NewConfiguration()
-	deployment_servicesConfig.Host = setupClient.GetHost()
-	deployment_servicesConfig.Scheme = "https"
-	deployment_servicesConfig.HTTPClient = setupClient.HttpClient
-	// Set up the default header with JWT
-	deployment_servicesConfig.DefaultHeader = make(map[string]string)
-	deployment_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
-	deployment_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
-	deployment_servicesApiClient := deployment_services.NewAPIClient(deployment_servicesConfig)
-	return deployment_servicesApiClient
-}
-
-func (p *ScmProvider) getIdentity_servicesAPIClient(setupClient *setup.Client) *identity_services.APIClient {
-	// Create the identity_services API client
-	identity_servicesConfig := identity_services.NewConfiguration()
-	identity_servicesConfig.Host = setupClient.GetHost()
-	identity_servicesConfig.Scheme = "https"
-	identity_servicesConfig.HTTPClient = setupClient.HttpClient
-	// Set up the default header with JWT
-	identity_servicesConfig.DefaultHeader = make(map[string]string)
-	identity_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
-	identity_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
-	identity_servicesApiClient := identity_services.NewAPIClient(identity_servicesConfig)
-	return identity_servicesApiClient
-}
-
-func (p *ScmProvider) getNetwork_servicesAPIClient(setupClient *setup.Client) *network_services.APIClient {
-	// Create the network_services API client
-	network_servicesConfig := network_services.NewConfiguration()
-	network_servicesConfig.Host = setupClient.GetHost()
-	network_servicesConfig.Scheme = "https"
-	network_servicesConfig.HTTPClient = setupClient.HttpClient
-	// Set up the default header with JWT
-	network_servicesConfig.DefaultHeader = make(map[string]string)
-	network_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
-	network_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
-	network_servicesApiClient := network_services.NewAPIClient(network_servicesConfig)
-	return network_servicesApiClient
-}
-
-func (p *ScmProvider) getObjectsAPIClient(setupClient *setup.Client) *objects.APIClient {
-	// Create the objects API client
-	objectsConfig := objects.NewConfiguration()
-	objectsConfig.Host = setupClient.GetHost()
-	objectsConfig.Scheme = "https"
-	objectsConfig.HTTPClient = setupClient.HttpClient
-	// Set up the default header with JWT
-	objectsConfig.DefaultHeader = make(map[string]string)
-	objectsConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
-	objectsConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
-	objectsApiClient := objects.NewAPIClient(objectsConfig)
-	return objectsApiClient
-}
-
-func (p *ScmProvider) getSecurity_servicesAPIClient(setupClient *setup.Client) *security_services.APIClient {
-	// Create the security_services API client
-	security_servicesConfig := security_services.NewConfiguration()
-	security_servicesConfig.Host = setupClient.GetHost()
-	security_servicesConfig.Scheme = "https"
-	security_servicesConfig.HTTPClient = setupClient.HttpClient
-	// Set up the default header with JWT
-	security_servicesConfig.DefaultHeader = make(map[string]string)
-	security_servicesConfig.DefaultHeader["Authorization"] = "Bearer " + setupClient.Jwt
-	security_servicesConfig.DefaultHeader["x-auth-jwt"] = setupClient.Jwt
-	security_servicesApiClient := security_services.NewAPIClient(security_servicesConfig)
-	return security_servicesApiClient
 }
 
 // DataSources defines the data sources for this provider.

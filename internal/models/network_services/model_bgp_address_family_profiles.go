@@ -33,11 +33,6 @@ type BgpAddressFamilyProfiles struct {
 
 // BgpAddressFamilyProfilesIpv4 represents a nested structure within the BgpAddressFamilyProfiles model
 type BgpAddressFamilyProfilesIpv4 struct {
-	Ipv4 basetypes.ObjectValue `tfsdk:"ipv4"`
-}
-
-// BgpAddressFamilyProfilesIpv4Ipv4 represents a nested structure within the BgpAddressFamilyProfiles model
-type BgpAddressFamilyProfilesIpv4Ipv4 struct {
 	Multicast basetypes.ObjectValue `tfsdk:"multicast"`
 	Unicast   basetypes.ObjectValue `tfsdk:"unicast"`
 }
@@ -122,201 +117,6 @@ func (o BgpAddressFamilyProfiles) AttrTypes() map[string]attr.Type {
 		"device": basetypes.StringType{},
 		"folder": basetypes.StringType{},
 		"id":     basetypes.StringType{},
-		"ipv4": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"ipv4": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"multicast": basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{
-								"add_path": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"tx_all_paths":       basetypes.BoolType{},
-										"tx_bestpath_per_as": basetypes.BoolType{},
-									},
-								},
-								"allowas_in": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"occurrence": basetypes.Int64Type{},
-										"origin": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"as_override":           basetypes.BoolType{},
-								"default_originate":     basetypes.BoolType{},
-								"default_originate_map": basetypes.StringType{},
-								"enable":                basetypes.BoolType{},
-								"maximum_prefix": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"action": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{
-												"restart": basetypes.ObjectType{
-													AttrTypes: map[string]attr.Type{
-														"interval": basetypes.Int64Type{},
-													},
-												},
-												"warning_only": basetypes.ObjectType{
-													AttrTypes: map[string]attr.Type{},
-												},
-											},
-										},
-										"num_prefixes": basetypes.Int64Type{},
-										"threshold":    basetypes.Int64Type{},
-									},
-								},
-								"next_hop": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"self": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"self_force": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"orf": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"orf_prefix_list": basetypes.StringType{},
-									},
-								},
-								"remove_private_as": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"all": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"replace_as": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"route_reflector_client": basetypes.BoolType{},
-								"send_community": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"all": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"both": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"extended": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"large": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"standard": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"soft_reconfig_with_stored_info": basetypes.BoolType{},
-							},
-						},
-						"unicast": basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{
-								"add_path": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"tx_all_paths":       basetypes.BoolType{},
-										"tx_bestpath_per_as": basetypes.BoolType{},
-									},
-								},
-								"allowas_in": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"occurrence": basetypes.Int64Type{},
-										"origin": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"as_override":           basetypes.BoolType{},
-								"default_originate":     basetypes.BoolType{},
-								"default_originate_map": basetypes.StringType{},
-								"enable":                basetypes.BoolType{},
-								"maximum_prefix": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"action": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{
-												"restart": basetypes.ObjectType{
-													AttrTypes: map[string]attr.Type{
-														"interval": basetypes.Int64Type{},
-													},
-												},
-												"warning_only": basetypes.ObjectType{
-													AttrTypes: map[string]attr.Type{},
-												},
-											},
-										},
-										"num_prefixes": basetypes.Int64Type{},
-										"threshold":    basetypes.Int64Type{},
-									},
-								},
-								"next_hop": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"self": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"self_force": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"orf": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"orf_prefix_list": basetypes.StringType{},
-									},
-								},
-								"remove_private_as": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"all": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"replace_as": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"route_reflector_client": basetypes.BoolType{},
-								"send_community": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"all": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"both": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"extended": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"large": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-										"standard": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{},
-										},
-									},
-								},
-								"soft_reconfig_with_stored_info": basetypes.BoolType{},
-							},
-						},
-					},
-				},
-			},
-		},
-		"name":    basetypes.StringType{},
-		"snippet": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of BgpAddressFamilyProfiles objects.
-func (o BgpAddressFamilyProfiles) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the BgpAddressFamilyProfilesIpv4 model.
-func (o BgpAddressFamilyProfilesIpv4) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
 		"ipv4": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"multicast": basetypes.ObjectType{
@@ -493,18 +293,20 @@ func (o BgpAddressFamilyProfilesIpv4) AttrTypes() map[string]attr.Type {
 				},
 			},
 		},
+		"name":    basetypes.StringType{},
+		"snippet": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of BgpAddressFamilyProfilesIpv4 objects.
-func (o BgpAddressFamilyProfilesIpv4) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of BgpAddressFamilyProfiles objects.
+func (o BgpAddressFamilyProfiles) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the BgpAddressFamilyProfilesIpv4Ipv4 model.
-func (o BgpAddressFamilyProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the BgpAddressFamilyProfilesIpv4 model.
+func (o BgpAddressFamilyProfilesIpv4) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"multicast": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -681,8 +483,8 @@ func (o BgpAddressFamilyProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of BgpAddressFamilyProfilesIpv4Ipv4 objects.
-func (o BgpAddressFamilyProfilesIpv4Ipv4) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of BgpAddressFamilyProfilesIpv4 objects.
+func (o BgpAddressFamilyProfilesIpv4) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -999,512 +801,506 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 			},
 		},
 		"ipv4": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ipv4",
+			MarkdownDescription: "IPv4 Address Family",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
-				"ipv4": schema.SingleNestedAttribute{
-					MarkdownDescription: "Ipv4",
-					Required:            true,
+				"multicast": schema.SingleNestedAttribute{
+					MarkdownDescription: "Multicast",
+					Optional:            true,
 					Attributes: map[string]schema.Attribute{
-						"multicast": schema.SingleNestedAttribute{
-							MarkdownDescription: "Multicast",
+						"add_path": schema.SingleNestedAttribute{
+							MarkdownDescription: "Add path",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
-								"add_path": schema.SingleNestedAttribute{
-									MarkdownDescription: "Add path",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"tx_all_paths": schema.BoolAttribute{
-											MarkdownDescription: "Advertise all paths to peer?",
-											Optional:            true,
-										},
-										"tx_bestpath_per_as": schema.BoolAttribute{
-											MarkdownDescription: "Tx bestpath per a s",
-											Optional:            true,
-										},
-									},
-								},
-								"allowas_in": schema.SingleNestedAttribute{
-									MarkdownDescription: "Allowas in",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"occurrence": schema.Int64Attribute{
-											Validators: []validator.Int64{
-												int64validator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("origin"),
-												),
-												int64validator.Between(1, 10),
-											},
-											MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Optional:            true,
-										},
-										"origin": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("occurrence"),
-												),
-											},
-											MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-									},
-								},
-								"as_override": schema.BoolAttribute{
-									MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
+								"tx_all_paths": schema.BoolAttribute{
+									MarkdownDescription: "Advertise all paths to peer?",
 									Optional:            true,
 								},
-								"default_originate": schema.BoolAttribute{
-									MarkdownDescription: "Originate default route?",
-									Optional:            true,
-								},
-								"default_originate_map": schema.StringAttribute{
-									MarkdownDescription: "Default originate route map",
-									Optional:            true,
-								},
-								"enable": schema.BoolAttribute{
-									MarkdownDescription: "Enable?",
-									Optional:            true,
-								},
-								"maximum_prefix": schema.SingleNestedAttribute{
-									MarkdownDescription: "Maximum prefix",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"action": schema.SingleNestedAttribute{
-											MarkdownDescription: "Action",
-											Optional:            true,
-											Attributes: map[string]schema.Attribute{
-												"restart": schema.SingleNestedAttribute{
-													Validators: []validator.Object{
-														objectvalidator.ConflictsWith(
-															path.MatchRelative().AtParent().AtName("warning_only"),
-														),
-													},
-													MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
-													Optional:            true,
-													Attributes: map[string]schema.Attribute{
-														"interval": schema.Int64Attribute{
-															Validators: []validator.Int64{
-																int64validator.Between(1, 65535),
-															},
-															MarkdownDescription: "Restart interval",
-															Optional:            true,
-														},
-													},
-												},
-												"warning_only": schema.SingleNestedAttribute{
-													Validators: []validator.Object{
-														objectvalidator.ConflictsWith(
-															path.MatchRelative().AtParent().AtName("restart"),
-														),
-													},
-													MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
-													Optional:            true,
-													Attributes:          map[string]schema.Attribute{},
-												},
-											},
-										},
-										"num_prefixes": schema.Int64Attribute{
-											Validators: []validator.Int64{
-												int64validator.Between(1, 4294967295),
-											},
-											MarkdownDescription: "Maximum number of prefixes",
-											Optional:            true,
-										},
-										"threshold": schema.Int64Attribute{
-											Validators: []validator.Int64{
-												int64validator.Between(1, 100),
-											},
-											MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
-											Optional:            true,
-										},
-									},
-								},
-								"next_hop": schema.SingleNestedAttribute{
-									MarkdownDescription: "Next hop",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"self": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("self_force"),
-												),
-											},
-											MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"self_force": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("self"),
-												),
-											},
-											MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-									},
-								},
-								"orf": schema.SingleNestedAttribute{
-									MarkdownDescription: "Orf",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"orf_prefix_list": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.OneOf("none", "both", "receive", "send"),
-											},
-											MarkdownDescription: "ORF prefix list",
-											Optional:            true,
-										},
-									},
-								},
-								"remove_private_as": schema.SingleNestedAttribute{
-									MarkdownDescription: "Remove private a s",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"all": schema.SingleNestedAttribute{
-											MarkdownDescription: "All",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"replace_as": schema.SingleNestedAttribute{
-											MarkdownDescription: "Replace a s",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-									},
-								},
-								"route_reflector_client": schema.BoolAttribute{
-									MarkdownDescription: "Route reflector client?",
-									Optional:            true,
-								},
-								"send_community": schema.SingleNestedAttribute{
-									MarkdownDescription: "Send community",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"all": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("large"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"both": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("large"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"extended": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("large"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"large": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"standard": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("large"),
-												),
-											},
-											MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-									},
-								},
-								"soft_reconfig_with_stored_info": schema.BoolAttribute{
-									MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+								"tx_bestpath_per_as": schema.BoolAttribute{
+									MarkdownDescription: "Tx bestpath per a s",
 									Optional:            true,
 								},
 							},
 						},
-						"unicast": schema.SingleNestedAttribute{
-							MarkdownDescription: "Unicast",
+						"allowas_in": schema.SingleNestedAttribute{
+							MarkdownDescription: "Allowas in",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
-								"add_path": schema.SingleNestedAttribute{
-									MarkdownDescription: "Add path",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"tx_all_paths": schema.BoolAttribute{
-											MarkdownDescription: "Advertise all paths to peer?",
-											Optional:            true,
-										},
-										"tx_bestpath_per_as": schema.BoolAttribute{
-											MarkdownDescription: "Tx bestpath per a s",
-											Optional:            true,
-										},
+								"occurrence": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("origin"),
+										),
+										int64validator.Between(1, 10),
 									},
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Optional:            true,
 								},
-								"allowas_in": schema.SingleNestedAttribute{
-									MarkdownDescription: "Allowas in",
+								"origin": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("occurrence"),
+										),
+									},
+									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"as_override": schema.BoolAttribute{
+							MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
+							Optional:            true,
+						},
+						"default_originate": schema.BoolAttribute{
+							MarkdownDescription: "Originate default route?",
+							Optional:            true,
+						},
+						"default_originate_map": schema.StringAttribute{
+							MarkdownDescription: "Default originate route map",
+							Optional:            true,
+						},
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable?",
+							Optional:            true,
+						},
+						"maximum_prefix": schema.SingleNestedAttribute{
+							MarkdownDescription: "Maximum prefix",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"action": schema.SingleNestedAttribute{
+									MarkdownDescription: "Action",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
-										"occurrence": schema.Int64Attribute{
-											Validators: []validator.Int64{
-												int64validator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("origin"),
-												),
-												int64validator.Between(1, 10),
-											},
-											MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Optional:            true,
-										},
-										"origin": schema.SingleNestedAttribute{
+										"restart": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("occurrence"),
+													path.MatchRelative().AtParent().AtName("warning_only"),
 												),
 											},
-											MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-									},
-								},
-								"as_override": schema.BoolAttribute{
-									MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
-									Optional:            true,
-								},
-								"default_originate": schema.BoolAttribute{
-									MarkdownDescription: "Originate default route?",
-									Optional:            true,
-								},
-								"default_originate_map": schema.StringAttribute{
-									MarkdownDescription: "Default originate route map",
-									Optional:            true,
-								},
-								"enable": schema.BoolAttribute{
-									MarkdownDescription: "Enable?",
-									Optional:            true,
-								},
-								"maximum_prefix": schema.SingleNestedAttribute{
-									MarkdownDescription: "Maximum prefix",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"action": schema.SingleNestedAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
-												"restart": schema.SingleNestedAttribute{
-													Validators: []validator.Object{
-														objectvalidator.ConflictsWith(
-															path.MatchRelative().AtParent().AtName("warning_only"),
-														),
+												"interval": schema.Int64Attribute{
+													Validators: []validator.Int64{
+														int64validator.Between(1, 65535),
 													},
-													MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+													MarkdownDescription: "Restart interval",
 													Optional:            true,
-													Attributes: map[string]schema.Attribute{
-														"interval": schema.Int64Attribute{
-															Validators: []validator.Int64{
-																int64validator.Between(1, 65535),
-															},
-															MarkdownDescription: "Restart interval",
-															Optional:            true,
-														},
-													},
-												},
-												"warning_only": schema.SingleNestedAttribute{
-													Validators: []validator.Object{
-														objectvalidator.ConflictsWith(
-															path.MatchRelative().AtParent().AtName("restart"),
-														),
-													},
-													MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
-													Optional:            true,
-													Attributes:          map[string]schema.Attribute{},
 												},
 											},
 										},
-										"num_prefixes": schema.Int64Attribute{
-											Validators: []validator.Int64{
-												int64validator.Between(1, 4294967295),
-											},
-											MarkdownDescription: "Maximum number of prefixes",
-											Optional:            true,
-										},
-										"threshold": schema.Int64Attribute{
-											Validators: []validator.Int64{
-												int64validator.Between(1, 100),
-											},
-											MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
-											Optional:            true,
-										},
-									},
-								},
-								"next_hop": schema.SingleNestedAttribute{
-									MarkdownDescription: "Next hop",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"self": schema.SingleNestedAttribute{
+										"warning_only": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
 												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("self_force"),
+													path.MatchRelative().AtParent().AtName("restart"),
 												),
 											},
-											MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"self_force": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("self"),
-												),
-											},
-											MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
 									},
 								},
-								"orf": schema.SingleNestedAttribute{
-									MarkdownDescription: "Orf",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"orf_prefix_list": schema.StringAttribute{
-											Validators: []validator.String{
-												stringvalidator.OneOf("none", "both", "receive", "send"),
-											},
-											MarkdownDescription: "ORF prefix list",
-											Optional:            true,
-										},
+								"num_prefixes": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(1, 4294967295),
 									},
-								},
-								"remove_private_as": schema.SingleNestedAttribute{
-									MarkdownDescription: "Remove private a s",
+									MarkdownDescription: "Maximum number of prefixes",
 									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"all": schema.SingleNestedAttribute{
-											MarkdownDescription: "All",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"replace_as": schema.SingleNestedAttribute{
-											MarkdownDescription: "Replace a s",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
+								},
+								"threshold": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(1, 100),
 									},
-								},
-								"route_reflector_client": schema.BoolAttribute{
-									MarkdownDescription: "Route reflector client?",
-									Optional:            true,
-								},
-								"send_community": schema.SingleNestedAttribute{
-									MarkdownDescription: "Send community",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"all": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("large"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"both": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("large"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"extended": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("large"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"large": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("standard"),
-												),
-											},
-											MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-										"standard": schema.SingleNestedAttribute{
-											Validators: []validator.Object{
-												objectvalidator.ConflictsWith(
-													path.MatchRelative().AtParent().AtName("all"),
-													path.MatchRelative().AtParent().AtName("both"),
-													path.MatchRelative().AtParent().AtName("extended"),
-													path.MatchRelative().AtParent().AtName("large"),
-												),
-											},
-											MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Optional:            true,
-											Attributes:          map[string]schema.Attribute{},
-										},
-									},
-								},
-								"soft_reconfig_with_stored_info": schema.BoolAttribute{
-									MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+									MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
 									Optional:            true,
 								},
 							},
+						},
+						"next_hop": schema.SingleNestedAttribute{
+							MarkdownDescription: "Next hop",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"self": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("self_force"),
+										),
+									},
+									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"self_force": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("self"),
+										),
+									},
+									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"orf": schema.SingleNestedAttribute{
+							MarkdownDescription: "Orf",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"orf_prefix_list": schema.StringAttribute{
+									Validators: []validator.String{
+										stringvalidator.OneOf("none", "both", "receive", "send"),
+									},
+									MarkdownDescription: "ORF prefix list",
+									Optional:            true,
+								},
+							},
+						},
+						"remove_private_as": schema.SingleNestedAttribute{
+							MarkdownDescription: "Remove private a s",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"all": schema.SingleNestedAttribute{
+									MarkdownDescription: "All",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"replace_as": schema.SingleNestedAttribute{
+									MarkdownDescription: "Replace a s",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"route_reflector_client": schema.BoolAttribute{
+							MarkdownDescription: "Route reflector client?",
+							Optional:            true,
+						},
+						"send_community": schema.SingleNestedAttribute{
+							MarkdownDescription: "Send community",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"all": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("large"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"both": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("large"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"extended": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("large"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"large": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"standard": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("large"),
+										),
+									},
+									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"soft_reconfig_with_stored_info": schema.BoolAttribute{
+							MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+							Optional:            true,
+						},
+					},
+				},
+				"unicast": schema.SingleNestedAttribute{
+					MarkdownDescription: "Unicast",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"add_path": schema.SingleNestedAttribute{
+							MarkdownDescription: "Add path",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"tx_all_paths": schema.BoolAttribute{
+									MarkdownDescription: "Advertise all paths to peer?",
+									Optional:            true,
+								},
+								"tx_bestpath_per_as": schema.BoolAttribute{
+									MarkdownDescription: "Tx bestpath per a s",
+									Optional:            true,
+								},
+							},
+						},
+						"allowas_in": schema.SingleNestedAttribute{
+							MarkdownDescription: "Allowas in",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"occurrence": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("origin"),
+										),
+										int64validator.Between(1, 10),
+									},
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Optional:            true,
+								},
+								"origin": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("occurrence"),
+										),
+									},
+									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"as_override": schema.BoolAttribute{
+							MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
+							Optional:            true,
+						},
+						"default_originate": schema.BoolAttribute{
+							MarkdownDescription: "Originate default route?",
+							Optional:            true,
+						},
+						"default_originate_map": schema.StringAttribute{
+							MarkdownDescription: "Default originate route map",
+							Optional:            true,
+						},
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable?",
+							Optional:            true,
+						},
+						"maximum_prefix": schema.SingleNestedAttribute{
+							MarkdownDescription: "Maximum prefix",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"action": schema.SingleNestedAttribute{
+									MarkdownDescription: "Action",
+									Optional:            true,
+									Attributes: map[string]schema.Attribute{
+										"restart": schema.SingleNestedAttribute{
+											Validators: []validator.Object{
+												objectvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("warning_only"),
+												),
+											},
+											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											Optional:            true,
+											Attributes: map[string]schema.Attribute{
+												"interval": schema.Int64Attribute{
+													Validators: []validator.Int64{
+														int64validator.Between(1, 65535),
+													},
+													MarkdownDescription: "Restart interval",
+													Optional:            true,
+												},
+											},
+										},
+										"warning_only": schema.SingleNestedAttribute{
+											Validators: []validator.Object{
+												objectvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("restart"),
+												),
+											},
+											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											Optional:            true,
+											Attributes:          map[string]schema.Attribute{},
+										},
+									},
+								},
+								"num_prefixes": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(1, 4294967295),
+									},
+									MarkdownDescription: "Maximum number of prefixes",
+									Optional:            true,
+								},
+								"threshold": schema.Int64Attribute{
+									Validators: []validator.Int64{
+										int64validator.Between(1, 100),
+									},
+									MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
+									Optional:            true,
+								},
+							},
+						},
+						"next_hop": schema.SingleNestedAttribute{
+							MarkdownDescription: "Next hop",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"self": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("self_force"),
+										),
+									},
+									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"self_force": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("self"),
+										),
+									},
+									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"orf": schema.SingleNestedAttribute{
+							MarkdownDescription: "Orf",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"orf_prefix_list": schema.StringAttribute{
+									Validators: []validator.String{
+										stringvalidator.OneOf("none", "both", "receive", "send"),
+									},
+									MarkdownDescription: "ORF prefix list",
+									Optional:            true,
+								},
+							},
+						},
+						"remove_private_as": schema.SingleNestedAttribute{
+							MarkdownDescription: "Remove private a s",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"all": schema.SingleNestedAttribute{
+									MarkdownDescription: "All",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"replace_as": schema.SingleNestedAttribute{
+									MarkdownDescription: "Replace a s",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"route_reflector_client": schema.BoolAttribute{
+							MarkdownDescription: "Route reflector client?",
+							Optional:            true,
+						},
+						"send_community": schema.SingleNestedAttribute{
+							MarkdownDescription: "Send community",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"all": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("large"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"both": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("large"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"extended": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("large"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"large": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("standard"),
+										),
+									},
+									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+								"standard": schema.SingleNestedAttribute{
+									Validators: []validator.Object{
+										objectvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("all"),
+											path.MatchRelative().AtParent().AtName("both"),
+											path.MatchRelative().AtParent().AtName("extended"),
+											path.MatchRelative().AtParent().AtName("large"),
+										),
+									},
+									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Optional:            true,
+									Attributes:          map[string]schema.Attribute{},
+								},
+							},
+						},
+						"soft_reconfig_with_stored_info": schema.BoolAttribute{
+							MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+							Optional:            true,
 						},
 					},
 				},
@@ -1556,346 +1352,340 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"ipv4": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ipv4",
+			MarkdownDescription: "IPv4 Address Family",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"ipv4": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ipv4",
+				"multicast": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Multicast",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"multicast": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Multicast",
+						"add_path": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Add path",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
-								"add_path": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Add path",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"tx_all_paths": dsschema.BoolAttribute{
-											MarkdownDescription: "Advertise all paths to peer?",
-											Computed:            true,
-										},
-										"tx_bestpath_per_as": dsschema.BoolAttribute{
-											MarkdownDescription: "Tx bestpath per a s",
-											Computed:            true,
-										},
-									},
-								},
-								"allowas_in": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Allowas in",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"occurrence": dsschema.Int64Attribute{
-											MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Computed:            true,
-										},
-										"origin": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-									},
-								},
-								"as_override": dsschema.BoolAttribute{
-									MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
+								"tx_all_paths": dsschema.BoolAttribute{
+									MarkdownDescription: "Advertise all paths to peer?",
 									Computed:            true,
 								},
-								"default_originate": dsschema.BoolAttribute{
-									MarkdownDescription: "Originate default route?",
-									Computed:            true,
-								},
-								"default_originate_map": dsschema.StringAttribute{
-									MarkdownDescription: "Default originate route map",
-									Computed:            true,
-								},
-								"enable": dsschema.BoolAttribute{
-									MarkdownDescription: "Enable?",
-									Computed:            true,
-								},
-								"maximum_prefix": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Maximum prefix",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"action": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Action",
-											Computed:            true,
-											Attributes: map[string]dsschema.Attribute{
-												"restart": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
-													Computed:            true,
-													Attributes: map[string]dsschema.Attribute{
-														"interval": dsschema.Int64Attribute{
-															MarkdownDescription: "Restart interval",
-															Computed:            true,
-														},
-													},
-												},
-												"warning_only": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
-													Computed:            true,
-													Attributes:          map[string]dsschema.Attribute{},
-												},
-											},
-										},
-										"num_prefixes": dsschema.Int64Attribute{
-											MarkdownDescription: "Maximum number of prefixes",
-											Computed:            true,
-										},
-										"threshold": dsschema.Int64Attribute{
-											MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
-											Computed:            true,
-										},
-									},
-								},
-								"next_hop": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Next hop",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"self": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"self_force": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-									},
-								},
-								"orf": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Orf",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"orf_prefix_list": dsschema.StringAttribute{
-											MarkdownDescription: "ORF prefix list",
-											Computed:            true,
-										},
-									},
-								},
-								"remove_private_as": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Remove private a s",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"all": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "All",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"replace_as": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Replace a s",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-									},
-								},
-								"route_reflector_client": dsschema.BoolAttribute{
-									MarkdownDescription: "Route reflector client?",
-									Computed:            true,
-								},
-								"send_community": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Send community",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"all": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"both": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"extended": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"large": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"standard": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-									},
-								},
-								"soft_reconfig_with_stored_info": dsschema.BoolAttribute{
-									MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+								"tx_bestpath_per_as": dsschema.BoolAttribute{
+									MarkdownDescription: "Tx bestpath per a s",
 									Computed:            true,
 								},
 							},
 						},
-						"unicast": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Unicast",
+						"allowas_in": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Allowas in",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
-								"add_path": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Add path",
+								"occurrence": dsschema.Int64Attribute{
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Computed:            true,
+								},
+								"origin": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"as_override": dsschema.BoolAttribute{
+							MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
+							Computed:            true,
+						},
+						"default_originate": dsschema.BoolAttribute{
+							MarkdownDescription: "Originate default route?",
+							Computed:            true,
+						},
+						"default_originate_map": dsschema.StringAttribute{
+							MarkdownDescription: "Default originate route map",
+							Computed:            true,
+						},
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable?",
+							Computed:            true,
+						},
+						"maximum_prefix": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Maximum prefix",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"action": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Action",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
-										"tx_all_paths": dsschema.BoolAttribute{
-											MarkdownDescription: "Advertise all paths to peer?",
-											Computed:            true,
-										},
-										"tx_bestpath_per_as": dsschema.BoolAttribute{
-											MarkdownDescription: "Tx bestpath per a s",
-											Computed:            true,
-										},
-									},
-								},
-								"allowas_in": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Allowas in",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"occurrence": dsschema.Int64Attribute{
-											MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Computed:            true,
-										},
-										"origin": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-									},
-								},
-								"as_override": dsschema.BoolAttribute{
-									MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
-									Computed:            true,
-								},
-								"default_originate": dsschema.BoolAttribute{
-									MarkdownDescription: "Originate default route?",
-									Computed:            true,
-								},
-								"default_originate_map": dsschema.StringAttribute{
-									MarkdownDescription: "Default originate route map",
-									Computed:            true,
-								},
-								"enable": dsschema.BoolAttribute{
-									MarkdownDescription: "Enable?",
-									Computed:            true,
-								},
-								"maximum_prefix": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Maximum prefix",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"action": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Action",
+										"restart": dsschema.SingleNestedAttribute{
+											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
-												"restart": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+												"interval": dsschema.Int64Attribute{
+													MarkdownDescription: "Restart interval",
 													Computed:            true,
-													Attributes: map[string]dsschema.Attribute{
-														"interval": dsschema.Int64Attribute{
-															MarkdownDescription: "Restart interval",
-															Computed:            true,
-														},
-													},
-												},
-												"warning_only": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
-													Computed:            true,
-													Attributes:          map[string]dsschema.Attribute{},
 												},
 											},
 										},
-										"num_prefixes": dsschema.Int64Attribute{
-											MarkdownDescription: "Maximum number of prefixes",
-											Computed:            true,
-										},
-										"threshold": dsschema.Int64Attribute{
-											MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
-											Computed:            true,
-										},
-									},
-								},
-								"next_hop": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Next hop",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"self": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"self_force": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+										"warning_only": dsschema.SingleNestedAttribute{
+											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 									},
 								},
-								"orf": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Orf",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"orf_prefix_list": dsschema.StringAttribute{
-											MarkdownDescription: "ORF prefix list",
-											Computed:            true,
-										},
-									},
-								},
-								"remove_private_as": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Remove private a s",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"all": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "All",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"replace_as": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Replace a s",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-									},
-								},
-								"route_reflector_client": dsschema.BoolAttribute{
-									MarkdownDescription: "Route reflector client?",
+								"num_prefixes": dsschema.Int64Attribute{
+									MarkdownDescription: "Maximum number of prefixes",
 									Computed:            true,
 								},
-								"send_community": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Send community",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"all": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"both": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"extended": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"large": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-										"standard": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
-											Computed:            true,
-											Attributes:          map[string]dsschema.Attribute{},
-										},
-									},
-								},
-								"soft_reconfig_with_stored_info": dsschema.BoolAttribute{
-									MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+								"threshold": dsschema.Int64Attribute{
+									MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
 									Computed:            true,
 								},
 							},
+						},
+						"next_hop": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Next hop",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"self": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"self_force": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"orf": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Orf",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"orf_prefix_list": dsschema.StringAttribute{
+									MarkdownDescription: "ORF prefix list",
+									Computed:            true,
+								},
+							},
+						},
+						"remove_private_as": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Remove private a s",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"all": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "All",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"replace_as": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Replace a s",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"route_reflector_client": dsschema.BoolAttribute{
+							MarkdownDescription: "Route reflector client?",
+							Computed:            true,
+						},
+						"send_community": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Send community",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"all": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"both": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"extended": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"large": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"standard": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"soft_reconfig_with_stored_info": dsschema.BoolAttribute{
+							MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+							Computed:            true,
+						},
+					},
+				},
+				"unicast": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Unicast",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"add_path": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Add path",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"tx_all_paths": dsschema.BoolAttribute{
+									MarkdownDescription: "Advertise all paths to peer?",
+									Computed:            true,
+								},
+								"tx_bestpath_per_as": dsschema.BoolAttribute{
+									MarkdownDescription: "Tx bestpath per a s",
+									Computed:            true,
+								},
+							},
+						},
+						"allowas_in": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Allowas in",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"occurrence": dsschema.Int64Attribute{
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Computed:            true,
+								},
+								"origin": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"as_override": dsschema.BoolAttribute{
+							MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
+							Computed:            true,
+						},
+						"default_originate": dsschema.BoolAttribute{
+							MarkdownDescription: "Originate default route?",
+							Computed:            true,
+						},
+						"default_originate_map": dsschema.StringAttribute{
+							MarkdownDescription: "Default originate route map",
+							Computed:            true,
+						},
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable?",
+							Computed:            true,
+						},
+						"maximum_prefix": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Maximum prefix",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"action": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Action",
+									Computed:            true,
+									Attributes: map[string]dsschema.Attribute{
+										"restart": dsschema.SingleNestedAttribute{
+											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											Computed:            true,
+											Attributes: map[string]dsschema.Attribute{
+												"interval": dsschema.Int64Attribute{
+													MarkdownDescription: "Restart interval",
+													Computed:            true,
+												},
+											},
+										},
+										"warning_only": dsschema.SingleNestedAttribute{
+											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											Computed:            true,
+											Attributes:          map[string]dsschema.Attribute{},
+										},
+									},
+								},
+								"num_prefixes": dsschema.Int64Attribute{
+									MarkdownDescription: "Maximum number of prefixes",
+									Computed:            true,
+								},
+								"threshold": dsschema.Int64Attribute{
+									MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
+									Computed:            true,
+								},
+							},
+						},
+						"next_hop": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Next hop",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"self": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"self_force": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"orf": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Orf",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"orf_prefix_list": dsschema.StringAttribute{
+									MarkdownDescription: "ORF prefix list",
+									Computed:            true,
+								},
+							},
+						},
+						"remove_private_as": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Remove private a s",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"all": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "All",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"replace_as": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Replace a s",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"route_reflector_client": dsschema.BoolAttribute{
+							MarkdownDescription: "Route reflector client?",
+							Computed:            true,
+						},
+						"send_community": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Send community",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"all": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"both": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"extended": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"large": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+								"standard": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									Computed:            true,
+									Attributes:          map[string]dsschema.Attribute{},
+								},
+							},
+						},
+						"soft_reconfig_with_stored_info": dsschema.BoolAttribute{
+							MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
+							Computed:            true,
 						},
 					},
 				},

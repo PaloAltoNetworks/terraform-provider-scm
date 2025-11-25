@@ -81,71 +81,65 @@ func (d *SharedInfrastructureSettingDataSource) Read(ctx context.Context, req da
 		tflog.Debug(ctx, "--- VERIFICATION LOG: req.Config.Get() resulted in a diagnostic error.")
 		return
 	}
+	// --- SINGLETON DATA SOURCE LOGIC ---
+	tflog.Debug(ctx, "Reading Singleton SharedInfrastructureSetting")
 
-	// Logic to handle read by ID or by name/list.
-	// We prioritize reading by ID if it is provided.
-	if !data.Id.IsNull() {
-		objectId := data.Id.ValueString()
-		tflog.Debug(ctx, "Reading SharedInfrastructureSettings data source by ID", map[string]interface{}{"id": objectId})
+	// 1. Perform the API call (no ID argument)
+	readReq := d.client.SharedInfrastructureSettingsAPI.GetSharedInfrastructureSettings(ctx)
 
-		getReq := d.client.SharedInfrastructureSettingsAPI.(ctx, objectId)
-		scmObject, httpRes, err := getReq.Execute()
+	// 2. Add query parameters if any
 
-		var statusCode int
-		if httpRes != nil {
-			statusCode = httpRes.StatusCode
-		}
-		tflog.Debug(ctx, "--- SCM API CALL: Execution complete.", map[string]interface{}{
-			"error":      err,
-			"statusCode": statusCode,
-			"scmObjectIsNil": scmObject == nil,
-		})
-
-		if err != nil {
-			resp.Diagnostics.AddError("Error Reading SharedInfrastructureSettings", fmt.Sprintf("Could not read SharedInfrastructureSettings with ID %s: %s", objectId, err.Error()))
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
-				detailedMessage,
-			)
-			return
-		}
-		if httpRes.StatusCode != 200 {
-			resp.Diagnostics.AddError("Unexpected HTTP status code", fmt.Sprintf("Expected 200, got %d", httpRes.StatusCode))
-			return
-		}
-
-		tflog.Debug(ctx, "--- DATA SOURCE READ: API call successful. About to call the packer.")
-
-		// Create a packed object from the SCM response.
-		packedObject, diags := packSharedInfrastructureSettingsFromSdk(ctx, *scmObject)
-		resp.Diagnostics.Append(diags...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-		// Load the packed object into the data model.
-		resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-	}  else {
-		resp.Diagnostics.AddError("Missing Identifier", "Either 'id' or 'name' must be provided for the SharedInfrastructureSettings data source.")
+	// 3. Execute using interface{} to capture any response type
+	var scmObjectInterface interface{}
+	scmObjectInterface, _, err := readReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error Reading SharedInfrastructureSetting", err.Error())
 		return
 	}
 
-	// Create the composite Tfid for consistency.
-	var idBuilder strings.Builder
+	// 4. Dynamic Response Handling (Reflection + JSON)
+	var scmObject *deployment_services.SharedInfrastructureSettings
+	val := reflect.ValueOf(scmObjectInterface)
+	if val.Kind() == reflect.Ptr && !val.IsNil() { val = val.Elem() }
 
+	if val.Kind() == reflect.Struct {
+		dataField := val.FieldByName("Data")
+		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
+			if dataField.Len() > 0 {
+				firstItem := dataField.Index(0).Interface()
+				jsonBytes, _ := json.Marshal(firstItem)
+				var targetStruct deployment_services.SharedInfrastructureSettings
+				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+					scmObject = &targetStruct
+				}
+			} else {
+				resp.Diagnostics.AddError("Not Found", "The singleton resource was not found (empty list returned).")
+				return
+			}
+		} else {
+            jsonBytes, _ := json.Marshal(scmObjectInterface)
+            var targetStruct deployment_services.SharedInfrastructureSettings
+            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+                scmObject = &targetStruct
+            }
+        }
+	}
 
-	idBuilder.WriteString(":")
+	if scmObject == nil {
+		resp.Diagnostics.AddError("Error Processing Response", "Could not convert API response to expected model.")
+		return
+	}
 
-	idBuilder.WriteString(":")
+	// 5. Pack and Set State
+	packedObject, diags := packSharedInfrastructureSettingsFromSdk(ctx, *scmObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
 
-	idBuilder.WriteString(":")
-	idBuilder.WriteString(data.Id.ValueString())
-	data.Tfid = types.StringValue(idBuilder.String())
+	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
+	if resp.Diagnostics.HasError() { return }
+
+	// Force synthetic ID
+	data.Tfid = types.StringValue("singleton")
 
 
 

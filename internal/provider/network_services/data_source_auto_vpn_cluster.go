@@ -1,22 +1,21 @@
 package provider
 
-/*
-
 import (
 	"context"
 	"fmt"
 	"reflect"
 	"strings"
 
-	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM AutoVpnCluster (Package: network_services)
@@ -96,8 +95,8 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 			statusCode = httpRes.StatusCode
 		}
 		tflog.Debug(ctx, "--- SCM API CALL: Execution complete.", map[string]interface{}{
-			"error":      err,
-			"statusCode": statusCode,
+			"error":          err,
+			"statusCode":     statusCode,
 			"scmObjectIsNil": scmObject == nil,
 		})
 
@@ -130,7 +129,7 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 			return
 		}
 
-	}  else if !data.Name.IsNull() {
+	} else if !data.Name.IsNull() {
 		objectName := data.Name.ValueString()
 		tflog.Debug(ctx, "Reading AutoVpnClusters data source by Name", map[string]interface{}{"name": objectName})
 
@@ -140,21 +139,23 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 
 		v := reflect.ValueOf(data)
 
-
 		if f := v.FieldByName("Folder"); f.IsValid() {
-			if folder, ok := f.Interface().(tfTypes.String); ok && !folder.IsNull() { listReq = listReq.Folder(folder.ValueString()) }
+			if folder, ok := f.Interface().(tfTypes.String); ok && !folder.IsNull() {
+				listReq = listReq.Folder(folder.ValueString())
+			}
 		}
-
 
 		if f := v.FieldByName("Snippet"); f.IsValid() {
-			if snippet, ok := f.Interface().(tfTypes.String); ok && !snippet.IsNull() { listReq = listReq.Snippet(snippet.ValueString()) }
+			if snippet, ok := f.Interface().(tfTypes.String); ok && !snippet.IsNull() {
+				listReq = listReq.Snippet(snippet.ValueString())
+			}
 		}
-
 
 		if f := v.FieldByName("Device"); f.IsValid() {
-			if device, ok := f.Interface().(tfTypes.String); ok && !device.IsNull() { listReq = listReq.Device(device.ValueString()) }
+			if device, ok := f.Interface().(tfTypes.String); ok && !device.IsNull() {
+				listReq = listReq.Device(device.ValueString())
+			}
 		}
-
 
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
@@ -173,8 +174,9 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 
 		// Find the specific object from the list.
 		var foundObject *network_services.AutoVpnClusters
-		for i := range listResponse.GetData() {
-			item := listResponse.GetData()[i]
+		// RAW LIST LOGIC: Iterate directly over the slice
+		for i := range listResponse {
+			item := listResponse[i]
 			if item.GetName() == objectName {
 				foundObject = &item
 				break
@@ -199,7 +201,7 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 			return
 		}
 
-	}  else {
+	} else {
 		resp.Diagnostics.AddError("Missing Identifier", "Either 'id' or 'name' must be provided for the AutoVpnClusters data source.")
 		return
 	}
@@ -209,30 +211,31 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 
 	v := reflect.ValueOf(data)
 
-
 	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
 
 	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
 
 	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 
-
-
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
-
-*/

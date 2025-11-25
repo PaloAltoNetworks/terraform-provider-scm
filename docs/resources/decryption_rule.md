@@ -211,3 +211,26 @@ Optional:
 
 <a id="nestedatt--type--ssl_forward_proxy"></a>
 ### Nested Schema for `type.ssl_forward_proxy`
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_decryption_rule.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_rule.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_rule.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.

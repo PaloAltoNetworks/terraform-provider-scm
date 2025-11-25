@@ -49,7 +49,7 @@ Read-Only:
 - `folder` (String) The folder in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ipv4))
+- `ipv4` (Attributes) IPv4 Address Family (see [below for nested schema](#nestedatt--data--ipv4))
 - `snippet` (String) The snippet in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
@@ -60,37 +60,30 @@ Read-Only:
 
 Read-Only:
 
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ipv4--ipv4))
+- `multicast` (Attributes) Multicast (see [below for nested schema](#nestedatt--data--ipv4--multicast))
+- `unicast` (Attributes) Unicast (see [below for nested schema](#nestedatt--data--ipv4--unicast))
 
-<a id="nestedatt--data--ipv4--ipv4"></a>
-### Nested Schema for `data.ipv4.ipv4`
-
-Read-Only:
-
-- `multicast` (Attributes) Multicast (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast))
-- `unicast` (Attributes) Unicast (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast))
-
-<a id="nestedatt--data--ipv4--ipv4--multicast"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast`
+<a id="nestedatt--data--ipv4--multicast"></a>
+### Nested Schema for `data.ipv4.multicast`
 
 Read-Only:
 
-- `add_path` (Attributes) Add path (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--add_path))
-- `allowas_in` (Attributes) Allowas in (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--allowas_in))
+- `add_path` (Attributes) Add path (see [below for nested schema](#nestedatt--data--ipv4--multicast--add_path))
+- `allowas_in` (Attributes) Allowas in (see [below for nested schema](#nestedatt--data--ipv4--multicast--allowas_in))
 - `as_override` (Boolean) Override ASNs in outbound updates if AS-Path equals Remote-AS?
 - `default_originate` (Boolean) Originate default route?
 - `default_originate_map` (String) Default originate route map
 - `enable` (Boolean) Enable?
-- `maximum_prefix` (Attributes) Maximum prefix (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--maximum_prefix))
-- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--next_hop))
-- `orf` (Attributes) Orf (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--orf))
-- `remove_private_as` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--remove_private_as))
+- `maximum_prefix` (Attributes) Maximum prefix (see [below for nested schema](#nestedatt--data--ipv4--multicast--maximum_prefix))
+- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--data--ipv4--multicast--next_hop))
+- `orf` (Attributes) Orf (see [below for nested schema](#nestedatt--data--ipv4--multicast--orf))
+- `remove_private_as` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--data--ipv4--multicast--remove_private_as))
 - `route_reflector_client` (Boolean) Route reflector client?
-- `send_community` (Attributes) Send community (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--send_community))
+- `send_community` (Attributes) Send community (see [below for nested schema](#nestedatt--data--ipv4--multicast--send_community))
 - `soft_reconfig_with_stored_info` (Boolean) Soft reconfiguration of peer with stored routes?
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--add_path"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.add_path`
+<a id="nestedatt--data--ipv4--multicast--add_path"></a>
+### Nested Schema for `data.ipv4.multicast.add_path`
 
 Read-Only:
 
@@ -98,8 +91,8 @@ Read-Only:
 - `tx_bestpath_per_as` (Boolean) Tx bestpath per a s
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--allowas_in"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.allowas_in`
+<a id="nestedatt--data--ipv4--multicast--allowas_in"></a>
+### Nested Schema for `data.ipv4.multicast.allowas_in`
 
 Read-Only:
 
@@ -108,158 +101,158 @@ Read-Only:
 > ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.
 - `origin` (Attributes) Origin
 
-> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--allowas_in--origin))
+> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--allowas_in--origin))
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--allowas_in--origin"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.allowas_in.origin`
+<a id="nestedatt--data--ipv4--multicast--allowas_in--origin"></a>
+### Nested Schema for `data.ipv4.multicast.allowas_in.origin`
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--maximum_prefix"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.maximum_prefix`
+<a id="nestedatt--data--ipv4--multicast--maximum_prefix"></a>
+### Nested Schema for `data.ipv4.multicast.maximum_prefix`
 
 Read-Only:
 
-- `action` (Attributes) Action (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--maximum_prefix--action))
+- `action` (Attributes) Action (see [below for nested schema](#nestedatt--data--ipv4--multicast--maximum_prefix--action))
 - `num_prefixes` (Number) Maximum number of prefixes
 - `threshold` (Number) Threshold percentage of the maximum number of prefixes
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--maximum_prefix--action"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.maximum_prefix.action`
+<a id="nestedatt--data--ipv4--multicast--maximum_prefix--action"></a>
+### Nested Schema for `data.ipv4.multicast.maximum_prefix.action`
 
 Read-Only:
 
 - `restart` (Attributes) Restart
 
-> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--maximum_prefix--action--restart))
+> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--maximum_prefix--action--restart))
 - `warning_only` (Attributes) Warning only
 
-> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--maximum_prefix--action--warning_only))
+> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--maximum_prefix--action--warning_only))
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--maximum_prefix--action--restart"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.maximum_prefix.action.restart`
+<a id="nestedatt--data--ipv4--multicast--maximum_prefix--action--restart"></a>
+### Nested Schema for `data.ipv4.multicast.maximum_prefix.action.restart`
 
 Read-Only:
 
 - `interval` (Number) Restart interval
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--maximum_prefix--action--warning_only"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.maximum_prefix.action.warning_only`
+<a id="nestedatt--data--ipv4--multicast--maximum_prefix--action--warning_only"></a>
+### Nested Schema for `data.ipv4.multicast.maximum_prefix.action.warning_only`
 
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--next_hop"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.next_hop`
+<a id="nestedatt--data--ipv4--multicast--next_hop"></a>
+### Nested Schema for `data.ipv4.multicast.next_hop`
 
 Read-Only:
 
 - `self` (Attributes) Self
 
-> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--next_hop--self))
+> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--next_hop--self))
 - `self_force` (Attributes) Self force
 
-> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--next_hop--self_force))
+> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--next_hop--self_force))
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--next_hop--self"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.next_hop.self`
-
-
-<a id="nestedatt--data--ipv4--ipv4--multicast--next_hop--self_force"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.next_hop.self_force`
+<a id="nestedatt--data--ipv4--multicast--next_hop--self"></a>
+### Nested Schema for `data.ipv4.multicast.next_hop.self`
 
 
+<a id="nestedatt--data--ipv4--multicast--next_hop--self_force"></a>
+### Nested Schema for `data.ipv4.multicast.next_hop.self_force`
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--orf"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.orf`
+
+
+<a id="nestedatt--data--ipv4--multicast--orf"></a>
+### Nested Schema for `data.ipv4.multicast.orf`
 
 Read-Only:
 
 - `orf_prefix_list` (String) ORF prefix list
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--remove_private_as"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.remove_private_as`
+<a id="nestedatt--data--ipv4--multicast--remove_private_as"></a>
+### Nested Schema for `data.ipv4.multicast.remove_private_as`
 
 Read-Only:
 
-- `all` (Attributes) All (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--remove_private_as--all))
-- `replace_as` (Attributes) Replace a s (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--remove_private_as--replace_as))
+- `all` (Attributes) All (see [below for nested schema](#nestedatt--data--ipv4--multicast--remove_private_as--all))
+- `replace_as` (Attributes) Replace a s (see [below for nested schema](#nestedatt--data--ipv4--multicast--remove_private_as--replace_as))
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--remove_private_as--all"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.remove_private_as.all`
-
-
-<a id="nestedatt--data--ipv4--ipv4--multicast--remove_private_as--replace_as"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.remove_private_as.replace_as`
+<a id="nestedatt--data--ipv4--multicast--remove_private_as--all"></a>
+### Nested Schema for `data.ipv4.multicast.remove_private_as.all`
 
 
+<a id="nestedatt--data--ipv4--multicast--remove_private_as--replace_as"></a>
+### Nested Schema for `data.ipv4.multicast.remove_private_as.replace_as`
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--send_community"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.send_community`
+
+
+<a id="nestedatt--data--ipv4--multicast--send_community"></a>
+### Nested Schema for `data.ipv4.multicast.send_community`
 
 Read-Only:
 
 - `all` (Attributes) All
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--send_community--all))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--send_community--all))
 - `both` (Attributes) Both
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--send_community--both))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--send_community--both))
 - `extended` (Attributes) Extended
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--send_community--extended))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--send_community--extended))
 - `large` (Attributes) Large
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--send_community--large))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--send_community--large))
 - `standard` (Attributes) Standard
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--send_community--standard))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--multicast--send_community--standard))
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--send_community--all"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.send_community.all`
-
-
-<a id="nestedatt--data--ipv4--ipv4--multicast--send_community--both"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.send_community.both`
+<a id="nestedatt--data--ipv4--multicast--send_community--all"></a>
+### Nested Schema for `data.ipv4.multicast.send_community.all`
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--send_community--extended"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.send_community.extended`
+<a id="nestedatt--data--ipv4--multicast--send_community--both"></a>
+### Nested Schema for `data.ipv4.multicast.send_community.both`
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--send_community--large"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.send_community.large`
+<a id="nestedatt--data--ipv4--multicast--send_community--extended"></a>
+### Nested Schema for `data.ipv4.multicast.send_community.extended`
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--send_community--standard"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.send_community.standard`
+<a id="nestedatt--data--ipv4--multicast--send_community--large"></a>
+### Nested Schema for `data.ipv4.multicast.send_community.large`
+
+
+<a id="nestedatt--data--ipv4--multicast--send_community--standard"></a>
+### Nested Schema for `data.ipv4.multicast.send_community.standard`
 
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast`
+<a id="nestedatt--data--ipv4--unicast"></a>
+### Nested Schema for `data.ipv4.unicast`
 
 Read-Only:
 
-- `add_path` (Attributes) Add path (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--add_path))
-- `allowas_in` (Attributes) Allowas in (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--allowas_in))
+- `add_path` (Attributes) Add path (see [below for nested schema](#nestedatt--data--ipv4--unicast--add_path))
+- `allowas_in` (Attributes) Allowas in (see [below for nested schema](#nestedatt--data--ipv4--unicast--allowas_in))
 - `as_override` (Boolean) Override ASNs in outbound updates if AS-Path equals Remote-AS?
 - `default_originate` (Boolean) Originate default route?
 - `default_originate_map` (String) Default originate route map
 - `enable` (Boolean) Enable?
-- `maximum_prefix` (Attributes) Maximum prefix (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--maximum_prefix))
-- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--next_hop))
-- `orf` (Attributes) Orf (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--orf))
-- `remove_private_as` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--remove_private_as))
+- `maximum_prefix` (Attributes) Maximum prefix (see [below for nested schema](#nestedatt--data--ipv4--unicast--maximum_prefix))
+- `next_hop` (Attributes) Next hop (see [below for nested schema](#nestedatt--data--ipv4--unicast--next_hop))
+- `orf` (Attributes) Orf (see [below for nested schema](#nestedatt--data--ipv4--unicast--orf))
+- `remove_private_as` (Attributes) Remove private a s (see [below for nested schema](#nestedatt--data--ipv4--unicast--remove_private_as))
 - `route_reflector_client` (Boolean) Route reflector client?
-- `send_community` (Attributes) Send community (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--send_community))
+- `send_community` (Attributes) Send community (see [below for nested schema](#nestedatt--data--ipv4--unicast--send_community))
 - `soft_reconfig_with_stored_info` (Boolean) Soft reconfiguration of peer with stored routes?
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--add_path"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.add_path`
+<a id="nestedatt--data--ipv4--unicast--add_path"></a>
+### Nested Schema for `data.ipv4.unicast.add_path`
 
 Read-Only:
 
@@ -267,8 +260,8 @@ Read-Only:
 - `tx_bestpath_per_as` (Boolean) Tx bestpath per a s
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--allowas_in"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.allowas_in`
+<a id="nestedatt--data--ipv4--unicast--allowas_in"></a>
+### Nested Schema for `data.ipv4.unicast.allowas_in`
 
 Read-Only:
 
@@ -277,130 +270,130 @@ Read-Only:
 > ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.
 - `origin` (Attributes) Origin
 
-> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--allowas_in--origin))
+> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--allowas_in--origin))
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--allowas_in--origin"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.allowas_in.origin`
+<a id="nestedatt--data--ipv4--unicast--allowas_in--origin"></a>
+### Nested Schema for `data.ipv4.unicast.allowas_in.origin`
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--maximum_prefix"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.maximum_prefix`
+<a id="nestedatt--data--ipv4--unicast--maximum_prefix"></a>
+### Nested Schema for `data.ipv4.unicast.maximum_prefix`
 
 Read-Only:
 
-- `action` (Attributes) Action (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--maximum_prefix--action))
+- `action` (Attributes) Action (see [below for nested schema](#nestedatt--data--ipv4--unicast--maximum_prefix--action))
 - `num_prefixes` (Number) Maximum number of prefixes
 - `threshold` (Number) Threshold percentage of the maximum number of prefixes
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--maximum_prefix--action"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.maximum_prefix.action`
+<a id="nestedatt--data--ipv4--unicast--maximum_prefix--action"></a>
+### Nested Schema for `data.ipv4.unicast.maximum_prefix.action`
 
 Read-Only:
 
 - `restart` (Attributes) Restart
 
-> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--maximum_prefix--action--restart))
+> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--maximum_prefix--action--restart))
 - `warning_only` (Attributes) Warning only
 
-> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--maximum_prefix--action--warning_only))
+> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--maximum_prefix--action--warning_only))
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--maximum_prefix--action--restart"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.maximum_prefix.action.restart`
+<a id="nestedatt--data--ipv4--unicast--maximum_prefix--action--restart"></a>
+### Nested Schema for `data.ipv4.unicast.maximum_prefix.action.restart`
 
 Read-Only:
 
 - `interval` (Number) Restart interval
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--maximum_prefix--action--warning_only"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.maximum_prefix.action.warning_only`
+<a id="nestedatt--data--ipv4--unicast--maximum_prefix--action--warning_only"></a>
+### Nested Schema for `data.ipv4.unicast.maximum_prefix.action.warning_only`
 
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--next_hop"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.next_hop`
+<a id="nestedatt--data--ipv4--unicast--next_hop"></a>
+### Nested Schema for `data.ipv4.unicast.next_hop`
 
 Read-Only:
 
 - `self` (Attributes) Self
 
-> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--next_hop--self))
+> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--next_hop--self))
 - `self_force` (Attributes) Self force
 
-> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--next_hop--self_force))
+> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--next_hop--self_force))
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--next_hop--self"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.next_hop.self`
-
-
-<a id="nestedatt--data--ipv4--ipv4--unicast--next_hop--self_force"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.next_hop.self_force`
+<a id="nestedatt--data--ipv4--unicast--next_hop--self"></a>
+### Nested Schema for `data.ipv4.unicast.next_hop.self`
 
 
+<a id="nestedatt--data--ipv4--unicast--next_hop--self_force"></a>
+### Nested Schema for `data.ipv4.unicast.next_hop.self_force`
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--orf"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.orf`
+
+
+<a id="nestedatt--data--ipv4--unicast--orf"></a>
+### Nested Schema for `data.ipv4.unicast.orf`
 
 Read-Only:
 
 - `orf_prefix_list` (String) ORF prefix list
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--remove_private_as"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.remove_private_as`
+<a id="nestedatt--data--ipv4--unicast--remove_private_as"></a>
+### Nested Schema for `data.ipv4.unicast.remove_private_as`
 
 Read-Only:
 
-- `all` (Attributes) All (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--remove_private_as--all))
-- `replace_as` (Attributes) Replace a s (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--remove_private_as--replace_as))
+- `all` (Attributes) All (see [below for nested schema](#nestedatt--data--ipv4--unicast--remove_private_as--all))
+- `replace_as` (Attributes) Replace a s (see [below for nested schema](#nestedatt--data--ipv4--unicast--remove_private_as--replace_as))
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--remove_private_as--all"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.remove_private_as.all`
-
-
-<a id="nestedatt--data--ipv4--ipv4--unicast--remove_private_as--replace_as"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.remove_private_as.replace_as`
+<a id="nestedatt--data--ipv4--unicast--remove_private_as--all"></a>
+### Nested Schema for `data.ipv4.unicast.remove_private_as.all`
 
 
+<a id="nestedatt--data--ipv4--unicast--remove_private_as--replace_as"></a>
+### Nested Schema for `data.ipv4.unicast.remove_private_as.replace_as`
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--send_community"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.send_community`
+
+
+<a id="nestedatt--data--ipv4--unicast--send_community"></a>
+### Nested Schema for `data.ipv4.unicast.send_community`
 
 Read-Only:
 
 - `all` (Attributes) All
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--send_community--all))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--send_community--all))
 - `both` (Attributes) Both
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--send_community--both))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--send_community--both))
 - `extended` (Attributes) Extended
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--send_community--extended))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--send_community--extended))
 - `large` (Attributes) Large
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--send_community--large))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--send_community--large))
 - `standard` (Attributes) Standard
 
-> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--send_community--standard))
+> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--data--ipv4--unicast--send_community--standard))
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--send_community--all"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.send_community.all`
-
-
-<a id="nestedatt--data--ipv4--ipv4--unicast--send_community--both"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.send_community.both`
+<a id="nestedatt--data--ipv4--unicast--send_community--all"></a>
+### Nested Schema for `data.ipv4.unicast.send_community.all`
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--send_community--extended"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.send_community.extended`
+<a id="nestedatt--data--ipv4--unicast--send_community--both"></a>
+### Nested Schema for `data.ipv4.unicast.send_community.both`
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--send_community--large"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.send_community.large`
+<a id="nestedatt--data--ipv4--unicast--send_community--extended"></a>
+### Nested Schema for `data.ipv4.unicast.send_community.extended`
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--send_community--standard"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.send_community.standard`
+<a id="nestedatt--data--ipv4--unicast--send_community--large"></a>
+### Nested Schema for `data.ipv4.unicast.send_community.large`
+
+
+<a id="nestedatt--data--ipv4--unicast--send_community--standard"></a>
+### Nested Schema for `data.ipv4.unicast.send_community.standard`

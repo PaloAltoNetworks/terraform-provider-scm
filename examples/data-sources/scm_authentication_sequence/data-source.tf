@@ -1,12 +1,5 @@
-resource "scm_authentication_sequence" "test_sequence" {
-  name                    = "test_auth_sequence_1"
-  folder                  = "All"
-  authentication_profiles = ["test_auth_profile"] // authentication_profiles added should exist 
-  use_domain_find_profile = false
-}
-
 data "scm_authentication_sequence" "sequence_data" {
-  id = scm_authentication_sequence.test_sequence.id
+  id = "1ee14ac7-760c-401f-8dbc-c887db16106a"
 
 }
 

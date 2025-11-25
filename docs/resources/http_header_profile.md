@@ -61,9 +61,12 @@ Required:
 Required:
 
 - `header` (String) The HTTP header string
-- `name` (String) An auto-generated name (_This should be removed_)
 - `value` (String) The value associated with the HTTP header
 
 Optional:
 
 - `log` (Boolean) Log the use of this HTTP header insertion?
+
+Read-Only:
+
+- `name` (String) An auto-generated name (_This should be removed_)

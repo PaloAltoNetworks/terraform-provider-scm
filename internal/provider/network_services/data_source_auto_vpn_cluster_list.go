@@ -1,7 +1,5 @@
 package provider
 
-/*
-
 import (
 	"context"
 	"fmt"
@@ -11,11 +9,11 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 var (
@@ -71,19 +69,22 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 
 	v := reflect.ValueOf(data)
 
-
 	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { listReq = listReq.Folder(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			listReq = listReq.Folder(val.ValueString())
+		}
 	}
-
 
 	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { listReq = listReq.Snippet(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			listReq = listReq.Snippet(val.ValueString())
+		}
 	}
 
-
 	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { listReq = listReq.Device(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			listReq = listReq.Device(val.ValueString())
+		}
 	}
 
 	if !data.Limit.IsNull() {
@@ -92,7 +93,6 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 	if !data.Offset.IsNull() {
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
 	}
-
 
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()
@@ -106,19 +106,22 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 		return
 	}
 
-	// Convert the response to the Terraform model.
-	if listResponse == nil || listResponse.GetData() == nil {
+	// RAW LIST LOGIC:
+	// The API returned a JSON array [...] directly.
+	if listResponse == nil {
 		return // Nothing to do.
 	}
 
-	total := int64(listResponse.GetTotal())
+	// 1. TOTAL: We calculate it manually based on the slice length.
+	total := int64(len(listResponse))
 	data.Total = types.Int64PointerValue(&total)
-	data.Limit = types.Int64Value(int64(listResponse.GetLimit()))
-	data.Offset = types.Int64Value(int64(listResponse.GetOffset()))
 
-	// =================== START: THE IMPROVEMENT ===================
-	// Use the generated list packer to pack the SCM items into a TF list.
-	packedList, diags := packAutoVpnClustersListFromSdk(ctx, listResponse.GetData())
+	// 2. LIMIT/OFFSET: We do not update them from the server (metadata missing).
+	//    We keep the values requested by the user in the config.
+
+	// 3. PACKING: Pass the listResponse directly (it IS the slice).
+	packedList, diags := packAutoVpnClustersListFromSdk(ctx, listResponse)
+
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -138,22 +141,26 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 
 	v = reflect.ValueOf(data)
 
-
-
 	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
 
 	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
 
 	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
@@ -172,5 +179,3 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
-
-*/

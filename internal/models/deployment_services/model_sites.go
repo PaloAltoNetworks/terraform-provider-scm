@@ -17,20 +17,21 @@ import (
 
 // Sites represents the Terraform model for Sites
 type Sites struct {
-	Tfid         types.String           `tfsdk:"tfid"`
-	AddressLine1 basetypes.StringValue  `tfsdk:"address_line_1"`
-	AddressLine2 basetypes.StringValue  `tfsdk:"address_line_2"`
-	City         basetypes.StringValue  `tfsdk:"city"`
-	Country      basetypes.StringValue  `tfsdk:"country"`
-	Id           basetypes.StringValue  `tfsdk:"id"`
-	Latitude     basetypes.Float64Value `tfsdk:"latitude"`
-	Longitude    basetypes.Float64Value `tfsdk:"longitude"`
-	Members      basetypes.ListValue    `tfsdk:"members"`
-	Name         basetypes.StringValue  `tfsdk:"name"`
-	Qos          basetypes.ObjectValue  `tfsdk:"qos"`
-	State        basetypes.StringValue  `tfsdk:"state"`
-	Type         basetypes.StringValue  `tfsdk:"type"`
-	ZipCode      basetypes.StringValue  `tfsdk:"zip_code"`
+	Tfid         types.String          `tfsdk:"tfid"`
+	AddressLine1 basetypes.StringValue `tfsdk:"address_line_1"`
+	AddressLine2 basetypes.StringValue `tfsdk:"address_line_2"`
+	City         basetypes.StringValue `tfsdk:"city"`
+	Country      basetypes.StringValue `tfsdk:"country"`
+	Id           basetypes.StringValue `tfsdk:"id"`
+	Latitude     basetypes.StringValue `tfsdk:"latitude"`
+	LicenseType  basetypes.StringValue `tfsdk:"license_type"`
+	Longitude    basetypes.StringValue `tfsdk:"longitude"`
+	Members      basetypes.ListValue   `tfsdk:"members"`
+	Name         basetypes.StringValue `tfsdk:"name"`
+	Qos          basetypes.ObjectValue `tfsdk:"qos"`
+	State        basetypes.StringValue `tfsdk:"state"`
+	Type         basetypes.StringValue `tfsdk:"type"`
+	ZipCode      basetypes.StringValue `tfsdk:"zip_code"`
 }
 
 // SitesMembersInner represents a nested structure within the Sites model
@@ -57,8 +58,9 @@ func (o Sites) AttrTypes() map[string]attr.Type {
 		"city":           basetypes.StringType{},
 		"country":        basetypes.StringType{},
 		"id":             basetypes.StringType{},
-		"latitude":       basetypes.Float64Type{},
-		"longitude":      basetypes.Float64Type{},
+		"latitude":       basetypes.StringType{},
+		"license_type":   basetypes.StringType{},
+		"longitude":      basetypes.StringType{},
 		"members": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"id":             basetypes.StringType{},
@@ -148,11 +150,19 @@ var SitesResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
-		"latitude": schema.Float64Attribute{
+		"latitude": schema.StringAttribute{
 			MarkdownDescription: "The latitude coordinate for the site",
 			Optional:            true,
 		},
-		"longitude": schema.Float64Attribute{
+		"license_type": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.LengthAtMost(63),
+				stringvalidator.OneOf("FWAAS-SITE-25Mbps", "FWAAS-SITE-50Mbps", "FWAAS-SITE-250Mbps", "FWAAS-SITE-1000Mbps", "FWAAS-SITE-2500Mbps"),
+			},
+			MarkdownDescription: "The license type of the site",
+			Optional:            true,
+		},
+		"longitude": schema.StringAttribute{
 			MarkdownDescription: "The longitude coordinate for the site",
 			Optional:            true,
 		},
@@ -163,7 +173,7 @@ var SitesResourceSchema = schema.Schema{
 				Attributes: map[string]schema.Attribute{
 					"id": schema.StringAttribute{
 						MarkdownDescription: "UUID of the remote network",
-						Optional:            true,
+						Computed:            true,
 					},
 					"mode": schema.StringAttribute{
 						Validators: []validator.String{
@@ -224,7 +234,7 @@ var SitesResourceSchema = schema.Schema{
 				stringvalidator.OneOf("prisma-sdwan", "third-party-branch", "third-party-discovered"),
 			},
 			MarkdownDescription: "The site type",
-			Required:            true,
+			Optional:            true,
 		},
 		"zip_code": schema.StringAttribute{
 			MarkdownDescription: "The postal code in which the site exists",
@@ -257,11 +267,15 @@ var SitesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The UUID of the site",
 			Required:            true,
 		},
-		"latitude": dsschema.Float64Attribute{
+		"latitude": dsschema.StringAttribute{
 			MarkdownDescription: "The latitude coordinate for the site",
 			Computed:            true,
 		},
-		"longitude": dsschema.Float64Attribute{
+		"license_type": dsschema.StringAttribute{
+			MarkdownDescription: "The license type of the site",
+			Computed:            true,
+		},
+		"longitude": dsschema.StringAttribute{
 			MarkdownDescription: "The longitude coordinate for the site",
 			Computed:            true,
 		},

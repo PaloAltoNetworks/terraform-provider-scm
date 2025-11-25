@@ -109,7 +109,7 @@ var VariablesResourceSchema = schema.Schema{
 		},
 		"overridden": schema.BoolAttribute{
 			MarkdownDescription: "Is the variable overridden?",
-			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{

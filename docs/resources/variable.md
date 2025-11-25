@@ -153,7 +153,6 @@ resource "scm_variable" "scm_variable_zone" {
 - `folder` (String) The folder in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `overridden` (Boolean) Is the variable overridden?
 - `snippet` (String) The snippet in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
@@ -161,4 +160,5 @@ resource "scm_variable" "scm_variable_zone" {
 ### Read-Only
 
 - `id` (String) UUID of the variable
+- `overridden` (Boolean) Is the variable overridden?
 - `tfid` (String) The Terraform ID.

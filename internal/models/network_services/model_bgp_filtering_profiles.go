@@ -32,17 +32,12 @@ type BgpFilteringProfiles struct {
 
 // BgpFilteringProfilesIpv4 represents a nested structure within the BgpFilteringProfiles model
 type BgpFilteringProfilesIpv4 struct {
-	Ipv4 basetypes.ObjectValue `tfsdk:"ipv4"`
-}
-
-// BgpFilteringProfilesIpv4Ipv4 represents a nested structure within the BgpFilteringProfiles model
-type BgpFilteringProfilesIpv4Ipv4 struct {
 	Multicast basetypes.ObjectValue `tfsdk:"multicast"`
 	Unicast   basetypes.ObjectValue `tfsdk:"unicast"`
 }
 
-// BgpFilteringProfilesIpv4Ipv4Multicast represents a nested structure within the BgpFilteringProfiles model
-type BgpFilteringProfilesIpv4Ipv4Multicast struct {
+// BgpFilteringProfilesIpv4Multicast represents a nested structure within the BgpFilteringProfiles model
+type BgpFilteringProfilesIpv4Multicast struct {
 	ConditionalAdvertisement basetypes.ObjectValue `tfsdk:"conditional_advertisement"`
 	FilterList               basetypes.ObjectValue `tfsdk:"filter_list"`
 	InboundNetworkFilters    basetypes.ObjectValue `tfsdk:"inbound_network_filters"`
@@ -100,120 +95,6 @@ func (o BgpFilteringProfiles) AttrTypes() map[string]attr.Type {
 		"device":      basetypes.StringType{},
 		"folder":      basetypes.StringType{},
 		"id":          basetypes.StringType{},
-		"ipv4": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"ipv4": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"multicast": basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{
-								"conditional_advertisement": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"exist": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{
-												"advertise_map": basetypes.StringType{},
-												"exist_map":     basetypes.StringType{},
-											},
-										},
-										"non_exist": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{
-												"advertise_map": basetypes.StringType{},
-												"non_exist_map": basetypes.StringType{},
-											},
-										},
-									},
-								},
-								"filter_list": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"inbound":  basetypes.StringType{},
-										"outbound": basetypes.StringType{},
-									},
-								},
-								"inbound_network_filters": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"distribute_list": basetypes.StringType{},
-										"prefix_list":     basetypes.StringType{},
-									},
-								},
-								"inherit": basetypes.BoolType{},
-								"outbound_network_filters": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"distribute_list": basetypes.StringType{},
-										"prefix_list":     basetypes.StringType{},
-									},
-								},
-								"route_maps": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"inbound":  basetypes.StringType{},
-										"outbound": basetypes.StringType{},
-									},
-								},
-								"unsuppress_map": basetypes.StringType{},
-							},
-						},
-						"unicast": basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{
-								"conditional_advertisement": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"exist": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{
-												"advertise_map": basetypes.StringType{},
-												"exist_map":     basetypes.StringType{},
-											},
-										},
-										"non_exist": basetypes.ObjectType{
-											AttrTypes: map[string]attr.Type{
-												"advertise_map": basetypes.StringType{},
-												"non_exist_map": basetypes.StringType{},
-											},
-										},
-									},
-								},
-								"filter_list": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"inbound":  basetypes.StringType{},
-										"outbound": basetypes.StringType{},
-									},
-								},
-								"inbound_network_filters": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"distribute_list": basetypes.StringType{},
-										"prefix_list":     basetypes.StringType{},
-									},
-								},
-								"outbound_network_filters": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"distribute_list": basetypes.StringType{},
-										"prefix_list":     basetypes.StringType{},
-									},
-								},
-								"route_maps": basetypes.ObjectType{
-									AttrTypes: map[string]attr.Type{
-										"inbound":  basetypes.StringType{},
-										"outbound": basetypes.StringType{},
-									},
-								},
-								"unsuppress_map": basetypes.StringType{},
-							},
-						},
-					},
-				},
-			},
-		},
-		"name":    basetypes.StringType{},
-		"snippet": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of BgpFilteringProfiles objects.
-func (o BgpFilteringProfiles) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the BgpFilteringProfilesIpv4 model.
-func (o BgpFilteringProfilesIpv4) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
 		"ipv4": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"multicast": basetypes.ObjectType{
@@ -309,18 +190,20 @@ func (o BgpFilteringProfilesIpv4) AttrTypes() map[string]attr.Type {
 				},
 			},
 		},
+		"name":    basetypes.StringType{},
+		"snippet": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of BgpFilteringProfilesIpv4 objects.
-func (o BgpFilteringProfilesIpv4) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of BgpFilteringProfiles objects.
+func (o BgpFilteringProfiles) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the BgpFilteringProfilesIpv4Ipv4 model.
-func (o BgpFilteringProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the BgpFilteringProfilesIpv4 model.
+func (o BgpFilteringProfilesIpv4) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"multicast": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -416,15 +299,15 @@ func (o BgpFilteringProfilesIpv4Ipv4) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of BgpFilteringProfilesIpv4Ipv4 objects.
-func (o BgpFilteringProfilesIpv4Ipv4) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of BgpFilteringProfilesIpv4 objects.
+func (o BgpFilteringProfilesIpv4) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the BgpFilteringProfilesIpv4Ipv4Multicast model.
-func (o BgpFilteringProfilesIpv4Ipv4Multicast) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the BgpFilteringProfilesIpv4Multicast model.
+func (o BgpFilteringProfilesIpv4Multicast) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"conditional_advertisement": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -471,8 +354,8 @@ func (o BgpFilteringProfilesIpv4Ipv4Multicast) AttrTypes() map[string]attr.Type 
 	}
 }
 
-// AttrType returns the attribute type for a list of BgpFilteringProfilesIpv4Ipv4Multicast objects.
-func (o BgpFilteringProfilesIpv4Ipv4Multicast) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of BgpFilteringProfilesIpv4Multicast objects.
+func (o BgpFilteringProfilesIpv4Multicast) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -666,213 +549,207 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "Ipv4",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
-				"ipv4": schema.SingleNestedAttribute{
-					MarkdownDescription: "Ipv4",
-					Required:            true,
+				"multicast": schema.SingleNestedAttribute{
+					MarkdownDescription: "Multicast",
+					Optional:            true,
 					Attributes: map[string]schema.Attribute{
-						"multicast": schema.SingleNestedAttribute{
-							MarkdownDescription: "Multicast",
+						"conditional_advertisement": schema.SingleNestedAttribute{
+							MarkdownDescription: "Conditional advertisement",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
-								"conditional_advertisement": schema.SingleNestedAttribute{
-									MarkdownDescription: "Conditional advertisement",
+								"exist": schema.SingleNestedAttribute{
+									MarkdownDescription: "Exist",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
-										"exist": schema.SingleNestedAttribute{
-											MarkdownDescription: "Exist",
-											Optional:            true,
-											Attributes: map[string]schema.Attribute{
-												"advertise_map": schema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Optional:            true,
-												},
-												"exist_map": schema.StringAttribute{
-													MarkdownDescription: "Exist map",
-													Optional:            true,
-												},
-											},
-										},
-										"non_exist": schema.SingleNestedAttribute{
-											MarkdownDescription: "Non exist",
-											Optional:            true,
-											Attributes: map[string]schema.Attribute{
-												"advertise_map": schema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Optional:            true,
-												},
-												"non_exist_map": schema.StringAttribute{
-													MarkdownDescription: "Non exist map",
-													Optional:            true,
-												},
-											},
-										},
-									},
-								},
-								"filter_list": schema.SingleNestedAttribute{
-									MarkdownDescription: "Filter list",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"inbound": schema.StringAttribute{
-											MarkdownDescription: "Inbound",
+										"advertise_map": schema.StringAttribute{
+											MarkdownDescription: "Advertise map",
 											Optional:            true,
 										},
-										"outbound": schema.StringAttribute{
-											MarkdownDescription: "Outbound",
+										"exist_map": schema.StringAttribute{
+											MarkdownDescription: "Exist map",
 											Optional:            true,
 										},
 									},
 								},
-								"inbound_network_filters": schema.SingleNestedAttribute{
-									MarkdownDescription: "Inbound network filters",
+								"non_exist": schema.SingleNestedAttribute{
+									MarkdownDescription: "Non exist",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
-										"distribute_list": schema.StringAttribute{
-											MarkdownDescription: "Distribute list",
+										"advertise_map": schema.StringAttribute{
+											MarkdownDescription: "Advertise map",
 											Optional:            true,
 										},
-										"prefix_list": schema.StringAttribute{
-											MarkdownDescription: "Prefix list",
+										"non_exist_map": schema.StringAttribute{
+											MarkdownDescription: "Non exist map",
 											Optional:            true,
 										},
 									},
 								},
-								"inherit": schema.BoolAttribute{
-									MarkdownDescription: "Inherit from unicast",
+							},
+						},
+						"filter_list": schema.SingleNestedAttribute{
+							MarkdownDescription: "Filter list",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"inbound": schema.StringAttribute{
+									MarkdownDescription: "Inbound",
 									Optional:            true,
 								},
-								"outbound_network_filters": schema.SingleNestedAttribute{
-									MarkdownDescription: "Outbound network filters",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"distribute_list": schema.StringAttribute{
-											MarkdownDescription: "Distribute list",
-											Optional:            true,
-										},
-										"prefix_list": schema.StringAttribute{
-											MarkdownDescription: "Prefix list",
-											Optional:            true,
-										},
-									},
-								},
-								"route_maps": schema.SingleNestedAttribute{
-									MarkdownDescription: "Route maps",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"inbound": schema.StringAttribute{
-											MarkdownDescription: "Inbound",
-											Optional:            true,
-										},
-										"outbound": schema.StringAttribute{
-											MarkdownDescription: "Outbound",
-											Optional:            true,
-										},
-									},
-								},
-								"unsuppress_map": schema.StringAttribute{
-									MarkdownDescription: "Unsuppress map",
+								"outbound": schema.StringAttribute{
+									MarkdownDescription: "Outbound",
 									Optional:            true,
 								},
 							},
 						},
-						"unicast": schema.SingleNestedAttribute{
-							MarkdownDescription: "Unicast",
+						"inbound_network_filters": schema.SingleNestedAttribute{
+							MarkdownDescription: "Inbound network filters",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
-								"conditional_advertisement": schema.SingleNestedAttribute{
-									MarkdownDescription: "Conditional advertisement",
+								"distribute_list": schema.StringAttribute{
+									MarkdownDescription: "Distribute list",
 									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"exist": schema.SingleNestedAttribute{
-											MarkdownDescription: "Exist",
-											Optional:            true,
-											Attributes: map[string]schema.Attribute{
-												"advertise_map": schema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Optional:            true,
-												},
-												"exist_map": schema.StringAttribute{
-													MarkdownDescription: "Exist map",
-													Optional:            true,
-												},
-											},
-										},
-										"non_exist": schema.SingleNestedAttribute{
-											MarkdownDescription: "Non exist",
-											Optional:            true,
-											Attributes: map[string]schema.Attribute{
-												"advertise_map": schema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Optional:            true,
-												},
-												"non_exist_map": schema.StringAttribute{
-													MarkdownDescription: "Non exist map",
-													Optional:            true,
-												},
-											},
-										},
-									},
 								},
-								"filter_list": schema.SingleNestedAttribute{
-									MarkdownDescription: "Filter list",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"inbound": schema.StringAttribute{
-											MarkdownDescription: "Inbound",
-											Optional:            true,
-										},
-										"outbound": schema.StringAttribute{
-											MarkdownDescription: "Outbound",
-											Optional:            true,
-										},
-									},
-								},
-								"inbound_network_filters": schema.SingleNestedAttribute{
-									MarkdownDescription: "Inbound network filters",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"distribute_list": schema.StringAttribute{
-											MarkdownDescription: "Distribute list",
-											Optional:            true,
-										},
-										"prefix_list": schema.StringAttribute{
-											MarkdownDescription: "Prefix list",
-											Optional:            true,
-										},
-									},
-								},
-								"outbound_network_filters": schema.SingleNestedAttribute{
-									MarkdownDescription: "Outbound network filters",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"distribute_list": schema.StringAttribute{
-											MarkdownDescription: "Distribute list",
-											Optional:            true,
-										},
-										"prefix_list": schema.StringAttribute{
-											MarkdownDescription: "Prefix list",
-											Optional:            true,
-										},
-									},
-								},
-								"route_maps": schema.SingleNestedAttribute{
-									MarkdownDescription: "Route maps",
-									Optional:            true,
-									Attributes: map[string]schema.Attribute{
-										"inbound": schema.StringAttribute{
-											MarkdownDescription: "Inbound",
-											Optional:            true,
-										},
-										"outbound": schema.StringAttribute{
-											MarkdownDescription: "Outbound",
-											Optional:            true,
-										},
-									},
-								},
-								"unsuppress_map": schema.StringAttribute{
-									MarkdownDescription: "Unsuppress map",
+								"prefix_list": schema.StringAttribute{
+									MarkdownDescription: "Prefix list",
 									Optional:            true,
 								},
 							},
+						},
+						"inherit": schema.BoolAttribute{
+							MarkdownDescription: "Inherit from unicast",
+							Optional:            true,
+						},
+						"outbound_network_filters": schema.SingleNestedAttribute{
+							MarkdownDescription: "Outbound network filters",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"distribute_list": schema.StringAttribute{
+									MarkdownDescription: "Distribute list",
+									Optional:            true,
+								},
+								"prefix_list": schema.StringAttribute{
+									MarkdownDescription: "Prefix list",
+									Optional:            true,
+								},
+							},
+						},
+						"route_maps": schema.SingleNestedAttribute{
+							MarkdownDescription: "Route maps",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"inbound": schema.StringAttribute{
+									MarkdownDescription: "Inbound",
+									Optional:            true,
+								},
+								"outbound": schema.StringAttribute{
+									MarkdownDescription: "Outbound",
+									Optional:            true,
+								},
+							},
+						},
+						"unsuppress_map": schema.StringAttribute{
+							MarkdownDescription: "Unsuppress map",
+							Optional:            true,
+						},
+					},
+				},
+				"unicast": schema.SingleNestedAttribute{
+					MarkdownDescription: "Unicast",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"conditional_advertisement": schema.SingleNestedAttribute{
+							MarkdownDescription: "Conditional advertisement",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"exist": schema.SingleNestedAttribute{
+									MarkdownDescription: "Exist",
+									Optional:            true,
+									Attributes: map[string]schema.Attribute{
+										"advertise_map": schema.StringAttribute{
+											MarkdownDescription: "Advertise map",
+											Optional:            true,
+										},
+										"exist_map": schema.StringAttribute{
+											MarkdownDescription: "Exist map",
+											Optional:            true,
+										},
+									},
+								},
+								"non_exist": schema.SingleNestedAttribute{
+									MarkdownDescription: "Non exist",
+									Optional:            true,
+									Attributes: map[string]schema.Attribute{
+										"advertise_map": schema.StringAttribute{
+											MarkdownDescription: "Advertise map",
+											Optional:            true,
+										},
+										"non_exist_map": schema.StringAttribute{
+											MarkdownDescription: "Non exist map",
+											Optional:            true,
+										},
+									},
+								},
+							},
+						},
+						"filter_list": schema.SingleNestedAttribute{
+							MarkdownDescription: "Filter list",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"inbound": schema.StringAttribute{
+									MarkdownDescription: "Inbound",
+									Optional:            true,
+								},
+								"outbound": schema.StringAttribute{
+									MarkdownDescription: "Outbound",
+									Optional:            true,
+								},
+							},
+						},
+						"inbound_network_filters": schema.SingleNestedAttribute{
+							MarkdownDescription: "Inbound network filters",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"distribute_list": schema.StringAttribute{
+									MarkdownDescription: "Distribute list",
+									Optional:            true,
+								},
+								"prefix_list": schema.StringAttribute{
+									MarkdownDescription: "Prefix list",
+									Optional:            true,
+								},
+							},
+						},
+						"outbound_network_filters": schema.SingleNestedAttribute{
+							MarkdownDescription: "Outbound network filters",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"distribute_list": schema.StringAttribute{
+									MarkdownDescription: "Distribute list",
+									Optional:            true,
+								},
+								"prefix_list": schema.StringAttribute{
+									MarkdownDescription: "Prefix list",
+									Optional:            true,
+								},
+							},
+						},
+						"route_maps": schema.SingleNestedAttribute{
+							MarkdownDescription: "Route maps",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"inbound": schema.StringAttribute{
+									MarkdownDescription: "Inbound",
+									Optional:            true,
+								},
+								"outbound": schema.StringAttribute{
+									MarkdownDescription: "Outbound",
+									Optional:            true,
+								},
+							},
+						},
+						"unsuppress_map": schema.StringAttribute{
+							MarkdownDescription: "Unsuppress map",
+							Optional:            true,
 						},
 					},
 				},
@@ -931,213 +808,207 @@ var BgpFilteringProfilesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Ipv4",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
-				"ipv4": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ipv4",
+				"multicast": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Multicast",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"multicast": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Multicast",
+						"conditional_advertisement": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Conditional advertisement",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
-								"conditional_advertisement": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Conditional advertisement",
+								"exist": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Exist",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
-										"exist": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Exist",
-											Computed:            true,
-											Attributes: map[string]dsschema.Attribute{
-												"advertise_map": dsschema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Computed:            true,
-												},
-												"exist_map": dsschema.StringAttribute{
-													MarkdownDescription: "Exist map",
-													Computed:            true,
-												},
-											},
-										},
-										"non_exist": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Non exist",
-											Computed:            true,
-											Attributes: map[string]dsschema.Attribute{
-												"advertise_map": dsschema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Computed:            true,
-												},
-												"non_exist_map": dsschema.StringAttribute{
-													MarkdownDescription: "Non exist map",
-													Computed:            true,
-												},
-											},
-										},
-									},
-								},
-								"filter_list": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Filter list",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"inbound": dsschema.StringAttribute{
-											MarkdownDescription: "Inbound",
+										"advertise_map": dsschema.StringAttribute{
+											MarkdownDescription: "Advertise map",
 											Computed:            true,
 										},
-										"outbound": dsschema.StringAttribute{
-											MarkdownDescription: "Outbound",
+										"exist_map": dsschema.StringAttribute{
+											MarkdownDescription: "Exist map",
 											Computed:            true,
 										},
 									},
 								},
-								"inbound_network_filters": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Inbound network filters",
+								"non_exist": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Non exist",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
-										"distribute_list": dsschema.StringAttribute{
-											MarkdownDescription: "Distribute list",
+										"advertise_map": dsschema.StringAttribute{
+											MarkdownDescription: "Advertise map",
 											Computed:            true,
 										},
-										"prefix_list": dsschema.StringAttribute{
-											MarkdownDescription: "Prefix list",
+										"non_exist_map": dsschema.StringAttribute{
+											MarkdownDescription: "Non exist map",
 											Computed:            true,
 										},
 									},
 								},
-								"inherit": dsschema.BoolAttribute{
-									MarkdownDescription: "Inherit from unicast",
+							},
+						},
+						"filter_list": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Filter list",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"inbound": dsschema.StringAttribute{
+									MarkdownDescription: "Inbound",
 									Computed:            true,
 								},
-								"outbound_network_filters": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Outbound network filters",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"distribute_list": dsschema.StringAttribute{
-											MarkdownDescription: "Distribute list",
-											Computed:            true,
-										},
-										"prefix_list": dsschema.StringAttribute{
-											MarkdownDescription: "Prefix list",
-											Computed:            true,
-										},
-									},
-								},
-								"route_maps": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Route maps",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"inbound": dsschema.StringAttribute{
-											MarkdownDescription: "Inbound",
-											Computed:            true,
-										},
-										"outbound": dsschema.StringAttribute{
-											MarkdownDescription: "Outbound",
-											Computed:            true,
-										},
-									},
-								},
-								"unsuppress_map": dsschema.StringAttribute{
-									MarkdownDescription: "Unsuppress map",
+								"outbound": dsschema.StringAttribute{
+									MarkdownDescription: "Outbound",
 									Computed:            true,
 								},
 							},
 						},
-						"unicast": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Unicast",
+						"inbound_network_filters": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Inbound network filters",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
-								"conditional_advertisement": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Conditional advertisement",
+								"distribute_list": dsschema.StringAttribute{
+									MarkdownDescription: "Distribute list",
 									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"exist": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Exist",
-											Computed:            true,
-											Attributes: map[string]dsschema.Attribute{
-												"advertise_map": dsschema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Computed:            true,
-												},
-												"exist_map": dsschema.StringAttribute{
-													MarkdownDescription: "Exist map",
-													Computed:            true,
-												},
-											},
-										},
-										"non_exist": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Non exist",
-											Computed:            true,
-											Attributes: map[string]dsschema.Attribute{
-												"advertise_map": dsschema.StringAttribute{
-													MarkdownDescription: "Advertise map",
-													Computed:            true,
-												},
-												"non_exist_map": dsschema.StringAttribute{
-													MarkdownDescription: "Non exist map",
-													Computed:            true,
-												},
-											},
-										},
-									},
 								},
-								"filter_list": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Filter list",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"inbound": dsschema.StringAttribute{
-											MarkdownDescription: "Inbound",
-											Computed:            true,
-										},
-										"outbound": dsschema.StringAttribute{
-											MarkdownDescription: "Outbound",
-											Computed:            true,
-										},
-									},
-								},
-								"inbound_network_filters": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Inbound network filters",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"distribute_list": dsschema.StringAttribute{
-											MarkdownDescription: "Distribute list",
-											Computed:            true,
-										},
-										"prefix_list": dsschema.StringAttribute{
-											MarkdownDescription: "Prefix list",
-											Computed:            true,
-										},
-									},
-								},
-								"outbound_network_filters": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Outbound network filters",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"distribute_list": dsschema.StringAttribute{
-											MarkdownDescription: "Distribute list",
-											Computed:            true,
-										},
-										"prefix_list": dsschema.StringAttribute{
-											MarkdownDescription: "Prefix list",
-											Computed:            true,
-										},
-									},
-								},
-								"route_maps": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Route maps",
-									Computed:            true,
-									Attributes: map[string]dsschema.Attribute{
-										"inbound": dsschema.StringAttribute{
-											MarkdownDescription: "Inbound",
-											Computed:            true,
-										},
-										"outbound": dsschema.StringAttribute{
-											MarkdownDescription: "Outbound",
-											Computed:            true,
-										},
-									},
-								},
-								"unsuppress_map": dsschema.StringAttribute{
-									MarkdownDescription: "Unsuppress map",
+								"prefix_list": dsschema.StringAttribute{
+									MarkdownDescription: "Prefix list",
 									Computed:            true,
 								},
 							},
+						},
+						"inherit": dsschema.BoolAttribute{
+							MarkdownDescription: "Inherit from unicast",
+							Computed:            true,
+						},
+						"outbound_network_filters": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Outbound network filters",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"distribute_list": dsschema.StringAttribute{
+									MarkdownDescription: "Distribute list",
+									Computed:            true,
+								},
+								"prefix_list": dsschema.StringAttribute{
+									MarkdownDescription: "Prefix list",
+									Computed:            true,
+								},
+							},
+						},
+						"route_maps": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Route maps",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"inbound": dsschema.StringAttribute{
+									MarkdownDescription: "Inbound",
+									Computed:            true,
+								},
+								"outbound": dsschema.StringAttribute{
+									MarkdownDescription: "Outbound",
+									Computed:            true,
+								},
+							},
+						},
+						"unsuppress_map": dsschema.StringAttribute{
+							MarkdownDescription: "Unsuppress map",
+							Computed:            true,
+						},
+					},
+				},
+				"unicast": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Unicast",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"conditional_advertisement": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Conditional advertisement",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"exist": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Exist",
+									Computed:            true,
+									Attributes: map[string]dsschema.Attribute{
+										"advertise_map": dsschema.StringAttribute{
+											MarkdownDescription: "Advertise map",
+											Computed:            true,
+										},
+										"exist_map": dsschema.StringAttribute{
+											MarkdownDescription: "Exist map",
+											Computed:            true,
+										},
+									},
+								},
+								"non_exist": dsschema.SingleNestedAttribute{
+									MarkdownDescription: "Non exist",
+									Computed:            true,
+									Attributes: map[string]dsschema.Attribute{
+										"advertise_map": dsschema.StringAttribute{
+											MarkdownDescription: "Advertise map",
+											Computed:            true,
+										},
+										"non_exist_map": dsschema.StringAttribute{
+											MarkdownDescription: "Non exist map",
+											Computed:            true,
+										},
+									},
+								},
+							},
+						},
+						"filter_list": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Filter list",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"inbound": dsschema.StringAttribute{
+									MarkdownDescription: "Inbound",
+									Computed:            true,
+								},
+								"outbound": dsschema.StringAttribute{
+									MarkdownDescription: "Outbound",
+									Computed:            true,
+								},
+							},
+						},
+						"inbound_network_filters": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Inbound network filters",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"distribute_list": dsschema.StringAttribute{
+									MarkdownDescription: "Distribute list",
+									Computed:            true,
+								},
+								"prefix_list": dsschema.StringAttribute{
+									MarkdownDescription: "Prefix list",
+									Computed:            true,
+								},
+							},
+						},
+						"outbound_network_filters": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Outbound network filters",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"distribute_list": dsschema.StringAttribute{
+									MarkdownDescription: "Distribute list",
+									Computed:            true,
+								},
+								"prefix_list": dsschema.StringAttribute{
+									MarkdownDescription: "Prefix list",
+									Computed:            true,
+								},
+							},
+						},
+						"route_maps": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "Route maps",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"inbound": dsschema.StringAttribute{
+									MarkdownDescription: "Inbound",
+									Computed:            true,
+								},
+								"outbound": dsschema.StringAttribute{
+									MarkdownDescription: "Outbound",
+									Computed:            true,
+								},
+							},
+						},
+						"unsuppress_map": dsschema.StringAttribute{
+							MarkdownDescription: "Unsuppress map",
+							Computed:            true,
 						},
 					},
 				},

@@ -233,7 +233,7 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 											},
 											"name": schema.StringAttribute{
 												MarkdownDescription: "An auto-generated name (_This should be removed_)",
-												Required:            true,
+												Computed:            true,
 											},
 											"value": schema.StringAttribute{
 												MarkdownDescription: "The value associated with the HTTP header",

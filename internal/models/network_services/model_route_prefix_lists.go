@@ -27,31 +27,36 @@ type RoutePrefixLists struct {
 	Device      basetypes.StringValue `tfsdk:"device"`
 	Folder      basetypes.StringValue `tfsdk:"folder"`
 	Id          basetypes.StringValue `tfsdk:"id"`
-	Ipv4        basetypes.ObjectValue `tfsdk:"ipv4"`
 	Name        basetypes.StringValue `tfsdk:"name"`
 	Snippet     basetypes.StringValue `tfsdk:"snippet"`
+	Type        basetypes.ObjectValue `tfsdk:"type"`
 }
 
-// RoutePrefixListsIpv4 represents a nested structure within the RoutePrefixLists model
-type RoutePrefixListsIpv4 struct {
+// RoutePrefixListsType represents a nested structure within the RoutePrefixLists model
+type RoutePrefixListsType struct {
+	Ipv4 basetypes.ObjectValue `tfsdk:"ipv4"`
+}
+
+// RoutePrefixListsTypeIpv4 represents a nested structure within the RoutePrefixLists model
+type RoutePrefixListsTypeIpv4 struct {
 	Ipv4Entry basetypes.ListValue `tfsdk:"ipv4_entry"`
 }
 
-// RoutePrefixListsIpv4Ipv4EntryInner represents a nested structure within the RoutePrefixLists model
-type RoutePrefixListsIpv4Ipv4EntryInner struct {
+// RoutePrefixListsTypeIpv4Ipv4EntryInner represents a nested structure within the RoutePrefixLists model
+type RoutePrefixListsTypeIpv4Ipv4EntryInner struct {
 	Action basetypes.StringValue `tfsdk:"action"`
 	Name   basetypes.Int64Value  `tfsdk:"name"`
 	Prefix basetypes.ObjectValue `tfsdk:"prefix"`
 }
 
-// RoutePrefixListsIpv4Ipv4EntryInnerPrefix represents a nested structure within the RoutePrefixLists model
-type RoutePrefixListsIpv4Ipv4EntryInnerPrefix struct {
+// RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix represents a nested structure within the RoutePrefixLists model
+type RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix struct {
 	Entry   basetypes.ObjectValue `tfsdk:"entry"`
 	Network basetypes.StringValue `tfsdk:"network"`
 }
 
-// RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry represents a nested structure within the RoutePrefixLists model
-type RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry struct {
+// RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry represents a nested structure within the RoutePrefixLists model
+type RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry struct {
 	GreaterThanOrEqual basetypes.Int64Value  `tfsdk:"greater_than_or_equal"`
 	LessThanOrEqual    basetypes.Int64Value  `tfsdk:"less_than_or_equal"`
 	Network            basetypes.StringValue `tfsdk:"network"`
@@ -65,6 +70,47 @@ func (o RoutePrefixLists) AttrTypes() map[string]attr.Type {
 		"device":      basetypes.StringType{},
 		"folder":      basetypes.StringType{},
 		"id":          basetypes.StringType{},
+		"name":        basetypes.StringType{},
+		"snippet":     basetypes.StringType{},
+		"type": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"ipv4": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"ipv4_entry": basetypes.ListType{ElemType: basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"action": basetypes.StringType{},
+								"name":   basetypes.Int64Type{},
+								"prefix": basetypes.ObjectType{
+									AttrTypes: map[string]attr.Type{
+										"entry": basetypes.ObjectType{
+											AttrTypes: map[string]attr.Type{
+												"greater_than_or_equal": basetypes.Int64Type{},
+												"less_than_or_equal":    basetypes.Int64Type{},
+												"network":               basetypes.StringType{},
+											},
+										},
+										"network": basetypes.StringType{},
+									},
+								},
+							},
+						}},
+					},
+				},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of RoutePrefixLists objects.
+func (o RoutePrefixLists) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the RoutePrefixListsType model.
+func (o RoutePrefixListsType) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
 		"ipv4": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"ipv4_entry": basetypes.ListType{ElemType: basetypes.ObjectType{
@@ -87,20 +133,18 @@ func (o RoutePrefixLists) AttrTypes() map[string]attr.Type {
 				}},
 			},
 		},
-		"name":    basetypes.StringType{},
-		"snippet": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of RoutePrefixLists objects.
-func (o RoutePrefixLists) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of RoutePrefixListsType objects.
+func (o RoutePrefixListsType) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the RoutePrefixListsIpv4 model.
-func (o RoutePrefixListsIpv4) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the RoutePrefixListsTypeIpv4 model.
+func (o RoutePrefixListsTypeIpv4) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"ipv4_entry": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -123,15 +167,15 @@ func (o RoutePrefixListsIpv4) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of RoutePrefixListsIpv4 objects.
-func (o RoutePrefixListsIpv4) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of RoutePrefixListsTypeIpv4 objects.
+func (o RoutePrefixListsTypeIpv4) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the RoutePrefixListsIpv4Ipv4EntryInner model.
-func (o RoutePrefixListsIpv4Ipv4EntryInner) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the RoutePrefixListsTypeIpv4Ipv4EntryInner model.
+func (o RoutePrefixListsTypeIpv4Ipv4EntryInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"action": basetypes.StringType{},
 		"name":   basetypes.Int64Type{},
@@ -150,15 +194,15 @@ func (o RoutePrefixListsIpv4Ipv4EntryInner) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of RoutePrefixListsIpv4Ipv4EntryInner objects.
-func (o RoutePrefixListsIpv4Ipv4EntryInner) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of RoutePrefixListsTypeIpv4Ipv4EntryInner objects.
+func (o RoutePrefixListsTypeIpv4Ipv4EntryInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the RoutePrefixListsIpv4Ipv4EntryInnerPrefix model.
-func (o RoutePrefixListsIpv4Ipv4EntryInnerPrefix) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix model.
+func (o RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"entry": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
@@ -171,15 +215,15 @@ func (o RoutePrefixListsIpv4Ipv4EntryInnerPrefix) AttrTypes() map[string]attr.Ty
 	}
 }
 
-// AttrType returns the attribute type for a list of RoutePrefixListsIpv4Ipv4EntryInnerPrefix objects.
-func (o RoutePrefixListsIpv4Ipv4EntryInnerPrefix) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix objects.
+func (o RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry model.
-func (o RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry model.
+func (o RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"greater_than_or_equal": basetypes.Int64Type{},
 		"less_than_or_equal":    basetypes.Int64Type{},
@@ -187,8 +231,8 @@ func (o RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry) AttrTypes() map[string]at
 	}
 }
 
-// AttrType returns the attribute type for a list of RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry objects.
-func (o RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry objects.
+func (o RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -239,79 +283,6 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
-		"ipv4": schema.SingleNestedAttribute{
-			MarkdownDescription: "Ipv4",
-			Optional:            true,
-			Attributes: map[string]schema.Attribute{
-				"ipv4_entry": schema.ListNestedAttribute{
-					MarkdownDescription: "IPv4 prefix lists",
-					Optional:            true,
-					NestedObject: schema.NestedAttributeObject{
-						Attributes: map[string]schema.Attribute{
-							"action": schema.StringAttribute{
-								Validators: []validator.String{
-									stringvalidator.OneOf("deny", "permit"),
-								},
-								MarkdownDescription: "Action",
-								Optional:            true,
-							},
-							"name": schema.Int64Attribute{
-								Validators: []validator.Int64{
-									int64validator.Between(1, 65535),
-								},
-								MarkdownDescription: "Sequence number",
-								Optional:            true,
-							},
-							"prefix": schema.SingleNestedAttribute{
-								MarkdownDescription: "Prefix",
-								Optional:            true,
-								Attributes: map[string]schema.Attribute{
-									"entry": schema.SingleNestedAttribute{
-										Validators: []validator.Object{
-											objectvalidator.ConflictsWith(
-												path.MatchRelative().AtParent().AtName("network"),
-											),
-										},
-										MarkdownDescription: "Entry\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
-										Optional:            true,
-										Attributes: map[string]schema.Attribute{
-											"greater_than_or_equal": schema.Int64Attribute{
-												Validators: []validator.Int64{
-													int64validator.Between(0, 32),
-												},
-												MarkdownDescription: "Greater than or equal to",
-												Optional:            true,
-											},
-											"less_than_or_equal": schema.Int64Attribute{
-												Validators: []validator.Int64{
-													int64validator.Between(0, 32),
-												},
-												MarkdownDescription: "Less than or equal to",
-												Optional:            true,
-											},
-											"network": schema.StringAttribute{
-												MarkdownDescription: "Network",
-												Optional:            true,
-											},
-										},
-									},
-									"network": schema.StringAttribute{
-										Validators: []validator.String{
-											stringvalidator.ConflictsWith(
-												path.MatchRelative().AtParent().AtName("entry"),
-											),
-											stringvalidator.OneOf("any"),
-										},
-										MarkdownDescription: "Network\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
-										Optional:            true,
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "Filter prefix list name",
 			Required:            true,
@@ -338,6 +309,85 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
+		"type": schema.SingleNestedAttribute{
+			MarkdownDescription: "Address Family Type",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"ipv4": schema.SingleNestedAttribute{
+					MarkdownDescription: "Ipv4",
+					Required:            true,
+					Attributes: map[string]schema.Attribute{
+						"ipv4_entry": schema.ListNestedAttribute{
+							MarkdownDescription: "IPv4 prefix lists",
+							Optional:            true,
+							NestedObject: schema.NestedAttributeObject{
+								Attributes: map[string]schema.Attribute{
+									"action": schema.StringAttribute{
+										Validators: []validator.String{
+											stringvalidator.OneOf("deny", "permit"),
+										},
+										MarkdownDescription: "Action",
+										Optional:            true,
+									},
+									"name": schema.Int64Attribute{
+										Validators: []validator.Int64{
+											int64validator.Between(1, 65535),
+										},
+										MarkdownDescription: "Sequence number",
+										Optional:            true,
+									},
+									"prefix": schema.SingleNestedAttribute{
+										MarkdownDescription: "Prefix",
+										Optional:            true,
+										Attributes: map[string]schema.Attribute{
+											"entry": schema.SingleNestedAttribute{
+												Validators: []validator.Object{
+													objectvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("network"),
+													),
+												},
+												MarkdownDescription: "Entry\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
+												Optional:            true,
+												Attributes: map[string]schema.Attribute{
+													"greater_than_or_equal": schema.Int64Attribute{
+														Validators: []validator.Int64{
+															int64validator.Between(0, 32),
+														},
+														MarkdownDescription: "Greater than or equal to",
+														Optional:            true,
+													},
+													"less_than_or_equal": schema.Int64Attribute{
+														Validators: []validator.Int64{
+															int64validator.Between(0, 32),
+														},
+														MarkdownDescription: "Less than or equal to",
+														Optional:            true,
+													},
+													"network": schema.StringAttribute{
+														MarkdownDescription: "Network",
+														Optional:            true,
+													},
+												},
+											},
+											"network": schema.StringAttribute{
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("entry"),
+													),
+													stringvalidator.OneOf("any"),
+												},
+												MarkdownDescription: "Network\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
+												Optional:            true,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 	},
 }
 
@@ -361,56 +411,6 @@ var RoutePrefixListsDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "UUID of the resource",
 			Required:            true,
 		},
-		"ipv4": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ipv4",
-			Computed:            true,
-			Attributes: map[string]dsschema.Attribute{
-				"ipv4_entry": dsschema.ListNestedAttribute{
-					MarkdownDescription: "IPv4 prefix lists",
-					Computed:            true,
-					NestedObject: dsschema.NestedAttributeObject{
-						Attributes: map[string]dsschema.Attribute{
-							"action": dsschema.StringAttribute{
-								MarkdownDescription: "Action",
-								Computed:            true,
-							},
-							"name": dsschema.Int64Attribute{
-								MarkdownDescription: "Sequence number",
-								Computed:            true,
-							},
-							"prefix": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Prefix",
-								Computed:            true,
-								Attributes: map[string]dsschema.Attribute{
-									"entry": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Entry\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
-										Computed:            true,
-										Attributes: map[string]dsschema.Attribute{
-											"greater_than_or_equal": dsschema.Int64Attribute{
-												MarkdownDescription: "Greater than or equal to",
-												Computed:            true,
-											},
-											"less_than_or_equal": dsschema.Int64Attribute{
-												MarkdownDescription: "Less than or equal to",
-												Computed:            true,
-											},
-											"network": dsschema.StringAttribute{
-												MarkdownDescription: "Network",
-												Computed:            true,
-											},
-										},
-									},
-									"network": dsschema.StringAttribute{
-										MarkdownDescription: "Network\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
-										Computed:            true,
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
 		"name": dsschema.StringAttribute{
 			MarkdownDescription: "Filter prefix list name",
 			Optional:            true,
@@ -423,6 +423,62 @@ var RoutePrefixListsDataSourceSchema = dsschema.Schema{
 		"tfid": dsschema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
 			Computed:            true,
+		},
+		"type": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Address Family Type",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"ipv4": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Ipv4",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"ipv4_entry": dsschema.ListNestedAttribute{
+							MarkdownDescription: "IPv4 prefix lists",
+							Computed:            true,
+							NestedObject: dsschema.NestedAttributeObject{
+								Attributes: map[string]dsschema.Attribute{
+									"action": dsschema.StringAttribute{
+										MarkdownDescription: "Action",
+										Computed:            true,
+									},
+									"name": dsschema.Int64Attribute{
+										MarkdownDescription: "Sequence number",
+										Computed:            true,
+									},
+									"prefix": dsschema.SingleNestedAttribute{
+										MarkdownDescription: "Prefix",
+										Computed:            true,
+										Attributes: map[string]dsschema.Attribute{
+											"entry": dsschema.SingleNestedAttribute{
+												MarkdownDescription: "Entry\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
+												Computed:            true,
+												Attributes: map[string]dsschema.Attribute{
+													"greater_than_or_equal": dsschema.Int64Attribute{
+														MarkdownDescription: "Greater than or equal to",
+														Computed:            true,
+													},
+													"less_than_or_equal": dsschema.Int64Attribute{
+														MarkdownDescription: "Less than or equal to",
+														Computed:            true,
+													},
+													"network": dsschema.StringAttribute{
+														MarkdownDescription: "Network",
+														Computed:            true,
+													},
+												},
+											},
+											"network": dsschema.StringAttribute{
+												MarkdownDescription: "Network\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
+												Computed:            true,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 }

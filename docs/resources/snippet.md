@@ -46,9 +46,9 @@ resource "scm_snippet" "scm_snippet_3" {
 
 - `description` (String) The description of the snippet
 - `labels` (List of String) Labels applied to the snippet
-- `type` (String) The snippet type
 
 ### Read-Only
 
 - `id` (String) The UUID of the snippet
 - `tfid` (String) The Terraform ID.
+- `type` (String) The snippet type

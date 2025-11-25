@@ -1,17 +1,12 @@
 package provider
 
-/*
-
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"reflect"
 	"strings"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -19,7 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // RESOURCE for SCM AutoVpnCluster (Package: network_services)
@@ -69,25 +65,25 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 
 	// 1. Get the plan from Terraform into the data model.
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
-	if resp.Diagnostics.HasError() { return }
-
-
-
-
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.AutoVpnClusters{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// 2. Unpack the request BODY from data into an SDK object.
 	unpackedScmObject, diags := unpackAutoVpnClustersToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	tflog.Debug(ctx, "Creating auto_vpn_clusters on SCM API")
-
-
 
 	// 3. Initiate the API request with the body.
 	createReq := r.client.AutoVPNClustersAPI.CreateAutoVPNClusters(ctx).AutoVpnClusters(*unpackedScmObject)
@@ -107,42 +103,45 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 		return
 	}
 
-
-
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packAutoVpnClustersFromSdk(ctx, *createdObject)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-	if resp.Diagnostics.HasError() { return }
-
-
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
-    //    This is necessary for parameters that are sent to the API but not returned in the response.
-
-
+	//    This is necessary for parameters that are sent to the API but not returned in the response.
 
 	// Set the Terraform ID and save the final state.
 	var idBuilder strings.Builder
 
 	v := reflect.ValueOf(data)
 
-
 	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
 
 	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
 
 	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
+			idBuilder.WriteString(val.ValueString())
+		}
 	}
 
 	idBuilder.WriteString(":")
@@ -160,7 +159,9 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 
 	// Step 2 - Fetch the state into savestate
 	resp.Diagnostics.Append(req.State.Get(ctx, &savestate)...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	tokens := strings.Split(savestate.Tfid.ValueString(), ":")
 	if len(tokens) != 4 {
@@ -190,23 +191,21 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 		return
 	}
 
-
-
 	// Step 5 - Pack the scm object into a terraform model and put it in data we initialized in step 1
 	packedObject, diags := packAutoVpnClustersFromSdk(ctx, *scmObject)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-	if resp.Diagnostics.HasError() { return }
-
-
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Step 7 - Carry over tfid from state back into data
 	data.Tfid = savestate.Tfid
 
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
-
-
 
 	// Step 9 - Set folder, snippet, device from params back into data if present
 
@@ -214,7 +213,7 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 
 	// Use reflection to safely restore the Folder field from the TFID token 0.
 	vFolder := reflect.ValueOf(&data).Elem() // Unique variable: vFolder
-	fFolder := vFolder.FieldByName("Folder")  // Unique variable: fFolder
+	fFolder := vFolder.FieldByName("Folder") // Unique variable: fFolder
 
 	if fFolder.IsValid() && fFolder.CanSet() {
 		tokenValue := tokens[0]
@@ -228,11 +227,10 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 		}
 	}
 
-
 	// --- SNIPPET RESTORATION (tokens[1]) ---
 
 	// Use reflection to safely restore the Snippet field from the TFID token 1.
-	vSnippet := reflect.ValueOf(&data).Elem() // Unique variable: vSnippet
+	vSnippet := reflect.ValueOf(&data).Elem()   // Unique variable: vSnippet
 	fSnippet := vSnippet.FieldByName("Snippet") // Unique variable: fSnippet
 
 	if fSnippet.IsValid() && fSnippet.CanSet() {
@@ -246,7 +244,6 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 			fSnippet.Set(reflect.ValueOf(newNullValue))
 		}
 	}
-
 
 	// --- DEVICE RESTORATION (tokens[2]) ---
 
@@ -266,7 +263,6 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 		}
 	}
 
-
 	// Step 10 - Set data back into tf state and done
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -279,23 +275,27 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 
 	// Step 2: Get the plan from plan file (resource.tf) into plan and state from tfstate into state
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
-	if resp.Diagnostics.HasError() { return }
-
-
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Step 3: Creates a plan object from the plan
 	planObject, diags := types.ObjectValueFrom(ctx, models.AutoVpnClusters{}.AttrTypes(), &plan)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Step 4: Unpack the plan object to an SCM Object
 	unpackedScmObject, diags := unpackAutoVpnClustersToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
-
-
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a pointer, so we nil it out to omit it from the update payload.
@@ -304,9 +304,9 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 	// Step 6: Get id from token and make update call
 	tokens := strings.Split(state.Tfid.ValueString(), ":")
 	if len(tokens) != 4 {
-        resp.Diagnostics.AddError("Error parsing TFID", fmt.Sprintf("Expected a TFID with 4 parts separated by ':', but got %d parts for TFID %s", len(tokens), state.Tfid.ValueString()))
+		resp.Diagnostics.AddError("Error parsing TFID", fmt.Sprintf("Expected a TFID with 4 parts separated by ':', but got %d parts for TFID %s", len(tokens), state.Tfid.ValueString()))
 		return
-    }
+	}
 	objectId := tokens[3]
 
 	tflog.Debug(ctx, "Updating auto_vpn_clusters on SCM API", map[string]interface{}{"id": objectId})
@@ -336,28 +336,26 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 		return
 	}
 
-
-
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packAutoVpnClustersFromSdk(ctx, *updatedObject)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &plan, basetypes.ObjectAsOptions{})...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// // Preserve any write-only parameter values from the plan.
 	//
 	// _ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
 	//
 
-
-
 	// Step 10: Carry over tfid from state into plan
 	plan.Tfid = state.Tfid
 
-    // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
-
-
+	// Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
 
 	tflog.Debug(ctx, "Updated auto_vpn_clusters", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
@@ -366,11 +364,13 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 func (r *AutoVpnClusterResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
 	var data models.AutoVpnClusters
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	tokens := strings.Split(data.Tfid.ValueString(), ":")
 	if len(tokens) != 4 {
-        resp.Diagnostics.AddError("Error parsing TFID", fmt.Sprintf("Expected a TFID with 4 parts separated by ':', but got %d parts for TFID %s", len(tokens), data.Tfid.ValueString()))
+		resp.Diagnostics.AddError("Error parsing TFID", fmt.Sprintf("Expected a TFID with 4 parts separated by ':', but got %d parts for TFID %s", len(tokens), data.Tfid.ValueString()))
 		return
 	}
 	objectId := tokens[3]
@@ -392,21 +392,3 @@ func (r *AutoVpnClusterResource) Delete(ctx context.Context, req resource.Delete
 func (r *AutoVpnClusterResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/

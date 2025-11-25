@@ -80,7 +80,7 @@ var SnippetsResourceSchema = schema.Schema{
 				stringvalidator.OneOf("predefined", "custom"),
 			},
 			MarkdownDescription: "The snippet type",
-			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

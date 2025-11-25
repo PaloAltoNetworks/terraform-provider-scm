@@ -106,6 +106,7 @@ func (d *OcspResponderListDataSource) Read(ctx context.Context, req datasource.R
 		return
 	}
 
+
 	// Convert the response to the Terraform model.
 	if listResponse == nil || listResponse.GetData() == nil {
 		return // Nothing to do.

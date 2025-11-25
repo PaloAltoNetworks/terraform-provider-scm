@@ -59,15 +59,19 @@ func unpackSitesToSdk(ctx context.Context, obj types.Object) (*deployment_servic
 
 	// Handling Primitives
 	if !model.Latitude.IsNull() && !model.Latitude.IsUnknown() {
-		val := float32(model.Latitude.ValueFloat64())
-		sdk.Latitude = &val
+		sdk.Latitude = model.Latitude.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Latitude", "value": *sdk.Latitude})
 	}
 
 	// Handling Primitives
+	if !model.LicenseType.IsNull() && !model.LicenseType.IsUnknown() {
+		sdk.LicenseType = model.LicenseType.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LicenseType", "value": *sdk.LicenseType})
+	}
+
+	// Handling Primitives
 	if !model.Longitude.IsNull() && !model.Longitude.IsUnknown() {
-		val := float32(model.Longitude.ValueFloat64())
-		sdk.Longitude = &val
+		sdk.Longitude = model.Longitude.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Longitude", "value": *sdk.Longitude})
 	}
 
@@ -106,8 +110,8 @@ func unpackSitesToSdk(ctx context.Context, obj types.Object) (*deployment_servic
 
 	// Handling Primitives
 	if !model.Type.IsNull() && !model.Type.IsUnknown() {
-		sdk.Type = model.Type.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Type", "value": sdk.Type})
+		sdk.Type = model.Type.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Type", "value": *sdk.Type})
 	}
 
 	// Handling Primitives
@@ -168,18 +172,26 @@ func packSitesFromSdk(ctx context.Context, sdk deployment_services.Sites) (types
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Latitude != nil {
-		model.Latitude = basetypes.NewFloat64Value(float64(*sdk.Latitude))
+		model.Latitude = basetypes.NewStringValue(*sdk.Latitude)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Latitude", "value": *sdk.Latitude})
 	} else {
-		model.Latitude = basetypes.NewFloat64Null()
+		model.Latitude = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.LicenseType != nil {
+		model.LicenseType = basetypes.NewStringValue(*sdk.LicenseType)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LicenseType", "value": *sdk.LicenseType})
+	} else {
+		model.LicenseType = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Longitude != nil {
-		model.Longitude = basetypes.NewFloat64Value(float64(*sdk.Longitude))
+		model.Longitude = basetypes.NewStringValue(*sdk.Longitude)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Longitude", "value": *sdk.Longitude})
 	} else {
-		model.Longitude = basetypes.NewFloat64Null()
+		model.Longitude = basetypes.NewStringNull()
 	}
 	// Handling Lists
 	if sdk.Members != nil {
@@ -217,8 +229,12 @@ func packSitesFromSdk(ctx context.Context, sdk deployment_services.Sites) (types
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Type = basetypes.NewStringValue(sdk.Type)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Type", "value": sdk.Type})
+	if sdk.Type != nil {
+		model.Type = basetypes.NewStringValue(*sdk.Type)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Type", "value": *sdk.Type})
+	} else {
+		model.Type = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.ZipCode != nil {

@@ -1,0 +1,119 @@
+## 1. Define the IKE Crypto Profile (IKE Phase 1)
+# Note: The resource name is plural: "scm_ike_crypto_profile"
+resource "scm_ike_crypto_profile" "example" {
+  name       = "example-ike-crypto-14"
+  folder     = "Remote Networks"
+  hash       = ["sha256"]
+  dh_group   = ["group14"]
+  encryption = ["aes-256-cbc"]
+}
+
+## 2. Define the IPsec Crypto Profile (IKE Phase 2)
+# Note: The resource name is plural and nested blocks now use an equals sign (=).
+resource "scm_ipsec_crypto_profile" "example" {
+  name   = "PaloAlto-Networks-IPSec-14"
+  folder = "Remote Networks"
+
+  esp = {
+    encryption     = ["aes-256-gcm"]
+    authentication = ["sha256"]
+  }
+
+  dh_group = "group14"
+
+  lifetime = {
+    hours = 8
+  }
+}
+
+## 3. Define the IKE Gateway
+# Note: The resource name is plural and nested blocks now use an equals sign (=).
+resource "scm_ike_gateway" "example" {
+  name   = "example-gateway-14"
+  folder = "Remote Networks"
+
+  peer_address = {
+    ip = "1.1.1.1"
+  }
+
+  authentication = {
+    pre_shared_key = {
+      # In a real-world scenario, use a variable marked as sensitive for the key.
+      key = "secret"
+    }
+  }
+
+  protocol = {
+    ikev1 = {
+      ike_crypto_profile = scm_ike_crypto_profile.example.name
+    }
+  }
+}
+
+## 4. Define the IPsec Tunnel
+# Note: Nested 'auto_key' block uses an equals sign (=).
+resource "scm_ipsec_tunnel" "example" {
+  name                     = "example-tunnel-14"
+  folder                   = "Remote Networks"
+  tunnel_interface         = "tunnel"
+  anti_replay              = true
+  copy_tos                 = false
+  enable_gre_encapsulation = false
+
+  auto_key = {
+    ike_gateway = [{
+      name = scm_ike_gateway.example.name
+    }]
+
+    ipsec_crypto_profile = scm_ipsec_crypto_profile.example.name
+  }
+
+  depends_on = [
+    scm_ike_gateway.example
+  ]
+}
+
+# 1. Define the Remote Network first
+resource "scm_remote_network" "branch_office" {
+  folder       = "Remote Networks"
+  name         = "example-rn-14"
+  region       = "us-west-1"
+  license_type = "FWAAS-AGGREGATE"
+
+  # Required configuration for FWAAS-AGGREGATE
+  ipsec_tunnel = scm_ipsec_tunnel.example.name # Ensure this tunnel exists
+  spn_name     = "us-west-1-spn-1"             # Replace with valid SPN
+
+  subnets = ["192.168.10.0/24"]
+}
+
+# 2. Define the Site
+resource "scm_site" "example" {
+
+  name         = "example-site-14"
+  type         = "third-party-branch"
+  license_type = "FWAAS-SITE-25Mbps"
+
+  # Location
+  city      = "San Jose"
+  state     = "CA"
+  country   = "United States"
+  zip_code  = "95135"
+  latitude  = "37.293306"
+  longitude = "-121.754485"
+
+  # Member configuration linking to the Remote Network above
+  members = [
+    {
+      name           = scm_remote_network.branch_office.name
+      remote_network = scm_remote_network.branch_office.name
+      mode           = "active"
+    }
+  ]
+
+  # QoS configuration
+  qos = {
+    profile = "Default Profile"
+    cir     = 20
+  }
+}

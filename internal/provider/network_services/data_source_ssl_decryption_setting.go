@@ -81,85 +81,80 @@ func (d *SslDecryptionSettingDataSource) Read(ctx context.Context, req datasourc
 		tflog.Debug(ctx, "--- VERIFICATION LOG: req.Config.Get() resulted in a diagnostic error.")
 		return
 	}
+	// --- SINGLETON DATA SOURCE LOGIC ---
+	tflog.Debug(ctx, "Reading Singleton SslDecryptionSetting")
 
-	// Logic to handle read by ID or by name/list.
-	// We prioritize reading by ID if it is provided.
-	if !data.Id.IsNull() {
-		objectId := data.Id.ValueString()
-		tflog.Debug(ctx, "Reading SslDecryptionSettings data source by ID", map[string]interface{}{"id": objectId})
+	// 1. Perform the API call (no ID argument)
+	readReq := d.client.SslDecryptionSettingsAPI.getSslDecryptionSettings(ctx)
 
-		getReq := d.client.SslDecryptionSettingsAPI.(ctx, objectId)
-		scmObject, httpRes, err := getReq.Execute()
+	// 2. Add query parameters if any
+	if !data.Folder.IsNull() {
+		readReq = readReq.Folder(data.Folder.ValueString())
+	}
+	if !data.Snippet.IsNull() {
+		readReq = readReq.Snippet(data.Snippet.ValueString())
+	}
+	if !data.Device.IsNull() {
+		readReq = readReq.Device(data.Device.ValueString())
+	}
+	if !data.Offset.IsNull() {
+		readReq = readReq.Offset(int32(data.Offset.ValueInt64()))
+	}
+	if !data.Limit.IsNull() {
+		readReq = readReq.Limit(int32(data.Limit.ValueInt64()))
+	}
 
-		var statusCode int
-		if httpRes != nil {
-			statusCode = httpRes.StatusCode
-		}
-		tflog.Debug(ctx, "--- SCM API CALL: Execution complete.", map[string]interface{}{
-			"error":      err,
-			"statusCode": statusCode,
-			"scmObjectIsNil": scmObject == nil,
-		})
-
-		if err != nil {
-			resp.Diagnostics.AddError("Error Reading SslDecryptionSettings", fmt.Sprintf("Could not read SslDecryptionSettings with ID %s: %s", objectId, err.Error()))
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
-				detailedMessage,
-			)
-			return
-		}
-		if httpRes.StatusCode != 200 {
-			resp.Diagnostics.AddError("Unexpected HTTP status code", fmt.Sprintf("Expected 200, got %d", httpRes.StatusCode))
-			return
-		}
-
-		tflog.Debug(ctx, "--- DATA SOURCE READ: API call successful. About to call the packer.")
-
-		// Create a packed object from the SCM response.
-		packedObject, diags := packSslDecryptionSettingsFromSdk(ctx, *scmObject)
-		resp.Diagnostics.Append(diags...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-		// Load the packed object into the data model.
-		resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-	}  else {
-		resp.Diagnostics.AddError("Missing Identifier", "Either 'id' or 'name' must be provided for the SslDecryptionSettings data source.")
+	// 3. Execute using interface{} to capture any response type
+	var scmObjectInterface interface{}
+	scmObjectInterface, _, err := readReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error Reading SslDecryptionSetting", err.Error())
 		return
 	}
 
-	// Create the composite Tfid for consistency.
-	var idBuilder strings.Builder
+	// 4. Dynamic Response Handling (Reflection + JSON)
+	var scmObject *network_services.SslDecryptionSettings
+	val := reflect.ValueOf(scmObjectInterface)
+	if val.Kind() == reflect.Ptr && !val.IsNil() { val = val.Elem() }
 
-	v := reflect.ValueOf(data)
-
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+	if val.Kind() == reflect.Struct {
+		dataField := val.FieldByName("Data")
+		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
+			if dataField.Len() > 0 {
+				firstItem := dataField.Index(0).Interface()
+				jsonBytes, _ := json.Marshal(firstItem)
+				var targetStruct network_services.SslDecryptionSettings
+				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+					scmObject = &targetStruct
+				}
+			} else {
+				resp.Diagnostics.AddError("Not Found", "The singleton resource was not found (empty list returned).")
+				return
+			}
+		} else {
+            jsonBytes, _ := json.Marshal(scmObjectInterface)
+            var targetStruct network_services.SslDecryptionSettings
+            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+                scmObject = &targetStruct
+            }
+        }
 	}
 
-	idBuilder.WriteString(":")
-
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
+	if scmObject == nil {
+		resp.Diagnostics.AddError("Error Processing Response", "Could not convert API response to expected model.")
+		return
 	}
 
-	idBuilder.WriteString(":")
+	// 5. Pack and Set State
+	packedObject, diags := packSslDecryptionSettingsFromSdk(ctx, *scmObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
 
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { idBuilder.WriteString(val.ValueString()) }
-	}
+	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
+	if resp.Diagnostics.HasError() { return }
 
-	idBuilder.WriteString(":")
-	idBuilder.WriteString(data.Id.ValueString())
-	data.Tfid = types.StringValue(idBuilder.String())
+	// Force synthetic ID
+	data.Tfid = types.StringValue("singleton")
 
 
 

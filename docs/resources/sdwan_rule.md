@@ -33,13 +33,19 @@ SdwanRule resource
 
 - `description` (String) Rule description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Disable rule?
 - `error_correction_profile` (String) Error correction profile
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `negate_destination` (Boolean) Negate destination address(es)?
 - `negate_source` (Boolean) Negate source address(es)?
 - `saas_quality_profile` (String) SaaS quality profile
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag` (List of String) List of tags
 
 ### Read-Only

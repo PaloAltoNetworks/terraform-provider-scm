@@ -67,9 +67,13 @@ Read-Only:
 - `default` (Attributes) Default (see [below for nested schema](#nestedatt--data--default))
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `evasive_behavior` (Boolean) Evasive behavior
 - `file_type_ident` (Boolean) File type ident
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `has_known_vulnerability` (Boolean) Has known vulnerability
 - `no_appid_caching` (Boolean) No appid caching
 - `parent_app` (String) Parent app
@@ -78,6 +82,8 @@ Read-Only:
 - `risk` (String) Risk
 - `signature` (Attributes List) Signature (see [below for nested schema](#nestedatt--data--signature))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `subcategory` (String) Subcategory
 - `tcp_half_closed_timeout` (Number) timeout for half-close session in seconds
 - `tcp_time_wait_timeout` (Number) timeout for session in time_wait state in seconds
@@ -96,10 +102,18 @@ Read-Only:
 
 Read-Only:
 
-- `ident_by_icmp6_type` (Attributes) Ident by icmp6 type (see [below for nested schema](#nestedatt--data--default--ident_by_icmp6_type))
-- `ident_by_icmp_type` (Attributes) Ident by icmp type (see [below for nested schema](#nestedatt--data--default--ident_by_icmp_type))
+- `ident_by_icmp6_type` (Attributes) Ident by icmp6 type
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`. (see [below for nested schema](#nestedatt--data--default--ident_by_icmp6_type))
+- `ident_by_icmp_type` (Attributes) Ident by icmp type
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`. (see [below for nested schema](#nestedatt--data--default--ident_by_icmp_type))
 - `ident_by_ip_protocol` (String) Ident by ip protocol
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.
 - `port` (List of String) Port
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.
 
 <a id="nestedatt--data--default--ident_by_icmp6_type"></a>
 ### Nested Schema for `data.default.ident_by_icmp6_type`
@@ -152,10 +166,18 @@ Read-Only:
 
 Read-Only:
 
-- `equal_to` (Attributes) Equal to (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--equal_to))
-- `greater_than` (Attributes) Greater than (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--greater_than))
-- `less_than` (Attributes) Less than (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--less_than))
-- `pattern_match` (Attributes) Pattern match (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--pattern_match))
+- `equal_to` (Attributes) Equal to
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--equal_to))
+- `greater_than` (Attributes) Greater than
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--greater_than))
+- `less_than` (Attributes) Less than
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--less_than))
+- `pattern_match` (Attributes) Pattern match
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--data--signature--and_condition--or_condition--operator--pattern_match))
 
 <a id="nestedatt--data--signature--and_condition--or_condition--operator--equal_to"></a>
 ### Nested Schema for `data.signature.and_condition.or_condition.operator.equal_to`

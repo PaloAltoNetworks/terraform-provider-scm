@@ -8,7 +8,8 @@ import (
 func GetDataSources() []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewAggregateInterfaceDataSource,
-		// 		NewAutoVpnClusterDataSource,
+		NewAutoVpnClusterDataSource,
+		NewAutoVpnSettingDataSource,
 		NewBgpAddressFamilyProfileDataSource,
 		NewBgpAuthProfileDataSource,
 		NewBgpFilteringProfileDataSource,
@@ -48,7 +49,7 @@ func GetDataSources() []func() datasource.DataSource {
 		NewZoneDataSource,
 		NewZoneProtectionProfileDataSource,
 		NewAggregateInterfaceListDataSource,
-		// 		NewAutoVpnClusterListDataSource,
+		NewAutoVpnClusterListDataSource,
 		NewBgpAddressFamilyProfileListDataSource,
 		NewBgpAuthProfileListDataSource,
 		NewBgpFilteringProfileListDataSource,
@@ -82,7 +83,6 @@ func GetDataSources() []func() datasource.DataSource {
 		NewSdwanRuleListDataSource,
 		NewSdwanSaasQualityProfileListDataSource,
 		NewSdwanTrafficDistributionProfileListDataSource,
-		// 		NewSslDecryptionSettingListDataSource,
 		NewTunnelInterfaceListDataSource,
 		NewVlanInterfaceListDataSource,
 		NewZoneListDataSource,

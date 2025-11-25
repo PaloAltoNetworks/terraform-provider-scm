@@ -50,7 +50,11 @@ output "url_access_profile_details" {
 - `credential_enforcement` (Attributes) Credential enforcement (see [below for nested schema](#nestedatt--credential_enforcement))
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `local_inline_cat` (Boolean) Local inline cat
 - `log_container_page_only` (Boolean) Log container page only
 - `log_http_hdr_referer` (Boolean) Log http hdr referer
@@ -60,6 +64,8 @@ output "url_access_profile_details" {
 - `redirect` (List of String) Redirect
 - `safe_search_enforcement` (Boolean) Safe search enforcement
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--credential_enforcement"></a>

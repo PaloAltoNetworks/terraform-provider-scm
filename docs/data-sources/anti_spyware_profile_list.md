@@ -59,12 +59,18 @@ Read-Only:
 - `cloud_inline_analysis` (Boolean) Cloud inline analysis
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `inline_exception_edl_url` (List of String) Inline exception edl url
 - `inline_exception_ip_address` (List of String) Inline exception ip address
 - `mica_engine_spyware_enabled` (Attributes List) Mica engine spyware enabled (see [below for nested schema](#nestedatt--data--mica_engine_spyware_enabled))
 - `rules` (Attributes List) Rules (see [below for nested schema](#nestedatt--data--rules))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `threat_exception` (Attributes List) Threat exception (see [below for nested schema](#nestedatt--data--threat_exception))
 
@@ -94,13 +100,27 @@ Read-Only:
 
 Read-Only:
 
-- `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--data--rules--action--alert))
-- `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--data--rules--action--allow))
-- `block_ip` (Attributes) anti spyware profiles rules action block ip (see [below for nested schema](#nestedatt--data--rules--action--block_ip))
-- `drop` (Attributes) Drop (see [below for nested schema](#nestedatt--data--rules--action--drop))
-- `reset_both` (Attributes) Reset both (see [below for nested schema](#nestedatt--data--rules--action--reset_both))
-- `reset_client` (Attributes) Reset client (see [below for nested schema](#nestedatt--data--rules--action--reset_client))
-- `reset_server` (Attributes) Reset server (see [below for nested schema](#nestedatt--data--rules--action--reset_server))
+- `alert` (Attributes) Alert
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--rules--action--alert))
+- `allow` (Attributes) Allow
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--rules--action--allow))
+- `block_ip` (Attributes) anti spyware profiles rules action block ip
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--rules--action--block_ip))
+- `drop` (Attributes) Drop
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--rules--action--drop))
+- `reset_both` (Attributes) Reset both
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--rules--action--reset_both))
+- `reset_client` (Attributes) Reset client
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--rules--action--reset_client))
+- `reset_server` (Attributes) Reset server
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--rules--action--reset_server))
 
 <a id="nestedatt--data--rules--action--alert"></a>
 ### Nested Schema for `data.rules.action.alert`
@@ -153,14 +173,30 @@ Read-Only:
 
 Read-Only:
 
-- `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--data--threat_exception--action--alert))
-- `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--data--threat_exception--action--allow))
-- `block_ip` (Attributes) anti spyware profiles threat exception action block ip (see [below for nested schema](#nestedatt--data--threat_exception--action--block_ip))
-- `default` (Attributes) Default (see [below for nested schema](#nestedatt--data--threat_exception--action--default))
-- `drop` (Attributes) Drop (see [below for nested schema](#nestedatt--data--threat_exception--action--drop))
-- `reset_both` (Attributes) Reset both (see [below for nested schema](#nestedatt--data--threat_exception--action--reset_both))
-- `reset_client` (Attributes) Reset client (see [below for nested schema](#nestedatt--data--threat_exception--action--reset_client))
-- `reset_server` (Attributes) Reset server (see [below for nested schema](#nestedatt--data--threat_exception--action--reset_server))
+- `alert` (Attributes) Alert
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--alert))
+- `allow` (Attributes) Allow
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--allow))
+- `block_ip` (Attributes) anti spyware profiles threat exception action block ip
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--block_ip))
+- `default` (Attributes) Default
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--default))
+- `drop` (Attributes) Drop
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--drop))
+- `reset_both` (Attributes) Reset both
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--reset_both))
+- `reset_client` (Attributes) Reset client
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--reset_client))
+- `reset_server` (Attributes) Reset server
+
+> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--threat_exception--action--reset_server))
 
 <a id="nestedatt--data--threat_exception--action--alert"></a>
 ### Nested Schema for `data.threat_exception.action.alert`

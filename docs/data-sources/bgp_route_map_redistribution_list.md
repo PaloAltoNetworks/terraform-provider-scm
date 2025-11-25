@@ -43,13 +43,25 @@ Optional:
 
 Read-Only:
 
-- `bgp` (Attributes) Bgp (see [below for nested schema](#nestedatt--data--bgp))
-- `connected_static` (Attributes) Connected static (see [below for nested schema](#nestedatt--data--connected_static))
+- `bgp` (Attributes) Bgp
+
+> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`. (see [below for nested schema](#nestedatt--data--bgp))
+- `connected_static` (Attributes) Connected static
+
+> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`. (see [below for nested schema](#nestedatt--data--connected_static))
 - `description` (String) BGP Route Map Redistributions Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-- `ospf` (Attributes) Ospf (see [below for nested schema](#nestedatt--data--ospf))
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `ospf` (Attributes) Ospf
+
+> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`. (see [below for nested schema](#nestedatt--data--ospf))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--bgp"></a>
@@ -57,8 +69,12 @@ Read-Only:
 
 Read-Only:
 
-- `ospf` (Attributes) Ospf (see [below for nested schema](#nestedatt--data--bgp--ospf))
-- `rib` (Attributes) BGP Root RIB (see [below for nested schema](#nestedatt--data--bgp--rib))
+- `ospf` (Attributes) Ospf
+
+> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`. (see [below for nested schema](#nestedatt--data--bgp--ospf))
+- `rib` (Attributes) BGP Root RIB
+
+> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`. (see [below for nested schema](#nestedatt--data--bgp--rib))
 
 <a id="nestedatt--data--bgp--ospf"></a>
 ### Nested Schema for `data.bgp.ospf`
@@ -243,9 +259,15 @@ Read-Only:
 
 Read-Only:
 
-- `bgp` (Attributes) Connected Static Root BGP (see [below for nested schema](#nestedatt--data--connected_static--bgp))
-- `ospf` (Attributes) Ospf (see [below for nested schema](#nestedatt--data--connected_static--ospf))
-- `rib` (Attributes) Rib (see [below for nested schema](#nestedatt--data--connected_static--rib))
+- `bgp` (Attributes) Connected Static Root BGP
+
+> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`. (see [below for nested schema](#nestedatt--data--connected_static--bgp))
+- `ospf` (Attributes) Ospf
+
+> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`. (see [below for nested schema](#nestedatt--data--connected_static--ospf))
+- `rib` (Attributes) Rib
+
+> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`. (see [below for nested schema](#nestedatt--data--connected_static--rib))
 
 <a id="nestedatt--data--connected_static--bgp"></a>
 ### Nested Schema for `data.connected_static.bgp`
@@ -497,8 +519,12 @@ Read-Only:
 
 Read-Only:
 
-- `bgp` (Attributes) OSPF Root BGP (see [below for nested schema](#nestedatt--data--ospf--bgp))
-- `rib` (Attributes) Rib (see [below for nested schema](#nestedatt--data--ospf--rib))
+- `bgp` (Attributes) OSPF Root BGP
+
+> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`. (see [below for nested schema](#nestedatt--data--ospf--bgp))
+- `rib` (Attributes) Rib
+
+> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`. (see [below for nested schema](#nestedatt--data--ospf--rib))
 
 <a id="nestedatt--data--ospf--bgp"></a>
 ### Nested Schema for `data.ospf.bgp`

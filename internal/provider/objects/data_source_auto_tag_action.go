@@ -81,126 +81,74 @@ func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadR
 		tflog.Debug(ctx, "--- VERIFICATION LOG: req.Config.Get() resulted in a diagnostic error.")
 		return
 	}
+	// --- SINGLETON DATA SOURCE LOGIC ---
+	tflog.Debug(ctx, "Reading Singleton AutoTagAction")
 
-	// Logic to handle read by ID or by name/list.
-	// We prioritize reading by ID if it is provided.
-	if !data.Id.IsNull() {
-		objectId := data.Id.ValueString()
-		tflog.Debug(ctx, "Reading AutoTagActions data source by ID", map[string]interface{}{"id": objectId})
+	// 1. Perform the API call (no ID argument)
+	readReq := d.client.AutoTagActionsAPI.ListAuto-TagActions(ctx)
 
-		getReq := d.client.AutoTagActionsAPI.(ctx, objectId)
-		scmObject, httpRes, err := getReq.Execute()
+	// 2. Add query parameters if any
+	if !data.Name.IsNull() {
+		readReq = readReq.Name(data.Name.ValueString())
+	}
+	if !data.Offset.IsNull() {
+		readReq = readReq.Offset(int32(data.Offset.ValueInt64()))
+	}
+	if !data.Limit.IsNull() {
+		readReq = readReq.Limit(int32(data.Limit.ValueInt64()))
+	}
 
-		var statusCode int
-		if httpRes != nil {
-			statusCode = httpRes.StatusCode
-		}
-		tflog.Debug(ctx, "--- SCM API CALL: Execution complete.", map[string]interface{}{
-			"error":      err,
-			"statusCode": statusCode,
-			"scmObjectIsNil": scmObject == nil,
-		})
-
-		if err != nil {
-			resp.Diagnostics.AddError("Error Reading AutoTagActions", fmt.Sprintf("Could not read AutoTagActions with ID %s: %s", objectId, err.Error()))
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
-				detailedMessage,
-			)
-			return
-		}
-		if httpRes.StatusCode != 200 {
-			resp.Diagnostics.AddError("Unexpected HTTP status code", fmt.Sprintf("Expected 200, got %d", httpRes.StatusCode))
-			return
-		}
-
-		tflog.Debug(ctx, "--- DATA SOURCE READ: API call successful. About to call the packer.")
-
-		// Create a packed object from the SCM response.
-		packedObject, diags := packAutoTagActionsFromSdk(ctx, *scmObject)
-		resp.Diagnostics.Append(diags...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-		// Load the packed object into the data model.
-		resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-	}  else if !data.Name.IsNull() {
-		objectName := data.Name.ValueString()
-		tflog.Debug(ctx, "Reading AutoTagActions data source by Name", map[string]interface{}{"name": objectName})
-
-		listReq := d.client.AutoTagActionsAPI.ListAuto-TagActions(ctx)
-
-		// Use reflection to dynamically check for and apply scope filters.
-
-
-
-
-
-		listResponse, httpRes, err := listReq.Execute()
-		if err != nil {
-			resp.Diagnostics.AddError("Error Listing AutoTagActionss", fmt.Sprintf("Could not list AutoTagActionss: %s", err.Error()))
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
-				detailedMessage,
-			)
-			return
-		}
-		if httpRes.StatusCode != 200 {
-			resp.Diagnostics.AddError("Unexpected HTTP status code", fmt.Sprintf("Expected 200, got %d", httpRes.StatusCode))
-			return
-		}
-
-		// Find the specific object from the list.
-		var foundObject *objects.AutoTagActions
-		for i := range listResponse.GetData() {
-			item := listResponse.GetData()[i]
-			if item.GetName() == objectName {
-				foundObject = &item
-				break
-			}
-		}
-
-		if foundObject == nil {
-			resp.Diagnostics.AddError("AutoTagActions Not Found", fmt.Sprintf("No AutoTagActions found with name: %s", objectName))
-			return
-		}
-
-		// Create a packed object from the SCM response.
-		packedObject, diags := packAutoTagActionsFromSdk(ctx, *foundObject)
-		resp.Diagnostics.Append(diags...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-		// Load the packed object into the data model.
-		resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-	}  else {
-		resp.Diagnostics.AddError("Missing Identifier", "Either 'id' or 'name' must be provided for the AutoTagActions data source.")
+	// 3. Execute using interface{} to capture any response type
+	var scmObjectInterface interface{}
+	scmObjectInterface, _, err := readReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error Reading AutoTagAction", err.Error())
 		return
 	}
 
-	// Create the composite Tfid for consistency.
-	var idBuilder strings.Builder
+	// 4. Dynamic Response Handling (Reflection + JSON)
+	var scmObject *objects.AutoTagActions
+	val := reflect.ValueOf(scmObjectInterface)
+	if val.Kind() == reflect.Ptr && !val.IsNil() { val = val.Elem() }
 
+	if val.Kind() == reflect.Struct {
+		dataField := val.FieldByName("Data")
+		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
+			if dataField.Len() > 0 {
+				firstItem := dataField.Index(0).Interface()
+				jsonBytes, _ := json.Marshal(firstItem)
+				var targetStruct objects.AutoTagActions
+				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+					scmObject = &targetStruct
+				}
+			} else {
+				resp.Diagnostics.AddError("Not Found", "The singleton resource was not found (empty list returned).")
+				return
+			}
+		} else {
+            jsonBytes, _ := json.Marshal(scmObjectInterface)
+            var targetStruct objects.AutoTagActions
+            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+                scmObject = &targetStruct
+            }
+        }
+	}
 
-	idBuilder.WriteString(":")
+	if scmObject == nil {
+		resp.Diagnostics.AddError("Error Processing Response", "Could not convert API response to expected model.")
+		return
+	}
 
-	idBuilder.WriteString(":")
+	// 5. Pack and Set State
+	packedObject, diags := packAutoTagActionsFromSdk(ctx, *scmObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
 
-	idBuilder.WriteString(":")
-	idBuilder.WriteString(data.Id.ValueString())
-	data.Tfid = types.StringValue(idBuilder.String())
+	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
+	if resp.Diagnostics.HasError() { return }
+
+	// Force synthetic ID
+	data.Tfid = types.StringValue("singleton")
 
 
 

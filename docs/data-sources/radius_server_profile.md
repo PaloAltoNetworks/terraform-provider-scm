@@ -13,31 +13,9 @@ RadiusServerProfile data source
 ## Example Usage
 
 ```terraform
-resource "scm_radius_server_profile" "chap_radius_profile" {
-  # Standard fields
-  name    = "CHAP_only_rsp_ds_1"
-  folder  = "All"
-  retries = 5
-  timeout = 60
-
-  protocol = {
-    c_h_a_p = {}
-  }
-
-  # Server list
-  server = [
-    {
-      name       = "Chap_Server_Primary"
-      ip_address = "10.1.1.10"
-      port       = 1812
-      secret     = "-AQ==lhyuV6U/j9Trb9JL9L0UoBecg9Y=kTOWntGhZ1KFyLD+etKQ3g=="
-    },
-  ]
-}
-
 data "scm_radius_server_profile" "single_profile_by_id" {
   # Requires the unique UUID of the rule
-  id = scm_radius_server_profile.chap_radius_profile.id
+  id = "50e5f694-19a2-467b-90a8-9db168600327"
 }
 
 output "single_rsp__dump" {
@@ -61,11 +39,17 @@ output "single_rsp__dump" {
 ### Read-Only
 
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `protocol` (Attributes) The RADIUS authentication protocol (see [below for nested schema](#nestedatt--protocol))
 - `retries` (Number) The number of RADIUS server retries
 - `server` (Attributes List) Server (see [below for nested schema](#nestedatt--server))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `timeout` (Number) The RADIUS server authentication timeout (seconds)
 

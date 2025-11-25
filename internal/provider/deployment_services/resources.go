@@ -8,13 +8,13 @@ import (
 func GetResources() []func() resource.Resource {
 	return []func() resource.Resource{
 		// 		NewBandwidthAllocationResource,
-		// 		NewBgpRoutingResource,
+		NewBgpRoutingResource,
 		NewInternalDnsServerResource,
 		NewRemoteNetworkResource,
 		NewServiceConnectionResource,
 		NewServiceConnectionGroupResource,
 		// 		NewSharedInfrastructureSettingResource,
-		// 		NewSiteResource,
+		NewSiteResource,
 		NewTrafficSteeringRuleResource,
 	}
 }

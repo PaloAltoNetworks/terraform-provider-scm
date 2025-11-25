@@ -8,8 +8,9 @@ import (
 func GetResources() []func() resource.Resource {
 	return []func() resource.Resource{
 		NewAggregateInterfaceResource,
-		// 		NewAutoVpnClusterResource,
+		NewAutoVpnClusterResource,
 		// 		NewAutoVpnPushResponseResource,
+		NewAutoVpnSettingResource,
 		NewBgpAddressFamilyProfileResource,
 		NewBgpAuthProfileResource,
 		NewBgpFilteringProfileResource,

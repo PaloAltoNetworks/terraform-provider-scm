@@ -13,26 +13,9 @@ AppOverrideRule data source
 ## Example Usage
 
 ```terraform
-# 1. RESOURCE: Create an Application Override rule to ensure a predictable target for lookups
-resource "scm_app_override_rule" "test_app_override_rule" {
-  name        = "data-source-app-override-test"
-  description = "Rule created specifically for data source testing."
-  folder      = "All"
-  position    = "pre"
-
-  # Core Match Criteria
-  application = "ssl"
-  protocol    = "tcp"
-  port        = "8443"
-  from        = ["trust"]
-  to          = ["untrust"]
-  source      = ["any"]
-  destination = ["any"]
-}
-
 data "scm_app_override_rule" "single_rule_by_id" {
   # Requires the unique UUID of the rule
-  id = scm_app_override_rule.test_app_override_rule.id
+  id = "8c285335-3c95-47c9-9bbd-829105b4a15c"
 }
 
 output "single_app_override_rule_name" {
@@ -58,8 +41,12 @@ output "single_app_override_rule_name" {
 - `description` (String) Description
 - `destination` (List of String) Destination
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Disabled
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (List of String) From
 - `group_tag` (String) Group tag
 - `negate_destination` (Boolean) Negate destination
@@ -69,6 +56,8 @@ output "single_app_override_rule_name" {
 - `protocol` (String) Protocol
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) Source
 - `tag` (List of String) Tag
 - `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.

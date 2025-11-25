@@ -45,37 +45,54 @@ Read-Only:
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-- `folder` (String) The folder in which the resource is defined
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ipv4))
-- `snippet` (String) The snippet in which the resource is defined
-- `tfid` (String) The Terraform ID.
 
-<a id="nestedatt--data--ipv4"></a>
-### Nested Schema for `data.ipv4`
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `tfid` (String) The Terraform ID.
+- `type` (Attributes) Address Family Type (see [below for nested schema](#nestedatt--data--type))
+
+<a id="nestedatt--data--type"></a>
+### Nested Schema for `data.type`
 
 Read-Only:
 
-- `ipv4_entry` (Attributes List) IPv4 prefix lists (see [below for nested schema](#nestedatt--data--ipv4--ipv4_entry))
+- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--type--ipv4))
 
-<a id="nestedatt--data--ipv4--ipv4_entry"></a>
-### Nested Schema for `data.ipv4.ipv4_entry`
+<a id="nestedatt--data--type--ipv4"></a>
+### Nested Schema for `data.type.ipv4`
+
+Read-Only:
+
+- `ipv4_entry` (Attributes List) IPv4 prefix lists (see [below for nested schema](#nestedatt--data--type--ipv4--ipv4_entry))
+
+<a id="nestedatt--data--type--ipv4--ipv4_entry"></a>
+### Nested Schema for `data.type.ipv4.ipv4_entry`
 
 Read-Only:
 
 - `action` (String) Action
 - `name` (Number) Sequence number
-- `prefix` (Attributes) Prefix (see [below for nested schema](#nestedatt--data--ipv4--ipv4_entry--prefix))
+- `prefix` (Attributes) Prefix (see [below for nested schema](#nestedatt--data--type--ipv4--ipv4_entry--prefix))
 
-<a id="nestedatt--data--ipv4--ipv4_entry--prefix"></a>
-### Nested Schema for `data.ipv4.ipv4_entry.prefix`
+<a id="nestedatt--data--type--ipv4--ipv4_entry--prefix"></a>
+### Nested Schema for `data.type.ipv4.ipv4_entry.prefix`
 
 Read-Only:
 
-- `entry` (Attributes) Entry (see [below for nested schema](#nestedatt--data--ipv4--ipv4_entry--prefix--entry))
+- `entry` (Attributes) Entry
+
+> ℹ️ **Note:** You must specify exactly one of `entry` and `network`. (see [below for nested schema](#nestedatt--data--type--ipv4--ipv4_entry--prefix--entry))
 - `network` (String) Network
 
-<a id="nestedatt--data--ipv4--ipv4_entry--prefix--entry"></a>
-### Nested Schema for `data.ipv4.ipv4_entry.prefix.entry`
+> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.
+
+<a id="nestedatt--data--type--ipv4--ipv4_entry--prefix--entry"></a>
+### Nested Schema for `data.type.ipv4.ipv4_entry.prefix.entry`
 
 Read-Only:
 

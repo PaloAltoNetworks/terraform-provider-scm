@@ -24,8 +24,14 @@ QosProfile resource
 - `aggregate_bandwidth` (Attributes) Aggregate bandwidth (see [below for nested schema](#nestedatt--aggregate_bandwidth))
 - `class_bandwidth_type` (Attributes) Class bandwidth type (see [below for nested schema](#nestedatt--class_bandwidth_type))
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -46,8 +52,12 @@ Optional:
 
 Optional:
 
-- `mbps` (Attributes) Mbps (see [below for nested schema](#nestedatt--class_bandwidth_type--mbps))
-- `percentage` (Attributes) Percentage (see [below for nested schema](#nestedatt--class_bandwidth_type--percentage))
+- `mbps` (Attributes) Mbps
+
+> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`. (see [below for nested schema](#nestedatt--class_bandwidth_type--mbps))
+- `percentage` (Attributes) Percentage
+
+> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`. (see [below for nested schema](#nestedatt--class_bandwidth_type--percentage))
 
 <a id="nestedatt--class_bandwidth_type--mbps"></a>
 ### Nested Schema for `class_bandwidth_type.mbps`

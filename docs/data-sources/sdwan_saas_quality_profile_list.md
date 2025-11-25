@@ -44,9 +44,15 @@ Optional:
 Read-Only:
 
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `monitor_mode` (Attributes) Monitor mode (see [below for nested schema](#nestedatt--data--monitor_mode))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--monitor_mode"></a>
@@ -54,9 +60,15 @@ Read-Only:
 
 Read-Only:
 
-- `adaptive` (Attributes) Adaptive (see [below for nested schema](#nestedatt--data--monitor_mode--adaptive))
-- `http_https` (Attributes) Http https (see [below for nested schema](#nestedatt--data--monitor_mode--http_https))
-- `static_ip` (Attributes) Static ip (see [below for nested schema](#nestedatt--data--monitor_mode--static_ip))
+- `adaptive` (Attributes) Adaptive
+
+> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`. (see [below for nested schema](#nestedatt--data--monitor_mode--adaptive))
+- `http_https` (Attributes) Http https
+
+> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`. (see [below for nested schema](#nestedatt--data--monitor_mode--http_https))
+- `static_ip` (Attributes) Static ip
+
+> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`. (see [below for nested schema](#nestedatt--data--monitor_mode--static_ip))
 
 <a id="nestedatt--data--monitor_mode--adaptive"></a>
 ### Nested Schema for `data.monitor_mode.adaptive`
@@ -76,8 +88,12 @@ Read-Only:
 
 Read-Only:
 
-- `fqdn` (Attributes) Fqdn (see [below for nested schema](#nestedatt--data--monitor_mode--static_ip--fqdn))
-- `ip_address` (Attributes List) List of IP addresses (see [below for nested schema](#nestedatt--data--monitor_mode--static_ip--ip_address))
+- `fqdn` (Attributes) Fqdn
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`. (see [below for nested schema](#nestedatt--data--monitor_mode--static_ip--fqdn))
+- `ip_address` (Attributes List) List of IP addresses
+
+> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`. (see [below for nested schema](#nestedatt--data--monitor_mode--static_ip--ip_address))
 
 <a id="nestedatt--data--monitor_mode--static_ip--fqdn"></a>
 ### Nested Schema for `data.monitor_mode.static_ip.fqdn`

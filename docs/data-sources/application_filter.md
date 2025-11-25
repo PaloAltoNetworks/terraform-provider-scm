@@ -38,10 +38,14 @@ output "application_filters_data_source_results" {
 
 - `category` (List of String) Category
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `evasive` (Boolean) only True is a valid value
 - `excessive_bandwidth_use` (Boolean) only True is a valid value
 - `exclude` (List of String) Exclude
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `has_known_vulnerabilities` (Boolean) only True is a valid value
 - `is_saas` (Boolean) only True is a valid value
 - `new_appid` (Boolean) only True is a valid value
@@ -51,6 +55,8 @@ output "application_filters_data_source_results" {
 - `saas_certifications` (List of String) Saas certifications
 - `saas_risk` (List of String) Saas risk
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `subcategory` (List of String) Subcategory
 - `tagging` (Attributes) Tagging (see [below for nested schema](#nestedatt--tagging))
 - `technology` (List of String) Technology
@@ -65,4 +71,8 @@ output "application_filters_data_source_results" {
 Read-Only:
 
 - `no_tag` (Boolean) No tag
+
+> ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.
 - `tag` (List of String) Tag
+
+> ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.

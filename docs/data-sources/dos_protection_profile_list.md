@@ -45,10 +45,16 @@ Read-Only:
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `flood` (Attributes) Flood (see [below for nested schema](#nestedatt--data--flood))
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `resource` (Attributes) Resource (see [below for nested schema](#nestedatt--data--resource))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `type` (String) Type
 

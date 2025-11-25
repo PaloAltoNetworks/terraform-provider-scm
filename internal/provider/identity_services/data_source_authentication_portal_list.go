@@ -106,6 +106,7 @@ func (d *AuthenticationPortalListDataSource) Read(ctx context.Context, req datas
 		return
 	}
 
+
 	// Convert the response to the Terraform model.
 	if listResponse == nil || listResponse.GetData() == nil {
 		return // Nothing to do.

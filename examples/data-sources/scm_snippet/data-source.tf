@@ -1,17 +1,6 @@
-resource "scm_label" "scm_label_1" {
-  name = "scm_label"
-}
-
-
-resource "scm_snippet" "scm_snippet_1" {
-  name        = "scm_snippet"
-  description = "Adding a Description from Terraform"
-  labels      = [scm_label.scm_label_1.name]
-}
-
 # Look up the "scm_snippet" tag by its id
 data "scm_snippet" "scm_snippet_outputs_ds" {
-  id = scm_snippet.scm_snippet_1.id
+  id = "b4811c43-e5f9-4b28-8316-7f18f97ba244"
 }
 
 # Output the details of the found tags to verify they were read correctly.

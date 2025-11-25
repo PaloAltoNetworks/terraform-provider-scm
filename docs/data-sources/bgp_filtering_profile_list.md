@@ -45,9 +45,15 @@ Read-Only:
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ipv4))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--ipv4"></a>
@@ -55,39 +61,32 @@ Read-Only:
 
 Read-Only:
 
-- `ipv4` (Attributes) Ipv4 (see [below for nested schema](#nestedatt--data--ipv4--ipv4))
+- `multicast` (Attributes) Multicast (see [below for nested schema](#nestedatt--data--ipv4--multicast))
+- `unicast` (Attributes) Unicast (see [below for nested schema](#nestedatt--data--ipv4--unicast))
 
-<a id="nestedatt--data--ipv4--ipv4"></a>
-### Nested Schema for `data.ipv4.ipv4`
-
-Read-Only:
-
-- `multicast` (Attributes) Multicast (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast))
-- `unicast` (Attributes) Unicast (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast))
-
-<a id="nestedatt--data--ipv4--ipv4--multicast"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast`
+<a id="nestedatt--data--ipv4--multicast"></a>
+### Nested Schema for `data.ipv4.multicast`
 
 Read-Only:
 
-- `conditional_advertisement` (Attributes) Conditional advertisement (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--conditional_advertisement))
-- `filter_list` (Attributes) Filter list (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--filter_list))
-- `inbound_network_filters` (Attributes) Inbound network filters (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--inbound_network_filters))
+- `conditional_advertisement` (Attributes) Conditional advertisement (see [below for nested schema](#nestedatt--data--ipv4--multicast--conditional_advertisement))
+- `filter_list` (Attributes) Filter list (see [below for nested schema](#nestedatt--data--ipv4--multicast--filter_list))
+- `inbound_network_filters` (Attributes) Inbound network filters (see [below for nested schema](#nestedatt--data--ipv4--multicast--inbound_network_filters))
 - `inherit` (Boolean) Inherit from unicast
-- `outbound_network_filters` (Attributes) Outbound network filters (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--outbound_network_filters))
-- `route_maps` (Attributes) Route maps (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--route_maps))
+- `outbound_network_filters` (Attributes) Outbound network filters (see [below for nested schema](#nestedatt--data--ipv4--multicast--outbound_network_filters))
+- `route_maps` (Attributes) Route maps (see [below for nested schema](#nestedatt--data--ipv4--multicast--route_maps))
 - `unsuppress_map` (String) Unsuppress map
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--conditional_advertisement"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.conditional_advertisement`
+<a id="nestedatt--data--ipv4--multicast--conditional_advertisement"></a>
+### Nested Schema for `data.ipv4.multicast.conditional_advertisement`
 
 Read-Only:
 
-- `exist` (Attributes) Exist (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--conditional_advertisement--exist))
-- `non_exist` (Attributes) Non exist (see [below for nested schema](#nestedatt--data--ipv4--ipv4--multicast--conditional_advertisement--non_exist))
+- `exist` (Attributes) Exist (see [below for nested schema](#nestedatt--data--ipv4--multicast--conditional_advertisement--exist))
+- `non_exist` (Attributes) Non exist (see [below for nested schema](#nestedatt--data--ipv4--multicast--conditional_advertisement--non_exist))
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--conditional_advertisement--exist"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.conditional_advertisement.exist`
+<a id="nestedatt--data--ipv4--multicast--conditional_advertisement--exist"></a>
+### Nested Schema for `data.ipv4.multicast.conditional_advertisement.exist`
 
 Read-Only:
 
@@ -95,8 +94,8 @@ Read-Only:
 - `exist_map` (String) Exist map
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--conditional_advertisement--non_exist"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.conditional_advertisement.non_exist`
+<a id="nestedatt--data--ipv4--multicast--conditional_advertisement--non_exist"></a>
+### Nested Schema for `data.ipv4.multicast.conditional_advertisement.non_exist`
 
 Read-Only:
 
@@ -105,8 +104,8 @@ Read-Only:
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--filter_list"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.filter_list`
+<a id="nestedatt--data--ipv4--multicast--filter_list"></a>
+### Nested Schema for `data.ipv4.multicast.filter_list`
 
 Read-Only:
 
@@ -114,8 +113,8 @@ Read-Only:
 - `outbound` (String) Outbound
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--inbound_network_filters"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.inbound_network_filters`
+<a id="nestedatt--data--ipv4--multicast--inbound_network_filters"></a>
+### Nested Schema for `data.ipv4.multicast.inbound_network_filters`
 
 Read-Only:
 
@@ -123,8 +122,8 @@ Read-Only:
 - `prefix_list` (String) Prefix list
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--outbound_network_filters"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.outbound_network_filters`
+<a id="nestedatt--data--ipv4--multicast--outbound_network_filters"></a>
+### Nested Schema for `data.ipv4.multicast.outbound_network_filters`
 
 Read-Only:
 
@@ -132,8 +131,8 @@ Read-Only:
 - `prefix_list` (String) Prefix list
 
 
-<a id="nestedatt--data--ipv4--ipv4--multicast--route_maps"></a>
-### Nested Schema for `data.ipv4.ipv4.multicast.route_maps`
+<a id="nestedatt--data--ipv4--multicast--route_maps"></a>
+### Nested Schema for `data.ipv4.multicast.route_maps`
 
 Read-Only:
 
@@ -142,28 +141,28 @@ Read-Only:
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast`
+<a id="nestedatt--data--ipv4--unicast"></a>
+### Nested Schema for `data.ipv4.unicast`
 
 Read-Only:
 
-- `conditional_advertisement` (Attributes) Conditional advertisement (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--conditional_advertisement))
-- `filter_list` (Attributes) Filter list (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--filter_list))
-- `inbound_network_filters` (Attributes) Inbound network filters (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--inbound_network_filters))
-- `outbound_network_filters` (Attributes) Outbound network filters (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--outbound_network_filters))
-- `route_maps` (Attributes) Route maps (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--route_maps))
+- `conditional_advertisement` (Attributes) Conditional advertisement (see [below for nested schema](#nestedatt--data--ipv4--unicast--conditional_advertisement))
+- `filter_list` (Attributes) Filter list (see [below for nested schema](#nestedatt--data--ipv4--unicast--filter_list))
+- `inbound_network_filters` (Attributes) Inbound network filters (see [below for nested schema](#nestedatt--data--ipv4--unicast--inbound_network_filters))
+- `outbound_network_filters` (Attributes) Outbound network filters (see [below for nested schema](#nestedatt--data--ipv4--unicast--outbound_network_filters))
+- `route_maps` (Attributes) Route maps (see [below for nested schema](#nestedatt--data--ipv4--unicast--route_maps))
 - `unsuppress_map` (String) Unsuppress map
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--conditional_advertisement"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.conditional_advertisement`
+<a id="nestedatt--data--ipv4--unicast--conditional_advertisement"></a>
+### Nested Schema for `data.ipv4.unicast.conditional_advertisement`
 
 Read-Only:
 
-- `exist` (Attributes) Exist (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--conditional_advertisement--exist))
-- `non_exist` (Attributes) Non exist (see [below for nested schema](#nestedatt--data--ipv4--ipv4--unicast--conditional_advertisement--non_exist))
+- `exist` (Attributes) Exist (see [below for nested schema](#nestedatt--data--ipv4--unicast--conditional_advertisement--exist))
+- `non_exist` (Attributes) Non exist (see [below for nested schema](#nestedatt--data--ipv4--unicast--conditional_advertisement--non_exist))
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--conditional_advertisement--exist"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.conditional_advertisement.exist`
+<a id="nestedatt--data--ipv4--unicast--conditional_advertisement--exist"></a>
+### Nested Schema for `data.ipv4.unicast.conditional_advertisement.exist`
 
 Read-Only:
 
@@ -171,8 +170,8 @@ Read-Only:
 - `exist_map` (String) Exist map
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--conditional_advertisement--non_exist"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.conditional_advertisement.non_exist`
+<a id="nestedatt--data--ipv4--unicast--conditional_advertisement--non_exist"></a>
+### Nested Schema for `data.ipv4.unicast.conditional_advertisement.non_exist`
 
 Read-Only:
 
@@ -181,8 +180,8 @@ Read-Only:
 
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--filter_list"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.filter_list`
+<a id="nestedatt--data--ipv4--unicast--filter_list"></a>
+### Nested Schema for `data.ipv4.unicast.filter_list`
 
 Read-Only:
 
@@ -190,8 +189,8 @@ Read-Only:
 - `outbound` (String) Outbound
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--inbound_network_filters"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.inbound_network_filters`
+<a id="nestedatt--data--ipv4--unicast--inbound_network_filters"></a>
+### Nested Schema for `data.ipv4.unicast.inbound_network_filters`
 
 Read-Only:
 
@@ -199,8 +198,8 @@ Read-Only:
 - `prefix_list` (String) Prefix list
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--outbound_network_filters"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.outbound_network_filters`
+<a id="nestedatt--data--ipv4--unicast--outbound_network_filters"></a>
+### Nested Schema for `data.ipv4.unicast.outbound_network_filters`
 
 Read-Only:
 
@@ -208,8 +207,8 @@ Read-Only:
 - `prefix_list` (String) Prefix list
 
 
-<a id="nestedatt--data--ipv4--ipv4--unicast--route_maps"></a>
-### Nested Schema for `data.ipv4.ipv4.unicast.route_maps`
+<a id="nestedatt--data--ipv4--unicast--route_maps"></a>
+### Nested Schema for `data.ipv4.unicast.route_maps`
 
 Read-Only:
 

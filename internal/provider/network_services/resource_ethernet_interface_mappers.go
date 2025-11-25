@@ -71,6 +71,12 @@ func unpackEthernetInterfacesToSdk(ctx context.Context, obj types.Object) (*netw
 	var d diag.Diagnostics
 
 	// Handling Primitives
+	if !model.AggregateGroup.IsNull() && !model.AggregateGroup.IsUnknown() {
+		sdk.AggregateGroup = model.AggregateGroup.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AggregateGroup", "value": *sdk.AggregateGroup})
+	}
+
+	// Handling Primitives
 	if !model.Comment.IsNull() && !model.Comment.IsUnknown() {
 		sdk.Comment = model.Comment.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Comment", "value": *sdk.Comment})
@@ -190,6 +196,14 @@ func packEthernetInterfacesFromSdk(ctx context.Context, sdk network_services.Eth
 	var d diag.Diagnostics
 	// MEGA FIX FOR MAP TYPE MISMATCH (NOT ALL MODELS MAY HAVE EncryptedValues)
 	model.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.AggregateGroup != nil {
+		model.AggregateGroup = basetypes.NewStringValue(*sdk.AggregateGroup)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AggregateGroup", "value": *sdk.AggregateGroup})
+	} else {
+		model.AggregateGroup = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Comment != nil {

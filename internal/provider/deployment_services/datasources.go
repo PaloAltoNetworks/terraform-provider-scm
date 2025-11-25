@@ -8,7 +8,7 @@ import (
 func GetDataSources() []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		// 		NewBandwidthAllocationDataSource,
-		// 		NewBgpRoutingDataSource,
+		NewBgpRoutingDataSource,
 		// 		NewInternalDnsServerDataSource,
 		NewRemoteNetworkDataSource,
 		NewServiceConnectionDataSource,
@@ -16,13 +16,10 @@ func GetDataSources() []func() datasource.DataSource {
 		// 		NewSharedInfrastructureSettingDataSource,
 		NewSiteDataSource,
 		NewTrafficSteeringRuleDataSource,
-		// 		NewBandwidthAllocationListDataSource,
-		// 		NewBgpRoutingListDataSource,
 		// 		NewInternalDnsServerListDataSource,
 		NewRemoteNetworkListDataSource,
 		NewServiceConnectionListDataSource,
 		NewServiceConnectionGroupListDataSource,
-		// 		NewSharedInfrastructureSettingListDataSource,
 		NewSiteListDataSource,
 		NewTrafficSteeringRuleListDataSource,
 	}

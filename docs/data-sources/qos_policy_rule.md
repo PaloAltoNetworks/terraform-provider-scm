@@ -13,34 +13,9 @@ QosPolicyRule data source
 ## Example Usage
 
 ```terraform
-resource "scm_qos_policy_rule" "test_qos_policy_rule" {
-  name        = "data-source-qos-test"
-  description = "Rule created specifically for data source testing with DSCP/TOS."
-  folder      = "All"
-  position    = "pre"
-  schedule    = "non-work-hours" # Assuming this schedule exists
-
-  # Action: Set traffic to Class 1
-  action = {
-    class = "1"
-  }
-
-  # DSCP/TOS: Set to Expedited Forwarding (EF)
-  dscp_tos = {
-    codepoints = [
-      {
-        name = "Expedited Forwarding"
-        type = {
-          ef = {}
-        }
-      }
-    ]
-  }
-}
-
 data "scm_qos_policy_rule" "single_rule_by_id" {
   # Requires the unique UUID of the rule
-  id = scm_qos_policy_rule.test_qos_policy_rule.id
+  id = "fbc3fdb2-8513-4949-be8a-f1be03b492da"
 }
 
 output "single_qos_policy_rule_dump" {
@@ -66,12 +41,18 @@ output "single_qos_policy_rule_dump" {
 - `action` (Attributes) Action (see [below for nested schema](#nestedatt--action))
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dscp_tos` (Attributes) Dscp tos (see [below for nested schema](#nestedatt--dscp_tos))
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `position` (String) The relative position of the rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `schedule` (String) Schedule
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `tfid` (String) The Terraform ID.
 
@@ -103,11 +84,21 @@ Read-Only:
 
 Read-Only:
 
-- `af` (Attributes) Af (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--af))
-- `cs` (Attributes) Cs (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--cs))
-- `custom` (Attributes) Custom (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--custom))
-- `ef` (Attributes) Ef (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--ef))
-- `tos` (Attributes) Tos (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--tos))
+- `af` (Attributes) Af
+
+> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--af))
+- `cs` (Attributes) Cs
+
+> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--cs))
+- `custom` (Attributes) Custom
+
+> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--custom))
+- `ef` (Attributes) Ef
+
+> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--ef))
+- `tos` (Attributes) Tos
+
+> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--dscp_tos--codepoints--type--tos))
 
 <a id="nestedatt--dscp_tos--codepoints--type--af"></a>
 ### Nested Schema for `dscp_tos.codepoints.type.af`

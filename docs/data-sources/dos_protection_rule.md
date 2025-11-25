@@ -29,8 +29,12 @@ DosProtectionRule data source
 - `description` (String) Description
 - `destination` (List of String) List of destination addresses
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Rule disabled?
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (List of String) List of source zones
 - `log_setting` (String) Log forwarding profile name
 - `position` (String) Position relative to local device rules
@@ -38,6 +42,8 @@ DosProtectionRule data source
 - `schedule` (String) Schedule on which to enforce the rule
 - `service` (List of String) List of services
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) List of source addresses
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.
 - `tag` (List of String) List of tags
@@ -49,9 +55,15 @@ DosProtectionRule data source
 
 Read-Only:
 
-- `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--action--allow))
-- `deny` (Attributes) Deny (see [below for nested schema](#nestedatt--action--deny))
-- `protect` (Attributes) Protect (see [below for nested schema](#nestedatt--action--protect))
+- `allow` (Attributes) Allow
+
+> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--action--allow))
+- `deny` (Attributes) Deny
+
+> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--action--deny))
+- `protect` (Attributes) Protect
+
+> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--action--protect))
 
 <a id="nestedatt--action--allow"></a>
 ### Nested Schema for `action.allow`
@@ -71,8 +83,12 @@ Read-Only:
 
 Read-Only:
 
-- `aggregate` (Attributes) Aggregate (see [below for nested schema](#nestedatt--protection--aggregate))
-- `classified` (Attributes) Classified (see [below for nested schema](#nestedatt--protection--classified))
+- `aggregate` (Attributes) Aggregate
+
+> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--protection--aggregate))
+- `classified` (Attributes) Classified
+
+> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--protection--classified))
 
 <a id="nestedatt--protection--aggregate"></a>
 ### Nested Schema for `protection.aggregate`

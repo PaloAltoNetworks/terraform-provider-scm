@@ -2,7 +2,7 @@
 # This profile defines the encryption and authentication algorithms for the IKE Gateway.
 # The values are taken from the 'createTestIKECryptoProfile' helper function.
 resource "scm_ike_crypto_profile" "example" {
-  name       = "example-ike-crypto-prf-for-rn"
+  name       = "example-ike-crypto-11"
   folder     = "Remote Networks"
   hash       = ["sha256"]
   dh_group   = ["group14"]
@@ -13,7 +13,7 @@ resource "scm_ike_crypto_profile" "example" {
 # This defines the VPN peer. It depends on the IKE Crypto Profile created above.
 # The values are taken from the 'createTestIKEGateway' helper function.
 resource "scm_ike_gateway" "example" {
-  name   = "example-ike-gateway-for-rn"
+  name   = "example-ike-gateway-11"
   folder = "Remote Networks"
   authentication = {
     pre_shared_key = {
@@ -38,7 +38,7 @@ resource "scm_ike_gateway" "example" {
 # This defines the tunnel interface itself and uses the IKE Gateway.
 # The values are taken from the 'createTestIPsecTunnel' helper function.
 resource "scm_ipsec_tunnel" "example" {
-  name                     = "example-ipsec-tunnel-for-rn"
+  name                     = "example-ipsec-tunnel-11"
   folder                   = "Remote Networks"
   anti_replay              = true
   copy_tos                 = false
@@ -61,7 +61,7 @@ resource "scm_ipsec_tunnel" "example" {
 # This is the final resource, which uses the IPsec Tunnel created above.
 # The values are taken directly from the 'Test_deployment_services_RemoteNetworksAPIService_Create' test.
 resource "scm_remote_network" "example" {
-  name         = "example-remote-network"
+  name         = "example-remote-network-11"
   folder       = "Remote Networks"
   license_type = "FWAAS-AGGREGATE"
   region       = "us-west-2"

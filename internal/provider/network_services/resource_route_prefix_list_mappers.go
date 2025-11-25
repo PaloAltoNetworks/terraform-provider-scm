@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -51,19 +52,6 @@ func unpackRoutePrefixListsToSdk(ctx context.Context, obj types.Object) (*networ
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
 	}
 
-	// Handling Objects
-	if !model.Ipv4.IsNull() && !model.Ipv4.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field Ipv4")
-		unpacked, d := unpackRoutePrefixListsIpv4ToSdk(ctx, model.Ipv4)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Ipv4"})
-		}
-		if unpacked != nil {
-			sdk.Ipv4 = unpacked
-		}
-	}
-
 	// Handling Primitives
 	if !model.Name.IsNull() && !model.Name.IsUnknown() {
 		sdk.Name = model.Name.ValueString()
@@ -74,6 +62,19 @@ func unpackRoutePrefixListsToSdk(ctx context.Context, obj types.Object) (*networ
 	if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
 		sdk.Snippet = model.Snippet.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+	}
+
+	// Handling Objects
+	if !model.Type.IsNull() && !model.Type.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Type")
+		unpacked, d := unpackRoutePrefixListsTypeToSdk(ctx, model.Type)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Type"})
+		}
+		if unpacked != nil {
+			sdk.Type = unpacked
+		}
 	}
 
 	diags.Append(d...)
@@ -121,19 +122,6 @@ func packRoutePrefixListsFromSdk(ctx context.Context, sdk network_services.Route
 	} else {
 		model.Id = basetypes.NewStringNull()
 	}
-	// Handling Objects
-	// This is a regular nested object that has its own packer.
-	if sdk.Ipv4 != nil {
-		tflog.Debug(ctx, "Packing nested object for field Ipv4")
-		packed, d := packRoutePrefixListsIpv4FromSdk(ctx, *sdk.Ipv4)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Ipv4"})
-		}
-		model.Ipv4 = packed
-	} else {
-		model.Ipv4 = basetypes.NewObjectNull(models.RoutePrefixListsIpv4{}.AttrTypes())
-	}
 	// Handling Primitives
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)
@@ -145,6 +133,19 @@ func packRoutePrefixListsFromSdk(ctx context.Context, sdk network_services.Route
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
 	} else {
 		model.Snippet = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Type != nil {
+		tflog.Debug(ctx, "Packing nested object for field Type")
+		packed, d := packRoutePrefixListsTypeFromSdk(ctx, *sdk.Type)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Type"})
+		}
+		model.Type = packed
+	} else {
+		model.Type = basetypes.NewObjectNull(models.RoutePrefixListsType{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -202,11 +203,11 @@ func packRoutePrefixListsListFromSdk(ctx context.Context, sdks []network_service
 	return basetypes.NewListValueFrom(ctx, models.RoutePrefixLists{}.AttrType(), data)
 }
 
-// --- Unpacker for RoutePrefixListsIpv4 ---
-func unpackRoutePrefixListsIpv4ToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsIpv4, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsIpv4", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for RoutePrefixListsType ---
+func unpackRoutePrefixListsTypeToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsType, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsType", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4
+	var model models.RoutePrefixListsType
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -214,99 +215,106 @@ func unpackRoutePrefixListsIpv4ToSdk(ctx context.Context, obj types.Object) (*ne
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.RoutePrefixListsIpv4
+	var sdk network_services.RoutePrefixListsType
 	var d diag.Diagnostics
-	// Handling Lists
-	if !model.Ipv4Entry.IsNull() && !model.Ipv4Entry.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of objects for field Ipv4Entry")
-		unpacked, d := unpackRoutePrefixListsIpv4Ipv4EntryInnerListToSdk(ctx, model.Ipv4Entry)
+	// Handling Objects
+	if !model.Ipv4.IsNull() && !model.Ipv4.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Ipv4")
+		unpacked, d := unpackRoutePrefixListsTypeIpv4ToSdk(ctx, model.Ipv4)
 		diags.Append(d...)
-		sdk.Ipv4Entry = unpacked
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Ipv4"})
+		}
+		if unpacked != nil {
+			sdk.Ipv4 = *unpacked
+		}
 	}
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsType", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for RoutePrefixListsIpv4 ---
-func packRoutePrefixListsIpv4FromSdk(ctx context.Context, sdk network_services.RoutePrefixListsIpv4) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsIpv4", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for RoutePrefixListsType ---
+func packRoutePrefixListsTypeFromSdk(ctx context.Context, sdk network_services.RoutePrefixListsType) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsType", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4
+	var model models.RoutePrefixListsType
 	var d diag.Diagnostics
-	// Handling Lists
-	if sdk.Ipv4Entry != nil {
-		tflog.Debug(ctx, "Packing list of objects for field Ipv4Entry")
-		packed, d := packRoutePrefixListsIpv4Ipv4EntryInnerListFromSdk(ctx, sdk.Ipv4Entry)
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	// Logic for non-pointer / value-type nested objects
+	if !reflect.ValueOf(sdk.Ipv4).IsZero() {
+		tflog.Debug(ctx, "Packing nested object for field Ipv4")
+		packed, d := packRoutePrefixListsTypeIpv4FromSdk(ctx, sdk.Ipv4)
 		diags.Append(d...)
-		model.Ipv4Entry = packed
+		model.Ipv4 = packed
 	} else {
-		model.Ipv4Entry = basetypes.NewListNull(models.RoutePrefixListsIpv4Ipv4EntryInner{}.AttrType())
+		model.Ipv4 = basetypes.NewObjectNull(models.RoutePrefixListsTypeIpv4{}.AttrTypes())
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsType{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsType", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for RoutePrefixListsIpv4 ---
-func unpackRoutePrefixListsIpv4ListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsIpv4, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsIpv4")
+// --- List Unpacker for RoutePrefixListsType ---
+func unpackRoutePrefixListsTypeListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsType, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsType")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4
+	var data []models.RoutePrefixListsType
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.RoutePrefixListsIpv4, 0, len(data))
+	ans := make([]network_services.RoutePrefixListsType, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4{}.AttrTypes(), &item)
-		unpacked, d := unpackRoutePrefixListsIpv4ToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsType{}.AttrTypes(), &item)
+		unpacked, d := unpackRoutePrefixListsTypeToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsType", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for RoutePrefixListsIpv4 ---
-func packRoutePrefixListsIpv4ListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsIpv4) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsIpv4")
+// --- List Packer for RoutePrefixListsType ---
+func packRoutePrefixListsTypeListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsType) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsType")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4
+	var data []models.RoutePrefixListsType
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.RoutePrefixListsIpv4
-		obj, d := packRoutePrefixListsIpv4FromSdk(ctx, sdk)
+		var model models.RoutePrefixListsType
+		obj, d := packRoutePrefixListsTypeFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.RoutePrefixListsIpv4{}.AttrType()), diags
+			return basetypes.NewListNull(models.RoutePrefixListsType{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsIpv4", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsIpv4{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsType", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsType{}.AttrType(), data)
 }
 
-// --- Unpacker for RoutePrefixListsIpv4Ipv4EntryInner ---
-func unpackRoutePrefixListsIpv4Ipv4EntryInnerToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsIpv4Ipv4EntryInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInner", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for RoutePrefixListsTypeIpv4 ---
+func unpackRoutePrefixListsTypeIpv4ToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsTypeIpv4, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsTypeIpv4", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4Ipv4EntryInner
+	var model models.RoutePrefixListsTypeIpv4
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -314,7 +322,107 @@ func unpackRoutePrefixListsIpv4Ipv4EntryInnerToSdk(ctx context.Context, obj type
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.RoutePrefixListsIpv4Ipv4EntryInner
+	var sdk network_services.RoutePrefixListsTypeIpv4
+	var d diag.Diagnostics
+	// Handling Lists
+	if !model.Ipv4Entry.IsNull() && !model.Ipv4Entry.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of objects for field Ipv4Entry")
+		unpacked, d := unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerListToSdk(ctx, model.Ipv4Entry)
+		diags.Append(d...)
+		sdk.Ipv4Entry = unpacked
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsTypeIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for RoutePrefixListsTypeIpv4 ---
+func packRoutePrefixListsTypeIpv4FromSdk(ctx context.Context, sdk network_services.RoutePrefixListsTypeIpv4) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsTypeIpv4", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.RoutePrefixListsTypeIpv4
+	var d diag.Diagnostics
+	// Handling Lists
+	if sdk.Ipv4Entry != nil {
+		tflog.Debug(ctx, "Packing list of objects for field Ipv4Entry")
+		packed, d := packRoutePrefixListsTypeIpv4Ipv4EntryInnerListFromSdk(ctx, sdk.Ipv4Entry)
+		diags.Append(d...)
+		model.Ipv4Entry = packed
+	} else {
+		model.Ipv4Entry = basetypes.NewListNull(models.RoutePrefixListsTypeIpv4Ipv4EntryInner{}.AttrType())
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsTypeIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for RoutePrefixListsTypeIpv4 ---
+func unpackRoutePrefixListsTypeIpv4ListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsTypeIpv4, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsTypeIpv4")
+	diags := diag.Diagnostics{}
+	var data []models.RoutePrefixListsTypeIpv4
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.RoutePrefixListsTypeIpv4, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4{}.AttrTypes(), &item)
+		unpacked, d := unpackRoutePrefixListsTypeIpv4ToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsTypeIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for RoutePrefixListsTypeIpv4 ---
+func packRoutePrefixListsTypeIpv4ListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsTypeIpv4) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsTypeIpv4")
+	diags := diag.Diagnostics{}
+	var data []models.RoutePrefixListsTypeIpv4
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.RoutePrefixListsTypeIpv4
+		obj, d := packRoutePrefixListsTypeIpv4FromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.RoutePrefixListsTypeIpv4{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsTypeIpv4", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsTypeIpv4{}.AttrType(), data)
+}
+
+// --- Unpacker for RoutePrefixListsTypeIpv4Ipv4EntryInner ---
+func unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsTypeIpv4Ipv4EntryInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.RoutePrefixListsTypeIpv4Ipv4EntryInner
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.RoutePrefixListsTypeIpv4Ipv4EntryInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Action.IsNull() && !model.Action.IsUnknown() {
@@ -332,7 +440,7 @@ func unpackRoutePrefixListsIpv4Ipv4EntryInnerToSdk(ctx context.Context, obj type
 	// Handling Objects
 	if !model.Prefix.IsNull() && !model.Prefix.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Prefix")
-		unpacked, d := unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixToSdk(ctx, model.Prefix)
+		unpacked, d := unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixToSdk(ctx, model.Prefix)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Prefix"})
@@ -344,16 +452,16 @@ func unpackRoutePrefixListsIpv4Ipv4EntryInnerToSdk(ctx context.Context, obj type
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for RoutePrefixListsIpv4Ipv4EntryInner ---
-func packRoutePrefixListsIpv4Ipv4EntryInnerFromSdk(ctx context.Context, sdk network_services.RoutePrefixListsIpv4Ipv4EntryInner) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsIpv4Ipv4EntryInner", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for RoutePrefixListsTypeIpv4Ipv4EntryInner ---
+func packRoutePrefixListsTypeIpv4Ipv4EntryInnerFromSdk(ctx context.Context, sdk network_services.RoutePrefixListsTypeIpv4Ipv4EntryInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4Ipv4EntryInner
+	var model models.RoutePrefixListsTypeIpv4Ipv4EntryInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -375,76 +483,76 @@ func packRoutePrefixListsIpv4Ipv4EntryInnerFromSdk(ctx context.Context, sdk netw
 	// This is a regular nested object that has its own packer.
 	if sdk.Prefix != nil {
 		tflog.Debug(ctx, "Packing nested object for field Prefix")
-		packed, d := packRoutePrefixListsIpv4Ipv4EntryInnerPrefixFromSdk(ctx, *sdk.Prefix)
+		packed, d := packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixFromSdk(ctx, *sdk.Prefix)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Prefix"})
 		}
 		model.Prefix = packed
 	} else {
-		model.Prefix = basetypes.NewObjectNull(models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix{}.AttrTypes())
+		model.Prefix = basetypes.NewObjectNull(models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix{}.AttrTypes())
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInner{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInner{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for RoutePrefixListsIpv4Ipv4EntryInner ---
-func unpackRoutePrefixListsIpv4Ipv4EntryInnerListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsIpv4Ipv4EntryInner, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInner")
+// --- List Unpacker for RoutePrefixListsTypeIpv4Ipv4EntryInner ---
+func unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsTypeIpv4Ipv4EntryInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4Ipv4EntryInner
+	var data []models.RoutePrefixListsTypeIpv4Ipv4EntryInner
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.RoutePrefixListsIpv4Ipv4EntryInner, 0, len(data))
+	ans := make([]network_services.RoutePrefixListsTypeIpv4Ipv4EntryInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInner{}.AttrTypes(), &item)
-		unpacked, d := unpackRoutePrefixListsIpv4Ipv4EntryInnerToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInner{}.AttrTypes(), &item)
+		unpacked, d := unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for RoutePrefixListsIpv4Ipv4EntryInner ---
-func packRoutePrefixListsIpv4Ipv4EntryInnerListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsIpv4Ipv4EntryInner) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsIpv4Ipv4EntryInner")
+// --- List Packer for RoutePrefixListsTypeIpv4Ipv4EntryInner ---
+func packRoutePrefixListsTypeIpv4Ipv4EntryInnerListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsTypeIpv4Ipv4EntryInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4Ipv4EntryInner
+	var data []models.RoutePrefixListsTypeIpv4Ipv4EntryInner
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.RoutePrefixListsIpv4Ipv4EntryInner
-		obj, d := packRoutePrefixListsIpv4Ipv4EntryInnerFromSdk(ctx, sdk)
+		var model models.RoutePrefixListsTypeIpv4Ipv4EntryInner
+		obj, d := packRoutePrefixListsTypeIpv4Ipv4EntryInnerFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.RoutePrefixListsIpv4Ipv4EntryInner{}.AttrType()), diags
+			return basetypes.NewListNull(models.RoutePrefixListsTypeIpv4Ipv4EntryInner{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInner{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInner{}.AttrType(), data)
 }
 
-// --- Unpacker for RoutePrefixListsIpv4Ipv4EntryInnerPrefix ---
-func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefix, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix ---
+func unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix
+	var model models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -452,12 +560,12 @@ func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixToSdk(ctx context.Context, ob
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefix
+	var sdk network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix
 	var d diag.Diagnostics
 	// Handling Objects
 	if !model.Entry.IsNull() && !model.Entry.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Entry")
-		unpacked, d := unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx, model.Entry)
+		unpacked, d := unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx, model.Entry)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Entry"})
@@ -475,29 +583,29 @@ func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixToSdk(ctx context.Context, ob
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for RoutePrefixListsIpv4Ipv4EntryInnerPrefix ---
-func packRoutePrefixListsIpv4Ipv4EntryInnerPrefixFromSdk(ctx context.Context, sdk network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefix) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix ---
+func packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixFromSdk(ctx context.Context, sdk network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix
+	var model models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix
 	var d diag.Diagnostics
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.Entry != nil {
 		tflog.Debug(ctx, "Packing nested object for field Entry")
-		packed, d := packRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryFromSdk(ctx, *sdk.Entry)
+		packed, d := packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryFromSdk(ctx, *sdk.Entry)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Entry"})
 		}
 		model.Entry = packed
 	} else {
-		model.Entry = basetypes.NewObjectNull(models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry{}.AttrTypes())
+		model.Entry = basetypes.NewObjectNull(models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -509,65 +617,65 @@ func packRoutePrefixListsIpv4Ipv4EntryInnerPrefixFromSdk(ctx context.Context, sd
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for RoutePrefixListsIpv4Ipv4EntryInnerPrefix ---
-func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefix, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix")
+// --- List Unpacker for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix ---
+func unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix
+	var data []models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefix, 0, len(data))
+	ans := make([]network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix{}.AttrTypes(), &item)
-		unpacked, d := unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix{}.AttrTypes(), &item)
+		unpacked, d := unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for RoutePrefixListsIpv4Ipv4EntryInnerPrefix ---
-func packRoutePrefixListsIpv4Ipv4EntryInnerPrefixListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefix) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix")
+// --- List Packer for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix ---
+func packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix
+	var data []models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix
-		obj, d := packRoutePrefixListsIpv4Ipv4EntryInnerPrefixFromSdk(ctx, sdk)
+		var model models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix
+		obj, d := packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix{}.AttrType()), diags
+			return basetypes.NewListNull(models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInnerPrefix{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefix{}.AttrType(), data)
 }
 
-// --- Unpacker for RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry ---
-func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry ---
+func unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx context.Context, obj types.Object) (*network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry
+	var model models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -575,7 +683,7 @@ func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx context.Contex
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry
+	var sdk network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.GreaterThanOrEqual.IsNull() && !model.GreaterThanOrEqual.IsUnknown() {
@@ -599,16 +707,16 @@ func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx context.Contex
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry ---
-func packRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryFromSdk(ctx context.Context, sdk network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry ---
+func packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryFromSdk(ctx context.Context, sdk network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry
+	var model models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -636,56 +744,56 @@ func packRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryFromSdk(ctx context.Contex
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry ---
-func unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry")
+// --- List Unpacker for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry ---
+func unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryListToSdk(ctx context.Context, list types.List) ([]network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry
+	var data []models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry, 0, len(data))
+	ans := make([]network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry{}.AttrTypes(), &item)
-		unpacked, d := unpackRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry{}.AttrTypes(), &item)
+		unpacked, d := unpackRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry ---
-func packRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry")
+// --- List Packer for RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry ---
+func packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryListFromSdk(ctx context.Context, sdks []network_services.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry")
 	diags := diag.Diagnostics{}
-	var data []models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry
+	var data []models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry
-		obj, d := packRoutePrefixListsIpv4Ipv4EntryInnerPrefixEntryFromSdk(ctx, sdk)
+		var model models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry
+		obj, d := packRoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntryFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry{}.AttrType()), diags
+			return basetypes.NewListNull(models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsIpv4Ipv4EntryInnerPrefixEntry{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.RoutePrefixListsTypeIpv4Ipv4EntryInnerPrefixEntry{}.AttrType(), data)
 }

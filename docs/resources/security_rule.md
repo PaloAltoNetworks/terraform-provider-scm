@@ -365,3 +365,26 @@ Optional:
 - `anti_spyware` (String) Anti spyware
 - `virus_and_wildfire_analysis` (String) Virus and wildfire analysis
 - `vulnerability` (String) Vulnerability
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_security_rule.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_security_rule.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_security_rule.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.

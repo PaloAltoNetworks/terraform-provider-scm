@@ -7,7 +7,7 @@ import (
 // GetResources returns all resources for the identity_services package
 func GetResources() []func() resource.Resource {
 	return []func() resource.Resource{
-		// 		NewAuthenticationPortalResource,
+		NewAuthenticationPortalResource,
 		NewAuthenticationProfileResource,
 		NewAuthenticationRuleResource,
 		NewAuthenticationSequenceResource,

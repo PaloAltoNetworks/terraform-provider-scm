@@ -54,7 +54,11 @@ resource "scm_interface_management_profile" "dc_postman_profile" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `http` (Boolean) Allow HTTP?
 - `http_ocsp` (Boolean) Allow HTTP OCSP?
 - `https` (Boolean) Allow HTTPS?
@@ -62,6 +66,8 @@ resource "scm_interface_management_profile" "dc_postman_profile" {
 - `ping` (Boolean) Allow ping?
 - `response_pages` (Boolean) Allow response pages?
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ssh` (Boolean) Allow SSH?
 - `telnet` (Boolean) Allow telnet? Seriously, why would you do this?!?
 - `userid_service` (Boolean) Allow User-ID?

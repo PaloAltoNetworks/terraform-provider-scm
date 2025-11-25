@@ -304,7 +304,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -319,7 +319,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -345,7 +345,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -369,7 +369,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("regular"),
 						),
 					},
-					MarkdownDescription: "Extended",
+					MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"extended_entry": schema.ListNestedAttribute{
@@ -411,7 +411,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("regular"),
 						),
 					},
-					MarkdownDescription: "Large",
+					MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"large_entry": schema.ListNestedAttribute{
@@ -453,7 +453,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("large"),
 						),
 					},
-					MarkdownDescription: "Regular",
+					MarkdownDescription: "Regular\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"regular_entry": schema.ListNestedAttribute{
@@ -499,11 +499,11 @@ var RouteCommunityListsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -516,7 +516,7 @@ var RouteCommunityListsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{
@@ -528,7 +528,7 @@ var RouteCommunityListsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"extended": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Extended",
+					MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"extended_entry": dsschema.ListNestedAttribute{
@@ -555,7 +555,7 @@ var RouteCommunityListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"large": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Large",
+					MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"large_entry": dsschema.ListNestedAttribute{
@@ -582,7 +582,7 @@ var RouteCommunityListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"regular": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Regular",
+					MarkdownDescription: "Regular\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"regular_entry": dsschema.ListNestedAttribute{

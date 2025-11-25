@@ -23,9 +23,15 @@ HttpHeaderProfile resource
 
 - `description` (String) The description of the HTTP header profile
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `http_header_insertion` (Attributes List) A list of HTTP header profile rules (see [below for nested schema](#nestedatt--http_header_insertion))
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -55,9 +61,12 @@ Required:
 Required:
 
 - `header` (String) The HTTP header string
-- `name` (String) An auto-generated name (_This should be removed_)
 - `value` (String) The value associated with the HTTP header
 
 Optional:
 
 - `log` (Boolean) Log the use of this HTTP header insertion?
+
+Read-Only:
+
+- `name` (String) An auto-generated name (_This should be removed_)

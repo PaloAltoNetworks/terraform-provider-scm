@@ -49,8 +49,8 @@ func unpackAuthenticationProfilesToSdk(ctx context.Context, obj types.Object) (*
 
 	// Handling Primitives
 	if !model.Id.IsNull() && !model.Id.IsUnknown() {
-		sdk.Id = model.Id.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+		sdk.Id = model.Id.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
 	}
 
 	// Handling Objects
@@ -173,8 +173,12 @@ func packAuthenticationProfilesFromSdk(ctx context.Context, sdk identity_service
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Id = basetypes.NewStringValue(sdk.Id)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+	if sdk.Id != nil {
+		model.Id = basetypes.NewStringValue(*sdk.Id)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
+	} else {
+		model.Id = basetypes.NewStringNull()
+	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.Lockout != nil {
@@ -512,7 +516,7 @@ func unpackAuthenticationProfilesMethodToSdk(ctx context.Context, obj types.Obje
 	// Handling Objects
 	if !model.Tacplus.IsNull() && !model.Tacplus.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Tacplus")
-		unpacked, d := unpackAuthenticationProfilesMethodRadiusToSdk(ctx, model.Tacplus)
+		unpacked, d := unpackAuthenticationProfilesMethodTacplusToSdk(ctx, model.Tacplus)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Tacplus"})
@@ -617,14 +621,14 @@ func packAuthenticationProfilesMethodFromSdk(ctx context.Context, sdk identity_s
 	// This is a regular nested object that has its own packer.
 	if sdk.Tacplus != nil {
 		tflog.Debug(ctx, "Packing nested object for field Tacplus")
-		packed, d := packAuthenticationProfilesMethodRadiusFromSdk(ctx, *sdk.Tacplus)
+		packed, d := packAuthenticationProfilesMethodTacplusFromSdk(ctx, *sdk.Tacplus)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Tacplus"})
 		}
 		model.Tacplus = packed
 	} else {
-		model.Tacplus = basetypes.NewObjectNull(models.AuthenticationProfilesMethodRadius{}.AttrTypes())
+		model.Tacplus = basetypes.NewObjectNull(models.AuthenticationProfilesMethodTacplus{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -1292,6 +1296,117 @@ func packAuthenticationProfilesMethodSamlIdpListFromSdk(ctx context.Context, sdk
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.AuthenticationProfilesMethodSamlIdp", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.AuthenticationProfilesMethodSamlIdp{}.AttrType(), data)
+}
+
+// --- Unpacker for AuthenticationProfilesMethodTacplus ---
+func unpackAuthenticationProfilesMethodTacplusToSdk(ctx context.Context, obj types.Object) (*identity_services.AuthenticationProfilesMethodTacplus, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.AuthenticationProfilesMethodTacplus", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.AuthenticationProfilesMethodTacplus
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk identity_services.AuthenticationProfilesMethodTacplus
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Checkgroup.IsNull() && !model.Checkgroup.IsUnknown() {
+		sdk.Checkgroup = model.Checkgroup.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Checkgroup", "value": *sdk.Checkgroup})
+	}
+
+	// Handling Primitives
+	if !model.ServerProfile.IsNull() && !model.ServerProfile.IsUnknown() {
+		sdk.ServerProfile = model.ServerProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ServerProfile", "value": *sdk.ServerProfile})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.AuthenticationProfilesMethodTacplus", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for AuthenticationProfilesMethodTacplus ---
+func packAuthenticationProfilesMethodTacplusFromSdk(ctx context.Context, sdk identity_services.AuthenticationProfilesMethodTacplus) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.AuthenticationProfilesMethodTacplus", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.AuthenticationProfilesMethodTacplus
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Checkgroup != nil {
+		model.Checkgroup = basetypes.NewBoolValue(*sdk.Checkgroup)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Checkgroup", "value": *sdk.Checkgroup})
+	} else {
+		model.Checkgroup = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.ServerProfile != nil {
+		model.ServerProfile = basetypes.NewStringValue(*sdk.ServerProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "ServerProfile", "value": *sdk.ServerProfile})
+	} else {
+		model.ServerProfile = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.AuthenticationProfilesMethodTacplus{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.AuthenticationProfilesMethodTacplus", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for AuthenticationProfilesMethodTacplus ---
+func unpackAuthenticationProfilesMethodTacplusListToSdk(ctx context.Context, list types.List) ([]identity_services.AuthenticationProfilesMethodTacplus, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.AuthenticationProfilesMethodTacplus")
+	diags := diag.Diagnostics{}
+	var data []models.AuthenticationProfilesMethodTacplus
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]identity_services.AuthenticationProfilesMethodTacplus, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.AuthenticationProfilesMethodTacplus{}.AttrTypes(), &item)
+		unpacked, d := unpackAuthenticationProfilesMethodTacplusToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.AuthenticationProfilesMethodTacplus", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for AuthenticationProfilesMethodTacplus ---
+func packAuthenticationProfilesMethodTacplusListFromSdk(ctx context.Context, sdks []identity_services.AuthenticationProfilesMethodTacplus) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.AuthenticationProfilesMethodTacplus")
+	diags := diag.Diagnostics{}
+	var data []models.AuthenticationProfilesMethodTacplus
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.AuthenticationProfilesMethodTacplus
+		obj, d := packAuthenticationProfilesMethodTacplusFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.AuthenticationProfilesMethodTacplus{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.AuthenticationProfilesMethodTacplus", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.AuthenticationProfilesMethodTacplus{}.AttrType(), data)
 }
 
 // --- Unpacker for AuthenticationProfilesMultiFactorAuth ---

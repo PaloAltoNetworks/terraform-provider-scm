@@ -24,11 +24,17 @@ ProfileGroup resource
 - `ai_security` (List of String) Ai security
 - `data_filtering` (List of String) Data filtering
 - `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dns_security` (List of String) Dns security
 - `file_blocking` (List of String) File blocking
 - `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `saas_security` (List of String) Saas security
 - `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `spyware` (List of String) Spyware
 - `url_filtering` (List of String) Url filtering
 - `virus_and_wildfire_analysis` (List of String) Virus and wildfire analysis

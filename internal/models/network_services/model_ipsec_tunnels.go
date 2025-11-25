@@ -509,7 +509,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 											),
 											int64validator.Between(1, 254),
 										},
-										MarkdownDescription: "IP protocol number",
+										MarkdownDescription: "IP protocol number\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
 										Computed:            true,
 									},
@@ -520,7 +520,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("udp"),
 											),
 										},
-										MarkdownDescription: "IPv4 type of proxy_id protocol values for TCP protocol",
+										MarkdownDescription: "IPv4 type of proxy_id protocol values for TCP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
 										Computed:            true,
 										Attributes: map[string]schema.Attribute{
@@ -551,7 +551,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tcp"),
 											),
 										},
-										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol",
+										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
 										Computed:            true,
 										Attributes: map[string]schema.Attribute{
@@ -610,7 +610,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 											),
 											int64validator.Between(1, 254),
 										},
-										MarkdownDescription: "IP protocol number",
+										MarkdownDescription: "IP protocol number\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
 										Computed:            true,
 									},
@@ -621,7 +621,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("udp"),
 											),
 										},
-										MarkdownDescription: "IPv6 type of proxy_id protocol values for TCP protocol",
+										MarkdownDescription: "IPv6 type of proxy_id protocol values for TCP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
 										Computed:            true,
 										Attributes: map[string]schema.Attribute{
@@ -652,7 +652,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tcp"),
 											),
 										},
-										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol",
+										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
 										Computed:            true,
 										Attributes: map[string]schema.Attribute{
@@ -702,7 +702,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -723,7 +723,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -752,7 +752,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -842,11 +842,11 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"number": dsschema.Int64Attribute{
-										MarkdownDescription: "IP protocol number",
+										MarkdownDescription: "IP protocol number\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Computed:            true,
 									},
 									"tcp": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "IPv4 type of proxy_id protocol values for TCP protocol",
+										MarkdownDescription: "IPv4 type of proxy_id protocol values for TCP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"local_port": dsschema.Int64Attribute{
@@ -860,7 +860,7 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"udp": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol",
+										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"local_port": dsschema.Int64Attribute{
@@ -900,11 +900,11 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"number": dsschema.Int64Attribute{
-										MarkdownDescription: "IP protocol number",
+										MarkdownDescription: "IP protocol number\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Computed:            true,
 									},
 									"tcp": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "IPv6 type of proxy_id protocol values for TCP protocol",
+										MarkdownDescription: "IPv6 type of proxy_id protocol values for TCP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"local_port": dsschema.Int64Attribute{
@@ -918,7 +918,7 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"udp": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol",
+										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"local_port": dsschema.Int64Attribute{
@@ -947,7 +947,7 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"enable_gre_encapsulation": dsschema.BoolAttribute{
@@ -955,7 +955,7 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -968,7 +968,7 @@ var IpsecTunnelsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

@@ -21,7 +21,6 @@ func GetDataSources() []func() datasource.DataSource {
 		NewRemoteNetworkListDataSource,
 		NewServiceConnectionListDataSource,
 		NewServiceConnectionGroupListDataSource,
-		// 		NewSharedInfrastructureSettingListDataSource,
 		NewSiteListDataSource,
 		NewTrafficSteeringRuleListDataSource,
 	}

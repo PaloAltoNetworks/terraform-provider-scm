@@ -9,6 +9,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 
@@ -64,22 +65,29 @@ func (d *ServiceConnectionListDataSource) Read(ctx context.Context, req datasour
 
 	// Create the API request.
 	listReq := d.client.ServiceConnectionsAPI.ListServiceConnections(ctx)
-
-	// Apply filters from the configuration.
-
-	v := reflect.ValueOf(data)
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			listReq = listReq.Folder(val.ValueString())
-		}
+	if !data.Folder.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "folder", "value": data.Folder})
+		listReq = listReq.Folder(data.Folder.ValueString())
+		// END: Add dynamic query parameter handling
 	}
-
 	if !data.Limit.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "limit", "value": data.Limit})
 		listReq = listReq.Limit(int32(data.Limit.ValueInt64()))
+		// END: Add dynamic query parameter handling
 	}
 	if !data.Offset.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "offset", "value": data.Offset})
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
+		// END: Add dynamic query parameter handling
+	}
+	if !data.Name.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "name", "value": data.Name})
+		listReq = listReq.Name(data.Name.ValueString())
+		// END: Add dynamic query parameter handling
 	}
 
 	// Execute the request.
@@ -124,7 +132,7 @@ func (d *ServiceConnectionListDataSource) Read(ctx context.Context, req datasour
 
 	// Use reflection again for Tfid creation to ensure safety
 
-	v = reflect.ValueOf(data)
+	v := reflect.ValueOf(data)
 
 	if f := v.FieldByName("Folder"); f.IsValid() {
 		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {

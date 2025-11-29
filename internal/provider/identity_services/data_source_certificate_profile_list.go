@@ -9,6 +9,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/identity_services"
 
@@ -64,34 +65,41 @@ func (d *CertificateProfileListDataSource) Read(ctx context.Context, req datasou
 
 	// Create the API request.
 	listReq := d.client.CertificateProfilesAPI.ListCertificateProfiles(ctx)
-
-	// Apply filters from the configuration.
-
-	v := reflect.ValueOf(data)
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			listReq = listReq.Folder(val.ValueString())
-		}
+	if !data.Name.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "name", "value": data.Name})
+		listReq = listReq.Name(data.Name.ValueString())
+		// END: Add dynamic query parameter handling
 	}
-
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			listReq = listReq.Snippet(val.ValueString())
-		}
+	if !data.Folder.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "folder", "value": data.Folder})
+		listReq = listReq.Folder(data.Folder.ValueString())
+		// END: Add dynamic query parameter handling
 	}
-
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			listReq = listReq.Device(val.ValueString())
-		}
+	if !data.Snippet.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "snippet", "value": data.Snippet})
+		listReq = listReq.Snippet(data.Snippet.ValueString())
+		// END: Add dynamic query parameter handling
 	}
-
+	if !data.Device.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "device", "value": data.Device})
+		listReq = listReq.Device(data.Device.ValueString())
+		// END: Add dynamic query parameter handling
+	}
 	if !data.Limit.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "limit", "value": data.Limit})
 		listReq = listReq.Limit(int32(data.Limit.ValueInt64()))
+		// END: Add dynamic query parameter handling
 	}
 	if !data.Offset.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "offset", "value": data.Offset})
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
+		// END: Add dynamic query parameter handling
 	}
 
 	// Execute the request.
@@ -136,7 +144,7 @@ func (d *CertificateProfileListDataSource) Read(ctx context.Context, req datasou
 
 	// Use reflection again for Tfid creation to ensure safety
 
-	v = reflect.ValueOf(data)
+	v := reflect.ValueOf(data)
 
 	if f := v.FieldByName("Folder"); f.IsValid() {
 		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {

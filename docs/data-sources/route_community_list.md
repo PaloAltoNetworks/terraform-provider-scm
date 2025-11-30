@@ -21,20 +21,17 @@ RouteCommunityList data source
 
 ### Optional
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Route community list name
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `description` (String) Description
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `type` (Attributes) Type (see [below for nested schema](#nestedatt--type))
 
@@ -44,13 +41,10 @@ RouteCommunityList data source
 Read-Only:
 
 - `extended` (Attributes) Extended
-
 > ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`. (see [below for nested schema](#nestedatt--type--extended))
 - `large` (Attributes) Large
-
 > ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`. (see [below for nested schema](#nestedatt--type--large))
 - `regular` (Attributes) Regular
-
 > ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`. (see [below for nested schema](#nestedatt--type--regular))
 
 <a id="nestedatt--type--extended"></a>

@@ -133,8 +133,6 @@ func (d *SnippetDataSource) Read(ctx context.Context, req datasource.ReadRequest
 
 		listReq := d.client.SnippetsAPI.ListSnippets(ctx)
 
-		// Use reflection to dynamically check for and apply scope filters.
-
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing Snippetss", fmt.Sprintf("Could not list Snippetss: %s", err.Error()))

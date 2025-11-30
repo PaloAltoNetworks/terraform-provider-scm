@@ -52,7 +52,13 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) L3 sub-interface name
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -60,23 +66,12 @@ Read-Only:
 - `comment` (String) Description
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Vlan Interfaces. (see [below for nested schema](#nestedatt--data--ddns_config))
 - `default_value` (String) Default interface assignment
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dhcp_client` (Attributes) Vlan interfaces DHCP Client Object
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--dhcp_client))
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) VLAN Interface IP Parent
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--ip))
 - `mtu` (Number) MTU
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `vlan_tag` (String) VLAN tag
 

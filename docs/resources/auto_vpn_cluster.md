@@ -143,10 +143,8 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -184,10 +182,8 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -241,10 +237,8 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -282,8 +276,6 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.

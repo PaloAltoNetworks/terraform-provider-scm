@@ -21,7 +21,13 @@ SdwanRule data source
 
 ### Optional
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Rule name
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -29,14 +35,8 @@ SdwanRule data source
 - `application` (List of String) List of applications
 - `description` (String) Rule description
 - `destination` (List of String) List of destination addresses
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Disable rule?
 - `error_correction_profile` (String) Error correction profile
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (List of String) List of source zones
 - `negate_destination` (Boolean) Negate destination address(es)?
 - `negate_source` (Boolean) Negate source address(es)?
@@ -44,9 +44,6 @@ SdwanRule data source
 - `position` (String) Rule postion relative to device rules
 - `saas_quality_profile` (String) SaaS quality profile
 - `service` (List of String) List of services
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) List of source addresses
 - `source_user` (List of String) List of source users
 - `tag` (List of String) List of tags

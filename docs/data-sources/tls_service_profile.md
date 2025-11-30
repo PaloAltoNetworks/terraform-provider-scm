@@ -21,21 +21,18 @@ TlsServiceProfile data source
 
 ### Optional
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) TLS service profile name. The value is `muCustomDomainSSLProfile` when it is used on mobile-agent infra settings.
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `certificate` (String) Certificate name
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `protocol_settings` (Attributes) Protocol settings (see [below for nested schema](#nestedatt--protocol_settings))
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--protocol_settings"></a>

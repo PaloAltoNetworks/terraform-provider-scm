@@ -23,14 +23,11 @@ MfaServer resource
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `mfa_vendor_type` (Attributes) The MFA vendor type (see [below for nested schema](#nestedatt--mfa_vendor_type))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -46,16 +43,12 @@ Optional:
 
 - `duo_security_v2` (Attributes) Integration with [Duo Security](https://duo.com/product)
 
-
 > ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`. (see [below for nested schema](#nestedatt--mfa_vendor_type--duo_security_v2))
 - `okta_adaptive_v1` (Attributes) Integration with [Okta Adaptive MFA](https://www.okta.com/products/adaptive-multi-factor-authentication)
-
 > ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`. (see [below for nested schema](#nestedatt--mfa_vendor_type--okta_adaptive_v1))
 - `ping_identity_v1` (Attributes) Integation with [Ping Identity](https://www.pingidentity.com/en/platform.html)
-
 > ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`. (see [below for nested schema](#nestedatt--mfa_vendor_type--ping_identity_v1))
 - `rsa_securid_access_v1` (Attributes) Integration with [RSA SecurID](https://www.rsa.com/products/securid/)
-
 > ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`. (see [below for nested schema](#nestedatt--mfa_vendor_type--rsa_securid_access_v1))
 
 <a id="nestedatt--mfa_vendor_type--duo_security_v2"></a>

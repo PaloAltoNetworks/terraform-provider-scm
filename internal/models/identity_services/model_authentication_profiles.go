@@ -407,7 +407,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -422,7 +422,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -470,7 +470,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Cloud\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Cloud\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"profile_name": schema.StringAttribute{
@@ -490,7 +490,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Kerberos\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Kerberos\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"realm": schema.StringAttribute{
@@ -514,7 +514,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Ldap\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Ldap\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"login_attribute": schema.StringAttribute{
@@ -542,7 +542,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Local database\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Local database\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -557,7 +557,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Radius\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Radius\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"checkgroup": schema.BoolAttribute{
@@ -581,7 +581,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tacplus"),
 						),
 					},
-					MarkdownDescription: "Saml idp\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Saml idp\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"attribute_name_usergroup": schema.StringAttribute{
@@ -638,7 +638,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("saml_idp"),
 						),
 					},
-					MarkdownDescription: "Tacplus\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Tacplus\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"checkgroup": schema.BoolAttribute{
@@ -701,7 +701,7 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -741,11 +741,13 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -771,7 +773,7 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"cloud": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Cloud\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Cloud\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"profile_name": dsschema.StringAttribute{
@@ -781,7 +783,7 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"kerberos": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Kerberos\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Kerberos\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"realm": dsschema.StringAttribute{
@@ -795,7 +797,7 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ldap": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ldap\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Ldap\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"login_attribute": dsschema.StringAttribute{
@@ -813,12 +815,12 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"local_database": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Local database\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Local database\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"radius": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Radius\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Radius\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"checkgroup": dsschema.BoolAttribute{
@@ -832,7 +834,7 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"saml_idp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Saml idp\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Saml idp\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"attribute_name_usergroup": dsschema.StringAttribute{
@@ -862,7 +864,7 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"tacplus": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Tacplus\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
+					MarkdownDescription: "Tacplus\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"checkgroup": dsschema.BoolAttribute{
@@ -912,7 +914,8 @@ var AuthenticationProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

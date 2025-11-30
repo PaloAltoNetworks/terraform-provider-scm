@@ -39,20 +39,17 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the schedule
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `schedule_type` (Attributes) Schedule type (see [below for nested schema](#nestedatt--data--schedule_type))
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--schedule_type"></a>
@@ -61,10 +58,8 @@ Read-Only:
 Read-Only:
 
 - `non_recurring` (List of String) Non recurring
-
 > ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`.
 - `recurring` (Attributes) Recurring
-
 > ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`. (see [below for nested schema](#nestedatt--data--schedule_type--recurring))
 
 <a id="nestedatt--data--schedule_type--recurring"></a>
@@ -73,10 +68,8 @@ Read-Only:
 Read-Only:
 
 - `daily` (List of String) Daily
-
 > ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`.
 - `weekly` (Attributes) Weekly
-
 > ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`. (see [below for nested schema](#nestedatt--data--schedule_type--recurring--weekly))
 
 <a id="nestedatt--data--schedule_type--recurring--weekly"></a>

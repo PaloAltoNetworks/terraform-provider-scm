@@ -33,6 +33,7 @@ output "single_site_details" {
 
 ### Optional
 
+- `folder` (String) The folder in which the resource is defined
 - `name` (String) The name of the site
 
 ### Read-Only

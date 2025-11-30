@@ -252,7 +252,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
 					},
-					MarkdownDescription: "Dnsname\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Dnsname\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
 				},
 				"rfc822name": schema.StringAttribute{
@@ -262,7 +262,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
 					},
-					MarkdownDescription: "Rfc822name\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Rfc822name\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
 				},
 				"uniform_resource_identifier": schema.StringAttribute{
@@ -272,7 +272,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rfc822name"),
 						),
 					},
-					MarkdownDescription: "Uniform resource identifier\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Uniform resource identifier\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
 				},
 			},
@@ -286,7 +286,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -318,7 +318,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -353,7 +353,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("none"),
 						),
 					},
-					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Dynamic\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"otp_server_url": schema.StringAttribute{
@@ -388,7 +388,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 						),
 						stringvalidator.LengthAtMost(1024),
 					},
-					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Optional:            true,
 				},
 				"none": schema.StringAttribute{
@@ -399,7 +399,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 						),
 						stringvalidator.OneOf(""),
 					},
-					MarkdownDescription: "No OTP\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "No OTP\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Optional:            true,
 				},
 			},
@@ -421,7 +421,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -478,21 +478,22 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"dnsname": dsschema.StringAttribute{
-					MarkdownDescription: "Dnsname\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Dnsname\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Computed:            true,
 				},
 				"rfc822name": dsschema.StringAttribute{
-					MarkdownDescription: "Rfc822name\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Rfc822name\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Computed:            true,
 				},
 				"uniform_resource_identifier": dsschema.StringAttribute{
-					MarkdownDescription: "Uniform resource identifier\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Uniform resource identifier\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Computed:            true,
 				},
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"digest": dsschema.StringAttribute{
@@ -510,7 +511,8 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -531,7 +533,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"dynamic": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Dynamic\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"otp_server_url": dsschema.StringAttribute{
@@ -550,11 +552,11 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"fixed": dsschema.StringAttribute{
-					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Computed:            true,
 				},
 				"none": dsschema.StringAttribute{
-					MarkdownDescription: "No OTP\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "No OTP\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Computed:            true,
 				},
 			},
@@ -568,7 +570,8 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"subject": dsschema.StringAttribute{

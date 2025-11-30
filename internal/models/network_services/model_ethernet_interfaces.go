@@ -514,7 +514,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("tap"),
 				),
 			},
-			MarkdownDescription: "Aggregate group\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Aggregate group\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Optional:            true,
 		},
 		"comment": schema.StringAttribute{
@@ -537,7 +537,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -558,7 +558,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -579,7 +579,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("tap"),
 				),
 			},
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Layer2\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"lldp": schema.SingleNestedAttribute{
@@ -609,7 +609,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("tap"),
 				),
 			},
-			MarkdownDescription: "Ethernet Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Ethernet Interface Layer 3 configuration\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Optional:            true,
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
@@ -690,7 +690,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					MarkdownDescription: "Ethernet Interfaces DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -756,7 +756,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					MarkdownDescription: "Ethernet Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interface IP addresses\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Optional:            true,
 					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
@@ -784,7 +784,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
-					MarkdownDescription: "Pppoe\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Pppoe\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -936,7 +936,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -950,7 +950,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("layer3"),
 				),
 			},
-			MarkdownDescription: "Tap\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Tap\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Optional:            true,
 			Attributes:          map[string]schema.Attribute{},
 		},
@@ -969,7 +969,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "EthernetInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"aggregate_group": dsschema.StringAttribute{
-			MarkdownDescription: "Aggregate group\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Aggregate group\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Computed:            true,
 		},
 		"comment": dsschema.StringAttribute{
@@ -981,7 +981,8 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"encrypted_values": dsschema.MapAttribute{
@@ -991,7 +992,8 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -999,7 +1001,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"layer2": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Layer2\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"lldp": dsschema.SingleNestedAttribute{
@@ -1019,7 +1021,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"layer3": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ethernet Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Ethernet Interface Layer 3 configuration\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
@@ -1073,7 +1075,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ethernet Interfaces DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"create_default_route": dsschema.BoolAttribute{
@@ -1109,7 +1111,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"ip": dsschema.ListNestedAttribute{
-					MarkdownDescription: "Ethernet Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interface IP addresses\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
@@ -1125,7 +1127,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"pppoe": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Pppoe\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Pppoe\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"access_concentrator": dsschema.StringAttribute{
@@ -1213,11 +1215,12 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"tap": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Tap\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Tap\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Computed:            true,
 			Attributes:          map[string]dsschema.Attribute{},
 		},

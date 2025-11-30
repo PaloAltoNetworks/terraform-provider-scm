@@ -21,29 +21,26 @@ ScepProfile data source
 
 ### Optional
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the SCEP profile
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `algorithm` (Attributes) Algorithm (see [below for nested schema](#nestedatt--algorithm))
 - `ca_identity_name` (String) Certificate Authority identity
 - `certificate_attributes` (Attributes) Subject Alternative name type (see [below for nested schema](#nestedatt--certificate_attributes))
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `digest` (String) Digest for CSR
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `fingerprint` (String) CA certificate fingerprint
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `scep_ca_cert` (String) SCEP server CA certificate
 - `scep_challenge` (Attributes) One Time Password challenge (see [below for nested schema](#nestedatt--scep_challenge))
 - `scep_client_cert` (String) SCEP client ceertificate
 - `scep_url` (String) SCEP server URL
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `subject` (String) Subject
 - `tfid` (String) The Terraform ID.
 - `use_as_digital_signature` (Boolean) Use as digital signature?
@@ -71,13 +68,10 @@ Read-Only:
 Read-Only:
 
 - `dnsname` (String) Dnsname
-
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `rfc822name` (String) Rfc822name
-
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `uniform_resource_identifier` (String) Uniform resource identifier
-
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 
 
@@ -87,13 +81,10 @@ Read-Only:
 Read-Only:
 
 - `dynamic` (Attributes) Dynamic
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`. (see [below for nested schema](#nestedatt--scep_challenge--dynamic))
 - `fixed` (String) Challenge to use for SCEP server on mobile clients
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
 - `none` (String) No OTP
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
 
 <a id="nestedatt--scep_challenge--dynamic"></a>

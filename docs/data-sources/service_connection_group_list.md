@@ -70,6 +70,7 @@ Required:
 
 Optional:
 
+- `folder` (String) The folder in which the resource is defined
 - `name` (String) Name
 
 Read-Only:

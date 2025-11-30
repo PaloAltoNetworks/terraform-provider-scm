@@ -136,12 +136,6 @@ func (d *InternalDnsServerDataSource) Read(ctx context.Context, req datasource.R
 
 		listReq := d.client.InternalDNSServersAPI.ListInternalDNSServers(ctx)
 
-		// Use reflection to dynamically check for and apply scope filters.
-
-
-
-
-
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing InternalDnsServerss", fmt.Sprintf("Could not list InternalDnsServerss: %s", err.Error()))

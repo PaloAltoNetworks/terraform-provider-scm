@@ -574,6 +574,7 @@ var RemoteNetworksDataSourceSchema = dsschema.Schema{
 		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder that contains the remote network",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{

@@ -270,6 +270,7 @@ var TrafficSteeringRulesDataSourceSchema = dsschema.Schema{
 		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder containing the traffic steering rule",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{

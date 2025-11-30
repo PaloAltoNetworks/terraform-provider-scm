@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"reflect"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -120,29 +119,9 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 	// Set the Terraform ID and save the final state.
 	var idBuilder strings.Builder
 
-	v := reflect.ValueOf(data)
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
 
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
-
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
 
 	idBuilder.WriteString(":")
 	idBuilder.WriteString(data.Id.ValueString())
@@ -211,57 +190,9 @@ func (r *AutoVpnClusterResource) Read(ctx context.Context, req resource.ReadRequ
 
 	// --- FOLDER RESTORATION (tokens[0]) ---
 
-	// Use reflection to safely restore the Folder field from the TFID token 0.
-	vFolder := reflect.ValueOf(&data).Elem() // Unique variable: vFolder
-	fFolder := vFolder.FieldByName("Folder") // Unique variable: fFolder
-
-	if fFolder.IsValid() && fFolder.CanSet() {
-		tokenValue := tokens[0]
-
-		if tokenValue != "" {
-			newStringValue := basetypes.NewStringValue(tokenValue)
-			fFolder.Set(reflect.ValueOf(newStringValue))
-		} else {
-			newNullValue := basetypes.NewStringNull()
-			fFolder.Set(reflect.ValueOf(newNullValue))
-		}
-	}
-
 	// --- SNIPPET RESTORATION (tokens[1]) ---
 
-	// Use reflection to safely restore the Snippet field from the TFID token 1.
-	vSnippet := reflect.ValueOf(&data).Elem()   // Unique variable: vSnippet
-	fSnippet := vSnippet.FieldByName("Snippet") // Unique variable: fSnippet
-
-	if fSnippet.IsValid() && fSnippet.CanSet() {
-		tokenValue := tokens[1]
-
-		if tokenValue != "" {
-			newStringValue := basetypes.NewStringValue(tokenValue)
-			fSnippet.Set(reflect.ValueOf(newStringValue))
-		} else {
-			newNullValue := basetypes.NewStringNull()
-			fSnippet.Set(reflect.ValueOf(newNullValue))
-		}
-	}
-
 	// --- DEVICE RESTORATION (tokens[2]) ---
-
-	// Use reflection to safely restore the Device field from the TFID token 2.
-	vDevice := reflect.ValueOf(&data).Elem() // Unique variable: vDevice
-	fDevice := vDevice.FieldByName("Device") // Unique variable: fDevice
-
-	if fDevice.IsValid() && fDevice.CanSet() {
-		tokenValue := tokens[2]
-
-		if tokenValue != "" {
-			newStringValue := basetypes.NewStringValue(tokenValue)
-			fDevice.Set(reflect.ValueOf(newStringValue))
-		} else {
-			newNullValue := basetypes.NewStringNull()
-			fDevice.Set(reflect.ValueOf(newNullValue))
-		}
-	}
 
 	// Step 10 - Set data back into tf state and done
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

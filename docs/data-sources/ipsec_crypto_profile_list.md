@@ -51,28 +51,23 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `ah` (Attributes) Ah
-
 > ℹ️ **Note:** You must specify exactly one of `ah` and `esp`. (see [below for nested schema](#nestedatt--data--ah))
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dh_group` (String) phase-2 DH group (PFS DH group)
 - `esp` (Attributes) Esp
-
 > ℹ️ **Note:** You must specify exactly one of `ah` and `esp`. (see [below for nested schema](#nestedatt--data--esp))
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `lifesize` (Attributes) Lifesize (see [below for nested schema](#nestedatt--data--lifesize))
 - `lifetime` (Attributes) Ipsec crypto profile lifetime (see [below for nested schema](#nestedatt--data--lifetime))
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--ah"></a>
@@ -98,16 +93,12 @@ Read-Only:
 Read-Only:
 
 - `gb` (Number) specify lifesize in gigabytes(GB)
-
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 - `kb` (Number) specify lifesize in kilobytes(KB)
-
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 - `mb` (Number) specify lifesize in megabytes(MB)
-
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 - `tb` (Number) specify lifesize in terabytes(TB)
-
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 
 
@@ -117,14 +108,10 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) specify lifetime in days
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `hours` (Number) specify lifetime in hours
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `minutes` (Number) specify lifetime in minutes
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `seconds` (Number) specify lifetime in seconds
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.

@@ -71,20 +71,17 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the external dynamic list
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `type` (Attributes) Type (see [below for nested schema](#nestedatt--data--type))
 
@@ -94,25 +91,18 @@ Read-Only:
 Read-Only:
 
 - `domain` (Attributes) Domain
-
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--data--type--domain))
 - `imei` (Attributes) Imei
-
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--data--type--imei))
 - `imsi` (Attributes) Imsi
-
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--data--type--imsi))
 - `ip` (Attributes) Ip
-
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--data--type--ip))
 - `predefined_ip` (Attributes) Predefined ip
-
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--data--type--predefined_ip))
 - `predefined_url` (Attributes) Predefined url
-
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--data--type--predefined_url))
 - `url` (Attributes) Url
-
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--data--type--url))
 
 <a id="nestedatt--data--type--domain"></a>
@@ -143,19 +133,14 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--domain--recurring--daily))
 - `five_minute` (Attributes) Five minute
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--domain--recurring--five_minute))
 - `hourly` (Attributes) Hourly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--domain--recurring--hourly))
 - `monthly` (Attributes) Monthly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--domain--recurring--monthly))
 - `weekly` (Attributes) Weekly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--domain--recurring--weekly))
 
 <a id="nestedatt--data--type--domain--recurring--daily"></a>
@@ -221,19 +206,14 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imei--recurring--daily))
 - `five_minute` (Attributes) Five minute
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imei--recurring--five_minute))
 - `hourly` (Attributes) Hourly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imei--recurring--hourly))
 - `monthly` (Attributes) Monthly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imei--recurring--monthly))
 - `weekly` (Attributes) Weekly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imei--recurring--weekly))
 
 <a id="nestedatt--data--type--imei--recurring--daily"></a>
@@ -299,19 +279,14 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imsi--recurring--daily))
 - `five_minute` (Attributes) Five minute
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imsi--recurring--five_minute))
 - `hourly` (Attributes) Hourly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imsi--recurring--hourly))
 - `monthly` (Attributes) Monthly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imsi--recurring--monthly))
 - `weekly` (Attributes) Weekly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--imsi--recurring--weekly))
 
 <a id="nestedatt--data--type--imsi--recurring--daily"></a>
@@ -377,19 +352,14 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--ip--recurring--daily))
 - `five_minute` (Attributes) Five minute
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--ip--recurring--five_minute))
 - `hourly` (Attributes) Hourly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--ip--recurring--hourly))
 - `monthly` (Attributes) Monthly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--ip--recurring--monthly))
 - `weekly` (Attributes) Weekly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--ip--recurring--weekly))
 
 <a id="nestedatt--data--type--ip--recurring--daily"></a>
@@ -475,19 +445,14 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--url--recurring--daily))
 - `five_minute` (Attributes) Five minute
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--url--recurring--five_minute))
 - `hourly` (Attributes) Hourly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--url--recurring--hourly))
 - `monthly` (Attributes) Monthly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--url--recurring--monthly))
 - `weekly` (Attributes) Weekly
-
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--data--type--url--recurring--weekly))
 
 <a id="nestedatt--data--type--url--recurring--daily"></a>

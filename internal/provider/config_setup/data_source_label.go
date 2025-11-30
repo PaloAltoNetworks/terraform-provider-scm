@@ -133,8 +133,6 @@ func (d *LabelDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 
 		listReq := d.client.LabelsAPI.ListLabels(ctx)
 
-		// Use reflection to dynamically check for and apply scope filters.
-
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing Labelss", fmt.Sprintf("Could not list Labelss: %s", err.Error()))

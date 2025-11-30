@@ -401,7 +401,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -416,7 +416,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -435,7 +435,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("layer3"),
 				),
 			},
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Layer2\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
 			Optional:            true,
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
@@ -510,7 +510,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("layer2"),
 				),
 			},
-			MarkdownDescription: "Aggregate Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Aggregate Interface Layer 3 configuration\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
 			Optional:            true,
 			Computed:            true,
 			Attributes: map[string]schema.Attribute{
@@ -590,7 +590,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
-					MarkdownDescription: "Aggregate Ethernet DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Ethernet DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -655,7 +655,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
 						),
 					},
-					MarkdownDescription: "Aggregate Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Interface IP addresses\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 					Optional:            true,
 					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
@@ -746,7 +746,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -775,11 +775,13 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -787,7 +789,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"layer2": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Layer2\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"lacp": dsschema.SingleNestedAttribute{
@@ -827,7 +829,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"layer3": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Aggregate Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Aggregate Interface Layer 3 configuration\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
@@ -881,7 +883,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Aggregate Ethernet DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Ethernet DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"create_default_route": dsschema.BoolAttribute{
@@ -917,7 +919,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"ip": dsschema.ListNestedAttribute{
-					MarkdownDescription: "Aggregate Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Interface IP addresses\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
@@ -970,7 +972,8 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

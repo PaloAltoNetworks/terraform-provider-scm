@@ -34,6 +34,7 @@ type ServiceConnections struct {
 	SecondaryIpsecTunnel basetypes.StringValue `tfsdk:"secondary_ipsec_tunnel"`
 	SourceNat            basetypes.BoolValue   `tfsdk:"source_nat"`
 	Subnets              basetypes.ListValue   `tfsdk:"subnets"`
+	Folder               basetypes.StringValue `tfsdk:"folder"`
 }
 
 // ServiceConnectionsBgpPeer represents a nested structure within the ServiceConnections model
@@ -117,6 +118,7 @@ func (o ServiceConnections) AttrTypes() map[string]attr.Type {
 		"secondary_ipsec_tunnel": basetypes.StringType{},
 		"source_nat":             basetypes.BoolType{},
 		"subnets":                basetypes.ListType{ElemType: basetypes.StringType{}},
+		"folder":                 basetypes.StringType{},
 	}
 }
 
@@ -248,6 +250,14 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 			MarkdownDescription: "Map of sensitive values returned from the API.",
 			Computed:            true,
 			Sensitive:           true,
+		},
+		"folder": schema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined\n",
+			Computed:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			},
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the service connection",
@@ -414,6 +424,11 @@ var ServiceConnectionsDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Map of sensitive values returned from the API.",
 			Computed:            true,
 			Sensitive:           true,
+		},
+		"folder": dsschema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined\n",
+			Optional:            true,
+			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
 			MarkdownDescription: "The UUID of the service connection",

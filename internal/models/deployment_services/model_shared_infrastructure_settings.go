@@ -222,6 +222,7 @@ var SharedInfrastructureSettingsDataSourceSchema = dsschema.Schema{
 		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder containing the shared infrastructure settings",
+			Optional:            true,
 			Computed:            true,
 		},
 		"infra_bgp_as": dsschema.StringAttribute{

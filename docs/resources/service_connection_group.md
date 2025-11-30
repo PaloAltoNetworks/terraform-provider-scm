@@ -149,5 +149,6 @@ resource "scm_service_connection_group" "example_group" {
 
 ### Read-Only
 
+- `folder` (String) The folder in which the resource is defined
 - `id` (String) The UUID of the service connection group
 - `tfid` (String) The Terraform ID.

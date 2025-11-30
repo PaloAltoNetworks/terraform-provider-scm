@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"reflect"
 	"strconv"
 	"strings"
 
@@ -83,24 +82,6 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 		listReq = listReq.Name(data.Name.ValueString())
 		// END: Add dynamic query parameter handling
 	}
-	if !data.Folder.IsNull() {
-		// START: Add dynamic query parameter handling
-		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "folder", "value": data.Folder})
-		listReq = listReq.Folder(data.Folder.ValueString())
-		// END: Add dynamic query parameter handling
-	}
-	if !data.Snippet.IsNull() {
-		// START: Add dynamic query parameter handling
-		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "snippet", "value": data.Snippet})
-		listReq = listReq.Snippet(data.Snippet.ValueString())
-		// END: Add dynamic query parameter handling
-	}
-	if !data.Device.IsNull() {
-		// START: Add dynamic query parameter handling
-		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "device", "value": data.Device})
-		listReq = listReq.Device(data.Device.ValueString())
-		// END: Add dynamic query parameter handling
-	}
 
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()
@@ -147,29 +128,9 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 
 	// Use reflection again for Tfid creation to ensure safety
 
-	v := reflect.ValueOf(data)
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
 
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
-
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
 
 	idBuilder.WriteString(":")
 	if !data.Name.IsNull() {

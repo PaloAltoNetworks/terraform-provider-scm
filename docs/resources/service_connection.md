@@ -132,6 +132,7 @@ resource "scm_service_connection" "site_a_vpn_sc" {
 ### Read-Only
 
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
+- `folder` (String) The folder in which the resource is defined
 - `id` (String) The UUID of the service connection
 - `tfid` (String) The Terraform ID.
 

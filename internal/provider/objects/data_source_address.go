@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/paloaltonetworks/scm-go/generated/objects"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
@@ -134,27 +133,17 @@ func (d *AddressDataSource) Read(ctx context.Context, req datasource.ReadRequest
 		tflog.Debug(ctx, "Reading Addresses data source by Name", map[string]interface{}{"name": objectName})
 
 		listReq := d.client.AddressesAPI.ListAddresses(ctx)
-
-		// Use reflection to dynamically check for and apply scope filters.
-
-		v := reflect.ValueOf(data)
-
-		if f := v.FieldByName("Folder"); f.IsValid() {
-			if folder, ok := f.Interface().(tfTypes.String); ok && !folder.IsNull() {
-				listReq = listReq.Folder(folder.ValueString())
-			}
+		if !data.Folder.IsNull() {
+			tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "folder", "value": data.Folder})
+			listReq = listReq.Folder(data.Folder.ValueString())
 		}
-
-		if f := v.FieldByName("Snippet"); f.IsValid() {
-			if snippet, ok := f.Interface().(tfTypes.String); ok && !snippet.IsNull() {
-				listReq = listReq.Snippet(snippet.ValueString())
-			}
+		if !data.Snippet.IsNull() {
+			tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "snippet", "value": data.Snippet})
+			listReq = listReq.Snippet(data.Snippet.ValueString())
 		}
-
-		if f := v.FieldByName("Device"); f.IsValid() {
-			if device, ok := f.Interface().(tfTypes.String); ok && !device.IsNull() {
-				listReq = listReq.Device(device.ValueString())
-			}
+		if !data.Device.IsNull() {
+			tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "device", "value": data.Device})
+			listReq = listReq.Device(data.Device.ValueString())
 		}
 
 		listResponse, httpRes, err := listReq.Execute()

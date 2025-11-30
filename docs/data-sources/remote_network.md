@@ -40,6 +40,7 @@ output "remote_network_details" {
 
 ### Optional
 
+- `folder` (String) The folder that contains the remote network
 - `name` (String) The name of the remote network
 
 ### Read-Only
@@ -47,7 +48,6 @@ output "remote_network_details" {
 - `ecmp_load_balancing` (String) Ecmp load balancing
 - `ecmp_tunnels` (Attributes List) ecmp_tunnels is required when ecmp_load_balancing is enable (see [below for nested schema](#nestedatt--ecmp_tunnels))
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
-- `folder` (String) The folder that contains the remote network
 - `ipsec_tunnel` (String) ipsec_tunnel is required when ecmp_load_balancing is disable
 - `license_type` (String) New customer will only be on aggregate bandwidth licensing
 - `protocol` (Attributes) setup the protocol when ecmp_load_balancing is disable (see [below for nested schema](#nestedatt--protocol))

@@ -158,6 +158,7 @@ resource "scm_site" "example" {
 
 ### Read-Only
 
+- `folder` (String) The folder in which the resource is defined
 - `id` (String) The UUID of the site
 - `tfid` (String) The Terraform ID.
 

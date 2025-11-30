@@ -39,25 +39,20 @@ output "address_group_outputs" {
 
 ### Optional
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the address group
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `description` (String) Description
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dynamic` (Attributes) Dynamic
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`. (see [below for nested schema](#nestedatt--dynamic))
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `static` (List of String) Static
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`.
 - `tag` (List of String) Tags for address group object
 - `tfid` (String) The Terraform ID.

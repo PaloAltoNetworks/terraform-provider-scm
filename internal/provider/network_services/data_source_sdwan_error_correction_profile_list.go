@@ -108,7 +108,7 @@ func (d *SdwanErrorCorrectionProfileListDataSource) Read(ctx context.Context, re
 		resp.Diagnostics.AddError("Error Listing SdwanErrorCorrectionProfiless", fmt.Sprintf("Could not list SdwanErrorCorrectionProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

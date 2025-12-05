@@ -103,7 +103,7 @@ func (d *ProfileGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 			resp.Diagnostics.AddError("Error Reading ProfileGroups", fmt.Sprintf("Could not read ProfileGroups with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *ProfileGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 			resp.Diagnostics.AddError("Error Listing ProfileGroupss", fmt.Sprintf("Could not list ProfileGroupss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

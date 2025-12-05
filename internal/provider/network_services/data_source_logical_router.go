@@ -103,7 +103,7 @@ func (d *LogicalRouterDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Reading LogicalRouters", fmt.Sprintf("Could not read LogicalRouters with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *LogicalRouterDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Listing LogicalRouterss", fmt.Sprintf("Could not list LogicalRouterss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

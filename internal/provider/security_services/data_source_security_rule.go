@@ -103,7 +103,7 @@ func (d *SecurityRuleDataSource) Read(ctx context.Context, req datasource.ReadRe
 			resp.Diagnostics.AddError("Error Reading SecurityRules", fmt.Sprintf("Could not read SecurityRules with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -155,7 +155,7 @@ func (d *SecurityRuleDataSource) Read(ctx context.Context, req datasource.ReadRe
 			resp.Diagnostics.AddError("Error Listing SecurityRuless", fmt.Sprintf("Could not list SecurityRuless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

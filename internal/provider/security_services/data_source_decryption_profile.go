@@ -103,7 +103,7 @@ func (d *DecryptionProfileDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Reading DecryptionProfiles", fmt.Sprintf("Could not read DecryptionProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *DecryptionProfileDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Listing DecryptionProfiless", fmt.Sprintf("Could not list DecryptionProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

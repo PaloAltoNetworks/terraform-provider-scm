@@ -108,7 +108,7 @@ func (d *SdwanTrafficDistributionProfileListDataSource) Read(ctx context.Context
 		resp.Diagnostics.AddError("Error Listing SdwanTrafficDistributionProfiless", fmt.Sprintf("Could not list SdwanTrafficDistributionProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

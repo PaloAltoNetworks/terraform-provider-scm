@@ -108,7 +108,7 @@ func (d *ProfileGroupListDataSource) Read(ctx context.Context, req datasource.Re
 		resp.Diagnostics.AddError("Error Listing ProfileGroupss", fmt.Sprintf("Could not list ProfileGroupss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

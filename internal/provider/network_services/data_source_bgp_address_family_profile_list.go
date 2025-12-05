@@ -108,7 +108,7 @@ func (d *BgpAddressFamilyProfileListDataSource) Read(ctx context.Context, req da
 		resp.Diagnostics.AddError("Error Listing BgpAddressFamilyProfiless", fmt.Sprintf("Could not list BgpAddressFamilyProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

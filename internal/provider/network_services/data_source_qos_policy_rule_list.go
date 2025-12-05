@@ -114,7 +114,7 @@ func (d *QosPolicyRuleListDataSource) Read(ctx context.Context, req datasource.R
 		resp.Diagnostics.AddError("Error Listing QosPolicyRuless", fmt.Sprintf("Could not list QosPolicyRuless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

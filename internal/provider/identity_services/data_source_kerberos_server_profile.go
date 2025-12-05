@@ -103,7 +103,7 @@ func (d *KerberosServerProfileDataSource) Read(ctx context.Context, req datasour
 			resp.Diagnostics.AddError("Error Reading KerberosServerProfiles", fmt.Sprintf("Could not read KerberosServerProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *KerberosServerProfileDataSource) Read(ctx context.Context, req datasour
 			resp.Diagnostics.AddError("Error Listing KerberosServerProfiless", fmt.Sprintf("Could not list KerberosServerProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

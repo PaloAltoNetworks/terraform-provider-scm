@@ -103,7 +103,7 @@ func (d *QosProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 			resp.Diagnostics.AddError("Error Reading QosProfiles", fmt.Sprintf("Could not read QosProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *QosProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 			resp.Diagnostics.AddError("Error Listing QosProfiless", fmt.Sprintf("Could not list QosProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

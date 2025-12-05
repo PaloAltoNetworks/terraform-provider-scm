@@ -108,7 +108,7 @@ func (d *RadiusServerProfileListDataSource) Read(ctx context.Context, req dataso
 		resp.Diagnostics.AddError("Error Listing RadiusServerProfiless", fmt.Sprintf("Could not list RadiusServerProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

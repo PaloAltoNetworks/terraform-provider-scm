@@ -103,7 +103,7 @@ func (d *BgpAddressFamilyProfileDataSource) Read(ctx context.Context, req dataso
 			resp.Diagnostics.AddError("Error Reading BgpAddressFamilyProfiles", fmt.Sprintf("Could not read BgpAddressFamilyProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *BgpAddressFamilyProfileDataSource) Read(ctx context.Context, req dataso
 			resp.Diagnostics.AddError("Error Listing BgpAddressFamilyProfiless", fmt.Sprintf("Could not list BgpAddressFamilyProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

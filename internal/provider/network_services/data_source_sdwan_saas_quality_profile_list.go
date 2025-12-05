@@ -108,7 +108,7 @@ func (d *SdwanSaasQualityProfileListDataSource) Read(ctx context.Context, req da
 		resp.Diagnostics.AddError("Error Listing SdwanSaasQualityProfiless", fmt.Sprintf("Could not list SdwanSaasQualityProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

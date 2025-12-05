@@ -108,7 +108,7 @@ func (d *AddressListDataSource) Read(ctx context.Context, req datasource.ReadReq
 		resp.Diagnostics.AddError("Error Listing Addressess", fmt.Sprintf("Could not list Addressess: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

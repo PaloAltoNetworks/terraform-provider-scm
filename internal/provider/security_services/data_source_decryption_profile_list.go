@@ -108,7 +108,7 @@ func (d *DecryptionProfileListDataSource) Read(ctx context.Context, req datasour
 		resp.Diagnostics.AddError("Error Listing DecryptionProfiless", fmt.Sprintf("Could not list DecryptionProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

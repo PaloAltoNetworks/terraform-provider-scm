@@ -89,7 +89,7 @@ func (d *LabelListDataSource) Read(ctx context.Context, req datasource.ReadReque
 		resp.Diagnostics.AddError("Error Listing Labelss", fmt.Sprintf("Could not list Labelss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

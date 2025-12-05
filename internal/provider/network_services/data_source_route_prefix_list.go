@@ -103,7 +103,7 @@ func (d *RoutePrefixListDataSource) Read(ctx context.Context, req datasource.Rea
 			resp.Diagnostics.AddError("Error Reading RoutePrefixLists", fmt.Sprintf("Could not read RoutePrefixLists with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *RoutePrefixListDataSource) Read(ctx context.Context, req datasource.Rea
 			resp.Diagnostics.AddError("Error Listing RoutePrefixListss", fmt.Sprintf("Could not list RoutePrefixListss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

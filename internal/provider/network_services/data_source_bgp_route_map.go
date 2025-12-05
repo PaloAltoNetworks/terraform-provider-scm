@@ -103,7 +103,7 @@ func (d *BgpRouteMapDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Reading BgpRouteMaps", fmt.Sprintf("Could not read BgpRouteMaps with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *BgpRouteMapDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Listing BgpRouteMapss", fmt.Sprintf("Could not list BgpRouteMapss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

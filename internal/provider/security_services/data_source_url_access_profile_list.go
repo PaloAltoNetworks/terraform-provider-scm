@@ -108,7 +108,7 @@ func (d *UrlAccessProfileListDataSource) Read(ctx context.Context, req datasourc
 		resp.Diagnostics.AddError("Error Listing UrlAccessProfiless", fmt.Sprintf("Could not list UrlAccessProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

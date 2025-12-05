@@ -103,7 +103,7 @@ func (d *InterfaceManagementProfileDataSource) Read(ctx context.Context, req dat
 			resp.Diagnostics.AddError("Error Reading InterfaceManagementProfiles", fmt.Sprintf("Could not read InterfaceManagementProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *InterfaceManagementProfileDataSource) Read(ctx context.Context, req dat
 			resp.Diagnostics.AddError("Error Listing InterfaceManagementProfiless", fmt.Sprintf("Could not list InterfaceManagementProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

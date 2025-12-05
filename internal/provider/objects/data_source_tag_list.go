@@ -108,7 +108,7 @@ func (d *TagListDataSource) Read(ctx context.Context, req datasource.ReadRequest
 		resp.Diagnostics.AddError("Error Listing Tagss", fmt.Sprintf("Could not list Tagss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

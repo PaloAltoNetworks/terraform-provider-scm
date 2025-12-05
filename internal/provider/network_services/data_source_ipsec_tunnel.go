@@ -103,7 +103,7 @@ func (d *IpsecTunnelDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Reading IpsecTunnels", fmt.Sprintf("Could not read IpsecTunnels with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *IpsecTunnelDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Listing IpsecTunnelss", fmt.Sprintf("Could not list IpsecTunnelss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

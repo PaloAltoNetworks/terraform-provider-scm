@@ -103,7 +103,7 @@ func (d *IkeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 			resp.Diagnostics.AddError("Error Reading IkeGateways", fmt.Sprintf("Could not read IkeGateways with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *IkeGatewayDataSource) Read(ctx context.Context, req datasource.ReadRequ
 			resp.Diagnostics.AddError("Error Listing IkeGatewayss", fmt.Sprintf("Could not list IkeGatewayss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

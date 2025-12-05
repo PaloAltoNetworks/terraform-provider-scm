@@ -105,7 +105,7 @@ func (d *InternalDnsServerDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Reading InternalDnsServers", fmt.Sprintf("Could not read InternalDnsServers with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -141,7 +141,7 @@ func (d *InternalDnsServerDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Listing InternalDnsServerss", fmt.Sprintf("Could not list InternalDnsServerss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

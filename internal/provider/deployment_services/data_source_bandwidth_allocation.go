@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE: BandwidthAllocation (Specialized: List-Managed / No-ID)
@@ -71,6 +72,11 @@ func (d *BandwidthAllocationDataSource) Read(ctx context.Context, req datasource
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error reading BandwidthAllocation", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"Resource Listing Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

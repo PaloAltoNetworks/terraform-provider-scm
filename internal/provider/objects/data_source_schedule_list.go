@@ -108,7 +108,7 @@ func (d *ScheduleListDataSource) Read(ctx context.Context, req datasource.ReadRe
 		resp.Diagnostics.AddError("Error Listing Scheduless", fmt.Sprintf("Could not list Scheduless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

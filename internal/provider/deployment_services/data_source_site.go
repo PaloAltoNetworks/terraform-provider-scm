@@ -103,7 +103,7 @@ func (d *SiteDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 			resp.Diagnostics.AddError("Error Reading Sites", fmt.Sprintf("Could not read Sites with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -143,7 +143,7 @@ func (d *SiteDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 			resp.Diagnostics.AddError("Error Listing Sitess", fmt.Sprintf("Could not list Sitess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

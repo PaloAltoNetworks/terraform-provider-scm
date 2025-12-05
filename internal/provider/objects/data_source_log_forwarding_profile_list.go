@@ -108,7 +108,7 @@ func (d *LogForwardingProfileListDataSource) Read(ctx context.Context, req datas
 		resp.Diagnostics.AddError("Error Listing LogForwardingProfiless", fmt.Sprintf("Could not list LogForwardingProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

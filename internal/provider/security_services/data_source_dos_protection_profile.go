@@ -103,7 +103,7 @@ func (d *DosProtectionProfileDataSource) Read(ctx context.Context, req datasourc
 			resp.Diagnostics.AddError("Error Reading DosProtectionProfiles", fmt.Sprintf("Could not read DosProtectionProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *DosProtectionProfileDataSource) Read(ctx context.Context, req datasourc
 			resp.Diagnostics.AddError("Error Listing DosProtectionProfiless", fmt.Sprintf("Could not list DosProtectionProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

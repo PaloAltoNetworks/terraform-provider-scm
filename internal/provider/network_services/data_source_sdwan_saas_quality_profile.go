@@ -103,7 +103,7 @@ func (d *SdwanSaasQualityProfileDataSource) Read(ctx context.Context, req dataso
 			resp.Diagnostics.AddError("Error Reading SdwanSaasQualityProfiles", fmt.Sprintf("Could not read SdwanSaasQualityProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *SdwanSaasQualityProfileDataSource) Read(ctx context.Context, req dataso
 			resp.Diagnostics.AddError("Error Listing SdwanSaasQualityProfiless", fmt.Sprintf("Could not list SdwanSaasQualityProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

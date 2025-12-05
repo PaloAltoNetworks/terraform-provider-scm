@@ -108,7 +108,7 @@ func (d *RouteCommunityListListDataSource) Read(ctx context.Context, req datasou
 		resp.Diagnostics.AddError("Error Listing RouteCommunityListss", fmt.Sprintf("Could not list RouteCommunityListss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

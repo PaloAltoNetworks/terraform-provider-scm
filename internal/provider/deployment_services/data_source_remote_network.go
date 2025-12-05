@@ -103,7 +103,7 @@ func (d *RemoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Reading RemoteNetworks", fmt.Sprintf("Could not read RemoteNetworks with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -143,7 +143,7 @@ func (d *RemoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Listing RemoteNetworkss", fmt.Sprintf("Could not list RemoteNetworkss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

@@ -103,7 +103,7 @@ func (d *RouteAccessListDataSource) Read(ctx context.Context, req datasource.Rea
 			resp.Diagnostics.AddError("Error Reading RouteAccessLists", fmt.Sprintf("Could not read RouteAccessLists with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *RouteAccessListDataSource) Read(ctx context.Context, req datasource.Rea
 			resp.Diagnostics.AddError("Error Listing RouteAccessListss", fmt.Sprintf("Could not list RouteAccessListss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

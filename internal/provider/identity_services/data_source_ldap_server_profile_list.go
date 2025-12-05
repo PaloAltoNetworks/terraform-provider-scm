@@ -108,7 +108,7 @@ func (d *LdapServerProfileListDataSource) Read(ctx context.Context, req datasour
 		resp.Diagnostics.AddError("Error Listing LdapServerProfiless", fmt.Sprintf("Could not list LdapServerProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

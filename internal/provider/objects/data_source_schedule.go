@@ -103,7 +103,7 @@ func (d *ScheduleDataSource) Read(ctx context.Context, req datasource.ReadReques
 			resp.Diagnostics.AddError("Error Reading Schedules", fmt.Sprintf("Could not read Schedules with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *ScheduleDataSource) Read(ctx context.Context, req datasource.ReadReques
 			resp.Diagnostics.AddError("Error Listing Scheduless", fmt.Sprintf("Could not list Scheduless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

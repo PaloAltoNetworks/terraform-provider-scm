@@ -108,7 +108,7 @@ func (d *DecryptionExclusionListDataSource) Read(ctx context.Context, req dataso
 		resp.Diagnostics.AddError("Error Listing DecryptionExclusionss", fmt.Sprintf("Could not list DecryptionExclusionss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

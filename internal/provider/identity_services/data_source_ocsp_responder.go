@@ -105,7 +105,7 @@ func (d *OcspResponderDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Reading OcspResponders", fmt.Sprintf("Could not read OcspResponders with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -153,7 +153,7 @@ func (d *OcspResponderDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Listing OcspResponderss", fmt.Sprintf("Could not list OcspResponderss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

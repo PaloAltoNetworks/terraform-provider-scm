@@ -108,7 +108,7 @@ func (d *IpsecCryptoProfileListDataSource) Read(ctx context.Context, req datasou
 		resp.Diagnostics.AddError("Error Listing IpsecCryptoProfiless", fmt.Sprintf("Could not list IpsecCryptoProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

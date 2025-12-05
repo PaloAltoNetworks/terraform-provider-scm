@@ -103,7 +103,7 @@ func (d *AuthenticationSequenceDataSource) Read(ctx context.Context, req datasou
 			resp.Diagnostics.AddError("Error Reading AuthenticationSequences", fmt.Sprintf("Could not read AuthenticationSequences with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *AuthenticationSequenceDataSource) Read(ctx context.Context, req datasou
 			resp.Diagnostics.AddError("Error Listing AuthenticationSequencess", fmt.Sprintf("Could not list AuthenticationSequencess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

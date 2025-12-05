@@ -103,7 +103,7 @@ func (d *ZoneDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 			resp.Diagnostics.AddError("Error Reading Zones", fmt.Sprintf("Could not read Zones with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *ZoneDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 			resp.Diagnostics.AddError("Error Listing Zoness", fmt.Sprintf("Could not list Zoness: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

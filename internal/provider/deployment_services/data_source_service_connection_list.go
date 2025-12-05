@@ -96,7 +96,7 @@ func (d *ServiceConnectionListDataSource) Read(ctx context.Context, req datasour
 		resp.Diagnostics.AddError("Error Listing ServiceConnectionss", fmt.Sprintf("Could not list ServiceConnectionss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

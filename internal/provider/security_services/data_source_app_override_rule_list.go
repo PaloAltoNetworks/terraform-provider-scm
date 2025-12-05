@@ -114,7 +114,7 @@ func (d *AppOverrideRuleListDataSource) Read(ctx context.Context, req datasource
 		resp.Diagnostics.AddError("Error Listing AppOverrideRuless", fmt.Sprintf("Could not list AppOverrideRuless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

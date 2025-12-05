@@ -89,28 +89,25 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 		resp.Diagnostics.AddError("Error Listing AutoVpnClusterss", fmt.Sprintf("Could not list AutoVpnClusterss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return
 	}
 
-	// RAW LIST LOGIC:
-	// The API returned a JSON array [...] directly.
-	if listResponse == nil {
+	// Convert the response to the Terraform model.
+	if listResponse == nil || listResponse.GetData() == nil {
 		return // Nothing to do.
 	}
 
-	// 1. TOTAL: We calculate it manually based on the slice length.
-	total := int64(len(listResponse))
+	total := int64(listResponse.GetTotal())
 	data.Total = types.Int64PointerValue(&total)
+	data.Limit = types.Int64Value(int64(listResponse.GetLimit()))
+	data.Offset = types.Int64Value(int64(listResponse.GetOffset()))
 
-	// 2. LIMIT/OFFSET: We do not update them from the server (metadata missing).
-	//    We keep the values requested by the user in the config.
-
-	// 3. PACKING: Pass the listResponse directly (it IS the slice).
-	packedList, diags := packAutoVpnClustersListFromSdk(ctx, listResponse)
-
+	// =================== START: THE IMPROVEMENT ===================
+	// Use the generated list packer to pack the SCM items into a TF list.
+	packedList, diags := packAutoVpnClustersListFromSdk(ctx, listResponse.GetData())
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return

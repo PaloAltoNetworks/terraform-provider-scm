@@ -103,7 +103,7 @@ func (d *DecryptionRuleDataSource) Read(ctx context.Context, req datasource.Read
 			resp.Diagnostics.AddError("Error Reading DecryptionRules", fmt.Sprintf("Could not read DecryptionRules with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -155,7 +155,7 @@ func (d *DecryptionRuleDataSource) Read(ctx context.Context, req datasource.Read
 			resp.Diagnostics.AddError("Error Listing DecryptionRuless", fmt.Sprintf("Could not list DecryptionRuless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

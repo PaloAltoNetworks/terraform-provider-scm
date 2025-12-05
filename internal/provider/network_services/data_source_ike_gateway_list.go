@@ -108,7 +108,7 @@ func (d *IkeGatewayListDataSource) Read(ctx context.Context, req datasource.Read
 		resp.Diagnostics.AddError("Error Listing IkeGatewayss", fmt.Sprintf("Could not list IkeGatewayss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

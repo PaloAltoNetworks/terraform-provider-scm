@@ -103,7 +103,7 @@ func (d *AntiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 			resp.Diagnostics.AddError("Error Reading AntiSpywareProfiles", fmt.Sprintf("Could not read AntiSpywareProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *AntiSpywareProfileDataSource) Read(ctx context.Context, req datasource.
 			resp.Diagnostics.AddError("Error Listing AntiSpywareProfiless", fmt.Sprintf("Could not list AntiSpywareProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

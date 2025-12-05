@@ -108,7 +108,7 @@ func (d *BgpFilteringProfileListDataSource) Read(ctx context.Context, req dataso
 		resp.Diagnostics.AddError("Error Listing BgpFilteringProfiless", fmt.Sprintf("Could not list BgpFilteringProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

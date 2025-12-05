@@ -115,7 +115,7 @@ func (d *MfaServerListDataSource) Read(ctx context.Context, req datasource.ReadR
 		resp.Diagnostics.AddError("Error Listing MfaServerss", fmt.Sprintf("Could not list MfaServerss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

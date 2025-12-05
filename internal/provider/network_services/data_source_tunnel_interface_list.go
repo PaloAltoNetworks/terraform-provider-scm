@@ -108,7 +108,7 @@ func (d *TunnelInterfaceListDataSource) Read(ctx context.Context, req datasource
 		resp.Diagnostics.AddError("Error Listing TunnelInterfacess", fmt.Sprintf("Could not list TunnelInterfacess: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

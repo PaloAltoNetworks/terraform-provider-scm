@@ -103,7 +103,7 @@ func (d *HipProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 			resp.Diagnostics.AddError("Error Reading HipProfiles", fmt.Sprintf("Could not read HipProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *HipProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 			resp.Diagnostics.AddError("Error Listing HipProfiless", fmt.Sprintf("Could not list HipProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

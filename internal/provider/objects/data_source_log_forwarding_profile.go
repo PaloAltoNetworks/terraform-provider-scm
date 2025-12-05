@@ -103,7 +103,7 @@ func (d *LogForwardingProfileDataSource) Read(ctx context.Context, req datasourc
 			resp.Diagnostics.AddError("Error Reading LogForwardingProfiles", fmt.Sprintf("Could not read LogForwardingProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *LogForwardingProfileDataSource) Read(ctx context.Context, req datasourc
 			resp.Diagnostics.AddError("Error Listing LogForwardingProfiless", fmt.Sprintf("Could not list LogForwardingProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

@@ -103,7 +103,7 @@ func (d *AuthenticationProfileDataSource) Read(ctx context.Context, req datasour
 			resp.Diagnostics.AddError("Error Reading AuthenticationProfiles", fmt.Sprintf("Could not read AuthenticationProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *AuthenticationProfileDataSource) Read(ctx context.Context, req datasour
 			resp.Diagnostics.AddError("Error Listing AuthenticationProfiless", fmt.Sprintf("Could not list AuthenticationProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

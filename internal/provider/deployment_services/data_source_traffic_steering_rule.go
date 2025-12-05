@@ -103,7 +103,7 @@ func (d *TrafficSteeringRuleDataSource) Read(ctx context.Context, req datasource
 			resp.Diagnostics.AddError("Error Reading TrafficSteeringRules", fmt.Sprintf("Could not read TrafficSteeringRules with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -143,7 +143,7 @@ func (d *TrafficSteeringRuleDataSource) Read(ctx context.Context, req datasource
 			resp.Diagnostics.AddError("Error Listing TrafficSteeringRuless", fmt.Sprintf("Could not list TrafficSteeringRuless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

@@ -103,7 +103,7 @@ func (d *NatRuleDataSource) Read(ctx context.Context, req datasource.ReadRequest
 			resp.Diagnostics.AddError("Error Reading NatRules", fmt.Sprintf("Could not read NatRules with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -155,7 +155,7 @@ func (d *NatRuleDataSource) Read(ctx context.Context, req datasource.ReadRequest
 			resp.Diagnostics.AddError("Error Listing NatRuless", fmt.Sprintf("Could not list NatRuless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

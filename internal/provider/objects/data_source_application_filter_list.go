@@ -108,7 +108,7 @@ func (d *ApplicationFilterListDataSource) Read(ctx context.Context, req datasour
 		resp.Diagnostics.AddError("Error Listing ApplicationFilterss", fmt.Sprintf("Could not list ApplicationFilterss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

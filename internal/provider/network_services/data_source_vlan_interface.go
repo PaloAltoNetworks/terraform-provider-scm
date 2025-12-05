@@ -103,7 +103,7 @@ func (d *VlanInterfaceDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Reading VlanInterfaces", fmt.Sprintf("Could not read VlanInterfaces with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *VlanInterfaceDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Listing VlanInterfacess", fmt.Sprintf("Could not list VlanInterfacess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

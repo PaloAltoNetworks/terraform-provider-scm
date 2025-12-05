@@ -103,7 +103,7 @@ func (d *AuthenticationRuleDataSource) Read(ctx context.Context, req datasource.
 			resp.Diagnostics.AddError("Error Reading AuthenticationRules", fmt.Sprintf("Could not read AuthenticationRules with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -155,7 +155,7 @@ func (d *AuthenticationRuleDataSource) Read(ctx context.Context, req datasource.
 			resp.Diagnostics.AddError("Error Listing AuthenticationRuless", fmt.Sprintf("Could not list AuthenticationRuless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

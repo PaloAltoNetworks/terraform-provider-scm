@@ -103,7 +103,7 @@ func (d *BgpRouteMapRedistributionDataSource) Read(ctx context.Context, req data
 			resp.Diagnostics.AddError("Error Reading BgpRouteMapRedistributions", fmt.Sprintf("Could not read BgpRouteMapRedistributions with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *BgpRouteMapRedistributionDataSource) Read(ctx context.Context, req data
 			resp.Diagnostics.AddError("Error Listing BgpRouteMapRedistributionss", fmt.Sprintf("Could not list BgpRouteMapRedistributionss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

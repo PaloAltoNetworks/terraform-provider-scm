@@ -108,7 +108,7 @@ func (d *FileBlockingProfileListDataSource) Read(ctx context.Context, req dataso
 		resp.Diagnostics.AddError("Error Listing FileBlockingProfiless", fmt.Sprintf("Could not list FileBlockingProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

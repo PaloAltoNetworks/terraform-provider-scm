@@ -102,7 +102,7 @@ func (d *LabelDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 			resp.Diagnostics.AddError("Error Reading Labels", fmt.Sprintf("Could not read Labels with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -138,7 +138,7 @@ func (d *LabelDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 			resp.Diagnostics.AddError("Error Listing Labelss", fmt.Sprintf("Could not list Labelss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

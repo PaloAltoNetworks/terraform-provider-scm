@@ -103,7 +103,7 @@ func (d *SdwanPathQualityProfileDataSource) Read(ctx context.Context, req dataso
 			resp.Diagnostics.AddError("Error Reading SdwanPathQualityProfiles", fmt.Sprintf("Could not read SdwanPathQualityProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *SdwanPathQualityProfileDataSource) Read(ctx context.Context, req dataso
 			resp.Diagnostics.AddError("Error Listing SdwanPathQualityProfiless", fmt.Sprintf("Could not list SdwanPathQualityProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

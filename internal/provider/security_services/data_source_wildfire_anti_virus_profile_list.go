@@ -108,7 +108,7 @@ func (d *WildfireAntiVirusProfileListDataSource) Read(ctx context.Context, req d
 		resp.Diagnostics.AddError("Error Listing WildfireAntiVirusProfiless", fmt.Sprintf("Could not list WildfireAntiVirusProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

@@ -108,7 +108,7 @@ func (d *ApplicationGroupListDataSource) Read(ctx context.Context, req datasourc
 		resp.Diagnostics.AddError("Error Listing ApplicationGroupss", fmt.Sprintf("Could not list ApplicationGroupss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

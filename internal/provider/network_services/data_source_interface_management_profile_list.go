@@ -108,7 +108,7 @@ func (d *InterfaceManagementProfileListDataSource) Read(ctx context.Context, req
 		resp.Diagnostics.AddError("Error Listing InterfaceManagementProfiless", fmt.Sprintf("Could not list InterfaceManagementProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

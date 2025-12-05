@@ -108,7 +108,7 @@ func (d *Layer3SubinterfaceListDataSource) Read(ctx context.Context, req datasou
 		resp.Diagnostics.AddError("Error Listing Layer3Subinterfacess", fmt.Sprintf("Could not list Layer3Subinterfacess: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

@@ -103,7 +103,7 @@ func (d *UrlCategoryDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Reading UrlCategories", fmt.Sprintf("Could not read UrlCategories with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *UrlCategoryDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Listing UrlCategoriess", fmt.Sprintf("Could not list UrlCategoriess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

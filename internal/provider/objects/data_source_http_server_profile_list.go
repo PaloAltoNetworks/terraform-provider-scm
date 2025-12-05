@@ -108,7 +108,7 @@ func (d *HttpServerProfileListDataSource) Read(ctx context.Context, req datasour
 		resp.Diagnostics.AddError("Error Listing HttpServerProfiless", fmt.Sprintf("Could not list HttpServerProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

@@ -108,7 +108,7 @@ func (d *UrlCategoryListDataSource) Read(ctx context.Context, req datasource.Rea
 		resp.Diagnostics.AddError("Error Listing UrlCategoriess", fmt.Sprintf("Could not list UrlCategoriess: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

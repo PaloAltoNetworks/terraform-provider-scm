@@ -108,7 +108,7 @@ func (d *ZoneProtectionProfileListDataSource) Read(ctx context.Context, req data
 		resp.Diagnostics.AddError("Error Listing ZoneProtectionProfiless", fmt.Sprintf("Could not list ZoneProtectionProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

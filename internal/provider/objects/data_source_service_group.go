@@ -103,7 +103,7 @@ func (d *ServiceGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 			resp.Diagnostics.AddError("Error Reading ServiceGroups", fmt.Sprintf("Could not read ServiceGroups with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *ServiceGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 			resp.Diagnostics.AddError("Error Listing ServiceGroupss", fmt.Sprintf("Could not list ServiceGroupss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

@@ -89,7 +89,7 @@ func (d *SnippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 		resp.Diagnostics.AddError("Error Listing Snippetss", fmt.Sprintf("Could not list Snippetss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

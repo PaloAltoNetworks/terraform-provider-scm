@@ -108,7 +108,7 @@ func (d *LocalUserGroupListDataSource) Read(ctx context.Context, req datasource.
 		resp.Diagnostics.AddError("Error Listing LocalUserGroupss", fmt.Sprintf("Could not list LocalUserGroupss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

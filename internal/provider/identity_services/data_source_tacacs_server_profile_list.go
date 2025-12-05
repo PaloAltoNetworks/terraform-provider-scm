@@ -108,7 +108,7 @@ func (d *TacacsServerProfileListDataSource) Read(ctx context.Context, req dataso
 		resp.Diagnostics.AddError("Error Listing TacacsServerProfiless", fmt.Sprintf("Could not list TacacsServerProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

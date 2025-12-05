@@ -102,7 +102,7 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 			resp.Diagnostics.AddError("Error Reading AutoVpnClusters", fmt.Sprintf("Could not read AutoVpnClusters with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -138,7 +138,7 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 			resp.Diagnostics.AddError("Error Listing AutoVpnClusterss", fmt.Sprintf("Could not list AutoVpnClusterss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -150,9 +150,8 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 
 		// Find the specific object from the list.
 		var foundObject *network_services.AutoVpnClusters
-		// RAW LIST LOGIC: Iterate directly over the slice
-		for i := range listResponse {
-			item := listResponse[i]
+		for i := range listResponse.GetData() {
+			item := listResponse.GetData()[i]
 			if item.GetName() == objectName {
 				foundObject = &item
 				break

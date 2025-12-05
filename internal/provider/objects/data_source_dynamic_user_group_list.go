@@ -108,7 +108,7 @@ func (d *DynamicUserGroupListDataSource) Read(ctx context.Context, req datasourc
 		resp.Diagnostics.AddError("Error Listing DynamicUserGroupss", fmt.Sprintf("Could not list DynamicUserGroupss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

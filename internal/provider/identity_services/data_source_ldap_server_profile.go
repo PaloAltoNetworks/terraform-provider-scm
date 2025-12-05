@@ -103,7 +103,7 @@ func (d *LdapServerProfileDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Reading LdapServerProfiles", fmt.Sprintf("Could not read LdapServerProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *LdapServerProfileDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Listing LdapServerProfiless", fmt.Sprintf("Could not list LdapServerProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

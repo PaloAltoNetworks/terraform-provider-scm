@@ -103,7 +103,7 @@ func (d *LocalUserGroupDataSource) Read(ctx context.Context, req datasource.Read
 			resp.Diagnostics.AddError("Error Reading LocalUserGroups", fmt.Sprintf("Could not read LocalUserGroups with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *LocalUserGroupDataSource) Read(ctx context.Context, req datasource.Read
 			resp.Diagnostics.AddError("Error Listing LocalUserGroupss", fmt.Sprintf("Could not list LocalUserGroupss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

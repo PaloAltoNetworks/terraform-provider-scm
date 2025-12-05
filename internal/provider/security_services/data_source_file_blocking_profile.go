@@ -103,7 +103,7 @@ func (d *FileBlockingProfileDataSource) Read(ctx context.Context, req datasource
 			resp.Diagnostics.AddError("Error Reading FileBlockingProfiles", fmt.Sprintf("Could not read FileBlockingProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *FileBlockingProfileDataSource) Read(ctx context.Context, req datasource
 			resp.Diagnostics.AddError("Error Listing FileBlockingProfiless", fmt.Sprintf("Could not list FileBlockingProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

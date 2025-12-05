@@ -108,7 +108,7 @@ func (d *ServiceGroupListDataSource) Read(ctx context.Context, req datasource.Re
 		resp.Diagnostics.AddError("Error Listing ServiceGroupss", fmt.Sprintf("Could not list ServiceGroupss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

@@ -108,7 +108,7 @@ func (d *RoutePathAccessListListDataSource) Read(ctx context.Context, req dataso
 		resp.Diagnostics.AddError("Error Listing RoutePathAccessListss", fmt.Sprintf("Could not list RoutePathAccessListss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

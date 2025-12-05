@@ -103,7 +103,7 @@ func (d *LinkTagDataSource) Read(ctx context.Context, req datasource.ReadRequest
 			resp.Diagnostics.AddError("Error Reading LinkTags", fmt.Sprintf("Could not read LinkTags with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *LinkTagDataSource) Read(ctx context.Context, req datasource.ReadRequest
 			resp.Diagnostics.AddError("Error Listing LinkTagss", fmt.Sprintf("Could not list LinkTagss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

@@ -103,7 +103,7 @@ func (d *UrlAccessProfileDataSource) Read(ctx context.Context, req datasource.Re
 			resp.Diagnostics.AddError("Error Reading UrlAccessProfiles", fmt.Sprintf("Could not read UrlAccessProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *UrlAccessProfileDataSource) Read(ctx context.Context, req datasource.Re
 			resp.Diagnostics.AddError("Error Listing UrlAccessProfiless", fmt.Sprintf("Could not list UrlAccessProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // RESOURCE: BandwidthAllocation (Specialized: List-Managed / No-ID)
@@ -84,6 +85,12 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating BandwidthAllocation", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Creation Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -157,6 +164,13 @@ func (r *BandwidthAllocationResource) Read(ctx context.Context, req resource.Rea
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error reading BandwidthAllocation", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Read Failed: API Request Failed",
+			detailedMessage,
+		)
+
 		return
 	}
 
@@ -223,6 +237,12 @@ func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.U
 	updatedObject, _, err := updateReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error updating BandwidthAllocation", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Update Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 
@@ -282,6 +302,12 @@ func (r *BandwidthAllocationResource) Delete(ctx context.Context, req resource.D
 	listResponse, _, err := listReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error reading BandwidthAllocation for deletion", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
 		return
 	}
 

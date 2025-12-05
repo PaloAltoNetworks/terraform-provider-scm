@@ -108,7 +108,7 @@ func (d *ZoneListDataSource) Read(ctx context.Context, req datasource.ReadReques
 		resp.Diagnostics.AddError("Error Listing Zoness", fmt.Sprintf("Could not list Zoness: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

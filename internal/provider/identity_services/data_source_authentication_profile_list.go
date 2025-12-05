@@ -108,7 +108,7 @@ func (d *AuthenticationProfileListDataSource) Read(ctx context.Context, req data
 		resp.Diagnostics.AddError("Error Listing AuthenticationProfiless", fmt.Sprintf("Could not list AuthenticationProfiless: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

@@ -103,7 +103,7 @@ func (d *BgpFilteringProfileDataSource) Read(ctx context.Context, req datasource
 			resp.Diagnostics.AddError("Error Reading BgpFilteringProfiles", fmt.Sprintf("Could not read BgpFilteringProfiles with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *BgpFilteringProfileDataSource) Read(ctx context.Context, req datasource
 			resp.Diagnostics.AddError("Error Listing BgpFilteringProfiless", fmt.Sprintf("Could not list BgpFilteringProfiless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

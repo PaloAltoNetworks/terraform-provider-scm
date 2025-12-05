@@ -103,7 +103,7 @@ func (d *Layer2SubinterfaceDataSource) Read(ctx context.Context, req datasource.
 			resp.Diagnostics.AddError("Error Reading Layer2Subinterfaces", fmt.Sprintf("Could not read Layer2Subinterfaces with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *Layer2SubinterfaceDataSource) Read(ctx context.Context, req datasource.
 			resp.Diagnostics.AddError("Error Listing Layer2Subinterfacess", fmt.Sprintf("Could not list Layer2Subinterfacess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

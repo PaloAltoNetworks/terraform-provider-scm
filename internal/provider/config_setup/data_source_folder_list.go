@@ -89,7 +89,7 @@ func (d *FolderListDataSource) Read(ctx context.Context, req datasource.ReadRequ
 		resp.Diagnostics.AddError("Error Listing Folderss", fmt.Sprintf("Could not list Folderss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

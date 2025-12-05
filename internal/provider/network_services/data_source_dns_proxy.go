@@ -103,7 +103,7 @@ func (d *DnsProxyDataSource) Read(ctx context.Context, req datasource.ReadReques
 			resp.Diagnostics.AddError("Error Reading DnsProxies", fmt.Sprintf("Could not read DnsProxies with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -151,7 +151,7 @@ func (d *DnsProxyDataSource) Read(ctx context.Context, req datasource.ReadReques
 			resp.Diagnostics.AddError("Error Listing DnsProxiess", fmt.Sprintf("Could not list DnsProxiess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

@@ -102,7 +102,7 @@ func (d *AntiSpywareSignatureListDataSource) Read(ctx context.Context, req datas
 		resp.Diagnostics.AddError("Error Listing AntiSpywareSignaturess", fmt.Sprintf("Could not list AntiSpywareSignaturess: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

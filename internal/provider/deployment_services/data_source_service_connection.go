@@ -103,7 +103,7 @@ func (d *ServiceConnectionDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Reading ServiceConnections", fmt.Sprintf("Could not read ServiceConnections with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -143,7 +143,7 @@ func (d *ServiceConnectionDataSource) Read(ctx context.Context, req datasource.R
 			resp.Diagnostics.AddError("Error Listing ServiceConnectionss", fmt.Sprintf("Could not list ServiceConnectionss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

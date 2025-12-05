@@ -103,7 +103,7 @@ func (d *AppOverrideRuleDataSource) Read(ctx context.Context, req datasource.Rea
 			resp.Diagnostics.AddError("Error Reading AppOverrideRules", fmt.Sprintf("Could not read AppOverrideRules with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -155,7 +155,7 @@ func (d *AppOverrideRuleDataSource) Read(ctx context.Context, req datasource.Rea
 			resp.Diagnostics.AddError("Error Listing AppOverrideRuless", fmt.Sprintf("Could not list AppOverrideRuless: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

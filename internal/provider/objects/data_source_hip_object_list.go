@@ -108,7 +108,7 @@ func (d *HipObjectListDataSource) Read(ctx context.Context, req datasource.ReadR
 		resp.Diagnostics.AddError("Error Listing HipObjectss", fmt.Sprintf("Could not list HipObjectss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

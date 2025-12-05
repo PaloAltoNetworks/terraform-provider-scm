@@ -1009,7 +1009,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1030,7 +1030,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1060,7 +1060,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1089,7 +1089,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Domain\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Domain\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1157,7 +1157,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1180,7 +1180,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1193,7 +1193,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1206,7 +1206,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1236,7 +1236,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1279,7 +1279,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Imei\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Imei\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1341,7 +1341,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1364,7 +1364,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1377,7 +1377,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1390,7 +1390,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1420,7 +1420,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1463,7 +1463,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Imsi\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Imsi\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1525,7 +1525,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1548,7 +1548,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1561,7 +1561,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1574,7 +1574,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1604,7 +1604,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1647,7 +1647,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Ip\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1710,7 +1710,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1733,7 +1733,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1746,7 +1746,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1759,7 +1759,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1789,7 +1789,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1832,7 +1832,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Predefined ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined ip\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1870,7 +1870,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Predefined url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined url\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1908,7 +1908,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("predefined_url"),
 						),
 					},
-					MarkdownDescription: "Url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Url\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
@@ -1970,7 +1970,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1993,7 +1993,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -2006,7 +2006,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -2019,7 +2019,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -2049,7 +2049,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -2091,7 +2091,8 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ExternalDynamicList data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"encrypted_values": dsschema.MapAttribute{
@@ -2101,7 +2102,8 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -2114,7 +2116,8 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{
@@ -2126,7 +2129,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"domain": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Domain\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Domain\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
@@ -2165,7 +2168,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2175,17 +2178,17 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2199,7 +2202,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2221,7 +2224,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"imei": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Imei\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Imei\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
@@ -2256,7 +2259,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2266,17 +2269,17 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2290,7 +2293,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2312,7 +2315,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"imsi": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Imsi\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Imsi\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
@@ -2347,7 +2350,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2357,17 +2360,17 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2381,7 +2384,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2403,7 +2406,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ip": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Ip\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
@@ -2439,7 +2442,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2449,17 +2452,17 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2473,7 +2476,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2495,7 +2498,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"predefined_ip": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Predefined ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined ip\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"description": dsschema.StringAttribute{
@@ -2514,7 +2517,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"predefined_url": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Predefined url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined url\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"description": dsschema.StringAttribute{
@@ -2533,7 +2536,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"url": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Url\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
@@ -2568,7 +2571,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2578,17 +2581,17 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
@@ -2602,7 +2605,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{

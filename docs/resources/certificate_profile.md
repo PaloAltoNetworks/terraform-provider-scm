@@ -57,15 +57,12 @@ resource "scm_certificate_profile" "scm_cp_1" {
 - `cert_status_timeout` (String) Certificate status timeout
 - `crl_receive_timeout` (String) CRL receive timeout (seconds)
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `domain` (String) User domain
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ocsp_receive_timeout` (String) OCSP receive timeout (seconds)
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `use_crl` (Boolean) Use CRL?
 - `use_ocsp` (Boolean) Use OCSP?

@@ -116,7 +116,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("hot_potato_routing"),
 						),
 					},
-					MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Default\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -126,7 +126,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("default"),
 						),
 					},
-					MarkdownDescription: "Hot potato routing\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Hot potato routing\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -172,12 +172,12 @@ var BgpRoutingDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"default": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Default\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"hot_potato_routing": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Hot potato routing\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Hot potato routing\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},

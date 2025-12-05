@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
@@ -104,7 +103,7 @@ func (d *UrlCategoryDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Reading UrlCategories", fmt.Sprintf("Could not read UrlCategories with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -134,27 +133,17 @@ func (d *UrlCategoryDataSource) Read(ctx context.Context, req datasource.ReadReq
 		tflog.Debug(ctx, "Reading UrlCategories data source by Name", map[string]interface{}{"name": objectName})
 
 		listReq := d.client.URLCategoriesAPI.ListURLCategories(ctx)
-
-		// Use reflection to dynamically check for and apply scope filters.
-
-		v := reflect.ValueOf(data)
-
-		if f := v.FieldByName("Folder"); f.IsValid() {
-			if folder, ok := f.Interface().(tfTypes.String); ok && !folder.IsNull() {
-				listReq = listReq.Folder(folder.ValueString())
-			}
+		if !data.Folder.IsNull() {
+			tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "folder", "value": data.Folder})
+			listReq = listReq.Folder(data.Folder.ValueString())
 		}
-
-		if f := v.FieldByName("Snippet"); f.IsValid() {
-			if snippet, ok := f.Interface().(tfTypes.String); ok && !snippet.IsNull() {
-				listReq = listReq.Snippet(snippet.ValueString())
-			}
+		if !data.Snippet.IsNull() {
+			tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "snippet", "value": data.Snippet})
+			listReq = listReq.Snippet(data.Snippet.ValueString())
 		}
-
-		if f := v.FieldByName("Device"); f.IsValid() {
-			if device, ok := f.Interface().(tfTypes.String); ok && !device.IsNull() {
-				listReq = listReq.Device(device.ValueString())
-			}
+		if !data.Device.IsNull() {
+			tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "device", "value": data.Device})
+			listReq = listReq.Device(data.Device.ValueString())
 		}
 
 		listResponse, httpRes, err := listReq.Execute()
@@ -162,7 +151,7 @@ func (d *UrlCategoryDataSource) Read(ctx context.Context, req datasource.ReadReq
 			resp.Diagnostics.AddError("Error Listing UrlCategoriess", fmt.Sprintf("Could not list UrlCategoriess: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

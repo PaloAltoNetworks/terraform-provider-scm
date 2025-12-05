@@ -32,6 +32,7 @@ type Sites struct {
 	State        basetypes.StringValue `tfsdk:"state"`
 	Type         basetypes.StringValue `tfsdk:"type"`
 	ZipCode      basetypes.StringValue `tfsdk:"zip_code"`
+	Folder       basetypes.StringValue `tfsdk:"folder"`
 }
 
 // SitesMembersInner represents a nested structure within the Sites model
@@ -80,6 +81,7 @@ func (o Sites) AttrTypes() map[string]attr.Type {
 		"state":    basetypes.StringType{},
 		"type":     basetypes.StringType{},
 		"zip_code": basetypes.StringType{},
+		"folder":   basetypes.StringType{},
 	}
 }
 
@@ -142,6 +144,14 @@ var SitesResourceSchema = schema.Schema{
 		"country": schema.StringAttribute{
 			MarkdownDescription: "The country in which the site exists",
 			Optional:            true,
+		},
+		"folder": schema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined\n",
+			Computed:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			},
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the site",
@@ -261,6 +271,11 @@ var SitesDataSourceSchema = dsschema.Schema{
 		},
 		"country": dsschema.StringAttribute{
 			MarkdownDescription: "The country in which the site exists",
+			Computed:            true,
+		},
+		"folder": dsschema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined\n",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{

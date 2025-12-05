@@ -1219,6 +1219,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 		},
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",
+			Optional:            true,
 			Computed:            true,
 		},
 		"devices": dsschema.ListAttribute{
@@ -1232,6 +1233,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder in which the resource is defined",
+			Optional:            true,
 			Computed:            true,
 		},
 		"from": dsschema.ListAttribute{
@@ -1334,6 +1336,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 		},
 		"snippet": dsschema.StringAttribute{
 			MarkdownDescription: "The snippet in which the resource is defined",
+			Optional:            true,
 			Computed:            true,
 		},
 		"source": dsschema.ListAttribute{

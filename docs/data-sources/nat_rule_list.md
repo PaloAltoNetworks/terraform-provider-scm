@@ -64,7 +64,10 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+- `folder` (String) The folder in which the resource is defined
 - `name` (String) NAT rule name
+- `snippet` (String) The snippet in which the resource is defined
 
 Read-Only:
 
@@ -72,15 +75,12 @@ Read-Only:
 - `description` (String) NAT rule description
 - `destination` (List of String) Destination address(es) of the original packet
 - `destination_translation` (Attributes) Destination translation (see [below for nested schema](#nestedatt--data--destination_translation))
-- `device` (String) The device in which the resource is defined
 - `disabled` (Boolean) Disable NAT rule?
 - `dynamic_destination_translation` (Attributes) Dynamic destination translation (see [below for nested schema](#nestedatt--data--dynamic_destination_translation))
-- `folder` (String) The folder in which the resource is defined
 - `from` (List of String) Source zone(s) of the original packet
 - `nat_type` (String) NAT type
 - `position` (String) The relative position of the rule
 - `service` (String) The service of the original packet
-- `snippet` (String) The snippet in which the resource is defined
 - `source` (List of String) Source address(es) of the original packet
 - `source_translation` (Attributes) Source translation (see [below for nested schema](#nestedatt--data--source_translation))
 - `tag` (List of String) NAT rule tags

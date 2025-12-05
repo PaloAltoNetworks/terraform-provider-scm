@@ -1,0 +1,99 @@
+########################################################
+# Create
+########################################################
+# 1000 mbps leads to 1 spn (eg: taiwan-raspberry)
+# >1000 mbps leads to 2 spns (eg: taiwan-raspberry, taiwan-larch)
+# >2000 mbps leads to 3 spns and so on. (eg: taiwan-raspberry, taiwan-larch, taiwan-peng)
+
+# The API is smart enough to generate these spn's and return to us.
+
+# To create with qos use following example
+# resource "scm_bandwidth_allocation" "example" {
+#  name                = "taiwan"
+#  allocated_bandwidth = 50 # In Mbps
+#
+#  qos = {
+#    enabled          = true
+#    customized       = false             # Set to true if using a custom profile
+#    profile          = "Default Profile" # Name of the QoS Profile
+#    guaranteed_ratio = 20              # 20% guaranteed bandwidth ratio. API seems to accept only round integers
+#  }
+#}
+
+# When creating, we never specify an spn_name_list. That is purely during update
+resource "scm_bandwidth_allocation" "example" {
+  name                = "taiwan"
+  allocated_bandwidth = 50 # In Mbps
+}
+
+########################################################
+#### Update
+########################################################
+# User needs to know the auto generated spn from state to pass or through a datasource call
+# 2 cases exist here - Upsizing and downsizing.
+
+########################################################
+#### Update - Upsizing
+########################################################
+# When upsizing, 2 cases exist
+# When upsizing, user can start from 50Mbps to 900Mbps (this is still < 1000 Mbps - so no spn list change and no warning is received on apply)
+# When upsizing, user can start from 50Mbps to 1200Mbps (this is > 1000 Mbps - so warning is received on apply with the new spn list)
+# We let the user know, so they can now add the new spn on their resource this way.
+
+# resource "scm_bandwidth_allocation" "example" {
+#   name                = "taiwan"
+#   allocated_bandwidth = 1200 # In Mbps (increase from 50 to 1200)
+#   spn_name_list = ["taiwan-larch"] # User just gives 1 spn - that is all they know. But API returns back 2 !!
+# }
+
+# Warning will show the user clearly that another spn has been added namely taiwan-aconitum.
+# State will still show only 1 spn to let terraform pass without complaining.
+
+#│ Warning: API Response Modified Input
+#│
+#│   with scm_bandwidth_allocation.example,
+#│   on resource.tf line 28, in resource "scm_bandwidth_allocation" "example":
+#│   28: resource "scm_bandwidth_allocation" "example" {
+#│
+#│ The API modified the 'spn_name_list' during update.
+#│ Real values returned by API: [taiwan-larch taiwan-aconitum]
+#│ We have saved your input to state to avoid errors, but drift will be detected on next plan.
+
+# User can now modify the resource to add taiwan-aconitum
+# On doing that and apply -> User gets -> Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+# State is also updated to both spn's at this time.
+
+# Note: No warning is shown if user upsizes from 50 to 900 Mbps because there is no spn change here.
+
+########################################################
+#### Update - Downsizing
+########################################################
+# When downsizing, 2 cases exist
+# When downsizing, user can start from 900Mbps to 50Mbps (this is still < 1000 Mbps - so no spn list change and no warning is received on apply)
+# When downsizing, user can start from 1200Mbps to 900Mbps (this is < 1000 Mbps - but 1 spn will be dropped - so warning is received on apply with the new spn list)
+# We let the user know that they can now remove their chosen spn on their resource this way.
+
+# resource "scm_bandwidth_allocation" "example" {
+#   name                = "taiwan"
+#   allocated_bandwidth = 900 # In Mbps (decrease from 1200 to 900)
+#   spn_name_list = ["taiwan-aconitum"]
+#   # User can choose which of the spn to retain. User is choosing aconitum.
+#   # User can also leave both spn's in which case the api will choose one at random.
+# }
+
+########################################################
+#### Delete
+########################################################
+#
+# Just comment out the tf and run apply - and all spn_name_list in your state will be deleted - equivalent to deleting a region's bandwidth
+#   # scm_bandwidth_allocation.example will be destroyed
+#  # (because scm_bandwidth_allocation.example is not in configuration)
+#  - resource "scm_bandwidth_allocation" "example" {
+#      - allocated_bandwidth = 1200 -> null
+#      - name                = "taiwan" -> null
+#      - spn_name_list       = [
+#          - "taiwan-aconitum",
+#          - "taiwan-larch",
+#        ] -> null
+#      - tfid                = "taiwan" -> null
+#    }

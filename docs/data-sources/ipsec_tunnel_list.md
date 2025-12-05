@@ -51,23 +51,20 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `anti_replay` (Boolean) Enable Anti-Replay check on this tunnel
 - `auto_key` (Attributes) Auto key (see [below for nested schema](#nestedatt--data--auto_key))
 - `copy_tos` (Boolean) Copy IP TOS bits from inner packet to IPSec packet (not recommended)
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `enable_gre_encapsulation` (Boolean) allow GRE over IPSec
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tfid` (String) The Terraform ID.
 - `tunnel_interface` (String) Tunnel interface variable or hardcoded tunnel. Default will be tunnels.
 - `tunnel_monitor` (Attributes) Tunnel monitor (see [below for nested schema](#nestedatt--data--tunnel_monitor))
@@ -106,13 +103,10 @@ Read-Only:
 Read-Only:
 
 - `number` (Number) IP protocol number
-
 > ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.
 - `tcp` (Attributes) IPv4 type of proxy_id protocol values for TCP protocol
-
 > ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`. (see [below for nested schema](#nestedatt--data--auto_key--proxy_id--protocol--tcp))
 - `udp` (Attributes) IPv6 type of proxy_id protocol values for UDP protocol
-
 > ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`. (see [below for nested schema](#nestedatt--data--auto_key--proxy_id--protocol--udp))
 
 <a id="nestedatt--data--auto_key--proxy_id--protocol--tcp"></a>
@@ -151,13 +145,10 @@ Read-Only:
 Read-Only:
 
 - `number` (Number) IP protocol number
-
 > ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.
 - `tcp` (Attributes) IPv6 type of proxy_id protocol values for TCP protocol
-
 > ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`. (see [below for nested schema](#nestedatt--data--auto_key--proxy_id_v6--protocol--tcp))
 - `udp` (Attributes) IPv6 type of proxy_id protocol values for UDP protocol
-
 > ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`. (see [below for nested schema](#nestedatt--data--auto_key--proxy_id_v6--protocol--udp))
 
 <a id="nestedatt--data--auto_key--proxy_id_v6--protocol--tcp"></a>

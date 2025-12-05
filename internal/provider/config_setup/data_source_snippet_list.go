@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/config_setup"
 
@@ -63,14 +64,23 @@ func (d *SnippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 	// Create the API request.
 	listReq := d.client.SnippetsAPI.ListSnippets(ctx)
-
-	// Apply filters from the configuration.
-
 	if !data.Limit.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "limit", "value": data.Limit})
 		listReq = listReq.Limit(int32(data.Limit.ValueInt64()))
+		// END: Add dynamic query parameter handling
 	}
 	if !data.Offset.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "offset", "value": data.Offset})
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
+		// END: Add dynamic query parameter handling
+	}
+	if !data.Name.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "name", "value": data.Name})
+		listReq = listReq.Name(data.Name.ValueString())
+		// END: Add dynamic query parameter handling
 	}
 
 	// Execute the request.
@@ -79,7 +89,7 @@ func (d *SnippetListDataSource) Read(ctx context.Context, req datasource.ReadReq
 		resp.Diagnostics.AddError("Error Listing Snippetss", fmt.Sprintf("Could not list Snippetss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return

@@ -39,29 +39,26 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Rule name
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `action` (Attributes) The action to take on rule match (see [below for nested schema](#nestedatt--data--action))
 - `description` (String) Description
 - `destination` (List of String) List of destination addresses
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Rule disabled?
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (List of String) List of source zones
 - `log_setting` (String) Log forwarding profile name
 - `position` (String) Position relative to local device rules
 - `protection` (Attributes) Protection (see [below for nested schema](#nestedatt--data--protection))
 - `schedule` (String) Schedule on which to enforce the rule
 - `service` (List of String) List of services
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) List of source addresses
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.
 - `tag` (List of String) List of tags
@@ -74,13 +71,10 @@ Read-Only:
 Read-Only:
 
 - `allow` (Attributes) Allow
-
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--data--action--allow))
 - `deny` (Attributes) Deny
-
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--data--action--deny))
 - `protect` (Attributes) Protect
-
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--data--action--protect))
 
 <a id="nestedatt--data--action--allow"></a>
@@ -102,10 +96,8 @@ Read-Only:
 Read-Only:
 
 - `aggregate` (Attributes) Aggregate
-
 > ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--data--protection--aggregate))
 - `classified` (Attributes) Classified
-
 > ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--data--protection--classified))
 
 <a id="nestedatt--data--protection--aggregate"></a>

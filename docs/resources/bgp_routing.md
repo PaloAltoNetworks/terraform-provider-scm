@@ -54,10 +54,8 @@ resource "scm_bgp_routing" "example" {
 Optional:
 
 - `default` (Attributes) Default
-
 > ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`. (see [below for nested schema](#nestedatt--routing_preference--default))
 - `hot_potato_routing` (Attributes) Hot potato routing
-
 > ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`. (see [below for nested schema](#nestedatt--routing_preference--hot_potato_routing))
 
 <a id="nestedatt--routing_preference--default"></a>

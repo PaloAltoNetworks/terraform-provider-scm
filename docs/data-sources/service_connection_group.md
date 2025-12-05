@@ -38,6 +38,7 @@ output "looked_up_service_connection_group_details" {
 
 ### Optional
 
+- `folder` (String) The folder in which the resource is defined
 - `name` (String) Name
 
 ### Read-Only

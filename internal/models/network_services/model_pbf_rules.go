@@ -314,7 +314,7 @@ var PbfRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("no_pbf"),
 						),
 					},
-					MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
+					MarkdownDescription: "Discard\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -325,7 +325,7 @@ var PbfRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("no_pbf"),
 						),
 					},
-					MarkdownDescription: "Forward\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
+					MarkdownDescription: "Forward\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"egress_interface": schema.StringAttribute{
@@ -360,7 +360,7 @@ var PbfRulesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("ip_address"),
 										),
 									},
-									MarkdownDescription: "Next hop FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+									MarkdownDescription: "Next hop FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
@@ -369,7 +369,7 @@ var PbfRulesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("fqdn"),
 										),
 									},
-									MarkdownDescription: "Next hop IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+									MarkdownDescription: "Next hop IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 									Optional:            true,
 								},
 							},
@@ -383,7 +383,7 @@ var PbfRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("forward"),
 						),
 					},
-					MarkdownDescription: "No pbf\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
+					MarkdownDescription: "No pbf\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -412,7 +412,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -449,7 +449,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -461,7 +461,7 @@ var PbfRulesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"interface": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Source interfaces\n\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
+					MarkdownDescription: "Source interfaces\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
 					Validators: []validator.List{
 						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("zone"),
@@ -471,7 +471,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				},
 				"zone": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Source zones\n\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
+					MarkdownDescription: "Source zones\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
 					Validators: []validator.List{
 						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("interface"),
@@ -510,7 +510,7 @@ var PbfRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -550,12 +550,12 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"discard": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
+					MarkdownDescription: "Discard\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"forward": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Forward\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
+					MarkdownDescription: "Forward\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"egress_interface": dsschema.StringAttribute{
@@ -585,11 +585,11 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"fqdn": dsschema.StringAttribute{
-									MarkdownDescription: "Next hop FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+									MarkdownDescription: "Next hop FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 									Computed:            true,
 								},
 								"ip_address": dsschema.StringAttribute{
-									MarkdownDescription: "Next hop IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+									MarkdownDescription: "Next hop IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 									Computed:            true,
 								},
 							},
@@ -597,7 +597,7 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"no_pbf": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "No pbf\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
+					MarkdownDescription: "No pbf\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
@@ -618,7 +618,8 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"enforce_symmetric_return": dsschema.SingleNestedAttribute{
@@ -644,7 +645,8 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"from": dsschema.SingleNestedAttribute{
@@ -653,12 +655,12 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 			Attributes: map[string]dsschema.Attribute{
 				"interface": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Source interfaces\n\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
+					MarkdownDescription: "Source interfaces\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
 					Computed:            true,
 				},
 				"zone": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Source zones\n\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
+					MarkdownDescription: "Source zones\n> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.",
 					Computed:            true,
 				},
 			},
@@ -682,7 +684,8 @@ var PbfRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"source": dsschema.ListAttribute{

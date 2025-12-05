@@ -66,7 +66,13 @@ Required:
 
 Optional:
 
+- `device` (String) Device
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) Folder
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the authentication rule
+- `snippet` (String) Snippet
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -75,13 +81,7 @@ Read-Only:
 - `description` (String) The description of the authentication rule
 - `destination` (List of String) The destination addresses
 - `destination_hip` (List of String) The destination Host Integrity Profile (HIP)
-- `device` (String) Device
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Is the authentication rule disabled?
-- `folder` (String) Folder
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (List of String) The source security zones
 - `group_tag` (String) Group tag
 - `hip_profiles` (List of String) The source Host Integrity Profile (HIP)
@@ -92,9 +92,6 @@ Read-Only:
 - `position` (String) The relative position of the rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `service` (List of String) The destination ports
-- `snippet` (String) Snippet
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) The source addresses
 - `source_hip` (List of String) The source Host Integrity Profile (HIP)
 - `source_user` (List of String) The source users

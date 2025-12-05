@@ -45,6 +45,7 @@ output "created_service_connection_subnets" {
 
 ### Optional
 
+- `folder` (String) The folder in which the resource is defined
 - `name` (String) The name of the service connection
 
 ### Read-Only

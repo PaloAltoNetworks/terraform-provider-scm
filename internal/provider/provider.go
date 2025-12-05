@@ -13,12 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	setup "github.com/paloaltonetworks/scm-go"
 
-	tfProviderConfig_setup "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_setup"
-	tfProviderDeployment_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
-	tfProviderIdentity_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/identity_services"
-	tfProviderNetwork_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/network_services"
+	tfProviderConfigSetup "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_setup"
+	tfProviderDeploymentServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
+	tfProviderDeviceSettings "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/device_settings"
+	tfProviderIdentityServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/identity_services"
+	tfProviderNetworkServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/network_services"
 	tfProviderObjects "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/objects"
-	tfProviderSecurity_services "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/security_services"
+	tfProviderSecurityServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/security_services"
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
@@ -184,12 +185,13 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 	// Create a client container with all service-specific clients
 	// Create clients map
 	clients := map[string]interface{}{
-		"config_setup":        setup.GetConfig_setupAPIClient(setupClient),
-		"deployment_services": setup.GetDeployment_servicesAPIClient(setupClient),
-		"identity_services":   setup.GetIdentity_servicesAPIClient(setupClient),
-		"network_services":    setup.GetNetwork_servicesAPIClient(setupClient),
+		"config_setup":        setup.GetConfigSetupAPIClient(setupClient),
+		"deployment_services": setup.GetDeploymentServicesAPIClient(setupClient),
+		"device_settings":     setup.GetDeviceSettingsAPIClient(setupClient),
+		"identity_services":   setup.GetIdentityServicesAPIClient(setupClient),
+		"network_services":    setup.GetNetworkServicesAPIClient(setupClient),
 		"objects":             setup.GetObjectsAPIClient(setupClient),
-		"security_services":   setup.GetSecurity_servicesAPIClient(setupClient),
+		"security_services":   setup.GetSecurityServicesAPIClient(setupClient),
 	}
 
 	resp.DataSourceData = clients
@@ -201,17 +203,19 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	var dataSources []func() datasource.DataSource
 	// Add config_setup package data sources
-	dataSources = append(dataSources, tfProviderConfig_setup.GetDataSources()...)
+	dataSources = append(dataSources, tfProviderConfigSetup.GetDataSources()...)
 	// Add deployment_services package data sources
-	dataSources = append(dataSources, tfProviderDeployment_services.GetDataSources()...)
+	dataSources = append(dataSources, tfProviderDeploymentServices.GetDataSources()...)
+	// Add device_settings package data sources
+	dataSources = append(dataSources, tfProviderDeviceSettings.GetDataSources()...)
 	// Add identity_services package data sources
-	dataSources = append(dataSources, tfProviderIdentity_services.GetDataSources()...)
+	dataSources = append(dataSources, tfProviderIdentityServices.GetDataSources()...)
 	// Add network_services package data sources
-	dataSources = append(dataSources, tfProviderNetwork_services.GetDataSources()...)
+	dataSources = append(dataSources, tfProviderNetworkServices.GetDataSources()...)
 	// Add objects package data sources
 	dataSources = append(dataSources, tfProviderObjects.GetDataSources()...)
 	// Add security_services package data sources
-	dataSources = append(dataSources, tfProviderSecurity_services.GetDataSources()...)
+	dataSources = append(dataSources, tfProviderSecurityServices.GetDataSources()...)
 	return dataSources
 }
 
@@ -219,17 +223,19 @@ func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataS
 func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource {
 	var resources []func() resource.Resource
 	// Add config_setup package resources
-	resources = append(resources, tfProviderConfig_setup.GetResources()...)
+	resources = append(resources, tfProviderConfigSetup.GetResources()...)
 	// Add deployment_services package resources
-	resources = append(resources, tfProviderDeployment_services.GetResources()...)
+	resources = append(resources, tfProviderDeploymentServices.GetResources()...)
+	// Add device_settings package resources
+	resources = append(resources, tfProviderDeviceSettings.GetResources()...)
 	// Add identity_services package resources
-	resources = append(resources, tfProviderIdentity_services.GetResources()...)
+	resources = append(resources, tfProviderIdentityServices.GetResources()...)
 	// Add network_services package resources
-	resources = append(resources, tfProviderNetwork_services.GetResources()...)
+	resources = append(resources, tfProviderNetworkServices.GetResources()...)
 	// Add objects package resources
 	resources = append(resources, tfProviderObjects.GetResources()...)
 	// Add security_services package resources
-	resources = append(resources, tfProviderSecurity_services.GetResources()...)
+	resources = append(resources, tfProviderSecurityServices.GetResources()...)
 
 	return resources
 }

@@ -244,8 +244,7 @@ func unpackContentIdSettingsContentIdToSdk(ctx context.Context, obj types.Object
 
 	// Handling Primitives
 	if !model.XForwardedFor.IsNull() && !model.XForwardedFor.IsUnknown() {
-		val := int32(model.XForwardedFor.ValueInt64())
-		sdk.XForwardedFor = &val
+		sdk.XForwardedFor = model.XForwardedFor.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "XForwardedFor", "value": *sdk.XForwardedFor})
 	}
 
@@ -326,10 +325,10 @@ func packContentIdSettingsContentIdFromSdk(ctx context.Context, sdk device_setti
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.XForwardedFor != nil {
-		model.XForwardedFor = basetypes.NewInt64Value(int64(*sdk.XForwardedFor))
+		model.XForwardedFor = basetypes.NewStringValue(*sdk.XForwardedFor)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "XForwardedFor", "value": *sdk.XForwardedFor})
 	} else {
-		model.XForwardedFor = basetypes.NewInt64Null()
+		model.XForwardedFor = basetypes.NewStringNull()
 	}
 	diags.Append(d...)
 

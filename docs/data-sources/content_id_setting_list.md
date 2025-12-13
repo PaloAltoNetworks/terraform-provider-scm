@@ -63,7 +63,7 @@ Read-Only:
 - `strip_x_fwd_for` (Boolean) Strip x fwd for
 - `tcp_bypass_exceed_queue` (Boolean) Tcp bypass exceed queue
 - `udp_bypass_exceed_queue` (Boolean) Udp bypass exceed queue
-- `x_forwarded_for` (Number) X forwarded for
+- `x_forwarded_for` (String) X forwarded for
 
 <a id="nestedatt--data--content_id--application"></a>
 ### Nested Schema for `data.content_id.application`

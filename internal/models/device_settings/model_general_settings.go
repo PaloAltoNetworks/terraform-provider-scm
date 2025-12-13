@@ -44,8 +44,8 @@ type GeneralSettingsGeneral struct {
 
 // GeneralSettingsGeneralGeoLocation represents a nested structure within the GeneralSettings model
 type GeneralSettingsGeneralGeoLocation struct {
-	Latitude  basetypes.Float64Value `tfsdk:"latitude"`
-	Longitude basetypes.Float64Value `tfsdk:"longitude"`
+	Latitude  basetypes.StringValue `tfsdk:"latitude"`
+	Longitude basetypes.StringValue `tfsdk:"longitude"`
 }
 
 // GeneralSettingsGeneralSetting represents a nested structure within the GeneralSettings model
@@ -74,8 +74,8 @@ func (o GeneralSettings) AttrTypes() map[string]attr.Type {
 				"domain":           basetypes.StringType{},
 				"geo_location": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"latitude":  basetypes.Float64Type{},
-						"longitude": basetypes.Float64Type{},
+						"latitude":  basetypes.StringType{},
+						"longitude": basetypes.StringType{},
 					},
 				},
 				"locale":       basetypes.StringType{},
@@ -116,8 +116,8 @@ func (o GeneralSettingsGeneral) AttrTypes() map[string]attr.Type {
 		"domain":           basetypes.StringType{},
 		"geo_location": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"latitude":  basetypes.Float64Type{},
-				"longitude": basetypes.Float64Type{},
+				"latitude":  basetypes.StringType{},
+				"longitude": basetypes.StringType{},
 			},
 		},
 		"locale":       basetypes.StringType{},
@@ -150,8 +150,8 @@ func (o GeneralSettingsGeneral) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the GeneralSettingsGeneralGeoLocation model.
 func (o GeneralSettingsGeneralGeoLocation) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"latitude":  basetypes.Float64Type{},
-		"longitude": basetypes.Float64Type{},
+		"latitude":  basetypes.StringType{},
+		"longitude": basetypes.StringType{},
 	}
 }
 
@@ -254,11 +254,11 @@ var GeneralSettingsResourceSchema = schema.Schema{
 					Optional:            true,
 					Computed:            true,
 					Attributes: map[string]schema.Attribute{
-						"latitude": schema.Float64Attribute{
+						"latitude": schema.StringAttribute{
 							MarkdownDescription: "Latitude",
 							Required:            true,
 						},
-						"longitude": schema.Float64Attribute{
+						"longitude": schema.StringAttribute{
 							MarkdownDescription: "Longitude",
 							Required:            true,
 						},
@@ -396,11 +396,11 @@ var GeneralSettingsDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Geographic coordinates",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"latitude": dsschema.Float64Attribute{
+						"latitude": dsschema.StringAttribute{
 							MarkdownDescription: "Latitude",
 							Computed:            true,
 						},
-						"longitude": dsschema.Float64Attribute{
+						"longitude": dsschema.StringAttribute{
 							MarkdownDescription: "Longitude",
 							Computed:            true,
 						},

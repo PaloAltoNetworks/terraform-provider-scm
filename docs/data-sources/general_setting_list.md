@@ -70,8 +70,8 @@ Read-Only:
 
 Read-Only:
 
-- `latitude` (Number) Latitude
-- `longitude` (Number) Longitude
+- `latitude` (String) Latitude
+- `longitude` (String) Longitude
 
 
 <a id="nestedatt--data--general--setting"></a>

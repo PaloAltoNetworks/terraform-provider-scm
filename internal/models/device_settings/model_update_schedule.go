@@ -972,7 +972,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
-												stringvalidator.RegexMatches(regexp.MustCompile("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"), "pattern must match "+"/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), "pattern must match "+"^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"),
 											},
 											MarkdownDescription: "At",
 											Required:            true,
@@ -1049,7 +1049,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
-												stringvalidator.RegexMatches(regexp.MustCompile("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"), "pattern must match "+"/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), "pattern must match "+"^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"),
 											},
 											MarkdownDescription: "At",
 											Optional:            true,
@@ -1098,7 +1098,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
-												stringvalidator.RegexMatches(regexp.MustCompile("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"), "pattern must match "+"/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), "pattern must match "+"^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"),
 											},
 											MarkdownDescription: "At",
 											Required:            true,
@@ -1239,7 +1239,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
-												stringvalidator.RegexMatches(regexp.MustCompile("/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"), "pattern must match "+"/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), "pattern must match "+"^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"),
 											},
 											MarkdownDescription: "At",
 											Required:            true,

@@ -27,7 +27,7 @@ type SyslogServerProfiles struct {
 	Format  basetypes.ObjectValue `tfsdk:"format"`
 	Id      basetypes.StringValue `tfsdk:"id"`
 	Name    basetypes.StringValue `tfsdk:"name"`
-	Servers basetypes.ObjectValue `tfsdk:"servers"`
+	Server  basetypes.ListValue   `tfsdk:"server"`
 	Snippet basetypes.StringValue `tfsdk:"snippet"`
 }
 
@@ -59,8 +59,8 @@ type SyslogServerProfilesFormatEscaping struct {
 	EscapedCharacters basetypes.StringValue `tfsdk:"escaped_characters"`
 }
 
-// SyslogServerProfilesServers represents a nested structure within the SyslogServerProfiles model
-type SyslogServerProfilesServers struct {
+// SyslogServerProfilesServerInner represents a nested structure within the SyslogServerProfiles model
+type SyslogServerProfilesServerInner struct {
 	Facility  basetypes.StringValue `tfsdk:"facility"`
 	Format    basetypes.StringValue `tfsdk:"format"`
 	Name      basetypes.StringValue `tfsdk:"name"`
@@ -104,7 +104,7 @@ func (o SyslogServerProfiles) AttrTypes() map[string]attr.Type {
 		},
 		"id":   basetypes.StringType{},
 		"name": basetypes.StringType{},
-		"servers": basetypes.ObjectType{
+		"server": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"facility":  basetypes.StringType{},
 				"format":    basetypes.StringType{},
@@ -113,7 +113,7 @@ func (o SyslogServerProfiles) AttrTypes() map[string]attr.Type {
 				"server":    basetypes.StringType{},
 				"transport": basetypes.StringType{},
 			},
-		},
+		}},
 		"snippet": basetypes.StringType{},
 	}
 }
@@ -176,8 +176,8 @@ func (o SyslogServerProfilesFormatEscaping) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the SyslogServerProfilesServers model.
-func (o SyslogServerProfilesServers) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the SyslogServerProfilesServerInner model.
+func (o SyslogServerProfilesServerInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"facility":  basetypes.StringType{},
 		"format":    basetypes.StringType{},
@@ -188,8 +188,8 @@ func (o SyslogServerProfilesServers) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of SyslogServerProfilesServers objects.
-func (o SyslogServerProfilesServers) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of SyslogServerProfilesServerInner objects.
+func (o SyslogServerProfilesServerInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -337,45 +337,47 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The name of the syslog server profile",
 			Required:            true,
 		},
-		"servers": schema.SingleNestedAttribute{
-			MarkdownDescription: "Servers",
-			Optional:            true,
-			Attributes: map[string]schema.Attribute{
-				"facility": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.OneOf("LOG_USER", "LOG_LOCAL0", "LOG_LOCAL1", "LOG_LOCAL2", "LOG_LOCAL3", "LOG_LOCAL4", "LOG_LOCAL5", "LOG_LOCAL6", "LOG_LOCAL7"),
+		"server": schema.ListNestedAttribute{
+			MarkdownDescription: "A list of syslog server configurations. At least one server is required.",
+			Required:            true,
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"facility": schema.StringAttribute{
+						Validators: []validator.String{
+							stringvalidator.OneOf("LOG_USER", "LOG_LOCAL0", "LOG_LOCAL1", "LOG_LOCAL2", "LOG_LOCAL3", "LOG_LOCAL4", "LOG_LOCAL5", "LOG_LOCAL6", "LOG_LOCAL7"),
+						},
+						MarkdownDescription: "Syslog facility",
+						Optional:            true,
 					},
-					MarkdownDescription: "Syslog facility",
-					Optional:            true,
-				},
-				"format": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.OneOf("BSD", "IETF"),
+					"format": schema.StringAttribute{
+						Validators: []validator.String{
+							stringvalidator.OneOf("BSD", "IETF"),
+						},
+						MarkdownDescription: "Syslog format",
+						Optional:            true,
 					},
-					MarkdownDescription: "Syslog format",
-					Optional:            true,
-				},
-				"name": schema.StringAttribute{
-					MarkdownDescription: "Syslog server name",
-					Optional:            true,
-				},
-				"port": schema.Int64Attribute{
-					Validators: []validator.Int64{
-						int64validator.Between(1, 65535),
+					"name": schema.StringAttribute{
+						MarkdownDescription: "Syslog server name",
+						Optional:            true,
 					},
-					MarkdownDescription: "Syslog server port",
-					Optional:            true,
-				},
-				"server": schema.StringAttribute{
-					MarkdownDescription: "Syslog server address",
-					Optional:            true,
-				},
-				"transport": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.OneOf("UDP", "TCP"),
+					"port": schema.Int64Attribute{
+						Validators: []validator.Int64{
+							int64validator.Between(1, 65535),
+						},
+						MarkdownDescription: "Syslog server port",
+						Optional:            true,
 					},
-					MarkdownDescription: "Transport protocol",
-					Optional:            true,
+					"server": schema.StringAttribute{
+						MarkdownDescription: "Syslog server address",
+						Optional:            true,
+					},
+					"transport": schema.StringAttribute{
+						Validators: []validator.String{
+							stringvalidator.OneOf("UDP", "TCP"),
+						},
+						MarkdownDescription: "Transport protocol",
+						Optional:            true,
+					},
 				},
 			},
 		},
@@ -515,33 +517,35 @@ var SyslogServerProfilesDataSourceSchema = dsschema.Schema{
 			Optional:            true,
 			Computed:            true,
 		},
-		"servers": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Servers",
+		"server": dsschema.ListNestedAttribute{
+			MarkdownDescription: "A list of syslog server configurations. At least one server is required.",
 			Computed:            true,
-			Attributes: map[string]dsschema.Attribute{
-				"facility": dsschema.StringAttribute{
-					MarkdownDescription: "Syslog facility",
-					Computed:            true,
-				},
-				"format": dsschema.StringAttribute{
-					MarkdownDescription: "Syslog format",
-					Computed:            true,
-				},
-				"name": dsschema.StringAttribute{
-					MarkdownDescription: "Syslog server name",
-					Computed:            true,
-				},
-				"port": dsschema.Int64Attribute{
-					MarkdownDescription: "Syslog server port",
-					Computed:            true,
-				},
-				"server": dsschema.StringAttribute{
-					MarkdownDescription: "Syslog server address",
-					Computed:            true,
-				},
-				"transport": dsschema.StringAttribute{
-					MarkdownDescription: "Transport protocol",
-					Computed:            true,
+			NestedObject: dsschema.NestedAttributeObject{
+				Attributes: map[string]dsschema.Attribute{
+					"facility": dsschema.StringAttribute{
+						MarkdownDescription: "Syslog facility",
+						Computed:            true,
+					},
+					"format": dsschema.StringAttribute{
+						MarkdownDescription: "Syslog format",
+						Computed:            true,
+					},
+					"name": dsschema.StringAttribute{
+						MarkdownDescription: "Syslog server name",
+						Computed:            true,
+					},
+					"port": dsschema.Int64Attribute{
+						MarkdownDescription: "Syslog server port",
+						Computed:            true,
+					},
+					"server": dsschema.StringAttribute{
+						MarkdownDescription: "Syslog server address",
+						Computed:            true,
+					},
+					"transport": dsschema.StringAttribute{
+						MarkdownDescription: "Transport protocol",
+						Computed:            true,
+					},
 				},
 			},
 		},

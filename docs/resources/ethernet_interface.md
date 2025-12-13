@@ -344,3 +344,26 @@ Optional:
 
 <a id="nestedatt--tap"></a>
 ### Nested Schema for `tap`
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_ethernet_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_ethernet_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_ethernet_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.

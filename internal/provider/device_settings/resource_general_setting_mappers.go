@@ -413,13 +413,13 @@ func unpackGeneralSettingsGeneralGeoLocationToSdk(ctx context.Context, obj types
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Latitude.IsNull() && !model.Latitude.IsUnknown() {
-		sdk.Latitude = float32(model.Latitude.ValueFloat64())
+		sdk.Latitude = model.Latitude.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Latitude", "value": sdk.Latitude})
 	}
 
 	// Handling Primitives
 	if !model.Longitude.IsNull() && !model.Longitude.IsUnknown() {
-		sdk.Longitude = float32(model.Longitude.ValueFloat64())
+		sdk.Longitude = model.Longitude.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Longitude", "value": sdk.Longitude})
 	}
 
@@ -438,11 +438,11 @@ func packGeneralSettingsGeneralGeoLocationFromSdk(ctx context.Context, sdk devic
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.Latitude = basetypes.NewFloat64Value(float64(sdk.Latitude))
+	model.Latitude = basetypes.NewStringValue(sdk.Latitude)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Latitude", "value": sdk.Latitude})
 	// Handling Primitives
 	// Standard primitive packing
-	model.Longitude = basetypes.NewFloat64Value(float64(sdk.Longitude))
+	model.Longitude = basetypes.NewStringValue(sdk.Longitude)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Longitude", "value": sdk.Longitude})
 	diags.Append(d...)
 

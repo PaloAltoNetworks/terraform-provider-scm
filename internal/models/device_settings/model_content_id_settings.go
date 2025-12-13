@@ -3,7 +3,6 @@ package models
 import (
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -12,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -40,7 +40,7 @@ type ContentIdSettingsContentId struct {
 	StripXFwdFor                 basetypes.BoolValue   `tfsdk:"strip_x_fwd_for"`
 	TcpBypassExceedQueue         basetypes.BoolValue   `tfsdk:"tcp_bypass_exceed_queue"`
 	UdpBypassExceedQueue         basetypes.BoolValue   `tfsdk:"udp_bypass_exceed_queue"`
-	XForwardedFor                basetypes.Int64Value  `tfsdk:"x_forwarded_for"`
+	XForwardedFor                basetypes.StringValue `tfsdk:"x_forwarded_for"`
 }
 
 // ContentIdSettingsContentIdApplication represents a nested structure within the ContentIdSettings model
@@ -65,7 +65,7 @@ func (o ContentIdSettings) AttrTypes() map[string]attr.Type {
 				"strip_x_fwd_for":          basetypes.BoolType{},
 				"tcp_bypass_exceed_queue":  basetypes.BoolType{},
 				"udp_bypass_exceed_queue":  basetypes.BoolType{},
-				"x_forwarded_for":          basetypes.Int64Type{},
+				"x_forwarded_for":          basetypes.StringType{},
 			},
 		},
 		"device":  basetypes.StringType{},
@@ -96,7 +96,7 @@ func (o ContentIdSettingsContentId) AttrTypes() map[string]attr.Type {
 		"strip_x_fwd_for":          basetypes.BoolType{},
 		"tcp_bypass_exceed_queue":  basetypes.BoolType{},
 		"udp_bypass_exceed_queue":  basetypes.BoolType{},
-		"x_forwarded_for":          basetypes.Int64Type{},
+		"x_forwarded_for":          basetypes.StringType{},
 	}
 }
 
@@ -179,14 +179,11 @@ var ContentIdSettingsResourceSchema = schema.Schema{
 					Computed:            true,
 					Default:             booldefault.StaticBool(true),
 				},
-				"x_forwarded_for": schema.Int64Attribute{
-					Validators: []validator.Int64{
-						int64validator.Between(0, 2),
-					},
+				"x_forwarded_for": schema.StringAttribute{
 					MarkdownDescription: "X forwarded for",
 					Optional:            true,
 					Computed:            true,
-					Default:             int64default.StaticInt64(0),
+					Default:             stringdefault.StaticString("0"),
 				},
 			},
 		},
@@ -294,7 +291,7 @@ var ContentIdSettingsDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Udp bypass exceed queue",
 					Computed:            true,
 				},
-				"x_forwarded_for": dsschema.Int64Attribute{
+				"x_forwarded_for": dsschema.StringAttribute{
 					MarkdownDescription: "X forwarded for",
 					Computed:            true,
 				},

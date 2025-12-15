@@ -207,7 +207,7 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 						Required:            true,
 					},
 					"type": schema.ListNestedAttribute{
-						MarkdownDescription: "A list of HTTP header insertion definitions (_This should be an object rather than an array_)",
+						MarkdownDescription: "A list of HTTP header insertion definitions",
 						Required:            true,
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
@@ -232,8 +232,8 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 												Default:             booldefault.StaticBool(false),
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "An auto-generated name (_This should be removed_)",
-												Computed:            true,
+												MarkdownDescription: "The name of the HTTP header",
+												Required:            true,
 											},
 											"value": schema.StringAttribute{
 												MarkdownDescription: "The value associated with the HTTP header",
@@ -243,7 +243,10 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 									},
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "The HTTP header insertion type (_This is a predefined list in the UI_)",
+									Validators: []validator.String{
+										stringvalidator.OneOf("Custom", "Dropbox Network Control", "Dynamic Fields", "Google Apps Access Control", "Microsoft Office365 Tenant Restrictions", "Youtube Safe Search"),
+									},
+									MarkdownDescription: "The HTTP header insertion type",
 									Required:            true,
 								},
 							},
@@ -316,7 +319,7 @@ var HttpHeaderProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"type": dsschema.ListNestedAttribute{
-						MarkdownDescription: "A list of HTTP header insertion definitions (_This should be an object rather than an array_)",
+						MarkdownDescription: "A list of HTTP header insertion definitions",
 						Computed:            true,
 						NestedObject: dsschema.NestedAttributeObject{
 							Attributes: map[string]dsschema.Attribute{
@@ -339,7 +342,7 @@ var HttpHeaderProfilesDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 											},
 											"name": dsschema.StringAttribute{
-												MarkdownDescription: "An auto-generated name (_This should be removed_)",
+												MarkdownDescription: "The name of the HTTP header",
 												Computed:            true,
 											},
 											"value": dsschema.StringAttribute{
@@ -350,7 +353,7 @@ var HttpHeaderProfilesDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"name": dsschema.StringAttribute{
-									MarkdownDescription: "The HTTP header insertion type (_This is a predefined list in the UI_)",
+									MarkdownDescription: "The HTTP header insertion type",
 									Computed:            true,
 								},
 							},

@@ -226,12 +226,6 @@ func unpackTlsServiceProfilesProtocolSettingsToSdk(ctx context.Context, obj type
 	}
 
 	// Handling Primitives
-	if !model.EncAlgo3des.IsNull() && !model.EncAlgo3des.IsUnknown() {
-		sdk.EncAlgo3des = model.EncAlgo3des.ValueBoolPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "EncAlgo3des", "value": *sdk.EncAlgo3des})
-	}
-
-	// Handling Primitives
 	if !model.EncAlgoAes128Cbc.IsNull() && !model.EncAlgoAes128Cbc.IsUnknown() {
 		sdk.EncAlgoAes128Cbc = model.EncAlgoAes128Cbc.ValueBoolPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "EncAlgoAes128Cbc", "value": *sdk.EncAlgoAes128Cbc})
@@ -253,12 +247,6 @@ func unpackTlsServiceProfilesProtocolSettingsToSdk(ctx context.Context, obj type
 	if !model.EncAlgoAes256Gcm.IsNull() && !model.EncAlgoAes256Gcm.IsUnknown() {
 		sdk.EncAlgoAes256Gcm = model.EncAlgoAes256Gcm.ValueBoolPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "EncAlgoAes256Gcm", "value": *sdk.EncAlgoAes256Gcm})
-	}
-
-	// Handling Primitives
-	if !model.EncAlgoRc4.IsNull() && !model.EncAlgoRc4.IsUnknown() {
-		sdk.EncAlgoRc4 = model.EncAlgoRc4.ValueBoolPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "EncAlgoRc4", "value": *sdk.EncAlgoRc4})
 	}
 
 	// Handling Primitives
@@ -330,14 +318,6 @@ func packTlsServiceProfilesProtocolSettingsFromSdk(ctx context.Context, sdk iden
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.EncAlgo3des != nil {
-		model.EncAlgo3des = basetypes.NewBoolValue(*sdk.EncAlgo3des)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "EncAlgo3des", "value": *sdk.EncAlgo3des})
-	} else {
-		model.EncAlgo3des = basetypes.NewBoolNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
 	if sdk.EncAlgoAes128Cbc != nil {
 		model.EncAlgoAes128Cbc = basetypes.NewBoolValue(*sdk.EncAlgoAes128Cbc)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "EncAlgoAes128Cbc", "value": *sdk.EncAlgoAes128Cbc})
@@ -367,14 +347,6 @@ func packTlsServiceProfilesProtocolSettingsFromSdk(ctx context.Context, sdk iden
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "EncAlgoAes256Gcm", "value": *sdk.EncAlgoAes256Gcm})
 	} else {
 		model.EncAlgoAes256Gcm = basetypes.NewBoolNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.EncAlgoRc4 != nil {
-		model.EncAlgoRc4 = basetypes.NewBoolValue(*sdk.EncAlgoRc4)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "EncAlgoRc4", "value": *sdk.EncAlgoRc4})
-	} else {
-		model.EncAlgoRc4 = basetypes.NewBoolNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing

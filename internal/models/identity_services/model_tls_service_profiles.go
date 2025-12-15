@@ -36,12 +36,10 @@ type TlsServiceProfilesProtocolSettings struct {
 	AuthAlgoSha1     basetypes.BoolValue   `tfsdk:"auth_algo_sha1"`
 	AuthAlgoSha256   basetypes.BoolValue   `tfsdk:"auth_algo_sha256"`
 	AuthAlgoSha384   basetypes.BoolValue   `tfsdk:"auth_algo_sha384"`
-	EncAlgo3des      basetypes.BoolValue   `tfsdk:"enc_algo_3des"`
 	EncAlgoAes128Cbc basetypes.BoolValue   `tfsdk:"enc_algo_aes_128_cbc"`
 	EncAlgoAes128Gcm basetypes.BoolValue   `tfsdk:"enc_algo_aes_128_gcm"`
 	EncAlgoAes256Cbc basetypes.BoolValue   `tfsdk:"enc_algo_aes_256_cbc"`
 	EncAlgoAes256Gcm basetypes.BoolValue   `tfsdk:"enc_algo_aes_256_gcm"`
-	EncAlgoRc4       basetypes.BoolValue   `tfsdk:"enc_algo_rc4"`
 	KeyxchgAlgoDhe   basetypes.BoolValue   `tfsdk:"keyxchg_algo_dhe"`
 	KeyxchgAlgoEcdhe basetypes.BoolValue   `tfsdk:"keyxchg_algo_ecdhe"`
 	KeyxchgAlgoRsa   basetypes.BoolValue   `tfsdk:"keyxchg_algo_rsa"`
@@ -63,12 +61,10 @@ func (o TlsServiceProfiles) AttrTypes() map[string]attr.Type {
 				"auth_algo_sha1":       basetypes.BoolType{},
 				"auth_algo_sha256":     basetypes.BoolType{},
 				"auth_algo_sha384":     basetypes.BoolType{},
-				"enc_algo_3des":        basetypes.BoolType{},
 				"enc_algo_aes_128_cbc": basetypes.BoolType{},
 				"enc_algo_aes_128_gcm": basetypes.BoolType{},
 				"enc_algo_aes_256_cbc": basetypes.BoolType{},
 				"enc_algo_aes_256_gcm": basetypes.BoolType{},
-				"enc_algo_rc4":         basetypes.BoolType{},
 				"keyxchg_algo_dhe":     basetypes.BoolType{},
 				"keyxchg_algo_ecdhe":   basetypes.BoolType{},
 				"keyxchg_algo_rsa":     basetypes.BoolType{},
@@ -93,12 +89,10 @@ func (o TlsServiceProfilesProtocolSettings) AttrTypes() map[string]attr.Type {
 		"auth_algo_sha1":       basetypes.BoolType{},
 		"auth_algo_sha256":     basetypes.BoolType{},
 		"auth_algo_sha384":     basetypes.BoolType{},
-		"enc_algo_3des":        basetypes.BoolType{},
 		"enc_algo_aes_128_cbc": basetypes.BoolType{},
 		"enc_algo_aes_128_gcm": basetypes.BoolType{},
 		"enc_algo_aes_256_cbc": basetypes.BoolType{},
 		"enc_algo_aes_256_gcm": basetypes.BoolType{},
-		"enc_algo_rc4":         basetypes.BoolType{},
 		"keyxchg_algo_dhe":     basetypes.BoolType{},
 		"keyxchg_algo_ecdhe":   basetypes.BoolType{},
 		"keyxchg_algo_rsa":     basetypes.BoolType{},
@@ -186,10 +180,6 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 					MarkdownDescription: "Allow SHA384 authentication?",
 					Optional:            true,
 				},
-				"enc_algo_3des": schema.BoolAttribute{
-					MarkdownDescription: "Allow 3DES algorithm?",
-					Optional:            true,
-				},
 				"enc_algo_aes_128_cbc": schema.BoolAttribute{
 					MarkdownDescription: "Allow AES-128-CBC algorithm?",
 					Optional:            true,
@@ -204,10 +194,6 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 				},
 				"enc_algo_aes_256_gcm": schema.BoolAttribute{
 					MarkdownDescription: "Allow algorithm AES-256-GCM",
-					Optional:            true,
-				},
-				"enc_algo_rc4": schema.BoolAttribute{
-					MarkdownDescription: "Allow RC4 algorithm?",
 					Optional:            true,
 				},
 				"keyxchg_algo_dhe": schema.BoolAttribute{
@@ -233,7 +219,7 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 				},
 				"min_version": schema.StringAttribute{
 					Validators: []validator.String{
-						stringvalidator.OneOf("tls1-0", "tls1-1", "tls1-2"),
+						stringvalidator.OneOf("tls1-0", "tls1-1", "tls1-2", "tls1-3"),
 					},
 					MarkdownDescription: "Minimum TLS version",
 					Optional:            true,
@@ -310,10 +296,6 @@ var TlsServiceProfilesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Allow SHA384 authentication?",
 					Computed:            true,
 				},
-				"enc_algo_3des": dsschema.BoolAttribute{
-					MarkdownDescription: "Allow 3DES algorithm?",
-					Computed:            true,
-				},
 				"enc_algo_aes_128_cbc": dsschema.BoolAttribute{
 					MarkdownDescription: "Allow AES-128-CBC algorithm?",
 					Computed:            true,
@@ -328,10 +310,6 @@ var TlsServiceProfilesDataSourceSchema = dsschema.Schema{
 				},
 				"enc_algo_aes_256_gcm": dsschema.BoolAttribute{
 					MarkdownDescription: "Allow algorithm AES-256-GCM",
-					Computed:            true,
-				},
-				"enc_algo_rc4": dsschema.BoolAttribute{
-					MarkdownDescription: "Allow RC4 algorithm?",
 					Computed:            true,
 				},
 				"keyxchg_algo_dhe": dsschema.BoolAttribute{

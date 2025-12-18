@@ -52,26 +52,26 @@ output "external_dynamic_list_details" {
 
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `tfid` (String) The Terraform ID.
-- `type` (Attributes) Type (see [below for nested schema](#nestedatt--type))
+- `type` (Attributes) Type configuration for External Dynamic List (see [below for nested schema](#nestedatt--type))
 
 <a id="nestedatt--type"></a>
 ### Nested Schema for `type`
 
 Read-Only:
 
-- `domain` (Attributes) Domain
+- `domain` (Attributes) Domain settings for Custom Domain type
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--domain))
-- `imei` (Attributes) Imei
+- `imei` (Attributes) IMEI Configuration settings
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--imei))
-- `imsi` (Attributes) Imsi
+- `imsi` (Attributes) IMSI Config for Custom IMSI type
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--imsi))
-- `ip` (Attributes) Ip
+- `ip` (Attributes) IP settings for Custom IP type
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--ip))
-- `predefined_ip` (Attributes) Predefined ip
+- `predefined_ip` (Attributes) Predefined IP settings for EDL type
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--predefined_ip))
-- `predefined_url` (Attributes) Predefined url
+- `predefined_url` (Attributes) Predefined URL settings for EDL type
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--predefined_url))
-- `url` (Attributes) Url
+- `url` (Attributes) URL settings for Custom URL type
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--url))
 
 <a id="nestedatt--type--domain"></a>
@@ -79,21 +79,21 @@ Read-Only:
 
 Read-Only:
 
-- `auth` (Attributes) Auth (see [below for nested schema](#nestedatt--type--domain--auth))
+- `auth` (Attributes) Authentication settings for Custom Domain type (see [below for nested schema](#nestedatt--type--domain--auth))
 - `certificate_profile` (String) Profile for authenticating client certificates
 - `description` (String) Description
-- `exception_list` (List of String) Exception list
+- `exception_list` (List of String) Domain Exception List for Custom Domain type
 - `expand_domain` (Boolean) Enable/Disable expand domain
-- `recurring` (Attributes) Recurring (see [below for nested schema](#nestedatt--type--domain--recurring))
-- `url` (String) Url
+- `recurring` (Attributes) Update Schedule for Custom Domain type (see [below for nested schema](#nestedatt--type--domain--recurring))
+- `url` (String) External URL for Custom Domain type
 
 <a id="nestedatt--type--domain--auth"></a>
 ### Nested Schema for `type.domain.auth`
 
 Read-Only:
 
-- `password` (String) Password
-- `username` (String) Username
+- `password` (String, Sensitive) Password for Custom Domain authentication
+- `username` (String) Username for Custom Domain authentication
 
 
 <a id="nestedatt--type--domain--recurring"></a>
@@ -101,15 +101,15 @@ Read-Only:
 
 Read-Only:
 
-- `daily` (Attributes) Daily
+- `daily` (Attributes) Daily settings for Domain recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--daily))
-- `five_minute` (Attributes) Five minute
+- `five_minute` (Attributes) Five minute settings for Domain recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--five_minute))
-- `hourly` (Attributes) Hourly
+- `hourly` (Attributes) Hourly settings for Domain recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--hourly))
-- `monthly` (Attributes) Monthly
+- `monthly` (Attributes) Monthly settings for Domain recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--monthly))
-- `weekly` (Attributes) Weekly
+- `weekly` (Attributes) Weekly settings for Domain recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--weekly))
 
 <a id="nestedatt--type--domain--recurring--daily"></a>
@@ -117,7 +117,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Daily Time specification hh (e.g. 20) for Domain
 
 
 <a id="nestedatt--type--domain--recurring--five_minute"></a>
@@ -133,8 +133,8 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
-- `day_of_month` (Number) Day of month
+- `at` (String) Monthly Time specification hh (e.g. 20) for domain
+- `day_of_month` (Number) Day setting for monthly Domain updates
 
 
 <a id="nestedatt--type--domain--recurring--weekly"></a>
@@ -142,7 +142,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Weekly Time specification hh (e.g. 20) for Domain
 - `day_of_week` (String) Day of week
 
 
@@ -153,20 +153,20 @@ Read-Only:
 
 Read-Only:
 
-- `auth` (Attributes) Auth (see [below for nested schema](#nestedatt--type--imei--auth))
-- `certificate_profile` (String) Profile for authenticating client certificates
-- `description` (String) Description
-- `exception_list` (List of String) Exception list
-- `recurring` (Attributes) Recurring (see [below for nested schema](#nestedatt--type--imei--recurring))
-- `url` (String) Url
+- `auth` (Attributes) IMEI Auth Cnfig for Custom IMEI type (see [below for nested schema](#nestedatt--type--imei--auth))
+- `certificate_profile` (String) IMEI Certificate Profile for Custom IMEI type
+- `description` (String) IMEI Description for Custom IMEI type
+- `exception_list` (List of String) IMEI Exception List for Custom IMEI type
+- `recurring` (Attributes) Recurring interval for IMEI updates (see [below for nested schema](#nestedatt--type--imei--recurring))
+- `url` (String) IMEI URL for Custom IMEI type
 
 <a id="nestedatt--type--imei--auth"></a>
 ### Nested Schema for `type.imei.auth`
 
 Read-Only:
 
-- `password` (String) Password
-- `username` (String) Username
+- `password` (String, Sensitive) IMEI Auth Password for Custom IMEI type
+- `username` (String) IMEI Auth username for Custom IMEI type
 
 
 <a id="nestedatt--type--imei--recurring"></a>
@@ -174,15 +174,15 @@ Read-Only:
 
 Read-Only:
 
-- `daily` (Attributes) Daily
+- `daily` (Attributes) Daily interval settings for IMEI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--daily))
-- `five_minute` (Attributes) Five minute
+- `five_minute` (Attributes) Five-minute interval settings for IMEI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--five_minute))
-- `hourly` (Attributes) Hourly
+- `hourly` (Attributes) Hourly interval settings for IMEI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--hourly))
-- `monthly` (Attributes) Monthly
+- `monthly` (Attributes) Monthly interval settings for IMEI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--monthly))
-- `weekly` (Attributes) Weekly
+- `weekly` (Attributes) Weekly interval settings for IMEI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--weekly))
 
 <a id="nestedatt--type--imei--recurring--daily"></a>
@@ -190,7 +190,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Daily Time specification hh (e.g. 20) for IMEI
 
 
 <a id="nestedatt--type--imei--recurring--five_minute"></a>
@@ -206,8 +206,8 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
-- `day_of_month` (Number) Day of month
+- `at` (String) Monthly Time specification hh (e.g. 20) for IMEI
+- `day_of_month` (Number) Day of month for IMEI updates
 
 
 <a id="nestedatt--type--imei--recurring--weekly"></a>
@@ -215,7 +215,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Weekly Time specification hh (e.g. 20) for IMEI
 - `day_of_week` (String) Day of week
 
 
@@ -226,20 +226,20 @@ Read-Only:
 
 Read-Only:
 
-- `auth` (Attributes) Auth (see [below for nested schema](#nestedatt--type--imsi--auth))
-- `certificate_profile` (String) Profile for authenticating client certificates
-- `description` (String) Description
-- `exception_list` (List of String) Exception list
-- `recurring` (Attributes) Recurring (see [below for nested schema](#nestedatt--type--imsi--recurring))
-- `url` (String) Url
+- `auth` (Attributes) IMSI Auth Config for Custom IMSI type (see [below for nested schema](#nestedatt--type--imsi--auth))
+- `certificate_profile` (String) IMSI Certificate Profile for Custom IMSI type
+- `description` (String) IMSI Description for Custom IMSI type
+- `exception_list` (List of String) IMSI Exception List for Custom IMSI type
+- `recurring` (Attributes) IMSI Recuring Config for Custom IMSI type (see [below for nested schema](#nestedatt--type--imsi--recurring))
+- `url` (String) IMSI URL for Custom IMSI type
 
 <a id="nestedatt--type--imsi--auth"></a>
 ### Nested Schema for `type.imsi.auth`
 
 Read-Only:
 
-- `password` (String) Password
-- `username` (String) Username
+- `password` (String, Sensitive) IMSI Auth Password for Custom IMSI type
+- `username` (String) IMSI Auth Username for Custom IMSI type
 
 
 <a id="nestedatt--type--imsi--recurring"></a>
@@ -247,15 +247,15 @@ Read-Only:
 
 Read-Only:
 
-- `daily` (Attributes) Daily
+- `daily` (Attributes) Daily interval settings for IMSI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--daily))
-- `five_minute` (Attributes) Five minute
+- `five_minute` (Attributes) Five-minute interval settings for IMSI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--five_minute))
-- `hourly` (Attributes) Hourly
+- `hourly` (Attributes) Hourly interval settings for IMSI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--hourly))
-- `monthly` (Attributes) Monthly
+- `monthly` (Attributes) Monthly interval settings for IMSI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--monthly))
-- `weekly` (Attributes) Weekly
+- `weekly` (Attributes) Weekly interval settings for IMSI updates
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--weekly))
 
 <a id="nestedatt--type--imsi--recurring--daily"></a>
@@ -263,7 +263,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Daily Time specification hh (e.g. 20) for IMSI
 
 
 <a id="nestedatt--type--imsi--recurring--five_minute"></a>
@@ -279,8 +279,8 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
-- `day_of_month` (Number) Day of month
+- `at` (String) Monthly Time specification hh (e.g. 20) for IMSI
+- `day_of_month` (Number) Day of the month for monthly IMSI updates
 
 
 <a id="nestedatt--type--imsi--recurring--weekly"></a>
@@ -288,7 +288,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Weekly Time specification hh (e.g. 20) for IMSI
 - `day_of_week` (String) Day of week
 
 
@@ -299,20 +299,20 @@ Read-Only:
 
 Read-Only:
 
-- `auth` (Attributes) Auth (see [below for nested schema](#nestedatt--type--ip--auth))
+- `auth` (Attributes) Authentication settings for Custom IP type (see [below for nested schema](#nestedatt--type--ip--auth))
 - `certificate_profile` (String) Profile for authenticating client certificates
 - `description` (String) Description
-- `exception_list` (List of String) Exception list
-- `recurring` (Attributes) Recurring (see [below for nested schema](#nestedatt--type--ip--recurring))
-- `url` (String) Url
+- `exception_list` (List of String) IP Exception List for Custom IP type
+- `recurring` (Attributes) Update Schedule for Custom IP type (see [below for nested schema](#nestedatt--type--ip--recurring))
+- `url` (String) External URL for Custom IP type
 
 <a id="nestedatt--type--ip--auth"></a>
 ### Nested Schema for `type.ip.auth`
 
 Read-Only:
 
-- `password` (String, Sensitive) Password
-- `username` (String) Username
+- `password` (String, Sensitive) Password for Custom IP authentication
+- `username` (String) Username for Custom IP authentication
 
 
 <a id="nestedatt--type--ip--recurring"></a>
@@ -320,15 +320,15 @@ Read-Only:
 
 Read-Only:
 
-- `daily` (Attributes) Daily
+- `daily` (Attributes) Daily settings for IP recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--daily))
-- `five_minute` (Attributes) Five minute
+- `five_minute` (Attributes) Five minute settings for IP recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--five_minute))
-- `hourly` (Attributes) Hourly
+- `hourly` (Attributes) Hourly settings for IP recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--hourly))
-- `monthly` (Attributes) Monthly
+- `monthly` (Attributes) Monthly settings for IP recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--monthly))
-- `weekly` (Attributes) Weekly
+- `weekly` (Attributes) Weekly settings for IP recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--weekly))
 
 <a id="nestedatt--type--ip--recurring--daily"></a>
@@ -336,7 +336,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Daily Time specification hh (e.g. 20) for IP
 
 
 <a id="nestedatt--type--ip--recurring--five_minute"></a>
@@ -352,8 +352,8 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
-- `day_of_month` (Number) Day of month
+- `at` (String) Monthly Time specification hh (e.g. 20) for IP
+- `day_of_month` (Number) Day setting for monthly IP updates
 
 
 <a id="nestedatt--type--ip--recurring--weekly"></a>
@@ -361,7 +361,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Weekly Time specification hh (e.g. 20) for IP
 - `day_of_week` (String) Day of week
 
 
@@ -373,8 +373,8 @@ Read-Only:
 Read-Only:
 
 - `description` (String) Description
-- `exception_list` (List of String) Exception list
-- `url` (String) Url
+- `exception_list` (List of String) IP Exception List for Predefined IP type
+- `url` (String) URL source for Predefined IP type
 
 
 <a id="nestedatt--type--predefined_url"></a>
@@ -383,8 +383,8 @@ Read-Only:
 Read-Only:
 
 - `description` (String) Description
-- `exception_list` (List of String) Exception list
-- `url` (String) Url
+- `exception_list` (List of String) URL Exception List for Predefined URL type
+- `url` (String) URL source for Predefined URL type
 
 
 <a id="nestedatt--type--url"></a>
@@ -392,20 +392,20 @@ Read-Only:
 
 Read-Only:
 
-- `auth` (Attributes) Auth (see [below for nested schema](#nestedatt--type--url--auth))
+- `auth` (Attributes) Authentication settings for Custom URL type (see [below for nested schema](#nestedatt--type--url--auth))
 - `certificate_profile` (String) Profile for authenticating client certificates
 - `description` (String) Description
-- `exception_list` (List of String) Exception list
-- `recurring` (Attributes) Recurring (see [below for nested schema](#nestedatt--type--url--recurring))
-- `url` (String) Url
+- `exception_list` (List of String) URL Exception List for Custom URL type
+- `recurring` (Attributes) Update Schedule for Custom URL type (see [below for nested schema](#nestedatt--type--url--recurring))
+- `url` (String) External URL for Custom URL type
 
 <a id="nestedatt--type--url--auth"></a>
 ### Nested Schema for `type.url.auth`
 
 Read-Only:
 
-- `password` (String) Password
-- `username` (String) Username
+- `password` (String, Sensitive) Password for Custom URL authentication
+- `username` (String) Username for Custom URL authentication
 
 
 <a id="nestedatt--type--url--recurring"></a>
@@ -413,15 +413,15 @@ Read-Only:
 
 Read-Only:
 
-- `daily` (Attributes) Daily
+- `daily` (Attributes) Daily settings for URL recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--daily))
-- `five_minute` (Attributes) Five minute
+- `five_minute` (Attributes) Five minute settings for URL recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--five_minute))
-- `hourly` (Attributes) Hourly
+- `hourly` (Attributes) Hourly settings for URL recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--hourly))
-- `monthly` (Attributes) Monthly
+- `monthly` (Attributes) Monthly settings for URL recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--monthly))
-- `weekly` (Attributes) Weekly
+- `weekly` (Attributes) Weekly settings for URL recurring
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--weekly))
 
 <a id="nestedatt--type--url--recurring--daily"></a>
@@ -429,7 +429,7 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Daily Time specification hh (e.g. 20) for URL
 
 
 <a id="nestedatt--type--url--recurring--five_minute"></a>
@@ -445,8 +445,8 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
-- `day_of_month` (Number) Day of month
+- `at` (String) Monthly Time specification hh (e.g. 20) for URL
+- `day_of_month` (Number) Day setting for monthly URL updates
 
 
 <a id="nestedatt--type--url--recurring--weekly"></a>
@@ -454,5 +454,5 @@ Read-Only:
 
 Read-Only:
 
-- `at` (String) Time specification hh (e.g. 20)
+- `at` (String) Weekly Time specification hh (e.g. 20) for URL
 - `day_of_week` (String) Day of week

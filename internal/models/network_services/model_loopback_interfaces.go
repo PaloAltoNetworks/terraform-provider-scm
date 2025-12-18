@@ -217,12 +217,10 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 		"ipv6": schema.SingleNestedAttribute{
 			MarkdownDescription: "Loopback IPv6 Configuration",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"address": schema.ListNestedAttribute{
 					MarkdownDescription: "IPv6 Address Parent",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"enable_on_interface": schema.BoolAttribute{

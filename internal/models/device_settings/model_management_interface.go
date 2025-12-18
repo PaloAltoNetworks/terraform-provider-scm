@@ -342,12 +342,10 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 		"management_interface": schema.SingleNestedAttribute{
 			MarkdownDescription: "Management interface",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"mgmt_type": schema.SingleNestedAttribute{
 					MarkdownDescription: "IP type",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dhcp_client": schema.SingleNestedAttribute{
 							Validators: []validator.Object{
@@ -357,7 +355,6 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Dhcp client\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"accept_dhcp_domain": schema.BoolAttribute{
 									MarkdownDescription: "Accept DHCP server provided domain name",
@@ -393,7 +390,6 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Static\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"default_gateway": schema.StringAttribute{
 									MarkdownDescription: "Default gateway",
@@ -420,7 +416,6 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				"permitted_ip": schema.ListNestedAttribute{
 					MarkdownDescription: "Permitting IP addresses",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"description": schema.StringAttribute{
@@ -437,7 +432,6 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				"service": schema.SingleNestedAttribute{
 					MarkdownDescription: "Network services",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"disable_http": schema.BoolAttribute{
 							MarkdownDescription: "HTTP",

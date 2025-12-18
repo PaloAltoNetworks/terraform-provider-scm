@@ -205,31 +205,26 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 		"credential_enforcement": schema.SingleNestedAttribute{
 			MarkdownDescription: "Credential enforcement",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"alert": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Alert",
 					Optional:            true,
-					Computed:            true,
 				},
 				"allow": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Allow",
 					Optional:            true,
-					Computed:            true,
 				},
 				"block": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Block",
 					Optional:            true,
-					Computed:            true,
 				},
 				"continue": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Continue",
 					Optional:            true,
-					Computed:            true,
 				},
 				"log_severity": schema.StringAttribute{
 					MarkdownDescription: "Log severity",
@@ -240,29 +235,24 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 				"mode": schema.SingleNestedAttribute{
 					MarkdownDescription: "Mode",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"disabled": schema.SingleNestedAttribute{
 							MarkdownDescription: "Disabled",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 						"domain_credentials": schema.SingleNestedAttribute{
 							MarkdownDescription: "Domain credentials",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 						"group_mapping": schema.StringAttribute{
 							MarkdownDescription: "Group mapping",
 							Optional:            true,
-							Computed:            true,
 						},
 						"ip_user": schema.SingleNestedAttribute{
 							MarkdownDescription: "Ip user",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 					},

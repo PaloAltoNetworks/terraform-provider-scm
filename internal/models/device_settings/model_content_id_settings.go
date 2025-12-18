@@ -128,7 +128,6 @@ var ContentIdSettingsResourceSchema = schema.Schema{
 		"content_id": schema.SingleNestedAttribute{
 			MarkdownDescription: "Content id",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"allow_forward_decrypted_content": schema.BoolAttribute{
 					MarkdownDescription: "Allow forward decrypted content",
@@ -145,7 +144,6 @@ var ContentIdSettingsResourceSchema = schema.Schema{
 				"application": schema.SingleNestedAttribute{
 					MarkdownDescription: "Application",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"bypass_exceed_queue": schema.BoolAttribute{
 							MarkdownDescription: "Bypass exceed queue",

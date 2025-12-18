@@ -334,7 +334,6 @@ var SessionSettingsResourceSchema = schema.Schema{
 		"session_settings": schema.SingleNestedAttribute{
 			MarkdownDescription: "Session settings",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"accelerated_aging_enable": schema.BoolAttribute{
 					MarkdownDescription: "Enable accelerated aging",
@@ -363,7 +362,6 @@ var SessionSettingsResourceSchema = schema.Schema{
 				"config": schema.SingleNestedAttribute{
 					MarkdownDescription: "Config",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"rematch": schema.BoolAttribute{
 							MarkdownDescription: "Rematch all sessions on config policy change",
@@ -397,7 +395,6 @@ var SessionSettingsResourceSchema = schema.Schema{
 				"icmpv6_rate_limit": schema.SingleNestedAttribute{
 					MarkdownDescription: "ICMPv6 rate limiting",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"bucket_size": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -428,7 +425,6 @@ var SessionSettingsResourceSchema = schema.Schema{
 				"jumbo_frame": schema.SingleNestedAttribute{
 					MarkdownDescription: "Enable jumbo frame support",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"mtu": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -459,7 +455,6 @@ var SessionSettingsResourceSchema = schema.Schema{
 				"nat": schema.SingleNestedAttribute{
 					MarkdownDescription: "Nat",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dipp_oversub": schema.StringAttribute{
 							Validators: []validator.String{
@@ -475,7 +470,6 @@ var SessionSettingsResourceSchema = schema.Schema{
 				"nat64": schema.SingleNestedAttribute{
 					MarkdownDescription: "Nat64",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ipv6_min_network_mtu": schema.Int64Attribute{
 							Validators: []validator.Int64{

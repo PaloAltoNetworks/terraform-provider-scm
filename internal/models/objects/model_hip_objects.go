@@ -2536,12 +2536,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"anti_malware": schema.SingleNestedAttribute{
 			MarkdownDescription: "Anti malware",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -2552,7 +2550,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"last_scan_time": schema.SingleNestedAttribute{
 							MarkdownDescription: "Last scan time",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -2563,7 +2560,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Not available\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"not_within": schema.SingleNestedAttribute{
@@ -2575,7 +2571,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2586,7 +2581,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2597,7 +2591,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2610,7 +2603,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2621,7 +2613,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2632,7 +2623,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2641,7 +2631,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"product_version": schema.SingleNestedAttribute{
 							MarkdownDescription: "Product version",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2659,7 +2648,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"greater_equal": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2677,7 +2665,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Greater equal\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"greater_than": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2695,7 +2682,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2713,7 +2699,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2731,7 +2716,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"less_equal": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2749,7 +2733,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Less equal\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"less_than": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2767,7 +2750,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -2784,7 +2766,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2810,7 +2791,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2829,12 +2809,10 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "real time protection",
 							Optional:            true,
-							Computed:            true,
 						},
 						"virdef_version": schema.SingleNestedAttribute{
 							MarkdownDescription: "Virdef version",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -2844,7 +2822,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2855,7 +2832,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2866,7 +2842,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify versions range\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2878,7 +2853,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2889,7 +2863,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2900,7 +2873,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify versions range\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2917,7 +2889,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3120,12 +3091,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"data_loss_prevention": schema.SingleNestedAttribute{
 			MarkdownDescription: "Data loss prevention",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.StringAttribute{
 							Validators: []validator.String{
@@ -3133,7 +3102,6 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "is enabled",
 							Optional:            true,
-							Computed:            true,
 						},
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -3152,7 +3120,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3200,12 +3167,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"disk_backup": schema.SingleNestedAttribute{
 			MarkdownDescription: "Disk backup",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -3216,7 +3181,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"last_backup_time": schema.SingleNestedAttribute{
 							MarkdownDescription: "Last backup time",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -3227,7 +3191,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Not available\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"not_within": schema.SingleNestedAttribute{
@@ -3239,7 +3202,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3250,7 +3212,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3261,7 +3222,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -3274,7 +3234,6 @@ var HipObjectsResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3285,7 +3244,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3296,7 +3254,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -3313,7 +3270,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3339,17 +3295,14 @@ var HipObjectsResourceSchema = schema.Schema{
 		"disk_encryption": schema.SingleNestedAttribute{
 			MarkdownDescription: "Disk encryption",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Encryption locations",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"encrypted_locations": schema.ListNestedAttribute{
 							MarkdownDescription: "Encrypted locations",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"encryption_state": schema.SingleNestedAttribute{
@@ -3405,7 +3358,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3431,12 +3383,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"firewall": schema.SingleNestedAttribute{
 			MarkdownDescription: "Firewall",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.StringAttribute{
 							Validators: []validator.String{
@@ -3444,7 +3394,6 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "is enabled",
 							Optional:            true,
-							Computed:            true,
 						},
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -3463,7 +3412,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -4240,12 +4188,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"patch_management": schema.SingleNestedAttribute{
 			MarkdownDescription: "Patch management",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.StringAttribute{
 							Validators: []validator.String{
@@ -4253,7 +4199,6 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "is enabled",
 							Optional:            true,
-							Computed:            true,
 						},
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -4264,7 +4209,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"missing_patches": schema.SingleNestedAttribute{
 							MarkdownDescription: "Missing patches",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"check": schema.StringAttribute{
 									Validators: []validator.String{
@@ -4280,12 +4224,10 @@ var HipObjectsResourceSchema = schema.Schema{
 										listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(1023)),
 									},
 									Optional: true,
-									Computed: true,
 								},
 								"severity": schema.SingleNestedAttribute{
 									MarkdownDescription: "Severity",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"greater_equal": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4300,7 +4242,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Greater equal\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"greater_than": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4315,7 +4256,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"is": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4330,7 +4270,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"is_not": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4345,7 +4284,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"less_equal": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4360,7 +4298,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Less equal\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"less_than": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4375,7 +4312,6 @@ var HipObjectsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -4392,7 +4328,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{

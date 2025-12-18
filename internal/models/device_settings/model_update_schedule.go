@@ -1086,7 +1086,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Daily\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1094,7 +1093,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1122,7 +1120,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Every30 mins\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1130,7 +1127,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1160,7 +1156,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Hourly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1168,7 +1163,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Float64Attribute{
 											Validators: []validator.Float64{
@@ -1227,7 +1221,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Weekly\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1235,7 +1228,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1283,7 +1275,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Every15 mins\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1291,7 +1282,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1322,7 +1312,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Every30 mins\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1330,7 +1319,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1361,7 +1349,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Every hour\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1369,7 +1356,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1400,7 +1386,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Every min\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1408,7 +1393,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sync_to_peer": schema.BoolAttribute{
 											MarkdownDescription: "Sync to peer",

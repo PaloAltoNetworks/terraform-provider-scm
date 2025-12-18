@@ -155,7 +155,6 @@ var SessionTimeoutsResourceSchema = schema.Schema{
 		"session_timeouts": schema.SingleNestedAttribute{
 			MarkdownDescription: "Session timeouts",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"timeout_captive_portal": schema.Int64Attribute{
 					Validators: []validator.Int64{

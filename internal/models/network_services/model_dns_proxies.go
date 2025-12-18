@@ -334,7 +334,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"cache": schema.SingleNestedAttribute{
 			MarkdownDescription: "Cache",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"cache_edns": schema.BoolAttribute{
 					MarkdownDescription: "Cache EDNS UDP response",
@@ -349,7 +348,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 				"max_ttl": schema.SingleNestedAttribute{
 					MarkdownDescription: "Max ttl",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enabled": schema.BoolAttribute{
 							MarkdownDescription: "Enable max ttl for this DNS object",
@@ -361,7 +359,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Time in seconds after which entry is cleared",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -524,7 +521,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"tcp_queries": schema.SingleNestedAttribute{
 			MarkdownDescription: "Tcp queries",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"enabled": schema.BoolAttribute{
 					MarkdownDescription: "Turn on forwarding of TCP DNS queries?",
@@ -551,12 +547,10 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"udp_queries": schema.SingleNestedAttribute{
 			MarkdownDescription: "Udp queries",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"retries": schema.SingleNestedAttribute{
 					MarkdownDescription: "Retries",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"attempts": schema.Int64Attribute{
 							Validators: []validator.Int64{

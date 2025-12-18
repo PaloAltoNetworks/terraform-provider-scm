@@ -611,12 +611,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Ethernet Interface Layer 3 configuration\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"arp": schema.ListNestedAttribute{
 					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"hw_address": schema.StringAttribute{
@@ -633,7 +631,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"ddns_config": schema.SingleNestedAttribute{
 					MarkdownDescription: "Dynamic DNS configuration specific to the Ethernet Interfaces.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ddns_cert_profile": schema.StringAttribute{
 							MarkdownDescription: "Certificate profile",
@@ -656,7 +653,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 						"ddns_ip": schema.StringAttribute{
 							MarkdownDescription: "IP to register (static only)",
 							Optional:            true,
-							Computed:            true,
 						},
 						"ddns_update_interval": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -692,7 +688,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Ethernet Interfaces DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"create_default_route": schema.BoolAttribute{
 							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
@@ -718,7 +713,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 						"send_hostname": schema.SingleNestedAttribute{
 							MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable",
@@ -747,7 +741,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Interface management profile",
 					Optional:            true,
-					Computed:            true,
 				},
 				"ip": schema.ListNestedAttribute{
 					Validators: []validator.List{
@@ -758,7 +751,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Ethernet Interface IP addresses\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -786,7 +778,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Pppoe\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"access_concentrator": schema.StringAttribute{
 							Validators: []validator.String{
@@ -795,7 +786,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Access concentrator",
 							Optional:            true,
-							Computed:            true,
 						},
 						"authentication": schema.StringAttribute{
 							Validators: []validator.String{
@@ -803,7 +793,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Authentication protocol",
 							Optional:            true,
-							Computed:            true,
 						},
 						"default_route_metric": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -823,7 +812,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 						"passive": schema.SingleNestedAttribute{
 							MarkdownDescription: "Passive",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Passive Mode enabled",
@@ -846,12 +834,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Service",
 							Optional:            true,
-							Computed:            true,
 						},
 						"static_address": schema.SingleNestedAttribute{
 							MarkdownDescription: "Static address",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
 									Validators: []validator.String{
@@ -908,7 +894,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		"poe": schema.SingleNestedAttribute{
 			MarkdownDescription: "Poe",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"poe_enabled": schema.BoolAttribute{
 					MarkdownDescription: "Enabled PoE?",

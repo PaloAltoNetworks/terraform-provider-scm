@@ -631,22 +631,18 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 								"sdwan_link_settings": schema.SingleNestedAttribute{
 									MarkdownDescription: "Sdwan link settings",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"sdwan_gateway": schema.StringAttribute{
 											MarkdownDescription: "Next hop gateway",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sdwan_interface_profile": schema.StringAttribute{
 											MarkdownDescription: "SD-WAN interface profile",
 											Optional:            true,
-											Computed:            true,
 										},
 										"upstream_nat": schema.SingleNestedAttribute{
 											MarkdownDescription: "Upstream nat",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Upstream NAT?",
@@ -657,7 +653,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 												"static_ip": schema.SingleNestedAttribute{
 													MarkdownDescription: "Static ip",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
@@ -667,7 +662,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -677,7 +671,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 													},
 												},
@@ -711,22 +704,18 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 								"sdwan_link_settings": schema.SingleNestedAttribute{
 									MarkdownDescription: "Sdwan link settings",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"sdwan_gateway": schema.StringAttribute{
 											MarkdownDescription: "Next hop gateway",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sdwan_interface_profile": schema.StringAttribute{
 											MarkdownDescription: "SD-WAN interface profile",
 											Optional:            true,
-											Computed:            true,
 										},
 										"upstream_nat": schema.SingleNestedAttribute{
 											MarkdownDescription: "Upstream nat",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Upstream NAT?",
@@ -737,7 +726,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 												"static_ip": schema.SingleNestedAttribute{
 													MarkdownDescription: "Static ip",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
@@ -747,7 +735,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -757,7 +744,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 													},
 												},

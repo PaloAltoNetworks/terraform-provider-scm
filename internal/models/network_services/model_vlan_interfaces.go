@@ -258,7 +258,6 @@ var VlanInterfacesResourceSchema = schema.Schema{
 		"ddns_config": schema.SingleNestedAttribute{
 			MarkdownDescription: "Dynamic DNS configuration specific to the Vlan Interfaces.",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ddns_cert_profile": schema.StringAttribute{
 					MarkdownDescription: "Certificate profile",
@@ -281,7 +280,6 @@ var VlanInterfacesResourceSchema = schema.Schema{
 				"ddns_ip": schema.StringAttribute{
 					MarkdownDescription: "IP to register (static only)",
 					Optional:            true,
-					Computed:            true,
 				},
 				"ddns_update_interval": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -338,7 +336,6 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Vlan interfaces DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"create_default_route": schema.BoolAttribute{
 					MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
@@ -364,7 +361,6 @@ var VlanInterfacesResourceSchema = schema.Schema{
 				"send_hostname": schema.SingleNestedAttribute{
 					MarkdownDescription: "Send hostname",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",

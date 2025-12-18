@@ -437,12 +437,10 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Layer2\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"lacp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Lacp",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable LACP?",
@@ -500,7 +498,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "VLAN tag",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -512,12 +509,10 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Aggregate Interface Layer 3 configuration\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"arp": schema.ListNestedAttribute{
 					MarkdownDescription: "Aggregate Ethernet ARP configuration",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"hw_address": schema.StringAttribute{
@@ -534,7 +529,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				"ddns_config": schema.SingleNestedAttribute{
 					MarkdownDescription: "Dynamic DNS configuration specific to the Aggregate Interface.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ddns_cert_profile": schema.StringAttribute{
 							MarkdownDescription: "Certificate profile",
@@ -557,7 +551,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 						"ddns_ip": schema.StringAttribute{
 							MarkdownDescription: "IP to register (static only)",
 							Optional:            true,
-							Computed:            true,
 						},
 						"ddns_update_interval": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -592,7 +585,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Aggregate Ethernet DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"create_default_route": schema.BoolAttribute{
 							MarkdownDescription: "Automatically create default route pointing to default gateway provided by server",
@@ -618,7 +610,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 						"send_hostname": schema.SingleNestedAttribute{
 							MarkdownDescription: "Aggregate Ethernet DHCP Client Send hostname",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable",
@@ -647,7 +638,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Interface management profile",
 					Optional:            true,
-					Computed:            true,
 				},
 				"ip": schema.ListNestedAttribute{
 					Validators: []validator.List{
@@ -657,7 +647,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Aggregate Interface IP addresses\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -670,7 +659,6 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				"lacp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Lacp",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable LACP?",

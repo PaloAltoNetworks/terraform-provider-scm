@@ -173,12 +173,10 @@ var VpnSettingsResourceSchema = schema.Schema{
 		"vpn": schema.SingleNestedAttribute{
 			MarkdownDescription: "Vpn",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ikev2": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ikev2",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"certificate_cache_size": schema.Int64Attribute{
 							Validators: []validator.Int64{

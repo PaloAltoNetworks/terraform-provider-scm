@@ -284,7 +284,6 @@ var ServicesResourceSchema = schema.Schema{
 		"protocol": schema.SingleNestedAttribute{
 			MarkdownDescription: "Protocol",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"tcp": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -294,12 +293,10 @@ var ServicesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Tcp\n> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"override": schema.SingleNestedAttribute{
 							MarkdownDescription: "Override",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"halfclose_timeout": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -345,7 +342,6 @@ var ServicesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Source port",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -357,12 +353,10 @@ var ServicesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Udp\n> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"override": schema.SingleNestedAttribute{
 							MarkdownDescription: "Override",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"timeout": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -390,7 +384,6 @@ var ServicesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Source port",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},

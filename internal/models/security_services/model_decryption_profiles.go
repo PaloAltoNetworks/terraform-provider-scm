@@ -302,7 +302,6 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 		"ssl_forward_proxy": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ssl forward proxy",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"auto_include_altname": schema.BoolAttribute{
 					MarkdownDescription: "Auto include altname",
@@ -375,7 +374,6 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 		"ssl_inbound_proxy": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ssl inbound proxy",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"block_if_hsm_unavailable": schema.BoolAttribute{
 					MarkdownDescription: "Block if hsm unavailable",
@@ -406,7 +404,6 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 		"ssl_no_proxy": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ssl no proxy",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"block_expired_certificate": schema.BoolAttribute{
 					MarkdownDescription: "Block expired certificate",
@@ -425,7 +422,6 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 		"ssl_protocol_settings": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ssl protocol settings",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"auth_algo_md5": schema.BoolAttribute{
 					MarkdownDescription: "Auth algo md5",

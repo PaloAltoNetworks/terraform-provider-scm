@@ -96,19 +96,22 @@ func (d *DeviceRedistributionCollectorListDataSource) Read(ctx context.Context, 
 		return
 	}
 
-	// Convert the response to the Terraform model.
-	if listResponse == nil || listResponse.GetData() == nil {
+	// RAW LIST LOGIC:
+	// The API returned a JSON array [...] directly.
+	if listResponse == nil {
 		return // Nothing to do.
 	}
 
-	total := int64(listResponse.GetTotal())
+	// 1. TOTAL: We calculate it manually based on the slice length.
+	total := int64(len(listResponse))
 	data.Total = types.Int64PointerValue(&total)
-	data.Limit = types.Int64Value(int64(listResponse.GetLimit()))
-	data.Offset = types.Int64Value(int64(listResponse.GetOffset()))
 
-	// =================== START: THE IMPROVEMENT ===================
-	// Use the generated list packer to pack the SCM items into a TF list.
-	packedList, diags := packDeviceRedistributionCollectorListFromSdk(ctx, listResponse.GetData())
+	// 2. LIMIT/OFFSET: We do not update them from the server (metadata missing).
+	//    We keep the values requested by the user in the config.
+
+	// 3. PACKING: Pass the listResponse directly (it IS the slice).
+	packedList, diags := packDeviceRedistributionCollectorListFromSdk(ctx, listResponse)
+
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return

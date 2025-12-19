@@ -46,6 +46,10 @@ func (r *SharedInfrastructureSettingResource) Metadata(ctx context.Context, req 
 
 func (r *SharedInfrastructureSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = models.SharedInfrastructureSettingsResourceSchema
+
+	resp.Schema.MarkdownDescription = "**Singleton Resource.** " + resp.Schema.MarkdownDescription +
+		"\n\nThis resource is a singleton, meaning only one instance can exist. " +
+		"If the resource typically exists (e.g. bgp_routing), you should import it before managing it."
 }
 
 func (r *SharedInfrastructureSettingResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
@@ -187,7 +191,7 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 
 
 
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_shared_infrastructure_settings")
 
 	tflog.Debug(ctx, "Created shared_infrastructure_settings", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -456,12 +460,12 @@ func (r *SharedInfrastructureSettingResource) Delete(ctx context.Context, req re
 func (r *SharedInfrastructureSettingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// --- START: MODIFIED IMPORT ---
 	// We expect the ID to be "singleton" or the resource name.
-	if req.ID != "singleton" && req.ID != "shared_infrastructure_setting" {
-		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'shared_infrastructure_setting', got: %s", req.ID))
+	if req.ID != "singleton" && req.ID != "shared_infrastructure_settings" {
+		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'shared_infrastructure_settings', got: %s", req.ID))
 		return
 	}
 	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton"))...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton_shared_infrastructure_settings"))...)
 	// --- END: MODIFIED IMPORT ---
 }
 

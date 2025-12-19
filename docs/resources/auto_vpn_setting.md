@@ -3,12 +3,15 @@
 page_title: "scm_auto_vpn_setting Resource - scm"
 subcategory: ""
 description: |-
-  AutoVpnSetting resource
+  Singleton Resource. AutoVpnSetting resource
+  This resource is a singleton, meaning only one instance can exist. If the resource typically exists (e.g. bgp_routing), you should import it before managing it.
 ---
 
 # scm_auto_vpn_setting (Resource)
 
-AutoVpnSetting resource
+**Singleton Resource.** AutoVpnSetting resource
+
+This resource is a singleton, meaning only one instance can exist. If the resource typically exists (e.g. bgp_routing), you should import it before managing it.
 
 ## Example Usage
 

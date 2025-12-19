@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
@@ -111,7 +112,7 @@ func (d *BandwidthAllocationDataSource) Read(ctx context.Context, req datasource
 	}
 
 	// Set the Tfid to the name
-	state.Tfid = state.Name
+	state.Tfid = types.StringValue("bandwidth_allocation_" + state.Name.ValueString())
 
 	// Initialize sensitive fields if present (required by framework)
 

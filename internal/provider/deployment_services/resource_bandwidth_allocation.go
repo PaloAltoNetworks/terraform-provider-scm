@@ -94,13 +94,6 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 		return
 	}
 
-	// The 'Name' is the identity for this resource.
-	if !data.Name.IsNull() {
-		data.Tfid = data.Name
-	} else {
-		data.Tfid = types.StringValue("unknown")
-	}
-
 	// Re-pack the response if available
 	if createdObject != nil {
 		packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *createdObject)
@@ -140,6 +133,12 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 		}
 
 		data = apiData
+		// The 'Name' is the identity for this resource.
+		if !data.Name.IsNull() {
+			data.Tfid = types.StringValue("bandwidth_allocation_" + data.Name.ValueString())
+		} else {
+			data.Tfid = types.StringValue("unknown")
+		}
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -156,7 +155,10 @@ func (r *BandwidthAllocationResource) Read(ctx context.Context, req resource.Rea
 	// Identify the target name
 	targetName := state.Name.ValueString()
 	if state.Tfid.ValueString() != "" && state.Tfid.ValueString() != "unknown" {
-		targetName = state.Tfid.ValueString()
+		parts := strings.Split(state.Tfid.ValueString(), "_")
+		if len(parts) > 0 {
+			targetName = parts[len(parts)-1]
+		}
 	}
 
 	// 1. Call the List operation to get all items
@@ -207,7 +209,7 @@ func (r *BandwidthAllocationResource) Read(ctx context.Context, req resource.Rea
 
 	// 🟢 NO MASKING: Let the Read operation reveal the true state (drift detection).
 
-	apiData.Tfid = state.Name
+	apiData.Tfid = types.StringValue("bandwidth_allocation_" + state.Name.ValueString())
 	resp.Diagnostics.Append(resp.State.Set(ctx, &apiData)...)
 }
 
@@ -279,7 +281,7 @@ func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.U
 		plan = apiData
 	}
 
-	plan.Tfid = plan.Name
+	plan.Tfid = types.StringValue("bandwidth_allocation_" + plan.Name.ValueString())
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
 }
@@ -295,7 +297,10 @@ func (r *BandwidthAllocationResource) Delete(ctx context.Context, req resource.D
 	// 🟢 FIX: Fetch the LIVE object first for robust deletion.
 	targetName := state.Name.ValueString()
 	if state.Tfid.ValueString() != "" && state.Tfid.ValueString() != "unknown" {
-		targetName = state.Tfid.ValueString()
+		parts := strings.Split(state.Tfid.ValueString(), "_")
+		if len(parts) > 0 {
+			targetName = parts[len(parts)-1]
+		}
 	}
 
 	listReq := r.client.BandwidthAllocationsAPI.ListBandwidthAllocations(ctx)

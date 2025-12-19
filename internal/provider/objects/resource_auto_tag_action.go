@@ -46,6 +46,10 @@ func (r *AutoTagActionResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *AutoTagActionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = models.AutoTagActionsResourceSchema
+
+	resp.Schema.MarkdownDescription = "**Singleton Resource.** " + resp.Schema.MarkdownDescription +
+		"\n\nThis resource is a singleton, meaning only one instance can exist. " +
+		"If the resource typically exists (e.g. bgp_routing), you should import it before managing it."
 }
 
 func (r *AutoTagActionResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
@@ -168,7 +172,7 @@ func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateR
 
 
 
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_auto_tag_actions")
 
 	tflog.Debug(ctx, "Created auto_tag_actions", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -509,12 +513,12 @@ func (r *AutoTagActionResource) Delete(ctx context.Context, req resource.DeleteR
 func (r *AutoTagActionResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// --- START: MODIFIED IMPORT ---
 	// We expect the ID to be "singleton" or the resource name.
-	if req.ID != "singleton" && req.ID != "auto_tag_action" {
-		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'auto_tag_action', got: %s", req.ID))
+	if req.ID != "singleton" && req.ID != "auto_tag_actions" {
+		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'auto_tag_actions', got: %s", req.ID))
 		return
 	}
 	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton"))...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton_auto_tag_actions"))...)
 	// --- END: MODIFIED IMPORT ---
 }
 

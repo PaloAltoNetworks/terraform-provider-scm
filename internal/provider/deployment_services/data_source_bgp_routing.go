@@ -142,7 +142,7 @@ func (d *BgpRoutingDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	}
 
 	// Force synthetic ID
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_bgp_routing")
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

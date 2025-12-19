@@ -154,7 +154,7 @@ func (d *SslDecryptionSettingDataSource) Read(ctx context.Context, req datasourc
 	if resp.Diagnostics.HasError() { return }
 
 	// Force synthetic ID
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_ssl_decryption_settings")
 
 
 

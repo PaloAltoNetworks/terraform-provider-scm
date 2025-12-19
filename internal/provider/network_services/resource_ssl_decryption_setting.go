@@ -46,6 +46,10 @@ func (r *SslDecryptionSettingResource) Metadata(ctx context.Context, req resourc
 
 func (r *SslDecryptionSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = models.SslDecryptionSettingsResourceSchema
+
+	resp.Schema.MarkdownDescription = "**Singleton Resource.** " + resp.Schema.MarkdownDescription +
+		"\n\nThis resource is a singleton, meaning only one instance can exist. " +
+		"If the resource typically exists (e.g. bgp_routing), you should import it before managing it."
 }
 
 func (r *SslDecryptionSettingResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
@@ -168,7 +172,7 @@ func (r *SslDecryptionSettingResource) Create(ctx context.Context, req resource.
 
 
 
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_ssl_decryption_settings")
 
 	tflog.Debug(ctx, "Created ssl_decryption_settings", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -537,12 +541,12 @@ func (r *SslDecryptionSettingResource) Delete(ctx context.Context, req resource.
 func (r *SslDecryptionSettingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// --- START: MODIFIED IMPORT ---
 	// We expect the ID to be "singleton" or the resource name.
-	if req.ID != "singleton" && req.ID != "ssl_decryption_setting" {
-		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'ssl_decryption_setting', got: %s", req.ID))
+	if req.ID != "singleton" && req.ID != "ssl_decryption_settings" {
+		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'ssl_decryption_settings', got: %s", req.ID))
 		return
 	}
 	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton"))...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton_ssl_decryption_settings"))...)
 	// --- END: MODIFIED IMPORT ---
 }
 

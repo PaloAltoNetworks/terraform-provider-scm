@@ -145,7 +145,7 @@ func (d *QuarantinedDeviceDataSource) Read(ctx context.Context, req datasource.R
 	if resp.Diagnostics.HasError() { return }
 
 	// Force synthetic ID
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_quarantined_devices")
 
 
 

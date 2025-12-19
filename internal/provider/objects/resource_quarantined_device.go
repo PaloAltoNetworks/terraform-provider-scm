@@ -46,6 +46,10 @@ func (r *QuarantinedDeviceResource) Metadata(ctx context.Context, req resource.M
 
 func (r *QuarantinedDeviceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = models.QuarantinedDevicesResourceSchema
+
+	resp.Schema.MarkdownDescription = "**Singleton Resource.** " + resp.Schema.MarkdownDescription +
+		"\n\nThis resource is a singleton, meaning only one instance can exist. " +
+		"If the resource typically exists (e.g. bgp_routing), you should import it before managing it."
 }
 
 func (r *QuarantinedDeviceResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
@@ -168,7 +172,7 @@ func (r *QuarantinedDeviceResource) Create(ctx context.Context, req resource.Cre
 
 
 
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_quarantined_devices")
 
 	tflog.Debug(ctx, "Created quarantined_devices", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -463,12 +467,12 @@ func (r *QuarantinedDeviceResource) Delete(ctx context.Context, req resource.Del
 func (r *QuarantinedDeviceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// --- START: MODIFIED IMPORT ---
 	// We expect the ID to be "singleton" or the resource name.
-	if req.ID != "singleton" && req.ID != "quarantined_device" {
-		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'quarantined_device', got: %s", req.ID))
+	if req.ID != "singleton" && req.ID != "quarantined_devices" {
+		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'quarantined_devices', got: %s", req.ID))
 		return
 	}
 	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton"))...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton_quarantined_devices"))...)
 	// --- END: MODIFIED IMPORT ---
 }
 

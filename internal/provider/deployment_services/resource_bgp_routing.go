@@ -40,6 +40,10 @@ func (r *BgpRoutingResource) Metadata(ctx context.Context, req resource.Metadata
 
 func (r *BgpRoutingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = models.BgpRoutingResourceSchema
+
+	resp.Schema.MarkdownDescription = "**Singleton Resource.** " + resp.Schema.MarkdownDescription +
+		"\n\nThis resource is a singleton, meaning only one instance can exist. " +
+		"If the resource typically exists (e.g. bgp_routing), you should import it before managing it."
 }
 
 func (r *BgpRoutingResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
@@ -184,7 +188,7 @@ func (r *BgpRoutingResource) Create(ctx context.Context, req resource.CreateRequ
 		return
 	}
 
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_bgp_routing")
 
 	tflog.Debug(ctx, "Created bgp_routing", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -465,6 +469,6 @@ func (r *BgpRoutingResource) ImportState(ctx context.Context, req resource.Impor
 		return
 	}
 	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton"))...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton_bgp_routing"))...)
 	// --- END: MODIFIED IMPORT ---
 }

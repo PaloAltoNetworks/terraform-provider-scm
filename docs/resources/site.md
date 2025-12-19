@@ -194,20 +194,6 @@ Optional:
 The following command can be used to import a resource not managed by Terraform:
 
 ```bash
-terraform import scm_site.example folder:::id
+terraform import scm_site.example :::id
 ```
-
-or
-
-```bash
-terraform import scm_site.example :snippet::id
-```
-
-or
-
-```bash
-terraform import scm_site.example ::device:id
-```
-
-**Note:** Please provide just one of folder, snippet, or device for the import command.
 

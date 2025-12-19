@@ -41,8 +41,8 @@ v1.0.6
 * resource/scm_session_timeout: Added Support, examples and tests (resources, data-source)
 * resource/scm_tcp_settings: Added Support, examples and tests (resources, data-source)
 * resource/scm_vpn_settings: Added Support, examples and tests (resources, data-source)
-* resource/scm_bandwidth_allocation: Added Support for singleton resource without uuid
-* resource/scm_lldp_profiles: Added Support
+* resource/scm_bandwidth_allocation: Added Support, examples (resources, data-source)
+* resource/scm_lldp_profiles: Added Support (resources, data-source)
 
 
 #### ENHANCEMENTS
@@ -51,14 +51,12 @@ v1.0.6
 * resource/scm_http_server_profile: Added additional examples and tests (resource, data-source)
 * resource/scm_tls_service_profile: Added additional examples and tests (resource)
 
-
 * Bandwidth Allocation currently supported (#9)
 * Document the import statements to import a resource into state (#23)
 * The password used on the external dynamic list can't be set  (#74)
 
 #### BUG FIXES
 
-* resource/scm_auto_vpn_cluster: Removed incorrect scope values
 * resource/scm_ethernet_interface: Resolved deletion of interface_management_profile property caused due to computed flag
 * resource/scm_decryption_rules: Fixed POST response codes for Decryption Rules
 * resource/scm_security_rules: Fixed POST response codes for Security Rules

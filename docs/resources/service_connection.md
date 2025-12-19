@@ -132,6 +132,7 @@ resource "scm_service_connection" "site_a_vpn_sc" {
 ### Read-Only
 
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
+- `folder` (String) The folder in which the resource is defined
 - `id` (String) The UUID of the service connection
 - `tfid` (String) The Terraform ID.
 
@@ -178,3 +179,27 @@ Optional:
 
 - `enable` (Boolean) Enable
 - `qos_profile` (String) Qos profile
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_service_connection.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_service_connection.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_service_connection.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

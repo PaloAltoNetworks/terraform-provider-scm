@@ -24,16 +24,13 @@ ProfileGroup resource
 - `ai_security` (List of String) Ai security
 - `data_filtering` (List of String) Data filtering
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dns_security` (List of String) Dns security
 - `file_blocking` (List of String) File blocking
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `saas_security` (List of String) Saas security
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `spyware` (List of String) Spyware
 - `url_filtering` (List of String) Url filtering
@@ -44,3 +41,27 @@ ProfileGroup resource
 
 - `id` (String) The UUID of the profile group
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_profile_group.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_profile_group.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_profile_group.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

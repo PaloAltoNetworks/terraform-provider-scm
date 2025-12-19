@@ -57,17 +57,14 @@ resource "scm_loopback_interface" "scm_loopback_intf_2" {
 - `comment` (String) Description
 - `default_value` (String) Default interface assignment
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) Loopback IP Parent (see [below for nested schema](#nestedatt--ip))
 - `ipv6` (Attributes) Loopback IPv6 Configuration (see [below for nested schema](#nestedatt--ipv6))
 - `mtu` (Number) MTU
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -99,3 +96,27 @@ Optional:
 - `enable_on_interface` (Boolean) Enable Address on Interface
 - `interface_id` (String) Interface ID
 - `name` (String) IPv6 Address
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_loopback_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_loopback_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_loopback_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

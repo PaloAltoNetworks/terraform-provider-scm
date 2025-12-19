@@ -42,21 +42,16 @@ resource "scm_vlan_interface" "scm_vlan_interface_ipv4" {
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Vlan Interfaces. (see [below for nested schema](#nestedatt--ddns_config))
 - `default_value` (String) Default interface assignment
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dhcp_client` (Attributes) Vlan interfaces DHCP Client Object
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--dhcp_client))
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) VLAN Interface IP Parent
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--ip))
 - `mtu` (Number) MTU
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `vlan_tag` (String) VLAN tag
 
@@ -118,3 +113,27 @@ Optional:
 Required:
 
 - `name` (String) VLAN Interface IP address(es)
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_vlan_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_vlan_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_vlan_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

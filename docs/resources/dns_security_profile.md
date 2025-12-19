@@ -160,14 +160,11 @@ resource "scm_dns_security_profile" "scm_dns_all" {
 - `botnet_domains` (Attributes) Botnet domains (see [below for nested schema](#nestedatt--botnet_domains))
 - `description` (String) The description of the DNS security profile
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the DNS security profile
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -214,16 +211,12 @@ Optional:
 Optional:
 
 - `alert` (Attributes) Alert
-
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--alert))
 - `allow` (Attributes) Allow
-
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--allow))
 - `block` (Attributes) Block
-
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--block))
 - `sinkhole` (Attributes) Sinkhole
-
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--sinkhole))
 
 <a id="nestedatt--botnet_domains--lists--action--alert"></a>
@@ -263,3 +256,27 @@ Required:
 Optional:
 
 - `description` (String) Description
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_dns_security_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_dns_security_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_dns_security_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

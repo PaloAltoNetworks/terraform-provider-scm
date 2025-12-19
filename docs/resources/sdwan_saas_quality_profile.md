@@ -23,13 +23,10 @@ SdwanSaasQualityProfile resource
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -43,13 +40,10 @@ SdwanSaasQualityProfile resource
 Optional:
 
 - `adaptive` (Attributes) Adaptive
-
 > ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`. (see [below for nested schema](#nestedatt--monitor_mode--adaptive))
 - `http_https` (Attributes) Http https
-
 > ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`. (see [below for nested schema](#nestedatt--monitor_mode--http_https))
 - `static_ip` (Attributes) Static ip
-
 > ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`. (see [below for nested schema](#nestedatt--monitor_mode--static_ip))
 
 <a id="nestedatt--monitor_mode--adaptive"></a>
@@ -71,10 +65,8 @@ Required:
 Optional:
 
 - `fqdn` (Attributes) Fqdn
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`. (see [below for nested schema](#nestedatt--monitor_mode--static_ip--fqdn))
 - `ip_address` (Attributes List) List of IP addresses
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`. (see [below for nested schema](#nestedatt--monitor_mode--static_ip--ip_address))
 
 <a id="nestedatt--monitor_mode--static_ip--fqdn"></a>
@@ -93,3 +85,27 @@ Required:
 
 - `name` (String) IP address
 - `probe_interval` (Number) Probe interval (seconds)
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_sdwan_saas_quality_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_saas_quality_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_saas_quality_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

@@ -66,33 +66,42 @@ func (d *OcspResponderListDataSource) Read(ctx context.Context, req datasource.R
 
 	// Create the API request.
 	listReq := d.client.OCSPRespondersAPI.ListOCSPResponders(ctx)
-
-	// Apply filters from the configuration.
-
-	v := reflect.ValueOf(data)
-
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { listReq = listReq.Folder(val.ValueString()) }
+	if !data.Name.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "name", "value": data.Name })
+		listReq = listReq.Name(data.Name.ValueString())
+		// END: Add dynamic query parameter handling
 	}
-
-
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { listReq = listReq.Snippet(val.ValueString()) }
+	if !data.Folder.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "folder", "value": data.Folder })
+		listReq = listReq.Folder(data.Folder.ValueString())
+		// END: Add dynamic query parameter handling
 	}
-
-
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() { listReq = listReq.Device(val.ValueString()) }
+	if !data.Snippet.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "snippet", "value": data.Snippet })
+		listReq = listReq.Snippet(data.Snippet.ValueString())
+		// END: Add dynamic query parameter handling
 	}
-
+	if !data.Device.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "device", "value": data.Device })
+		listReq = listReq.Device(data.Device.ValueString())
+		// END: Add dynamic query parameter handling
+	}
 	if !data.Limit.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "limit", "value": data.Limit })
 		listReq = listReq.Limit(int32(data.Limit.ValueInt64()))
+		// END: Add dynamic query parameter handling
 	}
 	if !data.Offset.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "offset", "value": data.Offset })
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
+		// END: Add dynamic query parameter handling
 	}
-
 
 	// Execute the request.
 	listResponse, _, err := listReq.Execute()
@@ -100,7 +109,7 @@ func (d *OcspResponderListDataSource) Read(ctx context.Context, req datasource.R
 		resp.Diagnostics.AddError("Error Listing OcspResponderss", fmt.Sprintf("Could not list OcspResponderss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return
@@ -137,7 +146,7 @@ func (d *OcspResponderListDataSource) Read(ctx context.Context, req datasource.R
 
 	// Use reflection again for Tfid creation to ensure safety
 
-	v = reflect.ValueOf(data)
+	v := reflect.ValueOf(data)
 
 
 

@@ -75,21 +75,18 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the service
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `description` (String) Description
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `protocol` (Attributes) Protocol (see [below for nested schema](#nestedatt--data--protocol))
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag` (List of String) Tags for service object
 - `tfid` (String) The Terraform ID.
 
@@ -99,10 +96,8 @@ Read-Only:
 Read-Only:
 
 - `tcp` (Attributes) Tcp
-
 > ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`. (see [below for nested schema](#nestedatt--data--protocol--tcp))
 - `udp` (Attributes) Udp
-
 > ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`. (see [below for nested schema](#nestedatt--data--protocol--udp))
 
 <a id="nestedatt--data--protocol--tcp"></a>

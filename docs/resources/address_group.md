@@ -77,19 +77,14 @@ resource "scm_address_group" "scm_addressgroup_dynamic" {
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dynamic` (Attributes) Dynamic
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`. (see [below for nested schema](#nestedatt--dynamic))
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `static` (List of String) Static
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`.
 - `tag` (List of String) Tags for address group object
 
@@ -104,3 +99,27 @@ resource "scm_address_group" "scm_addressgroup_dynamic" {
 Required:
 
 - `filter` (String) Tag based filter defining group membership
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_address_group.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_address_group.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_address_group.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

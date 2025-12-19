@@ -21,6 +21,7 @@ type ServiceConnectionGroups struct {
 	Name        basetypes.StringValue `tfsdk:"name"`
 	PbfOnly     basetypes.BoolValue   `tfsdk:"pbf_only"`
 	Target      basetypes.ListValue   `tfsdk:"target"`
+	Folder      basetypes.StringValue `tfsdk:"folder"`
 }
 
 // AttrTypes defines the attribute types for the ServiceConnectionGroups model.
@@ -32,6 +33,7 @@ func (o ServiceConnectionGroups) AttrTypes() map[string]attr.Type {
 		"name":         basetypes.StringType{},
 		"pbf_only":     basetypes.BoolType{},
 		"target":       basetypes.ListType{ElemType: basetypes.StringType{}},
+		"folder":       basetypes.StringType{},
 	}
 }
 
@@ -49,6 +51,14 @@ var ServiceConnectionGroupsResourceSchema = schema.Schema{
 		"disable_snat": schema.BoolAttribute{
 			MarkdownDescription: "Disable snat",
 			Optional:            true,
+		},
+		"folder": schema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined\n",
+			Computed:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			},
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the service connection group",
@@ -86,6 +96,11 @@ var ServiceConnectionGroupsDataSourceSchema = dsschema.Schema{
 	Attributes: map[string]dsschema.Attribute{
 		"disable_snat": dsschema.BoolAttribute{
 			MarkdownDescription: "Disable snat",
+			Computed:            true,
+		},
+		"folder": dsschema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined\n",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{

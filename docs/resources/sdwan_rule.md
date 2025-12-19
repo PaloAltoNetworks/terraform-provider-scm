@@ -33,18 +33,15 @@ SdwanRule resource
 
 - `description` (String) Rule description
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Disable rule?
 - `error_correction_profile` (String) Error correction profile
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `negate_destination` (Boolean) Negate destination address(es)?
 - `negate_source` (Boolean) Negate source address(es)?
 - `saas_quality_profile` (String) SaaS quality profile
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag` (List of String) List of tags
 
@@ -59,3 +56,27 @@ SdwanRule resource
 Required:
 
 - `traffic_distribution_profile` (String) Traffic dstribution profile
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_sdwan_rule.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_rule.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_rule.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

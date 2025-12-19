@@ -40,6 +40,10 @@ func (r *AutoVpnSettingResource) Metadata(ctx context.Context, req resource.Meta
 
 func (r *AutoVpnSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = models.AutoVpnSettingsResourceSchema
+
+	resp.Schema.MarkdownDescription = "**Singleton Resource.** " + resp.Schema.MarkdownDescription +
+		"\n\nThis resource is a singleton, meaning only one instance can exist. " +
+		"If the resource typically exists (e.g. bgp_routing), you should import it before managing it."
 }
 
 func (r *AutoVpnSettingResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
@@ -184,7 +188,7 @@ func (r *AutoVpnSettingResource) Create(ctx context.Context, req resource.Create
 		return
 	}
 
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_auto_vpn_settings")
 
 	tflog.Debug(ctx, "Created auto_vpn_settings", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -460,11 +464,11 @@ func (r *AutoVpnSettingResource) Delete(ctx context.Context, req resource.Delete
 func (r *AutoVpnSettingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// --- START: MODIFIED IMPORT ---
 	// We expect the ID to be "singleton" or the resource name.
-	if req.ID != "singleton" && req.ID != "auto_vpn_setting" {
-		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'auto_vpn_setting', got: %s", req.ID))
+	if req.ID != "singleton" && req.ID != "auto_vpn_settings" {
+		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'auto_vpn_settings', got: %s", req.ID))
 		return
 	}
 	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton"))...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton_auto_vpn_settings"))...)
 	// --- END: MODIFIED IMPORT ---
 }

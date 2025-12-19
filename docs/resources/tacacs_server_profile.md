@@ -24,13 +24,10 @@ TacacsServerProfile resource
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `timeout` (Number) The TACACS+ timeout (seconds)
 - `use_single_connection` (Boolean) Use a single TACACS+ connection?
@@ -49,3 +46,27 @@ Optional:
 - `name` (String) The name of the TACACS+ server
 - `port` (Number) The TACACS+ server port
 - `secret` (String, Sensitive) The TACACS+ secret
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_tacacs_server_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_tacacs_server_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_tacacs_server_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

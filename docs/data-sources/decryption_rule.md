@@ -34,7 +34,13 @@ output "single_decryption_rule_name" {
 
 ### Optional
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the decryption rule
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -43,13 +49,7 @@ output "single_decryption_rule_name" {
 - `description` (String) The description of the decryption rule
 - `destination` (List of String) The destination addresses
 - `destination_hip` (List of String) The Host Integrity Profile of the destination host
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Is the rule disabled?
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (List of String) The source security zone
 - `log_fail` (Boolean) Log failed decryption events?
 - `log_setting` (String) The log settings of the decryption rule
@@ -60,9 +60,6 @@ output "single_decryption_rule_name" {
 - `profile` (String) The decryption profile associated with the decryption rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `service` (List of String) The destination services and/or service groups
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) The source addresses
 - `source_hip` (List of String) Source hip
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.
@@ -78,10 +75,8 @@ output "single_decryption_rule_name" {
 Read-Only:
 
 - `ssl_forward_proxy` (Attributes) Ssl forward proxy
-
 > ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--type--ssl_forward_proxy))
 - `ssl_inbound_inspection` (String) add the certificate name for SSL inbound inspection
-
 > ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.
 
 <a id="nestedatt--type--ssl_forward_proxy"></a>

@@ -158,6 +158,7 @@ resource "scm_site" "example" {
 
 ### Read-Only
 
+- `folder` (String) The folder in which the resource is defined
 - `id` (String) The UUID of the site
 - `tfid` (String) The Terraform ID.
 
@@ -186,3 +187,13 @@ Optional:
 - `backup_cir` (Number) The backup CIR in Mbps. This is distributed equally for all tunnels in the site.
 - `cir` (Number) The CIR in Mbps. This is distributed equally for all tunnels in the site.
 - `profile` (String) The name of the site QoS profile
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_site.example :::id
+```
+

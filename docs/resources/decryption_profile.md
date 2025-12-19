@@ -169,13 +169,10 @@ resource "scm_decryption_profile" "full_mixed_decryption_profile" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ssl_forward_proxy` (Attributes) Ssl forward proxy (see [below for nested schema](#nestedatt--ssl_forward_proxy))
 - `ssl_inbound_proxy` (Attributes) Ssl inbound proxy (see [below for nested schema](#nestedatt--ssl_inbound_proxy))
@@ -246,3 +243,27 @@ Optional:
 - `keyxchg_algo_rsa` (Boolean) Keyxchg algo rsa
 - `max_version` (String) Max version
 - `min_version` (String) Min version
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_decryption_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

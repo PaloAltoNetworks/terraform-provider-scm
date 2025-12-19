@@ -36,13 +36,11 @@ resource "scm_application_filter" "scm_application_filter_1" {
 
 - `category` (List of String) Category
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `evasive` (Boolean) only True is a valid value
 - `excessive_bandwidth_use` (Boolean) only True is a valid value
 - `exclude` (List of String) Exclude
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `has_known_vulnerabilities` (Boolean) only True is a valid value
 - `is_saas` (Boolean) only True is a valid value
@@ -53,7 +51,6 @@ resource "scm_application_filter" "scm_application_filter_1" {
 - `saas_certifications` (List of String) Saas certifications
 - `saas_risk` (List of String) Saas risk
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `subcategory` (List of String) Subcategory
 - `tagging` (Attributes) Tagging (see [below for nested schema](#nestedatt--tagging))
@@ -73,8 +70,30 @@ resource "scm_application_filter" "scm_application_filter_1" {
 Optional:
 
 - `no_tag` (Boolean) No tag
-
 > ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.
 - `tag` (List of String) Tag
-
 > ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_application_filter.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_application_filter.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_application_filter.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

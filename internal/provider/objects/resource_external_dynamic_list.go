@@ -74,6 +74,117 @@ func (r *ExternalDynamicListResource) Create(ctx context.Context, req resource.C
 
 	// Stash plaintext values from the plan.
 
+	{ // Stash plaintext for Type.Domain.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_stash_Type_Domain_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_stash_Type_Domain_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Type_Domain_Auth_Password_0.Domain.IsNull() && !temp_stash_Type_Domain_Auth_Password_0.Domain.IsUnknown() {
+						var temp_stash_Type_Domain_Auth_Password_1 models.ExternalDynamicListsTypeDomain
+						resp.Diagnostics.Append(temp_stash_Type_Domain_Auth_Password_0.Domain.As(ctx, &temp_stash_Type_Domain_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Type_Domain_Auth_Password_1.Auth.IsNull() && !temp_stash_Type_Domain_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_Type_Domain_Auth_Password_2 models.ExternalDynamicListsTypeDomainAuth
+								resp.Diagnostics.Append(temp_stash_Type_Domain_Auth_Password_1.Auth.As(ctx, &temp_stash_Type_Domain_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_Type_Domain_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_domain_auth_password_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Type.Imei.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_stash_Type_Imei_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_stash_Type_Imei_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Type_Imei_Auth_Password_0.Imei.IsNull() && !temp_stash_Type_Imei_Auth_Password_0.Imei.IsUnknown() {
+						var temp_stash_Type_Imei_Auth_Password_1 models.ExternalDynamicListsTypeImei
+						resp.Diagnostics.Append(temp_stash_Type_Imei_Auth_Password_0.Imei.As(ctx, &temp_stash_Type_Imei_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Type_Imei_Auth_Password_1.Auth.IsNull() && !temp_stash_Type_Imei_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_Type_Imei_Auth_Password_2 models.ExternalDynamicListsTypeImeiAuth
+								resp.Diagnostics.Append(temp_stash_Type_Imei_Auth_Password_1.Auth.As(ctx, &temp_stash_Type_Imei_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_Type_Imei_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_imei_auth_password_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Type.Imsi.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_stash_Type_Imsi_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_stash_Type_Imsi_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Type_Imsi_Auth_Password_0.Imsi.IsNull() && !temp_stash_Type_Imsi_Auth_Password_0.Imsi.IsUnknown() {
+						var temp_stash_Type_Imsi_Auth_Password_1 models.ExternalDynamicListsTypeImsi
+						resp.Diagnostics.Append(temp_stash_Type_Imsi_Auth_Password_0.Imsi.As(ctx, &temp_stash_Type_Imsi_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Type_Imsi_Auth_Password_1.Auth.IsNull() && !temp_stash_Type_Imsi_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_Type_Imsi_Auth_Password_2 models.ExternalDynamicListsTypeImsiAuth
+								resp.Diagnostics.Append(temp_stash_Type_Imsi_Auth_Password_1.Auth.As(ctx, &temp_stash_Type_Imsi_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_Type_Imsi_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_imsi_auth_password_plaintext = finalVal
+		}
+	}
+
 	{ // Stash plaintext for Type.Ip.Auth.Password
 		var finalVal basetypes.StringValue
 		if !resp.Diagnostics.HasError() {
@@ -108,6 +219,43 @@ func (r *ExternalDynamicListResource) Create(ctx context.Context, req resource.C
 		}
 		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
 			patcher.type_ip_auth_password_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Type.Url.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_stash_Type_Url_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_stash_Type_Url_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Type_Url_Auth_Password_0.Url.IsNull() && !temp_stash_Type_Url_Auth_Password_0.Url.IsUnknown() {
+						var temp_stash_Type_Url_Auth_Password_1 models.ExternalDynamicListsTypeUrl
+						resp.Diagnostics.Append(temp_stash_Type_Url_Auth_Password_0.Url.As(ctx, &temp_stash_Type_Url_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Type_Url_Auth_Password_1.Auth.IsNull() && !temp_stash_Type_Url_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_Type_Url_Auth_Password_2 models.ExternalDynamicListsTypeUrlAuth
+								resp.Diagnostics.Append(temp_stash_Type_Url_Auth_Password_1.Auth.As(ctx, &temp_stash_Type_Url_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_Type_Url_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_url_auth_password_plaintext = finalVal
 		}
 	}
 
@@ -161,6 +309,177 @@ func (r *ExternalDynamicListResource) Create(ctx context.Context, req resource.C
 
 	// Stash the encrypted values from the API response and apply the patch.
 
+	{ // Patch plaintext for Type.Domain.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_create_Type_Domain_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_create_Type_Domain_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Type_Domain_Auth_Password_0.Domain.IsNull() && !temp_patch_create_Type_Domain_Auth_Password_0.Domain.IsUnknown() {
+						var temp_patch_create_Type_Domain_Auth_Password_1 models.ExternalDynamicListsTypeDomain
+						resp.Diagnostics.Append(temp_patch_create_Type_Domain_Auth_Password_0.Domain.As(ctx, &temp_patch_create_Type_Domain_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Type_Domain_Auth_Password_1.Auth.IsNull() && !temp_patch_create_Type_Domain_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_create_Type_Domain_Auth_Password_2 models.ExternalDynamicListsTypeDomainAuth
+								resp.Diagnostics.Append(temp_patch_create_Type_Domain_Auth_Password_1.Auth.As(ctx, &temp_patch_create_Type_Domain_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_domain_auth_password_encrypted = temp_patch_create_Type_Domain_Auth_Password_2.Password
+									temp_patch_create_Type_Domain_Auth_Password_2.Password = patcher.type_domain_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Domain_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeDomainAuth{}.AttrTypes(), &temp_patch_create_Type_Domain_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Domain_Auth_Password_0.Domain, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeDomain{}.AttrTypes(), &temp_patch_create_Type_Domain_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_create_Type_Domain_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Imei.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_create_Type_Imei_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_create_Type_Imei_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Type_Imei_Auth_Password_0.Imei.IsNull() && !temp_patch_create_Type_Imei_Auth_Password_0.Imei.IsUnknown() {
+						var temp_patch_create_Type_Imei_Auth_Password_1 models.ExternalDynamicListsTypeImei
+						resp.Diagnostics.Append(temp_patch_create_Type_Imei_Auth_Password_0.Imei.As(ctx, &temp_patch_create_Type_Imei_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Type_Imei_Auth_Password_1.Auth.IsNull() && !temp_patch_create_Type_Imei_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_create_Type_Imei_Auth_Password_2 models.ExternalDynamicListsTypeImeiAuth
+								resp.Diagnostics.Append(temp_patch_create_Type_Imei_Auth_Password_1.Auth.As(ctx, &temp_patch_create_Type_Imei_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_imei_auth_password_encrypted = temp_patch_create_Type_Imei_Auth_Password_2.Password
+									temp_patch_create_Type_Imei_Auth_Password_2.Password = patcher.type_imei_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Imei_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImeiAuth{}.AttrTypes(), &temp_patch_create_Type_Imei_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Imei_Auth_Password_0.Imei, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImei{}.AttrTypes(), &temp_patch_create_Type_Imei_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_create_Type_Imei_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Imsi.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_create_Type_Imsi_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_create_Type_Imsi_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Type_Imsi_Auth_Password_0.Imsi.IsNull() && !temp_patch_create_Type_Imsi_Auth_Password_0.Imsi.IsUnknown() {
+						var temp_patch_create_Type_Imsi_Auth_Password_1 models.ExternalDynamicListsTypeImsi
+						resp.Diagnostics.Append(temp_patch_create_Type_Imsi_Auth_Password_0.Imsi.As(ctx, &temp_patch_create_Type_Imsi_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Type_Imsi_Auth_Password_1.Auth.IsNull() && !temp_patch_create_Type_Imsi_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_create_Type_Imsi_Auth_Password_2 models.ExternalDynamicListsTypeImsiAuth
+								resp.Diagnostics.Append(temp_patch_create_Type_Imsi_Auth_Password_1.Auth.As(ctx, &temp_patch_create_Type_Imsi_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_imsi_auth_password_encrypted = temp_patch_create_Type_Imsi_Auth_Password_2.Password
+									temp_patch_create_Type_Imsi_Auth_Password_2.Password = patcher.type_imsi_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Imsi_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImsiAuth{}.AttrTypes(), &temp_patch_create_Type_Imsi_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Imsi_Auth_Password_0.Imsi, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImsi{}.AttrTypes(), &temp_patch_create_Type_Imsi_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_create_Type_Imsi_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
 	{ // Patch plaintext for Type.Ip.Auth.Password
 		if !resp.Diagnostics.HasError() {
 
@@ -202,6 +521,63 @@ func (r *ExternalDynamicListResource) Create(ctx context.Context, req resource.C
 									if !resp.Diagnostics.HasError() {
 
 										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_create_Type_Ip_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Url.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_create_Type_Url_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_create_Type_Url_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Type_Url_Auth_Password_0.Url.IsNull() && !temp_patch_create_Type_Url_Auth_Password_0.Url.IsUnknown() {
+						var temp_patch_create_Type_Url_Auth_Password_1 models.ExternalDynamicListsTypeUrl
+						resp.Diagnostics.Append(temp_patch_create_Type_Url_Auth_Password_0.Url.As(ctx, &temp_patch_create_Type_Url_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Type_Url_Auth_Password_1.Auth.IsNull() && !temp_patch_create_Type_Url_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_create_Type_Url_Auth_Password_2 models.ExternalDynamicListsTypeUrlAuth
+								resp.Diagnostics.Append(temp_patch_create_Type_Url_Auth_Password_1.Auth.As(ctx, &temp_patch_create_Type_Url_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_url_auth_password_encrypted = temp_patch_create_Type_Url_Auth_Password_2.Password
+									temp_patch_create_Type_Url_Auth_Password_2.Password = patcher.type_url_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Url_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeUrlAuth{}.AttrTypes(), &temp_patch_create_Type_Url_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Type_Url_Auth_Password_0.Url, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeUrl{}.AttrTypes(), &temp_patch_create_Type_Url_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_create_Type_Url_Auth_Password_0)
 
 										resp.Diagnostics.Append(diags...)
 									}
@@ -327,6 +703,186 @@ func (r *ExternalDynamicListResource) Read(ctx context.Context, req resource.Rea
 	// Step 6 - Encrypted values logic
 	// Check for out-of-band changes and apply the patch.
 
+	{ // Patch plaintext for Type.Domain.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_read_Type_Domain_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_read_Type_Domain_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Type_Domain_Auth_Password_0.Domain.IsNull() && !temp_patch_read_Type_Domain_Auth_Password_0.Domain.IsUnknown() {
+						var temp_patch_read_Type_Domain_Auth_Password_1 models.ExternalDynamicListsTypeDomain
+						resp.Diagnostics.Append(temp_patch_read_Type_Domain_Auth_Password_0.Domain.As(ctx, &temp_patch_read_Type_Domain_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Type_Domain_Auth_Password_1.Auth.IsNull() && !temp_patch_read_Type_Domain_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_read_Type_Domain_Auth_Password_2 models.ExternalDynamicListsTypeDomainAuth
+								resp.Diagnostics.Append(temp_patch_read_Type_Domain_Auth_Password_1.Auth.As(ctx, &temp_patch_read_Type_Domain_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block: Perform comparison and patch.
+									if patcher.type_domain_auth_password_encrypted.Equal(temp_patch_read_Type_Domain_Auth_Password_2.Password) {
+										temp_patch_read_Type_Domain_Auth_Password_2.Password = patcher.type_domain_auth_password_plaintext
+									} else {
+										temp_patch_read_Type_Domain_Auth_Password_2.Password = basetypes.NewStringNull()
+									}
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Domain_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeDomainAuth{}.AttrTypes(), &temp_patch_read_Type_Domain_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Domain_Auth_Password_0.Domain, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeDomain{}.AttrTypes(), &temp_patch_read_Type_Domain_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_read_Type_Domain_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Imei.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_read_Type_Imei_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_read_Type_Imei_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Type_Imei_Auth_Password_0.Imei.IsNull() && !temp_patch_read_Type_Imei_Auth_Password_0.Imei.IsUnknown() {
+						var temp_patch_read_Type_Imei_Auth_Password_1 models.ExternalDynamicListsTypeImei
+						resp.Diagnostics.Append(temp_patch_read_Type_Imei_Auth_Password_0.Imei.As(ctx, &temp_patch_read_Type_Imei_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Type_Imei_Auth_Password_1.Auth.IsNull() && !temp_patch_read_Type_Imei_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_read_Type_Imei_Auth_Password_2 models.ExternalDynamicListsTypeImeiAuth
+								resp.Diagnostics.Append(temp_patch_read_Type_Imei_Auth_Password_1.Auth.As(ctx, &temp_patch_read_Type_Imei_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block: Perform comparison and patch.
+									if patcher.type_imei_auth_password_encrypted.Equal(temp_patch_read_Type_Imei_Auth_Password_2.Password) {
+										temp_patch_read_Type_Imei_Auth_Password_2.Password = patcher.type_imei_auth_password_plaintext
+									} else {
+										temp_patch_read_Type_Imei_Auth_Password_2.Password = basetypes.NewStringNull()
+									}
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Imei_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImeiAuth{}.AttrTypes(), &temp_patch_read_Type_Imei_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Imei_Auth_Password_0.Imei, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImei{}.AttrTypes(), &temp_patch_read_Type_Imei_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_read_Type_Imei_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Imsi.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_read_Type_Imsi_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_read_Type_Imsi_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Type_Imsi_Auth_Password_0.Imsi.IsNull() && !temp_patch_read_Type_Imsi_Auth_Password_0.Imsi.IsUnknown() {
+						var temp_patch_read_Type_Imsi_Auth_Password_1 models.ExternalDynamicListsTypeImsi
+						resp.Diagnostics.Append(temp_patch_read_Type_Imsi_Auth_Password_0.Imsi.As(ctx, &temp_patch_read_Type_Imsi_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Type_Imsi_Auth_Password_1.Auth.IsNull() && !temp_patch_read_Type_Imsi_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_read_Type_Imsi_Auth_Password_2 models.ExternalDynamicListsTypeImsiAuth
+								resp.Diagnostics.Append(temp_patch_read_Type_Imsi_Auth_Password_1.Auth.As(ctx, &temp_patch_read_Type_Imsi_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block: Perform comparison and patch.
+									if patcher.type_imsi_auth_password_encrypted.Equal(temp_patch_read_Type_Imsi_Auth_Password_2.Password) {
+										temp_patch_read_Type_Imsi_Auth_Password_2.Password = patcher.type_imsi_auth_password_plaintext
+									} else {
+										temp_patch_read_Type_Imsi_Auth_Password_2.Password = basetypes.NewStringNull()
+									}
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Imsi_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImsiAuth{}.AttrTypes(), &temp_patch_read_Type_Imsi_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Imsi_Auth_Password_0.Imsi, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImsi{}.AttrTypes(), &temp_patch_read_Type_Imsi_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_read_Type_Imsi_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
 	{ // Patch plaintext for Type.Ip.Auth.Password
 		if !resp.Diagnostics.HasError() {
 
@@ -371,6 +927,66 @@ func (r *ExternalDynamicListResource) Read(ctx context.Context, req resource.Rea
 									if !resp.Diagnostics.HasError() {
 
 										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_read_Type_Ip_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Url.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Type.IsNull() && !data.Type.IsUnknown() {
+				var temp_patch_read_Type_Url_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(data.Type.As(ctx, &temp_patch_read_Type_Url_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Type_Url_Auth_Password_0.Url.IsNull() && !temp_patch_read_Type_Url_Auth_Password_0.Url.IsUnknown() {
+						var temp_patch_read_Type_Url_Auth_Password_1 models.ExternalDynamicListsTypeUrl
+						resp.Diagnostics.Append(temp_patch_read_Type_Url_Auth_Password_0.Url.As(ctx, &temp_patch_read_Type_Url_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Type_Url_Auth_Password_1.Auth.IsNull() && !temp_patch_read_Type_Url_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_read_Type_Url_Auth_Password_2 models.ExternalDynamicListsTypeUrlAuth
+								resp.Diagnostics.Append(temp_patch_read_Type_Url_Auth_Password_1.Auth.As(ctx, &temp_patch_read_Type_Url_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block: Perform comparison and patch.
+									if patcher.type_url_auth_password_encrypted.Equal(temp_patch_read_Type_Url_Auth_Password_2.Password) {
+										temp_patch_read_Type_Url_Auth_Password_2.Password = patcher.type_url_auth_password_plaintext
+									} else {
+										temp_patch_read_Type_Url_Auth_Password_2.Password = basetypes.NewStringNull()
+									}
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Url_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeUrlAuth{}.AttrTypes(), &temp_patch_read_Type_Url_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Type_Url_Auth_Password_0.Url, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeUrl{}.AttrTypes(), &temp_patch_read_Type_Url_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										data.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_read_Type_Url_Auth_Password_0)
 
 										resp.Diagnostics.Append(diags...)
 									}
@@ -484,6 +1100,117 @@ func (r *ExternalDynamicListResource) Update(ctx context.Context, req resource.U
 	// Step 3: Encrypted values logic
 	patcher := &externalDynamicListsSensitiveValuePatcher{}
 
+	{ // Stash plaintext for Type.Domain.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_stash_upd_Type_Domain_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_stash_upd_Type_Domain_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Type_Domain_Auth_Password_0.Domain.IsNull() && !temp_stash_upd_Type_Domain_Auth_Password_0.Domain.IsUnknown() {
+						var temp_stash_upd_Type_Domain_Auth_Password_1 models.ExternalDynamicListsTypeDomain
+						resp.Diagnostics.Append(temp_stash_upd_Type_Domain_Auth_Password_0.Domain.As(ctx, &temp_stash_upd_Type_Domain_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Type_Domain_Auth_Password_1.Auth.IsNull() && !temp_stash_upd_Type_Domain_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_upd_Type_Domain_Auth_Password_2 models.ExternalDynamicListsTypeDomainAuth
+								resp.Diagnostics.Append(temp_stash_upd_Type_Domain_Auth_Password_1.Auth.As(ctx, &temp_stash_upd_Type_Domain_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_upd_Type_Domain_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_domain_auth_password_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Type.Imei.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_stash_upd_Type_Imei_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_stash_upd_Type_Imei_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Type_Imei_Auth_Password_0.Imei.IsNull() && !temp_stash_upd_Type_Imei_Auth_Password_0.Imei.IsUnknown() {
+						var temp_stash_upd_Type_Imei_Auth_Password_1 models.ExternalDynamicListsTypeImei
+						resp.Diagnostics.Append(temp_stash_upd_Type_Imei_Auth_Password_0.Imei.As(ctx, &temp_stash_upd_Type_Imei_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Type_Imei_Auth_Password_1.Auth.IsNull() && !temp_stash_upd_Type_Imei_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_upd_Type_Imei_Auth_Password_2 models.ExternalDynamicListsTypeImeiAuth
+								resp.Diagnostics.Append(temp_stash_upd_Type_Imei_Auth_Password_1.Auth.As(ctx, &temp_stash_upd_Type_Imei_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_upd_Type_Imei_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_imei_auth_password_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Type.Imsi.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_stash_upd_Type_Imsi_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_stash_upd_Type_Imsi_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Type_Imsi_Auth_Password_0.Imsi.IsNull() && !temp_stash_upd_Type_Imsi_Auth_Password_0.Imsi.IsUnknown() {
+						var temp_stash_upd_Type_Imsi_Auth_Password_1 models.ExternalDynamicListsTypeImsi
+						resp.Diagnostics.Append(temp_stash_upd_Type_Imsi_Auth_Password_0.Imsi.As(ctx, &temp_stash_upd_Type_Imsi_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Type_Imsi_Auth_Password_1.Auth.IsNull() && !temp_stash_upd_Type_Imsi_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_upd_Type_Imsi_Auth_Password_2 models.ExternalDynamicListsTypeImsiAuth
+								resp.Diagnostics.Append(temp_stash_upd_Type_Imsi_Auth_Password_1.Auth.As(ctx, &temp_stash_upd_Type_Imsi_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_upd_Type_Imsi_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_imsi_auth_password_plaintext = finalVal
+		}
+	}
+
 	{ // Stash plaintext for Type.Ip.Auth.Password
 		var finalVal basetypes.StringValue
 		if !resp.Diagnostics.HasError() {
@@ -518,6 +1245,43 @@ func (r *ExternalDynamicListResource) Update(ctx context.Context, req resource.U
 		}
 		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
 			patcher.type_ip_auth_password_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Type.Url.Auth.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_stash_upd_Type_Url_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_stash_upd_Type_Url_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Type_Url_Auth_Password_0.Url.IsNull() && !temp_stash_upd_Type_Url_Auth_Password_0.Url.IsUnknown() {
+						var temp_stash_upd_Type_Url_Auth_Password_1 models.ExternalDynamicListsTypeUrl
+						resp.Diagnostics.Append(temp_stash_upd_Type_Url_Auth_Password_0.Url.As(ctx, &temp_stash_upd_Type_Url_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Type_Url_Auth_Password_1.Auth.IsNull() && !temp_stash_upd_Type_Url_Auth_Password_1.Auth.IsUnknown() {
+								var temp_stash_upd_Type_Url_Auth_Password_2 models.ExternalDynamicListsTypeUrlAuth
+								resp.Diagnostics.Append(temp_stash_upd_Type_Url_Auth_Password_1.Auth.As(ctx, &temp_stash_upd_Type_Url_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									finalVal = temp_stash_upd_Type_Url_Auth_Password_2.Password
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.type_url_auth_password_plaintext = finalVal
 		}
 	}
 
@@ -592,6 +1356,177 @@ func (r *ExternalDynamicListResource) Update(ctx context.Context, req resource.U
 
 	// Step 10: Encrypted values logic
 
+	{ // Patch plaintext for Type.Domain.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_patch_upd_Type_Domain_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_patch_upd_Type_Domain_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Type_Domain_Auth_Password_0.Domain.IsNull() && !temp_patch_upd_Type_Domain_Auth_Password_0.Domain.IsUnknown() {
+						var temp_patch_upd_Type_Domain_Auth_Password_1 models.ExternalDynamicListsTypeDomain
+						resp.Diagnostics.Append(temp_patch_upd_Type_Domain_Auth_Password_0.Domain.As(ctx, &temp_patch_upd_Type_Domain_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Type_Domain_Auth_Password_1.Auth.IsNull() && !temp_patch_upd_Type_Domain_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_upd_Type_Domain_Auth_Password_2 models.ExternalDynamicListsTypeDomainAuth
+								resp.Diagnostics.Append(temp_patch_upd_Type_Domain_Auth_Password_1.Auth.As(ctx, &temp_patch_upd_Type_Domain_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_domain_auth_password_encrypted = temp_patch_upd_Type_Domain_Auth_Password_2.Password
+									temp_patch_upd_Type_Domain_Auth_Password_2.Password = patcher.type_domain_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Domain_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeDomainAuth{}.AttrTypes(), &temp_patch_upd_Type_Domain_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Domain_Auth_Password_0.Domain, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeDomain{}.AttrTypes(), &temp_patch_upd_Type_Domain_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										plan.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_upd_Type_Domain_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Imei.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_patch_upd_Type_Imei_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_patch_upd_Type_Imei_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Type_Imei_Auth_Password_0.Imei.IsNull() && !temp_patch_upd_Type_Imei_Auth_Password_0.Imei.IsUnknown() {
+						var temp_patch_upd_Type_Imei_Auth_Password_1 models.ExternalDynamicListsTypeImei
+						resp.Diagnostics.Append(temp_patch_upd_Type_Imei_Auth_Password_0.Imei.As(ctx, &temp_patch_upd_Type_Imei_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Type_Imei_Auth_Password_1.Auth.IsNull() && !temp_patch_upd_Type_Imei_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_upd_Type_Imei_Auth_Password_2 models.ExternalDynamicListsTypeImeiAuth
+								resp.Diagnostics.Append(temp_patch_upd_Type_Imei_Auth_Password_1.Auth.As(ctx, &temp_patch_upd_Type_Imei_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_imei_auth_password_encrypted = temp_patch_upd_Type_Imei_Auth_Password_2.Password
+									temp_patch_upd_Type_Imei_Auth_Password_2.Password = patcher.type_imei_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Imei_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImeiAuth{}.AttrTypes(), &temp_patch_upd_Type_Imei_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Imei_Auth_Password_0.Imei, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImei{}.AttrTypes(), &temp_patch_upd_Type_Imei_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										plan.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_upd_Type_Imei_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Imsi.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_patch_upd_Type_Imsi_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_patch_upd_Type_Imsi_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Type_Imsi_Auth_Password_0.Imsi.IsNull() && !temp_patch_upd_Type_Imsi_Auth_Password_0.Imsi.IsUnknown() {
+						var temp_patch_upd_Type_Imsi_Auth_Password_1 models.ExternalDynamicListsTypeImsi
+						resp.Diagnostics.Append(temp_patch_upd_Type_Imsi_Auth_Password_0.Imsi.As(ctx, &temp_patch_upd_Type_Imsi_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Type_Imsi_Auth_Password_1.Auth.IsNull() && !temp_patch_upd_Type_Imsi_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_upd_Type_Imsi_Auth_Password_2 models.ExternalDynamicListsTypeImsiAuth
+								resp.Diagnostics.Append(temp_patch_upd_Type_Imsi_Auth_Password_1.Auth.As(ctx, &temp_patch_upd_Type_Imsi_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_imsi_auth_password_encrypted = temp_patch_upd_Type_Imsi_Auth_Password_2.Password
+									temp_patch_upd_Type_Imsi_Auth_Password_2.Password = patcher.type_imsi_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Imsi_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImsiAuth{}.AttrTypes(), &temp_patch_upd_Type_Imsi_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Imsi_Auth_Password_0.Imsi, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeImsi{}.AttrTypes(), &temp_patch_upd_Type_Imsi_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										plan.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_upd_Type_Imsi_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
 	{ // Patch plaintext for Type.Ip.Auth.Password
 		if !resp.Diagnostics.HasError() {
 
@@ -633,6 +1568,63 @@ func (r *ExternalDynamicListResource) Update(ctx context.Context, req resource.U
 									if !resp.Diagnostics.HasError() {
 
 										plan.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_upd_Type_Ip_Auth_Password_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Type.Url.Auth.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Type.IsNull() && !plan.Type.IsUnknown() {
+				var temp_patch_upd_Type_Url_Auth_Password_0 models.ExternalDynamicListsType
+				resp.Diagnostics.Append(plan.Type.As(ctx, &temp_patch_upd_Type_Url_Auth_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Type_Url_Auth_Password_0.Url.IsNull() && !temp_patch_upd_Type_Url_Auth_Password_0.Url.IsUnknown() {
+						var temp_patch_upd_Type_Url_Auth_Password_1 models.ExternalDynamicListsTypeUrl
+						resp.Diagnostics.Append(temp_patch_upd_Type_Url_Auth_Password_0.Url.As(ctx, &temp_patch_upd_Type_Url_Auth_Password_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Type_Url_Auth_Password_1.Auth.IsNull() && !temp_patch_upd_Type_Url_Auth_Password_1.Auth.IsUnknown() {
+								var temp_patch_upd_Type_Url_Auth_Password_2 models.ExternalDynamicListsTypeUrlAuth
+								resp.Diagnostics.Append(temp_patch_upd_Type_Url_Auth_Password_1.Auth.As(ctx, &temp_patch_upd_Type_Url_Auth_Password_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Innermost block
+									patcher.type_url_auth_password_encrypted = temp_patch_upd_Type_Url_Auth_Password_2.Password
+									temp_patch_upd_Type_Url_Auth_Password_2.Password = patcher.type_url_auth_password_plaintext
+
+									// Repack the modified structs.
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Url_Auth_Password_1.Auth, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeUrlAuth{}.AttrTypes(), &temp_patch_upd_Type_Url_Auth_Password_2)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Type_Url_Auth_Password_0.Url, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsTypeUrl{}.AttrTypes(), &temp_patch_upd_Type_Url_Auth_Password_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										plan.Type, diags = types.ObjectValueFrom(ctx, models.ExternalDynamicListsType{}.AttrTypes(), &temp_patch_upd_Type_Url_Auth_Password_0)
 
 										resp.Diagnostics.Append(diags...)
 									}

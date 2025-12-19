@@ -205,31 +205,26 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 		"credential_enforcement": schema.SingleNestedAttribute{
 			MarkdownDescription: "Credential enforcement",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"alert": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Alert",
 					Optional:            true,
-					Computed:            true,
 				},
 				"allow": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Allow",
 					Optional:            true,
-					Computed:            true,
 				},
 				"block": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Block",
 					Optional:            true,
-					Computed:            true,
 				},
 				"continue": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Continue",
 					Optional:            true,
-					Computed:            true,
 				},
 				"log_severity": schema.StringAttribute{
 					MarkdownDescription: "Log severity",
@@ -240,29 +235,24 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 				"mode": schema.SingleNestedAttribute{
 					MarkdownDescription: "Mode",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"disabled": schema.SingleNestedAttribute{
 							MarkdownDescription: "Disabled",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 						"domain_credentials": schema.SingleNestedAttribute{
 							MarkdownDescription: "Domain credentials",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 						"group_mapping": schema.StringAttribute{
 							MarkdownDescription: "Group mapping",
 							Optional:            true,
-							Computed:            true,
 						},
 						"ip_user": schema.SingleNestedAttribute{
 							MarkdownDescription: "Ip user",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 					},
@@ -285,7 +275,7 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -300,7 +290,7 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -370,7 +360,7 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -474,11 +464,13 @@ var UrlAccessProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -525,7 +517,8 @@ var UrlAccessProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

@@ -4,7 +4,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -91,18 +94,26 @@ var BandwidthAllocationsResourceSchema = schema.Schema{
 				"customized": schema.BoolAttribute{
 					MarkdownDescription: "Customized",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(false),
 				},
 				"enabled": schema.BoolAttribute{
 					MarkdownDescription: "Enabled",
 					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(false),
 				},
 				"guaranteed_ratio": schema.Float64Attribute{
 					MarkdownDescription: "Guaranteed ratio",
 					Optional:            true,
+					Computed:            true,
+					Default:             float64default.StaticFloat64(0.000000),
 				},
 				"profile": schema.StringAttribute{
 					MarkdownDescription: "Profile",
 					Optional:            true,
+					Computed:            true,
+					Default:             stringdefault.StaticString(""),
 				},
 			},
 		},
@@ -110,6 +121,7 @@ var BandwidthAllocationsResourceSchema = schema.Schema{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Spn name list",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

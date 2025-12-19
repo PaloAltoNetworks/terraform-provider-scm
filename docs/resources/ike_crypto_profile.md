@@ -52,14 +52,11 @@ resource "scm_ike_crypto_profile" "scm_ike_crypto_profile_2" {
 
 - `authentication_multiple` (Number) IKEv2 SA reauthentication interval equals authetication-multiple * rekey-lifetime; 0 means reauthentication disabled
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `lifetime` (Attributes) Ike crypto profile lifetime (see [below for nested schema](#nestedatt--lifetime))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -73,14 +70,34 @@ resource "scm_ike_crypto_profile" "scm_ike_crypto_profile_2" {
 Optional:
 
 - `days` (Number) specify lifetime in days
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `hours` (Number) specify lifetime in hours
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `minutes` (Number) specify lifetime in minutes
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `seconds` (Number) specify lifetime in seconds
-
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_ike_crypto_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_ike_crypto_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_ike_crypto_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

@@ -22,23 +22,17 @@ BgpRouteMapRedistribution resource
 ### Optional
 
 - `bgp` (Attributes) Bgp
-
 > ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`. (see [below for nested schema](#nestedatt--bgp))
 - `connected_static` (Attributes) Connected static
-
 > ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`. (see [below for nested schema](#nestedatt--connected_static))
 - `description` (String) BGP Route Map Redistributions Description
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ospf` (Attributes) Ospf
-
 > ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`. (see [below for nested schema](#nestedatt--ospf))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -52,10 +46,8 @@ BgpRouteMapRedistribution resource
 Optional:
 
 - `ospf` (Attributes) Ospf
-
 > ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`. (see [below for nested schema](#nestedatt--bgp--ospf))
 - `rib` (Attributes) BGP Root RIB
-
 > ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`. (see [below for nested schema](#nestedatt--bgp--rib))
 
 <a id="nestedatt--bgp--ospf"></a>
@@ -242,13 +234,10 @@ Optional:
 Optional:
 
 - `bgp` (Attributes) Connected Static Root BGP
-
 > ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`. (see [below for nested schema](#nestedatt--connected_static--bgp))
 - `ospf` (Attributes) Ospf
-
 > ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`. (see [below for nested schema](#nestedatt--connected_static--ospf))
 - `rib` (Attributes) Rib
-
 > ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`. (see [below for nested schema](#nestedatt--connected_static--rib))
 
 <a id="nestedatt--connected_static--bgp"></a>
@@ -502,10 +491,8 @@ Optional:
 Optional:
 
 - `bgp` (Attributes) OSPF Root BGP
-
 > ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`. (see [below for nested schema](#nestedatt--ospf--bgp))
 - `rib` (Attributes) Rib
-
 > ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`. (see [below for nested schema](#nestedatt--ospf--rib))
 
 <a id="nestedatt--ospf--bgp"></a>
@@ -658,3 +645,27 @@ Optional:
 Optional:
 
 - `source_address` (String) OSPF RIB Route maps set Source address
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_bgp_route_map_redistribution.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_bgp_route_map_redistribution.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_bgp_route_map_redistribution.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

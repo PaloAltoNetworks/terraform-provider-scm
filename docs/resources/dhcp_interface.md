@@ -22,19 +22,14 @@ DhcpInterface resource
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `relay` (Attributes) Relay
-
 > ℹ️ **Note:** You must specify exactly one of `relay` and `server`. (see [below for nested schema](#nestedatt--relay))
 - `server` (Attributes) Server
-
 > ℹ️ **Note:** You must specify exactly one of `relay` and `server`. (see [below for nested schema](#nestedatt--server))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -111,10 +106,8 @@ Optional:
 Optional:
 
 - `timeout` (Number) DHCP lease timeout (minutes)
-
 > ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.
 - `unlimited` (Attributes) Unlimited
-
 > ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`. (see [below for nested schema](#nestedatt--server--option--lease--unlimited))
 
 <a id="nestedatt--server--option--lease--unlimited"></a>
@@ -174,3 +167,27 @@ Optional:
 - `description` (String) Reservation description
 - `mac` (String) Reserved MAC address
 - `name` (String) Reserved IP address
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_dhcp_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_dhcp_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_dhcp_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

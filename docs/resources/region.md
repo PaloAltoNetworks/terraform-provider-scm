@@ -23,14 +23,11 @@ Region resource
 
 - `address` (List of String) Address
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `geo_location` (Attributes) Geo location (see [below for nested schema](#nestedatt--geo_location))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -45,3 +42,27 @@ Required:
 
 - `latitude` (Number) The latitudinal position of the region
 - `longitude` (Number) The longitudinal postition of the region
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_region.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_region.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_region.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

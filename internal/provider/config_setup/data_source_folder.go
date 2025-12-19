@@ -102,7 +102,7 @@ func (d *FolderDataSource) Read(ctx context.Context, req datasource.ReadRequest,
 			resp.Diagnostics.AddError("Error Reading Folders", fmt.Sprintf("Could not read Folders with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -133,14 +133,12 @@ func (d *FolderDataSource) Read(ctx context.Context, req datasource.ReadRequest,
 
 		listReq := d.client.FoldersAPI.ListFolders(ctx)
 
-		// Use reflection to dynamically check for and apply scope filters.
-
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing Folderss", fmt.Sprintf("Could not list Folderss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

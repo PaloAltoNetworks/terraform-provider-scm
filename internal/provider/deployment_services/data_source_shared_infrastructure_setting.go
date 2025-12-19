@@ -139,7 +139,7 @@ func (d *SharedInfrastructureSettingDataSource) Read(ctx context.Context, req da
 	if resp.Diagnostics.HasError() { return }
 
 	// Force synthetic ID
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_shared_infrastructure_settings")
 
 
 

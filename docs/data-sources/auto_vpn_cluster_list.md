@@ -16,6 +16,7 @@ Retrieves a listing of config items.
 # Fetch a list of all clusters from the "All" folder.
 data "scm_auto_vpn_cluster_list" "all_clusters" {
   folder = "All"
+  limit  = 10
 }
 
 # Output the raw list of all certificate profile objects found.
@@ -109,10 +110,8 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -150,10 +149,8 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -207,10 +204,8 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -248,8 +243,6 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.

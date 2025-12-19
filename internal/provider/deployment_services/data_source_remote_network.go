@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
@@ -104,7 +103,7 @@ func (d *RemoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Reading RemoteNetworks", fmt.Sprintf("Could not read RemoteNetworks with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -134,15 +133,9 @@ func (d *RemoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 		tflog.Debug(ctx, "Reading RemoteNetworks data source by Name", map[string]interface{}{"name": objectName})
 
 		listReq := d.client.RemoteNetworksAPI.ListRemoteNetworks(ctx)
-
-		// Use reflection to dynamically check for and apply scope filters.
-
-		v := reflect.ValueOf(data)
-
-		if f := v.FieldByName("Folder"); f.IsValid() {
-			if folder, ok := f.Interface().(tfTypes.String); ok && !folder.IsNull() {
-				listReq = listReq.Folder(folder.ValueString())
-			}
+		if !data.Folder.IsNull() {
+			tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "folder", "value": data.Folder})
+			listReq = listReq.Folder(data.Folder.ValueString())
 		}
 
 		listResponse, httpRes, err := listReq.Execute()
@@ -150,7 +143,7 @@ func (d *RemoteNetworkDataSource) Read(ctx context.Context, req datasource.ReadR
 			resp.Diagnostics.AddError("Error Listing RemoteNetworkss", fmt.Sprintf("Could not list RemoteNetworkss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return

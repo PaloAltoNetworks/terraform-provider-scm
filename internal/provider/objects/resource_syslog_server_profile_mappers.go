@@ -64,17 +64,12 @@ func unpackSyslogServerProfilesToSdk(ctx context.Context, obj types.Object) (*ob
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	}
 
-	// Handling Objects
-	if !model.Servers.IsNull() && !model.Servers.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field Servers")
-		unpacked, d := unpackSyslogServerProfilesServersToSdk(ctx, model.Servers)
+	// Handling Lists
+	if !model.Server.IsNull() && !model.Server.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of objects for field Server")
+		unpacked, d := unpackSyslogServerProfilesServerInnerListToSdk(ctx, model.Server)
 		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Servers"})
-		}
-		if unpacked != nil {
-			sdk.Servers = unpacked
-		}
+		sdk.Server = unpacked
 	}
 
 	// Handling Primitives
@@ -133,18 +128,14 @@ func packSyslogServerProfilesFromSdk(ctx context.Context, sdk objects.SyslogServ
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
-	// Handling Objects
-	// This is a regular nested object that has its own packer.
-	if sdk.Servers != nil {
-		tflog.Debug(ctx, "Packing nested object for field Servers")
-		packed, d := packSyslogServerProfilesServersFromSdk(ctx, *sdk.Servers)
+	// Handling Lists
+	if sdk.Server != nil {
+		tflog.Debug(ctx, "Packing list of objects for field Server")
+		packed, d := packSyslogServerProfilesServerInnerListFromSdk(ctx, sdk.Server)
 		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Servers"})
-		}
-		model.Servers = packed
+		model.Server = packed
 	} else {
-		model.Servers = basetypes.NewObjectNull(models.SyslogServerProfilesServers{}.AttrTypes())
+		model.Server = basetypes.NewListNull(models.SyslogServerProfilesServerInner{}.AttrType())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -668,11 +659,11 @@ func packSyslogServerProfilesFormatEscapingListFromSdk(ctx context.Context, sdks
 	return basetypes.NewListValueFrom(ctx, models.SyslogServerProfilesFormatEscaping{}.AttrType(), data)
 }
 
-// --- Unpacker for SyslogServerProfilesServers ---
-func unpackSyslogServerProfilesServersToSdk(ctx context.Context, obj types.Object) (*objects.SyslogServerProfilesServers, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.SyslogServerProfilesServers", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for SyslogServerProfilesServerInner ---
+func unpackSyslogServerProfilesServerInnerToSdk(ctx context.Context, obj types.Object) (*objects.SyslogServerProfilesServerInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.SyslogServerProfilesServerInner", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.SyslogServerProfilesServers
+	var model models.SyslogServerProfilesServerInner
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -680,7 +671,7 @@ func unpackSyslogServerProfilesServersToSdk(ctx context.Context, obj types.Objec
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk objects.SyslogServerProfilesServers
+	var sdk objects.SyslogServerProfilesServerInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Facility.IsNull() && !model.Facility.IsUnknown() {
@@ -721,16 +712,16 @@ func unpackSyslogServerProfilesServersToSdk(ctx context.Context, obj types.Objec
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.SyslogServerProfilesServers", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.SyslogServerProfilesServerInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for SyslogServerProfilesServers ---
-func packSyslogServerProfilesServersFromSdk(ctx context.Context, sdk objects.SyslogServerProfilesServers) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.SyslogServerProfilesServers", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for SyslogServerProfilesServerInner ---
+func packSyslogServerProfilesServerInnerFromSdk(ctx context.Context, sdk objects.SyslogServerProfilesServerInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.SyslogServerProfilesServerInner", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.SyslogServerProfilesServers
+	var model models.SyslogServerProfilesServerInner
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -782,56 +773,56 @@ func packSyslogServerProfilesServersFromSdk(ctx context.Context, sdk objects.Sys
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.SyslogServerProfilesServers{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.SyslogServerProfilesServerInner{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.SyslogServerProfilesServers", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.SyslogServerProfilesServerInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for SyslogServerProfilesServers ---
-func unpackSyslogServerProfilesServersListToSdk(ctx context.Context, list types.List) ([]objects.SyslogServerProfilesServers, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.SyslogServerProfilesServers")
+// --- List Unpacker for SyslogServerProfilesServerInner ---
+func unpackSyslogServerProfilesServerInnerListToSdk(ctx context.Context, list types.List) ([]objects.SyslogServerProfilesServerInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.SyslogServerProfilesServerInner")
 	diags := diag.Diagnostics{}
-	var data []models.SyslogServerProfilesServers
+	var data []models.SyslogServerProfilesServerInner
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]objects.SyslogServerProfilesServers, 0, len(data))
+	ans := make([]objects.SyslogServerProfilesServerInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.SyslogServerProfilesServers{}.AttrTypes(), &item)
-		unpacked, d := unpackSyslogServerProfilesServersToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.SyslogServerProfilesServerInner{}.AttrTypes(), &item)
+		unpacked, d := unpackSyslogServerProfilesServerInnerToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.SyslogServerProfilesServers", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.SyslogServerProfilesServerInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for SyslogServerProfilesServers ---
-func packSyslogServerProfilesServersListFromSdk(ctx context.Context, sdks []objects.SyslogServerProfilesServers) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.SyslogServerProfilesServers")
+// --- List Packer for SyslogServerProfilesServerInner ---
+func packSyslogServerProfilesServerInnerListFromSdk(ctx context.Context, sdks []objects.SyslogServerProfilesServerInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.SyslogServerProfilesServerInner")
 	diags := diag.Diagnostics{}
-	var data []models.SyslogServerProfilesServers
+	var data []models.SyslogServerProfilesServerInner
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.SyslogServerProfilesServers
-		obj, d := packSyslogServerProfilesServersFromSdk(ctx, sdk)
+		var model models.SyslogServerProfilesServerInner
+		obj, d := packSyslogServerProfilesServerInnerFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.SyslogServerProfilesServers{}.AttrType()), diags
+			return basetypes.NewListNull(models.SyslogServerProfilesServerInner{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.SyslogServerProfilesServers", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.SyslogServerProfilesServers{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.SyslogServerProfilesServerInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.SyslogServerProfilesServerInner{}.AttrType(), data)
 }

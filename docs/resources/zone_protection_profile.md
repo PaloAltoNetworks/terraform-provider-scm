@@ -27,12 +27,10 @@ ZoneProtectionProfile resource
 * `bypass` — Bypass scanning on packets that contain an asymmetric path.
 - `description` (String) The description of the profile
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `discard_icmp_embedded_error` (Boolean) Discard ICMP packets that are embedded with an error message.
 - `flood` (Attributes) Flood (see [below for nested schema](#nestedatt--flood))
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `fragmented_traffic_discard` (Boolean) Discard fragmented IP packets.
 - `icmp_frag_discard` (Boolean) Discard packets that consist of ICMP fragments.
@@ -57,7 +55,6 @@ ZoneProtectionProfile resource
 - `scan_white_list` (Attributes List) Scan white list (see [below for nested schema](#nestedatt--scan_white_list))
 - `security_discard` (Boolean) Discard packets if the security option is defined.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `spoofed_ip_discard` (Boolean) Check that the source IP address of the ingress packet is routable and the routing interface is in the same zone as the ingress interface. If either condition is not true, discard the packet.
 - `stream_id_discard` (Boolean) Discard packets if the Stream ID option is defined.
@@ -372,3 +369,27 @@ Optional:
 
 - `ipv4` (String) Ipv4
 - `ipv6` (String) Ipv6
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_zone_protection_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_zone_protection_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_zone_protection_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

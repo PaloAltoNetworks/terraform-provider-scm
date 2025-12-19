@@ -143,10 +143,8 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -184,10 +182,8 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -241,10 +237,8 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -282,8 +276,30 @@ Optional:
 Optional:
 
 - `fqdn` (String) FQDN
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_auto_vpn_cluster.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_auto_vpn_cluster.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_auto_vpn_cluster.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

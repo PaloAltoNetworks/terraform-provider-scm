@@ -3,12 +3,15 @@
 page_title: "scm_bgp_routing Resource - scm"
 subcategory: ""
 description: |-
-  BgpRouting resource
+  Singleton Resource. BgpRouting resource
+  This resource is a singleton, meaning only one instance can exist. If the resource typically exists (e.g. bgp_routing), you should import it before managing it.
 ---
 
 # scm_bgp_routing (Resource)
 
-BgpRouting resource
+**Singleton Resource.** BgpRouting resource
+
+This resource is a singleton, meaning only one instance can exist. If the resource typically exists (e.g. bgp_routing), you should import it before managing it.
 
 ## Example Usage
 
@@ -54,10 +57,8 @@ resource "scm_bgp_routing" "example" {
 Optional:
 
 - `default` (Attributes) Default
-
 > ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`. (see [below for nested schema](#nestedatt--routing_preference--default))
 - `hot_potato_routing` (Attributes) Hot potato routing
-
 > ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`. (see [below for nested schema](#nestedatt--routing_preference--hot_potato_routing))
 
 <a id="nestedatt--routing_preference--default"></a>
@@ -66,3 +67,18 @@ Optional:
 
 <a id="nestedatt--routing_preference--hot_potato_routing"></a>
 ### Nested Schema for `routing_preference.hot_potato_routing`
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_bgp_routing.example singleton
+```
+or 
+
+```bash
+terraform import scm_bgp_routing.example bgp_routing
+```
+			

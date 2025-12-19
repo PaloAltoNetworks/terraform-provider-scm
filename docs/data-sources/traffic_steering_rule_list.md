@@ -39,6 +39,7 @@ Required:
 
 Optional:
 
+- `folder` (String) The folder containing the traffic steering rule
 - `name` (String) Name
 
 Read-Only:
@@ -46,7 +47,6 @@ Read-Only:
 - `action` (Attributes) Action (see [below for nested schema](#nestedatt--data--action))
 - `category` (List of String) Category
 - `destination` (List of String) Destination
-- `folder` (String) The folder containing the traffic steering rule
 - `service` (List of String) Service
 - `source` (List of String) Source
 - `source_user` (List of String) Source user

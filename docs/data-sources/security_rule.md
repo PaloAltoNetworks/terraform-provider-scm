@@ -45,7 +45,10 @@ output "fetched_standard_web_description" {
 
 ### Optional
 
+- `device` (String) The device in which the resource is defined
+- `folder` (String) The folder in which the resource is defined
 - `name` (String) The name of the security rule
+- `snippet` (String) The snippet in which the resource is defined
 
 ### Read-Only
 
@@ -60,10 +63,8 @@ output "fetched_standard_web_description" {
 - `description` (String) The description of the security rule
 - `destination` (List of String) The destination address(es)
 - `destination_hip` (List of String) The destination Host Integrity Profile(s)
-- `device` (String) The device in which the resource is defined
 - `devices` (List of String) Devices
 - `disabled` (Boolean) Is the security rule disabled?
-- `folder` (String) The folder in which the resource is defined
 - `from` (List of String) The source security zone(s)
 - `log_end` (Boolean) Log at session end?
 - `log_setting` (String) The external log forwarding profile
@@ -79,7 +80,6 @@ output "fetched_standard_web_description" {
 - `schedule` (String) Schedule in which this rule will be applied
 - `security_settings` (Attributes) Security settings (see [below for nested schema](#nestedatt--security_settings))
 - `service` (List of String) The service(s) being accessed
-- `snippet` (String) The snippet in which the resource is defined
 - `source` (List of String) The source addresses(es)
 - `source_hip` (List of String) The source Host Integrity Profile(s)
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.

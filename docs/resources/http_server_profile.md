@@ -22,15 +22,12 @@ HttpServerProfile resource
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `format` (Attributes) Format (see [below for nested schema](#nestedatt--format))
 - `server` (Attributes List) Server (see [below for nested schema](#nestedatt--server))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag_registration` (Boolean) Register tags on match
 
@@ -1095,3 +1092,27 @@ Optional:
 - `port` (Number) HTTP server port
 - `protocol` (String) HTTP server protocol
 - `tls_version` (String) HTTP server TLS version
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_http_server_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_http_server_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_http_server_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

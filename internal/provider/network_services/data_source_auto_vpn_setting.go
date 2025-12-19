@@ -142,7 +142,7 @@ func (d *AutoVpnSettingDataSource) Read(ctx context.Context, req datasource.Read
 	}
 
 	// Force synthetic ID
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_auto_vpn_settings")
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

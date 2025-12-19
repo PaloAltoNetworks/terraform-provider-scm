@@ -194,3 +194,27 @@ Optional:
 - `local_ip_address` (String) Local peer IP address (secondary WAN)
 - `peer_ip_address` (String) Remote peer IP address (secondary WAN)
 - `secret` (String, Sensitive) BGP peering secret (secondary WAN)
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_remote_network.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_remote_network.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_remote_network.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

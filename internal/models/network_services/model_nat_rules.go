@@ -725,6 +725,7 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 		},
 		"device": dsschema.StringAttribute{
 			MarkdownDescription: "The device in which the resource is defined",
+			Optional:            true,
 			Computed:            true,
 		},
 		"disabled": dsschema.BoolAttribute{
@@ -751,6 +752,7 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder in which the resource is defined",
+			Optional:            true,
 			Computed:            true,
 		},
 		"from": dsschema.ListAttribute{
@@ -781,6 +783,7 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 		},
 		"snippet": dsschema.StringAttribute{
 			MarkdownDescription: "The snippet in which the resource is defined",
+			Optional:            true,
 			Computed:            true,
 		},
 		"source": dsschema.ListAttribute{

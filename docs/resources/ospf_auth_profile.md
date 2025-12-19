@@ -22,19 +22,14 @@ OspfAuthProfile resource
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `md5` (Attributes List) MD5s
-
 > ℹ️ **Note:** You must specify exactly one of `md5` and `password`. (see [below for nested schema](#nestedatt--md5))
 - `password` (String, Sensitive) Password
-
 > ℹ️ **Note:** You must specify exactly one of `md5` and `password`.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -51,3 +46,27 @@ Optional:
 - `key` (String, Sensitive) MD5 hash
 - `name` (Number) Key ID
 - `preferred` (Boolean) Preferred?
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_ospf_auth_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_ospf_auth_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_ospf_auth_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

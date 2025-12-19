@@ -57,15 +57,12 @@ resource "scm_certificate_profile" "scm_cp_1" {
 - `cert_status_timeout` (String) Certificate status timeout
 - `crl_receive_timeout` (String) CRL receive timeout (seconds)
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `domain` (String) User domain
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ocsp_receive_timeout` (String) OCSP receive timeout (seconds)
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `use_crl` (Boolean) Use CRL?
 - `use_ocsp` (Boolean) Use OCSP?
@@ -97,3 +94,27 @@ Optional:
 
 - `subject` (String) Common name
 - `subject_alt` (String) Email address
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_certificate_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_certificate_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_certificate_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

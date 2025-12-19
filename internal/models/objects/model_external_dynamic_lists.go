@@ -99,6 +99,38 @@ type ExternalDynamicListsTypeImei struct {
 	Url                basetypes.StringValue `tfsdk:"url"`
 }
 
+// ExternalDynamicListsTypeImeiAuth represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImeiAuth struct {
+	Password basetypes.StringValue `tfsdk:"password"`
+	Username basetypes.StringValue `tfsdk:"username"`
+}
+
+// ExternalDynamicListsTypeImeiRecurring represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImeiRecurring struct {
+	Daily      basetypes.ObjectValue `tfsdk:"daily"`
+	FiveMinute basetypes.ObjectValue `tfsdk:"five_minute"`
+	Hourly     basetypes.ObjectValue `tfsdk:"hourly"`
+	Monthly    basetypes.ObjectValue `tfsdk:"monthly"`
+	Weekly     basetypes.ObjectValue `tfsdk:"weekly"`
+}
+
+// ExternalDynamicListsTypeImeiRecurringDaily represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImeiRecurringDaily struct {
+	At basetypes.StringValue `tfsdk:"at"`
+}
+
+// ExternalDynamicListsTypeImeiRecurringMonthly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImeiRecurringMonthly struct {
+	At         basetypes.StringValue `tfsdk:"at"`
+	DayOfMonth basetypes.Int64Value  `tfsdk:"day_of_month"`
+}
+
+// ExternalDynamicListsTypeImeiRecurringWeekly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImeiRecurringWeekly struct {
+	At        basetypes.StringValue `tfsdk:"at"`
+	DayOfWeek basetypes.StringValue `tfsdk:"day_of_week"`
+}
+
 // ExternalDynamicListsTypeImsi represents a nested structure within the ExternalDynamicLists model
 type ExternalDynamicListsTypeImsi struct {
 	Auth               basetypes.ObjectValue `tfsdk:"auth"`
@@ -107,6 +139,38 @@ type ExternalDynamicListsTypeImsi struct {
 	ExceptionList      basetypes.ListValue   `tfsdk:"exception_list"`
 	Recurring          basetypes.ObjectValue `tfsdk:"recurring"`
 	Url                basetypes.StringValue `tfsdk:"url"`
+}
+
+// ExternalDynamicListsTypeImsiAuth represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImsiAuth struct {
+	Password basetypes.StringValue `tfsdk:"password"`
+	Username basetypes.StringValue `tfsdk:"username"`
+}
+
+// ExternalDynamicListsTypeImsiRecurring represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImsiRecurring struct {
+	Daily      basetypes.ObjectValue `tfsdk:"daily"`
+	FiveMinute basetypes.ObjectValue `tfsdk:"five_minute"`
+	Hourly     basetypes.ObjectValue `tfsdk:"hourly"`
+	Monthly    basetypes.ObjectValue `tfsdk:"monthly"`
+	Weekly     basetypes.ObjectValue `tfsdk:"weekly"`
+}
+
+// ExternalDynamicListsTypeImsiRecurringDaily represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImsiRecurringDaily struct {
+	At basetypes.StringValue `tfsdk:"at"`
+}
+
+// ExternalDynamicListsTypeImsiRecurringMonthly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImsiRecurringMonthly struct {
+	At         basetypes.StringValue `tfsdk:"at"`
+	DayOfMonth basetypes.Int64Value  `tfsdk:"day_of_month"`
+}
+
+// ExternalDynamicListsTypeImsiRecurringWeekly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeImsiRecurringWeekly struct {
+	At        basetypes.StringValue `tfsdk:"at"`
+	DayOfWeek basetypes.StringValue `tfsdk:"day_of_week"`
 }
 
 // ExternalDynamicListsTypeIp represents a nested structure within the ExternalDynamicLists model
@@ -125,8 +189,41 @@ type ExternalDynamicListsTypeIpAuth struct {
 	Username basetypes.StringValue `tfsdk:"username"`
 }
 
+// ExternalDynamicListsTypeIpRecurring represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeIpRecurring struct {
+	Daily      basetypes.ObjectValue `tfsdk:"daily"`
+	FiveMinute basetypes.ObjectValue `tfsdk:"five_minute"`
+	Hourly     basetypes.ObjectValue `tfsdk:"hourly"`
+	Monthly    basetypes.ObjectValue `tfsdk:"monthly"`
+	Weekly     basetypes.ObjectValue `tfsdk:"weekly"`
+}
+
+// ExternalDynamicListsTypeIpRecurringDaily represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeIpRecurringDaily struct {
+	At basetypes.StringValue `tfsdk:"at"`
+}
+
+// ExternalDynamicListsTypeIpRecurringMonthly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeIpRecurringMonthly struct {
+	At         basetypes.StringValue `tfsdk:"at"`
+	DayOfMonth basetypes.Int64Value  `tfsdk:"day_of_month"`
+}
+
+// ExternalDynamicListsTypeIpRecurringWeekly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeIpRecurringWeekly struct {
+	At        basetypes.StringValue `tfsdk:"at"`
+	DayOfWeek basetypes.StringValue `tfsdk:"day_of_week"`
+}
+
 // ExternalDynamicListsTypePredefinedIp represents a nested structure within the ExternalDynamicLists model
 type ExternalDynamicListsTypePredefinedIp struct {
+	Description   basetypes.StringValue `tfsdk:"description"`
+	ExceptionList basetypes.ListValue   `tfsdk:"exception_list"`
+	Url           basetypes.StringValue `tfsdk:"url"`
+}
+
+// ExternalDynamicListsTypePredefinedUrl represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypePredefinedUrl struct {
 	Description   basetypes.StringValue `tfsdk:"description"`
 	ExceptionList basetypes.ListValue   `tfsdk:"exception_list"`
 	Url           basetypes.StringValue `tfsdk:"url"`
@@ -140,6 +237,38 @@ type ExternalDynamicListsTypeUrl struct {
 	ExceptionList      basetypes.ListValue   `tfsdk:"exception_list"`
 	Recurring          basetypes.ObjectValue `tfsdk:"recurring"`
 	Url                basetypes.StringValue `tfsdk:"url"`
+}
+
+// ExternalDynamicListsTypeUrlAuth represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeUrlAuth struct {
+	Password basetypes.StringValue `tfsdk:"password"`
+	Username basetypes.StringValue `tfsdk:"username"`
+}
+
+// ExternalDynamicListsTypeUrlRecurring represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeUrlRecurring struct {
+	Daily      basetypes.ObjectValue `tfsdk:"daily"`
+	FiveMinute basetypes.ObjectValue `tfsdk:"five_minute"`
+	Hourly     basetypes.ObjectValue `tfsdk:"hourly"`
+	Monthly    basetypes.ObjectValue `tfsdk:"monthly"`
+	Weekly     basetypes.ObjectValue `tfsdk:"weekly"`
+}
+
+// ExternalDynamicListsTypeUrlRecurringDaily represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeUrlRecurringDaily struct {
+	At basetypes.StringValue `tfsdk:"at"`
+}
+
+// ExternalDynamicListsTypeUrlRecurringMonthly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeUrlRecurringMonthly struct {
+	At         basetypes.StringValue `tfsdk:"at"`
+	DayOfMonth basetypes.Int64Value  `tfsdk:"day_of_month"`
+}
+
+// ExternalDynamicListsTypeUrlRecurringWeekly represents a nested structure within the ExternalDynamicLists model
+type ExternalDynamicListsTypeUrlRecurringWeekly struct {
+	At        basetypes.StringValue `tfsdk:"at"`
+	DayOfWeek basetypes.StringValue `tfsdk:"day_of_week"`
 }
 
 // AttrTypes defines the attribute types for the ExternalDynamicLists model.
@@ -815,6 +944,101 @@ func (o ExternalDynamicListsTypeImei) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImeiAuth model.
+func (o ExternalDynamicListsTypeImeiAuth) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"password": basetypes.StringType{},
+		"username": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImeiAuth objects.
+func (o ExternalDynamicListsTypeImeiAuth) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImeiRecurring model.
+func (o ExternalDynamicListsTypeImeiRecurring) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"daily": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at": basetypes.StringType{},
+			},
+		},
+		"five_minute": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"hourly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"monthly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":           basetypes.StringType{},
+				"day_of_month": basetypes.Int64Type{},
+			},
+		},
+		"weekly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":          basetypes.StringType{},
+				"day_of_week": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImeiRecurring objects.
+func (o ExternalDynamicListsTypeImeiRecurring) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImeiRecurringDaily model.
+func (o ExternalDynamicListsTypeImeiRecurringDaily) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImeiRecurringDaily objects.
+func (o ExternalDynamicListsTypeImeiRecurringDaily) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImeiRecurringMonthly model.
+func (o ExternalDynamicListsTypeImeiRecurringMonthly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":           basetypes.StringType{},
+		"day_of_month": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImeiRecurringMonthly objects.
+func (o ExternalDynamicListsTypeImeiRecurringMonthly) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImeiRecurringWeekly model.
+func (o ExternalDynamicListsTypeImeiRecurringWeekly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":          basetypes.StringType{},
+		"day_of_week": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImeiRecurringWeekly objects.
+func (o ExternalDynamicListsTypeImeiRecurringWeekly) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the ExternalDynamicListsTypeImsi model.
 func (o ExternalDynamicListsTypeImsi) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -860,6 +1084,101 @@ func (o ExternalDynamicListsTypeImsi) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of ExternalDynamicListsTypeImsi objects.
 func (o ExternalDynamicListsTypeImsi) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImsiAuth model.
+func (o ExternalDynamicListsTypeImsiAuth) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"password": basetypes.StringType{},
+		"username": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImsiAuth objects.
+func (o ExternalDynamicListsTypeImsiAuth) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImsiRecurring model.
+func (o ExternalDynamicListsTypeImsiRecurring) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"daily": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at": basetypes.StringType{},
+			},
+		},
+		"five_minute": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"hourly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"monthly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":           basetypes.StringType{},
+				"day_of_month": basetypes.Int64Type{},
+			},
+		},
+		"weekly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":          basetypes.StringType{},
+				"day_of_week": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImsiRecurring objects.
+func (o ExternalDynamicListsTypeImsiRecurring) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImsiRecurringDaily model.
+func (o ExternalDynamicListsTypeImsiRecurringDaily) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImsiRecurringDaily objects.
+func (o ExternalDynamicListsTypeImsiRecurringDaily) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImsiRecurringMonthly model.
+func (o ExternalDynamicListsTypeImsiRecurringMonthly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":           basetypes.StringType{},
+		"day_of_month": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImsiRecurringMonthly objects.
+func (o ExternalDynamicListsTypeImsiRecurringMonthly) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeImsiRecurringWeekly model.
+func (o ExternalDynamicListsTypeImsiRecurringWeekly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":          basetypes.StringType{},
+		"day_of_week": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeImsiRecurringWeekly objects.
+func (o ExternalDynamicListsTypeImsiRecurringWeekly) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -930,6 +1249,86 @@ func (o ExternalDynamicListsTypeIpAuth) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeIpRecurring model.
+func (o ExternalDynamicListsTypeIpRecurring) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"daily": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at": basetypes.StringType{},
+			},
+		},
+		"five_minute": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"hourly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"monthly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":           basetypes.StringType{},
+				"day_of_month": basetypes.Int64Type{},
+			},
+		},
+		"weekly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":          basetypes.StringType{},
+				"day_of_week": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeIpRecurring objects.
+func (o ExternalDynamicListsTypeIpRecurring) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeIpRecurringDaily model.
+func (o ExternalDynamicListsTypeIpRecurringDaily) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeIpRecurringDaily objects.
+func (o ExternalDynamicListsTypeIpRecurringDaily) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeIpRecurringMonthly model.
+func (o ExternalDynamicListsTypeIpRecurringMonthly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":           basetypes.StringType{},
+		"day_of_month": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeIpRecurringMonthly objects.
+func (o ExternalDynamicListsTypeIpRecurringMonthly) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeIpRecurringWeekly model.
+func (o ExternalDynamicListsTypeIpRecurringWeekly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":          basetypes.StringType{},
+		"day_of_week": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeIpRecurringWeekly objects.
+func (o ExternalDynamicListsTypeIpRecurringWeekly) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the ExternalDynamicListsTypePredefinedIp model.
 func (o ExternalDynamicListsTypePredefinedIp) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -941,6 +1340,22 @@ func (o ExternalDynamicListsTypePredefinedIp) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of ExternalDynamicListsTypePredefinedIp objects.
 func (o ExternalDynamicListsTypePredefinedIp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypePredefinedUrl model.
+func (o ExternalDynamicListsTypePredefinedUrl) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"description":    basetypes.StringType{},
+		"exception_list": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"url":            basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypePredefinedUrl objects.
+func (o ExternalDynamicListsTypePredefinedUrl) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -996,6 +1411,101 @@ func (o ExternalDynamicListsTypeUrl) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeUrlAuth model.
+func (o ExternalDynamicListsTypeUrlAuth) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"password": basetypes.StringType{},
+		"username": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeUrlAuth objects.
+func (o ExternalDynamicListsTypeUrlAuth) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeUrlRecurring model.
+func (o ExternalDynamicListsTypeUrlRecurring) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"daily": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at": basetypes.StringType{},
+			},
+		},
+		"five_minute": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"hourly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
+		"monthly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":           basetypes.StringType{},
+				"day_of_month": basetypes.Int64Type{},
+			},
+		},
+		"weekly": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"at":          basetypes.StringType{},
+				"day_of_week": basetypes.StringType{},
+			},
+		},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeUrlRecurring objects.
+func (o ExternalDynamicListsTypeUrlRecurring) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeUrlRecurringDaily model.
+func (o ExternalDynamicListsTypeUrlRecurringDaily) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeUrlRecurringDaily objects.
+func (o ExternalDynamicListsTypeUrlRecurringDaily) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeUrlRecurringMonthly model.
+func (o ExternalDynamicListsTypeUrlRecurringMonthly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":           basetypes.StringType{},
+		"day_of_month": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeUrlRecurringMonthly objects.
+func (o ExternalDynamicListsTypeUrlRecurringMonthly) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the ExternalDynamicListsTypeUrlRecurringWeekly model.
+func (o ExternalDynamicListsTypeUrlRecurringWeekly) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"at":          basetypes.StringType{},
+		"day_of_week": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ExternalDynamicListsTypeUrlRecurringWeekly objects.
+func (o ExternalDynamicListsTypeUrlRecurringWeekly) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // ExternalDynamicListsResourceSchema defines the schema for ExternalDynamicLists resource
 var ExternalDynamicListsResourceSchema = schema.Schema{
 	MarkdownDescription: "ExternalDynamicList resource",
@@ -1009,7 +1519,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1030,7 +1540,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1060,7 +1570,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1074,9 +1584,8 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 			},
 		},
 		"type": schema.SingleNestedAttribute{
-			MarkdownDescription: "Type",
+			MarkdownDescription: "Type configuration for External Dynamic List",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"domain": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -1089,28 +1598,27 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Domain\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Domain settings for Custom Domain type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "Authentication settings for Custom Domain type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Password",
+									MarkdownDescription: "Password for Custom Domain authentication",
 									Required:            true,
+									Sensitive:           true,
 								},
 								"username": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 										stringvalidator.LengthAtLeast(1),
 									},
-									MarkdownDescription: "Username",
+									MarkdownDescription: "Username for Custom Domain authentication",
 									Required:            true,
 								},
 							},
@@ -1127,16 +1635,14 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "Domain Exception List for Custom Domain type",
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"expand_domain": schema.BoolAttribute{
 							MarkdownDescription: "Enable/Disable expand domain",
@@ -1145,7 +1651,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Default:             booldefault.StaticBool(false),
 						},
 						"recurring": schema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Update Schedule for Custom Domain type",
 							Required:            true,
 							Attributes: map[string]schema.Attribute{
 								"daily": schema.SingleNestedAttribute{
@@ -1157,7 +1663,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1166,7 +1672,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for Domain",
 											Required:            true,
 										},
 									},
@@ -1180,7 +1686,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1193,7 +1699,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1206,7 +1712,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1215,14 +1721,14 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for domain",
 											Required:            true,
 										},
 										"day_of_month": schema.Int64Attribute{
 											Validators: []validator.Int64{
 												int64validator.Between(1, 31),
 											},
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day setting for monthly Domain updates",
 											Required:            true,
 										},
 									},
@@ -1236,7 +1742,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1245,7 +1751,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for Domain",
 											Required:            true,
 										},
 										"day_of_week": schema.StringAttribute{
@@ -1263,7 +1769,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(255),
 							},
-							MarkdownDescription: "Url",
+							MarkdownDescription: "External URL for Custom Domain type",
 							Required:            true,
 						},
 					},
@@ -1279,34 +1785,33 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Imei\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "IMEI Configuration settings\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "IMEI Auth Cnfig for Custom IMEI type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Password",
+									MarkdownDescription: "IMEI Auth Password for Custom IMEI type",
 									Required:            true,
+									Sensitive:           true,
 								},
 								"username": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 										stringvalidator.LengthAtLeast(1),
 									},
-									MarkdownDescription: "Username",
+									MarkdownDescription: "IMEI Auth username for Custom IMEI type",
 									Required:            true,
 								},
 							},
 						},
 						"certificate_profile": schema.StringAttribute{
-							MarkdownDescription: "Profile for authenticating client certificates",
+							MarkdownDescription: "IMEI Certificate Profile for Custom IMEI type",
 							Optional:            true,
 							Computed:            true,
 							Default:             stringdefault.StaticString("None"),
@@ -1315,21 +1820,19 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(255),
 							},
-							MarkdownDescription: "Description",
+							MarkdownDescription: "IMEI Description for Custom IMEI type",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IMEI Exception List for Custom IMEI type",
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(32)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Recurring interval for IMEI updates",
 							Required:            true,
 							Attributes: map[string]schema.Attribute{
 								"daily": schema.SingleNestedAttribute{
@@ -1341,7 +1844,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1350,7 +1853,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for IMEI",
 											Required:            true,
 										},
 									},
@@ -1364,7 +1867,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five-minute interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1377,7 +1880,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1390,7 +1893,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1399,14 +1902,14 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for IMEI",
 											Required:            true,
 										},
 										"day_of_month": schema.Int64Attribute{
 											Validators: []validator.Int64{
 												int64validator.Between(1, 31),
 											},
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day of month for IMEI updates",
 											Required:            true,
 										},
 									},
@@ -1420,7 +1923,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1429,7 +1932,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for IMEI",
 											Required:            true,
 										},
 										"day_of_week": schema.StringAttribute{
@@ -1447,7 +1950,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(255),
 							},
-							MarkdownDescription: "Url",
+							MarkdownDescription: "IMEI URL for Custom IMEI type",
 							Required:            true,
 						},
 					},
@@ -1463,34 +1966,33 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Imsi\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "IMSI Config for Custom IMSI type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "IMSI Auth Config for Custom IMSI type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Password",
+									MarkdownDescription: "IMSI Auth Password for Custom IMSI type",
 									Required:            true,
+									Sensitive:           true,
 								},
 								"username": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 										stringvalidator.LengthAtLeast(1),
 									},
-									MarkdownDescription: "Username",
+									MarkdownDescription: "IMSI Auth Username for Custom IMSI type",
 									Required:            true,
 								},
 							},
 						},
 						"certificate_profile": schema.StringAttribute{
-							MarkdownDescription: "Profile for authenticating client certificates",
+							MarkdownDescription: "IMSI Certificate Profile for Custom IMSI type",
 							Optional:            true,
 							Computed:            true,
 							Default:             stringdefault.StaticString("None"),
@@ -1499,21 +2001,19 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(255),
 							},
-							MarkdownDescription: "Description",
+							MarkdownDescription: "IMSI Description for Custom IMSI type",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IMSI Exception List for Custom IMSI type",
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(34)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "IMSI Recuring Config for Custom IMSI type",
 							Required:            true,
 							Attributes: map[string]schema.Attribute{
 								"daily": schema.SingleNestedAttribute{
@@ -1525,7 +2025,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1534,7 +2034,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for IMSI",
 											Required:            true,
 										},
 									},
@@ -1548,7 +2048,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five-minute interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1561,7 +2061,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1574,7 +2074,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1583,14 +2083,14 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for IMSI",
 											Required:            true,
 										},
 										"day_of_month": schema.Int64Attribute{
 											Validators: []validator.Int64{
 												int64validator.Between(1, 31),
 											},
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day of the month for monthly IMSI updates",
 											Required:            true,
 										},
 									},
@@ -1604,7 +2104,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1613,7 +2113,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for IMSI",
 											Required:            true,
 										},
 										"day_of_week": schema.StringAttribute{
@@ -1631,7 +2131,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(255),
 							},
-							MarkdownDescription: "Url",
+							MarkdownDescription: "IMSI URL for Custom IMSI type",
 							Required:            true,
 						},
 					},
@@ -1647,20 +2147,18 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "IP settings for Custom IP type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "Authentication settings for Custom IP type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Password",
+									MarkdownDescription: "Password for Custom IP authentication",
 									Required:            true,
 									Sensitive:           true,
 								},
@@ -1669,7 +2167,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 										stringvalidator.LengthAtMost(255),
 										stringvalidator.LengthAtLeast(1),
 									},
-									MarkdownDescription: "Username",
+									MarkdownDescription: "Username for Custom IP authentication",
 									Required:            true,
 								},
 							},
@@ -1686,19 +2184,17 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IP Exception List for Custom IP type",
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Update Schedule for Custom IP type",
 							Required:            true,
 							Attributes: map[string]schema.Attribute{
 								"daily": schema.SingleNestedAttribute{
@@ -1710,7 +2206,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1719,7 +2215,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for IP",
 											Required:            true,
 										},
 									},
@@ -1733,7 +2229,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1746,7 +2242,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1759,7 +2255,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1768,14 +2264,14 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for IP",
 											Required:            true,
 										},
 										"day_of_month": schema.Int64Attribute{
 											Validators: []validator.Int64{
 												int64validator.Between(1, 31),
 											},
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day setting for monthly IP updates",
 											Required:            true,
 										},
 									},
@@ -1789,7 +2285,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1798,7 +2294,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for IP",
 											Required:            true,
 										},
 										"day_of_week": schema.StringAttribute{
@@ -1816,7 +2312,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(255),
 							},
-							MarkdownDescription: "Url",
+							MarkdownDescription: "External URL for Custom IP type",
 							Required:            true,
 						},
 					},
@@ -1832,9 +2328,8 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Predefined ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined IP settings for EDL type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
 							Validators: []validator.String{
@@ -1842,19 +2337,17 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IP Exception List for Predefined IP type",
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"url": schema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "URL source for Predefined IP type",
 							Required:            true,
 						},
 					},
@@ -1870,9 +2363,8 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("url"),
 						),
 					},
-					MarkdownDescription: "Predefined url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined URL settings for EDL type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
 							Validators: []validator.String{
@@ -1880,19 +2372,17 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "URL Exception List for Predefined URL type",
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"url": schema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "URL source for Predefined URL type",
 							Required:            true,
 						},
 					},
@@ -1908,28 +2398,27 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("predefined_url"),
 						),
 					},
-					MarkdownDescription: "Url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "URL settings for Custom URL type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "Authentication settings for Custom URL type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Password",
+									MarkdownDescription: "Password for Custom URL authentication",
 									Required:            true,
+									Sensitive:           true,
 								},
 								"username": schema.StringAttribute{
 									Validators: []validator.String{
 										stringvalidator.LengthAtMost(255),
 										stringvalidator.LengthAtLeast(1),
 									},
-									MarkdownDescription: "Username",
+									MarkdownDescription: "Username for Custom URL authentication",
 									Required:            true,
 								},
 							},
@@ -1946,19 +2435,17 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "URL Exception List for Custom URL type",
 							Validators: []validator.List{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Update Schedule for Custom URL type",
 							Required:            true,
 							Attributes: map[string]schema.Attribute{
 								"daily": schema.SingleNestedAttribute{
@@ -1970,7 +2457,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -1979,7 +2466,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for URL",
 											Required:            true,
 										},
 									},
@@ -1993,7 +2480,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -2006,7 +2493,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -2019,7 +2506,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -2028,14 +2515,14 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for URL",
 											Required:            true,
 										},
 										"day_of_month": schema.Int64Attribute{
 											Validators: []validator.Int64{
 												int64validator.Between(1, 31),
 											},
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day setting for monthly URL updates",
 											Required:            true,
 										},
 									},
@@ -2049,7 +2536,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("monthly"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"at": schema.StringAttribute{
@@ -2058,7 +2545,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 												stringvalidator.LengthAtLeast(2),
 												stringvalidator.RegexMatches(regexp.MustCompile("([01][0-9]|[2][0-3])"), "pattern must match "+"([01][0-9]|[2][0-3])"),
 											},
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for URL",
 											Required:            true,
 										},
 										"day_of_week": schema.StringAttribute{
@@ -2076,7 +2563,7 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.LengthAtMost(255),
 							},
-							MarkdownDescription: "Url",
+							MarkdownDescription: "External URL for Custom URL type",
 							Required:            true,
 						},
 					},
@@ -2091,7 +2578,8 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ExternalDynamicList data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"encrypted_values": dsschema.MapAttribute{
@@ -2101,7 +2589,8 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -2114,7 +2603,8 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{
@@ -2122,23 +2612,24 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"type": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Type",
+			MarkdownDescription: "Type configuration for External Dynamic List",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"domain": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Domain\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Domain settings for Custom Domain type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "Authentication settings for Custom Domain type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"password": dsschema.StringAttribute{
-									MarkdownDescription: "Password",
+									MarkdownDescription: "Password for Custom Domain authentication",
 									Computed:            true,
+									Sensitive:           true,
 								},
 								"username": dsschema.StringAttribute{
-									MarkdownDescription: "Username",
+									MarkdownDescription: "Username for Custom Domain authentication",
 									Computed:            true,
 								},
 							},
@@ -2153,7 +2644,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 						},
 						"exception_list": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "Domain Exception List for Custom Domain type",
 							Computed:            true,
 						},
 						"expand_domain": dsschema.BoolAttribute{
@@ -2161,49 +2652,49 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"recurring": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Update Schedule for Custom Domain type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for Domain",
 											Computed:            true,
 										},
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for domain",
 											Computed:            true,
 										},
 										"day_of_month": dsschema.Int64Attribute{
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day setting for monthly Domain updates",
 											Computed:            true,
 										},
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly settings for Domain recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for Domain",
 											Computed:            true,
 										},
 										"day_of_week": dsschema.StringAttribute{
@@ -2215,86 +2706,87 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"url": dsschema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "External URL for Custom Domain type",
 							Computed:            true,
 						},
 					},
 				},
 				"imei": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Imei\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "IMEI Configuration settings\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "IMEI Auth Cnfig for Custom IMEI type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"password": dsschema.StringAttribute{
-									MarkdownDescription: "Password",
+									MarkdownDescription: "IMEI Auth Password for Custom IMEI type",
 									Computed:            true,
+									Sensitive:           true,
 								},
 								"username": dsschema.StringAttribute{
-									MarkdownDescription: "Username",
+									MarkdownDescription: "IMEI Auth username for Custom IMEI type",
 									Computed:            true,
 								},
 							},
 						},
 						"certificate_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Profile for authenticating client certificates",
+							MarkdownDescription: "IMEI Certificate Profile for Custom IMEI type",
 							Computed:            true,
 						},
 						"description": dsschema.StringAttribute{
-							MarkdownDescription: "Description",
+							MarkdownDescription: "IMEI Description for Custom IMEI type",
 							Computed:            true,
 						},
 						"exception_list": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IMEI Exception List for Custom IMEI type",
 							Computed:            true,
 						},
 						"recurring": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Recurring interval for IMEI updates",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for IMEI",
 											Computed:            true,
 										},
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five-minute interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for IMEI",
 											Computed:            true,
 										},
 										"day_of_month": dsschema.Int64Attribute{
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day of month for IMEI updates",
 											Computed:            true,
 										},
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly interval settings for IMEI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for IMEI",
 											Computed:            true,
 										},
 										"day_of_week": dsschema.StringAttribute{
@@ -2306,86 +2798,87 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"url": dsschema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "IMEI URL for Custom IMEI type",
 							Computed:            true,
 						},
 					},
 				},
 				"imsi": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Imsi\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "IMSI Config for Custom IMSI type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "IMSI Auth Config for Custom IMSI type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"password": dsschema.StringAttribute{
-									MarkdownDescription: "Password",
+									MarkdownDescription: "IMSI Auth Password for Custom IMSI type",
 									Computed:            true,
+									Sensitive:           true,
 								},
 								"username": dsschema.StringAttribute{
-									MarkdownDescription: "Username",
+									MarkdownDescription: "IMSI Auth Username for Custom IMSI type",
 									Computed:            true,
 								},
 							},
 						},
 						"certificate_profile": dsschema.StringAttribute{
-							MarkdownDescription: "Profile for authenticating client certificates",
+							MarkdownDescription: "IMSI Certificate Profile for Custom IMSI type",
 							Computed:            true,
 						},
 						"description": dsschema.StringAttribute{
-							MarkdownDescription: "Description",
+							MarkdownDescription: "IMSI Description for Custom IMSI type",
 							Computed:            true,
 						},
 						"exception_list": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IMSI Exception List for Custom IMSI type",
 							Computed:            true,
 						},
 						"recurring": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "IMSI Recuring Config for Custom IMSI type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for IMSI",
 											Computed:            true,
 										},
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five-minute interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for IMSI",
 											Computed:            true,
 										},
 										"day_of_month": dsschema.Int64Attribute{
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day of the month for monthly IMSI updates",
 											Computed:            true,
 										},
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly interval settings for IMSI updates\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for IMSI",
 											Computed:            true,
 										},
 										"day_of_week": dsschema.StringAttribute{
@@ -2397,26 +2890,26 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"url": dsschema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "IMSI URL for Custom IMSI type",
 							Computed:            true,
 						},
 					},
 				},
 				"ip": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "IP settings for Custom IP type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "Authentication settings for Custom IP type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"password": dsschema.StringAttribute{
-									MarkdownDescription: "Password",
+									MarkdownDescription: "Password for Custom IP authentication",
 									Computed:            true,
 									Sensitive:           true,
 								},
 								"username": dsschema.StringAttribute{
-									MarkdownDescription: "Username",
+									MarkdownDescription: "Username for Custom IP authentication",
 									Computed:            true,
 								},
 							},
@@ -2431,53 +2924,53 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 						},
 						"exception_list": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IP Exception List for Custom IP type",
 							Computed:            true,
 						},
 						"recurring": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Update Schedule for Custom IP type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for IP",
 											Computed:            true,
 										},
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for IP",
 											Computed:            true,
 										},
 										"day_of_month": dsschema.Int64Attribute{
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day setting for monthly IP updates",
 											Computed:            true,
 										},
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly settings for IP recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for IP",
 											Computed:            true,
 										},
 										"day_of_week": dsschema.StringAttribute{
@@ -2489,13 +2982,13 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"url": dsschema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "External URL for Custom IP type",
 							Computed:            true,
 						},
 					},
 				},
 				"predefined_ip": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Predefined ip\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined IP settings for EDL type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"description": dsschema.StringAttribute{
@@ -2504,17 +2997,17 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 						},
 						"exception_list": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "IP Exception List for Predefined IP type",
 							Computed:            true,
 						},
 						"url": dsschema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "URL source for Predefined IP type",
 							Computed:            true,
 						},
 					},
 				},
 				"predefined_url": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Predefined url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "Predefined URL settings for EDL type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"description": dsschema.StringAttribute{
@@ -2523,29 +3016,30 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 						},
 						"exception_list": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "URL Exception List for Predefined URL type",
 							Computed:            true,
 						},
 						"url": dsschema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "URL source for Predefined URL type",
 							Computed:            true,
 						},
 					},
 				},
 				"url": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Url\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
+					MarkdownDescription: "URL settings for Custom URL type\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"auth": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Auth",
+							MarkdownDescription: "Authentication settings for Custom URL type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"password": dsschema.StringAttribute{
-									MarkdownDescription: "Password",
+									MarkdownDescription: "Password for Custom URL authentication",
 									Computed:            true,
+									Sensitive:           true,
 								},
 								"username": dsschema.StringAttribute{
-									MarkdownDescription: "Username",
+									MarkdownDescription: "Username for Custom URL authentication",
 									Computed:            true,
 								},
 							},
@@ -2560,53 +3054,53 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 						},
 						"exception_list": dsschema.ListAttribute{
 							ElementType:         types.StringType,
-							MarkdownDescription: "Exception list",
+							MarkdownDescription: "URL Exception List for Custom URL type",
 							Computed:            true,
 						},
 						"recurring": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Recurring",
+							MarkdownDescription: "Update Schedule for Custom URL type",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Daily settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Daily Time specification hh (e.g. 20) for URL",
 											Computed:            true,
 										},
 									},
 								},
 								"five_minute": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Five minute\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Five minute settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Hourly settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"monthly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Monthly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Monthly settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Monthly Time specification hh (e.g. 20) for URL",
 											Computed:            true,
 										},
 										"day_of_month": dsschema.Int64Attribute{
-											MarkdownDescription: "Day of month",
+											MarkdownDescription: "Day setting for monthly URL updates",
 											Computed:            true,
 										},
 									},
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
+									MarkdownDescription: "Weekly settings for URL recurring\n> ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"at": dsschema.StringAttribute{
-											MarkdownDescription: "Time specification hh (e.g. 20)",
+											MarkdownDescription: "Weekly Time specification hh (e.g. 20) for URL",
 											Computed:            true,
 										},
 										"day_of_week": dsschema.StringAttribute{
@@ -2618,7 +3112,7 @@ var ExternalDynamicListsDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"url": dsschema.StringAttribute{
-							MarkdownDescription: "Url",
+							MarkdownDescription: "External URL for Custom URL type",
 							Computed:            true,
 						},
 					},

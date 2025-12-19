@@ -29,16 +29,13 @@ ScepProfile resource
 
 - `certificate_attributes` (Attributes) Subject Alternative name type (see [below for nested schema](#nestedatt--certificate_attributes))
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `fingerprint` (String) CA certificate fingerprint
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `scep_ca_cert` (String) SCEP server CA certificate
 - `scep_client_cert` (String) SCEP client ceertificate
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `use_as_digital_signature` (Boolean) Use as digital signature?
 - `use_for_key_encipherment` (Boolean) Use for key encipherment?
@@ -71,13 +68,10 @@ Optional:
 Optional:
 
 - `dynamic` (Attributes) Dynamic
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`. (see [below for nested schema](#nestedatt--scep_challenge--dynamic))
 - `fixed` (String) Challenge to use for SCEP server on mobile clients
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
 - `none` (String) No OTP
-
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
 
 <a id="nestedatt--scep_challenge--dynamic"></a>
@@ -97,11 +91,32 @@ Optional:
 Optional:
 
 - `dnsname` (String) Dnsname
-
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `rfc822name` (String) Rfc822name
-
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `uniform_resource_identifier` (String) Uniform resource identifier
-
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_scep_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_scep_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_scep_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

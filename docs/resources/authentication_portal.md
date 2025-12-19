@@ -39,15 +39,12 @@ resource "scm_authentication_portal" "example_configuration" {
 - `authentication_profile` (String) The authentication profile
 - `certificate_profile` (String) The certificate profile
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `gp_udp_port` (Number) The UDP port for inbound authentication prompts
 - `idle_timer` (Number) The idle timeout value (minutes)
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `timer` (Number) Timer
 - `tls_service_profile` (String) The SSL/TLS service profile
@@ -56,3 +53,27 @@ resource "scm_authentication_portal" "example_configuration" {
 
 - `id` (String) The UUID of the authentication portal
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_authentication_portal.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_authentication_portal.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_authentication_portal.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

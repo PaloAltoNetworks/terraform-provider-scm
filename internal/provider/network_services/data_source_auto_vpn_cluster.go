@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"reflect"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -11,7 +10,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
@@ -104,7 +102,7 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 			resp.Diagnostics.AddError("Error Reading AutoVpnClusters", fmt.Sprintf("Could not read AutoVpnClusters with ID %s: %s", objectId, err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Get Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -135,34 +133,12 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 
 		listReq := d.client.AutoVPNClustersAPI.ListAutoVPNClusters(ctx)
 
-		// Use reflection to dynamically check for and apply scope filters.
-
-		v := reflect.ValueOf(data)
-
-		if f := v.FieldByName("Folder"); f.IsValid() {
-			if folder, ok := f.Interface().(tfTypes.String); ok && !folder.IsNull() {
-				listReq = listReq.Folder(folder.ValueString())
-			}
-		}
-
-		if f := v.FieldByName("Snippet"); f.IsValid() {
-			if snippet, ok := f.Interface().(tfTypes.String); ok && !snippet.IsNull() {
-				listReq = listReq.Snippet(snippet.ValueString())
-			}
-		}
-
-		if f := v.FieldByName("Device"); f.IsValid() {
-			if device, ok := f.Interface().(tfTypes.String); ok && !device.IsNull() {
-				listReq = listReq.Device(device.ValueString())
-			}
-		}
-
 		listResponse, httpRes, err := listReq.Execute()
 		if err != nil {
 			resp.Diagnostics.AddError("Error Listing AutoVpnClusterss", fmt.Sprintf("Could not list AutoVpnClusterss: %s", err.Error()))
 			detailedMessage := utils.PrintScmError(err)
 			resp.Diagnostics.AddError(
-				"Tag Listing Failed: API Request Failed",
+				"Resource Listing Failed: API Request Failed",
 				detailedMessage,
 			)
 			return
@@ -174,9 +150,8 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 
 		// Find the specific object from the list.
 		var foundObject *network_services.AutoVpnClusters
-		// RAW LIST LOGIC: Iterate directly over the slice
-		for i := range listResponse {
-			item := listResponse[i]
+		for i := range listResponse.GetData() {
+			item := listResponse.GetData()[i]
 			if item.GetName() == objectName {
 				foundObject = &item
 				break
@@ -209,29 +184,9 @@ func (d *AutoVpnClusterDataSource) Read(ctx context.Context, req datasource.Read
 	// Create the composite Tfid for consistency.
 	var idBuilder strings.Builder
 
-	v := reflect.ValueOf(data)
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
 
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
-
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
 
 	idBuilder.WriteString(":")
 	idBuilder.WriteString(data.Id.ValueString())

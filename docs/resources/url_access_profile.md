@@ -42,10 +42,8 @@ resource "scm_url_access_profile" "example" {
 - `credential_enforcement` (Attributes) Credential enforcement (see [below for nested schema](#nestedatt--credential_enforcement))
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `local_inline_cat` (Boolean) Local inline cat
 - `log_container_page_only` (Boolean) Log container page only
@@ -56,7 +54,6 @@ resource "scm_url_access_profile" "example" {
 - `redirect` (List of String) Redirect
 - `safe_search_enforcement` (Boolean) Safe search enforcement
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -96,3 +93,27 @@ Optional:
 
 <a id="nestedatt--credential_enforcement--mode--ip_user"></a>
 ### Nested Schema for `credential_enforcement.mode.ip_user`
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_url_access_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_url_access_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_url_access_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

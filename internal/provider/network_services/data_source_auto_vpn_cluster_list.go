@@ -3,12 +3,12 @@ package provider
 import (
 	"context"
 	"fmt"
-	"reflect"
 	"strconv"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
@@ -64,34 +64,23 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 
 	// Create the API request.
 	listReq := d.client.AutoVPNClustersAPI.ListAutoVPNClusters(ctx)
-
-	// Apply filters from the configuration.
-
-	v := reflect.ValueOf(data)
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			listReq = listReq.Folder(val.ValueString())
-		}
-	}
-
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			listReq = listReq.Snippet(val.ValueString())
-		}
-	}
-
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			listReq = listReq.Device(val.ValueString())
-		}
-	}
-
 	if !data.Limit.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "limit", "value": data.Limit})
 		listReq = listReq.Limit(int32(data.Limit.ValueInt64()))
+		// END: Add dynamic query parameter handling
 	}
 	if !data.Offset.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "offset", "value": data.Offset})
 		listReq = listReq.Offset(int32(data.Offset.ValueInt64()))
+		// END: Add dynamic query parameter handling
+	}
+	if !data.Name.IsNull() {
+		// START: Add dynamic query parameter handling
+		tflog.Debug(ctx, "Applying filter", map[string]interface{}{"param": "name", "value": data.Name})
+		listReq = listReq.Name(data.Name.ValueString())
+		// END: Add dynamic query parameter handling
 	}
 
 	// Execute the request.
@@ -100,28 +89,25 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 		resp.Diagnostics.AddError("Error Listing AutoVpnClusterss", fmt.Sprintf("Could not list AutoVpnClusterss: %s", err.Error()))
 		detailedMessage := utils.PrintScmError(err)
 		resp.Diagnostics.AddError(
-			"Tag Listing Failed: API Request Failed",
+			"Resource Listing Failed: API Request Failed",
 			detailedMessage,
 		)
 		return
 	}
 
-	// RAW LIST LOGIC:
-	// The API returned a JSON array [...] directly.
-	if listResponse == nil {
+	// Convert the response to the Terraform model.
+	if listResponse == nil || listResponse.GetData() == nil {
 		return // Nothing to do.
 	}
 
-	// 1. TOTAL: We calculate it manually based on the slice length.
-	total := int64(len(listResponse))
+	total := int64(listResponse.GetTotal())
 	data.Total = types.Int64PointerValue(&total)
+	data.Limit = types.Int64Value(int64(listResponse.GetLimit()))
+	data.Offset = types.Int64Value(int64(listResponse.GetOffset()))
 
-	// 2. LIMIT/OFFSET: We do not update them from the server (metadata missing).
-	//    We keep the values requested by the user in the config.
-
-	// 3. PACKING: Pass the listResponse directly (it IS the slice).
-	packedList, diags := packAutoVpnClustersListFromSdk(ctx, listResponse)
-
+	// =================== START: THE IMPROVEMENT ===================
+	// Use the generated list packer to pack the SCM items into a TF list.
+	packedList, diags := packAutoVpnClustersListFromSdk(ctx, listResponse.GetData())
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -139,29 +125,9 @@ func (d *AutoVpnClusterListDataSource) Read(ctx context.Context, req datasource.
 
 	// Use reflection again for Tfid creation to ensure safety
 
-	v = reflect.ValueOf(data)
-
-	if f := v.FieldByName("Folder"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
 
-	if f := v.FieldByName("Snippet"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
-
 	idBuilder.WriteString(":")
-
-	if f := v.FieldByName("Device"); f.IsValid() {
-		if val, ok := f.Interface().(types.String); ok && !val.IsNull() {
-			idBuilder.WriteString(val.ValueString())
-		}
-	}
 
 	idBuilder.WriteString(":")
 	if !data.Name.IsNull() {

@@ -129,19 +129,14 @@ resource "scm_aggregate_interface" "scm_aggregate_intf_l3_complex" {
 - `comment` (String) Aggregate interface description
 - `default_value` (String) Default interface assignment
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `layer2` (Attributes) Layer2
-
 > ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`. (see [below for nested schema](#nestedatt--layer2))
 - `layer3` (Attributes) Aggregate Interface Layer 3 configuration
-
 > ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`. (see [below for nested schema](#nestedatt--layer3))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -179,11 +174,9 @@ Optional:
 - `arp` (Attributes List) Aggregate Ethernet ARP configuration (see [below for nested schema](#nestedatt--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Aggregate Interface. (see [below for nested schema](#nestedatt--layer3--ddns_config))
 - `dhcp_client` (Attributes) Aggregate Ethernet DHCP Client Object
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) Aggregate Interface IP addresses
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--layer3--ip))
 - `lacp` (Attributes) Lacp (see [below for nested schema](#nestedatt--layer3--lacp))
 - `mtu` (Number) MTU
@@ -253,3 +246,27 @@ Optional:
 - `mode` (String) Mode
 - `system_priority` (Number) LACP system priority in system ID
 - `transmission_rate` (String) Transmission mode
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_aggregate_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_aggregate_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_aggregate_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

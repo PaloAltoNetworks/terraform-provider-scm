@@ -2536,12 +2536,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"anti_malware": schema.SingleNestedAttribute{
 			MarkdownDescription: "Anti malware",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -2552,7 +2550,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"last_scan_time": schema.SingleNestedAttribute{
 							MarkdownDescription: "Last scan time",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -2561,9 +2558,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
-									MarkdownDescription: "Not available\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not available\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"not_within": schema.SingleNestedAttribute{
@@ -2573,9 +2569,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2584,9 +2579,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2595,9 +2589,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2608,9 +2601,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2619,9 +2611,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2630,9 +2621,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2641,7 +2631,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"product_version": schema.SingleNestedAttribute{
 							MarkdownDescription: "Product version",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"contains": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2657,9 +2646,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"greater_equal": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2675,9 +2663,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Greater equal\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Greater equal\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"greater_than": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2693,9 +2680,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"is": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2711,9 +2697,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"is_not": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2729,9 +2714,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"less_equal": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2747,9 +2731,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Less equal\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Less equal\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"less_than": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2765,9 +2748,8 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -2782,9 +2764,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2808,9 +2789,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2829,12 +2809,10 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "real time protection",
 							Optional:            true,
-							Computed:            true,
 						},
 						"virdef_version": schema.SingleNestedAttribute{
 							MarkdownDescription: "Virdef version",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"not_within": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -2842,9 +2820,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2853,9 +2830,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2864,9 +2840,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify versions range\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify versions range\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2876,9 +2851,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2887,9 +2861,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"versions": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -2898,9 +2871,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify versions range\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify versions range\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -2917,7 +2889,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3120,12 +3091,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"data_loss_prevention": schema.SingleNestedAttribute{
 			MarkdownDescription: "Data loss prevention",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.StringAttribute{
 							Validators: []validator.String{
@@ -3133,7 +3102,6 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "is enabled",
 							Optional:            true,
-							Computed:            true,
 						},
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -3152,7 +3120,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3191,7 +3158,7 @@ var HipObjectsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -3200,12 +3167,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"disk_backup": schema.SingleNestedAttribute{
 			MarkdownDescription: "Disk backup",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -3216,7 +3181,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"last_backup_time": schema.SingleNestedAttribute{
 							MarkdownDescription: "Last backup time",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"not_available": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -3225,9 +3189,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
-									MarkdownDescription: "Not available\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not available\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"not_within": schema.SingleNestedAttribute{
@@ -3237,9 +3200,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3248,9 +3210,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3259,9 +3220,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -3272,9 +3232,8 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3283,9 +3242,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"hours": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -3294,9 +3252,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(1, 65535),
 											},
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -3313,7 +3270,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3339,17 +3295,14 @@ var HipObjectsResourceSchema = schema.Schema{
 		"disk_encryption": schema.SingleNestedAttribute{
 			MarkdownDescription: "Disk encryption",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Encryption locations",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"encrypted_locations": schema.ListNestedAttribute{
 							MarkdownDescription: "Encrypted locations",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"encryption_state": schema.SingleNestedAttribute{
@@ -3363,7 +3316,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													),
 													stringvalidator.OneOf("encrypted", "unencrypted", "partial", "unknown"),
 												},
-												MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+												MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 												Optional:            true,
 											},
 											"is_not": schema.StringAttribute{
@@ -3373,7 +3326,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													),
 													stringvalidator.OneOf("encrypted", "unencrypted", "partial", "unknown"),
 												},
-												MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+												MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 												Optional:            true,
 											},
 										},
@@ -3405,7 +3358,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3431,12 +3383,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"firewall": schema.SingleNestedAttribute{
 			MarkdownDescription: "Firewall",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.StringAttribute{
 							Validators: []validator.String{
@@ -3444,7 +3394,6 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "is enabled",
 							Optional:            true,
-							Computed:            true,
 						},
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -3463,7 +3412,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -3495,7 +3443,7 @@ var HipObjectsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -3521,7 +3469,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -3532,7 +3480,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -3543,7 +3491,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -3560,7 +3508,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -3571,7 +3519,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -3582,7 +3530,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -3599,7 +3547,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -3610,7 +3558,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -3621,7 +3569,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -3638,7 +3586,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -3649,7 +3597,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -3660,7 +3608,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -3713,7 +3661,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -3724,7 +3672,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -3735,7 +3683,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -3773,7 +3721,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("yes"),
 												),
 											},
-											MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+											MarkdownDescription: "No\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -3783,7 +3731,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("no"),
 												),
 											},
-											MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+											MarkdownDescription: "Yes\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"excludes": schema.ListNestedAttribute{
@@ -3874,7 +3822,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -3885,7 +3833,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -3896,7 +3844,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -3915,7 +3863,7 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("within"),
 										),
 									},
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
@@ -3933,7 +3881,7 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("not_within"),
 										),
 									},
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"days": schema.Int64Attribute{
@@ -3959,7 +3907,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -3970,7 +3918,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -3981,7 +3929,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -4002,7 +3950,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -4013,7 +3961,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -4024,7 +3972,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -4041,7 +3989,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is": schema.StringAttribute{
@@ -4052,7 +4000,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 								"is_not": schema.StringAttribute{
@@ -4063,7 +4011,7 @@ var HipObjectsResourceSchema = schema.Schema{
 										),
 										stringvalidator.LengthAtMost(255),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Optional:            true,
 								},
 							},
@@ -4098,7 +4046,7 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("is_not"),
 										),
 									},
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"mobile": schema.SingleNestedAttribute{
@@ -4108,7 +4056,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
-											MarkdownDescription: "Mobile\n\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Mobile\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"carrier": schema.StringAttribute{
@@ -4128,7 +4076,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
-											MarkdownDescription: "Unknown\n\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Unknown\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -4139,7 +4087,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("unknown"),
 												),
 											},
-											MarkdownDescription: "Wifi\n\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Wifi\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"ssid": schema.StringAttribute{
@@ -4160,7 +4108,7 @@ var HipObjectsResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("is"),
 										),
 									},
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"ethernet": schema.SingleNestedAttribute{
@@ -4171,7 +4119,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
-											MarkdownDescription: "Ethernet\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Ethernet\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -4183,7 +4131,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
-											MarkdownDescription: "Mobile\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Mobile\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"carrier": schema.StringAttribute{
@@ -4204,7 +4152,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("wifi"),
 												),
 											},
-											MarkdownDescription: "Unknown\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Unknown\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -4216,7 +4164,7 @@ var HipObjectsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("unknown"),
 												),
 											},
-											MarkdownDescription: "Wifi\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Wifi\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"ssid": schema.StringAttribute{
@@ -4240,12 +4188,10 @@ var HipObjectsResourceSchema = schema.Schema{
 		"patch_management": schema.SingleNestedAttribute{
 			MarkdownDescription: "Patch management",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"criteria": schema.SingleNestedAttribute{
 					MarkdownDescription: "Criteria",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.StringAttribute{
 							Validators: []validator.String{
@@ -4253,7 +4199,6 @@ var HipObjectsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "is enabled",
 							Optional:            true,
-							Computed:            true,
 						},
 						"is_installed": schema.BoolAttribute{
 							MarkdownDescription: "Is Installed",
@@ -4264,7 +4209,6 @@ var HipObjectsResourceSchema = schema.Schema{
 						"missing_patches": schema.SingleNestedAttribute{
 							MarkdownDescription: "Missing patches",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"check": schema.StringAttribute{
 									Validators: []validator.String{
@@ -4280,12 +4224,10 @@ var HipObjectsResourceSchema = schema.Schema{
 										listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(1023)),
 									},
 									Optional: true,
-									Computed: true,
 								},
 								"severity": schema.SingleNestedAttribute{
 									MarkdownDescription: "Severity",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"greater_equal": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4298,9 +4240,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(0, 100000),
 											},
-											MarkdownDescription: "Greater equal\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Greater equal\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"greater_than": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4313,9 +4254,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(0, 100000),
 											},
-											MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"is": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4328,9 +4268,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(0, 100000),
 											},
-											MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"is_not": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4343,9 +4282,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(0, 100000),
 											},
-											MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"less_equal": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4358,9 +4296,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(0, 100000),
 											},
-											MarkdownDescription: "Less equal\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Less equal\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 										"less_than": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -4373,9 +4310,8 @@ var HipObjectsResourceSchema = schema.Schema{
 												),
 												int64validator.Between(0, 100000),
 											},
-											MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -4392,7 +4328,6 @@ var HipObjectsResourceSchema = schema.Schema{
 				"vendor": schema.ListNestedAttribute{
 					MarkdownDescription: "Vendor name",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -4424,7 +4359,7 @@ var HipObjectsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -4461,34 +4396,34 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"not_available": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Not available\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not available\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"not_within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 										"hours": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 									},
 								},
 								"within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 										"hours": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 									},
@@ -4500,35 +4435,35 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 								},
 								"greater_equal": dsschema.StringAttribute{
-									MarkdownDescription: "Greater equal\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Greater equal\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 								},
 								"greater_than": dsschema.StringAttribute{
-									MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 								},
 								"less_equal": dsschema.StringAttribute{
-									MarkdownDescription: "Less equal\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Less equal\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 								},
 								"less_than": dsschema.StringAttribute{
-									MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 								},
 								"not_within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"versions": dsschema.Int64Attribute{
@@ -4538,7 +4473,7 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"versions": dsschema.Int64Attribute{
@@ -4558,29 +4493,29 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"not_within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Computed:            true,
 										},
 										"versions": dsschema.Int64Attribute{
-											MarkdownDescription: "specify versions range\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify versions range\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Computed:            true,
 										},
 									},
 								},
 								"within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Computed:            true,
 										},
 										"versions": dsschema.Int64Attribute{
-											MarkdownDescription: "specify versions range\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
+											MarkdownDescription: "specify versions range\n> ℹ️ **Note:** You must specify exactly one of `days` and `versions`.",
 											Computed:            true,
 										},
 									},
@@ -4794,7 +4729,8 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"disk_backup": dsschema.SingleNestedAttribute{
@@ -4814,34 +4750,34 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"not_available": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Not available\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not available\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"not_within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 										"hours": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 									},
 								},
 								"within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in days\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in days\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 										"hours": dsschema.Int64Attribute{
-											MarkdownDescription: "specify time in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
+											MarkdownDescription: "specify time in hours\n> ℹ️ **Note:** You must specify exactly one of `days` and `hours`.",
 											Computed:            true,
 										},
 									},
@@ -4891,11 +4827,11 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"is": dsschema.StringAttribute{
-												MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+												MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 												Computed:            true,
 											},
 											"is_not": dsschema.StringAttribute{
-												MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+												MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 												Computed:            true,
 											},
 										},
@@ -4978,7 +4914,8 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"host_info": dsschema.SingleNestedAttribute{
@@ -4994,15 +4931,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5012,15 +4949,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5030,15 +4967,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5048,15 +4985,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5102,15 +5039,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5140,12 +5077,12 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"no": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+											MarkdownDescription: "No\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"yes": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+											MarkdownDescription: "Yes\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"excludes": dsschema.ListNestedAttribute{
@@ -5207,15 +5144,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5229,7 +5166,7 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"not_within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Not within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Not within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
@@ -5239,7 +5176,7 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"within": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Within\n\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
+									MarkdownDescription: "Within\n> ℹ️ **Note:** You must specify exactly one of `not_within` and `within`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"days": dsschema.Int64Attribute{
@@ -5255,15 +5192,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5277,15 +5214,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5295,15 +5232,15 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"contains": dsschema.StringAttribute{
-									MarkdownDescription: "Contains\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Contains\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is": dsschema.StringAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 								"is_not": dsschema.StringAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.",
 									Computed:            true,
 								},
 							},
@@ -5330,11 +5267,11 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"is": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+									MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"mobile": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Mobile\n\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Mobile\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"carrier": dsschema.StringAttribute{
@@ -5344,12 +5281,12 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 											},
 										},
 										"unknown": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Unknown\n\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Unknown\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"wifi": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Wifi\n\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Wifi\n> ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"ssid": dsschema.StringAttribute{
@@ -5361,16 +5298,16 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"is_not": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
+									MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"ethernet": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Ethernet\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Ethernet\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"mobile": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Mobile\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Mobile\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"carrier": dsschema.StringAttribute{
@@ -5380,12 +5317,12 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 											},
 										},
 										"unknown": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Unknown\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Unknown\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"wifi": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Wifi\n\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
+											MarkdownDescription: "Wifi\n> ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"ssid": dsschema.StringAttribute{
@@ -5436,27 +5373,27 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"greater_equal": dsschema.Int64Attribute{
-											MarkdownDescription: "Greater equal\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Greater equal\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Computed:            true,
 										},
 										"greater_than": dsschema.Int64Attribute{
-											MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Computed:            true,
 										},
 										"is": dsschema.Int64Attribute{
-											MarkdownDescription: "Is\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Is\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Computed:            true,
 										},
 										"is_not": dsschema.Int64Attribute{
-											MarkdownDescription: "Is not\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Is not\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Computed:            true,
 										},
 										"less_equal": dsschema.Int64Attribute{
-											MarkdownDescription: "Less equal\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Less equal\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Computed:            true,
 										},
 										"less_than": dsschema.Int64Attribute{
-											MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
+											MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.",
 											Computed:            true,
 										},
 									},
@@ -5489,7 +5426,8 @@ var HipObjectsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

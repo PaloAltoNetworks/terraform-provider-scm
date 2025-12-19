@@ -52,37 +52,30 @@ Required:
 
 Optional:
 
+- `device` (String) The device in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Interface name
+- `snippet` (String) The snippet in which the resource is defined
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `aggregate_group` (String) Aggregate group
-
 > ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.
 - `comment` (String) Interface description
 - `default_value` (String) Default interface assignment
-- `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
-- `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `layer2` (Attributes) Layer2
-
 > ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`. (see [below for nested schema](#nestedatt--data--layer2))
 - `layer3` (Attributes) Ethernet Interface Layer 3 configuration
-
 > ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`. (see [below for nested schema](#nestedatt--data--layer3))
 - `link_duplex` (String) Link duplex
 - `link_speed` (String) Link speed
 - `link_state` (String) Link state
 - `poe` (Attributes) Poe (see [below for nested schema](#nestedatt--data--poe))
-- `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tap` (Attributes) Tap
-
 > ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`. (see [below for nested schema](#nestedatt--data--tap))
 - `tfid` (String) The Terraform ID.
 
@@ -111,15 +104,12 @@ Read-Only:
 - `arp` (Attributes List) Ethernet Interfaces ARP configuration (see [below for nested schema](#nestedatt--data--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Ethernet Interfaces. (see [below for nested schema](#nestedatt--data--layer3--ddns_config))
 - `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) Ethernet Interface IP addresses
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--data--layer3--ip))
 - `mtu` (Number) MTU
 - `pppoe` (Attributes) Pppoe
-
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--data--layer3--pppoe))
 
 <a id="nestedatt--data--layer3--arp"></a>

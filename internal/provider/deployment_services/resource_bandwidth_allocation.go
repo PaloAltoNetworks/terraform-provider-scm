@@ -1,30 +1,21 @@
 package provider
 
-/*
-
 import (
 	"context"
 	"fmt"
-	"io"
-	"net/http"
-	"reflect"
 	"strings"
-	"encoding/json"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
-
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// SINGLETON RESOURCE for SCM BandwidthAllocation (Package: deployment_services)
+// RESOURCE: BandwidthAllocation (Specialized: List-Managed / No-ID)
 var (
 	_ resource.Resource                = &BandwidthAllocationResource{}
 	_ resource.ResourceWithConfigure   = &BandwidthAllocationResource{}
@@ -35,7 +26,6 @@ func NewBandwidthAllocationResource() resource.Resource {
 	return &BandwidthAllocationResource{}
 }
 
-// BandwidthAllocationResource defines the resource implementation.
 type BandwidthAllocationResource struct {
 	client *deployment_services.APIClient
 }
@@ -66,45 +56,35 @@ func (r *BandwidthAllocationResource) Configure(ctx context.Context, req resourc
 }
 
 func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	tflog.Debug(ctx, "Starting Create function for Singleton BandwidthAllocation")
+	tflog.Debug(ctx, "Starting Create function for BandwidthAllocation")
 	var data models.BandwidthAllocations
 
-	// 1. Get the plan from Terraform into the data model.
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-
-
-	// Unpack the plan to an SCM SDK object.
+	// Unpack the plan to an SCM SDK object
 	planObject, diags := types.ObjectValueFrom(ctx, models.BandwidthAllocations{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-	// 2. Unpack the request BODY from data into an SDK object.
 	unpackedScmObject, diags := unpackBandwidthAllocationsToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-	tflog.Debug(ctx, "Creating bandwidth_allocations on SCM API")
+	// Call the API (POST)
+	createReq := r.client.BandwidthAllocationsAPI.CreateBandwidthAllocations(ctx).BandwidthAllocations(*unpackedScmObject)
 
-	// --- START: DYNAMIC CREATE LOGIC ---
-	var scmObjectInterface interface{}
-	var err error
+	// Apply params
 
-
-		// This singleton has a POST for Create (e.g., ssl-decryption-settings)
-		tflog.Debug(ctx, "Using POST operation: CreateBandwidthAllocations")
-
-
-		createReq := r.client.BandwidthAllocationsAPI.CreateBandwidthAllocations(ctx).BandwidthAllocations(*unpackedScmObject)
-
-		scmObjectInterface, _, err = createReq.Execute()
-
-
-	// --- END: DYNAMIC CREATE LOGIC ---
-
+	createdObject, _, err := createReq.Execute()
 	if err != nil {
-		resp.Diagnostics.AddError("Error creating bandwidth_allocations", err.Error())
+		resp.Diagnostics.AddError("Error creating BandwidthAllocation", err.Error())
 		detailedMessage := utils.PrintScmError(err)
 
 		resp.Diagnostics.AddError(
@@ -114,402 +94,257 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 		return
 	}
 
-	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Create) ---
-	var createdObject *deployment_services.BandwidthAllocations
+	// Re-pack the response if available
+	if createdObject != nil {
+		packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *createdObject)
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
 
-	// Use reflection to inspect the return type at runtime.
-	val := reflect.ValueOf(scmObjectInterface)
-	if val.Kind() == reflect.Ptr && !val.IsNil() {
-		val = val.Elem()
-	}
+		var apiData models.BandwidthAllocations
+		resp.Diagnostics.Append(packedObject.As(ctx, &apiData, basetypes.ObjectAsOptions{})...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
 
-	if val.Kind() == reflect.Struct {
-		// 1. Check for "Data" field (List Wrapper pattern)
-		dataField := val.FieldByName("Data")
-		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
-			// It is a list response (e.g., saas-tenant-restrictions)
-			if dataField.Len() > 0 {
-				// Extract the first item
-				firstItem := dataField.Index(0).Interface()
-
-				// We need to convert this interface{} back to the concrete SDK struct type.
-				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct deployment_services.BandwidthAllocations
-				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-					createdObject = &targetStruct
-				}
-			} else {
-                // List is empty
+		// 🟢 FIX: MASKING + VISIBILITY
+		// If the user provided a list, we force the state to match the plan to avoid errors.
+		if !data.SpnNameList.IsNull() && !data.SpnNameList.IsUnknown() {
+			// Check if the API returned DIFFERENT data than what we sent.
+			// If so, warn the user so they know what the real values are.
+			if !apiData.SpnNameList.Equal(data.SpnNameList) {
+				var realSpns []string
+				apiData.SpnNameList.ElementsAs(ctx, &realSpns, false)
+				resp.Diagnostics.AddWarning(
+					"API Response Modified Input",
+					fmt.Sprintf(
+						"The API modified the 'spn_name_list' (e.g., added suffixes or items).\n"+
+							"To avoid consistency errors, we have saved your original input to the state.\n"+
+							"Real values returned by API: %v\n"+
+							"Please update your configuration to match these values to avoid future drift.",
+						realSpns,
+					),
+				)
 			}
+
+			// Overwrite with user input to satisfy Terraform consistency check
+			apiData.SpnNameList = data.SpnNameList
+		}
+
+		data = apiData
+		// The 'Name' is the identity for this resource.
+		if !data.Name.IsNull() {
+			data.Tfid = types.StringValue("bandwidth_allocation_" + data.Name.ValueString())
 		} else {
-            // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
-            // Use the same JSON trick to be safe against pointer mismatches
-            jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct deployment_services.BandwidthAllocations
-            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-                createdObject = &targetStruct
-            }
-        }
+			data.Tfid = types.StringValue("unknown")
+		}
 	}
 
-	if createdObject == nil {
-		// If API returned 200/201 but no object, we cannot set the state.
-		resp.Diagnostics.AddError("API Response Missing Object", "API call successful but returned no object to set state with. Check SCM logs.")
-		return
-	}
-
-	packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *createdObject)
-	// --- END MODIFICATION ---
-
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
-	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-	if resp.Diagnostics.HasError() { return }
-
-
-
-	data.Tfid = types.StringValue("singleton")
-
-	tflog.Debug(ctx, "Created bandwidth_allocations", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *BandwidthAllocationResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	// Step 1 - Initialize a data and savestate of type models.BandwidthAllocations - which is the TF schema struct
-	tflog.Debug(ctx, "Starting Read function for Singleton BandwidthAllocation")
-	var data, savestate models.BandwidthAllocations
-
-	// Step 2 - Fetch the state into savestate
-	resp.Diagnostics.Append(req.State.Get(ctx, &savestate)...)
-	if resp.Diagnostics.HasError() { return }
-
-	tflog.Debug(ctx, "Reading bandwidth_allocations from SCM API")
-	getReq := r.client.BandwidthAllocationsAPI.ListBandwidthAllocations(ctx)
-
-	// --- START: DYNAMIC PARAMETERS FOR READ ---
-	// Use reflection to safely check for and use query parameters if they exist in the model
-	v := reflect.ValueOf(savestate)
-	f := v.FieldByName("Limit")
-	if f.IsValid() && !f.IsZero() && !f.Interface().(types.String).IsNull() {
-		getReq = getReq.Limit(int32(f.Interface().(types.Int64).ValueInt64()))
-	}
-	// Use reflection to safely check for and use query parameters if they exist in the model
-	v := reflect.ValueOf(savestate)
-	f := v.FieldByName("Offset")
-	if f.IsValid() && !f.IsZero() && !f.Interface().(types.String).IsNull() {
-		getReq = getReq.Offset(int32(f.Interface().(types.Int64).ValueInt64()))
-	}
-	// --- END: DYNAMIC PARAMETERS FOR READ ---
-
-	// Use interface{} to handle flexible return types (List vs Object)
-	var scmObjectInterface interface{}
-	var httpErr *http.Response
-	var err error
-	scmObjectInterface, httpErr, err = getReq.Execute()
-
-	if err != nil {
-		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got no bandwidth_allocations on read SCM API. Remove from state to let terraform create", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
-			resp.State.RemoveResource(ctx)
-		} else {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got an exception on read SCM API.", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
-			resp.Diagnostics.AddError("Error reading bandwidth_allocations", err.Error())
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError("SCM Resource Read Failed: API Request Failed", detailedMessage)
-		}
+	tflog.Debug(ctx, "Starting Read function for BandwidthAllocation")
+	var state models.BandwidthAllocations
+	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
+	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Read) ---
-	var scmObject *deployment_services.BandwidthAllocations
-
-	// Use reflection to inspect the return type at runtime.
-	val := reflect.ValueOf(scmObjectInterface)
-	if val.Kind() == reflect.Ptr && !val.IsNil() {
-		val = val.Elem()
+	// Identify the target name
+	targetName := state.Name.ValueString()
+	if state.Tfid.ValueString() != "" && state.Tfid.ValueString() != "unknown" {
+		parts := strings.Split(state.Tfid.ValueString(), "_")
+		if len(parts) > 0 {
+			targetName = parts[len(parts)-1]
+		}
 	}
 
-	if val.Kind() == reflect.Struct {
-		// 1. Check for "Data" field (List Wrapper pattern)
-		dataField := val.FieldByName("Data")
-		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
-			// It is a list response (e.g., saas-tenant-restrictions)
-			if dataField.Len() > 0 {
-				// Extract the first item
-				firstItem := dataField.Index(0).Interface()
+	// 1. Call the List operation to get all items
+	listReq := r.client.BandwidthAllocationsAPI.ListBandwidthAllocations(ctx)
+	listResponse, _, err := listReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error reading BandwidthAllocation", err.Error())
+		detailedMessage := utils.PrintScmError(err)
 
-				// We need to convert this interface{} back to the concrete SDK struct type.
-				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct deployment_services.BandwidthAllocations
-				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-					scmObject = &targetStruct
-				}
-			} else {
-                // List is empty, treat as Not Found
-                tflog.Debug(ctx, "Got no bandwidth_allocations on read SCM API (empty list). Remove from state", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
-				resp.State.RemoveResource(ctx)
-				return
+		resp.Diagnostics.AddError(
+			"SCM Resource Read Failed: API Request Failed",
+			detailedMessage,
+		)
+
+		return
+	}
+
+	// 2. Iterate through the list to find the matching item
+	var foundItem *deployment_services.BandwidthAllocations
+
+	if listResponse != nil && listResponse.Data != nil {
+		for _, item := range listResponse.Data {
+			if item.Name != "" && item.Name == targetName {
+				foundItem = &item
+				break
 			}
-		} else {
-            // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
-            // Use the same JSON trick to be safe against pointer mismatches
-            jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct deployment_services.BandwidthAllocations
-            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-                scmObject = &targetStruct
-            }
-        }
+		}
 	}
 
-	// If after all checks, scmObject is still nil, then the API returned 200 OK but no object was found.
-	if scmObject == nil {
-		tflog.Debug(ctx, "Got no bandwidth_allocations on read SCM API (nil object). Remove from state to let terraform create", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
+	if foundItem == nil {
+		tflog.Warn(ctx, "BandwidthAllocation not found in list, removing from state", map[string]interface{}{"name": targetName})
 		resp.State.RemoveResource(ctx)
 		return
 	}
 
-	// Step 5 - Pack the scm object into a terraform model and put it in data we initialized in step 1
-	packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *scmObject)
-	// --- END MODIFICATION ---
-
-
-
+	// 3. Pack the found item
+	packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *foundItem)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
-	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
-	if resp.Diagnostics.HasError() { return }
-
-
-
-	// Step 7 - Carry over tfid from state back into data
-	data.Tfid = savestate.Tfid
-
-	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
-
-	// --- START: RESTORE READ PARAMETERS ---
-	// Use reflection to safely copy query parameter back to data model
-	vData := reflect.ValueOf(&data).Elem()
-	vSave := reflect.ValueOf(savestate)
-	fData := vData.FieldByName("Limit")
-	fSave := vSave.FieldByName("Limit")
-	if fData.IsValid() && fData.CanSet() && fSave.IsValid() {
-		fData.Set(fSave)
+	if resp.Diagnostics.HasError() {
+		return
 	}
-	// Use reflection to safely copy query parameter back to data model
-	vData := reflect.ValueOf(&data).Elem()
-	vSave := reflect.ValueOf(savestate)
-	fData := vData.FieldByName("Offset")
-	fSave := vSave.FieldByName("Offset")
-	if fData.IsValid() && fData.CanSet() && fSave.IsValid() {
-		fData.Set(fSave)
-	}
-	// --- END: RESTORE READ PARAMETERS ---
 
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	var apiData models.BandwidthAllocations
+	resp.Diagnostics.Append(packedObject.As(ctx, &apiData, basetypes.ObjectAsOptions{})...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// 🟢 NO MASKING: Let the Read operation reveal the true state (drift detection).
+
+	apiData.Tfid = types.StringValue("bandwidth_allocation_" + state.Name.ValueString())
+	resp.Diagnostics.Append(resp.State.Set(ctx, &apiData)...)
 }
 
 func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-
-	// Step 1: Initialize a plan and state of type models.BandwidthAllocations which is the terraform schema struct
-	tflog.Debug(ctx, "Starting Update function for Singleton BandwidthAllocation")
-	var plan, state models.BandwidthAllocations
-
-	// Step 2: Get the plan from plan file (resource.tf) into plan and state from tfstate into state
+	tflog.Debug(ctx, "Starting Update function for BandwidthAllocation")
+	var plan models.BandwidthAllocations
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
-	if resp.Diagnostics.HasError() { return }
-	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-
-
-	// Step 3: Creates a plan object from the plan
 	planObject, diags := types.ObjectValueFrom(ctx, models.BandwidthAllocations{}.AttrTypes(), &plan)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-	// Step 4: Unpack the plan object to an SCM Object
 	unpackedScmObject, diags := unpackBandwidthAllocationsToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-	// --- START: MODIFIED API CALL (no path param) ---
-	var scmObjectInterface interface{}
-	var httpErr *http.Response
-	var err error
+	// Call Update (PUT)
+	updateReq := r.client.BandwidthAllocationsAPI.UpdateBandwidthAllocations(ctx).BandwidthAllocations(*unpackedScmObject)
 
-
-		tflog.Debug(ctx, "Updating bandwidth_allocations on SCM API")
-
-        // --- START AUTOMATED CONVERSION (JSON Marshaling) ---
-        // Asymmetric Schema Detected: The API expects bandwidth-allocations, but we have BandwidthAllocations.
-        var updateObj deployment_services.BandwidthAllocations
-
-        // 1. Marshal the read object to JSON
-        jsonBytes, err := json.Marshal(unpackedScmObject)
-        if err != nil {
-            resp.Diagnostics.AddError("Error Converting Model", "Could not marshal read model to JSON: "+err.Error())
-            return
-        }
-
-        // 2. Unmarshal into the update object.
-        err = json.Unmarshal(jsonBytes, &updateObj)
-        if err != nil {
-            resp.Diagnostics.AddError("Error Converting Model", "Could not unmarshal JSON to update model: "+err.Error())
-            return
-        }
-
-		updateReq := r.client.BandwidthAllocationsAPI.UpdateBandwidthAllocations(ctx).BandwidthAllocations(updateObj)
-        // --- END AUTOMATED CONVERSION ---
-
-
-
-		scmObjectInterface, httpErr, err = updateReq.Execute()
-
-	// --- END: MODIFIED API CALL ---
-
+	updatedObject, _, err := updateReq.Execute()
 	if err != nil {
-		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got no bandwidth_allocations on update SCM API. Remove from state to let terraform create", map[string]interface{}{"tfid": state.Tfid.ValueString()})
-			resp.State.RemoveResource(ctx)
-		} else {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got an exception on update SCM API.", map[string]interface{}{"tfid": state.Tfid.ValueString()})
-			resp.Diagnostics.AddError("Error updating bandwidth_allocations", err.Error())
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError("SCM Resource Update Failed: API Request Failed", detailedMessage)
+		resp.Diagnostics.AddError("Error updating BandwidthAllocation", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Update Failed: API Request Failed",
+			detailedMessage,
+		)
+		return
+	}
+
+	if updatedObject != nil {
+		packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *updatedObject)
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
 		}
-		return
-	}
 
-	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Update) ---
-	var updatedObject *deployment_services.BandwidthAllocations
+		var apiData models.BandwidthAllocations
+		resp.Diagnostics.Append(packedObject.As(ctx, &apiData, basetypes.ObjectAsOptions{})...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
 
-	// Use reflection to inspect the return type at runtime.
-	val := reflect.ValueOf(scmObjectInterface)
-	if val.Kind() == reflect.Ptr && !val.IsNil() {
-		val = val.Elem()
-	}
-
-	if val.Kind() == reflect.Struct {
-		// 1. Check for "Data" field (List Wrapper pattern)
-		dataField := val.FieldByName("Data")
-		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
-			// It is a list response (e.g., saas-tenant-restrictions)
-			if dataField.Len() > 0 {
-				// Extract the first item
-				firstItem := dataField.Index(0).Interface()
-
-				// We need to convert this interface{} back to the concrete SDK struct type.
-				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct deployment_services.BandwidthAllocations
-				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-					updatedObject = &targetStruct
-				}
-			} else {
-                 // List is empty
+		// 🟢 FIX: MASKING + VISIBILITY for Update
+		if !plan.SpnNameList.IsNull() && !plan.SpnNameList.IsUnknown() {
+			if !apiData.SpnNameList.Equal(plan.SpnNameList) {
+				var realSpns []string
+				apiData.SpnNameList.ElementsAs(ctx, &realSpns, false)
+				resp.Diagnostics.AddWarning(
+					"API Response Modified Input",
+					fmt.Sprintf(
+						"The API modified the 'spn_name_list' during update.\n"+
+							"Real values returned by API: %v\n"+
+							"We have saved your input to state to avoid errors, but drift will be detected on next plan.",
+						realSpns,
+					),
+				)
 			}
-		} else {
-            // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
-            // Use the same JSON trick to be safe against pointer mismatches
-            jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct deployment_services.BandwidthAllocations
-            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-                updatedObject = &targetStruct
-            }
-        }
+			apiData.SpnNameList = plan.SpnNameList
+		}
+		plan = apiData
 	}
 
-	if updatedObject == nil {
-		// If API returned 200/201 but no object, something is wrong, fail gracefully.
-		resp.Diagnostics.AddError("API Response Missing Object", "API call successful but returned no object after update. Check SCM logs.")
-		return
-	}
+	plan.Tfid = types.StringValue("bandwidth_allocation_" + plan.Name.ValueString())
 
-	packedObject, diags := packBandwidthAllocationsFromSdk(ctx, *updatedObject)
-	// --- END MODIFICATION ---
-
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
-	resp.Diagnostics.Append(packedObject.As(ctx, &plan, basetypes.ObjectAsOptions{})...)
-	if resp.Diagnostics.HasError() { return }
-
-	// // Preserve any write-only parameter values from the plan.
-	//
-
-
-
-	// Step 10: Carry over tfid from state into plan
-	plan.Tfid = state.Tfid
-
-    // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
-
-	// --- START: RESTORE READ PARAMETERS ---
-	// Use reflection to safely copy query parameter back to data model
-	vPlan := reflect.ValueOf(&plan).Elem()
-	vState := reflect.ValueOf(state)
-	fPlan := vPlan.FieldByName("Limit")
-	fState := vState.FieldByName("Limit")
-	if fPlan.IsValid() && fPlan.CanSet() && fState.IsValid() {
-		fPlan.Set(fState)
-	}
-	// Use reflection to safely copy query parameter back to data model
-	vPlan := reflect.ValueOf(&plan).Elem()
-	vState := reflect.ValueOf(state)
-	fPlan := vPlan.FieldByName("Offset")
-	fState := vState.FieldByName("Offset")
-	if fPlan.IsValid() && fPlan.CanSet() && fState.IsValid() {
-		fPlan.Set(fState)
-	}
-	// --- END: RESTORE READ PARAMETERS ---
-
-	tflog.Debug(ctx, "Updated bandwidth_allocations", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
 }
 
 func (r *BandwidthAllocationResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	// --- START: DYNAMIC DELETE LOGIC ---
+	tflog.Debug(ctx, "Starting Delete function for BandwidthAllocation")
+	var state models.BandwidthAllocations
+	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-		tflog.Debug(ctx, "Deleting singleton bandwidth_allocations from SCM API")
-		deleteReq := r.client.BandwidthAllocationsAPI.DeleteBandwidthAllocations(ctx)
-		_, _, err := deleteReq.Execute()
-		if err != nil {
-			resp.Diagnostics.AddError("Error deleting bandwidth_allocations", err.Error())
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError("SCM Resource Deletion Failed: API Request Failed", detailedMessage)
+	// 🟢 FIX: Fetch the LIVE object first for robust deletion.
+	targetName := state.Name.ValueString()
+	if state.Tfid.ValueString() != "" && state.Tfid.ValueString() != "unknown" {
+		parts := strings.Split(state.Tfid.ValueString(), "_")
+		if len(parts) > 0 {
+			targetName = parts[len(parts)-1]
 		}
+	}
 
-	// --- END: DYNAMIC DELETE LOGIC ---
+	listReq := r.client.BandwidthAllocationsAPI.ListBandwidthAllocations(ctx)
+	listResponse, _, err := listReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error reading BandwidthAllocation for deletion", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
+		return
+	}
+
+	var foundItem *deployment_services.BandwidthAllocations
+	if listResponse != nil && listResponse.Data != nil {
+		for _, item := range listResponse.Data {
+			if item.Name != "" && item.Name == targetName {
+				foundItem = &item
+				break
+			}
+		}
+	}
+
+	if foundItem == nil {
+		tflog.Warn(ctx, "Resource not found on server during delete, assuming already deleted", map[string]interface{}{"name": targetName})
+		return
+	}
+
+	// Call Delete using LIVE data
+	deleteReq := r.client.BandwidthAllocationsAPI.DeleteBandwidthAllocations(ctx)
+	deleteReq = deleteReq.Name(foundItem.Name)
+	if len(foundItem.SpnNameList) > 0 {
+		deleteReq = deleteReq.SpnNameList(strings.Join(foundItem.SpnNameList, ","))
+	}
+
+	_, err = deleteReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error deleting BandwidthAllocation", err.Error())
+		return
+	}
 }
 
 func (r *BandwidthAllocationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// --- START: MODIFIED IMPORT ---
-	// We expect the ID to be "singleton" or the resource name.
-	if req.ID != "singleton" && req.ID != "bandwidth_allocation" {
-		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'bandwidth_allocation', got: %s", req.ID))
-		return
-	}
-	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton"))...)
-	// --- END: MODIFIED IMPORT ---
+	resource.ImportStatePassthroughID(ctx, path.Root("name"), req, resp)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/

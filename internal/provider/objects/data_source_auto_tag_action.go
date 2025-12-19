@@ -148,7 +148,7 @@ func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadR
 	if resp.Diagnostics.HasError() { return }
 
 	// Force synthetic ID
-	data.Tfid = types.StringValue("singleton")
+	data.Tfid = types.StringValue("singleton_auto_tag_actions")
 
 
 

@@ -54,10 +54,8 @@ resource "scm_interface_management_profile" "dc_postman_profile" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `http` (Boolean) Allow HTTP?
 - `http_ocsp` (Boolean) Allow HTTP OCSP?
@@ -66,7 +64,6 @@ resource "scm_interface_management_profile" "dc_postman_profile" {
 - `ping` (Boolean) Allow ping?
 - `response_pages` (Boolean) Allow response pages?
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ssh` (Boolean) Allow SSH?
 - `telnet` (Boolean) Allow telnet? Seriously, why would you do this?!?
@@ -85,3 +82,27 @@ resource "scm_interface_management_profile" "dc_postman_profile" {
 Required:
 
 - `name` (String) The allowed IP address or CIDR block.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_interface_management_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_interface_management_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_interface_management_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

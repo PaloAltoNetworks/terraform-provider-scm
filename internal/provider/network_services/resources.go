@@ -29,6 +29,7 @@ func GetResources() []func() resource.Resource {
 		NewLayer3SubinterfaceResource,
 		// 		NewLicenseResultResource,
 		NewLinkTagResource,
+		NewLldpProfileResource,
 		NewLogicalRouterResource,
 		NewLoopbackInterfaceResource,
 		NewNatRuleResource,

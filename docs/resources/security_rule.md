@@ -388,3 +388,4 @@ terraform import scm_security_rule.example ::device:id
 ```
 
 **Note:** Please provide just one of folder, snippet, or device for the import command.
+

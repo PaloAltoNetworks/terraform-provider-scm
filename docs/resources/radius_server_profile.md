@@ -70,14 +70,11 @@ resource "scm_radius_server_profile" "pap_radius_profile" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `retries` (Number) The number of RADIUS server retries
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `timeout` (Number) The RADIUS server authentication timeout (seconds)
 
@@ -143,3 +140,27 @@ Optional:
 - `name` (String) The name of the RADIUS server
 - `port` (Number) The RADIUS server port
 - `secret` (String, Sensitive) The RADIUS secret
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_radius_server_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_radius_server_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_radius_server_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

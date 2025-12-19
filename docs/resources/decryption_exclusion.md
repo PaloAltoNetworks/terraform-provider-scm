@@ -23,16 +23,37 @@ DecryptionExclusion resource
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `id` (String) UUID of the resource
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_decryption_exclusion.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_exclusion.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_exclusion.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

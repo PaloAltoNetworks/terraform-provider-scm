@@ -76,17 +76,14 @@ resource "scm_authentication_profile" "global_db_access" {
 
 - `allow_list` (List of String) The allow_list of the authentication profile
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `lockout` (Attributes) Lockout object of the authentication profile (see [below for nested schema](#nestedatt--lockout))
 - `method` (Attributes) method object of authentication profile (see [below for nested schema](#nestedatt--method))
 - `multi_factor_auth` (Attributes) Multi factor auth (see [below for nested schema](#nestedatt--multi_factor_auth))
 - `single_sign_on` (Attributes) Single sign on (see [below for nested schema](#nestedatt--single_sign_on))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `user_domain` (String) User domain
 - `username_modifier` (String) Username modifier
@@ -111,25 +108,18 @@ Optional:
 Optional:
 
 - `cloud` (Attributes) Cloud
-
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--cloud))
 - `kerberos` (Attributes) Kerberos
-
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--kerberos))
 - `ldap` (Attributes) Ldap
-
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--ldap))
 - `local_database` (Attributes) Local database
-
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--local_database))
 - `radius` (Attributes) Radius
-
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--radius))
 - `saml_idp` (Attributes) Saml idp
-
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--saml_idp))
 - `tacplus` (Attributes) Tacplus
-
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--tacplus))
 
 <a id="nestedatt--method--cloud"></a>
@@ -211,3 +201,27 @@ Optional:
 
 - `kerberos_keytab` (String) Kerberos keytab
 - `realm` (String) Realm
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_authentication_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_authentication_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_authentication_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

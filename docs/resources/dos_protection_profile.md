@@ -24,15 +24,12 @@ DosProtectionProfile resource
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `flood` (Attributes) Flood (see [below for nested schema](#nestedatt--flood))
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `resource` (Attributes) Resource (see [below for nested schema](#nestedatt--resource))
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -226,3 +223,27 @@ Optional:
 
 - `enabled` (Boolean) Enabled
 - `max_concurrent_limit` (Number) Max concurrent limit
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_dos_protection_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_dos_protection_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_dos_protection_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

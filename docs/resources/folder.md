@@ -89,3 +89,13 @@ resource "scm_folder" "scm_folder_with_label" {
 
 - `id` (String) The UUID of the folder
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_folder.example :::id
+```
+

@@ -146,11 +146,9 @@ resource "scm_app_override_rule" "rule_after_anchor_override" {
 
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Disabled
 - `folder` (String) The folder in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `group_tag` (String) Group tag
 - `negate_destination` (Boolean) Negate destination
@@ -158,7 +156,6 @@ resource "scm_app_override_rule" "rule_after_anchor_override" {
 - `position` (String) The position of a security rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
-
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag` (List of String) Tag
 - `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
@@ -167,3 +164,27 @@ resource "scm_app_override_rule" "rule_after_anchor_override" {
 
 - `id` (String) UUID of the resource
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_app_override_rule.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_app_override_rule.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_app_override_rule.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

@@ -239,3 +239,27 @@ Optional:
 
 - `enable` (Boolean) Enable tunnel monitoring on this tunnel
 - `proxy_id` (String) Which proxy-id (or proxy-id-v6) the monitoring traffic will use
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_ipsec_tunnel.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_ipsec_tunnel.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_ipsec_tunnel.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

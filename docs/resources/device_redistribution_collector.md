@@ -84,3 +84,4 @@ terraform import scm_device_redistribution_collector.example ::device:id
 ```
 
 **Note:** Please provide just one of folder, snippet, or device for the import command.
+

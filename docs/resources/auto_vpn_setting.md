@@ -58,3 +58,18 @@ Optional:
 
 - `end` (Number) End
 - `start` (Number) Start
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_auto_vpn_setting.example singleton
+```
+or 
+
+```bash
+terraform import scm_auto_vpn_setting.example auto_vpn_setting
+```
+			

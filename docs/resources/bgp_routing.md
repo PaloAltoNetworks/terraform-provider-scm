@@ -67,3 +67,18 @@ Optional:
 
 <a id="nestedatt--routing_preference--hot_potato_routing"></a>
 ### Nested Schema for `routing_preference.hot_potato_routing`
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_bgp_routing.example singleton
+```
+or 
+
+```bash
+terraform import scm_bgp_routing.example bgp_routing
+```
+			

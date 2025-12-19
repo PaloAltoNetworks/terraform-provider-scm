@@ -96,3 +96,27 @@ Optional:
 - `enable_on_interface` (Boolean) Enable Address on Interface
 - `interface_id` (String) Interface ID
 - `name` (String) IPv6 Address
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_loopback_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_loopback_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_loopback_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

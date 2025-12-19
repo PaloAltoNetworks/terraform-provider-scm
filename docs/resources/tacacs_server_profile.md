@@ -46,3 +46,27 @@ Optional:
 - `name` (String) The name of the TACACS+ server
 - `port` (Number) The TACACS+ server port
 - `secret` (String, Sensitive) The TACACS+ secret
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_tacacs_server_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_tacacs_server_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_tacacs_server_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

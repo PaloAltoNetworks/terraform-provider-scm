@@ -140,3 +140,27 @@ Optional:
 - `name` (String) The name of the RADIUS server
 - `port` (Number) The RADIUS server port
 - `secret` (String, Sensitive) The RADIUS secret
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_radius_server_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_radius_server_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_radius_server_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

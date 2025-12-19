@@ -85,3 +85,27 @@ Required:
 
 - `name` (String) IP address
 - `probe_interval` (Number) Probe interval (seconds)
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_sdwan_saas_quality_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_saas_quality_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_saas_quality_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

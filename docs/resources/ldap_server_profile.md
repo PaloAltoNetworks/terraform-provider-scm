@@ -52,3 +52,27 @@ Optional:
 - `address` (String) The LDAP server IP address
 - `name` (String) The LDAP server name
 - `port` (Number) The LDAP server port
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_ldap_server_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_ldap_server_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_ldap_server_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

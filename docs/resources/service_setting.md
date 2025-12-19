@@ -244,3 +244,27 @@ Optional:
 Optional:
 
 - `authentication_key` (String) Authentication key
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_service_setting.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_service_setting.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_service_setting.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

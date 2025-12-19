@@ -167,3 +167,27 @@ Optional:
 - `description` (String) Reservation description
 - `mac` (String) Reserved MAC address
 - `name` (String) Reserved IP address
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_dhcp_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_dhcp_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_dhcp_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

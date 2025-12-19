@@ -114,3 +114,27 @@ Optional:
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 - `tb` (Number) specify lifesize in terabytes(TB)
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_ipsec_crypto_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_ipsec_crypto_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_ipsec_crypto_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

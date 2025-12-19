@@ -76,3 +76,27 @@ resource "scm_tunnel_interface" "scm_tunnel_intf_2" {
 Required:
 
 - `name` (String) Tunnel Interface IP address(es)
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_tunnel_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_tunnel_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_tunnel_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

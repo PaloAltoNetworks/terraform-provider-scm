@@ -645,3 +645,27 @@ Optional:
 Optional:
 
 - `source_address` (String) OSPF RIB Route maps set Source address
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_bgp_route_map_redistribution.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_bgp_route_map_redistribution.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_bgp_route_map_redistribution.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

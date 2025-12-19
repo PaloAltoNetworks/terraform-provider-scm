@@ -179,3 +179,27 @@ Optional:
 
 - `enable` (Boolean) Enable
 - `qos_profile` (String) Qos profile
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_service_connection.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_service_connection.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_service_connection.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

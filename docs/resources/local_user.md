@@ -35,3 +35,27 @@ LocalUser resource
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `id` (String) The UUID of the local user
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_local_user.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_local_user.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_local_user.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

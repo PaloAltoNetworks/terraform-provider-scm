@@ -119,3 +119,4 @@ terraform import scm_general_setting.example ::device:id
 ```
 
 **Note:** Please provide just one of folder, snippet, or device for the import command.
+

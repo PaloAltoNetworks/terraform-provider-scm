@@ -42,3 +42,27 @@ Required:
 
 - `latitude` (Number) The latitudinal position of the region
 - `longitude` (Number) The longitudinal postition of the region
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_region.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_region.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_region.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

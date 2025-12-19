@@ -256,3 +256,27 @@ Required:
 Optional:
 
 - `description` (String) Description
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_dns_security_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_dns_security_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_dns_security_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

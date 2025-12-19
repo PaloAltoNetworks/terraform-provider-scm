@@ -243,3 +243,27 @@ Optional:
 - `keyxchg_algo_rsa` (Boolean) Keyxchg algo rsa
 - `max_version` (String) Max version
 - `min_version` (String) Min version
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_decryption_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

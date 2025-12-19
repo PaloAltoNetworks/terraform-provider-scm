@@ -246,3 +246,27 @@ Optional:
 - `mode` (String) Mode
 - `system_priority` (Number) LACP system priority in system ID
 - `transmission_rate` (String) Transmission mode
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_aggregate_interface.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_aggregate_interface.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_aggregate_interface.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

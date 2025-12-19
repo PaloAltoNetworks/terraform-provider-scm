@@ -187,3 +187,27 @@ Optional:
 - `backup_cir` (Number) The backup CIR in Mbps. This is distributed equally for all tunnels in the site.
 - `cir` (Number) The CIR in Mbps. This is distributed equally for all tunnels in the site.
 - `profile` (String) The name of the site QoS profile
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_site.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_site.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_site.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

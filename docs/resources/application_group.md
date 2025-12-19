@@ -66,3 +66,27 @@ resource "scm_application_group" "scm_app_group_1" {
 
 - `id` (String) UUID of the resource
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_application_group.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_application_group.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_application_group.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

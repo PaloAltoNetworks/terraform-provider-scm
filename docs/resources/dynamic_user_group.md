@@ -75,3 +75,27 @@ resource "scm_dynamic_user_group" "scm_dug_1" {
 
 - `id` (String) The UUID of the dynamic user group
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_dynamic_user_group.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_dynamic_user_group.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_dynamic_user_group.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

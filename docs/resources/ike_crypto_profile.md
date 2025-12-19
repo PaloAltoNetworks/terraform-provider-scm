@@ -77,3 +77,27 @@ Optional:
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `seconds` (Number) specify lifetime in seconds
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_ike_crypto_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_ike_crypto_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_ike_crypto_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

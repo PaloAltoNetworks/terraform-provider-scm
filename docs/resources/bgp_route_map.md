@@ -201,3 +201,27 @@ Optional:
 
 - `action` (String) Metric action
 - `value` (Number) Metric value
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_bgp_route_map.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_bgp_route_map.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_bgp_route_map.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

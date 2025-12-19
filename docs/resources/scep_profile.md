@@ -96,3 +96,27 @@ Optional:
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `uniform_resource_identifier` (String) Uniform resource identifier
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_scep_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_scep_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_scep_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

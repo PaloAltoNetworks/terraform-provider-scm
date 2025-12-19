@@ -151,3 +151,27 @@ Optional:
 
 - `exclude_list` (List of String) Exclude list
 - `include_list` (List of String) Include list
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_zone.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_zone.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_zone.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

@@ -33,3 +33,27 @@ DecryptionExclusion resource
 
 - `id` (String) UUID of the resource
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_decryption_exclusion.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_exclusion.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_decryption_exclusion.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

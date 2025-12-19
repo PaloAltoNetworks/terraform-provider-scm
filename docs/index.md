@@ -42,12 +42,15 @@ v1.0.6
 * resource/scm_tcp_settings: Added Support, examples and tests (resources, data-source)
 * resource/scm_vpn_settings: Added Support, examples and tests (resources, data-source)
 * resource/scm_bandwidth_allocation: Added Support for singleton resource without uuid
+* resource/scm_lldp_profiles: Added Support
+
 
 #### ENHANCEMENTS
 
 * resource/scm_syslog_server_profile:  Added additional examples and tests (resource, data-source)
 * resource/scm_http_server_profile: Added additional examples and tests (resource, data-source)
 * resource/scm_tls_service_profile: Added additional examples and tests (resource)
+
 
 * Bandwidth Allocation currently supported (#9)
 * Document the import statements to import a resource into state (#23)
@@ -57,7 +60,6 @@ v1.0.6
 
 * resource/scm_auto_vpn_cluster: Removed incorrect scope values
 * resource/scm_ethernet_interface: Resolved deletion of interface_management_profile property caused due to computed flag
-* resource/scm_external_dynamic_lists: Added descriptions to each subproperty for correct model generation
 * resource/scm_decryption_rules: Fixed POST response codes for Decryption Rules
 * resource/scm_security_rules: Fixed POST response codes for Security Rules
 * resource/scm_auto_vpn_cluster: Fixed GET list response for Auto VPN Cluster

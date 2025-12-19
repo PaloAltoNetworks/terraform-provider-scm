@@ -189,3 +189,4 @@ terraform import scm_motd_banner_setting.example ::device:id
 ```
 
 **Note:** Please provide just one of folder, snippet, or device for the import command.
+

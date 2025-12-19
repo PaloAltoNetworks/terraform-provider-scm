@@ -60,3 +60,27 @@ Optional:
 - `certificate_cache_size` (Number) Maximum cached certificates
 - `cookie_threshold` (Number) Cookie activation threshold
 - `max_half_opened_sa` (Number) Maximum half-opened SA
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_vpn_setting.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_vpn_setting.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_vpn_setting.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

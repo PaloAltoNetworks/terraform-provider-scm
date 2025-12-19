@@ -138,3 +138,27 @@ Optional:
 
 - `attempts` (Number) Maximum number of retries before trying next name server
 - `interval` (Number) Time in seconds for another request to be sent
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_dns_proxy.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_dns_proxy.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_dns_proxy.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

@@ -56,3 +56,27 @@ resource "scm_tag" "scm_tag_3" {
 
 - `id` (String) The UUID of the tag
 - `tfid` (String) The Terraform ID.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_tag.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_tag.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_tag.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

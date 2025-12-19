@@ -52,3 +52,13 @@ resource "scm_snippet" "scm_snippet_3" {
 - `id` (String) The UUID of the snippet
 - `tfid` (String) The Terraform ID.
 - `type` (String) The snippet type
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_snippet.example :::id
+```
+

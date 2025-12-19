@@ -1092,3 +1092,27 @@ Optional:
 - `port` (Number) HTTP server port
 - `protocol` (String) HTTP server protocol
 - `tls_version` (String) HTTP server TLS version
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_http_server_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_http_server_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_http_server_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

@@ -60,3 +60,27 @@ Required:
 Required:
 
 - `recovery_duration_pd` (Number) Recovery duration pd
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_sdwan_error_correction_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_error_correction_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_sdwan_error_correction_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

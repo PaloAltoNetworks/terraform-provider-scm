@@ -256,3 +256,27 @@ Optional:
 > ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.
 - `zone` (List of String) Source zones
 > ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_pbf_rule.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_pbf_rule.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_pbf_rule.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

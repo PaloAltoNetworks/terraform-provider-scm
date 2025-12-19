@@ -106,3 +106,27 @@ Optional:
 - `keyxchg_algo_rsa` (Boolean) Allow RSA algorithm?
 - `max_version` (String) Maximum TLS version
 - `min_version` (String) Minimum TLS version
+
+
+## Import
+
+The following command can be used to import a resource not managed by Terraform:
+
+```bash
+terraform import scm_tls_service_profile.example folder:::id
+```
+
+or
+
+```bash
+terraform import scm_tls_service_profile.example :snippet::id
+```
+
+or
+
+```bash
+terraform import scm_tls_service_profile.example ::device:id
+```
+
+**Note:** Please provide just one of folder, snippet, or device for the import command.
+

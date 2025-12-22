@@ -22,11 +22,14 @@ SdwanErrorCorrectionProfile data source
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -41,8 +44,10 @@ SdwanErrorCorrectionProfile data source
 Read-Only:
 
 - `forward_error_correction` (Attributes) Forward error correction
+
 > ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`. (see [below for nested schema](#nestedatt--mode--forward_error_correction))
 - `packet_duplication` (Attributes) Packet duplication
+
 > ℹ️ **Note:** You must specify exactly one of `forward_error_correction` and `packet_duplication`. (see [below for nested schema](#nestedatt--mode--packet_duplication))
 
 <a id="nestedatt--mode--forward_error_correction"></a>

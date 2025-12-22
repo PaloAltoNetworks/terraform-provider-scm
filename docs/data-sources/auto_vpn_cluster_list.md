@@ -110,8 +110,10 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -149,8 +151,10 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -204,8 +208,10 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -243,6 +249,8 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.

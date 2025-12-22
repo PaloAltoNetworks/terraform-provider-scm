@@ -358,7 +358,7 @@ var QosProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("percentage"),
 						),
 					},
-					MarkdownDescription: "Mbps\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Mbps\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
@@ -413,7 +413,7 @@ var QosProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("mbps"),
 						),
 					},
-					MarkdownDescription: "Percentage\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Percentage\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
@@ -473,7 +473,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -488,7 +488,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -517,7 +517,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -556,7 +556,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"mbps": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Mbps\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Mbps\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"class": dsschema.ListNestedAttribute{
@@ -592,7 +592,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"percentage": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Percentage\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Percentage\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"class": dsschema.ListNestedAttribute{
@@ -630,12 +630,12 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -649,7 +649,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

@@ -79,11 +79,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -114,6 +117,8 @@ Read-Only:
 Read-Only:
 
 - `no_tag` (Boolean) No tag
+
 > ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.
 - `tag` (List of String) Tag
+
 > ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.

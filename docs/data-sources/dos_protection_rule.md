@@ -22,11 +22,14 @@ DosProtectionRule data source
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Rule name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -53,10 +56,13 @@ DosProtectionRule data source
 Read-Only:
 
 - `allow` (Attributes) Allow
+
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--action--allow))
 - `deny` (Attributes) Deny
+
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--action--deny))
 - `protect` (Attributes) Protect
+
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--action--protect))
 
 <a id="nestedatt--action--allow"></a>
@@ -78,8 +84,10 @@ Read-Only:
 Read-Only:
 
 - `aggregate` (Attributes) Aggregate
+
 > ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--protection--aggregate))
 - `classified` (Attributes) Classified
+
 > ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--protection--classified))
 
 <a id="nestedatt--protection--aggregate"></a>

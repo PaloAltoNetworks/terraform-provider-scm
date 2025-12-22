@@ -52,16 +52,21 @@ resource "scm_ipsec_crypto_profile" "scm_ipsec_crypto_profile_2" {
 ### Optional
 
 - `ah` (Attributes) Ah
+
 > ℹ️ **Note:** You must specify exactly one of `ah` and `esp`. (see [below for nested schema](#nestedatt--ah))
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `dh_group` (String) phase-2 DH group (PFS DH group)
 - `esp` (Attributes) Esp
+
 > ℹ️ **Note:** You must specify exactly one of `ah` and `esp`. (see [below for nested schema](#nestedatt--esp))
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `lifesize` (Attributes) Lifesize (see [below for nested schema](#nestedatt--lifesize))
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -75,12 +80,16 @@ resource "scm_ipsec_crypto_profile" "scm_ipsec_crypto_profile_2" {
 Optional:
 
 - `days` (Number) specify lifetime in days
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `hours` (Number) specify lifetime in hours
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `minutes` (Number) specify lifetime in minutes
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `seconds` (Number) specify lifetime in seconds
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 
 
@@ -107,12 +116,16 @@ Required:
 Optional:
 
 - `gb` (Number) specify lifesize in gigabytes(GB)
+
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 - `kb` (Number) specify lifesize in kilobytes(KB)
+
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 - `mb` (Number) specify lifesize in megabytes(MB)
+
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 - `tb` (Number) specify lifesize in terabytes(TB)
+
 > ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.
 
 

@@ -170,9 +170,11 @@ resource "scm_decryption_rule" "rule_after_anchor_decryption" {
 - `description` (String) The description of the decryption rule
 - `destination_hip` (List of String) The Host Integrity Profile of the destination host
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Is the rule disabled?
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `log_fail` (Boolean) Log failed decryption events?
 - `log_setting` (String) The log settings of the decryption rule
@@ -183,6 +185,7 @@ resource "scm_decryption_rule" "rule_after_anchor_decryption" {
 - `profile` (String) The decryption profile associated with the decryption rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source_hip` (List of String) Source hip
 - `tag` (List of String) The tags associated with the decryption rule
@@ -200,8 +203,10 @@ resource "scm_decryption_rule" "rule_after_anchor_decryption" {
 Optional:
 
 - `ssl_forward_proxy` (Attributes) Ssl forward proxy
+
 > ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--type--ssl_forward_proxy))
 - `ssl_inbound_inspection` (String) add the certificate name for SSL inbound inspection
+
 > ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.
 
 <a id="nestedatt--type--ssl_forward_proxy"></a>

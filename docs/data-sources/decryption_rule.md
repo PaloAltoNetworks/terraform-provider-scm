@@ -35,11 +35,14 @@ output "single_decryption_rule_name" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the decryption rule
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -75,8 +78,10 @@ output "single_decryption_rule_name" {
 Read-Only:
 
 - `ssl_forward_proxy` (Attributes) Ssl forward proxy
+
 > ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--type--ssl_forward_proxy))
 - `ssl_inbound_inspection` (String) add the certificate name for SSL inbound inspection
+
 > ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.
 
 <a id="nestedatt--type--ssl_forward_proxy"></a>

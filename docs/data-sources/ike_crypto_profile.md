@@ -34,11 +34,14 @@ output "ike_profile_by_id" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -56,10 +59,14 @@ output "ike_profile_by_id" {
 Read-Only:
 
 - `days` (Number) specify lifetime in days
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `hours` (Number) specify lifetime in hours
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `minutes` (Number) specify lifetime in minutes
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.
 - `seconds` (Number) specify lifetime in seconds
+
 > ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.

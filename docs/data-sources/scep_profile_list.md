@@ -40,11 +40,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the SCEP profile
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -86,10 +89,13 @@ Read-Only:
 Read-Only:
 
 - `dnsname` (String) Dnsname
+
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `rfc822name` (String) Rfc822name
+
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `uniform_resource_identifier` (String) Uniform resource identifier
+
 > ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 
 
@@ -99,10 +105,13 @@ Read-Only:
 Read-Only:
 
 - `dynamic` (Attributes) Dynamic
+
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`. (see [below for nested schema](#nestedatt--data--scep_challenge--dynamic))
 - `fixed` (String) Challenge to use for SCEP server on mobile clients
+
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
 - `none` (String) No OTP
+
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
 
 <a id="nestedatt--data--scep_challenge--dynamic"></a>

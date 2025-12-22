@@ -947,7 +947,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("reset_server"),
 						),
 					},
-					MarkdownDescription: "Alert\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -962,7 +962,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("reset_server"),
 						),
 					},
-					MarkdownDescription: "Allow\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -977,7 +977,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("reset_server"),
 						),
 					},
-					MarkdownDescription: "anti spyware signature block ip\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "anti spyware signature block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"duration": schema.Int64Attribute{
@@ -1007,7 +1007,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("reset_server"),
 						),
 					},
-					MarkdownDescription: "Drop\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -1022,7 +1022,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("reset_server"),
 						),
 					},
-					MarkdownDescription: "Reset both\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -1037,7 +1037,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("reset_server"),
 						),
 					},
-					MarkdownDescription: "Reset client\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -1052,7 +1052,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("reset_client"),
 						),
 					},
-					MarkdownDescription: "Reset server\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -1067,7 +1067,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1089,7 +1089,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1124,7 +1124,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("standard"),
 						),
 					},
-					MarkdownDescription: "anti spyware signature combination\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
+					MarkdownDescription: "anti spyware signature combination\n\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"and_condition": schema.ListNestedAttribute{
@@ -1196,7 +1196,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("combination"),
 						),
 					},
-					MarkdownDescription: "Standard\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
+					MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
 					Optional:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
@@ -1409,7 +1409,7 @@ var AntiSpywareSignaturesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1464,17 +1464,17 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"alert": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Alert\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"allow": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Allow\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"block_ip": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "anti spyware signature block ip\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "anti spyware signature block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"duration": dsschema.Int64Attribute{
@@ -1488,29 +1488,29 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"drop": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Drop\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"reset_both": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Reset both\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"reset_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Reset client\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"reset_server": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Reset server\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+					MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1519,7 +1519,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1541,7 +1541,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"combination": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "anti spyware signature combination\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
+					MarkdownDescription: "anti spyware signature combination\n\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"and_condition": dsschema.ListNestedAttribute{
@@ -1597,7 +1597,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"standard": dsschema.ListNestedAttribute{
-					MarkdownDescription: "Standard\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
+					MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`.",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
@@ -1781,7 +1781,7 @@ var AntiSpywareSignaturesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

@@ -62,14 +62,17 @@ resource "scm_anti_spyware_signature" "scm_anti_spyware_signature_1" {
 - `cve` (List of String) Cve
 - `default_action` (Attributes) anti spyware signature default action (see [below for nested schema](#nestedatt--default_action))
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `direction` (String) Direction
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `reference` (List of String) Reference
 - `severity` (String) Severity
 - `signature` (Attributes) anti spyware signature (see [below for nested schema](#nestedatt--signature))
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `vendor` (List of String) Vendor
 
@@ -84,18 +87,25 @@ resource "scm_anti_spyware_signature" "scm_anti_spyware_signature_1" {
 Optional:
 
 - `alert` (Attributes) Alert
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--default_action--alert))
 - `allow` (Attributes) Allow
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--default_action--allow))
 - `block_ip` (Attributes) anti spyware signature block ip
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--default_action--block_ip))
 - `drop` (Attributes) Drop
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--default_action--drop))
 - `reset_both` (Attributes) Reset both
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--default_action--reset_both))
 - `reset_client` (Attributes) Reset client
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--default_action--reset_client))
 - `reset_server` (Attributes) Reset server
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--default_action--reset_server))
 
 <a id="nestedatt--default_action--alert"></a>
@@ -138,8 +148,10 @@ Optional:
 Optional:
 
 - `combination` (Attributes) anti spyware signature combination
+
 > ℹ️ **Note:** You must specify exactly one of `combination` and `standard`. (see [below for nested schema](#nestedatt--signature--combination))
 - `standard` (Attributes List) Standard
+
 > ℹ️ **Note:** You must specify exactly one of `combination` and `standard`. (see [below for nested schema](#nestedatt--signature--standard))
 
 <a id="nestedatt--signature--combination"></a>

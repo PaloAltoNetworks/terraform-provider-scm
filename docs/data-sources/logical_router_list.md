@@ -55,11 +55,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -210,8 +213,10 @@ Read-Only:
 Read-Only:
 
 - `ipv4` (Attributes) Ipv4
+
 > ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`. (see [below for nested schema](#nestedatt--data--vrf--bgp--aggregate_routes--type--ipv4))
 - `ipv6` (Attributes) Ipv6
+
 > ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`. (see [below for nested schema](#nestedatt--data--vrf--bgp--aggregate_routes--type--ipv6))
 
 <a id="nestedatt--data--vrf--bgp--aggregate_routes--type--ipv4"></a>
@@ -388,8 +393,10 @@ Read-Only:
 Read-Only:
 
 - `no` (Attributes) No
+
 > ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`. (see [below for nested schema](#nestedatt--data--vrf--bgp--peer_group--peer--inherit--no))
 - `yes` (Attributes) Yes
+
 > ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`. (see [below for nested schema](#nestedatt--data--vrf--bgp--peer_group--peer--inherit--yes))
 
 <a id="nestedatt--data--vrf--bgp--peer_group--peer--inherit--no"></a>
@@ -439,8 +446,10 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) Fqdn
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.
 - `ip` (String) Ip
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.
 
 
@@ -460,12 +469,16 @@ Read-Only:
 Read-Only:
 
 - `ebgp` (Attributes) Ebgp
+
 > ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`. (see [below for nested schema](#nestedatt--data--vrf--bgp--peer_group--type--ebgp))
 - `ebgp_confed` (Attributes) Ebgp confed
+
 > ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`. (see [below for nested schema](#nestedatt--data--vrf--bgp--peer_group--type--ebgp_confed))
 - `ibgp` (Attributes) Ibgp
+
 > ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`. (see [below for nested schema](#nestedatt--data--vrf--bgp--peer_group--type--ibgp))
 - `ibgp_confed` (Attributes) Ibgp confed
+
 > ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`. (see [below for nested schema](#nestedatt--data--vrf--bgp--peer_group--type--ibgp_confed))
 
 <a id="nestedatt--data--vrf--bgp--peer_group--type--ebgp"></a>
@@ -616,12 +629,16 @@ Read-Only:
 Read-Only:
 
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--as_path--none))
 - `prepend` (Number) Prepend
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.
 - `remove` (Attributes) Remove
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--as_path--remove))
 - `remove_and_prepend` (Number) Remove and prepend
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.
 
 <a id="nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--as_path--none"></a>
@@ -639,14 +656,19 @@ Read-Only:
 Read-Only:
 
 - `append` (List of String) Append
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--community--none))
 - `overwrite` (List of String) Overwrite
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `remove_all` (Attributes) Remove all
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--community--remove_all))
 - `remove_regex` (String) Remove regex
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 
 <a id="nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--community--none"></a>
@@ -664,14 +686,19 @@ Read-Only:
 Read-Only:
 
 - `append` (List of String) Append
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--extended_community--none))
 - `overwrite` (List of String) Overwrite
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `remove_all` (Attributes) Remove all
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--extended_community--remove_all))
 - `remove_regex` (String) Remove regex
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 
 <a id="nestedatt--data--vrf--bgp--policy--aggregation--address--aggregate_route_attributes--extended_community--none"></a>
@@ -910,8 +937,10 @@ Read-Only:
 Read-Only:
 
 - `allow` (Attributes) Allow
+
 > ℹ️ **Note:** You must specify exactly one of `allow` and `deny`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--allow))
 - `deny` (Attributes) Deny
+
 > ℹ️ **Note:** You must specify exactly one of `allow` and `deny`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--deny))
 
 <a id="nestedatt--data--vrf--bgp--policy--export--rules--action--allow"></a>
@@ -941,12 +970,16 @@ Read-Only:
 Read-Only:
 
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--as_path--none))
 - `prepend` (Number) Prepend
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.
 - `remove` (Attributes) Remove
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--as_path--remove))
 - `remove_and_prepend` (Number) Remove and prepend
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.
 
 <a id="nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--as_path--none"></a>
@@ -964,14 +997,19 @@ Read-Only:
 Read-Only:
 
 - `append` (List of String) Append
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--community--none))
 - `overwrite` (List of String) Overwrite
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `remove_all` (Attributes) Remove all
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--community--remove_all))
 - `remove_regex` (String) Remove regex
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 
 <a id="nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--community--none"></a>
@@ -989,14 +1027,19 @@ Read-Only:
 Read-Only:
 
 - `append` (List of String) Append
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--extended_community--none))
 - `overwrite` (List of String) Overwrite
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `remove_all` (Attributes) Remove all
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--extended_community--remove_all))
 - `remove_regex` (String) Remove regex
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 
 <a id="nestedatt--data--vrf--bgp--policy--export--rules--action--allow--update--extended_community--none"></a>
@@ -1091,8 +1134,10 @@ Read-Only:
 Read-Only:
 
 - `allow` (Attributes) Allow
+
 > ℹ️ **Note:** You must specify exactly one of `allow` and `deny`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--allow))
 - `deny` (Attributes) Deny
+
 > ℹ️ **Note:** You must specify exactly one of `allow` and `deny`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--deny))
 
 <a id="nestedatt--data--vrf--bgp--policy--import--rules--action--allow"></a>
@@ -1124,12 +1169,16 @@ Read-Only:
 Read-Only:
 
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--as_path--none))
 - `prepend` (Number) Prepend
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.
 - `remove` (Attributes) Remove
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--as_path--remove))
 - `remove_and_prepend` (Number) Remove and prepend
+
 > ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.
 
 <a id="nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--as_path--none"></a>
@@ -1147,14 +1196,19 @@ Read-Only:
 Read-Only:
 
 - `append` (List of String) Append
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--community--none))
 - `overwrite` (List of String) Overwrite
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `remove_all` (Attributes) Remove all
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--community--remove_all))
 - `remove_regex` (String) Remove regex
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 
 <a id="nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--community--none"></a>
@@ -1172,14 +1226,19 @@ Read-Only:
 Read-Only:
 
 - `append` (List of String) Append
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--extended_community--none))
 - `overwrite` (List of String) Overwrite
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 - `remove_all` (Attributes) Remove all
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`. (see [below for nested schema](#nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--extended_community--remove_all))
 - `remove_regex` (String) Remove regex
+
 > ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.
 
 <a id="nestedatt--data--vrf--bgp--policy--import--rules--action--allow--update--extended_community--none"></a>
@@ -1312,12 +1371,16 @@ Read-Only:
 Read-Only:
 
 - `balanced_round_robin` (Attributes) Balanced round robin
+
 > ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`. (see [below for nested schema](#nestedatt--data--vrf--ecmp--algorithm--balanced_round_robin))
 - `ip_hash` (Attributes) Ip hash
+
 > ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`. (see [below for nested schema](#nestedatt--data--vrf--ecmp--algorithm--ip_hash))
 - `ip_modulo` (Attributes) Ip modulo
+
 > ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`. (see [below for nested schema](#nestedatt--data--vrf--ecmp--algorithm--ip_modulo))
 - `weighted_round_robin` (Attributes) Weighted round robin
+
 > ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`. (see [below for nested schema](#nestedatt--data--vrf--ecmp--algorithm--weighted_round_robin))
 
 <a id="nestedatt--data--vrf--ecmp--algorithm--balanced_round_robin"></a>
@@ -1552,8 +1615,10 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) Fqdn
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.
 - `ip` (String) Ip
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.
 
 
@@ -1611,8 +1676,10 @@ Read-Only:
 Read-Only:
 
 - `candidate_rp` (Attributes) Candidate rp
+
 > ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`. (see [below for nested schema](#nestedatt--data--vrf--multicast--pim--rp--local_rp--candidate_rp))
 - `static_rp` (Attributes) Static rp
+
 > ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`. (see [below for nested schema](#nestedatt--data--vrf--multicast--pim--rp--local_rp--static_rp))
 
 <a id="nestedatt--data--vrf--multicast--pim--rp--local_rp--candidate_rp"></a>
@@ -1682,8 +1749,10 @@ Read-Only:
 Read-Only:
 
 - `candidate_rp` (Attributes) Candidate rp
+
 > ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`. (see [below for nested schema](#nestedatt--data--vrf--multicast--rp--local_rp--candidate_rp))
 - `static_rp` (Attributes) Static rp
+
 > ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`. (see [below for nested schema](#nestedatt--data--vrf--multicast--rp--local_rp--static_rp))
 
 <a id="nestedatt--data--vrf--multicast--rp--local_rp--candidate_rp"></a>
@@ -1816,10 +1885,13 @@ Read-Only:
 Read-Only:
 
 - `broadcast` (Attributes) Broadcast
+
 > ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--interface--link_type--broadcast))
 - `p2mp` (Attributes) P2mp
+
 > ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--interface--link_type--p2mp))
 - `p2p` (Attributes) P2p
+
 > ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--interface--link_type--p2p))
 
 <a id="nestedatt--data--vrf--ospf--area--interface--link_type--broadcast"></a>
@@ -1877,10 +1949,13 @@ Read-Only:
 Read-Only:
 
 - `normal` (Attributes) Normal
+
 > ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--type--normal))
 - `nssa` (Attributes) Nssa
+
 > ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--type--nssa))
 - `stub` (Attributes) Stub
+
 > ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--type--stub))
 
 <a id="nestedatt--data--vrf--ospf--area--type--normal"></a>
@@ -1951,8 +2026,10 @@ Read-Only:
 Read-Only:
 
 - `advertise` (Attributes) Advertise
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--type--nssa--default_route--advertise))
 - `disable` (Attributes) Disable
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--type--nssa--default_route--disable))
 
 <a id="nestedatt--data--vrf--ospf--area--type--nssa--default_route--advertise"></a>
@@ -2016,8 +2093,10 @@ Read-Only:
 Read-Only:
 
 - `advertise` (Attributes) Advertise
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--type--stub--default_route--advertise))
 - `disable` (Attributes) Disable
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospf--area--type--stub--default_route--disable))
 
 <a id="nestedatt--data--vrf--ospf--area--type--stub--default_route--advertise"></a>
@@ -2245,10 +2324,13 @@ Read-Only:
 Read-Only:
 
 - `broadcast` (Attributes) Broadcast
+
 > ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--interface--link_type--broadcast))
 - `p2mp` (Attributes) P2mp
+
 > ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--interface--link_type--p2mp))
 - `p2p` (Attributes) P2p
+
 > ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--interface--link_type--p2p))
 
 <a id="nestedatt--data--vrf--ospfv3--area--interface--link_type--broadcast"></a>
@@ -2313,10 +2395,13 @@ Read-Only:
 Read-Only:
 
 - `normal` (Attributes) Normal
+
 > ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--type--normal))
 - `nssa` (Attributes) Nssa
+
 > ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--type--nssa))
 - `stub` (Attributes) Stub
+
 > ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--type--stub))
 
 <a id="nestedatt--data--vrf--ospfv3--area--type--normal"></a>
@@ -2396,8 +2481,10 @@ Read-Only:
 Read-Only:
 
 - `advertise` (Attributes) Advertise
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--type--nssa--default_route--advertise))
 - `disable` (Attributes) Disable
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--type--nssa--default_route--disable))
 
 <a id="nestedatt--data--vrf--ospfv3--area--type--nssa--default_route--advertise"></a>
@@ -2462,8 +2549,10 @@ Read-Only:
 Read-Only:
 
 - `advertise` (Attributes) Advertise
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--type--stub--default_route--advertise))
 - `disable` (Attributes) Disable
+
 > ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--area--type--stub--default_route--disable))
 
 <a id="nestedatt--data--vrf--ospfv3--area--type--stub--default_route--advertise"></a>
@@ -2553,14 +2642,19 @@ Read-Only:
 Read-Only:
 
 - `md5` (Attributes) Md5
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--ah--md5))
 - `sha1` (Attributes) Sha1
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--ah--sha1))
 - `sha256` (Attributes) Sha256
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--ah--sha256))
 - `sha384` (Attributes) Sha384
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--ah--sha384))
 - `sha512` (Attributes) Sha512
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--ah--sha512))
 
 <a id="nestedatt--data--vrf--ospfv3--auth_profile--ah--md5"></a>
@@ -2618,16 +2712,22 @@ Read-Only:
 Read-Only:
 
 - `md5` (Attributes) Md5
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--esp--authentication--md5))
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--esp--authentication--none))
 - `sha1` (Attributes) Sha1
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--esp--authentication--sha1))
 - `sha256` (Attributes) Sha256
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--esp--authentication--sha256))
 - `sha384` (Attributes) Sha384
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--esp--authentication--sha384))
 - `sha512` (Attributes) Sha512
+
 > ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`. (see [below for nested schema](#nestedatt--data--vrf--ospfv3--auth_profile--esp--authentication--sha512))
 
 <a id="nestedatt--data--vrf--ospfv3--auth_profile--esp--authentication--md5"></a>
@@ -2938,20 +3038,28 @@ Read-Only:
 Read-Only:
 
 - `discard` (Attributes) Discard
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ip--static_route--nexthop--discard))
 - `fqdn` (String) Fqdn
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `ip_address` (String) Ip address
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `ipv6_address` (String) Ipv6 address
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `next_lr` (String) Next lr
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `next_vr` (String) Next vr
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `receive` (Attributes) Receive
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ip--static_route--nexthop--receive))
 - `tunnel` (String) Tunnel
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 
 <a id="nestedatt--data--vrf--routing_table--ip--static_route--nexthop--discard"></a>
@@ -2994,12 +3102,16 @@ Read-Only:
 Read-Only:
 
 - `both` (Attributes) Both
+
 > ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ip--static_route--route_table--both))
 - `multicast` (Attributes) Multicast
+
 > ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ip--static_route--route_table--multicast))
 - `no_install` (Attributes) No install
+
 > ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ip--static_route--route_table--no_install))
 - `unicast` (Attributes) Unicast
+
 > ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ip--static_route--route_table--unicast))
 
 <a id="nestedatt--data--vrf--routing_table--ip--static_route--route_table--both"></a>
@@ -3058,18 +3170,25 @@ Read-Only:
 Read-Only:
 
 - `discard` (Attributes) Discard
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ipv6--static_route--nexthop--discard))
 - `fqdn` (String) Fqdn
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `ipv6_address` (String) Ipv6 address
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `next_lr` (String) Next lr
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `next_vr` (String) Next vr
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 - `receive` (Attributes) Receive
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`. (see [below for nested schema](#nestedatt--data--vrf--routing_table--ipv6--static_route--nexthop--receive))
 - `tunnel` (String) Tunnel
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.
 
 <a id="nestedatt--data--vrf--routing_table--ipv6--static_route--nexthop--discard"></a>

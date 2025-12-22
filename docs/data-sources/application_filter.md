@@ -33,11 +33,14 @@ output "application_filters_data_source_results" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -68,6 +71,8 @@ output "application_filters_data_source_results" {
 Read-Only:
 
 - `no_tag` (Boolean) No tag
+
 > ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.
 - `tag` (List of String) Tag
+
 > ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.

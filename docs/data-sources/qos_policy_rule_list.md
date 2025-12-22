@@ -61,11 +61,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -108,14 +111,19 @@ Read-Only:
 Read-Only:
 
 - `af` (Attributes) Af
+
 > ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--data--dscp_tos--codepoints--type--af))
 - `cs` (Attributes) Cs
+
 > ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--data--dscp_tos--codepoints--type--cs))
 - `custom` (Attributes) Custom
+
 > ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--data--dscp_tos--codepoints--type--custom))
 - `ef` (Attributes) Ef
+
 > ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--data--dscp_tos--codepoints--type--ef))
 - `tos` (Attributes) Tos
+
 > ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`. (see [below for nested schema](#nestedatt--data--dscp_tos--codepoints--type--tos))
 
 <a id="nestedatt--data--dscp_tos--codepoints--type--af"></a>

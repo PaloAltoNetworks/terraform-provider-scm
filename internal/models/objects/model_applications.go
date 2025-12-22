@@ -675,7 +675,7 @@ var ApplicationsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("port"),
 						),
 					},
-					MarkdownDescription: "Ident by icmp6 type\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp6 type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"code": schema.StringAttribute{
@@ -696,7 +696,7 @@ var ApplicationsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("port"),
 						),
 					},
-					MarkdownDescription: "Ident by icmp type\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"code": schema.StringAttribute{
@@ -717,12 +717,12 @@ var ApplicationsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("port"),
 						),
 					},
-					MarkdownDescription: "Ident by ip protocol\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by ip protocol\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Optional:            true,
 				},
 				"port": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Port\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Port\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Validators: []validator.List{
 						listvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
@@ -751,7 +751,7 @@ var ApplicationsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -774,7 +774,7 @@ var ApplicationsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -862,7 +862,7 @@ var ApplicationsResourceSchema = schema.Schema{
 																path.MatchRelative().AtParent().AtName("pattern_match"),
 															),
 														},
-														MarkdownDescription: "Equal to\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Equal to\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
@@ -901,7 +901,7 @@ var ApplicationsResourceSchema = schema.Schema{
 																path.MatchRelative().AtParent().AtName("pattern_match"),
 															),
 														},
-														MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
@@ -947,7 +947,7 @@ var ApplicationsResourceSchema = schema.Schema{
 																path.MatchRelative().AtParent().AtName("pattern_match"),
 															),
 														},
-														MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
@@ -993,7 +993,7 @@ var ApplicationsResourceSchema = schema.Schema{
 																path.MatchRelative().AtParent().AtName("less_than"),
 															),
 														},
-														MarkdownDescription: "Pattern match\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Pattern match\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
@@ -1080,7 +1080,7 @@ var ApplicationsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1190,7 +1190,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ident_by_icmp6_type": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ident by icmp6 type\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp6 type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"code": dsschema.StringAttribute{
@@ -1204,7 +1204,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ident_by_icmp_type": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ident by icmp type\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"code": dsschema.StringAttribute{
@@ -1218,12 +1218,12 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ident_by_ip_protocol": dsschema.StringAttribute{
-					MarkdownDescription: "Ident by ip protocol\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by ip protocol\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Computed:            true,
 				},
 				"port": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Port\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Port\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
 					Computed:            true,
 				},
 			},
@@ -1233,7 +1233,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1246,7 +1246,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1311,7 +1311,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"equal_to": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Equal to\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Equal to\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1333,7 +1333,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"greater_than": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Greater than\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1363,7 +1363,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"less_than": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Less than\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1393,7 +1393,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"pattern_match": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Pattern match\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Pattern match\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1450,7 +1450,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

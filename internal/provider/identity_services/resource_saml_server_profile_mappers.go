@@ -77,6 +77,12 @@ func unpackSamlServerProfilesToSdk(ctx context.Context, obj types.Object) (*iden
 	}
 
 	// Handling Primitives
+	if !model.SloUrl.IsNull() && !model.SloUrl.IsUnknown() {
+		sdk.SloUrl = model.SloUrl.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SloUrl", "value": *sdk.SloUrl})
+	}
+
+	// Handling Primitives
 	if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
 		sdk.Snippet = model.Snippet.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
@@ -166,6 +172,14 @@ func packSamlServerProfilesFromSdk(ctx context.Context, sdk identity_services.Sa
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SloBindings", "value": *sdk.SloBindings})
 	} else {
 		model.SloBindings = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.SloUrl != nil {
+		model.SloUrl = basetypes.NewStringValue(*sdk.SloUrl)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SloUrl", "value": *sdk.SloUrl})
+	} else {
+		model.SloUrl = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing

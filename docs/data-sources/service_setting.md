@@ -61,10 +61,13 @@ output "fetched_settings" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -97,8 +100,10 @@ Read-Only:
 Read-Only:
 
 - `dns_proxy_object` (String) Dns proxy object
+
 > ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.
 - `servers` (Attributes) Servers
+
 > ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`. (see [below for nested schema](#nestedatt--services--dns_setting--servers))
 
 <a id="nestedatt--services--dns_setting--servers"></a>
@@ -133,10 +138,13 @@ Read-Only:
 Read-Only:
 
 - `autokey` (Attributes) Autokey
+
 > ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`. (see [below for nested schema](#nestedatt--services--ntp_servers--primary_ntp_server--authentication_type--autokey))
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`. (see [below for nested schema](#nestedatt--services--ntp_servers--primary_ntp_server--authentication_type--none))
 - `symmetric_key` (Attributes) Symmetric key
+
 > ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`. (see [below for nested schema](#nestedatt--services--ntp_servers--primary_ntp_server--authentication_type--symmetric_key))
 
 <a id="nestedatt--services--ntp_servers--primary_ntp_server--authentication_type--autokey"></a>
@@ -197,10 +205,13 @@ Read-Only:
 Read-Only:
 
 - `autokey` (Attributes) Autokey
+
 > ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`. (see [below for nested schema](#nestedatt--services--ntp_servers--secondary_ntp_server--authentication_type--autokey))
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`. (see [below for nested schema](#nestedatt--services--ntp_servers--secondary_ntp_server--authentication_type--none))
 - `symmetric_key` (Attributes) Symmetric key
+
 > ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`. (see [below for nested schema](#nestedatt--services--ntp_servers--secondary_ntp_server--authentication_type--symmetric_key))
 
 <a id="nestedatt--services--ntp_servers--secondary_ntp_server--authentication_type--autokey"></a>

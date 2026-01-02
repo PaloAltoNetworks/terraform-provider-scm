@@ -80,17 +80,17 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 
-	// 2. Unpack the request BODY from data into an SDK object.
-	unpackedScmObject, diags := unpackOcspRespondersToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    // 2. Unpack the request BODY from data into an SDK object.
+    unpackedScmObject, diags := unpackOcspRespondersToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
-	tflog.Debug(ctx, "Creating ocsp_responders on SCM API")
+    tflog.Debug(ctx, "Creating ocsp_responders on SCM API")
 
 
 
-	// 3. Initiate the API request with the body.
-	createReq := r.client.OCSPRespondersAPI.CreateOCSPResponders(ctx).OcspResponders(*unpackedScmObject)
+    // 3. Initiate the API request with the body.
+    createReq := r.client.OCSPRespondersAPI.CreateOCSPResponders(ctx).OcspResponders(*unpackedScmObject)
 
 	// 4. BLOCK 1: Add the request PARAMETERS to the API call.
 
@@ -291,9 +291,9 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 	if resp.Diagnostics.HasError() { return }
 
 	// Step 4: Unpack the plan object to an SCM Object
-	unpackedScmObject, diags := unpackOcspRespondersToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    unpackedScmObject, diags := unpackOcspRespondersToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
 
 
@@ -310,7 +310,7 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 	objectId := tokens[3]
 
 	tflog.Debug(ctx, "Updating ocsp_responders on SCM API", map[string]interface{}{"id": objectId})
-	updateReq := r.client.OCSPRespondersAPI.UpdateOCSPRespondersByID(ctx, objectId).OcspResponders(*unpackedScmObject)
+    updateReq := r.client.OCSPRespondersAPI.UpdateOCSPRespondersByID(ctx, objectId).OcspResponders(*unpackedScmObject)
 
 	// Step 7: Retain update parameters so we dont lose them
 	// ======================== START: ADD THIS BLOCK ========================

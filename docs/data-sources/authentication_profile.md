@@ -38,11 +38,14 @@ output "fetched_profile" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the authentication profile
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -71,18 +74,25 @@ Read-Only:
 Read-Only:
 
 - `cloud` (Attributes) Cloud
+
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--cloud))
 - `kerberos` (Attributes) Kerberos
+
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--kerberos))
 - `ldap` (Attributes) Ldap
+
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--ldap))
 - `local_database` (Attributes) Local database
+
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--local_database))
 - `radius` (Attributes) Radius
+
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--radius))
 - `saml_idp` (Attributes) Saml idp
+
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--saml_idp))
 - `tacplus` (Attributes) Tacplus
+
 > ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`. (see [below for nested schema](#nestedatt--method--tacplus))
 
 <a id="nestedatt--method--cloud"></a>

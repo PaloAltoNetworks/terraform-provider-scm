@@ -38,11 +38,14 @@ output "fetched_rule_data" {
 ### Optional
 
 - `device` (String) Device
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) Folder
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the authentication rule
 - `snippet` (String) Snippet
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only

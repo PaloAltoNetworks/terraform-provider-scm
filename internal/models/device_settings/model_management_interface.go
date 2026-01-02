@@ -311,7 +311,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -326,7 +326,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -353,7 +353,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("static"),
 								),
 							},
-							MarkdownDescription: "Dhcp client\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Dhcp client\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
 								"accept_dhcp_domain": schema.BoolAttribute{
@@ -388,7 +388,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("dhcp_client"),
 								),
 							},
-							MarkdownDescription: "Static\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
 								"default_gateway": schema.StringAttribute{
@@ -515,7 +515,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -536,12 +536,12 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ManagementInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -558,7 +558,7 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"dhcp_client": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Dhcp client\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Dhcp client\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"accept_dhcp_domain": dsschema.BoolAttribute{
@@ -580,7 +580,7 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"static": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Static\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"default_gateway": dsschema.StringAttribute{
@@ -672,7 +672,7 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

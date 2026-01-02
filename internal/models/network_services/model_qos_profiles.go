@@ -10,6 +10,7 @@ import (
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -334,14 +335,14 @@ var QosProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"egress_guaranteed": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.Between(0, 16000),
+						int64validator.Between(0, 10000),
 					},
 					MarkdownDescription: "guaranteed sending bandwidth in mbps",
 					Optional:            true,
 				},
 				"egress_max": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.Between(0, 60000),
+						int64validator.Between(0, 10000),
 					},
 					MarkdownDescription: "max sending bandwidth in mbps",
 					Optional:            true,
@@ -376,6 +377,8 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "guaranteed sending bandwidth in mbps",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 											"egress_max": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -383,12 +386,14 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "max sending bandwidth in mbps",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 										},
 									},
 									"name": schema.StringAttribute{
 										Validators: []validator.String{
-											stringvalidator.LengthAtMost(31),
+											stringvalidator.OneOf("class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8"),
 										},
 										MarkdownDescription: "Traffic class",
 										Optional:            true,
@@ -431,6 +436,8 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "guaranteed sending bandwidth in percentage",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 											"egress_max": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -438,12 +445,14 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "max sending bandwidth in percentage",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 										},
 									},
 									"name": schema.StringAttribute{
 										Validators: []validator.String{
-											stringvalidator.LengthAtMost(31),
+											stringvalidator.OneOf("class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8"),
 										},
 										MarkdownDescription: "Traffic class",
 										Optional:            true,

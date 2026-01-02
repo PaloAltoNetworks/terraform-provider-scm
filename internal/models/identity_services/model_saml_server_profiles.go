@@ -30,6 +30,7 @@ type SamlServerProfiles struct {
 	MaxClockSkew           basetypes.Int64Value  `tfsdk:"max_clock_skew"`
 	Name                   basetypes.StringValue `tfsdk:"name"`
 	SloBindings            basetypes.StringValue `tfsdk:"slo_bindings"`
+	SloUrl                 basetypes.StringValue `tfsdk:"slo_url"`
 	Snippet                basetypes.StringValue `tfsdk:"snippet"`
 	SsoBindings            basetypes.StringValue `tfsdk:"sso_bindings"`
 	SsoUrl                 basetypes.StringValue `tfsdk:"sso_url"`
@@ -49,6 +50,7 @@ func (o SamlServerProfiles) AttrTypes() map[string]attr.Type {
 		"max_clock_skew":            basetypes.Int64Type{},
 		"name":                      basetypes.StringType{},
 		"slo_bindings":              basetypes.StringType{},
+		"slo_url":                   basetypes.StringType{},
 		"snippet":                   basetypes.StringType{},
 		"sso_bindings":              basetypes.StringType{},
 		"sso_url":                   basetypes.StringType{},
@@ -138,6 +140,14 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "SAML HTTP binding for SLO requests to the identity provider",
 			Optional:            true,
 		},
+		"slo_url": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.LengthAtMost(255),
+				stringvalidator.LengthAtLeast(1),
+			},
+			MarkdownDescription: "Identity provider SLO URL",
+			Optional:            true,
+		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
@@ -223,6 +233,10 @@ var SamlServerProfilesDataSourceSchema = dsschema.Schema{
 		},
 		"slo_bindings": dsschema.StringAttribute{
 			MarkdownDescription: "SAML HTTP binding for SLO requests to the identity provider",
+			Computed:            true,
+		},
+		"slo_url": dsschema.StringAttribute{
+			MarkdownDescription: "Identity provider SLO URL",
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{

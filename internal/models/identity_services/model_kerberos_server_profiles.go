@@ -131,11 +131,11 @@ var KerberosServerProfilesResourceSchema = schema.Schema{
 				Attributes: map[string]schema.Attribute{
 					"host": schema.StringAttribute{
 						MarkdownDescription: "The Kerberos server IP address",
-						Optional:            true,
+						Required:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "The Kerberos server name",
-						Optional:            true,
+						Required:            true,
 					},
 					"port": schema.Int64Attribute{
 						Validators: []validator.Int64{

@@ -85,9 +85,9 @@ func (r *SslDecryptionSettingResource) Create(ctx context.Context, req resource.
 	if resp.Diagnostics.HasError() { return }
 
 	// 2. Unpack the request BODY from data into an SDK object.
-	unpackedScmObject, diags := unpackSslDecryptionSettingsToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    unpackedScmObject, diags := unpackSslDecryptionSettingsToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
 	tflog.Debug(ctx, "Creating ssl_decryption_settings on SCM API")
 
@@ -376,22 +376,20 @@ func (r *SslDecryptionSettingResource) Update(ctx context.Context, req resource.
 	if resp.Diagnostics.HasError() { return }
 
 	// Step 4: Unpack the plan object to an SCM Object
-	unpackedScmObject, diags := unpackSslDecryptionSettingsToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    unpackedScmObject, diags := unpackSslDecryptionSettingsToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
-	// --- START: MODIFIED API CALL (no path param) ---
-	var scmObjectInterface interface{}
-	var httpErr *http.Response
-	var err error
+    // --- START: MODIFIED API CALL (no path param) ---
+    var scmObjectInterface interface{}
+    var httpErr *http.Response
+    var err error
 
 
-		tflog.Debug(ctx, "Updating ssl_decryption_settings on SCM API")
+       tflog.Debug(ctx, "Updating ssl_decryption_settings on SCM API")
 
-        // --- START AUTOMATED CONVERSION (JSON Marshaling) ---
-        // Symmetric Schema
-		updateReq := r.client.SslDecryptionSettingsAPI.PutSslDecryptionSettings(ctx).SslDecryptionSettings(*unpackedScmObject)
-        // --- END AUTOMATED CONVERSION ---
+       // Call Update (PUT)
+       updateReq := r.client.SslDecryptionSettingsAPI.PutSslDecryptionSettings(ctx).SslDecryptionSettings(*unpackedScmObject)
 
 
 

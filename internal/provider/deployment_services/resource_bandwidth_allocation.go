@@ -227,6 +227,7 @@ func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.U
 		return
 	}
 
+	// Unpack the plan to an SCM SDK object
 	unpackedScmObject, diags := unpackBandwidthAllocationsToSdk(ctx, planObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {

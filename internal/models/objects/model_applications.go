@@ -737,7 +737,7 @@ var ApplicationsResourceSchema = schema.Schema{
 		},
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.LengthAtMost(1023),
+				stringvalidator.LengthAtMost(8192),
 			},
 			MarkdownDescription: "Description",
 			Optional:            true,

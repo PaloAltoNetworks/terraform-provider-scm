@@ -85,9 +85,9 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 	if resp.Diagnostics.HasError() { return }
 
 	// 2. Unpack the request BODY from data into an SDK object.
-	unpackedScmObject, diags := unpackSharedInfrastructureSettingsToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    unpackedScmObject, diags := unpackSharedInfrastructureSettingsToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
 	tflog.Debug(ctx, "Creating shared_infrastructure_settings on SCM API")
 
@@ -325,38 +325,20 @@ func (r *SharedInfrastructureSettingResource) Update(ctx context.Context, req re
 	if resp.Diagnostics.HasError() { return }
 
 	// Step 4: Unpack the plan object to an SCM Object
-	unpackedScmObject, diags := unpackSharedInfrastructureSettingsToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    unpackedScmObject, diags := unpackEditSharedInfrastructureSettingsToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
-	// --- START: MODIFIED API CALL (no path param) ---
-	var scmObjectInterface interface{}
-	var httpErr *http.Response
-	var err error
+    // --- START: MODIFIED API CALL (no path param) ---
+    var scmObjectInterface interface{}
+    var httpErr *http.Response
+    var err error
 
 
-		tflog.Debug(ctx, "Updating shared_infrastructure_settings on SCM API")
+       tflog.Debug(ctx, "Updating shared_infrastructure_settings on SCM API")
 
-        // --- START AUTOMATED CONVERSION (JSON Marshaling) ---
-        // Asymmetric Schema Detected: The API expects edit-shared-infrastructure-settings, but we have SharedInfrastructureSettings.
-        var updateObj deployment_services.EditSharedInfrastructureSettings
-
-        // 1. Marshal the read object to JSON
-        jsonBytes, err := json.Marshal(unpackedScmObject)
-        if err != nil {
-            resp.Diagnostics.AddError("Error Converting Model", "Could not marshal read model to JSON: "+err.Error())
-            return
-        }
-
-        // 2. Unmarshal into the update object.
-        err = json.Unmarshal(jsonBytes, &updateObj)
-        if err != nil {
-            resp.Diagnostics.AddError("Error Converting Model", "Could not unmarshal JSON to update model: "+err.Error())
-            return
-        }
-
-		updateReq := r.client.SharedInfrastructureSettingsAPI.UpdateSharedInfrastructureSettings(ctx).EditSharedInfrastructureSettings(updateObj)
-        // --- END AUTOMATED CONVERSION ---
+       // Call Update (PUT)
+       updateReq := r.client.SharedInfrastructureSettingsAPI.UpdateSharedInfrastructureSettings(ctx).EditSharedInfrastructureSettings(*unpackedScmObject)
 
 
 

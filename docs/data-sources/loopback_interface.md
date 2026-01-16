@@ -76,12 +76,21 @@ Read-Only:
 
 - `address` (Attributes List) IPv6 Address Parent (see [below for nested schema](#nestedatt--ipv6--address))
 - `enabled` (Boolean) Enable IPv6
+- `interface_id` (String) Interface ID
 
 <a id="nestedatt--ipv6--address"></a>
 ### Nested Schema for `ipv6.address`
 
 Read-Only:
 
+- `anycast` (Attributes) Anycast (see [below for nested schema](#nestedatt--ipv6--address--anycast))
 - `enable_on_interface` (Boolean) Enable Address on Interface
-- `interface_id` (String) Interface ID
 - `name` (String) IPv6 Address
+- `prefix` (Attributes) Use interface ID as host portion (see [below for nested schema](#nestedatt--ipv6--address--prefix))
+
+<a id="nestedatt--ipv6--address--anycast"></a>
+### Nested Schema for `ipv6.address.anycast`
+
+
+<a id="nestedatt--ipv6--address--prefix"></a>
+### Nested Schema for `ipv6.address.prefix`

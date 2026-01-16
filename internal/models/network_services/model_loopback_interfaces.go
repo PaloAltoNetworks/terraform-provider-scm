@@ -44,15 +44,17 @@ type LoopbackInterfacesIpInner struct {
 
 // LoopbackInterfacesIpv6 represents a nested structure within the LoopbackInterfaces model
 type LoopbackInterfacesIpv6 struct {
-	Address basetypes.ListValue `tfsdk:"address"`
-	Enabled basetypes.BoolValue `tfsdk:"enabled"`
+	Address     basetypes.ListValue   `tfsdk:"address"`
+	Enabled     basetypes.BoolValue   `tfsdk:"enabled"`
+	InterfaceId basetypes.StringValue `tfsdk:"interface_id"`
 }
 
 // LoopbackInterfacesIpv6AddressInner represents a nested structure within the LoopbackInterfaces model
 type LoopbackInterfacesIpv6AddressInner struct {
+	Anycast           basetypes.ObjectValue `tfsdk:"anycast"`
 	EnableOnInterface basetypes.BoolValue   `tfsdk:"enable_on_interface"`
-	InterfaceId       basetypes.StringValue `tfsdk:"interface_id"`
 	Name              basetypes.StringValue `tfsdk:"name"`
+	Prefix            basetypes.ObjectValue `tfsdk:"prefix"`
 }
 
 // AttrTypes defines the attribute types for the LoopbackInterfaces model.
@@ -74,12 +76,18 @@ func (o LoopbackInterfaces) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"address": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
+						"anycast": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
 						"enable_on_interface": basetypes.BoolType{},
-						"interface_id":        basetypes.StringType{},
 						"name":                basetypes.StringType{},
+						"prefix": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
 					},
 				}},
-				"enabled": basetypes.BoolType{},
+				"enabled":      basetypes.BoolType{},
+				"interface_id": basetypes.StringType{},
 			},
 		},
 		"mtu":     basetypes.Int64Type{},
@@ -114,12 +122,18 @@ func (o LoopbackInterfacesIpv6) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"address": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"anycast": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
 				"enable_on_interface": basetypes.BoolType{},
-				"interface_id":        basetypes.StringType{},
 				"name":                basetypes.StringType{},
+				"prefix": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
 			},
 		}},
-		"enabled": basetypes.BoolType{},
+		"enabled":      basetypes.BoolType{},
+		"interface_id": basetypes.StringType{},
 	}
 }
 
@@ -133,9 +147,14 @@ func (o LoopbackInterfacesIpv6) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the LoopbackInterfacesIpv6AddressInner model.
 func (o LoopbackInterfacesIpv6AddressInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"anycast": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
 		"enable_on_interface": basetypes.BoolType{},
-		"interface_id":        basetypes.StringType{},
 		"name":                basetypes.StringType{},
+		"prefix": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
 	}
 }
 
@@ -223,21 +242,25 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 					Optional:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
+							"anycast": schema.SingleNestedAttribute{
+								MarkdownDescription: "Anycast",
+								Optional:            true,
+								Attributes:          map[string]schema.Attribute{},
+							},
 							"enable_on_interface": schema.BoolAttribute{
 								MarkdownDescription: "Enable Address on Interface",
 								Optional:            true,
 								Computed:            true,
 								Default:             booldefault.StaticBool(true),
 							},
-							"interface_id": schema.StringAttribute{
-								MarkdownDescription: "Interface ID",
-								Optional:            true,
-								Computed:            true,
-								Default:             stringdefault.StaticString("EUI-64"),
-							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "IPv6 Address",
 								Optional:            true,
+							},
+							"prefix": schema.SingleNestedAttribute{
+								MarkdownDescription: "Use interface ID as host portion",
+								Optional:            true,
+								Attributes:          map[string]schema.Attribute{},
 							},
 						},
 					},
@@ -247,6 +270,12 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 					Optional:            true,
 					Computed:            true,
 					Default:             booldefault.StaticBool(false),
+				},
+				"interface_id": schema.StringAttribute{
+					MarkdownDescription: "Interface ID",
+					Optional:            true,
+					Computed:            true,
+					Default:             stringdefault.StaticString("EUI-64"),
 				},
 			},
 		},
@@ -340,23 +369,33 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
+							"anycast": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Anycast",
+								Computed:            true,
+								Attributes:          map[string]dsschema.Attribute{},
+							},
 							"enable_on_interface": dsschema.BoolAttribute{
 								MarkdownDescription: "Enable Address on Interface",
-								Computed:            true,
-							},
-							"interface_id": dsschema.StringAttribute{
-								MarkdownDescription: "Interface ID",
 								Computed:            true,
 							},
 							"name": dsschema.StringAttribute{
 								MarkdownDescription: "IPv6 Address",
 								Computed:            true,
 							},
+							"prefix": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Use interface ID as host portion",
+								Computed:            true,
+								Attributes:          map[string]dsschema.Attribute{},
+							},
 						},
 					},
 				},
 				"enabled": dsschema.BoolAttribute{
 					MarkdownDescription: "Enable IPv6",
+					Computed:            true,
+				},
+				"interface_id": dsschema.StringAttribute{
+					MarkdownDescription: "Interface ID",
 					Computed:            true,
 				},
 			},

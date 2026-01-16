@@ -9,7 +9,9 @@ import (
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -29,6 +31,7 @@ type TunnelInterfaces struct {
 	Id                         basetypes.StringValue `tfsdk:"id"`
 	InterfaceManagementProfile basetypes.StringValue `tfsdk:"interface_management_profile"`
 	Ip                         basetypes.ListValue   `tfsdk:"ip"`
+	Ipv6                       basetypes.ObjectValue `tfsdk:"ipv6"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 	Name                       basetypes.StringValue `tfsdk:"name"`
 	Snippet                    basetypes.StringValue `tfsdk:"snippet"`
@@ -37,6 +40,13 @@ type TunnelInterfaces struct {
 // TunnelInterfacesIpInner represents a nested structure within the TunnelInterfaces model
 type TunnelInterfacesIpInner struct {
 	Name basetypes.StringValue `tfsdk:"name"`
+}
+
+// TunnelInterfacesIpv6 represents a nested structure within the TunnelInterfaces model
+type TunnelInterfacesIpv6 struct {
+	Address     basetypes.ListValue   `tfsdk:"address"`
+	Enabled     basetypes.BoolValue   `tfsdk:"enabled"`
+	InterfaceId basetypes.StringValue `tfsdk:"interface_id"`
 }
 
 // AttrTypes defines the attribute types for the TunnelInterfaces model.
@@ -54,6 +64,24 @@ func (o TunnelInterfaces) AttrTypes() map[string]attr.Type {
 				"name": basetypes.StringType{},
 			},
 		}},
+		"ipv6": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"address": basetypes.ListType{ElemType: basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"anycast": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
+						"enable_on_interface": basetypes.BoolType{},
+						"name":                basetypes.StringType{},
+						"prefix": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{},
+						},
+					},
+				}},
+				"enabled":      basetypes.BoolType{},
+				"interface_id": basetypes.StringType{},
+			},
+		},
 		"mtu":     basetypes.Int64Type{},
 		"name":    basetypes.StringType{},
 		"snippet": basetypes.StringType{},
@@ -76,6 +104,33 @@ func (o TunnelInterfacesIpInner) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of TunnelInterfacesIpInner objects.
 func (o TunnelInterfacesIpInner) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the TunnelInterfacesIpv6 model.
+func (o TunnelInterfacesIpv6) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"address": basetypes.ListType{ElemType: basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"anycast": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
+				"enable_on_interface": basetypes.BoolType{},
+				"name":                basetypes.StringType{},
+				"prefix": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
+			},
+		}},
+		"enabled":      basetypes.BoolType{},
+		"interface_id": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of TunnelInterfacesIpv6 objects.
+func (o TunnelInterfacesIpv6) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -146,6 +201,52 @@ var TunnelInterfacesResourceSchema = schema.Schema{
 						MarkdownDescription: "Tunnel Interface IP address(es)",
 						Required:            true,
 					},
+				},
+			},
+		},
+		"ipv6": schema.SingleNestedAttribute{
+			MarkdownDescription: "Tunnel Interface IPv6 Configuration",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"address": schema.ListNestedAttribute{
+					MarkdownDescription: "IPv6 Address Parent",
+					Optional:            true,
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"anycast": schema.SingleNestedAttribute{
+								MarkdownDescription: "Anycast",
+								Optional:            true,
+								Attributes:          map[string]schema.Attribute{},
+							},
+							"enable_on_interface": schema.BoolAttribute{
+								MarkdownDescription: "Enable Address on Interface",
+								Optional:            true,
+								Computed:            true,
+								Default:             booldefault.StaticBool(true),
+							},
+							"name": schema.StringAttribute{
+								MarkdownDescription: "IPv6 Address",
+								Optional:            true,
+							},
+							"prefix": schema.SingleNestedAttribute{
+								MarkdownDescription: "Use interface ID as host portion",
+								Optional:            true,
+								Attributes:          map[string]schema.Attribute{},
+							},
+						},
+					},
+				},
+				"enabled": schema.BoolAttribute{
+					MarkdownDescription: "Enable IPv6",
+					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(false),
+				},
+				"interface_id": schema.StringAttribute{
+					MarkdownDescription: "Interface ID",
+					Optional:            true,
+					Computed:            true,
+					Default:             stringdefault.StaticString("EUI-64"),
 				},
 			},
 		},
@@ -224,6 +325,46 @@ var TunnelInterfacesDataSourceSchema = dsschema.Schema{
 						MarkdownDescription: "Tunnel Interface IP address(es)",
 						Computed:            true,
 					},
+				},
+			},
+		},
+		"ipv6": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Tunnel Interface IPv6 Configuration",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"address": dsschema.ListNestedAttribute{
+					MarkdownDescription: "IPv6 Address Parent",
+					Computed:            true,
+					NestedObject: dsschema.NestedAttributeObject{
+						Attributes: map[string]dsschema.Attribute{
+							"anycast": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Anycast",
+								Computed:            true,
+								Attributes:          map[string]dsschema.Attribute{},
+							},
+							"enable_on_interface": dsschema.BoolAttribute{
+								MarkdownDescription: "Enable Address on Interface",
+								Computed:            true,
+							},
+							"name": dsschema.StringAttribute{
+								MarkdownDescription: "IPv6 Address",
+								Computed:            true,
+							},
+							"prefix": dsschema.SingleNestedAttribute{
+								MarkdownDescription: "Use interface ID as host portion",
+								Computed:            true,
+								Attributes:          map[string]dsschema.Attribute{},
+							},
+						},
+					},
+				},
+				"enabled": dsschema.BoolAttribute{
+					MarkdownDescription: "Enable IPv6",
+					Computed:            true,
+				},
+				"interface_id": dsschema.StringAttribute{
+					MarkdownDescription: "Interface ID",
+					Computed:            true,
 				},
 			},
 		},

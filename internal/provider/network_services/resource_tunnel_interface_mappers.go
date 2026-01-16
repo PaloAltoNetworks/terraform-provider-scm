@@ -71,6 +71,19 @@ func unpackTunnelInterfacesToSdk(ctx context.Context, obj types.Object) (*networ
 		sdk.Ip = unpacked
 	}
 
+	// Handling Objects
+	if !model.Ipv6.IsNull() && !model.Ipv6.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Ipv6")
+		unpacked, d := unpackTunnelInterfacesIpv6ToSdk(ctx, model.Ipv6)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Ipv6"})
+		}
+		if unpacked != nil {
+			sdk.Ipv6 = unpacked
+		}
+	}
+
 	// Handling Primitives
 	if !model.Mtu.IsNull() && !model.Mtu.IsUnknown() {
 		val := int32(model.Mtu.ValueInt64())
@@ -159,6 +172,19 @@ func packTunnelInterfacesFromSdk(ctx context.Context, sdk network_services.Tunne
 		model.Ip = packed
 	} else {
 		model.Ip = basetypes.NewListNull(models.TunnelInterfacesIpInner{}.AttrType())
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Ipv6 != nil {
+		tflog.Debug(ctx, "Packing nested object for field Ipv6")
+		packed, d := packTunnelInterfacesIpv6FromSdk(ctx, *sdk.Ipv6)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Ipv6"})
+		}
+		model.Ipv6 = packed
+	} else {
+		model.Ipv6 = basetypes.NewObjectNull(models.TunnelInterfacesIpv6{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -327,4 +353,132 @@ func packTunnelInterfacesIpInnerListFromSdk(ctx context.Context, sdks []network_
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.TunnelInterfacesIpInner", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.TunnelInterfacesIpInner{}.AttrType(), data)
+}
+
+// --- Unpacker for TunnelInterfacesIpv6 ---
+func unpackTunnelInterfacesIpv6ToSdk(ctx context.Context, obj types.Object) (*network_services.TunnelInterfacesIpv6, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.TunnelInterfacesIpv6", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.TunnelInterfacesIpv6
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.TunnelInterfacesIpv6
+	var d diag.Diagnostics
+	// Handling Lists
+	if !model.Address.IsNull() && !model.Address.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of objects for field Address")
+		unpacked, d := unpackLoopbackInterfacesIpv6AddressInnerListToSdk(ctx, model.Address)
+		diags.Append(d...)
+		sdk.Address = unpacked
+	}
+
+	// Handling Primitives
+	if !model.Enabled.IsNull() && !model.Enabled.IsUnknown() {
+		sdk.Enabled = model.Enabled.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Enabled", "value": *sdk.Enabled})
+	}
+
+	// Handling Primitives
+	if !model.InterfaceId.IsNull() && !model.InterfaceId.IsUnknown() {
+		sdk.InterfaceId = model.InterfaceId.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.TunnelInterfacesIpv6", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for TunnelInterfacesIpv6 ---
+func packTunnelInterfacesIpv6FromSdk(ctx context.Context, sdk network_services.TunnelInterfacesIpv6) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.TunnelInterfacesIpv6", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.TunnelInterfacesIpv6
+	var d diag.Diagnostics
+	// Handling Lists
+	if sdk.Address != nil {
+		tflog.Debug(ctx, "Packing list of objects for field Address")
+		packed, d := packLoopbackInterfacesIpv6AddressInnerListFromSdk(ctx, sdk.Address)
+		diags.Append(d...)
+		model.Address = packed
+	} else {
+		model.Address = basetypes.NewListNull(models.LoopbackInterfacesIpv6AddressInner{}.AttrType())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Enabled != nil {
+		model.Enabled = basetypes.NewBoolValue(*sdk.Enabled)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Enabled", "value": *sdk.Enabled})
+	} else {
+		model.Enabled = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.InterfaceId != nil {
+		model.InterfaceId = basetypes.NewStringValue(*sdk.InterfaceId)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
+	} else {
+		model.InterfaceId = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.TunnelInterfacesIpv6{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.TunnelInterfacesIpv6", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for TunnelInterfacesIpv6 ---
+func unpackTunnelInterfacesIpv6ListToSdk(ctx context.Context, list types.List) ([]network_services.TunnelInterfacesIpv6, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.TunnelInterfacesIpv6")
+	diags := diag.Diagnostics{}
+	var data []models.TunnelInterfacesIpv6
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.TunnelInterfacesIpv6, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.TunnelInterfacesIpv6{}.AttrTypes(), &item)
+		unpacked, d := unpackTunnelInterfacesIpv6ToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.TunnelInterfacesIpv6", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for TunnelInterfacesIpv6 ---
+func packTunnelInterfacesIpv6ListFromSdk(ctx context.Context, sdks []network_services.TunnelInterfacesIpv6) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.TunnelInterfacesIpv6")
+	diags := diag.Diagnostics{}
+	var data []models.TunnelInterfacesIpv6
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.TunnelInterfacesIpv6
+		obj, d := packTunnelInterfacesIpv6FromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.TunnelInterfacesIpv6{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.TunnelInterfacesIpv6", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.TunnelInterfacesIpv6{}.AttrType(), data)
 }

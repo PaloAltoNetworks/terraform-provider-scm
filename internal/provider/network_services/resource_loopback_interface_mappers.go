@@ -2,7 +2,9 @@ package provider
 
 import (
 	"context"
+	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -383,6 +385,12 @@ func unpackLoopbackInterfacesIpv6ToSdk(ctx context.Context, obj types.Object) (*
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Enabled", "value": *sdk.Enabled})
 	}
 
+	// Handling Primitives
+	if !model.InterfaceId.IsNull() && !model.InterfaceId.IsUnknown() {
+		sdk.InterfaceId = model.InterfaceId.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
+	}
+
 	diags.Append(d...)
 
 	tflog.Debug(ctx, "Exiting unpack helper for models.LoopbackInterfacesIpv6", map[string]interface{}{"has_errors": diags.HasError()})
@@ -412,6 +420,14 @@ func packLoopbackInterfacesIpv6FromSdk(ctx context.Context, sdk network_services
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Enabled", "value": *sdk.Enabled})
 	} else {
 		model.Enabled = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.InterfaceId != nil {
+		model.InterfaceId = basetypes.NewStringValue(*sdk.InterfaceId)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
+	} else {
+		model.InterfaceId = basetypes.NewStringNull()
 	}
 	diags.Append(d...)
 
@@ -483,6 +499,12 @@ func unpackLoopbackInterfacesIpv6AddressInnerToSdk(ctx context.Context, obj type
 
 	var sdk network_services.LoopbackInterfacesIpv6AddressInner
 	var d diag.Diagnostics
+	// Handling Typeless Objects
+	if !model.Anycast.IsNull() && !model.Anycast.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Anycast")
+		sdk.Anycast = make(map[string]interface{})
+	}
+
 	// Handling Primitives
 	if !model.EnableOnInterface.IsNull() && !model.EnableOnInterface.IsUnknown() {
 		sdk.EnableOnInterface = model.EnableOnInterface.ValueBoolPointer()
@@ -490,15 +512,15 @@ func unpackLoopbackInterfacesIpv6AddressInnerToSdk(ctx context.Context, obj type
 	}
 
 	// Handling Primitives
-	if !model.InterfaceId.IsNull() && !model.InterfaceId.IsUnknown() {
-		sdk.InterfaceId = model.InterfaceId.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
-	}
-
-	// Handling Primitives
 	if !model.Name.IsNull() && !model.Name.IsUnknown() {
 		sdk.Name = model.Name.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
+	}
+
+	// Handling Typeless Objects
+	if !model.Prefix.IsNull() && !model.Prefix.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Prefix")
+		sdk.Prefix = make(map[string]interface{})
 	}
 
 	diags.Append(d...)
@@ -514,6 +536,19 @@ func packLoopbackInterfacesIpv6AddressInnerFromSdk(ctx context.Context, sdk netw
 	diags := diag.Diagnostics{}
 	var model models.LoopbackInterfacesIpv6AddressInner
 	var d diag.Diagnostics
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Anycast != nil && !reflect.ValueOf(sdk.Anycast).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Anycast")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Anycast, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Anycast = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.EnableOnInterface != nil {
@@ -524,19 +559,24 @@ func packLoopbackInterfacesIpv6AddressInnerFromSdk(ctx context.Context, sdk netw
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.InterfaceId != nil {
-		model.InterfaceId = basetypes.NewStringValue(*sdk.InterfaceId)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "InterfaceId", "value": *sdk.InterfaceId})
-	} else {
-		model.InterfaceId = basetypes.NewStringNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
 	if sdk.Name != nil {
 		model.Name = basetypes.NewStringValue(*sdk.Name)
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
 	} else {
 		model.Name = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Prefix != nil && !reflect.ValueOf(sdk.Prefix).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Prefix")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Prefix, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Prefix = basetypes.NewObjectNull(map[string]attr.Type{})
 	}
 	diags.Append(d...)
 

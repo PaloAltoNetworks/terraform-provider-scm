@@ -32,12 +32,14 @@ type LogForwardingProfiles struct {
 
 // LogForwardingProfilesMatchListInner represents a nested structure within the LogForwardingProfiles model
 type LogForwardingProfilesMatchListInner struct {
-	ActionDesc basetypes.StringValue `tfsdk:"action_desc"`
-	Filter     basetypes.StringValue `tfsdk:"filter"`
-	LogType    basetypes.StringValue `tfsdk:"log_type"`
-	Name       basetypes.StringValue `tfsdk:"name"`
-	SendHttp   basetypes.ListValue   `tfsdk:"send_http"`
-	SendSyslog basetypes.ListValue   `tfsdk:"send_syslog"`
+	ActionDesc   basetypes.StringValue `tfsdk:"action_desc"`
+	Filter       basetypes.StringValue `tfsdk:"filter"`
+	LogType      basetypes.StringValue `tfsdk:"log_type"`
+	Name         basetypes.StringValue `tfsdk:"name"`
+	SendEmail    basetypes.ListValue   `tfsdk:"send_email"`
+	SendHttp     basetypes.ListValue   `tfsdk:"send_http"`
+	SendSnmptrap basetypes.ListValue   `tfsdk:"send_snmptrap"`
+	SendSyslog   basetypes.ListValue   `tfsdk:"send_syslog"`
 }
 
 // AttrTypes defines the attribute types for the LogForwardingProfiles model.
@@ -50,12 +52,14 @@ func (o LogForwardingProfiles) AttrTypes() map[string]attr.Type {
 		"id":          basetypes.StringType{},
 		"match_list": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"action_desc": basetypes.StringType{},
-				"filter":      basetypes.StringType{},
-				"log_type":    basetypes.StringType{},
-				"name":        basetypes.StringType{},
-				"send_http":   basetypes.ListType{ElemType: basetypes.StringType{}},
-				"send_syslog": basetypes.ListType{ElemType: basetypes.StringType{}},
+				"action_desc":   basetypes.StringType{},
+				"filter":        basetypes.StringType{},
+				"log_type":      basetypes.StringType{},
+				"name":          basetypes.StringType{},
+				"send_email":    basetypes.ListType{ElemType: basetypes.StringType{}},
+				"send_http":     basetypes.ListType{ElemType: basetypes.StringType{}},
+				"send_snmptrap": basetypes.ListType{ElemType: basetypes.StringType{}},
+				"send_syslog":   basetypes.ListType{ElemType: basetypes.StringType{}},
 			},
 		}},
 		"name":    basetypes.StringType{},
@@ -73,12 +77,14 @@ func (o LogForwardingProfiles) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the LogForwardingProfilesMatchListInner model.
 func (o LogForwardingProfilesMatchListInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"action_desc": basetypes.StringType{},
-		"filter":      basetypes.StringType{},
-		"log_type":    basetypes.StringType{},
-		"name":        basetypes.StringType{},
-		"send_http":   basetypes.ListType{ElemType: basetypes.StringType{}},
-		"send_syslog": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"action_desc":   basetypes.StringType{},
+		"filter":        basetypes.StringType{},
+		"log_type":      basetypes.StringType{},
+		"name":          basetypes.StringType{},
+		"send_email":    basetypes.ListType{ElemType: basetypes.StringType{}},
+		"send_http":     basetypes.ListType{ElemType: basetypes.StringType{}},
+		"send_snmptrap": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"send_syslog":   basetypes.ListType{ElemType: basetypes.StringType{}},
 	}
 }
 
@@ -136,7 +142,7 @@ var LogForwardingProfilesResourceSchema = schema.Schema{
 		},
 		"match_list": schema.ListNestedAttribute{
 			MarkdownDescription: "Match list",
-			Optional:            true,
+			Required:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"action_desc": schema.StringAttribute{
@@ -151,25 +157,35 @@ var LogForwardingProfilesResourceSchema = schema.Schema{
 							stringvalidator.LengthAtMost(65535),
 						},
 						MarkdownDescription: "Filter match criteria",
-						Optional:            true,
+						Required:            true,
 					},
 					"log_type": schema.StringAttribute{
 						Validators: []validator.String{
-							stringvalidator.OneOf("traffic", "threat", "wildfire", "url", "data", "tunnel", "auth", "decryption"),
+							stringvalidator.OneOf("traffic", "threat", "wildfire", "url", "data", "tunnel", "auth", "decryption", "dns-security"),
 						},
 						MarkdownDescription: "Log type",
-						Optional:            true,
+						Required:            true,
 					},
 					"name": schema.StringAttribute{
 						Validators: []validator.String{
 							stringvalidator.LengthAtMost(63),
 						},
 						MarkdownDescription: "Name of the match profile",
+						Required:            true,
+					},
+					"send_email": schema.ListAttribute{
+						ElementType:         types.StringType,
+						MarkdownDescription: "A list of email server profiles",
 						Optional:            true,
 					},
 					"send_http": schema.ListAttribute{
 						ElementType:         types.StringType,
 						MarkdownDescription: "A list of HTTP server profiles",
+						Optional:            true,
+					},
+					"send_snmptrap": schema.ListAttribute{
+						ElementType:         types.StringType,
+						MarkdownDescription: "A list of SNMP server profiles",
 						Optional:            true,
 					},
 					"send_syslog": schema.ListAttribute{
@@ -255,9 +271,19 @@ var LogForwardingProfilesDataSourceSchema = dsschema.Schema{
 						MarkdownDescription: "Name of the match profile",
 						Computed:            true,
 					},
+					"send_email": dsschema.ListAttribute{
+						ElementType:         types.StringType,
+						MarkdownDescription: "A list of email server profiles",
+						Computed:            true,
+					},
 					"send_http": dsschema.ListAttribute{
 						ElementType:         types.StringType,
 						MarkdownDescription: "A list of HTTP server profiles",
+						Computed:            true,
+					},
+					"send_snmptrap": dsschema.ListAttribute{
+						ElementType:         types.StringType,
+						MarkdownDescription: "A list of SNMP server profiles",
 						Computed:            true,
 					},
 					"send_syslog": dsschema.ListAttribute{

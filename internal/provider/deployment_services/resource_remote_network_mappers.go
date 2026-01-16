@@ -21,11 +21,21 @@ type remoteNetworksSensitiveValuePatcher struct {
 	protocol_bgp_secret_encrypted      basetypes.StringValue
 	protocol_bgp_peer_secret_plaintext basetypes.StringValue
 	protocol_bgp_peer_secret_encrypted basetypes.StringValue
+	// arrayValues stores sensitive values for fields inside arrays, with dynamic keys like "server_secret_plaintext_0"
+	arrayValues map[string]basetypes.StringValue
+}
+
+// Initialize initializes the patcher (must be called before use if there are array fields)
+func (p *remoteNetworksSensitiveValuePatcher) init() {
+	if p.arrayValues == nil {
+		p.arrayValues = make(map[string]basetypes.StringValue)
+	}
 }
 
 // populatePatcherFromState populates the patcher struct from the resource's state.
 func (p *remoteNetworksSensitiveValuePatcher) populatePatcherFromState(ctx context.Context, state models.RemoteNetworks) diag.Diagnostics {
 	var diags diag.Diagnostics
+	p.init() // Initialize the map
 	if state.EncryptedValues.IsNull() || state.EncryptedValues.IsUnknown() {
 		return diags
 	}
@@ -47,6 +57,17 @@ func (p *remoteNetworksSensitiveValuePatcher) populatePatcherFromState(ctx conte
 	if val, ok := ev["protocol_bgp_peer_secret_encrypted"]; ok {
 		p.protocol_bgp_peer_secret_encrypted = basetypes.NewStringValue(val)
 	}
+	// Load array values (all keys that don't match the non-array patterns)
+	for key, val := range ev {
+		if key == "protocol_bgp_secret_plaintext" || key == "protocol_bgp_secret_encrypted" {
+			continue // Already handled above
+		}
+		if key == "protocol_bgp_peer_secret_plaintext" || key == "protocol_bgp_peer_secret_encrypted" {
+			continue // Already handled above
+		}
+		// Store any remaining keys (array values) in the map
+		p.arrayValues[key] = basetypes.NewStringValue(val)
+	}
 
 	return diags
 }
@@ -65,6 +86,12 @@ func (p *remoteNetworksSensitiveValuePatcher) populateEncryptedValuesMap() map[s
 	}
 	if !p.protocol_bgp_peer_secret_encrypted.IsNull() {
 		ev["protocol_bgp_peer_secret_encrypted"] = p.protocol_bgp_peer_secret_encrypted.ValueString()
+	}
+	// Add all array values
+	for key, val := range p.arrayValues {
+		if !val.IsNull() {
+			ev[key] = val.ValueString()
+		}
 	}
 	return ev
 }

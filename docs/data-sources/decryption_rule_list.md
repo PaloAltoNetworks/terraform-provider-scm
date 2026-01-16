@@ -106,9 +106,17 @@ Read-Only:
 - `ssl_forward_proxy` (Attributes) Ssl forward proxy
 
 > ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--data--type--ssl_forward_proxy))
-- `ssl_inbound_inspection` (String) add the certificate name for SSL inbound inspection
+- `ssl_inbound_inspection` (Attributes) add the certificate name for SSL inbound inspection
 
-> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.
+> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--data--type--ssl_inbound_inspection))
 
 <a id="nestedatt--data--type--ssl_forward_proxy"></a>
 ### Nested Schema for `data.type.ssl_forward_proxy`
+
+
+<a id="nestedatt--data--type--ssl_inbound_inspection"></a>
+### Nested Schema for `data.type.ssl_inbound_inspection`
+
+Read-Only:
+
+- `certificates` (List of String) List of certificate names for SSL inbound inspection

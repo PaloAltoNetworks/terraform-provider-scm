@@ -71,8 +71,43 @@ func (r *RemoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 
 	// Create a patcher to temporarily store sensitive values.
 	patcher := &remoteNetworksSensitiveValuePatcher{}
+	patcher.init() // Initialize the patcher (sets up arrayValues map)
 
 	// Stash plaintext values from the plan.
+
+	{ // Stash plaintext for array field Protocol.Bgp.Secret
+		if !resp.Diagnostics.HasError() && !data.EcmpTunnels.IsNull() && !data.EcmpTunnels.IsUnknown() {
+			var arrayItems []models.RemoteNetworksEcmpTunnelsInner
+			resp.Diagnostics.Append(data.EcmpTunnels.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx, arrayItem := range arrayItems {
+
+					if !arrayItem.Protocol.IsNull() && !arrayItem.Protocol.IsUnknown() {
+						var temp_stash_Protocol_Bgp_Secret_0 models.RemoteNetworksEcmpTunnelsInnerProtocol
+						resp.Diagnostics.Append(arrayItem.Protocol.As(ctx, &temp_stash_Protocol_Bgp_Secret_0, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Protocol_Bgp_Secret_0.Bgp.IsNull() && !temp_stash_Protocol_Bgp_Secret_0.Bgp.IsUnknown() {
+								var temp_stash_Protocol_Bgp_Secret_1 models.RemoteNetworksProtocolBgp
+								resp.Diagnostics.Append(temp_stash_Protocol_Bgp_Secret_0.Bgp.As(ctx, &temp_stash_Protocol_Bgp_Secret_1, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									finalVal := temp_stash_Protocol_Bgp_Secret_1.Secret
+									if !finalVal.IsUnknown() && !finalVal.IsNull() {
+										key := fmt.Sprintf("protocol_bgp_secret_plaintext_%d", arrayIdx)
+										patcher.arrayValues[key] = finalVal
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+		}
+	}
 
 	{ // Stash plaintext for Protocol.Bgp.Secret
 		var finalVal basetypes.StringValue
@@ -181,6 +216,64 @@ func (r *RemoteNetworkResource) Create(ctx context.Context, req resource.CreateR
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
 
 	// Stash the encrypted values from the API response and apply the patch.
+
+	{ // Patch plaintext for array field Protocol.Bgp.Secret
+		if !resp.Diagnostics.HasError() && !data.EcmpTunnels.IsNull() && !data.EcmpTunnels.IsUnknown() {
+			var arrayItems []models.RemoteNetworksEcmpTunnelsInner
+			resp.Diagnostics.Append(data.EcmpTunnels.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					if !arrayItems[arrayIdx].Protocol.IsNull() && !arrayItems[arrayIdx].Protocol.IsUnknown() {
+						var temp_patch_create_Protocol_Bgp_Secret_0 models.RemoteNetworksEcmpTunnelsInnerProtocol
+						resp.Diagnostics.Append(arrayItems[arrayIdx].Protocol.As(ctx, &temp_patch_create_Protocol_Bgp_Secret_0, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Protocol_Bgp_Secret_0.Bgp.IsNull() && !temp_patch_create_Protocol_Bgp_Secret_0.Bgp.IsUnknown() {
+								var temp_patch_create_Protocol_Bgp_Secret_1 models.RemoteNetworksProtocolBgp
+								resp.Diagnostics.Append(temp_patch_create_Protocol_Bgp_Secret_0.Bgp.As(ctx, &temp_patch_create_Protocol_Bgp_Secret_1, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Store encrypted value and replace with plaintext
+									encryptedVal := temp_patch_create_Protocol_Bgp_Secret_1.Secret
+									plaintextKey := fmt.Sprintf("protocol_bgp_secret_plaintext_%d", arrayIdx)
+									encryptedKey := fmt.Sprintf("protocol_bgp_secret_encrypted_%d", arrayIdx)
+									if !encryptedVal.IsNull() && !encryptedVal.IsUnknown() {
+										patcher.arrayValues[encryptedKey] = encryptedVal
+									}
+									if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+										temp_patch_create_Protocol_Bgp_Secret_1.Secret = plaintextVal
+									}
+
+									// Repack modified structs back into the array
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_create_Protocol_Bgp_Secret_0.Bgp, diags = types.ObjectValueFrom(ctx, models.RemoteNetworksProtocolBgp{}.AttrTypes(), &temp_patch_create_Protocol_Bgp_Secret_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										arrayItems[arrayIdx].Protocol, diags = types.ObjectValueFrom(ctx, models.RemoteNetworksEcmpTunnelsInnerProtocol{}.AttrTypes(), &temp_patch_create_Protocol_Bgp_Secret_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+				// Repack the entire array back into data
+				data.EcmpTunnels, diags = basetypes.NewListValueFrom(ctx, models.RemoteNetworksEcmpTunnelsInner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
 
 	{ // Patch plaintext for Protocol.Bgp.Secret
 		if !resp.Diagnostics.HasError() {
@@ -363,6 +456,70 @@ func (r *RemoteNetworkResource) Read(ctx context.Context, req resource.ReadReque
 	// Step 6 - Encrypted values logic
 	// Check for out-of-band changes and apply the patch.
 
+	{ // Patch plaintext for array field Protocol.Bgp.Secret
+		if !resp.Diagnostics.HasError() && !data.EcmpTunnels.IsNull() && !data.EcmpTunnels.IsUnknown() {
+			var arrayItems []models.RemoteNetworksEcmpTunnelsInner
+			resp.Diagnostics.Append(data.EcmpTunnels.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					if !arrayItems[arrayIdx].Protocol.IsNull() && !arrayItems[arrayIdx].Protocol.IsUnknown() {
+						var temp_patch_read_Protocol_Bgp_Secret_0 models.RemoteNetworksEcmpTunnelsInnerProtocol
+						resp.Diagnostics.Append(arrayItems[arrayIdx].Protocol.As(ctx, &temp_patch_read_Protocol_Bgp_Secret_0, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Protocol_Bgp_Secret_0.Bgp.IsNull() && !temp_patch_read_Protocol_Bgp_Secret_0.Bgp.IsUnknown() {
+								var temp_patch_read_Protocol_Bgp_Secret_1 models.RemoteNetworksProtocolBgp
+								resp.Diagnostics.Append(temp_patch_read_Protocol_Bgp_Secret_0.Bgp.As(ctx, &temp_patch_read_Protocol_Bgp_Secret_1, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Compare encrypted values and apply patch
+									currentEncryptedVal := temp_patch_read_Protocol_Bgp_Secret_1.Secret
+									savedEncryptedKey := fmt.Sprintf("protocol_bgp_secret_encrypted_%d", arrayIdx)
+									plaintextKey := fmt.Sprintf("protocol_bgp_secret_plaintext_%d", arrayIdx)
+
+									if savedEncrypted, ok := patcher.arrayValues[savedEncryptedKey]; ok {
+										if currentEncryptedVal.Equal(savedEncrypted) {
+											// No out-of-band change, use plaintext
+											if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+												temp_patch_read_Protocol_Bgp_Secret_1.Secret = plaintextVal
+											}
+										} else {
+											// Out-of-band change detected, show as drift
+											temp_patch_read_Protocol_Bgp_Secret_1.Secret = basetypes.NewStringNull()
+										}
+									}
+
+									// Repack modified structs back into the array
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_read_Protocol_Bgp_Secret_0.Bgp, diags = types.ObjectValueFrom(ctx, models.RemoteNetworksProtocolBgp{}.AttrTypes(), &temp_patch_read_Protocol_Bgp_Secret_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										arrayItems[arrayIdx].Protocol, diags = types.ObjectValueFrom(ctx, models.RemoteNetworksEcmpTunnelsInnerProtocol{}.AttrTypes(), &temp_patch_read_Protocol_Bgp_Secret_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+				// Repack the entire array back into data
+				data.EcmpTunnels, diags = basetypes.NewListValueFrom(ctx, models.RemoteNetworksEcmpTunnelsInner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
+
 	{ // Patch plaintext for Protocol.Bgp.Secret
 		if !resp.Diagnostics.HasError() {
 
@@ -517,6 +674,41 @@ func (r *RemoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Step 3: Encrypted values logic
 	patcher := &remoteNetworksSensitiveValuePatcher{}
+	patcher.init() // Initialize the patcher (sets up arrayValues map)
+
+	{ // Stash plaintext for array field Protocol.Bgp.Secret
+		if !resp.Diagnostics.HasError() && !plan.EcmpTunnels.IsNull() && !plan.EcmpTunnels.IsUnknown() {
+			var arrayItems []models.RemoteNetworksEcmpTunnelsInner
+			resp.Diagnostics.Append(plan.EcmpTunnels.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx, arrayItem := range arrayItems {
+
+					if !arrayItem.Protocol.IsNull() && !arrayItem.Protocol.IsUnknown() {
+						var temp_stash_upd_Protocol_Bgp_Secret_0 models.RemoteNetworksEcmpTunnelsInnerProtocol
+						resp.Diagnostics.Append(arrayItem.Protocol.As(ctx, &temp_stash_upd_Protocol_Bgp_Secret_0, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Protocol_Bgp_Secret_0.Bgp.IsNull() && !temp_stash_upd_Protocol_Bgp_Secret_0.Bgp.IsUnknown() {
+								var temp_stash_upd_Protocol_Bgp_Secret_1 models.RemoteNetworksProtocolBgp
+								resp.Diagnostics.Append(temp_stash_upd_Protocol_Bgp_Secret_0.Bgp.As(ctx, &temp_stash_upd_Protocol_Bgp_Secret_1, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									finalVal := temp_stash_upd_Protocol_Bgp_Secret_1.Secret
+									if !finalVal.IsUnknown() && !finalVal.IsNull() {
+										key := fmt.Sprintf("protocol_bgp_secret_plaintext_%d", arrayIdx)
+										patcher.arrayValues[key] = finalVal
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+		}
+	}
 
 	{ // Stash plaintext for Protocol.Bgp.Secret
 		var finalVal basetypes.StringValue
@@ -646,6 +838,64 @@ func (r *RemoteNetworkResource) Update(ctx context.Context, req resource.UpdateR
 	//
 
 	// Step 10: Encrypted values logic
+
+	{ // Patch plaintext for array field Protocol.Bgp.Secret
+		if !resp.Diagnostics.HasError() && !plan.EcmpTunnels.IsNull() && !plan.EcmpTunnels.IsUnknown() {
+			var arrayItems []models.RemoteNetworksEcmpTunnelsInner
+			resp.Diagnostics.Append(plan.EcmpTunnels.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					if !arrayItems[arrayIdx].Protocol.IsNull() && !arrayItems[arrayIdx].Protocol.IsUnknown() {
+						var temp_patch_upd_Protocol_Bgp_Secret_0 models.RemoteNetworksEcmpTunnelsInnerProtocol
+						resp.Diagnostics.Append(arrayItems[arrayIdx].Protocol.As(ctx, &temp_patch_upd_Protocol_Bgp_Secret_0, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Protocol_Bgp_Secret_0.Bgp.IsNull() && !temp_patch_upd_Protocol_Bgp_Secret_0.Bgp.IsUnknown() {
+								var temp_patch_upd_Protocol_Bgp_Secret_1 models.RemoteNetworksProtocolBgp
+								resp.Diagnostics.Append(temp_patch_upd_Protocol_Bgp_Secret_0.Bgp.As(ctx, &temp_patch_upd_Protocol_Bgp_Secret_1, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									// Store encrypted value and replace with plaintext
+									encryptedVal := temp_patch_upd_Protocol_Bgp_Secret_1.Secret
+									plaintextKey := fmt.Sprintf("protocol_bgp_secret_plaintext_%d", arrayIdx)
+									encryptedKey := fmt.Sprintf("protocol_bgp_secret_encrypted_%d", arrayIdx)
+									if !encryptedVal.IsNull() && !encryptedVal.IsUnknown() {
+										patcher.arrayValues[encryptedKey] = encryptedVal
+									}
+									if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+										temp_patch_upd_Protocol_Bgp_Secret_1.Secret = plaintextVal
+									}
+
+									// Repack modified structs back into the array
+
+									if !resp.Diagnostics.HasError() {
+
+										temp_patch_upd_Protocol_Bgp_Secret_0.Bgp, diags = types.ObjectValueFrom(ctx, models.RemoteNetworksProtocolBgp{}.AttrTypes(), &temp_patch_upd_Protocol_Bgp_Secret_1)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+									if !resp.Diagnostics.HasError() {
+
+										arrayItems[arrayIdx].Protocol, diags = types.ObjectValueFrom(ctx, models.RemoteNetworksEcmpTunnelsInnerProtocol{}.AttrTypes(), &temp_patch_upd_Protocol_Bgp_Secret_0)
+
+										resp.Diagnostics.Append(diags...)
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+				// Repack the entire array back into plan
+				plan.EcmpTunnels, diags = basetypes.NewListValueFrom(ctx, models.RemoteNetworksEcmpTunnelsInner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
 
 	{ // Patch plaintext for Protocol.Bgp.Secret
 		if !resp.Diagnostics.HasError() {

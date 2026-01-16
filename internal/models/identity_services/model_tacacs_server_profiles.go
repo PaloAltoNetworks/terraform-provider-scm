@@ -22,6 +22,7 @@ import (
 // TacacsServerProfiles represents the Terraform model for TacacsServerProfiles
 type TacacsServerProfiles struct {
 	Tfid                types.String          `tfsdk:"tfid"`
+	EncryptedValues     basetypes.MapValue    `tfsdk:"encrypted_values"`
 	Device              basetypes.StringValue `tfsdk:"device"`
 	Folder              basetypes.StringValue `tfsdk:"folder"`
 	Id                  basetypes.StringValue `tfsdk:"id"`
@@ -44,12 +45,13 @@ type TacacsServerProfilesServerInner struct {
 // AttrTypes defines the attribute types for the TacacsServerProfiles model.
 func (o TacacsServerProfiles) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":     basetypes.StringType{},
-		"device":   basetypes.StringType{},
-		"folder":   basetypes.StringType{},
-		"id":       basetypes.StringType{},
-		"name":     basetypes.StringType{},
-		"protocol": basetypes.StringType{},
+		"tfid":             basetypes.StringType{},
+		"encrypted_values": basetypes.MapType{ElemType: basetypes.StringType{}},
+		"device":           basetypes.StringType{},
+		"folder":           basetypes.StringType{},
+		"id":               basetypes.StringType{},
+		"name":             basetypes.StringType{},
+		"protocol":         basetypes.StringType{},
 		"server": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"address": basetypes.StringType{},
@@ -107,6 +109,12 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
+		"encrypted_values": schema.MapAttribute{
+			ElementType:         basetypes.StringType{},
+			MarkdownDescription: "Map of sensitive values returned from the API.",
+			Computed:            true,
+			Sensitive:           true,
+		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
@@ -161,9 +169,6 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 						Optional:            true,
 					},
 					"secret": schema.StringAttribute{
-						Validators: []validator.String{
-							stringvalidator.LengthAtMost(64),
-						},
 						MarkdownDescription: "The TACACS+ secret",
 						Optional:            true,
 						Sensitive:           true,
@@ -215,6 +220,12 @@ var TacacsServerProfilesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
+		},
+		"encrypted_values": dsschema.MapAttribute{
+			ElementType:         basetypes.StringType{},
+			MarkdownDescription: "Map of sensitive values returned from the API.",
+			Computed:            true,
+			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",

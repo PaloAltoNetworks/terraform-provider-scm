@@ -83,6 +83,7 @@ resource "scm_radius_server_profile" "pap_radius_profile" {
 
 ### Read-Only
 
+- `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `id` (String) The UUID of the RADIUS server profile
 - `tfid` (String) The Terraform ID.
 

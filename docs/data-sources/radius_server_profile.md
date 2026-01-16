@@ -47,6 +47,7 @@ output "single_rsp__dump" {
 
 ### Read-Only
 
+- `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `protocol` (Attributes) The RADIUS authentication protocol (see [below for nested schema](#nestedatt--protocol))
 - `retries` (Number) The number of RADIUS server retries
 - `server` (Attributes List) Server (see [below for nested schema](#nestedatt--server))

@@ -335,14 +335,14 @@ var QosProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"egress_guaranteed": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.Between(0, 10000),
+						int64validator.Between(0, 16000),
 					},
 					MarkdownDescription: "guaranteed sending bandwidth in mbps",
 					Optional:            true,
 				},
 				"egress_max": schema.Int64Attribute{
 					Validators: []validator.Int64{
-						int64validator.Between(0, 10000),
+						int64validator.Between(0, 60000),
 					},
 					MarkdownDescription: "max sending bandwidth in mbps",
 					Optional:            true,

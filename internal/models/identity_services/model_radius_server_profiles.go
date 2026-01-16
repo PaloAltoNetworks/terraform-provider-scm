@@ -21,16 +21,17 @@ import (
 
 // RadiusServerProfiles represents the Terraform model for RadiusServerProfiles
 type RadiusServerProfiles struct {
-	Tfid     types.String          `tfsdk:"tfid"`
-	Device   basetypes.StringValue `tfsdk:"device"`
-	Folder   basetypes.StringValue `tfsdk:"folder"`
-	Id       basetypes.StringValue `tfsdk:"id"`
-	Name     basetypes.StringValue `tfsdk:"name"`
-	Protocol basetypes.ObjectValue `tfsdk:"protocol"`
-	Retries  basetypes.Int64Value  `tfsdk:"retries"`
-	Server   basetypes.ListValue   `tfsdk:"server"`
-	Snippet  basetypes.StringValue `tfsdk:"snippet"`
-	Timeout  basetypes.Int64Value  `tfsdk:"timeout"`
+	Tfid            types.String          `tfsdk:"tfid"`
+	EncryptedValues basetypes.MapValue    `tfsdk:"encrypted_values"`
+	Device          basetypes.StringValue `tfsdk:"device"`
+	Folder          basetypes.StringValue `tfsdk:"folder"`
+	Id              basetypes.StringValue `tfsdk:"id"`
+	Name            basetypes.StringValue `tfsdk:"name"`
+	Protocol        basetypes.ObjectValue `tfsdk:"protocol"`
+	Retries         basetypes.Int64Value  `tfsdk:"retries"`
+	Server          basetypes.ListValue   `tfsdk:"server"`
+	Snippet         basetypes.StringValue `tfsdk:"snippet"`
+	Timeout         basetypes.Int64Value  `tfsdk:"timeout"`
 }
 
 // RadiusServerProfilesProtocol represents a nested structure within the RadiusServerProfiles model
@@ -66,11 +67,12 @@ type RadiusServerProfilesServerInner struct {
 // AttrTypes defines the attribute types for the RadiusServerProfiles model.
 func (o RadiusServerProfiles) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":   basetypes.StringType{},
-		"device": basetypes.StringType{},
-		"folder": basetypes.StringType{},
-		"id":     basetypes.StringType{},
-		"name":   basetypes.StringType{},
+		"tfid":             basetypes.StringType{},
+		"encrypted_values": basetypes.MapType{ElemType: basetypes.StringType{}},
+		"device":           basetypes.StringType{},
+		"folder":           basetypes.StringType{},
+		"id":               basetypes.StringType{},
+		"name":             basetypes.StringType{},
 		"protocol": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"chap": basetypes.ObjectType{
@@ -225,6 +227,12 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
 			},
+		},
+		"encrypted_values": schema.MapAttribute{
+			ElementType:         basetypes.StringType{},
+			MarkdownDescription: "Map of sensitive values returned from the API.",
+			Computed:            true,
+			Sensitive:           true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -392,6 +400,12 @@ var RadiusServerProfilesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
+		},
+		"encrypted_values": dsschema.MapAttribute{
+			ElementType:         basetypes.StringType{},
+			MarkdownDescription: "Map of sensitive values returned from the API.",
+			Computed:            true,
+			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",

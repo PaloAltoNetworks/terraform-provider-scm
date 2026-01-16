@@ -85,9 +85,9 @@ func (r *QuarantinedDeviceResource) Create(ctx context.Context, req resource.Cre
 	if resp.Diagnostics.HasError() { return }
 
 	// 2. Unpack the request BODY from data into an SDK object.
-	unpackedScmObject, diags := unpackQuarantinedDevicesToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    unpackedScmObject, diags := unpackQuarantinedDevicesToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
 	tflog.Debug(ctx, "Creating quarantined_devices on SCM API")
 
@@ -334,14 +334,14 @@ func (r *QuarantinedDeviceResource) Update(ctx context.Context, req resource.Upd
 	if resp.Diagnostics.HasError() { return }
 
 	// Step 4: Unpack the plan object to an SCM Object
-	unpackedScmObject, diags := unpackQuarantinedDevicesToSdk(ctx, planObject)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() { return }
+    unpackedScmObject, diags := unpackQuarantinedDevicesToSdk(ctx, planObject)
+    resp.Diagnostics.Append(diags...)
+    if resp.Diagnostics.HasError() { return }
 
-	// --- START: MODIFIED API CALL (no path param) ---
-	var scmObjectInterface interface{}
-	var httpErr *http.Response
-	var err error
+    // --- START: MODIFIED API CALL (no path param) ---
+    var scmObjectInterface interface{}
+    var httpErr *http.Response
+    var err error
 
 
 		resp.Diagnostics.AddError("Update Not Supported", "This singleton resource does not support Update (PUT) operations.")

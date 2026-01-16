@@ -48,8 +48,8 @@ func unpackLogForwardingProfilesToSdk(ctx context.Context, obj types.Object) (*o
 
 	// Handling Primitives
 	if !model.Id.IsNull() && !model.Id.IsUnknown() {
-		sdk.Id = model.Id.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+		sdk.Id = model.Id.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
 	}
 
 	// Handling Lists
@@ -111,8 +111,12 @@ func packLogForwardingProfilesFromSdk(ctx context.Context, sdk objects.LogForwar
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Id = basetypes.NewStringValue(sdk.Id)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+	if sdk.Id != nil {
+		model.Id = basetypes.NewStringValue(*sdk.Id)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
+	} else {
+		model.Id = basetypes.NewStringNull()
+	}
 	// Handling Lists
 	if sdk.MatchList != nil {
 		tflog.Debug(ctx, "Packing list of objects for field MatchList")
@@ -212,26 +216,38 @@ func unpackLogForwardingProfilesMatchListInnerToSdk(ctx context.Context, obj typ
 
 	// Handling Primitives
 	if !model.Filter.IsNull() && !model.Filter.IsUnknown() {
-		sdk.Filter = model.Filter.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Filter", "value": *sdk.Filter})
+		sdk.Filter = model.Filter.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Filter", "value": sdk.Filter})
 	}
 
 	// Handling Primitives
 	if !model.LogType.IsNull() && !model.LogType.IsUnknown() {
-		sdk.LogType = model.LogType.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LogType", "value": *sdk.LogType})
+		sdk.LogType = model.LogType.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "LogType", "value": sdk.LogType})
 	}
 
 	// Handling Primitives
 	if !model.Name.IsNull() && !model.Name.IsUnknown() {
-		sdk.Name = model.Name.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
+		sdk.Name = model.Name.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	}
+
+	// Handling Lists
+	if !model.SendEmail.IsNull() && !model.SendEmail.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field SendEmail")
+		diags.Append(model.SendEmail.ElementsAs(ctx, &sdk.SendEmail, false)...)
 	}
 
 	// Handling Lists
 	if !model.SendHttp.IsNull() && !model.SendHttp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field SendHttp")
 		diags.Append(model.SendHttp.ElementsAs(ctx, &sdk.SendHttp, false)...)
+	}
+
+	// Handling Lists
+	if !model.SendSnmptrap.IsNull() && !model.SendSnmptrap.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field SendSnmptrap")
+		diags.Append(model.SendSnmptrap.ElementsAs(ctx, &sdk.SendSnmptrap, false)...)
 	}
 
 	// Handling Lists
@@ -263,27 +279,28 @@ func packLogForwardingProfilesMatchListInnerFromSdk(ctx context.Context, sdk obj
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.Filter != nil {
-		model.Filter = basetypes.NewStringValue(*sdk.Filter)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Filter", "value": *sdk.Filter})
-	} else {
-		model.Filter = basetypes.NewStringNull()
-	}
+	model.Filter = basetypes.NewStringValue(sdk.Filter)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Filter", "value": sdk.Filter})
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.LogType != nil {
-		model.LogType = basetypes.NewStringValue(*sdk.LogType)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LogType", "value": *sdk.LogType})
-	} else {
-		model.LogType = basetypes.NewStringNull()
-	}
+	model.LogType = basetypes.NewStringValue(sdk.LogType)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "LogType", "value": sdk.LogType})
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.Name != nil {
-		model.Name = basetypes.NewStringValue(*sdk.Name)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
+	model.Name = basetypes.NewStringValue(sdk.Name)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	// Handling Lists
+	if sdk.SendEmail != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field SendEmail")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.SendEmail, d = basetypes.NewListValueFrom(ctx, elemType, sdk.SendEmail)
+		diags.Append(d...)
 	} else {
-		model.Name = basetypes.NewStringNull()
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.SendEmail = basetypes.NewListNull(elemType)
 	}
 	// Handling Lists
 	if sdk.SendHttp != nil {
@@ -297,6 +314,19 @@ func packLogForwardingProfilesMatchListInnerFromSdk(ctx context.Context, sdk obj
 		// This logic now creates a correctly typed null list.
 		var elemType attr.Type = basetypes.StringType{} // Default to string
 		model.SendHttp = basetypes.NewListNull(elemType)
+	}
+	// Handling Lists
+	if sdk.SendSnmptrap != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field SendSnmptrap")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.SendSnmptrap, d = basetypes.NewListValueFrom(ctx, elemType, sdk.SendSnmptrap)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.SendSnmptrap = basetypes.NewListNull(elemType)
 	}
 	// Handling Lists
 	if sdk.SendSyslog != nil {

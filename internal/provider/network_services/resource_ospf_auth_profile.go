@@ -71,8 +71,27 @@ func (r *OspfAuthProfileResource) Create(ctx context.Context, req resource.Creat
 
 	// Create a patcher to temporarily store sensitive values.
 	patcher := &ospfAuthProfilesSensitiveValuePatcher{}
+	patcher.init() // Initialize the patcher (sets up arrayValues map)
 
 	// Stash plaintext values from the plan.
+
+	{ // Stash plaintext for array field Key
+		if !resp.Diagnostics.HasError() && !data.Md5.IsNull() && !data.Md5.IsUnknown() {
+			var arrayItems []models.OspfAuthProfilesMd5Inner
+			resp.Diagnostics.Append(data.Md5.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx, arrayItem := range arrayItems {
+
+					finalVal := arrayItem.Key
+					if !finalVal.IsUnknown() && !finalVal.IsNull() {
+						key := fmt.Sprintf("key_plaintext_%d", arrayIdx)
+						patcher.arrayValues[key] = finalVal
+					}
+
+				}
+			}
+		}
+	}
 
 	{ // Stash plaintext for Password
 		var finalVal basetypes.StringValue
@@ -136,6 +155,34 @@ func (r *OspfAuthProfileResource) Create(ctx context.Context, req resource.Creat
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
 
 	// Stash the encrypted values from the API response and apply the patch.
+
+	{ // Patch plaintext for array field Key
+		if !resp.Diagnostics.HasError() && !data.Md5.IsNull() && !data.Md5.IsUnknown() {
+			var arrayItems []models.OspfAuthProfilesMd5Inner
+			resp.Diagnostics.Append(data.Md5.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					// Store encrypted value and replace with plaintext
+					encryptedVal := arrayItems[arrayIdx].Key
+					plaintextKey := fmt.Sprintf("key_plaintext_%d", arrayIdx)
+					encryptedKey := fmt.Sprintf("key_encrypted_%d", arrayIdx)
+					if !encryptedVal.IsNull() && !encryptedVal.IsUnknown() {
+						patcher.arrayValues[encryptedKey] = encryptedVal
+					}
+					if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+						arrayItems[arrayIdx].Key = plaintextVal
+					}
+
+					// Repack modified structs back into the array
+
+				}
+				// Repack the entire array back into data
+				data.Md5, diags = basetypes.NewListValueFrom(ctx, models.OspfAuthProfilesMd5Inner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
 
 	{ // Patch plaintext for Password
 		if !resp.Diagnostics.HasError() {
@@ -258,6 +305,40 @@ func (r *OspfAuthProfileResource) Read(ctx context.Context, req resource.ReadReq
 	// Step 6 - Encrypted values logic
 	// Check for out-of-band changes and apply the patch.
 
+	{ // Patch plaintext for array field Key
+		if !resp.Diagnostics.HasError() && !data.Md5.IsNull() && !data.Md5.IsUnknown() {
+			var arrayItems []models.OspfAuthProfilesMd5Inner
+			resp.Diagnostics.Append(data.Md5.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					// Compare encrypted values and apply patch
+					currentEncryptedVal := arrayItems[arrayIdx].Key
+					savedEncryptedKey := fmt.Sprintf("key_encrypted_%d", arrayIdx)
+					plaintextKey := fmt.Sprintf("key_plaintext_%d", arrayIdx)
+
+					if savedEncrypted, ok := patcher.arrayValues[savedEncryptedKey]; ok {
+						if currentEncryptedVal.Equal(savedEncrypted) {
+							// No out-of-band change, use plaintext
+							if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+								arrayItems[arrayIdx].Key = plaintextVal
+							}
+						} else {
+							// Out-of-band change detected, show as drift
+							arrayItems[arrayIdx].Key = basetypes.NewStringNull()
+						}
+					}
+
+					// Repack modified structs back into the array
+
+				}
+				// Repack the entire array back into data
+				data.Md5, diags = basetypes.NewListValueFrom(ctx, models.OspfAuthProfilesMd5Inner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
+
 	{ // Patch plaintext for Password
 		if !resp.Diagnostics.HasError() {
 
@@ -369,6 +450,25 @@ func (r *OspfAuthProfileResource) Update(ctx context.Context, req resource.Updat
 
 	// Step 3: Encrypted values logic
 	patcher := &ospfAuthProfilesSensitiveValuePatcher{}
+	patcher.init() // Initialize the patcher (sets up arrayValues map)
+
+	{ // Stash plaintext for array field Key
+		if !resp.Diagnostics.HasError() && !plan.Md5.IsNull() && !plan.Md5.IsUnknown() {
+			var arrayItems []models.OspfAuthProfilesMd5Inner
+			resp.Diagnostics.Append(plan.Md5.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx, arrayItem := range arrayItems {
+
+					finalVal := arrayItem.Key
+					if !finalVal.IsUnknown() && !finalVal.IsNull() {
+						key := fmt.Sprintf("key_plaintext_%d", arrayIdx)
+						patcher.arrayValues[key] = finalVal
+					}
+
+				}
+			}
+		}
+	}
 
 	{ // Stash plaintext for Password
 		var finalVal basetypes.StringValue
@@ -453,6 +553,34 @@ func (r *OspfAuthProfileResource) Update(ctx context.Context, req resource.Updat
 	//
 
 	// Step 10: Encrypted values logic
+
+	{ // Patch plaintext for array field Key
+		if !resp.Diagnostics.HasError() && !plan.Md5.IsNull() && !plan.Md5.IsUnknown() {
+			var arrayItems []models.OspfAuthProfilesMd5Inner
+			resp.Diagnostics.Append(plan.Md5.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					// Store encrypted value and replace with plaintext
+					encryptedVal := arrayItems[arrayIdx].Key
+					plaintextKey := fmt.Sprintf("key_plaintext_%d", arrayIdx)
+					encryptedKey := fmt.Sprintf("key_encrypted_%d", arrayIdx)
+					if !encryptedVal.IsNull() && !encryptedVal.IsUnknown() {
+						patcher.arrayValues[encryptedKey] = encryptedVal
+					}
+					if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+						arrayItems[arrayIdx].Key = plaintextVal
+					}
+
+					// Repack modified structs back into the array
+
+				}
+				// Repack the entire array back into plan
+				plan.Md5, diags = basetypes.NewListValueFrom(ctx, models.OspfAuthProfilesMd5Inner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
 
 	{ // Patch plaintext for Password
 		if !resp.Diagnostics.HasError() {

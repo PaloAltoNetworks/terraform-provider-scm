@@ -41,11 +41,14 @@ output "external_dynamic_list_details" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the external dynamic list
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -60,18 +63,25 @@ output "external_dynamic_list_details" {
 Read-Only:
 
 - `domain` (Attributes) Domain settings for Custom Domain type
+
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--domain))
 - `imei` (Attributes) IMEI Configuration settings
+
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--imei))
 - `imsi` (Attributes) IMSI Config for Custom IMSI type
+
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--imsi))
 - `ip` (Attributes) IP settings for Custom IP type
+
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--ip))
 - `predefined_ip` (Attributes) Predefined IP settings for EDL type
+
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--predefined_ip))
 - `predefined_url` (Attributes) Predefined URL settings for EDL type
+
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--predefined_url))
 - `url` (Attributes) URL settings for Custom URL type
+
 > ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`. (see [below for nested schema](#nestedatt--type--url))
 
 <a id="nestedatt--type--domain"></a>
@@ -102,14 +112,19 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily settings for Domain recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--daily))
 - `five_minute` (Attributes) Five minute settings for Domain recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--five_minute))
 - `hourly` (Attributes) Hourly settings for Domain recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--hourly))
 - `monthly` (Attributes) Monthly settings for Domain recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--monthly))
 - `weekly` (Attributes) Weekly settings for Domain recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--domain--recurring--weekly))
 
 <a id="nestedatt--type--domain--recurring--daily"></a>
@@ -175,14 +190,19 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily interval settings for IMEI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--daily))
 - `five_minute` (Attributes) Five-minute interval settings for IMEI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--five_minute))
 - `hourly` (Attributes) Hourly interval settings for IMEI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--hourly))
 - `monthly` (Attributes) Monthly interval settings for IMEI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--monthly))
 - `weekly` (Attributes) Weekly interval settings for IMEI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imei--recurring--weekly))
 
 <a id="nestedatt--type--imei--recurring--daily"></a>
@@ -248,14 +268,19 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily interval settings for IMSI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--daily))
 - `five_minute` (Attributes) Five-minute interval settings for IMSI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--five_minute))
 - `hourly` (Attributes) Hourly interval settings for IMSI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--hourly))
 - `monthly` (Attributes) Monthly interval settings for IMSI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--monthly))
 - `weekly` (Attributes) Weekly interval settings for IMSI updates
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--imsi--recurring--weekly))
 
 <a id="nestedatt--type--imsi--recurring--daily"></a>
@@ -321,14 +346,19 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily settings for IP recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--daily))
 - `five_minute` (Attributes) Five minute settings for IP recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--five_minute))
 - `hourly` (Attributes) Hourly settings for IP recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--hourly))
 - `monthly` (Attributes) Monthly settings for IP recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--monthly))
 - `weekly` (Attributes) Weekly settings for IP recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--ip--recurring--weekly))
 
 <a id="nestedatt--type--ip--recurring--daily"></a>
@@ -414,14 +444,19 @@ Read-Only:
 Read-Only:
 
 - `daily` (Attributes) Daily settings for URL recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--daily))
 - `five_minute` (Attributes) Five minute settings for URL recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--five_minute))
 - `hourly` (Attributes) Hourly settings for URL recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--hourly))
 - `monthly` (Attributes) Monthly settings for URL recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--monthly))
 - `weekly` (Attributes) Weekly settings for URL recurring
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `five_minute`, `hourly`, `monthly`, and `weekly`. (see [below for nested schema](#nestedatt--type--url--recurring--weekly))
 
 <a id="nestedatt--type--url--recurring--daily"></a>

@@ -61,11 +61,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) PBF rule name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -89,10 +92,13 @@ Read-Only:
 Read-Only:
 
 - `discard` (Attributes) Discard
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--data--action--discard))
 - `forward` (Attributes) Forward
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--data--action--forward))
 - `no_pbf` (Attributes) No pbf
+
 > ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--data--action--no_pbf))
 
 <a id="nestedatt--data--action--discard"></a>
@@ -124,8 +130,10 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) Next hop FQDN
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) Next hop IP address
+
 > ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
@@ -158,6 +166,8 @@ Read-Only:
 Read-Only:
 
 - `interface` (List of String) Source interfaces
+
 > ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.
 - `zone` (List of String) Source zones
+
 > ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.

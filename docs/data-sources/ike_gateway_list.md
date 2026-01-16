@@ -69,11 +69,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -94,8 +97,10 @@ Read-Only:
 Read-Only:
 
 - `certificate` (Attributes) Certificate
+
 > ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`. (see [below for nested schema](#nestedatt--data--authentication--certificate))
 - `pre_shared_key` (Attributes) Pre shared key
+
 > ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`. (see [below for nested schema](#nestedatt--data--authentication--pre_shared_key))
 
 <a id="nestedatt--data--authentication--certificate"></a>
@@ -150,10 +155,13 @@ Read-Only:
 Read-Only:
 
 - `dynamic` (Attributes) Dynamic
+
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`. (see [below for nested schema](#nestedatt--data--peer_address--dynamic))
 - `fqdn` (String) peer gateway FQDN name
+
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.
 - `ip` (String) peer gateway has static IP address
+
 > ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.
 
 <a id="nestedatt--data--peer_address--dynamic"></a>

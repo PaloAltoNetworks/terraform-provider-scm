@@ -56,7 +56,12 @@ type DecryptionRules struct {
 // DecryptionRulesType represents a nested structure within the DecryptionRules model
 type DecryptionRulesType struct {
 	SslForwardProxy      basetypes.ObjectValue `tfsdk:"ssl_forward_proxy"`
-	SslInboundInspection basetypes.StringValue `tfsdk:"ssl_inbound_inspection"`
+	SslInboundInspection basetypes.ObjectValue `tfsdk:"ssl_inbound_inspection"`
+}
+
+// DecryptionRulesTypeSslInboundInspection represents a nested structure within the DecryptionRules model
+type DecryptionRulesTypeSslInboundInspection struct {
+	Certificates basetypes.ListValue `tfsdk:"certificates"`
 }
 
 // AttrTypes defines the attribute types for the DecryptionRules model.
@@ -94,7 +99,11 @@ func (o DecryptionRules) AttrTypes() map[string]attr.Type {
 				"ssl_forward_proxy": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{},
 				},
-				"ssl_inbound_inspection": basetypes.StringType{},
+				"ssl_inbound_inspection": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"certificates": basetypes.ListType{ElemType: basetypes.StringType{}},
+					},
+				},
 			},
 		},
 		"position": basetypes.StringType{},
@@ -114,12 +123,30 @@ func (o DecryptionRulesType) AttrTypes() map[string]attr.Type {
 		"ssl_forward_proxy": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		},
-		"ssl_inbound_inspection": basetypes.StringType{},
+		"ssl_inbound_inspection": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"certificates": basetypes.ListType{ElemType: basetypes.StringType{}},
+			},
+		},
 	}
 }
 
 // AttrType returns the attribute type for a list of DecryptionRulesType objects.
 func (o DecryptionRulesType) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the DecryptionRulesTypeSslInboundInspection model.
+func (o DecryptionRulesTypeSslInboundInspection) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"certificates": basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of DecryptionRulesTypeSslInboundInspection objects.
+func (o DecryptionRulesTypeSslInboundInspection) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -164,7 +191,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -183,7 +210,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -262,7 +289,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -314,18 +341,25 @@ var DecryptionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ssl_inbound_inspection"),
 						),
 					},
-					MarkdownDescription: "Ssl forward proxy\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+					MarkdownDescription: "Ssl forward proxy\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
-				"ssl_inbound_inspection": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.ConflictsWith(
+				"ssl_inbound_inspection": schema.SingleNestedAttribute{
+					Validators: []validator.Object{
+						objectvalidator.ConflictsWith(
 							path.MatchRelative().AtParent().AtName("ssl_forward_proxy"),
 						),
 					},
-					MarkdownDescription: "add the certificate name for SSL inbound inspection\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+					MarkdownDescription: "add the certificate name for SSL inbound inspection\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
 					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"certificates": schema.ListAttribute{
+							ElementType:         types.StringType,
+							MarkdownDescription: "List of certificate names for SSL inbound inspection",
+							Optional:            true,
+						},
+					},
 				},
 			},
 		},
@@ -360,7 +394,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -369,7 +403,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -425,7 +459,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -467,13 +501,20 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ssl_forward_proxy": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ssl forward proxy\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+					MarkdownDescription: "Ssl forward proxy\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
-				"ssl_inbound_inspection": dsschema.StringAttribute{
-					MarkdownDescription: "add the certificate name for SSL inbound inspection\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+				"ssl_inbound_inspection": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "add the certificate name for SSL inbound inspection\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
 					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"certificates": dsschema.ListAttribute{
+							ElementType:         types.StringType,
+							MarkdownDescription: "List of certificate names for SSL inbound inspection",
+							Computed:            true,
+						},
+					},
 				},
 			},
 		},

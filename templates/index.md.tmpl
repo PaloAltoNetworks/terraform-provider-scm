@@ -24,7 +24,31 @@ By using this software, you agree to these terms.
 
 ## Release Notes
 
-v1.0.6
+### v1.0.7
+
+#### ENHANCEMENTS
+
+* resource/scm_log_forwarding_profile:  Added additional examples and tests (resource, data-source)
+* resource/scm_kerberos_server_profile:  Added additional examples and tests (resource, data-source)
+* resource/scm_saml_server_profile: Added additional examples and tests (resource, data-source)
+* resource/scm_qos_prpfile: Added additional examples and tests (resource, data-source)
+* resource/scm_lldp_prpfile: Added additional examples and tests (resource, data-source)
+* resource/scm_scep_profile: Added additional examples and tests (resource, data-source)
+* resource/scm_decryption_rule: Added additional examples(resource)
+
+* Documentation on using SCM SDK with new Client Support. 
+* Added support for managing secrets within arrays of objects.
+
+#### BUG FIXES
+
+* resource/scm_decryption_rule: Resolved creation of Decryption Rule with SSL Inbound Inspection (#15)
+* resource/scm_lldp_profiles: Resolved LLDP API Support (#69)
+* resource/scm_tacacs_server: Resolved creation of Tacacs Server Profile with secrets within array of objects (#80)
+* resource/scm_loopback_interface: Resolved Loopback IPv6 interface id issue (#79)
+* resource/scm_tunnel_interface: Resolved Tunnel IPv6 interface id issue (#79)
+* resource/scm_service_connection: Resolved Creation of SC with protobol bgp enabled false and peer_as (ADI-51539)
+
+### v1.0.6
 
 #### FEATURES
 

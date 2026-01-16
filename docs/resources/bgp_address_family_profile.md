@@ -40,11 +40,14 @@ resource "scm_bgp_address_family_profile" "scm_bgp_address_family_profile" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ipv4` (Attributes) IPv4 Address Family (see [below for nested schema](#nestedatt--ipv4))
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -94,8 +97,10 @@ Optional:
 Optional:
 
 - `occurrence` (Number) Number of times the firewalls own AS can be in an AS_PATH
+
 > ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.
 - `origin` (Attributes) Origin
+
 > ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`. (see [below for nested schema](#nestedatt--ipv4--multicast--allowas_in--origin))
 
 <a id="nestedatt--ipv4--multicast--allowas_in--origin"></a>
@@ -118,8 +123,10 @@ Optional:
 Optional:
 
 - `restart` (Attributes) Restart
+
 > ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--ipv4--multicast--maximum_prefix--action--restart))
 - `warning_only` (Attributes) Warning only
+
 > ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--ipv4--multicast--maximum_prefix--action--warning_only))
 
 <a id="nestedatt--ipv4--multicast--maximum_prefix--action--restart"></a>
@@ -142,8 +149,10 @@ Optional:
 Optional:
 
 - `self` (Attributes) Self
+
 > ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--ipv4--multicast--next_hop--self))
 - `self_force` (Attributes) Self force
+
 > ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--ipv4--multicast--next_hop--self_force))
 
 <a id="nestedatt--ipv4--multicast--next_hop--self"></a>
@@ -186,14 +195,19 @@ Optional:
 Optional:
 
 - `all` (Attributes) All
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--multicast--send_community--all))
 - `both` (Attributes) Both
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--multicast--send_community--both))
 - `extended` (Attributes) Extended
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--multicast--send_community--extended))
 - `large` (Attributes) Large
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--multicast--send_community--large))
 - `standard` (Attributes) Standard
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--multicast--send_community--standard))
 
 <a id="nestedatt--ipv4--multicast--send_community--all"></a>
@@ -252,8 +266,10 @@ Optional:
 Optional:
 
 - `occurrence` (Number) Number of times the firewalls own AS can be in an AS_PATH
+
 > ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.
 - `origin` (Attributes) Origin
+
 > ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`. (see [below for nested schema](#nestedatt--ipv4--unicast--allowas_in--origin))
 
 <a id="nestedatt--ipv4--unicast--allowas_in--origin"></a>
@@ -276,8 +292,10 @@ Optional:
 Optional:
 
 - `restart` (Attributes) Restart
+
 > ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--ipv4--unicast--maximum_prefix--action--restart))
 - `warning_only` (Attributes) Warning only
+
 > ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`. (see [below for nested schema](#nestedatt--ipv4--unicast--maximum_prefix--action--warning_only))
 
 <a id="nestedatt--ipv4--unicast--maximum_prefix--action--restart"></a>
@@ -300,8 +318,10 @@ Optional:
 Optional:
 
 - `self` (Attributes) Self
+
 > ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--ipv4--unicast--next_hop--self))
 - `self_force` (Attributes) Self force
+
 > ℹ️ **Note:** You must specify exactly one of `self` and `self_force`. (see [below for nested schema](#nestedatt--ipv4--unicast--next_hop--self_force))
 
 <a id="nestedatt--ipv4--unicast--next_hop--self"></a>
@@ -344,14 +364,19 @@ Optional:
 Optional:
 
 - `all` (Attributes) All
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--unicast--send_community--all))
 - `both` (Attributes) Both
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--unicast--send_community--both))
 - `extended` (Attributes) Extended
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--unicast--send_community--extended))
 - `large` (Attributes) Large
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--unicast--send_community--large))
 - `standard` (Attributes) Standard
+
 > ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`. (see [below for nested schema](#nestedatt--ipv4--unicast--send_community--standard))
 
 <a id="nestedatt--ipv4--unicast--send_community--all"></a>

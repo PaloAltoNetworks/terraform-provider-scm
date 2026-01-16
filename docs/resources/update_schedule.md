@@ -106,10 +106,13 @@ resource "scm_update_schedule" "us_settings_daily" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `update_schedule` (Attributes) Update schedule (see [below for nested schema](#nestedatt--update_schedule))
 
@@ -144,13 +147,17 @@ Required:
 Optional:
 
 - `daily` (Attributes) Daily
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--daily))
 - `hourly` (Attributes) Hourly
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--hourly))
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--none))
 - `threshold` (Number) Threshold
 - `weekly` (Attributes) Weekly
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--weekly))
 
 <a id="nestedatt--update_schedule--anti_virus--recurring--daily"></a>
@@ -210,16 +217,21 @@ Required:
 Optional:
 
 - `daily` (Attributes) Daily
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--daily))
 - `every_30_mins` (Attributes) Every30 mins
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--every_30_mins))
 - `hourly` (Attributes) Hourly
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--hourly))
 - `new_app_threshold` (Number) New app threshold
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--none))
 - `threshold` (Number) Threshold
 - `weekly` (Attributes) Weekly
+
 > ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--weekly))
 
 <a id="nestedatt--update_schedule--threats--recurring--daily"></a>
@@ -291,16 +303,22 @@ Required:
 Optional:
 
 - `every_15_mins` (Attributes) Every15 mins
+
 > ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_15_mins))
 - `every_30_mins` (Attributes) Every30 mins
+
 > ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_30_mins))
 - `every_hour` (Attributes) Every hour
+
 > ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_hour))
 - `every_min` (Attributes) Every min
+
 > ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_min))
 - `none` (Attributes) None
+
 > ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--none))
 - `real_time` (Attributes) Real time
+
 > ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--real_time))
 
 <a id="nestedatt--update_schedule--wildfire--recurring--every_15_mins"></a>

@@ -133,3 +133,34 @@ resource "scm_decryption_rule" "rule_after_anchor_decryption" {
     ssl_forward_proxy = {}
   }
 }
+
+resource "scm_decryption_rule" "decryption_rule_ssl_inbound_inspection" {
+  name        = "ssl_inbound_inspection_rule"
+  description = "Decryption Rule with SSL Inbound Set"
+  folder      = "All"
+  position    = "pre" # Decryption Rules typically exist in the 'pre' rulebase
+  action      = "decrypt"
+
+  # Core Match Criteria (REQUIRED fields)
+  from        = ["trust"]         # Source security zone
+  to          = ["untrust"]       # Destination security zone
+  source      = ["any"]           # Source addresses
+  destination = ["any"]           # Destination addresses
+  service     = ["service-https"] # Services (e.g., standard HTTPS port)
+  category    = ["high-risk"]     # Destination URL Category
+  source_user = ["any"]           # Source user/group
+  type = {
+    ssl_inbound_inspection = {
+      certificates = ["Authentication Cookie CA"]
+    }
+  }
+  destination_hip = ["any"]
+
+  # Optional fields
+  tag                = [scm_tag.decryption_position_tag.name]
+  log_success        = true
+  log_fail           = true
+  disabled           = false
+  negate_source      = false
+  negate_destination = false
+}

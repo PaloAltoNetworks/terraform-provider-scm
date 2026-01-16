@@ -40,19 +40,24 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Profile name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `md5` (Attributes List) MD5s
+
 > ℹ️ **Note:** You must specify exactly one of `md5` and `password`. (see [below for nested schema](#nestedatt--data--md5))
 - `password` (String, Sensitive) Password
+
 > ℹ️ **Note:** You must specify exactly one of `md5` and `password`.
 - `tfid` (String) The Terraform ID.
 

@@ -374,7 +374,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -406,7 +406,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Af\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Af\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
@@ -424,7 +424,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Cs\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Cs\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
@@ -442,7 +442,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Custom\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Custom\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.SingleNestedAttribute{
@@ -470,7 +470,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Ef\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Ef\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -483,7 +483,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("ef"),
 											),
 										},
-										MarkdownDescription: "Tos\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Tos\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
@@ -508,7 +508,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -557,7 +557,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -596,7 +596,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -618,7 +618,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"af": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Af\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Af\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.StringAttribute{
@@ -628,7 +628,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"cs": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Cs\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Cs\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.StringAttribute{
@@ -638,7 +638,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"custom": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Custom\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Custom\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.SingleNestedAttribute{
@@ -658,12 +658,12 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"ef": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Ef\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Ef\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
 									"tos": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Tos\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Tos\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.StringAttribute{
@@ -680,7 +680,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -706,7 +706,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

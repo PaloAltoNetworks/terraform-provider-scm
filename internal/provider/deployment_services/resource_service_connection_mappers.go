@@ -683,8 +683,8 @@ func unpackServiceConnectionsProtocolBgpToSdk(ctx context.Context, obj types.Obj
 
 	// Handling Primitives
 	if !model.PeerAs.IsNull() && !model.PeerAs.IsUnknown() {
-		sdk.PeerAs = model.PeerAs.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "PeerAs", "value": *sdk.PeerAs})
+		sdk.PeerAs = model.PeerAs.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "PeerAs", "value": sdk.PeerAs})
 	}
 
 	// Handling Primitives
@@ -760,12 +760,8 @@ func packServiceConnectionsProtocolBgpFromSdk(ctx context.Context, sdk deploymen
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.PeerAs != nil {
-		model.PeerAs = basetypes.NewStringValue(*sdk.PeerAs)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PeerAs", "value": *sdk.PeerAs})
-	} else {
-		model.PeerAs = basetypes.NewStringNull()
-	}
+	model.PeerAs = basetypes.NewStringValue(sdk.PeerAs)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "PeerAs", "value": sdk.PeerAs})
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.PeerIpAddress != nil {

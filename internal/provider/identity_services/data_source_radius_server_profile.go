@@ -225,5 +225,8 @@ func (d *RadiusServerProfileDataSource) Read(ctx context.Context, req datasource
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 
+	// Data sources don't store sensitive values, but the model requires the field to be properly initialized.
+	data.EncryptedValues = types.MapNull(types.StringType)
+
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

@@ -351,7 +351,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 					},
 					"secret": schema.StringAttribute{
 						Validators: []validator.String{
-							stringvalidator.LengthAtMost(64),
+							stringvalidator.LengthAtMost(128),
 						},
 						MarkdownDescription: "The RADIUS secret",
 						Optional:            true,

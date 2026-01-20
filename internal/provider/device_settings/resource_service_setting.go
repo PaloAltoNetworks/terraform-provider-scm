@@ -74,6 +74,282 @@ func (r *ServiceSettingResource) Create(ctx context.Context, req resource.Create
 
 	// Stash plaintext values from the plan.
 
+	{ // Stash plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext = finalVal
+		}
+	}
+
 	{ // Stash plaintext for Services.SecureProxyPassword
 		var finalVal basetypes.StringValue
 		if !resp.Diagnostics.HasError() {
@@ -144,6 +420,474 @@ func (r *ServiceSettingResource) Create(ctx context.Context, req resource.Create
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
 
 	// Stash the encrypted values from the API response and apply the patch.
+
+	{ // Patch plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted = temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted = temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_create_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted = temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted = temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_create_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
 
 	{ // Patch plaintext for Services.SecureProxyPassword
 		if !resp.Diagnostics.HasError() {
@@ -281,6 +1025,486 @@ func (r *ServiceSettingResource) Read(ctx context.Context, req resource.ReadRequ
 	// Step 6 - Encrypted values logic
 	// Check for out-of-band changes and apply the patch.
 
+	{ // Patch plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block: Perform comparison and patch.
+																	if patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted.Equal(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey) {
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext
+																	} else {
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = basetypes.NewStringNull()
+																	}
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block: Perform comparison and patch.
+																	if patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted.Equal(temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey) {
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext
+																	} else {
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = basetypes.NewStringNull()
+																	}
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_read_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block: Perform comparison and patch.
+																	if patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted.Equal(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey) {
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext
+																	} else {
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = basetypes.NewStringNull()
+																	}
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Services.IsNull() && !data.Services.IsUnknown() {
+				var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(data.Services.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block: Perform comparison and patch.
+																	if patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted.Equal(temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey) {
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext
+																	} else {
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = basetypes.NewStringNull()
+																	}
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		data.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_read_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
 	{ // Patch plaintext for Services.SecureProxyPassword
 		if !resp.Diagnostics.HasError() {
 
@@ -408,6 +1632,282 @@ func (r *ServiceSettingResource) Update(ctx context.Context, req resource.Update
 	// Step 3: Encrypted values logic
 	patcher := &serviceSettingsSensitiveValuePatcher{}
 
+	{ // Stash plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext = finalVal
+		}
+	}
+
+	{ // Stash plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	finalVal = temp_stash_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext = finalVal
+		}
+	}
+
 	{ // Stash plaintext for Services.SecureProxyPassword
 		var finalVal basetypes.StringValue
 		if !resp.Diagnostics.HasError() {
@@ -499,6 +1999,474 @@ func (r *ServiceSettingResource) Update(ctx context.Context, req resource.Update
 	//
 
 	// Step 10: Encrypted values logic
+
+	{ // Patch plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted = temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.PrimaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		plan.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.PrimaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.IsUnknown() {
+								var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted = temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.PrimaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		plan.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_PrimaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Md5.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.IsUnknown() {
+																var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted = temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5.Md5, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1.SecondaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		plan.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Md5_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
+
+	{ // Patch plaintext for Services.NtpServers.SecondaryNtpServer.AuthenticationType.SymmetricKey.Algorithm.Sha1.AuthenticationKey
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Services.IsNull() && !plan.Services.IsUnknown() {
+				var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0 models.ServiceSettingsServices
+				resp.Diagnostics.Append(plan.Services.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.IsUnknown() {
+						var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1 models.ServiceSettingsServicesNtpServers
+						resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1, basetypes.ObjectAsOptions{})...)
+						if !resp.Diagnostics.HasError() {
+
+							if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.IsUnknown() {
+								var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2 models.ServiceSettingsServicesNtpServersPrimaryNtpServer
+								resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2, basetypes.ObjectAsOptions{})...)
+								if !resp.Diagnostics.HasError() {
+
+									if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.IsUnknown() {
+										var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType
+										resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3, basetypes.ObjectAsOptions{})...)
+										if !resp.Diagnostics.HasError() {
+
+											if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.IsUnknown() {
+												var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey
+												resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4, basetypes.ObjectAsOptions{})...)
+												if !resp.Diagnostics.HasError() {
+
+													if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.IsUnknown() {
+														var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm
+														resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5, basetypes.ObjectAsOptions{})...)
+														if !resp.Diagnostics.HasError() {
+
+															if !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsNull() && !temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.IsUnknown() {
+																var temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6 models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5
+																resp.Diagnostics.Append(temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1.As(ctx, &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6, basetypes.ObjectAsOptions{})...)
+																if !resp.Diagnostics.HasError() {
+
+																	// Innermost block
+																	patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted = temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey
+																	temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6.AuthenticationKey = patcher.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext
+
+																	// Repack the modified structs.
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5.Sha1, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithmMd5{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_6)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4.Algorithm, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKeyAlgorithm{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_5)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3.SymmetricKey, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationTypeSymmetricKey{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_4)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2.AuthenticationType, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServerAuthenticationType{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_3)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1.SecondaryNtpServer, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServersPrimaryNtpServer{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_2)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0.NtpServers, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServicesNtpServers{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_1)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																	if !resp.Diagnostics.HasError() {
+
+																		plan.Services, diags = types.ObjectValueFrom(ctx, models.ServiceSettingsServices{}.AttrTypes(), &temp_patch_upd_Services_NtpServers_SecondaryNtpServer_AuthenticationType_SymmetricKey_Algorithm_Sha1_AuthenticationKey_0)
+
+																		resp.Diagnostics.Append(diags...)
+																	}
+
+																}
+															}
+
+														}
+													}
+
+												}
+											}
+
+										}
+									}
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+		}
+	}
 
 	{ // Patch plaintext for Services.SecureProxyPassword
 		if !resp.Diagnostics.HasError() {

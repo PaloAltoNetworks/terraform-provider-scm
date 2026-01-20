@@ -234,6 +234,9 @@ var ScepProfilesResourceSchema = schema.Schema{
 					Required:            true,
 					Attributes: map[string]schema.Attribute{
 						"rsa_nbits": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.OneOf("1024", "2048", "3072"),
+							},
 							MarkdownDescription: "Rsa nbits",
 							Required:            true,
 						},

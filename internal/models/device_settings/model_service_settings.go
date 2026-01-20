@@ -745,6 +745,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -755,6 +756,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -825,6 +827,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -835,6 +838,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1017,6 +1021,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1027,6 +1032,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1079,6 +1085,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1089,6 +1096,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},

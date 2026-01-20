@@ -174,7 +174,7 @@ Read-Only:
 
 Read-Only:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key
 
 
 <a id="nestedatt--data--services--ntp_servers--primary_ntp_server--authentication_type--symmetric_key--algorithm--sha1"></a>
@@ -182,7 +182,7 @@ Read-Only:
 
 Read-Only:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key
 
 
 
@@ -241,7 +241,7 @@ Read-Only:
 
 Read-Only:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key
 
 
 <a id="nestedatt--data--services--ntp_servers--secondary_ntp_server--authentication_type--symmetric_key--algorithm--sha1"></a>
@@ -249,4 +249,4 @@ Read-Only:
 
 Read-Only:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key

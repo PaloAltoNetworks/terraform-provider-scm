@@ -17,8 +17,16 @@ import (
 // serviceSettingsSensitiveValuePatcher is an in-memory struct to temporarily store plaintext
 // and encrypted values for sensitive fields during the Create/Update/Read workflows.
 type serviceSettingsSensitiveValuePatcher struct {
-	services_secure_proxy_password_plaintext basetypes.StringValue
-	services_secure_proxy_password_encrypted basetypes.StringValue
+	services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext    basetypes.StringValue
+	services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted    basetypes.StringValue
+	services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext   basetypes.StringValue
+	services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted   basetypes.StringValue
+	services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext  basetypes.StringValue
+	services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted  basetypes.StringValue
+	services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext basetypes.StringValue
+	services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted basetypes.StringValue
+	services_secure_proxy_password_plaintext                                                                                basetypes.StringValue
+	services_secure_proxy_password_encrypted                                                                                basetypes.StringValue
 }
 
 // populatePatcherFromState populates the patcher struct from the resource's state.
@@ -33,6 +41,30 @@ func (p *serviceSettingsSensitiveValuePatcher) populatePatcherFromState(ctx cont
 	if diags.HasError() {
 		return diags
 	}
+	if val, ok := ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext"]; ok {
+		p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted"]; ok {
+		p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext"]; ok {
+		p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted"]; ok {
+		p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext"]; ok {
+		p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted"]; ok {
+		p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext"]; ok {
+		p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted"]; ok {
+		p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted = basetypes.NewStringValue(val)
+	}
 	if val, ok := ev["services_secure_proxy_password_plaintext"]; ok {
 		p.services_secure_proxy_password_plaintext = basetypes.NewStringValue(val)
 	}
@@ -46,6 +78,30 @@ func (p *serviceSettingsSensitiveValuePatcher) populatePatcherFromState(ctx cont
 // populateEncryptedValuesMap returns a map of the patcher's values for saving to state.
 func (p *serviceSettingsSensitiveValuePatcher) populateEncryptedValuesMap() map[string]string {
 	ev := make(map[string]string)
+	if !p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext.IsNull() {
+		ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext"] = p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext.ValueString()
+	}
+	if !p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted.IsNull() {
+		ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted"] = p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted.ValueString()
+	}
+	if !p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext.IsNull() {
+		ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext"] = p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext.ValueString()
+	}
+	if !p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted.IsNull() {
+		ev["services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted"] = p.services_ntp_servers_primary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted.ValueString()
+	}
+	if !p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext.IsNull() {
+		ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext"] = p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_plaintext.ValueString()
+	}
+	if !p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted.IsNull() {
+		ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted"] = p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_md5_authentication_key_encrypted.ValueString()
+	}
+	if !p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext.IsNull() {
+		ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext"] = p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_plaintext.ValueString()
+	}
+	if !p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted.IsNull() {
+		ev["services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted"] = p.services_ntp_servers_secondary_ntp_server_authentication_type_symmetric_key_algorithm_sha1_authentication_key_encrypted.ValueString()
+	}
 	if !p.services_secure_proxy_password_plaintext.IsNull() {
 		ev["services_secure_proxy_password_plaintext"] = p.services_secure_proxy_password_plaintext.ValueString()
 	}

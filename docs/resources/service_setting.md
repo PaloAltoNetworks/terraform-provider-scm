@@ -179,7 +179,7 @@ Optional:
 
 Optional:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key
 
 
 <a id="nestedatt--services--ntp_servers--primary_ntp_server--authentication_type--symmetric_key--algorithm--sha1"></a>
@@ -187,7 +187,7 @@ Optional:
 
 Optional:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key
 
 
 
@@ -246,7 +246,7 @@ Optional:
 
 Optional:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key
 
 
 <a id="nestedatt--services--ntp_servers--secondary_ntp_server--authentication_type--symmetric_key--algorithm--sha1"></a>
@@ -254,7 +254,7 @@ Optional:
 
 Optional:
 
-- `authentication_key` (String) Authentication key
+- `authentication_key` (String, Sensitive) Authentication key
 
 
 ## Import

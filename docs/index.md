@@ -34,6 +34,7 @@ By using this software, you agree to these terms.
 * resource/scm_qos_prpfile: Added additional examples and tests (resource, data-source)
 * resource/scm_lldp_prpfile: Added additional examples and tests (resource, data-source)
 * resource/scm_scep_profile: Added additional examples and tests (resource, data-source)
+* resource/scm_dhcp_interface: Added additional examples(resource, data-source)
 * resource/scm_decryption_rule: Added additional examples(resource)
 
 * Documentation on using SCM SDK with new Client Support. 
@@ -46,6 +47,9 @@ By using this software, you agree to these terms.
 * resource/scm_tacacs_server: Resolved creation of Tacacs Server Profile with secrets within array of objects (#80)
 * resource/scm_loopback_interface: Resolved Loopback IPv6 interface id issue (#79)
 * resource/scm_tunnel_interface: Resolved Tunnel IPv6 interface id issue (#79)
+* resource/scm_scep_profile : Schema Fix for rsa_nbits (#84)
+* resource/scm_dhcp_interface : DHCP Interface GetByUUID Fix (#82)
+* resource/scm_service_setting : md5 and sha1 sensitive values fix (#81)
 * resource/scm_service_connection: Resolved Creation of SC with protobol bgp enabled false and peer_as (ADI-51539)
 
 ### v1.0.6

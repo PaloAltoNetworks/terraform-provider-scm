@@ -34,6 +34,7 @@ By using this software, you agree to these terms.
 * resource/scm_qos_prpfile: Added additional examples and tests (resource, data-source)
 * resource/scm_lldp_prpfile: Added additional examples and tests (resource, data-source)
 * resource/scm_scep_profile: Added additional examples and tests (resource, data-source)
+* resource/scm_tacacs_server: Added additional examples and tests (resource, data-source)
 * resource/scm_dhcp_interface: Added additional examples(resource, data-source)
 * resource/scm_decryption_rule: Added additional examples(resource)
 

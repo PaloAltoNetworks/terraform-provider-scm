@@ -59,10 +59,13 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -87,8 +90,10 @@ Read-Only:
 Read-Only:
 
 - `dhcp_client` (Attributes) Dhcp client
+
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`. (see [below for nested schema](#nestedatt--data--management_interface--mgmt_type--dhcp_client))
 - `static` (Attributes) Static
+
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`. (see [below for nested schema](#nestedatt--data--management_interface--mgmt_type--static))
 
 <a id="nestedatt--data--management_interface--mgmt_type--dhcp_client"></a>

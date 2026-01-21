@@ -69,6 +69,30 @@ func (r *RadiusServerProfileResource) Create(ctx context.Context, req resource.C
 		return
 	}
 
+	// Create a patcher to temporarily store sensitive values.
+	patcher := &radiusServerProfilesSensitiveValuePatcher{}
+	patcher.init() // Initialize the patcher (sets up arrayValues map)
+
+	// Stash plaintext values from the plan.
+
+	{ // Stash plaintext for array field Secret
+		if !resp.Diagnostics.HasError() && !data.Server.IsNull() && !data.Server.IsUnknown() {
+			var arrayItems []models.RadiusServerProfilesServerInner
+			resp.Diagnostics.Append(data.Server.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx, arrayItem := range arrayItems {
+
+					finalVal := arrayItem.Secret
+					if !finalVal.IsUnknown() && !finalVal.IsNull() {
+						key := fmt.Sprintf("secret_plaintext_%d", arrayIdx)
+						patcher.arrayValues[key] = finalVal
+					}
+
+				}
+			}
+		}
+	}
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.RadiusServerProfiles{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
@@ -116,6 +140,49 @@ func (r *RadiusServerProfileResource) Create(ctx context.Context, req resource.C
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+
+	// Stash the encrypted values from the API response and apply the patch.
+
+	{ // Patch plaintext for array field Secret
+		if !resp.Diagnostics.HasError() && !data.Server.IsNull() && !data.Server.IsUnknown() {
+			var arrayItems []models.RadiusServerProfilesServerInner
+			resp.Diagnostics.Append(data.Server.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					// Store encrypted value and replace with plaintext
+					encryptedVal := arrayItems[arrayIdx].Secret
+					plaintextKey := fmt.Sprintf("secret_plaintext_%d", arrayIdx)
+					encryptedKey := fmt.Sprintf("secret_encrypted_%d", arrayIdx)
+					if !encryptedVal.IsNull() && !encryptedVal.IsUnknown() {
+						patcher.arrayValues[encryptedKey] = encryptedVal
+					}
+					if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+						arrayItems[arrayIdx].Secret = plaintextVal
+					}
+
+					// Repack modified structs back into the array
+
+				}
+				// Repack the entire array back into data
+				data.Server, diags = basetypes.NewListValueFrom(ctx, models.RadiusServerProfilesServerInner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
+
+	// Save the patcher's data to the EncryptedValues map in the state.
+	evMap := patcher.populateEncryptedValuesMap()
+	if len(evMap) > 0 {
+		// Create the map using NewMapValueFrom with explicit context and type
+		data.EncryptedValues, diags = basetypes.NewMapValueFrom(ctx, basetypes.StringType{}, evMap)
+	} else {
+		data.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Set the Terraform ID and save the final state.
 	var idBuilder strings.Builder
@@ -191,6 +258,14 @@ func (r *RadiusServerProfileResource) Read(ctx context.Context, req resource.Rea
 		return
 	}
 
+	// Step 4 - Encrypted values logic
+	// Populate a patcher from the state's encrypted_values map.
+	patcher := &radiusServerProfilesSensitiveValuePatcher{}
+	resp.Diagnostics.Append(patcher.populatePatcherFromState(ctx, savestate)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	// Step 5 - Pack the scm object into a terraform model and put it in data we initialized in step 1
 	packedObject, diags := packRadiusServerProfilesFromSdk(ctx, *scmObject)
 	resp.Diagnostics.Append(diags...)
@@ -198,6 +273,56 @@ func (r *RadiusServerProfileResource) Read(ctx context.Context, req resource.Rea
 		return
 	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// Step 6 - Encrypted values logic
+	// Check for out-of-band changes and apply the patch.
+
+	{ // Patch plaintext for array field Secret
+		if !resp.Diagnostics.HasError() && !data.Server.IsNull() && !data.Server.IsUnknown() {
+			var arrayItems []models.RadiusServerProfilesServerInner
+			resp.Diagnostics.Append(data.Server.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					// Compare encrypted values and apply patch
+					currentEncryptedVal := arrayItems[arrayIdx].Secret
+					savedEncryptedKey := fmt.Sprintf("secret_encrypted_%d", arrayIdx)
+					plaintextKey := fmt.Sprintf("secret_plaintext_%d", arrayIdx)
+
+					if savedEncrypted, ok := patcher.arrayValues[savedEncryptedKey]; ok {
+						if currentEncryptedVal.Equal(savedEncrypted) {
+							// No out-of-band change, use plaintext
+							if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+								arrayItems[arrayIdx].Secret = plaintextVal
+							}
+						} else {
+							// Out-of-band change detected, show as drift
+							arrayItems[arrayIdx].Secret = basetypes.NewStringNull()
+						}
+					}
+
+					// Repack modified structs back into the array
+
+				}
+				// Repack the entire array back into data
+				data.Server, diags = basetypes.NewListValueFrom(ctx, models.RadiusServerProfilesServerInner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
+
+	// Persist the patcher's data to the EncryptedValues map in the state.
+	evMap := patcher.populateEncryptedValuesMap()
+	if len(evMap) > 0 {
+		// Create the map using NewMapValueFrom with explicit context and type
+		data.EncryptedValues, diags = basetypes.NewMapValueFrom(ctx, basetypes.StringType{}, evMap)
+	} else {
+		data.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	}
+	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
@@ -283,6 +408,28 @@ func (r *RadiusServerProfileResource) Update(ctx context.Context, req resource.U
 		return
 	}
 
+	// Step 3: Encrypted values logic
+	patcher := &radiusServerProfilesSensitiveValuePatcher{}
+	patcher.init() // Initialize the patcher (sets up arrayValues map)
+
+	{ // Stash plaintext for array field Secret
+		if !resp.Diagnostics.HasError() && !plan.Server.IsNull() && !plan.Server.IsUnknown() {
+			var arrayItems []models.RadiusServerProfilesServerInner
+			resp.Diagnostics.Append(plan.Server.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx, arrayItem := range arrayItems {
+
+					finalVal := arrayItem.Secret
+					if !finalVal.IsUnknown() && !finalVal.IsNull() {
+						key := fmt.Sprintf("secret_plaintext_%d", arrayIdx)
+						patcher.arrayValues[key] = finalVal
+					}
+
+				}
+			}
+		}
+	}
+
 	// Step 3: Creates a plan object from the plan
 	planObject, diags := types.ObjectValueFrom(ctx, models.RadiusServerProfiles{}.AttrTypes(), &plan)
 	resp.Diagnostics.Append(diags...)
@@ -351,6 +498,47 @@ func (r *RadiusServerProfileResource) Update(ctx context.Context, req resource.U
 	//
 	// _ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
 	//
+
+	// Step 10: Encrypted values logic
+
+	{ // Patch plaintext for array field Secret
+		if !resp.Diagnostics.HasError() && !plan.Server.IsNull() && !plan.Server.IsUnknown() {
+			var arrayItems []models.RadiusServerProfilesServerInner
+			resp.Diagnostics.Append(plan.Server.ElementsAs(ctx, &arrayItems, false)...)
+			if !resp.Diagnostics.HasError() {
+				for arrayIdx := range arrayItems {
+
+					// Store encrypted value and replace with plaintext
+					encryptedVal := arrayItems[arrayIdx].Secret
+					plaintextKey := fmt.Sprintf("secret_plaintext_%d", arrayIdx)
+					encryptedKey := fmt.Sprintf("secret_encrypted_%d", arrayIdx)
+					if !encryptedVal.IsNull() && !encryptedVal.IsUnknown() {
+						patcher.arrayValues[encryptedKey] = encryptedVal
+					}
+					if plaintextVal, ok := patcher.arrayValues[plaintextKey]; ok {
+						arrayItems[arrayIdx].Secret = plaintextVal
+					}
+
+					// Repack modified structs back into the array
+
+				}
+				// Repack the entire array back into plan
+				plan.Server, diags = basetypes.NewListValueFrom(ctx, models.RadiusServerProfilesServerInner{}.AttrType(), arrayItems)
+				resp.Diagnostics.Append(diags...)
+			}
+		}
+	}
+	evMap := patcher.populateEncryptedValuesMap()
+	if len(evMap) > 0 {
+		// Create the map using NewMapValueFrom with explicit context and type
+		plan.EncryptedValues, diags = basetypes.NewMapValueFrom(ctx, basetypes.StringType{}, evMap)
+	} else {
+		plan.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Step 10: Carry over tfid from state into plan
 	plan.Tfid = state.Tfid

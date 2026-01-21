@@ -49,7 +49,7 @@ type ScepProfilesAlgorithm struct {
 
 // ScepProfilesAlgorithmRsa represents a nested structure within the ScepProfiles model
 type ScepProfilesAlgorithmRsa struct {
-	RsaNbits basetypes.Int64Value `tfsdk:"rsa_nbits"`
+	RsaNbits basetypes.StringValue `tfsdk:"rsa_nbits"`
 }
 
 // ScepProfilesCertificateAttributes represents a nested structure within the ScepProfiles model
@@ -63,7 +63,7 @@ type ScepProfilesCertificateAttributes struct {
 type ScepProfilesScepChallenge struct {
 	Dynamic basetypes.ObjectValue `tfsdk:"dynamic"`
 	Fixed   basetypes.StringValue `tfsdk:"fixed"`
-	None    basetypes.StringValue `tfsdk:"none"`
+	None    basetypes.ObjectValue `tfsdk:"none"`
 }
 
 // ScepProfilesScepChallengeDynamic represents a nested structure within the ScepProfiles model
@@ -82,7 +82,7 @@ func (o ScepProfiles) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"rsa": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"rsa_nbits": basetypes.Int64Type{},
+						"rsa_nbits": basetypes.StringType{},
 					},
 				},
 			},
@@ -112,7 +112,9 @@ func (o ScepProfiles) AttrTypes() map[string]attr.Type {
 					},
 				},
 				"fixed": basetypes.StringType{},
-				"none":  basetypes.StringType{},
+				"none": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{},
+				},
 			},
 		},
 		"scep_client_cert":         basetypes.StringType{},
@@ -136,7 +138,7 @@ func (o ScepProfilesAlgorithm) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"rsa": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"rsa_nbits": basetypes.Int64Type{},
+				"rsa_nbits": basetypes.StringType{},
 			},
 		},
 	}
@@ -152,7 +154,7 @@ func (o ScepProfilesAlgorithm) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the ScepProfilesAlgorithmRsa model.
 func (o ScepProfilesAlgorithmRsa) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"rsa_nbits": basetypes.Int64Type{},
+		"rsa_nbits": basetypes.StringType{},
 	}
 }
 
@@ -190,7 +192,9 @@ func (o ScepProfilesScepChallenge) AttrTypes() map[string]attr.Type {
 			},
 		},
 		"fixed": basetypes.StringType{},
-		"none":  basetypes.StringType{},
+		"none": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{},
+		},
 	}
 }
 
@@ -227,18 +231,21 @@ var ScepProfilesResourceSchema = schema.Schema{
 			Attributes: map[string]schema.Attribute{
 				"rsa": schema.SingleNestedAttribute{
 					MarkdownDescription: "Key length (bits)",
-					Optional:            true,
+					Required:            true,
 					Attributes: map[string]schema.Attribute{
-						"rsa_nbits": schema.Int64Attribute{
+						"rsa_nbits": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.OneOf("1024", "2048", "3072"),
+							},
 							MarkdownDescription: "Rsa nbits",
-							Optional:            true,
+							Required:            true,
 						},
 					},
 				},
 			},
 		},
 		"ca_identity_name": schema.StringAttribute{
-			MarkdownDescription: "Certificate Authority identity",
+			MarkdownDescription: "Certificate Authority Identity",
 			Required:            true,
 		},
 		"certificate_attributes": schema.SingleNestedAttribute{
@@ -252,7 +259,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
 					},
-					MarkdownDescription: "Dnsname\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Dnsname\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
 				},
 				"rfc822name": schema.StringAttribute{
@@ -262,7 +269,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
 					},
-					MarkdownDescription: "Rfc822name\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Rfc822name\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
 				},
 				"uniform_resource_identifier": schema.StringAttribute{
@@ -272,7 +279,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rfc822name"),
 						),
 					},
-					MarkdownDescription: "Uniform resource identifier\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Uniform resource identifier\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
 				},
 			},
@@ -286,7 +293,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -294,7 +301,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 		},
 		"digest": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.OneOf("sha1", "sha256", "sha348", "sha512"),
+				stringvalidator.OneOf("sha1", "sha256", "sha384", "sha512"),
 			},
 			MarkdownDescription: "Digest for CSR",
 			Required:            true,
@@ -306,7 +313,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			Sensitive:           true,
 		},
 		"fingerprint": schema.StringAttribute{
-			MarkdownDescription: "CA certificate fingerprint",
+			MarkdownDescription: "CA Certificate Fingerprint",
 			Optional:            true,
 		},
 		"folder": schema.StringAttribute{
@@ -318,7 +325,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -339,11 +346,14 @@ var ScepProfilesResourceSchema = schema.Schema{
 			Required:            true,
 		},
 		"scep_ca_cert": schema.StringAttribute{
-			MarkdownDescription: "SCEP server CA certificate",
+			Validators: []validator.String{
+				stringvalidator.OneOf("Authentication Cookie CA", "Forward-Trust-CA", "Forward-Trust-CA-ECDSA", "Forward-UnTrust-CA", "Forward-UnTrust-CA-ECDSA", "Global Authentication Cookie CA", "GlobalSign-Root-CA", "Root CA"),
+			},
+			MarkdownDescription: "SCEP Server CA Certificate",
 			Optional:            true,
 		},
 		"scep_challenge": schema.SingleNestedAttribute{
-			MarkdownDescription: "One Time Password challenge",
+			MarkdownDescription: "One Time Password Challenge",
 			Required:            true,
 			Attributes: map[string]schema.Attribute{
 				"dynamic": schema.SingleNestedAttribute{
@@ -353,7 +363,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("none"),
 						),
 					},
-					MarkdownDescription: "Dynamic\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"otp_server_url": schema.StringAttribute{
@@ -388,24 +398,27 @@ var ScepProfilesResourceSchema = schema.Schema{
 						),
 						stringvalidator.LengthAtMost(1024),
 					},
-					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Optional:            true,
 				},
-				"none": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.ExactlyOneOf(
+				"none": schema.SingleNestedAttribute{
+					Validators: []validator.Object{
+						objectvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("dynamic"),
 							path.MatchRelative().AtParent().AtName("fixed"),
 						),
-						stringvalidator.OneOf(""),
 					},
-					MarkdownDescription: "No OTP\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "No OTP\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Optional:            true,
+					Attributes:          map[string]schema.Attribute{},
 				},
 			},
 		},
 		"scep_client_cert": schema.StringAttribute{
-			MarkdownDescription: "SCEP client ceertificate",
+			Validators: []validator.String{
+				stringvalidator.OneOf("Authentication Cookie CA", "Forward-Trust-CA", "Forward-Trust-CA-ECDSA", "Forward-UnTrust-CA", "Forward-UnTrust-CA-ECDSA", "Global Authentication Cookie CA", "GlobalSign-Root-CA", "Root CA"),
+			},
+			MarkdownDescription: "SCEP Client Certificate",
 			Optional:            true,
 		},
 		"scep_url": schema.StringAttribute{
@@ -421,7 +434,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -461,7 +474,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "Key length (bits)",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
-						"rsa_nbits": dsschema.Int64Attribute{
+						"rsa_nbits": dsschema.StringAttribute{
 							MarkdownDescription: "Rsa nbits",
 							Computed:            true,
 						},
@@ -470,7 +483,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"ca_identity_name": dsschema.StringAttribute{
-			MarkdownDescription: "Certificate Authority identity",
+			MarkdownDescription: "Certificate Authority Identity",
 			Computed:            true,
 		},
 		"certificate_attributes": dsschema.SingleNestedAttribute{
@@ -478,21 +491,21 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"dnsname": dsschema.StringAttribute{
-					MarkdownDescription: "Dnsname\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Dnsname\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Computed:            true,
 				},
 				"rfc822name": dsschema.StringAttribute{
-					MarkdownDescription: "Rfc822name\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Rfc822name\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Computed:            true,
 				},
 				"uniform_resource_identifier": dsschema.StringAttribute{
-					MarkdownDescription: "Uniform resource identifier\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Uniform resource identifier\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Computed:            true,
 				},
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -507,11 +520,11 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"fingerprint": dsschema.StringAttribute{
-			MarkdownDescription: "CA certificate fingerprint",
+			MarkdownDescription: "CA Certificate Fingerprint",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -525,15 +538,15 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"scep_ca_cert": dsschema.StringAttribute{
-			MarkdownDescription: "SCEP server CA certificate",
+			MarkdownDescription: "SCEP Server CA Certificate",
 			Computed:            true,
 		},
 		"scep_challenge": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "One Time Password challenge",
+			MarkdownDescription: "One Time Password Challenge",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"dynamic": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dynamic\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"otp_server_url": dsschema.StringAttribute{
@@ -552,17 +565,18 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"fixed": dsschema.StringAttribute{
-					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Computed:            true,
 				},
-				"none": dsschema.StringAttribute{
-					MarkdownDescription: "No OTP\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+				"none": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "No OTP\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
 					Computed:            true,
+					Attributes:          map[string]dsschema.Attribute{},
 				},
 			},
 		},
 		"scep_client_cert": dsschema.StringAttribute{
-			MarkdownDescription: "SCEP client ceertificate",
+			MarkdownDescription: "SCEP Client Certificate",
 			Computed:            true,
 		},
 		"scep_url": dsschema.StringAttribute{
@@ -570,7 +584,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

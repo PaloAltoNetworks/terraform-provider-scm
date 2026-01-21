@@ -232,7 +232,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -247,7 +247,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -271,7 +271,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("static_ip"),
 						),
 					},
-					MarkdownDescription: "Adaptive\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
+					MarkdownDescription: "Adaptive\n\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -282,7 +282,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("static_ip"),
 						),
 					},
-					MarkdownDescription: "Http https\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
+					MarkdownDescription: "Http https\n\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"monitored_url": schema.StringAttribute{
@@ -305,7 +305,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("http_https"),
 						),
 					},
-					MarkdownDescription: "Static ip\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
+					MarkdownDescription: "Static ip\n\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"fqdn": schema.SingleNestedAttribute{
@@ -314,7 +314,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("ip_address"),
 								),
 							},
-							MarkdownDescription: "Fqdn\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+							MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
 								"fqdn_name": schema.StringAttribute{
@@ -336,7 +336,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("fqdn"),
 								),
 							},
-							MarkdownDescription: "List of IP addresses\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+							MarkdownDescription: "List of IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 							Optional:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
@@ -371,7 +371,7 @@ var SdwanSaasQualityProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -392,12 +392,12 @@ var SdwanSaasQualityProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "SdwanSaasQualityProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -410,12 +410,12 @@ var SdwanSaasQualityProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"adaptive": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Adaptive\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
+					MarkdownDescription: "Adaptive\n\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"http_https": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Http https\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
+					MarkdownDescription: "Http https\n\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"monitored_url": dsschema.StringAttribute{
@@ -429,11 +429,11 @@ var SdwanSaasQualityProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"static_ip": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Static ip\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
+					MarkdownDescription: "Static ip\n\n> ℹ️ **Note:** You must specify exactly one of `adaptive`, `http_https`, and `static_ip`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"fqdn": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Fqdn\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+							MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"fqdn_name": dsschema.StringAttribute{
@@ -447,7 +447,7 @@ var SdwanSaasQualityProfilesDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"ip_address": dsschema.ListNestedAttribute{
-							MarkdownDescription: "List of IP addresses\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+							MarkdownDescription: "List of IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 							Computed:            true,
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
@@ -472,7 +472,7 @@ var SdwanSaasQualityProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

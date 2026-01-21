@@ -12,6 +12,54 @@ import (
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/identity_services"
 )
 
+// tacacsServerProfilesSensitiveValuePatcher is an in-memory struct to temporarily store plaintext
+// and encrypted values for sensitive fields during the Create/Update/Read workflows.
+type tacacsServerProfilesSensitiveValuePatcher struct {
+	// arrayValues stores sensitive values for fields inside arrays, with dynamic keys like "server_secret_plaintext_0"
+	arrayValues map[string]basetypes.StringValue
+}
+
+// Initialize initializes the patcher (must be called before use if there are array fields)
+func (p *tacacsServerProfilesSensitiveValuePatcher) init() {
+	if p.arrayValues == nil {
+		p.arrayValues = make(map[string]basetypes.StringValue)
+	}
+}
+
+// populatePatcherFromState populates the patcher struct from the resource's state.
+func (p *tacacsServerProfilesSensitiveValuePatcher) populatePatcherFromState(ctx context.Context, state models.TacacsServerProfiles) diag.Diagnostics {
+	var diags diag.Diagnostics
+	p.init() // Initialize the map
+	if state.EncryptedValues.IsNull() || state.EncryptedValues.IsUnknown() {
+		return diags
+	}
+
+	var ev map[string]string
+	diags.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false)...)
+	if diags.HasError() {
+		return diags
+	}
+	// Load array values (all keys that don't match the non-array patterns)
+	for key, val := range ev {
+		// Store any remaining keys (array values) in the map
+		p.arrayValues[key] = basetypes.NewStringValue(val)
+	}
+
+	return diags
+}
+
+// populateEncryptedValuesMap returns a map of the patcher's values for saving to state.
+func (p *tacacsServerProfilesSensitiveValuePatcher) populateEncryptedValuesMap() map[string]string {
+	ev := make(map[string]string)
+	// Add all array values
+	for key, val := range p.arrayValues {
+		if !val.IsNull() {
+			ev[key] = val.ValueString()
+		}
+	}
+	return ev
+}
+
 // --- Unpacker for TacacsServerProfiles ---
 func unpackTacacsServerProfilesToSdk(ctx context.Context, obj types.Object) (*identity_services.TacacsServerProfiles, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering unpack helper for models.TacacsServerProfiles", map[string]interface{}{"tf_object": obj})
@@ -97,6 +145,8 @@ func packTacacsServerProfilesFromSdk(ctx context.Context, sdk identity_services.
 	diags := diag.Diagnostics{}
 	var model models.TacacsServerProfiles
 	var d diag.Diagnostics
+	// MEGA FIX FOR MAP TYPE MISMATCH (NOT ALL MODELS MAY HAVE EncryptedValues)
+	model.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Device != nil {

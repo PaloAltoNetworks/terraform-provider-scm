@@ -10,6 +10,7 @@ import (
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -358,7 +359,7 @@ var QosProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("percentage"),
 						),
 					},
-					MarkdownDescription: "Mbps\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Mbps\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
@@ -376,6 +377,8 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "guaranteed sending bandwidth in mbps",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 											"egress_max": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -383,12 +386,14 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "max sending bandwidth in mbps",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 										},
 									},
 									"name": schema.StringAttribute{
 										Validators: []validator.String{
-											stringvalidator.LengthAtMost(31),
+											stringvalidator.OneOf("class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8"),
 										},
 										MarkdownDescription: "Traffic class",
 										Optional:            true,
@@ -413,7 +418,7 @@ var QosProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("mbps"),
 						),
 					},
-					MarkdownDescription: "Percentage\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Percentage\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
@@ -431,6 +436,8 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "guaranteed sending bandwidth in percentage",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 											"egress_max": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -438,12 +445,14 @@ var QosProfilesResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "max sending bandwidth in percentage",
 												Optional:            true,
+												Computed:            true,
+												Default:             int64default.StaticInt64(0),
 											},
 										},
 									},
 									"name": schema.StringAttribute{
 										Validators: []validator.String{
-											stringvalidator.LengthAtMost(31),
+											stringvalidator.OneOf("class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8"),
 										},
 										MarkdownDescription: "Traffic class",
 										Optional:            true,
@@ -473,7 +482,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -488,7 +497,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -517,7 +526,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -556,7 +565,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"mbps": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Mbps\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Mbps\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"class": dsschema.ListNestedAttribute{
@@ -592,7 +601,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"percentage": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Percentage\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Percentage\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"class": dsschema.ListNestedAttribute{
@@ -630,12 +639,12 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -649,7 +658,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

@@ -42,11 +42,14 @@ output "scm_dns_security_profile_details" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the DNS security profile
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -91,12 +94,16 @@ Read-Only:
 Read-Only:
 
 - `alert` (Attributes) Alert
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--alert))
 - `allow` (Attributes) Allow
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--allow))
 - `block` (Attributes) Block
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--block))
 - `sinkhole` (Attributes) Sinkhole
+
 > ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--sinkhole))
 
 <a id="nestedatt--botnet_domains--lists--action--alert"></a>

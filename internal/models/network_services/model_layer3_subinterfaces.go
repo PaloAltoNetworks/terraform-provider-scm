@@ -308,7 +308,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -320,7 +320,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ip"),
 				),
 			},
-			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"create_default_route": schema.BoolAttribute{
@@ -378,7 +378,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -401,7 +401,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("dhcp_client"),
 				),
 			},
-			MarkdownDescription: "L3 sub-interface IP Parent\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+			MarkdownDescription: "L3 sub-interface IP Parent\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
@@ -436,7 +436,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -518,12 +518,12 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
 		"dhcp_client": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"create_default_route": dsschema.BoolAttribute{
@@ -555,7 +555,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -568,7 +568,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ip": dsschema.ListNestedAttribute{
-			MarkdownDescription: "L3 sub-interface IP Parent\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+			MarkdownDescription: "L3 sub-interface IP Parent\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
@@ -593,7 +593,7 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

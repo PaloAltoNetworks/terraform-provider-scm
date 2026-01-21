@@ -97,6 +97,7 @@ resource "scm_zone" "scm_layer3_zone_complex" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `device_acl` (Attributes) Device acl (see [below for nested schema](#nestedatt--device_acl))
 - `dos_log_setting` (String) Dos log setting
@@ -104,9 +105,11 @@ resource "scm_zone" "scm_layer3_zone_complex" {
 - `enable_device_identification` (Boolean) Enable device identification
 - `enable_user_identification` (Boolean) Enable user identification
 - `folder` (String) Folder
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `network` (Attributes) Network (see [below for nested schema](#nestedatt--network))
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `user_acl` (Attributes) User acl (see [below for nested schema](#nestedatt--user_acl))
 

@@ -191,14 +191,14 @@ func unpackKerberosServerProfilesServerInnerToSdk(ctx context.Context, obj types
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Host.IsNull() && !model.Host.IsUnknown() {
-		sdk.Host = model.Host.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Host", "value": *sdk.Host})
+		sdk.Host = model.Host.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Host", "value": sdk.Host})
 	}
 
 	// Handling Primitives
 	if !model.Name.IsNull() && !model.Name.IsUnknown() {
-		sdk.Name = model.Name.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
+		sdk.Name = model.Name.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	}
 
 	// Handling Primitives
@@ -223,20 +223,12 @@ func packKerberosServerProfilesServerInnerFromSdk(ctx context.Context, sdk ident
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.Host != nil {
-		model.Host = basetypes.NewStringValue(*sdk.Host)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Host", "value": *sdk.Host})
-	} else {
-		model.Host = basetypes.NewStringNull()
-	}
+	model.Host = basetypes.NewStringValue(sdk.Host)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Host", "value": sdk.Host})
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.Name != nil {
-		model.Name = basetypes.NewStringValue(*sdk.Name)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
-	} else {
-		model.Name = basetypes.NewStringNull()
-	}
+	model.Name = basetypes.NewStringValue(sdk.Name)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Port != nil {

@@ -341,26 +341,8 @@ func (r *BgpRoutingResource) Update(ctx context.Context, req resource.UpdateRequ
 
 	tflog.Debug(ctx, "Updating bgp_routing on SCM API")
 
-	// --- START AUTOMATED CONVERSION (JSON Marshaling) ---
-	// Asymmetric Schema Detected: The API expects bgp-routing, but we have BgpRouting.
-	var updateObj deployment_services.BgpRouting
-
-	// 1. Marshal the read object to JSON
-	jsonBytes, err := json.Marshal(unpackedScmObject)
-	if err != nil {
-		resp.Diagnostics.AddError("Error Converting Model", "Could not marshal read model to JSON: "+err.Error())
-		return
-	}
-
-	// 2. Unmarshal into the update object.
-	err = json.Unmarshal(jsonBytes, &updateObj)
-	if err != nil {
-		resp.Diagnostics.AddError("Error Converting Model", "Could not unmarshal JSON to update model: "+err.Error())
-		return
-	}
-
-	updateReq := r.client.BGPRoutingAPI.UpdateBGPRouting(ctx).BgpRouting(updateObj)
-	// --- END AUTOMATED CONVERSION ---
+	// Call Update (PUT)
+	updateReq := r.client.BGPRoutingAPI.UpdateBGPRouting(ctx).BgpRouting(*unpackedScmObject)
 
 	scmObjectInterface, httpErr, err = updateReq.Execute()
 

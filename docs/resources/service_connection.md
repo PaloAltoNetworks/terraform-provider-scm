@@ -158,6 +158,10 @@ Optional:
 <a id="nestedatt--protocol--bgp"></a>
 ### Nested Schema for `protocol.bgp`
 
+Required:
+
+- `peer_as` (String) Peer as
+
 Optional:
 
 - `do_not_export_routes` (Boolean) Do not export routes
@@ -165,7 +169,6 @@ Optional:
 - `fast_failover` (Boolean) Fast failover
 - `local_ip_address` (String) Local ip address
 - `originate_default_route` (Boolean) Originate default route
-- `peer_as` (String) Peer as
 - `peer_ip_address` (String) Peer ip address
 - `secret` (String, Sensitive) Secret
 - `summarize_mobile_user_routes` (Boolean) Summarize mobile user routes

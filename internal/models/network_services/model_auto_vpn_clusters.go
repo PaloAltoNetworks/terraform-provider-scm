@@ -660,7 +660,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 														"ip_address": schema.StringAttribute{
@@ -669,7 +669,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 													},
@@ -733,7 +733,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 														"ip_address": schema.StringAttribute{
@@ -742,7 +742,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 													},
@@ -829,7 +829,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 														"ip_address": schema.StringAttribute{
@@ -838,7 +838,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 													},
@@ -904,7 +904,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("ip_address"),
 																),
 															},
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 														"ip_address": schema.StringAttribute{
@@ -913,7 +913,7 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
 														},
 													},
@@ -1013,11 +1013,11 @@ var AutoVpnClustersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"fqdn": dsschema.StringAttribute{
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 														"ip_address": dsschema.StringAttribute{
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 													},
@@ -1071,11 +1071,11 @@ var AutoVpnClustersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"fqdn": dsschema.StringAttribute{
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 														"ip_address": dsschema.StringAttribute{
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 													},
@@ -1157,11 +1157,11 @@ var AutoVpnClustersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"fqdn": dsschema.StringAttribute{
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 														"ip_address": dsschema.StringAttribute{
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 													},
@@ -1219,11 +1219,11 @@ var AutoVpnClustersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"fqdn": dsschema.StringAttribute{
-															MarkdownDescription: "FQDN\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 														"ip_address": dsschema.StringAttribute{
-															MarkdownDescription: "IP address\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
+															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Computed:            true,
 														},
 													},

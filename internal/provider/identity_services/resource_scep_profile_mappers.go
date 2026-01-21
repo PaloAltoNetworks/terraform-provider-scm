@@ -4,6 +4,7 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -409,7 +410,7 @@ func unpackScepProfilesAlgorithmToSdk(ctx context.Context, obj types.Object) (*i
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Rsa"})
 		}
 		if unpacked != nil {
-			sdk.Rsa = unpacked
+			sdk.Rsa = *unpacked
 		}
 	}
 
@@ -428,13 +429,11 @@ func packScepProfilesAlgorithmFromSdk(ctx context.Context, sdk identity_services
 	var d diag.Diagnostics
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
-	if sdk.Rsa != nil {
+	// Logic for non-pointer / value-type nested objects
+	if !reflect.ValueOf(sdk.Rsa).IsZero() {
 		tflog.Debug(ctx, "Packing nested object for field Rsa")
-		packed, d := packScepProfilesAlgorithmRsaFromSdk(ctx, *sdk.Rsa)
+		packed, d := packScepProfilesAlgorithmRsaFromSdk(ctx, sdk.Rsa)
 		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Rsa"})
-		}
 		model.Rsa = packed
 	} else {
 		model.Rsa = basetypes.NewObjectNull(models.ScepProfilesAlgorithmRsa{}.AttrTypes())
@@ -511,9 +510,8 @@ func unpackScepProfilesAlgorithmRsaToSdk(ctx context.Context, obj types.Object) 
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.RsaNbits.IsNull() && !model.RsaNbits.IsUnknown() {
-		val := int32(model.RsaNbits.ValueInt64())
-		sdk.RsaNbits = &val
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RsaNbits", "value": *sdk.RsaNbits})
+		sdk.RsaNbits = model.RsaNbits.ValueString()
+		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "RsaNbits", "value": sdk.RsaNbits})
 	}
 
 	diags.Append(d...)
@@ -531,12 +529,8 @@ func packScepProfilesAlgorithmRsaFromSdk(ctx context.Context, sdk identity_servi
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	if sdk.RsaNbits != nil {
-		model.RsaNbits = basetypes.NewInt64Value(int64(*sdk.RsaNbits))
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RsaNbits", "value": *sdk.RsaNbits})
-	} else {
-		model.RsaNbits = basetypes.NewInt64Null()
-	}
+	model.RsaNbits = basetypes.NewStringValue(sdk.RsaNbits)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "RsaNbits", "value": sdk.RsaNbits})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.ScepProfilesAlgorithmRsa{}.AttrTypes(), &model)
@@ -751,10 +745,10 @@ func unpackScepProfilesScepChallengeToSdk(ctx context.Context, obj types.Object)
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Fixed", "value": *sdk.Fixed})
 	}
 
-	// Handling Primitives
+	// Handling Typeless Objects
 	if !model.None.IsNull() && !model.None.IsUnknown() {
-		sdk.None = model.None.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "None", "value": *sdk.None})
+		tflog.Debug(ctx, "Unpacking typeless object for field None")
+		sdk.None = make(map[string]interface{})
 	}
 
 	diags.Append(d...)
@@ -791,13 +785,18 @@ func packScepProfilesScepChallengeFromSdk(ctx context.Context, sdk identity_serv
 	} else {
 		model.Fixed = basetypes.NewStringNull()
 	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.None != nil {
-		model.None = basetypes.NewStringValue(*sdk.None)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "None", "value": *sdk.None})
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.None != nil && !reflect.ValueOf(sdk.None).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field None")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.None, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
 	} else {
-		model.None = basetypes.NewStringNull()
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.None = basetypes.NewObjectNull(map[string]attr.Type{})
 	}
 	diags.Append(d...)
 

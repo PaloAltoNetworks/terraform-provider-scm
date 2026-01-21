@@ -53,11 +53,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) L3 sub-interface name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -66,6 +69,7 @@ Read-Only:
 - `default_value` (String) Default interface assignment
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) Tunnel Interface IP Parent (see [below for nested schema](#nestedatt--data--ip))
+- `ipv6` (Attributes) Tunnel Interface IPv6 Configuration (see [below for nested schema](#nestedatt--data--ipv6))
 - `mtu` (Number) MTU
 - `tfid` (String) The Terraform ID.
 
@@ -75,3 +79,30 @@ Read-Only:
 Read-Only:
 
 - `name` (String) Tunnel Interface IP address(es)
+
+
+<a id="nestedatt--data--ipv6"></a>
+### Nested Schema for `data.ipv6`
+
+Read-Only:
+
+- `address` (Attributes List) IPv6 Address Parent (see [below for nested schema](#nestedatt--data--ipv6--address))
+- `enabled` (Boolean) Enable IPv6
+- `interface_id` (String) Interface ID
+
+<a id="nestedatt--data--ipv6--address"></a>
+### Nested Schema for `data.ipv6.address`
+
+Read-Only:
+
+- `anycast` (Attributes) Anycast (see [below for nested schema](#nestedatt--data--ipv6--address--anycast))
+- `enable_on_interface` (Boolean) Enable Address on Interface
+- `name` (String) IPv6 Address
+- `prefix` (Attributes) Use interface ID as host portion (see [below for nested schema](#nestedatt--data--ipv6--address--prefix))
+
+<a id="nestedatt--data--ipv6--address--anycast"></a>
+### Nested Schema for `data.ipv6.address.anycast`
+
+
+<a id="nestedatt--data--ipv6--address--prefix"></a>
+### Nested Schema for `data.ipv6.address.prefix`

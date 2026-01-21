@@ -324,7 +324,7 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 						},
 						"peer_as": schema.StringAttribute{
 							MarkdownDescription: "Peer as",
-							Optional:            true,
+							Required:            true,
 						},
 						"peer_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Peer ip address",

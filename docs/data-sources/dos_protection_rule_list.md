@@ -40,11 +40,14 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Rule name
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
@@ -71,10 +74,13 @@ Read-Only:
 Read-Only:
 
 - `allow` (Attributes) Allow
+
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--data--action--allow))
 - `deny` (Attributes) Deny
+
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--data--action--deny))
 - `protect` (Attributes) Protect
+
 > ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`. (see [below for nested schema](#nestedatt--data--action--protect))
 
 <a id="nestedatt--data--action--allow"></a>
@@ -96,8 +102,10 @@ Read-Only:
 Read-Only:
 
 - `aggregate` (Attributes) Aggregate
+
 > ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--data--protection--aggregate))
 - `classified` (Attributes) Classified
+
 > ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`. (see [below for nested schema](#nestedatt--data--protection--classified))
 
 <a id="nestedatt--data--protection--aggregate"></a>

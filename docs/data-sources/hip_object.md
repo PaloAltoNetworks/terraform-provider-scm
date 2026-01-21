@@ -35,11 +35,14 @@ output "hip_objects_ds_result" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the HIP object
 - `snippet` (String) The snippet in which the resource is defined
+
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
@@ -84,10 +87,13 @@ Read-Only:
 Read-Only:
 
 - `not_available` (Attributes) Not available
+
 > ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--not_available))
 - `not_within` (Attributes) Not within
+
 > ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--not_within))
 - `within` (Attributes) Within
+
 > ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--anti_malware--criteria--last_scan_time--within))
 
 <a id="nestedatt--anti_malware--criteria--last_scan_time--not_available"></a>
@@ -100,8 +106,10 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) specify time in days
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 - `hours` (Number) specify time in hours
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 
 
@@ -111,8 +119,10 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) specify time in days
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 - `hours` (Number) specify time in hours
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 
 
@@ -123,22 +133,31 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.
 - `greater_equal` (String) Greater equal
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.
 - `greater_than` (String) Greater than
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.
 - `less_equal` (String) Less equal
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.
 - `less_than` (String) Less than
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`.
 - `not_within` (Attributes) Not within
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--anti_malware--criteria--product_version--not_within))
 - `within` (Attributes) Within
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, `less_than`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--anti_malware--criteria--product_version--within))
 
 <a id="nestedatt--anti_malware--criteria--product_version--not_within"></a>
@@ -164,8 +183,10 @@ Read-Only:
 Read-Only:
 
 - `not_within` (Attributes) Not within
+
 > ℹ️ **Note:** You must specify exactly one of `not_within` and `within`. (see [below for nested schema](#nestedatt--anti_malware--criteria--virdef_version--not_within))
 - `within` (Attributes) Within
+
 > ℹ️ **Note:** You must specify exactly one of `not_within` and `within`. (see [below for nested schema](#nestedatt--anti_malware--criteria--virdef_version--within))
 
 <a id="nestedatt--anti_malware--criteria--virdef_version--not_within"></a>
@@ -174,8 +195,10 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) specify time in days
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `versions`.
 - `versions` (Number) specify versions range
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `versions`.
 
 
@@ -185,8 +208,10 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) specify time in days
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `versions`.
 - `versions` (Number) specify versions range
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `versions`.
 
 
@@ -347,10 +372,13 @@ Read-Only:
 Read-Only:
 
 - `not_available` (Attributes) Not available
+
 > ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--not_available))
 - `not_within` (Attributes) Not within
+
 > ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--not_within))
 - `within` (Attributes) Within
+
 > ℹ️ **Note:** You must specify exactly one of `not_available`, `not_within`, and `within`. (see [below for nested schema](#nestedatt--disk_backup--criteria--last_backup_time--within))
 
 <a id="nestedatt--disk_backup--criteria--last_backup_time--not_available"></a>
@@ -363,8 +391,10 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) specify time in days
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 - `hours` (Number) specify time in hours
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 
 
@@ -374,8 +404,10 @@ Read-Only:
 Read-Only:
 
 - `days` (Number) specify time in days
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 - `hours` (Number) specify time in hours
+
 > ℹ️ **Note:** You must specify exactly one of `days` and `hours`.
 
 
@@ -422,8 +454,10 @@ Read-Only:
 Read-Only:
 
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `is` and `is_not`.
 
 
@@ -493,10 +527,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -506,10 +543,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -519,10 +559,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -532,10 +575,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -565,10 +611,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -611,8 +660,10 @@ Read-Only:
 Read-Only:
 
 - `no` (Attributes) No
+
 > ℹ️ **Note:** You must specify exactly one of `no` and `yes`. (see [below for nested schema](#nestedatt--mobile_device--criteria--applications--has_malware--no))
 - `yes` (Attributes) Yes
+
 > ℹ️ **Note:** You must specify exactly one of `no` and `yes`. (see [below for nested schema](#nestedatt--mobile_device--criteria--applications--has_malware--yes))
 
 <a id="nestedatt--mobile_device--criteria--applications--has_malware--no"></a>
@@ -655,10 +706,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -668,8 +722,10 @@ Read-Only:
 Read-Only:
 
 - `not_within` (Attributes) Not within
+
 > ℹ️ **Note:** You must specify exactly one of `not_within` and `within`. (see [below for nested schema](#nestedatt--mobile_device--criteria--last_checkin_time--not_within))
 - `within` (Attributes) Within
+
 > ℹ️ **Note:** You must specify exactly one of `not_within` and `within`. (see [below for nested schema](#nestedatt--mobile_device--criteria--last_checkin_time--within))
 
 <a id="nestedatt--mobile_device--criteria--last_checkin_time--not_within"></a>
@@ -695,10 +751,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -708,10 +767,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -721,10 +783,13 @@ Read-Only:
 Read-Only:
 
 - `contains` (String) Contains
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is` (String) Is
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 - `is_not` (String) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `contains`, `is`, and `is_not`.
 
 
@@ -750,8 +815,10 @@ Read-Only:
 Read-Only:
 
 - `is` (Attributes) Is
+
 > ℹ️ **Note:** You must specify exactly one of `is` and `is_not`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is))
 - `is_not` (Attributes) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `is` and `is_not`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not))
 
 <a id="nestedatt--network_info--criteria--network--is"></a>
@@ -760,10 +827,13 @@ Read-Only:
 Read-Only:
 
 - `mobile` (Attributes) Mobile
+
 > ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is--mobile))
 - `unknown` (Attributes) Unknown
+
 > ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is--unknown))
 - `wifi` (Attributes) Wifi
+
 > ℹ️ **Note:** You must specify exactly one of `mobile`, `unknown`, and `wifi`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is--wifi))
 
 <a id="nestedatt--network_info--criteria--network--is--mobile"></a>
@@ -793,12 +863,16 @@ Read-Only:
 Read-Only:
 
 - `ethernet` (Attributes) Ethernet
+
 > ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--ethernet))
 - `mobile` (Attributes) Mobile
+
 > ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--mobile))
 - `unknown` (Attributes) Unknown
+
 > ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--unknown))
 - `wifi` (Attributes) Wifi
+
 > ℹ️ **Note:** You must specify exactly one of `ethernet`, `mobile`, `unknown`, and `wifi`. (see [below for nested schema](#nestedatt--network_info--criteria--network--is_not--wifi))
 
 <a id="nestedatt--network_info--criteria--network--is_not--ethernet"></a>
@@ -862,16 +936,22 @@ Read-Only:
 Read-Only:
 
 - `greater_equal` (Number) Greater equal
+
 > ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.
 - `greater_than` (Number) Greater than
+
 > ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.
 - `is` (Number) Is
+
 > ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.
 - `is_not` (Number) Is not
+
 > ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.
 - `less_equal` (Number) Less equal
+
 > ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.
 - `less_than` (Number) Less than
+
 > ℹ️ **Note:** You must specify exactly one of `greater_equal`, `greater_than`, `is`, `is_not`, `less_equal`, and `less_than`.
 
 

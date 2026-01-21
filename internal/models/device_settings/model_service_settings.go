@@ -594,7 +594,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -615,7 +615,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -642,7 +642,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("servers"),
 								),
 							},
-							MarkdownDescription: "Dns proxy object\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
+							MarkdownDescription: "Dns proxy object\n\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
 							Optional:            true,
 						},
 						"servers": schema.SingleNestedAttribute{
@@ -651,7 +651,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("dns_proxy_object"),
 								),
 							},
-							MarkdownDescription: "Servers\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
+							MarkdownDescription: "Servers\n\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
 								"primary": schema.StringAttribute{
@@ -709,7 +709,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("symmetric_key"),
 												),
 											},
-											MarkdownDescription: "Autokey\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Autokey\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -720,7 +720,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("symmetric_key"),
 												),
 											},
-											MarkdownDescription: "None\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -731,7 +731,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("none"),
 												),
 											},
-											MarkdownDescription: "Symmetric key\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Symmetric key\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"algorithm": schema.SingleNestedAttribute{
@@ -745,6 +745,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -755,6 +756,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -789,7 +791,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("symmetric_key"),
 												),
 											},
-											MarkdownDescription: "Autokey\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Autokey\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -800,7 +802,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("symmetric_key"),
 												),
 											},
-											MarkdownDescription: "None\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -811,7 +813,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("none"),
 												),
 											},
-											MarkdownDescription: "Symmetric key\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Symmetric key\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"algorithm": schema.SingleNestedAttribute{
@@ -825,6 +827,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -835,6 +838,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -896,7 +900,7 @@ var ServiceSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -917,7 +921,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ServiceSetting data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -928,7 +932,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -945,11 +949,11 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"dns_proxy_object": dsschema.StringAttribute{
-							MarkdownDescription: "Dns proxy object\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
+							MarkdownDescription: "Dns proxy object\n\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
 							Computed:            true,
 						},
 						"servers": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Servers\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
+							MarkdownDescription: "Servers\n\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"primary": dsschema.StringAttribute{
@@ -993,17 +997,17 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"autokey": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Autokey\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Autokey\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"none": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "None\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"symmetric_key": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Symmetric key\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Symmetric key\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"algorithm": dsschema.SingleNestedAttribute{
@@ -1017,6 +1021,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1027,6 +1032,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1055,17 +1061,17 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"autokey": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Autokey\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Autokey\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"none": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "None\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
 										"symmetric_key": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Symmetric key\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
+											MarkdownDescription: "Symmetric key\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"algorithm": dsschema.SingleNestedAttribute{
@@ -1079,6 +1085,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1089,6 +1096,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 																"authentication_key": dsschema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Computed:            true,
+																	Sensitive:           true,
 																},
 															},
 														},
@@ -1138,7 +1146,7 @@ var ServiceSettingsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			Computed:            true,
 		},

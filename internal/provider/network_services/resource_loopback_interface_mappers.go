@@ -2,7 +2,9 @@ package provider
 
 import (
 	"context"
+	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -481,4 +483,153 @@ func packLoopbackInterfacesIpv6ListFromSdk(ctx context.Context, sdks []network_s
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.LoopbackInterfacesIpv6", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.LoopbackInterfacesIpv6{}.AttrType(), data)
+}
+
+// --- Unpacker for LoopbackInterfacesIpv6AddressInner ---
+func unpackLoopbackInterfacesIpv6AddressInnerToSdk(ctx context.Context, obj types.Object) (*network_services.LoopbackInterfacesIpv6AddressInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.LoopbackInterfacesIpv6AddressInner", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.LoopbackInterfacesIpv6AddressInner
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.LoopbackInterfacesIpv6AddressInner
+	var d diag.Diagnostics
+	// Handling Typeless Objects
+	if !model.Anycast.IsNull() && !model.Anycast.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Anycast")
+		sdk.Anycast = make(map[string]interface{})
+	}
+
+	// Handling Primitives
+	if !model.EnableOnInterface.IsNull() && !model.EnableOnInterface.IsUnknown() {
+		sdk.EnableOnInterface = model.EnableOnInterface.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "EnableOnInterface", "value": *sdk.EnableOnInterface})
+	}
+
+	// Handling Primitives
+	if !model.Name.IsNull() && !model.Name.IsUnknown() {
+		sdk.Name = model.Name.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
+	}
+
+	// Handling Typeless Objects
+	if !model.Prefix.IsNull() && !model.Prefix.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking typeless object for field Prefix")
+		sdk.Prefix = make(map[string]interface{})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.LoopbackInterfacesIpv6AddressInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for LoopbackInterfacesIpv6AddressInner ---
+func packLoopbackInterfacesIpv6AddressInnerFromSdk(ctx context.Context, sdk network_services.LoopbackInterfacesIpv6AddressInner) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.LoopbackInterfacesIpv6AddressInner", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.LoopbackInterfacesIpv6AddressInner
+	var d diag.Diagnostics
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Anycast != nil && !reflect.ValueOf(sdk.Anycast).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Anycast")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Anycast, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Anycast = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.EnableOnInterface != nil {
+		model.EnableOnInterface = basetypes.NewBoolValue(*sdk.EnableOnInterface)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "EnableOnInterface", "value": *sdk.EnableOnInterface})
+	} else {
+		model.EnableOnInterface = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Name != nil {
+		model.Name = basetypes.NewStringValue(*sdk.Name)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
+	} else {
+		model.Name = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Prefix != nil && !reflect.ValueOf(sdk.Prefix).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Prefix")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Prefix, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+		diags.Append(d...)
+	} else {
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Prefix = basetypes.NewObjectNull(map[string]attr.Type{})
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.LoopbackInterfacesIpv6AddressInner{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.LoopbackInterfacesIpv6AddressInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for LoopbackInterfacesIpv6AddressInner ---
+func unpackLoopbackInterfacesIpv6AddressInnerListToSdk(ctx context.Context, list types.List) ([]network_services.LoopbackInterfacesIpv6AddressInner, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.LoopbackInterfacesIpv6AddressInner")
+	diags := diag.Diagnostics{}
+	var data []models.LoopbackInterfacesIpv6AddressInner
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.LoopbackInterfacesIpv6AddressInner, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.LoopbackInterfacesIpv6AddressInner{}.AttrTypes(), &item)
+		unpacked, d := unpackLoopbackInterfacesIpv6AddressInnerToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.LoopbackInterfacesIpv6AddressInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for LoopbackInterfacesIpv6AddressInner ---
+func packLoopbackInterfacesIpv6AddressInnerListFromSdk(ctx context.Context, sdks []network_services.LoopbackInterfacesIpv6AddressInner) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.LoopbackInterfacesIpv6AddressInner")
+	diags := diag.Diagnostics{}
+	var data []models.LoopbackInterfacesIpv6AddressInner
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.LoopbackInterfacesIpv6AddressInner
+		obj, d := packLoopbackInterfacesIpv6AddressInnerFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.LoopbackInterfacesIpv6AddressInner{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.LoopbackInterfacesIpv6AddressInner", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.LoopbackInterfacesIpv6AddressInner{}.AttrType(), data)
 }

@@ -804,7 +804,6 @@ func packUpdateScheduleUpdateScheduleAntiVirusRecurringHourlyFromSdk(ctx context
 	// Handling Primitives
 	// Standard primitive packing
 	model.At = basetypes.NewInt64Value(int64(sdk.At))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "At", "value": sdk.At})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.UpdateScheduleUpdateScheduleAntiVirusRecurringHourly{}.AttrTypes(), &model)
@@ -1642,7 +1641,6 @@ func packUpdateScheduleUpdateScheduleThreatsRecurringHourlyFromSdk(ctx context.C
 	// Handling Primitives
 	// Standard primitive packing
 	model.At = basetypes.NewFloat64Value(float64(sdk.At))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "At", "value": sdk.At})
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.DisableNewContent != nil {

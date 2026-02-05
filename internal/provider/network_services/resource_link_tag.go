@@ -117,6 +117,34 @@ func (r *LinkTagResource) Create(ctx context.Context, req resource.CreateRequest
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
 
+	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
+	// This handles both deprecated value translation and Shared/Prisma Access normalization.
+	// Get the user's configured folder value from the request plan.
+	var userConfiguredFolder basetypes.StringValue
+	_ = req.Plan.GetAttribute(ctx, path.Root("folder"), &userConfiguredFolder)
+
+	if !userConfiguredFolder.IsNull() && !userConfiguredFolder.IsUnknown() && !data.Folder.IsNull() {
+		userFolderStr := userConfiguredFolder.ValueString()
+		apiReturnedFolder := data.Folder.ValueString()
+
+		// First, translate any deprecated values from the API
+		translatedFolder := utils.FolderAPIToState(apiReturnedFolder)
+
+		// Then, if user configured "Shared" or "Prisma Access", normalize to match user's choice
+		if (userFolderStr == "Shared" || userFolderStr == "Prisma Access") &&
+			(translatedFolder == "Shared" || translatedFolder == "Prisma Access") {
+			translatedFolder = userFolderStr
+		}
+
+		// Set the final normalized value
+		data.Folder = basetypes.NewStringValue(translatedFolder)
+		tflog.Debug(ctx, "Normalized folder value", map[string]interface{}{
+			"configured":   userFolderStr,
+			"api_returned": apiReturnedFolder,
+			"normalized":   translatedFolder,
+		})
+	}
+
 	// Set the Terraform ID and save the final state.
 	var idBuilder strings.Builder
 
@@ -202,6 +230,30 @@ func (r *LinkTagResource) Read(ctx context.Context, req resource.ReadRequest, re
 		return
 	}
 
+	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
+	// This handles both deprecated value translation and Shared/Prisma Access normalization.
+	if !savestate.Folder.IsNull() && !savestate.Folder.IsUnknown() && !data.Folder.IsNull() {
+		savedFolderValue := savestate.Folder.ValueString()
+		apiReturnedFolder := data.Folder.ValueString()
+
+		// First, translate any deprecated values from the API
+		translatedFolder := utils.FolderAPIToState(apiReturnedFolder)
+
+		// Then, if saved state had "Shared" or "Prisma Access", normalize to match saved state
+		if (savedFolderValue == "Shared" || savedFolderValue == "Prisma Access") &&
+			(translatedFolder == "Shared" || translatedFolder == "Prisma Access") {
+			translatedFolder = savedFolderValue
+		}
+
+		// Set the final normalized value
+		data.Folder = basetypes.NewStringValue(translatedFolder)
+		tflog.Debug(ctx, "Normalized folder value", map[string]interface{}{
+			"saved_state":  savedFolderValue,
+			"api_returned": apiReturnedFolder,
+			"normalized":   translatedFolder,
+		})
+	}
+
 	// Step 7 - Carry over tfid from state back into data
 	data.Tfid = savestate.Tfid
 
@@ -217,6 +269,10 @@ func (r *LinkTagResource) Read(ctx context.Context, req resource.ReadRequest, re
 
 	if fFolder.IsValid() && fFolder.CanSet() {
 		tokenValue := tokens[0]
+
+		// No validation here - just restore the value from TFID
+		// Validation happens during ImportState for actual import operations
+		// This allows backward compatibility for existing state with old folder values
 
 		if tokenValue != "" {
 			newStringValue := basetypes.NewStringValue(tokenValue)
@@ -347,10 +403,37 @@ func (r *LinkTagResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
-	// // Preserve any write-only parameter values from the plan.
-	//
-	// _ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
-	//
+	// Preserve any operation parameter values from the plan (folder, snippet, device).
+	// This ensures the user's configured value is preserved regardless of what the API returns.
+	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+
+	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
+	// This handles both deprecated value translation and Shared/Prisma Access normalization.
+	// We need to get the user's configured folder value from the request plan.
+	var userConfiguredFolder basetypes.StringValue
+	_ = req.Plan.GetAttribute(ctx, path.Root("folder"), &userConfiguredFolder)
+
+	if !userConfiguredFolder.IsNull() && !userConfiguredFolder.IsUnknown() && !plan.Folder.IsNull() {
+		userFolderStr := userConfiguredFolder.ValueString()
+		apiReturnedFolder := plan.Folder.ValueString()
+
+		// First, translate any deprecated values from the API
+		translatedFolder := utils.FolderAPIToState(apiReturnedFolder)
+
+		// Then, if user configured "Shared" or "Prisma Access", normalize to match user's choice
+		if (userFolderStr == "Shared" || userFolderStr == "Prisma Access") &&
+			(translatedFolder == "Shared" || translatedFolder == "Prisma Access") {
+			translatedFolder = userFolderStr
+		}
+
+		// Set the final normalized value
+		plan.Folder = basetypes.NewStringValue(translatedFolder)
+		tflog.Debug(ctx, "Normalized folder value", map[string]interface{}{
+			"configured":   userFolderStr,
+			"api_returned": apiReturnedFolder,
+			"normalized":   translatedFolder,
+		})
+	}
 
 	// Step 10: Carry over tfid from state into plan
 	plan.Tfid = state.Tfid
@@ -390,5 +473,44 @@ func (r *LinkTagResource) Delete(ctx context.Context, req resource.DeleteRequest
 }
 
 func (r *LinkTagResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+
+	// Parse and validate the import ID before storing it - block deprecated folder values
+	// Note: Both "Shared" and "Prisma Access" are accepted as valid values
+	importID := req.ID
+	tokens := strings.Split(importID, ":::")
+
+	if len(tokens) > 0 && tokens[0] != "" {
+		folderValue := tokens[0]
+		if folderValue == "All Firewalls" {
+			resp.Diagnostics.AddError(
+				"Invalid Folder Value in Import ID",
+				"The folder value 'All Firewalls' is not allowed in import IDs. Please use 'ngfw-shared' instead.\nExample: terraform import scm_link_tag.example \"ngfw-shared\":::\"<id>\"",
+			)
+			return
+		}
+		if folderValue == "Global" {
+			resp.Diagnostics.AddError(
+				"Invalid Folder Value in Import ID",
+				"The folder value 'Global' is not allowed in import IDs. Please use 'All' instead.\nExample: terraform import scm_link_tag.example \"All\":::\"<id>\"",
+			)
+			return
+		}
+		if folderValue == "Explicit Proxy" {
+			resp.Diagnostics.AddError(
+				"Invalid Folder Value in Import ID",
+				"The folder value 'Explicit Proxy' is not allowed in import IDs. Please use 'Mobile Users Explicit Proxy' instead.\nExample: terraform import scm_link_tag.example \"Mobile Users Explicit Proxy\":::\"<id>\"",
+			)
+			return
+		}
+		if folderValue == "Access Agent" {
+			resp.Diagnostics.AddError(
+				"Invalid Folder Value in Import ID",
+				"The folder value 'Access Agent' is not allowed in import IDs. Please use 'Mobile Users' instead.\nExample: terraform import scm_link_tag.example \"Mobile Users\":::\"<id>\"",
+			)
+			return
+		}
+	}
+
+	// If validation passes, store the import ID in tfid
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }

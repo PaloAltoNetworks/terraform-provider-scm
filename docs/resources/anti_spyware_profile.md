@@ -23,7 +23,7 @@ resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_1" {
 
 # Required object that will be referenced in examples
 resource "scm_address" "scm_address_1" {
-  folder      = "Shared"
+  folder      = "Prisma Access"
   name        = "scm_address_1"
   description = "Made by Terraform"
   ip_netmask  = "10.2.3.4"

@@ -1,7 +1,7 @@
 # This data source will call the "ListAddresses" API endpoint
-# and return all filters in the "Shared" folder.
+# and return all filters in the "All" folder.
 
-# 1. Use a single data block to fetch ALL addresses in the "Shared" folder.
+# 1. Use a single data block to fetch ALL addresses in the "All" folder.
 data "scm_address_list" "all_shared" {
   folder = "All"
 }
@@ -9,7 +9,7 @@ data "scm_address_list" "all_shared" {
 # 2. Use a 'for' expression to transform the list into a map.
 # This creates a map where the key is the address name and the value is the address object.
 output "address_data_source_results_from_list" {
-  description = "A map of all address objects in the Shared folder, keyed by id."
+  description = "A map of all address objects in the All folder, keyed by id."
   value       = { for addr in data.scm_address_list.all_shared.data : addr.id => addr }
 }
 

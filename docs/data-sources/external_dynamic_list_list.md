@@ -13,7 +13,7 @@ Retrieves a listing of config items.
 ## Example Usage
 
 ```terraform
-# Data source to fetch all external dynamic lists in the "Shared" folder.
+# Data source to fetch all external dynamic lists in the "All" folder.
 data "scm_external_dynamic_list_list" "all_shared_edls" {
   folder = "All"
 }

@@ -246,11 +246,9 @@ func packRegionsGeoLocationFromSdk(ctx context.Context, sdk objects.RegionsGeoLo
 	// Handling Primitives
 	// Standard primitive packing
 	model.Latitude = basetypes.NewFloat64Value(float64(sdk.Latitude))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Latitude", "value": sdk.Latitude})
 	// Handling Primitives
 	// Standard primitive packing
 	model.Longitude = basetypes.NewFloat64Value(float64(sdk.Longitude))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Longitude", "value": sdk.Longitude})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.RegionsGeoLocation{}.AttrTypes(), &model)

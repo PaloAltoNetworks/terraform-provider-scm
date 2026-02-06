@@ -15,7 +15,7 @@ Service resource
 ```terraform
 # TCP Service with multiple destination ports custom timeout
 resource "scm_service" "scm_service_tcp_ports" {
-  folder      = "Shared"
+  folder      = "Prisma Access"
   name        = "scm_service_tcp_ports"
   description = "Managed by Terraform"
   protocol = {
@@ -30,7 +30,7 @@ resource "scm_service" "scm_service_tcp_ports" {
 
 # TCP Service with source port, destination port and custom timeout values
 resource "scm_service" "scm_service_tcp_port_src_dst" {
-  folder      = "Shared"
+  folder      = "Prisma Access"
   name        = "scm_service_tcp_port_src_dst"
   description = "Managed by Terraform"
   protocol = {
@@ -48,7 +48,7 @@ resource "scm_service" "scm_service_tcp_port_src_dst" {
 
 # UDP Service with single destination port
 resource "scm_service" "scm_service_udp_port" {
-  folder      = "Shared"
+  folder      = "Prisma Access"
   name        = "scm_service_udp_port"
   description = "Managed by Terraform"
   protocol = {

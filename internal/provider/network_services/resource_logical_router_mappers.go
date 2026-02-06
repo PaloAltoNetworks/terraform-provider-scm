@@ -18624,7 +18624,6 @@ func packLogicalRoutersVrfInnerOspfAuthProfileInnerMd5InnerFromSdk(ctx context.C
 	// Handling Primitives
 	// Standard primitive packing
 	model.Name = basetypes.NewFloat64Value(float64(sdk.Name))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Preferred != nil {

@@ -1,7 +1,7 @@
 /**
  * Data source to retrieve a list of IKE Gateways.
  * You can filter the list by folder, snippet, or device.
- * This example retrieves all gateways in the "Shared" folder.
+ * This example retrieves all gateways in the "All" folder.
  */
 data "scm_ike_gateway_list" "example_list_ike_gateway_ds" {
   folder = "Remote Networks"

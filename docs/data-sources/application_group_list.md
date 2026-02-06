@@ -13,7 +13,7 @@ Retrieves a listing of config items.
 ## Example Usage
 
 ```terraform
-# 1. Use a single data block to fetch ALL application groups in the "Shared" folder.
+# 1. Use a single data block to fetch ALL application groups in the "All" folder.
 data "scm_application_group_list" "all_shared" {
   folder = "All"
 }
@@ -21,7 +21,7 @@ data "scm_application_group_list" "all_shared" {
 # 2. Use a 'for' expression to transform the list into a map.
 # This creates a map where the key is the group name and the value is the group object.
 output "application_groups_data_source_results_from_list" {
-  description = "A map of all application group objects in the Shared folder, keyed by id."
+  description = "A map of all application group objects in the All folder, keyed by id."
   value       = { for group in data.scm_application_group_list.all_shared.data : group.id => group }
 }
 

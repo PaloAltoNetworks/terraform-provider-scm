@@ -17,6 +17,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/network_services"
 
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM SslDecryptionSetting (Package: network_services)

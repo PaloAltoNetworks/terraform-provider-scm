@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
@@ -159,6 +160,31 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		return
 	}
 
+	// Only wrap the HTTP transport if we're using an auth file
+	// When using an auth file, we need to re-read it periodically to pick up
+	// tokens refreshed by external processes (e.g., cron jobs)
+	// Otherwise, leave the SDK's default transport alone (it has built-in auto-refresh)
+	if setupClient.AuthFile != "" {
+		// Initialize HTTP client if needed
+		if setupClient.HttpClient == nil {
+			setupClient.HttpClient = &http.Client{}
+		}
+		if setupClient.HttpClient.Transport == nil {
+			setupClient.HttpClient.Transport = http.DefaultTransport
+		}
+
+		// Add token refresh transport to re-read shared auth file when token expires
+		// This allows long-running operations to use tokens refreshed by external processes (e.g., cron jobs)
+		setupClient.HttpClient.Transport = &utils.TokenRefreshTransport{
+			Wrapped:  setupClient.HttpClient.Transport,
+			Client:   setupClient,
+			AuthFile: setupClient.AuthFile,
+			Ctx:      ctx,
+		}
+
+	}
+
+	// Add logging transport if debug mode is enabled (works in both auth file and non-auth-file modes)
 	if config.Logging.ValueString() == "debug" {
 		if setupClient.HttpClient == nil {
 			setupClient.HttpClient = &http.Client{}
@@ -174,8 +200,8 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 	}
 
 	// Refresh JWT token
-	if setupClient.Jwt == "" {
-		// Only refresh if no JWT exists
+	// Only refresh if no JWT exists or if it's expired/near expiry
+	if setupClient.Jwt == "" || time.Now().After(setupClient.JwtExpiresAt) {
 		if err := setupClient.RefreshJwt(ctx); err != nil {
 			resp.Diagnostics.AddError("Refresh JWT Authentication error", err.Error())
 			return

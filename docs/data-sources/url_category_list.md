@@ -17,12 +17,12 @@ Retrieves a listing of config items.
 # Data source to retrieve a list of URL Category objects.
 #
 
-# Example 1: Fetch a list of all URL Categories in the "Shared" folder.
+# Example 1: Fetch a list of all URL Categories in the "All" folder.
 data "scm_url_category_list" "all_shared" {
   folder = "All"
 }
 
-# Output the list of all URL Category objects from the "Shared" folder.
+# Output the list of all URL Category objects from the "All" folder.
 output "url_categories_list_all_shared" {
   description = "A list of all URL Category objects from the Shared folder."
   value       = data.scm_url_category_list.all_shared.data

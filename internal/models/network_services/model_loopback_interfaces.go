@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // Package: network_services
@@ -47,14 +48,6 @@ type LoopbackInterfacesIpv6 struct {
 	Address     basetypes.ListValue   `tfsdk:"address"`
 	Enabled     basetypes.BoolValue   `tfsdk:"enabled"`
 	InterfaceId basetypes.StringValue `tfsdk:"interface_id"`
-}
-
-// LoopbackInterfacesIpv6AddressInner represents a nested structure within the LoopbackInterfaces model
-type LoopbackInterfacesIpv6AddressInner struct {
-	Anycast           basetypes.ObjectValue `tfsdk:"anycast"`
-	EnableOnInterface basetypes.BoolValue   `tfsdk:"enable_on_interface"`
-	Name              basetypes.StringValue `tfsdk:"name"`
-	Prefix            basetypes.ObjectValue `tfsdk:"prefix"`
 }
 
 // AttrTypes defines the attribute types for the LoopbackInterfaces model.
@@ -144,27 +137,6 @@ func (o LoopbackInterfacesIpv6) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the LoopbackInterfacesIpv6AddressInner model.
-func (o LoopbackInterfacesIpv6AddressInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"anycast": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"enable_on_interface": basetypes.BoolType{},
-		"name":                basetypes.StringType{},
-		"prefix": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of LoopbackInterfacesIpv6AddressInner objects.
-func (o LoopbackInterfacesIpv6AddressInner) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // LoopbackInterfacesResourceSchema defines the schema for LoopbackInterfaces resource
 var LoopbackInterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "LoopbackInterface resource",
@@ -203,6 +175,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
+				utils.FolderValidator(),
 			},
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,

@@ -14,7 +14,7 @@ CertificateProfile resource
 
 ```terraform
 resource "scm_certificate_profile" "scm_cp_1" {
-  folder                     = "Shared"
+  folder                     = "Prisma Access"
   name                       = "scm_cp_1"
   domain                     = "test"
   use_crl                    = true

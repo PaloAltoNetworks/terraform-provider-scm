@@ -1325,7 +1325,6 @@ func packHipObjectsAntiMalwareCriteriaProductVersionNotWithinFromSdk(ctx context
 	// Handling Primitives
 	// Standard primitive packing
 	model.Versions = basetypes.NewInt64Value(int64(sdk.Versions))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Versions", "value": sdk.Versions})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.HipObjectsAntiMalwareCriteriaProductVersionNotWithin{}.AttrTypes(), &model)
@@ -5971,7 +5970,6 @@ func packHipObjectsMobileDeviceCriteriaLastCheckinTimeNotWithinFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	model.Days = basetypes.NewInt64Value(int64(sdk.Days))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Days", "value": sdk.Days})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.HipObjectsMobileDeviceCriteriaLastCheckinTimeNotWithin{}.AttrTypes(), &model)

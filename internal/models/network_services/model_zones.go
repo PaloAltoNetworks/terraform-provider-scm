@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // Package: network_services
@@ -200,6 +201,7 @@ var ZonesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("device"),
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
+				utils.FolderValidator(),
 			},
 			MarkdownDescription: "Folder\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,

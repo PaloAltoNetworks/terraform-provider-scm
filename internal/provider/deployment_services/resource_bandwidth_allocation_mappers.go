@@ -75,7 +75,6 @@ func packBandwidthAllocationsFromSdk(ctx context.Context, sdk deployment_service
 	// Handling Primitives
 	// Standard primitive packing
 	model.AllocatedBandwidth = basetypes.NewInt64Value(int64(sdk.AllocatedBandwidth))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "AllocatedBandwidth", "value": sdk.AllocatedBandwidth})
 	// Handling Primitives
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)

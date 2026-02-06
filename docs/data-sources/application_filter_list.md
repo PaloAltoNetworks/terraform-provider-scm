@@ -14,9 +14,9 @@ Retrieves a listing of config items.
 
 ```terraform
 # This data source will call the "List" API endpoint
-# and return all application filters in the "Shared" folder.
+# and return all application filters in the "All" folder.
 
-# 1. Use a single data block to fetch ALL application filters in the "Shared" folder.
+# 1. Use a single data block to fetch ALL application filters in the "All" folder.
 data "scm_application_filter_list" "all_shared" {
   folder = "All"
 }

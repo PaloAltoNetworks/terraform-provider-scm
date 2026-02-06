@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // Package: deployment_services
@@ -361,6 +362,9 @@ var RemoteNetworksResourceSchema = schema.Schema{
 			Sensitive:           true,
 		},
 		"folder": schema.StringAttribute{
+			Validators: []validator.String{
+				utils.FolderValidator(),
+			},
 			MarkdownDescription: "The folder that contains the remote network",
 			Required:            true,
 			PlanModifiers: []planmodifier.String{

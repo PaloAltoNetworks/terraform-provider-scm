@@ -18,7 +18,7 @@ HipObject resource
 # corrected provider schema now supports.
 
 resource "scm_hip_object" "scm_hip_object_1" {
-  folder      = "Shared"
+  folder      = "Prisma Access"
   name        = "scm_hip_object_1"
   description = "HIP object with multiple advanced criteria configured"
 

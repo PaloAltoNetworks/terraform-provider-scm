@@ -17,6 +17,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/deployment_services"
 
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/deployment_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM SharedInfrastructureSetting (Package: deployment_services)

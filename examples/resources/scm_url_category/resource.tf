@@ -2,7 +2,7 @@
 # Creates a custom URL Category object.
 #
 resource "scm_url_category" "example" {
-  folder      = "Shared"
+  folder      = "Prisma Access"
   name        = "example_url_category"
   description = "Test URL Category for create API"
   list        = ["example.com", "test-create.com"]

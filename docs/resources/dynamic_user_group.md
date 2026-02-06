@@ -34,7 +34,7 @@ resource "scm_tag" "scm_dug_tag_3" {
 
 # Create the dynamic user group that references the tags above.
 resource "scm_dynamic_user_group" "scm_dug_1" {
-  folder      = "Shared"
+  folder      = "Prisma Access"
   name        = "scm_dug_1"
   description = "DUG created for Terraform"
 

@@ -635,11 +635,9 @@ func packDosProtectionProfilesFloodIcmpRedFromSdk(ctx context.Context, sdk secur
 	// Handling Primitives
 	// Standard primitive packing
 	model.ActivateRate = basetypes.NewInt64Value(int64(sdk.ActivateRate))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
 	// Handling Primitives
 	// Standard primitive packing
 	model.AlarmRate = basetypes.NewInt64Value(int64(sdk.AlarmRate))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.Block != nil {
@@ -656,7 +654,6 @@ func packDosProtectionProfilesFloodIcmpRedFromSdk(ctx context.Context, sdk secur
 	// Handling Primitives
 	// Standard primitive packing
 	model.MaximalRate = basetypes.NewInt64Value(int64(sdk.MaximalRate))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.DosProtectionProfilesFloodIcmpRed{}.AttrTypes(), &model)
@@ -1017,11 +1014,9 @@ func packDosProtectionProfilesFloodTcpSynSynCookiesFromSdk(ctx context.Context, 
 	// Handling Primitives
 	// Standard primitive packing
 	model.ActivateRate = basetypes.NewInt64Value(int64(sdk.ActivateRate))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
 	// Handling Primitives
 	// Standard primitive packing
 	model.AlarmRate = basetypes.NewInt64Value(int64(sdk.AlarmRate))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.Block != nil {
@@ -1038,7 +1033,6 @@ func packDosProtectionProfilesFloodTcpSynSynCookiesFromSdk(ctx context.Context, 
 	// Handling Primitives
 	// Standard primitive packing
 	model.MaximalRate = basetypes.NewInt64Value(int64(sdk.MaximalRate))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.DosProtectionProfilesFloodTcpSynSynCookies{}.AttrTypes(), &model)

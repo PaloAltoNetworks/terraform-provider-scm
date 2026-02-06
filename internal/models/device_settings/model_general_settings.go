@@ -255,11 +255,11 @@ var GeneralSettingsResourceSchema = schema.Schema{
 					Attributes: map[string]schema.Attribute{
 						"latitude": schema.StringAttribute{
 							MarkdownDescription: "Latitude",
-							Required:            true,
+							Optional:            true,
 						},
 						"longitude": schema.StringAttribute{
 							MarkdownDescription: "Longitude",
-							Required:            true,
+							Optional:            true,
 						},
 					},
 				},

@@ -413,14 +413,14 @@ func unpackGeneralSettingsGeneralGeoLocationToSdk(ctx context.Context, obj types
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Latitude.IsNull() && !model.Latitude.IsUnknown() {
-		sdk.Latitude = model.Latitude.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Latitude", "value": sdk.Latitude})
+		sdk.Latitude = model.Latitude.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Latitude", "value": *sdk.Latitude})
 	}
 
 	// Handling Primitives
 	if !model.Longitude.IsNull() && !model.Longitude.IsUnknown() {
-		sdk.Longitude = model.Longitude.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Longitude", "value": sdk.Longitude})
+		sdk.Longitude = model.Longitude.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Longitude", "value": *sdk.Longitude})
 	}
 
 	diags.Append(d...)
@@ -438,12 +438,20 @@ func packGeneralSettingsGeneralGeoLocationFromSdk(ctx context.Context, sdk devic
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.Latitude = basetypes.NewStringValue(sdk.Latitude)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Latitude", "value": sdk.Latitude})
+	if sdk.Latitude != nil {
+		model.Latitude = basetypes.NewStringValue(*sdk.Latitude)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Latitude", "value": *sdk.Latitude})
+	} else {
+		model.Latitude = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Longitude = basetypes.NewStringValue(sdk.Longitude)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Longitude", "value": sdk.Longitude})
+	if sdk.Longitude != nil {
+		model.Longitude = basetypes.NewStringValue(*sdk.Longitude)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Longitude", "value": *sdk.Longitude})
+	} else {
+		model.Longitude = basetypes.NewStringNull()
+	}
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.GeneralSettingsGeneralGeoLocation{}.AttrTypes(), &model)

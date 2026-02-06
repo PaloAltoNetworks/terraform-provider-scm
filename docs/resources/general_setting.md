@@ -76,7 +76,7 @@ Optional:
 <a id="nestedatt--general--geo_location"></a>
 ### Nested Schema for `general.geo_location`
 
-Required:
+Optional:
 
 - `latitude` (String) Latitude
 - `longitude` (String) Longitude

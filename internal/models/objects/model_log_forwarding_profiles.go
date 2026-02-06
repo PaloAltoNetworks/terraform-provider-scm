@@ -163,7 +163,7 @@ var LogForwardingProfilesResourceSchema = schema.Schema{
 					},
 					"log_type": schema.StringAttribute{
 						Validators: []validator.String{
-							stringvalidator.OneOf("traffic", "threat", "wildfire", "url", "data", "tunnel", "auth", "decryption", "dns-security"),
+							stringvalidator.OneOf("traffic", "threat", "wildfire", "url", "data", "tunnel", "auth", "decryption", "dns-security", "gtp", "sctp"),
 						},
 						MarkdownDescription: "Log type",
 						Required:            true,

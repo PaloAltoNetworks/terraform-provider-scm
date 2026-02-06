@@ -77,7 +77,7 @@ var SnippetsResourceSchema = schema.Schema{
 		},
 		"type": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.OneOf("predefined", "custom"),
+				stringvalidator.OneOf("predefined", "custom", "readonly"),
 			},
 			MarkdownDescription: "The snippet type",
 			Computed:            true,

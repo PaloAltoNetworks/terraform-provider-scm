@@ -171,14 +171,14 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "LoopbackInterface resource",
 	Attributes: map[string]schema.Attribute{
 		"comment": schema.StringAttribute{
-			MarkdownDescription: "Description",
+			MarkdownDescription: "Description for loopback interface",
 			Optional:            true,
 		},
 		"default_value": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.RegexMatches(regexp.MustCompile("^loopback\\.([1-9][0-9]{0,3})$"), "pattern must match "+"^loopback\\.([1-9][0-9]{0,3})$"),
 			},
-			MarkdownDescription: "Default interface assignment",
+			MarkdownDescription: "Default interface assignment for loopback interface",
 			Optional:            true,
 		},
 		"device": schema.StringAttribute{
@@ -213,14 +213,14 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			},
 		},
 		"id": schema.StringAttribute{
-			MarkdownDescription: "UUID of the resource",
+			MarkdownDescription: "UUID of the resource loopback interface",
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
 		"interface_management_profile": schema.StringAttribute{
-			MarkdownDescription: "Interface management profile",
+			MarkdownDescription: "Interface management profile for loopback interface",
 			Optional:            true,
 		},
 		"ip": schema.ListNestedAttribute{
@@ -240,27 +240,27 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"address": schema.ListNestedAttribute{
-					MarkdownDescription: "IPv6 Address Parent",
+					MarkdownDescription: "IPv6 Address Parent for loopback interface",
 					Optional:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"anycast": schema.SingleNestedAttribute{
-								MarkdownDescription: "Anycast",
+								MarkdownDescription: "Anycast for loopback interface",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"enable_on_interface": schema.BoolAttribute{
-								MarkdownDescription: "Enable Address on Interface",
+								MarkdownDescription: "Enable Address on Interface for loopback interface",
 								Optional:            true,
 								Computed:            true,
 								Default:             booldefault.StaticBool(true),
 							},
 							"name": schema.StringAttribute{
-								MarkdownDescription: "IPv6 Address",
+								MarkdownDescription: "IPv6 Address for loopback interface",
 								Optional:            true,
 							},
 							"prefix": schema.SingleNestedAttribute{
-								MarkdownDescription: "Use interface ID as host portion",
+								MarkdownDescription: "Use interface ID as host portion for loopback interface",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -268,13 +268,13 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 					},
 				},
 				"enabled": schema.BoolAttribute{
-					MarkdownDescription: "Enable IPv6",
+					MarkdownDescription: "Enable IPv6 for loopback interface",
 					Optional:            true,
 					Computed:            true,
 					Default:             booldefault.StaticBool(false),
 				},
 				"interface_id": schema.StringAttribute{
-					MarkdownDescription: "Interface ID",
+					MarkdownDescription: "Interface ID for loopback interface",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("EUI-64"),
@@ -285,7 +285,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			Validators: []validator.Int64{
 				int64validator.Between(576, 9216),
 			},
-			MarkdownDescription: "MTU",
+			MarkdownDescription: "MTU for loopback interface",
 			Optional:            true,
 		},
 		"name": schema.StringAttribute{
@@ -325,11 +325,11 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "LoopbackInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"comment": dsschema.StringAttribute{
-			MarkdownDescription: "Description",
+			MarkdownDescription: "Description for loopback interface",
 			Computed:            true,
 		},
 		"default_value": dsschema.StringAttribute{
-			MarkdownDescription: "Default interface assignment",
+			MarkdownDescription: "Default interface assignment for loopback interface",
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
@@ -343,11 +343,11 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
-			MarkdownDescription: "UUID of the resource",
+			MarkdownDescription: "UUID of the resource loopback interface",
 			Required:            true,
 		},
 		"interface_management_profile": dsschema.StringAttribute{
-			MarkdownDescription: "Interface management profile",
+			MarkdownDescription: "Interface management profile for loopback interface",
 			Computed:            true,
 		},
 		"ip": dsschema.ListNestedAttribute{
@@ -367,25 +367,25 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"address": dsschema.ListNestedAttribute{
-					MarkdownDescription: "IPv6 Address Parent",
+					MarkdownDescription: "IPv6 Address Parent for loopback interface",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
 							"anycast": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Anycast",
+								MarkdownDescription: "Anycast for loopback interface",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"enable_on_interface": dsschema.BoolAttribute{
-								MarkdownDescription: "Enable Address on Interface",
+								MarkdownDescription: "Enable Address on Interface for loopback interface",
 								Computed:            true,
 							},
 							"name": dsschema.StringAttribute{
-								MarkdownDescription: "IPv6 Address",
+								MarkdownDescription: "IPv6 Address for loopback interface",
 								Computed:            true,
 							},
 							"prefix": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Use interface ID as host portion",
+								MarkdownDescription: "Use interface ID as host portion for loopback interface",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
@@ -393,17 +393,17 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"enabled": dsschema.BoolAttribute{
-					MarkdownDescription: "Enable IPv6",
+					MarkdownDescription: "Enable IPv6 for loopback interface",
 					Computed:            true,
 				},
 				"interface_id": dsschema.StringAttribute{
-					MarkdownDescription: "Interface ID",
+					MarkdownDescription: "Interface ID for loopback interface",
 					Computed:            true,
 				},
 			},
 		},
 		"mtu": dsschema.Int64Attribute{
-			MarkdownDescription: "MTU",
+			MarkdownDescription: "MTU for loopback interface",
 			Computed:            true,
 		},
 		"name": dsschema.StringAttribute{

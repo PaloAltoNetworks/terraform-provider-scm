@@ -26,34 +26,21 @@ By using this software, you agree to these terms.
 
 ### v1.0.8
 
-#### FEATURES
-
-* **New Spec**: Added support for Config Operations API (`config-operations.yaml`)
-  * resource/scm_config_versions: Support for managing configuration versions
-  * resource/scm_jobs: Support for managing and monitoring configuration jobs
-  * Data sources for listing and retrieving jobs and config versions
-
 #### ENHANCEMENTS
 
-* **Token Cache & Authentication**:
-  * Implemented token caching feature with automatic refresh for long-running operations (#89, #93, #94, #95, #96)
-  * Added config file validation before making authentication calls in scm-python (#98)
-  * Improved token management for concurrent job executions
+* scm_jobs: Added support and tests.
+* scm_config_versions: Added support and tests for listing versions, loading configs, pushing candidate configs, and performing rollbacks/deletions.
 
-* **Folder Mapping & Translation**:
-  * Added intelligent folder mapping and translation system (#92)
-  * Implemented validation for incorrect folder values in Terraform resources
-  * Enhanced import functionality with automatic folder translation
-  * Improved folder handling in read/create/update operations
-
-* **OpenAPI Spec Enhancements**:
-  * resource/scm_file_blocking_profile: Expanded file type enum to include complete list of 226+ supported file types
-  * resource/scm_log_forwarding_profile: Added support for `gtp` and `sctp` log types in objects.yaml
-  * resource/scm_general_settings: Removed incorrect required constraint for geolocation field in device-settings
+* Added JWT token handling to enable concurrent Terraform executions.
+* Added folder name mapping between UI and API layers.
 
 #### BUG FIXES
 
-<!-- User will add bug fixes here -->
+* resource/scm_general_settings: SCM Resource Read failed due to missing required fields (#87)
+* Limited Concurrent IaC operations possible (#77)
+* Objects being written to "Shared" Folder for not appearing in SCM (#54)
+* resource/scm_ike_gateway: Added ip support for local address object in ike-gateway
+* resource/bgp_routing: Resolved support for inherit object for bgp routing
 
 ### v1.0.7
 
@@ -62,8 +49,8 @@ By using this software, you agree to these terms.
 * resource/scm_log_forwarding_profile:  Added additional examples and tests (resource, data-source)
 * resource/scm_kerberos_server_profile:  Added additional examples and tests (resource, data-source)
 * resource/scm_saml_server_profile: Added additional examples and tests (resource, data-source)
-* resource/scm_qos_prpfile: Added additional examples and tests (resource, data-source)
-* resource/scm_lldp_prpfile: Added additional examples and tests (resource, data-source)
+* resource/scm_qos_profile: Added additional examples and tests (resource, data-source)
+* resource/scm_lldp_profile: Added additional examples and tests (resource, data-source)
 * resource/scm_scep_profile: Added additional examples and tests (resource, data-source)
 * resource/scm_tacacs_server: Added additional examples and tests (resource, data-source)
 * resource/scm_dhcp_interface: Added additional examples(resource, data-source)
@@ -82,7 +69,7 @@ By using this software, you agree to these terms.
 * resource/scm_scep_profile : Schema Fix for rsa_nbits (#84)
 * resource/scm_dhcp_interface : DHCP Interface GetByUUID Fix (#82)
 * resource/scm_service_setting : md5 and sha1 sensitive values fix (#81)
-* resource/scm_service_connection: Resolved Creation of SC with protobol bgp enabled false and peer_as (ADI-51539)
+* resource/scm_service_connection: Resolved Creation of SC with protocol bgp enabled false and peer_as (ADI-51539)
 
 ### v1.0.6
 

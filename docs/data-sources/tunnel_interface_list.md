@@ -48,7 +48,7 @@ output "scm_tunnel_interface_list" {
 
 Required:
 
-- `id` (String) UUID of the resource
+- `id` (String) UUID of the resource for tunnel interface
 
 Optional:
 
@@ -58,19 +58,19 @@ Optional:
 - `folder` (String) The folder in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `name` (String) L3 sub-interface name
+- `name` (String) L3 sub-interface name for tunnel interface
 - `snippet` (String) The snippet in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
-- `comment` (String) Description
-- `default_value` (String) Default interface assignment
-- `interface_management_profile` (String) Interface management profile
+- `comment` (String) Description for tunnel interface
+- `default_value` (String) Default interface assignment for tunnel interface
+- `interface_management_profile` (String) Interface management profile for tunnel interface
 - `ip` (Attributes List) Tunnel Interface IP Parent (see [below for nested schema](#nestedatt--data--ip))
 - `ipv6` (Attributes) Tunnel Interface IPv6 Configuration (see [below for nested schema](#nestedatt--data--ipv6))
-- `mtu` (Number) MTU
+- `mtu` (Number) MTU for tunnel interface
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--ip"></a>
@@ -86,19 +86,19 @@ Read-Only:
 
 Read-Only:
 
-- `address` (Attributes List) IPv6 Address Parent (see [below for nested schema](#nestedatt--data--ipv6--address))
-- `enabled` (Boolean) Enable IPv6
-- `interface_id` (String) Interface ID
+- `address` (Attributes List) IPv6 Address Parent for tunnel interface (see [below for nested schema](#nestedatt--data--ipv6--address))
+- `enabled` (Boolean) Enable IPv6 for tunnel interface
+- `interface_id` (String) Interface ID for tunnel interface
 
 <a id="nestedatt--data--ipv6--address"></a>
 ### Nested Schema for `data.ipv6.address`
 
 Read-Only:
 
-- `anycast` (Attributes) Anycast (see [below for nested schema](#nestedatt--data--ipv6--address--anycast))
-- `enable_on_interface` (Boolean) Enable Address on Interface
-- `name` (String) IPv6 Address
-- `prefix` (Attributes) Use interface ID as host portion (see [below for nested schema](#nestedatt--data--ipv6--address--prefix))
+- `anycast` (Attributes) Anycast for tunnel interface (see [below for nested schema](#nestedatt--data--ipv6--address--anycast))
+- `enable_on_interface` (Boolean) Enable Address on Interface for tunnel interface
+- `name` (String) IPv6 Address for tunnel interface
+- `prefix` (Attributes) Use interface ID as host portion for tunnel interface (see [below for nested schema](#nestedatt--data--ipv6--address--prefix))
 
 <a id="nestedatt--data--ipv6--address--anycast"></a>
 ### Nested Schema for `data.ipv6.address.anycast`

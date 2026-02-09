@@ -48,7 +48,7 @@ output "scm_loopback_interface_list" {
 
 Required:
 
-- `id` (String) UUID of the resource
+- `id` (String) UUID of the resource loopback interface
 
 Optional:
 
@@ -65,12 +65,12 @@ Optional:
 
 Read-Only:
 
-- `comment` (String) Description
-- `default_value` (String) Default interface assignment
-- `interface_management_profile` (String) Interface management profile
+- `comment` (String) Description for loopback interface
+- `default_value` (String) Default interface assignment for loopback interface
+- `interface_management_profile` (String) Interface management profile for loopback interface
 - `ip` (Attributes List) Loopback IP Parent (see [below for nested schema](#nestedatt--data--ip))
 - `ipv6` (Attributes) Loopback IPv6 Configuration (see [below for nested schema](#nestedatt--data--ipv6))
-- `mtu` (Number) MTU
+- `mtu` (Number) MTU for loopback interface
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--ip"></a>
@@ -86,19 +86,19 @@ Read-Only:
 
 Read-Only:
 
-- `address` (Attributes List) IPv6 Address Parent (see [below for nested schema](#nestedatt--data--ipv6--address))
-- `enabled` (Boolean) Enable IPv6
-- `interface_id` (String) Interface ID
+- `address` (Attributes List) IPv6 Address Parent for loopback interface (see [below for nested schema](#nestedatt--data--ipv6--address))
+- `enabled` (Boolean) Enable IPv6 for loopback interface
+- `interface_id` (String) Interface ID for loopback interface
 
 <a id="nestedatt--data--ipv6--address"></a>
 ### Nested Schema for `data.ipv6.address`
 
 Read-Only:
 
-- `anycast` (Attributes) Anycast (see [below for nested schema](#nestedatt--data--ipv6--address--anycast))
-- `enable_on_interface` (Boolean) Enable Address on Interface
-- `name` (String) IPv6 Address
-- `prefix` (Attributes) Use interface ID as host portion (see [below for nested schema](#nestedatt--data--ipv6--address--prefix))
+- `anycast` (Attributes) Anycast for loopback interface (see [below for nested schema](#nestedatt--data--ipv6--address--anycast))
+- `enable_on_interface` (Boolean) Enable Address on Interface for loopback interface
+- `name` (String) IPv6 Address for loopback interface
+- `prefix` (Attributes) Use interface ID as host portion for loopback interface (see [below for nested schema](#nestedatt--data--ipv6--address--prefix))
 
 <a id="nestedatt--data--ipv6--address--anycast"></a>
 ### Nested Schema for `data.ipv6.address.anycast`

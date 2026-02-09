@@ -68,6 +68,7 @@ type IkeGatewaysAuthenticationPreSharedKey struct {
 // IkeGatewaysLocalAddress represents a nested structure within the IkeGateways model
 type IkeGatewaysLocalAddress struct {
 	Interface basetypes.StringValue `tfsdk:"interface"`
+	Ip        basetypes.StringValue `tfsdk:"ip"`
 }
 
 // IkeGatewaysLocalId represents a nested structure within the IkeGateways model
@@ -157,6 +158,7 @@ func (o IkeGateways) AttrTypes() map[string]attr.Type {
 		"local_address": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"interface": basetypes.StringType{},
+				"ip":        basetypes.StringType{},
 			},
 		},
 		"local_id": basetypes.ObjectType{
@@ -317,6 +319,7 @@ func (o IkeGatewaysAuthenticationPreSharedKey) AttrType() attr.Type {
 func (o IkeGatewaysLocalAddress) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"interface": basetypes.StringType{},
+		"ip":        basetypes.StringType{},
 	}
 }
 
@@ -612,6 +615,11 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					Computed:            true,
 					Default:             stringdefault.StaticString("vlan"),
 				},
+				"ip": schema.StringAttribute{
+					MarkdownDescription: "IP Prefix of the assigned interface",
+					Optional:            true,
+					Computed:            true,
+				},
 			},
 		},
 		"local_id": schema.SingleNestedAttribute{
@@ -898,6 +906,10 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 			Attributes: map[string]dsschema.Attribute{
 				"interface": dsschema.StringAttribute{
 					MarkdownDescription: "Interface variable or hardcoded vlan/loopback. vlan will be passed as default value",
+					Computed:            true,
+				},
+				"ip": dsschema.StringAttribute{
+					MarkdownDescription: "IP Prefix of the assigned interface",
 					Computed:            true,
 				},
 			},

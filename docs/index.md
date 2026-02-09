@@ -24,6 +24,37 @@ By using this software, you agree to these terms.
 
 ## Release Notes
 
+### v1.0.8
+
+#### FEATURES
+
+* **New Spec**: Added support for Config Operations API (`config-operations.yaml`)
+  * resource/scm_config_versions: Support for managing configuration versions
+  * resource/scm_jobs: Support for managing and monitoring configuration jobs
+  * Data sources for listing and retrieving jobs and config versions
+
+#### ENHANCEMENTS
+
+* **Token Cache & Authentication**:
+  * Implemented token caching feature with automatic refresh for long-running operations (#89, #93, #94, #95, #96)
+  * Added config file validation before making authentication calls in scm-python (#98)
+  * Improved token management for concurrent job executions
+
+* **Folder Mapping & Translation**:
+  * Added intelligent folder mapping and translation system (#92)
+  * Implemented validation for incorrect folder values in Terraform resources
+  * Enhanced import functionality with automatic folder translation
+  * Improved folder handling in read/create/update operations
+
+* **OpenAPI Spec Enhancements**:
+  * resource/scm_file_blocking_profile: Expanded file type enum to include complete list of 226+ supported file types
+  * resource/scm_log_forwarding_profile: Added support for `gtp` and `sctp` log types in objects.yaml
+  * resource/scm_general_settings: Removed incorrect required constraint for geolocation field in device-settings
+
+#### BUG FIXES
+
+<!-- User will add bug fixes here -->
+
 ### v1.0.7
 
 #### ENHANCEMENTS

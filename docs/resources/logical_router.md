@@ -547,10 +547,10 @@ Optional:
 
 - `no` (Attributes) No
 
-> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`. (see [below for nested schema](#nestedatt--vrf--bgp--peer_group--peer--inherit--no))
+> ℹ️ **Note:** You must specify exactly one of `no` and `yes`. (see [below for nested schema](#nestedatt--vrf--bgp--peer_group--peer--inherit--no))
 - `yes` (Attributes) Yes
 
-> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`. (see [below for nested schema](#nestedatt--vrf--bgp--peer_group--peer--inherit--yes))
+> ℹ️ **Note:** You must specify exactly one of `no` and `yes`. (see [below for nested schema](#nestedatt--vrf--bgp--peer_group--peer--inherit--yes))
 
 <a id="nestedatt--vrf--bgp--peer_group--peer--inherit--no"></a>
 ### Nested Schema for `vrf.bgp.peer_group.peer.inherit.no`

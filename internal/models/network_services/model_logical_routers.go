@@ -13422,11 +13422,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"no": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
 																	objectvalidator.ConflictsWith(
-																		path.MatchRelative().AtParent().AtName("ipv4"),
 																		path.MatchRelative().AtParent().AtName("yes"),
 																	),
 																},
-																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Optional:            true,
 																Attributes: map[string]schema.Attribute{
 																	"address_family": schema.SingleNestedAttribute{
@@ -13462,11 +13461,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"yes": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
 																	objectvalidator.ConflictsWith(
-																		path.MatchRelative().AtParent().AtName("ipv4"),
 																		path.MatchRelative().AtParent().AtName("no"),
 																	),
 																},
-																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Optional:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
@@ -18958,7 +18956,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"no": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Computed:            true,
 																Attributes: map[string]dsschema.Attribute{
 																	"address_family": dsschema.SingleNestedAttribute{
@@ -18992,7 +18990,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																},
 															},
 															"yes": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Computed:            true,
 																Attributes:          map[string]dsschema.Attribute{},
 															},

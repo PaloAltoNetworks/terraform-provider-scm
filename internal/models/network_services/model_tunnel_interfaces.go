@@ -50,14 +50,6 @@ type TunnelInterfacesIpv6 struct {
 	InterfaceId basetypes.StringValue `tfsdk:"interface_id"`
 }
 
-// LoopbackInterfacesIpv6AddressInner represents a nested structure within the TunnelInterfaces model
-type LoopbackInterfacesIpv6AddressInner struct {
-	Anycast           basetypes.ObjectValue `tfsdk:"anycast"`
-	EnableOnInterface basetypes.BoolValue   `tfsdk:"enable_on_interface"`
-	Name              basetypes.StringValue `tfsdk:"name"`
-	Prefix            basetypes.ObjectValue `tfsdk:"prefix"`
-}
-
 // AttrTypes defines the attribute types for the TunnelInterfaces model.
 func (o TunnelInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -140,27 +132,6 @@ func (o TunnelInterfacesIpv6) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of TunnelInterfacesIpv6 objects.
 func (o TunnelInterfacesIpv6) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the LoopbackInterfacesIpv6AddressInner model.
-func (o LoopbackInterfacesIpv6AddressInner) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"anycast": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-		"enable_on_interface": basetypes.BoolType{},
-		"name":                basetypes.StringType{},
-		"prefix": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
-		},
-	}
-}
-
-// AttrType returns the attribute type for a list of LoopbackInterfacesIpv6AddressInner objects.
-func (o LoopbackInterfacesIpv6AddressInner) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

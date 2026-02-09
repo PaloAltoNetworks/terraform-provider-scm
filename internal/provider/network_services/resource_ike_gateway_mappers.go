@@ -897,6 +897,12 @@ func unpackIkeGatewaysLocalAddressToSdk(ctx context.Context, obj types.Object) (
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
 	}
 
+	// Handling Primitives
+	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
+		sdk.Ip = model.Ip.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	}
+
 	diags.Append(d...)
 
 	tflog.Debug(ctx, "Exiting unpack helper for models.IkeGatewaysLocalAddress", map[string]interface{}{"has_errors": diags.HasError()})
@@ -917,6 +923,14 @@ func packIkeGatewaysLocalAddressFromSdk(ctx context.Context, sdk network_service
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Interface", "value": *sdk.Interface})
 	} else {
 		model.Interface = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ip != nil {
+		model.Ip = basetypes.NewStringValue(*sdk.Ip)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ip", "value": *sdk.Ip})
+	} else {
+		model.Ip = basetypes.NewStringNull()
 	}
 	diags.Append(d...)
 

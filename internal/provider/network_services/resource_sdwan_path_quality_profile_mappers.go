@@ -390,7 +390,6 @@ func packSdwanPathQualityProfilesMetricJitterFromSdk(ctx context.Context, sdk ne
 	// Handling Primitives
 	// Standard primitive packing
 	model.Threshold = basetypes.NewInt64Value(int64(sdk.Threshold))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Threshold", "value": sdk.Threshold})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.SdwanPathQualityProfilesMetricJitter{}.AttrTypes(), &model)
@@ -493,7 +492,6 @@ func packSdwanPathQualityProfilesMetricLatencyFromSdk(ctx context.Context, sdk n
 	// Handling Primitives
 	// Standard primitive packing
 	model.Threshold = basetypes.NewInt64Value(int64(sdk.Threshold))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Threshold", "value": sdk.Threshold})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.SdwanPathQualityProfilesMetricLatency{}.AttrTypes(), &model)
@@ -596,7 +594,6 @@ func packSdwanPathQualityProfilesMetricPktLossFromSdk(ctx context.Context, sdk n
 	// Handling Primitives
 	// Standard primitive packing
 	model.Threshold = basetypes.NewInt64Value(int64(sdk.Threshold))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Threshold", "value": sdk.Threshold})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.SdwanPathQualityProfilesMetricPktLoss{}.AttrTypes(), &model)

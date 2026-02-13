@@ -202,6 +202,7 @@ Optional:
 Optional:
 
 - `interface` (String) Interface variable or hardcoded vlan/loopback. vlan will be passed as default value
+- `ip` (String) IP Prefix of the assigned interface
 
 
 <a id="nestedatt--local_id"></a>

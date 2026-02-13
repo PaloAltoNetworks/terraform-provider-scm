@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // Package: network_services
@@ -12879,6 +12880,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
+				utils.FolderValidator(),
 			},
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
@@ -13420,11 +13422,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"no": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
 																	objectvalidator.ConflictsWith(
-																		path.MatchRelative().AtParent().AtName("ipv4"),
 																		path.MatchRelative().AtParent().AtName("yes"),
 																	),
 																},
-																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Optional:            true,
 																Attributes: map[string]schema.Attribute{
 																	"address_family": schema.SingleNestedAttribute{
@@ -13460,11 +13461,10 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"yes": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
 																	objectvalidator.ConflictsWith(
-																		path.MatchRelative().AtParent().AtName("ipv4"),
 																		path.MatchRelative().AtParent().AtName("no"),
 																	),
 																},
-																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Optional:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
@@ -18956,7 +18956,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"no": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Computed:            true,
 																Attributes: map[string]dsschema.Attribute{
 																	"address_family": dsschema.SingleNestedAttribute{
@@ -18990,7 +18990,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																},
 															},
 															"yes": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4`, `no`, and `yes`.",
+																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Computed:            true,
 																Attributes:          map[string]dsschema.Attribute{},
 															},

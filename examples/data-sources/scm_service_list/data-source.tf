@@ -1,4 +1,4 @@
-# Data source to fetch all services in the "Shared" folder.
+# Data source to fetch all services in the "All" folder.
 data "scm_service_list" "all_shared_services" {
   folder = "All"
 }

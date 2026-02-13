@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // Package: network_services
@@ -67,6 +68,7 @@ type IkeGatewaysAuthenticationPreSharedKey struct {
 // IkeGatewaysLocalAddress represents a nested structure within the IkeGateways model
 type IkeGatewaysLocalAddress struct {
 	Interface basetypes.StringValue `tfsdk:"interface"`
+	Ip        basetypes.StringValue `tfsdk:"ip"`
 }
 
 // IkeGatewaysLocalId represents a nested structure within the IkeGateways model
@@ -156,6 +158,7 @@ func (o IkeGateways) AttrTypes() map[string]attr.Type {
 		"local_address": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"interface": basetypes.StringType{},
+				"ip":        basetypes.StringType{},
 			},
 		},
 		"local_id": basetypes.ObjectType{
@@ -316,6 +319,7 @@ func (o IkeGatewaysAuthenticationPreSharedKey) AttrType() attr.Type {
 func (o IkeGatewaysLocalAddress) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"interface": basetypes.StringType{},
+		"ip":        basetypes.StringType{},
 	}
 }
 
@@ -585,6 +589,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				),
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
+				utils.FolderValidator(),
 			},
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
@@ -609,6 +614,11 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("vlan"),
+				},
+				"ip": schema.StringAttribute{
+					MarkdownDescription: "IP Prefix of the assigned interface",
+					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
@@ -896,6 +906,10 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 			Attributes: map[string]dsschema.Attribute{
 				"interface": dsschema.StringAttribute{
 					MarkdownDescription: "Interface variable or hardcoded vlan/loopback. vlan will be passed as default value",
+					Computed:            true,
+				},
+				"ip": dsschema.StringAttribute{
+					MarkdownDescription: "IP Prefix of the assigned interface",
 					Computed:            true,
 				},
 			},

@@ -1,4 +1,4 @@
-# 1. Use a single data block to fetch ALL dynamic user groups in the "Shared" folder. [cite: 2]
+# 1. Use a single data block to fetch ALL dynamic user groups in the "All" folder. [cite: 2]
 data "scm_dynamic_user_group_list" "all_shared_dugs" {
   folder = "All"
 }

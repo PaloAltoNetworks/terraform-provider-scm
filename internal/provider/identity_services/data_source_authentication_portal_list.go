@@ -16,6 +16,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/identity_services"
 
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/identity_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 var (

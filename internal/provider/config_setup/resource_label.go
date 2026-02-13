@@ -278,10 +278,9 @@ func (r *LabelResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		return
 	}
 
-	// // Preserve any write-only parameter values from the plan.
-	//
-	// _ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
-	//
+	// Preserve any operation parameter values from the plan (folder, snippet, device).
+	// This ensures the user's configured value is preserved regardless of what the API returns.
+	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
 
 	// Step 10: Carry over tfid from state into plan
 	plan.Tfid = state.Tfid
@@ -321,5 +320,7 @@ func (r *LabelResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 }
 
 func (r *LabelResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+
+	// If validation passes, store the import ID in tfid
 	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }

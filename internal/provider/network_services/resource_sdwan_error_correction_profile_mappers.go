@@ -93,7 +93,6 @@ func packSdwanErrorCorrectionProfilesFromSdk(ctx context.Context, sdk network_se
 	// Handling Primitives
 	// Standard primitive packing
 	model.ActivationThreshold = basetypes.NewInt64Value(int64(sdk.ActivationThreshold))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "ActivationThreshold", "value": sdk.ActivationThreshold})
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Device != nil {
@@ -378,7 +377,6 @@ func packSdwanErrorCorrectionProfilesModeForwardErrorCorrectionFromSdk(ctx conte
 	// Handling Primitives
 	// Standard primitive packing
 	model.RecoveryDuration = basetypes.NewInt64Value(int64(sdk.RecoveryDuration))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "RecoveryDuration", "value": sdk.RecoveryDuration})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.SdwanErrorCorrectionProfilesModeForwardErrorCorrection{}.AttrTypes(), &model)
@@ -471,7 +469,6 @@ func packSdwanErrorCorrectionProfilesModePacketDuplicationFromSdk(ctx context.Co
 	// Handling Primitives
 	// Standard primitive packing
 	model.RecoveryDurationPd = basetypes.NewInt64Value(int64(sdk.RecoveryDurationPd))
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "RecoveryDurationPd", "value": sdk.RecoveryDurationPd})
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.SdwanErrorCorrectionProfilesModePacketDuplication{}.AttrTypes(), &model)

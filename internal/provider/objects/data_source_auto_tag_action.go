@@ -17,6 +17,7 @@ import (
 	"github.com/paloaltonetworks/scm-go/generated/objects"
 
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
 // DATA SOURCE for SCM AutoTagAction (Package: objects)

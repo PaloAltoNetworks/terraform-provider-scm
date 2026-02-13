@@ -16,7 +16,7 @@ Retrieves a listing of config items.
 /**
  * Data source to retrieve a list of IKE Gateways.
  * You can filter the list by folder, snippet, or device.
- * This example retrieves all gateways in the "Shared" folder.
+ * This example retrieves all gateways in the "All" folder.
  */
 data "scm_ike_gateway_list" "example_list_ike_gateway_ds" {
   folder = "Remote Networks"
@@ -138,6 +138,7 @@ Read-Only:
 Read-Only:
 
 - `interface` (String) Interface variable or hardcoded vlan/loopback. vlan will be passed as default value
+- `ip` (String) IP Prefix of the assigned interface
 
 
 <a id="nestedatt--data--local_id"></a>

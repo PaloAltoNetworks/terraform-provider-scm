@@ -186,6 +186,13 @@ func (r *SharedInfrastructureSettingResource) Create(ctx context.Context, req re
 
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 
@@ -410,6 +417,13 @@ func (r *SharedInfrastructureSettingResource) Update(ctx context.Context, req re
 
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &plan, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 

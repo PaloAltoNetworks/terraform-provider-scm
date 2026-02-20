@@ -109,6 +109,13 @@ func (r *Layer3SubinterfaceResource) Create(ctx context.Context, req resource.Cr
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -394,6 +401,13 @@ func (r *Layer3SubinterfaceResource) Update(ctx context.Context, req resource.Up
 
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packLayer3SubinterfacesFromSdk(ctx, *updatedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return

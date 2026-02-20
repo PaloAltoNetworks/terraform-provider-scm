@@ -127,6 +127,13 @@ func (r *LdapServerProfileResource) Create(ctx context.Context, req resource.Cre
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -494,6 +501,13 @@ func (r *LdapServerProfileResource) Update(ctx context.Context, req resource.Upd
 
 	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packLdapServerProfilesFromSdk(ctx, *updatedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return

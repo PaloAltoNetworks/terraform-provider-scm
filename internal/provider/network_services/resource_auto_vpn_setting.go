@@ -183,6 +183,13 @@ func (r *AutoVpnSettingResource) Create(ctx context.Context, req resource.Create
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -410,6 +417,13 @@ func (r *AutoVpnSettingResource) Update(ctx context.Context, req resource.Update
 	packedObject, diags := packAutoVpnSettingsFromSdk(ctx, *updatedObject)
 	// --- END MODIFICATION ---
 
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return

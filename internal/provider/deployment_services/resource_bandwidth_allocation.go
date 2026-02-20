@@ -103,6 +103,13 @@ func (r *BandwidthAllocationResource) Create(ctx context.Context, req resource.C
 		}
 
 		var apiData models.BandwidthAllocations
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 		resp.Diagnostics.Append(packedObject.As(ctx, &apiData, basetypes.ObjectAsOptions{})...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -257,6 +264,13 @@ func (r *BandwidthAllocationResource) Update(ctx context.Context, req resource.U
 		}
 
 		var apiData models.BandwidthAllocations
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 		resp.Diagnostics.Append(packedObject.As(ctx, &apiData, basetypes.ObjectAsOptions{})...)
 		if resp.Diagnostics.HasError() {
 			return

@@ -114,6 +114,13 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 	packedObject, diags := packOcspRespondersFromSdk(ctx, *createdObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 
@@ -403,6 +410,13 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 	packedObject, diags := packOcspRespondersFromSdk(ctx, *updatedObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &plan, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 

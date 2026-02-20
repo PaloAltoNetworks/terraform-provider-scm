@@ -167,6 +167,13 @@ func (r *SslDecryptionSettingResource) Create(ctx context.Context, req resource.
 
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 
@@ -461,6 +468,13 @@ func (r *SslDecryptionSettingResource) Update(ctx context.Context, req resource.
 
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Normalize null lists from API response to match the plan
+	packedObject, diags = utils.NormalizeNullLists(ctx, packedObject, planObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 	resp.Diagnostics.Append(packedObject.As(ctx, &plan, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 

@@ -47,7 +47,24 @@ jobs:
           SCM_CLIENT_SECRET: ${{ secrets.SCM_CLIENT_SECRET }}
           SCM_SCOPE: ${{ secrets.SCM_SCOPE }}
         run: |
-          printf 'provider "scm" {\n  host          = "%s"\n  auth_url      = "%s"\n  client_id     = "%s"\n  client_secret = "%s"\n  scope         = "%s"\n  logging       = "debug"\n}\n\nterraform {\n  required_providers {\n    scm = {\n      source = "paloaltonetworks-local/scm"\n    }\n  }\n}\n' "$SCM_HOST" "$SCM_AUTH_URL" "$SCM_CLIENT_ID" "$SCM_CLIENT_SECRET" "$SCM_SCOPE" > examples/provider/provider.tf
+          {
+            echo 'provider "scm" {'
+            echo "  host          = \"${SCM_HOST}\""
+            echo "  auth_url      = \"${SCM_AUTH_URL}\""
+            echo "  client_id     = \"${SCM_CLIENT_ID}\""
+            echo "  client_secret = \"${SCM_CLIENT_SECRET}\""
+            echo "  scope         = \"${SCM_SCOPE}\""
+            echo '  logging       = "debug"'
+            echo '}'
+            echo ''
+            echo 'terraform {'
+            echo '  required_providers {'
+            echo '    scm = {'
+            echo '      source = "paloaltonetworks-local/scm"'
+            echo '    }'
+            echo '  }'
+            echo '}'
+          } > examples/provider/provider.tf
 
       - name: Setup test workspaces
         run: ./tests/setup.sh

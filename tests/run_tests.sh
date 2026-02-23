@@ -189,6 +189,7 @@ test_resource() {
       failed_step=$(grep -E 'run ".*"\.\.\. fail' "$test_output" 2>/dev/null | head -1 | sed -E 's/.*run "([^"]+)".*/\1/' || echo "unknown")
       err_msg=$(grep -m1 "^Error:" "$test_output" 2>/dev/null | head -1 || echo "Unknown error")
       echo "  FAIL: ${resource_name} (${failed_step})"
+      echo "        ${err_msg}"
       FAILED+=("${resource_name}")
       FAILED_ERRORS+=("${failed_step}: ${err_msg}")
       parse_phases "$resource_name" "$test_output"

@@ -45,6 +45,7 @@ jobs:
             direct {}
           }
           EOF
+          sed -i 's/^          //' ~/.terraformrc
 
       - name: Generate provider.tf
         run: |
@@ -66,6 +67,7 @@ jobs:
             }
           }
           TPEOF
+          sed -i 's/^          //' examples/provider/provider.tf
 
       - name: Setup test workspaces
         run: ./tests/setup.sh

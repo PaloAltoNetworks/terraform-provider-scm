@@ -26,6 +26,12 @@ jobs:
         with:
           terraform_wrapper: false
 
+      - name: Pull latest scm-go SDK from develop
+        run: |
+          sed -i '/replace.*scm-go/d' go.mod
+          go get github.com/paloaltonetworks/scm-go@develop
+          go mod tidy
+
       - name: Build provider
         run: go build -o terraform-provider-scm
 

@@ -2,7 +2,7 @@ name: Resource Tests
 
 on:
   push:
-    branches: [main, develop, ci-cd-terraform]
+    branches: [main, ci-cd-terraform]
   pull_request:
     branches: [main]
   workflow_dispatch: # manual trigger

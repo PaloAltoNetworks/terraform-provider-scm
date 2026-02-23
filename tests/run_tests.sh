@@ -192,7 +192,6 @@ test_resource() {
       echo "        ${err_msg}"
       FAILED+=("${resource_name}")
       FAILED_ERRORS+=("${failed_step}: ${err_msg}")
-      parse_phases "$resource_name" "$test_output"
     fi
   fi
 

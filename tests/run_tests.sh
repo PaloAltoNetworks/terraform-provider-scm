@@ -298,6 +298,20 @@ if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
     echo "| Delete | ${#DELETE_PASSED[@]} | ${#DELETE_FAILED[@]} | 0 |"
     echo ""
 
+    # Failed resources (actual errors, not "already exists")
+    if [ ${#FAILED[@]} -gt 0 ]; then
+      echo "### Failed (${#FAILED[@]})"
+      echo ""
+      echo "| Resource | Step | Error |"
+      echo "|---|---|---|"
+      for i in "${!FAILED[@]}"; do
+        local_step=$(echo "${FAILED_ERRORS[$i]}" | cut -d: -f1)
+        local_err=$(echo "${FAILED_ERRORS[$i]}" | cut -d: -f2-)
+        echo "| ${FAILED[$i]} | ${local_step} | ${local_err} |"
+      done
+      echo ""
+    fi
+
     # Create failures
     if [ ${#CREATE_FAILED[@]} -gt 0 ]; then
       echo "<details><summary>Create Failed (${#CREATE_FAILED[@]})</summary>"

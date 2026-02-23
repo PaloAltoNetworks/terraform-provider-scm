@@ -37,37 +37,17 @@ jobs:
 
       - name: Configure dev_overrides
         run: |
-          cat > ~/.terraformrc <<EOF
-          provider_installation {
-            dev_overrides {
-              "paloaltonetworks-local/scm" = "${{ github.workspace }}"
-            }
-            direct {}
-          }
-          EOF
-          sed -i 's/^          //' ~/.terraformrc
+          printf 'provider_installation {\n  dev_overrides {\n    "paloaltonetworks-local/scm" = "%s"\n  }\n  direct {}\n}\n' "${{ github.workspace }}" > ~/.terraformrc
 
       - name: Generate provider.tf
+        env:
+          SCM_HOST: ${{ secrets.SCM_HOST }}
+          SCM_AUTH_URL: ${{ secrets.SCM_AUTH_URL }}
+          SCM_CLIENT_ID: ${{ secrets.SCM_CLIENT_ID }}
+          SCM_CLIENT_SECRET: ${{ secrets.SCM_CLIENT_SECRET }}
+          SCM_SCOPE: ${{ secrets.SCM_SCOPE }}
         run: |
-          cat > examples/provider/provider.tf <<'TPEOF'
-          provider "scm" {
-            host          = "${{ secrets.SCM_HOST }}"
-            auth_url      = "${{ secrets.SCM_AUTH_URL }}"
-            client_id     = "${{ secrets.SCM_CLIENT_ID }}"
-            client_secret = "${{ secrets.SCM_CLIENT_SECRET }}"
-            scope         = "${{ secrets.SCM_SCOPE }}"
-            logging       = "debug"
-          }
-
-          terraform {
-            required_providers {
-              scm = {
-                source = "paloaltonetworks-local/scm"
-              }
-            }
-          }
-          TPEOF
-          sed -i 's/^          //' examples/provider/provider.tf
+          printf 'provider "scm" {\n  host          = "%s"\n  auth_url      = "%s"\n  client_id     = "%s"\n  client_secret = "%s"\n  scope         = "%s"\n  logging       = "debug"\n}\n\nterraform {\n  required_providers {\n    scm = {\n      source = "paloaltonetworks-local/scm"\n    }\n  }\n}\n' "$SCM_HOST" "$SCM_AUTH_URL" "$SCM_CLIENT_ID" "$SCM_CLIENT_SECRET" "$SCM_SCOPE" > examples/provider/provider.tf
 
       - name: Setup test workspaces
         run: ./tests/setup.sh

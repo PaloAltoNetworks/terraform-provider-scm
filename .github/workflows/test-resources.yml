@@ -1,0 +1,68 @@
+name: Resource Tests
+
+on:
+  push:
+    branches: [main, develop, ci-cd-terraform]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # manual trigger
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Terraform Resource Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Build provider
+        run: go build -o terraform-provider-scm
+
+      - name: Configure dev_overrides
+        run: |
+          cat > ~/.terraformrc <<EOF
+          provider_installation {
+            dev_overrides {
+              "paloaltonetworks-local/scm" = "${{ github.workspace }}"
+            }
+            direct {}
+          }
+          EOF
+
+      - name: Generate provider.tf
+        run: |
+          cat > examples/provider/provider.tf <<'TPEOF'
+          provider "scm" {
+            host          = "${{ secrets.SCM_HOST }}"
+            auth_url      = "${{ secrets.SCM_AUTH_URL }}"
+            client_id     = "${{ secrets.SCM_CLIENT_ID }}"
+            client_secret = "${{ secrets.SCM_CLIENT_SECRET }}"
+            scope         = "${{ secrets.SCM_SCOPE }}"
+            logging       = "debug"
+          }
+
+          terraform {
+            required_providers {
+              scm = {
+                source = "paloaltonetworks-local/scm"
+              }
+            }
+          }
+          TPEOF
+
+      - name: Setup test workspaces
+        run: ./tests/setup.sh
+
+      - name: Run tests
+        run: ./tests/run_tests.sh --all

@@ -36,8 +36,8 @@ func unpackFoldersToSdk(ctx context.Context, obj types.Object) (*config_setup.Fo
 
 	// Handling Primitives
 	if !model.Id.IsNull() && !model.Id.IsUnknown() {
-		sdk.Id = model.Id.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+		sdk.Id = model.Id.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
 	}
 
 	// Handling Lists
@@ -87,8 +87,12 @@ func packFoldersFromSdk(ctx context.Context, sdk config_setup.Folders) (types.Ob
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Id = basetypes.NewStringValue(sdk.Id)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Id", "value": sdk.Id})
+	if sdk.Id != nil {
+		model.Id = basetypes.NewStringValue(*sdk.Id)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Id", "value": *sdk.Id})
+	} else {
+		model.Id = basetypes.NewStringNull()
+	}
 	// Handling Lists
 	if sdk.Labels != nil {
 		tflog.Debug(ctx, "Packing list of primitives for field Labels")

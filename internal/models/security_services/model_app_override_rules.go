@@ -88,7 +88,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 	Attributes: map[string]schema.Attribute{
 		"application": schema.StringAttribute{
 			MarkdownDescription: "Application",
-			Required:            true,
+			Optional:            true,
 		},
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -100,7 +100,8 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Destination",
-			Required:            true,
+			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -142,7 +143,8 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"from": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "From",
-			Required:            true,
+			Optional:            true,
+			Computed:            true,
 		},
 		"group_tag": schema.StringAttribute{
 			MarkdownDescription: "Group tag",
@@ -177,7 +179,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		},
 		"port": schema.StringAttribute{
 			MarkdownDescription: "Port",
-			Required:            true,
+			Optional:            true,
 		},
 		"position": schema.StringAttribute{
 			Validators: []validator.String{
@@ -196,7 +198,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 				stringvalidator.OneOf("tcp", "udp"),
 			},
 			MarkdownDescription: "Protocol",
-			Required:            true,
+			Optional:            true,
 		},
 		"relative_position": schema.StringAttribute{
 			Validators: []validator.String{
@@ -223,7 +225,8 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"source": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Source",
-			Required:            true,
+			Optional:            true,
+			Computed:            true,
 		},
 		"tag": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -244,7 +247,8 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"to": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "To",
-			Required:            true,
+			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

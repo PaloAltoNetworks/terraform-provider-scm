@@ -56,8 +56,8 @@ func unpackTrafficSteeringRulesToSdk(ctx context.Context, obj types.Object) (*de
 
 	// Handling Primitives
 	if !model.Folder.IsNull() && !model.Folder.IsUnknown() {
-		sdk.Folder = model.Folder.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Folder", "value": sdk.Folder})
+		sdk.Folder = model.Folder.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
 	}
 
 	// Handling Primitives
@@ -144,8 +144,12 @@ func packTrafficSteeringRulesFromSdk(ctx context.Context, sdk deployment_service
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Folder = basetypes.NewStringValue(sdk.Folder)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Folder", "value": sdk.Folder})
+	if sdk.Folder != nil {
+		model.Folder = basetypes.NewStringValue(*sdk.Folder)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+	} else {
+		model.Folder = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	model.Id = basetypes.NewStringValue(sdk.Id)

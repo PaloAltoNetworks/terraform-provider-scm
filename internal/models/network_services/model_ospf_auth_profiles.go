@@ -145,7 +145,7 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 				Attributes: map[string]schema.Attribute{
 					"key": schema.StringAttribute{
 						Validators: []validator.String{
-							stringvalidator.LengthAtMost(16),
+							stringvalidator.LengthAtMost(256),
 						},
 						MarkdownDescription: "MD5 hash",
 						Optional:            true,

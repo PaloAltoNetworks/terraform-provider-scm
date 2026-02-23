@@ -17,7 +17,6 @@ TrafficSteeringRule resource
 
 ### Required
 
-- `folder` (String) The folder containing the traffic steering rule
 - `name` (String) Name
 - `service` (List of String) Service
 - `source` (List of String) Source
@@ -27,6 +26,7 @@ TrafficSteeringRule resource
 - `action` (Attributes) Action (see [below for nested schema](#nestedatt--action))
 - `category` (List of String) Category
 - `destination` (List of String) Destination
+- `folder` (String) The folder containing the traffic steering rule
 - `source_user` (List of String) Source user
 
 ### Read-Only

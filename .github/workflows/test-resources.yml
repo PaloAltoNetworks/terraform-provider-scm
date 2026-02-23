@@ -66,6 +66,25 @@ jobs:
             echo '}'
           } > examples/provider/provider.tf
 
+      - name: Validate provider config
+        env:
+          SCM_HOST: ${{ secrets.SCM_HOST }}
+          SCM_AUTH_URL: ${{ secrets.SCM_AUTH_URL }}
+          SCM_CLIENT_ID: ${{ secrets.SCM_CLIENT_ID }}
+          SCM_CLIENT_SECRET: ${{ secrets.SCM_CLIENT_SECRET }}
+          SCM_SCOPE: ${{ secrets.SCM_SCOPE }}
+        run: |
+          echo "Checking secrets are non-empty..."
+          [ -z "$SCM_HOST" ] && echo "ERROR: SCM_HOST is empty" && exit 1
+          [ -z "$SCM_AUTH_URL" ] && echo "ERROR: SCM_AUTH_URL is empty" && exit 1
+          [ -z "$SCM_CLIENT_ID" ] && echo "ERROR: SCM_CLIENT_ID is empty" && exit 1
+          [ -z "$SCM_CLIENT_SECRET" ] && echo "ERROR: SCM_CLIENT_SECRET is empty" && exit 1
+          [ -z "$SCM_SCOPE" ] && echo "ERROR: SCM_SCOPE is empty" && exit 1
+          echo "All secrets present"
+          echo "provider.tf line count: $(wc -l < examples/provider/provider.tf)"
+          echo "provider.tf has provider block: $(grep -c 'provider "scm"' examples/provider/provider.tf)"
+          echo "provider.tf has terraform block: $(grep -c 'terraform {' examples/provider/provider.tf)"
+
       - name: Setup test workspaces
         run: ./tests/setup.sh
 

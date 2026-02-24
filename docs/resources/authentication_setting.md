@@ -13,8 +13,8 @@ AuthenticationSetting resource
 ## Example Usage
 
 ```terraform
-resource "scm_authentication_profile" "global_radius_access" {
-  name              = "test_auth_profile_radius_1"
+resource "scm_authentication_profile" "test_ui_example" {
+  name              = "test_auth_profile_settings"
   folder            = "Prisma Access"
   user_domain       = "default"
   username_modifier = "%USERINPUT%"
@@ -22,16 +22,13 @@ resource "scm_authentication_profile" "global_radius_access" {
 
   # Lockout Configuration
   lockout = {
-    failed_attempts = 1
-    lockout_time    = 3
+    failed_attempts = 3
+    lockout_time    = 1
   }
 
   # Authentication Method: RADIUS
   method = {
-    radius = {
-      checkgroup     = true
-      server_profile = "CHAP_only_rsp_11" // server_profile added should exist 
-    }
+    local_database = {}
   }
 
   # Single Sign-On Configuration

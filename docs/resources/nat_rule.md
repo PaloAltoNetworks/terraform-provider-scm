@@ -15,7 +15,7 @@ NatRule resource
 ```terraform
 resource "scm_tag" "example_tag" {
   folder = "All"
-  name   = "example-tag"
+  name   = "example-nat-rule"
   color  = "Red"
 }
 

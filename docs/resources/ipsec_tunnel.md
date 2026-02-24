@@ -16,7 +16,7 @@ IpsecTunnel resource
 ## 1. Define the IKE Crypto Profile (IKE Phase 1)
 # Note: The resource name is plural: "scm_ike_crypto_profile"
 resource "scm_ike_crypto_profile" "example" {
-  name       = "example-ike-crypto"
+  name       = "tunnel-ike-crypto"
   folder     = "Remote Networks"
   hash       = ["sha256"]
   dh_group   = ["group14"]
@@ -26,7 +26,7 @@ resource "scm_ike_crypto_profile" "example" {
 ## 2. Define the IPsec Crypto Profile (IKE Phase 2)
 # Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ipsec_crypto_profile" "example" {
-  name   = "PaloAlto-Networks-IPSec-Crypto"
+  name   = "example-tunnel-crypto"
   folder = "Remote Networks"
 
   esp = {
@@ -44,7 +44,7 @@ resource "scm_ipsec_crypto_profile" "example" {
 ## 3. Define the IKE Gateway
 # Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ike_gateway" "example" {
-  name   = "example-gateway"
+  name   = "example-tunnel-gateway"
   folder = "Remote Networks"
 
   peer_address = {
@@ -68,7 +68,7 @@ resource "scm_ike_gateway" "example" {
 ## 4. Define the IPsec Tunnel
 # Note: Nested 'auto_key' block uses an equals sign (=).
 resource "scm_ipsec_tunnel" "example" {
-  name                     = "example-tunnel"
+  name                     = "example-tf-tunnel"
   folder                   = "Remote Networks"
   tunnel_interface         = "tunnel"
   anti_replay              = true

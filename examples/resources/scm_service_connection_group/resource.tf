@@ -8,18 +8,20 @@ variable "folder_scope" {
 # I. VPN COMPONENT RESOURCES (Creation/Management)
 # ------------------------------------------------------------------
 
-## 1. IKE Crypto Profile (IKE Phase 1)
+## 1. Define the IKE Crypto Profile (IKE Phase 1)
+# Note: The resource name is plural: "scm_ike_crypto_profile"
 resource "scm_ike_crypto_profile" "example" {
-  name       = "example-ike-crypto_sc_grp"
+  name       = "example-sc-ike-crypto"
   folder     = var.folder_scope
   hash       = ["sha256"]
   dh_group   = ["group14"]
   encryption = ["aes-256-cbc"]
 }
 
-## 2. IPsec Crypto Profile (IKE Phase 2)
+## 2. Define the IPsec Crypto Profile (IKE Phase 2)
+# Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ipsec_crypto_profile" "example" {
-  name   = "panw-IPSec-Crypto_sc_grp"
+  name   = "panw-sc-Crypto"
   folder = var.folder_scope
 
   esp = {
@@ -34,9 +36,10 @@ resource "scm_ipsec_crypto_profile" "example" {
   }
 }
 
-## 3. IKE Gateway
+## 3. Define the IKE Gateway
+# Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ike_gateway" "example" {
-  name   = "example-gateway_sc_grp"
+  name   = "example-sc-gateway"
   folder = var.folder_scope
 
   peer_address = {
@@ -45,6 +48,7 @@ resource "scm_ike_gateway" "example" {
 
   authentication = {
     pre_shared_key = {
+      # In a real-world scenario, use a variable marked as sensitive for the key.
       key = "secret"
     }
   }
@@ -56,9 +60,10 @@ resource "scm_ike_gateway" "example" {
   }
 }
 
-## 4. IPsec Tunnel
+## 4. Define the IPsec Tunnel
+# Note: Nested 'auto_key' block uses an equals sign (=).
 resource "scm_ipsec_tunnel" "example" {
-  name                     = "example-tunnel_sc_grp"
+  name                     = "example-sc-tunnel"
   folder                   = var.folder_scope
   tunnel_interface         = "tunnel"
   anti_replay              = true

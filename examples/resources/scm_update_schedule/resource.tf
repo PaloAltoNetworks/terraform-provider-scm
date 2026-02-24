@@ -41,45 +41,45 @@ resource "scm_update_schedule" "us_settings" {
 }
 
 
-# -- Example 2 : With Daily recurring updates for recurring and anti-virus
-resource "scm_update_schedule" "us_settings_daily" {
-  folder = "All"
+# # -- Example 2 : With Daily recurring updates for recurring and anti-virus
+# resource "scm_update_schedule" "us_settings_daily" {
+#     folder = "All"
 
-  update_schedule = {
-    threats = {
-      recurring = {
-        threshold         = 300
-        new_app_threshold = 300
-        sync_to_peer      = false
+#     update_schedule = {
+#         threats = {
+#             recurring = {
+#                 threshold = 300
+#                 new_app_threshold = 300
+#                 sync_to_peer = false
 
-        daily = {
-          at                  = "02:13"
-          action              = "download-only"
-          disable_new_content = false
-        }
-      }
-    }
+#                 daily = {
+#                     at = "02:13"
+#                     action = "download-only"
+#                     disable_new_content = false
+#                 }
+#             }
+#         }
 
-    anti_virus = {
-      recurring = {
-        threshold    = 300
-        sync_to_peer = true
+#         anti_virus = {
+#             recurring = {
+#                 threshold = 300
+#                 sync_to_peer = true
 
-        daily = {
-          at     = "02:13"
-          action = "download-only"
-        }
-      }
-    }
+#                 daily = {
+#                     at = "02:13"
+#                     action = "download-only"
+#                 }
+#             }
+#         }
 
-    wildfire = {
-      recurring = {
-        every_30_mins = {
-          at           = 20
-          action       = "download-only"
-          sync_to_peer = false
-        }
-      }
-    }
-  }
-}
+#         wildfire = {
+#             recurring = {
+#                 every_30_mins = {
+#                     at = 20
+#                     action = "download-only"
+#                     sync_to_peer = false
+#                 }
+#             }
+#         }
+#     }
+# }

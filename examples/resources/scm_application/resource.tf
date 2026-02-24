@@ -41,7 +41,7 @@ resource "scm_application" "scm_risky_app" {
 # Custom Application based on Custom Signature
 resource "scm_application" "scm_custom_app" {
   folder      = "All"
-  name        = "scm_custom_app"
+  name        = "scm_custom_test_app"
   description = "Managed by Terraform"
   category    = "media"
   subcategory = "gaming"

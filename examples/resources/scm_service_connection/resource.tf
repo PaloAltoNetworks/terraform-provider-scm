@@ -8,7 +8,7 @@ variable "folder_scope" {
 ## 1. Define the IKE Crypto Profile (IKE Phase 1)
 # Note: The resource name is plural: "scm_ike_crypto_profile"
 resource "scm_ike_crypto_profile" "example" {
-  name       = "example-ike-crypto"
+  name       = "example-sc-ike-crypto"
   folder     = var.folder_scope
   hash       = ["sha256"]
   dh_group   = ["group14"]
@@ -18,7 +18,7 @@ resource "scm_ike_crypto_profile" "example" {
 ## 2. Define the IPsec Crypto Profile (IKE Phase 2)
 # Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ipsec_crypto_profile" "example" {
-  name   = "panw-IPSec-Crypto"
+  name   = "panw-sc-Crypto"
   folder = var.folder_scope
 
   esp = {
@@ -36,7 +36,7 @@ resource "scm_ipsec_crypto_profile" "example" {
 ## 3. Define the IKE Gateway
 # Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ike_gateway" "example" {
-  name   = "example-gateway"
+  name   = "example-sc-gateway"
   folder = var.folder_scope
 
   peer_address = {
@@ -60,7 +60,7 @@ resource "scm_ike_gateway" "example" {
 ## 4. Define the IPsec Tunnel
 # Note: Nested 'auto_key' block uses an equals sign (=).
 resource "scm_ipsec_tunnel" "example" {
-  name                     = "example-tunnel"
+  name                     = "example-sc-tunnel"
   folder                   = var.folder_scope
   tunnel_interface         = "tunnel"
   anti_replay              = true

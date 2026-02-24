@@ -1,6 +1,6 @@
 resource "scm_interface_management_profile" "dc_postman_profile" {
   # Required Field
-  name = "test_inf_mgmt_profile_1_update"
+  name = "cd"
 
   # Contextual Field
   folder = "All"

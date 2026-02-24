@@ -13,8 +13,30 @@ AuthenticationProfile resource
 ## Example Usage
 
 ```terraform
+resource "scm_radius_server_profile" "chap_radius_profile" {
+  # Standard fields
+  name    = "CHAP_only_rsp"
+  folder  = "All"
+  retries = 5
+  timeout = 60
+
+  protocol = {
+    chap = {}
+  }
+
+  # Server list
+  server = [
+    {
+      name       = "Chap_Server_Primary"
+      ip_address = "10.1.1.10"
+      port       = 1812
+      secret     = "-AQ==lhyuV6U/j9Trb9JL9L0UoBecg9Y=kTOWntGhZ1KFyLD+etKQ3g=="
+    },
+  ]
+}
+
 resource "scm_authentication_profile" "global_radius_access" {
-  name              = "test_auth_profile_radius_1"
+  name              = "test_auth_profile_radius"
   folder            = "All"
   user_domain       = "default"
   username_modifier = "%USERINPUT%"
@@ -30,7 +52,7 @@ resource "scm_authentication_profile" "global_radius_access" {
   method = {
     radius = {
       checkgroup     = true
-      server_profile = "CHAP_only_rsp_1" // server_profile added should exist 
+      server_profile = scm_radius_server_profile.chap_radius_profile.name // server_profile added should exist 
     }
   }
 
@@ -41,7 +63,7 @@ resource "scm_authentication_profile" "global_radius_access" {
 }
 
 resource "scm_authentication_profile" "global_db_access" {
-  name              = "test_auth_global_db_1"
+  name              = "test_auth_global_db"
   folder            = "All"
   user_domain       = "default"
   username_modifier = "%USERINPUT%"

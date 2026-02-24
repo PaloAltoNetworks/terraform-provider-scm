@@ -1,4 +1,4 @@
-resource "scm_authentication_profile" "test_ui_example" {
+resource "scm_authentication_profile" "global_radius_access" {
   name              = "test_auth_profile_settings"
   folder            = "Prisma Access"
   user_domain       = "default"
@@ -7,18 +7,16 @@ resource "scm_authentication_profile" "test_ui_example" {
 
   # Lockout Configuration
   lockout = {
-    failed_attempts = 3
-    lockout_time    = 1
+    failed_attempts = 1
+    lockout_time    = 3
   }
 
   # Authentication Method: RADIUS
   method = {
-    local_database = {}
-  }
-
-  # Single Sign-On Configuration
-  single_sign_on = {
-    realm = "EXAMPLE.COM"
+    radius = {
+      checkgroup     = true
+      server_profile = "CHAP_only_rsp_11" // server_profile added should exist 
+    }
   }
 }
 

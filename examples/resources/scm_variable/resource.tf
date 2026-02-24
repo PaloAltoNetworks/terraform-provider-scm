@@ -3,7 +3,7 @@
 #
 resource "scm_variable" "scm_variable_asn" {
   folder      = "All"
-  name        = "$scm_variable_asn"
+  name        = "$tf_variable_asn"
   description = "Managed by Terraform"
   type        = "as-number"
   value       = "65535"
@@ -14,7 +14,7 @@ resource "scm_variable" "scm_variable_asn" {
 #
 resource "scm_variable" "scm_variable_count" {
   folder      = "All"
-  name        = "$scm_variable_count"
+  name        = "$tf_variable_count"
   description = "Managed by Terraform"
   type        = "count"
   value       = "15"
@@ -25,7 +25,7 @@ resource "scm_variable" "scm_variable_count" {
 #
 resource "scm_variable" "scm_variable_fqdn" {
   folder      = "All"
-  name        = "$scm_variable_fqdn"
+  name        = "$tf_variable_fqdn"
   description = "Managed by Terraform"
   type        = "fqdn"
   value       = "scm.example.com"
@@ -36,7 +36,7 @@ resource "scm_variable" "scm_variable_fqdn" {
 #
 resource "scm_variable" "scm_variable_group_id" {
   folder      = "All"
-  name        = "$scm_variable_group_id"
+  name        = "$tf_variable_group_id"
   description = "Managed by Terraform"
   type        = "group-id"
   value       = "10"
@@ -47,7 +47,7 @@ resource "scm_variable" "scm_variable_group_id" {
 #
 resource "scm_variable" "scm_variable_iprange" {
   folder      = "All"
-  name        = "$scm_variable_iprange"
+  name        = "$tf_variable_iprange"
   description = "Managed by Terraform"
   type        = "ip-range"
   value       = "198.18.1.1-198.18.1.100"
@@ -58,7 +58,7 @@ resource "scm_variable" "scm_variable_iprange" {
 #
 resource "scm_variable" "scm_variable_ipaddr" {
   folder      = "All"
-  name        = "$scm_variable_ipaddr"
+  name        = "$tf_variable_ipaddr"
   description = "Managed by Terraform"
   type        = "ip-netmask"
   value       = "198.18.2.0/24"
@@ -69,7 +69,7 @@ resource "scm_variable" "scm_variable_ipaddr" {
 #
 resource "scm_variable" "scm_variable_ipwildcard" {
   folder      = "All"
-  name        = "$scm_variable_ipwildcard"
+  name        = "$tf_variable_ipwildcard"
   description = "Managed by Terraform"
   type        = "ip-wildcard"
   value       = "198.18.1.0/0.255.255.255"
@@ -80,7 +80,7 @@ resource "scm_variable" "scm_variable_ipwildcard" {
 #
 resource "scm_variable" "scm_variable_percent" {
   folder      = "All"
-  name        = "$scm_variable_percent"
+  name        = "$tf_variable_percent"
   description = "Managed by Terraform"
   type        = "percent"
   value       = "10"
@@ -91,7 +91,7 @@ resource "scm_variable" "scm_variable_percent" {
 #
 resource "scm_variable" "scm_variable_router_id" {
   folder      = "All"
-  name        = "$scm_variable_router_id"
+  name        = "$tf_variable_router_id"
   description = "Managed by Terraform"
   type        = "router-id"
   value       = "198.18.1.1"
@@ -102,7 +102,7 @@ resource "scm_variable" "scm_variable_router_id" {
 #
 resource "scm_variable" "scm_variable_timer" {
   folder      = "All"
-  name        = "$scm_variable_timer"
+  name        = "$tf_variable_timer"
   description = "Managed by Terraform"
   type        = "timer"
   value       = "1440"
@@ -113,7 +113,7 @@ resource "scm_variable" "scm_variable_timer" {
 #
 resource "scm_variable" "scm_variable_zone" {
   folder      = "All"
-  name        = "$scm_variable_zone"
+  name        = "$tf_variable_zone"
   description = "Managed by Terraform"
   type        = "zone"
   value       = "internet"

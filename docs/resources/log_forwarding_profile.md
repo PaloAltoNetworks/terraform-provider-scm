@@ -14,8 +14,9 @@ LogForwardingProfile resource
 
 ```terraform
 resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_1" {
-  folder = "All"
-  name   = "scm-log-fowarding-profile-1"
+  folder = "ngfw-shared"
+
+  name = "scm-log-fowarding-profile-1"
   match_list = [
     {
       name     = "profile_match"
@@ -26,7 +27,8 @@ resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_1" {
 }
 
 resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_2" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "scm-log-fowarding-profile-2"
   description = "Log Forwarding w/ HTTP Server Profile and Syslog Server Profile"
   match_list = [
@@ -41,7 +43,8 @@ resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_2" {
 }
 
 resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_3" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "scm-log-fowarding-profile-3"
   description = "Log Forwarding w/ All Server Profiles"
   match_list = [
@@ -59,7 +62,8 @@ resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_3" {
 }
 
 resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_4" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "scm-log-fowarding-profile-4"
   description = "Log Forwarding w/ Multiple Match Lists"
   match_list = [

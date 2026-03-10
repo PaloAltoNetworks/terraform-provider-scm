@@ -3,7 +3,7 @@
 #
 
 resource "scm_ethernet_interface" "scm_parent_interface" {
-  name    = "$scm_parent_interface"
+  name    = "$scm_tf_parent_interface"
   comment = "Managed by Terraform"
   folder  = "ngfw-shared"
   layer2  = {}
@@ -14,10 +14,10 @@ resource "scm_ethernet_interface" "scm_parent_interface" {
 #
 
 resource "scm_layer2_subinterface" "scm_layer2_subinterface" {
-  name             = "$scm_parent_interface.100"
+  name             = "$scm_tf_parent_interface.100"
   comment          = "Managed by Terraform"
   folder           = "ngfw-shared"
   vlan_tag         = 100
-  parent_interface = "$scm_parent_interface"
+  parent_interface = "$scm_tf_parent_interface"
   depends_on       = [scm_ethernet_interface.scm_parent_interface]
 }

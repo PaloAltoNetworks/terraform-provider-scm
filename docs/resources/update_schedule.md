@@ -14,7 +14,8 @@ UpdateSchedule resource
 
 ```terraform
 resource "scm_update_schedule" "us_settings" {
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   update_schedule = {
     threats = {
@@ -58,7 +59,8 @@ resource "scm_update_schedule" "us_settings" {
 
 # # -- Example 2 : With Daily recurring updates for recurring and anti-virus
 # resource "scm_update_schedule" "us_settings_daily" {
-#     folder = "All"
+#     folder = "ngfw-shared"
+
 
 #     update_schedule = {
 #         threats = {

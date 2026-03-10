@@ -1,5 +1,6 @@
 resource "scm_saml_server_profile" "scm_saml_server_profile_1" {
-  folder       = "All"
+  folder = "ngfw-shared"
+
   name         = "scm-saml-server-prof-1"
   certificate  = "Global Authentication Cookie Cert"
   entity_id    = "123"
@@ -8,7 +9,8 @@ resource "scm_saml_server_profile" "scm_saml_server_profile_1" {
 }
 
 resource "scm_saml_server_profile" "scm_saml_server_profile_2" {
-  folder                   = "All"
+  folder = "ngfw-shared"
+
   name                     = "scm-saml-server-prof-2"
   certificate              = "Global Authentication Cookie Cert"
   entity_id                = "test_id"
@@ -20,7 +22,8 @@ resource "scm_saml_server_profile" "scm_saml_server_profile_2" {
 }
 
 resource "scm_saml_server_profile" "scm_saml_server_profile_3" {
-  folder                    = "All"
+  folder = "ngfw-shared"
+
   name                      = "scm-saml-server-prof-3"
   certificate               = "Global Authentication Cookie Cert"
   entity_id                 = "test_123"

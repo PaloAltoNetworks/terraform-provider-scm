@@ -14,9 +14,10 @@ LldpProfile resource
 
 ```terraform
 resource "scm_lldp_profile" "example" {
-  folder = "All"
-  mode   = "transmit-receive"
-  name   = "lldp-profile-tf-1"
+  folder = "ngfw-shared"
+
+  mode = "transmit-receive"
+  name = "lldp-profile-tf-1"
   option_tlvs = {
     management_address = {
       enabled = true

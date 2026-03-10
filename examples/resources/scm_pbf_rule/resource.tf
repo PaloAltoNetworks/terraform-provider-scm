@@ -1,14 +1,16 @@
 resource "scm_tag" "example_tag" {
-  folder = "All"
-  name   = "pbf-rule-tag-test-1"
-  color  = "Red"
+  folder = "ngfw-shared"
+
+  name  = "pbf-rule-tag-test-1"
+  color = "Red"
 }
 
 # --- PBF Rule Resource with discard action---
 resource "scm_pbf_rule" "example_pbf_rule" {
   # Required fields
   name   = "pbf-test-rule-discard"
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Optional: Description of the rule
   description = "PBF rule for forwarding specific traffic."
@@ -48,7 +50,8 @@ resource "scm_pbf_rule" "example_pbf_rule" {
 resource "scm_pbf_rule" "example_no_pbf_rule" {
   # Required fields
   name   = "pbf-test-rule-no-pbf"
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Optional: Description of the rule
   description = "PBF rule for forwarding specific traffic"
@@ -87,7 +90,8 @@ resource "scm_pbf_rule" "example_no_pbf_rule" {
 resource "scm_pbf_rule" "example_forward_pbf_rule" {
   # Required fields
   name   = "pbf-test-rule-forward"
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Optional: Description of the rule
   description = "PBF rule for forwarding specific traffic"

@@ -1,7 +1,7 @@
 ## 1. Define the IKE Crypto Profile (IKE Phase 1)
 # Note: The resource name is plural: "scm_ike_crypto_profile"
 resource "scm_ike_crypto_profile" "example" {
-  name       = "example-ike-crypto-14"
+  name       = "example-ike-crypto-site"
   folder     = "Remote Networks"
   hash       = ["sha256"]
   dh_group   = ["group14"]
@@ -11,7 +11,7 @@ resource "scm_ike_crypto_profile" "example" {
 ## 2. Define the IPsec Crypto Profile (IKE Phase 2)
 # Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ipsec_crypto_profile" "example" {
-  name   = "PaloAlto-Networks-IPSec-14"
+  name   = "panw-IPSec-site"
   folder = "Remote Networks"
 
   esp = {
@@ -29,7 +29,7 @@ resource "scm_ipsec_crypto_profile" "example" {
 ## 3. Define the IKE Gateway
 # Note: The resource name is plural and nested blocks now use an equals sign (=).
 resource "scm_ike_gateway" "example" {
-  name   = "example-gateway-14"
+  name   = "example-gateway-site"
   folder = "Remote Networks"
 
   peer_address = {
@@ -53,7 +53,7 @@ resource "scm_ike_gateway" "example" {
 ## 4. Define the IPsec Tunnel
 # Note: Nested 'auto_key' block uses an equals sign (=).
 resource "scm_ipsec_tunnel" "example" {
-  name                     = "example-tunnel-14"
+  name                     = "example-tunnel-site"
   folder                   = "Remote Networks"
   tunnel_interface         = "tunnel"
   anti_replay              = true
@@ -76,7 +76,7 @@ resource "scm_ipsec_tunnel" "example" {
 # 1. Define the Remote Network first
 resource "scm_remote_network" "branch_office" {
   folder       = "Remote Networks"
-  name         = "example-rn-14"
+  name         = "example-rn-site"
   region       = "us-west-1"
   license_type = "FWAAS-AGGREGATE"
 
@@ -90,7 +90,7 @@ resource "scm_remote_network" "branch_office" {
 # 2. Define the Site
 resource "scm_site" "example" {
 
-  name         = "example-site-14"
+  name         = "example-site-site"
   type         = "third-party-branch"
   license_type = "FWAAS-SITE-25Mbps"
 

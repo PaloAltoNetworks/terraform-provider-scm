@@ -1,7 +1,9 @@
 // Set Sessions with Config Rematch value set to True
 resource "scm_session_setting" "session_example" {
-  # Corresponds to: "folder": "All"
-  folder = "All"
+  # Corresponds to: "folder": "ngfw-shared"
+
+  folder = "ngfw-shared"
+
 
   session_settings = {
 
@@ -59,8 +61,10 @@ resource "scm_session_setting" "session_example" {
 
 # Set sessions with the rematch config value set to false; in this case, you don’t need to provide the {} config object.
 # resource "scm_session_setting" "session_example_config_false" {
-#   # Corresponds to: "folder": "All"
-#   folder = "All"
+#   # Corresponds to: "folder": "ngfw-shared"
+
+#   folder = "ngfw-shared"
+
 
 #   session_settings = {
 

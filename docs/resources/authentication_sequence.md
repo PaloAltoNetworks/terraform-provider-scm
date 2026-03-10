@@ -14,11 +14,13 @@ AuthenticationSequence resource
 
 ```terraform
 resource "scm_authentication_profile" "test_ui_example" {
-  name              = "Test_UI"
-  folder            = "All"
+  name   = "Test_UI"
+  folder = "ngfw-shared"
+
   user_domain       = "default"
   username_modifier = "%USERINPUT%"
-  allow_list        = ["all"]
+  allow_list = ["ngfw-shared"
+  ]
 
   # Lockout Configuration
   lockout = {
@@ -38,15 +40,17 @@ resource "scm_authentication_profile" "test_ui_example" {
 }
 
 resource "scm_authentication_sequence" "test_sequence" {
-  name                    = "test_auth_sequence_1"
-  folder                  = "All"
+  name   = "test_auth_sequence_1"
+  folder = "ngfw-shared"
+
   authentication_profiles = ["test_auth_profile"] // authentication_profiles added should exist 
   use_domain_find_profile = false
 }
 
 resource "scm_authentication_sequence" "test_sequence_2" {
-  name                    = "test_auth_sequence_2"
-  folder                  = "All"
+  name   = "test_auth_sequence_2"
+  folder = "ngfw-shared"
+
   authentication_profiles = [scm_authentication_profile.test_ui_example.name, "test_auth_profile"] // authentication_profiles added should exist 
   use_domain_find_profile = false
 }

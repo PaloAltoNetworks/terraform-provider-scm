@@ -112,7 +112,7 @@ resource "scm_service_connection" "site_a_vpn_sc" {
 
 ## 5. Service Connection (The target for the group)
 resource "scm_service_connection" "site_a_vpn_sc_2" {
-  name         = "creating_a_service_connection_sc_grp_2"
+  name         = "creating_a_svc_connection_sc_grp_2"
   region       = "us-west-1a"
   ipsec_tunnel = scm_ipsec_tunnel.example.name
   subnets = [
@@ -128,7 +128,7 @@ resource "scm_service_connection" "site_a_vpn_sc_2" {
 
 ## 6. Service Connection Group (Groups the Service Connection created above)
 resource "scm_service_connection_group" "example_group" {
-  name = "service-connection-group-app_sc_grp"
+  name = "svc-connection-group-app_sc_grp"
   # The key attribute: references the name of the Service Connection resource
   target = [
     scm_service_connection.site_a_vpn_sc.name, scm_service_connection.site_a_vpn_sc_2.name

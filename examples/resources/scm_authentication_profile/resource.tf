@@ -1,7 +1,8 @@
 resource "scm_radius_server_profile" "chap_radius_profile" {
   # Standard fields
-  name    = "CHAP_only_rsp"
-  folder  = "All"
+  name   = "CHAP_only_rsp"
+  folder = "ngfw-shared"
+
   retries = 5
   timeout = 60
 
@@ -21,11 +22,13 @@ resource "scm_radius_server_profile" "chap_radius_profile" {
 }
 
 resource "scm_authentication_profile" "global_radius_access" {
-  name              = "test_auth_profile_radius"
-  folder            = "All"
+  name   = "test_auth_profile_radius"
+  folder = "ngfw-shared"
+
   user_domain       = "default"
   username_modifier = "%USERINPUT%"
-  allow_list        = ["all"]
+  allow_list = ["ngfw-shared"
+  ]
 
   # Lockout Configuration
   lockout = {
@@ -48,11 +51,13 @@ resource "scm_authentication_profile" "global_radius_access" {
 }
 
 resource "scm_authentication_profile" "global_db_access" {
-  name              = "test_auth_global_db"
-  folder            = "All"
+  name   = "test_auth_global_db"
+  folder = "ngfw-shared"
+
   user_domain       = "default"
   username_modifier = "%USERINPUT%"
-  allow_list        = ["all"]
+  allow_list = ["ngfw-shared"
+  ]
 
   # Lockout Configuration
   lockout = {

@@ -14,9 +14,10 @@ NatRule resource
 
 ```terraform
 resource "scm_tag" "example_tag" {
-  folder = "All"
-  name   = "example-nat-rule"
-  color  = "Red"
+  folder = "ngfw-shared"
+
+  name  = "example-nat-rule"
+  color = "Red"
 }
 
 #Source Translation (SNAT) - Dynamic IP and Port
@@ -35,7 +36,8 @@ resource "scm_nat_rule" "example_nat_rule" {
   nat_type    = "ipv4" # Default value, explicitly setting for clarity
 
   # Scope (Use either folder, device, or snippet)
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Apply the created tag
   tag = [
@@ -76,7 +78,8 @@ resource "scm_nat_rule" "example_nat_static_rule" {
   nat_type    = "ipv4" # Default value, explicitly setting for clarity
 
   # Scope (Use either folder, device, or snippet)
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Apply the created tag
   tag = [
@@ -118,7 +121,8 @@ resource "scm_nat_rule" "example_nat_static_rule_2" {
   nat_type    = "ipv4" # Default value, explicitly setting for clarity
 
   # Scope (Use either folder, device, or snippet)
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Apply the created tag
   tag = [
@@ -155,7 +159,8 @@ resource "scm_nat_rule" "example_nat_dynamic_rule" {
   nat_type    = "ipv4" # Default value, explicitly setting for clarity
 
   # Scope (Use either folder, device, or snippet)
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Apply the created tag
   tag = [

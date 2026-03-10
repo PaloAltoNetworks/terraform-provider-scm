@@ -15,7 +15,8 @@ TcpSetting resource
 ```terraform
 resource "scm_tcp_setting" "tcp_example" {
   # Corresponds to = folder = All
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   tcp = {
     bypass_exceed_oo_queue = false

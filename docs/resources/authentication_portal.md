@@ -15,7 +15,8 @@ AuthenticationPortal resource
 ```terraform
 resource "scm_authentication_portal" "example_configuration" {
   redirect_host = "192.168.255.254"
-  folder        = "All"
+  folder        = "ngfw-shared"
+
 
   # Optional Fields
   authentication_profile = "test_auth_profile"

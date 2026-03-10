@@ -15,7 +15,8 @@ ScepProfile resource
 ```terraform
 # scep profile w/ no challenge
 resource "scm_scep_profile" "scm_scep_profile_1" {
-  folder           = "All"
+  folder = "ngfw-shared"
+
   name             = "scep-prof-1"
   scep_url         = "https://scep.example.com/"
   ca_identity_name = "Default"
@@ -35,7 +36,8 @@ resource "scm_scep_profile" "scm_scep_profile_1" {
 
 # scep profile w/ fixed challenge
 resource "scm_scep_profile" "scm_scep_profile_2" {
-  folder           = "All"
+  folder = "ngfw-shared"
+
   name             = "scep-prof-2"
   scep_url         = "https://example.target.com/"
   ca_identity_name = "user-scep"
@@ -60,7 +62,8 @@ resource "scm_scep_profile" "scm_scep_profile_2" {
 
 # scep profile w/ dynamic challenge
 resource "scm_scep_profile" "scm_scep_profile_3" {
-  folder                   = "All"
+  folder = "ngfw-shared"
+
   name                     = "scep-prof-3"
   scep_url                 = "https://example.gateway.com/"
   ca_identity_name         = "vpn-gateway"
@@ -91,7 +94,8 @@ resource "scm_scep_profile" "scm_scep_profile_3" {
 
 # scep profile w/ all fields
 resource "scm_scep_profile" "scm_scep_profile_4" {
-  folder                   = "All"
+  folder = "ngfw-shared"
+
   name                     = "scep-prof-4"
   scep_url                 = "https://example.wifi.com/"
   ca_identity_name         = "wifi"

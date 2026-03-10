@@ -1,5 +1,6 @@
 resource "scm_service_setting" "service_settings" {
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   services = {
     dns_setting = {

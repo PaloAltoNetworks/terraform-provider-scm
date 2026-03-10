@@ -15,21 +15,24 @@ Address resource
 ```terraform
 # This file is embedded using go:embed
 resource "scm_tag" "scm_addr_tag_1" {
-  folder = "All"
-  name   = "tf_addr_tag_1"
-  color  = "Red"
+  folder = "ngfw-shared"
+
+  name  = "tf_addr_tag_1"
+  color = "Red"
 }
 
 resource "scm_tag" "scm_addr_tag_2" {
-  folder = "All"
-  name   = "tf_addr_tag_2"
-  color  = "Blue"
+  folder = "ngfw-shared"
+
+  name  = "tf_addr_tag_2"
+  color = "Blue"
 }
 
 resource "scm_tag" "scm_addr_tag_3" {
-  folder = "All"
-  name   = "tf_addr_tag_3"
-  color  = "Orange"
+  folder = "ngfw-shared"
+
+  name  = "tf_addr_tag_3"
+  color = "Orange"
 }
 
 # IP Netmask

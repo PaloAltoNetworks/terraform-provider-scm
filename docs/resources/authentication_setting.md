@@ -18,7 +18,8 @@ resource "scm_authentication_profile" "global_radius_access" {
   folder            = "Prisma Access"
   user_domain       = "default"
   username_modifier = "%USERINPUT%"
-  allow_list        = ["all"]
+  allow_list = ["ngfw-shared"
+  ]
 
   # Lockout Configuration
   lockout = {

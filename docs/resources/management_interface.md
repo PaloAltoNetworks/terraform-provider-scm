@@ -14,8 +14,10 @@ ManagementInterface resource
 
 ```terraform
 resource "scm_management_interface" "mi_example" {
-  # Corresponds to: "folder": "All"
-  folder = "All"
+  # Corresponds to: "folder": "ngfw-shared"
+
+  folder = "ngfw-shared"
+
 
   # The settings for the management interface itself are defined within the interface_setting block.
   management_interface = {

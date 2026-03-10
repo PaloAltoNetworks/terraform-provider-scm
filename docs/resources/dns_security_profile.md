@@ -14,12 +14,14 @@ DnsSecurityProfile resource
 
 ```terraform
 resource "scm_dns_security_profile" "scm_dns_security_profile_base" {
-  folder = "All"
-  name   = "dns_base"
+  folder = "ngfw-shared"
+
+  name = "dns_base"
 }
 
 resource "scm_dns_security_profile" "scm_dns_security_categories" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "test_dns_sec_categories"
   description = "dns security profile w/ dns security categories"
 
@@ -57,7 +59,8 @@ resource "scm_dns_security_profile" "scm_dns_security_categories" {
 }
 
 resource "scm_dns_security_profile" "scm_dns_lists" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "test_dns_lists"
   description = "dns security profile w/ dns lists"
 
@@ -84,7 +87,8 @@ resource "scm_dns_security_profile" "scm_dns_lists" {
 }
 
 resource "scm_dns_security_profile" "scm_dns_sinkhole" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "test_dns_sinkhole"
   description = "dns security profile w/ sinkhole"
 
@@ -97,7 +101,8 @@ resource "scm_dns_security_profile" "scm_dns_sinkhole" {
 }
 
 resource "scm_dns_security_profile" "scm_dns_whitelist" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "test_dns_whitelist"
   description = "dns security profile w/ whitelist"
 
@@ -115,7 +120,8 @@ resource "scm_dns_security_profile" "scm_dns_whitelist" {
 }
 
 resource "scm_dns_security_profile" "scm_dns_all" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "test_dns_all_test"
   description = "dns security profile w/ all"
 

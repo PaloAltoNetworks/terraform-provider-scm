@@ -1,6 +1,8 @@
 resource "scm_session_timeout" "st_example" {
-  # Corresponds to: "folder": "All"
-  folder = "All"
+  # Corresponds to: "folder": "ngfw-shared"
+
+  folder = "ngfw-shared"
+
 
   session_timeouts = {
     timeout_default            = 60

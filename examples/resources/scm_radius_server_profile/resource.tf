@@ -1,7 +1,8 @@
 resource "scm_radius_server_profile" "chap_radius_profile" {
   # Standard fields
-  name    = "CHAP_only_rsp_1"
-  folder  = "All"
+  name   = "CHAP_only_rsp_1"
+  folder = "ngfw-shared"
+
   retries = 5
   timeout = 60
 
@@ -22,8 +23,9 @@ resource "scm_radius_server_profile" "chap_radius_profile" {
 
 resource "scm_radius_server_profile" "pap_radius_profile" {
   # Standard fields
-  name    = "pap_only_rsp_1"
-  folder  = "All"
+  name   = "pap_only_rsp_1"
+  folder = "ngfw-shared"
+
   retries = 5
   timeout = 60
 

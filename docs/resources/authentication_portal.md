@@ -21,7 +21,6 @@ resource "scm_authentication_portal" "example_configuration" {
   # Optional Fields
   authentication_profile = "test_auth_profile"
   certificate_profile    = "EDL-Hosting-Service-Profile"
-  tls_service_profile    = "test_svc_profile"
   gp_udp_port            = 12
   idle_timer             = 12
   timer                  = 10

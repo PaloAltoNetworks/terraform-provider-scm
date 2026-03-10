@@ -34,7 +34,7 @@ resource "scm_syslog_server_profile" "scm_syslog_server_prof_2" {
 resource "scm_syslog_server_profile" "scm_syslog_server_prof_3" {
   folder = "ngfw-shared"
 
-  name = "syslog-server-prof-complete"
+  name = "syslog-server-tf-prof-complete"
   server = [
     {
       name      = "Server-A"

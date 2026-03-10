@@ -1,23 +1,20 @@
 # This file is embedded using go:embed
 resource "scm_tag" "scm_addr_tag_1" {
-  folder = "ngfw-shared"
-
-  name  = "tf_addr_tag_1"
-  color = "Red"
+  folder = "Prisma Access"
+  name   = "tf_addr_tag_1"
+  color  = "Red"
 }
 
 resource "scm_tag" "scm_addr_tag_2" {
-  folder = "ngfw-shared"
-
-  name  = "tf_addr_tag_2"
-  color = "Blue"
+  folder = "Prisma Access"
+  name   = "tf_addr_tag_2"
+  color  = "Blue"
 }
 
 resource "scm_tag" "scm_addr_tag_3" {
-  folder = "ngfw-shared"
-
-  name  = "tf_addr_tag_3"
-  color = "Orange"
+  folder = "Prisma Access"
+  name   = "tf_addr_tag_3"
+  color  = "Orange"
 }
 
 # IP Netmask

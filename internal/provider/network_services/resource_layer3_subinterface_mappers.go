@@ -113,6 +113,12 @@ func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 	}
 
 	// Handling Primitives
+	if !model.NetflowProfile.IsNull() && !model.NetflowProfile.IsUnknown() {
+		sdk.NetflowProfile = model.NetflowProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	}
+
+	// Handling Primitives
 	if !model.ParentInterface.IsNull() && !model.ParentInterface.IsUnknown() {
 		sdk.ParentInterface = model.ParentInterface.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ParentInterface", "value": *sdk.ParentInterface})
@@ -240,6 +246,14 @@ func packLayer3SubinterfacesFromSdk(ctx context.Context, sdk network_services.La
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NetflowProfile != nil {
+		model.NetflowProfile = basetypes.NewStringValue(*sdk.NetflowProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	} else {
+		model.NetflowProfile = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.ParentInterface != nil {

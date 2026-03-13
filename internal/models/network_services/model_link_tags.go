@@ -65,7 +65,7 @@ var LinkTagsResourceSchema = schema.Schema{
 		},
 		"comments": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.LengthAtMost(0),
+				stringvalidator.LengthAtMost(1024),
 			},
 			MarkdownDescription: "Description of the link tag",
 			Optional:            true,

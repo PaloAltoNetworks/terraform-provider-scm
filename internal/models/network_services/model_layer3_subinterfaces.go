@@ -39,6 +39,7 @@ type Layer3Subinterfaces struct {
 	Ip                         basetypes.ListValue   `tfsdk:"ip"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 	Name                       basetypes.StringValue `tfsdk:"name"`
+	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 	ParentInterface            basetypes.StringValue `tfsdk:"parent_interface"`
 	Snippet                    basetypes.StringValue `tfsdk:"snippet"`
 	Tag                        basetypes.Int64Value  `tfsdk:"tag"`
@@ -126,6 +127,7 @@ func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 		}},
 		"mtu":              basetypes.Int64Type{},
 		"name":             basetypes.StringType{},
+		"netflow_profile":  basetypes.StringType{},
 		"parent_interface": basetypes.StringType{},
 		"snippet":          basetypes.StringType{},
 		"tag":              basetypes.Int64Type{},
@@ -425,6 +427,10 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "L3 sub-interface name",
 			Required:            true,
 		},
+		"netflow_profile": schema.StringAttribute{
+			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+			Optional:            true,
+		},
 		"parent_interface": schema.StringAttribute{
 			MarkdownDescription: "Parent interface",
 			Optional:            true,
@@ -588,6 +594,10 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 		"name": dsschema.StringAttribute{
 			MarkdownDescription: "L3 sub-interface name",
 			Optional:            true,
+			Computed:            true,
+		},
+		"netflow_profile": dsschema.StringAttribute{
+			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 			Computed:            true,
 		},
 		"parent_interface": dsschema.StringAttribute{

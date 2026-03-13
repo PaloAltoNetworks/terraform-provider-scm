@@ -5,6 +5,7 @@ import (
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -190,7 +191,9 @@ var TrafficSteeringRulesResourceSchema = schema.Schema{
 				utils.FolderValidator(),
 			},
 			MarkdownDescription: "The folder containing the traffic steering rule",
-			Required:            true,
+			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("Service Connections"),
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
 			},

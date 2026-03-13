@@ -35,6 +35,7 @@ type LoopbackInterfaces struct {
 	Ipv6                       basetypes.ObjectValue `tfsdk:"ipv6"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 	Name                       basetypes.StringValue `tfsdk:"name"`
+	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 	Snippet                    basetypes.StringValue `tfsdk:"snippet"`
 }
 
@@ -91,9 +92,10 @@ func (o LoopbackInterfaces) AttrTypes() map[string]attr.Type {
 				"interface_id": basetypes.StringType{},
 			},
 		},
-		"mtu":     basetypes.Int64Type{},
-		"name":    basetypes.StringType{},
-		"snippet": basetypes.StringType{},
+		"mtu":             basetypes.Int64Type{},
+		"name":            basetypes.StringType{},
+		"netflow_profile": basetypes.StringType{},
+		"snippet":         basetypes.StringType{},
 	}
 }
 
@@ -295,6 +297,10 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Loopback Interface name",
 			Required:            true,
 		},
+		"netflow_profile": schema.StringAttribute{
+			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+			Optional:            true,
+		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
@@ -409,6 +415,10 @@ var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 		"name": dsschema.StringAttribute{
 			MarkdownDescription: "Loopback Interface name",
 			Optional:            true,
+			Computed:            true,
+		},
+		"netflow_profile": dsschema.StringAttribute{
+			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{

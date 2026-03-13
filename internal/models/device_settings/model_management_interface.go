@@ -35,11 +35,14 @@ type ManagementInterface struct {
 
 // ManagementInterfaceManagementInterface represents a nested structure within the ManagementInterface model
 type ManagementInterfaceManagementInterface struct {
-	MgmtType    basetypes.ObjectValue `tfsdk:"mgmt_type"`
-	Mtu         basetypes.Int64Value  `tfsdk:"mtu"`
-	PermittedIp basetypes.ListValue   `tfsdk:"permitted_ip"`
-	Service     basetypes.ObjectValue `tfsdk:"service"`
-	SpeedDuplex basetypes.StringValue `tfsdk:"speed_duplex"`
+	DefaultGateway basetypes.StringValue `tfsdk:"default_gateway"`
+	IpAddress      basetypes.StringValue `tfsdk:"ip_address"`
+	MgmtType       basetypes.ObjectValue `tfsdk:"mgmt_type"`
+	Mtu            basetypes.Int64Value  `tfsdk:"mtu"`
+	Netmask        basetypes.StringValue `tfsdk:"netmask"`
+	PermittedIp    basetypes.ListValue   `tfsdk:"permitted_ip"`
+	Service        basetypes.ObjectValue `tfsdk:"service"`
+	SpeedDuplex    basetypes.StringValue `tfsdk:"speed_duplex"`
 }
 
 // ManagementInterfaceManagementInterfaceMgmtType represents a nested structure within the ManagementInterface model
@@ -54,13 +57,6 @@ type ManagementInterfaceManagementInterfaceMgmtTypeDhcpClient struct {
 	AcceptDhcpHostname basetypes.BoolValue `tfsdk:"accept_dhcp_hostname"`
 	SendClientId       basetypes.BoolValue `tfsdk:"send_client_id"`
 	SendHostname       basetypes.BoolValue `tfsdk:"send_hostname"`
-}
-
-// ManagementInterfaceManagementInterfaceMgmtTypeStatic represents a nested structure within the ManagementInterface model
-type ManagementInterfaceManagementInterfaceMgmtTypeStatic struct {
-	DefaultGateway basetypes.StringValue `tfsdk:"default_gateway"`
-	IpAddress      basetypes.StringValue `tfsdk:"ip_address"`
-	Netmask        basetypes.StringValue `tfsdk:"netmask"`
 }
 
 // ManagementInterfaceManagementInterfacePermittedIpInner represents a nested structure within the ManagementInterface model
@@ -92,6 +88,8 @@ func (o ManagementInterface) AttrTypes() map[string]attr.Type {
 		"id":     basetypes.StringType{},
 		"management_interface": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"default_gateway": basetypes.StringType{},
+				"ip_address":      basetypes.StringType{},
 				"mgmt_type": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"dhcp_client": basetypes.ObjectType{
@@ -103,15 +101,12 @@ func (o ManagementInterface) AttrTypes() map[string]attr.Type {
 							},
 						},
 						"static": basetypes.ObjectType{
-							AttrTypes: map[string]attr.Type{
-								"default_gateway": basetypes.StringType{},
-								"ip_address":      basetypes.StringType{},
-								"netmask":         basetypes.StringType{},
-							},
+							AttrTypes: map[string]attr.Type{},
 						},
 					},
 				},
-				"mtu": basetypes.Int64Type{},
+				"mtu":     basetypes.Int64Type{},
+				"netmask": basetypes.StringType{},
 				"permitted_ip": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"description": basetypes.StringType{},
@@ -149,6 +144,8 @@ func (o ManagementInterface) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the ManagementInterfaceManagementInterface model.
 func (o ManagementInterfaceManagementInterface) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"default_gateway": basetypes.StringType{},
+		"ip_address":      basetypes.StringType{},
 		"mgmt_type": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"dhcp_client": basetypes.ObjectType{
@@ -160,15 +157,12 @@ func (o ManagementInterfaceManagementInterface) AttrTypes() map[string]attr.Type
 					},
 				},
 				"static": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"default_gateway": basetypes.StringType{},
-						"ip_address":      basetypes.StringType{},
-						"netmask":         basetypes.StringType{},
-					},
+					AttrTypes: map[string]attr.Type{},
 				},
 			},
 		},
-		"mtu": basetypes.Int64Type{},
+		"mtu":     basetypes.Int64Type{},
+		"netmask": basetypes.StringType{},
 		"permitted_ip": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"description": basetypes.StringType{},
@@ -212,11 +206,7 @@ func (o ManagementInterfaceManagementInterfaceMgmtType) AttrTypes() map[string]a
 			},
 		},
 		"static": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"default_gateway": basetypes.StringType{},
-				"ip_address":      basetypes.StringType{},
-				"netmask":         basetypes.StringType{},
-			},
+			AttrTypes: map[string]attr.Type{},
 		},
 	}
 }
@@ -240,22 +230,6 @@ func (o ManagementInterfaceManagementInterfaceMgmtTypeDhcpClient) AttrTypes() ma
 
 // AttrType returns the attribute type for a list of ManagementInterfaceManagementInterfaceMgmtTypeDhcpClient objects.
 func (o ManagementInterfaceManagementInterfaceMgmtTypeDhcpClient) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the ManagementInterfaceManagementInterfaceMgmtTypeStatic model.
-func (o ManagementInterfaceManagementInterfaceMgmtTypeStatic) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"default_gateway": basetypes.StringType{},
-		"ip_address":      basetypes.StringType{},
-		"netmask":         basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of ManagementInterfaceManagementInterfaceMgmtTypeStatic objects.
-func (o ManagementInterfaceManagementInterfaceMgmtTypeStatic) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -310,7 +284,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
@@ -325,7 +299,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
@@ -345,6 +319,14 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 			MarkdownDescription: "Management interface",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
+				"default_gateway": schema.StringAttribute{
+					MarkdownDescription: "Default gateway",
+					Optional:            true,
+				},
+				"ip_address": schema.StringAttribute{
+					MarkdownDescription: "IP address",
+					Optional:            true,
+				},
 				"mgmt_type": schema.SingleNestedAttribute{
 					MarkdownDescription: "IP type",
 					Optional:            true,
@@ -392,20 +374,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Optional:            true,
-							Attributes: map[string]schema.Attribute{
-								"default_gateway": schema.StringAttribute{
-									MarkdownDescription: "Default gateway",
-									Required:            true,
-								},
-								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "IP address",
-									Required:            true,
-								},
-								"netmask": schema.StringAttribute{
-									MarkdownDescription: "Netmask",
-									Required:            true,
-								},
-							},
+							Attributes:          map[string]schema.Attribute{},
 						},
 					},
 				},
@@ -414,6 +383,10 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 					Optional:            true,
 					Computed:            true,
 					Default:             int64default.StaticInt64(1500),
+				},
+				"netmask": schema.StringAttribute{
+					MarkdownDescription: "Netmask",
+					Optional:            true,
 				},
 				"permitted_ip": schema.ListNestedAttribute{
 					MarkdownDescription: "Permitting IP addresses",
@@ -515,7 +488,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("folder"),
 				),
 				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d-_\\. ]+$"),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
@@ -555,6 +528,14 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Management interface",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
+				"default_gateway": dsschema.StringAttribute{
+					MarkdownDescription: "Default gateway",
+					Computed:            true,
+				},
+				"ip_address": dsschema.StringAttribute{
+					MarkdownDescription: "IP address",
+					Computed:            true,
+				},
 				"mgmt_type": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "IP type",
 					Computed:            true,
@@ -584,25 +565,16 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 						"static": dsschema.SingleNestedAttribute{
 							MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Computed:            true,
-							Attributes: map[string]dsschema.Attribute{
-								"default_gateway": dsschema.StringAttribute{
-									MarkdownDescription: "Default gateway",
-									Computed:            true,
-								},
-								"ip_address": dsschema.StringAttribute{
-									MarkdownDescription: "IP address",
-									Computed:            true,
-								},
-								"netmask": dsschema.StringAttribute{
-									MarkdownDescription: "Netmask",
-									Computed:            true,
-								},
-							},
+							Attributes:          map[string]dsschema.Attribute{},
 						},
 					},
 				},
 				"mtu": dsschema.Int64Attribute{
 					MarkdownDescription: "MTU",
+					Computed:            true,
+				},
+				"netmask": dsschema.StringAttribute{
+					MarkdownDescription: "Netmask",
 					Computed:            true,
 				},
 				"permitted_ip": dsschema.ListNestedAttribute{

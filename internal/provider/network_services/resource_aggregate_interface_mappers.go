@@ -270,6 +270,12 @@ func unpackAggregateInterfacesLayer2ToSdk(ctx context.Context, obj types.Object)
 	}
 
 	// Handling Primitives
+	if !model.NetflowProfile.IsNull() && !model.NetflowProfile.IsUnknown() {
+		sdk.NetflowProfile = model.NetflowProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	}
+
+	// Handling Primitives
 	if !model.VlanTag.IsNull() && !model.VlanTag.IsUnknown() {
 		sdk.VlanTag = model.VlanTag.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "VlanTag", "value": *sdk.VlanTag})
@@ -300,6 +306,14 @@ func packAggregateInterfacesLayer2FromSdk(ctx context.Context, sdk network_servi
 		model.Lacp = packed
 	} else {
 		model.Lacp = basetypes.NewObjectNull(models.Lacp{}.AttrTypes())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NetflowProfile != nil {
+		model.NetflowProfile = basetypes.NewStringValue(*sdk.NetflowProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	} else {
+		model.NetflowProfile = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -616,6 +630,12 @@ func unpackAggregateInterfacesLayer3ToSdk(ctx context.Context, obj types.Object)
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	}
 
+	// Handling Primitives
+	if !model.NetflowProfile.IsNull() && !model.NetflowProfile.IsUnknown() {
+		sdk.NetflowProfile = model.NetflowProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	}
+
 	diags.Append(d...)
 
 	tflog.Debug(ctx, "Exiting unpack helper for models.AggregateInterfacesLayer3", map[string]interface{}{"has_errors": diags.HasError()})
@@ -701,6 +721,14 @@ func packAggregateInterfacesLayer3FromSdk(ctx context.Context, sdk network_servi
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	} else {
 		model.Mtu = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NetflowProfile != nil {
+		model.NetflowProfile = basetypes.NewStringValue(*sdk.NetflowProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	} else {
+		model.NetflowProfile = basetypes.NewStringNull()
 	}
 	diags.Append(d...)
 

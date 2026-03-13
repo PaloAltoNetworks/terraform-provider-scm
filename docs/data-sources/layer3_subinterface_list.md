@@ -76,6 +76,7 @@ Read-Only:
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--ip))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `parent_interface` (String) Parent interface
 - `tag` (Number) VLAN tag
 - `tfid` (String) The Terraform ID.

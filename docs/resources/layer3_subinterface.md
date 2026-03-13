@@ -102,6 +102,7 @@ resource "scm_layer3_subinterface" "scm_l3_dhcp_subinterface" {
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--ip))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `parent_interface` (String) Parent interface
 - `snippet` (String) The snippet in which the resource is defined
 

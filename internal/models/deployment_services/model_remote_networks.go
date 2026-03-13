@@ -70,6 +70,7 @@ type RemoteNetworksProtocol struct {
 type RemoteNetworksProtocolBgpPeer struct {
 	LocalIpAddress basetypes.StringValue `tfsdk:"local_ip_address"`
 	PeerIpAddress  basetypes.StringValue `tfsdk:"peer_ip_address"`
+	SameAsPrimary  basetypes.BoolValue   `tfsdk:"same_as_primary"`
 	Secret         basetypes.StringValue `tfsdk:"secret"`
 }
 
@@ -126,6 +127,7 @@ func (o RemoteNetworks) AttrTypes() map[string]attr.Type {
 					AttrTypes: map[string]attr.Type{
 						"local_ip_address": basetypes.StringType{},
 						"peer_ip_address":  basetypes.StringType{},
+						"same_as_primary":  basetypes.BoolType{},
 						"secret":           basetypes.StringType{},
 					},
 				},
@@ -245,6 +247,7 @@ func (o RemoteNetworksProtocol) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"local_ip_address": basetypes.StringType{},
 				"peer_ip_address":  basetypes.StringType{},
+				"same_as_primary":  basetypes.BoolType{},
 				"secret":           basetypes.StringType{},
 			},
 		},
@@ -263,6 +266,7 @@ func (o RemoteNetworksProtocolBgpPeer) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"local_ip_address": basetypes.StringType{},
 		"peer_ip_address":  basetypes.StringType{},
+		"same_as_primary":  basetypes.BoolType{},
 		"secret":           basetypes.StringType{},
 	}
 }
@@ -456,6 +460,10 @@ var RemoteNetworksResourceSchema = schema.Schema{
 						},
 						"peer_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Remote peer IP address (secondary WAN)",
+							Optional:            true,
+						},
+						"same_as_primary": schema.BoolAttribute{
+							MarkdownDescription: "Same peer IP address as primary WAN",
 							Optional:            true,
 						},
 						"secret": schema.StringAttribute{
@@ -655,6 +663,10 @@ var RemoteNetworksDataSourceSchema = dsschema.Schema{
 						},
 						"peer_ip_address": dsschema.StringAttribute{
 							MarkdownDescription: "Remote peer IP address (secondary WAN)",
+							Computed:            true,
+						},
+						"same_as_primary": dsschema.BoolAttribute{
+							MarkdownDescription: "Same peer IP address as primary WAN",
 							Computed:            true,
 						},
 						"secret": dsschema.StringAttribute{

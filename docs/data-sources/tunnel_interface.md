@@ -59,6 +59,7 @@ output "scm_tunnel_interface_data_source_results" {
 - `ip` (Attributes List) Tunnel Interface IP Parent (see [below for nested schema](#nestedatt--ip))
 - `ipv6` (Attributes) Tunnel Interface IPv6 Configuration (see [below for nested schema](#nestedatt--ipv6))
 - `mtu` (Number) MTU for tunnel interface
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--ip"></a>

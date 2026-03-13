@@ -957,6 +957,12 @@ func unpackRemoteNetworksProtocolBgpPeerToSdk(ctx context.Context, obj types.Obj
 	}
 
 	// Handling Primitives
+	if !model.SameAsPrimary.IsNull() && !model.SameAsPrimary.IsUnknown() {
+		sdk.SameAsPrimary = model.SameAsPrimary.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SameAsPrimary", "value": *sdk.SameAsPrimary})
+	}
+
+	// Handling Primitives
 	if !model.Secret.IsNull() && !model.Secret.IsUnknown() {
 		sdk.Secret = model.Secret.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Secret", "value": *sdk.Secret})
@@ -990,6 +996,14 @@ func packRemoteNetworksProtocolBgpPeerFromSdk(ctx context.Context, sdk deploymen
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PeerIpAddress", "value": *sdk.PeerIpAddress})
 	} else {
 		model.PeerIpAddress = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.SameAsPrimary != nil {
+		model.SameAsPrimary = basetypes.NewBoolValue(*sdk.SameAsPrimary)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SameAsPrimary", "value": *sdk.SameAsPrimary})
+	} else {
+		model.SameAsPrimary = basetypes.NewBoolNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing

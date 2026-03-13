@@ -133,6 +133,16 @@ func (r *RadiusServerProfileResource) Create(ctx context.Context, req resource.C
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// 6a. Normalize null lists: when the API returns null for a list field that
+	// the plan had as [] (empty list), coerce to empty list to satisfy Terraform's
+	// consistency requirement. This recurses into nested objects and list elements.
+	packedObject, diags = utils.NormalizeNullLists(ctx, planObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -545,6 +555,16 @@ func (r *RadiusServerProfileResource) Update(ctx context.Context, req resource.U
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Step 9a: Normalize null lists: when the API returns null for a list field that
+	// the plan had as [] (empty list), coerce to empty list to satisfy Terraform's
+	// consistency requirement. This recurses into nested objects and list elements.
+	packedObject, diags = utils.NormalizeNullLists(ctx, planObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &plan, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return

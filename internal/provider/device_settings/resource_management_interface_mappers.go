@@ -2,7 +2,9 @@ package provider
 
 import (
 	"context"
+	"reflect"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -192,6 +194,18 @@ func unpackManagementInterfaceManagementInterfaceToSdk(ctx context.Context, obj 
 
 	var sdk device_settings.ManagementInterfaceManagementInterface
 	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.DefaultGateway.IsNull() && !model.DefaultGateway.IsUnknown() {
+		sdk.DefaultGateway = model.DefaultGateway.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "DefaultGateway", "value": *sdk.DefaultGateway})
+	}
+
+	// Handling Primitives
+	if !model.IpAddress.IsNull() && !model.IpAddress.IsUnknown() {
+		sdk.IpAddress = model.IpAddress.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "IpAddress", "value": *sdk.IpAddress})
+	}
+
 	// Handling Objects
 	if !model.MgmtType.IsNull() && !model.MgmtType.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field MgmtType")
@@ -210,6 +224,12 @@ func unpackManagementInterfaceManagementInterfaceToSdk(ctx context.Context, obj 
 		val := int32(model.Mtu.ValueInt64())
 		sdk.Mtu = &val
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
+	}
+
+	// Handling Primitives
+	if !model.Netmask.IsNull() && !model.Netmask.IsUnknown() {
+		sdk.Netmask = model.Netmask.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Netmask", "value": *sdk.Netmask})
 	}
 
 	// Handling Lists
@@ -252,6 +272,22 @@ func packManagementInterfaceManagementInterfaceFromSdk(ctx context.Context, sdk 
 	diags := diag.Diagnostics{}
 	var model models.ManagementInterfaceManagementInterface
 	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.DefaultGateway != nil {
+		model.DefaultGateway = basetypes.NewStringValue(*sdk.DefaultGateway)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "DefaultGateway", "value": *sdk.DefaultGateway})
+	} else {
+		model.DefaultGateway = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.IpAddress != nil {
+		model.IpAddress = basetypes.NewStringValue(*sdk.IpAddress)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "IpAddress", "value": *sdk.IpAddress})
+	} else {
+		model.IpAddress = basetypes.NewStringNull()
+	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.MgmtType != nil {
@@ -272,6 +308,14 @@ func packManagementInterfaceManagementInterfaceFromSdk(ctx context.Context, sdk 
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	} else {
 		model.Mtu = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Netmask != nil {
+		model.Netmask = basetypes.NewStringValue(*sdk.Netmask)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Netmask", "value": *sdk.Netmask})
+	} else {
+		model.Netmask = basetypes.NewStringNull()
 	}
 	// Handling Lists
 	if sdk.PermittedIp != nil {
@@ -386,17 +430,10 @@ func unpackManagementInterfaceManagementInterfaceMgmtTypeToSdk(ctx context.Conte
 		}
 	}
 
-	// Handling Objects
+	// Handling Typeless Objects
 	if !model.Static.IsNull() && !model.Static.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field Static")
-		unpacked, d := unpackManagementInterfaceManagementInterfaceMgmtTypeStaticToSdk(ctx, model.Static)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Static"})
-		}
-		if unpacked != nil {
-			sdk.Static = unpacked
-		}
+		tflog.Debug(ctx, "Unpacking typeless object for field Static")
+		sdk.Static = make(map[string]interface{})
 	}
 
 	diags.Append(d...)
@@ -426,17 +463,17 @@ func packManagementInterfaceManagementInterfaceMgmtTypeFromSdk(ctx context.Conte
 		model.DhcpClient = basetypes.NewObjectNull(models.ManagementInterfaceManagementInterfaceMgmtTypeDhcpClient{}.AttrTypes())
 	}
 	// Handling Objects
-	// This is a regular nested object that has its own packer.
-	if sdk.Static != nil {
-		tflog.Debug(ctx, "Packing nested object for field Static")
-		packed, d := packManagementInterfaceManagementInterfaceMgmtTypeStaticFromSdk(ctx, *sdk.Static)
+	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
+	if sdk.Static != nil && !reflect.ValueOf(sdk.Static).IsNil() {
+		tflog.Debug(ctx, "Packing typeless object for field Static")
+		var d diag.Diagnostics
+		// Create an empty object with no attributes, which signifies its presence.
+		model.Static, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
 		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Static"})
-		}
-		model.Static = packed
 	} else {
-		model.Static = basetypes.NewObjectNull(models.ManagementInterfaceManagementInterfaceMgmtTypeStatic{}.AttrTypes())
+		// Since this field is part of a oneOf, being nil means it's not selected.
+		// We make the object null with an empty attribute map.
+		model.Static = basetypes.NewObjectNull(map[string]attr.Type{})
 	}
 	diags.Append(d...)
 
@@ -631,119 +668,6 @@ func packManagementInterfaceManagementInterfaceMgmtTypeDhcpClientListFromSdk(ctx
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeDhcpClient", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.ManagementInterfaceManagementInterfaceMgmtTypeDhcpClient{}.AttrType(), data)
-}
-
-// --- Unpacker for ManagementInterfaceManagementInterfaceMgmtTypeStatic ---
-func unpackManagementInterfaceManagementInterfaceMgmtTypeStaticToSdk(ctx context.Context, obj types.Object) (*device_settings.ManagementInterfaceManagementInterfaceMgmtTypeStatic, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic", map[string]interface{}{"tf_object": obj})
-	diags := diag.Diagnostics{}
-	var model models.ManagementInterfaceManagementInterfaceMgmtTypeStatic
-	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
-
-	var sdk device_settings.ManagementInterfaceManagementInterfaceMgmtTypeStatic
-	var d diag.Diagnostics
-	// Handling Primitives
-	if !model.DefaultGateway.IsNull() && !model.DefaultGateway.IsUnknown() {
-		sdk.DefaultGateway = model.DefaultGateway.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "DefaultGateway", "value": sdk.DefaultGateway})
-	}
-
-	// Handling Primitives
-	if !model.IpAddress.IsNull() && !model.IpAddress.IsUnknown() {
-		sdk.IpAddress = model.IpAddress.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "IpAddress", "value": sdk.IpAddress})
-	}
-
-	// Handling Primitives
-	if !model.Netmask.IsNull() && !model.Netmask.IsUnknown() {
-		sdk.Netmask = model.Netmask.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Netmask", "value": sdk.Netmask})
-	}
-
-	diags.Append(d...)
-
-	tflog.Debug(ctx, "Exiting unpack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic", map[string]interface{}{"has_errors": diags.HasError()})
-	return &sdk, diags
-
-}
-
-// --- Packer for ManagementInterfaceManagementInterfaceMgmtTypeStatic ---
-func packManagementInterfaceManagementInterfaceMgmtTypeStaticFromSdk(ctx context.Context, sdk device_settings.ManagementInterfaceManagementInterfaceMgmtTypeStatic) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic", map[string]interface{}{"sdk_struct": sdk})
-	diags := diag.Diagnostics{}
-	var model models.ManagementInterfaceManagementInterfaceMgmtTypeStatic
-	var d diag.Diagnostics
-	// Handling Primitives
-	// Standard primitive packing
-	model.DefaultGateway = basetypes.NewStringValue(sdk.DefaultGateway)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "DefaultGateway", "value": sdk.DefaultGateway})
-	// Handling Primitives
-	// Standard primitive packing
-	model.IpAddress = basetypes.NewStringValue(sdk.IpAddress)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "IpAddress", "value": sdk.IpAddress})
-	// Handling Primitives
-	// Standard primitive packing
-	model.Netmask = basetypes.NewStringValue(sdk.Netmask)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Netmask", "value": sdk.Netmask})
-	diags.Append(d...)
-
-	obj, d := types.ObjectValueFrom(ctx, models.ManagementInterfaceManagementInterfaceMgmtTypeStatic{}.AttrTypes(), &model)
-	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
-	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic", map[string]interface{}{"has_errors": diags.HasError()})
-	return obj, diags
-
-}
-
-// --- List Unpacker for ManagementInterfaceManagementInterfaceMgmtTypeStatic ---
-func unpackManagementInterfaceManagementInterfaceMgmtTypeStaticListToSdk(ctx context.Context, list types.List) ([]device_settings.ManagementInterfaceManagementInterfaceMgmtTypeStatic, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic")
-	diags := diag.Diagnostics{}
-	var data []models.ManagementInterfaceManagementInterfaceMgmtTypeStatic
-	diags.Append(list.ElementsAs(ctx, &data, false)...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-
-	ans := make([]device_settings.ManagementInterfaceManagementInterfaceMgmtTypeStatic, 0, len(data))
-	for i, item := range data {
-		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.ManagementInterfaceManagementInterfaceMgmtTypeStatic{}.AttrTypes(), &item)
-		unpacked, d := unpackManagementInterfaceManagementInterfaceMgmtTypeStaticToSdk(ctx, obj)
-		diags.Append(d...)
-		if unpacked != nil {
-			ans = append(ans, *unpacked)
-		}
-	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic", map[string]interface{}{"has_errors": diags.HasError()})
-	return ans, diags
-}
-
-// --- List Packer for ManagementInterfaceManagementInterfaceMgmtTypeStatic ---
-func packManagementInterfaceManagementInterfaceMgmtTypeStaticListFromSdk(ctx context.Context, sdks []device_settings.ManagementInterfaceManagementInterfaceMgmtTypeStatic) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic")
-	diags := diag.Diagnostics{}
-	var data []models.ManagementInterfaceManagementInterfaceMgmtTypeStatic
-
-	for i, sdk := range sdks {
-		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.ManagementInterfaceManagementInterfaceMgmtTypeStatic
-		obj, d := packManagementInterfaceManagementInterfaceMgmtTypeStaticFromSdk(ctx, sdk)
-		diags.Append(d...)
-		if diags.HasError() {
-			return basetypes.NewListNull(models.ManagementInterfaceManagementInterfaceMgmtTypeStatic{}.AttrType()), diags
-		}
-		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-		data = append(data, model)
-	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.ManagementInterfaceManagementInterfaceMgmtTypeStatic", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.ManagementInterfaceManagementInterfaceMgmtTypeStatic{}.AttrType(), data)
 }
 
 // --- Unpacker for ManagementInterfaceManagementInterfacePermittedIpInner ---

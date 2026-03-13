@@ -52,8 +52,11 @@ output "fetched_settings" {
 
 Read-Only:
 
+- `default_gateway` (String) Default gateway
+- `ip_address` (String) IP address
 - `mgmt_type` (Attributes) IP type (see [below for nested schema](#nestedatt--management_interface--mgmt_type))
 - `mtu` (Number) MTU
+- `netmask` (String) Netmask
 - `permitted_ip` (Attributes List) Permitting IP addresses (see [below for nested schema](#nestedatt--management_interface--permitted_ip))
 - `service` (Attributes) Network services (see [below for nested schema](#nestedatt--management_interface--service))
 - `speed_duplex` (String) Speed and duplex
@@ -83,12 +86,6 @@ Read-Only:
 
 <a id="nestedatt--management_interface--mgmt_type--static"></a>
 ### Nested Schema for `management_interface.mgmt_type.static`
-
-Read-Only:
-
-- `default_gateway` (String) Default gateway
-- `ip_address` (String) IP address
-- `netmask` (String) Netmask
 
 
 

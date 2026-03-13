@@ -223,6 +223,7 @@ resource "scm_ethernet_interface" "scm_ae_member_2" {
 Optional:
 
 - `lldp` (Attributes) LLDP Settings (see [below for nested schema](#nestedatt--layer2--lldp))
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `vlan_tag` (String) Assign interface to VLAN tag
 
 <a id="nestedatt--layer2--lldp"></a>
@@ -249,6 +250,7 @@ Optional:
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--layer3--ip))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `pppoe` (Attributes) Pppoe
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--layer3--pppoe))
@@ -354,6 +356,10 @@ Optional:
 
 <a id="nestedatt--tap"></a>
 ### Nested Schema for `tap`
+
+Optional:
+
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 
 
 ## Import

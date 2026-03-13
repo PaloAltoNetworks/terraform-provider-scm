@@ -55,6 +55,7 @@ resource "scm_vlan_interface" "scm_vlan_interface_ipv4" {
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--ip))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `snippet` (String) The snippet in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.

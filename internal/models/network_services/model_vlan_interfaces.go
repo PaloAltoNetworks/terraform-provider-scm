@@ -40,6 +40,7 @@ type VlanInterfaces struct {
 	Ip                         basetypes.ListValue   `tfsdk:"ip"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 	Name                       basetypes.StringValue `tfsdk:"name"`
+	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 	Snippet                    basetypes.StringValue `tfsdk:"snippet"`
 	VlanTag                    basetypes.StringValue `tfsdk:"vlan_tag"`
 }
@@ -127,10 +128,11 @@ func (o VlanInterfaces) AttrTypes() map[string]attr.Type {
 				"name": basetypes.StringType{},
 			},
 		}},
-		"mtu":      basetypes.Int64Type{},
-		"name":     basetypes.StringType{},
-		"snippet":  basetypes.StringType{},
-		"vlan_tag": basetypes.StringType{},
+		"mtu":             basetypes.Int64Type{},
+		"name":            basetypes.StringType{},
+		"netflow_profile": basetypes.StringType{},
+		"snippet":         basetypes.StringType{},
+		"vlan_tag":        basetypes.StringType{},
 	}
 }
 
@@ -439,6 +441,10 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "L3 sub-interface name",
 			Required:            true,
 		},
+		"netflow_profile": schema.StringAttribute{
+			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+			Optional:            true,
+		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
@@ -606,6 +612,10 @@ var VlanInterfacesDataSourceSchema = dsschema.Schema{
 		"name": dsschema.StringAttribute{
 			MarkdownDescription: "L3 sub-interface name",
 			Optional:            true,
+			Computed:            true,
+		},
+		"netflow_profile": dsschema.StringAttribute{
+			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{

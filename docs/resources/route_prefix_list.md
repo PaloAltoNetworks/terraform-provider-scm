@@ -15,7 +15,7 @@ RoutePrefixList resource
 ```terraform
 resource "scm_route_prefix_list" "scm_route_prefix_list" {
   folder      = "ngfw-shared"
-  name        = "scm_bgp_prefix_list"
+  name        = "scm_tf_bgp_prefix_list"
   description = "Managed by Terraform"
   type = {
     ipv4 = {
@@ -25,7 +25,7 @@ resource "scm_route_prefix_list" "scm_route_prefix_list" {
           action = "permit"
           prefix = {
             greater_than_or_equal = 24
-            network               = "198.18.1.0/24"
+            network               = "any"
           }
         }
       ]

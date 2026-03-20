@@ -18,7 +18,8 @@ resource "scm_interface_management_profile" "dc_postman_profile" {
   name = "test_inf_mgmt_profile_1_update"
 
   # Contextual Field
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   # Permitted IP Addresses (Inner block structure)
   permitted_ip = [

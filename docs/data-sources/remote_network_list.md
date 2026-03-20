@@ -139,4 +139,5 @@ Read-Only:
 
 - `local_ip_address` (String) Local peer IP address (secondary WAN)
 - `peer_ip_address` (String) Remote peer IP address (secondary WAN)
+- `same_as_primary` (Boolean) Same peer IP address as primary WAN
 - `secret` (String, Sensitive) BGP peering secret (secondary WAN)

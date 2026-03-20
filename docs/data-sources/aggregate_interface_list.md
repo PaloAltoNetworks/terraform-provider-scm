@@ -81,6 +81,7 @@ Read-Only:
 Read-Only:
 
 - `lacp` (Attributes) Lacp (see [below for nested schema](#nestedatt--data--layer2--lacp))
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `vlan_tag` (String) VLAN tag
 
 <a id="nestedatt--data--layer2--lacp"></a>
@@ -113,6 +114,7 @@ Read-Only:
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--layer3--ip))
 - `lacp` (Attributes) Lacp (see [below for nested schema](#nestedatt--data--layer3--lacp))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 
 <a id="nestedatt--data--layer3--arp"></a>
 ### Nested Schema for `data.layer3.arp`

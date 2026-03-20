@@ -2,9 +2,7 @@ package provider
 
 import (
 	"context"
-	"reflect"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
@@ -175,10 +173,17 @@ func unpackEthernetInterfacesToSdk(ctx context.Context, obj types.Object) (*netw
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
 	}
 
-	// Handling Typeless Objects
+	// Handling Objects
 	if !model.Tap.IsNull() && !model.Tap.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking typeless object for field Tap")
-		sdk.Tap = make(map[string]interface{})
+		tflog.Debug(ctx, "Unpacking nested object for field Tap")
+		unpacked, d := unpackEthernetInterfacesTapToSdk(ctx, model.Tap)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Tap"})
+		}
+		if unpacked != nil {
+			sdk.Tap = unpacked
+		}
 	}
 
 	diags.Append(d...)
@@ -316,17 +321,17 @@ func packEthernetInterfacesFromSdk(ctx context.Context, sdk network_services.Eth
 		model.Snippet = basetypes.NewStringNull()
 	}
 	// Handling Objects
-	// This is a marker object (e.g. CHAP: {}). We just need to create an empty, non-null object.
-	if sdk.Tap != nil && !reflect.ValueOf(sdk.Tap).IsNil() {
-		tflog.Debug(ctx, "Packing typeless object for field Tap")
-		var d diag.Diagnostics
-		// Create an empty object with no attributes, which signifies its presence.
-		model.Tap, d = basetypes.NewObjectValue(map[string]attr.Type{}, map[string]attr.Value{})
+	// This is a regular nested object that has its own packer.
+	if sdk.Tap != nil {
+		tflog.Debug(ctx, "Packing nested object for field Tap")
+		packed, d := packEthernetInterfacesTapFromSdk(ctx, *sdk.Tap)
 		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Tap"})
+		}
+		model.Tap = packed
 	} else {
-		// Since this field is part of a oneOf, being nil means it's not selected.
-		// We make the object null with an empty attribute map.
-		model.Tap = basetypes.NewObjectNull(map[string]attr.Type{})
+		model.Tap = basetypes.NewObjectNull(models.EthernetInterfacesTap{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -412,6 +417,12 @@ func unpackEthernetInterfacesLayer2ToSdk(ctx context.Context, obj types.Object) 
 	}
 
 	// Handling Primitives
+	if !model.NetflowProfile.IsNull() && !model.NetflowProfile.IsUnknown() {
+		sdk.NetflowProfile = model.NetflowProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	}
+
+	// Handling Primitives
 	if !model.VlanTag.IsNull() && !model.VlanTag.IsUnknown() {
 		sdk.VlanTag = model.VlanTag.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "VlanTag", "value": *sdk.VlanTag})
@@ -442,6 +453,14 @@ func packEthernetInterfacesLayer2FromSdk(ctx context.Context, sdk network_servic
 		model.Lldp = packed
 	} else {
 		model.Lldp = basetypes.NewObjectNull(models.EthernetInterfacesLayer2Lldp{}.AttrTypes())
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NetflowProfile != nil {
+		model.NetflowProfile = basetypes.NewStringValue(*sdk.NetflowProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	} else {
+		model.NetflowProfile = basetypes.NewStringNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -669,6 +688,12 @@ func unpackEthernetInterfacesLayer3ToSdk(ctx context.Context, obj types.Object) 
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	}
 
+	// Handling Primitives
+	if !model.NetflowProfile.IsNull() && !model.NetflowProfile.IsUnknown() {
+		sdk.NetflowProfile = model.NetflowProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	}
+
 	// Handling Objects
 	if !model.Pppoe.IsNull() && !model.Pppoe.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Pppoe")
@@ -754,6 +779,14 @@ func packEthernetInterfacesLayer3FromSdk(ctx context.Context, sdk network_servic
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Mtu", "value": *sdk.Mtu})
 	} else {
 		model.Mtu = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NetflowProfile != nil {
+		model.NetflowProfile = basetypes.NewStringValue(*sdk.NetflowProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	} else {
+		model.NetflowProfile = basetypes.NewStringNull()
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
@@ -1979,4 +2012,101 @@ func packPoeListFromSdk(ctx context.Context, sdks []network_services.Poe) (types
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.Poe", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.Poe{}.AttrType(), data)
+}
+
+// --- Unpacker for EthernetInterfacesTap ---
+func unpackEthernetInterfacesTapToSdk(ctx context.Context, obj types.Object) (*network_services.EthernetInterfacesTap, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.EthernetInterfacesTap", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.EthernetInterfacesTap
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.EthernetInterfacesTap
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.NetflowProfile.IsNull() && !model.NetflowProfile.IsUnknown() {
+		sdk.NetflowProfile = model.NetflowProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.EthernetInterfacesTap", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for EthernetInterfacesTap ---
+func packEthernetInterfacesTapFromSdk(ctx context.Context, sdk network_services.EthernetInterfacesTap) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.EthernetInterfacesTap", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.EthernetInterfacesTap
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NetflowProfile != nil {
+		model.NetflowProfile = basetypes.NewStringValue(*sdk.NetflowProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	} else {
+		model.NetflowProfile = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.EthernetInterfacesTap{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.EthernetInterfacesTap", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for EthernetInterfacesTap ---
+func unpackEthernetInterfacesTapListToSdk(ctx context.Context, list types.List) ([]network_services.EthernetInterfacesTap, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.EthernetInterfacesTap")
+	diags := diag.Diagnostics{}
+	var data []models.EthernetInterfacesTap
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.EthernetInterfacesTap, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.EthernetInterfacesTap{}.AttrTypes(), &item)
+		unpacked, d := unpackEthernetInterfacesTapToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.EthernetInterfacesTap", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for EthernetInterfacesTap ---
+func packEthernetInterfacesTapListFromSdk(ctx context.Context, sdks []network_services.EthernetInterfacesTap) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.EthernetInterfacesTap")
+	diags := diag.Diagnostics{}
+	var data []models.EthernetInterfacesTap
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.EthernetInterfacesTap
+		obj, d := packEthernetInterfacesTapFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.EthernetInterfacesTap{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.EthernetInterfacesTap", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesTap{}.AttrType(), data)
 }

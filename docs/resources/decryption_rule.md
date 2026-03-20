@@ -16,17 +16,19 @@ DecryptionRule resource
 # --- 1. TAG Resource ---
 resource "scm_tag" "decryption_position_tag" {
   name   = "decryption-position-tag"
-  folder = "All"
-  color  = "Purple"
+  folder = "ngfw-shared"
+
+  color = "Purple"
 }
 
 # --- 2. ANCHOR DECRYPTION RULE (Used for relative positioning) ---
 resource "scm_decryption_rule" "anchor_decryption_rule" {
   name        = "anchor-decryption-rule"
   description = "Base rule for testing 'before' and 'after' positioning."
-  folder      = "All"
-  position    = "pre" # Decryption Rules typically exist in the 'pre' rulebase
-  action      = "decrypt"
+  folder      = "ngfw-shared"
+
+  position = "pre" # Decryption Rules typically exist in the 'pre' rulebase
+  action   = "decrypt"
 
   # Core Match Criteria (REQUIRED fields)
   from        = ["trust"]         # Source security zone
@@ -55,9 +57,10 @@ resource "scm_decryption_rule" "anchor_decryption_rule" {
 resource "scm_decryption_rule" "rule_top_decryption_rule" {
   name        = "top-absolute-decryption-rule"
   description = "Placed at the very TOP of the Decryption rulebase."
-  folder      = "All"
-  position    = "pre"
-  action      = "no-decrypt" # Use no-decrypt for top rules (e.g., skip banking sites)
+  folder      = "ngfw-shared"
+
+  position = "pre"
+  action   = "no-decrypt" # Use no-decrypt for top rules (e.g., skip banking sites)
 
   # POSITIONING: Sets rule at the absolute beginning of the rulebase
   relative_position = "top"
@@ -79,9 +82,10 @@ resource "scm_decryption_rule" "rule_top_decryption_rule" {
 resource "scm_decryption_rule" "rule_bottom_decryption_rule" {
   name        = "bottom-absolute-decryption-rule"
   description = "Placed at the very BOTTOM of the Decryption rulebase."
-  folder      = "All"
-  position    = "pre"
-  action      = "decrypt"
+  folder      = "ngfw-shared"
+
+  position = "pre"
+  action   = "decrypt"
 
   # POSITIONING: Sets rule at the absolute end of the rulebase
   relative_position = "bottom"
@@ -104,9 +108,10 @@ resource "scm_decryption_rule" "rule_bottom_decryption_rule" {
 resource "scm_decryption_rule" "rule_before_anchor_decryption" {
   name        = "before-anchor-decryption-rule"
   description = "Positioned immediately BEFORE the anchor-decryption-rule. Updating"
-  folder      = "All"
-  position    = "pre"
-  action      = "decrypt"
+  folder      = "ngfw-shared"
+
+  position = "pre"
+  action   = "decrypt"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "before"
@@ -128,9 +133,10 @@ resource "scm_decryption_rule" "rule_before_anchor_decryption" {
 resource "scm_decryption_rule" "rule_after_anchor_decryption" {
   name        = "after-anchor-decryption-rule_123"
   description = "Positioned immediately AFTER the anchor-decryption-rule."
-  folder      = "All"
-  position    = "pre"
-  action      = "decrypt"
+  folder      = "ngfw-shared"
+
+  position = "pre"
+  action   = "decrypt"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "after"
@@ -152,9 +158,10 @@ resource "scm_decryption_rule" "rule_after_anchor_decryption" {
 resource "scm_decryption_rule" "decryption_rule_ssl_inbound_inspection" {
   name        = "ssl_inbound_inspection_rule"
   description = "Decryption Rule with SSL Inbound Set"
-  folder      = "All"
-  position    = "pre" # Decryption Rules typically exist in the 'pre' rulebase
-  action      = "decrypt"
+  folder      = "ngfw-shared"
+
+  position = "pre" # Decryption Rules typically exist in the 'pre' rulebase
+  action   = "decrypt"
 
   # Core Match Criteria (REQUIRED fields)
   from        = ["trust"]         # Source security zone

@@ -1,8 +1,9 @@
 resource "scm_tacacs_server_profile" "ise_tacacs_example" {
-  name                  = "ISE-TACACS11"
-  protocol              = "PAP"
-  timeout               = 3
-  folder                = "All"
+  name     = "ISE-TACACS11"
+  protocol = "PAP"
+  timeout  = 3
+  folder   = "ngfw-shared"
+
   use_single_connection = true
 
   server = [

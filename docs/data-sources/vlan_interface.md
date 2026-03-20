@@ -66,6 +66,7 @@ output "vlan_interface_data_source_results" {
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--ip))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `tfid` (String) The Terraform ID.
 - `vlan_tag` (String) VLAN tag
 

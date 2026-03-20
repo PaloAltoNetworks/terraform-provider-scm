@@ -1,6 +1,7 @@
 resource "scm_vpn_setting" "tcp_example" {
   # Corresponds to = folder = All
-  folder = "All"
+  folder = "ngfw-shared"
+
 
   vpn = {
     ikev2 = {

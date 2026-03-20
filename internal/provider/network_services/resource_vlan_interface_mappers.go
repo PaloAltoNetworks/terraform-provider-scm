@@ -119,6 +119,12 @@ func unpackVlanInterfacesToSdk(ctx context.Context, obj types.Object) (*network_
 	}
 
 	// Handling Primitives
+	if !model.NetflowProfile.IsNull() && !model.NetflowProfile.IsUnknown() {
+		sdk.NetflowProfile = model.NetflowProfile.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	}
+
+	// Handling Primitives
 	if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
 		sdk.Snippet = model.Snippet.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
@@ -247,6 +253,14 @@ func packVlanInterfacesFromSdk(ctx context.Context, sdk network_services.VlanInt
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NetflowProfile != nil {
+		model.NetflowProfile = basetypes.NewStringValue(*sdk.NetflowProfile)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NetflowProfile", "value": *sdk.NetflowProfile})
+	} else {
+		model.NetflowProfile = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Snippet != nil {

@@ -30,8 +30,8 @@ func unpackAppOverrideRulesToSdk(ctx context.Context, obj types.Object) (*securi
 
 	// Handling Primitives
 	if !model.Application.IsNull() && !model.Application.IsUnknown() {
-		sdk.Application = model.Application.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Application", "value": sdk.Application})
+		sdk.Application = model.Application.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Application", "value": *sdk.Application})
 	}
 
 	// Handling Primitives
@@ -102,14 +102,14 @@ func unpackAppOverrideRulesToSdk(ctx context.Context, obj types.Object) (*securi
 
 	// Handling Primitives
 	if !model.Port.IsNull() && !model.Port.IsUnknown() {
-		sdk.Port = model.Port.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Port", "value": sdk.Port})
+		sdk.Port = model.Port.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Port", "value": *sdk.Port})
 	}
 
 	// Handling Primitives
 	if !model.Protocol.IsNull() && !model.Protocol.IsUnknown() {
-		sdk.Protocol = model.Protocol.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "Protocol", "value": sdk.Protocol})
+		sdk.Protocol = model.Protocol.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Protocol", "value": *sdk.Protocol})
 	}
 
 	// Handling Primitives
@@ -151,8 +151,12 @@ func packAppOverrideRulesFromSdk(ctx context.Context, sdk security_services.AppO
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.Application = basetypes.NewStringValue(sdk.Application)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Application", "value": sdk.Application})
+	if sdk.Application != nil {
+		model.Application = basetypes.NewStringValue(*sdk.Application)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Application", "value": *sdk.Application})
+	} else {
+		model.Application = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Description != nil {
@@ -249,12 +253,20 @@ func packAppOverrideRulesFromSdk(ctx context.Context, sdk security_services.AppO
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Port = basetypes.NewStringValue(sdk.Port)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Port", "value": sdk.Port})
+	if sdk.Port != nil {
+		model.Port = basetypes.NewStringValue(*sdk.Port)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Port", "value": *sdk.Port})
+	} else {
+		model.Port = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.Protocol = basetypes.NewStringValue(sdk.Protocol)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Protocol", "value": sdk.Protocol})
+	if sdk.Protocol != nil {
+		model.Protocol = basetypes.NewStringValue(*sdk.Protocol)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Protocol", "value": *sdk.Protocol})
+	} else {
+		model.Protocol = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Snippet != nil {

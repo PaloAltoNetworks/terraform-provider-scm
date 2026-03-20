@@ -777,7 +777,7 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 					MarkdownDescription: "Enable tunnel monitoring on this tunnel",
 					Optional:            true,
 					Computed:            true,
-					Default:             booldefault.StaticBool(true),
+					Default:             booldefault.StaticBool(false),
 				},
 				"proxy_id": schema.StringAttribute{
 					MarkdownDescription: "Which proxy-id (or proxy-id-v6) the monitoring traffic will use",

@@ -41,8 +41,9 @@ type AggregateInterfaces struct {
 
 // AggregateInterfacesLayer2 represents a nested structure within the AggregateInterfaces model
 type AggregateInterfacesLayer2 struct {
-	Lacp    basetypes.ObjectValue `tfsdk:"lacp"`
-	VlanTag basetypes.StringValue `tfsdk:"vlan_tag"`
+	Lacp           basetypes.ObjectValue `tfsdk:"lacp"`
+	NetflowProfile basetypes.StringValue `tfsdk:"netflow_profile"`
+	VlanTag        basetypes.StringValue `tfsdk:"vlan_tag"`
 }
 
 // Lacp represents a nested structure within the AggregateInterfaces model
@@ -64,6 +65,7 @@ type AggregateInterfacesLayer3 struct {
 	Ip                         basetypes.ListValue   `tfsdk:"ip"`
 	Lacp                       basetypes.ObjectValue `tfsdk:"lacp"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
+	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 }
 
 // AggEthernetArpInner represents a nested structure within the AggregateInterfaces model
@@ -123,7 +125,8 @@ func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 						"transmission_rate": basetypes.StringType{},
 					},
 				},
-				"vlan_tag": basetypes.StringType{},
+				"netflow_profile": basetypes.StringType{},
+				"vlan_tag":        basetypes.StringType{},
 			},
 		},
 		"layer3": basetypes.ObjectType{
@@ -174,7 +177,8 @@ func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 						"transmission_rate": basetypes.StringType{},
 					},
 				},
-				"mtu": basetypes.Int64Type{},
+				"mtu":             basetypes.Int64Type{},
+				"netflow_profile": basetypes.StringType{},
 			},
 		},
 		"name":    basetypes.StringType{},
@@ -202,7 +206,8 @@ func (o AggregateInterfacesLayer2) AttrTypes() map[string]attr.Type {
 				"transmission_rate": basetypes.StringType{},
 			},
 		},
-		"vlan_tag": basetypes.StringType{},
+		"netflow_profile": basetypes.StringType{},
+		"vlan_tag":        basetypes.StringType{},
 	}
 }
 
@@ -281,7 +286,8 @@ func (o AggregateInterfacesLayer3) AttrTypes() map[string]attr.Type {
 				"transmission_rate": basetypes.StringType{},
 			},
 		},
-		"mtu": basetypes.Int64Type{},
+		"mtu":             basetypes.Int64Type{},
+		"netflow_profile": basetypes.StringType{},
 	}
 }
 
@@ -493,6 +499,10 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							Default:             stringdefault.StaticString("slow"),
 						},
 					},
+				},
+				"netflow_profile": schema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Optional:            true,
 				},
 				"vlan_tag": schema.StringAttribute{
 					Validators: []validator.String{
@@ -721,6 +731,10 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					Computed:            true,
 					Default:             int64default.StaticInt64(1500),
 				},
+				"netflow_profile": schema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Optional:            true,
+				},
 			},
 		},
 		"name": schema.StringAttribute{
@@ -811,6 +825,10 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 					},
+				},
+				"netflow_profile": dsschema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Computed:            true,
 				},
 				"vlan_tag": dsschema.StringAttribute{
 					MarkdownDescription: "VLAN tag",
@@ -952,6 +970,10 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 				},
 				"mtu": dsschema.Int64Attribute{
 					MarkdownDescription: "MTU",
+					Computed:            true,
+				},
+				"netflow_profile": dsschema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 					Computed:            true,
 				},
 			},

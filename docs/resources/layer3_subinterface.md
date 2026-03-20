@@ -18,7 +18,7 @@ Layer3Subinterface resource
 #
 
 resource "scm_ethernet_interface" "scm_parent_interface" {
-  name    = "$scm_parent_interface"
+  name    = "$scm_tf_parent_interface"
   comment = "Managed by Terraform"
   folder  = "ngfw-shared"
   layer3  = {}
@@ -29,20 +29,21 @@ resource "scm_ethernet_interface" "scm_parent_interface" {
 #
 
 resource "scm_layer3_subinterface" "scm_l3_subinterface" {
-  name             = "$scm_parent_interface.100"
+  name             = "$scm_tf_parent_interface.100"
   comment          = "Managed by Terraform"
   folder           = "ngfw-shared"
   tag              = 100
-  parent_interface = "$scm_parent_interface"
+  parent_interface = "$scm_tf_parent_interface"
   depends_on       = [scm_ethernet_interface.scm_parent_interface]
   ip               = [{ name = "198.18.1.1/32" }]
 }
 
 resource "scm_ethernet_interface" "scm_parent_dhcp_interface" {
-  name    = "$scm_parent_dhcp_interface"
+  name    = "$scm_parent_tf_dhcp_interface"
   comment = "Managed by Terraform"
-  folder  = "All"
-  layer3  = {}
+  folder  = "ngfw-shared"
+
+  layer3 = {}
 }
 
 #
@@ -50,11 +51,12 @@ resource "scm_ethernet_interface" "scm_parent_dhcp_interface" {
 #
 
 resource "scm_layer3_subinterface" "scm_l3_dhcp_subinterface" {
-  name             = "$scm_parent_dhcp_interface.100"
-  comment          = "Managed by Terraform"
-  folder           = "All"
+  name    = "$scm_parent_tf_dhcp_interface.100"
+  comment = "Managed by Terraform"
+  folder  = "ngfw-shared"
+
   tag              = 100
-  parent_interface = "$scm_parent_dhcp_interface"
+  parent_interface = "$scm_parent_tf_dhcp_interface"
   depends_on       = [scm_ethernet_interface.scm_parent_dhcp_interface]
   dhcp_client = {
     # Enable DHCP client on this subinterface (Default is true)
@@ -102,6 +104,7 @@ resource "scm_layer3_subinterface" "scm_l3_dhcp_subinterface" {
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--ip))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `parent_interface` (String) Parent interface
 - `snippet` (String) The snippet in which the resource is defined
 

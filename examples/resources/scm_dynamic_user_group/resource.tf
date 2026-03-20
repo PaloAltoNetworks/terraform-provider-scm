@@ -1,20 +1,23 @@
 # First, create the tags that will be used in the dynamic user group's filter.
 resource "scm_tag" "scm_dug_tag_1" {
-  folder = "All"
-  name   = "scm_dug_tag_1"
-  color  = "Red"
+  folder = "ngfw-shared"
+
+  name  = "scm_dug_tag_1"
+  color = "Red"
 }
 
 resource "scm_tag" "scm_dug_tag_2" {
-  folder = "All"
-  name   = "scm_dug_tag_2"
-  color  = "Blue"
+  folder = "ngfw-shared"
+
+  name  = "scm_dug_tag_2"
+  color = "Blue"
 }
 
 resource "scm_tag" "scm_dug_tag_3" {
-  folder = "All"
-  name   = "scm_dug_tag_3"
-  color  = "Green"
+  folder = "ngfw-shared"
+
+  name  = "scm_dug_tag_3"
+  color = "Green"
 }
 
 # Create the dynamic user group that references the tags above.

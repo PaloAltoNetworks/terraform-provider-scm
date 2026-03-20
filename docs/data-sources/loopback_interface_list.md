@@ -71,6 +71,7 @@ Read-Only:
 - `ip` (Attributes List) Loopback IP Parent (see [below for nested schema](#nestedatt--data--ip))
 - `ipv6` (Attributes) Loopback IPv6 Configuration (see [below for nested schema](#nestedatt--data--ipv6))
 - `mtu` (Number) MTU for loopback interface
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--ip"></a>

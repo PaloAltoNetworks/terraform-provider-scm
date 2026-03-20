@@ -1,0 +1,92 @@
+name: Resource Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch: # manual trigger
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Terraform Resource Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Pull latest scm-go SDK from develop
+        run: |
+          sed -i '/replace.*scm-go/d' go.mod
+          go get github.com/paloaltonetworks/scm-go@develop
+          go mod tidy
+
+      - name: Build provider
+        run: go build -o terraform-provider-scm
+
+      - name: Configure dev_overrides
+        run: |
+          printf 'provider_installation {\n  dev_overrides {\n    "paloaltonetworks-local/scm" = "%s"\n  }\n  direct {}\n}\n' "${{ github.workspace }}" > ~/.terraformrc
+
+      - name: Generate provider.tf
+        env:
+          SCM_HOST: ${{ secrets.SCM_HOST }}
+          SCM_AUTH_URL: ${{ secrets.SCM_AUTH_URL }}
+          SCM_CLIENT_ID: ${{ secrets.SCM_CLIENT_ID }}
+          SCM_CLIENT_SECRET: ${{ secrets.SCM_CLIENT_SECRET }}
+          SCM_SCOPE: ${{ secrets.SCM_SCOPE }}
+        run: |
+          {
+            echo 'provider "scm" {'
+            echo "  host          = \"${SCM_HOST}\""
+            echo "  auth_url      = \"${SCM_AUTH_URL}\""
+            echo "  client_id     = \"${SCM_CLIENT_ID}\""
+            echo "  client_secret = \"${SCM_CLIENT_SECRET}\""
+            echo "  scope         = \"${SCM_SCOPE}\""
+            echo '  logging       = "debug"'
+            echo '}'
+            echo ''
+            echo 'terraform {'
+            echo '  required_providers {'
+            echo '    scm = {'
+            echo '      source = "paloaltonetworks-local/scm"'
+            echo '    }'
+            echo '  }'
+            echo '}'
+          } > examples/provider/provider.tf
+
+      - name: Validate provider config
+        env:
+          SCM_HOST: ${{ secrets.SCM_HOST }}
+          SCM_AUTH_URL: ${{ secrets.SCM_AUTH_URL }}
+          SCM_CLIENT_ID: ${{ secrets.SCM_CLIENT_ID }}
+          SCM_CLIENT_SECRET: ${{ secrets.SCM_CLIENT_SECRET }}
+          SCM_SCOPE: ${{ secrets.SCM_SCOPE }}
+        run: |
+          echo "Checking secrets are non-empty..."
+          [ -z "$SCM_HOST" ] && echo "ERROR: SCM_HOST is empty" && exit 1
+          [ -z "$SCM_AUTH_URL" ] && echo "ERROR: SCM_AUTH_URL is empty" && exit 1
+          [ -z "$SCM_CLIENT_ID" ] && echo "ERROR: SCM_CLIENT_ID is empty" && exit 1
+          [ -z "$SCM_CLIENT_SECRET" ] && echo "ERROR: SCM_CLIENT_SECRET is empty" && exit 1
+          [ -z "$SCM_SCOPE" ] && echo "ERROR: SCM_SCOPE is empty" && exit 1
+          echo "All secrets present"
+          echo "provider.tf line count: $(wc -l < examples/provider/provider.tf)"
+          echo "provider.tf has provider block: $(grep -c 'provider "scm"' examples/provider/provider.tf)"
+          echo "provider.tf has terraform block: $(grep -c 'terraform {' examples/provider/provider.tf)"
+
+      - name: Setup test workspaces
+        run: ./tests/setup.sh
+
+      - name: Run tests
+        run: ./tests/run_tests.sh --all

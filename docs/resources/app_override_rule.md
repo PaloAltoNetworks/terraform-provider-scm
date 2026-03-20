@@ -16,16 +16,18 @@ AppOverrideRule resource
 # --- 1. TAG Resource ---
 resource "scm_tag" "app_override_position_tag" {
   name   = "app-override-position-tag_1"
-  folder = "All"
-  color  = "Orange"
+  folder = "ngfw-shared"
+
+  color = "Orange"
 }
 
 # --- 2. ANCHOR RULE (Used for relative positioning by other rules) ---
 resource "scm_app_override_rule" "anchor_app_override" {
   name        = "anchor-app-override-rule"
   description = "Base rule for testing 'before' and 'after' positioning. Updating"
-  folder      = "All"
-  position    = "pre" # App Override Rules exist in the 'pre' rulebase
+  folder      = "ngfw-shared"
+
+  position = "pre" # App Override Rules exist in the 'pre' rulebase
 
   # Core Match Criteria
   application = "ssl" # Reclassify the traffic as 'ssl'
@@ -47,8 +49,9 @@ resource "scm_app_override_rule" "anchor_app_override" {
 resource "scm_app_override_rule" "rule_top_app_override" {
   name        = "top-absolute-app-override"
   description = "Placed at the very TOP of the App Override rulebase."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Sets rule at the absolute beginning of the rulebase
   relative_position = "bottom"
@@ -67,8 +70,9 @@ resource "scm_app_override_rule" "rule_top_app_override" {
 resource "scm_app_override_rule" "rule_bottom_app_override" {
   name        = "bottom-absolute-app-override"
   description = "Placed at the very BOTTOM of the App Override rulebase."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Sets rule at the absolute end of the rulebase
   relative_position = "bottom"
@@ -88,8 +92,9 @@ resource "scm_app_override_rule" "rule_bottom_app_override" {
 resource "scm_app_override_rule" "rule_before_anchor_override" {
   name        = "before-anchor-app-override"
   description = "Positioned immediately BEFORE the anchor-app-override-rule."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "before"
@@ -109,8 +114,9 @@ resource "scm_app_override_rule" "rule_before_anchor_override" {
 resource "scm_app_override_rule" "rule_after_anchor_override" {
   name        = "after-anchor-app-override"
   description = "Positioned immediately AFTER the anchor-app-override-rule."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "before"
@@ -133,18 +139,13 @@ resource "scm_app_override_rule" "rule_after_anchor_override" {
 
 ### Required
 
-- `application` (String) Application
-- `destination` (List of String) Destination
-- `from` (List of String) From
 - `name` (String) Name
-- `port` (String) Port
-- `protocol` (String) Protocol
-- `source` (List of String) Source
-- `to` (List of String) To
 
 ### Optional
 
+- `application` (String) Application
 - `description` (String) Description
+- `destination` (List of String) Destination
 - `device` (String) The device in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
@@ -152,16 +153,21 @@ resource "scm_app_override_rule" "rule_after_anchor_override" {
 - `folder` (String) The folder in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `from` (List of String) From
 - `group_tag` (String) Group tag
 - `negate_destination` (Boolean) Negate destination
 - `negate_source` (Boolean) Negate source
+- `port` (String) Port
 - `position` (String) The position of a security rule
+- `protocol` (String) Protocol
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `source` (List of String) Source
 - `tag` (List of String) Tag
 - `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `to` (List of String) To
 
 ### Read-Only
 

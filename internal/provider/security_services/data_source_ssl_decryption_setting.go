@@ -14,13 +14,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/paloaltonetworks/scm-go/generated/network_services"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// DATA SOURCE for SCM SslDecryptionSetting (Package: network_services)
+// DATA SOURCE for SCM SslDecryptionSetting (Package: security_services)
 var (
 	_ datasource.DataSource              = &SslDecryptionSettingDataSource{}
 	_ datasource.DataSourceWithConfigure = &SslDecryptionSettingDataSource{}
@@ -32,7 +32,7 @@ func NewSslDecryptionSettingDataSource() datasource.DataSource {
 
 // SslDecryptionSettingDataSource defines the data source implementation.
 type SslDecryptionSettingDataSource struct {
-	client *network_services.APIClient
+	client *security_services.APIClient
 }
 
 func (d *SslDecryptionSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
@@ -56,9 +56,9 @@ func (d *SslDecryptionSettingDataSource) Configure(ctx context.Context, req data
 		resp.Diagnostics.AddError("Unexpected Data Source Configure Type", fmt.Sprintf("Expected map[string]interface{}, got: %T.", req.ProviderData))
 		return
 	}
-	client, ok := clients["network_services"].(*network_services.APIClient)
+	client, ok := clients["security_services"].(*security_services.APIClient)
 	if !ok {
-		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *network_services.APIClient for 'network_services' client."))
+		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *security_services.APIClient for 'security_services' client."))
 		return
 	}
 	d.client = client
@@ -114,7 +114,7 @@ func (d *SslDecryptionSettingDataSource) Read(ctx context.Context, req datasourc
 	}
 
 	// 4. Dynamic Response Handling (Reflection + JSON)
-	var scmObject *network_services.SslDecryptionSettings
+	var scmObject *security_services.SslDecryptionSettings
 	val := reflect.ValueOf(scmObjectInterface)
 	if val.Kind() == reflect.Ptr && !val.IsNil() { val = val.Elem() }
 
@@ -124,7 +124,7 @@ func (d *SslDecryptionSettingDataSource) Read(ctx context.Context, req datasourc
 			if dataField.Len() > 0 {
 				firstItem := dataField.Index(0).Interface()
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct network_services.SslDecryptionSettings
+				var targetStruct security_services.SslDecryptionSettings
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					scmObject = &targetStruct
 				}
@@ -134,7 +134,7 @@ func (d *SslDecryptionSettingDataSource) Read(ctx context.Context, req datasourc
 			}
 		} else {
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct network_services.SslDecryptionSettings
+            var targetStruct security_services.SslDecryptionSettings
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 scmObject = &targetStruct
             }

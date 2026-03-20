@@ -14,8 +14,9 @@ SyslogServerProfile resource
 
 ```terraform
 resource "scm_syslog_server_profile" "scm_syslog_server_prof_1" {
-  folder = "All"
-  name   = "syslog-server-prof-base"
+  folder = "ngfw-shared"
+
+  name = "syslog-server-prof-base"
   server = [
     {
       name   = "Server-Primary"
@@ -25,8 +26,9 @@ resource "scm_syslog_server_profile" "scm_syslog_server_prof_1" {
 }
 
 resource "scm_syslog_server_profile" "scm_syslog_server_prof_2" {
-  folder = "All"
-  name   = "syslog-server-prof-mixed"
+  folder = "ngfw-shared"
+
+  name = "syslog-server-prof-mixed"
   server = [
     {
       name      = "Server-Mixed"
@@ -45,8 +47,9 @@ resource "scm_syslog_server_profile" "scm_syslog_server_prof_2" {
 }
 
 resource "scm_syslog_server_profile" "scm_syslog_server_prof_3" {
-  folder = "All"
-  name   = "syslog-server-prof-complete"
+  folder = "ngfw-shared"
+
+  name = "syslog-server-tf-prof-complete"
   server = [
     {
       name      = "Server-A"

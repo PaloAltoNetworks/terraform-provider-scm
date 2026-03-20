@@ -19,12 +19,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	"github.com/paloaltonetworks/scm-go/generated/network_services"
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// SINGLETON RESOURCE for SCM SslDecryptionSetting (Package: network_services)
+// SINGLETON RESOURCE for SCM SslDecryptionSetting (Package: security_services)
 var (
 	_ resource.Resource                = &SslDecryptionSettingResource{}
 	_ resource.ResourceWithConfigure   = &SslDecryptionSettingResource{}
@@ -37,7 +37,7 @@ func NewSslDecryptionSettingResource() resource.Resource {
 
 // SslDecryptionSettingResource defines the resource implementation.
 type SslDecryptionSettingResource struct {
-	client *network_services.APIClient
+	client *security_services.APIClient
 }
 
 func (r *SslDecryptionSettingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -61,9 +61,9 @@ func (r *SslDecryptionSettingResource) Configure(ctx context.Context, req resour
 		resp.Diagnostics.AddError("Unexpected Resource Configure Type", fmt.Sprintf("Expected map[string]interface{}, got: %T.", req.ProviderData))
 		return
 	}
-	client, ok := clients["network_services"].(*network_services.APIClient)
+	client, ok := clients["security_services"].(*security_services.APIClient)
 	if !ok {
-		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *network_services.APIClient for 'network_services' client."))
+		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *security_services.APIClient for 'security_services' client."))
 		return
 	}
 	r.client = client
@@ -119,7 +119,7 @@ func (r *SslDecryptionSettingResource) Create(ctx context.Context, req resource.
 	}
 
 	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Create) ---
-	var createdObject *network_services.SslDecryptionSettings
+	var createdObject *security_services.SslDecryptionSettings
 
 	// Use reflection to inspect the return type at runtime.
 	val := reflect.ValueOf(scmObjectInterface)
@@ -138,7 +138,7 @@ func (r *SslDecryptionSettingResource) Create(ctx context.Context, req resource.
 
 				// We need to convert this interface{} back to the concrete SDK struct type.
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct network_services.SslDecryptionSettings
+				var targetStruct security_services.SslDecryptionSettings
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					createdObject = &targetStruct
 				}
@@ -149,7 +149,7 @@ func (r *SslDecryptionSettingResource) Create(ctx context.Context, req resource.
             // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
             // Use the same JSON trick to be safe against pointer mismatches
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct network_services.SslDecryptionSettings
+            var targetStruct security_services.SslDecryptionSettings
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 createdObject = &targetStruct
             }
@@ -245,7 +245,7 @@ func (r *SslDecryptionSettingResource) Read(ctx context.Context, req resource.Re
 	}
 
 	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Read) ---
-	var scmObject *network_services.SslDecryptionSettings
+	var scmObject *security_services.SslDecryptionSettings
 
 	// Use reflection to inspect the return type at runtime.
 	val := reflect.ValueOf(scmObjectInterface)
@@ -264,7 +264,7 @@ func (r *SslDecryptionSettingResource) Read(ctx context.Context, req resource.Re
 
 				// We need to convert this interface{} back to the concrete SDK struct type.
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct network_services.SslDecryptionSettings
+				var targetStruct security_services.SslDecryptionSettings
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					scmObject = &targetStruct
 				}
@@ -278,7 +278,7 @@ func (r *SslDecryptionSettingResource) Read(ctx context.Context, req resource.Re
             // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
             // Use the same JSON trick to be safe against pointer mismatches
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct network_services.SslDecryptionSettings
+            var targetStruct security_services.SslDecryptionSettings
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 scmObject = &targetStruct
             }
@@ -376,7 +376,7 @@ func (r *SslDecryptionSettingResource) Update(ctx context.Context, req resource.
 	if resp.Diagnostics.HasError() { return }
 
 	// Step 4: Unpack the plan object to an SCM Object
-    unpackedScmObject, diags := unpackSslDecryptionSettingsToSdk(ctx, planObject)
+    unpackedScmObject, diags := unpackSslDecryptionSettingsGetPutToSdk(ctx, planObject)
     resp.Diagnostics.Append(diags...)
     if resp.Diagnostics.HasError() { return }
 
@@ -389,7 +389,7 @@ func (r *SslDecryptionSettingResource) Update(ctx context.Context, req resource.
        tflog.Debug(ctx, "Updating ssl_decryption_settings on SCM API")
 
        // Call Update (PUT)
-       updateReq := r.client.SslDecryptionSettingsAPI.PutSslDecryptionSettings(ctx).SslDecryptionSettings(*unpackedScmObject)
+       updateReq := r.client.SslDecryptionSettingsAPI.PutSslDecryptionSettings(ctx).SslDecryptionSettingsGetPut(*unpackedScmObject)
 
 
 
@@ -413,7 +413,7 @@ func (r *SslDecryptionSettingResource) Update(ctx context.Context, req resource.
 	}
 
 	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Update) ---
-	var updatedObject *network_services.SslDecryptionSettings
+	var updatedObject *security_services.SslDecryptionSettings
 
 	// Use reflection to inspect the return type at runtime.
 	val := reflect.ValueOf(scmObjectInterface)
@@ -432,7 +432,7 @@ func (r *SslDecryptionSettingResource) Update(ctx context.Context, req resource.
 
 				// We need to convert this interface{} back to the concrete SDK struct type.
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct network_services.SslDecryptionSettings
+				var targetStruct security_services.SslDecryptionSettings
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					updatedObject = &targetStruct
 				}
@@ -443,7 +443,7 @@ func (r *SslDecryptionSettingResource) Update(ctx context.Context, req resource.
             // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
             // Use the same JSON trick to be safe against pointer mismatches
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct network_services.SslDecryptionSettings
+            var targetStruct security_services.SslDecryptionSettings
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 updatedObject = &targetStruct
             }

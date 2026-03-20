@@ -80,6 +80,7 @@ output "ethernet_interface_data_source_results" {
 Read-Only:
 
 - `lldp` (Attributes) LLDP Settings (see [below for nested schema](#nestedatt--layer2--lldp))
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `vlan_tag` (String) Assign interface to VLAN tag
 
 <a id="nestedatt--layer2--lldp"></a>
@@ -106,6 +107,7 @@ Read-Only:
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--layer3--ip))
 - `mtu` (Number) MTU
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `pppoe` (Attributes) Pppoe
 
 > ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--layer3--pppoe))
@@ -205,3 +207,7 @@ Read-Only:
 
 <a id="nestedatt--tap"></a>
 ### Nested Schema for `tap`
+
+Read-Only:
+
+- `netflow_profile` (String) Name of Netflow Profile to assign to Interface

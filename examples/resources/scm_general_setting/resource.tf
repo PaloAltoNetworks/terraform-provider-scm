@@ -1,5 +1,6 @@
 resource "scm_general_setting" "gs_example" {
-  folder = "All"
+  folder = "ngfw-shared"
+
   general = {
     domain           = "foo.com"
     login_banner     = "Test Banner"

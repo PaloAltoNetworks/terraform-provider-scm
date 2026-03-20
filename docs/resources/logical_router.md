@@ -18,7 +18,8 @@ LogicalRouter resource
 #
 
 resource "scm_variable" "scm_next_hop" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "$scm_next_hop"
   description = "Managed by Terraform"
   type        = "ip-netmask"
@@ -26,7 +27,8 @@ resource "scm_variable" "scm_next_hop" {
 }
 
 resource "scm_variable" "scm_next_hop_fqdn" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "$scm_next_hop_fqdn"
   description = "Managed by Terraform"
   type        = "fqdn"

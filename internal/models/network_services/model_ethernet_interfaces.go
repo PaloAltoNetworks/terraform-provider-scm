@@ -48,8 +48,9 @@ type EthernetInterfaces struct {
 
 // EthernetInterfacesLayer2 represents a nested structure within the EthernetInterfaces model
 type EthernetInterfacesLayer2 struct {
-	Lldp    basetypes.ObjectValue `tfsdk:"lldp"`
-	VlanTag basetypes.StringValue `tfsdk:"vlan_tag"`
+	Lldp           basetypes.ObjectValue `tfsdk:"lldp"`
+	NetflowProfile basetypes.StringValue `tfsdk:"netflow_profile"`
+	VlanTag        basetypes.StringValue `tfsdk:"vlan_tag"`
 }
 
 // EthernetInterfacesLayer2Lldp represents a nested structure within the EthernetInterfaces model
@@ -65,6 +66,7 @@ type EthernetInterfacesLayer3 struct {
 	InterfaceManagementProfile basetypes.StringValue `tfsdk:"interface_management_profile"`
 	Ip                         basetypes.ListValue   `tfsdk:"ip"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
+	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 	Pppoe                      basetypes.ObjectValue `tfsdk:"pppoe"`
 }
 
@@ -133,6 +135,11 @@ type Poe struct {
 	PoeRsvdPwr basetypes.Int64Value `tfsdk:"poe_rsvd_pwr"`
 }
 
+// EthernetInterfacesTap represents a nested structure within the EthernetInterfaces model
+type EthernetInterfacesTap struct {
+	NetflowProfile basetypes.StringValue `tfsdk:"netflow_profile"`
+}
+
 // AttrTypes defines the attribute types for the EthernetInterfaces model.
 func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -151,7 +158,8 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 						"enable": basetypes.BoolType{},
 					},
 				},
-				"vlan_tag": basetypes.StringType{},
+				"netflow_profile": basetypes.StringType{},
+				"vlan_tag":        basetypes.StringType{},
 			},
 		},
 		"layer3": basetypes.ObjectType{
@@ -192,7 +200,8 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 						"name": basetypes.StringType{},
 					},
 				}},
-				"mtu": basetypes.Int64Type{},
+				"mtu":             basetypes.Int64Type{},
+				"netflow_profile": basetypes.StringType{},
 				"pppoe": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"access_concentrator":  basetypes.StringType{},
@@ -228,7 +237,9 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 		},
 		"snippet": basetypes.StringType{},
 		"tap": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{},
+			AttrTypes: map[string]attr.Type{
+				"netflow_profile": basetypes.StringType{},
+			},
 		},
 	}
 }
@@ -248,7 +259,8 @@ func (o EthernetInterfacesLayer2) AttrTypes() map[string]attr.Type {
 				"enable": basetypes.BoolType{},
 			},
 		},
-		"vlan_tag": basetypes.StringType{},
+		"netflow_profile": basetypes.StringType{},
+		"vlan_tag":        basetypes.StringType{},
 	}
 }
 
@@ -312,7 +324,8 @@ func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 				"name": basetypes.StringType{},
 			},
 		}},
-		"mtu": basetypes.Int64Type{},
+		"mtu":             basetypes.Int64Type{},
+		"netflow_profile": basetypes.StringType{},
 		"pppoe": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"access_concentrator":  basetypes.StringType{},
@@ -503,6 +516,20 @@ func (o Poe) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the EthernetInterfacesTap model.
+func (o EthernetInterfacesTap) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"netflow_profile": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of EthernetInterfacesTap objects.
+func (o EthernetInterfacesTap) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // EthernetInterfacesResourceSchema defines the schema for EthernetInterfaces resource
 var EthernetInterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "EthernetInterface resource",
@@ -593,6 +620,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Required:            true,
 						},
 					},
+				},
+				"netflow_profile": schema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Optional:            true,
 				},
 				"vlan_tag": schema.StringAttribute{
 					Validators: []validator.String{
@@ -771,6 +802,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					Computed:            true,
 					Default:             int64default.StaticInt64(1500),
 				},
+				"netflow_profile": schema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Optional:            true,
+				},
 				"pppoe": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
 						objectvalidator.ConflictsWith(
@@ -939,7 +974,12 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Tap\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Optional:            true,
-			Attributes:          map[string]schema.Attribute{},
+			Attributes: map[string]schema.Attribute{
+				"netflow_profile": schema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Optional:            true,
+				},
+			},
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
@@ -1000,6 +1040,10 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 					},
+				},
+				"netflow_profile": dsschema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Computed:            true,
 				},
 				"vlan_tag": dsschema.StringAttribute{
 					MarkdownDescription: "Assign interface to VLAN tag",
@@ -1113,6 +1157,10 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					MarkdownDescription: "MTU",
 					Computed:            true,
 				},
+				"netflow_profile": dsschema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Computed:            true,
+				},
 				"pppoe": dsschema.SingleNestedAttribute{
 					MarkdownDescription: "Pppoe\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
 					Computed:            true,
@@ -1209,7 +1257,12 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 		"tap": dsschema.SingleNestedAttribute{
 			MarkdownDescription: "Tap\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
 			Computed:            true,
-			Attributes:          map[string]dsschema.Attribute{},
+			Attributes: map[string]dsschema.Attribute{
+				"netflow_profile": dsschema.StringAttribute{
+					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
+					Computed:            true,
+				},
+			},
 		},
 		"tfid": dsschema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

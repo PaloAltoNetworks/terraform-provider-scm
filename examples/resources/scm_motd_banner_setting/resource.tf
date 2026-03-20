@@ -1,8 +1,9 @@
 
 resource "scm_motd_banner_setting" "motd_example" {
   # The 'folder' field in your JSON maps to the 'folder' argument in the SCM provider.
-  # "All" means it applies to all devices managed by the Panorama/Cloud Managed environment.
-  folder = "All"
+  # "ngfw-shared" means it applies to all devices managed by the Panorama/Cloud Managed environment.
+  folder = "ngfw-shared"
+
   motd_and_banner = {
     # MOTD Configuration (motd_and_banner fields)
     motd_enable               = true

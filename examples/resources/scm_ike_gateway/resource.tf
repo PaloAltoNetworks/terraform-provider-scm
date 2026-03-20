@@ -1,7 +1,7 @@
 // The scm_ike_crypto_profile resource is a prerequisite for the IKE gateway.
 resource "scm_ike_crypto_profile" "scm_ike_gw_crypto_profile_1" {
   folder     = "Remote Networks"
-  name       = "scm_ike_gw_crypto_profile_1"
+  name       = "scm_ike_gw_crypto_profile_tf"
   hash       = ["sha256"]
   dh_group   = ["group14"]
   encryption = ["aes-256-cbc"]

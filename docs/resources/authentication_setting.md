@@ -14,11 +14,12 @@ AuthenticationSetting resource
 
 ```terraform
 resource "scm_authentication_profile" "global_radius_access" {
-  name              = "test_auth_profile_radius_1"
+  name              = "test_auth_profile_settings"
   folder            = "Prisma Access"
   user_domain       = "default"
   username_modifier = "%USERINPUT%"
-  allow_list        = ["all"]
+  allow_list = ["ngfw-shared"
+  ]
 
   # Lockout Configuration
   lockout = {
@@ -32,11 +33,6 @@ resource "scm_authentication_profile" "global_radius_access" {
       checkgroup     = true
       server_profile = "CHAP_only_rsp_11" // server_profile added should exist 
     }
-  }
-
-  # Single Sign-On Configuration
-  single_sign_on = {
-    realm = "EXAMPLE.COM"
   }
 }
 

@@ -1,25 +1,34 @@
 package models
 
 import (
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// Package: network_services
-// This file contains models for the network_services SDK package
+// Package: security_services
+// This file contains models for the security_services SDK package
 
 // SslDecryptionSettings represents the Terraform model for SslDecryptionSettings
 type SslDecryptionSettings struct {
 	Tfid                                 types.String          `tfsdk:"tfid"`
+	Device                               basetypes.StringValue `tfsdk:"device"`
 	DisabledSslExcludeCertFromPredefined basetypes.ListValue   `tfsdk:"disabled_ssl_exclude_cert_from_predefined"`
+	Folder                               basetypes.StringValue `tfsdk:"folder"`
 	ForwardTrustCertificate              basetypes.ObjectValue `tfsdk:"forward_trust_certificate"`
 	ForwardUntrustCertificate            basetypes.ObjectValue `tfsdk:"forward_untrust_certificate"`
 	RootCaExcludeList                    basetypes.ListValue   `tfsdk:"root_ca_exclude_list"`
+	Snippet                              basetypes.StringValue `tfsdk:"snippet"`
 	SslExcludeCert                       basetypes.ListValue   `tfsdk:"ssl_exclude_cert"`
 	TrustedRootCA                        basetypes.ListValue   `tfsdk:"trusted_root_ca"`
 }
@@ -40,10 +49,12 @@ type SslDecryptionSettingsSslExcludeCertInner struct {
 // AttrTypes defines the attribute types for the SslDecryptionSettings model.
 func (o SslDecryptionSettings) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid": basetypes.StringType{},
+		"tfid":   basetypes.StringType{},
+		"device": basetypes.StringType{},
 		"disabled_ssl_exclude_cert_from_predefined": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		}},
+		"folder": basetypes.StringType{},
 		"forward_trust_certificate": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"ecdsa": basetypes.StringType{},
@@ -59,6 +70,7 @@ func (o SslDecryptionSettings) AttrTypes() map[string]attr.Type {
 		"root_ca_exclude_list": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{},
 		}},
+		"snippet": basetypes.StringType{},
 		"ssl_exclude_cert": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"description": basetypes.StringType{},
@@ -114,10 +126,41 @@ func (o SslDecryptionSettingsSslExcludeCertInner) AttrType() attr.Type {
 var SslDecryptionSettingsResourceSchema = schema.Schema{
 	MarkdownDescription: "SslDecryptionSetting resource",
 	Attributes: map[string]schema.Attribute{
+		"device": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("folder"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
+			},
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.RequiresReplace(),
+			},
+		},
 		"disabled_ssl_exclude_cert_from_predefined": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Disabled ssl exclude cert from predefined",
 			Optional:            true,
+		},
+		"folder": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("snippet"),
+				),
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
+				utils.FolderValidator(),
+			},
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.RequiresReplace(),
+			},
 		},
 		"forward_trust_certificate": schema.SingleNestedAttribute{
 			MarkdownDescription: "Forward trust certificate",
@@ -151,6 +194,21 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Root ca exclude list",
 			Optional:            true,
+		},
+		"snippet": schema.StringAttribute{
+			Validators: []validator.String{
+				stringvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("device"),
+					path.MatchRelative().AtParent().AtName("folder"),
+				),
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
+			},
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
+			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.RequiresReplace(),
+			},
 		},
 		"ssl_exclude_cert": schema.ListNestedAttribute{
 			MarkdownDescription: "Ssl exclude cert",
@@ -191,9 +249,19 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 var SslDecryptionSettingsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "SslDecryptionSetting data source",
 	Attributes: map[string]dsschema.Attribute{
+		"device": dsschema.StringAttribute{
+			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
+			Computed:            true,
+		},
 		"disabled_ssl_exclude_cert_from_predefined": dsschema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Disabled ssl exclude cert from predefined",
+			Computed:            true,
+		},
+		"folder": dsschema.StringAttribute{
+			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"forward_trust_certificate": dsschema.SingleNestedAttribute{
@@ -227,6 +295,11 @@ var SslDecryptionSettingsDataSourceSchema = dsschema.Schema{
 		"root_ca_exclude_list": dsschema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "Root ca exclude list",
+			Computed:            true,
+		},
+		"snippet": dsschema.StringAttribute{
+			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			Optional:            true,
 			Computed:            true,
 		},
 		"ssl_exclude_cert": dsschema.ListNestedAttribute{

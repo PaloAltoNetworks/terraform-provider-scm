@@ -1,7 +1,8 @@
 resource "scm_tag" "app_access_tag" {
-  folder = "All"
-  name   = "app-access-test_25"
-  color  = "Blue"
+  folder = "ngfw-shared"
+
+  name  = "app-access-test_25"
+  color = "Blue"
 }
 
 # -----------------------------------------------------------------------------
@@ -12,7 +13,8 @@ resource "scm_authentication_rule" "anchor_rule" {
   name        = "test_anchor_rule_251"
   description = "Base rule. Used to test 'before' and 'after' positioning"
   position    = "pre" # Default rulebase is 'pre'
-  folder      = "All"
+  folder      = "ngfw-shared"
+
 
   # Core fields (REQUIRED by the API)
   destination = ["any"]
@@ -44,8 +46,9 @@ resource "scm_authentication_rule" "anchor_rule" {
 resource "scm_authentication_rule" "rule_top_of_list" {
   name        = "test_top_rule_25"
   description = "Placed at the very top of the 'pre' rulebase."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Sets rule at the absolute beginning of the rulebase
   relative_position = "top"
@@ -63,8 +66,9 @@ resource "scm_authentication_rule" "rule_top_of_list" {
 resource "scm_authentication_rule" "rule_bottom_of_list" {
   name        = "test_bottom_rule_25"
   description = "Placed at the very bottom of the 'pre' rulebase."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Sets rule at the absolute end of the rulebase
   relative_position = "bottom"
@@ -85,8 +89,9 @@ resource "scm_authentication_rule" "rule_bottom_of_list" {
 resource "scm_authentication_rule" "rule_before_anchor" {
   name        = "test_before_rule_25_updating"
   description = "Positioned immediately BEFORE the anchor_rule."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "before"
@@ -104,8 +109,9 @@ resource "scm_authentication_rule" "rule_before_anchor" {
 resource "scm_authentication_rule" "rule_after_anchor" {
   name        = "test_after_rule_25"
   description = "Positioned immediately AFTER the anchor_rule."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "after"

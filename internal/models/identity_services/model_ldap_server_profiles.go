@@ -186,6 +186,9 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			Required:            true,
 		},
 		"retry_interval": schema.Int64Attribute{
+			Validators: []validator.Int64{
+				int64validator.Between(60, 3600),
+			},
 			MarkdownDescription: "The search retry interval (seconds)",
 			Optional:            true,
 		},
@@ -239,6 +242,9 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			},
 		},
 		"timelimit": schema.Int64Attribute{
+			Validators: []validator.Int64{
+				int64validator.Between(1, 30),
+			},
 			MarkdownDescription: "The search timeout (seconds)",
 			Optional:            true,
 		},

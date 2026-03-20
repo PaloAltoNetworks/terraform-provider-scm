@@ -1,8 +1,9 @@
 # This resource creates a domain-based External Dynamic List (EDL).
 # The EDL will fetch a list of domains from the specified URL daily.
 resource "scm_external_dynamic_list" "scm_edl_1" {
-  folder = "All"
-  name   = "scm_edl_1"
+  folder = "ngfw-shared"
+
+  name = "scm_edl_1"
 
   type = {
     domain = {
@@ -18,8 +19,9 @@ resource "scm_external_dynamic_list" "scm_edl_1" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_2" {
-  folder = "All"
-  name   = "scm_edl_2"
+  folder = "ngfw-shared"
+
+  name = "scm_edl_2"
 
   type = {
     ip = {
@@ -33,8 +35,9 @@ resource "scm_external_dynamic_list" "scm_edl_2" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_3" {
-  folder = "All"
-  name   = "scm_edl_3"
+  folder = "ngfw-shared"
+
+  name = "scm_edl_3"
 
   type = {
     url = {
@@ -51,8 +54,9 @@ resource "scm_external_dynamic_list" "scm_edl_3" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_4" {
-  folder = "All"
-  name   = "scm_edl_4"
+  folder = "ngfw-shared"
+
+  name = "scm_edl_4"
 
   type = {
     predefined_ip = {
@@ -63,8 +67,9 @@ resource "scm_external_dynamic_list" "scm_edl_4" {
 }
 
 resource "scm_external_dynamic_list" "scm_edl_5" {
-  folder = "All"
-  name   = "scm_edl_5"
+  folder = "ngfw-shared"
+
+  name = "scm_edl_5"
 
   type = {
     ip = {

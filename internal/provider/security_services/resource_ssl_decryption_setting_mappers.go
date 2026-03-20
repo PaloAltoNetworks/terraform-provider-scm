@@ -14,8 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
-	"github.com/paloaltonetworks/scm-go/generated/network_services"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
 )
 
 
@@ -28,7 +28,7 @@ import (
 
 
 // --- Unpacker for SslDecryptionSettings ---
-func unpackSslDecryptionSettingsToSdk(ctx context.Context, obj types.Object) (*network_services.SslDecryptionSettings, diag.Diagnostics) {
+func unpackSslDecryptionSettingsToSdk(ctx context.Context, obj types.Object) (*security_services.SslDecryptionSettings, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering unpack helper for models.SslDecryptionSettings", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
     var model models.SslDecryptionSettings
@@ -39,13 +39,25 @@ func unpackSslDecryptionSettingsToSdk(ctx context.Context, obj types.Object) (*n
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk network_services.SslDecryptionSettings
+    var sdk security_services.SslDecryptionSettings
     var d diag.Diagnostics
+
+    // Handling Primitives
+    if !model.Device.IsNull() && !model.Device.IsUnknown() {
+        sdk.Device = model.Device.ValueStringPointer()
+        tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+    }
 
     // Handling Lists
     if !model.DisabledSslExcludeCertFromPredefined.IsNull() && !model.DisabledSslExcludeCertFromPredefined.IsUnknown() {
         tflog.Debug(ctx, "Unpacking list of primitives for field DisabledSslExcludeCertFromPredefined")
         diags.Append(model.DisabledSslExcludeCertFromPredefined.ElementsAs(ctx, &sdk.DisabledSslExcludeCertFromPredefined, false)...)
+    }
+
+    // Handling Primitives
+    if !model.Folder.IsNull() && !model.Folder.IsUnknown() {
+        sdk.Folder = model.Folder.ValueStringPointer()
+        tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
     }
 
     // Handling Objects
@@ -80,6 +92,12 @@ func unpackSslDecryptionSettingsToSdk(ctx context.Context, obj types.Object) (*n
         diags.Append(model.RootCaExcludeList.ElementsAs(ctx, &sdk.RootCaExcludeList, false)...)
     }
 
+    // Handling Primitives
+    if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
+        sdk.Snippet = model.Snippet.ValueStringPointer()
+        tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+    }
+
     // Handling Lists
     if !model.SslExcludeCert.IsNull() && !model.SslExcludeCert.IsUnknown() {
         tflog.Debug(ctx, "Unpacking list of objects for field SslExcludeCert")
@@ -102,11 +120,19 @@ diags.Append(d...)
 }
 
 // --- Packer for SslDecryptionSettings ---
-func packSslDecryptionSettingsFromSdk(ctx context.Context, sdk network_services.SslDecryptionSettings) (types.Object, diag.Diagnostics) {
+func packSslDecryptionSettingsFromSdk(ctx context.Context, sdk security_services.SslDecryptionSettings) (types.Object, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering pack helper for models.SslDecryptionSettings", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
     var model models.SslDecryptionSettings
     var d diag.Diagnostics
+    // Handling Primitives
+    // Standard primitive packing
+    if sdk.Device != nil {
+        model.Device = basetypes.NewStringValue(*sdk.Device)
+        tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Device", "value": *sdk.Device})
+    } else {
+        model.Device = basetypes.NewStringNull()
+    }
     // Handling Lists
     if sdk.DisabledSslExcludeCertFromPredefined != nil {
         tflog.Debug(ctx, "Packing list of primitives for field DisabledSslExcludeCertFromPredefined")
@@ -119,6 +145,14 @@ func packSslDecryptionSettingsFromSdk(ctx context.Context, sdk network_services.
         // This logic now creates a correctly typed null list.
         var elemType attr.Type = basetypes.StringType{} // Default to string
         model.DisabledSslExcludeCertFromPredefined = basetypes.NewListNull(elemType)
+    }
+    // Handling Primitives
+    // Standard primitive packing
+    if sdk.Folder != nil {
+        model.Folder = basetypes.NewStringValue(*sdk.Folder)
+        tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
+    } else {
+        model.Folder = basetypes.NewStringNull()
     }
     // Handling Objects
     // This is a regular nested object that has its own packer.
@@ -159,6 +193,14 @@ func packSslDecryptionSettingsFromSdk(ctx context.Context, sdk network_services.
         var elemType attr.Type = basetypes.StringType{} // Default to string
         model.RootCaExcludeList = basetypes.NewListNull(elemType)
     }
+    // Handling Primitives
+    // Standard primitive packing
+    if sdk.Snippet != nil {
+        model.Snippet = basetypes.NewStringValue(*sdk.Snippet)
+        tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
+    } else {
+        model.Snippet = basetypes.NewStringNull()
+    }
     // Handling Lists
     if sdk.SslExcludeCert != nil {
         tflog.Debug(ctx, "Packing list of objects for field SslExcludeCert")
@@ -192,7 +234,7 @@ diags.Append(d...)
 }
 
 // --- List Unpacker for SslDecryptionSettings ---
-func unpackSslDecryptionSettingsListToSdk(ctx context.Context, list types.List) ([]network_services.SslDecryptionSettings, diag.Diagnostics) {
+func unpackSslDecryptionSettingsListToSdk(ctx context.Context, list types.List) ([]security_services.SslDecryptionSettings, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list unpack helper for models.SslDecryptionSettings")
 	diags := diag.Diagnostics{}
 	var data []models.SslDecryptionSettings
@@ -202,7 +244,7 @@ func unpackSslDecryptionSettingsListToSdk(ctx context.Context, list types.List) 
 		return nil, diags
 	}
 
-	ans := make([]network_services.SslDecryptionSettings, 0, len(data))
+	ans := make([]security_services.SslDecryptionSettings, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
 		obj, _ := types.ObjectValueFrom(ctx, models.SslDecryptionSettings{}.AttrTypes(), &item)
@@ -217,7 +259,7 @@ func unpackSslDecryptionSettingsListToSdk(ctx context.Context, list types.List) 
 }
 
 // --- List Packer for SslDecryptionSettings ---
-func packSslDecryptionSettingsListFromSdk(ctx context.Context, sdks []network_services.SslDecryptionSettings) (types.List, diag.Diagnostics) {
+func packSslDecryptionSettingsListFromSdk(ctx context.Context, sdks []security_services.SslDecryptionSettings) (types.List, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list pack helper for models.SslDecryptionSettings")
 	diags := diag.Diagnostics{}
 	var data []models.SslDecryptionSettings
@@ -238,7 +280,7 @@ func packSslDecryptionSettingsListFromSdk(ctx context.Context, sdks []network_se
 }
 
 // --- Unpacker for SslDecryptionSettingsForwardTrustCertificate ---
-func unpackSslDecryptionSettingsForwardTrustCertificateToSdk(ctx context.Context, obj types.Object) (*network_services.SslDecryptionSettingsForwardTrustCertificate, diag.Diagnostics) {
+func unpackSslDecryptionSettingsForwardTrustCertificateToSdk(ctx context.Context, obj types.Object) (*security_services.SslDecryptionSettingsForwardTrustCertificate, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering unpack helper for models.SslDecryptionSettingsForwardTrustCertificate", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
     var model models.SslDecryptionSettingsForwardTrustCertificate
@@ -249,7 +291,7 @@ func unpackSslDecryptionSettingsForwardTrustCertificateToSdk(ctx context.Context
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk network_services.SslDecryptionSettingsForwardTrustCertificate
+    var sdk security_services.SslDecryptionSettingsForwardTrustCertificate
     var d diag.Diagnostics
     // Handling Primitives
     if !model.Ecdsa.IsNull() && !model.Ecdsa.IsUnknown() {
@@ -271,7 +313,7 @@ diags.Append(d...)
 }
 
 // --- Packer for SslDecryptionSettingsForwardTrustCertificate ---
-func packSslDecryptionSettingsForwardTrustCertificateFromSdk(ctx context.Context, sdk network_services.SslDecryptionSettingsForwardTrustCertificate) (types.Object, diag.Diagnostics) {
+func packSslDecryptionSettingsForwardTrustCertificateFromSdk(ctx context.Context, sdk security_services.SslDecryptionSettingsForwardTrustCertificate) (types.Object, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering pack helper for models.SslDecryptionSettingsForwardTrustCertificate", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
     var model models.SslDecryptionSettingsForwardTrustCertificate
@@ -303,7 +345,7 @@ diags.Append(d...)
 }
 
 // --- List Unpacker for SslDecryptionSettingsForwardTrustCertificate ---
-func unpackSslDecryptionSettingsForwardTrustCertificateListToSdk(ctx context.Context, list types.List) ([]network_services.SslDecryptionSettingsForwardTrustCertificate, diag.Diagnostics) {
+func unpackSslDecryptionSettingsForwardTrustCertificateListToSdk(ctx context.Context, list types.List) ([]security_services.SslDecryptionSettingsForwardTrustCertificate, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list unpack helper for models.SslDecryptionSettingsForwardTrustCertificate")
 	diags := diag.Diagnostics{}
 	var data []models.SslDecryptionSettingsForwardTrustCertificate
@@ -313,7 +355,7 @@ func unpackSslDecryptionSettingsForwardTrustCertificateListToSdk(ctx context.Con
 		return nil, diags
 	}
 
-	ans := make([]network_services.SslDecryptionSettingsForwardTrustCertificate, 0, len(data))
+	ans := make([]security_services.SslDecryptionSettingsForwardTrustCertificate, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
 		obj, _ := types.ObjectValueFrom(ctx, models.SslDecryptionSettingsForwardTrustCertificate{}.AttrTypes(), &item)
@@ -328,7 +370,7 @@ func unpackSslDecryptionSettingsForwardTrustCertificateListToSdk(ctx context.Con
 }
 
 // --- List Packer for SslDecryptionSettingsForwardTrustCertificate ---
-func packSslDecryptionSettingsForwardTrustCertificateListFromSdk(ctx context.Context, sdks []network_services.SslDecryptionSettingsForwardTrustCertificate) (types.List, diag.Diagnostics) {
+func packSslDecryptionSettingsForwardTrustCertificateListFromSdk(ctx context.Context, sdks []security_services.SslDecryptionSettingsForwardTrustCertificate) (types.List, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list pack helper for models.SslDecryptionSettingsForwardTrustCertificate")
 	diags := diag.Diagnostics{}
 	var data []models.SslDecryptionSettingsForwardTrustCertificate
@@ -349,7 +391,7 @@ func packSslDecryptionSettingsForwardTrustCertificateListFromSdk(ctx context.Con
 }
 
 // --- Unpacker for SslDecryptionSettingsSslExcludeCertInner ---
-func unpackSslDecryptionSettingsSslExcludeCertInnerToSdk(ctx context.Context, obj types.Object) (*network_services.SslDecryptionSettingsSslExcludeCertInner, diag.Diagnostics) {
+func unpackSslDecryptionSettingsSslExcludeCertInnerToSdk(ctx context.Context, obj types.Object) (*security_services.SslDecryptionSettingsSslExcludeCertInner, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering unpack helper for models.SslDecryptionSettingsSslExcludeCertInner", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
     var model models.SslDecryptionSettingsSslExcludeCertInner
@@ -360,7 +402,7 @@ func unpackSslDecryptionSettingsSslExcludeCertInnerToSdk(ctx context.Context, ob
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk network_services.SslDecryptionSettingsSslExcludeCertInner
+    var sdk security_services.SslDecryptionSettingsSslExcludeCertInner
     var d diag.Diagnostics
     // Handling Primitives
     if !model.Description.IsNull() && !model.Description.IsUnknown() {
@@ -388,7 +430,7 @@ diags.Append(d...)
 }
 
 // --- Packer for SslDecryptionSettingsSslExcludeCertInner ---
-func packSslDecryptionSettingsSslExcludeCertInnerFromSdk(ctx context.Context, sdk network_services.SslDecryptionSettingsSslExcludeCertInner) (types.Object, diag.Diagnostics) {
+func packSslDecryptionSettingsSslExcludeCertInnerFromSdk(ctx context.Context, sdk security_services.SslDecryptionSettingsSslExcludeCertInner) (types.Object, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering pack helper for models.SslDecryptionSettingsSslExcludeCertInner", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
     var model models.SslDecryptionSettingsSslExcludeCertInner
@@ -428,7 +470,7 @@ diags.Append(d...)
 }
 
 // --- List Unpacker for SslDecryptionSettingsSslExcludeCertInner ---
-func unpackSslDecryptionSettingsSslExcludeCertInnerListToSdk(ctx context.Context, list types.List) ([]network_services.SslDecryptionSettingsSslExcludeCertInner, diag.Diagnostics) {
+func unpackSslDecryptionSettingsSslExcludeCertInnerListToSdk(ctx context.Context, list types.List) ([]security_services.SslDecryptionSettingsSslExcludeCertInner, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list unpack helper for models.SslDecryptionSettingsSslExcludeCertInner")
 	diags := diag.Diagnostics{}
 	var data []models.SslDecryptionSettingsSslExcludeCertInner
@@ -438,7 +480,7 @@ func unpackSslDecryptionSettingsSslExcludeCertInnerListToSdk(ctx context.Context
 		return nil, diags
 	}
 
-	ans := make([]network_services.SslDecryptionSettingsSslExcludeCertInner, 0, len(data))
+	ans := make([]security_services.SslDecryptionSettingsSslExcludeCertInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
 		obj, _ := types.ObjectValueFrom(ctx, models.SslDecryptionSettingsSslExcludeCertInner{}.AttrTypes(), &item)
@@ -453,7 +495,7 @@ func unpackSslDecryptionSettingsSslExcludeCertInnerListToSdk(ctx context.Context
 }
 
 // --- List Packer for SslDecryptionSettingsSslExcludeCertInner ---
-func packSslDecryptionSettingsSslExcludeCertInnerListFromSdk(ctx context.Context, sdks []network_services.SslDecryptionSettingsSslExcludeCertInner) (types.List, diag.Diagnostics) {
+func packSslDecryptionSettingsSslExcludeCertInnerListFromSdk(ctx context.Context, sdks []security_services.SslDecryptionSettingsSslExcludeCertInner) (types.List, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list pack helper for models.SslDecryptionSettingsSslExcludeCertInner")
 	diags := diag.Diagnostics{}
 	var data []models.SslDecryptionSettingsSslExcludeCertInner

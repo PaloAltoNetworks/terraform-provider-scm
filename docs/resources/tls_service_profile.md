@@ -14,7 +14,8 @@ TlsServiceProfile resource
 
 ```terraform
 resource "scm_tls_service_profile" "tls_service_prof_1_upper" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "TLS_Service_Profile_1"
   certificate = "Authentication Cookie CA"
 
@@ -24,7 +25,8 @@ resource "scm_tls_service_profile" "tls_service_prof_1_upper" {
 }
 
 resource "scm_tls_service_profile" "tls_service_prof_2_upper" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "TLS_Service_Profile_2"
   certificate = "Forward-Trust-CA"
 
@@ -39,7 +41,8 @@ resource "scm_tls_service_profile" "tls_service_prof_2_upper" {
 }
 
 resource "scm_tls_service_profile" "tls_service_prof_3_upper" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "TLS_Service_Profile_3"
   certificate = "Root CA"
 

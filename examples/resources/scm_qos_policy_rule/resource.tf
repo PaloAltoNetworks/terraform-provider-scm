@@ -2,8 +2,9 @@
 resource "scm_qos_policy_rule" "anchor_qos_rule" {
   name        = "anchor-qos-rule"
   description = "Base rule for testing 'before' and 'after' positioning."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # Action: Set the traffic to QoS Class B
   action = {
@@ -31,8 +32,9 @@ resource "scm_qos_policy_rule" "anchor_qos_rule" {
 resource "scm_qos_policy_rule" "rule_top_qos_rule" {
   name        = "top-absolute-qos-rule"
   description = "Placed at the very TOP of the QoS rulebase (Highest Priority)."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Sets rule at the absolute beginning of the rulebase
   relative_position = "top"
@@ -47,8 +49,9 @@ resource "scm_qos_policy_rule" "rule_top_qos_rule" {
 resource "scm_qos_policy_rule" "rule_bottom_qos_rule" {
   name        = "bottom-absolute-qos-rule"
   description = "Placed at the very BOTTOM of the QoS rulebase (Lowest Priority)"
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Sets rule at the absolute end of the rulebase
   relative_position = "bottom"
@@ -64,8 +67,9 @@ resource "scm_qos_policy_rule" "rule_bottom_qos_rule" {
 resource "scm_qos_policy_rule" "rule_before_anchor_qos" {
   name        = "before-anchor-qos-rule"
   description = "Positioned immediately BEFORE the anchor-qos-rule."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "before"
@@ -82,8 +86,9 @@ resource "scm_qos_policy_rule" "rule_before_anchor_qos" {
 resource "scm_qos_policy_rule" "rule_after_anchor_qos" {
   name        = "after-anchor-qos-rule"
   description = "Positioned immediately AFTER the anchor-qos-rule."
-  folder      = "All"
-  position    = "pre"
+  folder      = "ngfw-shared"
+
+  position = "pre"
 
   # POSITIONING: Requires both relative_position and target_rule
   relative_position = "after"

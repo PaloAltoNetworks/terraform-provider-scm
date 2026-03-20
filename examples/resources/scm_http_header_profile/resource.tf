@@ -1,11 +1,13 @@
 resource "scm_http_header_profile" "scm_http_header_profile_1" {
-  folder = "All"
-  name   = "base_http_header_profile_1"
+  folder = "ngfw-shared"
+
+  name = "base_http_header_profile_1"
 }
 
 resource "scm_http_header_profile" "scm_http_header_profile_2" {
-  folder = "All"
-  name   = "simple_http_header_profile_2"
+  folder = "ngfw-shared"
+
+  name = "simple_http_header_profile_2"
 
   http_header_insertion = [
     {
@@ -28,8 +30,9 @@ resource "scm_http_header_profile" "scm_http_header_profile_2" {
 }
 
 resource "scm_http_header_profile" "scm_http_header_profile_3" {
-  folder = "All"
-  name   = "complete_http_header_profile_3"
+  folder = "ngfw-shared"
+
+  name = "complete_http_header_profile_3"
 
   http_header_insertion = [
     {

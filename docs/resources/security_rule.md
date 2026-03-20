@@ -15,21 +15,24 @@ SecurityRule resource
 ```terraform
 # First, create the tag objects that you will reference.
 resource "scm_tag" "outbound_tag" {
-  folder = "All"
-  name   = "outbound143"
-  color  = "Red"
+  folder = "ngfw-shared"
+
+  name  = "outbound143"
+  color = "Red"
 }
 
 resource "scm_tag" "web_tag" {
-  folder = "All"
-  name   = "web143"
-  color  = "Blue"
+  folder = "ngfw-shared"
+
+  name  = "web143"
+  color = "Blue"
 }
 
 # --- Existing Rules (Backward Compatibility) ---
 
 resource "scm_security_rule" "standard_web_access" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "Allow Standard Web Access143"
   description = "Allow outbound web traffic to any destination..."
   position    = "pre" #
@@ -69,7 +72,8 @@ resource "scm_security_rule" "standard_web_access" {
 }
 
 resource "scm_security_rule" "block_risky_saas" {
-  folder      = "All"
+  folder = "ngfw-shared"
+
   name        = "Block Risky SaaS Applications143"
   description = "Prevent data exfiltration by blocking risky SaaS apps..."
   # Internet rule fields
@@ -106,7 +110,8 @@ resource "scm_security_rule" "block_risky_saas" {
 
 # Example 1: Place a critical block rule at the absolute top
 resource "scm_security_rule" "critical_block_top" {
-  folder            = "All"
+  folder = "ngfw-shared"
+
   name              = "CRITICAL Block Malicious IPs Top143"
   description       = "Always block known malicious IPs first."
   relative_position = "top" # Place at the very top of the 'pre' rulebase
@@ -126,7 +131,8 @@ resource "scm_security_rule" "critical_block_top" {
 
 # Example 2: Place a cleanup rule at the absolute bottom
 resource "scm_security_rule" "cleanup_deny_bottom" {
-  folder            = "All"
+  folder = "ngfw-shared"
+
   name              = "Cleanup Deny All Bottom143"
   description       = "Deny any traffic not explicitly allowed."
   relative_position = "bottom" # Place at the very bottom of the 'pre' rulebase (default rulebase)
@@ -147,7 +153,8 @@ resource "scm_security_rule" "cleanup_deny_bottom" {
 
 # Example 3: Place a rule *before* the standard web access rule
 resource "scm_security_rule" "allow_updates_before_web" {
-  folder            = "All"
+  folder = "ngfw-shared"
+
   name              = "Allow OS Updates Before Web143"
   description       = "Allow specific OS update traffic before general web access."
   relative_position = "before"
@@ -168,7 +175,8 @@ resource "scm_security_rule" "allow_updates_before_web" {
 
 # Example 4: Place a rule *after* the standard web access rule
 resource "scm_security_rule" "allow_corp_apps_after_web" {
-  folder            = "All"
+  folder = "ngfw-shared"
+
   name              = "Allow Corp Apps After Web143"
   description       = "Allow access to specific corporate apps after general web access."
   relative_position = "after"

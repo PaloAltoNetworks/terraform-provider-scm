@@ -14,7 +14,8 @@ ContentIdSetting resource
 
 ```terraform
 resource "scm_content_id_setting" "cid_example" {
-  folder = "All"
+  folder = "ngfw-shared"
+
   content_id = {
     allow_forward_decrypted_content = true
     extended_capture_segment        = 6

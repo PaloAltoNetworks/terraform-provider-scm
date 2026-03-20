@@ -15,7 +15,7 @@ AntiSpywareProfile resource
 ```terraform
 # Basic Anti-Spyware Profile
 resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_1" {
-  folder                = "All"
+  folder                = "ngfw-shared"
   name                  = "scm_anti_spyware_profile_1"
   description           = "Managed by Terraform"
   cloud_inline_analysis = true
@@ -23,7 +23,7 @@ resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_1" {
 
 # Required object that will be referenced in examples
 resource "scm_address" "scm_address_1" {
-  folder      = "Prisma Access"
+  folder      = "ngfw-shared"
   name        = "scm_address_1"
   description = "Made by Terraform"
   ip_netmask  = "10.2.3.4"
@@ -32,7 +32,7 @@ resource "scm_address" "scm_address_1" {
 
 # Anti-Spyware Profile with exception EDL
 resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_2" {
-  folder                = "All"
+  folder                = "ngfw-shared"
   name                  = "scm_anti_spyware_profile_2"
   description           = "Managed by Terraform"
   cloud_inline_analysis = true
@@ -45,7 +45,7 @@ resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_2" {
 
 # Anti-Spyware Profile with rules
 resource "scm_anti_spyware_profile" "scm_anti_spyware_profile_3" {
-  folder                = "All"
+  folder                = "ngfw-shared"
   name                  = "scm_anti_spyware_profile_3"
   description           = "Managed by Terraform"
   cloud_inline_analysis = true

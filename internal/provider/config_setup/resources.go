@@ -7,6 +7,7 @@ import (
 // GetResources returns all resources for the config_setup package
 func GetResources() []func() resource.Resource {
 	return []func() resource.Resource{
+		NewDeviceResource,
 		NewFolderResource,
 		NewLabelResource,
 		NewSnippetResource,

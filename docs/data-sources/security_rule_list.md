@@ -131,6 +131,7 @@ Read-Only:
 
 Read-Only:
 
+- `app_id` (String) App id
 - `application_function` (List of String) Application function
 - `dlp` (String) Dlp
 - `file_control` (Attributes) File control (see [below for nested schema](#nestedatt--data--allow_web_application--file_control))

@@ -78,7 +78,7 @@ Required:
 - `okta_api_host` (String) Okta API hostname
 - `okta_baseuri` (String) Okta baseuri
 - `okta_org` (String) Okta organization
-- `okta_timeout` (Number) Okta timeout (seconds)
+- `okta_timeout` (String) Okta timeout (seconds)
 - `okta_token` (String, Sensitive) Okta API token
 
 

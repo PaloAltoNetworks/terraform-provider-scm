@@ -12,7 +12,6 @@ func GetResources() []func() resource.Resource {
 		NewAuthenticationRuleResource,
 		NewAuthenticationSequenceResource,
 		NewCertificateProfileResource,
-		// 		NewCertificatesGetResource,
 		NewKerberosServerProfileResource,
 		NewLdapServerProfileResource,
 		NewLocalUserResource,

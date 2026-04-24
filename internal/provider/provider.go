@@ -18,6 +18,7 @@ import (
 	tfProviderDeploymentServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
 	tfProviderDeviceSettings "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/device_settings"
 	tfProviderIdentityServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/identity_services"
+	tfProviderMobileAgent "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/mobile_agent"
 	tfProviderNetworkServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/network_services"
 	tfProviderObjects "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/objects"
 	tfProviderSecurityServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/security_services"
@@ -215,6 +216,7 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		"deployment_services": setup.GetDeploymentServicesAPIClient(setupClient),
 		"device_settings":     setup.GetDeviceSettingsAPIClient(setupClient),
 		"identity_services":   setup.GetIdentityServicesAPIClient(setupClient),
+		"mobile_agent":        setup.GetMobileAgentAPIClient(setupClient),
 		"network_services":    setup.GetNetworkServicesAPIClient(setupClient),
 		"objects":             setup.GetObjectsAPIClient(setupClient),
 		"security_services":   setup.GetSecurityServicesAPIClient(setupClient),
@@ -236,6 +238,8 @@ func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataS
 	dataSources = append(dataSources, tfProviderDeviceSettings.GetDataSources()...)
 	// Add identity_services package data sources
 	dataSources = append(dataSources, tfProviderIdentityServices.GetDataSources()...)
+	// Add mobile_agent package data sources
+	dataSources = append(dataSources, tfProviderMobileAgent.GetDataSources()...)
 	// Add network_services package data sources
 	dataSources = append(dataSources, tfProviderNetworkServices.GetDataSources()...)
 	// Add objects package data sources
@@ -256,6 +260,8 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 	resources = append(resources, tfProviderDeviceSettings.GetResources()...)
 	// Add identity_services package resources
 	resources = append(resources, tfProviderIdentityServices.GetResources()...)
+	// Add mobile_agent package resources
+	resources = append(resources, tfProviderMobileAgent.GetResources()...)
 	// Add network_services package resources
 	resources = append(resources, tfProviderNetworkServices.GetResources()...)
 	// Add objects package resources

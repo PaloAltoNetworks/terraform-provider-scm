@@ -171,6 +171,12 @@ func unpackServiceConnectionsToSdk(ctx context.Context, obj types.Object) (*depl
 	}
 
 	// Handling Primitives
+	if !model.RegionTag.IsNull() && !model.RegionTag.IsUnknown() {
+		sdk.RegionTag = model.RegionTag.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RegionTag", "value": *sdk.RegionTag})
+	}
+
+	// Handling Primitives
 	if !model.SecondaryIpsecTunnel.IsNull() && !model.SecondaryIpsecTunnel.IsUnknown() {
 		sdk.SecondaryIpsecTunnel = model.SecondaryIpsecTunnel.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SecondaryIpsecTunnel", "value": *sdk.SecondaryIpsecTunnel})
@@ -290,6 +296,14 @@ func packServiceConnectionsFromSdk(ctx context.Context, sdk deployment_services.
 	// Standard primitive packing
 	model.Region = basetypes.NewStringValue(sdk.Region)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Region", "value": sdk.Region})
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.RegionTag != nil {
+		model.RegionTag = basetypes.NewStringValue(*sdk.RegionTag)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RegionTag", "value": *sdk.RegionTag})
+	} else {
+		model.RegionTag = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.SecondaryIpsecTunnel != nil {
@@ -414,6 +428,12 @@ func unpackServiceConnectionsBgpPeerToSdk(ctx context.Context, obj types.Object)
 	}
 
 	// Handling Primitives
+	if !model.SameAsPrimary.IsNull() && !model.SameAsPrimary.IsUnknown() {
+		sdk.SameAsPrimary = model.SameAsPrimary.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SameAsPrimary", "value": *sdk.SameAsPrimary})
+	}
+
+	// Handling Primitives
 	if !model.Secret.IsNull() && !model.Secret.IsUnknown() {
 		sdk.Secret = model.Secret.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Secret", "value": *sdk.Secret})
@@ -463,6 +483,14 @@ func packServiceConnectionsBgpPeerFromSdk(ctx context.Context, sdk deployment_se
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PeerIpv6Address", "value": *sdk.PeerIpv6Address})
 	} else {
 		model.PeerIpv6Address = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.SameAsPrimary != nil {
+		model.SameAsPrimary = basetypes.NewBoolValue(*sdk.SameAsPrimary)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SameAsPrimary", "value": *sdk.SameAsPrimary})
+	} else {
+		model.SameAsPrimary = basetypes.NewBoolNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing

@@ -125,6 +125,7 @@ resource "scm_service_connection" "site_a_vpn_sc" {
 - `onboarding_type` (String) Onboarding type
 - `protocol` (Attributes) Protocol (see [below for nested schema](#nestedatt--protocol))
 - `qos` (Attributes) Qos (see [below for nested schema](#nestedatt--qos))
+- `region_tag` (String) Region tag
 - `secondary_ipsec_tunnel` (String) Secondary ipsec tunnel
 - `source_nat` (Boolean) Source nat
 - `subnets` (List of String) Subnets
@@ -145,6 +146,7 @@ Optional:
 - `local_ipv6_address` (String) Local ipv6 address
 - `peer_ip_address` (String) Peer ip address
 - `peer_ipv6_address` (String) Peer ipv6 address
+- `same_as_primary` (Boolean) Same peer IP address for SC
 - `secret` (String, Sensitive) Secret
 
 

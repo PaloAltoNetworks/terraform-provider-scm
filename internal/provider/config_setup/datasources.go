@@ -7,10 +7,12 @@ import (
 // GetDataSources returns the list of data sources for this package.
 func GetDataSources() []func() datasource.DataSource {
 	return []func() datasource.DataSource{
+		NewDeviceDataSource,
 		NewFolderDataSource,
 		NewLabelDataSource,
 		NewSnippetDataSource,
 		NewVariableDataSource,
+		NewDeviceListDataSource,
 		NewFolderListDataSource,
 		NewLabelListDataSource,
 		NewSnippetListDataSource,

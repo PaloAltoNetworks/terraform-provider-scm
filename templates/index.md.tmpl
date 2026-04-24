@@ -24,6 +24,28 @@ By using this software, you agree to these terms.
 
 ## Release Notes
 
+### v1.0.10
+
+#### FEATURES
+* resources/scm_forwarding_profile: Added Support, examples and tests (resources, data-source)
+* resources/scm_forwarding_profile_destination: Added Support, examples and tests (resources, data-source)
+* resources/scm_forwarding_profile_regional_and_custom_proxy: Added Support, examples and tests (resources, data-source)
+* resources/scm_forwarding_profile_source_application: Added Support, examples and tests (resources, data-source)
+* resources/scm_forwarding_profile_user_location: Added Support, examples and tests (resources, data-source)
+* resources/scm_device: Added Support, examples and tests (data-source)
+
+#### ENHANCEMENTS
+
+* scm_certificates: Added support and tests (SDK-Only)
+* resource/scm_security_rule: Added additional examples (resource)
+
+#### BUG FIXES
+
+* resources/scm_service_connection: Added support for a region tag 
+* Added an app_id field to the allow_web_application items in the internet-rule-type schema
+* resources/scm_device: Added device support for device to folder management (#96)
+* resources/scm_service_connection: Added support for same_as_primary (#104)
+
 ### v1.0.9
 
 #### FEATURES

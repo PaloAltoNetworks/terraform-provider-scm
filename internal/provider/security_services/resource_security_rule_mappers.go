@@ -1062,6 +1062,12 @@ func unpackInternetRuleTypeAllowWebApplicationInnerToSdk(ctx context.Context, ob
 
 	var sdk security_services.InternetRuleTypeAllowWebApplicationInner
 	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.AppId.IsNull() && !model.AppId.IsUnknown() {
+		sdk.AppId = model.AppId.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AppId", "value": *sdk.AppId})
+	}
+
 	// Handling Lists
 	if !model.ApplicationFunction.IsNull() && !model.ApplicationFunction.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of primitives for field ApplicationFunction")
@@ -1150,6 +1156,14 @@ func packInternetRuleTypeAllowWebApplicationInnerFromSdk(ctx context.Context, sd
 	diags := diag.Diagnostics{}
 	var model models.InternetRuleTypeAllowWebApplicationInner
 	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.AppId != nil {
+		model.AppId = basetypes.NewStringValue(*sdk.AppId)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AppId", "value": *sdk.AppId})
+	} else {
+		model.AppId = basetypes.NewStringNull()
+	}
 	// Handling Lists
 	if sdk.ApplicationFunction != nil {
 		tflog.Debug(ctx, "Packing list of primitives for field ApplicationFunction")

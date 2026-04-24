@@ -58,7 +58,7 @@ type MfaServersMfaVendorTypeOktaAdaptiveV1 struct {
 	OktaApiHost basetypes.StringValue `tfsdk:"okta_api_host"`
 	OktaBaseuri basetypes.StringValue `tfsdk:"okta_baseuri"`
 	OktaOrg     basetypes.StringValue `tfsdk:"okta_org"`
-	OktaTimeout basetypes.Int64Value  `tfsdk:"okta_timeout"`
+	OktaTimeout basetypes.StringValue `tfsdk:"okta_timeout"`
 	OktaToken   basetypes.StringValue `tfsdk:"okta_token"`
 }
 
@@ -107,7 +107,7 @@ func (o MfaServers) AttrTypes() map[string]attr.Type {
 						"okta_api_host": basetypes.StringType{},
 						"okta_baseuri":  basetypes.StringType{},
 						"okta_org":      basetypes.StringType{},
-						"okta_timeout":  basetypes.Int64Type{},
+						"okta_timeout":  basetypes.StringType{},
 						"okta_token":    basetypes.StringType{},
 					},
 				},
@@ -162,7 +162,7 @@ func (o MfaServersMfaVendorType) AttrTypes() map[string]attr.Type {
 				"okta_api_host": basetypes.StringType{},
 				"okta_baseuri":  basetypes.StringType{},
 				"okta_org":      basetypes.StringType{},
-				"okta_timeout":  basetypes.Int64Type{},
+				"okta_timeout":  basetypes.StringType{},
 				"okta_token":    basetypes.StringType{},
 			},
 		},
@@ -220,7 +220,7 @@ func (o MfaServersMfaVendorTypeOktaAdaptiveV1) AttrTypes() map[string]attr.Type 
 		"okta_api_host": basetypes.StringType{},
 		"okta_baseuri":  basetypes.StringType{},
 		"okta_org":      basetypes.StringType{},
-		"okta_timeout":  basetypes.Int64Type{},
+		"okta_timeout":  basetypes.StringType{},
 		"okta_token":    basetypes.StringType{},
 	}
 }
@@ -404,10 +404,7 @@ var MfaServersResourceSchema = schema.Schema{
 							MarkdownDescription: "Okta organization",
 							Required:            true,
 						},
-						"okta_timeout": schema.Int64Attribute{
-							Validators: []validator.Int64{
-								int64validator.Between(5, 600),
-							},
+						"okta_timeout": schema.StringAttribute{
 							MarkdownDescription: "Okta timeout (seconds)",
 							Required:            true,
 						},
@@ -643,7 +640,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 							MarkdownDescription: "Okta organization",
 							Computed:            true,
 						},
-						"okta_timeout": dsschema.Int64Attribute{
+						"okta_timeout": dsschema.StringAttribute{
 							MarkdownDescription: "Okta timeout (seconds)",
 							Computed:            true,
 						},

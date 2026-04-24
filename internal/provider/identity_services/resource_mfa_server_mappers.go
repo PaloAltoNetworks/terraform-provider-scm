@@ -636,7 +636,7 @@ func unpackMfaServersMfaVendorTypeOktaAdaptiveV1ToSdk(ctx context.Context, obj t
 
 	// Handling Primitives
 	if !model.OktaTimeout.IsNull() && !model.OktaTimeout.IsUnknown() {
-		sdk.OktaTimeout = int32(model.OktaTimeout.ValueInt64())
+		sdk.OktaTimeout = model.OktaTimeout.ValueString()
 		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "OktaTimeout", "value": sdk.OktaTimeout})
 	}
 
@@ -673,7 +673,8 @@ func packMfaServersMfaVendorTypeOktaAdaptiveV1FromSdk(ctx context.Context, sdk i
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "OktaOrg", "value": sdk.OktaOrg})
 	// Handling Primitives
 	// Standard primitive packing
-	model.OktaTimeout = basetypes.NewInt64Value(int64(sdk.OktaTimeout))
+	model.OktaTimeout = basetypes.NewStringValue(sdk.OktaTimeout)
+	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "OktaTimeout", "value": sdk.OktaTimeout})
 	// Handling Primitives
 	// Standard primitive packing
 	model.OktaToken = basetypes.NewStringValue(sdk.OktaToken)

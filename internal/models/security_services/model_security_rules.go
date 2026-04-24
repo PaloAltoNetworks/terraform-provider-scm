@@ -84,6 +84,7 @@ type InternetRuleTypeAllowUrlCategoryInnerFileControl struct {
 
 // InternetRuleTypeAllowWebApplicationInner represents a nested structure within the SecurityRules model
 type InternetRuleTypeAllowWebApplicationInner struct {
+	AppId                 basetypes.StringValue `tfsdk:"app_id"`
 	ApplicationFunction   basetypes.ListValue   `tfsdk:"application_function"`
 	Dlp                   basetypes.StringValue `tfsdk:"dlp"`
 	FileControl           basetypes.ObjectValue `tfsdk:"file_control"`
@@ -168,6 +169,7 @@ func (o SecurityRules) AttrTypes() map[string]attr.Type {
 		}},
 		"allow_web_application": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"app_id":               basetypes.StringType{},
 				"application_function": basetypes.ListType{ElemType: basetypes.StringType{}},
 				"dlp":                  basetypes.StringType{},
 				"file_control": basetypes.ObjectType{
@@ -317,6 +319,7 @@ func (o InternetRuleTypeAllowUrlCategoryInnerFileControl) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the InternetRuleTypeAllowWebApplicationInner model.
 func (o InternetRuleTypeAllowWebApplicationInner) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"app_id":               basetypes.StringType{},
 		"application_function": basetypes.ListType{ElemType: basetypes.StringType{}},
 		"dlp":                  basetypes.StringType{},
 		"file_control": basetypes.ObjectType{
@@ -583,6 +586,11 @@ var SecurityRulesResourceSchema = schema.Schema{
 			Computed:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
+					"app_id": schema.StringAttribute{
+						MarkdownDescription: "App id",
+						Optional:            true,
+						Computed:            true,
+					},
 					"application_function": schema.ListAttribute{
 						ElementType:         types.StringType,
 						MarkdownDescription: "Application function",
@@ -1061,6 +1069,10 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
+					"app_id": dsschema.StringAttribute{
+						MarkdownDescription: "App id",
+						Computed:            true,
+					},
 					"application_function": dsschema.ListAttribute{
 						ElementType:         types.StringType,
 						MarkdownDescription: "Application function",

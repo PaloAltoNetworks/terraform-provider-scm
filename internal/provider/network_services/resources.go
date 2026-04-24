@@ -9,7 +9,6 @@ func GetResources() []func() resource.Resource {
 	return []func() resource.Resource{
 		NewAggregateInterfaceResource,
 		NewAutoVpnClusterResource,
-		// 		NewAutoVpnPushResponseResource,
 		NewAutoVpnSettingResource,
 		NewBgpAddressFamilyProfileResource,
 		NewBgpAuthProfileResource,
@@ -31,7 +30,6 @@ func GetResources() []func() resource.Resource {
 		NewIptagMatchListResource,
 		NewLayer2SubinterfaceResource,
 		NewLayer3SubinterfaceResource,
-		// 		NewLicenseResultResource,
 		NewLinkTagResource,
 		NewLldpProfileResource,
 		NewLogicalRouterResource,

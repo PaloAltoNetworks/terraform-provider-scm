@@ -179,3 +179,34 @@ resource "scm_security_rule" "allow_corp_apps_after_web" {
   log_end     = true
   tag         = [scm_tag.web_tag.name]
 }
+
+# Internet Rule with Web Application
+resource "scm_security_rule" "internet_rule_example" {
+  folder      = "ngfw-shared"
+  name        = "internet-rule-postman"
+  policy_type = "Internet"
+
+  allow_web_application = [
+    {
+      name                 = "web_appln"
+      type                 = "application"
+      application_function = ["any"]
+      app_id               = "4sync"
+    },
+    {
+      name                 = "web_appln_2"
+      type                 = "application"
+      application_function = ["any"]
+      app_id               = "4sync"
+    }
+  ]
+
+  source      = ["any"]
+  destination = ["any"]
+  action      = "allow"
+
+  source_user = [
+    "casidp\\test_1",
+    "CN=ng1,DC=casidp,DC=onmicrosoft,DC=com"
+  ]
+}

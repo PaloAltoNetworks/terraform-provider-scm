@@ -32,6 +32,7 @@ type ServiceConnections struct {
 	Protocol             basetypes.ObjectValue `tfsdk:"protocol"`
 	Qos                  basetypes.ObjectValue `tfsdk:"qos"`
 	Region               basetypes.StringValue `tfsdk:"region"`
+	RegionTag            basetypes.StringValue `tfsdk:"region_tag"`
 	SecondaryIpsecTunnel basetypes.StringValue `tfsdk:"secondary_ipsec_tunnel"`
 	SourceNat            basetypes.BoolValue   `tfsdk:"source_nat"`
 	Subnets              basetypes.ListValue   `tfsdk:"subnets"`
@@ -44,6 +45,7 @@ type ServiceConnectionsBgpPeer struct {
 	LocalIpv6Address basetypes.StringValue `tfsdk:"local_ipv6_address"`
 	PeerIpAddress    basetypes.StringValue `tfsdk:"peer_ip_address"`
 	PeerIpv6Address  basetypes.StringValue `tfsdk:"peer_ipv6_address"`
+	SameAsPrimary    basetypes.BoolValue   `tfsdk:"same_as_primary"`
 	Secret           basetypes.StringValue `tfsdk:"secret"`
 }
 
@@ -83,6 +85,7 @@ func (o ServiceConnections) AttrTypes() map[string]attr.Type {
 				"local_ipv6_address": basetypes.StringType{},
 				"peer_ip_address":    basetypes.StringType{},
 				"peer_ipv6_address":  basetypes.StringType{},
+				"same_as_primary":    basetypes.BoolType{},
 				"secret":             basetypes.StringType{},
 			},
 		},
@@ -116,6 +119,7 @@ func (o ServiceConnections) AttrTypes() map[string]attr.Type {
 			},
 		},
 		"region":                 basetypes.StringType{},
+		"region_tag":             basetypes.StringType{},
 		"secondary_ipsec_tunnel": basetypes.StringType{},
 		"source_nat":             basetypes.BoolType{},
 		"subnets":                basetypes.ListType{ElemType: basetypes.StringType{}},
@@ -137,6 +141,7 @@ func (o ServiceConnectionsBgpPeer) AttrTypes() map[string]attr.Type {
 		"local_ipv6_address": basetypes.StringType{},
 		"peer_ip_address":    basetypes.StringType{},
 		"peer_ipv6_address":  basetypes.StringType{},
+		"same_as_primary":    basetypes.BoolType{},
 		"secret":             basetypes.StringType{},
 	}
 }
@@ -237,6 +242,10 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 				},
 				"peer_ipv6_address": schema.StringAttribute{
 					MarkdownDescription: "Peer ipv6 address",
+					Optional:            true,
+				},
+				"same_as_primary": schema.BoolAttribute{
+					MarkdownDescription: "Same peer IP address for SC",
 					Optional:            true,
 				},
 				"secret": schema.StringAttribute{
@@ -365,6 +374,11 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 			MarkdownDescription: "Region",
 			Required:            true,
 		},
+		"region_tag": schema.StringAttribute{
+			MarkdownDescription: "Region tag",
+			Optional:            true,
+			Computed:            true,
+		},
 		"secondary_ipsec_tunnel": schema.StringAttribute{
 			MarkdownDescription: "Secondary ipsec tunnel",
 			Optional:            true,
@@ -414,6 +428,10 @@ var ServiceConnectionsDataSourceSchema = dsschema.Schema{
 				},
 				"peer_ipv6_address": dsschema.StringAttribute{
 					MarkdownDescription: "Peer ipv6 address",
+					Computed:            true,
+				},
+				"same_as_primary": dsschema.BoolAttribute{
+					MarkdownDescription: "Same peer IP address for SC",
 					Computed:            true,
 				},
 				"secret": dsschema.StringAttribute{
@@ -524,6 +542,10 @@ var ServiceConnectionsDataSourceSchema = dsschema.Schema{
 		},
 		"region": dsschema.StringAttribute{
 			MarkdownDescription: "Region",
+			Computed:            true,
+		},
+		"region_tag": dsschema.StringAttribute{
+			MarkdownDescription: "Region tag",
 			Computed:            true,
 		},
 		"secondary_ipsec_tunnel": dsschema.StringAttribute{

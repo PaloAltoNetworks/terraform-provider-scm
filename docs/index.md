@@ -24,6 +24,34 @@ By using this software, you agree to these terms.
 
 ## Release Notes
 
+### v1.0.11-beta.1
+
+#### FEATURES
+
+* actions/scm_config_push: Push candidate configuration to devices (action)
+* actions/scm_config_load: Load configuration versions (action)
+* actions/scm_snippet_snapshot_publish: Publish snippet snapshots (action)
+* actions/scm_snippet_snapshot_compare: Compare snippet snapshots (action)
+* actions/scm_snippet_snapshot_diff: Diff snippet snapshots (action)
+* actions/scm_snippet_snapshot_load: Load snippet snapshots (action)
+* actions/scm_snippet_snapshot_save: Save snippet snapshots (action)
+* actions/scm_snippet_snapshot_convert: Convert snippet snapshots (action)
+* actions/scm_snippet_snapshot_updates: Update snippet snapshots (action)
+* actions/scm_certificate_import: Import certificates (action)
+* actions/scm_certificate_export: Export certificates (action)
+* actions/scm_auto_vpn_push: Push Auto VPN configurations (action)
+* actions/scm_trust_validation: Validate trust (action)
+* actions/scm_shared_snippets_load: Load shared snippets (action)
+
+#### BUG FIXES
+
+* api/config-operations.yaml: Fixed devices field type (changed from number to string)
+
+#### NOTES
+
+* This is a beta release for testing Terraform Actions functionality
+* Customers must explicitly opt-in by specifying version = "1.0.11-beta.1"
+
 ### v1.0.10
 
 #### FEATURES

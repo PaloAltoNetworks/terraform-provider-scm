@@ -39,3 +39,33 @@ jobs:
           # GitHub sets the GITHUB_TOKEN secret automatically.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
+      - name: Extract release notes from docs
+        id: release_notes
+        run: |
+          # Get the version from the tag (e.g. refs/tags/v1.0.10 -> v1.0.10)
+          VERSION="${GITHUB_REF_NAME}"
+          echo "Extracting release notes for ${VERSION}"
+
+          # Extract the section for this version from docs/index.md
+          # Skips the version header line, captures content until the next version or section heading
+          # Converts #### headings to # headings for the GitHub release
+          NOTES=$(awk -v ver="### ${VERSION}" '
+            $0 == ver { found=1; next }
+            found && /^### v/ { exit }
+            found && /^## / { exit }
+            found { gsub(/^####/, "#"); print }
+          ' docs/index.md)
+
+          if [ -z "$NOTES" ]; then
+            echo "::warning::No release notes found for ${VERSION} in docs/index.md"
+            NOTES="Release ${VERSION}"
+          fi
+
+          # Write notes to a file to preserve formatting
+          echo "$NOTES" > /tmp/release_notes.md
+      - name: Update GitHub release with notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          gh release edit "${VERSION}" --notes-file /tmp/release_notes.md

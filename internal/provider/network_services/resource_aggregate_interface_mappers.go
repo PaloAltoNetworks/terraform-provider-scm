@@ -405,6 +405,19 @@ func unpackLacpToSdk(ctx context.Context, obj types.Object) (*network_services.L
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "FastFailover", "value": *sdk.FastFailover})
 	}
 
+	// Handling Objects
+	if !model.HighAvailability.IsNull() && !model.HighAvailability.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field HighAvailability")
+		unpacked, d := unpackLacpHighAvailabilityToSdk(ctx, model.HighAvailability)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "HighAvailability"})
+		}
+		if unpacked != nil {
+			sdk.HighAvailability = unpacked
+		}
+	}
+
 	// Handling Primitives
 	if !model.MaxPorts.IsNull() && !model.MaxPorts.IsUnknown() {
 		val := int32(model.MaxPorts.ValueInt64())
@@ -459,6 +472,19 @@ func packLacpFromSdk(ctx context.Context, sdk network_services.Lacp) (types.Obje
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "FastFailover", "value": *sdk.FastFailover})
 	} else {
 		model.FastFailover = basetypes.NewBoolNull()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.HighAvailability != nil {
+		tflog.Debug(ctx, "Packing nested object for field HighAvailability")
+		packed, d := packLacpHighAvailabilityFromSdk(ctx, *sdk.HighAvailability)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "HighAvailability"})
+		}
+		model.HighAvailability = packed
+	} else {
+		model.HighAvailability = basetypes.NewObjectNull(models.LacpHighAvailability{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -546,6 +572,103 @@ func packLacpListFromSdk(ctx context.Context, sdks []network_services.Lacp) (typ
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.Lacp", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.Lacp{}.AttrType(), data)
+}
+
+// --- Unpacker for LacpHighAvailability ---
+func unpackLacpHighAvailabilityToSdk(ctx context.Context, obj types.Object) (*network_services.LacpHighAvailability, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.LacpHighAvailability", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.LacpHighAvailability
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.LacpHighAvailability
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.PassivePreNegotiation.IsNull() && !model.PassivePreNegotiation.IsUnknown() {
+		sdk.PassivePreNegotiation = model.PassivePreNegotiation.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "PassivePreNegotiation", "value": *sdk.PassivePreNegotiation})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.LacpHighAvailability", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for LacpHighAvailability ---
+func packLacpHighAvailabilityFromSdk(ctx context.Context, sdk network_services.LacpHighAvailability) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.LacpHighAvailability", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.LacpHighAvailability
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.PassivePreNegotiation != nil {
+		model.PassivePreNegotiation = basetypes.NewBoolValue(*sdk.PassivePreNegotiation)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PassivePreNegotiation", "value": *sdk.PassivePreNegotiation})
+	} else {
+		model.PassivePreNegotiation = basetypes.NewBoolNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.LacpHighAvailability{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.LacpHighAvailability", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for LacpHighAvailability ---
+func unpackLacpHighAvailabilityListToSdk(ctx context.Context, list types.List) ([]network_services.LacpHighAvailability, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.LacpHighAvailability")
+	diags := diag.Diagnostics{}
+	var data []models.LacpHighAvailability
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.LacpHighAvailability, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.LacpHighAvailability{}.AttrTypes(), &item)
+		unpacked, d := unpackLacpHighAvailabilityToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.LacpHighAvailability", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for LacpHighAvailability ---
+func packLacpHighAvailabilityListFromSdk(ctx context.Context, sdks []network_services.LacpHighAvailability) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.LacpHighAvailability")
+	diags := diag.Diagnostics{}
+	var data []models.LacpHighAvailability
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.LacpHighAvailability
+		obj, d := packLacpHighAvailabilityFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.LacpHighAvailability{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.LacpHighAvailability", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.LacpHighAvailability{}.AttrType(), data)
 }
 
 // --- Unpacker for AggregateInterfacesLayer3 ---

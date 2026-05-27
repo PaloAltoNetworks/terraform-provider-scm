@@ -1,6 +1,25 @@
+# Create a Layer3 ethernet interface first
+resource "scm_ethernet_interface" "test_interface" {
+  name        = "$test-interface"
+  comment     = "Interface for DHCP server - Managed by Terraform"
+  folder      = "ngfw-shared"
+  link_speed  = "auto"
+  link_duplex = "full"
+  link_state  = "auto"
+  layer3 = {
+    ip = [
+      {
+        name = "10.10.10.1/24" # Gateway IP for the DHCP subnet
+      }
+    ]
+  }
+}
+
+# Configure DHCP server on the interface
 resource "scm_dhcp_interface" "dhcp_server_example" {
-  folder = "ngfw-shared"
-  name   = "$test-interface-must-exist"
+  folder     = "ngfw-shared"
+  name       = scm_ethernet_interface.test_interface.name
+  depends_on = [scm_ethernet_interface.test_interface]
   server = {
     ip_pool  = ["10.10.10.10-10.10.10.200"]
     mode     = "auto"

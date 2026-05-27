@@ -79,10 +79,19 @@ Read-Only:
 
 - `enable` (Boolean) Enable LACP?
 - `fast_failover` (Boolean) Fast failover
+- `high_availability` (Attributes) High Availability settings (see [below for nested schema](#nestedatt--layer2--lacp--high_availability))
 - `max_ports` (Number) Maximum number of physical ports bundled in the LAG
 - `mode` (String) Mode
 - `system_priority` (Number) LACP system priority in system ID
 - `transmission_rate` (String) Transmission mode
+
+<a id="nestedatt--layer2--lacp--high_availability"></a>
+### Nested Schema for `layer2.lacp.high_availability`
+
+Read-Only:
+
+- `passive_pre_negotiation` (Boolean) Passive pre negotiation
+
 
 
 
@@ -162,7 +171,15 @@ Read-Only:
 
 - `enable` (Boolean) Enable LACP?
 - `fast_failover` (Boolean) Fast failover
+- `high_availability` (Attributes) High Availability settings (see [below for nested schema](#nestedatt--layer3--lacp--high_availability))
 - `max_ports` (Number) Maximum number of physical ports bundled in the LAG
 - `mode` (String) Mode
 - `system_priority` (Number) LACP system priority in system ID
 - `transmission_rate` (String) Transmission mode
+
+<a id="nestedatt--layer3--lacp--high_availability"></a>
+### Nested Schema for `layer3.lacp.high_availability`
+
+Read-Only:
+
+- `passive_pre_negotiation` (Boolean) Passive pre negotiation

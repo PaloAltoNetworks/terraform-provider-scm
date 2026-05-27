@@ -24,6 +24,9 @@ resource "scm_aggregate_interface" "scm_aggregate_intf_l2_lacp" {
       fast_failover     = true
       systen_priority   = 32768
       transmission_rate = "fast"
+      high_availability = {
+        passive_pre_negotiation = true
+      }
     }
     lldp = {
       enable = false
@@ -61,6 +64,9 @@ resource "scm_aggregate_interface" "scm_aggregate_intf_l3_static" {
       fast_failover     = true
       systen_priority   = 32768
       transmission_rate = "fast"
+      high_availability = {
+        passive_pre_negotiation = true
+      }
     }
   }
 }

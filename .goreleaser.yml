@@ -51,6 +51,8 @@ signs:
       - "--detach-sign"
       - "${artifact}"
 release:
+  # Auto-detect pre-release from version suffix (-beta, -alpha, -rc)
+  prerelease: auto
   extra_files:
     - glob: 'terraform-registry-manifest.json'
       name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'

@@ -24,6 +24,13 @@ By using this software, you agree to these terms.
 
 ## Release Notes
 
+### v1.0.11
+
+#### FEATURES
+
+* Introduced beta release stream for early access to new features
+* Beta versions (v1.0.11-beta.1) are now available for testing before GA release
+
 ### v1.0.10
 
 #### FEATURES

@@ -32,7 +32,7 @@ type ExternalDynamicListListDataSource struct {
 }
 
 func (d *ExternalDynamicListListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_external_dynamic_list_list"
+	resp.TypeName = "scm_external_dynamic_list_list"
 }
 
 func (d *ExternalDynamicListListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

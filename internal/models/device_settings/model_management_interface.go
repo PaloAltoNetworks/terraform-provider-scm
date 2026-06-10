@@ -289,6 +289,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -305,6 +306,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -318,18 +320,22 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 		"management_interface": schema.SingleNestedAttribute{
 			MarkdownDescription: "Management interface",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"default_gateway": schema.StringAttribute{
 					MarkdownDescription: "Default gateway",
 					Optional:            true,
+					Computed:            true,
 				},
 				"ip_address": schema.StringAttribute{
 					MarkdownDescription: "IP address",
 					Optional:            true,
+					Computed:            true,
 				},
 				"mgmt_type": schema.SingleNestedAttribute{
 					MarkdownDescription: "IP type",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dhcp_client": schema.SingleNestedAttribute{
 							Validators: []validator.Object{
@@ -339,6 +345,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Dhcp client\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"accept_dhcp_domain": schema.BoolAttribute{
 									MarkdownDescription: "Accept DHCP server provided domain name",
@@ -374,6 +381,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
 							Optional:            true,
+							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 					},
@@ -387,19 +395,23 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				"netmask": schema.StringAttribute{
 					MarkdownDescription: "Netmask",
 					Optional:            true,
+					Computed:            true,
 				},
 				"permitted_ip": schema.ListNestedAttribute{
 					MarkdownDescription: "Permitting IP addresses",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"description": schema.StringAttribute{
 								MarkdownDescription: "Description",
 								Optional:            true,
+								Computed:            true,
 							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "IP address",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -407,6 +419,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				"service": schema.SingleNestedAttribute{
 					MarkdownDescription: "Network services",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"disable_http": schema.BoolAttribute{
 							MarkdownDescription: "HTTP",
@@ -493,6 +506,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

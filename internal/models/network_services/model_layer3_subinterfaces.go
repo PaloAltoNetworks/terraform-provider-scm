@@ -239,10 +239,12 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 					"hw_address": schema.StringAttribute{
 						MarkdownDescription: "MAC address",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "IP address",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -250,10 +252,12 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"comment": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"ddns_config": schema.SingleNestedAttribute{
 			MarkdownDescription: "Dynamic DNS configuration specific to the Layer 3 sub Interfaces.",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ddns_cert_profile": schema.StringAttribute{
 					MarkdownDescription: "Certificate profile",
@@ -276,6 +280,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 				"ddns_ip": schema.StringAttribute{
 					MarkdownDescription: "IP to register (static only)",
 					Optional:            true,
+					Computed:            true,
 				},
 				"ddns_update_interval": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -314,6 +319,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -350,6 +356,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 				"send_hostname": schema.SingleNestedAttribute{
 					MarkdownDescription: "Layer3 sub interfaces DHCP Client Send hostname",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -385,6 +392,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -398,6 +406,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"interface_management_profile": schema.StringAttribute{
 			MarkdownDescription: "Interface management profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"ip": schema.ListNestedAttribute{
 			Validators: []validator.List{
@@ -422,6 +431,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "MTU",
 			Optional:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "L3 sub-interface name",
@@ -430,10 +440,12 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"netflow_profile": schema.StringAttribute{
 			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"parent_interface": schema.StringAttribute{
 			MarkdownDescription: "Parent interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -447,6 +459,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -456,6 +469,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "VLAN tag",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

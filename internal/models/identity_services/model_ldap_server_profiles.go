@@ -110,6 +110,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The base DN",
 			Optional:            true,
+			Computed:            true,
 		},
 		"bind_dn": schema.StringAttribute{
 			Validators: []validator.String{
@@ -117,6 +118,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The bind DN",
 			Optional:            true,
+			Computed:            true,
 		},
 		"bind_password": schema.StringAttribute{
 			Validators: []validator.String{
@@ -124,11 +126,13 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The bind password",
 			Optional:            true,
+			Computed:            true,
 			Sensitive:           true,
 		},
 		"bind_timelimit": schema.StringAttribute{
 			MarkdownDescription: "The bind timeout (seconds)",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -142,6 +146,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -164,6 +169,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -180,6 +186,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The LDAP server time",
 			Optional:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the LDAP server profile",
@@ -191,6 +198,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The search retry interval (seconds)",
 			Optional:            true,
+			Computed:            true,
 		},
 		"server": schema.ListNestedAttribute{
 			MarkdownDescription: "The LDAP server configuration",
@@ -200,10 +208,12 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 					"address": schema.StringAttribute{
 						MarkdownDescription: "The LDAP server IP address",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "The LDAP server name",
 						Optional:            true,
+						Computed:            true,
 					},
 					"port": schema.Int64Attribute{
 						Validators: []validator.Int64{
@@ -211,6 +221,7 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "The LDAP server port",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -227,12 +238,14 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"ssl": schema.BoolAttribute{
 			MarkdownDescription: "Require SSL/TLS secured connection?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
@@ -247,10 +260,12 @@ var LdapServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The search timeout (seconds)",
 			Optional:            true,
+			Computed:            true,
 		},
 		"verify_server_certificate": schema.BoolAttribute{
 			MarkdownDescription: "Verify server certificate for SSL sessions?",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

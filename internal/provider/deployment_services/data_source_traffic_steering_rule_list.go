@@ -32,7 +32,7 @@ type TrafficSteeringRuleListDataSource struct {
 }
 
 func (d *TrafficSteeringRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_traffic_steering_rule_list"
+	resp.TypeName = "scm_traffic_steering_rule_list"
 }
 
 func (d *TrafficSteeringRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

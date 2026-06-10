@@ -32,7 +32,7 @@ type LocalUserGroupListDataSource struct {
 }
 
 func (d *LocalUserGroupListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_local_user_group_list"
+	resp.TypeName = "scm_local_user_group_list"
 }
 
 func (d *LocalUserGroupListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

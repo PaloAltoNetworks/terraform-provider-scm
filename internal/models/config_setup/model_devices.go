@@ -234,6 +234,7 @@ var DevicesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the device",
 			Optional:            true,
+			Computed:            true,
 		},
 		"dev_cert_detail": schema.StringAttribute{
 			MarkdownDescription: "Dev cert detail",
@@ -246,6 +247,7 @@ var DevicesResourceSchema = schema.Schema{
 		"display_name": schema.StringAttribute{
 			MarkdownDescription: "The display name of the device",
 			Optional:            true,
+			Computed:            true,
 		},
 		"family": schema.StringAttribute{
 			MarkdownDescription: "The product family of the device",
@@ -258,6 +260,7 @@ var DevicesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder containing the device",
 			Required:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -335,6 +338,7 @@ var DevicesResourceSchema = schema.Schema{
 		"ip_v6_address": schema.StringAttribute{
 			MarkdownDescription: "Ip v6 address",
 			Optional:            true,
+			Computed:            true,
 		},
 		"is_connected": schema.BoolAttribute{
 			MarkdownDescription: "Is connected",

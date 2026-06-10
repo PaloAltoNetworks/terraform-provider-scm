@@ -34,7 +34,7 @@ type ProfileGroupDataSource struct {
 
 func (d *ProfileGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ProfileGroupDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_profile_group"
+	resp.TypeName = "scm_profile_group"
 }
 
 func (d *ProfileGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *ProfileGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading ProfileGroups data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *ProfileGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

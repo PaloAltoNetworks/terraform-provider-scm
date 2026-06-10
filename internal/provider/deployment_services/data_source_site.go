@@ -34,7 +34,7 @@ type SiteDataSource struct {
 
 func (d *SiteDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SiteDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_site"
+	resp.TypeName = "scm_site"
 }
 
 func (d *SiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *SiteDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading Sites data source by ID", map[string]interface{}{"id": objectId})
 
@@ -202,6 +204,7 @@ func (d *SiteDataSource) Read(ctx context.Context, req datasource.ReadRequest, r
 	idBuilder.WriteString(":")
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

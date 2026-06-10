@@ -34,7 +34,7 @@ type LocalUserDataSource struct {
 
 func (d *LocalUserDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LocalUserDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_local_user"
+	resp.TypeName = "scm_local_user"
 }
 
 func (d *LocalUserDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *LocalUserDataSource) Read(ctx context.Context, req datasource.ReadReque
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading LocalUsers data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *LocalUserDataSource) Read(ctx context.Context, req datasource.ReadReque
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

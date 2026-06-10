@@ -22,28 +22,30 @@ type LicenseResult struct {
 	PurchasedLicenses  basetypes.ListValue   `tfsdk:"purchased_licenses"`
 }
 
-// LicenseInfo represents a nested structure within the LicenseResult model
-type LicenseInfo struct {
-	Count       basetypes.Int64Value  `tfsdk:"count"`
-	LicenseType basetypes.StringValue `tfsdk:"license_type"`
-}
-
 // AttrTypes defines the attribute types for the LicenseResult model.
 func (o LicenseResult) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid": basetypes.StringType{},
 		"configured_licenses": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"count":        basetypes.Int64Type{},
-				"license_type": basetypes.StringType{},
+				"applications":     basetypes.Float64Type{},
+				"connectors":       basetypes.Float64Type{},
+				"expiry":           basetypes.StringType{},
+				"license_name":     basetypes.StringType{},
+				"max_applications": basetypes.Float64Type{},
+				"max_connectors":   basetypes.Float64Type{},
 			},
 		}},
 		"license_model":       basetypes.ListType{ElemType: basetypes.StringType{}},
 		"operational_license": basetypes.StringType{},
 		"purchased_licenses": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"count":        basetypes.Int64Type{},
-				"license_type": basetypes.StringType{},
+				"applications":     basetypes.Float64Type{},
+				"connectors":       basetypes.Float64Type{},
+				"expiry":           basetypes.StringType{},
+				"license_name":     basetypes.StringType{},
+				"max_applications": basetypes.Float64Type{},
+				"max_connectors":   basetypes.Float64Type{},
 			},
 		}},
 	}
@@ -51,21 +53,6 @@ func (o LicenseResult) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of LicenseResult objects.
 func (o LicenseResult) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the LicenseInfo model.
-func (o LicenseInfo) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"count":        basetypes.Int64Type{},
-		"license_type": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of LicenseInfo objects.
-func (o LicenseInfo) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -83,10 +70,12 @@ var LicenseResultResourceSchema = schema.Schema{
 					"count": schema.Int64Attribute{
 						MarkdownDescription: "Count",
 						Optional:            true,
+						Computed:            true,
 					},
 					"license_type": schema.StringAttribute{
 						MarkdownDescription: "License type",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -99,6 +88,7 @@ var LicenseResultResourceSchema = schema.Schema{
 		"operational_license": schema.StringAttribute{
 			MarkdownDescription: "Operational license",
 			Optional:            true,
+			Computed:            true,
 		},
 		"purchased_licenses": schema.ListNestedAttribute{
 			MarkdownDescription: "Purchased licenses",
@@ -108,10 +98,12 @@ var LicenseResultResourceSchema = schema.Schema{
 					"count": schema.Int64Attribute{
 						MarkdownDescription: "Count",
 						Optional:            true,
+						Computed:            true,
 					},
 					"license_type": schema.StringAttribute{
 						MarkdownDescription: "License type",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},

@@ -34,7 +34,7 @@ type TunnelInterfaceDataSource struct {
 
 func (d *TunnelInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TunnelInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_tunnel_interface"
+	resp.TypeName = "scm_tunnel_interface"
 }
 
 func (d *TunnelInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *TunnelInterfaceDataSource) Read(ctx context.Context, req datasource.Rea
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading TunnelInterfaces data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *TunnelInterfaceDataSource) Read(ctx context.Context, req datasource.Rea
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

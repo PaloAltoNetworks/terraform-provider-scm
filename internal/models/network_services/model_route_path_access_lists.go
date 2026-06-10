@@ -97,10 +97,12 @@ var RoutePathAccessListsResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Action",
 						Optional:            true,
+						Computed:            true,
 					},
 					"aspath_regex": schema.StringAttribute{
 						MarkdownDescription: "AS path regular expression",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.Int64Attribute{
 						Validators: []validator.Int64{
@@ -108,6 +110,7 @@ var RoutePathAccessListsResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Sequence number",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -115,6 +118,7 @@ var RoutePathAccessListsResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -128,6 +132,7 @@ var RoutePathAccessListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -144,6 +149,7 @@ var RoutePathAccessListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -170,6 +176,7 @@ var RoutePathAccessListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

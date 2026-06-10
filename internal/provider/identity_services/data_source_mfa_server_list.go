@@ -34,7 +34,7 @@ type MfaServerListDataSource struct {
 }
 
 func (d *MfaServerListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_mfa_server_list"
+	resp.TypeName = "scm_mfa_server_list"
 }
 
 func (d *MfaServerListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

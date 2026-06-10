@@ -34,7 +34,7 @@ type DeviceRedistributionCollectorDataSource struct {
 
 func (d *DeviceRedistributionCollectorDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DeviceRedistributionCollectorDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_device_redistribution_collector"
+	resp.TypeName = "scm_device_redistribution_collector"
 }
 
 func (d *DeviceRedistributionCollectorDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *DeviceRedistributionCollectorDataSource) Read(ctx context.Context, req 
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading DeviceRedistributionCollector data source by ID", map[string]interface{}{"id": objectId})
 
@@ -161,6 +163,7 @@ func (d *DeviceRedistributionCollectorDataSource) Read(ctx context.Context, req 
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

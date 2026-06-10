@@ -4,8 +4,8 @@ set -euo pipefail
 # =============================================================================
 # Setup: generate test workspaces from examples/resources
 # =============================================================================
-# For each examples/resources/scm_*:
-#   1. Creates tests/scm_*/
+# For each examples/resources/<prefix>_* (scm_*, ztna_*, ...):
+#   1. Creates tests/<prefix>_<resource>/
 #   2. Generates main.tf = provider.tf + resource.tf (always overwritten)
 #   3. Generates a .tftest.hcl with create + update + auto-destroy
 #
@@ -15,8 +15,9 @@ set -euo pipefail
 #   - neither                      → skip update test
 #
 # Usage:
-#   ./tests/setup.sh              # all resources
-#   ./tests/setup.sh scm_address  # single resource
+#   ./tests/setup.sh                  # all resources (all prefixes)
+#   ./tests/setup.sh scm_address      # single scm resource
+#   ./tests/setup.sh ztna_connector   # single ztna resource
 # =============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -33,6 +34,9 @@ fi
 # Resources that don't have an id attribute (from OpenAPI specs)
 NO_ID_RESOURCES="scm_bgp_routing scm_bandwidth_allocation"
 
+# Resources that use "oid" instead of "id" as their identifier attribute
+OID_RESOURCES="scm_connector scm_fqdn_application scm_subnet ztna_connector ztna_fqdn_application ztna_subnet ztna_wildcard ztna_connector_group ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade"
+
 # -----------------------------------------------------------------------------
 # Check if a field exists at root level (brace depth 1) inside any resource block.
 # Uses brace-depth tracking so indentation doesn't matter.
@@ -43,7 +47,7 @@ has_root_level_field() {
   local tf_file="$2"
 
   awk -v field="$field" '
-    /^resource "scm_/ { in_res = 1; depth = 0 }
+    /^resource "/ { in_res = 1; depth = 0 }
     /^variable / || /^data / || /^locals / || /^output / { in_res = 0 }
     in_res && /{/ { depth++ }
     in_res && /}/ { depth--; if (depth == 0) in_res = 0 }
@@ -81,7 +85,7 @@ inject_test_variable() {
   local tf_file="$2"
 
   awk -v field="$field" '
-    /^resource "scm_/ { in_res = 1; depth = 0 }
+    /^resource "/ { in_res = 1; depth = 0 }
     /^variable / || /^data / || /^locals / || /^output / { in_res = 0 }
     in_res && /{/ { depth++ }
     in_res && /}/ { depth--; if (depth == 0) in_res = 0 }
@@ -102,7 +106,7 @@ generate_tftest() {
   local output_file="$2"
   local update_field="$3"
 
-  # Extract all resource "scm_*" "label" declarations
+  # Extract all resource "<type>" "<label>" declarations
   local assertions=""
   while IFS= read -r line; do
     local type label
@@ -112,6 +116,13 @@ generate_tftest() {
       assertions="${assertions}
   # ${type}.${label} — no id attribute, apply success is the test
 "
+    elif echo "$OID_RESOURCES" | grep -qw "$type"; then
+      assertions="${assertions}
+  assert {
+    condition     = ${type}.${label}.oid != \"\"
+    error_message = \"${type}.${label} was not created\"
+  }
+"
     else
       assertions="${assertions}
   assert {
@@ -120,7 +131,7 @@ generate_tftest() {
   }
 "
     fi
-  done < <(grep -E '^resource "scm_' "$resource_tf")
+  done < <(grep -E '^resource "' "$resource_tf")
 
   if [ -z "$assertions" ]; then
     return 1
@@ -150,7 +161,7 @@ EOF
 
   while IFS= read -r line; do
     # Detect resource block start
-    if echo "$line" | grep -qE '^resource "scm_'; then
+    if echo "$line" | grep -qE '^resource "'; then
       # Emit assertion for the previous resource if it had the field
       if [ -n "$current_label" ] && [ "$current_type" = "$primary_type" ] && [ "$has_field" = true ]; then
         update_assertions="${update_assertions}
@@ -218,7 +229,7 @@ targets=()
 if [ $# -gt 0 ]; then
   targets=("$@")
 else
-  for d in "${RESOURCES_DIR}"/scm_*; do
+  for d in "${RESOURCES_DIR}"/*_*; do
     [ -d "$d" ] && targets+=("$(basename "$d")")
   done
 fi
@@ -240,9 +251,45 @@ for resource_name in "${targets[@]}"; do
   # Determine update strategy
   update_field=$(get_update_field "${resource_dir}/resource.tf")
 
-  # Always regenerate main.tf (provider.tf + resource.tf)
-  cat "$PROVIDER_FILE" > "${test_dir}/main.tf"
-  echo "" >> "${test_dir}/main.tf"
+  # Determine the resource prefix (everything before the first underscore).
+  resource_prefix="${resource_name%%_*}"
+
+  # Build main.tf from scratch:
+  # 1. Extract only the provider "<resource_prefix>" { ... } block from provider.tf
+  #    using awk brace-depth tracking.
+  # 2. Append a terraform {} block declaring only this prefix's provider.
+  # This avoids the "Duplicate required provider" warning that occurs when two
+  # local names (scm, ztna) point to the same source binary.
+  awk -v prefix="$resource_prefix" '
+    /^provider "/ {
+      # Extract the provider name between the first pair of quotes
+      line = $0; sub(/^provider "/, "", line); sub(/".*/, "", line)
+      if (line == prefix) { in_block=1; depth=0 }
+    }
+    in_block {
+      print
+      n = split($0, chars, "")
+      for (i=1; i<=n; i++) {
+        if (chars[i] == "{") depth++
+        if (chars[i] == "}") {
+          depth--
+          if (depth == 0) { in_block=0 }
+        }
+      }
+    }
+  ' "$PROVIDER_FILE" > "${test_dir}/main.tf"
+
+  cat >> "${test_dir}/main.tf" <<TFBLOCK
+
+terraform {
+  required_providers {
+    ${resource_prefix} = {
+      source = "paloaltonetworks-local/scm"
+    }
+  }
+}
+
+TFBLOCK
 
   if [ "$update_field" != "none" ]; then
     # Add the test variable
@@ -261,11 +308,11 @@ VAREOF
     cat "${resource_dir}/resource.tf" >> "${test_dir}/main.tf"
   fi
 
-  # Generate .tftest.hcl (always regenerate since scm_*/ is gitignored)
+  # Generate .tftest.hcl (always regenerate)
   if generate_tftest "${resource_dir}/resource.tf" "${test_dir}/${resource_name}.tftest.hcl" "$update_field"; then
     echo "  [new] ${resource_name}/ (update: ${update_field})"
   else
-    echo "  [skip] ${resource_name}/ - no scm_ resources found in resource.tf"
+    echo "  [skip] ${resource_name}/ - no resource blocks found in resource.tf"
     skipped=$((skipped + 1))
     continue
   fi

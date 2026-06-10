@@ -32,7 +32,7 @@ type DecryptionExclusionListDataSource struct {
 }
 
 func (d *DecryptionExclusionListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_decryption_exclusion_list"
+	resp.TypeName = "scm_decryption_exclusion_list"
 }
 
 func (d *DecryptionExclusionListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

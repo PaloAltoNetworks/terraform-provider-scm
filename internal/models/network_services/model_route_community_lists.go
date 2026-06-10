@@ -295,6 +295,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -308,6 +309,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -324,6 +326,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -350,6 +353,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -363,6 +367,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 		"type": schema.SingleNestedAttribute{
 			MarkdownDescription: "Type",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"extended": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -373,10 +378,12 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"extended_entry": schema.ListNestedAttribute{
 							MarkdownDescription: "Extended community lists",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"action": schema.StringAttribute{
@@ -385,6 +392,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Action",
 										Optional:            true,
+										Computed:            true,
 									},
 									"lc_regex": schema.ListAttribute{
 										ElementType:         types.StringType,
@@ -400,6 +408,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Sequence number",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -415,10 +424,12 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"large_entry": schema.ListNestedAttribute{
 							MarkdownDescription: "Large community lists",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"action": schema.StringAttribute{
@@ -427,6 +438,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Action",
 										Optional:            true,
+										Computed:            true,
 									},
 									"lc_regex": schema.ListAttribute{
 										ElementType:         types.StringType,
@@ -442,6 +454,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Sequence number",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -457,10 +470,12 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Regular\n\n> ℹ️ **Note:** You must specify exactly one of `extended`, `large`, and `regular`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"regular_entry": schema.ListNestedAttribute{
 							MarkdownDescription: "Regular community lists",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"action": schema.StringAttribute{
@@ -469,6 +484,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Action",
 										Optional:            true,
+										Computed:            true,
 									},
 									"community": schema.ListAttribute{
 										ElementType:         types.StringType,
@@ -481,6 +497,7 @@ var RouteCommunityListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Sequence number",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},

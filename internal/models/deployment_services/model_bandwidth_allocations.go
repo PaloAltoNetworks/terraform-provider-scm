@@ -90,6 +90,7 @@ var BandwidthAllocationsResourceSchema = schema.Schema{
 		"qos": schema.SingleNestedAttribute{
 			MarkdownDescription: "Qos",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"customized": schema.BoolAttribute{
 					MarkdownDescription: "Customized",

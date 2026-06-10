@@ -34,7 +34,7 @@ type ApplicationFilterDataSource struct {
 
 func (d *ApplicationFilterDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ApplicationFilterDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_application_filter"
+	resp.TypeName = "scm_application_filter"
 }
 
 func (d *ApplicationFilterDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *ApplicationFilterDataSource) Read(ctx context.Context, req datasource.R
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading ApplicationFilters data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *ApplicationFilterDataSource) Read(ctx context.Context, req datasource.R
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

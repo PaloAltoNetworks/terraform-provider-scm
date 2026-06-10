@@ -109,6 +109,7 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -125,20 +126,24 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"http": schema.BoolAttribute{
 			MarkdownDescription: "Allow HTTP?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"http_ocsp": schema.BoolAttribute{
 			MarkdownDescription: "Allow HTTP OCSP?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"https": schema.BoolAttribute{
 			MarkdownDescription: "Allow HTTPS?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "UUID of the resource",
@@ -166,10 +171,12 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 		"ping": schema.BoolAttribute{
 			MarkdownDescription: "Allow ping?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"response_pages": schema.BoolAttribute{
 			MarkdownDescription: "Allow response pages?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -183,16 +190,19 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"ssh": schema.BoolAttribute{
 			MarkdownDescription: "Allow SSH?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"telnet": schema.BoolAttribute{
 			MarkdownDescription: "Allow telnet? Seriously, why would you do this?!?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
@@ -204,14 +214,17 @@ var InterfaceManagementProfilesResourceSchema = schema.Schema{
 		"userid_service": schema.BoolAttribute{
 			MarkdownDescription: "Allow User-ID?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"userid_syslog_listener_ssl": schema.BoolAttribute{
 			MarkdownDescription: "Allow User-ID syslog listener (SSL)?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"userid_syslog_listener_udp": schema.BoolAttribute{
 			MarkdownDescription: "Allow User-ID syslog listener (UDP)?",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

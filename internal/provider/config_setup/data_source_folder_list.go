@@ -31,7 +31,7 @@ type FolderListDataSource struct {
 }
 
 func (d *FolderListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_folder_list"
+	resp.TypeName = "scm_folder_list"
 }
 
 func (d *FolderListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type FileBlockingProfileDataSource struct {
 
 func (d *FileBlockingProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: FileBlockingProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_file_blocking_profile"
+	resp.TypeName = "scm_file_blocking_profile"
 }
 
 func (d *FileBlockingProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *FileBlockingProfileDataSource) Read(ctx context.Context, req datasource
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading FileBlockingProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *FileBlockingProfileDataSource) Read(ctx context.Context, req datasource
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

@@ -12869,6 +12869,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -12885,6 +12886,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -12905,6 +12907,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Routing stack",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -12918,6 +12921,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -12936,81 +12940,100 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					"admin_dists": schema.SingleNestedAttribute{
 						MarkdownDescription: "Admin dists",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"bgp_external": schema.Int64Attribute{
 								MarkdownDescription: "Bgp external",
 								Optional:            true,
+								Computed:            true,
 							},
 							"bgp_internal": schema.Int64Attribute{
 								MarkdownDescription: "Bgp internal",
 								Optional:            true,
+								Computed:            true,
 							},
 							"bgp_local": schema.Int64Attribute{
 								MarkdownDescription: "Bgp local",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospf_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospf ext",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospf_inter": schema.Int64Attribute{
 								MarkdownDescription: "Ospf inter",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospf_intra": schema.Int64Attribute{
 								MarkdownDescription: "Ospf intra",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospfv3_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 ext",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospfv3_inter": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 inter",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospfv3_intra": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 intra",
 								Optional:            true,
+								Computed:            true,
 							},
 							"rip": schema.Int64Attribute{
 								MarkdownDescription: "Rip",
 								Optional:            true,
+								Computed:            true,
 							},
 							"static": schema.Int64Attribute{
 								MarkdownDescription: "Static",
 								Optional:            true,
+								Computed:            true,
 							},
 							"static_ipv6": schema.Int64Attribute{
 								MarkdownDescription: "Static ipv6",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 					"bgp": schema.SingleNestedAttribute{
 						MarkdownDescription: "Bgp",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"advertise_network": schema.SingleNestedAttribute{
 								MarkdownDescription: "Advertise network",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"ipv4": schema.SingleNestedAttribute{
 										MarkdownDescription: "Ipv4",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"network": schema.ListNestedAttribute{
 												MarkdownDescription: "Network",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"backdoor": schema.BoolAttribute{
 															MarkdownDescription: "Backdoor",
 															Optional:            true,
+															Computed:            true,
 														},
 														"multicast": schema.BoolAttribute{
 															MarkdownDescription: "Multicast",
 															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name",
@@ -13019,6 +13042,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"unicast": schema.BoolAttribute{
 															MarkdownDescription: "Unicast",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13028,10 +13052,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"ipv6": schema.SingleNestedAttribute{
 										MarkdownDescription: "Ipv6",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"network": schema.ListNestedAttribute{
 												MarkdownDescription: "Network",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
@@ -13041,6 +13067,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"unicast": schema.BoolAttribute{
 															MarkdownDescription: "Unicast",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13052,29 +13079,35 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"aggregate": schema.SingleNestedAttribute{
 								MarkdownDescription: "Aggregate",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"aggregate_med": schema.BoolAttribute{
 										MarkdownDescription: "Aggregate med",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"aggregate_routes": schema.ListNestedAttribute{
 								MarkdownDescription: "Aggregate routes",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"as_set": schema.BoolAttribute{
 											MarkdownDescription: "As set",
 											Optional:            true,
+											Computed:            true,
 										},
 										"description": schema.StringAttribute{
 											MarkdownDescription: "Description",
 											Optional:            true,
+											Computed:            true,
 										},
 										"enable": schema.BoolAttribute{
 											MarkdownDescription: "Enable",
 											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name",
@@ -13083,14 +13116,17 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"same_med": schema.BoolAttribute{
 											MarkdownDescription: "Same med",
 											Optional:            true,
+											Computed:            true,
 										},
 										"summary_only": schema.BoolAttribute{
 											MarkdownDescription: "Summary only",
 											Optional:            true,
+											Computed:            true,
 										},
 										"type": schema.SingleNestedAttribute{
 											MarkdownDescription: "Type",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
@@ -13100,18 +13136,22 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Ipv4\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"attribute_map": schema.StringAttribute{
 															MarkdownDescription: "Attribute map",
 															Optional:            true,
+															Computed:            true,
 														},
 														"summary_prefix": schema.StringAttribute{
 															MarkdownDescription: "Summary prefix",
 															Optional:            true,
+															Computed:            true,
 														},
 														"suppress_map": schema.StringAttribute{
 															MarkdownDescription: "Suppress map",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13123,18 +13163,22 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Ipv6\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"attribute_map": schema.StringAttribute{
 															MarkdownDescription: "Attribute map",
 															Optional:            true,
+															Computed:            true,
 														},
 														"summary_prefix": schema.StringAttribute{
 															MarkdownDescription: "Summary prefix",
 															Optional:            true,
+															Computed:            true,
 														},
 														"suppress_map": schema.StringAttribute{
 															MarkdownDescription: "Suppress map",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13146,157 +13190,193 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"allow_redist_default_route": schema.BoolAttribute{
 								MarkdownDescription: "Allow redist default route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"always_advertise_network_route": schema.BoolAttribute{
 								MarkdownDescription: "Always advertise network route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"as_format": schema.StringAttribute{
 								MarkdownDescription: "As format",
 								Optional:            true,
+								Computed:            true,
 							},
 							"confederation_member_as": schema.StringAttribute{
 								MarkdownDescription: "Confederation member as",
 								Optional:            true,
+								Computed:            true,
 							},
 							"default_local_preference": schema.Int64Attribute{
 								MarkdownDescription: "Default local preference",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ecmp_multi_as": schema.BoolAttribute{
 								MarkdownDescription: "Ecmp multi as",
 								Optional:            true,
+								Computed:            true,
 							},
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable",
 								Optional:            true,
+								Computed:            true,
 							},
 							"enforce_first_as": schema.BoolAttribute{
 								MarkdownDescription: "Enforce first as",
 								Optional:            true,
+								Computed:            true,
 							},
 							"fast_external_failover": schema.BoolAttribute{
 								MarkdownDescription: "Fast external failover",
 								Optional:            true,
+								Computed:            true,
 							},
 							"global_bfd": schema.SingleNestedAttribute{
 								MarkdownDescription: "Global bfd",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"profile": schema.StringAttribute{
 										MarkdownDescription: "Profile",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"graceful_restart": schema.SingleNestedAttribute{
 								MarkdownDescription: "Graceful restart",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"enable": schema.BoolAttribute{
 										MarkdownDescription: "Enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"local_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Local restart time",
 										Optional:            true,
+										Computed:            true,
 									},
 									"max_peer_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Max peer restart time",
 										Optional:            true,
+										Computed:            true,
 									},
 									"stale_route_time": schema.Int64Attribute{
 										MarkdownDescription: "Stale route time",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"graceful_shutdown": schema.BoolAttribute{
 								MarkdownDescription: "Graceful shutdown",
 								Optional:            true,
+								Computed:            true,
 							},
 							"install_route": schema.BoolAttribute{
 								MarkdownDescription: "Install route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"local_as": schema.StringAttribute{
 								MarkdownDescription: "Local as",
 								Optional:            true,
+								Computed:            true,
 							},
 							"med": schema.SingleNestedAttribute{
 								MarkdownDescription: "Med",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"always_compare_med": schema.BoolAttribute{
 										MarkdownDescription: "Always compare med",
 										Optional:            true,
+										Computed:            true,
 									},
 									"deterministic_med_comparison": schema.BoolAttribute{
 										MarkdownDescription: "Deterministic med comparison",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"peer_group": schema.ListNestedAttribute{
 								MarkdownDescription: "Peer group",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"address_family": schema.SingleNestedAttribute{
 											MarkdownDescription: "Address family",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
 													MarkdownDescription: "Ipv4",
 													Optional:            true,
+													Computed:            true,
 												},
 												"ipv6": schema.StringAttribute{
 													MarkdownDescription: "Ipv6",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
 										"aggregated_confed_as_path": schema.BoolAttribute{
 											MarkdownDescription: "Aggregated confed as path",
 											Optional:            true,
+											Computed:            true,
 										},
 										"connection_options": schema.SingleNestedAttribute{
 											MarkdownDescription: "Connection options",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"authentication": schema.StringAttribute{
 													MarkdownDescription: "Authentication",
 													Optional:            true,
+													Computed:            true,
 												},
 												"dampening": schema.StringAttribute{
 													MarkdownDescription: "Dampening",
 													Optional:            true,
+													Computed:            true,
 												},
 												"multihop": schema.Int64Attribute{
 													MarkdownDescription: "Multihop",
 													Optional:            true,
+													Computed:            true,
 												},
 												"timers": schema.StringAttribute{
 													MarkdownDescription: "Timers",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
 										"enable": schema.BoolAttribute{
 											MarkdownDescription: "Enable",
 											Optional:            true,
+											Computed:            true,
 										},
 										"filtering_profile": schema.SingleNestedAttribute{
 											MarkdownDescription: "Filtering profile",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
 													MarkdownDescription: "Ipv4",
 													Optional:            true,
+													Computed:            true,
 												},
 												"ipv6": schema.StringAttribute{
 													MarkdownDescription: "Ipv6",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -13312,112 +13392,137 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"bfd": schema.SingleNestedAttribute{
 														MarkdownDescription: "Bfd",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"multihop": schema.SingleNestedAttribute{
 																MarkdownDescription: "Multihop",
 																Optional:            true,
+																Computed:            true,
 																Attributes: map[string]schema.Attribute{
 																	"min_received_ttl": schema.Int64Attribute{
 																		MarkdownDescription: "Min received ttl",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 															"profile": schema.StringAttribute{
 																MarkdownDescription: "Profile",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"connection_options": schema.SingleNestedAttribute{
 														MarkdownDescription: "Connection options",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"authentication": schema.StringAttribute{
 																MarkdownDescription: "Authentication",
 																Optional:            true,
+																Computed:            true,
 															},
 															"dampening": schema.StringAttribute{
 																MarkdownDescription: "Dampening",
 																Optional:            true,
+																Computed:            true,
 															},
 															"hold_time": schema.StringAttribute{
 																MarkdownDescription: "Hold time",
 																Optional:            true,
+																Computed:            true,
 															},
 															"idle_hold_time": schema.Int64Attribute{
 																MarkdownDescription: "Idle hold time",
 																Optional:            true,
+																Computed:            true,
 															},
 															"incoming_bgp_connection": schema.SingleNestedAttribute{
 																MarkdownDescription: "Incoming bgp connection",
 																Optional:            true,
+																Computed:            true,
 																Attributes: map[string]schema.Attribute{
 																	"allow": schema.BoolAttribute{
 																		MarkdownDescription: "Allow",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"remote_port": schema.Int64Attribute{
 																		MarkdownDescription: "Remote port",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 															"keep_alive_interval": schema.StringAttribute{
 																MarkdownDescription: "Keep alive interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"max_prefixes": schema.StringAttribute{
 																MarkdownDescription: "Max prefixes",
 																Optional:            true,
+																Computed:            true,
 															},
 															"min_route_adv_interval": schema.Int64Attribute{
 																MarkdownDescription: "Min route adv interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"multihop": schema.StringAttribute{
 																MarkdownDescription: "Multihop",
 																Optional:            true,
+																Computed:            true,
 															},
 															"open_delay_time": schema.Int64Attribute{
 																MarkdownDescription: "Open delay time",
 																Optional:            true,
+																Computed:            true,
 															},
 															"outgoing_bgp_connection": schema.SingleNestedAttribute{
 																MarkdownDescription: "Outgoing bgp connection",
 																Optional:            true,
+																Computed:            true,
 																Attributes: map[string]schema.Attribute{
 																	"allow": schema.BoolAttribute{
 																		MarkdownDescription: "Allow",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"local_port": schema.Int64Attribute{
 																		MarkdownDescription: "Local port",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
 															"timers": schema.StringAttribute{
 																MarkdownDescription: "Timers",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"enable": schema.BoolAttribute{
 														MarkdownDescription: "Enable",
 														Optional:            true,
+														Computed:            true,
 													},
 													"enable_mp_bgp": schema.BoolAttribute{
 														MarkdownDescription: "Enable mp bgp",
 														Optional:            true,
+														Computed:            true,
 													},
 													"enable_sender_side_loop_detection": schema.BoolAttribute{
 														MarkdownDescription: "Enable sender side loop detection",
 														Optional:            true,
+														Computed:            true,
 													},
 													"inherit": schema.SingleNestedAttribute{
 														MarkdownDescription: "Inherit",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"no": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
@@ -13427,32 +13532,39 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes: map[string]schema.Attribute{
 																	"address_family": schema.SingleNestedAttribute{
 																		MarkdownDescription: "Address family",
 																		Optional:            true,
+																		Computed:            true,
 																		Attributes: map[string]schema.Attribute{
 																			"ipv4": schema.StringAttribute{
 																				MarkdownDescription: "Ipv4",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"ipv6": schema.StringAttribute{
 																				MarkdownDescription: "Ipv6",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
 																	"filtering_profile": schema.SingleNestedAttribute{
 																		MarkdownDescription: "Filtering profile",
 																		Optional:            true,
+																		Computed:            true,
 																		Attributes: map[string]schema.Attribute{
 																			"ipv4": schema.StringAttribute{
 																				MarkdownDescription: "Ipv4",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"ipv6": schema.StringAttribute{
 																				MarkdownDescription: "Ipv6",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
@@ -13466,6 +13578,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
 														},
@@ -13473,14 +13586,17 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"local_address": schema.SingleNestedAttribute{
 														MarkdownDescription: "Local address",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"interface": schema.StringAttribute{
 																MarkdownDescription: "Interface",
 																Optional:            true,
+																Computed:            true,
 															},
 															"ip": schema.StringAttribute{
 																MarkdownDescription: "Ip",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -13491,10 +13607,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"passive": schema.BoolAttribute{
 														MarkdownDescription: "Passive",
 														Optional:            true,
+														Computed:            true,
 													},
 													"peer_address": schema.SingleNestedAttribute{
 														MarkdownDescription: "Peer address",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"fqdn": schema.StringAttribute{
 																Validators: []validator.String{
@@ -13504,6 +13622,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
 																Optional:            true,
+																Computed:            true,
 															},
 															"ip": schema.StringAttribute{
 																Validators: []validator.String{
@@ -13513,32 +13632,39 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"peer_as": schema.StringAttribute{
 														MarkdownDescription: "Peer as",
 														Optional:            true,
+														Computed:            true,
 													},
 													"peering_type": schema.StringAttribute{
 														MarkdownDescription: "Peering type",
 														Optional:            true,
+														Computed:            true,
 													},
 													"reflector_client": schema.StringAttribute{
 														MarkdownDescription: "Reflector client",
 														Optional:            true,
+														Computed:            true,
 													},
 													"subsequent_address_family_identifier": schema.SingleNestedAttribute{
 														MarkdownDescription: "Subsequent address family identifier",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"multicast": schema.BoolAttribute{
 																MarkdownDescription: "Multicast",
 																Optional:            true,
+																Computed:            true,
 															},
 															"unicast": schema.BoolAttribute{
 																MarkdownDescription: "Unicast",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -13548,10 +13674,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"soft_reset_with_stored_info": schema.BoolAttribute{
 											MarkdownDescription: "Soft reset with stored info",
 											Optional:            true,
+											Computed:            true,
 										},
 										"type": schema.SingleNestedAttribute{
 											MarkdownDescription: "Type",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"ebgp": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
@@ -13563,18 +13691,22 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Ebgp\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
 															MarkdownDescription: "Export nexthop",
 															Optional:            true,
+															Computed:            true,
 														},
 														"import_nexthop": schema.StringAttribute{
 															MarkdownDescription: "Import nexthop",
 															Optional:            true,
+															Computed:            true,
 														},
 														"remove_private_as": schema.BoolAttribute{
 															MarkdownDescription: "Remove private as",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13588,10 +13720,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Ebgp confed\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
 															MarkdownDescription: "Export nexthop",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13605,10 +13739,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Ibgp\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
 															MarkdownDescription: "Export nexthop",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13622,10 +13758,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Ibgp confed\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
 															MarkdownDescription: "Export nexthop",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -13637,14 +13775,17 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"policy": schema.SingleNestedAttribute{
 								MarkdownDescription: "Policy",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"aggregation": schema.SingleNestedAttribute{
 										MarkdownDescription: "Aggregation",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"address": schema.ListNestedAttribute{
 												MarkdownDescription: "Address",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"advertise_filters": schema.ListNestedAttribute{
@@ -13655,19 +13796,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	"enable": schema.BoolAttribute{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"match": schema.SingleNestedAttribute{
 																		MarkdownDescription: "Match",
 																		Optional:            true,
+																		Computed:            true,
 																		Attributes: map[string]schema.Attribute{
 																			"address_prefix": schema.ListNestedAttribute{
 																				MarkdownDescription: "Address prefix",
 																				Optional:            true,
+																				Computed:            true,
 																				NestedObject: schema.NestedAttributeObject{
 																					Attributes: map[string]schema.Attribute{
 																						"exact": schema.BoolAttribute{
 																							MarkdownDescription: "Exact",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																						"name": schema.StringAttribute{
 																							MarkdownDescription: "Name",
@@ -13682,34 +13827,41 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Afi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
 																				MarkdownDescription: "As path",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"extended_community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Extended community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
@@ -13717,15 +13869,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"nexthop": schema.ListAttribute{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "Nexthop",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"route_table": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -13733,6 +13888,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Route table",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -13740,6 +13896,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Safi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
@@ -13753,10 +13910,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"aggregate_route_attributes": schema.SingleNestedAttribute{
 															MarkdownDescription: "Aggregate route attributes",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"as_path": schema.SingleNestedAttribute{
 																	MarkdownDescription: "As path",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
@@ -13768,6 +13927,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"prepend": schema.Int64Attribute{
@@ -13780,6 +13940,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"remove": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
@@ -13791,6 +13952,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"remove_and_prepend": schema.Int64Attribute{
@@ -13803,16 +13965,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
 																"as_path_limit": schema.Int64Attribute{
 																	MarkdownDescription: "As path limit",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"community": schema.SingleNestedAttribute{
 																	MarkdownDescription: "Community",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"append": schema.ListAttribute{
 																			ElementType:         types.StringType,
@@ -13826,6 +13991,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				),
 																			},
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
@@ -13838,6 +14004,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"overwrite": schema.ListAttribute{
@@ -13852,6 +14019,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				),
 																			},
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"remove_all": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
@@ -13864,6 +14032,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"remove_regex": schema.StringAttribute{
@@ -13877,12 +14046,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
 																"extended_community": schema.SingleNestedAttribute{
 																	MarkdownDescription: "Extended community",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"append": schema.ListAttribute{
 																			ElementType:         types.StringType,
@@ -13896,6 +14067,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				),
 																			},
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"none": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
@@ -13908,6 +14080,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"overwrite": schema.ListAttribute{
@@ -13922,6 +14095,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				),
 																			},
 																			Optional: true,
+																			Computed: true,
 																		},
 																		"remove_all": schema.SingleNestedAttribute{
 																			Validators: []validator.Object{
@@ -13934,6 +14108,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"remove_regex": schema.StringAttribute{
@@ -13947,20 +14122,24 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
 																"local_preference": schema.Int64Attribute{
 																	MarkdownDescription: "Local preference",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"med": schema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"nexthop": schema.StringAttribute{
 																	MarkdownDescription: "Nexthop",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"origin": schema.StringAttribute{
 																	Validators: []validator.String{
@@ -13968,20 +14147,24 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Origin",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"weight": schema.Int64Attribute{
 																	MarkdownDescription: "Weight",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
 														"as_set": schema.BoolAttribute{
 															MarkdownDescription: "As set",
 															Optional:            true,
+															Computed:            true,
 														},
 														"enable": schema.BoolAttribute{
 															MarkdownDescription: "Enable",
 															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name",
@@ -13990,10 +14173,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Prefix",
 															Optional:            true,
+															Computed:            true,
 														},
 														"summary": schema.BoolAttribute{
 															MarkdownDescription: "Summary",
 															Optional:            true,
+															Computed:            true,
 														},
 														"suppress_filters": schema.ListNestedAttribute{
 															MarkdownDescription: "Suppress filters",
@@ -14003,19 +14188,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	"enable": schema.BoolAttribute{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"match": schema.SingleNestedAttribute{
 																		MarkdownDescription: "Match",
 																		Optional:            true,
+																		Computed:            true,
 																		Attributes: map[string]schema.Attribute{
 																			"address_prefix": schema.ListNestedAttribute{
 																				MarkdownDescription: "Address prefix",
 																				Optional:            true,
+																				Computed:            true,
 																				NestedObject: schema.NestedAttributeObject{
 																					Attributes: map[string]schema.Attribute{
 																						"exact": schema.BoolAttribute{
 																							MarkdownDescription: "Exact",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																						"name": schema.StringAttribute{
 																							MarkdownDescription: "Name",
@@ -14030,34 +14219,41 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Afi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
 																				MarkdownDescription: "As path",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"extended_community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Extended community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
@@ -14065,15 +14261,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"nexthop": schema.ListAttribute{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "Nexthop",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"route_table": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -14081,6 +14280,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Route table",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -14088,6 +14288,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Safi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
@@ -14106,10 +14307,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"conditional_advertisement": schema.SingleNestedAttribute{
 										MarkdownDescription: "Conditional advertisement",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"policy": schema.ListNestedAttribute{
 												MarkdownDescription: "Policy",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"advertise_filters": schema.ListNestedAttribute{
@@ -14120,19 +14323,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	"enable": schema.BoolAttribute{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"match": schema.SingleNestedAttribute{
 																		MarkdownDescription: "Match",
 																		Optional:            true,
+																		Computed:            true,
 																		Attributes: map[string]schema.Attribute{
 																			"address_prefix": schema.ListNestedAttribute{
 																				MarkdownDescription: "Address prefix",
 																				Optional:            true,
+																				Computed:            true,
 																				NestedObject: schema.NestedAttributeObject{
 																					Attributes: map[string]schema.Attribute{
 																						"exact": schema.BoolAttribute{
 																							MarkdownDescription: "Exact",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																						"name": schema.StringAttribute{
 																							MarkdownDescription: "Name",
@@ -14147,34 +14354,41 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Afi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
 																				MarkdownDescription: "As path",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"extended_community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Extended community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
@@ -14182,15 +14396,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"nexthop": schema.ListAttribute{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "Nexthop",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"route_table": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -14198,6 +14415,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Route table",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -14205,6 +14423,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Safi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
@@ -14218,6 +14437,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"enable": schema.BoolAttribute{
 															MarkdownDescription: "Enable",
 															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name",
@@ -14231,19 +14451,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	"enable": schema.BoolAttribute{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"match": schema.SingleNestedAttribute{
 																		MarkdownDescription: "Match",
 																		Optional:            true,
+																		Computed:            true,
 																		Attributes: map[string]schema.Attribute{
 																			"address_prefix": schema.ListNestedAttribute{
 																				MarkdownDescription: "Address prefix",
 																				Optional:            true,
+																				Computed:            true,
 																				NestedObject: schema.NestedAttributeObject{
 																					Attributes: map[string]schema.Attribute{
 																						"exact": schema.BoolAttribute{
 																							MarkdownDescription: "Exact",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																						"name": schema.StringAttribute{
 																							MarkdownDescription: "Name",
@@ -14258,34 +14482,41 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Afi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
 																				MarkdownDescription: "As path",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
 																			"extended_community": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Extended community",
 																				Optional:            true,
+																				Computed:            true,
 																				Attributes: map[string]schema.Attribute{
 																					"regex": schema.StringAttribute{
 																						MarkdownDescription: "Regex",
 																						Optional:            true,
+																						Computed:            true,
 																					},
 																				},
 																			},
@@ -14293,15 +14524,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "From peer",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"med": schema.Int64Attribute{
 																				MarkdownDescription: "Med",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"nexthop": schema.ListAttribute{
 																				ElementType:         types.StringType,
 																				MarkdownDescription: "Nexthop",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"route_table": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -14309,6 +14543,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Route table",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
@@ -14316,6 +14551,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				},
 																				MarkdownDescription: "Safi",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
@@ -14339,15 +14575,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"export": schema.SingleNestedAttribute{
 										MarkdownDescription: "Export",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"rules": schema.ListNestedAttribute{
 												MarkdownDescription: "Rules",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"action": schema.SingleNestedAttribute{
 															MarkdownDescription: "Action",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"allow": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
@@ -14357,14 +14596,17 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"update": schema.SingleNestedAttribute{
 																			MarkdownDescription: "Update",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes: map[string]schema.Attribute{
 																				"as_path": schema.SingleNestedAttribute{
 																					MarkdownDescription: "As path",
 																					Optional:            true,
+																					Computed:            true,
 																					Attributes: map[string]schema.Attribute{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14376,6 +14618,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"prepend": schema.Int64Attribute{
@@ -14388,6 +14631,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																						"remove": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14399,6 +14643,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"remove_and_prepend": schema.Int64Attribute{
@@ -14411,16 +14656,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																					},
 																				},
 																				"as_path_limit": schema.Int64Attribute{
 																					MarkdownDescription: "As path limit",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"community": schema.SingleNestedAttribute{
 																					MarkdownDescription: "Community",
 																					Optional:            true,
+																					Computed:            true,
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
@@ -14434,6 +14682,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14446,6 +14695,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
@@ -14460,6 +14710,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14472,6 +14723,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"remove_regex": schema.StringAttribute{
@@ -14485,12 +14737,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																					},
 																				},
 																				"extended_community": schema.SingleNestedAttribute{
 																					MarkdownDescription: "Extended community",
 																					Optional:            true,
+																					Computed:            true,
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
@@ -14504,6 +14758,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14516,6 +14771,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
@@ -14530,6 +14786,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14542,6 +14799,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"remove_regex": schema.StringAttribute{
@@ -14555,20 +14813,24 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																					},
 																				},
 																				"local_preference": schema.Int64Attribute{
 																					MarkdownDescription: "Local preference",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"med": schema.Int64Attribute{
 																					MarkdownDescription: "Med",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"nexthop": schema.StringAttribute{
 																					MarkdownDescription: "Nexthop",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"origin": schema.StringAttribute{
 																					Validators: []validator.String{
@@ -14576,6 +14838,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					},
 																					MarkdownDescription: "Origin",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -14589,6 +14852,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
 															},
@@ -14596,23 +14860,28 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"enable": schema.BoolAttribute{
 															MarkdownDescription: "Enable",
 															Optional:            true,
+															Computed:            true,
 														},
 														"match": schema.SingleNestedAttribute{
 															MarkdownDescription: "Match",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"address_prefix": schema.ListNestedAttribute{
 																	MarkdownDescription: "Address prefix",
 																	Optional:            true,
+																	Computed:            true,
 																	NestedObject: schema.NestedAttributeObject{
 																		Attributes: map[string]schema.Attribute{
 																			"exact": schema.BoolAttribute{
 																				MarkdownDescription: "Exact",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"name": schema.StringAttribute{
 																				MarkdownDescription: "Name",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
@@ -14623,34 +14892,41 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Afi",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"as_path": schema.SingleNestedAttribute{
 																	MarkdownDescription: "As path",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"regex": schema.StringAttribute{
 																			MarkdownDescription: "Regex",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
 																"community": schema.SingleNestedAttribute{
 																	MarkdownDescription: "Community",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"regex": schema.StringAttribute{
 																			MarkdownDescription: "Regex",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
 																"extended_community": schema.SingleNestedAttribute{
 																	MarkdownDescription: "Extended community",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"regex": schema.StringAttribute{
 																			MarkdownDescription: "Regex",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -14658,15 +14934,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	ElementType:         types.StringType,
 																	MarkdownDescription: "From peer",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"med": schema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"nexthop": schema.ListAttribute{
 																	ElementType:         types.StringType,
 																	MarkdownDescription: "Nexthop",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"route_table": schema.StringAttribute{
 																	Validators: []validator.String{
@@ -14674,6 +14953,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Route table",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"safi": schema.StringAttribute{
 																	Validators: []validator.String{
@@ -14681,6 +14961,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Safi",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -14701,15 +14982,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"import": schema.SingleNestedAttribute{
 										MarkdownDescription: "Import",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"rules": schema.ListNestedAttribute{
 												MarkdownDescription: "Rules",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"action": schema.SingleNestedAttribute{
 															MarkdownDescription: "Action",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"allow": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
@@ -14719,18 +15003,22 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"dampening": schema.StringAttribute{
 																			MarkdownDescription: "Dampening",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"update": schema.SingleNestedAttribute{
 																			MarkdownDescription: "Update",
 																			Optional:            true,
+																			Computed:            true,
 																			Attributes: map[string]schema.Attribute{
 																				"as_path": schema.SingleNestedAttribute{
 																					MarkdownDescription: "As path",
 																					Optional:            true,
+																					Computed:            true,
 																					Attributes: map[string]schema.Attribute{
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14742,6 +15030,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"prepend": schema.Int64Attribute{
@@ -14754,6 +15043,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																						"remove": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14765,6 +15055,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"remove_and_prepend": schema.Int64Attribute{
@@ -14777,16 +15068,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																					},
 																				},
 																				"as_path_limit": schema.Int64Attribute{
 																					MarkdownDescription: "As path limit",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"community": schema.SingleNestedAttribute{
 																					MarkdownDescription: "Community",
 																					Optional:            true,
+																					Computed:            true,
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
@@ -14800,6 +15094,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14812,6 +15107,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
@@ -14826,6 +15122,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14838,6 +15135,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"remove_regex": schema.StringAttribute{
@@ -14851,12 +15149,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																					},
 																				},
 																				"extended_community": schema.SingleNestedAttribute{
 																					MarkdownDescription: "Extended community",
 																					Optional:            true,
+																					Computed:            true,
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
@@ -14870,6 +15170,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"none": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14882,6 +15183,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
@@ -14896,6 +15198,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																								),
 																							},
 																							Optional: true,
+																							Computed: true,
 																						},
 																						"remove_all": schema.SingleNestedAttribute{
 																							Validators: []validator.Object{
@@ -14908,6 +15211,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"remove_regex": schema.StringAttribute{
@@ -14921,20 +15225,24 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																							},
 																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
 																							Optional:            true,
+																							Computed:            true,
 																						},
 																					},
 																				},
 																				"local_preference": schema.Int64Attribute{
 																					MarkdownDescription: "Local preference",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"med": schema.Int64Attribute{
 																					MarkdownDescription: "Med",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"nexthop": schema.StringAttribute{
 																					MarkdownDescription: "Nexthop",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"origin": schema.StringAttribute{
 																					Validators: []validator.String{
@@ -14942,10 +15250,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					},
 																					MarkdownDescription: "Origin",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																				"weight": schema.Int64Attribute{
 																					MarkdownDescription: "Weight",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -14959,6 +15269,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
 															},
@@ -14966,19 +15277,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"enable": schema.BoolAttribute{
 															MarkdownDescription: "Enable",
 															Optional:            true,
+															Computed:            true,
 														},
 														"match": schema.SingleNestedAttribute{
 															MarkdownDescription: "Match",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"address_prefix": schema.ListNestedAttribute{
 																	MarkdownDescription: "Address prefix",
 																	Optional:            true,
+																	Computed:            true,
 																	NestedObject: schema.NestedAttributeObject{
 																		Attributes: map[string]schema.Attribute{
 																			"exact": schema.BoolAttribute{
 																				MarkdownDescription: "Exact",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"name": schema.StringAttribute{
 																				MarkdownDescription: "Name",
@@ -14993,34 +15308,41 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Afi",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"as_path": schema.SingleNestedAttribute{
 																	MarkdownDescription: "As path",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"regex": schema.StringAttribute{
 																			MarkdownDescription: "Regex",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
 																"community": schema.SingleNestedAttribute{
 																	MarkdownDescription: "Community",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"regex": schema.StringAttribute{
 																			MarkdownDescription: "Regex",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
 																"extended_community": schema.SingleNestedAttribute{
 																	MarkdownDescription: "Extended community",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"regex": schema.StringAttribute{
 																			MarkdownDescription: "Regex",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -15028,15 +15350,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	ElementType:         types.StringType,
 																	MarkdownDescription: "From peer",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"med": schema.Int64Attribute{
 																	MarkdownDescription: "Med",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"nexthop": schema.ListAttribute{
 																	ElementType:         types.StringType,
 																	MarkdownDescription: "Nexthop",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"route_table": schema.StringAttribute{
 																	Validators: []validator.String{
@@ -15044,6 +15369,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Route table",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"safi": schema.StringAttribute{
 																	Validators: []validator.String{
@@ -15051,6 +15377,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Safi",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -15073,6 +15400,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"redist_rules": schema.ListNestedAttribute{
 								MarkdownDescription: "Redist rules",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"address_family_identifier": schema.StringAttribute{
@@ -15081,14 +15409,17 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Address family identifier",
 											Optional:            true,
+											Computed:            true,
 										},
 										"enable": schema.BoolAttribute{
 											MarkdownDescription: "Enable",
 											Optional:            true,
+											Computed:            true,
 										},
 										"metric": schema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name",
@@ -15100,10 +15431,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Route table",
 											Optional:            true,
+											Computed:            true,
 										},
 										"set_as_path_limit": schema.Int64Attribute{
 											MarkdownDescription: "Set as path limit",
 											Optional:            true,
+											Computed:            true,
 										},
 										"set_community": schema.ListAttribute{
 											ElementType:         types.StringType,
@@ -15118,10 +15451,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"set_local_preference": schema.Int64Attribute{
 											MarkdownDescription: "Set local preference",
 											Optional:            true,
+											Computed:            true,
 										},
 										"set_med": schema.Int64Attribute{
 											MarkdownDescription: "Set med",
 											Optional:            true,
+											Computed:            true,
 										},
 										"set_origin": schema.StringAttribute{
 											Validators: []validator.String{
@@ -15129,6 +15464,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Set origin",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -15136,24 +15472,29 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"redistribution_profile": schema.SingleNestedAttribute{
 								MarkdownDescription: "Redistribution profile",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"ipv4": schema.SingleNestedAttribute{
 										MarkdownDescription: "Ipv4",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"unicast": schema.StringAttribute{
 												MarkdownDescription: "Unicast",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"ipv6": schema.SingleNestedAttribute{
 										MarkdownDescription: "Ipv6",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"unicast": schema.StringAttribute{
 												MarkdownDescription: "Unicast",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -15162,20 +15503,24 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"reject_default_route": schema.BoolAttribute{
 								MarkdownDescription: "Reject default route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"router_id": schema.StringAttribute{
 								MarkdownDescription: "Router id",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 					"ecmp": schema.SingleNestedAttribute{
 						MarkdownDescription: "Ecmp",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"algorithm": schema.SingleNestedAttribute{
 								MarkdownDescription: "Algorithm",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"balanced_round_robin": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
@@ -15187,6 +15532,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Balanced round robin\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
 									"ip_hash": schema.SingleNestedAttribute{
@@ -15199,18 +15545,22 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Ip hash\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"hash_seed": schema.Int64Attribute{
 												MarkdownDescription: "Hash seed",
 												Optional:            true,
+												Computed:            true,
 											},
 											"src_only": schema.BoolAttribute{
 												MarkdownDescription: "Src only",
 												Optional:            true,
+												Computed:            true,
 											},
 											"use_port": schema.BoolAttribute{
 												MarkdownDescription: "Use port",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -15224,6 +15574,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Ip modulo\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
 									"weighted_round_robin": schema.SingleNestedAttribute{
@@ -15236,10 +15587,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Weighted round robin\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"interface": schema.ListNestedAttribute{
 												MarkdownDescription: "Interface",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
@@ -15249,6 +15602,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"weight": schema.Int64Attribute{
 															MarkdownDescription: "Weight",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -15260,24 +15614,29 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable",
 								Optional:            true,
+								Computed:            true,
 							},
 							"max_path": schema.Int64Attribute{
 								MarkdownDescription: "Max path",
 								Optional:            true,
+								Computed:            true,
 							},
 							"strict_source_path": schema.BoolAttribute{
 								MarkdownDescription: "Strict source path",
 								Optional:            true,
+								Computed:            true,
 							},
 							"symmetric_return": schema.BoolAttribute{
 								MarkdownDescription: "Symmetric return",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 					"global_vrid": schema.Int64Attribute{
 						MarkdownDescription: "Global vrid",
 						Optional:            true,
+						Computed:            true,
 					},
 					"interface": schema.ListAttribute{
 						ElementType:         types.StringType,
@@ -15287,39 +15646,48 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					"multicast": schema.SingleNestedAttribute{
 						MarkdownDescription: "Multicast",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable",
 								Optional:            true,
+								Computed:            true,
 							},
 							"enable_v6": schema.BoolAttribute{
 								MarkdownDescription: "Enable v6",
 								Optional:            true,
+								Computed:            true,
 							},
 							"igmp": schema.SingleNestedAttribute{
 								MarkdownDescription: "Igmp",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"dynamic": schema.SingleNestedAttribute{
 										MarkdownDescription: "Dynamic",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"interface": schema.ListNestedAttribute{
 												MarkdownDescription: "Interface",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"group_filter": schema.StringAttribute{
 															MarkdownDescription: "Group filter",
 															Optional:            true,
+															Computed:            true,
 														},
 														"max_groups": schema.StringAttribute{
 															MarkdownDescription: "Max groups",
 															Optional:            true,
+															Computed:            true,
 														},
 														"max_sources": schema.StringAttribute{
 															MarkdownDescription: "Max sources",
 															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name",
@@ -15328,6 +15696,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"query_profile": schema.StringAttribute{
 															MarkdownDescription: "Query profile",
 															Optional:            true,
+															Computed:            true,
 														},
 														"robustness": schema.StringAttribute{
 															Validators: []validator.String{
@@ -15335,10 +15704,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Robustness",
 															Optional:            true,
+															Computed:            true,
 														},
 														"router_alert_policing": schema.BoolAttribute{
 															MarkdownDescription: "Router alert policing",
 															Optional:            true,
+															Computed:            true,
 														},
 														"version": schema.StringAttribute{
 															Validators: []validator.String{
@@ -15346,6 +15717,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Version",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -15355,19 +15727,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"enable": schema.BoolAttribute{
 										MarkdownDescription: "Enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"static": schema.ListNestedAttribute{
 										MarkdownDescription: "Static",
 										Optional:            true,
+										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"group_address": schema.StringAttribute{
 													MarkdownDescription: "Group address",
 													Optional:            true,
+													Computed:            true,
 												},
 												"interface": schema.StringAttribute{
 													MarkdownDescription: "Interface",
 													Optional:            true,
+													Computed:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name",
@@ -15376,6 +15752,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"source_address": schema.StringAttribute{
 													MarkdownDescription: "Source address",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -15385,28 +15762,34 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"interface_group": schema.ListNestedAttribute{
 								MarkdownDescription: "Interface group",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"description": schema.StringAttribute{
 											MarkdownDescription: "Description",
 											Optional:            true,
+											Computed:            true,
 										},
 										"group_permission": schema.SingleNestedAttribute{
 											MarkdownDescription: "Group permission",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"any_source_multicast": schema.ListNestedAttribute{
 													MarkdownDescription: "Any source multicast",
 													Optional:            true,
+													Computed:            true,
 													NestedObject: schema.NestedAttributeObject{
 														Attributes: map[string]schema.Attribute{
 															"group_address": schema.StringAttribute{
 																MarkdownDescription: "Group address",
 																Optional:            true,
+																Computed:            true,
 															},
 															"included": schema.BoolAttribute{
 																MarkdownDescription: "Included",
 																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name",
@@ -15418,15 +15801,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"source_specific_multicast": schema.ListNestedAttribute{
 													MarkdownDescription: "Source specific multicast",
 													Optional:            true,
+													Computed:            true,
 													NestedObject: schema.NestedAttributeObject{
 														Attributes: map[string]schema.Attribute{
 															"group_address": schema.StringAttribute{
 																MarkdownDescription: "Group address",
 																Optional:            true,
+																Computed:            true,
 															},
 															"included": schema.BoolAttribute{
 																MarkdownDescription: "Included",
 																Optional:            true,
+																Computed:            true,
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name",
@@ -15435,6 +15821,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															"source_address": schema.StringAttribute{
 																MarkdownDescription: "Source address",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -15444,30 +15831,37 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"igmp": schema.SingleNestedAttribute{
 											MarkdownDescription: "Igmp",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Enable",
 													Optional:            true,
+													Computed:            true,
 												},
 												"immediate_leave": schema.BoolAttribute{
 													MarkdownDescription: "Immediate leave",
 													Optional:            true,
+													Computed:            true,
 												},
 												"last_member_query_interval": schema.Int64Attribute{
 													MarkdownDescription: "Last member query interval",
 													Optional:            true,
+													Computed:            true,
 												},
 												"max_groups": schema.StringAttribute{
 													MarkdownDescription: "Max groups",
 													Optional:            true,
+													Computed:            true,
 												},
 												"max_query_response_time": schema.Int64Attribute{
 													MarkdownDescription: "Max query response time",
 													Optional:            true,
+													Computed:            true,
 												},
 												"max_sources": schema.StringAttribute{
 													MarkdownDescription: "Max sources",
 													Optional:            true,
+													Computed:            true,
 												},
 												"mode": schema.StringAttribute{
 													Validators: []validator.String{
@@ -15475,10 +15869,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Mode",
 													Optional:            true,
+													Computed:            true,
 												},
 												"query_interval": schema.Int64Attribute{
 													MarkdownDescription: "Query interval",
 													Optional:            true,
+													Computed:            true,
 												},
 												"robustness": schema.StringAttribute{
 													Validators: []validator.String{
@@ -15486,10 +15882,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Robustness",
 													Optional:            true,
+													Computed:            true,
 												},
 												"router_alert_policing": schema.BoolAttribute{
 													MarkdownDescription: "Router alert policing",
 													Optional:            true,
+													Computed:            true,
 												},
 												"version": schema.StringAttribute{
 													Validators: []validator.String{
@@ -15497,6 +15895,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Version",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -15512,10 +15911,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"pim": schema.SingleNestedAttribute{
 											MarkdownDescription: "Pim",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"allowed_neighbors": schema.ListNestedAttribute{
 													MarkdownDescription: "Allowed neighbors",
 													Optional:            true,
+													Computed:            true,
 													NestedObject: schema.NestedAttributeObject{
 														Attributes: map[string]schema.Attribute{
 															"name": schema.StringAttribute{
@@ -15528,26 +15929,32 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"assert_interval": schema.Int64Attribute{
 													MarkdownDescription: "Assert interval",
 													Optional:            true,
+													Computed:            true,
 												},
 												"bsr_border": schema.BoolAttribute{
 													MarkdownDescription: "Bsr border",
 													Optional:            true,
+													Computed:            true,
 												},
 												"dr_priority": schema.Int64Attribute{
 													MarkdownDescription: "Dr priority",
 													Optional:            true,
+													Computed:            true,
 												},
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Enable",
 													Optional:            true,
+													Computed:            true,
 												},
 												"hello_interval": schema.Int64Attribute{
 													MarkdownDescription: "Hello interval",
 													Optional:            true,
+													Computed:            true,
 												},
 												"join_prune_interval": schema.Int64Attribute{
 													MarkdownDescription: "Join prune interval",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -15560,71 +15967,87 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Mode",
 								Optional:            true,
+								Computed:            true,
 							},
 							"msdp": schema.SingleNestedAttribute{
 								MarkdownDescription: "Msdp",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"enable": schema.BoolAttribute{
 										MarkdownDescription: "Enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"global_authentication": schema.StringAttribute{
 										MarkdownDescription: "Global authentication",
 										Optional:            true,
+										Computed:            true,
 									},
 									"global_timer": schema.StringAttribute{
 										MarkdownDescription: "Global timer",
 										Optional:            true,
+										Computed:            true,
 									},
 									"originator_id": schema.SingleNestedAttribute{
 										MarkdownDescription: "Originator id",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"interface": schema.StringAttribute{
 												MarkdownDescription: "Interface",
 												Optional:            true,
+												Computed:            true,
 											},
 											"ip": schema.StringAttribute{
 												MarkdownDescription: "Ip",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"peer": schema.ListNestedAttribute{
 										MarkdownDescription: "Peer",
 										Optional:            true,
+										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"authentication": schema.StringAttribute{
 													MarkdownDescription: "Authentication",
 													Optional:            true,
+													Computed:            true,
 												},
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Enable",
 													Optional:            true,
+													Computed:            true,
 												},
 												"inbound_sa_filter": schema.StringAttribute{
 													MarkdownDescription: "Inbound sa filter",
 													Optional:            true,
+													Computed:            true,
 												},
 												"local_address": schema.SingleNestedAttribute{
 													MarkdownDescription: "Local address",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"interface": schema.StringAttribute{
 															MarkdownDescription: "Interface",
 															Optional:            true,
+															Computed:            true,
 														},
 														"ip": schema.StringAttribute{
 															MarkdownDescription: "Ip",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
 												"max_sa": schema.Int64Attribute{
 													MarkdownDescription: "Max sa",
 													Optional:            true,
+													Computed:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name",
@@ -15633,10 +16056,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"outbound_sa_filter": schema.StringAttribute{
 													MarkdownDescription: "Outbound sa filter",
 													Optional:            true,
+													Computed:            true,
 												},
 												"peer_address": schema.SingleNestedAttribute{
 													MarkdownDescription: "Peer address",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
@@ -15646,6 +16071,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"ip": schema.StringAttribute{
 															Validators: []validator.String{
@@ -15655,12 +16081,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
 												"peer_as": schema.StringAttribute{
 													MarkdownDescription: "Peer as",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -15670,35 +16098,43 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"pim": schema.SingleNestedAttribute{
 								MarkdownDescription: "Pim",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"enable": schema.BoolAttribute{
 										MarkdownDescription: "Enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"group_permission": schema.StringAttribute{
 										MarkdownDescription: "Group permission",
 										Optional:            true,
+										Computed:            true,
 									},
 									"if_timer_global": schema.StringAttribute{
 										MarkdownDescription: "If timer global",
 										Optional:            true,
+										Computed:            true,
 									},
 									"interface": schema.ListNestedAttribute{
 										MarkdownDescription: "Interface",
 										Optional:            true,
+										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"description": schema.StringAttribute{
 													MarkdownDescription: "Description",
 													Optional:            true,
+													Computed:            true,
 												},
 												"dr_priority": schema.Int64Attribute{
 													MarkdownDescription: "Dr priority",
 													Optional:            true,
+													Computed:            true,
 												},
 												"if_timer": schema.StringAttribute{
 													MarkdownDescription: "If timer",
 													Optional:            true,
+													Computed:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name",
@@ -15707,10 +16143,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"neighbor_filter": schema.StringAttribute{
 													MarkdownDescription: "Neighbor filter",
 													Optional:            true,
+													Computed:            true,
 												},
 												"send_bsm": schema.BoolAttribute{
 													MarkdownDescription: "Send bsm",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -15718,27 +16156,33 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"route_ageout_time": schema.Int64Attribute{
 										MarkdownDescription: "Route ageout time",
 										Optional:            true,
+										Computed:            true,
 									},
 									"rp": schema.SingleNestedAttribute{
 										MarkdownDescription: "Rp",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"external_rp": schema.ListNestedAttribute{
 												MarkdownDescription: "External rp",
 												Optional:            true,
+												Computed:            true,
 												NestedObject: schema.NestedAttributeObject{
 													Attributes: map[string]schema.Attribute{
 														"group_list": schema.StringAttribute{
 															MarkdownDescription: "Group list",
 															Optional:            true,
+															Computed:            true,
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name",
 															Optional:            true,
+															Computed:            true,
 														},
 														"override": schema.BoolAttribute{
 															MarkdownDescription: "Override",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -15746,6 +16190,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											"local_rp": schema.SingleNestedAttribute{
 												MarkdownDescription: "Local rp",
 												Optional:            true,
+												Computed:            true,
 												Attributes: map[string]schema.Attribute{
 													"candidate_rp": schema.SingleNestedAttribute{
 														Validators: []validator.Object{
@@ -15755,26 +16200,32 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														MarkdownDescription: "Candidate rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"address": schema.StringAttribute{
 																MarkdownDescription: "Address",
 																Optional:            true,
+																Computed:            true,
 															},
 															"advertisement_interval": schema.Int64Attribute{
 																MarkdownDescription: "Advertisement interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"group_list": schema.StringAttribute{
 																MarkdownDescription: "Group list",
 																Optional:            true,
+																Computed:            true,
 															},
 															"interface": schema.StringAttribute{
 																MarkdownDescription: "Interface",
 																Optional:            true,
+																Computed:            true,
 															},
 															"priority": schema.Int64Attribute{
 																MarkdownDescription: "Priority",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -15786,22 +16237,27 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														},
 														MarkdownDescription: "Static rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"address": schema.StringAttribute{
 																MarkdownDescription: "Address",
 																Optional:            true,
+																Computed:            true,
 															},
 															"group_list": schema.StringAttribute{
 																MarkdownDescription: "Group list",
 																Optional:            true,
+																Computed:            true,
 															},
 															"interface": schema.StringAttribute{
 																MarkdownDescription: "Interface",
 																Optional:            true,
+																Computed:            true,
 															},
 															"override": schema.BoolAttribute{
 																MarkdownDescription: "Override",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -15815,10 +16271,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Rpf lookup mode",
 										Optional:            true,
+										Computed:            true,
 									},
 									"spt_threshold": schema.ListNestedAttribute{
 										MarkdownDescription: "Spt threshold",
 										Optional:            true,
+										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
@@ -15828,6 +16286,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"threshold": schema.StringAttribute{
 													MarkdownDescription: "Threshold",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -15835,10 +16294,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"ssm_address_space": schema.SingleNestedAttribute{
 										MarkdownDescription: "Ssm address space",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"group_list": schema.StringAttribute{
 												MarkdownDescription: "Group list",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -15847,14 +16308,17 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"route_ageout_time": schema.Int64Attribute{
 								MarkdownDescription: "Route ageout time",
 								Optional:            true,
+								Computed:            true,
 							},
 							"rp": schema.SingleNestedAttribute{
 								MarkdownDescription: "Rp",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"external_rp": schema.ListNestedAttribute{
 										MarkdownDescription: "External rp",
 										Optional:            true,
+										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"group_addresses": schema.ListAttribute{
@@ -15869,6 +16333,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"override": schema.BoolAttribute{
 													MarkdownDescription: "Override",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -15876,6 +16341,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 									"local_rp": schema.SingleNestedAttribute{
 										MarkdownDescription: "Local rp",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"candidate_rp": schema.SingleNestedAttribute{
 												Validators: []validator.Object{
@@ -15885,27 +16351,33 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "Candidate rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
 												Optional:            true,
+												Computed:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.StringAttribute{
 														MarkdownDescription: "Address",
 														Optional:            true,
+														Computed:            true,
 													},
 													"advertisement_interval": schema.Int64Attribute{
 														MarkdownDescription: "Advertisement interval",
 														Optional:            true,
+														Computed:            true,
 													},
 													"group_addresses": schema.ListAttribute{
 														ElementType:         types.StringType,
 														MarkdownDescription: "Group addresses",
 														Optional:            true,
+														Computed:            true,
 													},
 													"interface": schema.StringAttribute{
 														MarkdownDescription: "Interface",
 														Optional:            true,
+														Computed:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -15917,23 +16389,28 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "Static rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
 												Optional:            true,
+												Computed:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.StringAttribute{
 														MarkdownDescription: "Address",
 														Optional:            true,
+														Computed:            true,
 													},
 													"group_addresses": schema.ListAttribute{
 														ElementType:         types.StringType,
 														MarkdownDescription: "Group addresses",
 														Optional:            true,
+														Computed:            true,
 													},
 													"interface": schema.StringAttribute{
 														MarkdownDescription: "Interface",
 														Optional:            true,
+														Computed:            true,
 													},
 													"override": schema.BoolAttribute{
 														MarkdownDescription: "Override",
 														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -15944,6 +16421,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"spt_threshold": schema.ListNestedAttribute{
 								MarkdownDescription: "Spt threshold",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
@@ -15953,6 +16431,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"threshold": schema.StringAttribute{
 											MarkdownDescription: "Threshold",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -15960,15 +16439,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"ssm_address_space": schema.ListNestedAttribute{
 								MarkdownDescription: "Ssm address space",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"group_address": schema.StringAttribute{
 											MarkdownDescription: "Group address",
 											Optional:            true,
+											Computed:            true,
 										},
 										"included": schema.BoolAttribute{
 											MarkdownDescription: "Included",
 											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name",
@@ -15980,15 +16462,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"static_route": schema.ListNestedAttribute{
 								MarkdownDescription: "Static route",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"destination": schema.StringAttribute{
 											MarkdownDescription: "Destination",
 											Optional:            true,
+											Computed:            true,
 										},
 										"interface": schema.StringAttribute{
 											MarkdownDescription: "Interface",
 											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name",
@@ -15997,16 +16482,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"nexthop": schema.SingleNestedAttribute{
 											MarkdownDescription: "Nexthop",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "Ip address",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
 										"preference": schema.Int64Attribute{
 											MarkdownDescription: "Preference",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -16020,19 +16508,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					"ospf": schema.SingleNestedAttribute{
 						MarkdownDescription: "Ospf",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"allow_redist_default_route": schema.BoolAttribute{
 								MarkdownDescription: "Allow redist default route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"area": schema.ListNestedAttribute{
 								MarkdownDescription: "Area",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"authentication": schema.StringAttribute{
 											MarkdownDescription: "Authentication",
 											Optional:            true,
+											Computed:            true,
 										},
 										"interface": schema.ListNestedAttribute{
 											MarkdownDescription: "Interface",
@@ -16042,24 +16534,29 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"authentication": schema.StringAttribute{
 														MarkdownDescription: "Authentication",
 														Optional:            true,
+														Computed:            true,
 													},
 													"bfd": schema.SingleNestedAttribute{
 														MarkdownDescription: "Bfd",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"profile": schema.StringAttribute{
 																MarkdownDescription: "Profile",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"enable": schema.BoolAttribute{
 														MarkdownDescription: "Enable",
 														Optional:            true,
+														Computed:            true,
 													},
 													"link_type": schema.SingleNestedAttribute{
 														MarkdownDescription: "Link type",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"broadcast": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
@@ -16070,6 +16567,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "Broadcast\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
 															"p2mp": schema.SingleNestedAttribute{
@@ -16081,10 +16579,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "P2mp\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes: map[string]schema.Attribute{
 																	"neighbor": schema.ListNestedAttribute{
 																		MarkdownDescription: "Neighbor",
 																		Optional:            true,
+																		Computed:            true,
 																		NestedObject: schema.NestedAttributeObject{
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
@@ -16094,6 +16594,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				"priority": schema.Int64Attribute{
 																					MarkdownDescription: "Priority",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -16109,6 +16610,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "P2p\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
 														},
@@ -16116,10 +16618,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"metric": schema.Int64Attribute{
 														MarkdownDescription: "Metric",
 														Optional:            true,
+														Computed:            true,
 													},
 													"mtu_ignore": schema.BoolAttribute{
 														MarkdownDescription: "Mtu ignore",
 														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name",
@@ -16128,38 +16632,47 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"passive": schema.BoolAttribute{
 														MarkdownDescription: "Passive",
 														Optional:            true,
+														Computed:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Optional:            true,
+														Computed:            true,
 													},
 													"timing": schema.StringAttribute{
 														MarkdownDescription: "Timing",
 														Optional:            true,
+														Computed:            true,
 													},
 													"vr_timing": schema.SingleNestedAttribute{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
+																Computed:            true,
 															},
 															"gr_delay": schema.Int64Attribute{
 																MarkdownDescription: "Gr delay",
 																Optional:            true,
+																Computed:            true,
 															},
 															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -16178,6 +16691,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"advertise": schema.BoolAttribute{
 														MarkdownDescription: "Advertise",
 														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name",
@@ -16186,6 +16700,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"substitute": schema.StringAttribute{
 														MarkdownDescription: "Substitute",
 														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -16193,6 +16708,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"type": schema.SingleNestedAttribute{
 											MarkdownDescription: "Type",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"normal": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
@@ -16203,26 +16719,32 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Normal\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
 															MarkdownDescription: "Abr",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"export_list": schema.StringAttribute{
 																	MarkdownDescription: "Export list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"import_list": schema.StringAttribute{
 																	MarkdownDescription: "Import list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"inbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Inbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"outbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Outbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -16237,31 +16759,38 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Nssa\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
 															MarkdownDescription: "Abr",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"export_list": schema.StringAttribute{
 																	MarkdownDescription: "Export list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"import_list": schema.StringAttribute{
 																	MarkdownDescription: "Import list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"inbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Inbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"nssa_ext_range": schema.ListNestedAttribute{
 																	MarkdownDescription: "Nssa ext range",
 																	Optional:            true,
+																	Computed:            true,
 																	NestedObject: schema.NestedAttributeObject{
 																		Attributes: map[string]schema.Attribute{
 																			"advertise": schema.BoolAttribute{
 																				MarkdownDescription: "Advertise",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"name": schema.StringAttribute{
 																				MarkdownDescription: "Name",
@@ -16270,6 +16799,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			"route_tag": schema.Int64Attribute{
 																				MarkdownDescription: "Route tag",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																		},
 																	},
@@ -16277,20 +16807,24 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																"outbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Outbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
 														"accept_summary": schema.BoolAttribute{
 															MarkdownDescription: "Accept summary",
 															Optional:            true,
+															Computed:            true,
 														},
 														"default_information_originate": schema.SingleNestedAttribute{
 															MarkdownDescription: "Default information originate",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"metric": schema.Int64Attribute{
 																	MarkdownDescription: "Metric",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"metric_type": schema.StringAttribute{
 																	Validators: []validator.String{
@@ -16298,12 +16832,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Metric type",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
 														"default_route": schema.SingleNestedAttribute{
 															MarkdownDescription: "Default route",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
@@ -16313,10 +16849,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"type": schema.StringAttribute{
 																			Validators: []validator.String{
@@ -16324,6 +16862,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Type",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -16335,6 +16874,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
 															},
@@ -16342,10 +16882,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"no_summary": schema.BoolAttribute{
 															MarkdownDescription: "No summary",
 															Optional:            true,
+															Computed:            true,
 														},
 														"nssa_ext_range": schema.ListNestedAttribute{
 															MarkdownDescription: "Nssa ext range",
 															Optional:            true,
+															Computed:            true,
 															NestedObject: schema.NestedAttributeObject{
 																Attributes: map[string]schema.Attribute{
 																	"advertise": schema.SingleNestedAttribute{
@@ -16376,36 +16918,44 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Stub\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
 															MarkdownDescription: "Abr",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"export_list": schema.StringAttribute{
 																	MarkdownDescription: "Export list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"import_list": schema.StringAttribute{
 																	MarkdownDescription: "Import list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"inbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Inbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"outbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Outbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
 														"accept_summary": schema.BoolAttribute{
 															MarkdownDescription: "Accept summary",
 															Optional:            true,
+															Computed:            true,
 														},
 														"default_route": schema.SingleNestedAttribute{
 															MarkdownDescription: "Default route",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
@@ -16415,10 +16965,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -16430,6 +16982,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
 															},
@@ -16437,10 +16990,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"default_route_metric": schema.Int64Attribute{
 															MarkdownDescription: "Default route metric",
 															Optional:            true,
+															Computed:            true,
 														},
 														"no_summary": schema.BoolAttribute{
 															MarkdownDescription: "No summary",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -16454,28 +17009,34 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"authentication": schema.StringAttribute{
 														MarkdownDescription: "Authentication",
 														Optional:            true,
+														Computed:            true,
 													},
 													"bfd": schema.SingleNestedAttribute{
 														MarkdownDescription: "Bfd",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"profile": schema.StringAttribute{
 																MarkdownDescription: "Profile",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"enable": schema.BoolAttribute{
 														MarkdownDescription: "Enable",
 														Optional:            true,
+														Computed:            true,
 													},
 													"instance_id": schema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"interface_id": schema.Int64Attribute{
 														MarkdownDescription: "Interface id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name",
@@ -16484,38 +17045,47 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"neighbor_id": schema.StringAttribute{
 														MarkdownDescription: "Neighbor id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"passive": schema.BoolAttribute{
 														MarkdownDescription: "Passive",
 														Optional:            true,
+														Computed:            true,
 													},
 													"timing": schema.StringAttribute{
 														MarkdownDescription: "Timing",
 														Optional:            true,
+														Computed:            true,
 													},
 													"transit_area_id": schema.StringAttribute{
 														MarkdownDescription: "Transit area id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"vr_timing": schema.SingleNestedAttribute{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
+																Computed:            true,
 															},
 															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -16550,6 +17120,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"auth_profile": schema.ListNestedAttribute{
 								MarkdownDescription: "Auth profile",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"md5": schema.ListNestedAttribute{
@@ -16560,6 +17131,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"key": schema.StringAttribute{
 														MarkdownDescription: "Key",
 														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.Float64Attribute{
 														MarkdownDescription: "Name",
@@ -16568,6 +17140,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"preferred": schema.BoolAttribute{
 														MarkdownDescription: "Preferred",
 														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -16579,6 +17152,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"password": schema.StringAttribute{
 											MarkdownDescription: "Password",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -16586,15 +17160,18 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable",
 								Optional:            true,
+								Computed:            true,
 							},
 							"export_rules": schema.ListNestedAttribute{
 								MarkdownDescription: "Export rules",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"metric": schema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name",
@@ -16606,10 +17183,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "New path type",
 											Optional:            true,
+											Computed:            true,
 										},
 										"new_tag": schema.StringAttribute{
 											MarkdownDescription: "New tag",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -16617,32 +17196,39 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"flood_prevention": schema.SingleNestedAttribute{
 								MarkdownDescription: "Flood prevention",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"hello": schema.SingleNestedAttribute{
 										MarkdownDescription: "Hello",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"enable": schema.BoolAttribute{
 												MarkdownDescription: "Enable",
 												Optional:            true,
+												Computed:            true,
 											},
 											"max_packet": schema.Int64Attribute{
 												MarkdownDescription: "Max packet",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"lsa": schema.SingleNestedAttribute{
 										MarkdownDescription: "Lsa",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"enable": schema.BoolAttribute{
 												MarkdownDescription: "Enable",
 												Optional:            true,
+												Computed:            true,
 											},
 											"max_packet": schema.Int64Attribute{
 												MarkdownDescription: "Max packet",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -16651,74 +17237,91 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"global_bfd": schema.SingleNestedAttribute{
 								MarkdownDescription: "Global bfd",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"profile": schema.StringAttribute{
 										MarkdownDescription: "Profile",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"global_if_timer": schema.StringAttribute{
 								MarkdownDescription: "Global if timer",
 								Optional:            true,
+								Computed:            true,
 							},
 							"graceful_restart": schema.SingleNestedAttribute{
 								MarkdownDescription: "Graceful restart",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"enable": schema.BoolAttribute{
 										MarkdownDescription: "Enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"grace_period": schema.Int64Attribute{
 										MarkdownDescription: "Grace period",
 										Optional:            true,
+										Computed:            true,
 									},
 									"helper_enable": schema.BoolAttribute{
 										MarkdownDescription: "Helper enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"max_neighbor_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Max neighbor restart time",
 										Optional:            true,
+										Computed:            true,
 									},
 									"strict_lsa_checking": schema.BoolAttribute{
 										MarkdownDescription: "Strict l s a checking",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"redistribution_profile": schema.StringAttribute{
 								MarkdownDescription: "Redistribution profile",
 								Optional:            true,
+								Computed:            true,
 							},
 							"reject_default_route": schema.BoolAttribute{
 								MarkdownDescription: "Reject default route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"rfc1583": schema.BoolAttribute{
 								MarkdownDescription: "Rfc1583",
 								Optional:            true,
+								Computed:            true,
 							},
 							"router_id": schema.StringAttribute{
 								MarkdownDescription: "Router id",
 								Optional:            true,
+								Computed:            true,
 							},
 							"spf_timer": schema.StringAttribute{
 								MarkdownDescription: "Spf timer",
 								Optional:            true,
+								Computed:            true,
 							},
 							"vr_timers": schema.SingleNestedAttribute{
 								MarkdownDescription: "Vr timers",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"lsa_interval": schema.Int64Attribute{
 										MarkdownDescription: "Lsa interval",
 										Optional:            true,
+										Computed:            true,
 									},
 									"spf_calculation_delay": schema.Int64Attribute{
 										MarkdownDescription: "Spf calculation delay",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -16727,19 +17330,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					"ospfv3": schema.SingleNestedAttribute{
 						MarkdownDescription: "Ospfv3",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"allow_redist_default_route": schema.BoolAttribute{
 								MarkdownDescription: "Allow redist default route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"area": schema.ListNestedAttribute{
 								MarkdownDescription: "Area",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"authentication": schema.StringAttribute{
 											MarkdownDescription: "Authentication",
 											Optional:            true,
+											Computed:            true,
 										},
 										"interface": schema.ListNestedAttribute{
 											MarkdownDescription: "Interface",
@@ -16749,28 +17356,34 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"authentication": schema.StringAttribute{
 														MarkdownDescription: "Authentication",
 														Optional:            true,
+														Computed:            true,
 													},
 													"bfd": schema.SingleNestedAttribute{
 														MarkdownDescription: "Bfd",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"profile": schema.StringAttribute{
 																MarkdownDescription: "Profile",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"enable": schema.BoolAttribute{
 														MarkdownDescription: "Enable",
 														Optional:            true,
+														Computed:            true,
 													},
 													"instance_id": schema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"link_type": schema.SingleNestedAttribute{
 														MarkdownDescription: "Link type",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"broadcast": schema.SingleNestedAttribute{
 																Validators: []validator.Object{
@@ -16781,6 +17394,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "Broadcast\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
 															"p2mp": schema.SingleNestedAttribute{
@@ -16792,10 +17406,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "P2mp\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes: map[string]schema.Attribute{
 																	"neighbor": schema.ListNestedAttribute{
 																		MarkdownDescription: "Neighbor",
 																		Optional:            true,
+																		Computed:            true,
 																		NestedObject: schema.NestedAttributeObject{
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
@@ -16805,6 +17421,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				"priority": schema.Int64Attribute{
 																					MarkdownDescription: "Priority",
 																					Optional:            true,
+																					Computed:            true,
 																				},
 																			},
 																		},
@@ -16820,6 +17437,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																},
 																MarkdownDescription: "P2p\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
 																Optional:            true,
+																Computed:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
 														},
@@ -16827,10 +17445,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"metric": schema.Int64Attribute{
 														MarkdownDescription: "Metric",
 														Optional:            true,
+														Computed:            true,
 													},
 													"mtu_ignore": schema.BoolAttribute{
 														MarkdownDescription: "Mtu ignore",
 														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name",
@@ -16851,38 +17471,47 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"passive": schema.BoolAttribute{
 														MarkdownDescription: "Passive",
 														Optional:            true,
+														Computed:            true,
 													},
 													"priority": schema.Int64Attribute{
 														MarkdownDescription: "Priority",
 														Optional:            true,
+														Computed:            true,
 													},
 													"timing": schema.StringAttribute{
 														MarkdownDescription: "Timing",
 														Optional:            true,
+														Computed:            true,
 													},
 													"vr_timing": schema.SingleNestedAttribute{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
+																Computed:            true,
 															},
 															"gr_delay": schema.Int64Attribute{
 																MarkdownDescription: "Gr delay",
 																Optional:            true,
+																Computed:            true,
 															},
 															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -16901,6 +17530,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"advertise": schema.BoolAttribute{
 														MarkdownDescription: "Advertise",
 														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name",
@@ -16912,6 +17542,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"type": schema.SingleNestedAttribute{
 											MarkdownDescription: "Type",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"normal": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
@@ -16922,26 +17553,32 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Normal\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
 															MarkdownDescription: "Abr",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"export_list": schema.StringAttribute{
 																	MarkdownDescription: "Export list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"import_list": schema.StringAttribute{
 																	MarkdownDescription: "Import list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"inbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Inbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"outbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Outbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -16956,26 +17593,32 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Nssa\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
 															MarkdownDescription: "Abr",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"export_list": schema.StringAttribute{
 																	MarkdownDescription: "Export list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"import_list": schema.StringAttribute{
 																	MarkdownDescription: "Import list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"inbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Inbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"nssa_ext_range": schema.ListNestedAttribute{
 																	MarkdownDescription: "Nssa ext range",
 																	Optional:            true,
+																	Computed:            true,
 																	NestedObject: schema.NestedAttributeObject{
 																		Attributes: map[string]schema.Attribute{
 																			"advertise": schema.SingleNestedAttribute{
@@ -16990,6 +17633,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			"route_tag": schema.Int64Attribute{
 																				MarkdownDescription: "Route tag",
 																				Optional:            true,
+																				Computed:            true,
 																			},
 																			"suppress": schema.SingleNestedAttribute{
 																				MarkdownDescription: "Suppress",
@@ -17002,20 +17646,24 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																"outbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Outbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
 														"accept_summary": schema.BoolAttribute{
 															MarkdownDescription: "Accept summary",
 															Optional:            true,
+															Computed:            true,
 														},
 														"default_information_originate": schema.SingleNestedAttribute{
 															MarkdownDescription: "Default information originate",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"metric": schema.Int64Attribute{
 																	MarkdownDescription: "Metric",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"metric_type": schema.StringAttribute{
 																	Validators: []validator.String{
@@ -17023,12 +17671,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Metric type",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
 														"default_route": schema.SingleNestedAttribute{
 															MarkdownDescription: "Default route",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
@@ -17038,10 +17688,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																		"type": schema.StringAttribute{
 																			Validators: []validator.String{
@@ -17049,6 +17701,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			},
 																			MarkdownDescription: "Type",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -17060,6 +17713,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
 															},
@@ -17067,10 +17721,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"no_summary": schema.BoolAttribute{
 															MarkdownDescription: "No summary",
 															Optional:            true,
+															Computed:            true,
 														},
 														"nssa_ext_range": schema.ListNestedAttribute{
 															MarkdownDescription: "Nssa ext range",
 															Optional:            true,
+															Computed:            true,
 															NestedObject: schema.NestedAttributeObject{
 																Attributes: map[string]schema.Attribute{
 																	"advertise": schema.SingleNestedAttribute{
@@ -17085,6 +17741,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	"route_tag": schema.Int64Attribute{
 																		MarkdownDescription: "Route tag",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"suppress": schema.SingleNestedAttribute{
 																		MarkdownDescription: "Suppress",
@@ -17105,36 +17762,44 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Stub\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
 															MarkdownDescription: "Abr",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"export_list": schema.StringAttribute{
 																	MarkdownDescription: "Export list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"import_list": schema.StringAttribute{
 																	MarkdownDescription: "Import list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"inbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Inbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 																"outbound_filter_list": schema.StringAttribute{
 																	MarkdownDescription: "Outbound filter list",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
 														"accept_summary": schema.BoolAttribute{
 															MarkdownDescription: "Accept summary",
 															Optional:            true,
+															Computed:            true,
 														},
 														"default_route": schema.SingleNestedAttribute{
 															MarkdownDescription: "Default route",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"advertise": schema.SingleNestedAttribute{
 																	Validators: []validator.Object{
@@ -17144,10 +17809,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
 																			MarkdownDescription: "Metric",
 																			Optional:            true,
+																			Computed:            true,
 																		},
 																	},
 																},
@@ -17159,6 +17826,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	},
 																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
 																	Optional:            true,
+																	Computed:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
 															},
@@ -17166,10 +17834,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														"default_route_metric": schema.Int64Attribute{
 															MarkdownDescription: "Default route metric",
 															Optional:            true,
+															Computed:            true,
 														},
 														"no_summary": schema.BoolAttribute{
 															MarkdownDescription: "No summary",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -17183,28 +17853,34 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"authentication": schema.StringAttribute{
 														MarkdownDescription: "Authentication",
 														Optional:            true,
+														Computed:            true,
 													},
 													"bfd": schema.SingleNestedAttribute{
 														MarkdownDescription: "Bfd",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"profile": schema.StringAttribute{
 																MarkdownDescription: "Profile",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"enable": schema.BoolAttribute{
 														MarkdownDescription: "Enable",
 														Optional:            true,
+														Computed:            true,
 													},
 													"instance_id": schema.Int64Attribute{
 														MarkdownDescription: "Instance id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"interface_id": schema.Int64Attribute{
 														MarkdownDescription: "Interface id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name",
@@ -17213,38 +17889,47 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													"neighbor_id": schema.StringAttribute{
 														MarkdownDescription: "Neighbor id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"passive": schema.BoolAttribute{
 														MarkdownDescription: "Passive",
 														Optional:            true,
+														Computed:            true,
 													},
 													"timing": schema.StringAttribute{
 														MarkdownDescription: "Timing",
 														Optional:            true,
+														Computed:            true,
 													},
 													"transit_area_id": schema.StringAttribute{
 														MarkdownDescription: "Transit area id",
 														Optional:            true,
+														Computed:            true,
 													},
 													"vr_timing": schema.SingleNestedAttribute{
 														MarkdownDescription: "Vr timing",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"dead_counts": schema.Int64Attribute{
 																MarkdownDescription: "Dead counts",
 																Optional:            true,
+																Computed:            true,
 															},
 															"hello_interval": schema.Int64Attribute{
 																MarkdownDescription: "Hello interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"retransmit_interval": schema.Int64Attribute{
 																MarkdownDescription: "Retransmit interval",
 																Optional:            true,
+																Computed:            true,
 															},
 															"transit_delay": schema.Int64Attribute{
 																MarkdownDescription: "Transit delay",
 																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
@@ -17279,11 +17964,13 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"auth_profile": schema.ListNestedAttribute{
 								MarkdownDescription: "Auth profile",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"ah": schema.SingleNestedAttribute{
 											MarkdownDescription: "Ah",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"md5": schema.SingleNestedAttribute{
 													Validators: []validator.Object{
@@ -17296,10 +17983,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Md5\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
 															MarkdownDescription: "Key",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -17314,10 +18003,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Sha1\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
 															MarkdownDescription: "Key",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -17332,10 +18023,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Sha256\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
 															MarkdownDescription: "Key",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -17350,10 +18043,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Sha384\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
 															MarkdownDescription: "Key",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -17368,10 +18063,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Sha512\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
 															MarkdownDescription: "Key",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -17380,10 +18077,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"esp": schema.SingleNestedAttribute{
 											MarkdownDescription: "Esp",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"authentication": schema.SingleNestedAttribute{
 													MarkdownDescription: "Authentication",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"md5": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
@@ -17397,10 +18096,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Md5\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
 																	MarkdownDescription: "Key",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -17416,6 +18117,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"sha1": schema.SingleNestedAttribute{
@@ -17430,10 +18132,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Sha1\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
 																	MarkdownDescription: "Key",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -17449,10 +18153,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Sha256\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
 																	MarkdownDescription: "Key",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -17468,10 +18174,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Sha384\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
 																	MarkdownDescription: "Key",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -17487,10 +18195,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Sha512\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
 																	MarkdownDescription: "Key",
 																	Optional:            true,
+																	Computed:            true,
 																},
 															},
 														},
@@ -17499,6 +18209,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"encryption": schema.SingleNestedAttribute{
 													MarkdownDescription: "Encryption",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"algorithm": schema.StringAttribute{
 															Validators: []validator.String{
@@ -17506,10 +18217,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Algorithm",
 															Optional:            true,
+															Computed:            true,
 														},
 														"key": schema.StringAttribute{
 															MarkdownDescription: "Key",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
@@ -17522,6 +18235,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										"spi": schema.StringAttribute{
 											MarkdownDescription: "Spi",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -17529,19 +18243,23 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"disable_transit_traffic": schema.BoolAttribute{
 								MarkdownDescription: "Disable transit traffic",
 								Optional:            true,
+								Computed:            true,
 							},
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable",
 								Optional:            true,
+								Computed:            true,
 							},
 							"export_rules": schema.ListNestedAttribute{
 								MarkdownDescription: "Export rules",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"metric": schema.Int64Attribute{
 											MarkdownDescription: "Metric",
 											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name",
@@ -17553,10 +18271,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "New path type",
 											Optional:            true,
+											Computed:            true,
 										},
 										"new_tag": schema.StringAttribute{
 											MarkdownDescription: "New tag",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -17564,70 +18284,86 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"global_bfd": schema.SingleNestedAttribute{
 								MarkdownDescription: "Global bfd",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"profile": schema.StringAttribute{
 										MarkdownDescription: "Profile",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"global_if_timer": schema.StringAttribute{
 								MarkdownDescription: "Global if timer",
 								Optional:            true,
+								Computed:            true,
 							},
 							"graceful_restart": schema.SingleNestedAttribute{
 								MarkdownDescription: "Graceful restart",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"enable": schema.BoolAttribute{
 										MarkdownDescription: "Enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"grace_period": schema.Int64Attribute{
 										MarkdownDescription: "Grace period",
 										Optional:            true,
+										Computed:            true,
 									},
 									"helper_enable": schema.BoolAttribute{
 										MarkdownDescription: "Helper enable",
 										Optional:            true,
+										Computed:            true,
 									},
 									"max_neighbor_restart_time": schema.Int64Attribute{
 										MarkdownDescription: "Max neighbor restart time",
 										Optional:            true,
+										Computed:            true,
 									},
 									"strict_lsa_checking": schema.BoolAttribute{
 										MarkdownDescription: "Strict l s a checking",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"redistribution_profile": schema.StringAttribute{
 								MarkdownDescription: "Redistribution profile",
 								Optional:            true,
+								Computed:            true,
 							},
 							"reject_default_route": schema.BoolAttribute{
 								MarkdownDescription: "Reject default route",
 								Optional:            true,
+								Computed:            true,
 							},
 							"router_id": schema.StringAttribute{
 								MarkdownDescription: "Router id",
 								Optional:            true,
+								Computed:            true,
 							},
 							"spf_timer": schema.StringAttribute{
 								MarkdownDescription: "Spf timer",
 								Optional:            true,
+								Computed:            true,
 							},
 							"vr_timers": schema.SingleNestedAttribute{
 								MarkdownDescription: "Vr timers",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"lsa_interval": schema.Int64Attribute{
 										MarkdownDescription: "Lsa interval",
 										Optional:            true,
+										Computed:            true,
 									},
 									"spf_calculation_delay": schema.Int64Attribute{
 										MarkdownDescription: "Spf calculation delay",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -17636,48 +18372,58 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					"rib_filter": schema.SingleNestedAttribute{
 						MarkdownDescription: "Rib filter",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"ipv4": schema.SingleNestedAttribute{
 								MarkdownDescription: "Ipv4",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"bgp": schema.SingleNestedAttribute{
 										MarkdownDescription: "Bgp",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"route_map": schema.StringAttribute{
 												MarkdownDescription: "Route map",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"ospf": schema.SingleNestedAttribute{
 										MarkdownDescription: "Ospf",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"route_map": schema.StringAttribute{
 												MarkdownDescription: "Route map",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"rip": schema.SingleNestedAttribute{
 										MarkdownDescription: "Rip",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"route_map": schema.StringAttribute{
 												MarkdownDescription: "Route map",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"static": schema.SingleNestedAttribute{
 										MarkdownDescription: "Static",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"route_map": schema.StringAttribute{
 												MarkdownDescription: "Route map",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -17686,34 +18432,41 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"ipv6": schema.SingleNestedAttribute{
 								MarkdownDescription: "Ipv6",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"bgp": schema.SingleNestedAttribute{
 										MarkdownDescription: "Bgp",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"route_map": schema.StringAttribute{
 												MarkdownDescription: "Route map",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"ospfv3": schema.SingleNestedAttribute{
 										MarkdownDescription: "Ospfv3",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"route_map": schema.StringAttribute{
 												MarkdownDescription: "Route map",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
 									"static": schema.SingleNestedAttribute{
 										MarkdownDescription: "Static",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"route_map": schema.StringAttribute{
 												MarkdownDescription: "Route map",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},
@@ -17724,101 +18477,123 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					"rip": schema.SingleNestedAttribute{
 						MarkdownDescription: "Rip",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"auth_profile": schema.StringAttribute{
 								MarkdownDescription: "Auth profile",
 								Optional:            true,
+								Computed:            true,
 							},
 							"default_information_originate": schema.BoolAttribute{
 								MarkdownDescription: "Default information originate",
 								Optional:            true,
+								Computed:            true,
 							},
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable",
 								Optional:            true,
+								Computed:            true,
 							},
 							"global_bfd": schema.SingleNestedAttribute{
 								MarkdownDescription: "Global bfd",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"profile": schema.StringAttribute{
 										MarkdownDescription: "Profile",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"global_inbound_distribute_list": schema.SingleNestedAttribute{
 								MarkdownDescription: "Global inbound distribute list",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"access_list": schema.StringAttribute{
 										MarkdownDescription: "Access list",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"global_outbound_distribute_list": schema.SingleNestedAttribute{
 								MarkdownDescription: "Global outbound distribute list",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"access_list": schema.StringAttribute{
 										MarkdownDescription: "Access list",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"global_timer": schema.StringAttribute{
 								MarkdownDescription: "Global timer",
 								Optional:            true,
+								Computed:            true,
 							},
 							"interface": schema.ListNestedAttribute{
 								MarkdownDescription: "Interface",
 								Optional:            true,
+								Computed:            true,
 								NestedObject: schema.NestedAttributeObject{
 									Attributes: map[string]schema.Attribute{
 										"authentication": schema.StringAttribute{
 											MarkdownDescription: "Authentication",
 											Optional:            true,
+											Computed:            true,
 										},
 										"bfd": schema.SingleNestedAttribute{
 											MarkdownDescription: "Bfd",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"profile": schema.StringAttribute{
 													MarkdownDescription: "Profile",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
 										"enable": schema.BoolAttribute{
 											MarkdownDescription: "Enable",
 											Optional:            true,
+											Computed:            true,
 										},
 										"interface_inbound_distribute_list": schema.SingleNestedAttribute{
 											MarkdownDescription: "Interface inbound distribute list",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"access_list": schema.StringAttribute{
 													MarkdownDescription: "Access list",
 													Optional:            true,
+													Computed:            true,
 												},
 												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
 										"interface_outbound_distribute_list": schema.SingleNestedAttribute{
 											MarkdownDescription: "Interface outbound distribute list",
 											Optional:            true,
+											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"access_list": schema.StringAttribute{
 													MarkdownDescription: "Access list",
 													Optional:            true,
+													Computed:            true,
 												},
 												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
+													Computed:            true,
 												},
 											},
 										},
@@ -17828,6 +18603,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Mode",
 											Optional:            true,
+											Computed:            true,
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name",
@@ -17839,6 +18615,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Split horizon",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
@@ -17846,47 +18623,57 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"redistribution_profile": schema.StringAttribute{
 								MarkdownDescription: "Redistribution profile",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 					"routing_table": schema.SingleNestedAttribute{
 						MarkdownDescription: "Routing table",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"ip": schema.SingleNestedAttribute{
 								MarkdownDescription: "Ip",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"static_route": schema.ListNestedAttribute{
 										MarkdownDescription: "Static route",
 										Optional:            true,
+										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"admin_dist": schema.Int64Attribute{
 													MarkdownDescription: "Admin dist",
 													Optional:            true,
+													Computed:            true,
 												},
 												"bfd": schema.SingleNestedAttribute{
 													MarkdownDescription: "Bfd",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"profile": schema.StringAttribute{
 															MarkdownDescription: "Profile",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
 												"destination": schema.StringAttribute{
 													MarkdownDescription: "Destination",
 													Optional:            true,
+													Computed:            true,
 												},
 												"interface": schema.StringAttribute{
 													MarkdownDescription: "Interface",
 													Optional:            true,
+													Computed:            true,
 												},
 												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
+													Computed:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name",
@@ -17895,6 +18682,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"nexthop": schema.SingleNestedAttribute{
 													MarkdownDescription: "Nexthop",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"discard": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
@@ -17910,6 +18698,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"fqdn": schema.StringAttribute{
@@ -17926,6 +18715,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -17941,6 +18731,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Ip address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"ipv6_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -17956,6 +18747,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Ipv6 address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"next_lr": schema.StringAttribute{
 															Validators: []validator.String{
@@ -17971,6 +18763,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Next lr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"next_vr": schema.StringAttribute{
 															Validators: []validator.String{
@@ -17986,6 +18779,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Next vr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"receive": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
@@ -18001,6 +18795,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Receive\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"tunnel": schema.StringAttribute{
@@ -18017,16 +18812,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Tunnel\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
 												"path_monitor": schema.SingleNestedAttribute{
 													MarkdownDescription: "Path monitor",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"enable": schema.BoolAttribute{
 															MarkdownDescription: "Enable",
 															Optional:            true,
+															Computed:            true,
 														},
 														"failure_condition": schema.StringAttribute{
 															Validators: []validator.String{
@@ -18034,35 +18832,43 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Failure condition",
 															Optional:            true,
+															Computed:            true,
 														},
 														"hold_time": schema.Int64Attribute{
 															MarkdownDescription: "Hold time",
 															Optional:            true,
+															Computed:            true,
 														},
 														"monitor_destinations": schema.ListNestedAttribute{
 															MarkdownDescription: "Monitor destinations",
 															Optional:            true,
+															Computed:            true,
 															NestedObject: schema.NestedAttributeObject{
 																Attributes: map[string]schema.Attribute{
 																	"count": schema.Int64Attribute{
 																		MarkdownDescription: "Count",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"destination": schema.StringAttribute{
 																		MarkdownDescription: "Destination",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"destination_fqdn": schema.StringAttribute{
 																		MarkdownDescription: "Destination fqdn",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"enable": schema.BoolAttribute{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"interval": schema.Int64Attribute{
 																		MarkdownDescription: "Interval",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name",
@@ -18071,6 +18877,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	"source": schema.StringAttribute{
 																		MarkdownDescription: "Source",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -18080,6 +18887,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"route_table": schema.SingleNestedAttribute{
 													MarkdownDescription: "Route table",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"both": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
@@ -18091,6 +18899,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"multicast": schema.SingleNestedAttribute{
@@ -18103,6 +18912,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Multicast\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"no_install": schema.SingleNestedAttribute{
@@ -18115,6 +18925,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "No install\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"unicast": schema.SingleNestedAttribute{
@@ -18127,6 +18938,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Unicast\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 													},
@@ -18139,37 +18951,45 @@ var LogicalRoutersResourceSchema = schema.Schema{
 							"ipv6": schema.SingleNestedAttribute{
 								MarkdownDescription: "Ipv6",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"static_route": schema.ListNestedAttribute{
 										MarkdownDescription: "Static route",
 										Optional:            true,
+										Computed:            true,
 										NestedObject: schema.NestedAttributeObject{
 											Attributes: map[string]schema.Attribute{
 												"admin_dist": schema.Int64Attribute{
 													MarkdownDescription: "Admin dist",
 													Optional:            true,
+													Computed:            true,
 												},
 												"bfd": schema.SingleNestedAttribute{
 													MarkdownDescription: "Bfd",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"profile": schema.StringAttribute{
 															MarkdownDescription: "Profile",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
 												"destination": schema.StringAttribute{
 													MarkdownDescription: "Destination",
 													Optional:            true,
+													Computed:            true,
 												},
 												"interface": schema.StringAttribute{
 													MarkdownDescription: "Interface",
 													Optional:            true,
+													Computed:            true,
 												},
 												"metric": schema.Int64Attribute{
 													MarkdownDescription: "Metric",
 													Optional:            true,
+													Computed:            true,
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name",
@@ -18178,6 +18998,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"nexthop": schema.SingleNestedAttribute{
 													MarkdownDescription: "Nexthop",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"discard": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
@@ -18192,6 +19013,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"fqdn": schema.StringAttribute{
@@ -18207,6 +19029,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"ipv6_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -18221,6 +19044,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Ipv6 address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"next_lr": schema.StringAttribute{
 															Validators: []validator.String{
@@ -18235,6 +19059,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Next lr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"next_vr": schema.StringAttribute{
 															Validators: []validator.String{
@@ -18249,6 +19074,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Next vr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 														"receive": schema.SingleNestedAttribute{
 															Validators: []validator.Object{
@@ -18263,6 +19089,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Receive\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"tunnel": schema.StringAttribute{
@@ -18278,16 +19105,19 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Tunnel\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
 															Optional:            true,
+															Computed:            true,
 														},
 													},
 												},
 												"option": schema.SingleNestedAttribute{
 													MarkdownDescription: "Option",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"passive": schema.SingleNestedAttribute{
 															MarkdownDescription: "Passive",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 													},
@@ -18295,10 +19125,12 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"path_monitor": schema.SingleNestedAttribute{
 													MarkdownDescription: "Path monitor",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"enable": schema.BoolAttribute{
 															MarkdownDescription: "Enable",
 															Optional:            true,
+															Computed:            true,
 														},
 														"failure_condition": schema.StringAttribute{
 															Validators: []validator.String{
@@ -18306,35 +19138,43 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "Failure condition",
 															Optional:            true,
+															Computed:            true,
 														},
 														"hold_time": schema.Int64Attribute{
 															MarkdownDescription: "Hold time",
 															Optional:            true,
+															Computed:            true,
 														},
 														"monitor_destinations": schema.ListNestedAttribute{
 															MarkdownDescription: "Monitor destinations",
 															Optional:            true,
+															Computed:            true,
 															NestedObject: schema.NestedAttributeObject{
 																Attributes: map[string]schema.Attribute{
 																	"count": schema.Int64Attribute{
 																		MarkdownDescription: "Count",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"destination": schema.StringAttribute{
 																		MarkdownDescription: "Destination",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"destination_fqdn": schema.StringAttribute{
 																		MarkdownDescription: "Destination fqdn",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"enable": schema.BoolAttribute{
 																		MarkdownDescription: "Enable",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"interval": schema.Int64Attribute{
 																		MarkdownDescription: "Interval",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name",
@@ -18343,6 +19183,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	"source": schema.StringAttribute{
 																		MarkdownDescription: "Source",
 																		Optional:            true,
+																		Computed:            true,
 																	},
 																},
 															},
@@ -18352,25 +19193,30 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												"route_table": schema.SingleNestedAttribute{
 													MarkdownDescription: "Route table",
 													Optional:            true,
+													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"both": schema.SingleNestedAttribute{
 															MarkdownDescription: "Both",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"multicast": schema.SingleNestedAttribute{
 															MarkdownDescription: "Multicast",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"no_install": schema.SingleNestedAttribute{
 															MarkdownDescription: "No install",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 														"unicast": schema.SingleNestedAttribute{
 															MarkdownDescription: "Unicast",
 															Optional:            true,
+															Computed:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
 													},
@@ -18385,52 +19231,64 @@ var LogicalRoutersResourceSchema = schema.Schema{
 					"sdwan_type": schema.StringAttribute{
 						MarkdownDescription: "Sdwan type",
 						Optional:            true,
+						Computed:            true,
 					},
 					"vr_admin_dists": schema.SingleNestedAttribute{
 						MarkdownDescription: "Vr admin dists",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"ebgp": schema.Int64Attribute{
 								MarkdownDescription: "Ebgp",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ibgp": schema.Int64Attribute{
 								MarkdownDescription: "Ibgp",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospf_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospf ext",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospf_int": schema.Int64Attribute{
 								MarkdownDescription: "Ospf int",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospfv3_ext": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 ext",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ospfv3_int": schema.Int64Attribute{
 								MarkdownDescription: "Ospfv3 int",
 								Optional:            true,
+								Computed:            true,
 							},
 							"rip": schema.Int64Attribute{
 								MarkdownDescription: "Rip",
 								Optional:            true,
+								Computed:            true,
 							},
 							"static": schema.Int64Attribute{
 								MarkdownDescription: "Static",
 								Optional:            true,
+								Computed:            true,
 							},
 							"static_ipv6": schema.Int64Attribute{
 								MarkdownDescription: "Static ipv6",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
 					"zone_name": schema.StringAttribute{
 						MarkdownDescription: "Zone name",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},

@@ -216,6 +216,7 @@ var GeneralSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -232,12 +233,14 @@ var GeneralSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"general": schema.SingleNestedAttribute{
 			MarkdownDescription: "General",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ack_login_banner": schema.BoolAttribute{
 					MarkdownDescription: "Force admins to acknowledge login banner",
@@ -248,18 +251,22 @@ var GeneralSettingsResourceSchema = schema.Schema{
 				"domain": schema.StringAttribute{
 					MarkdownDescription: "DNS domain",
 					Optional:            true,
+					Computed:            true,
 				},
 				"geo_location": schema.SingleNestedAttribute{
 					MarkdownDescription: "Geographic coordinates",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"latitude": schema.StringAttribute{
 							MarkdownDescription: "Latitude",
 							Optional:            true,
+							Computed:            true,
 						},
 						"longitude": schema.StringAttribute{
 							MarkdownDescription: "Longitude",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
@@ -275,10 +282,12 @@ var GeneralSettingsResourceSchema = schema.Schema{
 				"login_banner": schema.StringAttribute{
 					MarkdownDescription: "Logon banner",
 					Optional:            true,
+					Computed:            true,
 				},
 				"setting": schema.SingleNestedAttribute{
 					MarkdownDescription: "Setting",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auto_mac_detect": schema.BoolAttribute{
 							MarkdownDescription: "Use hypervisor assigned MAC addresses",
@@ -295,6 +304,7 @@ var GeneralSettingsResourceSchema = schema.Schema{
 						"management": schema.SingleNestedAttribute{
 							MarkdownDescription: "Management",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"auto_acquire_commit_lock": schema.BoolAttribute{
 									MarkdownDescription: "Automatically acquire commit lock",
@@ -321,10 +331,12 @@ var GeneralSettingsResourceSchema = schema.Schema{
 				"ssl_tls_service_profile": schema.StringAttribute{
 					MarkdownDescription: "SSL/TLS service profile",
 					Optional:            true,
+					Computed:            true,
 				},
 				"timezone": schema.StringAttribute{
 					MarkdownDescription: "Timezone",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
@@ -347,6 +359,7 @@ var GeneralSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

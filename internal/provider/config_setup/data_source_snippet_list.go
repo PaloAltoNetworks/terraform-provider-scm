@@ -31,7 +31,7 @@ type SnippetListDataSource struct {
 }
 
 func (d *SnippetListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet_list"
+	resp.TypeName = "scm_snippet_list"
 }
 
 func (d *SnippetListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

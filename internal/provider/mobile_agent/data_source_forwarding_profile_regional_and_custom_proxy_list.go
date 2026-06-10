@@ -32,7 +32,7 @@ type ForwardingProfileRegionalAndCustomProxyListDataSource struct {
 }
 
 func (d *ForwardingProfileRegionalAndCustomProxyListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_forwarding_profile_regional_and_custom_proxy_list"
+	resp.TypeName = "scm_forwarding_profile_regional_and_custom_proxy_list"
 }
 
 func (d *ForwardingProfileRegionalAndCustomProxyListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

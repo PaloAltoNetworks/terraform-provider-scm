@@ -242,6 +242,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "The action to take on rule match",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"allow": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -252,6 +253,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 				"deny": schema.SingleNestedAttribute{
@@ -263,6 +265,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 				"protect": schema.SingleNestedAttribute{
@@ -274,6 +277,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Protect\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 			},
@@ -284,6 +288,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -302,6 +307,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -324,6 +330,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -364,6 +371,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 		"protection": schema.SingleNestedAttribute{
 			MarkdownDescription: "Protection",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"aggregate": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -373,6 +381,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Aggregate\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"profile": schema.StringAttribute{
 							MarkdownDescription: "Aggregate DoS protection profile",
@@ -388,14 +397,17 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Classified\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"classification_criteria": schema.SingleNestedAttribute{
 							MarkdownDescription: "Classification criteria",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"address": schema.StringAttribute{
 									MarkdownDescription: "Address",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -410,6 +422,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 		"schedule": schema.StringAttribute{
 			MarkdownDescription: "Schedule on which to enforce the rule",
 			Optional:            true,
+			Computed:            true,
 		},
 		"service": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -428,6 +441,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

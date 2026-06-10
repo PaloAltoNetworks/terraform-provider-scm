@@ -34,7 +34,7 @@ type IpsecCryptoProfileDataSource struct {
 
 func (d *IpsecCryptoProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: IpsecCryptoProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ipsec_crypto_profile"
+	resp.TypeName = "scm_ipsec_crypto_profile"
 }
 
 func (d *IpsecCryptoProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *IpsecCryptoProfileDataSource) Read(ctx context.Context, req datasource.
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading IpsecCryptoProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *IpsecCryptoProfileDataSource) Read(ctx context.Context, req datasource.
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

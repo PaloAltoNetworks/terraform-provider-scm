@@ -32,7 +32,7 @@ type EthernetInterfaceListDataSource struct {
 }
 
 func (d *EthernetInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ethernet_interface_list"
+	resp.TypeName = "scm_ethernet_interface_list"
 }
 
 func (d *EthernetInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

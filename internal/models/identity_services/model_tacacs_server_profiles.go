@@ -107,6 +107,7 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -129,6 +130,7 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -158,10 +160,12 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 					"address": schema.StringAttribute{
 						MarkdownDescription: "The IP address of the TACACS+ server",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "The name of the TACACS+ server",
 						Optional:            true,
+						Computed:            true,
 					},
 					"port": schema.Int64Attribute{
 						Validators: []validator.Int64{
@@ -169,10 +173,12 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "The TACACS+ server port",
 						Optional:            true,
+						Computed:            true,
 					},
 					"secret": schema.StringAttribute{
 						MarkdownDescription: "The TACACS+ secret",
 						Optional:            true,
+						Computed:            true,
 						Sensitive:           true,
 					},
 				},
@@ -190,6 +196,7 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -206,10 +213,12 @@ var TacacsServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The TACACS+ timeout (seconds)",
 			Optional:            true,
+			Computed:            true,
 		},
 		"use_single_connection": schema.BoolAttribute{
 			MarkdownDescription: "Use a single TACACS+ connection?",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

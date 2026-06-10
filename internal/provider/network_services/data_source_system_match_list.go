@@ -34,7 +34,7 @@ type SystemMatchListDataSource struct {
 
 func (d *SystemMatchListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SystemMatchListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_system_match_list"
+	resp.TypeName = "scm_system_match_list"
 }
 
 func (d *SystemMatchListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *SystemMatchListDataSource) Read(ctx context.Context, req datasource.Rea
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading SystemMatchList data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *SystemMatchListDataSource) Read(ctx context.Context, req datasource.Rea
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

@@ -175,6 +175,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 		"comment": schema.StringAttribute{
 			MarkdownDescription: "Description for loopback interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"default_value": schema.StringAttribute{
 			Validators: []validator.String{
@@ -182,6 +183,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Default interface assignment for loopback interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -195,6 +197,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -211,6 +214,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -224,6 +228,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 		"interface_management_profile": schema.StringAttribute{
 			MarkdownDescription: "Interface management profile for loopback interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"ip": schema.ListNestedAttribute{
 			MarkdownDescription: "Loopback IP Parent",
@@ -240,10 +245,12 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 		"ipv6": schema.SingleNestedAttribute{
 			MarkdownDescription: "Loopback IPv6 Configuration",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"address": schema.ListNestedAttribute{
 					MarkdownDescription: "IPv6 Address Parent for loopback interface",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"anycast": schema.SingleNestedAttribute{
@@ -260,6 +267,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "IPv6 Address for loopback interface",
 								Optional:            true,
+								Computed:            true,
 							},
 							"prefix": schema.SingleNestedAttribute{
 								MarkdownDescription: "Use interface ID as host portion for loopback interface",
@@ -289,6 +297,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "MTU for loopback interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			Validators: []validator.String{
@@ -300,6 +309,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 		"netflow_profile": schema.StringAttribute{
 			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -313,6 +323,7 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

@@ -32,7 +32,7 @@ type SdwanRuleListDataSource struct {
 }
 
 func (d *SdwanRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_sdwan_rule_list"
+	resp.TypeName = "scm_sdwan_rule_list"
 }
 
 func (d *SdwanRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

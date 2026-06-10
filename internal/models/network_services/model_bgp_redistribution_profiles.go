@@ -248,6 +248,7 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -264,6 +265,7 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -281,14 +283,17 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 				"unicast": schema.SingleNestedAttribute{
 					MarkdownDescription: "Unicast",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"connected": schema.SingleNestedAttribute{
 							MarkdownDescription: "Connected",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable connected route redistribution?",
 									Optional:            true,
+									Computed:            true,
 								},
 								"metric": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -296,20 +301,24 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Route metric",
 									Optional:            true,
+									Computed:            true,
 								},
 								"route_map": schema.StringAttribute{
 									MarkdownDescription: "Route map",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 						"ospf": schema.SingleNestedAttribute{
 							MarkdownDescription: "Ospf",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable OSPF route redistribution?",
 									Optional:            true,
+									Computed:            true,
 								},
 								"metric": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -317,20 +326,24 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Route metric",
 									Optional:            true,
+									Computed:            true,
 								},
 								"route_map": schema.StringAttribute{
 									MarkdownDescription: "Route map",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 						"static": schema.SingleNestedAttribute{
 							MarkdownDescription: "Static",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable static route redistribution?",
 									Optional:            true,
+									Computed:            true,
 								},
 								"metric": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -338,10 +351,12 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Route metric",
 									Optional:            true,
+									Computed:            true,
 								},
 								"route_map": schema.StringAttribute{
 									MarkdownDescription: "Route map",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -365,6 +380,7 @@ var BgpRedistributionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

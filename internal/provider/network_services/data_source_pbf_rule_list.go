@@ -32,7 +32,7 @@ type PbfRuleListDataSource struct {
 }
 
 func (d *PbfRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_pbf_rule_list"
+	resp.TypeName = "scm_pbf_rule_list"
 }
 
 func (d *PbfRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

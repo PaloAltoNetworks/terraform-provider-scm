@@ -41,7 +41,7 @@ type SslDecryptionSettingResource struct {
 }
 
 func (r *SslDecryptionSettingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ssl_decryption_setting"
+	resp.TypeName = "scm_ssl_decryption_setting"
 }
 
 func (r *SslDecryptionSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

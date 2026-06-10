@@ -34,7 +34,7 @@ type SecurityRuleDataSource struct {
 
 func (d *SecurityRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SecurityRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_security_rule"
+	resp.TypeName = "scm_security_rule"
 }
 
 func (d *SecurityRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *SecurityRuleDataSource) Read(ctx context.Context, req datasource.ReadRe
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading SecurityRules data source by ID", map[string]interface{}{"id": objectId})
 
@@ -226,6 +228,7 @@ func (d *SecurityRuleDataSource) Read(ctx context.Context, req datasource.ReadRe
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

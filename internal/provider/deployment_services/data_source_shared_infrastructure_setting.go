@@ -37,7 +37,7 @@ type SharedInfrastructureSettingDataSource struct {
 
 func (d *SharedInfrastructureSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SharedInfrastructureSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_shared_infrastructure_setting"
+	resp.TypeName = "scm_shared_infrastructure_setting"
 }
 
 func (d *SharedInfrastructureSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

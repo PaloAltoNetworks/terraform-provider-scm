@@ -32,7 +32,7 @@ type QosPolicyRuleListDataSource struct {
 }
 
 func (d *QosPolicyRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_qos_policy_rule_list"
+	resp.TypeName = "scm_qos_policy_rule_list"
 }
 
 func (d *QosPolicyRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

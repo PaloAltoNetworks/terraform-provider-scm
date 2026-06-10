@@ -307,10 +307,12 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 		"botnet_domains": schema.SingleNestedAttribute{
 			MarkdownDescription: "Botnet domains",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"dns_security_categories": schema.ListNestedAttribute{
 					MarkdownDescription: "DNS categories",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"action": schema.StringAttribute{
@@ -334,6 +336,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name",
 								Optional:            true,
+								Computed:            true,
 							},
 							"packet_capture": schema.StringAttribute{
 								Validators: []validator.String{
@@ -341,6 +344,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Packet capture",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -348,11 +352,13 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 				"lists": schema.ListNestedAttribute{
 					MarkdownDescription: "Dynamic lists of DNS domains",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"action": schema.SingleNestedAttribute{
 								MarkdownDescription: "Action",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"alert": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
@@ -364,6 +370,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
 									"allow": schema.SingleNestedAttribute{
@@ -376,6 +383,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
 									"block": schema.SingleNestedAttribute{
@@ -388,6 +396,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Block\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
 									"sinkhole": schema.SingleNestedAttribute{
@@ -400,6 +409,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Sinkhole\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
 										Optional:            true,
+										Computed:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
 								},
@@ -414,6 +424,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Packet capture",
 								Optional:            true,
+								Computed:            true,
 							},
 						},
 					},
@@ -421,6 +432,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 				"sinkhole": schema.SingleNestedAttribute{
 					MarkdownDescription: "DNS sinkhole settings",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ipv4_address": schema.StringAttribute{
 							Validators: []validator.String{
@@ -428,6 +440,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Ipv4 address",
 							Optional:            true,
+							Computed:            true,
 						},
 						"ipv6_address": schema.StringAttribute{
 							Validators: []validator.String{
@@ -435,17 +448,20 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Ipv6 address",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"whitelist": schema.ListNestedAttribute{
 					MarkdownDescription: "DNS security overrides",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"description": schema.StringAttribute{
 								MarkdownDescription: "Description",
 								Optional:            true,
+								Computed:            true,
 							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "DNS domain or FQDN to be whitelisted",
@@ -459,6 +475,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the DNS security profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -472,6 +489,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -488,6 +506,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -501,6 +520,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the DNS security profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -514,6 +534,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

@@ -1058,6 +1058,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Determine whether to drop or bypass packets that contain out-of-sync ACKs or out-of-window sequence numbers:\n* `global` — Use system-wide setting that is assigned through TCP Settings or the CLI.\n* `drop` — Drop packets that contain an asymmetric path.\n* `bypass` — Bypass scanning on packets that contain an asymmetric path.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1065,6 +1066,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The description of the profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1078,28 +1080,34 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"discard_icmp_embedded_error": schema.BoolAttribute{
 			MarkdownDescription: "Discard ICMP packets that are embedded with an error message.",
 			Optional:            true,
+			Computed:            true,
 		},
 		"flood": schema.SingleNestedAttribute{
 			MarkdownDescription: "Flood",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"icmp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Icmp",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable protection against ICMP floods?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1129,14 +1137,17 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				"icmpv6": schema.SingleNestedAttribute{
 					MarkdownDescription: "Icmpv6",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable protection against ICMPv6 floods?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1166,14 +1177,17 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				"other_ip": schema.SingleNestedAttribute{
 					MarkdownDescription: "Other ip",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable protection against other IP (non-TCP, non-ICMP, non-ICMPv6, non-SCTP, and non-UDP) floods?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1203,14 +1217,17 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				"sctp_init": schema.SingleNestedAttribute{
 					MarkdownDescription: "Sctp init",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable protection against floods of Stream Control Transmission Protocol (SCTP) packets that contain an Initiation (INIT) chunk?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1240,14 +1257,17 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				"tcp_syn": schema.SingleNestedAttribute{
 					MarkdownDescription: "Tcp syn",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable protection against SYN floods?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1275,6 +1295,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						"syn_cookies": schema.SingleNestedAttribute{
 							MarkdownDescription: "Syn cookies",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1304,14 +1325,17 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				"udp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Udp",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable protection against UDP floods?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1353,24 +1377,29 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"fragmented_traffic_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard fragmented IP packets.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"icmp_frag_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets that consist of ICMP fragments.",
 			Optional:            true,
+			Computed:            true,
 		},
 		"icmp_large_packet_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard ICMP packets that are larger than 1024 bytes.",
 			Optional:            true,
+			Computed:            true,
 		},
 		"icmp_ping_zero_id_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets if the ICMP ping packet has an identifier value of 0.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "UUID of the resource",
@@ -1382,117 +1411,144 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"ipv6": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ipv6",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"anycast_source": schema.BoolAttribute{
 					MarkdownDescription: "Discard IPv6 packets that contain an anycast source address.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"filter_ext_hdr": schema.SingleNestedAttribute{
 					MarkdownDescription: "Filter ext hdr",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dest_option_hdr": schema.BoolAttribute{
 							MarkdownDescription: "Discard IPv6 packets that contain the Destination Options extension, which contains options intended only for the destination of the packet.",
 							Optional:            true,
+							Computed:            true,
 						},
 						"hop_by_hop_hdr": schema.BoolAttribute{
 							MarkdownDescription: "Discard IPv6 packets that contain the Hop-by-Hop Options extension header.",
 							Optional:            true,
+							Computed:            true,
 						},
 						"routing_hdr": schema.BoolAttribute{
 							MarkdownDescription: "Discard IPv6 packets that contain the Routing extension header, which directs packets to one or more intermediate nodes on its way to its destination.",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"icmpv6_too_big_small_mtu_discard": schema.BoolAttribute{
 					MarkdownDescription: "Discard IPv6 packets that contain a Packet Too Big ICMPv6 message when the maximum transmission unit (MTU) is less than 1,280 bytes.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"ignore_inv_pkt": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ignore inv pkt",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dest_unreach": schema.BoolAttribute{
 							MarkdownDescription: "Require an explicit Security policy match for Destination Unreachable ICMPv6 messages, even when the message is associated with an existing session.",
 							Optional:            true,
+							Computed:            true,
 						},
 						"param_problem": schema.BoolAttribute{
 							MarkdownDescription: "Require an explicit Security policy match for Parameter Problem ICMPv6 messages, even when the message is associated with an existing session.",
 							Optional:            true,
+							Computed:            true,
 						},
 						"pkt_too_big": schema.BoolAttribute{
 							MarkdownDescription: "Require an explicit Security policy match for Packet Too Big ICMPv6 messages, even when the message is associated with an existing session.",
 							Optional:            true,
+							Computed:            true,
 						},
 						"redirect": schema.BoolAttribute{
 							MarkdownDescription: "Require an explicit Security policy match for Redirect Message ICMPv6 messages, even when the message is associated with an existing session.",
 							Optional:            true,
+							Computed:            true,
 						},
 						"time_exceeded": schema.BoolAttribute{
 							MarkdownDescription: "Require an explicit Security policy match for Time Exceeded ICMPv6 messages, even when the message is associated with an existing session.",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"ipv4_compatible_address": schema.BoolAttribute{
 					MarkdownDescription: "Discard IPv6 packets that are defined as an RFC 4291 IPv4-Compatible IPv6 address.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"needless_fragment_hdr": schema.BoolAttribute{
 					MarkdownDescription: "Discard IPv6 packets with the last fragment flag (M=0) and offset of zero.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"options_invalid_ipv6_discard": schema.BoolAttribute{
 					MarkdownDescription: "Discard IPv6 packets that contain invalid IPv6 options in an extension header.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"reserved_field_set_discard": schema.BoolAttribute{
 					MarkdownDescription: "Discard IPv6 packets that have a header with a reserved field not set to zero.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"routing_header_0": schema.BoolAttribute{
 					MarkdownDescription: "Drop packets with type 0 routing header.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"routing_header_1": schema.BoolAttribute{
 					MarkdownDescription: "Drop packets with type 1 routing header.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"routing_header_253": schema.BoolAttribute{
 					MarkdownDescription: "Drop packets with type 253 routing header.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"routing_header_254": schema.BoolAttribute{
 					MarkdownDescription: "Drop packets with type 254 routing header.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"routing_header_255": schema.BoolAttribute{
 					MarkdownDescription: "Drop packets with type 255 routing header.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"routing_header_3": schema.BoolAttribute{
 					MarkdownDescription: "Drop packets with type 3 routing header.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"routing_header_4_252": schema.BoolAttribute{
 					MarkdownDescription: "Drop packets with type 4 to type 252 routing header.",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
 		"l2_sec_group_tag_protection": schema.SingleNestedAttribute{
 			MarkdownDescription: "L2 sec group tag protection",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"tags": schema.ListNestedAttribute{
 					MarkdownDescription: "Tags",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable this exclude list for Ethernet SGT protection.",
 								Optional:            true,
+								Computed:            true,
 							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name for the list of Security Group Tags (SGTs).",
@@ -1510,14 +1566,17 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"loose_source_routing_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets with the Loose Source Routing IP option set. Loose Source Routing is an option whereby a source of a datagram provides routing information and a gateway or host is allowed to choose any route of a number of intermediate gateways to get the datagram to the next address in the route.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"malformed_option_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets if they have incorrect combinations of class, number, and length based on RFCs 791, 1108, 1393, and 2113.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"mismatched_overlapping_tcp_segment_discard": schema.BoolAttribute{
 			MarkdownDescription: "Drop packets with mismatched overlapping TCP segments.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"mptcp_option_strip": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1538,6 +1597,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"non_ip_protocol": schema.SingleNestedAttribute{
 			MarkdownDescription: "Non ip protocol",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"list_type": schema.StringAttribute{
 					Validators: []validator.String{
@@ -1545,15 +1605,18 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Specify the type of list you are creating for protocol protection:\n* Include List—Only the protocols on the list are allowed—in addition to IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), and VLAN tagged frames (0x8100). All other protocols are implicitly denied (blocked).\n* Exclude List—Only the protocols on the list are denied; all other protocols are implicitly allowed. You cannot exclude IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), or VLAN tagged frames (0x8100).\n",
 					Optional:            true,
+					Computed:            true,
 				},
 				"protocol": schema.ListNestedAttribute{
 					MarkdownDescription: "Protocol",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"enable": schema.BoolAttribute{
 								MarkdownDescription: "Enable the Ethertype code on the list.",
 								Optional:            true,
+								Computed:            true,
 							},
 							"ether_type": schema.StringAttribute{
 								MarkdownDescription: "Enter an Ethertype code (protocol) preceded by 0x to indicate hexadecimal (range is 0x0000 to 0xFFFF). A list can have a maximum of 64 Ethertypes. Some sources of Ethertype codes are:\n* [IEEE hexadecimal Ethertype](https://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)\n* [standards.ieee.org/develop/regauth/ethertype/eth.txt](https://standards-oui.ieee.org/ethertype/eth.txt)\n* [www.cavebear.com/archive/cavebear/Ethernet/type.html](https://www.cavebear.com/archive/cavebear/Ethernet/type.html)\n",
@@ -1571,6 +1634,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"record_route_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets with the Record Route IP option set. When a datagram has this option, each router that routes the datagram adds its own IP address to the header, thus providing the path to the recipient.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"reject_non_syn_tcp": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1578,6 +1642,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Determine whether to reject the packet if the first packet for the TCP session setup is not a SYN packet:\n* `global` — Use system-wide setting that is assigned through the CLI.\n* `yes` — Reject non-SYN TCP.\n* `no` — Accept non-SYN TCP.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"scan": schema.ListNestedAttribute{
 			MarkdownDescription: "Scan",
@@ -1587,25 +1652,30 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 					"action": schema.SingleNestedAttribute{
 						MarkdownDescription: "Action",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"alert": schema.SingleNestedAttribute{
 								MarkdownDescription: "Alert",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"allow": schema.SingleNestedAttribute{
 								MarkdownDescription: "Allow",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"block": schema.SingleNestedAttribute{
 								MarkdownDescription: "Block",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"block_ip": schema.SingleNestedAttribute{
 								MarkdownDescription: "Block ip",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"duration": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -1631,6 +1701,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Interval",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						Validators: []validator.String{
@@ -1645,6 +1716,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Threshold",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -1657,10 +1729,12 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 					"ipv4": schema.StringAttribute{
 						MarkdownDescription: "Ipv4",
 						Optional:            true,
+						Computed:            true,
 					},
 					"ipv6": schema.StringAttribute{
 						MarkdownDescription: "Ipv6",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "A descriptive name for the address to exclude.",
@@ -1672,6 +1746,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"security_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets if the security option is defined.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -1685,40 +1760,49 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"spoofed_ip_discard": schema.BoolAttribute{
 			MarkdownDescription: "Check that the source IP address of the ingress packet is routable and the routing interface is in the same zone as the ingress interface. If either condition is not true, discard the packet.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"stream_id_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets if the Stream ID option is defined.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"strict_ip_check": schema.BoolAttribute{
 			MarkdownDescription: "Check that both conditions are true:\n* The source IP address is not the subnet broadcast IP address of the ingress interface.\n* The source IP address is routable over the exact ingress interface.\nIf either condition is not true, discard the packet.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"strict_source_routing_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets with the Strict Source Routing IP option set. Strict Source Routing is an option whereby a source of a datagram provides routing information through which a gateway or host must send the datagram.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"suppress_icmp_needfrag": schema.BoolAttribute{
 			MarkdownDescription: "Stop sending ICMP fragmentation needed messages in response to packets that exceed the interface MTU and have the do not fragment (DF) bit set. This setting will interfere with the PMTUD process performed by hosts behind the firewall.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"suppress_icmp_timeexceeded": schema.BoolAttribute{
 			MarkdownDescription: "Stop sending ICMP TTL expired messages.",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tcp_fast_open_and_data_strip": schema.BoolAttribute{
 			MarkdownDescription: "Strip the TCP Fast Open option (and data payload, if any) from the TCP SYN or SYN-ACK packet during a TCP three-way handshake.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tcp_handshake_discard": schema.BoolAttribute{
 			MarkdownDescription: "Drop packets with split handshakes.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tcp_syn_with_data_discard": schema.BoolAttribute{
 			MarkdownDescription: "Prevent a TCP session from being established if the TCP SYN packet contains data during a three-way handshake.\n",
@@ -1735,6 +1819,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"tcp_timestamp_strip": schema.BoolAttribute{
 			MarkdownDescription: "Determine whether the packet has a TCP timestamp in the header and, if it does, strip the timestamp from the header.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
@@ -1746,10 +1831,12 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 		"timestamp_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets with the Timestamp IP option set.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 		"unknown_option_discard": schema.BoolAttribute{
 			MarkdownDescription: "Discard packets if the class and number are unknown.\n",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

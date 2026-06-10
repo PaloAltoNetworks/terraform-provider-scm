@@ -354,14 +354,12 @@ provider "scm" {
 
 # OR with Auth File
 
-# This file is embedded using go:embed
 # provider "scm" {
 #   auth_file = "../../../secrets/scm-auth.json"
 #   logging   = "debug"
-#   protocol = "https"
+#   protocol  = "https"
 # }
 
-# This file is embedded using go:embed
 terraform {
   required_providers {
     scm = {

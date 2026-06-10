@@ -264,6 +264,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -280,6 +281,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -293,27 +295,33 @@ var ServiceRouteResourceSchema = schema.Schema{
 		"route": schema.SingleNestedAttribute{
 			MarkdownDescription: "Route",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"destination": schema.ListNestedAttribute{
 					MarkdownDescription: "Destination",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name",
 								Optional:            true,
+								Computed:            true,
 							},
 							"source": schema.SingleNestedAttribute{
 								MarkdownDescription: "Source",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: "Address",
 										Optional:            true,
+										Computed:            true,
 									},
 									"interface": schema.StringAttribute{
 										MarkdownDescription: "Interface",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -323,6 +331,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 				"service": schema.ListNestedAttribute{
 					MarkdownDescription: "Service",
 					Optional:            true,
+					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
@@ -331,32 +340,39 @@ var ServiceRouteResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "The follow list details the accepted `name` values and their corresponding service description.\n- `autofocus` = AutoFocus Cloud\n- `crl-status` = CRL servers\n- `data-services` = Data Services\n- `ddns` = DDNS server(s)\n- `deployments` = Panorama pushed updates\n- `dns` = DNS server(s)\n- `edl-updates` = External Dynamic List update server\n- `email` = SMTP gateway(s)\n- `hsm` = Hardware Security Module server(s)\n- `http` = HTTP Forwarding server(s)\n- `iot` = IOT service-route\n- `kerberos` = Kerberos server\n- `ldap` = LDAP server\n- `mdm` = MDM servers\n- `mfa` = Multi-Factor Authentication\n- `netflow` = Netflow server(s)\n- `ntp` = NTP server(s)\n- `paloalto-networks-services` = Palo Alto Networks Services\n- `panorama` = Panorama server\n- `panorama-log-forwarding` = Panorama Log Forwarding\n- `proxy` = Proxy server\n- `radius` = RADIUS server\n- `scep` = SCEP\n- `snmp` = SNMP server(s)\n- `syslog` = Syslog server(s)\n- `tacplus` = TACACS+ server\n- `uid-`agent = UID agent(s)\n- `url-`updates = URL update server\n- `vmmonitor` = VM monitor\n- `wildfire-`private = WildFire Appliance\n- `ztp` = ZTP and Auto-VPN DDNS\n",
 								Optional:            true,
+								Computed:            true,
 							},
 							"source": schema.SingleNestedAttribute{
 								MarkdownDescription: "Source",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: "Address",
 										Optional:            true,
+										Computed:            true,
 									},
 									"interface": schema.StringAttribute{
 										MarkdownDescription: "Interface",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
 							"source_v6": schema.SingleNestedAttribute{
 								MarkdownDescription: "Source v6",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"address": schema.StringAttribute{
 										MarkdownDescription: "Address",
 										Optional:            true,
+										Computed:            true,
 									},
 									"interface": schema.StringAttribute{
 										MarkdownDescription: "Interface",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -377,6 +393,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

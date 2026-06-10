@@ -89,6 +89,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"application": schema.StringAttribute{
 			MarkdownDescription: "Application",
 			Optional:            true,
+			Computed:            true,
 		},
 		"description": schema.StringAttribute{
 			Validators: []validator.String{
@@ -96,6 +97,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -115,6 +117,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -137,6 +140,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -149,6 +153,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"group_tag": schema.StringAttribute{
 			MarkdownDescription: "Group tag",
 			Optional:            true,
+			Computed:            true,
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "UUID of the resource",
@@ -180,6 +185,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 		"port": schema.StringAttribute{
 			MarkdownDescription: "Port",
 			Optional:            true,
+			Computed:            true,
 		},
 		"position": schema.StringAttribute{
 			Validators: []validator.String{
@@ -199,6 +205,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Protocol",
 			Optional:            true,
+			Computed:            true,
 		},
 		"relative_position": schema.StringAttribute{
 			Validators: []validator.String{
@@ -219,6 +226,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

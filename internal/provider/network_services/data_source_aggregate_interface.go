@@ -34,7 +34,7 @@ type AggregateInterfaceDataSource struct {
 
 func (d *AggregateInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AggregateInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_aggregate_interface"
+	resp.TypeName = "scm_aggregate_interface"
 }
 
 func (d *AggregateInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *AggregateInterfaceDataSource) Read(ctx context.Context, req datasource.
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading AggregateInterfaces data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *AggregateInterfaceDataSource) Read(ctx context.Context, req datasource.
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

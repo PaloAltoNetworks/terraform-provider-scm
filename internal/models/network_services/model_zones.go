@@ -160,40 +160,48 @@ var ZonesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"device_acl": schema.SingleNestedAttribute{
 			MarkdownDescription: "Device acl",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"exclude_list": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Exclude list",
 					Optional:            true,
+					Computed:            true,
 				},
 				"include_list": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Include list",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
 		"dos_log_setting": schema.StringAttribute{
 			MarkdownDescription: "Dos log setting",
 			Optional:            true,
+			Computed:            true,
 		},
 		"dos_profile": schema.StringAttribute{
 			MarkdownDescription: "Dos profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"enable_device_identification": schema.BoolAttribute{
 			MarkdownDescription: "Enable device identification",
 			Optional:            true,
+			Computed:            true,
 		},
 		"enable_user_identification": schema.BoolAttribute{
 			MarkdownDescription: "Enable user identification",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -206,6 +214,7 @@ var ZonesResourceSchema = schema.Schema{
 			MarkdownDescription: "Folder\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -226,48 +235,58 @@ var ZonesResourceSchema = schema.Schema{
 		"network": schema.SingleNestedAttribute{
 			MarkdownDescription: "Network",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"enable_packet_buffer_protection": schema.BoolAttribute{
 					MarkdownDescription: "Enable packet buffer protection",
 					Optional:            true,
+					Computed:            true,
 				},
 				"external": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "External",
 					Optional:            true,
+					Computed:            true,
 				},
 				"layer2": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Layer2",
 					Optional:            true,
+					Computed:            true,
 				},
 				"layer3": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Layer3",
 					Optional:            true,
+					Computed:            true,
 				},
 				"log_setting": schema.StringAttribute{
 					MarkdownDescription: "Log setting",
 					Optional:            true,
+					Computed:            true,
 				},
 				"tap": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Tap",
 					Optional:            true,
+					Computed:            true,
 				},
 				"tunnel": schema.SingleNestedAttribute{
 					MarkdownDescription: "Tunnel",
 					Optional:            true,
+					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 				"virtual_wire": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Virtual wire",
 					Optional:            true,
+					Computed:            true,
 				},
 				"zone_protection_profile": schema.StringAttribute{
 					MarkdownDescription: "Zone protection profile",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
@@ -283,6 +302,7 @@ var ZonesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -296,16 +316,19 @@ var ZonesResourceSchema = schema.Schema{
 		"user_acl": schema.SingleNestedAttribute{
 			MarkdownDescription: "User acl",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"exclude_list": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Exclude list",
 					Optional:            true,
+					Computed:            true,
 				},
 				"include_list": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Include list",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},

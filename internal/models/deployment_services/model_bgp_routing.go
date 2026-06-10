@@ -89,10 +89,12 @@ var BgpRoutingResourceSchema = schema.Schema{
 		"accept_route_over_sc": schema.BoolAttribute{
 			MarkdownDescription: "Accept route over s c",
 			Optional:            true,
+			Computed:            true,
 		},
 		"add_host_route_to_ike_peer": schema.BoolAttribute{
 			MarkdownDescription: "Add host route to ike peer",
 			Optional:            true,
+			Computed:            true,
 		},
 		"backbone_routing": schema.StringAttribute{
 			Validators: []validator.String{
@@ -100,6 +102,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Backbone routing",
 			Optional:            true,
+			Computed:            true,
 		},
 		"outbound_routes_for_services": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -109,6 +112,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 		"routing_preference": schema.SingleNestedAttribute{
 			MarkdownDescription: "Routing preference",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"default": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -118,6 +122,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 				"hot_potato_routing": schema.SingleNestedAttribute{
@@ -128,6 +133,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Hot potato routing\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 			},
@@ -142,6 +148,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 		"withdraw_static_route": schema.BoolAttribute{
 			MarkdownDescription: "Withdraw static route",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

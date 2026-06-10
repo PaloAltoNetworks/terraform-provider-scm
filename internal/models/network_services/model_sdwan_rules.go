@@ -128,6 +128,7 @@ var SdwanRulesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Rule description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -146,6 +147,7 @@ var SdwanRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -158,6 +160,7 @@ var SdwanRulesResourceSchema = schema.Schema{
 		"error_correction_profile": schema.StringAttribute{
 			MarkdownDescription: "Error correction profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -172,6 +175,7 @@ var SdwanRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -217,6 +221,7 @@ var SdwanRulesResourceSchema = schema.Schema{
 		"saas_quality_profile": schema.StringAttribute{
 			MarkdownDescription: "SaaS quality profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"service": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -235,6 +240,7 @@ var SdwanRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

@@ -212,6 +212,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -228,36 +229,44 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"format": schema.SingleNestedAttribute{
 			MarkdownDescription: "Format",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"auth": schema.StringAttribute{
 					MarkdownDescription: "Auth",
 					Optional:            true,
+					Computed:            true,
 				},
 				"config": schema.StringAttribute{
 					MarkdownDescription: "Config",
 					Optional:            true,
+					Computed:            true,
 				},
 				"correlation": schema.StringAttribute{
 					MarkdownDescription: "Correlation",
 					Optional:            true,
+					Computed:            true,
 				},
 				"data": schema.StringAttribute{
 					MarkdownDescription: "Data",
 					Optional:            true,
+					Computed:            true,
 				},
 				"decryption": schema.StringAttribute{
 					MarkdownDescription: "Decryption",
 					Optional:            true,
+					Computed:            true,
 				},
 				"escaping": schema.SingleNestedAttribute{
 					MarkdownDescription: "Escaping",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"escape_character": schema.StringAttribute{
 							Validators: []validator.String{
@@ -265,6 +274,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Escape sequence delimiter",
 							Optional:            true,
+							Computed:            true,
 						},
 						"escaped_characters": schema.StringAttribute{
 							Validators: []validator.String{
@@ -272,56 +282,69 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "A list of all the characters to be escaped (without spaces).",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"globalprotect": schema.StringAttribute{
 					MarkdownDescription: "Globalprotect",
 					Optional:            true,
+					Computed:            true,
 				},
 				"gtp": schema.StringAttribute{
 					MarkdownDescription: "Gtp",
 					Optional:            true,
+					Computed:            true,
 				},
 				"hip_match": schema.StringAttribute{
 					MarkdownDescription: "Hip match",
 					Optional:            true,
+					Computed:            true,
 				},
 				"iptag": schema.StringAttribute{
 					MarkdownDescription: "Iptag",
 					Optional:            true,
+					Computed:            true,
 				},
 				"sctp": schema.StringAttribute{
 					MarkdownDescription: "Sctp",
 					Optional:            true,
+					Computed:            true,
 				},
 				"system": schema.StringAttribute{
 					MarkdownDescription: "System",
 					Optional:            true,
+					Computed:            true,
 				},
 				"threat": schema.StringAttribute{
 					MarkdownDescription: "Threat",
 					Optional:            true,
+					Computed:            true,
 				},
 				"traffic": schema.StringAttribute{
 					MarkdownDescription: "Traffic",
 					Optional:            true,
+					Computed:            true,
 				},
 				"tunnel": schema.StringAttribute{
 					MarkdownDescription: "Tunnel",
 					Optional:            true,
+					Computed:            true,
 				},
 				"url": schema.StringAttribute{
 					MarkdownDescription: "Url",
 					Optional:            true,
+					Computed:            true,
 				},
 				"userid": schema.StringAttribute{
 					MarkdownDescription: "Userid",
 					Optional:            true,
+					Computed:            true,
 				},
 				"wildfire": schema.StringAttribute{
 					MarkdownDescription: "Wildfire",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
@@ -350,6 +373,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Syslog facility",
 						Optional:            true,
+						Computed:            true,
 					},
 					"format": schema.StringAttribute{
 						Validators: []validator.String{
@@ -357,10 +381,12 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Syslog format",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Syslog server name",
 						Optional:            true,
+						Computed:            true,
 					},
 					"port": schema.Int64Attribute{
 						Validators: []validator.Int64{
@@ -368,10 +394,12 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Syslog server port",
 						Optional:            true,
+						Computed:            true,
 					},
 					"server": schema.StringAttribute{
 						MarkdownDescription: "Syslog server address",
 						Optional:            true,
+						Computed:            true,
 					},
 					"transport": schema.StringAttribute{
 						Validators: []validator.String{
@@ -379,6 +407,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Transport protocol",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -395,6 +424,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

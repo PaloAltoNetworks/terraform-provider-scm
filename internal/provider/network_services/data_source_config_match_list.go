@@ -34,7 +34,7 @@ type ConfigMatchListDataSource struct {
 
 func (d *ConfigMatchListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ConfigMatchListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_config_match_list"
+	resp.TypeName = "scm_config_match_list"
 }
 
 func (d *ConfigMatchListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *ConfigMatchListDataSource) Read(ctx context.Context, req datasource.Rea
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading ConfigMatchList data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *ConfigMatchListDataSource) Read(ctx context.Context, req datasource.Rea
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

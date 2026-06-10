@@ -32,7 +32,7 @@ type ApplicationGroupListDataSource struct {
 }
 
 func (d *ApplicationGroupListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_application_group_list"
+	resp.TypeName = "scm_application_group_list"
 }
 
 func (d *ApplicationGroupListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

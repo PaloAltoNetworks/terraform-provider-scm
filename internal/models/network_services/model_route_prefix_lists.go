@@ -246,6 +246,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -259,6 +260,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -275,6 +277,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -301,6 +304,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -314,6 +318,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 		"type": schema.SingleNestedAttribute{
 			MarkdownDescription: "Address Family Type",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ipv4": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ipv4",
@@ -330,6 +335,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Action",
 										Optional:            true,
+										Computed:            true,
 									},
 									"name": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -337,10 +343,12 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Sequence number",
 										Optional:            true,
+										Computed:            true,
 									},
 									"prefix": schema.SingleNestedAttribute{
 										MarkdownDescription: "Prefix",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"entry": schema.SingleNestedAttribute{
 												Validators: []validator.Object{
@@ -350,6 +358,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "Entry\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
 												Optional:            true,
+												Computed:            true,
 												Attributes: map[string]schema.Attribute{
 													"greater_than_or_equal": schema.Int64Attribute{
 														Validators: []validator.Int64{
@@ -357,6 +366,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 														},
 														MarkdownDescription: "Greater than or equal to",
 														Optional:            true,
+														Computed:            true,
 													},
 													"less_than_or_equal": schema.Int64Attribute{
 														Validators: []validator.Int64{
@@ -364,10 +374,12 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 														},
 														MarkdownDescription: "Less than or equal to",
 														Optional:            true,
+														Computed:            true,
 													},
 													"network": schema.StringAttribute{
 														MarkdownDescription: "Network",
 														Optional:            true,
+														Computed:            true,
 													},
 												},
 											},
@@ -380,6 +392,7 @@ var RoutePrefixListsResourceSchema = schema.Schema{
 												},
 												MarkdownDescription: "Network\n\n> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.",
 												Optional:            true,
+												Computed:            true,
 											},
 										},
 									},

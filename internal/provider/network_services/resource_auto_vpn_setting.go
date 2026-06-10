@@ -35,7 +35,7 @@ type AutoVpnSettingResource struct {
 }
 
 func (r *AutoVpnSettingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_auto_vpn_setting"
+	resp.TypeName = "scm_auto_vpn_setting"
 }
 
 func (r *AutoVpnSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

@@ -34,7 +34,7 @@ type SdwanSaasQualityProfileDataSource struct {
 
 func (d *SdwanSaasQualityProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SdwanSaasQualityProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_sdwan_saas_quality_profile"
+	resp.TypeName = "scm_sdwan_saas_quality_profile"
 }
 
 func (d *SdwanSaasQualityProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *SdwanSaasQualityProfileDataSource) Read(ctx context.Context, req dataso
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading SdwanSaasQualityProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *SdwanSaasQualityProfileDataSource) Read(ctx context.Context, req dataso
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

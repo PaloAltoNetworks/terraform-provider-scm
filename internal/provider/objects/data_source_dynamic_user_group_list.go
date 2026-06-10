@@ -32,7 +32,7 @@ type DynamicUserGroupListDataSource struct {
 }
 
 func (d *DynamicUserGroupListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_dynamic_user_group_list"
+	resp.TypeName = "scm_dynamic_user_group_list"
 }
 
 func (d *DynamicUserGroupListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

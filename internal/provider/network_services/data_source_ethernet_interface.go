@@ -34,7 +34,7 @@ type EthernetInterfaceDataSource struct {
 
 func (d *EthernetInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: EthernetInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ethernet_interface"
+	resp.TypeName = "scm_ethernet_interface"
 }
 
 func (d *EthernetInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *EthernetInterfaceDataSource) Read(ctx context.Context, req datasource.R
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading EthernetInterfaces data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *EthernetInterfaceDataSource) Read(ctx context.Context, req datasource.R
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

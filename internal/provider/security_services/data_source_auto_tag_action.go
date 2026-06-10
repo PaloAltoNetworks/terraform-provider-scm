@@ -14,13 +14,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/paloaltonetworks/scm-go/generated/objects"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
 
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// DATA SOURCE for SCM AutoTagAction (Package: objects)
+// DATA SOURCE for SCM AutoTagAction (Package: security_services)
 var (
 	_ datasource.DataSource              = &AutoTagActionDataSource{}
 	_ datasource.DataSourceWithConfigure = &AutoTagActionDataSource{}
@@ -32,12 +32,12 @@ func NewAutoTagActionDataSource() datasource.DataSource {
 
 // AutoTagActionDataSource defines the data source implementation.
 type AutoTagActionDataSource struct {
-	client *objects.APIClient
+	client *security_services.APIClient
 }
 
 func (d *AutoTagActionDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AutoTagActionDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_auto_tag_action"
+	resp.TypeName = "scm_auto_tag_action"
 }
 
 func (d *AutoTagActionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -56,9 +56,9 @@ func (d *AutoTagActionDataSource) Configure(ctx context.Context, req datasource.
 		resp.Diagnostics.AddError("Unexpected Data Source Configure Type", fmt.Sprintf("Expected map[string]interface{}, got: %T.", req.ProviderData))
 		return
 	}
-	client, ok := clients["objects"].(*objects.APIClient)
+	client, ok := clients["security_services"].(*security_services.APIClient)
 	if !ok {
-		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *objects.APIClient for 'objects' client."))
+		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *security_services.APIClient for 'security_services' client."))
 		return
 	}
 	d.client = client
@@ -108,7 +108,7 @@ func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadR
 	}
 
 	// 4. Dynamic Response Handling (Reflection + JSON)
-	var scmObject *objects.AutoTagActions
+	var scmObject *security_services.AutoTagActions
 	val := reflect.ValueOf(scmObjectInterface)
 	if val.Kind() == reflect.Ptr && !val.IsNil() { val = val.Elem() }
 
@@ -118,7 +118,7 @@ func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadR
 			if dataField.Len() > 0 {
 				firstItem := dataField.Index(0).Interface()
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct objects.AutoTagActions
+				var targetStruct security_services.AutoTagActions
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					scmObject = &targetStruct
 				}
@@ -128,7 +128,7 @@ func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadR
 			}
 		} else {
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct objects.AutoTagActions
+            var targetStruct security_services.AutoTagActions
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 scmObject = &targetStruct
             }

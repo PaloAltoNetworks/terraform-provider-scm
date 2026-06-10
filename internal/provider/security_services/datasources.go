@@ -10,6 +10,7 @@ func GetDataSources() []func() datasource.DataSource {
 		NewAntiSpywareProfileDataSource,
 		NewAntiSpywareSignatureDataSource,
 		NewAppOverrideRuleDataSource,
+		// 		NewAutoTagActionDataSource,
 		NewDataFilteringProfileDataSource,
 		NewDataObjectDataSource,
 		NewDecryptionExclusionDataSource,

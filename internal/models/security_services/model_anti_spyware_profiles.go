@@ -461,6 +461,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -474,6 +475,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -490,6 +492,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -527,6 +530,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -543,6 +547,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 					"action": schema.SingleNestedAttribute{
 						MarkdownDescription: "anti spyware profiles rules default action",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"alert": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
@@ -557,6 +562,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"allow": schema.SingleNestedAttribute{
@@ -572,6 +578,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"block_ip": schema.SingleNestedAttribute{
@@ -587,6 +594,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "anti spyware profiles rules action block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"duration": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -594,6 +602,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Duration",
 										Optional:            true,
+										Computed:            true,
 									},
 									"track_by": schema.StringAttribute{
 										Validators: []validator.String{
@@ -601,6 +610,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Track by",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -617,6 +627,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"reset_both": schema.SingleNestedAttribute{
@@ -632,6 +643,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"reset_client": schema.SingleNestedAttribute{
@@ -647,6 +659,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"reset_server": schema.SingleNestedAttribute{
@@ -662,6 +675,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 						},
@@ -672,10 +686,12 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Category",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
+						Computed:            true,
 					},
 					"packet_capture": schema.StringAttribute{
 						Validators: []validator.String{
@@ -683,6 +699,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Packet capture",
 						Optional:            true,
+						Computed:            true,
 					},
 					"severity": schema.ListAttribute{
 						ElementType:         types.StringType,
@@ -713,6 +730,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -731,6 +749,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 					"action": schema.SingleNestedAttribute{
 						MarkdownDescription: "anti spyware profiles threat exception default action",
 						Optional:            true,
+						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"alert": schema.SingleNestedAttribute{
 								Validators: []validator.Object{
@@ -746,6 +765,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"allow": schema.SingleNestedAttribute{
@@ -762,6 +782,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"block_ip": schema.SingleNestedAttribute{
@@ -778,6 +799,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "anti spyware profiles threat exception action block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"duration": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -785,6 +807,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Duration",
 										Optional:            true,
+										Computed:            true,
 									},
 									"track_by": schema.StringAttribute{
 										Validators: []validator.String{
@@ -792,6 +815,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Track by",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -809,6 +833,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"drop": schema.SingleNestedAttribute{
@@ -825,6 +850,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"reset_both": schema.SingleNestedAttribute{
@@ -841,6 +867,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"reset_client": schema.SingleNestedAttribute{
@@ -857,6 +884,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 							"reset_server": schema.SingleNestedAttribute{
@@ -873,6 +901,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
 								Optional:            true,
+								Computed:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
 						},
@@ -892,10 +921,12 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
+						Computed:            true,
 					},
 					"notes": schema.StringAttribute{
 						MarkdownDescription: "Notes",
 						Optional:            true,
+						Computed:            true,
 					},
 					"packet_capture": schema.StringAttribute{
 						Validators: []validator.String{
@@ -903,6 +934,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Packet capture",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},

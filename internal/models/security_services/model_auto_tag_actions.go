@@ -17,8 +17,8 @@ import (
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// Package: objects
-// This file contains models for the objects SDK package
+// Package: security_services
+// This file contains models for the security_services SDK package
 
 // AutoTagActions represents the Terraform model for AutoTagActions
 type AutoTagActions struct {
@@ -202,6 +202,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 									"timeout": schema.Int64Attribute{
 										MarkdownDescription: "Timeout",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -216,6 +217,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -229,6 +231,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -252,6 +255,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -269,10 +273,12 @@ var AutoTagActionsResourceSchema = schema.Schema{
 		"quarantine": schema.BoolAttribute{
 			MarkdownDescription: "Quarantine",
 			Optional:            true,
+			Computed:            true,
 		},
 		"send_to_panorama": schema.BoolAttribute{
 			MarkdownDescription: "Send to panorama",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -286,6 +292,7 @@ var AutoTagActionsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

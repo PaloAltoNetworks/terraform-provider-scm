@@ -34,7 +34,7 @@ type ServiceRouteDataSource struct {
 
 func (d *ServiceRouteDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ServiceRouteDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_service_route"
+	resp.TypeName = "scm_service_route"
 }
 
 func (d *ServiceRouteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *ServiceRouteDataSource) Read(ctx context.Context, req datasource.ReadRe
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading ServiceRoute data source by ID", map[string]interface{}{"id": objectId})
 
@@ -161,6 +163,7 @@ func (d *ServiceRouteDataSource) Read(ctx context.Context, req datasource.ReadRe
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

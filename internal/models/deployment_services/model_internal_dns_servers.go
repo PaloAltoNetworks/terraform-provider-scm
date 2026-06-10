@@ -69,6 +69,7 @@ var InternalDnsServersResourceSchema = schema.Schema{
 		"secondary": schema.StringAttribute{
 			MarkdownDescription: "The IP address of the secondary DNS server",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

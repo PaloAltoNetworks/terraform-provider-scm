@@ -34,7 +34,7 @@ type QosProfileDataSource struct {
 
 func (d *QosProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: QosProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_qos_profile"
+	resp.TypeName = "scm_qos_profile"
 }
 
 func (d *QosProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *QosProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading QosProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *QosProfileDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

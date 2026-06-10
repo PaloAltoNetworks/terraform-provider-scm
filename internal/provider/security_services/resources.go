@@ -10,6 +10,7 @@ func GetResources() []func() resource.Resource {
 		NewAntiSpywareProfileResource,
 		NewAntiSpywareSignatureResource,
 		NewAppOverrideRuleResource,
+		// 		NewAutoTagActionResource,
 		NewDataFilteringProfileResource,
 		NewDataObjectResource,
 		NewDecryptionExclusionResource,

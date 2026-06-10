@@ -311,30 +311,37 @@ var RemoteNetworksResourceSchema = schema.Schema{
 							"bgp": schema.SingleNestedAttribute{
 								MarkdownDescription: "Bgp",
 								Optional:            true,
+								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"do_not_export_routes": schema.BoolAttribute{
 										MarkdownDescription: "Do not export routes?",
 										Optional:            true,
+										Computed:            true,
 									},
 									"enable": schema.BoolAttribute{
 										MarkdownDescription: "Enable BGP peering?",
 										Optional:            true,
+										Computed:            true,
 									},
 									"local_ip_address": schema.StringAttribute{
 										MarkdownDescription: "Local peer IP address",
 										Optional:            true,
+										Computed:            true,
 									},
 									"originate_default_route": schema.BoolAttribute{
 										MarkdownDescription: "Originate default route?",
 										Optional:            true,
+										Computed:            true,
 									},
 									"peer_as": schema.StringAttribute{
 										MarkdownDescription: "BGP peer ASN",
 										Optional:            true,
+										Computed:            true,
 									},
 									"peer_ip_address": schema.StringAttribute{
 										MarkdownDescription: "Remote peer IP address",
 										Optional:            true,
+										Computed:            true,
 									},
 									"peering_type": schema.StringAttribute{
 										Validators: []validator.String{
@@ -342,15 +349,18 @@ var RemoteNetworksResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Route exchange types",
 										Optional:            true,
+										Computed:            true,
 									},
 									"secret": schema.StringAttribute{
 										MarkdownDescription: "BGP peering secret",
 										Optional:            true,
+										Computed:            true,
 										Sensitive:           true,
 									},
 									"summarize_mobile_user_routes": schema.BoolAttribute{
 										MarkdownDescription: "Summarize mobile user routes?",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -372,6 +382,7 @@ var RemoteNetworksResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder that contains the remote network",
 			Required:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -385,6 +396,7 @@ var RemoteNetworksResourceSchema = schema.Schema{
 		"ipsec_tunnel": schema.StringAttribute{
 			MarkdownDescription: "ipsec_tunnel is required when ecmp_load_balancing is disable",
 			Optional:            true,
+			Computed:            true,
 		},
 		"license_type": schema.StringAttribute{
 			Validators: []validator.String{
@@ -403,34 +415,42 @@ var RemoteNetworksResourceSchema = schema.Schema{
 		"protocol": schema.SingleNestedAttribute{
 			MarkdownDescription: "setup the protocol when ecmp_load_balancing is disable",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Bgp",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"do_not_export_routes": schema.BoolAttribute{
 							MarkdownDescription: "Do not export routes?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable BGP peering?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"local_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Local peer IP address",
 							Optional:            true,
+							Computed:            true,
 						},
 						"originate_default_route": schema.BoolAttribute{
 							MarkdownDescription: "Originate default route?",
 							Optional:            true,
+							Computed:            true,
 						},
 						"peer_as": schema.StringAttribute{
 							MarkdownDescription: "BGP peer ASN",
 							Optional:            true,
+							Computed:            true,
 						},
 						"peer_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Remote peer IP address",
 							Optional:            true,
+							Computed:            true,
 						},
 						"peering_type": schema.StringAttribute{
 							Validators: []validator.String{
@@ -438,37 +458,45 @@ var RemoteNetworksResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Route exchange types",
 							Optional:            true,
+							Computed:            true,
 						},
 						"secret": schema.StringAttribute{
 							MarkdownDescription: "BGP peering secret",
 							Optional:            true,
+							Computed:            true,
 							Sensitive:           true,
 						},
 						"summarize_mobile_user_routes": schema.BoolAttribute{
 							MarkdownDescription: "Summarize mobile user routes?",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"bgp_peer": schema.SingleNestedAttribute{
 					MarkdownDescription: "secondary bgp routing as bgp_peer",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"local_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Local peer IP address (secondary WAN)",
 							Optional:            true,
+							Computed:            true,
 						},
 						"peer_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Remote peer IP address (secondary WAN)",
 							Optional:            true,
+							Computed:            true,
 						},
 						"same_as_primary": schema.BoolAttribute{
 							MarkdownDescription: "Same peer IP address as primary WAN",
 							Optional:            true,
+							Computed:            true,
 						},
 						"secret": schema.StringAttribute{
 							MarkdownDescription: "BGP peering secret (secondary WAN)",
 							Optional:            true,
+							Computed:            true,
 							Sensitive:           true,
 						},
 					},
@@ -485,10 +513,12 @@ var RemoteNetworksResourceSchema = schema.Schema{
 		"secondary_ipsec_tunnel": schema.StringAttribute{
 			MarkdownDescription: "specify secondary ipsec_tunnel if needed",
 			Optional:            true,
+			Computed:            true,
 		},
 		"spn_name": schema.StringAttribute{
 			MarkdownDescription: "spn-name is needed when license_type is FWAAS-AGGREGATE",
 			Optional:            true,
+			Computed:            true,
 		},
 		"subnets": schema.ListAttribute{
 			ElementType:         types.StringType,

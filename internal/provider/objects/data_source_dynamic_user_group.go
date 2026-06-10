@@ -34,7 +34,7 @@ type DynamicUserGroupDataSource struct {
 
 func (d *DynamicUserGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DynamicUserGroupDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dynamic_user_group"
+	resp.TypeName = "scm_dynamic_user_group"
 }
 
 func (d *DynamicUserGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *DynamicUserGroupDataSource) Read(ctx context.Context, req datasource.Re
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading DynamicUserGroups data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *DynamicUserGroupDataSource) Read(ctx context.Context, req datasource.Re
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

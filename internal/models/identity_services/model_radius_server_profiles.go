@@ -226,6 +226,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -248,6 +249,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -274,14 +276,17 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 				"eap_ttls_with_pap": schema.SingleNestedAttribute{
 					MarkdownDescription: "E a p t t l s with p a p",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"anon_outer_id": schema.BoolAttribute{
 							MarkdownDescription: "Anon outer id",
 							Optional:            true,
+							Computed:            true,
 						},
 						"radius_cert_profile": schema.StringAttribute{
 							MarkdownDescription: "Radius cert profile",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
@@ -293,32 +298,39 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 				"peap_mscha_pv2": schema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p m s c h a pv2",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"allow_pwd_change": schema.BoolAttribute{
 							MarkdownDescription: "Allow pwd change",
 							Optional:            true,
+							Computed:            true,
 						},
 						"anon_outer_id": schema.BoolAttribute{
 							MarkdownDescription: "Anon outer id",
 							Optional:            true,
+							Computed:            true,
 						},
 						"radius_cert_profile": schema.StringAttribute{
 							MarkdownDescription: "Radius cert profile",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"peap_with_gtc": schema.SingleNestedAttribute{
 					MarkdownDescription: "P e a p with g t c",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"anon_outer_id": schema.BoolAttribute{
 							MarkdownDescription: "Anon outer id",
 							Optional:            true,
+							Computed:            true,
 						},
 						"radius_cert_profile": schema.StringAttribute{
 							MarkdownDescription: "Radius cert profile",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
@@ -330,6 +342,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The number of RADIUS server retries",
 			Optional:            true,
+			Computed:            true,
 		},
 		"server": schema.ListNestedAttribute{
 			MarkdownDescription: "Server",
@@ -339,10 +352,12 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 					"ip_address": schema.StringAttribute{
 						MarkdownDescription: "The IP address of the RADIUS server",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "The name of the RADIUS server",
 						Optional:            true,
+						Computed:            true,
 					},
 					"port": schema.Int64Attribute{
 						Validators: []validator.Int64{
@@ -350,6 +365,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "The RADIUS server port",
 						Optional:            true,
+						Computed:            true,
 					},
 					"secret": schema.StringAttribute{
 						Validators: []validator.String{
@@ -357,6 +373,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "The RADIUS secret",
 						Optional:            true,
+						Computed:            true,
 						Sensitive:           true,
 					},
 				},
@@ -374,6 +391,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -390,6 +408,7 @@ var RadiusServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The RADIUS server authentication timeout (seconds)",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

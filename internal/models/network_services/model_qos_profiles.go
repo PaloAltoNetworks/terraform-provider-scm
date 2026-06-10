@@ -333,6 +333,7 @@ var QosProfilesResourceSchema = schema.Schema{
 		"aggregate_bandwidth": schema.SingleNestedAttribute{
 			MarkdownDescription: "Aggregate bandwidth",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"egress_guaranteed": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -340,6 +341,7 @@ var QosProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "guaranteed sending bandwidth in mbps",
 					Optional:            true,
+					Computed:            true,
 				},
 				"egress_max": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -347,12 +349,14 @@ var QosProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "max sending bandwidth in mbps",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
 		"class_bandwidth_type": schema.SingleNestedAttribute{
 			MarkdownDescription: "Class bandwidth type",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"mbps": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -362,15 +366,18 @@ var QosProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Mbps\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
 							MarkdownDescription: "QoS setting for traffic classes",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"class_bandwidth": schema.SingleNestedAttribute{
 										MarkdownDescription: "Class bandwidth",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"egress_guaranteed": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -398,6 +405,7 @@ var QosProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Traffic class",
 										Optional:            true,
+										Computed:            true,
 									},
 									"priority": schema.StringAttribute{
 										Validators: []validator.String{
@@ -421,15 +429,18 @@ var QosProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Percentage\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
 							MarkdownDescription: "QoS setting for traffic classes",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"class_bandwidth": schema.SingleNestedAttribute{
 										MarkdownDescription: "Class bandwidth",
 										Optional:            true,
+										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"egress_guaranteed": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -457,6 +468,7 @@ var QosProfilesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Traffic class",
 										Optional:            true,
+										Computed:            true,
 									},
 									"priority": schema.StringAttribute{
 										Validators: []validator.String{
@@ -486,6 +498,7 @@ var QosProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -502,6 +515,7 @@ var QosProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -531,6 +545,7 @@ var QosProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

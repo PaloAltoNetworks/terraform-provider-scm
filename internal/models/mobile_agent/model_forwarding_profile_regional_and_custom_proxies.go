@@ -204,6 +204,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "regional and custom proxy configuration description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"fallback_option": schema.StringAttribute{
 			Validators: []validator.String{
@@ -211,6 +212,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Behavior when proxy connection fails - 'fail-open' allows direct internet access, 'fail-safe' blocks traffic until proxy is restored",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -221,6 +223,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
@@ -238,6 +241,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Strategy for selecting Prisma Access location - 'best-available-pa-location' automatically selects optimal location, 'specific-pa-location' uses predefined locations",
 			Optional:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			Validators: []validator.String{
@@ -273,6 +277,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 		"proxy_1": schema.SingleNestedAttribute{
 			MarkdownDescription: "primary regional and custom proxy",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"fqdn": schema.StringAttribute{
 					Validators: []validator.String{
@@ -281,10 +286,12 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "fqdn of the primary proxy server (supports wildcards and alphanumeric characters with dots, hyphens, and underscores)",
 					Optional:            true,
+					Computed:            true,
 				},
 				"location": schema.StringAttribute{
 					MarkdownDescription: "Geographic or network location identifier for the primary proxy server",
 					Optional:            true,
+					Computed:            true,
 				},
 				"port": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -292,12 +299,14 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "port number for primary proxy",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
 		"proxy_2": schema.SingleNestedAttribute{
 			MarkdownDescription: "secondary regional and custom proxy",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"fqdn": schema.StringAttribute{
 					Validators: []validator.String{
@@ -306,10 +315,12 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Fqdn of the secondary (backup) proxy server used for failover scenarios",
 					Optional:            true,
+					Computed:            true,
 				},
 				"location": schema.StringAttribute{
 					MarkdownDescription: "Geographic or network location identifier for the secondary proxy server",
 					Optional:            true,
+					Computed:            true,
 				},
 				"port": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -317,6 +328,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "port number for secondary proxy",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},

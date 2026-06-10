@@ -47,6 +47,7 @@ var QuarantinedDevicesResourceSchema = schema.Schema{
 		"serial_number": schema.StringAttribute{
 			MarkdownDescription: "Device serial number",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

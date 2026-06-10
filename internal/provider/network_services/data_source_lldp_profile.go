@@ -34,7 +34,7 @@ type LldpProfileDataSource struct {
 
 func (d *LldpProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LldpProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_lldp_profile"
+	resp.TypeName = "scm_lldp_profile"
 }
 
 func (d *LldpProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *LldpProfileDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading LldpProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *LldpProfileDataSource) Read(ctx context.Context, req datasource.ReadReq
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

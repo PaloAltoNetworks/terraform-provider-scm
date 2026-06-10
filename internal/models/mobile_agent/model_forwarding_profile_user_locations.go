@@ -85,6 +85,7 @@ var ForwardingProfileUserLocationsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Description of the user location",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -95,6 +96,7 @@ var ForwardingProfileUserLocationsResourceSchema = schema.Schema{
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
@@ -109,6 +111,7 @@ var ForwardingProfileUserLocationsResourceSchema = schema.Schema{
 		"internal_host_detection": schema.SingleNestedAttribute{
 			MarkdownDescription: "Configuration for detecting internal hosts using IP address and FQDN",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"fqdn": schema.StringAttribute{
 					Validators: []validator.String{
@@ -139,6 +142,7 @@ var ForwardingProfileUserLocationsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "alphanumeric string [ 0-9a-zA-Z._-]",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

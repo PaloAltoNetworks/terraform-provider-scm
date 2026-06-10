@@ -34,7 +34,7 @@ type ContentIdSettingDataSource struct {
 
 func (d *ContentIdSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ContentIdSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_content_id_setting"
+	resp.TypeName = "scm_content_id_setting"
 }
 
 func (d *ContentIdSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *ContentIdSettingDataSource) Read(ctx context.Context, req datasource.Re
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading ContentIdSettings data source by ID", map[string]interface{}{"id": objectId})
 
@@ -161,6 +163,7 @@ func (d *ContentIdSettingDataSource) Read(ctx context.Context, req datasource.Re
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

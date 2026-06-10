@@ -114,6 +114,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -140,6 +141,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -158,6 +160,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 		"lifetime": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ike crypto profile lifetime",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"days": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -170,6 +173,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifetime in days\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"hours": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -182,6 +186,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifetime in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"minutes": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -194,6 +199,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifetime in minutes\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"seconds": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -206,6 +212,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifetime in seconds\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
@@ -228,6 +235,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

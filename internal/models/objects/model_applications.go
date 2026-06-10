@@ -1,19 +1,10 @@
 package models
 
 import (
-	"regexp"
-
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	dsschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -644,184 +635,154 @@ var ApplicationsResourceSchema = schema.Schema{
 		"able_to_transfer_file": schema.BoolAttribute{
 			MarkdownDescription: "Able to transfer file",
 			Optional:            true,
+			Computed:            true,
 		},
 		"alg_disable_capability": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.LengthAtMost(127),
-			},
 			MarkdownDescription: "Alg disable capability",
 			Optional:            true,
+			Computed:            true,
 		},
 		"category": schema.StringAttribute{
 			MarkdownDescription: "Category",
-			Required:            true,
+			Optional:            true,
 		},
 		"consume_big_bandwidth": schema.BoolAttribute{
 			MarkdownDescription: "Consume big bandwidth",
 			Optional:            true,
+			Computed:            true,
 		},
 		"data_ident": schema.BoolAttribute{
 			MarkdownDescription: "Data ident",
 			Optional:            true,
+			Computed:            true,
 		},
 		"default": schema.SingleNestedAttribute{
 			MarkdownDescription: "Default",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ident_by_icmp6_type": schema.SingleNestedAttribute{
-					Validators: []validator.Object{
-						objectvalidator.ConflictsWith(
-							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
-							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
-							path.MatchRelative().AtParent().AtName("port"),
-						),
-					},
-					MarkdownDescription: "Ident by icmp6 type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp6 type",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"code": schema.StringAttribute{
 							MarkdownDescription: "Code",
 							Optional:            true,
+							Computed:            true,
 						},
 						"type": schema.StringAttribute{
 							MarkdownDescription: "Type",
-							Required:            true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"ident_by_icmp_type": schema.SingleNestedAttribute{
-					Validators: []validator.Object{
-						objectvalidator.ConflictsWith(
-							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
-							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
-							path.MatchRelative().AtParent().AtName("port"),
-						),
-					},
-					MarkdownDescription: "Ident by icmp type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp type",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"code": schema.StringAttribute{
 							MarkdownDescription: "Code",
 							Optional:            true,
+							Computed:            true,
 						},
 						"type": schema.StringAttribute{
 							MarkdownDescription: "Type",
-							Required:            true,
+							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
 				"ident_by_ip_protocol": schema.StringAttribute{
-					Validators: []validator.String{
-						stringvalidator.ConflictsWith(
-							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
-							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
-							path.MatchRelative().AtParent().AtName("port"),
-						),
-					},
-					MarkdownDescription: "Ident by ip protocol\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by ip protocol",
 					Optional:            true,
+					Computed:            true,
 				},
 				"port": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Port\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
-					Validators: []validator.List{
-						listvalidator.ConflictsWith(
-							path.MatchRelative().AtParent().AtName("ident_by_icmp6_type"),
-							path.MatchRelative().AtParent().AtName("ident_by_icmp_type"),
-							path.MatchRelative().AtParent().AtName("ident_by_ip_protocol"),
-						),
-						listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(63)),
-					},
-					Optional: true,
+					MarkdownDescription: "Port",
+					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
 		"description": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.LengthAtMost(8192),
-			},
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("folder"),
-					path.MatchRelative().AtParent().AtName("snippet"),
-				),
-				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
-			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Device",
 			Optional:            true,
+			Computed:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"evasive_behavior": schema.BoolAttribute{
 			MarkdownDescription: "Evasive behavior",
 			Optional:            true,
+			Computed:            true,
 		},
 		"file_type_ident": schema.BoolAttribute{
 			MarkdownDescription: "File type ident",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("device"),
-					path.MatchRelative().AtParent().AtName("snippet"),
-				),
-				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Folder",
 			Optional:            true,
+			Computed:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"has_known_vulnerability": schema.BoolAttribute{
 			MarkdownDescription: "Has known vulnerability",
 			Optional:            true,
+			Computed:            true,
 		},
 		"id": schema.StringAttribute{
-			MarkdownDescription: "The UUID of the application",
+			MarkdownDescription: "Id",
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
 		"name": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.LengthAtMost(31),
-			},
-			MarkdownDescription: "The name of the application",
-			Required:            true,
+			MarkdownDescription: "Name",
+			Optional:            true,
 		},
 		"no_appid_caching": schema.BoolAttribute{
 			MarkdownDescription: "No appid caching",
 			Optional:            true,
+			Computed:            true,
 		},
 		"parent_app": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.LengthAtMost(127),
-			},
 			MarkdownDescription: "Parent app",
 			Optional:            true,
+			Computed:            true,
 		},
 		"pervasive_use": schema.BoolAttribute{
 			MarkdownDescription: "Pervasive use",
 			Optional:            true,
+			Computed:            true,
 		},
 		"prone_to_misuse": schema.BoolAttribute{
 			MarkdownDescription: "Prone to misuse",
 			Optional:            true,
+			Computed:            true,
 		},
 		"risk": schema.StringAttribute{
 			MarkdownDescription: "Risk",
-			Required:            true,
+			Optional:            true,
 		},
 		"signature": schema.ListNestedAttribute{
 			MarkdownDescription: "Signature",
@@ -834,11 +795,8 @@ var ApplicationsResourceSchema = schema.Schema{
 						NestedObject: schema.NestedAttributeObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									Validators: []validator.String{
-										stringvalidator.LengthAtMost(31),
-									},
-									MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
-									Required:            true,
+									MarkdownDescription: "Name",
+									Optional:            true,
 								},
 								"or_condition": schema.ListNestedAttribute{
 									MarkdownDescription: "Or condition",
@@ -846,187 +804,136 @@ var ApplicationsResourceSchema = schema.Schema{
 									NestedObject: schema.NestedAttributeObject{
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												Validators: []validator.String{
-													stringvalidator.LengthAtMost(31),
-												},
-												MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
-												Required:            true,
+												MarkdownDescription: "Name",
+												Optional:            true,
 											},
 											"operator": schema.SingleNestedAttribute{
 												MarkdownDescription: "Operator",
-												Required:            true,
+												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"equal_to": schema.SingleNestedAttribute{
-														Validators: []validator.Object{
-															objectvalidator.ExactlyOneOf(
-																path.MatchRelative().AtParent().AtName("greater_than"),
-																path.MatchRelative().AtParent().AtName("less_than"),
-																path.MatchRelative().AtParent().AtName("pattern_match"),
-															),
-														},
-														MarkdownDescription: "Equal to\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Equal to",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "Context",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"mask": schema.StringAttribute{
-																Validators: []validator.String{
-																	stringvalidator.LengthAtMost(10),
-																	stringvalidator.RegexMatches(regexp.MustCompile("^[0][xX][0-9A-Fa-f]{8}$"), "pattern must match "+"^[0][xX][0-9A-Fa-f]{8}$"),
-																},
-																MarkdownDescription: "4-byte hex value",
+																MarkdownDescription: "Mask",
 																Optional:            true,
+																Computed:            true,
 															},
 															"position": schema.StringAttribute{
-																Validators: []validator.String{
-																	stringvalidator.LengthAtMost(127),
-																},
 																MarkdownDescription: "Position",
 																Optional:            true,
+																Computed:            true,
 															},
 															"value": schema.StringAttribute{
-																Validators: []validator.String{
-																	stringvalidator.LengthAtMost(10),
-																},
 																MarkdownDescription: "Value",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"greater_than": schema.SingleNestedAttribute{
-														Validators: []validator.Object{
-															objectvalidator.ExactlyOneOf(
-																path.MatchRelative().AtParent().AtName("equal_to"),
-																path.MatchRelative().AtParent().AtName("less_than"),
-																path.MatchRelative().AtParent().AtName("pattern_match"),
-															),
-														},
-														MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Greater than",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
-																Validators: []validator.String{
-																	stringvalidator.LengthAtMost(127),
-																},
 																MarkdownDescription: "Context",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"qualifier": schema.ListNestedAttribute{
 																MarkdownDescription: "Qualifier",
 																Optional:            true,
+																Computed:            true,
 																NestedObject: schema.NestedAttributeObject{
 																	Attributes: map[string]schema.Attribute{
 																		"name": schema.StringAttribute{
-																			Validators: []validator.String{
-																				stringvalidator.LengthAtMost(31),
-																			},
-																			MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
-																			Required:            true,
+																			MarkdownDescription: "Name",
+																			Optional:            true,
 																		},
 																		"value": schema.StringAttribute{
 																			MarkdownDescription: "Value",
-																			Required:            true,
+																			Optional:            true,
 																		},
 																	},
 																},
 															},
 															"value": schema.Int64Attribute{
-																Validators: []validator.Int64{
-																	int64validator.Between(0, 4294967295),
-																},
 																MarkdownDescription: "Value",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"less_than": schema.SingleNestedAttribute{
-														Validators: []validator.Object{
-															objectvalidator.ExactlyOneOf(
-																path.MatchRelative().AtParent().AtName("equal_to"),
-																path.MatchRelative().AtParent().AtName("greater_than"),
-																path.MatchRelative().AtParent().AtName("pattern_match"),
-															),
-														},
-														MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Less than",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
-																Validators: []validator.String{
-																	stringvalidator.LengthAtMost(127),
-																},
 																MarkdownDescription: "Context",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"qualifier": schema.ListNestedAttribute{
 																MarkdownDescription: "Qualifier",
 																Optional:            true,
+																Computed:            true,
 																NestedObject: schema.NestedAttributeObject{
 																	Attributes: map[string]schema.Attribute{
 																		"name": schema.StringAttribute{
-																			Validators: []validator.String{
-																				stringvalidator.LengthAtMost(31),
-																			},
-																			MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
-																			Required:            true,
+																			MarkdownDescription: "Name",
+																			Optional:            true,
 																		},
 																		"value": schema.StringAttribute{
 																			MarkdownDescription: "Value",
-																			Required:            true,
+																			Optional:            true,
 																		},
 																	},
 																},
 															},
 															"value": schema.Int64Attribute{
-																Validators: []validator.Int64{
-																	int64validator.Between(0, 4294967295),
-																},
 																MarkdownDescription: "Value",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 														},
 													},
 													"pattern_match": schema.SingleNestedAttribute{
-														Validators: []validator.Object{
-															objectvalidator.ExactlyOneOf(
-																path.MatchRelative().AtParent().AtName("equal_to"),
-																path.MatchRelative().AtParent().AtName("greater_than"),
-																path.MatchRelative().AtParent().AtName("less_than"),
-															),
-														},
-														MarkdownDescription: "Pattern match\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Pattern match",
 														Optional:            true,
+														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
-																Validators: []validator.String{
-																	stringvalidator.LengthAtMost(127),
-																},
 																MarkdownDescription: "Context",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"pattern": schema.StringAttribute{
-																Validators: []validator.String{
-																	stringvalidator.LengthAtMost(127),
-																},
 																MarkdownDescription: "Pattern",
-																Required:            true,
+																Optional:            true,
+																Computed:            true,
 															},
 															"qualifier": schema.ListNestedAttribute{
 																MarkdownDescription: "Qualifier",
 																Optional:            true,
+																Computed:            true,
 																NestedObject: schema.NestedAttributeObject{
 																	Attributes: map[string]schema.Attribute{
 																		"name": schema.StringAttribute{
-																			Validators: []validator.String{
-																				stringvalidator.LengthAtMost(31),
-																			},
-																			MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
-																			Required:            true,
+																			MarkdownDescription: "Name",
+																			Optional:            true,
 																		},
 																		"value": schema.StringAttribute{
 																			MarkdownDescription: "Value",
-																			Required:            true,
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -1042,86 +949,60 @@ var ApplicationsResourceSchema = schema.Schema{
 						},
 					},
 					"comment": schema.StringAttribute{
-						Validators: []validator.String{
-							stringvalidator.LengthAtMost(256),
-						},
 						MarkdownDescription: "Comment",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
-						Validators: []validator.String{
-							stringvalidator.LengthAtMost(31),
-						},
-						MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
-						Required:            true,
+						MarkdownDescription: "Name",
+						Optional:            true,
 					},
 					"order_free": schema.BoolAttribute{
 						MarkdownDescription: "Order free",
 						Optional:            true,
 						Computed:            true,
-						Default:             booldefault.StaticBool(false),
 					},
 					"scope": schema.StringAttribute{
-						Validators: []validator.String{
-							stringvalidator.OneOf("protocol-data-unit", "session"),
-						},
 						MarkdownDescription: "Scope",
 						Optional:            true,
 						Computed:            true,
-						Default:             stringdefault.StaticString("protocol-data-unit"),
 					},
 				},
 			},
 		},
 		"snippet": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.ExactlyOneOf(
-					path.MatchRelative().AtParent().AtName("device"),
-					path.MatchRelative().AtParent().AtName("folder"),
-				),
-				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
-			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Snippet",
 			Optional:            true,
+			Computed:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"subcategory": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.LengthAtMost(63),
-			},
 			MarkdownDescription: "Subcategory",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tcp_half_closed_timeout": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(1, 604800),
-			},
-			MarkdownDescription: "timeout for half-close session in seconds",
+			MarkdownDescription: "Tcp half closed timeout",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tcp_time_wait_timeout": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(1, 600),
-			},
-			MarkdownDescription: "timeout for session in time_wait state in seconds",
+			MarkdownDescription: "Tcp time wait timeout",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tcp_timeout": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(0, 604800),
-			},
-			MarkdownDescription: "timeout in seconds",
+			MarkdownDescription: "Tcp timeout",
 			Optional:            true,
+			Computed:            true,
 		},
 		"technology": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.LengthAtMost(63),
-			},
 			MarkdownDescription: "Technology",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
@@ -1131,34 +1012,34 @@ var ApplicationsResourceSchema = schema.Schema{
 			},
 		},
 		"timeout": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(0, 604800),
-			},
-			MarkdownDescription: "timeout in seconds",
+			MarkdownDescription: "Timeout",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tunnel_applications": schema.BoolAttribute{
 			MarkdownDescription: "Tunnel applications",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tunnel_other_application": schema.BoolAttribute{
 			MarkdownDescription: "Tunnel other application",
 			Optional:            true,
+			Computed:            true,
 		},
 		"udp_timeout": schema.Int64Attribute{
-			Validators: []validator.Int64{
-				int64validator.Between(0, 604800),
-			},
-			MarkdownDescription: "timeout in seconds",
+			MarkdownDescription: "Udp timeout",
 			Optional:            true,
+			Computed:            true,
 		},
 		"used_by_malware": schema.BoolAttribute{
 			MarkdownDescription: "Used by malware",
 			Optional:            true,
+			Computed:            true,
 		},
 		"virus_ident": schema.BoolAttribute{
 			MarkdownDescription: "Virus ident",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }
@@ -1192,7 +1073,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ident_by_icmp6_type": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ident by icmp6 type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp6 type",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"code": dsschema.StringAttribute{
@@ -1206,7 +1087,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ident_by_icmp_type": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ident by icmp type\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by icmp type",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"code": dsschema.StringAttribute{
@@ -1220,12 +1101,12 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ident_by_ip_protocol": dsschema.StringAttribute{
-					MarkdownDescription: "Ident by ip protocol\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Ident by ip protocol",
 					Computed:            true,
 				},
 				"port": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Port\n\n> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.",
+					MarkdownDescription: "Port",
 					Computed:            true,
 				},
 			},
@@ -1235,7 +1116,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Device",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1248,7 +1129,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Folder",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1257,11 +1138,11 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
-			MarkdownDescription: "The UUID of the application",
+			MarkdownDescription: "Id",
 			Required:            true,
 		},
 		"name": dsschema.StringAttribute{
-			MarkdownDescription: "The name of the application",
+			MarkdownDescription: "Name",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1296,7 +1177,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 						NestedObject: dsschema.NestedAttributeObject{
 							Attributes: map[string]dsschema.Attribute{
 								"name": dsschema.StringAttribute{
-									MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
+									MarkdownDescription: "Name",
 									Computed:            true,
 								},
 								"or_condition": dsschema.ListNestedAttribute{
@@ -1305,7 +1186,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 									NestedObject: dsschema.NestedAttributeObject{
 										Attributes: map[string]dsschema.Attribute{
 											"name": dsschema.StringAttribute{
-												MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
+												MarkdownDescription: "Name",
 												Computed:            true,
 											},
 											"operator": dsschema.SingleNestedAttribute{
@@ -1313,7 +1194,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"equal_to": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Equal to\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Equal to",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1321,7 +1202,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 																Computed:            true,
 															},
 															"mask": dsschema.StringAttribute{
-																MarkdownDescription: "4-byte hex value",
+																MarkdownDescription: "Mask",
 																Computed:            true,
 															},
 															"position": dsschema.StringAttribute{
@@ -1335,7 +1216,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"greater_than": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Greater than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Greater than",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1348,7 +1229,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 																NestedObject: dsschema.NestedAttributeObject{
 																	Attributes: map[string]dsschema.Attribute{
 																		"name": dsschema.StringAttribute{
-																			MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
+																			MarkdownDescription: "Name",
 																			Computed:            true,
 																		},
 																		"value": dsschema.StringAttribute{
@@ -1365,7 +1246,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"less_than": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Less than\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Less than",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1378,7 +1259,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 																NestedObject: dsschema.NestedAttributeObject{
 																	Attributes: map[string]dsschema.Attribute{
 																		"name": dsschema.StringAttribute{
-																			MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
+																			MarkdownDescription: "Name",
 																			Computed:            true,
 																		},
 																		"value": dsschema.StringAttribute{
@@ -1395,7 +1276,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"pattern_match": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Pattern match\n\n> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`.",
+														MarkdownDescription: "Pattern match",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"context": dsschema.StringAttribute{
@@ -1412,7 +1293,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 																NestedObject: dsschema.NestedAttributeObject{
 																	Attributes: map[string]dsschema.Attribute{
 																		"name": dsschema.StringAttribute{
-																			MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
+																			MarkdownDescription: "Name",
 																			Computed:            true,
 																		},
 																		"value": dsschema.StringAttribute{
@@ -1437,7 +1318,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
-						MarkdownDescription: "Alphanumeric string [ 0-9a-zA-Z._-]",
+						MarkdownDescription: "Name",
 						Computed:            true,
 					},
 					"order_free": dsschema.BoolAttribute{
@@ -1452,7 +1333,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Snippet",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1461,15 +1342,15 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"tcp_half_closed_timeout": dsschema.Int64Attribute{
-			MarkdownDescription: "timeout for half-close session in seconds",
+			MarkdownDescription: "Tcp half closed timeout",
 			Computed:            true,
 		},
 		"tcp_time_wait_timeout": dsschema.Int64Attribute{
-			MarkdownDescription: "timeout for session in time_wait state in seconds",
+			MarkdownDescription: "Tcp time wait timeout",
 			Computed:            true,
 		},
 		"tcp_timeout": dsschema.Int64Attribute{
-			MarkdownDescription: "timeout in seconds",
+			MarkdownDescription: "Tcp timeout",
 			Computed:            true,
 		},
 		"technology": dsschema.StringAttribute{
@@ -1481,7 +1362,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"timeout": dsschema.Int64Attribute{
-			MarkdownDescription: "timeout in seconds",
+			MarkdownDescription: "Timeout",
 			Computed:            true,
 		},
 		"tunnel_applications": dsschema.BoolAttribute{
@@ -1493,7 +1374,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"udp_timeout": dsschema.Int64Attribute{
-			MarkdownDescription: "timeout in seconds",
+			MarkdownDescription: "Udp timeout",
 			Computed:            true,
 		},
 		"used_by_malware": dsschema.BoolAttribute{

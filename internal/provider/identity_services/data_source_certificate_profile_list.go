@@ -32,7 +32,7 @@ type CertificateProfileListDataSource struct {
 }
 
 func (d *CertificateProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_certificate_profile_list"
+	resp.TypeName = "scm_certificate_profile_list"
 }
 
 func (d *CertificateProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

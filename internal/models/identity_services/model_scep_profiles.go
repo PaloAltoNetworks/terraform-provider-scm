@@ -252,6 +252,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 		"certificate_attributes": schema.SingleNestedAttribute{
 			MarkdownDescription: "Subject Alternative name type",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"dnsname": schema.StringAttribute{
 					Validators: []validator.String{
@@ -262,6 +263,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Dnsname\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"rfc822name": schema.StringAttribute{
 					Validators: []validator.String{
@@ -272,6 +274,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Rfc822name\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"uniform_resource_identifier": schema.StringAttribute{
 					Validators: []validator.String{
@@ -282,6 +285,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Uniform resource identifier\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
@@ -297,6 +301,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -316,6 +321,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 		"fingerprint": schema.StringAttribute{
 			MarkdownDescription: "CA Certificate Fingerprint",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -330,6 +336,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -353,6 +360,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "SCEP Server CA Certificate",
 			Optional:            true,
+			Computed:            true,
 		},
 		"scep_challenge": schema.SingleNestedAttribute{
 			MarkdownDescription: "One Time Password Challenge",
@@ -374,6 +382,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "OTP server URL",
 							Optional:            true,
+							Computed:            true,
 						},
 						"password": schema.StringAttribute{
 							Validators: []validator.String{
@@ -381,6 +390,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "OTP password",
 							Optional:            true,
+							Computed:            true,
 							Sensitive:           true,
 						},
 						"username": schema.StringAttribute{
@@ -389,6 +399,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "OTP username",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
@@ -422,6 +433,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "SCEP Client Certificate",
 			Optional:            true,
+			Computed:            true,
 		},
 		"scep_url": schema.StringAttribute{
 			MarkdownDescription: "SCEP server URL",
@@ -439,6 +451,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -456,10 +469,12 @@ var ScepProfilesResourceSchema = schema.Schema{
 		"use_as_digital_signature": schema.BoolAttribute{
 			MarkdownDescription: "Use as digital signature?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"use_for_key_encipherment": schema.BoolAttribute{
 			MarkdownDescription: "Use for key encipherment?",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

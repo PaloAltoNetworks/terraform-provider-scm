@@ -136,16 +136,19 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"evasive": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"excessive_bandwidth_use": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"exclude": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -168,12 +171,14 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"has_known_vulnerabilities": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "UUID of the resource",
@@ -185,6 +190,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 		"is_saas": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			Validators: []validator.String{
@@ -196,14 +202,17 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 		"new_appid": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"pervasive": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"prone_to_misuse": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"risk": schema.ListAttribute{
 			ElementType:         types.Int64Type,
@@ -238,6 +247,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -252,6 +262,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 		"tagging": schema.SingleNestedAttribute{
 			MarkdownDescription: "Tagging",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"no_tag": schema.BoolAttribute{
 					Validators: []validator.Bool{
@@ -261,6 +272,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "No tag\n\n> ℹ️ **Note:** You must specify exactly one of `no_tag` and `tag`.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"tag": schema.ListAttribute{
 					ElementType:         types.StringType,
@@ -272,6 +284,7 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 						listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(127)),
 					},
 					Optional: true,
+					Computed: true,
 				},
 			},
 		},
@@ -293,14 +306,17 @@ var ApplicationFiltersResourceSchema = schema.Schema{
 		"transfers_files": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tunnels_other_apps": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 		"used_by_malware": schema.BoolAttribute{
 			MarkdownDescription: "only True is a valid value",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

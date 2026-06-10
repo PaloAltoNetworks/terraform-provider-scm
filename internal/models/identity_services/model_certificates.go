@@ -166,18 +166,22 @@ var CertificatesGetResourceSchema = schema.Schema{
 		"algorithm": schema.StringAttribute{
 			MarkdownDescription: "Algorithm",
 			Optional:            true,
+			Computed:            true,
 		},
 		"ca": schema.BoolAttribute{
 			MarkdownDescription: "CA certificate?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"common_name": schema.StringAttribute{
 			MarkdownDescription: "Common name",
 			Optional:            true,
+			Computed:            true,
 		},
 		"common_name_int": schema.StringAttribute{
 			MarkdownDescription: "Common name int",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -191,12 +195,14 @@ var CertificatesGetResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"expiry_epoch": schema.StringAttribute{
 			MarkdownDescription: "Expiry epoch",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -211,6 +217,7 @@ var CertificatesGetResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -224,26 +231,32 @@ var CertificatesGetResourceSchema = schema.Schema{
 		"issuer": schema.StringAttribute{
 			MarkdownDescription: "Issuer",
 			Optional:            true,
+			Computed:            true,
 		},
 		"issuer_hash": schema.StringAttribute{
 			MarkdownDescription: "Issue hash",
 			Optional:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the certificate",
 			Optional:            true,
+			Computed:            true,
 		},
 		"not_valid_after": schema.StringAttribute{
 			MarkdownDescription: "Not valid after this date",
 			Optional:            true,
+			Computed:            true,
 		},
 		"not_valid_before": schema.StringAttribute{
 			MarkdownDescription: "Not valid before this date",
 			Optional:            true,
+			Computed:            true,
 		},
 		"public_key": schema.StringAttribute{
 			MarkdownDescription: "Public key",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -257,20 +270,24 @@ var CertificatesGetResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"subject": schema.StringAttribute{
 			MarkdownDescription: "Subject",
 			Optional:            true,
+			Computed:            true,
 		},
 		"subject_hash": schema.StringAttribute{
 			MarkdownDescription: "Subject hash",
 			Optional:            true,
+			Computed:            true,
 		},
 		"subject_int": schema.StringAttribute{
 			MarkdownDescription: "Subject int",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

@@ -133,18 +133,22 @@ var SitesResourceSchema = schema.Schema{
 		"address_line_1": schema.StringAttribute{
 			MarkdownDescription: "The address in which the site exists",
 			Optional:            true,
+			Computed:            true,
 		},
 		"address_line_2": schema.StringAttribute{
 			MarkdownDescription: "The address in which the site exists (continued)",
 			Optional:            true,
+			Computed:            true,
 		},
 		"city": schema.StringAttribute{
 			MarkdownDescription: "The city in which the site exists",
 			Optional:            true,
+			Computed:            true,
 		},
 		"country": schema.StringAttribute{
 			MarkdownDescription: "The country in which the site exists",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -153,6 +157,7 @@ var SitesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n",
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
@@ -167,6 +172,7 @@ var SitesResourceSchema = schema.Schema{
 		"latitude": schema.StringAttribute{
 			MarkdownDescription: "The latitude coordinate for the site",
 			Optional:            true,
+			Computed:            true,
 		},
 		"license_type": schema.StringAttribute{
 			Validators: []validator.String{
@@ -175,10 +181,12 @@ var SitesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The license type of the site",
 			Optional:            true,
+			Computed:            true,
 		},
 		"longitude": schema.StringAttribute{
 			MarkdownDescription: "The longitude coordinate for the site",
 			Optional:            true,
+			Computed:            true,
 		},
 		"members": schema.ListNestedAttribute{
 			MarkdownDescription: "Members",
@@ -203,6 +211,7 @@ var SitesResourceSchema = schema.Schema{
 					"remote_network": schema.StringAttribute{
 						MarkdownDescription: "The remote network name",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -217,24 +226,29 @@ var SitesResourceSchema = schema.Schema{
 		"qos": schema.SingleNestedAttribute{
 			MarkdownDescription: "Qos",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"backup_cir": schema.Float64Attribute{
 					MarkdownDescription: "The backup CIR in Mbps. This is distributed equally for all tunnels in the site.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"cir": schema.Float64Attribute{
 					MarkdownDescription: "The CIR in Mbps. This is distributed equally for all tunnels in the site.",
 					Optional:            true,
+					Computed:            true,
 				},
 				"profile": schema.StringAttribute{
 					MarkdownDescription: "The name of the site QoS profile",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
 		"state": schema.StringAttribute{
 			MarkdownDescription: "The state in which the site exists",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
@@ -249,10 +263,12 @@ var SitesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The site type",
 			Optional:            true,
+			Computed:            true,
 		},
 		"zip_code": schema.StringAttribute{
 			MarkdownDescription: "The postal code in which the site exists",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

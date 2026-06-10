@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -36,7 +37,7 @@ type QosPolicyRuleResource struct {
 }
 
 func (r *QosPolicyRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_qos_policy_rule"
+	resp.TypeName = "scm_qos_policy_rule"
 }
 
 func (r *QosPolicyRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -161,6 +162,7 @@ func (r *QosPolicyRuleResource) Create(ctx context.Context, req resource.CreateR
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 	_ = req.Plan.GetAttribute(ctx, path.Root("position"), &data.Position)
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
@@ -219,6 +221,7 @@ func (r *QosPolicyRuleResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 
@@ -406,6 +409,7 @@ func (r *QosPolicyRuleResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a pointer, so we nil it out to omit it from the update payload.
+	// unpackedScmObject.Id = nil
 	unpackedScmObject.Id = nil
 
 	// Step 6: Get id from token and make update call
@@ -425,6 +429,7 @@ func (r *QosPolicyRuleResource) Update(ctx context.Context, req resource.UpdateR
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
+	// updatedObject, httpErr, err := updateReq.Execute()
 	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
@@ -500,7 +505,7 @@ func (r *QosPolicyRuleResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -561,15 +566,39 @@ func (r *QosPolicyRuleResource) Delete(ctx context.Context, req resource.DeleteR
 
 	tflog.Debug(ctx, "Deleting qos_policy_rules", map[string]interface{}{"id": objectId})
 	deleteReq := r.client.QoSRulesAPI.DeleteQoSPolicyRulesByID(ctx, objectId)
-	_, err := deleteReq.Execute()
+	httpResp, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting qos_policy_rules", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
+	}
+
+	// For 202 Accepted responses the delete is asynchronous. Poll the GET endpoint
+	// until the resource is gone (404) or a timeout is reached, so that dependent
+	// resources (e.g. a connector group) are not destroyed before this one is fully
+	// removed on the backend.
+	if httpResp != nil && httpResp.StatusCode == http.StatusAccepted {
+		deadline := time.Now().Add(2 * time.Minute)
+		for time.Now().Before(deadline) {
+			time.Sleep(3 * time.Second)
+			_, getResp, getErr := r.client.QoSRulesAPI.GetQoSPolicyRulesByID(ctx, objectId).Execute()
+			if getErr != nil {
+				// If the SDK returns an error check whether it is a 404 — that means deletion is complete.
+				if getResp != nil && getResp.StatusCode == http.StatusNotFound {
+					break
+				}
+				// Any other error: stop polling and surface it.
+				resp.Diagnostics.AddWarning("Delete poll error", getErr.Error())
+				break
+			}
+			if getResp != nil && getResp.StatusCode == http.StatusNotFound {
+				break
+			}
+		}
 	}
 }
 

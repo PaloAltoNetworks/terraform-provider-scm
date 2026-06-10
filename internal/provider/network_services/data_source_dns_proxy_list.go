@@ -32,7 +32,7 @@ type DnsProxyListDataSource struct {
 }
 
 func (d *DnsProxyListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_dns_proxy_list"
+	resp.TypeName = "scm_dns_proxy_list"
 }
 
 func (d *DnsProxyListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

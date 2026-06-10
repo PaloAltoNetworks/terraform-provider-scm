@@ -242,14 +242,17 @@ var VlanInterfacesResourceSchema = schema.Schema{
 					"hw_address": schema.StringAttribute{
 						MarkdownDescription: "MAC address",
 						Optional:            true,
+						Computed:            true,
 					},
 					"interface": schema.StringAttribute{
 						MarkdownDescription: "ARP interface",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "IP address",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -257,10 +260,12 @@ var VlanInterfacesResourceSchema = schema.Schema{
 		"comment": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"ddns_config": schema.SingleNestedAttribute{
 			MarkdownDescription: "Dynamic DNS configuration specific to the Vlan Interfaces.",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ddns_cert_profile": schema.StringAttribute{
 					MarkdownDescription: "Certificate profile",
@@ -283,6 +288,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 				"ddns_ip": schema.StringAttribute{
 					MarkdownDescription: "IP to register (static only)",
 					Optional:            true,
+					Computed:            true,
 				},
 				"ddns_update_interval": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -315,6 +321,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -328,6 +335,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -364,6 +372,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 				"send_hostname": schema.SingleNestedAttribute{
 					MarkdownDescription: "Send hostname",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -399,6 +408,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -412,6 +422,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 		"interface_management_profile": schema.StringAttribute{
 			MarkdownDescription: "Interface management profile",
 			Optional:            true,
+			Computed:            true,
 		},
 		"ip": schema.ListNestedAttribute{
 			Validators: []validator.List{
@@ -436,6 +447,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "MTU",
 			Optional:            true,
+			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "L3 sub-interface name",
@@ -444,6 +456,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 		"netflow_profile": schema.StringAttribute{
 			MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -457,6 +470,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -473,6 +487,7 @@ var VlanInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "VLAN tag",
 			Optional:            true,
+			Computed:            true,
 		},
 	},
 }

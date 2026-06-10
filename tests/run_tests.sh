@@ -207,7 +207,7 @@ resources_to_test=()
 for arg in "$@"; do
   case "$arg" in
     --all)
-      for d in "${SCRIPT_DIR}"/scm_*/; do
+      for d in "${SCRIPT_DIR}"/*_*/; do
         [ -d "$d" ] || continue
         resources_to_test+=("$(basename "$d")")
       done

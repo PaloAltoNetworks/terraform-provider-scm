@@ -294,6 +294,7 @@ var DataObjectsResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the data object",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -307,12 +308,14 @@ var DataObjectsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"disable_override": schema.StringAttribute{
 			MarkdownDescription: "Disable override",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -327,6 +330,7 @@ var DataObjectsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -340,35 +344,43 @@ var DataObjectsResourceSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the data object",
 			Optional:            true,
+			Computed:            true,
 		},
 		"pattern_type": schema.SingleNestedAttribute{
 			MarkdownDescription: "Pattern type",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"file_properties": schema.SingleNestedAttribute{
 					MarkdownDescription: "File properties",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"pattern": schema.ListNestedAttribute{
 							MarkdownDescription: "Pattern",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"file_property": schema.StringAttribute{
 										MarkdownDescription: "File property",
 										Optional:            true,
+										Computed:            true,
 									},
 									"file_type": schema.StringAttribute{
 										MarkdownDescription: "File type",
 										Optional:            true,
+										Computed:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name",
 										Optional:            true,
+										Computed:            true,
 									},
 									"property_value": schema.StringAttribute{
 										MarkdownDescription: "Property value",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -378,10 +390,12 @@ var DataObjectsResourceSchema = schema.Schema{
 				"predefined": schema.SingleNestedAttribute{
 					MarkdownDescription: "Predefined",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"pattern": schema.ListNestedAttribute{
 							MarkdownDescription: "Pattern",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"file_type": schema.ListAttribute{
@@ -392,6 +406,7 @@ var DataObjectsResourceSchema = schema.Schema{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -401,10 +416,12 @@ var DataObjectsResourceSchema = schema.Schema{
 				"regex": schema.SingleNestedAttribute{
 					MarkdownDescription: "Regex",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"pattern": schema.ListNestedAttribute{
 							MarkdownDescription: "Pattern",
 							Optional:            true,
+							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"file_type": schema.ListAttribute{
@@ -415,10 +432,12 @@ var DataObjectsResourceSchema = schema.Schema{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name",
 										Optional:            true,
+										Computed:            true,
 									},
 									"regex": schema.StringAttribute{
 										MarkdownDescription: "Regex",
 										Optional:            true,
+										Computed:            true,
 									},
 								},
 							},
@@ -439,6 +458,7 @@ var DataObjectsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

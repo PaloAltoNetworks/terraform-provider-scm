@@ -123,6 +123,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -139,6 +140,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -152,10 +154,12 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 		"motd_and_banner": schema.SingleNestedAttribute{
 			MarkdownDescription: "Motd and banner",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"banner_footer": schema.StringAttribute{
 					MarkdownDescription: "Banner footer",
 					Optional:            true,
+					Computed:            true,
 				},
 				"banner_footer_color": schema.StringAttribute{
 					Validators: []validator.String{
@@ -163,6 +167,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
 					Optional:            true,
+					Computed:            true,
 				},
 				"banner_footer_text_color": schema.StringAttribute{
 					Validators: []validator.String{
@@ -170,10 +175,12 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
 					Optional:            true,
+					Computed:            true,
 				},
 				"banner_header": schema.StringAttribute{
 					MarkdownDescription: "Banner header",
 					Optional:            true,
+					Computed:            true,
 				},
 				"banner_header_color": schema.StringAttribute{
 					Validators: []validator.String{
@@ -181,10 +188,12 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
 					Optional:            true,
+					Computed:            true,
 				},
 				"banner_header_footer_match": schema.BoolAttribute{
 					MarkdownDescription: "Banner header footer match",
 					Optional:            true,
+					Computed:            true,
 				},
 				"banner_header_text_color": schema.StringAttribute{
 					Validators: []validator.String{
@@ -192,10 +201,12 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
 					Optional:            true,
+					Computed:            true,
 				},
 				"message": schema.StringAttribute{
 					MarkdownDescription: "Message",
 					Optional:            true,
+					Computed:            true,
 				},
 				"motd_color": schema.StringAttribute{
 					Validators: []validator.String{
@@ -203,18 +214,22 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
 					Optional:            true,
+					Computed:            true,
 				},
 				"motd_do_not_display_again": schema.BoolAttribute{
 					MarkdownDescription: "Motd do not display again",
 					Optional:            true,
+					Computed:            true,
 				},
 				"motd_enable": schema.BoolAttribute{
 					MarkdownDescription: "Motd enable",
 					Optional:            true,
+					Computed:            true,
 				},
 				"motd_title": schema.StringAttribute{
 					MarkdownDescription: "Motd title",
 					Optional:            true,
+					Computed:            true,
 				},
 				"severity": schema.StringAttribute{
 					Validators: []validator.String{
@@ -222,6 +237,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Severity",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
@@ -237,6 +253,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

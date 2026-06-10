@@ -66,6 +66,7 @@ var ForwardingProfileSourceApplicationsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "fowarding profile source application description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -76,6 +77,7 @@ var ForwardingProfileSourceApplicationsResourceSchema = schema.Schema{
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},

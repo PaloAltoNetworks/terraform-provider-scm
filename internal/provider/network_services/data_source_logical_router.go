@@ -34,7 +34,7 @@ type LogicalRouterDataSource struct {
 
 func (d *LogicalRouterDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LogicalRouterDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_logical_router"
+	resp.TypeName = "scm_logical_router"
 }
 
 func (d *LogicalRouterDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *LogicalRouterDataSource) Read(ctx context.Context, req datasource.ReadR
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading LogicalRouters data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *LogicalRouterDataSource) Read(ctx context.Context, req datasource.ReadR
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

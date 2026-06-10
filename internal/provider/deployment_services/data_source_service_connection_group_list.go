@@ -32,7 +32,7 @@ type ServiceConnectionGroupListDataSource struct {
 }
 
 func (d *ServiceConnectionGroupListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_service_connection_group_list"
+	resp.TypeName = "scm_service_connection_group_list"
 }
 
 func (d *ServiceConnectionGroupListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

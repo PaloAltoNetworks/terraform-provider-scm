@@ -34,7 +34,7 @@ type DecryptionRuleDataSource struct {
 
 func (d *DecryptionRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DecryptionRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_decryption_rule"
+	resp.TypeName = "scm_decryption_rule"
 }
 
 func (d *DecryptionRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *DecryptionRuleDataSource) Read(ctx context.Context, req datasource.Read
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading DecryptionRules data source by ID", map[string]interface{}{"id": objectId})
 
@@ -226,6 +228,7 @@ func (d *DecryptionRuleDataSource) Read(ctx context.Context, req datasource.Read
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

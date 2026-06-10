@@ -34,7 +34,7 @@ type SessionSettingDataSource struct {
 
 func (d *SessionSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SessionSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_session_setting"
+	resp.TypeName = "scm_session_setting"
 }
 
 func (d *SessionSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *SessionSettingDataSource) Read(ctx context.Context, req datasource.Read
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading SessionSettings data source by ID", map[string]interface{}{"id": objectId})
 
@@ -161,6 +163,7 @@ func (d *SessionSettingDataSource) Read(ctx context.Context, req datasource.Read
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

@@ -32,7 +32,7 @@ type SyslogServerProfileListDataSource struct {
 }
 
 func (d *SyslogServerProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_syslog_server_profile_list"
+	resp.TypeName = "scm_syslog_server_profile_list"
 }
 
 func (d *SyslogServerProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

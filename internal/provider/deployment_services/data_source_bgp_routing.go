@@ -33,7 +33,7 @@ type BgpRoutingDataSource struct {
 
 func (d *BgpRoutingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: BgpRoutingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_bgp_routing"
+	resp.TypeName = "scm_bgp_routing"
 }
 
 func (d *BgpRoutingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

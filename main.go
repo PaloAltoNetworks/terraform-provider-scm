@@ -10,15 +10,11 @@ import (
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/provider"
 )
 
-// Run "go generate" to format example terraform files and generate the docs for the registry/website
-
-// If you do not have terraform installed, you can remove the formatting command, but its suggested to
-// ensure the documentation is formatted properly.
-//go:generate terraform fmt -recursive ./examples/
-
-// Run the docs generation tool, check its repository for more information on how it works and how docs
-// can be customized.
-//go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate --provider-name scm
+// Run generate-docs.sh to format examples and generate per-prefix documentation.
+// The script runs tfplugindocs once per resource prefix (scm_, ztna_, etc.) so
+// each prefix gets correct, full docs without the tool crashing on cross-prefix
+// resources.  See generate-docs.sh for details.
+//go:generate bash generate-docs.sh
 
 var (
 	// these will be set by the goreleaser configuration

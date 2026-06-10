@@ -34,7 +34,7 @@ type WildfireAntiVirusProfileDataSource struct {
 
 func (d *WildfireAntiVirusProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: WildfireAntiVirusProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_wildfire_anti_virus_profile"
+	resp.TypeName = "scm_wildfire_anti_virus_profile"
 }
 
 func (d *WildfireAntiVirusProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *WildfireAntiVirusProfileDataSource) Read(ctx context.Context, req datas
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading WildfireAntiVirusProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *WildfireAntiVirusProfileDataSource) Read(ctx context.Context, req datas
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

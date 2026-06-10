@@ -80,6 +80,7 @@ var AutoVpnSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "End",
 					Optional:            true,
+					Computed:            true,
 				},
 				"start": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -87,12 +88,14 @@ var AutoVpnSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Start",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},
 		"enable_mesh_between_hubs": schema.BoolAttribute{
 			MarkdownDescription: "Enable mesh connection between hubs?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

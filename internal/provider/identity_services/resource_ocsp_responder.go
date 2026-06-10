@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -40,7 +41,7 @@ type OcspResponderResource struct {
 }
 
 func (r *OcspResponderResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ocsp_responder"
+	resp.TypeName = "scm_ocsp_responder"
 }
 
 func (r *OcspResponderResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -96,7 +97,7 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 	// 4. BLOCK 1: Add the request PARAMETERS to the API call.
 
 	// 5. Execute the API call.
-	createdObject, _, err := createReq.Execute()
+	_, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating ocsp_responders", err.Error())
 		detailedMessage := utils.PrintScmError(err)
@@ -109,7 +110,16 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 
-
+	// API returns no body on create — fetch the object by name to get the assigned ID.
+	createdObject, err := r.client.OCSPRespondersAPI.FetchOCSPResponders(ctx, data.Name.ValueString(), nil, nil, nil)
+	if err != nil {
+		resp.Diagnostics.AddError("Error fetching created ocsp_responders after creation", err.Error())
+		return
+	}
+	if createdObject == nil {
+		resp.Diagnostics.AddError("Error fetching created ocsp_responders", fmt.Sprintf("Could not find ocsp_responders with name %s after creation", data.Name.ValueString()))
+		return
+	}
 	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packOcspRespondersFromSdk(ctx, *createdObject)
 	resp.Diagnostics.Append(diags...)
@@ -129,6 +139,7 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
     //    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
@@ -185,6 +196,7 @@ func (r *OcspResponderResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 
@@ -368,6 +380,7 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
+	// unpackedScmObject.Id = ""
 	unpackedScmObject.Id = ""
 
 	// Step 6: Get id from token and make update call
@@ -387,6 +400,7 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
+	// updatedObject, httpErr, err := updateReq.Execute()
 	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
@@ -424,7 +438,7 @@ func (r *OcspResponderResource) Update(ctx context.Context, req resource.UpdateR
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
@@ -483,15 +497,39 @@ func (r *OcspResponderResource) Delete(ctx context.Context, req resource.DeleteR
 
 	tflog.Debug(ctx, "Deleting ocsp_responders", map[string]interface{}{"id": objectId})
 	deleteReq := r.client.OCSPRespondersAPI.DeleteOCSPRespondersByID(ctx, objectId)
-	_, err := deleteReq.Execute()
+	httpResp, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting ocsp_responders", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
+	}
+
+	// For 202 Accepted responses the delete is asynchronous. Poll the GET endpoint
+	// until the resource is gone (404) or a timeout is reached, so that dependent
+	// resources (e.g. a connector group) are not destroyed before this one is fully
+	// removed on the backend.
+	if httpResp != nil && httpResp.StatusCode == http.StatusAccepted {
+		deadline := time.Now().Add(2 * time.Minute)
+		for time.Now().Before(deadline) {
+			time.Sleep(3 * time.Second)
+			_, getResp, getErr := r.client.OCSPRespondersAPI.GetOCSPRespondersByID(ctx, objectId).Execute()
+			if getErr != nil {
+				// If the SDK returns an error check whether it is a 404 — that means deletion is complete.
+				if getResp != nil && getResp.StatusCode == http.StatusNotFound {
+					break
+				}
+				// Any other error: stop polling and surface it.
+				resp.Diagnostics.AddWarning("Delete poll error", getErr.Error())
+				break
+			}
+			if getResp != nil && getResp.StatusCode == http.StatusNotFound {
+				break
+			}
+		}
 	}
 }
 

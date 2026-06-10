@@ -37,7 +37,7 @@ type AuthenticationPortalDataSource struct {
 
 func (d *AuthenticationPortalDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AuthenticationPortalDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_authentication_portal"
+	resp.TypeName = "scm_authentication_portal"
 }
 
 func (d *AuthenticationPortalDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -85,7 +85,9 @@ func (d *AuthenticationPortalDataSource) Read(ctx context.Context, req datasourc
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading AuthenticationPortals data source by ID", map[string]interface{}{"id": objectId})
 
@@ -220,6 +222,7 @@ func (d *AuthenticationPortalDataSource) Read(ctx context.Context, req datasourc
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

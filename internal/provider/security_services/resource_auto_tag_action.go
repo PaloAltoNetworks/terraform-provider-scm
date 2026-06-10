@@ -19,12 +19,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	"github.com/paloaltonetworks/scm-go/generated/objects"
-	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// SINGLETON RESOURCE for SCM AutoTagAction (Package: objects)
+// SINGLETON RESOURCE for SCM AutoTagAction (Package: security_services)
 var (
 	_ resource.Resource                = &AutoTagActionResource{}
 	_ resource.ResourceWithConfigure   = &AutoTagActionResource{}
@@ -37,11 +37,11 @@ func NewAutoTagActionResource() resource.Resource {
 
 // AutoTagActionResource defines the resource implementation.
 type AutoTagActionResource struct {
-	client *objects.APIClient
+	client *security_services.APIClient
 }
 
 func (r *AutoTagActionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_auto_tag_action"
+	resp.TypeName = "scm_auto_tag_action"
 }
 
 func (r *AutoTagActionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -61,9 +61,9 @@ func (r *AutoTagActionResource) Configure(ctx context.Context, req resource.Conf
 		resp.Diagnostics.AddError("Unexpected Resource Configure Type", fmt.Sprintf("Expected map[string]interface{}, got: %T.", req.ProviderData))
 		return
 	}
-	client, ok := clients["objects"].(*objects.APIClient)
+	client, ok := clients["security_services"].(*security_services.APIClient)
 	if !ok {
-		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *objects.APIClient for 'objects' client."))
+		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *security_services.APIClient for 'security_services' client."))
 		return
 	}
 	r.client = client
@@ -119,7 +119,7 @@ func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Create) ---
-	var createdObject *objects.AutoTagActions
+	var createdObject *security_services.AutoTagActions
 
 	// Use reflection to inspect the return type at runtime.
 	val := reflect.ValueOf(scmObjectInterface)
@@ -138,7 +138,7 @@ func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateR
 
 				// We need to convert this interface{} back to the concrete SDK struct type.
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct objects.AutoTagActions
+				var targetStruct security_services.AutoTagActions
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					createdObject = &targetStruct
 				}
@@ -149,7 +149,7 @@ func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateR
             // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
             // Use the same JSON trick to be safe against pointer mismatches
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct objects.AutoTagActions
+            var targetStruct security_services.AutoTagActions
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 createdObject = &targetStruct
             }
@@ -233,7 +233,7 @@ func (r *AutoTagActionResource) Read(ctx context.Context, req resource.ReadReque
 	}
 
 	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Read) ---
-	var scmObject *objects.AutoTagActions
+	var scmObject *security_services.AutoTagActions
 
 	// Use reflection to inspect the return type at runtime.
 	val := reflect.ValueOf(scmObjectInterface)
@@ -252,7 +252,7 @@ func (r *AutoTagActionResource) Read(ctx context.Context, req resource.ReadReque
 
 				// We need to convert this interface{} back to the concrete SDK struct type.
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct objects.AutoTagActions
+				var targetStruct security_services.AutoTagActions
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					scmObject = &targetStruct
 				}
@@ -266,7 +266,7 @@ func (r *AutoTagActionResource) Read(ctx context.Context, req resource.ReadReque
             // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
             // Use the same JSON trick to be safe against pointer mismatches
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct objects.AutoTagActions
+            var targetStruct security_services.AutoTagActions
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 scmObject = &targetStruct
             }
@@ -385,7 +385,7 @@ func (r *AutoTagActionResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Update) ---
-	var updatedObject *objects.AutoTagActions
+	var updatedObject *security_services.AutoTagActions
 
 	// Use reflection to inspect the return type at runtime.
 	val := reflect.ValueOf(scmObjectInterface)
@@ -404,7 +404,7 @@ func (r *AutoTagActionResource) Update(ctx context.Context, req resource.UpdateR
 
 				// We need to convert this interface{} back to the concrete SDK struct type.
 				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct objects.AutoTagActions
+				var targetStruct security_services.AutoTagActions
 				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
 					updatedObject = &targetStruct
 				}
@@ -415,7 +415,7 @@ func (r *AutoTagActionResource) Update(ctx context.Context, req resource.UpdateR
             // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
             // Use the same JSON trick to be safe against pointer mismatches
             jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct objects.AutoTagActions
+            var targetStruct security_services.AutoTagActions
             if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
                 updatedObject = &targetStruct
             }

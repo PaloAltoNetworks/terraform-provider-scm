@@ -32,7 +32,7 @@ type BgpRouteMapListDataSource struct {
 }
 
 func (d *BgpRouteMapListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_bgp_route_map_list"
+	resp.TypeName = "scm_bgp_route_map_list"
 }
 
 func (d *BgpRouteMapListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

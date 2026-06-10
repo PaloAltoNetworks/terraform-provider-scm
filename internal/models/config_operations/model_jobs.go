@@ -116,10 +116,12 @@ var JobsResponseResourceSchema = schema.Schema{
 					"description": schema.StringAttribute{
 						MarkdownDescription: "A description provided by the administrator or service account",
 						Optional:            true,
+						Computed:            true,
 					},
 					"details": schema.StringAttribute{
 						MarkdownDescription: "JSON string with detailed errors or info",
 						Optional:            true,
+						Computed:            true,
 					},
 					"device_name": schema.StringAttribute{
 						MarkdownDescription: "The name of the device",

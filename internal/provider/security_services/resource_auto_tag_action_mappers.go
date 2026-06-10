@@ -14,8 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/objects"
-	"github.com/paloaltonetworks/scm-go/generated/objects"
+	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
 )
 
 
@@ -28,7 +28,7 @@ import (
 
 
 // --- Unpacker for AutoTagActions ---
-func unpackAutoTagActionsToSdk(ctx context.Context, obj types.Object) (*objects.AutoTagActions, diag.Diagnostics) {
+func unpackAutoTagActionsToSdk(ctx context.Context, obj types.Object) (*security_services.AutoTagActions, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering unpack helper for models.AutoTagActions", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
     var model models.AutoTagActions
@@ -39,7 +39,7 @@ func unpackAutoTagActionsToSdk(ctx context.Context, obj types.Object) (*objects.
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk objects.AutoTagActions
+    var sdk security_services.AutoTagActions
     var d diag.Diagnostics
 
     // Handling Lists
@@ -112,7 +112,7 @@ diags.Append(d...)
 }
 
 // --- Packer for AutoTagActions ---
-func packAutoTagActionsFromSdk(ctx context.Context, sdk objects.AutoTagActions) (types.Object, diag.Diagnostics) {
+func packAutoTagActionsFromSdk(ctx context.Context, sdk security_services.AutoTagActions) (types.Object, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering pack helper for models.AutoTagActions", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
     var model models.AutoTagActions
@@ -197,7 +197,7 @@ diags.Append(d...)
 }
 
 // --- List Unpacker for AutoTagActions ---
-func unpackAutoTagActionsListToSdk(ctx context.Context, list types.List) ([]objects.AutoTagActions, diag.Diagnostics) {
+func unpackAutoTagActionsListToSdk(ctx context.Context, list types.List) ([]security_services.AutoTagActions, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list unpack helper for models.AutoTagActions")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActions
@@ -207,7 +207,7 @@ func unpackAutoTagActionsListToSdk(ctx context.Context, list types.List) ([]obje
 		return nil, diags
 	}
 
-	ans := make([]objects.AutoTagActions, 0, len(data))
+	ans := make([]security_services.AutoTagActions, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
 		obj, _ := types.ObjectValueFrom(ctx, models.AutoTagActions{}.AttrTypes(), &item)
@@ -222,7 +222,7 @@ func unpackAutoTagActionsListToSdk(ctx context.Context, list types.List) ([]obje
 }
 
 // --- List Packer for AutoTagActions ---
-func packAutoTagActionsListFromSdk(ctx context.Context, sdks []objects.AutoTagActions) (types.List, diag.Diagnostics) {
+func packAutoTagActionsListFromSdk(ctx context.Context, sdks []security_services.AutoTagActions) (types.List, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list pack helper for models.AutoTagActions")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActions
@@ -243,7 +243,7 @@ func packAutoTagActionsListFromSdk(ctx context.Context, sdks []objects.AutoTagAc
 }
 
 // --- Unpacker for AutoTagActionsActionsInner ---
-func unpackAutoTagActionsActionsInnerToSdk(ctx context.Context, obj types.Object) (*objects.AutoTagActionsActionsInner, diag.Diagnostics) {
+func unpackAutoTagActionsActionsInnerToSdk(ctx context.Context, obj types.Object) (*security_services.AutoTagActionsActionsInner, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering unpack helper for models.AutoTagActionsActionsInner", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
     var model models.AutoTagActionsActionsInner
@@ -254,7 +254,7 @@ func unpackAutoTagActionsActionsInnerToSdk(ctx context.Context, obj types.Object
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk objects.AutoTagActionsActionsInner
+    var sdk security_services.AutoTagActionsActionsInner
     var d diag.Diagnostics
     // Handling Primitives
     if !model.Name.IsNull() && !model.Name.IsUnknown() {
@@ -283,7 +283,7 @@ diags.Append(d...)
 }
 
 // --- Packer for AutoTagActionsActionsInner ---
-func packAutoTagActionsActionsInnerFromSdk(ctx context.Context, sdk objects.AutoTagActionsActionsInner) (types.Object, diag.Diagnostics) {
+func packAutoTagActionsActionsInnerFromSdk(ctx context.Context, sdk security_services.AutoTagActionsActionsInner) (types.Object, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering pack helper for models.AutoTagActionsActionsInner", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
     var model models.AutoTagActionsActionsInner
@@ -314,7 +314,7 @@ diags.Append(d...)
 }
 
 // --- List Unpacker for AutoTagActionsActionsInner ---
-func unpackAutoTagActionsActionsInnerListToSdk(ctx context.Context, list types.List) ([]objects.AutoTagActionsActionsInner, diag.Diagnostics) {
+func unpackAutoTagActionsActionsInnerListToSdk(ctx context.Context, list types.List) ([]security_services.AutoTagActionsActionsInner, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list unpack helper for models.AutoTagActionsActionsInner")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActionsActionsInner
@@ -324,7 +324,7 @@ func unpackAutoTagActionsActionsInnerListToSdk(ctx context.Context, list types.L
 		return nil, diags
 	}
 
-	ans := make([]objects.AutoTagActionsActionsInner, 0, len(data))
+	ans := make([]security_services.AutoTagActionsActionsInner, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
 		obj, _ := types.ObjectValueFrom(ctx, models.AutoTagActionsActionsInner{}.AttrTypes(), &item)
@@ -339,7 +339,7 @@ func unpackAutoTagActionsActionsInnerListToSdk(ctx context.Context, list types.L
 }
 
 // --- List Packer for AutoTagActionsActionsInner ---
-func packAutoTagActionsActionsInnerListFromSdk(ctx context.Context, sdks []objects.AutoTagActionsActionsInner) (types.List, diag.Diagnostics) {
+func packAutoTagActionsActionsInnerListFromSdk(ctx context.Context, sdks []security_services.AutoTagActionsActionsInner) (types.List, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list pack helper for models.AutoTagActionsActionsInner")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActionsActionsInner
@@ -360,7 +360,7 @@ func packAutoTagActionsActionsInnerListFromSdk(ctx context.Context, sdks []objec
 }
 
 // --- Unpacker for AutoTagActionsActionsInnerType ---
-func unpackAutoTagActionsActionsInnerTypeToSdk(ctx context.Context, obj types.Object) (*objects.AutoTagActionsActionsInnerType, diag.Diagnostics) {
+func unpackAutoTagActionsActionsInnerTypeToSdk(ctx context.Context, obj types.Object) (*security_services.AutoTagActionsActionsInnerType, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering unpack helper for models.AutoTagActionsActionsInnerType", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
     var model models.AutoTagActionsActionsInnerType
@@ -371,7 +371,7 @@ func unpackAutoTagActionsActionsInnerTypeToSdk(ctx context.Context, obj types.Ob
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk objects.AutoTagActionsActionsInnerType
+    var sdk security_services.AutoTagActionsActionsInnerType
     var d diag.Diagnostics
     // Handling Objects
     if !model.Tagging.IsNull() && !model.Tagging.IsUnknown() {
@@ -394,7 +394,7 @@ diags.Append(d...)
 }
 
 // --- Packer for AutoTagActionsActionsInnerType ---
-func packAutoTagActionsActionsInnerTypeFromSdk(ctx context.Context, sdk objects.AutoTagActionsActionsInnerType) (types.Object, diag.Diagnostics) {
+func packAutoTagActionsActionsInnerTypeFromSdk(ctx context.Context, sdk security_services.AutoTagActionsActionsInnerType) (types.Object, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering pack helper for models.AutoTagActionsActionsInnerType", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
     var model models.AutoTagActionsActionsInnerType
@@ -421,7 +421,7 @@ diags.Append(d...)
 }
 
 // --- List Unpacker for AutoTagActionsActionsInnerType ---
-func unpackAutoTagActionsActionsInnerTypeListToSdk(ctx context.Context, list types.List) ([]objects.AutoTagActionsActionsInnerType, diag.Diagnostics) {
+func unpackAutoTagActionsActionsInnerTypeListToSdk(ctx context.Context, list types.List) ([]security_services.AutoTagActionsActionsInnerType, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list unpack helper for models.AutoTagActionsActionsInnerType")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActionsActionsInnerType
@@ -431,7 +431,7 @@ func unpackAutoTagActionsActionsInnerTypeListToSdk(ctx context.Context, list typ
 		return nil, diags
 	}
 
-	ans := make([]objects.AutoTagActionsActionsInnerType, 0, len(data))
+	ans := make([]security_services.AutoTagActionsActionsInnerType, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
 		obj, _ := types.ObjectValueFrom(ctx, models.AutoTagActionsActionsInnerType{}.AttrTypes(), &item)
@@ -446,7 +446,7 @@ func unpackAutoTagActionsActionsInnerTypeListToSdk(ctx context.Context, list typ
 }
 
 // --- List Packer for AutoTagActionsActionsInnerType ---
-func packAutoTagActionsActionsInnerTypeListFromSdk(ctx context.Context, sdks []objects.AutoTagActionsActionsInnerType) (types.List, diag.Diagnostics) {
+func packAutoTagActionsActionsInnerTypeListFromSdk(ctx context.Context, sdks []security_services.AutoTagActionsActionsInnerType) (types.List, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list pack helper for models.AutoTagActionsActionsInnerType")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActionsActionsInnerType
@@ -467,7 +467,7 @@ func packAutoTagActionsActionsInnerTypeListFromSdk(ctx context.Context, sdks []o
 }
 
 // --- Unpacker for AutoTagActionsActionsInnerTypeTagging ---
-func unpackAutoTagActionsActionsInnerTypeTaggingToSdk(ctx context.Context, obj types.Object) (*objects.AutoTagActionsActionsInnerTypeTagging, diag.Diagnostics) {
+func unpackAutoTagActionsActionsInnerTypeTaggingToSdk(ctx context.Context, obj types.Object) (*security_services.AutoTagActionsActionsInnerTypeTagging, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering unpack helper for models.AutoTagActionsActionsInnerTypeTagging", map[string]interface{}{"tf_object": obj})
     diags := diag.Diagnostics{}
     var model models.AutoTagActionsActionsInnerTypeTagging
@@ -478,7 +478,7 @@ func unpackAutoTagActionsActionsInnerTypeTaggingToSdk(ctx context.Context, obj t
     }
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-    var sdk objects.AutoTagActionsActionsInnerTypeTagging
+    var sdk security_services.AutoTagActionsActionsInnerTypeTagging
     var d diag.Diagnostics
     // Handling Primitives
     if !model.Action.IsNull() && !model.Action.IsUnknown() {
@@ -513,7 +513,7 @@ diags.Append(d...)
 }
 
 // --- Packer for AutoTagActionsActionsInnerTypeTagging ---
-func packAutoTagActionsActionsInnerTypeTaggingFromSdk(ctx context.Context, sdk objects.AutoTagActionsActionsInnerTypeTagging) (types.Object, diag.Diagnostics) {
+func packAutoTagActionsActionsInnerTypeTaggingFromSdk(ctx context.Context, sdk security_services.AutoTagActionsActionsInnerTypeTagging) (types.Object, diag.Diagnostics) {
     tflog.Debug(ctx, "Entering pack helper for models.AutoTagActionsActionsInnerTypeTagging", map[string]interface{}{"sdk_struct": sdk})
     diags := diag.Diagnostics{}
     var model models.AutoTagActionsActionsInnerTypeTagging
@@ -558,7 +558,7 @@ diags.Append(d...)
 }
 
 // --- List Unpacker for AutoTagActionsActionsInnerTypeTagging ---
-func unpackAutoTagActionsActionsInnerTypeTaggingListToSdk(ctx context.Context, list types.List) ([]objects.AutoTagActionsActionsInnerTypeTagging, diag.Diagnostics) {
+func unpackAutoTagActionsActionsInnerTypeTaggingListToSdk(ctx context.Context, list types.List) ([]security_services.AutoTagActionsActionsInnerTypeTagging, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list unpack helper for models.AutoTagActionsActionsInnerTypeTagging")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActionsActionsInnerTypeTagging
@@ -568,7 +568,7 @@ func unpackAutoTagActionsActionsInnerTypeTaggingListToSdk(ctx context.Context, l
 		return nil, diags
 	}
 
-	ans := make([]objects.AutoTagActionsActionsInnerTypeTagging, 0, len(data))
+	ans := make([]security_services.AutoTagActionsActionsInnerTypeTagging, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
 		obj, _ := types.ObjectValueFrom(ctx, models.AutoTagActionsActionsInnerTypeTagging{}.AttrTypes(), &item)
@@ -583,7 +583,7 @@ func unpackAutoTagActionsActionsInnerTypeTaggingListToSdk(ctx context.Context, l
 }
 
 // --- List Packer for AutoTagActionsActionsInnerTypeTagging ---
-func packAutoTagActionsActionsInnerTypeTaggingListFromSdk(ctx context.Context, sdks []objects.AutoTagActionsActionsInnerTypeTagging) (types.List, diag.Diagnostics) {
+func packAutoTagActionsActionsInnerTypeTaggingListFromSdk(ctx context.Context, sdks []security_services.AutoTagActionsActionsInnerTypeTagging) (types.List, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering list pack helper for models.AutoTagActionsActionsInnerTypeTagging")
 	diags := diag.Diagnostics{}
 	var data []models.AutoTagActionsActionsInnerTypeTagging

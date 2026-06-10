@@ -137,18 +137,22 @@ var CertificateProfilesResourceSchema = schema.Schema{
 		"block_expired_cert": schema.BoolAttribute{
 			MarkdownDescription: "Block sessions with expired certificates?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"block_timeout_cert": schema.BoolAttribute{
 			MarkdownDescription: "Block session if certificate status cannot be retrieved within timeout?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"block_unauthenticated_cert": schema.BoolAttribute{
 			MarkdownDescription: "Block session if the certificate was not issued to the authenticating device?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"block_unknown_cert": schema.BoolAttribute{
 			MarkdownDescription: "Block session if certificate status is unknown?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"ca_certificates": schema.ListNestedAttribute{
 			MarkdownDescription: "An ordered list of CA certificates",
@@ -158,6 +162,7 @@ var CertificateProfilesResourceSchema = schema.Schema{
 					"default_ocsp_url": schema.StringAttribute{
 						MarkdownDescription: "Default OCSP URL",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "CA certificate name",
@@ -166,10 +171,12 @@ var CertificateProfilesResourceSchema = schema.Schema{
 					"ocsp_verify_cert": schema.StringAttribute{
 						MarkdownDescription: "OCSP verify certificate",
 						Optional:            true,
+						Computed:            true,
 					},
 					"template_name": schema.StringAttribute{
 						MarkdownDescription: "Template name/OID",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -177,10 +184,12 @@ var CertificateProfilesResourceSchema = schema.Schema{
 		"cert_status_timeout": schema.StringAttribute{
 			MarkdownDescription: "Certificate status timeout",
 			Optional:            true,
+			Computed:            true,
 		},
 		"crl_receive_timeout": schema.StringAttribute{
 			MarkdownDescription: "CRL receive timeout (seconds)",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -194,12 +203,14 @@ var CertificateProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"domain": schema.StringAttribute{
 			MarkdownDescription: "User domain",
 			Optional:            true,
+			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -214,6 +225,7 @@ var CertificateProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -234,6 +246,7 @@ var CertificateProfilesResourceSchema = schema.Schema{
 		"ocsp_receive_timeout": schema.StringAttribute{
 			MarkdownDescription: "OCSP receive timeout (seconds)",
 			Optional:            true,
+			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -247,6 +260,7 @@ var CertificateProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -260,14 +274,17 @@ var CertificateProfilesResourceSchema = schema.Schema{
 		"use_crl": schema.BoolAttribute{
 			MarkdownDescription: "Use CRL?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"use_ocsp": schema.BoolAttribute{
 			MarkdownDescription: "Use OCSP?",
 			Optional:            true,
+			Computed:            true,
 		},
 		"username_field": schema.SingleNestedAttribute{
 			MarkdownDescription: "Certificate username field",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"subject": schema.StringAttribute{
 					Validators: []validator.String{
@@ -275,6 +292,7 @@ var CertificateProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Common name",
 					Optional:            true,
+					Computed:            true,
 				},
 				"subject_alt": schema.StringAttribute{
 					Validators: []validator.String{
@@ -282,6 +300,7 @@ var CertificateProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Email address",
 					Optional:            true,
+					Computed:            true,
 				},
 			},
 		},

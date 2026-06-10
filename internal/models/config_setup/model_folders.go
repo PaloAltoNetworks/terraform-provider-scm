@@ -51,6 +51,7 @@ var FoldersResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the folder",
 			Optional:            true,
+			Computed:            true,
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the folder",

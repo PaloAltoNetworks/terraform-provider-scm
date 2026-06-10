@@ -34,7 +34,7 @@ type VlanInterfaceDataSource struct {
 
 func (d *VlanInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: VlanInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_vlan_interface"
+	resp.TypeName = "scm_vlan_interface"
 }
 
 func (d *VlanInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *VlanInterfaceDataSource) Read(ctx context.Context, req datasource.ReadR
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading VlanInterfaces data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *VlanInterfaceDataSource) Read(ctx context.Context, req datasource.ReadR
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

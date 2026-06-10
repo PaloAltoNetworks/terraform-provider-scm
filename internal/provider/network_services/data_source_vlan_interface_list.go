@@ -32,7 +32,7 @@ type VlanInterfaceListDataSource struct {
 }
 
 func (d *VlanInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_vlan_interface_list"
+	resp.TypeName = "scm_vlan_interface_list"
 }
 
 func (d *VlanInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

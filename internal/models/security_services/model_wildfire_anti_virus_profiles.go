@@ -155,6 +155,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -168,6 +169,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -184,6 +186,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -202,14 +205,17 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 					"description": schema.StringAttribute{
 						MarkdownDescription: "Description",
 						Optional:            true,
+						Computed:            true,
 					},
 					"filename": schema.StringAttribute{
 						MarkdownDescription: "Filename",
 						Optional:            true,
+						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -224,6 +230,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 		"packet_capture": schema.BoolAttribute{
 			MarkdownDescription: "Packet capture",
 			Optional:            true,
+			Computed:            true,
 		},
 		"rules": schema.ListNestedAttribute{
 			MarkdownDescription: "Rules",
@@ -236,6 +243,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Analysis",
 						Optional:            true,
+						Computed:            true,
 					},
 					"application": schema.ListAttribute{
 						ElementType:         types.StringType,
@@ -248,6 +256,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Direction",
 						Optional:            true,
+						Computed:            true,
 					},
 					"file_type": schema.ListAttribute{
 						ElementType:         types.StringType,
@@ -257,6 +266,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},
@@ -273,6 +283,7 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -291,10 +302,12 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
+						Computed:            true,
 					},
 					"notes": schema.StringAttribute{
 						MarkdownDescription: "Notes",
 						Optional:            true,
+						Computed:            true,
 					},
 				},
 			},

@@ -34,7 +34,7 @@ type ServiceSettingDataSource struct {
 
 func (d *ServiceSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ServiceSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_service_setting"
+	resp.TypeName = "scm_service_setting"
 }
 
 func (d *ServiceSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *ServiceSettingDataSource) Read(ctx context.Context, req datasource.Read
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading ServiceSettings data source by ID", map[string]interface{}{"id": objectId})
 
@@ -161,6 +163,7 @@ func (d *ServiceSettingDataSource) Read(ctx context.Context, req datasource.Read
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

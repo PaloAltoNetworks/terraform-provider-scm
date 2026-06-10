@@ -32,7 +32,7 @@ type OspfAuthProfileListDataSource struct {
 }
 
 func (d *OspfAuthProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ospf_auth_profile_list"
+	resp.TypeName = "scm_ospf_auth_profile_list"
 }
 
 func (d *OspfAuthProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

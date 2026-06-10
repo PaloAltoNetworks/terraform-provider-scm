@@ -32,7 +32,7 @@ type GlobalprotectMatchListListDataSource struct {
 }
 
 func (d *GlobalprotectMatchListListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_globalprotect_match_list_list"
+	resp.TypeName = "scm_globalprotect_match_list_list"
 }
 
 func (d *GlobalprotectMatchListListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type BgpRedistributionProfileDataSource struct {
 
 func (d *BgpRedistributionProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: BgpRedistributionProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_bgp_redistribution_profile"
+	resp.TypeName = "scm_bgp_redistribution_profile"
 }
 
 func (d *BgpRedistributionProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *BgpRedistributionProfileDataSource) Read(ctx context.Context, req datas
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading BgpRedistributionProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *BgpRedistributionProfileDataSource) Read(ctx context.Context, req datas
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

@@ -35,7 +35,7 @@ type BgpRoutingResource struct {
 }
 
 func (r *BgpRoutingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_bgp_routing"
+	resp.TypeName = "scm_bgp_routing"
 }
 
 func (r *BgpRoutingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

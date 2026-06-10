@@ -34,7 +34,7 @@ type AddressGroupDataSource struct {
 
 func (d *AddressGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AddressGroupDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_address_group"
+	resp.TypeName = "scm_address_group"
 }
 
 func (d *AddressGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *AddressGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading AddressGroups data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *AddressGroupDataSource) Read(ctx context.Context, req datasource.ReadRe
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

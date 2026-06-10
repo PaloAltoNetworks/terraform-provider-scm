@@ -515,6 +515,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Description",
 			Optional:            true,
+			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -528,16 +529,19 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"flood": schema.SingleNestedAttribute{
 			MarkdownDescription: "Flood",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"icmp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Icmp",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -548,18 +552,22 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									MarkdownDescription: "Activate rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"alarm_rate": schema.Int64Attribute{
 									MarkdownDescription: "Alarm rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"block": schema.SingleNestedAttribute{
 									MarkdownDescription: "Block",
 									Optional:            true,
+									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -575,6 +583,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 								"maximal_rate": schema.Int64Attribute{
 									MarkdownDescription: "Maximal rate",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -583,6 +592,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 				"icmpv6": schema.SingleNestedAttribute{
 					MarkdownDescription: "Icmpv6",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -593,18 +603,22 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									MarkdownDescription: "Activate rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"alarm_rate": schema.Int64Attribute{
 									MarkdownDescription: "Alarm rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"block": schema.SingleNestedAttribute{
 									MarkdownDescription: "Block",
 									Optional:            true,
+									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -620,6 +634,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 								"maximal_rate": schema.Int64Attribute{
 									MarkdownDescription: "Maximal rate",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -628,6 +643,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 				"other_ip": schema.SingleNestedAttribute{
 					MarkdownDescription: "Other ip",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -638,18 +654,22 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									MarkdownDescription: "Activate rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"alarm_rate": schema.Int64Attribute{
 									MarkdownDescription: "Alarm rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"block": schema.SingleNestedAttribute{
 									MarkdownDescription: "Block",
 									Optional:            true,
+									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -665,6 +685,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 								"maximal_rate": schema.Int64Attribute{
 									MarkdownDescription: "Maximal rate",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -673,26 +694,32 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 				"tcp_syn": schema.SingleNestedAttribute{
 					MarkdownDescription: "Tcp syn",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
 							Optional:            true,
+							Computed:            true,
 						},
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									MarkdownDescription: "Activate rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"alarm_rate": schema.Int64Attribute{
 									MarkdownDescription: "Alarm rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"block": schema.SingleNestedAttribute{
 									MarkdownDescription: "Block",
 									Optional:            true,
+									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -708,34 +735,41 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 								"maximal_rate": schema.Int64Attribute{
 									MarkdownDescription: "Maximal rate",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
 						"syn_cookies": schema.SingleNestedAttribute{
 							MarkdownDescription: "Syn cookies",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									MarkdownDescription: "Activate rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"alarm_rate": schema.Int64Attribute{
 									MarkdownDescription: "Alarm rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"block": schema.SingleNestedAttribute{
 									MarkdownDescription: "Block",
 									Optional:            true,
+									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											MarkdownDescription: "Duration",
 											Optional:            true,
+											Computed:            true,
 										},
 									},
 								},
 								"maximal_rate": schema.Int64Attribute{
 									MarkdownDescription: "Maximal rate",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -744,6 +778,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 				"udp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Udp",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
@@ -754,18 +789,22 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 						"red": schema.SingleNestedAttribute{
 							MarkdownDescription: "Red",
 							Optional:            true,
+							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"activate_rate": schema.Int64Attribute{
 									MarkdownDescription: "Activate rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"alarm_rate": schema.Int64Attribute{
 									MarkdownDescription: "Alarm rate",
 									Optional:            true,
+									Computed:            true,
 								},
 								"block": schema.SingleNestedAttribute{
 									MarkdownDescription: "Block",
 									Optional:            true,
+									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -781,6 +820,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 								"maximal_rate": schema.Int64Attribute{
 									MarkdownDescription: "Maximal rate",
 									Optional:            true,
+									Computed:            true,
 								},
 							},
 						},
@@ -801,6 +841,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -821,10 +862,12 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 		"resource": schema.SingleNestedAttribute{
 			MarkdownDescription: "Resource",
 			Optional:            true,
+			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"sessions": schema.SingleNestedAttribute{
 					MarkdownDescription: "Sessions",
 					Optional:            true,
+					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enabled": schema.BoolAttribute{
 							MarkdownDescription: "Enabled",
@@ -835,6 +878,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 						"max_concurrent_limit": schema.Int64Attribute{
 							MarkdownDescription: "Max concurrent limit",
 							Optional:            true,
+							Computed:            true,
 						},
 					},
 				},
@@ -852,6 +896,7 @@ var DosProtectionProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

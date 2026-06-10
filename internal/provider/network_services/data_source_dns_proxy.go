@@ -34,7 +34,7 @@ type DnsProxyDataSource struct {
 
 func (d *DnsProxyDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DnsProxyDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dns_proxy"
+	resp.TypeName = "scm_dns_proxy"
 }
 
 func (d *DnsProxyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -82,7 +82,9 @@ func (d *DnsProxyDataSource) Read(ctx context.Context, req datasource.ReadReques
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
+	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
+		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading DnsProxies data source by ID", map[string]interface{}{"id": objectId})
 
@@ -222,6 +224,7 @@ func (d *DnsProxyDataSource) Read(ctx context.Context, req datasource.ReadReques
 	}
 
 	idBuilder.WriteString(":")
+	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

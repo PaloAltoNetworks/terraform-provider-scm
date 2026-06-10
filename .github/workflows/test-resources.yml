@@ -29,7 +29,8 @@ jobs:
       - name: Pull latest scm-go SDK
         run: |
           sed -i '/replace.*scm-go/d' go.mod
-          go get github.com/paloaltonetworks/scm-go@${{ github.ref_name }} || go get github.com/paloaltonetworks/scm-go@develop
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          go get github.com/paloaltonetworks/scm-go@${BRANCH} || go get github.com/paloaltonetworks/scm-go@develop
           go mod tidy
 
       - name: Build provider

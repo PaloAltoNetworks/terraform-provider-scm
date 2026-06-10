@@ -185,11 +185,15 @@ test_resource() {
       echo "  FAIL: ${resource_name} (object already exists)"
       FAILED_ALREADY_EXISTS+=("${resource_name}")
     else
-      local failed_step err_msg
+      local failed_step err_msg err_detail
       failed_step=$(grep -E 'run ".*"\.\.\. fail' "$test_output" 2>/dev/null | head -1 | sed -E 's/.*run "([^"]+)".*/\1/' || echo "unknown")
       err_msg=$(grep -m1 "^Error:" "$test_output" 2>/dev/null | head -1 || echo "Unknown error")
+      err_detail=$(awk '/^Error:/{found=1} found{print; if(/^[[:space:]]*$/ && found>1) exit; found++}' "$test_output" 2>/dev/null | head -20 || echo "")
       echo "  FAIL: ${resource_name} (${failed_step})"
       echo "        ${err_msg}"
+      if [ -n "$err_detail" ]; then
+        echo "$err_detail" | sed 's/^/        /'
+      fi
       FAILED+=("${resource_name}")
       FAILED_ERRORS+=("${failed_step}: ${err_msg}")
     fi

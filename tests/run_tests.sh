@@ -182,13 +182,18 @@ test_resource() {
     parse_phases "$resource_name" "$test_output"
   else
     if grep -qi "already exists\|OBJECT_ALREADY_EXISTS" "$test_output" 2>/dev/null; then
+      local exists_detail
+      exists_detail=$(grep -i -A 10 "already exists\|OBJECT_ALREADY_EXISTS" "$test_output" 2>/dev/null | grep -v "^--$" | head -10 || echo "")
       echo "  FAIL: ${resource_name} (object already exists)"
+      if [ -n "$exists_detail" ]; then
+        echo "$exists_detail" | sed 's/^/        /'
+      fi
       FAILED_ALREADY_EXISTS+=("${resource_name}")
     else
       local failed_step err_msg err_detail
       failed_step=$(grep -E 'run ".*"\.\.\. fail' "$test_output" 2>/dev/null | head -1 | sed -E 's/.*run "([^"]+)".*/\1/' || echo "unknown")
       err_msg=$(grep -m1 "^Error:" "$test_output" 2>/dev/null | head -1 || echo "Unknown error")
-      err_detail=$(awk '/^Error:/{found=1} found{print; if(/^[[:space:]]*$/ && found>1) exit; found++}' "$test_output" 2>/dev/null | head -20 || echo "")
+      err_detail=$(grep -A 15 "^Error:" "$test_output" 2>/dev/null | grep -v "^Error:" | grep -v "^--$" | head -15 || echo "")
       echo "  FAIL: ${resource_name} (${failed_step})"
       echo "        ${err_msg}"
       if [ -n "$err_detail" ]; then

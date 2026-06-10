@@ -148,6 +148,7 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		AuthUrl:          config.AuthUrl.ValueString(),
 		Protocol:         config.Protocol.ValueString(),
 		Host:             config.Host.ValueString(),
+		ZtnaHost:         config.Host.ValueString(),
 		Port:             int(config.Port.ValueInt64()),
 		Headers:          headers,
 		ClientId:         config.ClientId.ValueString(),

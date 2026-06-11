@@ -590,14 +590,16 @@ func unpackDosProtectionProfilesFloodIcmpRedToSdk(ctx context.Context, obj types
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.ActivateRate.IsNull() && !model.ActivateRate.IsUnknown() {
-		sdk.ActivateRate = int32(model.ActivateRate.ValueInt64())
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
+		val := int32(model.ActivateRate.ValueInt64())
+		sdk.ActivateRate = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ActivateRate", "value": *sdk.ActivateRate})
 	}
 
 	// Handling Primitives
 	if !model.AlarmRate.IsNull() && !model.AlarmRate.IsUnknown() {
-		sdk.AlarmRate = int32(model.AlarmRate.ValueInt64())
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
+		val := int32(model.AlarmRate.ValueInt64())
+		sdk.AlarmRate = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AlarmRate", "value": *sdk.AlarmRate})
 	}
 
 	// Handling Objects
@@ -615,8 +617,9 @@ func unpackDosProtectionProfilesFloodIcmpRedToSdk(ctx context.Context, obj types
 
 	// Handling Primitives
 	if !model.MaximalRate.IsNull() && !model.MaximalRate.IsUnknown() {
-		sdk.MaximalRate = int32(model.MaximalRate.ValueInt64())
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
+		val := int32(model.MaximalRate.ValueInt64())
+		sdk.MaximalRate = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaximalRate", "value": *sdk.MaximalRate})
 	}
 
 	diags.Append(d...)
@@ -634,10 +637,20 @@ func packDosProtectionProfilesFloodIcmpRedFromSdk(ctx context.Context, sdk secur
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.ActivateRate = basetypes.NewInt64Value(int64(sdk.ActivateRate))
+	if sdk.ActivateRate != nil {
+		model.ActivateRate = basetypes.NewInt64Value(int64(*sdk.ActivateRate))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "ActivateRate", "value": *sdk.ActivateRate})
+	} else {
+		model.ActivateRate = basetypes.NewInt64Null()
+	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.AlarmRate = basetypes.NewInt64Value(int64(sdk.AlarmRate))
+	if sdk.AlarmRate != nil {
+		model.AlarmRate = basetypes.NewInt64Value(int64(*sdk.AlarmRate))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AlarmRate", "value": *sdk.AlarmRate})
+	} else {
+		model.AlarmRate = basetypes.NewInt64Null()
+	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.Block != nil {
@@ -653,7 +666,12 @@ func packDosProtectionProfilesFloodIcmpRedFromSdk(ctx context.Context, sdk secur
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.MaximalRate = basetypes.NewInt64Value(int64(sdk.MaximalRate))
+	if sdk.MaximalRate != nil {
+		model.MaximalRate = basetypes.NewInt64Value(int64(*sdk.MaximalRate))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaximalRate", "value": *sdk.MaximalRate})
+	} else {
+		model.MaximalRate = basetypes.NewInt64Null()
+	}
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.DosProtectionProfilesFloodIcmpRed{}.AttrTypes(), &model)
@@ -969,14 +987,16 @@ func unpackDosProtectionProfilesFloodTcpSynSynCookiesToSdk(ctx context.Context, 
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.ActivateRate.IsNull() && !model.ActivateRate.IsUnknown() {
-		sdk.ActivateRate = int32(model.ActivateRate.ValueInt64())
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "ActivateRate", "value": sdk.ActivateRate})
+		val := int32(model.ActivateRate.ValueInt64())
+		sdk.ActivateRate = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ActivateRate", "value": *sdk.ActivateRate})
 	}
 
 	// Handling Primitives
 	if !model.AlarmRate.IsNull() && !model.AlarmRate.IsUnknown() {
-		sdk.AlarmRate = int32(model.AlarmRate.ValueInt64())
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "AlarmRate", "value": sdk.AlarmRate})
+		val := int32(model.AlarmRate.ValueInt64())
+		sdk.AlarmRate = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "AlarmRate", "value": *sdk.AlarmRate})
 	}
 
 	// Handling Objects
@@ -994,8 +1014,9 @@ func unpackDosProtectionProfilesFloodTcpSynSynCookiesToSdk(ctx context.Context, 
 
 	// Handling Primitives
 	if !model.MaximalRate.IsNull() && !model.MaximalRate.IsUnknown() {
-		sdk.MaximalRate = int32(model.MaximalRate.ValueInt64())
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "MaximalRate", "value": sdk.MaximalRate})
+		val := int32(model.MaximalRate.ValueInt64())
+		sdk.MaximalRate = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "MaximalRate", "value": *sdk.MaximalRate})
 	}
 
 	diags.Append(d...)
@@ -1013,10 +1034,20 @@ func packDosProtectionProfilesFloodTcpSynSynCookiesFromSdk(ctx context.Context, 
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
-	model.ActivateRate = basetypes.NewInt64Value(int64(sdk.ActivateRate))
+	if sdk.ActivateRate != nil {
+		model.ActivateRate = basetypes.NewInt64Value(int64(*sdk.ActivateRate))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "ActivateRate", "value": *sdk.ActivateRate})
+	} else {
+		model.ActivateRate = basetypes.NewInt64Null()
+	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.AlarmRate = basetypes.NewInt64Value(int64(sdk.AlarmRate))
+	if sdk.AlarmRate != nil {
+		model.AlarmRate = basetypes.NewInt64Value(int64(*sdk.AlarmRate))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "AlarmRate", "value": *sdk.AlarmRate})
+	} else {
+		model.AlarmRate = basetypes.NewInt64Null()
+	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
 	if sdk.Block != nil {
@@ -1032,7 +1063,12 @@ func packDosProtectionProfilesFloodTcpSynSynCookiesFromSdk(ctx context.Context, 
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.MaximalRate = basetypes.NewInt64Value(int64(sdk.MaximalRate))
+	if sdk.MaximalRate != nil {
+		model.MaximalRate = basetypes.NewInt64Value(int64(*sdk.MaximalRate))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "MaximalRate", "value": *sdk.MaximalRate})
+	} else {
+		model.MaximalRate = basetypes.NewInt64Null()
+	}
 	diags.Append(d...)
 
 	obj, d := types.ObjectValueFrom(ctx, models.DosProtectionProfilesFloodTcpSynSynCookies{}.AttrTypes(), &model)

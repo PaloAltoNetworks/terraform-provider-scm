@@ -50,10 +50,16 @@ type AggregateInterfacesLayer2 struct {
 type Lacp struct {
 	Enable           basetypes.BoolValue   `tfsdk:"enable"`
 	FastFailover     basetypes.BoolValue   `tfsdk:"fast_failover"`
+	HighAvailability basetypes.ObjectValue `tfsdk:"high_availability"`
 	MaxPorts         basetypes.Int64Value  `tfsdk:"max_ports"`
 	Mode             basetypes.StringValue `tfsdk:"mode"`
 	SystemPriority   basetypes.Int64Value  `tfsdk:"system_priority"`
 	TransmissionRate basetypes.StringValue `tfsdk:"transmission_rate"`
+}
+
+// LacpHighAvailability represents a nested structure within the AggregateInterfaces model
+type LacpHighAvailability struct {
+	PassivePreNegotiation basetypes.BoolValue `tfsdk:"passive_pre_negotiation"`
 }
 
 // AggregateInterfacesLayer3 represents a nested structure within the AggregateInterfaces model
@@ -117,8 +123,13 @@ func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 			AttrTypes: map[string]attr.Type{
 				"lacp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"enable":            basetypes.BoolType{},
-						"fast_failover":     basetypes.BoolType{},
+						"enable":        basetypes.BoolType{},
+						"fast_failover": basetypes.BoolType{},
+						"high_availability": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"passive_pre_negotiation": basetypes.BoolType{},
+							},
+						},
 						"max_ports":         basetypes.Int64Type{},
 						"mode":              basetypes.StringType{},
 						"system_priority":   basetypes.Int64Type{},
@@ -169,8 +180,13 @@ func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 				}},
 				"lacp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
-						"enable":            basetypes.BoolType{},
-						"fast_failover":     basetypes.BoolType{},
+						"enable":        basetypes.BoolType{},
+						"fast_failover": basetypes.BoolType{},
+						"high_availability": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"passive_pre_negotiation": basetypes.BoolType{},
+							},
+						},
 						"max_ports":         basetypes.Int64Type{},
 						"mode":              basetypes.StringType{},
 						"system_priority":   basetypes.Int64Type{},
@@ -198,8 +214,13 @@ func (o AggregateInterfacesLayer2) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"lacp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"enable":            basetypes.BoolType{},
-				"fast_failover":     basetypes.BoolType{},
+				"enable":        basetypes.BoolType{},
+				"fast_failover": basetypes.BoolType{},
+				"high_availability": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"passive_pre_negotiation": basetypes.BoolType{},
+					},
+				},
 				"max_ports":         basetypes.Int64Type{},
 				"mode":              basetypes.StringType{},
 				"system_priority":   basetypes.Int64Type{},
@@ -221,8 +242,13 @@ func (o AggregateInterfacesLayer2) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the Lacp model.
 func (o Lacp) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"enable":            basetypes.BoolType{},
-		"fast_failover":     basetypes.BoolType{},
+		"enable":        basetypes.BoolType{},
+		"fast_failover": basetypes.BoolType{},
+		"high_availability": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"passive_pre_negotiation": basetypes.BoolType{},
+			},
+		},
 		"max_ports":         basetypes.Int64Type{},
 		"mode":              basetypes.StringType{},
 		"system_priority":   basetypes.Int64Type{},
@@ -232,6 +258,20 @@ func (o Lacp) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of Lacp objects.
 func (o Lacp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the LacpHighAvailability model.
+func (o LacpHighAvailability) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"passive_pre_negotiation": basetypes.BoolType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of LacpHighAvailability objects.
+func (o LacpHighAvailability) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -278,8 +318,13 @@ func (o AggregateInterfacesLayer3) AttrTypes() map[string]attr.Type {
 		}},
 		"lacp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
-				"enable":            basetypes.BoolType{},
-				"fast_failover":     basetypes.BoolType{},
+				"enable":        basetypes.BoolType{},
+				"fast_failover": basetypes.BoolType{},
+				"high_availability": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"passive_pre_negotiation": basetypes.BoolType{},
+					},
+				},
 				"max_ports":         basetypes.Int64Type{},
 				"mode":              basetypes.StringType{},
 				"system_priority":   basetypes.Int64Type{},
@@ -461,6 +506,18 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							Optional:            true,
 							Computed:            true,
 							Default:             booldefault.StaticBool(false),
+						},
+						"high_availability": schema.SingleNestedAttribute{
+							MarkdownDescription: "High Availability settings",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"passive_pre_negotiation": schema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Optional:            true,
+									Computed:            true,
+									Default:             booldefault.StaticBool(false),
+								},
+							},
 						},
 						"max_ports": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -684,6 +741,18 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							Computed:            true,
 							Default:             booldefault.StaticBool(false),
 						},
+						"high_availability": schema.SingleNestedAttribute{
+							MarkdownDescription: "High Availability settings",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"passive_pre_negotiation": schema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Optional:            true,
+									Computed:            true,
+									Default:             booldefault.StaticBool(false),
+								},
+							},
+						},
 						"max_ports": schema.Int64Attribute{
 							Validators: []validator.Int64{
 								int64validator.Between(1, 8),
@@ -807,6 +876,16 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 						"fast_failover": dsschema.BoolAttribute{
 							MarkdownDescription: "Fast failover",
 							Computed:            true,
+						},
+						"high_availability": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "High Availability settings",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"passive_pre_negotiation": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Computed:            true,
+								},
+							},
 						},
 						"max_ports": dsschema.Int64Attribute{
 							MarkdownDescription: "Maximum number of physical ports bundled in the LAG",
@@ -949,6 +1028,16 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 						"fast_failover": dsschema.BoolAttribute{
 							MarkdownDescription: "Fast failover",
 							Computed:            true,
+						},
+						"high_availability": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "High Availability settings",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"passive_pre_negotiation": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Computed:            true,
+								},
+							},
 						},
 						"max_ports": dsschema.Int64Attribute{
 							MarkdownDescription: "Maximum number of physical ports bundled in the LAG",

@@ -11,17 +11,6 @@ The `scm` provider provides resources and data sources to manage and query Strat
 This provider covers the following aspects of Strata Cloud Manager:
 * NGFW & Prisma Access
 
-## Beta Release Disclaimer
-
-**This software is a pre-release version and is not ready for production use.**
-
-*   **No Warranty:** This software is provided "as is," without any warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.
-*   **Instability:** The beta software may contain defects, may not operate correctly, and may be substantially modified or withdrawn at any time.
-*   **Limitation of Liability:** In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the beta software or the use or other dealings in the beta software.
-*   **Feedback:** We encourage and appreciate your feedback and bug reports. However, you acknowledge that any feedback you provide is non-confidential.
-
-By using this software, you agree to these terms.
-
 ## Release Notes
 
 ### v1.0.11
@@ -30,6 +19,34 @@ By using this software, you agree to these terms.
 
 * Introduced beta release stream for early access to new features
 * Beta versions (v1.0.11-beta.1) are now available for testing before GA release
+
+### v1.0.11-beta.1
+
+#### FEATURES
+
+* actions/scm_config_push: Push candidate configuration to devices (action)
+* actions/scm_config_load: Load configuration versions (action)
+* actions/scm_snippet_snapshot_publish: Publish snippet snapshots (action)
+* actions/scm_snippet_snapshot_compare: Compare snippet snapshots (action)
+* actions/scm_snippet_snapshot_diff: Diff snippet snapshots (action)
+* actions/scm_snippet_snapshot_load: Load snippet snapshots (action)
+* actions/scm_snippet_snapshot_save: Save snippet snapshots (action)
+* actions/scm_snippet_snapshot_convert: Convert snippet snapshots (action)
+* actions/scm_snippet_snapshot_updates: Update snippet snapshots (action)
+* actions/scm_certificate_import: Import certificates (action)
+* actions/scm_certificate_export: Export certificates (action)
+* actions/scm_auto_vpn_push: Push Auto VPN configurations (action)
+* actions/scm_trust_validation: Validate trust (action)
+* actions/scm_shared_snippets_load: Load shared snippets (action)
+
+#### BUG FIXES
+
+* api/config-operations.yaml: Fixed devices field type (changed from number to string)
+
+#### NOTES
+
+* This is a beta release for testing Terraform Actions functionality
+* Customers must explicitly opt-in by specifying version = "1.0.11-beta.1"
 
 ### v1.0.10
 

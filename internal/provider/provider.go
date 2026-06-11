@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/hashicorp/terraform-plugin-framework/action"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
@@ -14,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	setup "github.com/paloaltonetworks/scm-go"
 
+	tfProviderConfigOperations "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_operations"
 	tfProviderConfigSetup "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_setup"
 	tfProviderDeploymentServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
 	tfProviderDeviceSettings "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/device_settings"
@@ -25,9 +27,10 @@ import (
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// Ensure the provider implementation interface is sound.
+// Ensure the provider implementation interfaces are satisfied.
 var (
-	_ provider.Provider = &ScmProvider{}
+	_ provider.Provider            = &ScmProvider{}
+	_ provider.ProviderWithActions = &ScmProvider{}
 )
 
 func New(version string) provider.Provider {
@@ -220,10 +223,12 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		"network_services":    setup.GetNetworkServicesAPIClient(setupClient),
 		"objects":             setup.GetObjectsAPIClient(setupClient),
 		"security_services":   setup.GetSecurityServicesAPIClient(setupClient),
+		"config_operations":   setup.GetConfigOperationsAPIClient(setupClient),
 	}
 
 	resp.DataSourceData = clients
 	resp.ResourceData = clients
+	resp.ActionData = clients
 	tflog.Info(ctx, "Configured client", map[string]any{"success": true})
 }
 
@@ -270,4 +275,19 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 	resources = append(resources, tfProviderSecurityServices.GetResources()...)
 
 	return resources
+}
+
+// Actions defines the actions for this provider.
+func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
+	var actions []func() action.Action
+	// Add identity_services package actions
+	actions = append(actions, tfProviderIdentityServices.GetActions()...)
+	// Add config_setup package actions
+	actions = append(actions, tfProviderConfigSetup.GetActions()...)
+	// Add network_services package actions
+	actions = append(actions, tfProviderNetworkServices.GetActions()...)
+	// Add config_operations package actions
+	actions = append(actions, tfProviderConfigOperations.GetActions()...)
+
+	return actions
 }

@@ -47,15 +47,25 @@ resource "scm_zone" "scm_vwire_zone" {
 }
 
 #
-# Creates a layer3 zone
-# Requires Interface $scm_l3_interface to exist
+# Creates a layer3 ethernet interface for use in zone
+#
+
+resource "scm_ethernet_interface" "scm_l3_interface" {
+  name    = "$scm_l3_interface"
+  comment = "Managed by Terraform"
+  folder  = "ngfw-shared"
+  layer3  = {}
+}
+
+#
+# Creates a layer3 zone that references the interface
 #
 
 resource "scm_zone" "scm_layer3_zone_complex" {
   name   = "scm_layer3_zone_complex"
   folder = "ngfw-shared"
   network = {
-    layer3                          = ["$scm_l3_interface"]
+    layer3                          = [scm_ethernet_interface.scm_l3_interface.name]
     zone_protection_profile         = "best-practice"
     enable_packet_buffer_protection = true
   }
@@ -69,4 +79,5 @@ resource "scm_zone" "scm_layer3_zone_complex" {
     include_list = ["198.18.3.0/24"]
     exclude_list = ["198.18.4.0/24"]
   }
+  depends_on = [scm_ethernet_interface.scm_l3_interface]
 }

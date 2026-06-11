@@ -17,8 +17,8 @@ import (
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// Package: objects
-// This file contains models for the objects SDK package
+// Package: security_services
+// This file contains models for the security_services SDK package
 
 // AutoTagActions represents the Terraform model for AutoTagActions
 type AutoTagActions struct {

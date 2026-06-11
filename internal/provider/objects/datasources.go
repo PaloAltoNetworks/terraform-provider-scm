@@ -12,7 +12,6 @@ func GetDataSources() []func() datasource.DataSource {
 		NewApplicationDataSource,
 		NewApplicationFilterDataSource,
 		NewApplicationGroupDataSource,
-		// 		NewAutoTagActionDataSource,
 		NewDynamicUserGroupDataSource,
 		NewExternalDynamicListDataSource,
 		NewHipObjectDataSource,

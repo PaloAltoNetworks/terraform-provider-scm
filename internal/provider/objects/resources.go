@@ -12,7 +12,6 @@ func GetResources() []func() resource.Resource {
 		NewApplicationResource,
 		NewApplicationFilterResource,
 		NewApplicationGroupResource,
-		// 		NewAutoTagActionResource,
 		NewDynamicUserGroupResource,
 		NewExternalDynamicListResource,
 		NewHipObjectResource,

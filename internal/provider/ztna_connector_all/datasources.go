@@ -9,10 +9,12 @@ func GetDataSources() []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewConnectorDataSource,
 		NewConnectorGroupDataSource,
+		NewFqdnApplicationDataSource,
 		NewSubnetDataSource,
 		NewWildcardDataSource,
 		NewConnectorListDataSource,
 		NewConnectorGroupListDataSource,
+		NewFqdnApplicationListDataSource,
 		NewSubnetListDataSource,
 		NewWildcardListDataSource,
 		NewApplicationFiltersDataSource,

@@ -9,6 +9,7 @@ func GetDataSources() []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewAddressDataSource,
 		NewAddressGroupDataSource,
+		NewApplicationDataSource,
 		NewApplicationFilterDataSource,
 		NewApplicationGroupDataSource,
 		NewDynamicUserGroupDataSource,
@@ -26,6 +27,7 @@ func GetDataSources() []func() datasource.DataSource {
 		NewTagDataSource,
 		NewAddressListDataSource,
 		NewAddressGroupListDataSource,
+		NewApplicationListDataSource,
 		NewApplicationFilterListDataSource,
 		NewApplicationGroupListDataSource,
 		NewDynamicUserGroupListDataSource,

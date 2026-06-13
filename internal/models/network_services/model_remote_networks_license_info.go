@@ -22,12 +22,6 @@ type LicenseResult struct {
 	PurchasedLicenses  basetypes.ListValue   `tfsdk:"purchased_licenses"`
 }
 
-// LicenseInfo represents a nested structure within the LicenseResult model
-type LicenseInfo struct {
-	Count       basetypes.Int64Value  `tfsdk:"count"`
-	LicenseType basetypes.StringValue `tfsdk:"license_type"`
-}
-
 // AttrTypes defines the attribute types for the LicenseResult model.
 func (o LicenseResult) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -59,21 +53,6 @@ func (o LicenseResult) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of LicenseResult objects.
 func (o LicenseResult) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the LicenseInfo model.
-func (o LicenseInfo) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"count":        basetypes.Int64Type{},
-		"license_type": basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of LicenseInfo objects.
-func (o LicenseInfo) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

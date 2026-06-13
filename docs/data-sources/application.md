@@ -31,14 +31,20 @@ output "application_ds_result" {
 
 ### Required
 
-- `id` (String) Id
+- `id` (String) The UUID of the application
 
 ### Optional
 
-- `device` (String) Device
-- `folder` (String) Folder
-- `name` (String) Name
-- `snippet` (String) Snippet
+- `device` (String) The device in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `folder` (String) The folder in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
+- `name` (String) The name of the application
+- `snippet` (String) The snippet in which the resource is defined
+
+> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -59,15 +65,15 @@ output "application_ds_result" {
 - `risk` (String) Risk
 - `signature` (Attributes List) Signature (see [below for nested schema](#nestedatt--signature))
 - `subcategory` (String) Subcategory
-- `tcp_half_closed_timeout` (Number) Tcp half closed timeout
-- `tcp_time_wait_timeout` (Number) Tcp time wait timeout
-- `tcp_timeout` (Number) Tcp timeout
+- `tcp_half_closed_timeout` (Number) timeout for half-close session in seconds
+- `tcp_time_wait_timeout` (Number) timeout for session in time_wait state in seconds
+- `tcp_timeout` (Number) timeout in seconds
 - `technology` (String) Technology
 - `tfid` (String) The Terraform ID.
-- `timeout` (Number) Timeout
+- `timeout` (Number) timeout in seconds
 - `tunnel_applications` (Boolean) Tunnel applications
 - `tunnel_other_application` (Boolean) Tunnel other application
-- `udp_timeout` (Number) Udp timeout
+- `udp_timeout` (Number) timeout in seconds
 - `used_by_malware` (Boolean) Used by malware
 - `virus_ident` (Boolean) Virus ident
 
@@ -76,10 +82,18 @@ output "application_ds_result" {
 
 Read-Only:
 
-- `ident_by_icmp6_type` (Attributes) Ident by icmp6 type (see [below for nested schema](#nestedatt--default--ident_by_icmp6_type))
-- `ident_by_icmp_type` (Attributes) Ident by icmp type (see [below for nested schema](#nestedatt--default--ident_by_icmp_type))
+- `ident_by_icmp6_type` (Attributes) Ident by icmp6 type
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`. (see [below for nested schema](#nestedatt--default--ident_by_icmp6_type))
+- `ident_by_icmp_type` (Attributes) Ident by icmp type
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`. (see [below for nested schema](#nestedatt--default--ident_by_icmp_type))
 - `ident_by_ip_protocol` (String) Ident by ip protocol
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.
 - `port` (List of String) Port
+
+> ℹ️ **Note:** You must specify exactly one of `ident_by_icmp6_type`, `ident_by_icmp_type`, `ident_by_ip_protocol`, and `port`.
 
 <a id="nestedatt--default--ident_by_icmp6_type"></a>
 ### Nested Schema for `default.ident_by_icmp6_type`
@@ -107,7 +121,7 @@ Read-Only:
 
 - `and_condition` (Attributes List) And condition (see [below for nested schema](#nestedatt--signature--and_condition))
 - `comment` (String) Comment
-- `name` (String) Name
+- `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `order_free` (Boolean) Order free
 - `scope` (String) Scope
 
@@ -116,7 +130,7 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) Name
+- `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `or_condition` (Attributes List) Or condition (see [below for nested schema](#nestedatt--signature--and_condition--or_condition))
 
 <a id="nestedatt--signature--and_condition--or_condition"></a>
@@ -124,7 +138,7 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) Name
+- `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `operator` (Attributes) Operator (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator))
 
 <a id="nestedatt--signature--and_condition--or_condition--operator"></a>
@@ -132,10 +146,18 @@ Read-Only:
 
 Read-Only:
 
-- `equal_to` (Attributes) Equal to (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--equal_to))
-- `greater_than` (Attributes) Greater than (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--greater_than))
-- `less_than` (Attributes) Less than (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--less_than))
-- `pattern_match` (Attributes) Pattern match (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--pattern_match))
+- `equal_to` (Attributes) Equal to
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--equal_to))
+- `greater_than` (Attributes) Greater than
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--greater_than))
+- `less_than` (Attributes) Less than
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--less_than))
+- `pattern_match` (Attributes) Pattern match
+
+> ℹ️ **Note:** You must specify exactly one of `equal_to`, `greater_than`, `less_than`, and `pattern_match`. (see [below for nested schema](#nestedatt--signature--and_condition--or_condition--operator--pattern_match))
 
 <a id="nestedatt--signature--and_condition--or_condition--operator--equal_to"></a>
 ### Nested Schema for `signature.and_condition.or_condition.operator.equal_to`
@@ -143,7 +165,7 @@ Read-Only:
 Read-Only:
 
 - `context` (String) Context
-- `mask` (String) Mask
+- `mask` (String) 4-byte hex value
 - `position` (String) Position
 - `value` (String) Value
 
@@ -162,7 +184,7 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) Name
+- `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `value` (String) Value
 
 
@@ -181,7 +203,7 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) Name
+- `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `value` (String) Value
 
 
@@ -200,5 +222,5 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) Name
+- `name` (String) Alphanumeric string [ 0-9a-zA-Z._-]
 - `value` (String) Value

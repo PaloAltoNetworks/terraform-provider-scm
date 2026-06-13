@@ -81,9 +81,7 @@ func (d *ConnectorDataSource) Read(ctx context.Context, req datasource.ReadReque
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
-	// if !data.Id.IsNull() {
 	if !data.Oid.IsNull() {
-		// objectId := data.Id.ValueString()
 		objectId := data.Oid.ValueString()
 		tflog.Debug(ctx, "Reading Connectors data source by ID", map[string]interface{}{"id": objectId})
 
@@ -142,7 +140,6 @@ func (d *ConnectorDataSource) Read(ctx context.Context, req datasource.ReadReque
 	idBuilder.WriteString(":")
 
 	idBuilder.WriteString(":")
-	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Oid.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

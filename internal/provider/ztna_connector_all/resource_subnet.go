@@ -146,7 +146,6 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 	idBuilder.WriteString(":")
 
 	idBuilder.WriteString(":")
-	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Oid.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 
@@ -253,7 +252,6 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a pointer, so we nil it out to omit it from the update payload.
-	// unpackedScmObject.Id = nil
 	unpackedScmObject.Oid = nil
 
 	// Step 6: Get id from token and make update call
@@ -273,7 +271,6 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
-	// updatedObject, httpErr, err := updateReq.Execute()
 	httpErr, err := updateReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {

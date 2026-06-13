@@ -82,9 +82,7 @@ func (d *UrlAccessProfileDataSource) Read(ctx context.Context, req datasource.Re
 
 	// Logic to handle read by ID or by name/list.
 	// We prioritize reading by ID if it is provided.
-	// if !data.Id.IsNull() {
 	if !data.Id.IsNull() {
-		// objectId := data.Id.ValueString()
 		objectId := data.Id.ValueString()
 		tflog.Debug(ctx, "Reading UrlAccessProfiles data source by ID", map[string]interface{}{"id": objectId})
 
@@ -224,7 +222,6 @@ func (d *UrlAccessProfileDataSource) Read(ctx context.Context, req datasource.Re
 	}
 
 	idBuilder.WriteString(":")
-	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 

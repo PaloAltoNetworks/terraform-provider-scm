@@ -188,7 +188,6 @@ func (r *NatRuleResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	idBuilder.WriteString(":")
-	// idBuilder.WriteString(data.Id.ValueString())
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
 
@@ -372,7 +371,6 @@ func (r *NatRuleResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	// Step 5: Update calls cannot have id sent in payload, so remove it
 	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
-	// unpackedScmObject.Id = ""
 	unpackedScmObject.Id = ""
 
 	// Step 6: Get id from token and make update call
@@ -395,7 +393,6 @@ func (r *NatRuleResource) Update(ctx context.Context, req resource.UpdateRequest
 	// ========================= END: ADD THIS BLOCK =========================
 
 	// Step 8: Make the update call and get an SCM updatedObject
-	// updatedObject, httpErr, err := updateReq.Execute()
 	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {

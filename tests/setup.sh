@@ -6,7 +6,7 @@ set -euo pipefail
 # =============================================================================
 # For each examples/resources/<prefix>_* (scm_*, ztna_*, ...):
 #   1. Creates tests/<prefix>_<resource>/
-#   2. Generates main.tf = provider.tf + resource.tf (always overwritten)
+#   2. Generates main.tf = matching provider block + resource.tf (always overwritten)
 #   3. Generates a .tftest.hcl with create + update + auto-destroy
 #
 # Update strategy per resource:
@@ -35,7 +35,7 @@ fi
 NO_ID_RESOURCES="scm_bgp_routing scm_bandwidth_allocation"
 
 # Resources that use "oid" instead of "id" as their identifier attribute
-OID_RESOURCES="scm_connector scm_fqdn_application scm_subnet ztna_connector ztna_fqdn_application ztna_subnet ztna_wildcard ztna_connector_group ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade"
+OID_RESOURCES="ztna_connector ztna_fqdn_application ztna_subnet ztna_wildcard ztna_connector_group ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade"
 
 # -----------------------------------------------------------------------------
 # Check if a field exists at root level (brace depth 1) inside any resource block.

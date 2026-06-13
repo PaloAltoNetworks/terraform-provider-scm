@@ -463,7 +463,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 		"anti_replay": schema.BoolAttribute{
 			MarkdownDescription: "Enable Anti-Replay check on this tunnel",
 			Optional:            true,
-			Computed:            true,
 		},
 		"auto_key": schema.SingleNestedAttribute{
 			MarkdownDescription: "Auto key",
@@ -477,7 +476,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -494,7 +492,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 							"local": schema.StringAttribute{
 								MarkdownDescription: "Local",
 								Optional:            true,
-								Computed:            true,
 							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name",
@@ -503,7 +500,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 							"protocol": schema.SingleNestedAttribute{
 								MarkdownDescription: "IPv4 type of proxy_id protocol values for TCP protocol",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"number": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -515,7 +511,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "IP protocol number\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
-										Computed:            true,
 									},
 									"tcp": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
@@ -526,7 +521,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "IPv4 type of proxy_id protocol values for TCP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"local_port": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -557,7 +551,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"local_port": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -584,7 +577,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 							"remote": schema.StringAttribute{
 								MarkdownDescription: "Remote",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -597,7 +589,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 							"local": schema.StringAttribute{
 								MarkdownDescription: "Local",
 								Optional:            true,
-								Computed:            true,
 							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name",
@@ -606,7 +597,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 							"protocol": schema.SingleNestedAttribute{
 								MarkdownDescription: "IPv6 type of proxy_id protocol values for protocol",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"number": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -618,7 +608,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "IP protocol number\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
-										Computed:            true,
 									},
 									"tcp": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
@@ -629,7 +618,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "IPv6 type of proxy_id protocol values for TCP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"local_port": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -660,7 +648,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "IPv6 type of proxy_id protocol values for UDP protocol\n\n> ℹ️ **Note:** You must specify exactly one of `number`, `tcp`, and `udp`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"local_port": schema.Int64Attribute{
 												Validators: []validator.Int64{
@@ -687,7 +674,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 							"remote": schema.StringAttribute{
 								MarkdownDescription: "Remote",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -712,7 +698,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -735,7 +720,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -765,7 +749,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -785,7 +768,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 		"tunnel_monitor": schema.SingleNestedAttribute{
 			MarkdownDescription: "Tunnel monitor",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"destination_ip": schema.StringAttribute{
 					MarkdownDescription: "Destination IP to send ICMP probe",
@@ -800,7 +782,6 @@ var IpsecTunnelsResourceSchema = schema.Schema{
 				"proxy_id": schema.StringAttribute{
 					MarkdownDescription: "Which proxy-id (or proxy-id-v6) the monitoring traffic will use",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},

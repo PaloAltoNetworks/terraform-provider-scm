@@ -71,7 +71,6 @@ var HipmatchMatchListResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description of the hipmatch match list entry",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -85,14 +84,12 @@ var HipmatchMatchListResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"filter": schema.StringAttribute{
 			MarkdownDescription: "Filter of the hipmatch match list entry",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -107,7 +104,6 @@ var HipmatchMatchListResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -128,7 +124,6 @@ var HipmatchMatchListResourceSchema = schema.Schema{
 		"quarantine": schema.BoolAttribute{
 			MarkdownDescription: "Quarantine Flag of the hipmatch match list entry",
 			Optional:            true,
-			Computed:            true,
 		},
 		"send_email": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -153,7 +148,6 @@ var HipmatchMatchListResourceSchema = schema.Schema{
 		"send_to_panorama": schema.BoolAttribute{
 			MarkdownDescription: "Send to Panorama Flag of the hipmatch match list entry",
 			Optional:            true,
-			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -167,7 +161,6 @@ var HipmatchMatchListResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

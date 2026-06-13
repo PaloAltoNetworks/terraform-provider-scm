@@ -551,12 +551,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Interface description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"default_value": schema.StringAttribute{
 			MarkdownDescription: "Default interface assignment",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -570,7 +568,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -593,7 +590,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -618,7 +614,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"lldp": schema.SingleNestedAttribute{
 					MarkdownDescription: "LLDP Settings",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable LLDP on Interface",
@@ -629,7 +624,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"netflow_profile": schema.StringAttribute{
 					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 					Optional:            true,
-					Computed:            true,
 				},
 				"vlan_tag": schema.StringAttribute{
 					Validators: []validator.String{
@@ -637,7 +631,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Assign interface to VLAN tag",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -660,12 +653,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							"hw_address": schema.StringAttribute{
 								MarkdownDescription: "MAC address",
 								Optional:            true,
-								Computed:            true,
 							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "IP address",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -673,7 +664,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"ddns_config": schema.SingleNestedAttribute{
 					MarkdownDescription: "Dynamic DNS configuration specific to the Ethernet Interfaces.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ddns_cert_profile": schema.StringAttribute{
 							MarkdownDescription: "Certificate profile",
@@ -696,7 +686,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 						"ddns_ip": schema.StringAttribute{
 							MarkdownDescription: "IP to register (static only)",
 							Optional:            true,
-							Computed:            true,
 						},
 						"ddns_update_interval": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -757,7 +746,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 						"send_hostname": schema.SingleNestedAttribute{
 							MarkdownDescription: "Ethernet Interfaces DHCP ClientSend hostname",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable",
@@ -786,7 +774,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Interface management profile",
 					Optional:            true,
-					Computed:            true,
 				},
 				"ip": schema.ListNestedAttribute{
 					Validators: []validator.List{
@@ -818,7 +805,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"netflow_profile": schema.StringAttribute{
 					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 					Optional:            true,
-					Computed:            true,
 				},
 				"pppoe": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -837,7 +823,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Access concentrator",
 							Optional:            true,
-							Computed:            true,
 						},
 						"authentication": schema.StringAttribute{
 							Validators: []validator.String{
@@ -845,7 +830,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Authentication protocol",
 							Optional:            true,
-							Computed:            true,
 						},
 						"default_route_metric": schema.Int64Attribute{
 							Validators: []validator.Int64{
@@ -865,7 +849,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 						"passive": schema.SingleNestedAttribute{
 							MarkdownDescription: "Passive",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Passive Mode enabled",
@@ -888,12 +871,10 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Service",
 							Optional:            true,
-							Computed:            true,
 						},
 						"static_address": schema.SingleNestedAttribute{
 							MarkdownDescription: "Static address",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
 									Validators: []validator.String{
@@ -950,7 +931,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 		"poe": schema.SingleNestedAttribute{
 			MarkdownDescription: "Poe",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"poe_enabled": schema.BoolAttribute{
 					MarkdownDescription: "Enabled PoE?",
@@ -981,7 +961,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -999,7 +978,6 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				"netflow_profile": schema.StringAttribute{
 					MarkdownDescription: "Name of Netflow Profile to assign to Interface",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},

@@ -112,7 +112,6 @@ var ForwardingProfileDestinationsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "description of the destination",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -123,7 +122,6 @@ var ForwardingProfileDestinationsResourceSchema = schema.Schema{
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
@@ -147,7 +145,6 @@ var ForwardingProfileDestinationsResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Port number for fqdn based destination",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -177,7 +174,6 @@ var ForwardingProfileDestinationsResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Port number for IP address based destination",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},

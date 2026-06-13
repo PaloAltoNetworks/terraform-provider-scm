@@ -517,34 +517,28 @@ var IkeGatewaysResourceSchema = schema.Schema{
 						"allow_id_payload_mismatch": schema.BoolAttribute{
 							MarkdownDescription: "Allow id payload mismatch",
 							Optional:            true,
-							Computed:            true,
 						},
 						"certificate_profile": schema.StringAttribute{
 							MarkdownDescription: "Certificate profile",
 							Optional:            true,
-							Computed:            true,
 						},
 						"local_certificate": schema.SingleNestedAttribute{
 							MarkdownDescription: "Local certificate",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"local_certificate_name": schema.StringAttribute{
 									MarkdownDescription: "Local certificate name",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"strict_validation_revocation": schema.BoolAttribute{
 							MarkdownDescription: "Strict validation revocation",
 							Optional:            true,
-							Computed:            true,
 						},
 						"use_management_as_source": schema.BoolAttribute{
 							MarkdownDescription: "Use management as source",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -560,7 +554,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 						"key": schema.StringAttribute{
 							MarkdownDescription: "Key",
 							Optional:            true,
-							Computed:            true,
 							Sensitive:           true,
 						},
 					},
@@ -579,7 +572,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -602,7 +594,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -634,7 +625,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 		"local_id": schema.SingleNestedAttribute{
 			MarkdownDescription: "Local id",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"id": schema.StringAttribute{
 					Validators: []validator.String{
@@ -644,12 +634,10 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Local ID string",
 					Optional:            true,
-					Computed:            true,
 				},
 				"type": schema.StringAttribute{
 					MarkdownDescription: "Type",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -701,7 +689,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 		"peer_id": schema.SingleNestedAttribute{
 			MarkdownDescription: "Peer id",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"id": schema.StringAttribute{
 					Validators: []validator.String{
@@ -711,7 +698,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Peer ID string",
 					Optional:            true,
-					Computed:            true,
 				},
 				"type": schema.StringAttribute{
 					Validators: []validator.String{
@@ -719,7 +705,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Type",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -730,48 +715,40 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				"ikev1": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ikev1",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dpd": schema.SingleNestedAttribute{
 							MarkdownDescription: "Dpd",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"ike_crypto_profile": schema.StringAttribute{
 							MarkdownDescription: "Ike crypto profile",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"ikev2": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ikev2",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dpd": schema.SingleNestedAttribute{
 							MarkdownDescription: "Dpd",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"ike_crypto_profile": schema.StringAttribute{
 							MarkdownDescription: "Ike crypto profile",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -837,7 +814,6 @@ var IkeGatewaysResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

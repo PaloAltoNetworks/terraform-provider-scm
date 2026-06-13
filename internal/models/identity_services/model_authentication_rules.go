@@ -102,7 +102,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 		"authentication_enforcement": schema.StringAttribute{
 			MarkdownDescription: "The authentication profile name",
 			Optional:            true,
-			Computed:            true,
 		},
 		"category": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -112,7 +111,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the authentication rule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -134,7 +132,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "Device\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -155,7 +152,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "Folder\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -167,7 +163,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 		"group_tag": schema.StringAttribute{
 			MarkdownDescription: "Group tag",
 			Optional:            true,
-			Computed:            true,
 		},
 		"hip_profiles": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -190,7 +185,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 		"log_setting": schema.StringAttribute{
 			MarkdownDescription: "The log forwarding profile name",
 			Optional:            true,
-			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the authentication rule",
@@ -242,7 +236,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "Snippet\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -283,7 +276,6 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The authentication session timeout (seconds)",
 			Optional:            true,
-			Computed:            true,
 		},
 		"to": schema.ListAttribute{
 			ElementType:         types.StringType,

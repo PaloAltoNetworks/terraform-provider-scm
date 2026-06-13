@@ -107,12 +107,10 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 		"data_capture": schema.BoolAttribute{
 			MarkdownDescription: "Data capture",
 			Optional:            true,
-			Computed:            true,
 		},
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the data filtering profile",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -126,14 +124,12 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"disable_override": schema.StringAttribute{
 			MarkdownDescription: "Disable override",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -148,7 +144,6 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -162,7 +157,6 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the data filtering profile",
 			Optional:            true,
-			Computed:            true,
 		},
 		"rules": schema.ListNestedAttribute{
 			MarkdownDescription: "Rules",
@@ -172,7 +166,6 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 					"alert_threshold": schema.Int64Attribute{
 						MarkdownDescription: "Alert threshold",
 						Optional:            true,
-						Computed:            true,
 					},
 					"application": schema.ListAttribute{
 						ElementType:         types.StringType,
@@ -182,17 +175,14 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 					"block_threshold": schema.Int64Attribute{
 						MarkdownDescription: "Block threshold",
 						Optional:            true,
-						Computed:            true,
 					},
 					"data_object": schema.StringAttribute{
 						MarkdownDescription: "Data object",
 						Optional:            true,
-						Computed:            true,
 					},
 					"direction": schema.StringAttribute{
 						MarkdownDescription: "Direction",
 						Optional:            true,
-						Computed:            true,
 					},
 					"file_type": schema.ListAttribute{
 						ElementType:         types.StringType,
@@ -202,12 +192,10 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 					"log_severity": schema.StringAttribute{
 						MarkdownDescription: "Log severity",
 						Optional:            true,
-						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -224,7 +212,6 @@ var DataFilteringProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

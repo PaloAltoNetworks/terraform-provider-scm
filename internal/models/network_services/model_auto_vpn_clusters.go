@@ -611,7 +611,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 					"bgp_redistribution_profile": schema.StringAttribute{
 						MarkdownDescription: "BGP redistribution profile",
 						Optional:            true,
-						Computed:            true,
 					},
 					"interfaces": schema.ListNestedAttribute{
 						Validators: []validator.List{
@@ -624,32 +623,26 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 								"dhcp_ip": schema.StringAttribute{
 									MarkdownDescription: "DHCP IP",
 									Optional:            true,
-									Computed:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Ethernet interface",
 									Optional:            true,
-									Computed:            true,
 								},
 								"sdwan_link_settings": schema.SingleNestedAttribute{
 									MarkdownDescription: "Sdwan link settings",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"sdwan_gateway": schema.StringAttribute{
 											MarkdownDescription: "Next hop gateway",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sdwan_interface_profile": schema.StringAttribute{
 											MarkdownDescription: "SD-WAN interface profile",
 											Optional:            true,
-											Computed:            true,
 										},
 										"upstream_nat": schema.SingleNestedAttribute{
 											MarkdownDescription: "Upstream nat",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Upstream NAT?",
@@ -660,7 +653,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 												"static_ip": schema.SingleNestedAttribute{
 													MarkdownDescription: "Static ip",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
@@ -670,7 +662,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -680,7 +671,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 													},
 												},
@@ -694,12 +684,10 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 					"logical_router": schema.StringAttribute{
 						MarkdownDescription: "Router",
 						Optional:            true,
-						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Branch firewall serial number",
 						Optional:            true,
-						Computed:            true,
 					},
 					"private_interfaces": schema.ListNestedAttribute{
 						Validators: []validator.List{
@@ -712,27 +700,22 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Ethernet interface",
 									Optional:            true,
-									Computed:            true,
 								},
 								"sdwan_link_settings": schema.SingleNestedAttribute{
 									MarkdownDescription: "Sdwan link settings",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"sdwan_gateway": schema.StringAttribute{
 											MarkdownDescription: "Next hop gateway",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sdwan_interface_profile": schema.StringAttribute{
 											MarkdownDescription: "SD-WAN interface profile",
 											Optional:            true,
-											Computed:            true,
 										},
 										"upstream_nat": schema.SingleNestedAttribute{
 											MarkdownDescription: "Upstream nat",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Upstream NAT?",
@@ -743,7 +726,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 												"static_ip": schema.SingleNestedAttribute{
 													MarkdownDescription: "Static ip",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
@@ -753,7 +735,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -763,7 +744,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 													},
 												},
@@ -777,7 +757,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 					"site": schema.StringAttribute{
 						MarkdownDescription: "Site name",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -785,17 +764,14 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 		"enable_mesh_between_hubs": schema.BoolAttribute{
 			MarkdownDescription: "Enable mesh between hubs?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"enable_mesh_interconnect": schema.BoolAttribute{
 			MarkdownDescription: "Enable mesh interconnect?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"enable_sdwan": schema.BoolAttribute{
 			MarkdownDescription: "Enable SD-WAN?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"gateways": schema.ListNestedAttribute{
 			MarkdownDescription: "Hubs",
@@ -805,12 +781,10 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 					"allow_dia_vpn_failover": schema.BoolAttribute{
 						MarkdownDescription: "Allow DIA to VPN failover on branch device for the hub?",
 						Optional:            true,
-						Computed:            true,
 					},
 					"bgp_redistribution_profile": schema.StringAttribute{
 						MarkdownDescription: "BGP redistribution file",
 						Optional:            true,
-						Computed:            true,
 					},
 					"interfaces": schema.ListNestedAttribute{
 						MarkdownDescription: "Interfaces",
@@ -820,42 +794,34 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 								"dhcp_ip": schema.StringAttribute{
 									MarkdownDescription: "DHCP IP",
 									Optional:            true,
-									Computed:            true,
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Ethernet interface",
 									Optional:            true,
-									Computed:            true,
 								},
 								"sdwan_link_settings": schema.SingleNestedAttribute{
 									MarkdownDescription: "Sdwan link settings",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"sdwan_gateway": schema.StringAttribute{
 											MarkdownDescription: "Next hop gateway",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sdwan_interface_profile": schema.StringAttribute{
 											MarkdownDescription: "SD-WAN interface profile",
 											Optional:            true,
-											Computed:            true,
 										},
 										"upstream_nat": schema.SingleNestedAttribute{
 											MarkdownDescription: "Upstream nat",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Upstream NAT?",
 													Optional:            true,
-													Computed:            true,
 												},
 												"static_ip": schema.SingleNestedAttribute{
 													MarkdownDescription: "Static ip",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
@@ -865,7 +831,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -875,7 +840,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 													},
 												},
@@ -889,12 +853,10 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 					"logical_router": schema.StringAttribute{
 						MarkdownDescription: "Router",
 						Optional:            true,
-						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Hub firewall serial number",
 						Optional:            true,
-						Computed:            true,
 					},
 					"priority": schema.StringAttribute{
 						Validators: []validator.String{
@@ -902,7 +864,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Priority",
 						Optional:            true,
-						Computed:            true,
 					},
 					"private_interfaces": schema.ListNestedAttribute{
 						MarkdownDescription: "Private interfaces",
@@ -912,37 +873,30 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Ethernet interface",
 									Optional:            true,
-									Computed:            true,
 								},
 								"sdwan_link_settings": schema.SingleNestedAttribute{
 									MarkdownDescription: "Sdwan link settings",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"sdwan_gateway": schema.StringAttribute{
 											MarkdownDescription: "Next hop gateway",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sdwan_interface_profile": schema.StringAttribute{
 											MarkdownDescription: "SD-WAN interface profile",
 											Optional:            true,
-											Computed:            true,
 										},
 										"upstream_nat": schema.SingleNestedAttribute{
 											MarkdownDescription: "Upstream nat",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"enable": schema.BoolAttribute{
 													MarkdownDescription: "Upstream NAT?",
 													Optional:            true,
-													Computed:            true,
 												},
 												"static_ip": schema.SingleNestedAttribute{
 													MarkdownDescription: "Static ip",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"fqdn": schema.StringAttribute{
 															Validators: []validator.String{
@@ -952,7 +906,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 														"ip_address": schema.StringAttribute{
 															Validators: []validator.String{
@@ -962,7 +915,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 															},
 															MarkdownDescription: "IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 															Optional:            true,
-															Computed:            true,
 														},
 													},
 												},
@@ -976,7 +928,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 					"site": schema.StringAttribute{
 						MarkdownDescription: "Site name",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -991,7 +942,6 @@ var AutoVpnClustersResourceSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			MarkdownDescription: "VPN cluster name",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

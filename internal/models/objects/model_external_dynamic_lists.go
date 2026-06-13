@@ -1523,7 +1523,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -1546,7 +1545,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -1577,7 +1575,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -1591,7 +1588,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 		"type": schema.SingleNestedAttribute{
 			MarkdownDescription: "Type configuration for External Dynamic List",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"domain": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -1606,12 +1602,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Domain settings for Custom Domain type\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
 							MarkdownDescription: "Authentication settings for Custom Domain type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
@@ -1643,7 +1637,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
@@ -1652,7 +1645,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"expand_domain": schema.BoolAttribute{
 							MarkdownDescription: "Enable/Disable expand domain",
@@ -1797,12 +1789,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "IMEI Configuration settings\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
 							MarkdownDescription: "IMEI Auth Cnfig for Custom IMEI type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
@@ -1834,7 +1824,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "IMEI Description for Custom IMEI type",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
@@ -1843,7 +1832,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(32)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
 							MarkdownDescription: "Recurring interval for IMEI updates",
@@ -1982,12 +1970,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "IMSI Config for Custom IMSI type\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
 							MarkdownDescription: "IMSI Auth Config for Custom IMSI type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2019,7 +2005,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "IMSI Description for Custom IMSI type",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
@@ -2028,7 +2013,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(34)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
 							MarkdownDescription: "IMSI Recuring Config for Custom IMSI type",
@@ -2167,12 +2151,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "IP settings for Custom IP type\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
 							MarkdownDescription: "Authentication settings for Custom IP type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2204,7 +2186,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
@@ -2213,7 +2194,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
 							MarkdownDescription: "Update Schedule for Custom IP type",
@@ -2352,7 +2332,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Predefined IP settings for EDL type\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
 							Validators: []validator.String{
@@ -2360,7 +2339,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
@@ -2369,7 +2347,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"url": schema.StringAttribute{
 							MarkdownDescription: "URL source for Predefined IP type",
@@ -2390,7 +2367,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Predefined URL settings for EDL type\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"description": schema.StringAttribute{
 							Validators: []validator.String{
@@ -2398,7 +2374,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
@@ -2407,7 +2382,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"url": schema.StringAttribute{
 							MarkdownDescription: "URL source for Predefined URL type",
@@ -2428,12 +2402,10 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "URL settings for Custom URL type\n\n> ℹ️ **Note:** You must specify exactly one of `domain`, `imei`, `imsi`, `ip`, `predefined_ip`, `predefined_url`, and `url`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"auth": schema.SingleNestedAttribute{
 							MarkdownDescription: "Authentication settings for Custom URL type",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"password": schema.StringAttribute{
 									Validators: []validator.String{
@@ -2465,7 +2437,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Description",
 							Optional:            true,
-							Computed:            true,
 						},
 						"exception_list": schema.ListAttribute{
 							ElementType:         types.StringType,
@@ -2474,7 +2445,6 @@ var ExternalDynamicListsResourceSchema = schema.Schema{
 								listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(255)),
 							},
 							Optional: true,
-							Computed: true,
 						},
 						"recurring": schema.SingleNestedAttribute{
 							MarkdownDescription: "Update Schedule for Custom URL type",

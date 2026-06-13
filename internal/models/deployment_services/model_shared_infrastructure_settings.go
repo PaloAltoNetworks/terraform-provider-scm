@@ -111,43 +111,36 @@ var SharedInfrastructureSettingsResourceSchema = schema.Schema{
 		"api_key": schema.StringAttribute{
 			MarkdownDescription: "Api key",
 			Optional:            true,
-			Computed:            true,
 		},
 		"captive_portal_redirect_ip_address": schema.StringAttribute{
 			MarkdownDescription: "Captive portal redirect ip address",
 			Optional:            true,
-			Computed:            true,
 		},
 		"connector_application_blocks": schema.SingleNestedAttribute{
 			MarkdownDescription: "Connector application blocks",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"member": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Member",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
 		"connector_connector_blocks": schema.SingleNestedAttribute{
 			MarkdownDescription: "Connector connector blocks",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"member": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Member",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
 		"egress_ip_notification_url": schema.StringAttribute{
 			MarkdownDescription: "Egress ip notification url",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -156,29 +149,24 @@ var SharedInfrastructureSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder containing the shared infrastructure settings",
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"infra_bgp_as": schema.StringAttribute{
 			MarkdownDescription: "Infra bgp as",
 			Optional:            true,
-			Computed:            true,
 		},
 		"infrastructure_subnet": schema.StringAttribute{
 			MarkdownDescription: "Infrastructure subnet",
 			Optional:            true,
-			Computed:            true,
 		},
 		"infrastructure_subnet_ipv6": schema.StringAttribute{
 			MarkdownDescription: "Infrastructure subnet ipv6",
 			Optional:            true,
-			Computed:            true,
 		},
 		"ipv6": schema.BoolAttribute{
 			MarkdownDescription: "Ipv6",
 			Optional:            true,
-			Computed:            true,
 		},
 		"loopback_ips": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -195,7 +183,6 @@ var SharedInfrastructureSettingsResourceSchema = schema.Schema{
 		"tunnel_monitor_ip_address": schema.StringAttribute{
 			MarkdownDescription: "Tunnel monitor ip address",
 			Optional:            true,
-			Computed:            true,
 		},
 	},
 }

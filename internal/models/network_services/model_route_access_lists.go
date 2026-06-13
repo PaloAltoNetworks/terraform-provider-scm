@@ -330,7 +330,6 @@ var RouteAccessListsResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -344,7 +343,6 @@ var RouteAccessListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -361,7 +359,6 @@ var RouteAccessListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -388,7 +385,6 @@ var RouteAccessListsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -402,17 +398,14 @@ var RouteAccessListsResourceSchema = schema.Schema{
 		"type": schema.SingleNestedAttribute{
 			MarkdownDescription: "Type",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ipv4": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ipv4",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"ipv4_entry": schema.ListNestedAttribute{
 							MarkdownDescription: "IPv4 access lists",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"action": schema.StringAttribute{
@@ -421,32 +414,26 @@ var RouteAccessListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Action",
 										Optional:            true,
-										Computed:            true,
 									},
 									"destination_address": schema.SingleNestedAttribute{
 										MarkdownDescription: "Destination address",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"address": schema.StringAttribute{
 												MarkdownDescription: "Destination IP address",
 												Optional:            true,
-												Computed:            true,
 											},
 											"entry": schema.SingleNestedAttribute{
 												MarkdownDescription: "Entry",
 												Optional:            true,
-												Computed:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.StringAttribute{
 														MarkdownDescription: "Destination IP address",
 														Optional:            true,
-														Computed:            true,
 													},
 													"wildcard": schema.StringAttribute{
 														MarkdownDescription: "Destination IP wildcard",
 														Optional:            true,
-														Computed:            true,
 													},
 												},
 											},
@@ -458,32 +445,26 @@ var RouteAccessListsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Sequence number",
 										Optional:            true,
-										Computed:            true,
 									},
 									"source_address": schema.SingleNestedAttribute{
 										MarkdownDescription: "Source address",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"address": schema.StringAttribute{
 												MarkdownDescription: "Source IP address",
 												Optional:            true,
-												Computed:            true,
 											},
 											"entry": schema.SingleNestedAttribute{
 												MarkdownDescription: "Entry",
 												Optional:            true,
-												Computed:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.StringAttribute{
 														MarkdownDescription: "Source IP address",
 														Optional:            true,
-														Computed:            true,
 													},
 													"wildcard": schema.StringAttribute{
 														MarkdownDescription: "Source IP wildcard",
 														Optional:            true,
-														Computed:            true,
 													},
 												},
 											},

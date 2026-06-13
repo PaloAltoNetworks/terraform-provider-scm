@@ -335,7 +335,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"cache": schema.SingleNestedAttribute{
 			MarkdownDescription: "Cache",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"cache_edns": schema.BoolAttribute{
 					MarkdownDescription: "Cache EDNS UDP response",
@@ -350,7 +349,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 				"max_ttl": schema.SingleNestedAttribute{
 					MarkdownDescription: "Max ttl",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enabled": schema.BoolAttribute{
 							MarkdownDescription: "Enable max ttl for this DNS object",
@@ -362,7 +360,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Time in seconds after which entry is cleared",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -375,12 +372,10 @@ var DnsProxiesResourceSchema = schema.Schema{
 				"inheritance": schema.SingleNestedAttribute{
 					MarkdownDescription: "Inheritance",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"source": schema.StringAttribute{
 							MarkdownDescription: "Dynamic interface",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -391,7 +386,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 				"secondary": schema.StringAttribute{
 					MarkdownDescription: "Secondary DNS Name server IP address",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -407,7 +401,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -419,7 +412,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 					"cacheable": schema.BoolAttribute{
 						MarkdownDescription: "Enable caching for this DNS proxy rule?",
 						Optional:            true,
-						Computed:            true,
 					},
 					"domain_name": schema.ListAttribute{
 						ElementType:         types.StringType,
@@ -440,7 +432,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 					"secondary": schema.StringAttribute{
 						MarkdownDescription: "Secondary DNS server IP address",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -448,7 +439,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"enabled": schema.BoolAttribute{
 			MarkdownDescription: "Enable DNS proxy?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -463,7 +453,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -498,7 +487,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -535,7 +523,6 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"tcp_queries": schema.SingleNestedAttribute{
 			MarkdownDescription: "Tcp queries",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"enabled": schema.BoolAttribute{
 					MarkdownDescription: "Turn on forwarding of TCP DNS queries?",
@@ -562,12 +549,10 @@ var DnsProxiesResourceSchema = schema.Schema{
 		"udp_queries": schema.SingleNestedAttribute{
 			MarkdownDescription: "Udp queries",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"retries": schema.SingleNestedAttribute{
 					MarkdownDescription: "Retries",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"attempts": schema.Int64Attribute{
 							Validators: []validator.Int64{

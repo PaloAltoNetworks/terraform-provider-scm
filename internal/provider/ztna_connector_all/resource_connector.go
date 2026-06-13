@@ -359,7 +359,6 @@ func (r *ConnectorResource) Delete(ctx context.Context, req resource.DeleteReque
 		)
 		return
 	}
-
 	// For 202 Accepted responses the delete is asynchronous. Poll the GET endpoint
 	// until the resource is gone (404) or a timeout is reached, so that dependent
 	// resources (e.g. a connector group) are not destroyed before this one is fully

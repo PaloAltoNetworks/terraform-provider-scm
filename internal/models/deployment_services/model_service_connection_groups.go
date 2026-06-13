@@ -53,7 +53,6 @@ var ServiceConnectionGroupsResourceSchema = schema.Schema{
 		"disable_snat": schema.BoolAttribute{
 			MarkdownDescription: "Disable snat",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -62,7 +61,6 @@ var ServiceConnectionGroupsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n",
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
@@ -81,7 +79,6 @@ var ServiceConnectionGroupsResourceSchema = schema.Schema{
 		"pbf_only": schema.BoolAttribute{
 			MarkdownDescription: "Pbf only",
 			Optional:            true,
-			Computed:            true,
 		},
 		"target": schema.ListAttribute{
 			ElementType:         types.StringType,

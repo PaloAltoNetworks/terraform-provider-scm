@@ -74,7 +74,6 @@ var TrustedTenantOverviewResourceSchema = schema.Schema{
 		"publisher": schema.SingleNestedAttribute{
 			MarkdownDescription: "Publisher",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"pending": schema.Int64Attribute{
 					MarkdownDescription: "Pending",
@@ -89,7 +88,6 @@ var TrustedTenantOverviewResourceSchema = schema.Schema{
 		"subscriber": schema.SingleNestedAttribute{
 			MarkdownDescription: "Subscriber",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"pending": schema.Int64Attribute{
 					MarkdownDescription: "Pending",

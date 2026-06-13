@@ -497,7 +497,7 @@ func (r *OcspResponderResource) Delete(ctx context.Context, req resource.DeleteR
 
 	tflog.Debug(ctx, "Deleting ocsp_responders", map[string]interface{}{"id": objectId})
 	deleteReq := r.client.OCSPRespondersAPI.DeleteOCSPRespondersByID(ctx, objectId)
-	httpResp, err := deleteReq.Execute()
+	_, err := deleteReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting ocsp_responders", err.Error())
 		detailedMessage := utils.PrintScmError(err)
@@ -506,30 +506,6 @@ func (r *OcspResponderResource) Delete(ctx context.Context, req resource.DeleteR
 			detailedMessage,
 		)
 		return
-	}
-
-	// For 202 Accepted responses the delete is asynchronous. Poll the GET endpoint
-	// until the resource is gone (404) or a timeout is reached, so that dependent
-	// resources (e.g. a connector group) are not destroyed before this one is fully
-	// removed on the backend.
-	if httpResp != nil && httpResp.StatusCode == http.StatusAccepted {
-		deadline := time.Now().Add(2 * time.Minute)
-		for time.Now().Before(deadline) {
-			time.Sleep(3 * time.Second)
-			_, getResp, getErr := r.client.OCSPRespondersAPI.GetOCSPRespondersByID(ctx, objectId).Execute()
-			if getErr != nil {
-				// If the SDK returns an error check whether it is a 404 — that means deletion is complete.
-				if getResp != nil && getResp.StatusCode == http.StatusNotFound {
-					break
-				}
-				// Any other error: stop polling and surface it.
-				resp.Diagnostics.AddWarning("Delete poll error", getErr.Error())
-				break
-			}
-			if getResp != nil && getResp.StatusCode == http.StatusNotFound {
-				break
-			}
-		}
 	}
 }
 

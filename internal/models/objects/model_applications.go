@@ -635,12 +635,10 @@ var ApplicationsResourceSchema = schema.Schema{
 		"able_to_transfer_file": schema.BoolAttribute{
 			MarkdownDescription: "Able to transfer file",
 			Optional:            true,
-			Computed:            true,
 		},
 		"alg_disable_capability": schema.StringAttribute{
 			MarkdownDescription: "Alg disable capability",
 			Optional:            true,
-			Computed:            true,
 		},
 		"category": schema.StringAttribute{
 			MarkdownDescription: "Category",
@@ -649,88 +647,72 @@ var ApplicationsResourceSchema = schema.Schema{
 		"consume_big_bandwidth": schema.BoolAttribute{
 			MarkdownDescription: "Consume big bandwidth",
 			Optional:            true,
-			Computed:            true,
 		},
 		"data_ident": schema.BoolAttribute{
 			MarkdownDescription: "Data ident",
 			Optional:            true,
-			Computed:            true,
 		},
 		"default": schema.SingleNestedAttribute{
 			MarkdownDescription: "Default",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ident_by_icmp6_type": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ident by icmp6 type",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"code": schema.StringAttribute{
 							MarkdownDescription: "Code",
 							Optional:            true,
-							Computed:            true,
 						},
 						"type": schema.StringAttribute{
 							MarkdownDescription: "Type",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"ident_by_icmp_type": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ident by icmp type",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"code": schema.StringAttribute{
 							MarkdownDescription: "Code",
 							Optional:            true,
-							Computed:            true,
 						},
 						"type": schema.StringAttribute{
 							MarkdownDescription: "Type",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"ident_by_ip_protocol": schema.StringAttribute{
 					MarkdownDescription: "Ident by ip protocol",
 					Optional:            true,
-					Computed:            true,
 				},
 				"port": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Port",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			MarkdownDescription: "Device",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"evasive_behavior": schema.BoolAttribute{
 			MarkdownDescription: "Evasive behavior",
 			Optional:            true,
-			Computed:            true,
 		},
 		"file_type_ident": schema.BoolAttribute{
 			MarkdownDescription: "File type ident",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -738,16 +720,13 @@ var ApplicationsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Folder",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"has_known_vulnerability": schema.BoolAttribute{
 			MarkdownDescription: "Has known vulnerability",
 			Optional:            true,
-			Computed:            true,
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "Id",
@@ -763,22 +742,18 @@ var ApplicationsResourceSchema = schema.Schema{
 		"no_appid_caching": schema.BoolAttribute{
 			MarkdownDescription: "No appid caching",
 			Optional:            true,
-			Computed:            true,
 		},
 		"parent_app": schema.StringAttribute{
 			MarkdownDescription: "Parent app",
 			Optional:            true,
-			Computed:            true,
 		},
 		"pervasive_use": schema.BoolAttribute{
 			MarkdownDescription: "Pervasive use",
 			Optional:            true,
-			Computed:            true,
 		},
 		"prone_to_misuse": schema.BoolAttribute{
 			MarkdownDescription: "Prone to misuse",
 			Optional:            true,
-			Computed:            true,
 		},
 		"risk": schema.StringAttribute{
 			MarkdownDescription: "Risk",
@@ -814,44 +789,36 @@ var ApplicationsResourceSchema = schema.Schema{
 													"equal_to": schema.SingleNestedAttribute{
 														MarkdownDescription: "Equal to",
 														Optional:            true,
-														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "Context",
 																Optional:            true,
-																Computed:            true,
 															},
 															"mask": schema.StringAttribute{
 																MarkdownDescription: "Mask",
 																Optional:            true,
-																Computed:            true,
 															},
 															"position": schema.StringAttribute{
 																MarkdownDescription: "Position",
 																Optional:            true,
-																Computed:            true,
 															},
 															"value": schema.StringAttribute{
 																MarkdownDescription: "Value",
 																Optional:            true,
-																Computed:            true,
 															},
 														},
 													},
 													"greater_than": schema.SingleNestedAttribute{
 														MarkdownDescription: "Greater than",
 														Optional:            true,
-														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "Context",
 																Optional:            true,
-																Computed:            true,
 															},
 															"qualifier": schema.ListNestedAttribute{
 																MarkdownDescription: "Qualifier",
 																Optional:            true,
-																Computed:            true,
 																NestedObject: schema.NestedAttributeObject{
 																	Attributes: map[string]schema.Attribute{
 																		"name": schema.StringAttribute{
@@ -868,24 +835,20 @@ var ApplicationsResourceSchema = schema.Schema{
 															"value": schema.Int64Attribute{
 																MarkdownDescription: "Value",
 																Optional:            true,
-																Computed:            true,
 															},
 														},
 													},
 													"less_than": schema.SingleNestedAttribute{
 														MarkdownDescription: "Less than",
 														Optional:            true,
-														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "Context",
 																Optional:            true,
-																Computed:            true,
 															},
 															"qualifier": schema.ListNestedAttribute{
 																MarkdownDescription: "Qualifier",
 																Optional:            true,
-																Computed:            true,
 																NestedObject: schema.NestedAttributeObject{
 																	Attributes: map[string]schema.Attribute{
 																		"name": schema.StringAttribute{
@@ -902,29 +865,24 @@ var ApplicationsResourceSchema = schema.Schema{
 															"value": schema.Int64Attribute{
 																MarkdownDescription: "Value",
 																Optional:            true,
-																Computed:            true,
 															},
 														},
 													},
 													"pattern_match": schema.SingleNestedAttribute{
 														MarkdownDescription: "Pattern match",
 														Optional:            true,
-														Computed:            true,
 														Attributes: map[string]schema.Attribute{
 															"context": schema.StringAttribute{
 																MarkdownDescription: "Context",
 																Optional:            true,
-																Computed:            true,
 															},
 															"pattern": schema.StringAttribute{
 																MarkdownDescription: "Pattern",
 																Optional:            true,
-																Computed:            true,
 															},
 															"qualifier": schema.ListNestedAttribute{
 																MarkdownDescription: "Qualifier",
 																Optional:            true,
-																Computed:            true,
 																NestedObject: schema.NestedAttributeObject{
 																	Attributes: map[string]schema.Attribute{
 																		"name": schema.StringAttribute{
@@ -951,7 +909,6 @@ var ApplicationsResourceSchema = schema.Schema{
 					"comment": schema.StringAttribute{
 						MarkdownDescription: "Comment",
 						Optional:            true,
-						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
@@ -960,12 +917,10 @@ var ApplicationsResourceSchema = schema.Schema{
 					"order_free": schema.BoolAttribute{
 						MarkdownDescription: "Order free",
 						Optional:            true,
-						Computed:            true,
 					},
 					"scope": schema.StringAttribute{
 						MarkdownDescription: "Scope",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -973,36 +928,29 @@ var ApplicationsResourceSchema = schema.Schema{
 		"snippet": schema.StringAttribute{
 			MarkdownDescription: "Snippet",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"subcategory": schema.StringAttribute{
 			MarkdownDescription: "Subcategory",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tcp_half_closed_timeout": schema.Int64Attribute{
 			MarkdownDescription: "Tcp half closed timeout",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tcp_time_wait_timeout": schema.Int64Attribute{
 			MarkdownDescription: "Tcp time wait timeout",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tcp_timeout": schema.Int64Attribute{
 			MarkdownDescription: "Tcp timeout",
 			Optional:            true,
-			Computed:            true,
 		},
 		"technology": schema.StringAttribute{
 			MarkdownDescription: "Technology",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",
@@ -1014,32 +962,26 @@ var ApplicationsResourceSchema = schema.Schema{
 		"timeout": schema.Int64Attribute{
 			MarkdownDescription: "Timeout",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tunnel_applications": schema.BoolAttribute{
 			MarkdownDescription: "Tunnel applications",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tunnel_other_application": schema.BoolAttribute{
 			MarkdownDescription: "Tunnel other application",
 			Optional:            true,
-			Computed:            true,
 		},
 		"udp_timeout": schema.Int64Attribute{
 			MarkdownDescription: "Udp timeout",
 			Optional:            true,
-			Computed:            true,
 		},
 		"used_by_malware": schema.BoolAttribute{
 			MarkdownDescription: "Used by malware",
 			Optional:            true,
-			Computed:            true,
 		},
 		"virus_ident": schema.BoolAttribute{
 			MarkdownDescription: "Virus ident",
 			Optional:            true,
-			Computed:            true,
 		},
 	},
 }

@@ -874,7 +874,6 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -891,35 +890,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"format": schema.SingleNestedAttribute{
 			MarkdownDescription: "Format",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"auth": schema.SingleNestedAttribute{
 					MarkdownDescription: "Auth",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -933,18 +926,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -952,35 +942,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"config": schema.SingleNestedAttribute{
 					MarkdownDescription: "Config",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -994,18 +978,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1013,35 +994,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"correlation": schema.SingleNestedAttribute{
 					MarkdownDescription: "Correlation",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1055,18 +1030,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1074,35 +1046,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"data": schema.SingleNestedAttribute{
 					MarkdownDescription: "Data",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1116,18 +1082,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1135,35 +1098,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"decryption": schema.SingleNestedAttribute{
 					MarkdownDescription: "Decryption",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1177,18 +1134,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1196,35 +1150,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"globalprotect": schema.SingleNestedAttribute{
 					MarkdownDescription: "Globalprotect",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1238,18 +1186,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1257,35 +1202,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"gtp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Gtp",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1299,18 +1238,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1318,35 +1254,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"hip_match": schema.SingleNestedAttribute{
 					MarkdownDescription: "Hip match",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1360,18 +1290,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1379,35 +1306,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"iptag": schema.SingleNestedAttribute{
 					MarkdownDescription: "Iptag",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1421,18 +1342,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1440,35 +1358,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"sctp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Sctp",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1482,18 +1394,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1501,35 +1410,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"system": schema.SingleNestedAttribute{
 					MarkdownDescription: "System",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1543,18 +1446,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1562,35 +1462,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"threat": schema.SingleNestedAttribute{
 					MarkdownDescription: "Threat",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1604,18 +1498,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1623,35 +1514,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"traffic": schema.SingleNestedAttribute{
 					MarkdownDescription: "Traffic",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1665,18 +1550,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1684,35 +1566,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"tunnel": schema.SingleNestedAttribute{
 					MarkdownDescription: "Tunnel",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1726,18 +1602,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1745,35 +1618,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"url": schema.SingleNestedAttribute{
 					MarkdownDescription: "Url",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1787,18 +1654,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1806,35 +1670,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"userid": schema.SingleNestedAttribute{
 					MarkdownDescription: "Userid",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1848,18 +1706,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1867,35 +1722,29 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"wildfire": schema.SingleNestedAttribute{
 					MarkdownDescription: "Wildfire",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"headers": schema.ListNestedAttribute{
 							MarkdownDescription: "Headers",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Header name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Header value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1909,18 +1758,15 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"params": schema.ListNestedAttribute{
 							MarkdownDescription: "Params",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Parameter name",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.StringAttribute{
 										MarkdownDescription: "Parameter value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -1928,12 +1774,10 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						"payload": schema.StringAttribute{
 							MarkdownDescription: "The log payload format.  The accepted log field values are as follows.\n* `receive_time`\n* `serial`\n* `seqno`\n* `actionflags`\n* `type`\n* `subtype`\n* `time_generated`\n* `high_res_timestamp`\n* `dg_hier_level_1`\n* `dg_hier_level_2`\n* `dg_hier_level_3`\n* `dg_hier_level_4`\n* `vsys_name`\n* `device_name`\n* `vsys_id`\n* `host`\n* `vsys`\n* `cmd`\n* `admin`\n* `client`\n* `result`\n* `path`\n* `dg_id`\n* `comment`\n* `tpl_id`\n* `sender_sw_version`\n* `cef-formatted-receive_time`\n* `cef-formatted-time_generated`\n* `before-change-detail`\n* `after-change-detail`\n",
 							Optional:            true,
-							Computed:            true,
 						},
 						"url_format": schema.StringAttribute{
 							MarkdownDescription: "The URL path of the HTTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -1961,7 +1805,6 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 					"address": schema.StringAttribute{
 						MarkdownDescription: "HTTP server address",
 						Optional:            true,
-						Computed:            true,
 					},
 					"certificate_profile": schema.StringAttribute{
 						MarkdownDescription: "HTTP server certificate profile",
@@ -1975,17 +1818,14 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "HTTP operation to perform",
 						Optional:            true,
-						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "HTTP server name",
 						Optional:            true,
-						Computed:            true,
 					},
 					"port": schema.Int64Attribute{
 						MarkdownDescription: "HTTP server port",
 						Optional:            true,
-						Computed:            true,
 					},
 					"protocol": schema.StringAttribute{
 						Validators: []validator.String{
@@ -1993,7 +1833,6 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "HTTP server protocol",
 						Optional:            true,
-						Computed:            true,
 					},
 					"tls_version": schema.StringAttribute{
 						Validators: []validator.String{
@@ -2001,7 +1840,6 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "HTTP server TLS version",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -2018,14 +1856,12 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"tag_registration": schema.BoolAttribute{
 			MarkdownDescription: "Register tags on match",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

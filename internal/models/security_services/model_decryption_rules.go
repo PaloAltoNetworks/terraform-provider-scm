@@ -172,7 +172,6 @@ var DecryptionRulesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the decryption rule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -196,14 +195,12 @@ var DecryptionRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"disabled": schema.BoolAttribute{
 			MarkdownDescription: "Is the rule disabled?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -218,7 +215,6 @@ var DecryptionRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -237,17 +233,14 @@ var DecryptionRulesResourceSchema = schema.Schema{
 		"log_fail": schema.BoolAttribute{
 			MarkdownDescription: "Log failed decryption events?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"log_setting": schema.StringAttribute{
 			MarkdownDescription: "The log settings of the decryption rule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"log_success": schema.BoolAttribute{
 			MarkdownDescription: "Log successful decryption events?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the decryption rule",
@@ -256,12 +249,10 @@ var DecryptionRulesResourceSchema = schema.Schema{
 		"negate_destination": schema.BoolAttribute{
 			MarkdownDescription: "Negate the destination addresses?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"negate_source": schema.BoolAttribute{
 			MarkdownDescription: "Negate the source addresses?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"position": schema.StringAttribute{
 			Validators: []validator.String{
@@ -278,7 +269,6 @@ var DecryptionRulesResourceSchema = schema.Schema{
 		"profile": schema.StringAttribute{
 			MarkdownDescription: "The decryption profile associated with the decryption rule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"relative_position": schema.StringAttribute{
 			Validators: []validator.String{
@@ -304,7 +294,6 @@ var DecryptionRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -347,7 +336,6 @@ var DecryptionRulesResourceSchema = schema.Schema{
 		"type": schema.SingleNestedAttribute{
 			MarkdownDescription: "The type of decryption",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ssl_forward_proxy": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -357,7 +345,6 @@ var DecryptionRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Ssl forward proxy\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 				"ssl_inbound_inspection": schema.SingleNestedAttribute{
@@ -368,13 +355,11 @@ var DecryptionRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "add the certificate name for SSL inbound inspection\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"certificates": schema.ListAttribute{
 							ElementType:         types.StringType,
 							MarkdownDescription: "List of certificate names for SSL inbound inspection",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},

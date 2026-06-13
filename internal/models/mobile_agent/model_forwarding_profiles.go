@@ -593,7 +593,6 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Forwarding profile description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
@@ -604,7 +603,6 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
@@ -634,7 +632,6 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 		"type": schema.SingleNestedAttribute{
 			MarkdownDescription: "Forwarding profile type configuration (PAC file, GlobalProtect proxy, or ZTNA agent)",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"global_protect_proxy": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -645,22 +642,18 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Global Protect proxy-based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"block_rule": schema.SingleNestedAttribute{
 							MarkdownDescription: "Basic block rule configuration for PAC file and GlobalProtect proxy profiles",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"allow_tcp": schema.SingleNestedAttribute{
 									MarkdownDescription: "TCP traffic allowlist configuration",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"enable_locations": schema.BoolAttribute{
 											MarkdownDescription: "Enable locations for allow-tcp",
 											Optional:            true,
-											Computed:            true,
 										},
 										"locations": schema.ListAttribute{
 											ElementType:         types.StringType,
@@ -669,14 +662,12 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 												listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(64)),
 											},
 											Optional: true,
-											Computed: true,
 										},
 									},
 								},
 								"allow_udp": schema.SingleNestedAttribute{
 									MarkdownDescription: "UDP traffic allowlist configuration with location and destination support",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"destinations": schema.StringAttribute{
 											Validators: []validator.String{
@@ -684,17 +675,14 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Destination addresses or networks allowed for UDP traffic",
 											Optional:            true,
-											Computed:            true,
 										},
 										"enable_destinations": schema.BoolAttribute{
 											MarkdownDescription: "Enable destinations for allow-udp",
 											Optional:            true,
-											Computed:            true,
 										},
 										"enable_locations": schema.BoolAttribute{
 											MarkdownDescription: "Enable locations for allow-udp",
 											Optional:            true,
-											Computed:            true,
 										},
 										"locations": schema.ListAttribute{
 											ElementType:         types.StringType,
@@ -703,21 +691,18 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 												listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(64)),
 											},
 											Optional: true,
-											Computed: true,
 										},
 									},
 								},
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable block rule",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"forwarding_rules": schema.ListNestedAttribute{
 							MarkdownDescription: "List of GlobalProtect proxy-based forwarding rules",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"connectivity": schema.StringAttribute{
@@ -781,22 +766,18 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "PAC file based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"block_rule": schema.SingleNestedAttribute{
 							MarkdownDescription: "Basic block rule configuration for PAC file and GlobalProtect proxy profiles",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"allow_tcp": schema.SingleNestedAttribute{
 									MarkdownDescription: "TCP traffic allowlist configuration",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"enable_locations": schema.BoolAttribute{
 											MarkdownDescription: "Enable locations for allow-tcp",
 											Optional:            true,
-											Computed:            true,
 										},
 										"locations": schema.ListAttribute{
 											ElementType:         types.StringType,
@@ -805,14 +786,12 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 												listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(64)),
 											},
 											Optional: true,
-											Computed: true,
 										},
 									},
 								},
 								"allow_udp": schema.SingleNestedAttribute{
 									MarkdownDescription: "UDP traffic allowlist configuration with location and destination support",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"destinations": schema.StringAttribute{
 											Validators: []validator.String{
@@ -820,17 +799,14 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Destination addresses or networks allowed for UDP traffic",
 											Optional:            true,
-											Computed:            true,
 										},
 										"enable_destinations": schema.BoolAttribute{
 											MarkdownDescription: "Enable destinations for allow-udp",
 											Optional:            true,
-											Computed:            true,
 										},
 										"enable_locations": schema.BoolAttribute{
 											MarkdownDescription: "Enable locations for allow-udp",
 											Optional:            true,
-											Computed:            true,
 										},
 										"locations": schema.ListAttribute{
 											ElementType:         types.StringType,
@@ -839,21 +815,18 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 												listvalidator.ValueStringsAre(stringvalidator.LengthAtMost(64)),
 											},
 											Optional: true,
-											Computed: true,
 										},
 									},
 								},
 								"enable": schema.BoolAttribute{
 									MarkdownDescription: "Enable block rule",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"forwarding_rules": schema.ListNestedAttribute{
 							MarkdownDescription: "List of PAC file-based forwarding rules",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"connectivity": schema.StringAttribute{
@@ -917,12 +890,10 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "ZTNA agent-based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"block_rule": schema.SingleNestedAttribute{
 							MarkdownDescription: "ZTNA block rule configuration",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"allow_icmp_for_troubleshooting": schema.BoolAttribute{
 									MarkdownDescription: "Allow ICMP for troubleshooting",
@@ -971,7 +942,6 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 						"forwarding_rules": schema.ListNestedAttribute{
 							MarkdownDescription: "List of ZTNA agent-based forwarding rules",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"connectivity": schema.StringAttribute{

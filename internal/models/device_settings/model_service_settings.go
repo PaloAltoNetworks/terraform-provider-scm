@@ -598,7 +598,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -621,7 +620,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -635,12 +633,10 @@ var ServiceSettingsResourceSchema = schema.Schema{
 		"services": schema.SingleNestedAttribute{
 			MarkdownDescription: "Services",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"dns_setting": schema.SingleNestedAttribute{
 					MarkdownDescription: "Dns setting",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dns_proxy_object": schema.StringAttribute{
 							Validators: []validator.String{
@@ -650,7 +646,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Dns proxy object\n\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
 							Optional:            true,
-							Computed:            true,
 						},
 						"servers": schema.SingleNestedAttribute{
 							Validators: []validator.Object{
@@ -660,17 +655,14 @@ var ServiceSettingsResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Servers\n\n> ℹ️ **Note:** You must specify exactly one of `dns_proxy_object` and `servers`.",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"primary": schema.StringAttribute{
 									MarkdownDescription: "Primary",
 									Optional:            true,
-									Computed:            true,
 								},
 								"secondary": schema.StringAttribute{
 									MarkdownDescription: "Secondary",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
@@ -703,17 +695,14 @@ var ServiceSettingsResourceSchema = schema.Schema{
 				"ntp_servers": schema.SingleNestedAttribute{
 					MarkdownDescription: "Ntp servers",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"primary_ntp_server": schema.SingleNestedAttribute{
 							MarkdownDescription: "Primary ntp server",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"authentication_type": schema.SingleNestedAttribute{
 									MarkdownDescription: "Authentication type",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"autokey": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
@@ -724,7 +713,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Autokey\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
 										"none": schema.SingleNestedAttribute{
@@ -736,7 +724,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
 										"symmetric_key": schema.SingleNestedAttribute{
@@ -748,22 +735,18 @@ var ServiceSettingsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Symmetric key\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"algorithm": schema.SingleNestedAttribute{
 													MarkdownDescription: "Algorithm",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"md5": schema.SingleNestedAttribute{
 															MarkdownDescription: "Md5",
 															Optional:            true,
-															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
-																	Computed:            true,
 																	Sensitive:           true,
 																},
 															},
@@ -771,12 +754,10 @@ var ServiceSettingsResourceSchema = schema.Schema{
 														"sha1": schema.SingleNestedAttribute{
 															MarkdownDescription: "Sha1",
 															Optional:            true,
-															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
-																	Computed:            true,
 																	Sensitive:           true,
 																},
 															},
@@ -786,7 +767,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 												"key_id": schema.Float64Attribute{
 													MarkdownDescription: "Key id",
 													Optional:            true,
-													Computed:            true,
 												},
 											},
 										},
@@ -795,19 +775,16 @@ var ServiceSettingsResourceSchema = schema.Schema{
 								"ntp_server_address": schema.StringAttribute{
 									MarkdownDescription: "Ntp server address",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"secondary_ntp_server": schema.SingleNestedAttribute{
 							MarkdownDescription: "Secondary ntp server",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"authentication_type": schema.SingleNestedAttribute{
 									MarkdownDescription: "Authentication type",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"autokey": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
@@ -818,7 +795,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Autokey\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
 										"none": schema.SingleNestedAttribute{
@@ -830,7 +806,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
 										"symmetric_key": schema.SingleNestedAttribute{
@@ -842,22 +817,18 @@ var ServiceSettingsResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Symmetric key\n\n> ℹ️ **Note:** You must specify exactly one of `autokey`, `none`, and `symmetric_key`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"algorithm": schema.SingleNestedAttribute{
 													MarkdownDescription: "Algorithm",
 													Optional:            true,
-													Computed:            true,
 													Attributes: map[string]schema.Attribute{
 														"md5": schema.SingleNestedAttribute{
 															MarkdownDescription: "Md5",
 															Optional:            true,
-															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
-																	Computed:            true,
 																	Sensitive:           true,
 																},
 															},
@@ -865,12 +836,10 @@ var ServiceSettingsResourceSchema = schema.Schema{
 														"sha1": schema.SingleNestedAttribute{
 															MarkdownDescription: "Sha1",
 															Optional:            true,
-															Computed:            true,
 															Attributes: map[string]schema.Attribute{
 																"authentication_key": schema.StringAttribute{
 																	MarkdownDescription: "Authentication key",
 																	Optional:            true,
-																	Computed:            true,
 																	Sensitive:           true,
 																},
 															},
@@ -880,7 +849,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 												"key_id": schema.Float64Attribute{
 													MarkdownDescription: "Key id",
 													Optional:            true,
-													Computed:            true,
 												},
 											},
 										},
@@ -889,7 +857,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 								"ntp_server_address": schema.StringAttribute{
 									MarkdownDescription: "Ntp server address",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
@@ -898,23 +865,19 @@ var ServiceSettingsResourceSchema = schema.Schema{
 				"secure_proxy_password": schema.StringAttribute{
 					MarkdownDescription: "Secure proxy password",
 					Optional:            true,
-					Computed:            true,
 					Sensitive:           true,
 				},
 				"secure_proxy_port": schema.Float64Attribute{
 					MarkdownDescription: "Secure proxy port",
 					Optional:            true,
-					Computed:            true,
 				},
 				"secure_proxy_server": schema.StringAttribute{
 					MarkdownDescription: "Secure proxy server",
 					Optional:            true,
-					Computed:            true,
 				},
 				"secure_proxy_user": schema.StringAttribute{
 					MarkdownDescription: "Secure proxy user",
 					Optional:            true,
-					Computed:            true,
 				},
 				"server_verification": schema.BoolAttribute{
 					MarkdownDescription: "Server verification",
@@ -942,7 +905,6 @@ var ServiceSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

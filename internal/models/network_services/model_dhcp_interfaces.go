@@ -540,7 +540,6 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -557,7 +556,6 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -618,56 +616,46 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "DHCP server mode",
 					Optional:            true,
-					Computed:            true,
 				},
 				"option": schema.SingleNestedAttribute{
 					MarkdownDescription: "Option",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"dns": schema.SingleNestedAttribute{
 							MarkdownDescription: "Dns",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"primary": schema.StringAttribute{
 									MarkdownDescription: "Primary DNS server",
 									Optional:            true,
-									Computed:            true,
 								},
 								"secondary": schema.StringAttribute{
 									MarkdownDescription: "Secondary DNS server",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"dns_suffix": schema.StringAttribute{
 							MarkdownDescription: "DNS suffix",
 							Optional:            true,
-							Computed:            true,
 						},
 						"gateway": schema.StringAttribute{
 							MarkdownDescription: "Default gateway",
 							Optional:            true,
-							Computed:            true,
 						},
 						"inheritance": schema.SingleNestedAttribute{
 							MarkdownDescription: "Inheritance",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"source": schema.StringAttribute{
 									MarkdownDescription: "Interface from which to inherit lease options",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"lease": schema.SingleNestedAttribute{
 							MarkdownDescription: "Lease",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"timeout": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -678,7 +666,6 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "DHCP lease timeout (minutes)\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"unlimited": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -688,7 +675,6 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Unlimited\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -696,56 +682,46 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 						"nis": schema.SingleNestedAttribute{
 							MarkdownDescription: "Nis",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"primary": schema.StringAttribute{
 									MarkdownDescription: "Primary NIS server",
 									Optional:            true,
-									Computed:            true,
 								},
 								"secondary": schema.StringAttribute{
 									MarkdownDescription: "Secondary NIS server",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"ntp": schema.SingleNestedAttribute{
 							MarkdownDescription: "Ntp",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"primary": schema.StringAttribute{
 									MarkdownDescription: "Primary NTP server",
 									Optional:            true,
-									Computed:            true,
 								},
 								"secondary": schema.StringAttribute{
 									MarkdownDescription: "Secondary NTP server",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"pop3_server": schema.StringAttribute{
 							MarkdownDescription: "POP3 server",
 							Optional:            true,
-							Computed:            true,
 						},
 						"smtp_server": schema.StringAttribute{
 							MarkdownDescription: "SMTP server",
 							Optional:            true,
-							Computed:            true,
 						},
 						"subnet_mask": schema.StringAttribute{
 							MarkdownDescription: "Subnet mask",
 							Optional:            true,
-							Computed:            true,
 						},
 						"user_defined": schema.ListNestedAttribute{
 							MarkdownDescription: "Custom DHCP options",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"ascii": schema.ListAttribute{
@@ -759,7 +735,6 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Option code",
 										Optional:            true,
-										Computed:            true,
 									},
 									"hex": schema.ListAttribute{
 										ElementType:         types.StringType,
@@ -785,17 +760,14 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 						"wins": schema.SingleNestedAttribute{
 							MarkdownDescription: "Wins",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"primary": schema.StringAttribute{
 									MarkdownDescription: "Primary WINS server",
 									Optional:            true,
-									Computed:            true,
 								},
 								"secondary": schema.StringAttribute{
 									MarkdownDescription: "Secondary WINS server",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
@@ -804,7 +776,6 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 				"probe_ip": schema.BoolAttribute{
 					MarkdownDescription: "Ping IP before allocating?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"reserved": schema.ListNestedAttribute{
 					MarkdownDescription: "List of IP reservations",
@@ -814,17 +785,14 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 							"description": schema.StringAttribute{
 								MarkdownDescription: "Reservation description",
 								Optional:            true,
-								Computed:            true,
 							},
 							"mac": schema.StringAttribute{
 								MarkdownDescription: "Reserved MAC address",
 								Optional:            true,
-								Computed:            true,
 							},
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Reserved IP address",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -843,7 +811,6 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

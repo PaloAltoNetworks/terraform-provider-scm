@@ -131,7 +131,6 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -148,7 +147,6 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -174,52 +172,42 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 				"auth_algo_sha1": schema.BoolAttribute{
 					MarkdownDescription: "Allow SHA1 authentication?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"auth_algo_sha256": schema.BoolAttribute{
 					MarkdownDescription: "Allow SHA256 authentication?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"auth_algo_sha384": schema.BoolAttribute{
 					MarkdownDescription: "Allow SHA384 authentication?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"enc_algo_aes_128_cbc": schema.BoolAttribute{
 					MarkdownDescription: "Allow AES-128-CBC algorithm?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"enc_algo_aes_128_gcm": schema.BoolAttribute{
 					MarkdownDescription: "Allow AES-128-GCM algorithm?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"enc_algo_aes_256_cbc": schema.BoolAttribute{
 					MarkdownDescription: "Allow AES-256-CBC algorithm?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"enc_algo_aes_256_gcm": schema.BoolAttribute{
 					MarkdownDescription: "Allow algorithm AES-256-GCM",
 					Optional:            true,
-					Computed:            true,
 				},
 				"keyxchg_algo_dhe": schema.BoolAttribute{
 					MarkdownDescription: "Allow DHE algorithm?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"keyxchg_algo_ecdhe": schema.BoolAttribute{
 					MarkdownDescription: "Allow ECDHE algorithm?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"keyxchg_algo_rsa": schema.BoolAttribute{
 					MarkdownDescription: "Allow RSA algorithm?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"max_version": schema.StringAttribute{
 					Validators: []validator.String{
@@ -227,7 +215,6 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Maximum TLS version",
 					Optional:            true,
-					Computed:            true,
 				},
 				"min_version": schema.StringAttribute{
 					Validators: []validator.String{
@@ -235,7 +222,6 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Minimum TLS version",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -251,7 +237,6 @@ var TlsServiceProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

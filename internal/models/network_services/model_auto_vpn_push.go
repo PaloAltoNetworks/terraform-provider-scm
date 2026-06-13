@@ -92,17 +92,14 @@ var AutoVpnPushResponseResourceSchema = schema.Schema{
 		"job": schema.StringAttribute{
 			MarkdownDescription: "Job ID",
 			Optional:            true,
-			Computed:            true,
 		},
 		"message": schema.StringAttribute{
 			MarkdownDescription: "Job message",
 			Optional:            true,
-			Computed:            true,
 		},
 		"success": schema.BoolAttribute{
 			MarkdownDescription: "Push successful?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

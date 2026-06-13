@@ -111,7 +111,6 @@ var TcpSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -128,7 +127,6 @@ var TcpSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -151,19 +149,16 @@ var TcpSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"tcp": schema.SingleNestedAttribute{
 			MarkdownDescription: "Tcp",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"allow_challenge_ack": schema.BoolAttribute{
 					MarkdownDescription: "Allow arbitrary ACK in response to SYN?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"asymmetric_path": schema.StringAttribute{
 					Validators: []validator.String{
@@ -171,22 +166,18 @@ var TcpSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Asymmetric path action",
 					Optional:            true,
-					Computed:            true,
 				},
 				"bypass_exceed_oo_queue": schema.BoolAttribute{
 					MarkdownDescription: "Forward segments exceeding TCP out-of-order queue?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"check_timestamp_option": schema.BoolAttribute{
 					MarkdownDescription: "Drop segments with null timestamp option?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"drop_zero_flag": schema.BoolAttribute{
 					MarkdownDescription: "Drop segments without flag?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"siptcp_cleartext_proxy": schema.StringAttribute{
 					Validators: []validator.String{
@@ -194,17 +185,14 @@ var TcpSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "SIP TCP cleartext action (`'0'` = Always Off, `'1'` = Always Enabled, `'2'` = Automatically enable proxy when needed)",
 					Optional:            true,
-					Computed:            true,
 				},
 				"strip_mptcp_option": schema.BoolAttribute{
 					MarkdownDescription: "Strip MPTCP option?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"tcp_retransmit_scan": schema.BoolAttribute{
 					MarkdownDescription: "TCP retransmit scan?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"urgent_data": schema.StringAttribute{
 					Validators: []validator.String{
@@ -212,7 +200,6 @@ var TcpSettingsResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Urgent data flag action",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},

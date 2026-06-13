@@ -483,7 +483,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -497,7 +496,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -514,7 +512,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -540,86 +537,70 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Action",
 						Optional:            true,
-						Computed:            true,
 					},
 					"description": schema.StringAttribute{
 						MarkdownDescription: "Description",
 						Optional:            true,
-						Computed:            true,
 					},
 					"match": schema.SingleNestedAttribute{
 						MarkdownDescription: "Match",
 						Optional:            true,
-						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"as_path_access_list": schema.StringAttribute{
 								MarkdownDescription: "AS path access list",
 								Optional:            true,
-								Computed:            true,
 							},
 							"extended_community": schema.StringAttribute{
 								MarkdownDescription: "Extended community",
 								Optional:            true,
-								Computed:            true,
 							},
 							"interface": schema.StringAttribute{
 								MarkdownDescription: "Interface",
 								Optional:            true,
-								Computed:            true,
 							},
 							"ipv4": schema.SingleNestedAttribute{
 								MarkdownDescription: "bgp-route-maps ipv4 object",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"address": schema.SingleNestedAttribute{
 										MarkdownDescription: "Address",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"access_list": schema.StringAttribute{
 												MarkdownDescription: "Access list",
 												Optional:            true,
-												Computed:            true,
 											},
 											"prefix_list": schema.StringAttribute{
 												MarkdownDescription: "Prefix list",
 												Optional:            true,
-												Computed:            true,
 											},
 										},
 									},
 									"next_hop": schema.SingleNestedAttribute{
 										MarkdownDescription: "Next hop",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"access_list": schema.StringAttribute{
 												MarkdownDescription: "Access list",
 												Optional:            true,
-												Computed:            true,
 											},
 											"prefix_list": schema.StringAttribute{
 												MarkdownDescription: "Prefix list",
 												Optional:            true,
-												Computed:            true,
 											},
 										},
 									},
 									"route_source": schema.SingleNestedAttribute{
 										MarkdownDescription: "Route source",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"access_list": schema.StringAttribute{
 												MarkdownDescription: "Access list",
 												Optional:            true,
-												Computed:            true,
 											},
 											"prefix_list": schema.StringAttribute{
 												MarkdownDescription: "Prefix list",
 												Optional:            true,
-												Computed:            true,
 											},
 										},
 									},
@@ -628,7 +609,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 							"large_community": schema.StringAttribute{
 								MarkdownDescription: "Large community",
 								Optional:            true,
-								Computed:            true,
 							},
 							"local_preference": schema.Int64Attribute{
 								Validators: []validator.Int64{
@@ -636,7 +616,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Local preference",
 								Optional:            true,
-								Computed:            true,
 							},
 							"metric": schema.Int64Attribute{
 								Validators: []validator.Int64{
@@ -644,12 +623,10 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Metric",
 								Optional:            true,
-								Computed:            true,
 							},
 							"origin": schema.StringAttribute{
 								MarkdownDescription: "Origin",
 								Optional:            true,
-								Computed:            true,
 							},
 							"peer": schema.StringAttribute{
 								Validators: []validator.String{
@@ -657,12 +634,10 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Peer",
 								Optional:            true,
-								Computed:            true,
 							},
 							"regular_community": schema.StringAttribute{
 								MarkdownDescription: "Regular community",
 								Optional:            true,
-								Computed:            true,
 							},
 							"tag": schema.Int64Attribute{
 								Validators: []validator.Int64{
@@ -670,7 +645,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Tag",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -680,17 +654,14 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 						},
 						MarkdownDescription: "Sequence number",
 						Optional:            true,
-						Computed:            true,
 					},
 					"set": schema.SingleNestedAttribute{
 						MarkdownDescription: "Set",
 						Optional:            true,
-						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"aggregator": schema.SingleNestedAttribute{
 								MarkdownDescription: "bgp-route-maps aggregator",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"as": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -698,12 +669,10 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Aggregator AS",
 										Optional:            true,
-										Computed:            true,
 									},
 									"router_id": schema.StringAttribute{
 										MarkdownDescription: "Router ID",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -711,33 +680,27 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								ElementType:         types.Int64Type,
 								MarkdownDescription: "Aspath exclude",
 								Optional:            true,
-								Computed:            true,
 							},
 							"aspath_prepend": schema.ListAttribute{
 								ElementType:         types.Int64Type,
 								MarkdownDescription: "Aspath prepend",
 								Optional:            true,
-								Computed:            true,
 							},
 							"atomic_aggregate": schema.BoolAttribute{
 								MarkdownDescription: "Enable BGP atomic aggregate?",
 								Optional:            true,
-								Computed:            true,
 							},
 							"ipv4": schema.SingleNestedAttribute{
 								MarkdownDescription: "Ipv4",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"next_hop": schema.StringAttribute{
 										MarkdownDescription: "Next hop",
 										Optional:            true,
-										Computed:            true,
 									},
 									"source_address": schema.StringAttribute{
 										MarkdownDescription: "Source address",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -745,7 +708,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								ElementType:         types.StringType,
 								MarkdownDescription: "Large community",
 								Optional:            true,
-								Computed:            true,
 							},
 							"local_preference": schema.Int64Attribute{
 								Validators: []validator.Int64{
@@ -753,12 +715,10 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Local preference",
 								Optional:            true,
-								Computed:            true,
 							},
 							"metric": schema.SingleNestedAttribute{
 								MarkdownDescription: "Metric",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"action": schema.StringAttribute{
 										Validators: []validator.String{
@@ -766,7 +726,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Metric action",
 										Optional:            true,
-										Computed:            true,
 									},
 									"value": schema.Int64Attribute{
 										Validators: []validator.Int64{
@@ -774,7 +733,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Metric value",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -784,38 +742,31 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Origin",
 								Optional:            true,
-								Computed:            true,
 							},
 							"originator_id": schema.StringAttribute{
 								MarkdownDescription: "Originator ID",
 								Optional:            true,
-								Computed:            true,
 							},
 							"overwrite_large_community": schema.BoolAttribute{
 								MarkdownDescription: "Overwrite large community?",
 								Optional:            true,
-								Computed:            true,
 							},
 							"overwrite_regular_community": schema.BoolAttribute{
 								MarkdownDescription: "Overwrite regular community?",
 								Optional:            true,
-								Computed:            true,
 							},
 							"regular_community": schema.ListAttribute{
 								ElementType:         types.StringType,
 								MarkdownDescription: "Regular community",
 								Optional:            true,
-								Computed:            true,
 							},
 							"remove_large_community": schema.StringAttribute{
 								MarkdownDescription: "Remove large community name",
 								Optional:            true,
-								Computed:            true,
 							},
 							"remove_regular_community": schema.StringAttribute{
 								MarkdownDescription: "Remove regular community name",
 								Optional:            true,
-								Computed:            true,
 							},
 							"tag": schema.Int64Attribute{
 								Validators: []validator.Int64{
@@ -823,7 +774,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Tag",
 								Optional:            true,
-								Computed:            true,
 							},
 							"weight": schema.Int64Attribute{
 								Validators: []validator.Int64{
@@ -831,7 +781,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Weight",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -850,7 +799,6 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

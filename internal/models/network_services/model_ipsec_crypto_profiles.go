@@ -206,7 +206,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -253,7 +252,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -267,7 +265,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 		"lifesize": schema.SingleNestedAttribute{
 			MarkdownDescription: "Lifesize",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"gb": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -280,7 +277,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifesize in gigabytes(GB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
 					Optional:            true,
-					Computed:            true,
 				},
 				"kb": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -293,7 +289,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifesize in kilobytes(KB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
 					Optional:            true,
-					Computed:            true,
 				},
 				"mb": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -306,7 +301,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifesize in megabytes(MB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
 					Optional:            true,
-					Computed:            true,
 				},
 				"tb": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -319,7 +313,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "specify lifesize in terabytes(TB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -396,7 +389,6 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

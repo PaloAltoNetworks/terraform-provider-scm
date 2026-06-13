@@ -421,12 +421,10 @@ var NatRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Active active device binding",
 			Optional:            true,
-			Computed:            true,
 		},
 		"description": schema.StringAttribute{
 			MarkdownDescription: "NAT rule description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -436,12 +434,10 @@ var NatRulesResourceSchema = schema.Schema{
 		"destination_translation": schema.SingleNestedAttribute{
 			MarkdownDescription: "Destination translation",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"dns_rewrite": schema.SingleNestedAttribute{
 					MarkdownDescription: "DNS rewrite",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"direction": schema.StringAttribute{
 							Validators: []validator.String{
@@ -449,14 +445,12 @@ var NatRulesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Direction",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"translated_address": schema.StringAttribute{
 					MarkdownDescription: "Translated destination IP address",
 					Optional:            true,
-					Computed:            true,
 				},
 				"translated_port": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -464,7 +458,6 @@ var NatRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Translated destination port",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -475,9 +468,7 @@ var NatRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -490,7 +481,6 @@ var NatRulesResourceSchema = schema.Schema{
 		"dynamic_destination_translation": schema.SingleNestedAttribute{
 			MarkdownDescription: "Dynamic destination translation",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"distribution": schema.StringAttribute{
 					Validators: []validator.String{
@@ -498,12 +488,10 @@ var NatRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Distribution method",
 					Optional:            true,
-					Computed:            true,
 				},
 				"translated_address": schema.StringAttribute{
 					MarkdownDescription: "Translated destination IP address",
 					Optional:            true,
-					Computed:            true,
 				},
 				"translated_port": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -511,7 +499,6 @@ var NatRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Translated destination port",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -523,9 +510,7 @@ var NatRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -577,9 +562,7 @@ var NatRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -591,37 +574,30 @@ var NatRulesResourceSchema = schema.Schema{
 		"source_translation": schema.SingleNestedAttribute{
 			MarkdownDescription: "Source translation",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"dynamic_ip": schema.SingleNestedAttribute{
 					MarkdownDescription: "Dynamic IP",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"fallback": schema.SingleNestedAttribute{
 							MarkdownDescription: "Fallback",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"interface_address": schema.SingleNestedAttribute{
 									MarkdownDescription: "Fallback interface",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"floating_ip": schema.StringAttribute{
 											MarkdownDescription: "Floating IP address",
 											Optional:            true,
-											Computed:            true,
 										},
 										"interface": schema.StringAttribute{
 											MarkdownDescription: "Interface name",
 											Optional:            true,
-											Computed:            true,
 										},
 										"ip": schema.StringAttribute{
 											MarkdownDescription: "IP address",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -629,7 +605,6 @@ var NatRulesResourceSchema = schema.Schema{
 									ElementType:         types.StringType,
 									MarkdownDescription: "Fallback IP addresses",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
@@ -637,34 +612,28 @@ var NatRulesResourceSchema = schema.Schema{
 							ElementType:         types.StringType,
 							MarkdownDescription: "Translated IP addresses",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"dynamic_ip_and_port": schema.SingleNestedAttribute{
 					MarkdownDescription: "Dynamic IP and port",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"interface_address": schema.SingleNestedAttribute{
 							MarkdownDescription: "Translated source interface",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"floating_ip": schema.StringAttribute{
 									MarkdownDescription: "Floating IP address",
 									Optional:            true,
-									Computed:            true,
 								},
 								"interface": schema.StringAttribute{
 									MarkdownDescription: "Interface name",
 									Optional:            true,
-									Computed:            true,
 								},
 								"ip": schema.StringAttribute{
 									MarkdownDescription: "Translated source IP address",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
@@ -672,24 +641,20 @@ var NatRulesResourceSchema = schema.Schema{
 							ElementType:         types.StringType,
 							MarkdownDescription: "Translated source IP addresses",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"static_ip": schema.SingleNestedAttribute{
 					MarkdownDescription: "Static IP",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"bi_directional": schema.StringAttribute{
 							MarkdownDescription: "Bi directional",
 							Optional:            true,
-							Computed:            true,
 						},
 						"translated_address": schema.StringAttribute{
 							MarkdownDescription: "Translated IP address",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -715,7 +680,6 @@ var NatRulesResourceSchema = schema.Schema{
 		"to_interface": schema.StringAttribute{
 			MarkdownDescription: "Destination interface of the original packet",
 			Optional:            true,
-			Computed:            true,
 		},
 	},
 }

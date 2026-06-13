@@ -90,7 +90,6 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -115,7 +114,6 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -132,7 +130,6 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Maxiumum clock skew",
 			Optional:            true,
-			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the SAML server profile",
@@ -144,7 +141,6 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "SAML HTTP binding for SLO requests to the identity provider",
 			Optional:            true,
-			Computed:            true,
 		},
 		"slo_url": schema.StringAttribute{
 			Validators: []validator.String{
@@ -153,7 +149,6 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Identity provider SLO URL",
 			Optional:            true,
-			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -167,7 +162,6 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -196,12 +190,10 @@ var SamlServerProfilesResourceSchema = schema.Schema{
 		"validate_idp_certificate": schema.BoolAttribute{
 			MarkdownDescription: "Validate the identity provider certificate?",
 			Optional:            true,
-			Computed:            true,
 		},
 		"want_auth_requests_signed": schema.BoolAttribute{
 			MarkdownDescription: "Sign SAML message to the identity provider?",
 			Optional:            true,
-			Computed:            true,
 		},
 	},
 }

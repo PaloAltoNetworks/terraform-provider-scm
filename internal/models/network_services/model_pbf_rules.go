@@ -307,7 +307,6 @@ var PbfRulesResourceSchema = schema.Schema{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "Action",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"discard": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -318,7 +317,6 @@ var PbfRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 				"forward": schema.SingleNestedAttribute{
@@ -330,39 +328,32 @@ var PbfRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Forward\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"egress_interface": schema.StringAttribute{
 							MarkdownDescription: "Egress interface",
 							Optional:            true,
-							Computed:            true,
 						},
 						"monitor": schema.SingleNestedAttribute{
 							MarkdownDescription: "Monitor",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"disable_if_unreachable": schema.BoolAttribute{
 									MarkdownDescription: "Disable this rule if nexthop/monitor ip is unreachable?",
 									Optional:            true,
-									Computed:            true,
 								},
 								"ip_address": schema.StringAttribute{
 									MarkdownDescription: "Monitor IP address",
 									Optional:            true,
-									Computed:            true,
 								},
 								"profile": schema.StringAttribute{
 									MarkdownDescription: "Monitoring profile",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"nexthop": schema.SingleNestedAttribute{
 							MarkdownDescription: "Nexthop",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"fqdn": schema.StringAttribute{
 									Validators: []validator.String{
@@ -372,7 +363,6 @@ var PbfRulesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Next hop FQDN\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"ip_address": schema.StringAttribute{
 									Validators: []validator.String{
@@ -382,7 +372,6 @@ var PbfRulesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Next hop IP address\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
@@ -397,7 +386,6 @@ var PbfRulesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "No pbf\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 			},
@@ -410,7 +398,6 @@ var PbfRulesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -429,30 +416,25 @@ var PbfRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"enforce_symmetric_return": schema.SingleNestedAttribute{
 			MarkdownDescription: "Enforce symmetric return",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"enabled": schema.BoolAttribute{
 					MarkdownDescription: "Enforce symmetric return?",
 					Optional:            true,
-					Computed:            true,
 				},
 				"nexthop_address_list": schema.ListNestedAttribute{
 					MarkdownDescription: "Next hop IP addresses",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Next hop IP address",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -472,14 +454,12 @@ var PbfRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"from": schema.SingleNestedAttribute{
 			MarkdownDescription: "From",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"interface": schema.ListAttribute{
 					ElementType:         types.StringType,
@@ -490,7 +470,6 @@ var PbfRulesResourceSchema = schema.Schema{
 						),
 					},
 					Optional: true,
-					Computed: true,
 				},
 				"zone": schema.ListAttribute{
 					ElementType:         types.StringType,
@@ -501,7 +480,6 @@ var PbfRulesResourceSchema = schema.Schema{
 						),
 					},
 					Optional: true,
-					Computed: true,
 				},
 			},
 		},
@@ -515,12 +493,10 @@ var PbfRulesResourceSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			MarkdownDescription: "PBF rule name",
 			Optional:            true,
-			Computed:            true,
 		},
 		"schedule": schema.StringAttribute{
 			MarkdownDescription: "Schedule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"service": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -539,7 +515,6 @@ var PbfRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

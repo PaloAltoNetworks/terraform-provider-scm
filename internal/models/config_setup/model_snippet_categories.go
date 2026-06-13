@@ -170,7 +170,6 @@ var SnippetCategoriesResourceSchema = schema.Schema{
 					"id": schema.StringAttribute{
 						MarkdownDescription: "Id",
 						Optional:            true,
-						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",

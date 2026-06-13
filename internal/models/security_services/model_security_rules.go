@@ -509,7 +509,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The action to be taken when the rule is matched",
 			Optional:            true,
-			Computed:            true,
 		},
 		"allow_url_category": schema.ListNestedAttribute{
 			MarkdownDescription: "Allow url category",
@@ -547,12 +546,10 @@ var SecurityRulesResourceSchema = schema.Schema{
 					"dlp": schema.StringAttribute{
 						MarkdownDescription: "Dlp",
 						Optional:            true,
-						Computed:            true,
 					},
 					"file_control": schema.SingleNestedAttribute{
 						MarkdownDescription: "File control",
 						Optional:            true,
-						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"download": schema.StringAttribute{
 								Validators: []validator.String{
@@ -560,7 +557,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Download",
 								Optional:            true,
-								Computed:            true,
 							},
 							"upload": schema.StringAttribute{
 								Validators: []validator.String{
@@ -568,7 +564,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Upload",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
@@ -581,7 +576,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -605,12 +599,10 @@ var SecurityRulesResourceSchema = schema.Schema{
 					"dlp": schema.StringAttribute{
 						MarkdownDescription: "Dlp",
 						Optional:            true,
-						Computed:            true,
 					},
 					"file_control": schema.SingleNestedAttribute{
 						MarkdownDescription: "File control",
 						Optional:            true,
-						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"download": schema.StringAttribute{
 								Validators: []validator.String{
@@ -618,7 +610,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Download",
 								Optional:            true,
-								Computed:            true,
 							},
 							"upload": schema.StringAttribute{
 								Validators: []validator.String{
@@ -626,24 +617,20 @@ var SecurityRulesResourceSchema = schema.Schema{
 								},
 								MarkdownDescription: "Upload",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
-						Computed:            true,
 					},
 					"saas_enterprise_control": schema.SingleNestedAttribute{
 						MarkdownDescription: "Saas enterprise control",
 						Optional:            true,
-						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"consumer_access": schema.SingleNestedAttribute{
 								MarkdownDescription: "Consumer access",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"enable": schema.StringAttribute{
 										Validators: []validator.String{
@@ -651,14 +638,12 @@ var SecurityRulesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Enable",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
 							"enterprise_access": schema.SingleNestedAttribute{
 								MarkdownDescription: "Enterprise access",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"enable": schema.StringAttribute{
 										Validators: []validator.String{
@@ -666,13 +651,11 @@ var SecurityRulesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Enable",
 										Optional:            true,
-										Computed:            true,
 									},
 									"tenant_restrictions": schema.ListAttribute{
 										ElementType:         types.StringType,
 										MarkdownDescription: "Tenant restrictions",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -691,37 +674,31 @@ var SecurityRulesResourceSchema = schema.Schema{
 					"tenant_control": schema.SingleNestedAttribute{
 						MarkdownDescription: "Tenant control",
 						Optional:            true,
-						Computed:            true,
 						Attributes: map[string]schema.Attribute{
 							"allowed_activities": schema.ListAttribute{
 								ElementType:         types.StringType,
 								MarkdownDescription: "Allowed activities",
 								Optional:            true,
-								Computed:            true,
 							},
 							"blocked_activities": schema.ListAttribute{
 								ElementType:         types.StringType,
 								MarkdownDescription: "Blocked activities",
 								Optional:            true,
-								Computed:            true,
 							},
 							"parent_application": schema.StringAttribute{
 								MarkdownDescription: "Parent application",
 								Optional:            true,
-								Computed:            true,
 							},
 							"tenants": schema.ListAttribute{
 								ElementType:         types.StringType,
 								MarkdownDescription: "Tenants",
 								Optional:            true,
-								Computed:            true,
 							},
 						},
 					},
 					"type": schema.StringAttribute{
 						MarkdownDescription: "Type",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},
@@ -788,7 +765,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "The description of the security rule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"destination": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -808,9 +784,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -834,9 +808,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -883,7 +855,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 		"name": schema.StringAttribute{
 			MarkdownDescription: "The name of the security rule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"negate_destination": schema.BoolAttribute{
 			MarkdownDescription: "Negate the destination addresses(es)?",
@@ -942,7 +913,6 @@ var SecurityRulesResourceSchema = schema.Schema{
 		"schedule": schema.StringAttribute{
 			MarkdownDescription: "Schedule in which this rule will be applied",
 			Optional:            true,
-			Computed:            true,
 		},
 		"security_settings": schema.SingleNestedAttribute{
 			MarkdownDescription: "Security settings",
@@ -990,9 +960,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
-			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

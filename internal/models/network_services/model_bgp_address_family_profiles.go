@@ -776,7 +776,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -793,7 +792,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -807,34 +805,28 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 		"ipv4": schema.SingleNestedAttribute{
 			MarkdownDescription: "IPv4 Address Family",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"multicast": schema.SingleNestedAttribute{
 					MarkdownDescription: "Multicast",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"add_path": schema.SingleNestedAttribute{
 							MarkdownDescription: "Add path",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"tx_all_paths": schema.BoolAttribute{
 									MarkdownDescription: "Advertise all paths to peer?",
 									Optional:            true,
-									Computed:            true,
 								},
 								"tx_bestpath_per_as": schema.BoolAttribute{
 									MarkdownDescription: "Tx bestpath per a s",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"allowas_in": schema.SingleNestedAttribute{
 							MarkdownDescription: "Allowas in",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"occurrence": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -845,7 +837,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"origin": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -855,7 +846,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -863,32 +853,26 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"as_override": schema.BoolAttribute{
 							MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"default_originate": schema.BoolAttribute{
 							MarkdownDescription: "Originate default route?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"default_originate_map": schema.StringAttribute{
 							MarkdownDescription: "Default originate route map",
 							Optional:            true,
-							Computed:            true,
 						},
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"maximum_prefix": schema.SingleNestedAttribute{
 							MarkdownDescription: "Maximum prefix",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"action": schema.SingleNestedAttribute{
 									MarkdownDescription: "Action",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"restart": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
@@ -898,7 +882,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"interval": schema.Int64Attribute{
 													Validators: []validator.Int64{
@@ -906,7 +889,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Restart interval",
 													Optional:            true,
-													Computed:            true,
 												},
 											},
 										},
@@ -918,7 +900,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
 									},
@@ -929,7 +910,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Maximum number of prefixes",
 									Optional:            true,
-									Computed:            true,
 								},
 								"threshold": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -937,14 +917,12 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"next_hop": schema.SingleNestedAttribute{
 							MarkdownDescription: "Next hop",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"self": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -954,7 +932,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"self_force": schema.SingleNestedAttribute{
@@ -965,7 +942,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -973,7 +949,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"orf": schema.SingleNestedAttribute{
 							MarkdownDescription: "Orf",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"orf_prefix_list": schema.StringAttribute{
 									Validators: []validator.String{
@@ -981,25 +956,21 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "ORF prefix list",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"remove_private_as": schema.SingleNestedAttribute{
 							MarkdownDescription: "Remove private a s",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"all": schema.SingleNestedAttribute{
 									MarkdownDescription: "All",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"replace_as": schema.SingleNestedAttribute{
 									MarkdownDescription: "Replace a s",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -1007,12 +978,10 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"route_reflector_client": schema.BoolAttribute{
 							MarkdownDescription: "Route reflector client?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"send_community": schema.SingleNestedAttribute{
 							MarkdownDescription: "Send community",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"all": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -1025,7 +994,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"both": schema.SingleNestedAttribute{
@@ -1039,7 +1007,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"extended": schema.SingleNestedAttribute{
@@ -1053,7 +1020,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"large": schema.SingleNestedAttribute{
@@ -1067,7 +1033,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"standard": schema.SingleNestedAttribute{
@@ -1081,7 +1046,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -1089,36 +1053,30 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"soft_reconfig_with_stored_info": schema.BoolAttribute{
 							MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"unicast": schema.SingleNestedAttribute{
 					MarkdownDescription: "Unicast",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"add_path": schema.SingleNestedAttribute{
 							MarkdownDescription: "Add path",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"tx_all_paths": schema.BoolAttribute{
 									MarkdownDescription: "Advertise all paths to peer?",
 									Optional:            true,
-									Computed:            true,
 								},
 								"tx_bestpath_per_as": schema.BoolAttribute{
 									MarkdownDescription: "Tx bestpath per a s",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"allowas_in": schema.SingleNestedAttribute{
 							MarkdownDescription: "Allowas in",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"occurrence": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1129,7 +1087,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
 									Optional:            true,
-									Computed:            true,
 								},
 								"origin": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -1139,7 +1096,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -1147,32 +1103,26 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"as_override": schema.BoolAttribute{
 							MarkdownDescription: "Override ASNs in outbound updates if AS-Path equals Remote-AS?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"default_originate": schema.BoolAttribute{
 							MarkdownDescription: "Originate default route?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"default_originate_map": schema.StringAttribute{
 							MarkdownDescription: "Default originate route map",
 							Optional:            true,
-							Computed:            true,
 						},
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"maximum_prefix": schema.SingleNestedAttribute{
 							MarkdownDescription: "Maximum prefix",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"action": schema.SingleNestedAttribute{
 									MarkdownDescription: "Action",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"restart": schema.SingleNestedAttribute{
 											Validators: []validator.Object{
@@ -1182,7 +1132,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes: map[string]schema.Attribute{
 												"interval": schema.Int64Attribute{
 													Validators: []validator.Int64{
@@ -1190,7 +1139,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 													},
 													MarkdownDescription: "Restart interval",
 													Optional:            true,
-													Computed:            true,
 												},
 											},
 										},
@@ -1202,7 +1150,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
 											Optional:            true,
-											Computed:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
 									},
@@ -1213,7 +1160,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Maximum number of prefixes",
 									Optional:            true,
-									Computed:            true,
 								},
 								"threshold": schema.Int64Attribute{
 									Validators: []validator.Int64{
@@ -1221,14 +1167,12 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Threshold percentage of the maximum number of prefixes",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"next_hop": schema.SingleNestedAttribute{
 							MarkdownDescription: "Next hop",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"self": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -1238,7 +1182,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"self_force": schema.SingleNestedAttribute{
@@ -1249,7 +1192,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -1257,7 +1199,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"orf": schema.SingleNestedAttribute{
 							MarkdownDescription: "Orf",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"orf_prefix_list": schema.StringAttribute{
 									Validators: []validator.String{
@@ -1265,25 +1206,21 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "ORF prefix list",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"remove_private_as": schema.SingleNestedAttribute{
 							MarkdownDescription: "Remove private a s",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"all": schema.SingleNestedAttribute{
 									MarkdownDescription: "All",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"replace_as": schema.SingleNestedAttribute{
 									MarkdownDescription: "Replace a s",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -1291,12 +1228,10 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"route_reflector_client": schema.BoolAttribute{
 							MarkdownDescription: "Route reflector client?",
 							Optional:            true,
-							Computed:            true,
 						},
 						"send_community": schema.SingleNestedAttribute{
 							MarkdownDescription: "Send community",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"all": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -1309,7 +1244,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"both": schema.SingleNestedAttribute{
@@ -1323,7 +1257,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"extended": schema.SingleNestedAttribute{
@@ -1337,7 +1270,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"large": schema.SingleNestedAttribute{
@@ -1351,7 +1283,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 								"standard": schema.SingleNestedAttribute{
@@ -1365,7 +1296,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
 									Optional:            true,
-									Computed:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
 							},
@@ -1373,7 +1303,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 						"soft_reconfig_with_stored_info": schema.BoolAttribute{
 							MarkdownDescription: "Soft reconfiguration of peer with stored routes?",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -1395,7 +1324,6 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

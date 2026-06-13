@@ -894,7 +894,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -911,7 +910,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -934,7 +932,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -948,7 +945,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 		"update_schedule": schema.SingleNestedAttribute{
 			MarkdownDescription: "Update schedule",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"anti_virus": schema.SingleNestedAttribute{
 					MarkdownDescription: "Anti virus",
@@ -975,7 +971,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1003,7 +998,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1036,7 +1030,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Threshold",
 									Optional:            true,
-									Computed:            true,
 								},
 								"weekly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -1055,7 +1048,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1063,7 +1055,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "At",
 											Optional:            true,
-											Computed:            true,
 										},
 										"day_of_week": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1071,7 +1062,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Day of week",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -1105,7 +1095,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1140,7 +1129,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1177,7 +1165,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Float64Attribute{
 											Validators: []validator.Float64{
@@ -1200,7 +1187,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "New app threshold",
 									Optional:            true,
-									Computed:            true,
 								},
 								"none": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -1225,7 +1211,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 									},
 									MarkdownDescription: "Threshold",
 									Optional:            true,
-									Computed:            true,
 								},
 								"weekly": schema.SingleNestedAttribute{
 									Validators: []validator.Object{
@@ -1245,7 +1230,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.StringAttribute{
 											Validators: []validator.String{
@@ -1300,7 +1284,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1338,7 +1321,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1376,7 +1358,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"at": schema.Int64Attribute{
 											Validators: []validator.Int64{
@@ -1414,7 +1395,6 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											},
 											MarkdownDescription: "Action",
 											Optional:            true,
-											Computed:            true,
 										},
 										"sync_to_peer": schema.BoolAttribute{
 											MarkdownDescription: "Sync to peer",

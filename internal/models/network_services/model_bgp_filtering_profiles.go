@@ -508,7 +508,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -522,7 +521,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -539,7 +537,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -553,49 +550,40 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 		"ipv4": schema.SingleNestedAttribute{
 			MarkdownDescription: "Ipv4",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"multicast": schema.SingleNestedAttribute{
 					MarkdownDescription: "Multicast",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"conditional_advertisement": schema.SingleNestedAttribute{
 							MarkdownDescription: "Conditional advertisement",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"exist": schema.SingleNestedAttribute{
 									MarkdownDescription: "Exist",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"advertise_map": schema.StringAttribute{
 											MarkdownDescription: "Advertise map",
 											Optional:            true,
-											Computed:            true,
 										},
 										"exist_map": schema.StringAttribute{
 											MarkdownDescription: "Exist map",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
 								"non_exist": schema.SingleNestedAttribute{
 									MarkdownDescription: "Non exist",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"advertise_map": schema.StringAttribute{
 											MarkdownDescription: "Advertise map",
 											Optional:            true,
-											Computed:            true,
 										},
 										"non_exist_map": schema.StringAttribute{
 											MarkdownDescription: "Non exist map",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -604,124 +592,102 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 						"filter_list": schema.SingleNestedAttribute{
 							MarkdownDescription: "Filter list",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"inbound": schema.StringAttribute{
 									MarkdownDescription: "Inbound",
 									Optional:            true,
-									Computed:            true,
 								},
 								"outbound": schema.StringAttribute{
 									MarkdownDescription: "Outbound",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"inbound_network_filters": schema.SingleNestedAttribute{
 							MarkdownDescription: "Inbound network filters",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"distribute_list": schema.StringAttribute{
 									MarkdownDescription: "Distribute list",
 									Optional:            true,
-									Computed:            true,
 								},
 								"prefix_list": schema.StringAttribute{
 									MarkdownDescription: "Prefix list",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"inherit": schema.BoolAttribute{
 							MarkdownDescription: "Inherit from unicast",
 							Optional:            true,
-							Computed:            true,
 						},
 						"outbound_network_filters": schema.SingleNestedAttribute{
 							MarkdownDescription: "Outbound network filters",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"distribute_list": schema.StringAttribute{
 									MarkdownDescription: "Distribute list",
 									Optional:            true,
-									Computed:            true,
 								},
 								"prefix_list": schema.StringAttribute{
 									MarkdownDescription: "Prefix list",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"route_maps": schema.SingleNestedAttribute{
 							MarkdownDescription: "Route maps",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"inbound": schema.StringAttribute{
 									MarkdownDescription: "Inbound",
 									Optional:            true,
-									Computed:            true,
 								},
 								"outbound": schema.StringAttribute{
 									MarkdownDescription: "Outbound",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"unsuppress_map": schema.StringAttribute{
 							MarkdownDescription: "Unsuppress map",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
 				"unicast": schema.SingleNestedAttribute{
 					MarkdownDescription: "Unicast",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"conditional_advertisement": schema.SingleNestedAttribute{
 							MarkdownDescription: "Conditional advertisement",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"exist": schema.SingleNestedAttribute{
 									MarkdownDescription: "Exist",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"advertise_map": schema.StringAttribute{
 											MarkdownDescription: "Advertise map",
 											Optional:            true,
-											Computed:            true,
 										},
 										"exist_map": schema.StringAttribute{
 											MarkdownDescription: "Exist map",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
 								"non_exist": schema.SingleNestedAttribute{
 									MarkdownDescription: "Non exist",
 									Optional:            true,
-									Computed:            true,
 									Attributes: map[string]schema.Attribute{
 										"advertise_map": schema.StringAttribute{
 											MarkdownDescription: "Advertise map",
 											Optional:            true,
-											Computed:            true,
 										},
 										"non_exist_map": schema.StringAttribute{
 											MarkdownDescription: "Non exist map",
 											Optional:            true,
-											Computed:            true,
 										},
 									},
 								},
@@ -730,75 +696,62 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 						"filter_list": schema.SingleNestedAttribute{
 							MarkdownDescription: "Filter list",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"inbound": schema.StringAttribute{
 									MarkdownDescription: "Inbound",
 									Optional:            true,
-									Computed:            true,
 								},
 								"outbound": schema.StringAttribute{
 									MarkdownDescription: "Outbound",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"inbound_network_filters": schema.SingleNestedAttribute{
 							MarkdownDescription: "Inbound network filters",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"distribute_list": schema.StringAttribute{
 									MarkdownDescription: "Distribute list",
 									Optional:            true,
-									Computed:            true,
 								},
 								"prefix_list": schema.StringAttribute{
 									MarkdownDescription: "Prefix list",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"outbound_network_filters": schema.SingleNestedAttribute{
 							MarkdownDescription: "Outbound network filters",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"distribute_list": schema.StringAttribute{
 									MarkdownDescription: "Distribute list",
 									Optional:            true,
-									Computed:            true,
 								},
 								"prefix_list": schema.StringAttribute{
 									MarkdownDescription: "Prefix list",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"route_maps": schema.SingleNestedAttribute{
 							MarkdownDescription: "Route maps",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"inbound": schema.StringAttribute{
 									MarkdownDescription: "Inbound",
 									Optional:            true,
-									Computed:            true,
 								},
 								"outbound": schema.StringAttribute{
 									MarkdownDescription: "Outbound",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"unsuppress_map": schema.StringAttribute{
 							MarkdownDescription: "Unsuppress map",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -820,7 +773,6 @@ var BgpFilteringProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

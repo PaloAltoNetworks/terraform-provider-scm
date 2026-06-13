@@ -182,7 +182,6 @@ var LldpProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -199,7 +198,6 @@ var LldpProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -213,7 +211,6 @@ var LldpProfilesResourceSchema = schema.Schema{
 		"mode": schema.StringAttribute{
 			MarkdownDescription: "LLDP mode",
 			Optional:            true,
-			Computed:            true,
 		},
 		"name": schema.StringAttribute{
 			MarkdownDescription: "LLDP profile name",
@@ -222,43 +219,35 @@ var LldpProfilesResourceSchema = schema.Schema{
 		"option_tlvs": schema.SingleNestedAttribute{
 			MarkdownDescription: "Option tlvs",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"management_address": schema.SingleNestedAttribute{
 					MarkdownDescription: "Management address",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"enabled": schema.BoolAttribute{
 							MarkdownDescription: "Management address enabled",
 							Optional:            true,
-							Computed:            true,
 						},
 						"iplist": schema.ListNestedAttribute{
 							MarkdownDescription: "Iplist",
 							Optional:            true,
-							Computed:            true,
 							NestedObject: schema.NestedAttributeObject{
 								Attributes: map[string]schema.Attribute{
 									"interface": schema.StringAttribute{
 										MarkdownDescription: "Interface",
 										Optional:            true,
-										Computed:            true,
 									},
 									"ipv4": schema.StringAttribute{
 										MarkdownDescription: "IPv4 Address",
 										Optional:            true,
-										Computed:            true,
 									},
 									"ipv6": schema.StringAttribute{
 										MarkdownDescription: "IPv6 Address",
 										Optional:            true,
-										Computed:            true,
 									},
 									"name": schema.StringAttribute{
 										MarkdownDescription: "Name",
 										Optional:            true,
-										Computed:            true,
 									},
 								},
 							},
@@ -268,22 +257,18 @@ var LldpProfilesResourceSchema = schema.Schema{
 				"port_description": schema.BoolAttribute{
 					MarkdownDescription: "Option TLV Port Description",
 					Optional:            true,
-					Computed:            true,
 				},
 				"system_capabilities": schema.BoolAttribute{
 					MarkdownDescription: "Option TLV System Capabilities",
 					Optional:            true,
-					Computed:            true,
 				},
 				"system_description": schema.BoolAttribute{
 					MarkdownDescription: "Option TLV System Description",
 					Optional:            true,
-					Computed:            true,
 				},
 				"system_name": schema.BoolAttribute{
 					MarkdownDescription: "Option TLV System Name",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -299,14 +284,12 @@ var LldpProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"snmp_syslog_notification": schema.BoolAttribute{
 			MarkdownDescription: "SNMP syslog notification",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tfid": schema.StringAttribute{
 			MarkdownDescription: "The Terraform ID.",

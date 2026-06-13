@@ -359,14 +359,12 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				"class": schema.StringAttribute{
 					MarkdownDescription: "Class",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -380,30 +378,25 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"dscp_tos": schema.SingleNestedAttribute{
 			MarkdownDescription: "Dscp tos",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"codepoints": schema.ListNestedAttribute{
 					MarkdownDescription: "Codepoints",
 					Optional:            true,
-					Computed:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Name",
 								Optional:            true,
-								Computed:            true,
 							},
 							"type": schema.SingleNestedAttribute{
 								MarkdownDescription: "Type",
 								Optional:            true,
-								Computed:            true,
 								Attributes: map[string]schema.Attribute{
 									"af": schema.SingleNestedAttribute{
 										Validators: []validator.Object{
@@ -416,12 +409,10 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Af\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
 												MarkdownDescription: "Codepoint",
 												Optional:            true,
-												Computed:            true,
 											},
 										},
 									},
@@ -436,12 +427,10 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Cs\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
 												MarkdownDescription: "Codepoint",
 												Optional:            true,
-												Computed:            true,
 											},
 										},
 									},
@@ -456,22 +445,18 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Custom\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.SingleNestedAttribute{
 												MarkdownDescription: "Codepoint",
 												Optional:            true,
-												Computed:            true,
 												Attributes: map[string]schema.Attribute{
 													"binary_value": schema.StringAttribute{
 														MarkdownDescription: "Binary value",
 														Optional:            true,
-														Computed:            true,
 													},
 													"codepoint_name": schema.StringAttribute{
 														MarkdownDescription: "Codepoint name",
 														Optional:            true,
-														Computed:            true,
 													},
 												},
 											},
@@ -488,7 +473,6 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Ef\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
 									"tos": schema.SingleNestedAttribute{
@@ -502,12 +486,10 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 										},
 										MarkdownDescription: "Tos\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
 										Optional:            true,
-										Computed:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
 												MarkdownDescription: "Codepoint",
 												Optional:            true,
-												Computed:            true,
 											},
 										},
 									},
@@ -531,7 +513,6 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -568,7 +549,6 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 		"schedule": schema.StringAttribute{
 			MarkdownDescription: "Schedule",
 			Optional:            true,
-			Computed:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -582,7 +562,6 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

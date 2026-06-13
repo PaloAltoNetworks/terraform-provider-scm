@@ -151,29 +151,24 @@ var TrafficSteeringRulesResourceSchema = schema.Schema{
 		"action": schema.SingleNestedAttribute{
 			MarkdownDescription: "Action",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"forward": schema.SingleNestedAttribute{
 					MarkdownDescription: "Forward",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"forward": schema.SingleNestedAttribute{
 							MarkdownDescription: "Forward",
 							Optional:            true,
-							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"target": schema.StringAttribute{
 									MarkdownDescription: "Target",
 									Optional:            true,
-									Computed:            true,
 								},
 							},
 						},
 						"no_pbf": schema.SingleNestedAttribute{
 							MarkdownDescription: "No pbf",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 					},
@@ -200,7 +195,6 @@ var TrafficSteeringRulesResourceSchema = schema.Schema{
 			Computed:            true,
 			Default:             stringdefault.StaticString("Service Connections"),
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

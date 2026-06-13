@@ -197,7 +197,6 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 		"cloud_inline_cat": schema.BoolAttribute{
 			MarkdownDescription: "Cloud inline cat",
 			Optional:            true,
-			Computed:            true,
 		},
 		"continue": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -207,31 +206,26 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 		"credential_enforcement": schema.SingleNestedAttribute{
 			MarkdownDescription: "Credential enforcement",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"alert": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Alert",
 					Optional:            true,
-					Computed:            true,
 				},
 				"allow": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Allow",
 					Optional:            true,
-					Computed:            true,
 				},
 				"block": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Block",
 					Optional:            true,
-					Computed:            true,
 				},
 				"continue": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Continue",
 					Optional:            true,
-					Computed:            true,
 				},
 				"log_severity": schema.StringAttribute{
 					MarkdownDescription: "Log severity",
@@ -242,29 +236,24 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 				"mode": schema.SingleNestedAttribute{
 					MarkdownDescription: "Mode",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"disabled": schema.SingleNestedAttribute{
 							MarkdownDescription: "Disabled",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 						"domain_credentials": schema.SingleNestedAttribute{
 							MarkdownDescription: "Domain credentials",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 						"group_mapping": schema.StringAttribute{
 							MarkdownDescription: "Group mapping",
 							Optional:            true,
-							Computed:            true,
 						},
 						"ip_user": schema.SingleNestedAttribute{
 							MarkdownDescription: "Ip user",
 							Optional:            true,
-							Computed:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
 					},
@@ -277,7 +266,6 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Description",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -291,7 +279,6 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -308,7 +295,6 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -322,7 +308,6 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 		"local_inline_cat": schema.BoolAttribute{
 			MarkdownDescription: "Local inline cat",
 			Optional:            true,
-			Computed:            true,
 		},
 		"log_container_page_only": schema.BoolAttribute{
 			MarkdownDescription: "Log container page only",
@@ -380,7 +365,6 @@ var UrlAccessProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},

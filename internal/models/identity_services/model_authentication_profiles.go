@@ -411,7 +411,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -428,7 +427,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -442,7 +440,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 		"lockout": schema.SingleNestedAttribute{
 			MarkdownDescription: "Lockout object of the authentication profile",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"failed_attempts": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -450,7 +447,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Lockout object - failed_attempts of authentication profile",
 					Optional:            true,
-					Computed:            true,
 				},
 				"lockout_time": schema.Int64Attribute{
 					Validators: []validator.Int64{
@@ -458,14 +454,12 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Lockout object - lockout-time of authentication profile",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
 		"method": schema.SingleNestedAttribute{
 			MarkdownDescription: "method object of authentication profile",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"cloud": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
@@ -480,12 +474,10 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Cloud\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"profile_name": schema.StringAttribute{
 							MarkdownDescription: "The tenant profile name",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -502,17 +494,14 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Kerberos\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"realm": schema.StringAttribute{
 							MarkdownDescription: "method kerberos object realm of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 						"server_profile": schema.StringAttribute{
 							MarkdownDescription: "method kerberos object server profile of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -529,22 +518,18 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Ldap\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"login_attribute": schema.StringAttribute{
 							MarkdownDescription: "Login attribute",
 							Optional:            true,
-							Computed:            true,
 						},
 						"passwd_exp_days": schema.Int64Attribute{
 							MarkdownDescription: "Passwd exp days",
 							Optional:            true,
-							Computed:            true,
 						},
 						"server_profile": schema.StringAttribute{
 							MarkdownDescription: "Server profile",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -561,7 +546,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Local database\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
 				"radius": schema.SingleNestedAttribute{
@@ -577,17 +561,14 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Radius\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"checkgroup": schema.BoolAttribute{
 							MarkdownDescription: "method radius object check group of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 						"server_profile": schema.StringAttribute{
 							MarkdownDescription: "method radius object server profile of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -604,7 +585,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Saml idp\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"attribute_name_usergroup": schema.StringAttribute{
 							Validators: []validator.String{
@@ -613,7 +593,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Attribute name usergroup",
 							Optional:            true,
-							Computed:            true,
 						},
 						"attribute_name_username": schema.StringAttribute{
 							Validators: []validator.String{
@@ -622,7 +601,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Attribute name username",
 							Optional:            true,
-							Computed:            true,
 						},
 						"certificate_profile": schema.StringAttribute{
 							Validators: []validator.String{
@@ -630,12 +608,10 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "method object saml idp certificate profile of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 						"enable_single_logout": schema.BoolAttribute{
 							MarkdownDescription: "Enable single logout",
 							Optional:            true,
-							Computed:            true,
 						},
 						"request_signing_certificate": schema.StringAttribute{
 							Validators: []validator.String{
@@ -643,7 +619,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "Request signing certificate",
 							Optional:            true,
-							Computed:            true,
 						},
 						"server_profile": schema.StringAttribute{
 							Validators: []validator.String{
@@ -651,7 +626,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 							},
 							MarkdownDescription: "method object saml idp server profile of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -668,17 +642,14 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Tacplus\n\n> ℹ️ **Note:** You must specify exactly one of `cloud`, `kerberos`, `ldap`, `local_database`, `radius`, `saml_idp`, and `tacplus`.",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"checkgroup": schema.BoolAttribute{
 							MarkdownDescription: "method tacplus object check group of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 						"server_profile": schema.StringAttribute{
 							MarkdownDescription: "method tacplus object check group of authentication profile",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -687,18 +658,15 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 		"multi_factor_auth": schema.SingleNestedAttribute{
 			MarkdownDescription: "Multi factor auth",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"factors": schema.ListAttribute{
 					ElementType:         types.StringType,
 					MarkdownDescription: "Factors",
 					Optional:            true,
-					Computed:            true,
 				},
 				"mfa_enable": schema.BoolAttribute{
 					MarkdownDescription: "Mfa enable",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -709,7 +677,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 		"single_sign_on": schema.SingleNestedAttribute{
 			MarkdownDescription: "Single sign on",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"kerberos_keytab": schema.StringAttribute{
 					Validators: []validator.String{
@@ -717,7 +684,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Kerberos keytab",
 					Optional:            true,
-					Computed:            true,
 				},
 				"realm": schema.StringAttribute{
 					Validators: []validator.String{
@@ -725,7 +691,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 					},
 					MarkdownDescription: "Realm",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -741,7 +706,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -758,7 +722,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "User domain",
 			Optional:            true,
-			Computed:            true,
 		},
 		"username_modifier": schema.StringAttribute{
 			Validators: []validator.String{
@@ -766,7 +729,6 @@ var AuthenticationProfilesResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Username modifier",
 			Optional:            true,
-			Computed:            true,
 		},
 	},
 }

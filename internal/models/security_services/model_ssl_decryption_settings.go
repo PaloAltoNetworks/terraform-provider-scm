@@ -138,7 +138,6 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -160,41 +159,34 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"forward_trust_certificate": schema.SingleNestedAttribute{
 			MarkdownDescription: "Forward trust certificate",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ecdsa": schema.StringAttribute{
 					MarkdownDescription: "Ecdsa",
 					Optional:            true,
-					Computed:            true,
 				},
 				"rsa": schema.StringAttribute{
 					MarkdownDescription: "Rsa",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
 		"forward_untrust_certificate": schema.SingleNestedAttribute{
 			MarkdownDescription: "Forward untrust certificate",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"ecdsa": schema.StringAttribute{
 					MarkdownDescription: "Ecdsa",
 					Optional:            true,
-					Computed:            true,
 				},
 				"rsa": schema.StringAttribute{
 					MarkdownDescription: "Rsa",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -215,7 +207,6 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -227,17 +218,14 @@ var SslDecryptionSettingsResourceSchema = schema.Schema{
 					"description": schema.StringAttribute{
 						MarkdownDescription: "Description",
 						Optional:            true,
-						Computed:            true,
 					},
 					"exclude": schema.BoolAttribute{
 						MarkdownDescription: "Exclude",
 						Optional:            true,
-						Computed:            true,
 					},
 					"name": schema.StringAttribute{
 						MarkdownDescription: "Name",
 						Optional:            true,
-						Computed:            true,
 					},
 				},
 			},

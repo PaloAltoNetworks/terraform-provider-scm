@@ -68,12 +68,10 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 		"authentication_profile": schema.StringAttribute{
 			MarkdownDescription: "The authentication profile",
 			Optional:            true,
-			Computed:            true,
 		},
 		"certificate_profile": schema.StringAttribute{
 			MarkdownDescription: "The certificate profile",
 			Optional:            true,
-			Computed:            true,
 		},
 		"device": schema.StringAttribute{
 			Validators: []validator.String{
@@ -87,7 +85,6 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -104,7 +101,6 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -114,7 +110,6 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The UDP port for inbound authentication prompts",
 			Optional:            true,
-			Computed:            true,
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the authentication portal",
@@ -129,7 +124,6 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "The idle timeout value (minutes)",
 			Optional:            true,
-			Computed:            true,
 		},
 		"redirect_host": schema.StringAttribute{
 			MarkdownDescription: "The authentication portal IP address or hostname",
@@ -147,7 +141,6 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
@@ -164,12 +157,10 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "Timer",
 			Optional:            true,
-			Computed:            true,
 		},
 		"tls_service_profile": schema.StringAttribute{
 			MarkdownDescription: "The SSL/TLS service profile",
 			Optional:            true,
-			Computed:            true,
 		},
 	},
 }

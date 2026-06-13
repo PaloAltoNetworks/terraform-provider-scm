@@ -223,42 +223,34 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 		"backup_sc": schema.StringAttribute{
 			MarkdownDescription: "Backup s c",
 			Optional:            true,
-			Computed:            true,
 		},
 		"bgp_peer": schema.SingleNestedAttribute{
 			MarkdownDescription: "Bgp peer",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"local_ip_address": schema.StringAttribute{
 					MarkdownDescription: "Local ip address",
 					Optional:            true,
-					Computed:            true,
 				},
 				"local_ipv6_address": schema.StringAttribute{
 					MarkdownDescription: "Local ipv6 address",
 					Optional:            true,
-					Computed:            true,
 				},
 				"peer_ip_address": schema.StringAttribute{
 					MarkdownDescription: "Peer ip address",
 					Optional:            true,
-					Computed:            true,
 				},
 				"peer_ipv6_address": schema.StringAttribute{
 					MarkdownDescription: "Peer ipv6 address",
 					Optional:            true,
-					Computed:            true,
 				},
 				"same_as_primary": schema.BoolAttribute{
 					MarkdownDescription: "Same peer IP address for SC",
 					Optional:            true,
-					Computed:            true,
 				},
 				"secret": schema.StringAttribute{
 					MarkdownDescription: "Secret",
 					Optional:            true,
-					Computed:            true,
 					Sensitive:           true,
 				},
 			},
@@ -276,7 +268,6 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 			MarkdownDescription: "The folder in which the resource is defined\n",
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			},
@@ -299,7 +290,6 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 		"nat_pool": schema.StringAttribute{
 			MarkdownDescription: "Nat pool",
 			Optional:            true,
-			Computed:            true,
 		},
 		"no_export_community": schema.StringAttribute{
 			Validators: []validator.String{
@@ -307,7 +297,6 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 			},
 			MarkdownDescription: "No export community",
 			Optional:            true,
-			Computed:            true,
 		},
 		"onboarding_type": schema.StringAttribute{
 			Validators: []validator.String{
@@ -321,37 +310,30 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 		"protocol": schema.SingleNestedAttribute{
 			MarkdownDescription: "Protocol",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
 					MarkdownDescription: "Bgp",
 					Optional:            true,
-					Computed:            true,
 					Attributes: map[string]schema.Attribute{
 						"do_not_export_routes": schema.BoolAttribute{
 							MarkdownDescription: "Do not export routes",
 							Optional:            true,
-							Computed:            true,
 						},
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable",
 							Optional:            true,
-							Computed:            true,
 						},
 						"fast_failover": schema.BoolAttribute{
 							MarkdownDescription: "Fast failover",
 							Optional:            true,
-							Computed:            true,
 						},
 						"local_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Local ip address",
 							Optional:            true,
-							Computed:            true,
 						},
 						"originate_default_route": schema.BoolAttribute{
 							MarkdownDescription: "Originate default route",
 							Optional:            true,
-							Computed:            true,
 						},
 						"peer_as": schema.StringAttribute{
 							MarkdownDescription: "Peer as",
@@ -360,18 +342,15 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 						"peer_ip_address": schema.StringAttribute{
 							MarkdownDescription: "Peer ip address",
 							Optional:            true,
-							Computed:            true,
 						},
 						"secret": schema.StringAttribute{
 							MarkdownDescription: "Secret",
 							Optional:            true,
-							Computed:            true,
 							Sensitive:           true,
 						},
 						"summarize_mobile_user_routes": schema.BoolAttribute{
 							MarkdownDescription: "Summarize mobile user routes",
 							Optional:            true,
-							Computed:            true,
 						},
 					},
 				},
@@ -380,17 +359,14 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 		"qos": schema.SingleNestedAttribute{
 			MarkdownDescription: "Qos",
 			Optional:            true,
-			Computed:            true,
 			Attributes: map[string]schema.Attribute{
 				"enable": schema.BoolAttribute{
 					MarkdownDescription: "Enable",
 					Optional:            true,
-					Computed:            true,
 				},
 				"qos_profile": schema.StringAttribute{
 					MarkdownDescription: "Qos profile",
 					Optional:            true,
-					Computed:            true,
 				},
 			},
 		},
@@ -406,12 +382,10 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 		"secondary_ipsec_tunnel": schema.StringAttribute{
 			MarkdownDescription: "Secondary ipsec tunnel",
 			Optional:            true,
-			Computed:            true,
 		},
 		"source_nat": schema.BoolAttribute{
 			MarkdownDescription: "Source nat",
 			Optional:            true,
-			Computed:            true,
 		},
 		"subnets": schema.ListAttribute{
 			ElementType:         types.StringType,

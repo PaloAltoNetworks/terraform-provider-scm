@@ -53,7 +53,6 @@ output "scm_logical_router_data_source_output" {
 
 ### Read-Only
 
-- `routing_stack` (String) Routing stack
 - `tfid` (String) The Terraform ID.
 - `vrf` (Attributes List) Vrf (see [below for nested schema](#nestedatt--vrf))
 

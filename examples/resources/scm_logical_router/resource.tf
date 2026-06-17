@@ -57,9 +57,8 @@ resource "scm_bgp_auth_profile" "bgp_auth_profile" {
 #
 
 resource "scm_logical_router" "scm_logical_router" {
-  folder        = "ngfw-shared"
-  name          = "scm_logical_router"
-  routing_stack = "advanced"
+  folder = "ngfw-shared"
+  name   = "scm_logical_router"
   vrf = [
     {
       name = "default"
@@ -115,9 +114,8 @@ resource "scm_logical_router" "scm_logical_router" {
 #
 
 resource "scm_logical_router" "scm_bgp_router" {
-  folder        = "ngfw-shared"
-  name          = "scm_bgp_router"
-  routing_stack = "advanced"
+  folder = "ngfw-shared"
+  name   = "scm_bgp_router"
   vrf = [
     {
       name = "default"

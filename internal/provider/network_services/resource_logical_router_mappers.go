@@ -54,12 +54,6 @@ func unpackLogicalRoutersToSdk(ctx context.Context, obj types.Object) (*network_
 	}
 
 	// Handling Primitives
-	if !model.RoutingStack.IsNull() && !model.RoutingStack.IsUnknown() {
-		sdk.RoutingStack = model.RoutingStack.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RoutingStack", "value": *sdk.RoutingStack})
-	}
-
-	// Handling Primitives
 	if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
 		sdk.Snippet = model.Snippet.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Snippet", "value": *sdk.Snippet})
@@ -114,14 +108,6 @@ func packLogicalRoutersFromSdk(ctx context.Context, sdk network_services.Logical
 	// Standard primitive packing
 	model.Name = basetypes.NewStringValue(sdk.Name)
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Name", "value": sdk.Name})
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.RoutingStack != nil {
-		model.RoutingStack = basetypes.NewStringValue(*sdk.RoutingStack)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RoutingStack", "value": *sdk.RoutingStack})
-	} else {
-		model.RoutingStack = basetypes.NewStringNull()
-	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Snippet != nil {

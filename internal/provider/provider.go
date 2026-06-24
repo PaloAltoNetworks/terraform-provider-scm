@@ -57,6 +57,7 @@ type ScmProviderModel struct {
 	AuthUrl      types.String `tfsdk:"auth_url"`
 	Protocol     types.String `tfsdk:"protocol"`
 	Host         types.String `tfsdk:"host"`
+	ZtnaHost     types.String `tfsdk:"ztna_host"`
 	Port         types.Int64  `tfsdk:"port"`
 	Headers      types.Map    `tfsdk:"headers"`
 	ClientId     types.String `tfsdk:"client_id"`
@@ -87,6 +88,10 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 			},
 			"host": schema.StringAttribute{
 				Description: "The hostname of Strata Cloud Manager API. Default: `api.sase.paloaltonetworks.com`. Environment variable: `SCM_HOST`. JSON config file variable: `host`.",
+				Optional:    true,
+			},
+			"ztna_host": schema.StringAttribute{
+				Description: "The hostname of the ZTNA Connector API. Required when using ztna_* resources. Default: `api.sase.paloaltonetworks.com`. Environment variable: `ZTNA_HOST`. JSON config file variable: `ztna_host`.",
 				Optional:    true,
 			},
 			"port": schema.Int64Attribute{
@@ -287,14 +292,14 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 // Actions defines the actions for this provider.
 func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
 	var actions []func() action.Action
-	// Add config_setup package actions
-	actions = append(actions, tfProviderConfigSetup.GetActions()...)
 	// Add identity_services package actions
 	actions = append(actions, tfProviderIdentityServices.GetActions()...)
-	// Add config_operations package actions
-	actions = append(actions, tfProviderConfigOperations.GetActions()...)
+	// Add config_setup package actions
+	actions = append(actions, tfProviderConfigSetup.GetActions()...)
 	// Add network_services package actions
 	actions = append(actions, tfProviderNetworkServices.GetActions()...)
+	// Add config_operations package actions
+	actions = append(actions, tfProviderConfigOperations.GetActions()...)
 
 	return actions
 }

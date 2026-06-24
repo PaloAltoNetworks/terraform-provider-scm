@@ -1,3 +1,41 @@
+# This provider serves two resource prefixes from a single binary:
+#   scm_*  — Strata Cloud Manager resources (NGFW & Prisma Access)
+#   ztna_* — ZTNA Connector resources (Zero Trust Network Access)
+#
+# SCM and ZTNA use different API hosts:
+#   scm_*  resources use the "host" field      (e.g. api.strata.paloaltonetworks.com)
+#   ztna_* resources use the "ztna_host" field (e.g. api.sase.paloaltonetworks.com)
+# Both "host" and "ztna_host" can be specified together in the same provider block
+# when configuring credentials inline. If using an auth file, both fields can be
+# included in the same JSON file.
+#
+# To use both, declare two provider aliases in required_providers pointing to
+# the same source, and configure each with its own provider block.
+# The ztna_host field in the auth file or provider block is used for ZTNA resources.
+#
+# Example with both providers:
+#
+# terraform {
+#   required_providers {
+#     scm = {
+#       source  = "PaloAltoNetworks/scm"
+#     }
+#     ztna = {
+#       source  = "PaloAltoNetworks/scm"
+#     }
+#   }
+# }
+#
+# provider "scm" {
+#   auth_file = "/path/to/scm-config.json"
+#   logging   = "debug"
+# }
+#
+# provider "ztna" {
+#   auth_file = "/path/to/scm-config.json"
+#   logging   = "debug"
+# }
+
 # This file is embedded using go:embed
 provider "scm" {
   host          = ""

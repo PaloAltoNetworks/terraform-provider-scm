@@ -10,8 +10,13 @@ The `scm` provider provides resources and data sources to manage and query Strat
 
 This provider covers the following aspects of Strata Cloud Manager:
 * NGFW & Prisma Access
+* ZTNA Connector
 
 ## Release Notes
+
+### v1.0.12-beta.2
+
+* Fixed ZTNA documentation display in Terraform Registry
 
 ### v1.0.12-beta.1
 
@@ -372,6 +377,44 @@ THIS SOFTWARE IS RELEASED AS A PROOF OF CONCEPT FOR EXPERIMENTAL PURPOSES ONLY. 
 ## Example Usage
 
 ```terraform
+# This provider serves two resource prefixes from a single binary:
+#   scm_*  — Strata Cloud Manager resources (NGFW & Prisma Access)
+#   ztna_* — ZTNA Connector resources (Zero Trust Network Access)
+#
+# SCM and ZTNA use different API hosts:
+#   scm_*  resources use the "host" field      (e.g. api.strata.paloaltonetworks.com)
+#   ztna_* resources use the "ztna_host" field (e.g. api.sase.paloaltonetworks.com)
+# Both "host" and "ztna_host" can be specified together in the same provider block
+# when configuring credentials inline. If using an auth file, both fields can be
+# included in the same JSON file.
+#
+# To use both, declare two provider aliases in required_providers pointing to
+# the same source, and configure each with its own provider block.
+# The ztna_host field in the auth file or provider block is used for ZTNA resources.
+#
+# Example with both providers:
+#
+# terraform {
+#   required_providers {
+#     scm = {
+#       source  = "PaloAltoNetworks/scm"
+#     }
+#     ztna = {
+#       source  = "PaloAltoNetworks/scm"
+#     }
+#   }
+# }
+#
+# provider "scm" {
+#   auth_file = "/path/to/scm-config.json"
+#   logging   = "debug"
+# }
+#
+# provider "ztna" {
+#   auth_file = "/path/to/scm-config.json"
+#   logging   = "debug"
+# }
+
 # This file is embedded using go:embed
 provider "scm" {
   host          = ""
@@ -424,6 +467,7 @@ There are multiple ways to specify the provider's parameters.  If overlapping va
 - `port` (Number) The port number to use for API commands, if non-standard for the given protocol. Environment variable: `SCM_PORT`. JSON config file variable: `port`.
 - `protocol` (String) The protocol to use for SCM. This should be 'http' or 'https'. Default: `https`. Environment variable: `SCM_PROTOCOL`. JSON config file variable: `protocol`.
 - `scope` (String) The client scope. Environment variable: `SCM_SCOPE`. JSON config file variable: `scope`.
+- `ztna_host` (String) The hostname of the ZTNA Connector API. Required when using ztna_* resources. Default: `api.sase.paloaltonetworks.com`. Environment variable: `ZTNA_HOST`. JSON config file variable: `ztna_host`.
 
 
 ## Debugging

@@ -34,7 +34,7 @@ type ForwardingProfileRegionalAndCustomProxyDataSource struct {
 
 func (d *ForwardingProfileRegionalAndCustomProxyDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ForwardingProfileRegionalAndCustomProxyDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_forwarding_profile_regional_and_custom_proxy"
+	resp.TypeName = "scm_forwarding_profile_regional_and_custom_proxy"
 }
 
 func (d *ForwardingProfileRegionalAndCustomProxyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

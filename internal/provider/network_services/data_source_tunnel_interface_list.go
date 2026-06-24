@@ -32,7 +32,7 @@ type TunnelInterfaceListDataSource struct {
 }
 
 func (d *TunnelInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_tunnel_interface_list"
+	resp.TypeName = "scm_tunnel_interface_list"
 }
 
 func (d *TunnelInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

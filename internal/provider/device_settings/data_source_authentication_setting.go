@@ -34,7 +34,7 @@ type AuthenticationSettingDataSource struct {
 
 func (d *AuthenticationSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AuthenticationSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_authentication_setting"
+	resp.TypeName = "scm_authentication_setting"
 }
 
 func (d *AuthenticationSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type ForwardingProfileSourceApplicationDataSource struct {
 
 func (d *ForwardingProfileSourceApplicationDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ForwardingProfileSourceApplicationDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_forwarding_profile_source_application"
+	resp.TypeName = "scm_forwarding_profile_source_application"
 }
 
 func (d *ForwardingProfileSourceApplicationDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type AddressGroupListDataSource struct {
 }
 
 func (d *AddressGroupListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_address_group_list"
+	resp.TypeName = "scm_address_group_list"
 }
 
 func (d *AddressGroupListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

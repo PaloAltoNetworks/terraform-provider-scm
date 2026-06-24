@@ -34,7 +34,7 @@ type VariableDataSource struct {
 
 func (d *VariableDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: VariableDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_variable"
+	resp.TypeName = "scm_variable"
 }
 
 func (d *VariableDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type HipProfileListDataSource struct {
 }
 
 func (d *HipProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_hip_profile_list"
+	resp.TypeName = "scm_hip_profile_list"
 }
 
 func (d *HipProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

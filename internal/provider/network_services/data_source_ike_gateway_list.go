@@ -32,7 +32,7 @@ type IkeGatewayListDataSource struct {
 }
 
 func (d *IkeGatewayListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ike_gateway_list"
+	resp.TypeName = "scm_ike_gateway_list"
 }
 
 func (d *IkeGatewayListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

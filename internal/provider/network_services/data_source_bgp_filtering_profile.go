@@ -34,7 +34,7 @@ type BgpFilteringProfileDataSource struct {
 
 func (d *BgpFilteringProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: BgpFilteringProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_bgp_filtering_profile"
+	resp.TypeName = "scm_bgp_filtering_profile"
 }
 
 func (d *BgpFilteringProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

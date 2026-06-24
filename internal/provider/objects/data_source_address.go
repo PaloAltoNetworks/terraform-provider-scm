@@ -34,7 +34,7 @@ type AddressDataSource struct {
 
 func (d *AddressDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AddressDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_address"
+	resp.TypeName = "scm_address"
 }
 
 func (d *AddressDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

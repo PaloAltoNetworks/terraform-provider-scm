@@ -34,7 +34,7 @@ type RouteCommunityListDataSource struct {
 
 func (d *RouteCommunityListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: RouteCommunityListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_route_community_list"
+	resp.TypeName = "scm_route_community_list"
 }
 
 func (d *RouteCommunityListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type IkeGatewayDataSource struct {
 
 func (d *IkeGatewayDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: IkeGatewayDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ike_gateway"
+	resp.TypeName = "scm_ike_gateway"
 }
 
 func (d *IkeGatewayDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -35,7 +35,7 @@ type VariableResource struct {
 }
 
 func (r *VariableResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_variable"
+	resp.TypeName = "scm_variable"
 }
 
 func (r *VariableResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -135,6 +135,7 @@ func (r *VariableResource) Create(ctx context.Context, req resource.CreateReques
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 	_ = req.Plan.GetAttribute(ctx, path.Root("folder"), &data.Folder)
 	_ = req.Plan.GetAttribute(ctx, path.Root("snippet"), &data.Snippet)
 	_ = req.Plan.GetAttribute(ctx, path.Root("device"), &data.Device)
@@ -437,7 +438,7 @@ func (r *VariableResource) Update(ctx context.Context, req resource.UpdateReques
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -496,11 +497,11 @@ func (r *VariableResource) Delete(ctx context.Context, req resource.DeleteReques
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting variables", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

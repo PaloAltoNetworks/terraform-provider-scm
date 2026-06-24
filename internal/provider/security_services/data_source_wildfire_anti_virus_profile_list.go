@@ -32,7 +32,7 @@ type WildfireAntiVirusProfileListDataSource struct {
 }
 
 func (d *WildfireAntiVirusProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_wildfire_anti_virus_profile_list"
+	resp.TypeName = "scm_wildfire_anti_virus_profile_list"
 }
 
 func (d *WildfireAntiVirusProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

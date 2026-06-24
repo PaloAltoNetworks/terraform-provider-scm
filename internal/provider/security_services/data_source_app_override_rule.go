@@ -34,7 +34,7 @@ type AppOverrideRuleDataSource struct {
 
 func (d *AppOverrideRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AppOverrideRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_app_override_rule"
+	resp.TypeName = "scm_app_override_rule"
 }
 
 func (d *AppOverrideRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

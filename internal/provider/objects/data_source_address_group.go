@@ -34,7 +34,7 @@ type AddressGroupDataSource struct {
 
 func (d *AddressGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AddressGroupDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_address_group"
+	resp.TypeName = "scm_address_group"
 }
 
 func (d *AddressGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

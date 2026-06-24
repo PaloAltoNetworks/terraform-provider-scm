@@ -33,7 +33,7 @@ type LabelDataSource struct {
 
 func (d *LabelDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LabelDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_label"
+	resp.TypeName = "scm_label"
 }
 
 func (d *LabelDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type DecryptionProfileDataSource struct {
 
 func (d *DecryptionProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DecryptionProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_decryption_profile"
+	resp.TypeName = "scm_decryption_profile"
 }
 
 func (d *DecryptionProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

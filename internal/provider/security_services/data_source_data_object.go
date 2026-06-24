@@ -34,7 +34,7 @@ type DataObjectDataSource struct {
 
 func (d *DataObjectDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DataObjectDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_data_object"
+	resp.TypeName = "scm_data_object"
 }
 
 func (d *DataObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

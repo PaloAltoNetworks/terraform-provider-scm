@@ -37,7 +37,7 @@ type AutoTagActionDataSource struct {
 
 func (d *AutoTagActionDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AutoTagActionDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_auto_tag_action"
+	resp.TypeName = "scm_auto_tag_action"
 }
 
 func (d *AutoTagActionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

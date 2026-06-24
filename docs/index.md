@@ -13,6 +13,47 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 ## Release Notes
 
+### v1.0.12-beta.1
+
+#### FEATURES
+
+* ZTNA Connector support is introduced in this release under a new ztna_* resource prefix,
+  separate from the existing scm_* resources. All resources and data sources below target
+  the ZTNA Connector API v2.0.
+
+Resources
+* resources/ztna_connector_group: Added support, examples and tests (resource, data-source)
+* resources/ztna_connector: Added support, examples and tests (resource, data-source)
+* resources/ztna_fqdn_application: Added support, examples and tests (resource, data-source)
+* resources/ztna_subnet: Added support, examples and tests (resource, data-source)
+* resources/ztna_wildcard: Added support, examples and tests (resource, data-source)
+* resources/ztna_license_info: Added support, examples and tests (SDK-only)
+
+Data Sources
+* The following data sources are available but require a live connector for full validation and may not 
+be fully tested in this release:
+
+* data-source/ztna_connector_group_connectors
+* data-source/ztna_connector_group_fqdn_rules
+* data-source/ztna_connector_group_subnet_rules
+* data-source/ztna_connector_group_wildcards
+* data-source/ztna_connector_group_upgrade_status
+* data-source/ztna_connector_group_filters
+* data-source/ztna_connector_quiesce
+* data-source/ztna_connector_upgrade_status
+* data-source/ztna_connector_scheduled_upgrade
+* data-source/ztna_connector_images
+* data-source/ztna_connector_filters
+* data-source/ztna_application_filters
+* data-source/ztna_subnet_filters
+* data-source/ztna_wildcard_filters
+* data-source/ztna_discovered_application_filters
+
+#### NOTES
+
+* This is a beta release for testing Terraform Actions functionality
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.1"
+
 ### v1.0.11
 
 #### FEATURES
@@ -343,14 +384,12 @@ provider "scm" {
 
 # OR with Auth File
 
-# This file is embedded using go:embed
 # provider "scm" {
 #   auth_file = "../../../secrets/scm-auth.json"
 #   logging   = "debug"
-#   protocol = "https"
+#   protocol  = "https"
 # }
 
-# This file is embedded using go:embed
 terraform {
   required_providers {
     scm = {

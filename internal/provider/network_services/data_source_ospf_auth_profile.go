@@ -34,7 +34,7 @@ type OspfAuthProfileDataSource struct {
 
 func (d *OspfAuthProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: OspfAuthProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ospf_auth_profile"
+	resp.TypeName = "scm_ospf_auth_profile"
 }
 
 func (d *OspfAuthProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

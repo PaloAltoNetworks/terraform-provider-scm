@@ -37,7 +37,7 @@ type MfaServerDataSource struct {
 
 func (d *MfaServerDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: MfaServerDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_mfa_server"
+	resp.TypeName = "scm_mfa_server"
 }
 
 func (d *MfaServerDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

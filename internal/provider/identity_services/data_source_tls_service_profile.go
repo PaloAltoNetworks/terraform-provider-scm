@@ -34,7 +34,7 @@ type TlsServiceProfileDataSource struct {
 
 func (d *TlsServiceProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TlsServiceProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_tls_service_profile"
+	resp.TypeName = "scm_tls_service_profile"
 }
 
 func (d *TlsServiceProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

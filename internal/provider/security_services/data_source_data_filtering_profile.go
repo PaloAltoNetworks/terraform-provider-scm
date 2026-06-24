@@ -34,7 +34,7 @@ type DataFilteringProfileDataSource struct {
 
 func (d *DataFilteringProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DataFilteringProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_data_filtering_profile"
+	resp.TypeName = "scm_data_filtering_profile"
 }
 
 func (d *DataFilteringProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

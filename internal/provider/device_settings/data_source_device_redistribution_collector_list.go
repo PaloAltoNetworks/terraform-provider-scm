@@ -32,7 +32,7 @@ type DeviceRedistributionCollectorListDataSource struct {
 }
 
 func (d *DeviceRedistributionCollectorListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_device_redistribution_collector_list"
+	resp.TypeName = "scm_device_redistribution_collector_list"
 }
 
 func (d *DeviceRedistributionCollectorListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

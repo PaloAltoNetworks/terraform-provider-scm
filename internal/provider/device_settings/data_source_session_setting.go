@@ -34,7 +34,7 @@ type SessionSettingDataSource struct {
 
 func (d *SessionSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SessionSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_session_setting"
+	resp.TypeName = "scm_session_setting"
 }
 
 func (d *SessionSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

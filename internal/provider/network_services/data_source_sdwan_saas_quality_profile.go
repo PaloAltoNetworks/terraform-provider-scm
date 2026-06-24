@@ -34,7 +34,7 @@ type SdwanSaasQualityProfileDataSource struct {
 
 func (d *SdwanSaasQualityProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SdwanSaasQualityProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_sdwan_saas_quality_profile"
+	resp.TypeName = "scm_sdwan_saas_quality_profile"
 }
 
 func (d *SdwanSaasQualityProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type RemoteNetworkListDataSource struct {
 }
 
 func (d *RemoteNetworkListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_remote_network_list"
+	resp.TypeName = "scm_remote_network_list"
 }
 
 func (d *RemoteNetworkListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type RegionDataSource struct {
 
 func (d *RegionDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: RegionDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_region"
+	resp.TypeName = "scm_region"
 }
 
 func (d *RegionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

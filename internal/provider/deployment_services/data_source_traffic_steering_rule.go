@@ -34,7 +34,7 @@ type TrafficSteeringRuleDataSource struct {
 
 func (d *TrafficSteeringRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TrafficSteeringRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_traffic_steering_rule"
+	resp.TypeName = "scm_traffic_steering_rule"
 }
 
 func (d *TrafficSteeringRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type BgpRedistributionProfileDataSource struct {
 
 func (d *BgpRedistributionProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: BgpRedistributionProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_bgp_redistribution_profile"
+	resp.TypeName = "scm_bgp_redistribution_profile"
 }
 
 func (d *BgpRedistributionProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

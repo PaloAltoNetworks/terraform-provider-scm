@@ -33,7 +33,7 @@ type FolderDataSource struct {
 
 func (d *FolderDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: FolderDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_folder"
+	resp.TypeName = "scm_folder"
 }
 
 func (d *FolderDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

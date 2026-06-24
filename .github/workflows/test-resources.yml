@@ -26,10 +26,11 @@ jobs:
         with:
           terraform_wrapper: false
 
-      - name: Pull latest scm-go SDK from develop
+      - name: Pull latest scm-go SDK
         run: |
           sed -i '/replace.*scm-go/d' go.mod
-          go get github.com/paloaltonetworks/scm-go@develop
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          go get github.com/paloaltonetworks/scm-go@${BRANCH} || go get github.com/paloaltonetworks/scm-go@develop
           go mod tidy
 
       - name: Build provider
@@ -46,6 +47,7 @@ jobs:
           SCM_CLIENT_ID: ${{ secrets.SCM_CLIENT_ID }}
           SCM_CLIENT_SECRET: ${{ secrets.SCM_CLIENT_SECRET }}
           SCM_SCOPE: ${{ secrets.SCM_SCOPE }}
+          ZTNA_HOST: ${{ secrets.ZTNA_HOST || secrets.SCM_HOST }}
         run: |
           {
             echo 'provider "scm" {'
@@ -57,9 +59,21 @@ jobs:
             echo '  logging       = "debug"'
             echo '}'
             echo ''
+            echo 'provider "ztna" {'
+            echo "  host          = \"${ZTNA_HOST}\""
+            echo "  auth_url      = \"${SCM_AUTH_URL}\""
+            echo "  client_id     = \"${SCM_CLIENT_ID}\""
+            echo "  client_secret = \"${SCM_CLIENT_SECRET}\""
+            echo "  scope         = \"${SCM_SCOPE}\""
+            echo '  logging       = "debug"'
+            echo '}'
+            echo ''
             echo 'terraform {'
             echo '  required_providers {'
             echo '    scm = {'
+            echo '      source = "paloaltonetworks-local/scm"'
+            echo '    }'
+            echo '    ztna = {'
             echo '      source = "paloaltonetworks-local/scm"'
             echo '    }'
             echo '  }'

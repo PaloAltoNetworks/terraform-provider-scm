@@ -34,7 +34,7 @@ type HipProfileDataSource struct {
 
 func (d *HipProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: HipProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_hip_profile"
+	resp.TypeName = "scm_hip_profile"
 }
 
 func (d *HipProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

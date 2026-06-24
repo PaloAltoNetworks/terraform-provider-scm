@@ -34,7 +34,7 @@ type BgpAddressFamilyProfileDataSource struct {
 
 func (d *BgpAddressFamilyProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: BgpAddressFamilyProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_bgp_address_family_profile"
+	resp.TypeName = "scm_bgp_address_family_profile"
 }
 
 func (d *BgpAddressFamilyProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

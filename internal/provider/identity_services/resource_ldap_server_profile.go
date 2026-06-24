@@ -35,7 +35,7 @@ type LdapServerProfileResource struct {
 }
 
 func (r *LdapServerProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ldap_server_profile"
+	resp.TypeName = "scm_ldap_server_profile"
 }
 
 func (r *LdapServerProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -144,6 +144,7 @@ func (r *LdapServerProfileResource) Create(ctx context.Context, req resource.Cre
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -525,7 +526,7 @@ func (r *LdapServerProfileResource) Update(ctx context.Context, req resource.Upd
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -609,11 +610,11 @@ func (r *LdapServerProfileResource) Delete(ctx context.Context, req resource.Del
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting ldap_server_profiles", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

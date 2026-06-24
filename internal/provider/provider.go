@@ -24,6 +24,7 @@ import (
 	tfProviderNetworkServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/network_services"
 	tfProviderObjects "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/objects"
 	tfProviderSecurityServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/security_services"
+	tfProviderZtnaConnectorAll "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/ztna_connector_all"
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
@@ -147,6 +148,7 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		AuthUrl:          config.AuthUrl.ValueString(),
 		Protocol:         config.Protocol.ValueString(),
 		Host:             config.Host.ValueString(),
+		ZtnaHost:         config.Host.ValueString(),
 		Port:             int(config.Port.ValueInt64()),
 		Headers:          headers,
 		ClientId:         config.ClientId.ValueString(),
@@ -223,6 +225,7 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		"network_services":    setup.GetNetworkServicesAPIClient(setupClient),
 		"objects":             setup.GetObjectsAPIClient(setupClient),
 		"security_services":   setup.GetSecurityServicesAPIClient(setupClient),
+		"ztna_connector_all":  setup.GetZtnaConnectorAllAPIClient(setupClient),
 		"config_operations":   setup.GetConfigOperationsAPIClient(setupClient),
 	}
 
@@ -251,6 +254,8 @@ func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataS
 	dataSources = append(dataSources, tfProviderObjects.GetDataSources()...)
 	// Add security_services package data sources
 	dataSources = append(dataSources, tfProviderSecurityServices.GetDataSources()...)
+	// Add ztna_connector_all package data sources
+	dataSources = append(dataSources, tfProviderZtnaConnectorAll.GetDataSources()...)
 	return dataSources
 }
 
@@ -273,6 +278,8 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 	resources = append(resources, tfProviderObjects.GetResources()...)
 	// Add security_services package resources
 	resources = append(resources, tfProviderSecurityServices.GetResources()...)
+	// Add ztna_connector_all package resources
+	resources = append(resources, tfProviderZtnaConnectorAll.GetResources()...)
 
 	return resources
 }
@@ -280,14 +287,14 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 // Actions defines the actions for this provider.
 func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
 	var actions []func() action.Action
-	// Add identity_services package actions
-	actions = append(actions, tfProviderIdentityServices.GetActions()...)
 	// Add config_setup package actions
 	actions = append(actions, tfProviderConfigSetup.GetActions()...)
-	// Add network_services package actions
-	actions = append(actions, tfProviderNetworkServices.GetActions()...)
+	// Add identity_services package actions
+	actions = append(actions, tfProviderIdentityServices.GetActions()...)
 	// Add config_operations package actions
 	actions = append(actions, tfProviderConfigOperations.GetActions()...)
+	// Add network_services package actions
+	actions = append(actions, tfProviderNetworkServices.GetActions()...)
 
 	return actions
 }

@@ -41,7 +41,7 @@ type AutoTagActionResource struct {
 }
 
 func (r *AutoTagActionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_auto_tag_action"
+	resp.TypeName = "scm_auto_tag_action"
 }
 
 func (r *AutoTagActionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

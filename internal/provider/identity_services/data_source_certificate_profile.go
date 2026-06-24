@@ -34,7 +34,7 @@ type CertificateProfileDataSource struct {
 
 func (d *CertificateProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: CertificateProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_certificate_profile"
+	resp.TypeName = "scm_certificate_profile"
 }
 
 func (d *CertificateProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

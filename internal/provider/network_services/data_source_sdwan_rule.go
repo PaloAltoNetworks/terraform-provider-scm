@@ -34,7 +34,7 @@ type SdwanRuleDataSource struct {
 
 func (d *SdwanRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SdwanRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_sdwan_rule"
+	resp.TypeName = "scm_sdwan_rule"
 }
 
 func (d *SdwanRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

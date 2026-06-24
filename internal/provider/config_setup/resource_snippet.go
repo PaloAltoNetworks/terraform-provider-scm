@@ -34,7 +34,7 @@ type SnippetResource struct {
 }
 
 func (r *SnippetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet"
+	resp.TypeName = "scm_snippet"
 }
 
 func (r *SnippetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -125,6 +125,7 @@ func (r *SnippetResource) Create(ctx context.Context, req resource.CreateRequest
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// Set the Terraform ID and save the final state.
 	var idBuilder strings.Builder
@@ -300,7 +301,7 @@ func (r *SnippetResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// Step 10: Carry over tfid from state into plan
 	plan.Tfid = state.Tfid
@@ -331,11 +332,11 @@ func (r *SnippetResource) Delete(ctx context.Context, req resource.DeleteRequest
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting snippets", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

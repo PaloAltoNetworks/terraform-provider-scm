@@ -31,7 +31,7 @@ type BandwidthAllocationResource struct {
 }
 
 func (r *BandwidthAllocationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_bandwidth_allocation"
+	resp.TypeName = "scm_bandwidth_allocation"
 }
 
 func (r *BandwidthAllocationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

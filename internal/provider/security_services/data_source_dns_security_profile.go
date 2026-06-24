@@ -34,7 +34,7 @@ type DnsSecurityProfileDataSource struct {
 
 func (d *DnsSecurityProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DnsSecurityProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dns_security_profile"
+	resp.TypeName = "scm_dns_security_profile"
 }
 
 func (d *DnsSecurityProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

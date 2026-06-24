@@ -67,7 +67,6 @@ Optional:
 
 Read-Only:
 
-- `routing_stack` (String) Routing stack
 - `tfid` (String) The Terraform ID.
 - `vrf` (Attributes List) Vrf (see [below for nested schema](#nestedatt--data--vrf))
 

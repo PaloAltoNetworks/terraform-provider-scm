@@ -34,7 +34,7 @@ type HipObjectDataSource struct {
 
 func (d *HipObjectDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: HipObjectDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_hip_object"
+	resp.TypeName = "scm_hip_object"
 }
 
 func (d *HipObjectDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

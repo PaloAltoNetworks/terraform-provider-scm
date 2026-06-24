@@ -35,7 +35,7 @@ type ForwardingProfileSourceApplicationResource struct {
 }
 
 func (r *ForwardingProfileSourceApplicationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_forwarding_profile_source_application"
+	resp.TypeName = "scm_forwarding_profile_source_application"
 }
 
 func (r *ForwardingProfileSourceApplicationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -129,6 +129,7 @@ func (r *ForwardingProfileSourceApplicationResource) Create(ctx context.Context,
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 	_ = req.Plan.GetAttribute(ctx, path.Root("folder"), &data.Folder)
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
@@ -386,7 +387,7 @@ func (r *ForwardingProfileSourceApplicationResource) Update(ctx context.Context,
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -447,11 +448,11 @@ func (r *ForwardingProfileSourceApplicationResource) Delete(ctx context.Context,
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting forwarding_profile_source_applications", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

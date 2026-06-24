@@ -32,7 +32,7 @@ type IpsecTunnelListDataSource struct {
 }
 
 func (d *IpsecTunnelListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ipsec_tunnel_list"
+	resp.TypeName = "scm_ipsec_tunnel_list"
 }
 
 func (d *IpsecTunnelListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

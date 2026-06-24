@@ -34,7 +34,7 @@ type TcpSettingDataSource struct {
 
 func (d *TcpSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TcpSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_tcp_setting"
+	resp.TypeName = "scm_tcp_setting"
 }
 
 func (d *TcpSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

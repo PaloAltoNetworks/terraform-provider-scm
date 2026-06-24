@@ -72,9 +72,8 @@ resource "scm_bgp_auth_profile" "bgp_auth_profile" {
 #
 
 resource "scm_logical_router" "scm_logical_router" {
-  folder        = "ngfw-shared"
-  name          = "scm_logical_router"
-  routing_stack = "advanced"
+  folder = "ngfw-shared"
+  name   = "scm_logical_router"
   vrf = [
     {
       name = "default"
@@ -130,9 +129,8 @@ resource "scm_logical_router" "scm_logical_router" {
 #
 
 resource "scm_logical_router" "scm_bgp_router" {
-  folder        = "ngfw-shared"
-  name          = "scm_bgp_router"
-  routing_stack = "advanced"
+  folder = "ngfw-shared"
+  name   = "scm_bgp_router"
   vrf = [
     {
       name = "default"
@@ -197,7 +195,6 @@ resource "scm_logical_router" "scm_bgp_router" {
 - `folder` (String) The folder in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `routing_stack` (String) Routing stack
 - `snippet` (String) The snippet in which the resource is defined
 
 > ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.

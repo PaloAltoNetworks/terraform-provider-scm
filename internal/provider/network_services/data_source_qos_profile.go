@@ -34,7 +34,7 @@ type QosProfileDataSource struct {
 
 func (d *QosProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: QosProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_qos_profile"
+	resp.TypeName = "scm_qos_profile"
 }
 
 func (d *QosProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

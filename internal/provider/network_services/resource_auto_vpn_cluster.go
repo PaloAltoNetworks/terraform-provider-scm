@@ -34,7 +34,7 @@ type AutoVpnClusterResource struct {
 }
 
 func (r *AutoVpnClusterResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_auto_vpn_cluster"
+	resp.TypeName = "scm_auto_vpn_cluster"
 }
 
 func (r *AutoVpnClusterResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -125,6 +125,7 @@ func (r *AutoVpnClusterResource) Create(ctx context.Context, req resource.Create
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// Set the Terraform ID and save the final state.
 	var idBuilder strings.Builder
@@ -300,7 +301,7 @@ func (r *AutoVpnClusterResource) Update(ctx context.Context, req resource.Update
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// Step 10: Carry over tfid from state into plan
 	plan.Tfid = state.Tfid
@@ -331,11 +332,11 @@ func (r *AutoVpnClusterResource) Delete(ctx context.Context, req resource.Delete
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting auto_vpn_clusters", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

@@ -34,7 +34,7 @@ type SdwanErrorCorrectionProfileDataSource struct {
 
 func (d *SdwanErrorCorrectionProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SdwanErrorCorrectionProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_sdwan_error_correction_profile"
+	resp.TypeName = "scm_sdwan_error_correction_profile"
 }
 
 func (d *SdwanErrorCorrectionProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

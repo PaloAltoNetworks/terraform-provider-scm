@@ -33,7 +33,7 @@ type AutoVpnClusterDataSource struct {
 
 func (d *AutoVpnClusterDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AutoVpnClusterDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_auto_vpn_cluster"
+	resp.TypeName = "scm_auto_vpn_cluster"
 }
 
 func (d *AutoVpnClusterDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

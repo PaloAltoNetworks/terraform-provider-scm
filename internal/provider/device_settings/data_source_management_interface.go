@@ -34,7 +34,7 @@ type ManagementInterfaceDataSource struct {
 
 func (d *ManagementInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ManagementInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_management_interface"
+	resp.TypeName = "scm_management_interface"
 }
 
 func (d *ManagementInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

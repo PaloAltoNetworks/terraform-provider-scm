@@ -34,7 +34,7 @@ type SessionTimeoutDataSource struct {
 
 func (d *SessionTimeoutDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SessionTimeoutDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_session_timeout"
+	resp.TypeName = "scm_session_timeout"
 }
 
 func (d *SessionTimeoutDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

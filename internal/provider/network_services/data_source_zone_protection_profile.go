@@ -34,7 +34,7 @@ type ZoneProtectionProfileDataSource struct {
 
 func (d *ZoneProtectionProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ZoneProtectionProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_zone_protection_profile"
+	resp.TypeName = "scm_zone_protection_profile"
 }
 
 func (d *ZoneProtectionProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

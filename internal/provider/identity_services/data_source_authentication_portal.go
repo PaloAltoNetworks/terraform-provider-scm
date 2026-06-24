@@ -37,7 +37,7 @@ type AuthenticationPortalDataSource struct {
 
 func (d *AuthenticationPortalDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AuthenticationPortalDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_authentication_portal"
+	resp.TypeName = "scm_authentication_portal"
 }
 
 func (d *AuthenticationPortalDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

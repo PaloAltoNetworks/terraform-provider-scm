@@ -34,7 +34,7 @@ type TagDataSource struct {
 
 func (d *TagDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TagDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_tag"
+	resp.TypeName = "scm_tag"
 }
 
 func (d *TagDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type IpsecTunnelDataSource struct {
 
 func (d *IpsecTunnelDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: IpsecTunnelDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ipsec_tunnel"
+	resp.TypeName = "scm_ipsec_tunnel"
 }
 
 func (d *IpsecTunnelDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

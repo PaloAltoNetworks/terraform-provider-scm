@@ -32,7 +32,7 @@ type LoopbackInterfaceListDataSource struct {
 }
 
 func (d *LoopbackInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_loopback_interface_list"
+	resp.TypeName = "scm_loopback_interface_list"
 }
 
 func (d *LoopbackInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

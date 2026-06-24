@@ -34,7 +34,7 @@ type RoutePrefixListDataSource struct {
 
 func (d *RoutePrefixListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: RoutePrefixListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_route_prefix_list"
+	resp.TypeName = "scm_route_prefix_list"
 }
 
 func (d *RoutePrefixListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

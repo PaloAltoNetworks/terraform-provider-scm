@@ -32,7 +32,7 @@ type SiteListDataSource struct {
 }
 
 func (d *SiteListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_site_list"
+	resp.TypeName = "scm_site_list"
 }
 
 func (d *SiteListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type SecurityRuleDataSource struct {
 
 func (d *SecurityRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SecurityRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_security_rule"
+	resp.TypeName = "scm_security_rule"
 }
 
 func (d *SecurityRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type ServiceDataSource struct {
 
 func (d *ServiceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ServiceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_service"
+	resp.TypeName = "scm_service"
 }
 
 func (d *ServiceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

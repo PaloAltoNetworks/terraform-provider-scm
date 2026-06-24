@@ -34,7 +34,7 @@ type GlobalprotectMatchListDataSource struct {
 
 func (d *GlobalprotectMatchListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: GlobalprotectMatchListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_globalprotect_match_list"
+	resp.TypeName = "scm_globalprotect_match_list"
 }
 
 func (d *GlobalprotectMatchListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

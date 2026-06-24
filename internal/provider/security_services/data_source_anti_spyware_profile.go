@@ -34,7 +34,7 @@ type AntiSpywareProfileDataSource struct {
 
 func (d *AntiSpywareProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AntiSpywareProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_anti_spyware_profile"
+	resp.TypeName = "scm_anti_spyware_profile"
 }
 
 func (d *AntiSpywareProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

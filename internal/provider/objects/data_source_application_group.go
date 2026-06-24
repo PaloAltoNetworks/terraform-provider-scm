@@ -34,7 +34,7 @@ type ApplicationGroupDataSource struct {
 
 func (d *ApplicationGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ApplicationGroupDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_application_group"
+	resp.TypeName = "scm_application_group"
 }
 
 func (d *ApplicationGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

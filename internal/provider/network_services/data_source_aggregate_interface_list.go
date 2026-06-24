@@ -32,7 +32,7 @@ type AggregateInterfaceListDataSource struct {
 }
 
 func (d *AggregateInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_aggregate_interface_list"
+	resp.TypeName = "scm_aggregate_interface_list"
 }
 
 func (d *AggregateInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

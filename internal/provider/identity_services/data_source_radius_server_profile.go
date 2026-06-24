@@ -34,7 +34,7 @@ type RadiusServerProfileDataSource struct {
 
 func (d *RadiusServerProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: RadiusServerProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_radius_server_profile"
+	resp.TypeName = "scm_radius_server_profile"
 }
 
 func (d *RadiusServerProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

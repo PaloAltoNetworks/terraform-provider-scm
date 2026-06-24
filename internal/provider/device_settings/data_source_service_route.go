@@ -34,7 +34,7 @@ type ServiceRouteDataSource struct {
 
 func (d *ServiceRouteDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ServiceRouteDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_service_route"
+	resp.TypeName = "scm_service_route"
 }
 
 func (d *ServiceRouteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

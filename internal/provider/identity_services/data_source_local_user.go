@@ -34,7 +34,7 @@ type LocalUserDataSource struct {
 
 func (d *LocalUserDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LocalUserDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_local_user"
+	resp.TypeName = "scm_local_user"
 }
 
 func (d *LocalUserDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type ApplicationFilterDataSource struct {
 
 func (d *ApplicationFilterDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ApplicationFilterDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_application_filter"
+	resp.TypeName = "scm_application_filter"
 }
 
 func (d *ApplicationFilterDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

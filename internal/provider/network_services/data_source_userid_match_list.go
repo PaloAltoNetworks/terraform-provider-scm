@@ -34,7 +34,7 @@ type UseridMatchListDataSource struct {
 
 func (d *UseridMatchListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: UseridMatchListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_userid_match_list"
+	resp.TypeName = "scm_userid_match_list"
 }
 
 func (d *UseridMatchListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

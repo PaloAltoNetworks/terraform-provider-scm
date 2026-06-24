@@ -34,7 +34,7 @@ type FileBlockingProfileDataSource struct {
 
 func (d *FileBlockingProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: FileBlockingProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_file_blocking_profile"
+	resp.TypeName = "scm_file_blocking_profile"
 }
 
 func (d *FileBlockingProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

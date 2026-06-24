@@ -34,7 +34,7 @@ type SdwanPathQualityProfileDataSource struct {
 
 func (d *SdwanPathQualityProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SdwanPathQualityProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_sdwan_path_quality_profile"
+	resp.TypeName = "scm_sdwan_path_quality_profile"
 }
 
 func (d *SdwanPathQualityProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

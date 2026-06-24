@@ -34,7 +34,7 @@ type Layer3SubinterfaceDataSource struct {
 
 func (d *Layer3SubinterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: Layer3SubinterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_layer3_subinterface"
+	resp.TypeName = "scm_layer3_subinterface"
 }
 
 func (d *Layer3SubinterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

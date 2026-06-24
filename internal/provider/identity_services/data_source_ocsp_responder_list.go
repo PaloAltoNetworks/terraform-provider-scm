@@ -34,7 +34,7 @@ type OcspResponderListDataSource struct {
 }
 
 func (d *OcspResponderListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ocsp_responder_list"
+	resp.TypeName = "scm_ocsp_responder_list"
 }
 
 func (d *OcspResponderListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -35,7 +35,7 @@ type IpsecTunnelResource struct {
 }
 
 func (r *IpsecTunnelResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ipsec_tunnel"
+	resp.TypeName = "scm_ipsec_tunnel"
 }
 
 func (r *IpsecTunnelResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -126,6 +126,7 @@ func (r *IpsecTunnelResource) Create(ctx context.Context, req resource.CreateReq
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -425,7 +426,7 @@ func (r *IpsecTunnelResource) Update(ctx context.Context, req resource.UpdateReq
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -484,11 +485,11 @@ func (r *IpsecTunnelResource) Delete(ctx context.Context, req resource.DeleteReq
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting ipsec_tunnels", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

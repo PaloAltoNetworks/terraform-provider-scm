@@ -34,7 +34,7 @@ type DecryptionRuleDataSource struct {
 
 func (d *DecryptionRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DecryptionRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_decryption_rule"
+	resp.TypeName = "scm_decryption_rule"
 }
 
 func (d *DecryptionRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

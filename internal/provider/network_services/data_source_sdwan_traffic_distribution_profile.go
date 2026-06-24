@@ -34,7 +34,7 @@ type SdwanTrafficDistributionProfileDataSource struct {
 
 func (d *SdwanTrafficDistributionProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SdwanTrafficDistributionProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_sdwan_traffic_distribution_profile"
+	resp.TypeName = "scm_sdwan_traffic_distribution_profile"
 }
 
 func (d *SdwanTrafficDistributionProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

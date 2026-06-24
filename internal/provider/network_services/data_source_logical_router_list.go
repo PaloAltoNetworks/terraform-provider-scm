@@ -32,7 +32,7 @@ type LogicalRouterListDataSource struct {
 }
 
 func (d *LogicalRouterListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_logical_router_list"
+	resp.TypeName = "scm_logical_router_list"
 }
 
 func (d *LogicalRouterListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

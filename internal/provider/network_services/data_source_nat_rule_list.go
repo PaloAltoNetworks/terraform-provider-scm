@@ -32,7 +32,7 @@ type NatRuleListDataSource struct {
 }
 
 func (d *NatRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_nat_rule_list"
+	resp.TypeName = "scm_nat_rule_list"
 }
 
 func (d *NatRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

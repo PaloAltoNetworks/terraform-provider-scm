@@ -32,7 +32,7 @@ type ManagementInterfaceListDataSource struct {
 }
 
 func (d *ManagementInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_management_interface_list"
+	resp.TypeName = "scm_management_interface_list"
 }
 
 func (d *ManagementInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

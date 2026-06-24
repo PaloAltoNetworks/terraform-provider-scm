@@ -34,7 +34,7 @@ type LdapServerProfileDataSource struct {
 
 func (d *LdapServerProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LdapServerProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ldap_server_profile"
+	resp.TypeName = "scm_ldap_server_profile"
 }
 
 func (d *LdapServerProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type UseridMatchListListDataSource struct {
 }
 
 func (d *UseridMatchListListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_userid_match_list_list"
+	resp.TypeName = "scm_userid_match_list_list"
 }
 
 func (d *UseridMatchListListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type ScepProfileDataSource struct {
 
 func (d *ScepProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ScepProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_scep_profile"
+	resp.TypeName = "scm_scep_profile"
 }
 
 func (d *ScepProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

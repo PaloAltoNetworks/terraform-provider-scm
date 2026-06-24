@@ -32,7 +32,7 @@ type LldpProfileListDataSource struct {
 }
 
 func (d *LldpProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_lldp_profile_list"
+	resp.TypeName = "scm_lldp_profile_list"
 }
 
 func (d *LldpProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

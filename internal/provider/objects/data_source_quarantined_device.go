@@ -37,7 +37,7 @@ type QuarantinedDeviceDataSource struct {
 
 func (d *QuarantinedDeviceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: QuarantinedDeviceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_quarantined_device"
+	resp.TypeName = "scm_quarantined_device"
 }
 
 func (d *QuarantinedDeviceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

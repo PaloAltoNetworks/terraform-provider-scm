@@ -34,7 +34,7 @@ type DhcpInterfaceDataSource struct {
 
 func (d *DhcpInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DhcpInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dhcp_interface"
+	resp.TypeName = "scm_dhcp_interface"
 }
 
 func (d *DhcpInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

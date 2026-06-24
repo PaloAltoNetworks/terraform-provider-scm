@@ -24,14 +24,13 @@ import (
 
 // LogicalRouters represents the Terraform model for LogicalRouters
 type LogicalRouters struct {
-	Tfid         types.String          `tfsdk:"tfid"`
-	Device       basetypes.StringValue `tfsdk:"device"`
-	Folder       basetypes.StringValue `tfsdk:"folder"`
-	Id           basetypes.StringValue `tfsdk:"id"`
-	Name         basetypes.StringValue `tfsdk:"name"`
-	RoutingStack basetypes.StringValue `tfsdk:"routing_stack"`
-	Snippet      basetypes.StringValue `tfsdk:"snippet"`
-	Vrf          basetypes.ListValue   `tfsdk:"vrf"`
+	Tfid    types.String          `tfsdk:"tfid"`
+	Device  basetypes.StringValue `tfsdk:"device"`
+	Folder  basetypes.StringValue `tfsdk:"folder"`
+	Id      basetypes.StringValue `tfsdk:"id"`
+	Name    basetypes.StringValue `tfsdk:"name"`
+	Snippet basetypes.StringValue `tfsdk:"snippet"`
+	Vrf     basetypes.ListValue   `tfsdk:"vrf"`
 }
 
 // LogicalRoutersVrfInner represents a nested structure within the LogicalRouters model
@@ -1354,13 +1353,12 @@ type LogicalRoutersVrfInnerVrAdminDists struct {
 // AttrTypes defines the attribute types for the LogicalRouters model.
 func (o LogicalRouters) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":          basetypes.StringType{},
-		"device":        basetypes.StringType{},
-		"folder":        basetypes.StringType{},
-		"id":            basetypes.StringType{},
-		"name":          basetypes.StringType{},
-		"routing_stack": basetypes.StringType{},
-		"snippet":       basetypes.StringType{},
+		"tfid":    basetypes.StringType{},
+		"device":  basetypes.StringType{},
+		"folder":  basetypes.StringType{},
+		"id":      basetypes.StringType{},
+		"name":    basetypes.StringType{},
+		"snippet": basetypes.StringType{},
 		"vrf": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"admin_dists": basetypes.ObjectType{
@@ -12899,13 +12897,6 @@ var LogicalRoutersResourceSchema = schema.Schema{
 			MarkdownDescription: "Name",
 			Required:            true,
 		},
-		"routing_stack": schema.StringAttribute{
-			Validators: []validator.String{
-				stringvalidator.OneOf("legacy", "advanced"),
-			},
-			MarkdownDescription: "Routing stack",
-			Optional:            true,
-		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
@@ -18459,10 +18450,6 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 		"name": dsschema.StringAttribute{
 			MarkdownDescription: "Name",
 			Optional:            true,
-			Computed:            true,
-		},
-		"routing_stack": dsschema.StringAttribute{
-			MarkdownDescription: "Routing stack",
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{

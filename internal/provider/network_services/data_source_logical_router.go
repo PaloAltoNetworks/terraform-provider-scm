@@ -34,7 +34,7 @@ type LogicalRouterDataSource struct {
 
 func (d *LogicalRouterDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LogicalRouterDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_logical_router"
+	resp.TypeName = "scm_logical_router"
 }
 
 func (d *LogicalRouterDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

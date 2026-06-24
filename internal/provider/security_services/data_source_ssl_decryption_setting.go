@@ -37,7 +37,7 @@ type SslDecryptionSettingDataSource struct {
 
 func (d *SslDecryptionSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SslDecryptionSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ssl_decryption_setting"
+	resp.TypeName = "scm_ssl_decryption_setting"
 }
 
 func (d *SslDecryptionSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

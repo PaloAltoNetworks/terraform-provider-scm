@@ -34,7 +34,7 @@ type WildfireAntiVirusProfileDataSource struct {
 
 func (d *WildfireAntiVirusProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: WildfireAntiVirusProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_wildfire_anti_virus_profile"
+	resp.TypeName = "scm_wildfire_anti_virus_profile"
 }
 
 func (d *WildfireAntiVirusProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

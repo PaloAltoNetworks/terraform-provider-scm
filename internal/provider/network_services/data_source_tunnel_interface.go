@@ -34,7 +34,7 @@ type TunnelInterfaceDataSource struct {
 
 func (d *TunnelInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TunnelInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_tunnel_interface"
+	resp.TypeName = "scm_tunnel_interface"
 }
 
 func (d *TunnelInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

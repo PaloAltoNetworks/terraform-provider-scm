@@ -31,7 +31,7 @@ type LabelListDataSource struct {
 }
 
 func (d *LabelListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_label_list"
+	resp.TypeName = "scm_label_list"
 }
 
 func (d *LabelListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

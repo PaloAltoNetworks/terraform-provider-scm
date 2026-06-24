@@ -35,7 +35,7 @@ type EthernetInterfaceResource struct {
 }
 
 func (r *EthernetInterfaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ethernet_interface"
+	resp.TypeName = "scm_ethernet_interface"
 }
 
 func (r *EthernetInterfaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -160,6 +160,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -617,7 +618,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -731,11 +732,11 @@ func (r *EthernetInterfaceResource) Delete(ctx context.Context, req resource.Del
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting ethernet_interfaces", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

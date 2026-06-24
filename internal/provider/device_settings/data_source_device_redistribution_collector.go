@@ -34,7 +34,7 @@ type DeviceRedistributionCollectorDataSource struct {
 
 func (d *DeviceRedistributionCollectorDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DeviceRedistributionCollectorDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_device_redistribution_collector"
+	resp.TypeName = "scm_device_redistribution_collector"
 }
 
 func (d *DeviceRedistributionCollectorDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type ExternalDynamicListDataSource struct {
 
 func (d *ExternalDynamicListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ExternalDynamicListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_external_dynamic_list"
+	resp.TypeName = "scm_external_dynamic_list"
 }
 
 func (d *ExternalDynamicListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

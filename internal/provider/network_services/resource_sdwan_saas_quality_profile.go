@@ -35,7 +35,7 @@ type SdwanSaasQualityProfileResource struct {
 }
 
 func (r *SdwanSaasQualityProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_sdwan_saas_quality_profile"
+	resp.TypeName = "scm_sdwan_saas_quality_profile"
 }
 
 func (r *SdwanSaasQualityProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -126,6 +126,7 @@ func (r *SdwanSaasQualityProfileResource) Create(ctx context.Context, req resour
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -425,7 +426,7 @@ func (r *SdwanSaasQualityProfileResource) Update(ctx context.Context, req resour
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -484,11 +485,11 @@ func (r *SdwanSaasQualityProfileResource) Delete(ctx context.Context, req resour
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting sdwan_saas_quality_profiles", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

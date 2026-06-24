@@ -37,7 +37,7 @@ type InternalDnsServerDataSource struct {
 
 func (d *InternalDnsServerDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: InternalDnsServerDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_internal_dns_server"
+	resp.TypeName = "scm_internal_dns_server"
 }
 
 func (d *InternalDnsServerDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

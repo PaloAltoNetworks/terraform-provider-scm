@@ -32,7 +32,7 @@ type ContentIdSettingListDataSource struct {
 }
 
 func (d *ContentIdSettingListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_content_id_setting_list"
+	resp.TypeName = "scm_content_id_setting_list"
 }
 
 func (d *ContentIdSettingListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

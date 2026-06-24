@@ -34,7 +34,7 @@ type ZoneDataSource struct {
 
 func (d *ZoneDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ZoneDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_zone"
+	resp.TypeName = "scm_zone"
 }
 
 func (d *ZoneDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type IptagMatchListListDataSource struct {
 }
 
 func (d *IptagMatchListListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_iptag_match_list_list"
+	resp.TypeName = "scm_iptag_match_list_list"
 }
 
 func (d *IptagMatchListListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -42,16 +42,6 @@ type TenantTrustInfo struct {
 	UpdatedBy            basetypes.StringValue `tfsdk:"updated_by"`
 }
 
-// Trusts represents a nested structure within the TenantTrustInfo model
-type Trusts struct {
-	Tfid                types.String          `tfsdk:"tfid"`
-	DonorTenantName     basetypes.StringValue `tfsdk:"donor_tenant_name"`
-	Psk                 basetypes.StringValue `tfsdk:"psk"`
-	RecipientTenantName basetypes.StringValue `tfsdk:"recipient_tenant_name"`
-	TrustId             basetypes.Int64Value  `tfsdk:"trust_id"`
-	Tsg                 basetypes.StringValue `tfsdk:"tsg"`
-}
-
 // AttrTypes defines the attribute types for the TenantTrustInfo model.
 func (o TenantTrustInfo) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -85,25 +75,6 @@ func (o TenantTrustInfo) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of TenantTrustInfo objects.
 func (o TenantTrustInfo) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
-// AttrTypes defines the attribute types for the Trusts model.
-func (o Trusts) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"tfid":                  basetypes.StringType{},
-		"donor_tenant_name":     basetypes.StringType{},
-		"psk":                   basetypes.StringType{},
-		"recipient_tenant_name": basetypes.StringType{},
-		"trust_id":              basetypes.Int64Type{},
-		"tsg":                   basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of Trusts objects.
-func (o Trusts) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}

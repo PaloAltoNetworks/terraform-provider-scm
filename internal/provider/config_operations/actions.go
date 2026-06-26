@@ -7,7 +7,7 @@ import (
 // GetActions returns all actions for this package.
 func GetActions() []func() action.Action {
 	return []func() action.Action{
-		NewConfigPushAction,
 		NewConfigLoadAction,
+		NewConfigPushAction,
 	}
 }

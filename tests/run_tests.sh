@@ -41,7 +41,7 @@ DELETE_FAILED=()
 DELETE_FAILED_ERRORS=()
 
 # Resources to skip (require special setup, not testable in isolation)
-SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster"
+SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade"
 
 # -----------------------------------------------------------------------------
 # Detect dev_overrides — when active, terraform init must be skipped.

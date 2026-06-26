@@ -53,20 +53,6 @@ and contain unicode text, space, dash, or underscore, or period.
 The following command can be used to import a resource not managed by Terraform:
 
 ```bash
-terraform import scm_ztna_connector.example folder:::id
+terraform import ztna_connector.example :::oid
 ```
-
-or
-
-```bash
-terraform import scm_ztna_connector.example :snippet::id
-```
-
-or
-
-```bash
-terraform import scm_ztna_connector.example ::device:id
-```
-
-**Note:** Please provide just one of folder, snippet, or device for the import command.
 

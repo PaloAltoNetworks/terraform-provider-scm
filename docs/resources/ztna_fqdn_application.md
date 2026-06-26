@@ -96,20 +96,6 @@ If both tcp_port and udp_port are omitted, tcp_port defaults to 443.
 The following command can be used to import a resource not managed by Terraform:
 
 ```bash
-terraform import scm_ztna_fqdn_application.example folder:::id
+terraform import ztna_fqdn_application.example :::oid
 ```
-
-or
-
-```bash
-terraform import scm_ztna_fqdn_application.example :snippet::id
-```
-
-or
-
-```bash
-terraform import scm_ztna_fqdn_application.example ::device:id
-```
-
-**Note:** Please provide just one of folder, snippet, or device for the import command.
 

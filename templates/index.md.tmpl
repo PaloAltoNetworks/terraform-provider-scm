@@ -14,9 +14,24 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 ## Release Notes
 
+### v1.0.12-beta.3
+
+* Fixed ZTNA documentation display in Terraform Registry and added clarification of
+current functionality.
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.3"
+
 ### v1.0.12-beta.2
 
 * Fixed ZTNA documentation display in Terraform Registry
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.2"
 
 ### v1.0.12-beta.1
 
@@ -26,17 +41,42 @@ This provider covers the following aspects of Strata Cloud Manager:
   separate from the existing scm_* resources. All resources and data sources below target
   the ZTNA Connector API v2.0.
 
-Resources
+#### Resources (Supported — fully tested with examples)
+
 * resources/ztna_connector_group: Added support, examples and tests (resource, data-source)
 * resources/ztna_connector: Added support, examples and tests (resource, data-source)
 * resources/ztna_fqdn_application: Added support, examples and tests (resource, data-source)
 * resources/ztna_subnet: Added support, examples and tests (resource, data-source)
 * resources/ztna_wildcard: Added support, examples and tests (resource, data-source)
-* resources/ztna_license_info: Added support, examples and tests (SDK-only)
+* resources/ztna_license_info: Added support and tests (SDK-only)
 
-Data Sources
-* The following data sources are available but require a live connector for full validation and may not 
-be fully tested in this release:
+#### Resources (Available — not fully tested, use with caution)
+
+> **Warning:** The following resources are available in this release but have not been fully
+> tested against a live ZTNA Connector environment. Examples are not yet provided. Use at
+> your own risk and report any issues.
+
+* resources/ztna_connector_group_scheduled_upgrade
+* resources/ztna_connector_scheduled_upgrade
+
+#### Data Sources (Supported — fully tested with examples)
+
+* data-source/ztna_connector_group: Added support, examples and tests
+* data-source/ztna_connector_group_list: Added support, examples and tests
+* data-source/ztna_connector: Added support, examples and tests
+* data-source/ztna_connector_list: Added support, examples and tests
+* data-source/ztna_fqdn_application: Added support, examples and tests
+* data-source/ztna_fqdn_application_list: Added support, examples and tests
+* data-source/ztna_subnet: Added support, examples and tests
+* data-source/ztna_subnet_list: Added support, examples and tests
+* data-source/ztna_wildcard: Added support, examples and tests
+* data-source/ztna_wildcard_list: Added support, examples and tests
+
+#### Data Sources (Available — not fully tested, use with caution)
+
+> **Warning:** The following data sources are available in this release but require a live
+> ZTNA Connector environment for full validation. They have not been fully tested and examples
+> are not yet provided. Use at your own risk and report any issues.
 
 * data-source/ztna_connector_group_connectors
 * data-source/ztna_connector_group_fqdn_rules
@@ -44,6 +84,7 @@ be fully tested in this release:
 * data-source/ztna_connector_group_wildcards
 * data-source/ztna_connector_group_upgrade_status
 * data-source/ztna_connector_group_filters
+* data-source/ztna_connector_group_scheduled_upgrade
 * data-source/ztna_connector_quiesce
 * data-source/ztna_connector_upgrade_status
 * data-source/ztna_connector_scheduled_upgrade
@@ -56,7 +97,7 @@ be fully tested in this release:
 
 #### NOTES
 
-* This is a beta release for testing Terraform Actions functionality
+* This is a beta release for ZTNA Connector support
 * Customers must explicitly opt-in by specifying version = "1.0.12-beta.1"
 
 ### v1.0.11

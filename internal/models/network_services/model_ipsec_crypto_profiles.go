@@ -184,12 +184,12 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("esp"),
 				),
 			},
-			MarkdownDescription: "Ah\n\n> ℹ️ **Note:** You must specify exactly one of `ah` and `esp`.",
+			MarkdownDescription: "Ah",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"authentication": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Authentication",
+					MarkdownDescription: "Authentication. Possible values are `md5`, `sha1`, `sha256`, `sha384` and `sha512`.",
 					Required:            true,
 				},
 			},
@@ -203,7 +203,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -213,7 +213,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("no-pfs", "group1", "group2", "group5", "group14", "group19", "group20"),
 			},
-			MarkdownDescription: "phase-2 DH group (PFS DH group)",
+			MarkdownDescription: "phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("group2"),
@@ -224,7 +224,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ah"),
 				),
 			},
-			MarkdownDescription: "Esp\n\n> ℹ️ **Note:** You must specify exactly one of `ah` and `esp`.",
+			MarkdownDescription: "Esp",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"authentication": schema.ListAttribute{
@@ -234,7 +234,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				},
 				"encryption": schema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Encryption algorithm",
+					MarkdownDescription: "Encryption algorithm. Possible values are `des`, `3des`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-gcm`, `aes-256-gcm` and `null`.",
 					Required:            true,
 				},
 			},
@@ -249,7 +249,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -275,7 +275,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 65535),
 					},
-					MarkdownDescription: "specify lifesize in gigabytes(GB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in gigabytes(GB)",
 					Optional:            true,
 				},
 				"kb": schema.Int64Attribute{
@@ -287,7 +287,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 65535),
 					},
-					MarkdownDescription: "specify lifesize in kilobytes(KB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in kilobytes(KB)",
 					Optional:            true,
 				},
 				"mb": schema.Int64Attribute{
@@ -299,7 +299,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 65535),
 					},
-					MarkdownDescription: "specify lifesize in megabytes(MB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in megabytes(MB)",
 					Optional:            true,
 				},
 				"tb": schema.Int64Attribute{
@@ -311,7 +311,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 65535),
 					},
-					MarkdownDescription: "specify lifesize in terabytes(TB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in terabytes(TB)",
 					Optional:            true,
 				},
 			},
@@ -329,7 +329,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 365),
 					},
-					MarkdownDescription: "specify lifetime in days\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in days",
 					Optional:            true,
 				},
 				"hours": schema.Int64Attribute{
@@ -341,7 +341,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 65535),
 					},
-					MarkdownDescription: "specify lifetime in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in hours",
 					Optional:            true,
 				},
 				"minutes": schema.Int64Attribute{
@@ -353,7 +353,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(3, 65535),
 					},
-					MarkdownDescription: "specify lifetime in minutes\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in minutes",
 					Optional:            true,
 				},
 				"seconds": schema.Int64Attribute{
@@ -365,7 +365,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(180, 65535),
 					},
-					MarkdownDescription: "specify lifetime in seconds\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in seconds",
 					Optional:            true,
 				},
 			},
@@ -386,7 +386,7 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -407,27 +407,27 @@ var IpsecCryptoProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "IpsecCryptoProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"ah": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ah\n\n> ℹ️ **Note:** You must specify exactly one of `ah` and `esp`.",
+			MarkdownDescription: "Ah",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"authentication": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Authentication",
+					MarkdownDescription: "Authentication. Possible values are `md5`, `sha1`, `sha256`, `sha384` and `sha512`.",
 					Computed:            true,
 				},
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"dh_group": dsschema.StringAttribute{
-			MarkdownDescription: "phase-2 DH group (PFS DH group)",
+			MarkdownDescription: "phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
 			Computed:            true,
 		},
 		"esp": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Esp\n\n> ℹ️ **Note:** You must specify exactly one of `ah` and `esp`.",
+			MarkdownDescription: "Esp",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"authentication": dsschema.ListAttribute{
@@ -437,13 +437,13 @@ var IpsecCryptoProfilesDataSourceSchema = dsschema.Schema{
 				},
 				"encryption": dsschema.ListAttribute{
 					ElementType:         types.StringType,
-					MarkdownDescription: "Encryption algorithm",
+					MarkdownDescription: "Encryption algorithm. Possible values are `des`, `3des`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-gcm`, `aes-256-gcm` and `null`.",
 					Computed:            true,
 				},
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -456,19 +456,19 @@ var IpsecCryptoProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"gb": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifesize in gigabytes(GB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in gigabytes(GB)",
 					Computed:            true,
 				},
 				"kb": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifesize in kilobytes(KB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in kilobytes(KB)",
 					Computed:            true,
 				},
 				"mb": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifesize in megabytes(MB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in megabytes(MB)",
 					Computed:            true,
 				},
 				"tb": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifesize in terabytes(TB)\n\n> ℹ️ **Note:** You must specify exactly one of `gb`, `kb`, `mb`, and `tb`.",
+					MarkdownDescription: "specify lifesize in terabytes(TB)",
 					Computed:            true,
 				},
 			},
@@ -478,19 +478,19 @@ var IpsecCryptoProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"days": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in days\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in days",
 					Computed:            true,
 				},
 				"hours": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in hours",
 					Computed:            true,
 				},
 				"minutes": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in minutes\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in minutes",
 					Computed:            true,
 				},
 				"seconds": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in seconds\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in seconds",
 					Computed:            true,
 				},
 			},
@@ -501,7 +501,7 @@ var IpsecCryptoProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

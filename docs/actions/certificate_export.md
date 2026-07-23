@@ -33,7 +33,7 @@ action "scm_certificate_export" "backup" {
 
 ### Required
 
-- `format` (String) Format
+- `format` (String) Format. Possible values are `pkcs12`, `pem`, `der` and `pkcs10`.
 - `id` (String) The UUID of the configuration resource
 
 ### Optional

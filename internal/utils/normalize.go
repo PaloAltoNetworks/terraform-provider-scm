@@ -21,13 +21,18 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
-// NormalizeNullLists recursively compares a planned types.Object against the
-// API response types.Object. When the plan contains an empty list [] for a
-// field but the API response contains null for that same field, the response
-// is normalized to an empty list.
+// NormalizeNullLists recursively compares a planned (or prior-state)
+// types.Object against the API response types.Object and reconciles the two
+// representations of "no elements" — null versus empty list [] — that the SCM
+// API uses interchangeably, in whichever direction is needed to match the
+// plan/state. Concretely, for each list field:
+//   - plan/state is empty list [], API returned null  -> normalize to []
+//   - plan/state is null,          API returned []     -> normalize to null
 //
-// This prevents "Provider produced inconsistent result after apply" errors
-// caused by the SCM API returning null instead of [] for empty list fields.
+// Both directions prevent "Provider produced inconsistent result after apply"
+// errors caused by the SCM API returning null or [] inconsistently for empty
+// list fields. In Read, the "plan" argument is prior state (savestate), since
+// Read receives no plan.
 //
 // The function handles:
 //   - Top-level list fields (e.g., tag = [])
@@ -36,7 +41,9 @@ import (
 //
 // It deliberately does NOT normalize when:
 //   - Both plan and response are null (field was omitted)
+//   - The plan is unknown (only an explicit null plan triggers [] -> null)
 //   - The plan had a populated list but API returned null (data loss)
+//   - The plan is null but the API returned a populated list (real data)
 func NormalizeNullLists(ctx context.Context, plan types.Object, response types.Object) (types.Object, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
@@ -68,6 +75,19 @@ func NormalizeNullLists(ctx context.Context, plan types.Object, response types.O
 			}
 
 			if plannedTyped.IsNull() || plannedTyped.IsUnknown() {
+				// Reverse direction: the plan (or prior state) had null, but the
+				// API returned an empty list []. Coerce the empty list back to null
+				// to satisfy Terraform's post-apply consistency check. We only do
+				// this for an explicit null plan (not unknown) and only when the
+				// response is a genuinely empty list — a populated response is real
+				// data and must be preserved.
+				if plannedTyped.IsNull() &&
+					!responseList.IsNull() && !responseList.IsUnknown() &&
+					len(responseList.Elements()) == 0 {
+					newAttrs[key] = basetypes.NewListNull(responseList.ElementType(ctx))
+					modified = true
+					tflog.Debug(ctx, "Normalized empty list to null to match plan", map[string]interface{}{"field": key})
+				}
 				continue
 			}
 

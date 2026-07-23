@@ -286,7 +286,7 @@ var RemoteNetworksResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("enable", "disable"),
 			},
-			MarkdownDescription: "Ecmp load balancing",
+			MarkdownDescription: "Ecmp load balancing. Possible values are `enable` and `disable`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("disable"),
@@ -340,7 +340,7 @@ var RemoteNetworksResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("exchange-v4-over-v4", "exchange-v4-v6-over-v4", "exchange-v4-over-v4-v6-over-v6", "exchange-v6-over-v6"),
 										},
-										MarkdownDescription: "Route exchange types",
+										MarkdownDescription: "Route exchange types. Possible values are `exchange-v4-over-v4`, `exchange-v4-v6-over-v4`, `exchange-v4-over-v4-v6-over-v6` and `exchange-v6-over-v6`.",
 										Optional:            true,
 									},
 									"secret": schema.StringAttribute{
@@ -401,7 +401,7 @@ var RemoteNetworksResourceSchema = schema.Schema{
 			Required:            true,
 		},
 		"protocol": schema.SingleNestedAttribute{
-			MarkdownDescription: "setup the protocol when ecmp_load_balancing is disable",
+			MarkdownDescription: "setup the protocol when ecmp_load_balancing is disabled",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
@@ -436,7 +436,7 @@ var RemoteNetworksResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("exchange-v4-over-v4", "exchange-v4-v6-over-v4", "exchange-v4-over-v4-v6-over-v6", "exchange-v6-over-v6"),
 							},
-							MarkdownDescription: "Route exchange types",
+							MarkdownDescription: "Route exchange types. Possible values are `exchange-v4-over-v4`, `exchange-v4-v6-over-v4`, `exchange-v4-over-v4-v6-over-v6` and `exchange-v6-over-v6`.",
 							Optional:            true,
 						},
 						"secret": schema.StringAttribute{
@@ -510,7 +510,7 @@ var RemoteNetworksDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "RemoteNetwork data source",
 	Attributes: map[string]dsschema.Attribute{
 		"ecmp_load_balancing": dsschema.StringAttribute{
-			MarkdownDescription: "Ecmp load balancing",
+			MarkdownDescription: "Ecmp load balancing. Possible values are `enable` and `disable`.",
 			Computed:            true,
 		},
 		"ecmp_tunnels": dsschema.ListNestedAttribute{
@@ -559,7 +559,7 @@ var RemoteNetworksDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 									},
 									"peering_type": dsschema.StringAttribute{
-										MarkdownDescription: "Route exchange types",
+										MarkdownDescription: "Route exchange types. Possible values are `exchange-v4-over-v4`, `exchange-v4-v6-over-v4`, `exchange-v4-over-v4-v6-over-v6` and `exchange-v6-over-v6`.",
 										Computed:            true,
 									},
 									"secret": dsschema.StringAttribute{
@@ -607,7 +607,7 @@ var RemoteNetworksDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"protocol": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "setup the protocol when ecmp_load_balancing is disable",
+			MarkdownDescription: "setup the protocol when ecmp_load_balancing is disabled",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"bgp": dsschema.SingleNestedAttribute{
@@ -639,7 +639,7 @@ var RemoteNetworksDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"peering_type": dsschema.StringAttribute{
-							MarkdownDescription: "Route exchange types",
+							MarkdownDescription: "Route exchange types. Possible values are `exchange-v4-over-v4`, `exchange-v4-v6-over-v4`, `exchange-v4-over-v4-v6-over-v6` and `exchange-v6-over-v6`.",
 							Computed:            true,
 						},
 						"secret": dsschema.StringAttribute{

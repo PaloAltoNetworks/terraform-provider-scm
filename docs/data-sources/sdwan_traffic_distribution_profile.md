@@ -22,21 +22,15 @@ SdwanTrafficDistributionProfile data source
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Profile name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `link_tags` (Attributes List) Link-Tags for interfaces identified by defined tags (see [below for nested schema](#nestedatt--link_tags))
 - `tfid` (String) The Terraform ID.
-- `traffic_distribution` (String) Traffic distribution
+- `traffic_distribution` (String) Traffic distribution. Possible values are `Best Available Path`, `Top Down Priority` and `Weighted Session Distribution`.
 
 <a id="nestedatt--link_tags"></a>
 ### Nested Schema for `link_tags`

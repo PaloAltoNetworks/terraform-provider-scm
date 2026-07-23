@@ -49,7 +49,7 @@ output "auto_vpn_cluster_outputs" {
 - `enable_sdwan` (Boolean) Enable SD-WAN?
 - `gateways` (Attributes List) Hubs (see [below for nested schema](#nestedatt--gateways))
 - `tfid` (String) The Terraform ID.
-- `type` (String) VPN cluster type
+- `type` (String) VPN cluster type. Possible values are `hub-spoke` and `mesh`.
 
 <a id="nestedatt--branches"></a>
 ### Nested Schema for `branches`
@@ -95,11 +95,7 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -136,11 +132,7 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -157,7 +149,7 @@ Read-Only:
 - `interfaces` (Attributes List) Interfaces (see [below for nested schema](#nestedatt--gateways--interfaces))
 - `logical_router` (String) Router
 - `name` (String) Hub firewall serial number
-- `priority` (String) Priority
+- `priority` (String) Priority. Possible values are `1`, `2`, `3`, `4`, `5`, `6`, `7` and `8`.
 - `private_interfaces` (Attributes List) Private interfaces (see [below for nested schema](#nestedatt--gateways--private_interfaces))
 - `site` (String) Site name
 
@@ -193,11 +185,7 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -234,8 +222,4 @@ Read-Only:
 Read-Only:
 
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.

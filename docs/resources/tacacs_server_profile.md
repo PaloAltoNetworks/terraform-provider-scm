@@ -50,20 +50,16 @@ resource "scm_tacacs_server_profile" "ise_tacacs_example" {
 ### Required
 
 - `name` (String) The name of the TACACS+ server profile
-- `protocol` (String) The TACACS+ authentication protocol
+- `protocol` (String) The TACACS+ authentication protocol. Possible values are `CHAP` and `PAP`.
 - `server` (Attributes List) The TACACS+ server configuration (see [below for nested schema](#nestedatt--server))
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `timeout` (Number) The TACACS+ timeout (seconds)
 - `use_single_connection` (Boolean) Use a single TACACS+ connection?
 

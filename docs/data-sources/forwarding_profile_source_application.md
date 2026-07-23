@@ -34,7 +34,7 @@ output "forwarding_profile_source_application_result" {
 
 ### Optional
 
-- `folder` (String) The folder in which the resource is defined
+- `folder` (String) The folder in which the resource is defined. Possible values are `Mobile Users`.
 - `name` (String) The unique name identifying the source application. Must be alphanumeric with allowed characters [0-9a-zA-Z._-]
 
 ### Read-Only

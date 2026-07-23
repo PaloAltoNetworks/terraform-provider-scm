@@ -51,19 +51,15 @@ resource "scm_data_object" "scm_data_filtering_profile_file_properties" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) The description of the data object
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disable_override` (String) Disable override
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the data object
 - `pattern_type` (Attributes) Pattern type (see [below for nested schema](#nestedatt--pattern_type))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 

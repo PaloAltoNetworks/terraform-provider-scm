@@ -67,7 +67,7 @@ resource "scm_forwarding_profile_source_application" "example_multi_apps" {
 ### Optional
 
 - `description` (String) fowarding profile source application description
-- `folder` (String) The folder in which the resource is defined
+- `folder` (String) The folder in which the resource is defined. Possible values are `Mobile Users`.
 
 ### Read-Only
 

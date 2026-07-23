@@ -38,15 +38,9 @@ output "fetched_rule_data" {
 ### Optional
 
 - `device` (String) Device
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) Folder
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the authentication rule
 - `snippet` (String) Snippet
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -63,14 +57,14 @@ output "fetched_rule_data" {
 - `log_setting` (String) The log forwarding profile name
 - `negate_destination` (Boolean) Are the destination addresses negated?
 - `negate_source` (Boolean) Are the source addresses negated?
-- `position` (String) The relative position of the rule
+- `position` (String) The relative position of the rule. Possible values are `pre` and `post`.
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `service` (List of String) The destination ports
 - `source` (List of String) The source addresses
 - `source_hip` (List of String) The source Host Integrity Profile (HIP)
 - `source_user` (List of String) The source users
 - `tag` (List of String) The authentication rule tags
-- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `target_rule` (String) UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `tfid` (String) The Terraform ID.
 - `timeout` (Number) The authentication session timeout (seconds)
 - `to` (List of String) The destination security zones

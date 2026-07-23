@@ -54,20 +54,20 @@ output "forwarding_profile_regional_and_custom_proxy_data_source_results" {
 
 ### Optional
 
-- `folder` (String) The folder in which the resource is defined
+- `folder` (String) The folder in which the resource is defined. Possible values are `Mobile Users`.
 - `name` (String) alphanumeric string [ 0-9a-zA-Z ._-]
 
 ### Read-Only
 
 - `connectivity_preference` (Attributes List) List of connectivity methods and their enablement status for establishing proxy connections (see [below for nested schema](#nestedatt--connectivity_preference))
 - `description` (String) regional and custom proxy configuration description
-- `fallback_option` (String) Behavior when proxy connection fails - 'fail-open' allows direct internet access, 'fail-safe' blocks traffic until proxy is restored
-- `location_preference` (String) Strategy for selecting Prisma Access location - 'best-available-pa-location' automatically selects optimal location, 'specific-pa-location' uses predefined locations
+- `fallback_option` (String) Behavior when proxy connection fails - 'fail-open' allows direct internet access, 'fail-safe' blocks traffic until proxy is restored. Possible values are `fail-open` and `fail-safe`.
+- `location_preference` (String) Strategy for selecting Prisma Access location - 'best-available-pa-location' automatically selects optimal location, 'specific-pa-location' uses predefined locations. Possible values are `best-available-pa-location` and `specific-pa-location`.
 - `prisma_access_locations` (Attributes List) Select Prisma Access location Americas, Europe and Asia-Pacific. (see [below for nested schema](#nestedatt--prisma_access_locations))
 - `proxy_1` (Attributes) primary regional and custom proxy (see [below for nested schema](#nestedatt--proxy_1))
 - `proxy_2` (Attributes) secondary regional and custom proxy (see [below for nested schema](#nestedatt--proxy_2))
 - `tfid` (String) The Terraform ID.
-- `type` (String) Proxy configuration type - 'gp-and-pac' for GlobalProtect and PAC file forwarding, 'ztna-agent' for ZTNA agent forwarding
+- `type` (String) Proxy configuration type - 'gp-and-pac' for GlobalProtect and PAC file forwarding, 'ztna-agent' for ZTNA agent forwarding. Possible values are `gp-and-pac` and `ztna-agent`.
 
 <a id="nestedatt--connectivity_preference"></a>
 ### Nested Schema for `connectivity_preference`
@@ -75,7 +75,7 @@ output "forwarding_profile_regional_and_custom_proxy_data_source_results" {
 Read-Only:
 
 - `enabled` (Boolean) Indicates whether this connectivity method is enabled for use in the proxy configuration
-- `name` (String) Connectivity method type - 'tunnel' for VPN tunnels, 'proxy' for HTTP/HTTPS proxies, 'adns' for authenticated DNS, 'masque' for MASQUE protocol
+- `name` (String) Connectivity method type - 'tunnel' for VPN tunnels, 'proxy' for HTTP/HTTPS proxies, 'adns' for authenticated DNS, 'masque' for MASQUE protocol. Possible values are `tunnel`, `proxy`, `adns` and `masque`.
 
 
 <a id="nestedatt--prisma_access_locations"></a>

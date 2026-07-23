@@ -36,14 +36,12 @@ resource "scm_globalprotect_match_list" "globalprotect_match_list" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) Description of the globalprotect match list entry
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `filter` (String) Filter of the globalprotect match list entry
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `quarantine` (Boolean) Quarantine Flag of the globalprotect match list entry
 - `send_email` (List of String) Send Email List of the globalprotect match list entry
 - `send_http` (List of String) Send HTTP List of the globalprotect match list entry
@@ -51,8 +49,6 @@ resource "scm_globalprotect_match_list" "globalprotect_match_list" {
 - `send_syslog` (List of String) Send Sys log List of the globalprotect match list entry
 - `send_to_panorama` (Boolean) Send to Panorama Flag of the globalprotect match list entry
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 

@@ -891,7 +891,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -907,7 +907,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -929,7 +929,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -962,14 +962,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Daily",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.StringAttribute{
@@ -989,14 +989,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Hourly",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.Int64Attribute{
@@ -1016,7 +1016,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "None",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1039,14 +1039,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("none"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Weekly",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.StringAttribute{
@@ -1060,7 +1060,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"),
 											},
-											MarkdownDescription: "Day of week",
+											MarkdownDescription: "Day of week. Possible values are `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday` and `saturday`.",
 											Optional:            true,
 										},
 									},
@@ -1086,14 +1086,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Daily",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.StringAttribute{
@@ -1120,14 +1120,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Every30 mins\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Every30 mins",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.Int64Attribute{
@@ -1156,14 +1156,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Hourly",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.Float64Attribute{
@@ -1197,7 +1197,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("weekly"),
 										),
 									},
-									MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "None",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1221,14 +1221,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("none"),
 										),
 									},
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Weekly",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.StringAttribute{
@@ -1242,7 +1242,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"),
 											},
-											MarkdownDescription: "Day of week",
+											MarkdownDescription: "Day of week. Possible values are `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday` and `saturday`.",
 											Required:            true,
 										},
 										"disable_new_content": schema.BoolAttribute{
@@ -1275,14 +1275,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("real_time"),
 										),
 									},
-									MarkdownDescription: "Every15 mins\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every15 mins",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.Int64Attribute{
@@ -1312,14 +1312,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("real_time"),
 										),
 									},
-									MarkdownDescription: "Every30 mins\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every30 mins",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.Int64Attribute{
@@ -1349,14 +1349,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("real_time"),
 										),
 									},
-									MarkdownDescription: "Every hour\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every hour",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"at": schema.Int64Attribute{
@@ -1386,14 +1386,14 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("real_time"),
 										),
 									},
-									MarkdownDescription: "Every min\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every min",
 									Optional:            true,
 									Attributes: map[string]schema.Attribute{
 										"action": schema.StringAttribute{
 											Validators: []validator.String{
 												stringvalidator.OneOf("download-only", "download-and-install"),
 											},
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Optional:            true,
 										},
 										"sync_to_peer": schema.BoolAttribute{
@@ -1414,7 +1414,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("real_time"),
 										),
 									},
-									MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "None",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1428,7 +1428,7 @@ var UpdateScheduleResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("none"),
 										),
 									},
-									MarkdownDescription: "Real time\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Real time",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1446,12 +1446,12 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "UpdateSchedule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1460,7 +1460,7 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1481,11 +1481,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Daily",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.StringAttribute{
@@ -1495,11 +1495,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Hourly",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.Int64Attribute{
@@ -1509,7 +1509,7 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"none": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "None",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1522,11 +1522,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Weekly",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.StringAttribute{
@@ -1534,7 +1534,7 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"day_of_week": dsschema.StringAttribute{
-											MarkdownDescription: "Day of week",
+											MarkdownDescription: "Day of week. Possible values are `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday` and `saturday`.",
 											Computed:            true,
 										},
 									},
@@ -1552,11 +1552,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"daily": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Daily\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Daily",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.StringAttribute{
@@ -1570,11 +1570,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"every_30_mins": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Every30 mins\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Every30 mins",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.Int64Attribute{
@@ -1588,11 +1588,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"hourly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Hourly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Hourly",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.Float64Attribute{
@@ -1610,7 +1610,7 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"none": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "None",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1623,11 +1623,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 								},
 								"weekly": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Weekly\n\n> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`.",
+									MarkdownDescription: "Weekly",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.StringAttribute{
@@ -1635,7 +1635,7 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"day_of_week": dsschema.StringAttribute{
-											MarkdownDescription: "Day of week",
+											MarkdownDescription: "Day of week. Possible values are `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday` and `saturday`.",
 											Computed:            true,
 										},
 										"disable_new_content": dsschema.BoolAttribute{
@@ -1657,11 +1657,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"every_15_mins": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Every15 mins\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every15 mins",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.Int64Attribute{
@@ -1675,11 +1675,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"every_30_mins": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Every30 mins\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every30 mins",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.Int64Attribute{
@@ -1693,11 +1693,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"every_hour": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Every hour\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every hour",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"at": dsschema.Int64Attribute{
@@ -1711,11 +1711,11 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"every_min": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Every min\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Every min",
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"action": dsschema.StringAttribute{
-											MarkdownDescription: "Action",
+											MarkdownDescription: "Action. Possible values are `download-only` and `download-and-install`.",
 											Computed:            true,
 										},
 										"sync_to_peer": dsschema.BoolAttribute{
@@ -1725,12 +1725,12 @@ var UpdateScheduleDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"none": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "None",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"real_time": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Real time\n\n> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`.",
+									MarkdownDescription: "Real time",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},

@@ -58,15 +58,9 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -88,12 +82,8 @@ Read-Only:
 
 Read-Only:
 
-- `mbps` (Attributes) Mbps
-
-> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`. (see [below for nested schema](#nestedatt--data--class_bandwidth_type--mbps))
-- `percentage` (Attributes) Percentage
-
-> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`. (see [below for nested schema](#nestedatt--data--class_bandwidth_type--percentage))
+- `mbps` (Attributes) Mbps (see [below for nested schema](#nestedatt--data--class_bandwidth_type--mbps))
+- `percentage` (Attributes) Percentage (see [below for nested schema](#nestedatt--data--class_bandwidth_type--percentage))
 
 <a id="nestedatt--data--class_bandwidth_type--mbps"></a>
 ### Nested Schema for `data.class_bandwidth_type.mbps`
@@ -108,8 +98,8 @@ Read-Only:
 Read-Only:
 
 - `class_bandwidth` (Attributes) Class bandwidth (see [below for nested schema](#nestedatt--data--class_bandwidth_type--mbps--class--class_bandwidth))
-- `name` (String) Traffic class
-- `priority` (String) traffic class priority
+- `name` (String) Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.
+- `priority` (String) traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.
 
 <a id="nestedatt--data--class_bandwidth_type--mbps--class--class_bandwidth"></a>
 ### Nested Schema for `data.class_bandwidth_type.mbps.class.class_bandwidth`
@@ -135,8 +125,8 @@ Read-Only:
 Read-Only:
 
 - `class_bandwidth` (Attributes) Class bandwidth (see [below for nested schema](#nestedatt--data--class_bandwidth_type--percentage--class--class_bandwidth))
-- `name` (String) Traffic class
-- `priority` (String) traffic class priority
+- `name` (String) Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.
+- `priority` (String) traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.
 
 <a id="nestedatt--data--class_bandwidth_type--percentage--class--class_bandwidth"></a>
 ### Nested Schema for `data.class_bandwidth_type.percentage.class.class_bandwidth`

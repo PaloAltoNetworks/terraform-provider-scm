@@ -16,10 +16,10 @@ import (
 // serviceConnectionsSensitiveValuePatcher is an in-memory struct to temporarily store plaintext
 // and encrypted values for sensitive fields during the Create/Update/Read workflows.
 type serviceConnectionsSensitiveValuePatcher struct {
-	bgp_peer_secret_plaintext     basetypes.StringValue
-	bgp_peer_secret_encrypted     basetypes.StringValue
-	protocol_bgp_secret_plaintext basetypes.StringValue
-	protocol_bgp_secret_encrypted basetypes.StringValue
+	protocol_bgp_secret_plaintext      basetypes.StringValue
+	protocol_bgp_secret_encrypted      basetypes.StringValue
+	protocol_bgp_peer_secret_plaintext basetypes.StringValue
+	protocol_bgp_peer_secret_encrypted basetypes.StringValue
 }
 
 // populatePatcherFromState populates the patcher struct from the resource's state.
@@ -34,17 +34,17 @@ func (p *serviceConnectionsSensitiveValuePatcher) populatePatcherFromState(ctx c
 	if diags.HasError() {
 		return diags
 	}
-	if val, ok := ev["bgp_peer_secret_plaintext"]; ok {
-		p.bgp_peer_secret_plaintext = basetypes.NewStringValue(val)
-	}
-	if val, ok := ev["bgp_peer_secret_encrypted"]; ok {
-		p.bgp_peer_secret_encrypted = basetypes.NewStringValue(val)
-	}
 	if val, ok := ev["protocol_bgp_secret_plaintext"]; ok {
 		p.protocol_bgp_secret_plaintext = basetypes.NewStringValue(val)
 	}
 	if val, ok := ev["protocol_bgp_secret_encrypted"]; ok {
 		p.protocol_bgp_secret_encrypted = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["protocol_bgp_peer_secret_plaintext"]; ok {
+		p.protocol_bgp_peer_secret_plaintext = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["protocol_bgp_peer_secret_encrypted"]; ok {
+		p.protocol_bgp_peer_secret_encrypted = basetypes.NewStringValue(val)
 	}
 
 	return diags
@@ -53,17 +53,17 @@ func (p *serviceConnectionsSensitiveValuePatcher) populatePatcherFromState(ctx c
 // populateEncryptedValuesMap returns a map of the patcher's values for saving to state.
 func (p *serviceConnectionsSensitiveValuePatcher) populateEncryptedValuesMap() map[string]string {
 	ev := make(map[string]string)
-	if !p.bgp_peer_secret_plaintext.IsNull() {
-		ev["bgp_peer_secret_plaintext"] = p.bgp_peer_secret_plaintext.ValueString()
-	}
-	if !p.bgp_peer_secret_encrypted.IsNull() {
-		ev["bgp_peer_secret_encrypted"] = p.bgp_peer_secret_encrypted.ValueString()
-	}
 	if !p.protocol_bgp_secret_plaintext.IsNull() {
 		ev["protocol_bgp_secret_plaintext"] = p.protocol_bgp_secret_plaintext.ValueString()
 	}
 	if !p.protocol_bgp_secret_encrypted.IsNull() {
 		ev["protocol_bgp_secret_encrypted"] = p.protocol_bgp_secret_encrypted.ValueString()
+	}
+	if !p.protocol_bgp_peer_secret_plaintext.IsNull() {
+		ev["protocol_bgp_peer_secret_plaintext"] = p.protocol_bgp_peer_secret_plaintext.ValueString()
+	}
+	if !p.protocol_bgp_peer_secret_encrypted.IsNull() {
+		ev["protocol_bgp_peer_secret_encrypted"] = p.protocol_bgp_peer_secret_encrypted.ValueString()
 	}
 	return ev
 }
@@ -87,19 +87,6 @@ func unpackServiceConnectionsToSdk(ctx context.Context, obj types.Object) (*depl
 	if !model.BackupSC.IsNull() && !model.BackupSC.IsUnknown() {
 		sdk.BackupSC = model.BackupSC.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "BackupSC", "value": *sdk.BackupSC})
-	}
-
-	// Handling Objects
-	if !model.BgpPeer.IsNull() && !model.BgpPeer.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking nested object for field BgpPeer")
-		unpacked, d := unpackServiceConnectionsBgpPeerToSdk(ctx, model.BgpPeer)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "BgpPeer"})
-		}
-		if unpacked != nil {
-			sdk.BgpPeer = unpacked
-		}
 	}
 
 	// Handling Primitives
@@ -216,19 +203,6 @@ func packServiceConnectionsFromSdk(ctx context.Context, sdk deployment_services.
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "BackupSC", "value": *sdk.BackupSC})
 	} else {
 		model.BackupSC = basetypes.NewStringNull()
-	}
-	// Handling Objects
-	// This is a regular nested object that has its own packer.
-	if sdk.BgpPeer != nil {
-		tflog.Debug(ctx, "Packing nested object for field BgpPeer")
-		packed, d := packServiceConnectionsBgpPeerFromSdk(ctx, *sdk.BgpPeer)
-		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "BgpPeer"})
-		}
-		model.BgpPeer = packed
-	} else {
-		model.BgpPeer = basetypes.NewObjectNull(models.ServiceConnectionsBgpPeer{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -389,173 +363,6 @@ func packServiceConnectionsListFromSdk(ctx context.Context, sdks []deployment_se
 	return basetypes.NewListValueFrom(ctx, models.ServiceConnections{}.AttrType(), data)
 }
 
-// --- Unpacker for ServiceConnectionsBgpPeer ---
-func unpackServiceConnectionsBgpPeerToSdk(ctx context.Context, obj types.Object) (*deployment_services.ServiceConnectionsBgpPeer, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.ServiceConnectionsBgpPeer", map[string]interface{}{"tf_object": obj})
-	diags := diag.Diagnostics{}
-	var model models.ServiceConnectionsBgpPeer
-	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
-
-	var sdk deployment_services.ServiceConnectionsBgpPeer
-	var d diag.Diagnostics
-	// Handling Primitives
-	if !model.LocalIpAddress.IsNull() && !model.LocalIpAddress.IsUnknown() {
-		sdk.LocalIpAddress = model.LocalIpAddress.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalIpAddress", "value": *sdk.LocalIpAddress})
-	}
-
-	// Handling Primitives
-	if !model.LocalIpv6Address.IsNull() && !model.LocalIpv6Address.IsUnknown() {
-		sdk.LocalIpv6Address = model.LocalIpv6Address.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalIpv6Address", "value": *sdk.LocalIpv6Address})
-	}
-
-	// Handling Primitives
-	if !model.PeerIpAddress.IsNull() && !model.PeerIpAddress.IsUnknown() {
-		sdk.PeerIpAddress = model.PeerIpAddress.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "PeerIpAddress", "value": *sdk.PeerIpAddress})
-	}
-
-	// Handling Primitives
-	if !model.PeerIpv6Address.IsNull() && !model.PeerIpv6Address.IsUnknown() {
-		sdk.PeerIpv6Address = model.PeerIpv6Address.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "PeerIpv6Address", "value": *sdk.PeerIpv6Address})
-	}
-
-	// Handling Primitives
-	if !model.SameAsPrimary.IsNull() && !model.SameAsPrimary.IsUnknown() {
-		sdk.SameAsPrimary = model.SameAsPrimary.ValueBoolPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "SameAsPrimary", "value": *sdk.SameAsPrimary})
-	}
-
-	// Handling Primitives
-	if !model.Secret.IsNull() && !model.Secret.IsUnknown() {
-		sdk.Secret = model.Secret.ValueStringPointer()
-		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Secret", "value": *sdk.Secret})
-	}
-
-	diags.Append(d...)
-
-	tflog.Debug(ctx, "Exiting unpack helper for models.ServiceConnectionsBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
-	return &sdk, diags
-
-}
-
-// --- Packer for ServiceConnectionsBgpPeer ---
-func packServiceConnectionsBgpPeerFromSdk(ctx context.Context, sdk deployment_services.ServiceConnectionsBgpPeer) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.ServiceConnectionsBgpPeer", map[string]interface{}{"sdk_struct": sdk})
-	diags := diag.Diagnostics{}
-	var model models.ServiceConnectionsBgpPeer
-	var d diag.Diagnostics
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.LocalIpAddress != nil {
-		model.LocalIpAddress = basetypes.NewStringValue(*sdk.LocalIpAddress)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalIpAddress", "value": *sdk.LocalIpAddress})
-	} else {
-		model.LocalIpAddress = basetypes.NewStringNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.LocalIpv6Address != nil {
-		model.LocalIpv6Address = basetypes.NewStringValue(*sdk.LocalIpv6Address)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalIpv6Address", "value": *sdk.LocalIpv6Address})
-	} else {
-		model.LocalIpv6Address = basetypes.NewStringNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.PeerIpAddress != nil {
-		model.PeerIpAddress = basetypes.NewStringValue(*sdk.PeerIpAddress)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PeerIpAddress", "value": *sdk.PeerIpAddress})
-	} else {
-		model.PeerIpAddress = basetypes.NewStringNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.PeerIpv6Address != nil {
-		model.PeerIpv6Address = basetypes.NewStringValue(*sdk.PeerIpv6Address)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PeerIpv6Address", "value": *sdk.PeerIpv6Address})
-	} else {
-		model.PeerIpv6Address = basetypes.NewStringNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.SameAsPrimary != nil {
-		model.SameAsPrimary = basetypes.NewBoolValue(*sdk.SameAsPrimary)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "SameAsPrimary", "value": *sdk.SameAsPrimary})
-	} else {
-		model.SameAsPrimary = basetypes.NewBoolNull()
-	}
-	// Handling Primitives
-	// Standard primitive packing
-	if sdk.Secret != nil {
-		model.Secret = basetypes.NewStringValue(*sdk.Secret)
-		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Secret", "value": *sdk.Secret})
-	} else {
-		model.Secret = basetypes.NewStringNull()
-	}
-	diags.Append(d...)
-
-	obj, d := types.ObjectValueFrom(ctx, models.ServiceConnectionsBgpPeer{}.AttrTypes(), &model)
-	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
-	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.ServiceConnectionsBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
-	return obj, diags
-
-}
-
-// --- List Unpacker for ServiceConnectionsBgpPeer ---
-func unpackServiceConnectionsBgpPeerListToSdk(ctx context.Context, list types.List) ([]deployment_services.ServiceConnectionsBgpPeer, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.ServiceConnectionsBgpPeer")
-	diags := diag.Diagnostics{}
-	var data []models.ServiceConnectionsBgpPeer
-	diags.Append(list.ElementsAs(ctx, &data, false)...)
-	if diags.HasError() {
-		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
-		return nil, diags
-	}
-
-	ans := make([]deployment_services.ServiceConnectionsBgpPeer, 0, len(data))
-	for i, item := range data {
-		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.ServiceConnectionsBgpPeer{}.AttrTypes(), &item)
-		unpacked, d := unpackServiceConnectionsBgpPeerToSdk(ctx, obj)
-		diags.Append(d...)
-		if unpacked != nil {
-			ans = append(ans, *unpacked)
-		}
-	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.ServiceConnectionsBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
-	return ans, diags
-}
-
-// --- List Packer for ServiceConnectionsBgpPeer ---
-func packServiceConnectionsBgpPeerListFromSdk(ctx context.Context, sdks []deployment_services.ServiceConnectionsBgpPeer) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.ServiceConnectionsBgpPeer")
-	diags := diag.Diagnostics{}
-	var data []models.ServiceConnectionsBgpPeer
-
-	for i, sdk := range sdks {
-		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.ServiceConnectionsBgpPeer
-		obj, d := packServiceConnectionsBgpPeerFromSdk(ctx, sdk)
-		diags.Append(d...)
-		if diags.HasError() {
-			return basetypes.NewListNull(models.ServiceConnectionsBgpPeer{}.AttrType()), diags
-		}
-		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
-		data = append(data, model)
-	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.ServiceConnectionsBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.ServiceConnectionsBgpPeer{}.AttrType(), data)
-}
-
 // --- Unpacker for ServiceConnectionsProtocol ---
 func unpackServiceConnectionsProtocolToSdk(ctx context.Context, obj types.Object) (*deployment_services.ServiceConnectionsProtocol, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering unpack helper for models.ServiceConnectionsProtocol", map[string]interface{}{"tf_object": obj})
@@ -580,6 +387,19 @@ func unpackServiceConnectionsProtocolToSdk(ctx context.Context, obj types.Object
 		}
 		if unpacked != nil {
 			sdk.Bgp = unpacked
+		}
+	}
+
+	// Handling Objects
+	if !model.BgpPeer.IsNull() && !model.BgpPeer.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field BgpPeer")
+		unpacked, d := unpackServiceConnectionsProtocolBgpPeerToSdk(ctx, model.BgpPeer)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "BgpPeer"})
+		}
+		if unpacked != nil {
+			sdk.BgpPeer = unpacked
 		}
 	}
 
@@ -608,6 +428,19 @@ func packServiceConnectionsProtocolFromSdk(ctx context.Context, sdk deployment_s
 		model.Bgp = packed
 	} else {
 		model.Bgp = basetypes.NewObjectNull(models.ServiceConnectionsProtocolBgp{}.AttrTypes())
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.BgpPeer != nil {
+		tflog.Debug(ctx, "Packing nested object for field BgpPeer")
+		packed, d := packServiceConnectionsProtocolBgpPeerFromSdk(ctx, *sdk.BgpPeer)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "BgpPeer"})
+		}
+		model.BgpPeer = packed
+	} else {
+		model.BgpPeer = basetypes.NewObjectNull(models.ServiceConnectionsProtocolBgpPeer{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -868,6 +701,159 @@ func packServiceConnectionsProtocolBgpListFromSdk(ctx context.Context, sdks []de
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.ServiceConnectionsProtocolBgp", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.ServiceConnectionsProtocolBgp{}.AttrType(), data)
+}
+
+// --- Unpacker for ServiceConnectionsProtocolBgpPeer ---
+func unpackServiceConnectionsProtocolBgpPeerToSdk(ctx context.Context, obj types.Object) (*deployment_services.ServiceConnectionsProtocolBgpPeer, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.ServiceConnectionsProtocolBgpPeer", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.ServiceConnectionsProtocolBgpPeer
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk deployment_services.ServiceConnectionsProtocolBgpPeer
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.LocalIpAddress.IsNull() && !model.LocalIpAddress.IsUnknown() {
+		sdk.LocalIpAddress = model.LocalIpAddress.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalIpAddress", "value": *sdk.LocalIpAddress})
+	}
+
+	// Handling Primitives
+	if !model.LocalIpv6Address.IsNull() && !model.LocalIpv6Address.IsUnknown() {
+		sdk.LocalIpv6Address = model.LocalIpv6Address.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "LocalIpv6Address", "value": *sdk.LocalIpv6Address})
+	}
+
+	// Handling Primitives
+	if !model.PeerIpAddress.IsNull() && !model.PeerIpAddress.IsUnknown() {
+		sdk.PeerIpAddress = model.PeerIpAddress.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "PeerIpAddress", "value": *sdk.PeerIpAddress})
+	}
+
+	// Handling Primitives
+	if !model.PeerIpv6Address.IsNull() && !model.PeerIpv6Address.IsUnknown() {
+		sdk.PeerIpv6Address = model.PeerIpv6Address.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "PeerIpv6Address", "value": *sdk.PeerIpv6Address})
+	}
+
+	// Handling Primitives
+	if !model.Secret.IsNull() && !model.Secret.IsUnknown() {
+		sdk.Secret = model.Secret.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Secret", "value": *sdk.Secret})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.ServiceConnectionsProtocolBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for ServiceConnectionsProtocolBgpPeer ---
+func packServiceConnectionsProtocolBgpPeerFromSdk(ctx context.Context, sdk deployment_services.ServiceConnectionsProtocolBgpPeer) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.ServiceConnectionsProtocolBgpPeer", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.ServiceConnectionsProtocolBgpPeer
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.LocalIpAddress != nil {
+		model.LocalIpAddress = basetypes.NewStringValue(*sdk.LocalIpAddress)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalIpAddress", "value": *sdk.LocalIpAddress})
+	} else {
+		model.LocalIpAddress = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.LocalIpv6Address != nil {
+		model.LocalIpv6Address = basetypes.NewStringValue(*sdk.LocalIpv6Address)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "LocalIpv6Address", "value": *sdk.LocalIpv6Address})
+	} else {
+		model.LocalIpv6Address = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.PeerIpAddress != nil {
+		model.PeerIpAddress = basetypes.NewStringValue(*sdk.PeerIpAddress)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PeerIpAddress", "value": *sdk.PeerIpAddress})
+	} else {
+		model.PeerIpAddress = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.PeerIpv6Address != nil {
+		model.PeerIpv6Address = basetypes.NewStringValue(*sdk.PeerIpv6Address)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "PeerIpv6Address", "value": *sdk.PeerIpv6Address})
+	} else {
+		model.PeerIpv6Address = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Secret != nil {
+		model.Secret = basetypes.NewStringValue(*sdk.Secret)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Secret", "value": *sdk.Secret})
+	} else {
+		model.Secret = basetypes.NewStringNull()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocolBgpPeer{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.ServiceConnectionsProtocolBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for ServiceConnectionsProtocolBgpPeer ---
+func unpackServiceConnectionsProtocolBgpPeerListToSdk(ctx context.Context, list types.List) ([]deployment_services.ServiceConnectionsProtocolBgpPeer, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.ServiceConnectionsProtocolBgpPeer")
+	diags := diag.Diagnostics{}
+	var data []models.ServiceConnectionsProtocolBgpPeer
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]deployment_services.ServiceConnectionsProtocolBgpPeer, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocolBgpPeer{}.AttrTypes(), &item)
+		unpacked, d := unpackServiceConnectionsProtocolBgpPeerToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.ServiceConnectionsProtocolBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for ServiceConnectionsProtocolBgpPeer ---
+func packServiceConnectionsProtocolBgpPeerListFromSdk(ctx context.Context, sdks []deployment_services.ServiceConnectionsProtocolBgpPeer) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.ServiceConnectionsProtocolBgpPeer")
+	diags := diag.Diagnostics{}
+	var data []models.ServiceConnectionsProtocolBgpPeer
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.ServiceConnectionsProtocolBgpPeer
+		obj, d := packServiceConnectionsProtocolBgpPeerFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.ServiceConnectionsProtocolBgpPeer{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.ServiceConnectionsProtocolBgpPeer", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.ServiceConnectionsProtocolBgpPeer{}.AttrType(), data)
 }
 
 // --- Unpacker for ServiceConnectionsQos ---

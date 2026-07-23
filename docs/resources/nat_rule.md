@@ -207,15 +207,15 @@ resource "scm_nat_rule" "example_nat_dynamic_rule" {
 
 ### Optional
 
-- `active_active_device_binding` (String) Active active device binding
+- `active_active_device_binding` (String) Active active device binding. Possible values are `primary`, `both`, `0` and `1`.
 - `description` (String) NAT rule description
 - `destination_translation` (Attributes) Destination translation (see [below for nested schema](#nestedatt--destination_translation))
 - `device` (String) The device in which the resource is defined
 - `disabled` (Boolean) Disable NAT rule?
 - `dynamic_destination_translation` (Attributes) Dynamic destination translation (see [below for nested schema](#nestedatt--dynamic_destination_translation))
 - `folder` (String) The folder in which the resource is defined
-- `nat_type` (String) NAT type
-- `position` (String) The relative position of the rule
+- `nat_type` (String) NAT type. Possible values are `ipv4`, `nat64` and `nptv6`.
+- `position` (String) The relative position of the rule. Possible values are `pre` and `post`.
 - `snippet` (String) The snippet in which the resource is defined
 - `source_translation` (Attributes) Source translation (see [below for nested schema](#nestedatt--source_translation))
 - `tag` (List of String) NAT rule tags
@@ -240,7 +240,7 @@ Optional:
 
 Optional:
 
-- `direction` (String) Direction
+- `direction` (String) Direction. Possible values are `reverse` and `forward`.
 
 
 
@@ -249,7 +249,7 @@ Optional:
 
 Optional:
 
-- `distribution` (String) Distribution method
+- `distribution` (String) Distribution method. Possible values are `round-robin`, `source-ip-hash`, `ip-modulo`, `ip-hash` and `least-sessions`.
 - `translated_address` (String) Translated destination IP address
 - `translated_port` (Number) Translated destination port
 

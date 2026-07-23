@@ -46,7 +46,7 @@ func (a *CertificateExportAction) Schema(_ context.Context, _ action.SchemaReque
 		Description: "Export a certificate.",
 		Attributes: map[string]schema.Attribute{
 			"format": schema.StringAttribute{
-				Description: "Format",
+				Description: "Format. Possible values are `pkcs12`, `pem`, `der` and `pkcs10`.",
 				Required:    true,
 			},
 			"passphrase": schema.StringAttribute{

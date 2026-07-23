@@ -14,6 +14,32 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 ## Release Notes
 
+### v1.0.12-beta.4
+
+#### FEATURES
+
+* data-source/scm_location_list: Added support, examples and tests
+* actions/scm_application_defaults: Bootstrap Prisma Access application defaults (certificates, config nodes) on a fresh tenant
+
+#### BUG FIXES
+
+* resource/scm_service_connection: Resolved model issue with secondary bgp settings ([#128](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/128))
+* resource/scm_ethernet_interface: Added missing lldp support for `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
+* resource/scm_aggregate_interface: Added missing lldp support for `layer2` and layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
+* resource/scm_pbf_rule: Added missing `negate_source` and `negate_destination` flags ([#118](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/118))
+* resources/scm_security_rule: Corrected docs for `target_rule`. Ref-by-name is not supported (#125)
+* resources/scm_folder: Resolved apply error caused by unset `labels` property (#116)
+
+#### ENHANCEMENTS
+
+* Added possible values to `enum` properties across >500 resources (#86)
+* Consolidated `oneOf` requirements for optional `resource` properties in terraform docs across all `resources`
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.4"
+
 ### v1.0.12-beta.3
 
 * Fixed ZTNA documentation display in Terraform Registry and added clarification of

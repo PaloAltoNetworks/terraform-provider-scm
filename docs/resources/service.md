@@ -68,17 +68,13 @@ resource "scm_service" "scm_service_udp_port" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `protocol` (Attributes) Protocol (see [below for nested schema](#nestedatt--protocol))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `tag` (List of String) Tags for service object
 
 ### Read-Only
@@ -91,12 +87,10 @@ resource "scm_service" "scm_service_udp_port" {
 
 Optional:
 
-- `tcp` (Attributes) Tcp
+~> **Note:** You must specify at most one of `tcp` or `udp`.
 
-> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`. (see [below for nested schema](#nestedatt--protocol--tcp))
-- `udp` (Attributes) Udp
-
-> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`. (see [below for nested schema](#nestedatt--protocol--udp))
+- `tcp` (Attributes) Tcp (see [below for nested schema](#nestedatt--protocol--tcp))
+- `udp` (Attributes) Udp (see [below for nested schema](#nestedatt--protocol--udp))
 
 <a id="nestedatt--protocol--tcp"></a>
 ### Nested Schema for `protocol.tcp`

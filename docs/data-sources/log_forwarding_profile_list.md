@@ -57,15 +57,9 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the log forwarding profile
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -80,7 +74,7 @@ Read-Only:
 
 - `action_desc` (String) Match profile description
 - `filter` (String) Filter match criteria
-- `log_type` (String) Log type
+- `log_type` (String) Log type. Possible values are `traffic`, `threat`, `wildfire`, `url`, `data`, `tunnel`, `auth`, `decryption`, `dns-security`, `gtp` and `sctp`.
 - `name` (String) Name of the match profile
 - `send_email` (List of String) A list of email server profiles
 - `send_http` (List of String) A list of HTTP server profiles

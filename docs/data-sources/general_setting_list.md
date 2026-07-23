@@ -59,14 +59,8 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -81,7 +75,7 @@ Read-Only:
 - `ack_login_banner` (Boolean) Force admins to acknowledge login banner
 - `domain` (String) DNS domain
 - `geo_location` (Attributes) Geographic coordinates (see [below for nested schema](#nestedatt--data--general--geo_location))
-- `locale` (String) Locale
+- `locale` (String) Locale. Possible values are `en`, `es`, `ja`, `fr`, `zh_CN` and `zh_TW`.
 - `login_banner` (String) Logon banner
 - `setting` (Attributes) Setting (see [below for nested schema](#nestedatt--data--general--setting))
 - `ssl_tls_service_profile` (String) SSL/TLS service profile

@@ -261,7 +261,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -277,7 +277,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -329,7 +329,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("autofocus", "crl-status", "data-services", "ddns", "deployments", "dns", "edl-updates", "email", "hsm", "http", "iot", "kerberos", "ldap", "mdm", "mfa", "netflow", "ntp", "paloalto-networks-services", "panorama", "panorama-log-forwarding", "proxy", "radius", "scep", "snmp", "syslog", "tacplus", "uid-agent", "url-updates", "vmmonitor", "wildfire-private", "ztp"),
 								},
-								MarkdownDescription: "The follow list details the accepted `name` values and their corresponding service description.\n- `autofocus` = AutoFocus Cloud\n- `crl-status` = CRL servers\n- `data-services` = Data Services\n- `ddns` = DDNS server(s)\n- `deployments` = Panorama pushed updates\n- `dns` = DNS server(s)\n- `edl-updates` = External Dynamic List update server\n- `email` = SMTP gateway(s)\n- `hsm` = Hardware Security Module server(s)\n- `http` = HTTP Forwarding server(s)\n- `iot` = IOT service-route\n- `kerberos` = Kerberos server\n- `ldap` = LDAP server\n- `mdm` = MDM servers\n- `mfa` = Multi-Factor Authentication\n- `netflow` = Netflow server(s)\n- `ntp` = NTP server(s)\n- `paloalto-networks-services` = Palo Alto Networks Services\n- `panorama` = Panorama server\n- `panorama-log-forwarding` = Panorama Log Forwarding\n- `proxy` = Proxy server\n- `radius` = RADIUS server\n- `scep` = SCEP\n- `snmp` = SNMP server(s)\n- `syslog` = Syslog server(s)\n- `tacplus` = TACACS+ server\n- `uid-`agent = UID agent(s)\n- `url-`updates = URL update server\n- `vmmonitor` = VM monitor\n- `wildfire-`private = WildFire Appliance\n- `ztp` = ZTP and Auto-VPN DDNS\n",
+								MarkdownDescription: "The follow list details the accepted `name` values and their corresponding service description.\n- `autofocus` = AutoFocus Cloud\n- `crl-status` = CRL servers\n- `data-services` = Data Services\n- `ddns` = DDNS server(s)\n- `deployments` = Panorama pushed updates\n- `dns` = DNS server(s)\n- `edl-updates` = External Dynamic List update server\n- `email` = SMTP gateway(s)\n- `hsm` = Hardware Security Module server(s)\n- `http` = HTTP Forwarding server(s)\n- `iot` = IOT service-route\n- `kerberos` = Kerberos server\n- `ldap` = LDAP server\n- `mdm` = MDM servers\n- `mfa` = Multi-Factor Authentication\n- `netflow` = Netflow server(s)\n- `ntp` = NTP server(s)\n- `paloalto-networks-services` = Palo Alto Networks Services\n- `panorama` = Panorama server\n- `panorama-log-forwarding` = Panorama Log Forwarding\n- `proxy` = Proxy server\n- `radius` = RADIUS server\n- `scep` = SCEP\n- `snmp` = SNMP server(s)\n- `syslog` = Syslog server(s)\n- `tacplus` = TACACS+ server\n- `uid-`agent = UID agent(s)\n- `url-`updates = URL update server\n- `vmmonitor` = VM monitor\n- `wildfire-`private = WildFire Appliance\n- `ztp` = ZTP and Auto-VPN DDNS. Possible values are `autofocus`, `crl-status`, `data-services`, `ddns`, `deployments`, `dns`, `edl-updates`, `email`, `hsm`, `http`, `iot`, `kerberos`, `ldap`, `mdm`, `mfa`, `netflow`, `ntp`, `paloalto-networks-services`, `panorama`, `panorama-log-forwarding`, `proxy`, `radius`, `scep`, `snmp`, `syslog`, `tacplus`, `uid-agent`, `url-updates`, `vmmonitor`, `wildfire-private` and `ztp`.",
 								Optional:            true,
 							},
 							"source": schema.SingleNestedAttribute{
@@ -374,7 +374,7 @@ var ServiceRouteResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -395,12 +395,12 @@ var ServiceRouteDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ServiceRoute data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -444,7 +444,7 @@ var ServiceRouteDataSourceSchema = dsschema.Schema{
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
 							"name": dsschema.StringAttribute{
-								MarkdownDescription: "The follow list details the accepted `name` values and their corresponding service description.\n- `autofocus` = AutoFocus Cloud\n- `crl-status` = CRL servers\n- `data-services` = Data Services\n- `ddns` = DDNS server(s)\n- `deployments` = Panorama pushed updates\n- `dns` = DNS server(s)\n- `edl-updates` = External Dynamic List update server\n- `email` = SMTP gateway(s)\n- `hsm` = Hardware Security Module server(s)\n- `http` = HTTP Forwarding server(s)\n- `iot` = IOT service-route\n- `kerberos` = Kerberos server\n- `ldap` = LDAP server\n- `mdm` = MDM servers\n- `mfa` = Multi-Factor Authentication\n- `netflow` = Netflow server(s)\n- `ntp` = NTP server(s)\n- `paloalto-networks-services` = Palo Alto Networks Services\n- `panorama` = Panorama server\n- `panorama-log-forwarding` = Panorama Log Forwarding\n- `proxy` = Proxy server\n- `radius` = RADIUS server\n- `scep` = SCEP\n- `snmp` = SNMP server(s)\n- `syslog` = Syslog server(s)\n- `tacplus` = TACACS+ server\n- `uid-`agent = UID agent(s)\n- `url-`updates = URL update server\n- `vmmonitor` = VM monitor\n- `wildfire-`private = WildFire Appliance\n- `ztp` = ZTP and Auto-VPN DDNS\n",
+								MarkdownDescription: "The follow list details the accepted `name` values and their corresponding service description.\n- `autofocus` = AutoFocus Cloud\n- `crl-status` = CRL servers\n- `data-services` = Data Services\n- `ddns` = DDNS server(s)\n- `deployments` = Panorama pushed updates\n- `dns` = DNS server(s)\n- `edl-updates` = External Dynamic List update server\n- `email` = SMTP gateway(s)\n- `hsm` = Hardware Security Module server(s)\n- `http` = HTTP Forwarding server(s)\n- `iot` = IOT service-route\n- `kerberos` = Kerberos server\n- `ldap` = LDAP server\n- `mdm` = MDM servers\n- `mfa` = Multi-Factor Authentication\n- `netflow` = Netflow server(s)\n- `ntp` = NTP server(s)\n- `paloalto-networks-services` = Palo Alto Networks Services\n- `panorama` = Panorama server\n- `panorama-log-forwarding` = Panorama Log Forwarding\n- `proxy` = Proxy server\n- `radius` = RADIUS server\n- `scep` = SCEP\n- `snmp` = SNMP server(s)\n- `syslog` = Syslog server(s)\n- `tacplus` = TACACS+ server\n- `uid-`agent = UID agent(s)\n- `url-`updates = URL update server\n- `vmmonitor` = VM monitor\n- `wildfire-`private = WildFire Appliance\n- `ztp` = ZTP and Auto-VPN DDNS. Possible values are `autofocus`, `crl-status`, `data-services`, `ddns`, `deployments`, `dns`, `edl-updates`, `email`, `hsm`, `http`, `iot`, `kerberos`, `ldap`, `mdm`, `mfa`, `netflow`, `ntp`, `paloalto-networks-services`, `panorama`, `panorama-log-forwarding`, `proxy`, `radius`, `scep`, `snmp`, `syslog`, `tacplus`, `uid-agent`, `url-updates`, `vmmonitor`, `wildfire-private` and `ztp`.",
 								Computed:            true,
 							},
 							"source": dsschema.SingleNestedAttribute{
@@ -481,7 +481,7 @@ var ServiceRouteDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

@@ -53,28 +53,18 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) L3 sub-interface name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `arp` (Attributes List) Layer 3 sub Interfaces ARP configuration (see [below for nested schema](#nestedatt--data--arp))
 - `comment` (String) Description
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Layer 3 sub Interfaces. (see [below for nested schema](#nestedatt--data--ddns_config))
-- `dhcp_client` (Attributes) Layer3 sub interfaces DHCP Client Object
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--dhcp_client))
+- `dhcp_client` (Attributes) Layer3 sub interfaces DHCP Client Object (see [below for nested schema](#nestedatt--data--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
-- `ip` (Attributes List) L3 sub-interface IP Parent
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`. (see [below for nested schema](#nestedatt--data--ip))
+- `ip` (Attributes List) L3 sub-interface IP Parent (see [below for nested schema](#nestedatt--data--ip))
 - `mtu` (Number) MTU
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `parent_interface` (String) Parent interface

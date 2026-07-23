@@ -136,16 +136,12 @@ resource "scm_session_setting" "session_example" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `session_settings` (Attributes) Session settings (see [below for nested schema](#nestedatt--session_settings))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -214,7 +210,7 @@ Optional:
 
 Optional:
 
-- `dipp_oversub` (String) NAT oversubscription rate
+- `dipp_oversub` (String) NAT oversubscription rate. Possible values are `1x`, `2x`, `4x` and `8x`.
 
 
 <a id="nestedatt--session_settings--nat64"></a>

@@ -57,27 +57,21 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the SCEP profile
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `algorithm` (Attributes) Algorithm (see [below for nested schema](#nestedatt--data--algorithm))
 - `ca_identity_name` (String) Certificate Authority Identity
 - `certificate_attributes` (Attributes) Subject Alternative name type (see [below for nested schema](#nestedatt--data--certificate_attributes))
-- `digest` (String) Digest for CSR
+- `digest` (String) Digest for CSR. Possible values are `sha1`, `sha256`, `sha384` and `sha512`.
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `fingerprint` (String) CA Certificate Fingerprint
-- `scep_ca_cert` (String) SCEP Server CA Certificate
+- `scep_ca_cert` (String) SCEP Server CA Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.
 - `scep_challenge` (Attributes) One Time Password Challenge (see [below for nested schema](#nestedatt--data--scep_challenge))
-- `scep_client_cert` (String) SCEP Client Certificate
+- `scep_client_cert` (String) SCEP Client Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.
 - `scep_url` (String) SCEP server URL
 - `subject` (String) Subject
 - `tfid` (String) The Terraform ID.
@@ -96,7 +90,7 @@ Read-Only:
 
 Read-Only:
 
-- `rsa_nbits` (String) Rsa nbits
+- `rsa_nbits` (String) Rsa nbits. Possible values are `1024`, `2048` and `3072`.
 
 
 
@@ -106,14 +100,8 @@ Read-Only:
 Read-Only:
 
 - `dnsname` (String) Dnsname
-
-> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `rfc822name` (String) Rfc822name
-
-> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `uniform_resource_identifier` (String) Uniform resource identifier
-
-> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 
 
 <a id="nestedatt--data--scep_challenge"></a>
@@ -121,15 +109,9 @@ Read-Only:
 
 Read-Only:
 
-- `dynamic` (Attributes) Dynamic
-
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`. (see [below for nested schema](#nestedatt--data--scep_challenge--dynamic))
+- `dynamic` (Attributes) Dynamic (see [below for nested schema](#nestedatt--data--scep_challenge--dynamic))
 - `fixed` (String) Challenge to use for SCEP server on mobile clients
-
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
-- `none` (Attributes) No OTP
-
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`. (see [below for nested schema](#nestedatt--data--scep_challenge--none))
+- `none` (Attributes) No OTP (see [below for nested schema](#nestedatt--data--scep_challenge--none))
 
 <a id="nestedatt--data--scep_challenge--dynamic"></a>
 ### Nested Schema for `data.scep_challenge.dynamic`

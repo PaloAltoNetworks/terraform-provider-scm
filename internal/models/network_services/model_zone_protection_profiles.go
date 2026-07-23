@@ -1056,7 +1056,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("global", "drop", "bypass"),
 			},
-			MarkdownDescription: "Determine whether to drop or bypass packets that contain out-of-sync ACKs or out-of-window sequence numbers:\n* `global` — Use system-wide setting that is assigned through TCP Settings or the CLI.\n* `drop` — Drop packets that contain an asymmetric path.\n* `bypass` — Bypass scanning on packets that contain an asymmetric path.\n",
+			MarkdownDescription: "Determine whether to drop or bypass packets that contain out-of-sync ACKs or out-of-window sequence numbers:\n* `global` — Use system-wide setting that is assigned through TCP Settings or the CLI.\n* `drop` — Drop packets that contain an asymmetric path.\n* `bypass` — Bypass scanning on packets that contain an asymmetric path. Possible values are `global`, `drop` and `bypass`.",
 			Optional:            true,
 		},
 		"description": schema.StringAttribute{
@@ -1075,7 +1075,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1350,7 +1350,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1523,7 +1523,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("no", "yes", "global"),
 			},
-			MarkdownDescription: "MPTCP is an extension of TCP that allows a client to maintain a connection by simultaneously using multiple paths to connect to the destination host. By default, MPTCP support is disabled, based on the global MPTCP setting.  Review or adjust the MPTCP settings for the security zones associated with this profile:\n* `no` — Enable MPTCP support (do not strip the MPTCP option).\n* `yes` — Disable MPTCP support (strip the MPTCP option). With this configured, MPTCP connections are converted to standard TCP connections, as MPTCP is backwards compatible with TCP.\n* `global` — Support MPTCP based on the global MPTCP setting. By default, the global MPTCP setting is set to yes so that MPTCP is disabled (the MPTCP option is stripped from the packet).\n",
+			MarkdownDescription: "MPTCP is an extension of TCP that allows a client to maintain a connection by simultaneously using multiple paths to connect to the destination host. By default, MPTCP support is disabled, based on the global MPTCP setting.  Review or adjust the MPTCP settings for the security zones associated with this profile:\n* `no` — Enable MPTCP support (do not strip the MPTCP option).\n* `yes` — Disable MPTCP support (strip the MPTCP option). With this configured, MPTCP connections are converted to standard TCP connections, as MPTCP is backwards compatible with TCP.\n* `global` — Support MPTCP based on the global MPTCP setting. By default, the global MPTCP setting is set to yes so that MPTCP is disabled (the MPTCP option is stripped from the packet). Possible values are `no`, `yes` and `global`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("global"),
@@ -1543,7 +1543,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("exclude", "include"),
 					},
-					MarkdownDescription: "Specify the type of list you are creating for protocol protection:\n* Include List—Only the protocols on the list are allowed—in addition to IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), and VLAN tagged frames (0x8100). All other protocols are implicitly denied (blocked).\n* Exclude List—Only the protocols on the list are denied; all other protocols are implicitly allowed. You cannot exclude IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), or VLAN tagged frames (0x8100).\n",
+					MarkdownDescription: "Specify the type of list you are creating for protocol protection:\n* Include List—Only the protocols on the list are allowed—in addition to IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), and VLAN tagged frames (0x8100). All other protocols are implicitly denied (blocked).\n* Exclude List—Only the protocols on the list are denied; all other protocols are implicitly allowed. You cannot exclude IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), or VLAN tagged frames (0x8100). Possible values are `exclude` and `include`.",
 					Optional:            true,
 				},
 				"protocol": schema.ListNestedAttribute{
@@ -1576,7 +1576,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("global", "yes", "no"),
 			},
-			MarkdownDescription: "Determine whether to reject the packet if the first packet for the TCP session setup is not a SYN packet:\n* `global` — Use system-wide setting that is assigned through the CLI.\n* `yes` — Reject non-SYN TCP.\n* `no` — Accept non-SYN TCP.\n",
+			MarkdownDescription: "Determine whether to reject the packet if the first packet for the TCP session setup is not a SYN packet:\n* `global` — Use system-wide setting that is assigned through the CLI.\n* `yes` — Reject non-SYN TCP.\n* `no` — Accept non-SYN TCP. Possible values are `global`, `yes` and `no`.",
 			Optional:            true,
 		},
 		"scan": schema.ListNestedAttribute{
@@ -1618,7 +1618,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("source-and-destination", "source"),
 										},
-										MarkdownDescription: "Track by",
+										MarkdownDescription: "Track by. Possible values are `source-and-destination` and `source`.",
 										Required:            true,
 									},
 								},
@@ -1636,7 +1636,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("8001", "8002", "8003", "8006"),
 						},
-						MarkdownDescription: "The threat ID number.  These can be found in [Palo Alto Networks ThreatVault](https://threatvault.paloaltonetworks.com).\n* \"8001\" - TCP Port Scan\n* \"8002\" - Host Sweep\n* \"8003\" - UDP Port Scan\n* \"8006\" - Port Scan\n",
+						MarkdownDescription: "The threat ID number.  These can be found in [Palo Alto Networks ThreatVault](https://threatvault.paloaltonetworks.com).\n* \"8001\" - TCP Port Scan\n* \"8002\" - Host Sweep\n* \"8003\" - UDP Port Scan\n* \"8006\" - Port Scan. Possible values are `8001`, `8002`, `8003` and `8006`.",
 						Required:            true,
 					},
 					"threshold": schema.Int64Attribute{
@@ -1682,7 +1682,7 @@ var ZoneProtectionProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1759,7 +1759,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ZoneProtectionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"asymmetric_path": dsschema.StringAttribute{
-			MarkdownDescription: "Determine whether to drop or bypass packets that contain out-of-sync ACKs or out-of-window sequence numbers:\n* `global` — Use system-wide setting that is assigned through TCP Settings or the CLI.\n* `drop` — Drop packets that contain an asymmetric path.\n* `bypass` — Bypass scanning on packets that contain an asymmetric path.\n",
+			MarkdownDescription: "Determine whether to drop or bypass packets that contain out-of-sync ACKs or out-of-window sequence numbers:\n* `global` — Use system-wide setting that is assigned through TCP Settings or the CLI.\n* `drop` — Drop packets that contain an asymmetric path.\n* `bypass` — Bypass scanning on packets that contain an asymmetric path. Possible values are `global`, `drop` and `bypass`.",
 			Computed:            true,
 		},
 		"description": dsschema.StringAttribute{
@@ -1767,7 +1767,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1968,7 +1968,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -2133,7 +2133,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"mptcp_option_strip": dsschema.StringAttribute{
-			MarkdownDescription: "MPTCP is an extension of TCP that allows a client to maintain a connection by simultaneously using multiple paths to connect to the destination host. By default, MPTCP support is disabled, based on the global MPTCP setting.  Review or adjust the MPTCP settings for the security zones associated with this profile:\n* `no` — Enable MPTCP support (do not strip the MPTCP option).\n* `yes` — Disable MPTCP support (strip the MPTCP option). With this configured, MPTCP connections are converted to standard TCP connections, as MPTCP is backwards compatible with TCP.\n* `global` — Support MPTCP based on the global MPTCP setting. By default, the global MPTCP setting is set to yes so that MPTCP is disabled (the MPTCP option is stripped from the packet).\n",
+			MarkdownDescription: "MPTCP is an extension of TCP that allows a client to maintain a connection by simultaneously using multiple paths to connect to the destination host. By default, MPTCP support is disabled, based on the global MPTCP setting.  Review or adjust the MPTCP settings for the security zones associated with this profile:\n* `no` — Enable MPTCP support (do not strip the MPTCP option).\n* `yes` — Disable MPTCP support (strip the MPTCP option). With this configured, MPTCP connections are converted to standard TCP connections, as MPTCP is backwards compatible with TCP.\n* `global` — Support MPTCP based on the global MPTCP setting. By default, the global MPTCP setting is set to yes so that MPTCP is disabled (the MPTCP option is stripped from the packet). Possible values are `no`, `yes` and `global`.",
 			Computed:            true,
 		},
 		"name": dsschema.StringAttribute{
@@ -2146,7 +2146,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"list_type": dsschema.StringAttribute{
-					MarkdownDescription: "Specify the type of list you are creating for protocol protection:\n* Include List—Only the protocols on the list are allowed—in addition to IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), and VLAN tagged frames (0x8100). All other protocols are implicitly denied (blocked).\n* Exclude List—Only the protocols on the list are denied; all other protocols are implicitly allowed. You cannot exclude IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), or VLAN tagged frames (0x8100).\n",
+					MarkdownDescription: "Specify the type of list you are creating for protocol protection:\n* Include List—Only the protocols on the list are allowed—in addition to IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), and VLAN tagged frames (0x8100). All other protocols are implicitly denied (blocked).\n* Exclude List—Only the protocols on the list are denied; all other protocols are implicitly allowed. You cannot exclude IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), or VLAN tagged frames (0x8100). Possible values are `exclude` and `include`.",
 					Computed:            true,
 				},
 				"protocol": dsschema.ListNestedAttribute{
@@ -2176,7 +2176,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"reject_non_syn_tcp": dsschema.StringAttribute{
-			MarkdownDescription: "Determine whether to reject the packet if the first packet for the TCP session setup is not a SYN packet:\n* `global` — Use system-wide setting that is assigned through the CLI.\n* `yes` — Reject non-SYN TCP.\n* `no` — Accept non-SYN TCP.\n",
+			MarkdownDescription: "Determine whether to reject the packet if the first packet for the TCP session setup is not a SYN packet:\n* `global` — Use system-wide setting that is assigned through the CLI.\n* `yes` — Reject non-SYN TCP.\n* `no` — Accept non-SYN TCP. Possible values are `global`, `yes` and `no`.",
 			Computed:            true,
 		},
 		"scan": dsschema.ListNestedAttribute{
@@ -2212,7 +2212,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 									},
 									"track_by": dsschema.StringAttribute{
-										MarkdownDescription: "Track by",
+										MarkdownDescription: "Track by. Possible values are `source-and-destination` and `source`.",
 										Computed:            true,
 									},
 								},
@@ -2224,7 +2224,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
-						MarkdownDescription: "The threat ID number.  These can be found in [Palo Alto Networks ThreatVault](https://threatvault.paloaltonetworks.com).\n* \"8001\" - TCP Port Scan\n* \"8002\" - Host Sweep\n* \"8003\" - UDP Port Scan\n* \"8006\" - Port Scan\n",
+						MarkdownDescription: "The threat ID number.  These can be found in [Palo Alto Networks ThreatVault](https://threatvault.paloaltonetworks.com).\n* \"8001\" - TCP Port Scan\n* \"8002\" - Host Sweep\n* \"8003\" - UDP Port Scan\n* \"8006\" - Port Scan. Possible values are `8001`, `8002`, `8003` and `8006`.",
 						Computed:            true,
 					},
 					"threshold": dsschema.Int64Attribute{
@@ -2259,7 +2259,7 @@ var ZoneProtectionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

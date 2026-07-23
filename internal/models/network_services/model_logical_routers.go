@@ -12864,7 +12864,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -12880,7 +12880,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -12906,7 +12906,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -13089,7 +13089,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("ipv6"),
 														),
 													},
-													MarkdownDescription: "Ipv4\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`.",
+													MarkdownDescription: "Ipv4",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"attribute_map": schema.StringAttribute{
@@ -13112,7 +13112,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("ipv4"),
 														),
 													},
-													MarkdownDescription: "Ipv6\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`.",
+													MarkdownDescription: "Ipv6",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"attribute_map": schema.StringAttribute{
@@ -13416,7 +13416,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("yes"),
 																	),
 																},
-																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+																MarkdownDescription: "No",
 																Optional:            true,
 																Attributes: map[string]schema.Attribute{
 																	"address_family": schema.SingleNestedAttribute{
@@ -13455,7 +13455,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("no"),
 																	),
 																},
-																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+																MarkdownDescription: "Yes",
 																Optional:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
@@ -13493,7 +13493,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("ip"),
 																	),
 																},
-																MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+																MarkdownDescription: "Fqdn",
 																Optional:            true,
 															},
 															"ip": schema.StringAttribute{
@@ -13502,7 +13502,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("fqdn"),
 																	),
 																},
-																MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+																MarkdownDescription: "Ip",
 																Optional:            true,
 															},
 														},
@@ -13552,7 +13552,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
 														),
 													},
-													MarkdownDescription: "Ebgp\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ebgp",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
@@ -13577,7 +13577,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
 														),
 													},
-													MarkdownDescription: "Ebgp confed\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ebgp confed",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
@@ -13594,7 +13594,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("ibgp_confed"),
 														),
 													},
-													MarkdownDescription: "Ibgp\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ibgp",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
@@ -13611,7 +13611,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("ibgp"),
 														),
 													},
-													MarkdownDescription: "Ibgp confed\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ibgp confed",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"export_nexthop": schema.StringAttribute{
@@ -13671,7 +13671,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
@@ -13722,14 +13722,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("unicast", "multicast", "both"),
 																				},
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Optional:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																		},
@@ -13757,7 +13757,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																				),
 																			},
-																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "None",
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
@@ -13769,7 +13769,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																				),
 																			},
-																			MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "Prepend",
 																			Optional:            true,
 																		},
 																		"remove": schema.SingleNestedAttribute{
@@ -13780,7 +13780,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																				),
 																			},
-																			MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "Remove",
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
@@ -13792,7 +13792,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove"),
 																				),
 																			},
-																			MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "Remove and prepend",
 																			Optional:            true,
 																		},
 																	},
@@ -13807,7 +13807,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Attributes: map[string]schema.Attribute{
 																		"append": schema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Append",
 																			Validators: []validator.List{
 																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("none"),
@@ -13827,13 +13827,13 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
-																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "None",
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"overwrite": schema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Overwrite",
 																			Validators: []validator.List{
 																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
@@ -13853,7 +13853,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
-																			MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove all",
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
@@ -13866,7 +13866,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_all"),
 																				),
 																			},
-																			MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove regex",
 																			Optional:            true,
 																		},
 																	},
@@ -13877,7 +13877,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Attributes: map[string]schema.Attribute{
 																		"append": schema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Append",
 																			Validators: []validator.List{
 																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("none"),
@@ -13897,13 +13897,13 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
-																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "None",
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
 																		"overwrite": schema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Overwrite",
 																			Validators: []validator.List{
 																				listvalidator.ConflictsWith(
 																					path.MatchRelative().AtParent().AtName("append"),
@@ -13923,7 +13923,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_regex"),
 																				),
 																			},
-																			MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove all",
 																			Optional:            true,
 																			Attributes:          map[string]schema.Attribute{},
 																		},
@@ -13936,7 +13936,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					path.MatchRelative().AtParent().AtName("remove_all"),
 																				),
 																			},
-																			MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove regex",
 																			Optional:            true,
 																		},
 																	},
@@ -13957,7 +13957,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("igp", "egp", "incomplete"),
 																	},
-																	MarkdownDescription: "Origin",
+																	MarkdownDescription: "Origin. Possible values are `igp`, `egp` and `incomplete`.",
 																	Optional:            true,
 																},
 																"weight": schema.Int64Attribute{
@@ -14019,7 +14019,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
@@ -14070,14 +14070,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("unicast", "multicast", "both"),
 																				},
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Optional:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																		},
@@ -14136,7 +14136,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
@@ -14187,14 +14187,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("unicast", "multicast", "both"),
 																				},
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Optional:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																		},
@@ -14247,7 +14247,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																			"as_path": schema.SingleNestedAttribute{
@@ -14298,14 +14298,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("unicast", "multicast", "both"),
 																				},
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Optional:            true,
 																			},
 																			"safi": schema.StringAttribute{
 																				Validators: []validator.String{
 																					stringvalidator.OneOf("ip", "ipv6"),
 																				},
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Optional:            true,
 																			},
 																		},
@@ -14346,7 +14346,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("deny"),
 																		),
 																	},
-																	MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Allow",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"update": schema.SingleNestedAttribute{
@@ -14365,7 +14365,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "None",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14377,7 +14377,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
-																							MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Prepend",
 																							Optional:            true,
 																						},
 																						"remove": schema.SingleNestedAttribute{
@@ -14388,7 +14388,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
-																							MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14400,7 +14400,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove"),
 																								),
 																							},
-																							MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove and prepend",
 																							Optional:            true,
 																						},
 																					},
@@ -14415,7 +14415,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
@@ -14435,13 +14435,13 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
@@ -14461,7 +14461,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14474,7 +14474,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Optional:            true,
 																						},
 																					},
@@ -14485,7 +14485,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
@@ -14505,13 +14505,13 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
@@ -14531,7 +14531,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14544,7 +14544,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Optional:            true,
 																						},
 																					},
@@ -14565,7 +14565,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Validators: []validator.String{
 																						stringvalidator.OneOf("igp", "egp", "multicast"),
 																					},
-																					MarkdownDescription: "Origin",
+																					MarkdownDescription: "Origin. Possible values are `igp`, `egp` and `multicast`.",
 																					Optional:            true,
 																				},
 																			},
@@ -14578,7 +14578,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("allow"),
 																		),
 																	},
-																	MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Deny",
 																	Optional:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
@@ -14612,7 +14612,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("ip", "ipv6"),
 																	},
-																	MarkdownDescription: "Afi",
+																	MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																	Optional:            true,
 																},
 																"as_path": schema.SingleNestedAttribute{
@@ -14663,14 +14663,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("unicast", "multicast", "both"),
 																	},
-																	MarkdownDescription: "Route table",
+																	MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																	Optional:            true,
 																},
 																"safi": schema.StringAttribute{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("ip", "ipv6"),
 																	},
-																	MarkdownDescription: "Safi",
+																	MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																	Optional:            true,
 																},
 															},
@@ -14708,7 +14708,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("deny"),
 																		),
 																	},
-																	MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Allow",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"dampening": schema.StringAttribute{
@@ -14731,7 +14731,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "None",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14743,7 +14743,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
-																							MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Prepend",
 																							Optional:            true,
 																						},
 																						"remove": schema.SingleNestedAttribute{
@@ -14754,7 +14754,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_and_prepend"),
 																								),
 																							},
-																							MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14766,7 +14766,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove"),
 																								),
 																							},
-																							MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove and prepend",
 																							Optional:            true,
 																						},
 																					},
@@ -14781,7 +14781,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
@@ -14801,13 +14801,13 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
@@ -14827,7 +14827,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14840,7 +14840,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Optional:            true,
 																						},
 																					},
@@ -14851,7 +14851,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Attributes: map[string]schema.Attribute{
 																						"append": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("none"),
@@ -14871,13 +14871,13 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
 																						"overwrite": schema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Validators: []validator.List{
 																								listvalidator.ConflictsWith(
 																									path.MatchRelative().AtParent().AtName("append"),
@@ -14897,7 +14897,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_regex"),
 																								),
 																							},
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Optional:            true,
 																							Attributes:          map[string]schema.Attribute{},
 																						},
@@ -14910,7 +14910,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																									path.MatchRelative().AtParent().AtName("remove_all"),
 																								),
 																							},
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Optional:            true,
 																						},
 																					},
@@ -14931,7 +14931,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																					Validators: []validator.String{
 																						stringvalidator.OneOf("igp", "egp", "incomplete"),
 																					},
-																					MarkdownDescription: "Origin",
+																					MarkdownDescription: "Origin. Possible values are `igp`, `egp` and `incomplete`.",
 																					Optional:            true,
 																				},
 																				"weight": schema.Int64Attribute{
@@ -14948,7 +14948,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("allow"),
 																		),
 																	},
-																	MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Deny",
 																	Optional:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
@@ -14982,7 +14982,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("ip", "ipv6"),
 																	},
-																	MarkdownDescription: "Afi",
+																	MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																	Optional:            true,
 																},
 																"as_path": schema.SingleNestedAttribute{
@@ -15033,14 +15033,14 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("unicast", "multicast", "both"),
 																	},
-																	MarkdownDescription: "Route table",
+																	MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																	Optional:            true,
 																},
 																"safi": schema.StringAttribute{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("ip", "ipv6"),
 																	},
-																	MarkdownDescription: "Safi",
+																	MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																	Optional:            true,
 																},
 															},
@@ -15070,7 +15070,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("ipv4", "ipv6"),
 											},
-											MarkdownDescription: "Address family identifier",
+											MarkdownDescription: "Address family identifier. Possible values are `ipv4` and `ipv6`.",
 											Optional:            true,
 										},
 										"enable": schema.BoolAttribute{
@@ -15089,7 +15089,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("unicast", "multicast", "both"),
 											},
-											MarkdownDescription: "Route table",
+											MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 											Optional:            true,
 										},
 										"set_as_path_limit": schema.Int64Attribute{
@@ -15118,7 +15118,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("igp", "egp", "incomplete"),
 											},
-											MarkdownDescription: "Set origin",
+											MarkdownDescription: "Set origin. Possible values are `igp`, `egp` and `incomplete`.",
 											Optional:            true,
 										},
 									},
@@ -15176,7 +15176,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
 											),
 										},
-										MarkdownDescription: "Balanced round robin\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Balanced round robin",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -15188,7 +15188,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
 											),
 										},
-										MarkdownDescription: "Ip hash\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Ip hash",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"hash_seed": schema.Int64Attribute{
@@ -15213,7 +15213,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("weighted_round_robin"),
 											),
 										},
-										MarkdownDescription: "Ip modulo\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Ip modulo",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -15225,7 +15225,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("ip_modulo"),
 											),
 										},
-										MarkdownDescription: "Weighted round robin\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Weighted round robin",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"interface": schema.ListNestedAttribute{
@@ -15324,7 +15324,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.String{
 																stringvalidator.OneOf("1", "2", "3", "4", "5", "6", "7"),
 															},
-															MarkdownDescription: "Robustness",
+															MarkdownDescription: "Robustness. Possible values are `1`, `2`, `3`, `4`, `5`, `6` and `7`.",
 															Optional:            true,
 														},
 														"router_alert_policing": schema.BoolAttribute{
@@ -15335,7 +15335,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.String{
 																stringvalidator.OneOf("2", "3"),
 															},
-															MarkdownDescription: "Version",
+															MarkdownDescription: "Version. Possible values are `2` and `3`.",
 															Optional:            true,
 														},
 													},
@@ -15464,7 +15464,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Validators: []validator.String{
 														stringvalidator.OneOf("router", "host"),
 													},
-													MarkdownDescription: "Mode",
+													MarkdownDescription: "Mode. Possible values are `router` and `host`.",
 													Optional:            true,
 												},
 												"query_interval": schema.Int64Attribute{
@@ -15475,7 +15475,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Validators: []validator.String{
 														stringvalidator.OneOf("1", "2", "3", "4", "5", "6", "7"),
 													},
-													MarkdownDescription: "Robustness",
+													MarkdownDescription: "Robustness. Possible values are `1`, `2`, `3`, `4`, `5`, `6` and `7`.",
 													Optional:            true,
 												},
 												"router_alert_policing": schema.BoolAttribute{
@@ -15486,7 +15486,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 													Validators: []validator.String{
 														stringvalidator.OneOf("1", "2", "3"),
 													},
-													MarkdownDescription: "Version",
+													MarkdownDescription: "Version. Possible values are `1`, `2` and `3`.",
 													Optional:            true,
 												},
 											},
@@ -15549,7 +15549,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("PIM-SM", "IGMP-Proxy"),
 								},
-								MarkdownDescription: "Mode",
+								MarkdownDescription: "Mode. Possible values are `PIM-SM` and `IGMP-Proxy`.",
 								Optional:            true,
 							},
 							"msdp": schema.SingleNestedAttribute{
@@ -15635,7 +15635,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("ip"),
 																),
 															},
-															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+															MarkdownDescription: "Fqdn",
 															Optional:            true,
 														},
 														"ip": schema.StringAttribute{
@@ -15644,7 +15644,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("fqdn"),
 																),
 															},
-															MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+															MarkdownDescription: "Ip",
 															Optional:            true,
 														},
 													},
@@ -15744,7 +15744,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																path.MatchRelative().AtParent().AtName("static_rp"),
 															),
 														},
-														MarkdownDescription: "Candidate rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+														MarkdownDescription: "Candidate rp",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"address": schema.StringAttribute{
@@ -15775,7 +15775,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																path.MatchRelative().AtParent().AtName("candidate_rp"),
 															),
 														},
-														MarkdownDescription: "Static rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+														MarkdownDescription: "Static rp",
 														Optional:            true,
 														Attributes: map[string]schema.Attribute{
 															"address": schema.StringAttribute{
@@ -15804,7 +15804,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("mrib-then-urib", "mrib-only", "urib-only"),
 										},
-										MarkdownDescription: "Rpf lookup mode",
+										MarkdownDescription: "Rpf lookup mode. Possible values are `mrib-then-urib`, `mrib-only` and `urib-only`.",
 										Optional:            true,
 									},
 									"spt_threshold": schema.ListNestedAttribute{
@@ -15874,7 +15874,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														path.MatchRelative().AtParent().AtName("static_rp"),
 													),
 												},
-												MarkdownDescription: "Candidate rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+												MarkdownDescription: "Candidate rp",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.StringAttribute{
@@ -15906,7 +15906,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 														path.MatchRelative().AtParent().AtName("candidate_rp"),
 													),
 												},
-												MarkdownDescription: "Static rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+												MarkdownDescription: "Static rp",
 												Optional:            true,
 												Attributes: map[string]schema.Attribute{
 													"address": schema.StringAttribute{
@@ -16059,7 +16059,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
 																},
-																MarkdownDescription: "Broadcast\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "Broadcast",
 																Optional:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
@@ -16070,7 +16070,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
 																},
-																MarkdownDescription: "P2mp\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2mp",
 																Optional:            true,
 																Attributes: map[string]schema.Attribute{
 																	"neighbor": schema.ListNestedAttribute{
@@ -16098,7 +16098,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("p2mp"),
 																	),
 																},
-																MarkdownDescription: "P2p\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2p",
 																Optional:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
@@ -16192,7 +16192,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
 													},
-													MarkdownDescription: "Normal\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Normal",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
@@ -16226,7 +16226,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
 													},
-													MarkdownDescription: "Nssa\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Nssa",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
@@ -16287,7 +16287,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("type-1", "type-2"),
 																	},
-																	MarkdownDescription: "Metric type",
+																	MarkdownDescription: "Metric type. Possible values are `type-1` and `type-2`.",
 																	Optional:            true,
 																},
 															},
@@ -16302,7 +16302,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
@@ -16313,7 +16313,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			Validators: []validator.String{
 																				stringvalidator.OneOf("ext-1", "ext-2"),
 																			},
-																			MarkdownDescription: "Type",
+																			MarkdownDescription: "Type. Possible values are `ext-1` and `ext-2`.",
 																			Optional:            true,
 																		},
 																	},
@@ -16324,7 +16324,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Optional:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
@@ -16365,7 +16365,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("nssa"),
 														),
 													},
-													MarkdownDescription: "Stub\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Stub",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
@@ -16404,7 +16404,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
@@ -16419,7 +16419,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Optional:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
@@ -16595,7 +16595,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("ext-1", "ext-2"),
 											},
-											MarkdownDescription: "New path type",
+											MarkdownDescription: "New path type. Possible values are `ext-1` and `ext-2`.",
 											Optional:            true,
 										},
 										"new_tag": schema.StringAttribute{
@@ -16770,7 +16770,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
 																},
-																MarkdownDescription: "Broadcast\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "Broadcast",
 																Optional:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
@@ -16781,7 +16781,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("p2p"),
 																	),
 																},
-																MarkdownDescription: "P2mp\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2mp",
 																Optional:            true,
 																Attributes: map[string]schema.Attribute{
 																	"neighbor": schema.ListNestedAttribute{
@@ -16809,7 +16809,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																		path.MatchRelative().AtParent().AtName("p2mp"),
 																	),
 																},
-																MarkdownDescription: "P2p\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2p",
 																Optional:            true,
 																Attributes:          map[string]schema.Attribute{},
 															},
@@ -16911,7 +16911,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
 													},
-													MarkdownDescription: "Normal\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Normal",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
@@ -16945,7 +16945,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("stub"),
 														),
 													},
-													MarkdownDescription: "Nssa\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Nssa",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
@@ -17012,7 +17012,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	Validators: []validator.String{
 																		stringvalidator.OneOf("type-1", "type-2"),
 																	},
-																	MarkdownDescription: "Metric type",
+																	MarkdownDescription: "Metric type. Possible values are `type-1` and `type-2`.",
 																	Optional:            true,
 																},
 															},
@@ -17027,7 +17027,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
@@ -17038,7 +17038,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			Validators: []validator.String{
 																				stringvalidator.OneOf("ext-1", "ext-2"),
 																			},
-																			MarkdownDescription: "Type",
+																			MarkdownDescription: "Type. Possible values are `ext-1` and `ext-2`.",
 																			Optional:            true,
 																		},
 																	},
@@ -17049,7 +17049,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Optional:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
@@ -17094,7 +17094,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("nssa"),
 														),
 													},
-													MarkdownDescription: "Stub\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Stub",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"abr": schema.SingleNestedAttribute{
@@ -17133,7 +17133,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("disable"),
 																		),
 																	},
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Optional:            true,
 																	Attributes: map[string]schema.Attribute{
 																		"metric": schema.Int64Attribute{
@@ -17148,7 +17148,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																			path.MatchRelative().AtParent().AtName("advertise"),
 																		),
 																	},
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Optional:            true,
 																	Attributes:          map[string]schema.Attribute{},
 																},
@@ -17285,7 +17285,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("sha512"),
 														),
 													},
-													MarkdownDescription: "Md5\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Md5",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
@@ -17303,7 +17303,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("sha512"),
 														),
 													},
-													MarkdownDescription: "Sha1\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha1",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
@@ -17321,7 +17321,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("sha512"),
 														),
 													},
-													MarkdownDescription: "Sha256\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha256",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
@@ -17339,7 +17339,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("sha512"),
 														),
 													},
-													MarkdownDescription: "Sha384\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha384",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
@@ -17357,7 +17357,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															path.MatchRelative().AtParent().AtName("sha384"),
 														),
 													},
-													MarkdownDescription: "Sha512\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha512",
 													Optional:            true,
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
@@ -17386,7 +17386,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("sha512"),
 																),
 															},
-															MarkdownDescription: "Md5\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Md5",
 															Optional:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
@@ -17405,7 +17405,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("sha512"),
 																),
 															},
-															MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "None",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -17419,7 +17419,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("sha512"),
 																),
 															},
-															MarkdownDescription: "Sha1\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha1",
 															Optional:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
@@ -17438,7 +17438,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("sha512"),
 																),
 															},
-															MarkdownDescription: "Sha256\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha256",
 															Optional:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
@@ -17457,7 +17457,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("sha512"),
 																),
 															},
-															MarkdownDescription: "Sha384\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha384",
 															Optional:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
@@ -17476,7 +17476,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("sha384"),
 																),
 															},
-															MarkdownDescription: "Sha512\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha512",
 															Optional:            true,
 															Attributes: map[string]schema.Attribute{
 																"key": schema.StringAttribute{
@@ -17495,7 +17495,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.String{
 																stringvalidator.OneOf("3des", "aes-128-cbc", "aes-192-cbc", "aes-256-cbc", "null"),
 															},
-															MarkdownDescription: "Algorithm",
+															MarkdownDescription: "Algorithm. Possible values are `3des`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc` and `null`.",
 															Optional:            true,
 														},
 														"key": schema.StringAttribute{
@@ -17542,7 +17542,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("ext-1", "ext-2"),
 											},
-											MarkdownDescription: "New path type",
+											MarkdownDescription: "New path type. Possible values are `ext-1` and `ext-2`.",
 											Optional:            true,
 										},
 										"new_tag": schema.StringAttribute{
@@ -17817,7 +17817,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("active", "passive", "send-only"),
 											},
-											MarkdownDescription: "Mode",
+											MarkdownDescription: "Mode. Possible values are `active`, `passive` and `send-only`.",
 											Optional:            true,
 										},
 										"name": schema.StringAttribute{
@@ -17828,7 +17828,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 											Validators: []validator.String{
 												stringvalidator.OneOf("split-horizon", "no-split-horizon", "no-split-horizon-with-poison-reverse"),
 											},
-											MarkdownDescription: "Split horizon",
+											MarkdownDescription: "Split horizon. Possible values are `split-horizon`, `no-split-horizon` and `no-split-horizon-with-poison-reverse`.",
 											Optional:            true,
 										},
 									},
@@ -17899,7 +17899,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Discard",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -17915,7 +17915,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Fqdn",
 															Optional:            true,
 														},
 														"ip_address": schema.StringAttribute{
@@ -17930,7 +17930,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Ip address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Ip address",
 															Optional:            true,
 														},
 														"ipv6_address": schema.StringAttribute{
@@ -17945,7 +17945,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Ipv6 address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Ipv6 address",
 															Optional:            true,
 														},
 														"next_lr": schema.StringAttribute{
@@ -17960,7 +17960,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Next lr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next lr",
 															Optional:            true,
 														},
 														"next_vr": schema.StringAttribute{
@@ -17975,7 +17975,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Next vr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next vr",
 															Optional:            true,
 														},
 														"receive": schema.SingleNestedAttribute{
@@ -17990,7 +17990,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Receive\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Receive",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -18006,7 +18006,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("receive"),
 																),
 															},
-															MarkdownDescription: "Tunnel\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Tunnel",
 															Optional:            true,
 														},
 													},
@@ -18023,7 +18023,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.String{
 																stringvalidator.OneOf("any", "all"),
 															},
-															MarkdownDescription: "Failure condition",
+															MarkdownDescription: "Failure condition. Possible values are `any` and `all`.",
 															Optional:            true,
 														},
 														"hold_time": schema.Int64Attribute{
@@ -18080,7 +18080,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("unicast"),
 																),
 															},
-															MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "Both",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -18092,7 +18092,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("unicast"),
 																),
 															},
-															MarkdownDescription: "Multicast\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "Multicast",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -18104,7 +18104,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("unicast"),
 																),
 															},
-															MarkdownDescription: "No install\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "No install",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -18116,7 +18116,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("no_install"),
 																),
 															},
-															MarkdownDescription: "Unicast\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "Unicast",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -18181,7 +18181,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Discard",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -18196,7 +18196,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Fqdn",
 															Optional:            true,
 														},
 														"ipv6_address": schema.StringAttribute{
@@ -18210,7 +18210,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Ipv6 address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Ipv6 address",
 															Optional:            true,
 														},
 														"next_lr": schema.StringAttribute{
@@ -18224,7 +18224,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Next lr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next lr",
 															Optional:            true,
 														},
 														"next_vr": schema.StringAttribute{
@@ -18238,7 +18238,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Next vr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next vr",
 															Optional:            true,
 														},
 														"receive": schema.SingleNestedAttribute{
@@ -18252,7 +18252,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("tunnel"),
 																),
 															},
-															MarkdownDescription: "Receive\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Receive",
 															Optional:            true,
 															Attributes:          map[string]schema.Attribute{},
 														},
@@ -18267,7 +18267,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 																	path.MatchRelative().AtParent().AtName("receive"),
 																),
 															},
-															MarkdownDescription: "Tunnel\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Tunnel",
 															Optional:            true,
 														},
 													},
@@ -18295,7 +18295,7 @@ var LogicalRoutersResourceSchema = schema.Schema{
 															Validators: []validator.String{
 																stringvalidator.OneOf("any", "all"),
 															},
-															MarkdownDescription: "Failure condition",
+															MarkdownDescription: "Failure condition. Possible values are `any` and `all`.",
 															Optional:            true,
 														},
 														"hold_time": schema.Int64Attribute{
@@ -18434,12 +18434,12 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "LogicalRouter data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -18453,7 +18453,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -18626,7 +18626,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"ipv4": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Ipv4\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`.",
+													MarkdownDescription: "Ipv4",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"attribute_map": dsschema.StringAttribute{
@@ -18644,7 +18644,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"ipv6": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Ipv6\n\n> ℹ️ **Note:** You must specify exactly one of `ipv4` and `ipv6`.",
+													MarkdownDescription: "Ipv6",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"attribute_map": dsschema.StringAttribute{
@@ -18943,7 +18943,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"no": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "No\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+																MarkdownDescription: "No",
 																Computed:            true,
 																Attributes: map[string]dsschema.Attribute{
 																	"address_family": dsschema.SingleNestedAttribute{
@@ -18977,7 +18977,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																},
 															},
 															"yes": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "Yes\n\n> ℹ️ **Note:** You must specify exactly one of `no` and `yes`.",
+																MarkdownDescription: "Yes",
 																Computed:            true,
 																Attributes:          map[string]dsschema.Attribute{},
 															},
@@ -19010,11 +19010,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"fqdn": dsschema.StringAttribute{
-																MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+																MarkdownDescription: "Fqdn",
 																Computed:            true,
 															},
 															"ip": dsschema.StringAttribute{
-																MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+																MarkdownDescription: "Ip",
 																Computed:            true,
 															},
 														},
@@ -19057,7 +19057,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"ebgp": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Ebgp\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ebgp",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"export_nexthop": dsschema.StringAttribute{
@@ -19075,7 +19075,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"ebgp_confed": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Ebgp confed\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ebgp confed",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"export_nexthop": dsschema.StringAttribute{
@@ -19085,7 +19085,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"ibgp": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Ibgp\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ibgp",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"export_nexthop": dsschema.StringAttribute{
@@ -19095,7 +19095,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"ibgp_confed": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Ibgp confed\n\n> ℹ️ **Note:** You must specify exactly one of `ebgp`, `ebgp_confed`, `ibgp`, and `ibgp_confed`.",
+													MarkdownDescription: "Ibgp confed",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"export_nexthop": dsschema.StringAttribute{
@@ -19152,7 +19152,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				},
 																			},
 																			"afi": dsschema.StringAttribute{
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																			"as_path": dsschema.SingleNestedAttribute{
@@ -19200,11 +19200,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				Computed:            true,
 																			},
 																			"route_table": dsschema.StringAttribute{
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Computed:            true,
 																			},
 																			"safi": dsschema.StringAttribute{
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																		},
@@ -19225,21 +19225,21 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
 																		"none": dsschema.SingleNestedAttribute{
-																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "None",
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
 																		"prepend": dsschema.Int64Attribute{
-																			MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "Prepend",
 																			Computed:            true,
 																		},
 																		"remove": dsschema.SingleNestedAttribute{
-																			MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "Remove",
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
 																		"remove_and_prepend": dsschema.Int64Attribute{
-																			MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																			MarkdownDescription: "Remove and prepend",
 																			Computed:            true,
 																		},
 																	},
@@ -19254,26 +19254,26 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Attributes: map[string]dsschema.Attribute{
 																		"append": dsschema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Append",
 																			Computed:            true,
 																		},
 																		"none": dsschema.SingleNestedAttribute{
-																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "None",
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
 																		"overwrite": dsschema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Overwrite",
 																			Computed:            true,
 																		},
 																		"remove_all": dsschema.SingleNestedAttribute{
-																			MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove all",
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
 																		"remove_regex": dsschema.StringAttribute{
-																			MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove regex",
 																			Computed:            true,
 																		},
 																	},
@@ -19284,26 +19284,26 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Attributes: map[string]dsschema.Attribute{
 																		"append": dsschema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Append",
 																			Computed:            true,
 																		},
 																		"none": dsschema.SingleNestedAttribute{
-																			MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "None",
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
 																		"overwrite": dsschema.ListAttribute{
 																			ElementType:         types.StringType,
-																			MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Overwrite",
 																			Computed:            true,
 																		},
 																		"remove_all": dsschema.SingleNestedAttribute{
-																			MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove all",
 																			Computed:            true,
 																			Attributes:          map[string]dsschema.Attribute{},
 																		},
 																		"remove_regex": dsschema.StringAttribute{
-																			MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																			MarkdownDescription: "Remove regex",
 																			Computed:            true,
 																		},
 																	},
@@ -19321,7 +19321,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Computed:            true,
 																},
 																"origin": dsschema.StringAttribute{
-																	MarkdownDescription: "Origin",
+																	MarkdownDescription: "Origin. Possible values are `igp`, `egp` and `incomplete`.",
 																	Computed:            true,
 																},
 																"weight": dsschema.Int64Attribute{
@@ -19380,7 +19380,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				},
 																			},
 																			"afi": dsschema.StringAttribute{
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																			"as_path": dsschema.SingleNestedAttribute{
@@ -19428,11 +19428,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				Computed:            true,
 																			},
 																			"route_table": dsschema.StringAttribute{
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Computed:            true,
 																			},
 																			"safi": dsschema.StringAttribute{
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																		},
@@ -19488,7 +19488,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				},
 																			},
 																			"afi": dsschema.StringAttribute{
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																			"as_path": dsschema.SingleNestedAttribute{
@@ -19536,11 +19536,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				Computed:            true,
 																			},
 																			"route_table": dsschema.StringAttribute{
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Computed:            true,
 																			},
 																			"safi": dsschema.StringAttribute{
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																		},
@@ -19590,7 +19590,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				},
 																			},
 																			"afi": dsschema.StringAttribute{
-																				MarkdownDescription: "Afi",
+																				MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																			"as_path": dsschema.SingleNestedAttribute{
@@ -19638,11 +19638,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																				Computed:            true,
 																			},
 																			"route_table": dsschema.StringAttribute{
-																				MarkdownDescription: "Route table",
+																				MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																				Computed:            true,
 																			},
 																			"safi": dsschema.StringAttribute{
-																				MarkdownDescription: "Safi",
+																				MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																				Computed:            true,
 																			},
 																		},
@@ -19678,7 +19678,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"allow": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Allow",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
 																		"update": dsschema.SingleNestedAttribute{
@@ -19690,21 +19690,21 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Computed:            true,
 																					Attributes: map[string]dsschema.Attribute{
 																						"none": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "None",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"prepend": dsschema.Int64Attribute{
-																							MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Prepend",
 																							Computed:            true,
 																						},
 																						"remove": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"remove_and_prepend": dsschema.Int64Attribute{
-																							MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove and prepend",
 																							Computed:            true,
 																						},
 																					},
@@ -19719,26 +19719,26 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Attributes: map[string]dsschema.Attribute{
 																						"append": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Computed:            true,
 																						},
 																						"none": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"overwrite": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Computed:            true,
 																						},
 																						"remove_all": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"remove_regex": dsschema.StringAttribute{
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Computed:            true,
 																						},
 																					},
@@ -19749,26 +19749,26 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Attributes: map[string]dsschema.Attribute{
 																						"append": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Computed:            true,
 																						},
 																						"none": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"overwrite": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Computed:            true,
 																						},
 																						"remove_all": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"remove_regex": dsschema.StringAttribute{
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Computed:            true,
 																						},
 																					},
@@ -19786,7 +19786,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Computed:            true,
 																				},
 																				"origin": dsschema.StringAttribute{
-																					MarkdownDescription: "Origin",
+																					MarkdownDescription: "Origin. Possible values are `igp`, `egp` and `multicast`.",
 																					Computed:            true,
 																				},
 																			},
@@ -19794,7 +19794,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	},
 																},
 																"deny": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Deny",
 																	Computed:            true,
 																	Attributes:          map[string]dsschema.Attribute{},
 																},
@@ -19825,7 +19825,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	},
 																},
 																"afi": dsschema.StringAttribute{
-																	MarkdownDescription: "Afi",
+																	MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																	Computed:            true,
 																},
 																"as_path": dsschema.SingleNestedAttribute{
@@ -19873,11 +19873,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Computed:            true,
 																},
 																"route_table": dsschema.StringAttribute{
-																	MarkdownDescription: "Route table",
+																	MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																	Computed:            true,
 																},
 																"safi": dsschema.StringAttribute{
-																	MarkdownDescription: "Safi",
+																	MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																	Computed:            true,
 																},
 															},
@@ -19910,7 +19910,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"allow": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Allow",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
 																		"dampening": dsschema.StringAttribute{
@@ -19926,21 +19926,21 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Computed:            true,
 																					Attributes: map[string]dsschema.Attribute{
 																						"none": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "None",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"prepend": dsschema.Int64Attribute{
-																							MarkdownDescription: "Prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Prepend",
 																							Computed:            true,
 																						},
 																						"remove": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "Remove\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"remove_and_prepend": dsschema.Int64Attribute{
-																							MarkdownDescription: "Remove and prepend\n\n> ℹ️ **Note:** You must specify exactly one of `none`, `prepend`, `remove`, and `remove_and_prepend`.",
+																							MarkdownDescription: "Remove and prepend",
 																							Computed:            true,
 																						},
 																					},
@@ -19955,26 +19955,26 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Attributes: map[string]dsschema.Attribute{
 																						"append": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Computed:            true,
 																						},
 																						"none": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"overwrite": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Computed:            true,
 																						},
 																						"remove_all": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"remove_regex": dsschema.StringAttribute{
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Computed:            true,
 																						},
 																					},
@@ -19985,26 +19985,26 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Attributes: map[string]dsschema.Attribute{
 																						"append": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Append\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Append",
 																							Computed:            true,
 																						},
 																						"none": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "None",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"overwrite": dsschema.ListAttribute{
 																							ElementType:         types.StringType,
-																							MarkdownDescription: "Overwrite\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Overwrite",
 																							Computed:            true,
 																						},
 																						"remove_all": dsschema.SingleNestedAttribute{
-																							MarkdownDescription: "Remove all\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove all",
 																							Computed:            true,
 																							Attributes:          map[string]dsschema.Attribute{},
 																						},
 																						"remove_regex": dsschema.StringAttribute{
-																							MarkdownDescription: "Remove regex\n\n> ℹ️ **Note:** You must specify exactly one of `append`, `none`, `overwrite`, `remove_all`, and `remove_regex`.",
+																							MarkdownDescription: "Remove regex",
 																							Computed:            true,
 																						},
 																					},
@@ -20022,7 +20022,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																					Computed:            true,
 																				},
 																				"origin": dsschema.StringAttribute{
-																					MarkdownDescription: "Origin",
+																					MarkdownDescription: "Origin. Possible values are `igp`, `egp` and `incomplete`.",
 																					Computed:            true,
 																				},
 																				"weight": dsschema.Int64Attribute{
@@ -20034,7 +20034,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	},
 																},
 																"deny": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow` and `deny`.",
+																	MarkdownDescription: "Deny",
 																	Computed:            true,
 																	Attributes:          map[string]dsschema.Attribute{},
 																},
@@ -20065,7 +20065,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	},
 																},
 																"afi": dsschema.StringAttribute{
-																	MarkdownDescription: "Afi",
+																	MarkdownDescription: "Afi. Possible values are `ip` and `ipv6`.",
 																	Computed:            true,
 																},
 																"as_path": dsschema.SingleNestedAttribute{
@@ -20113,11 +20113,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Computed:            true,
 																},
 																"route_table": dsschema.StringAttribute{
-																	MarkdownDescription: "Route table",
+																	MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 																	Computed:            true,
 																},
 																"safi": dsschema.StringAttribute{
-																	MarkdownDescription: "Safi",
+																	MarkdownDescription: "Safi. Possible values are `ip` and `ipv6`.",
 																	Computed:            true,
 																},
 															},
@@ -20144,7 +20144,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								NestedObject: dsschema.NestedAttributeObject{
 									Attributes: map[string]dsschema.Attribute{
 										"address_family_identifier": dsschema.StringAttribute{
-											MarkdownDescription: "Address family identifier",
+											MarkdownDescription: "Address family identifier. Possible values are `ipv4` and `ipv6`.",
 											Computed:            true,
 										},
 										"enable": dsschema.BoolAttribute{
@@ -20160,7 +20160,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"route_table": dsschema.StringAttribute{
-											MarkdownDescription: "Route table",
+											MarkdownDescription: "Route table. Possible values are `unicast`, `multicast` and `both`.",
 											Computed:            true,
 										},
 										"set_as_path_limit": dsschema.Int64Attribute{
@@ -20186,7 +20186,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"set_origin": dsschema.StringAttribute{
-											MarkdownDescription: "Set origin",
+											MarkdownDescription: "Set origin. Possible values are `igp`, `egp` and `incomplete`.",
 											Computed:            true,
 										},
 									},
@@ -20237,12 +20237,12 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"balanced_round_robin": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Balanced round robin\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Balanced round robin",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
 									"ip_hash": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Ip hash\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Ip hash",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"hash_seed": dsschema.Int64Attribute{
@@ -20260,12 +20260,12 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"ip_modulo": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Ip modulo\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Ip modulo",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
 									"weighted_round_robin": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Weighted round robin\n\n> ℹ️ **Note:** You must specify exactly one of `balanced_round_robin`, `ip_hash`, `ip_modulo`, and `weighted_round_robin`.",
+										MarkdownDescription: "Weighted round robin",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"interface": dsschema.ListNestedAttribute{
@@ -20361,7 +20361,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 														},
 														"robustness": dsschema.StringAttribute{
-															MarkdownDescription: "Robustness",
+															MarkdownDescription: "Robustness. Possible values are `1`, `2`, `3`, `4`, `5`, `6` and `7`.",
 															Computed:            true,
 														},
 														"router_alert_policing": dsschema.BoolAttribute{
@@ -20369,7 +20369,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 														},
 														"version": dsschema.StringAttribute{
-															MarkdownDescription: "Version",
+															MarkdownDescription: "Version. Possible values are `2` and `3`.",
 															Computed:            true,
 														},
 													},
@@ -20495,7 +20495,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 												},
 												"mode": dsschema.StringAttribute{
-													MarkdownDescription: "Mode",
+													MarkdownDescription: "Mode. Possible values are `router` and `host`.",
 													Computed:            true,
 												},
 												"query_interval": dsschema.Int64Attribute{
@@ -20503,7 +20503,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 												},
 												"robustness": dsschema.StringAttribute{
-													MarkdownDescription: "Robustness",
+													MarkdownDescription: "Robustness. Possible values are `1`, `2`, `3`, `4`, `5`, `6` and `7`.",
 													Computed:            true,
 												},
 												"router_alert_policing": dsschema.BoolAttribute{
@@ -20511,7 +20511,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 												},
 												"version": dsschema.StringAttribute{
-													MarkdownDescription: "Version",
+													MarkdownDescription: "Version. Possible values are `1`, `2` and `3`.",
 													Computed:            true,
 												},
 											},
@@ -20571,7 +20571,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 								},
 							},
 							"mode": dsschema.StringAttribute{
-								MarkdownDescription: "Mode",
+								MarkdownDescription: "Mode. Possible values are `PIM-SM` and `IGMP-Proxy`.",
 								Computed:            true,
 							},
 							"msdp": dsschema.SingleNestedAttribute{
@@ -20652,11 +20652,11 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"fqdn": dsschema.StringAttribute{
-															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+															MarkdownDescription: "Fqdn",
 															Computed:            true,
 														},
 														"ip": dsschema.StringAttribute{
-															MarkdownDescription: "Ip\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip`.",
+															MarkdownDescription: "Ip",
 															Computed:            true,
 														},
 													},
@@ -20751,7 +20751,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"candidate_rp": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Candidate rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+														MarkdownDescription: "Candidate rp",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"address": dsschema.StringAttribute{
@@ -20777,7 +20777,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														},
 													},
 													"static_rp": dsschema.SingleNestedAttribute{
-														MarkdownDescription: "Static rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+														MarkdownDescription: "Static rp",
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"address": dsschema.StringAttribute{
@@ -20803,7 +20803,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"rpf_lookup_mode": dsschema.StringAttribute{
-										MarkdownDescription: "Rpf lookup mode",
+										MarkdownDescription: "Rpf lookup mode. Possible values are `mrib-then-urib`, `mrib-only` and `urib-only`.",
 										Computed:            true,
 									},
 									"spt_threshold": dsschema.ListNestedAttribute{
@@ -20868,7 +20868,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"candidate_rp": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Candidate rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+												MarkdownDescription: "Candidate rp",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.StringAttribute{
@@ -20895,7 +20895,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"static_rp": dsschema.SingleNestedAttribute{
-												MarkdownDescription: "Static rp\n\n> ℹ️ **Note:** You must specify exactly one of `candidate_rp` and `static_rp`.",
+												MarkdownDescription: "Static rp",
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"address": dsschema.StringAttribute{
@@ -21042,12 +21042,12 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"broadcast": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "Broadcast\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "Broadcast",
 																Computed:            true,
 																Attributes:          map[string]dsschema.Attribute{},
 															},
 															"p2mp": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "P2mp\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2mp",
 																Computed:            true,
 																Attributes: map[string]dsschema.Attribute{
 																	"neighbor": dsschema.ListNestedAttribute{
@@ -21069,7 +21069,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																},
 															},
 															"p2p": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "P2p\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2p",
 																Computed:            true,
 																Attributes:          map[string]dsschema.Attribute{},
 															},
@@ -21157,7 +21157,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"normal": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Normal\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Normal",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"abr": dsschema.SingleNestedAttribute{
@@ -21185,7 +21185,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"nssa": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Nssa\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Nssa",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"abr": dsschema.SingleNestedAttribute{
@@ -21243,7 +21243,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Computed:            true,
 																},
 																"metric_type": dsschema.StringAttribute{
-																	MarkdownDescription: "Metric type",
+																	MarkdownDescription: "Metric type. Possible values are `type-1` and `type-2`.",
 																	Computed:            true,
 																},
 															},
@@ -21253,7 +21253,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"advertise": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
 																		"metric": dsschema.Int64Attribute{
@@ -21261,13 +21261,13 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																			Computed:            true,
 																		},
 																		"type": dsschema.StringAttribute{
-																			MarkdownDescription: "Type",
+																			MarkdownDescription: "Type. Possible values are `ext-1` and `ext-2`.",
 																			Computed:            true,
 																		},
 																	},
 																},
 																"disable": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Computed:            true,
 																	Attributes:          map[string]dsschema.Attribute{},
 																},
@@ -21302,7 +21302,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"stub": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Stub\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Stub",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"abr": dsschema.SingleNestedAttribute{
@@ -21336,7 +21336,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"advertise": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
 																		"metric": dsschema.Int64Attribute{
@@ -21346,7 +21346,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	},
 																},
 																"disable": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Computed:            true,
 																	Attributes:          map[string]dsschema.Attribute{},
 																},
@@ -21519,7 +21519,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"new_path_type": dsschema.StringAttribute{
-											MarkdownDescription: "New path type",
+											MarkdownDescription: "New path type. Possible values are `ext-1` and `ext-2`.",
 											Computed:            true,
 										},
 										"new_tag": dsschema.StringAttribute{
@@ -21688,12 +21688,12 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 														Computed:            true,
 														Attributes: map[string]dsschema.Attribute{
 															"broadcast": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "Broadcast\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "Broadcast",
 																Computed:            true,
 																Attributes:          map[string]dsschema.Attribute{},
 															},
 															"p2mp": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "P2mp\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2mp",
 																Computed:            true,
 																Attributes: map[string]dsschema.Attribute{
 																	"neighbor": dsschema.ListNestedAttribute{
@@ -21715,7 +21715,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																},
 															},
 															"p2p": dsschema.SingleNestedAttribute{
-																MarkdownDescription: "P2p\n\n> ℹ️ **Note:** You must specify exactly one of `broadcast`, `p2mp`, and `p2p`.",
+																MarkdownDescription: "P2p",
 																Computed:            true,
 																Attributes:          map[string]dsschema.Attribute{},
 															},
@@ -21811,7 +21811,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"normal": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Normal\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Normal",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"abr": dsschema.SingleNestedAttribute{
@@ -21839,7 +21839,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"nssa": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Nssa\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Nssa",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"abr": dsschema.SingleNestedAttribute{
@@ -21903,7 +21903,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	Computed:            true,
 																},
 																"metric_type": dsschema.StringAttribute{
-																	MarkdownDescription: "Metric type",
+																	MarkdownDescription: "Metric type. Possible values are `type-1` and `type-2`.",
 																	Computed:            true,
 																},
 															},
@@ -21913,7 +21913,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"advertise": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
 																		"metric": dsschema.Int64Attribute{
@@ -21921,13 +21921,13 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																			Computed:            true,
 																		},
 																		"type": dsschema.StringAttribute{
-																			MarkdownDescription: "Type",
+																			MarkdownDescription: "Type. Possible values are `ext-1` and `ext-2`.",
 																			Computed:            true,
 																		},
 																	},
 																},
 																"disable": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Computed:            true,
 																	Attributes:          map[string]dsschema.Attribute{},
 																},
@@ -21966,7 +21966,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"stub": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Stub\n\n> ℹ️ **Note:** You must specify exactly one of `normal`, `nssa`, and `stub`.",
+													MarkdownDescription: "Stub",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"abr": dsschema.SingleNestedAttribute{
@@ -22000,7 +22000,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"advertise": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Advertise\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Advertise",
 																	Computed:            true,
 																	Attributes: map[string]dsschema.Attribute{
 																		"metric": dsschema.Int64Attribute{
@@ -22010,7 +22010,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 																	},
 																},
 																"disable": dsschema.SingleNestedAttribute{
-																	MarkdownDescription: "Disable\n\n> ℹ️ **Note:** You must specify exactly one of `advertise` and `disable`.",
+																	MarkdownDescription: "Disable",
 																	Computed:            true,
 																	Attributes:          map[string]dsschema.Attribute{},
 																},
@@ -22139,7 +22139,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"md5": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Md5\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Md5",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"key": dsschema.StringAttribute{
@@ -22149,7 +22149,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"sha1": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Sha1\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha1",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"key": dsschema.StringAttribute{
@@ -22159,7 +22159,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"sha256": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Sha256\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha256",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"key": dsschema.StringAttribute{
@@ -22169,7 +22169,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"sha384": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Sha384\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha384",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"key": dsschema.StringAttribute{
@@ -22179,7 +22179,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													},
 												},
 												"sha512": dsschema.SingleNestedAttribute{
-													MarkdownDescription: "Sha512\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+													MarkdownDescription: "Sha512",
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"key": dsschema.StringAttribute{
@@ -22199,7 +22199,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"md5": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Md5\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Md5",
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"key": dsschema.StringAttribute{
@@ -22209,12 +22209,12 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															},
 														},
 														"none": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "None\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "None",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"sha1": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Sha1\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha1",
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"key": dsschema.StringAttribute{
@@ -22224,7 +22224,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															},
 														},
 														"sha256": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Sha256\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha256",
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"key": dsschema.StringAttribute{
@@ -22234,7 +22234,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															},
 														},
 														"sha384": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Sha384\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha384",
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"key": dsschema.StringAttribute{
@@ -22244,7 +22244,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															},
 														},
 														"sha512": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Sha512\n\n> ℹ️ **Note:** You must specify exactly one of `md5`, `none`, `sha1`, `sha256`, `sha384`, and `sha512`.",
+															MarkdownDescription: "Sha512",
 															Computed:            true,
 															Attributes: map[string]dsschema.Attribute{
 																"key": dsschema.StringAttribute{
@@ -22260,7 +22260,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"algorithm": dsschema.StringAttribute{
-															MarkdownDescription: "Algorithm",
+															MarkdownDescription: "Algorithm. Possible values are `3des`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc` and `null`.",
 															Computed:            true,
 														},
 														"key": dsschema.StringAttribute{
@@ -22304,7 +22304,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"new_path_type": dsschema.StringAttribute{
-											MarkdownDescription: "New path type",
+											MarkdownDescription: "New path type. Possible values are `ext-1` and `ext-2`.",
 											Computed:            true,
 										},
 										"new_tag": dsschema.StringAttribute{
@@ -22576,7 +22576,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											},
 										},
 										"mode": dsschema.StringAttribute{
-											MarkdownDescription: "Mode",
+											MarkdownDescription: "Mode. Possible values are `active`, `passive` and `send-only`.",
 											Computed:            true,
 										},
 										"name": dsschema.StringAttribute{
@@ -22584,7 +22584,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 											Computed:            true,
 										},
 										"split_horizon": dsschema.StringAttribute{
-											MarkdownDescription: "Split horizon",
+											MarkdownDescription: "Split horizon. Possible values are `split-horizon`, `no-split-horizon` and `no-split-horizon-with-poison-reverse`.",
 											Computed:            true,
 										},
 									},
@@ -22644,37 +22644,37 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"discard": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Discard",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"fqdn": dsschema.StringAttribute{
-															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Fqdn",
 															Computed:            true,
 														},
 														"ip_address": dsschema.StringAttribute{
-															MarkdownDescription: "Ip address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Ip address",
 															Computed:            true,
 														},
 														"ipv6_address": dsschema.StringAttribute{
-															MarkdownDescription: "Ipv6 address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Ipv6 address",
 															Computed:            true,
 														},
 														"next_lr": dsschema.StringAttribute{
-															MarkdownDescription: "Next lr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next lr",
 															Computed:            true,
 														},
 														"next_vr": dsschema.StringAttribute{
-															MarkdownDescription: "Next vr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next vr",
 															Computed:            true,
 														},
 														"receive": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Receive\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Receive",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"tunnel": dsschema.StringAttribute{
-															MarkdownDescription: "Tunnel\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ip_address`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Tunnel",
 															Computed:            true,
 														},
 													},
@@ -22688,7 +22688,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 														},
 														"failure_condition": dsschema.StringAttribute{
-															MarkdownDescription: "Failure condition",
+															MarkdownDescription: "Failure condition. Possible values are `any` and `all`.",
 															Computed:            true,
 														},
 														"hold_time": dsschema.Int64Attribute{
@@ -22738,22 +22738,22 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"both": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "Both",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"multicast": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Multicast\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "Multicast",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"no_install": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "No install\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "No install",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"unicast": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Unicast\n\n> ℹ️ **Note:** You must specify exactly one of `both`, `multicast`, `no_install`, and `unicast`.",
+															MarkdownDescription: "Unicast",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
@@ -22808,33 +22808,33 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 													Computed:            true,
 													Attributes: map[string]dsschema.Attribute{
 														"discard": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Discard\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Discard",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"fqdn": dsschema.StringAttribute{
-															MarkdownDescription: "Fqdn\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Fqdn",
 															Computed:            true,
 														},
 														"ipv6_address": dsschema.StringAttribute{
-															MarkdownDescription: "Ipv6 address\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Ipv6 address",
 															Computed:            true,
 														},
 														"next_lr": dsschema.StringAttribute{
-															MarkdownDescription: "Next lr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next lr",
 															Computed:            true,
 														},
 														"next_vr": dsschema.StringAttribute{
-															MarkdownDescription: "Next vr\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Next vr",
 															Computed:            true,
 														},
 														"receive": dsschema.SingleNestedAttribute{
-															MarkdownDescription: "Receive\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Receive",
 															Computed:            true,
 															Attributes:          map[string]dsschema.Attribute{},
 														},
 														"tunnel": dsschema.StringAttribute{
-															MarkdownDescription: "Tunnel\n\n> ℹ️ **Note:** You must specify exactly one of `discard`, `fqdn`, `ipv6_address`, `next_lr`, `next_vr`, `receive`, and `tunnel`.",
+															MarkdownDescription: "Tunnel",
 															Computed:            true,
 														},
 													},
@@ -22859,7 +22859,7 @@ var LogicalRoutersDataSourceSchema = dsschema.Schema{
 															Computed:            true,
 														},
 														"failure_condition": dsschema.StringAttribute{
-															MarkdownDescription: "Failure condition",
+															MarkdownDescription: "Failure condition. Possible values are `any` and `all`.",
 															Computed:            true,
 														},
 														"hold_time": dsschema.Int64Attribute{

@@ -360,7 +360,7 @@ var QosProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("percentage"),
 						),
 					},
-					MarkdownDescription: "Mbps\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Mbps",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
@@ -396,14 +396,14 @@ var QosProfilesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8"),
 										},
-										MarkdownDescription: "Traffic class",
+										MarkdownDescription: "Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.",
 										Optional:            true,
 									},
 									"priority": schema.StringAttribute{
 										Validators: []validator.String{
 											stringvalidator.OneOf("real-time", "high", "medium", "low"),
 										},
-										MarkdownDescription: "traffic class priority",
+										MarkdownDescription: "traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.",
 										Optional:            true,
 										Computed:            true,
 										Default:             stringdefault.StaticString("medium"),
@@ -419,7 +419,7 @@ var QosProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("mbps"),
 						),
 					},
-					MarkdownDescription: "Percentage\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Percentage",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"class": schema.ListNestedAttribute{
@@ -455,14 +455,14 @@ var QosProfilesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8"),
 										},
-										MarkdownDescription: "Traffic class",
+										MarkdownDescription: "Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.",
 										Optional:            true,
 									},
 									"priority": schema.StringAttribute{
 										Validators: []validator.String{
 											stringvalidator.OneOf("real-time", "high", "medium", "low"),
 										},
-										MarkdownDescription: "traffic class priority",
+										MarkdownDescription: "traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.",
 										Optional:            true,
 										Computed:            true,
 										Default:             stringdefault.StaticString("medium"),
@@ -483,7 +483,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -499,7 +499,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -528,7 +528,7 @@ var QosProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -567,7 +567,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"mbps": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Mbps\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Mbps",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"class": dsschema.ListNestedAttribute{
@@ -590,11 +590,11 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"name": dsschema.StringAttribute{
-										MarkdownDescription: "Traffic class",
+										MarkdownDescription: "Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.",
 										Computed:            true,
 									},
 									"priority": dsschema.StringAttribute{
-										MarkdownDescription: "traffic class priority",
+										MarkdownDescription: "traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.",
 										Computed:            true,
 									},
 								},
@@ -603,7 +603,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"percentage": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Percentage\n\n> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`.",
+					MarkdownDescription: "Percentage",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"class": dsschema.ListNestedAttribute{
@@ -626,11 +626,11 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"name": dsschema.StringAttribute{
-										MarkdownDescription: "Traffic class",
+										MarkdownDescription: "Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.",
 										Computed:            true,
 									},
 									"priority": dsschema.StringAttribute{
-										MarkdownDescription: "traffic class priority",
+										MarkdownDescription: "traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.",
 										Computed:            true,
 									},
 								},
@@ -641,12 +641,12 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -660,7 +660,7 @@ var QosProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

@@ -213,7 +213,7 @@ var GeneralSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -229,7 +229,7 @@ var GeneralSettingsResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -267,7 +267,7 @@ var GeneralSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("en", "es", "ja", "fr", "zh_CN", "zh_TW"),
 					},
-					MarkdownDescription: "Locale",
+					MarkdownDescription: "Locale. Possible values are `en`, `es`, `ja`, `fr`, `zh_CN` and `zh_TW`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("en"),
@@ -344,7 +344,7 @@ var GeneralSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -365,12 +365,12 @@ var GeneralSettingsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "GeneralSetting data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -401,7 +401,7 @@ var GeneralSettingsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"locale": dsschema.StringAttribute{
-					MarkdownDescription: "Locale",
+					MarkdownDescription: "Locale. Possible values are `en`, `es`, `ja`, `fr`, `zh_CN` and `zh_TW`.",
 					Computed:            true,
 				},
 				"login_banner": dsschema.StringAttribute{
@@ -455,7 +455,7 @@ var GeneralSettingsDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

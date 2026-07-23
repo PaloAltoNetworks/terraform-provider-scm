@@ -43,16 +43,12 @@ resource "scm_route_prefix_list" "scm_route_prefix_list" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `type` (Attributes) Address Family Type (see [below for nested schema](#nestedatt--type))
 
 ### Read-Only
@@ -79,7 +75,7 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `deny` and `permit`.
 - `name` (Number) Sequence number
 - `prefix` (Attributes) Prefix (see [below for nested schema](#nestedatt--type--ipv4--ipv4_entry--prefix))
 
@@ -88,12 +84,10 @@ Optional:
 
 Optional:
 
-- `entry` (Attributes) Entry
+~> **Note:** You must specify at most one of `entry` or `network`.
 
-> ℹ️ **Note:** You must specify exactly one of `entry` and `network`. (see [below for nested schema](#nestedatt--type--ipv4--ipv4_entry--prefix--entry))
-- `network` (String) Network
-
-> ℹ️ **Note:** You must specify exactly one of `entry` and `network`.
+- `entry` (Attributes) Entry (see [below for nested schema](#nestedatt--type--ipv4--ipv4_entry--prefix--entry))
+- `network` (String) Network. Possible values are `any`.
 
 <a id="nestedatt--type--ipv4--ipv4_entry--prefix--entry"></a>
 ### Nested Schema for `type.ipv4.ipv4_entry.prefix.entry`

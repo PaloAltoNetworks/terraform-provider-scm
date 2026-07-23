@@ -51,7 +51,7 @@ resource "scm_snippet" "scm_snippet_3" {
 
 - `id` (String) The UUID of the snippet
 - `tfid` (String) The Terraform ID.
-- `type` (String) The snippet type
+- `type` (String) The snippet type. Possible values are `predefined`, `custom` and `readonly`.
 
 
 ## Import

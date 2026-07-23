@@ -60,23 +60,19 @@ resource "scm_saml_server_profile" "scm_saml_server_profile_3" {
 - `certificate` (String) The identity provider certificate
 - `entity_id` (String) The identity provider ID
 - `name` (String) The name of the SAML server profile
-- `sso_bindings` (String) SAML HTTP binding for SSO requests to the identity provider
+- `sso_bindings` (String) SAML HTTP binding for SSO requests to the identity provider. Possible values are `post` and `redirect`.
 - `sso_url` (String) Identity provider SSO URL
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `max_clock_skew` (Number) Maxiumum clock skew
-- `slo_bindings` (String) SAML HTTP binding for SLO requests to the identity provider
+- `slo_bindings` (String) SAML HTTP binding for SLO requests to the identity provider. Possible values are `post` and `redirect`.
 - `slo_url` (String) Identity provider SLO URL
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `validate_idp_certificate` (Boolean) Validate the identity provider certificate?
 - `want_auth_requests_signed` (Boolean) Sign SAML message to the identity provider?
 

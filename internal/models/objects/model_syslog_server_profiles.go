@@ -209,7 +209,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -225,7 +225,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -348,14 +348,14 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("LOG_USER", "LOG_LOCAL0", "LOG_LOCAL1", "LOG_LOCAL2", "LOG_LOCAL3", "LOG_LOCAL4", "LOG_LOCAL5", "LOG_LOCAL6", "LOG_LOCAL7"),
 						},
-						MarkdownDescription: "Syslog facility",
+						MarkdownDescription: "Syslog facility. Possible values are `LOG_USER`, `LOG_LOCAL0`, `LOG_LOCAL1`, `LOG_LOCAL2`, `LOG_LOCAL3`, `LOG_LOCAL4`, `LOG_LOCAL5`, `LOG_LOCAL6` and `LOG_LOCAL7`.",
 						Optional:            true,
 					},
 					"format": schema.StringAttribute{
 						Validators: []validator.String{
 							stringvalidator.OneOf("BSD", "IETF"),
 						},
-						MarkdownDescription: "Syslog format",
+						MarkdownDescription: "Syslog format. Possible values are `BSD` and `IETF`.",
 						Optional:            true,
 					},
 					"name": schema.StringAttribute{
@@ -377,7 +377,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("UDP", "TCP"),
 						},
-						MarkdownDescription: "Transport protocol",
+						MarkdownDescription: "Transport protocol. Possible values are `UDP` and `TCP`.",
 						Optional:            true,
 					},
 				},
@@ -392,7 +392,7 @@ var SyslogServerProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -413,12 +413,12 @@ var SyslogServerProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "SyslogServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -525,11 +525,11 @@ var SyslogServerProfilesDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"facility": dsschema.StringAttribute{
-						MarkdownDescription: "Syslog facility",
+						MarkdownDescription: "Syslog facility. Possible values are `LOG_USER`, `LOG_LOCAL0`, `LOG_LOCAL1`, `LOG_LOCAL2`, `LOG_LOCAL3`, `LOG_LOCAL4`, `LOG_LOCAL5`, `LOG_LOCAL6` and `LOG_LOCAL7`.",
 						Computed:            true,
 					},
 					"format": dsschema.StringAttribute{
-						MarkdownDescription: "Syslog format",
+						MarkdownDescription: "Syslog format. Possible values are `BSD` and `IETF`.",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
@@ -545,14 +545,14 @@ var SyslogServerProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"transport": dsschema.StringAttribute{
-						MarkdownDescription: "Transport protocol",
+						MarkdownDescription: "Transport protocol. Possible values are `UDP` and `TCP`.",
 						Computed:            true,
 					},
 				},
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

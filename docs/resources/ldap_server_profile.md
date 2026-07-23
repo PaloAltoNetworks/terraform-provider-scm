@@ -143,21 +143,17 @@ resource "scm_ldap_server_profile" "scm_ldap_server_profile_five" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `base` (String) The base DN
 - `bind_dn` (String) The bind DN
 - `bind_password` (String, Sensitive) The bind password
 - `bind_timelimit` (String) The bind timeout (seconds)
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `ldap_type` (String) The LDAP server time
+- `ldap_type` (String) The LDAP server time. Possible values are `active-directory`, `e-directory`, `sun` and `other`.
 - `retry_interval` (Number) The search retry interval (seconds)
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ssl` (Boolean) Require SSL/TLS secured connection?
 - `timelimit` (Number) The search timeout (seconds)
 - `verify_server_certificate` (Boolean) Verify server certificate for SSL sessions?

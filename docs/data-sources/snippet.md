@@ -45,4 +45,4 @@ output "snippet_outputs" {
 - `description` (String) The description of the snippet
 - `labels` (List of String) Labels applied to the snippet
 - `tfid` (String) The Terraform ID.
-- `type` (String) The snippet type
+- `type` (String) The snippet type. Possible values are `predefined`, `custom` and `readonly`.

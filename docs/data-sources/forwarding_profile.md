@@ -54,12 +54,12 @@ output "forwarding_profile_data_source_results" {
 
 ### Optional
 
-- `folder` (String) The folder in which the resource is defined
+- `folder` (String) The folder in which the resource is defined. Possible values are `Mobile Users`.
 - `name` (String) forwarding profile name as an alphanumeric string [ 0-9a-zA-Z._ -]
 
 ### Read-Only
 
-- `definition_method` (String) Enable forwarding rule for forwarding profile
+- `definition_method` (String) Enable forwarding rule for forwarding profile. Possible values are `rules` and `pac-file`.
 - `description` (String) Forwarding profile description
 - `tfid` (String) The Terraform ID.
 - `type` (Attributes) Forwarding profile type configuration (PAC file, GlobalProtect proxy, or ZTNA agent) (see [below for nested schema](#nestedatt--type))
@@ -69,15 +69,9 @@ output "forwarding_profile_data_source_results" {
 
 Read-Only:
 
-- `global_protect_proxy` (Attributes) Global Protect proxy-based forwarding configuration
-
-> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`. (see [below for nested schema](#nestedatt--type--global_protect_proxy))
-- `pac_file` (Attributes) PAC file based forwarding configuration
-
-> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`. (see [below for nested schema](#nestedatt--type--pac_file))
-- `ztna_agent` (Attributes) ZTNA agent-based forwarding configuration
-
-> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`. (see [below for nested schema](#nestedatt--type--ztna_agent))
+- `global_protect_proxy` (Attributes) Global Protect proxy-based forwarding configuration (see [below for nested schema](#nestedatt--type--global_protect_proxy))
+- `pac_file` (Attributes) PAC file based forwarding configuration (see [below for nested schema](#nestedatt--type--pac_file))
+- `ztna_agent` (Attributes) ZTNA agent-based forwarding configuration (see [below for nested schema](#nestedatt--type--ztna_agent))
 
 <a id="nestedatt--type--global_protect_proxy"></a>
 ### Nested Schema for `type.global_protect_proxy`
@@ -216,5 +210,5 @@ Read-Only:
 - `enabled` (Boolean) Enable a forwarding rule ztna
 - `name` (String) Forwarding rule ZTNA name as an alphanumeric string [ 0-9a-zA-Z._ -]
 - `source_applications` (String) Source applications this ZTNA rule applies to
-- `traffic_type` (String) Type of traffic this ZTNA rule applies to (dns, network, or both)
+- `traffic_type` (String) Type of traffic this ZTNA rule applies to (dns, network, or both). Possible values are `dns`, `dns-and-network-traffic` and `network-traffic`.
 - `user_locations` (String) User location scope this ZTNA rule applies to

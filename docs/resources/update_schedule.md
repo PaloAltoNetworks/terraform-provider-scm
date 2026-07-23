@@ -107,15 +107,11 @@ resource "scm_update_schedule" "us_settings" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `update_schedule` (Attributes) Update schedule (see [below for nested schema](#nestedatt--update_schedule))
 
 ### Read-Only
@@ -148,19 +144,13 @@ Required:
 
 Optional:
 
-- `daily` (Attributes) Daily
+~> **Note:** You must specify exactly one of `daily`, `hourly`, `none` or `weekly`.
 
-> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--daily))
-- `hourly` (Attributes) Hourly
-
-> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--hourly))
-- `none` (Attributes) None
-
-> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--none))
+- `daily` (Attributes) Daily (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--daily))
+- `hourly` (Attributes) Hourly (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--hourly))
+- `none` (Attributes) None (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--none))
 - `threshold` (Number) Threshold
-- `weekly` (Attributes) Weekly
-
-> ℹ️ **Note:** You must specify exactly one of `daily`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--weekly))
+- `weekly` (Attributes) Weekly (see [below for nested schema](#nestedatt--update_schedule--anti_virus--recurring--weekly))
 
 <a id="nestedatt--update_schedule--anti_virus--recurring--daily"></a>
 ### Nested Schema for `update_schedule.anti_virus.recurring.daily`
@@ -171,7 +161,7 @@ Required:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 
 
 <a id="nestedatt--update_schedule--anti_virus--recurring--hourly"></a>
@@ -183,7 +173,7 @@ Required:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 
 
 <a id="nestedatt--update_schedule--anti_virus--recurring--none"></a>
@@ -195,9 +185,9 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `at` (String) At
-- `day_of_week` (String) Day of week
+- `day_of_week` (String) Day of week. Possible values are `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday` and `saturday`.
 
 
 
@@ -218,23 +208,15 @@ Required:
 
 Optional:
 
-- `daily` (Attributes) Daily
+~> **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none` or `weekly`.
 
-> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--daily))
-- `every_30_mins` (Attributes) Every30 mins
-
-> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--every_30_mins))
-- `hourly` (Attributes) Hourly
-
-> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--hourly))
+- `daily` (Attributes) Daily (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--daily))
+- `every_30_mins` (Attributes) Every30 mins (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--every_30_mins))
+- `hourly` (Attributes) Hourly (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--hourly))
 - `new_app_threshold` (Number) New app threshold
-- `none` (Attributes) None
-
-> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--none))
+- `none` (Attributes) None (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--none))
 - `threshold` (Number) Threshold
-- `weekly` (Attributes) Weekly
-
-> ℹ️ **Note:** You must specify exactly one of `daily`, `every_30_mins`, `hourly`, `none`, and `weekly`. (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--weekly))
+- `weekly` (Attributes) Weekly (see [below for nested schema](#nestedatt--update_schedule--threats--recurring--weekly))
 
 <a id="nestedatt--update_schedule--threats--recurring--daily"></a>
 ### Nested Schema for `update_schedule.threats.recurring.daily`
@@ -245,7 +227,7 @@ Required:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `disable_new_content` (Boolean) Disable new content
 
 
@@ -254,7 +236,7 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `at` (Number) At
 - `disable_new_content` (Boolean) Disable new content
 
@@ -268,7 +250,7 @@ Required:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `disable_new_content` (Boolean) Disable new content
 
 
@@ -282,11 +264,11 @@ Optional:
 Required:
 
 - `at` (String) At
-- `day_of_week` (String) Day of week
+- `day_of_week` (String) Day of week. Possible values are `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday` and `saturday`.
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `disable_new_content` (Boolean) Disable new content
 
 
@@ -304,31 +286,21 @@ Required:
 
 Optional:
 
-- `every_15_mins` (Attributes) Every15 mins
+~> **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none` or `real_time`.
 
-> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_15_mins))
-- `every_30_mins` (Attributes) Every30 mins
-
-> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_30_mins))
-- `every_hour` (Attributes) Every hour
-
-> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_hour))
-- `every_min` (Attributes) Every min
-
-> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_min))
-- `none` (Attributes) None
-
-> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--none))
-- `real_time` (Attributes) Real time
-
-> ℹ️ **Note:** You must specify exactly one of `every_15_mins`, `every_30_mins`, `every_hour`, `every_min`, `none`, and `real_time`. (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--real_time))
+- `every_15_mins` (Attributes) Every15 mins (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_15_mins))
+- `every_30_mins` (Attributes) Every30 mins (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_30_mins))
+- `every_hour` (Attributes) Every hour (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_hour))
+- `every_min` (Attributes) Every min (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--every_min))
+- `none` (Attributes) None (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--none))
+- `real_time` (Attributes) Real time (see [below for nested schema](#nestedatt--update_schedule--wildfire--recurring--real_time))
 
 <a id="nestedatt--update_schedule--wildfire--recurring--every_15_mins"></a>
 ### Nested Schema for `update_schedule.wildfire.recurring.every_15_mins`
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `at` (Number) At
 - `sync_to_peer` (Boolean) Sync to peer
 
@@ -338,7 +310,7 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `at` (Number) At
 - `sync_to_peer` (Boolean) Sync to peer
 
@@ -348,7 +320,7 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `at` (Number) At
 - `sync_to_peer` (Boolean) Sync to peer
 
@@ -358,7 +330,7 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `download-only` and `download-and-install`.
 - `sync_to_peer` (Boolean) Sync to peer
 
 

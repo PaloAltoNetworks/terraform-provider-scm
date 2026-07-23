@@ -40,15 +40,9 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the profile
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -1108,8 +1102,8 @@ Read-Only:
 
 - `address` (String) HTTP server address
 - `certificate_profile` (String) HTTP server certificate profile
-- `http_method` (String) HTTP operation to perform
+- `http_method` (String) HTTP operation to perform. Possible values are `GET`, `POST`, `PUT` and `DELETE`.
 - `name` (String) HTTP server name
 - `port` (Number) HTTP server port
-- `protocol` (String) HTTP server protocol
-- `tls_version` (String) HTTP server TLS version
+- `protocol` (String) HTTP server protocol. Possible values are `HTTP` and `HTTPS`.
+- `tls_version` (String) HTTP server TLS version. Possible values are `1.0`, `1.1`, `1.2` and `1.3`.

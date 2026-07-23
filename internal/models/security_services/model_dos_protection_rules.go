@@ -250,7 +250,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("protect"),
 						),
 					},
-					MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Allow",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -261,7 +261,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("protect"),
 						),
 					},
-					MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Deny",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -272,7 +272,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("deny"),
 						),
 					},
-					MarkdownDescription: "Protect\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Protect",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -299,7 +299,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -321,7 +321,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -356,7 +356,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "Position relative to local device rules",
+			MarkdownDescription: "Position relative to local device rules. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
@@ -371,7 +371,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("classified"),
 						),
 					},
-					MarkdownDescription: "Aggregate\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Aggregate",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"profile": schema.StringAttribute{
@@ -386,7 +386,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("aggregate"),
 						),
 					},
-					MarkdownDescription: "Classified\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Classified",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"classification_criteria": schema.SingleNestedAttribute{
@@ -425,7 +425,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -470,17 +470,17 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"allow": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Allow",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"deny": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Deny",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"protect": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Protect\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Protect",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
@@ -496,7 +496,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -505,7 +505,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -528,7 +528,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "Position relative to local device rules",
+			MarkdownDescription: "Position relative to local device rules. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"protection": dsschema.SingleNestedAttribute{
@@ -536,7 +536,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"aggregate": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Aggregate\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Aggregate",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"profile": dsschema.StringAttribute{
@@ -546,7 +546,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"classified": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Classified\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Classified",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"classification_criteria": dsschema.SingleNestedAttribute{
@@ -577,7 +577,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

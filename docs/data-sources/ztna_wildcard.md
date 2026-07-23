@@ -64,7 +64,7 @@ If omitted, defaults to true.
 - `probe_port` (String) The probing port if the `probe_type` is `tcp_ping`.
 - `probe_type` (String) The probing type.
 
-The value can be `tcp_ping`, `icmp_ping`, or omitted.
+The value can be `tcp_ping`, `icmp_ping`, or omitted. Possible values are `tcp_ping` and `icmp_ping`.
 - `tcp_port` (String) TCP port number(s).
 
 It can be a single port number, multiple port numbers separated by comma,

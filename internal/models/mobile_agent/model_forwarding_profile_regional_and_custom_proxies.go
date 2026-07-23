@@ -192,7 +192,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("tunnel", "proxy", "adns", "masque"),
 						},
-						MarkdownDescription: "Connectivity method type - 'tunnel' for VPN tunnels, 'proxy' for HTTP/HTTPS proxies, 'adns' for authenticated DNS, 'masque' for MASQUE protocol",
+						MarkdownDescription: "Connectivity method type - 'tunnel' for VPN tunnels, 'proxy' for HTTP/HTTPS proxies, 'adns' for authenticated DNS, 'masque' for MASQUE protocol. Possible values are `tunnel`, `proxy`, `adns` and `masque`.",
 						Required:            true,
 					},
 				},
@@ -209,7 +209,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("fail-open", "fail-safe"),
 			},
-			MarkdownDescription: "Behavior when proxy connection fails - 'fail-open' allows direct internet access, 'fail-safe' blocks traffic until proxy is restored",
+			MarkdownDescription: "Behavior when proxy connection fails - 'fail-open' allows direct internet access, 'fail-safe' blocks traffic until proxy is restored. Possible values are `fail-open` and `fail-safe`.",
 			Optional:            true,
 		},
 		"folder": schema.StringAttribute{
@@ -217,7 +217,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 				stringvalidator.OneOf("Mobile Users"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n",
+			MarkdownDescription: "The folder in which the resource is defined. Possible values are `Mobile Users`.",
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
@@ -236,7 +236,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("best-available-pa-location", "specific-pa-location"),
 			},
-			MarkdownDescription: "Strategy for selecting Prisma Access location - 'best-available-pa-location' automatically selects optimal location, 'specific-pa-location' uses predefined locations",
+			MarkdownDescription: "Strategy for selecting Prisma Access location - 'best-available-pa-location' automatically selects optimal location, 'specific-pa-location' uses predefined locations. Possible values are `best-available-pa-location` and `specific-pa-location`.",
 			Optional:            true,
 		},
 		"name": schema.StringAttribute{
@@ -331,7 +331,7 @@ var ForwardingProfileRegionalAndCustomProxiesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("gp-and-pac", "ztna-agent"),
 			},
-			MarkdownDescription: "Proxy configuration type - 'gp-and-pac' for GlobalProtect and PAC file forwarding, 'ztna-agent' for ZTNA agent forwarding",
+			MarkdownDescription: "Proxy configuration type - 'gp-and-pac' for GlobalProtect and PAC file forwarding, 'ztna-agent' for ZTNA agent forwarding. Possible values are `gp-and-pac` and `ztna-agent`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("gp-and-pac"),
@@ -353,7 +353,7 @@ var ForwardingProfileRegionalAndCustomProxiesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
-						MarkdownDescription: "Connectivity method type - 'tunnel' for VPN tunnels, 'proxy' for HTTP/HTTPS proxies, 'adns' for authenticated DNS, 'masque' for MASQUE protocol",
+						MarkdownDescription: "Connectivity method type - 'tunnel' for VPN tunnels, 'proxy' for HTTP/HTTPS proxies, 'adns' for authenticated DNS, 'masque' for MASQUE protocol. Possible values are `tunnel`, `proxy`, `adns` and `masque`.",
 						Computed:            true,
 					},
 				},
@@ -364,11 +364,11 @@ var ForwardingProfileRegionalAndCustomProxiesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"fallback_option": dsschema.StringAttribute{
-			MarkdownDescription: "Behavior when proxy connection fails - 'fail-open' allows direct internet access, 'fail-safe' blocks traffic until proxy is restored",
+			MarkdownDescription: "Behavior when proxy connection fails - 'fail-open' allows direct internet access, 'fail-safe' blocks traffic until proxy is restored. Possible values are `fail-open` and `fail-safe`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n",
+			MarkdownDescription: "The folder in which the resource is defined. Possible values are `Mobile Users`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -377,7 +377,7 @@ var ForwardingProfileRegionalAndCustomProxiesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"location_preference": dsschema.StringAttribute{
-			MarkdownDescription: "Strategy for selecting Prisma Access location - 'best-available-pa-location' automatically selects optimal location, 'specific-pa-location' uses predefined locations",
+			MarkdownDescription: "Strategy for selecting Prisma Access location - 'best-available-pa-location' automatically selects optimal location, 'specific-pa-location' uses predefined locations. Possible values are `best-available-pa-location` and `specific-pa-location`.",
 			Computed:            true,
 		},
 		"name": dsschema.StringAttribute{
@@ -443,7 +443,7 @@ var ForwardingProfileRegionalAndCustomProxiesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"type": dsschema.StringAttribute{
-			MarkdownDescription: "Proxy configuration type - 'gp-and-pac' for GlobalProtect and PAC file forwarding, 'ztna-agent' for ZTNA agent forwarding",
+			MarkdownDescription: "Proxy configuration type - 'gp-and-pac' for GlobalProtect and PAC file forwarding, 'ztna-agent' for ZTNA agent forwarding. Possible values are `gp-and-pac` and `ztna-agent`.",
 			Computed:            true,
 		},
 	},

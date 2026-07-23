@@ -101,7 +101,7 @@ var AddressGroupsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -113,7 +113,7 @@ var AddressGroupsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("static"),
 				),
 			},
-			MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`.",
+			MarkdownDescription: "Dynamic",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"filter": schema.StringAttribute{
@@ -135,7 +135,7 @@ var AddressGroupsResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -165,7 +165,7 @@ var AddressGroupsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -173,7 +173,7 @@ var AddressGroupsResourceSchema = schema.Schema{
 		},
 		"static": schema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`.",
+			MarkdownDescription: "Static",
 			Validators: []validator.List{
 				listvalidator.ExactlyOneOf(
 					path.MatchRelative().AtParent().AtName("dynamic"),
@@ -210,12 +210,12 @@ var AddressGroupsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"dynamic": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`.",
+			MarkdownDescription: "Dynamic",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"filter": dsschema.StringAttribute{
@@ -225,7 +225,7 @@ var AddressGroupsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -239,13 +239,13 @@ var AddressGroupsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"static": dsschema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic` and `static`.",
+			MarkdownDescription: "Static",
 			Computed:            true,
 		},
 		"tag": dsschema.ListAttribute{

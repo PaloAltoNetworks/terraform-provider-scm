@@ -71,15 +71,15 @@ Optional:
 
 Read-Only:
 
-- `active_active_device_binding` (String) Active active device binding
+- `active_active_device_binding` (String) Active active device binding. Possible values are `primary`, `both`, `0` and `1`.
 - `description` (String) NAT rule description
 - `destination` (List of String) Destination address(es) of the original packet
 - `destination_translation` (Attributes) Destination translation (see [below for nested schema](#nestedatt--data--destination_translation))
 - `disabled` (Boolean) Disable NAT rule?
 - `dynamic_destination_translation` (Attributes) Dynamic destination translation (see [below for nested schema](#nestedatt--data--dynamic_destination_translation))
 - `from` (List of String) Source zone(s) of the original packet
-- `nat_type` (String) NAT type
-- `position` (String) The relative position of the rule
+- `nat_type` (String) NAT type. Possible values are `ipv4`, `nat64` and `nptv6`.
+- `position` (String) The relative position of the rule. Possible values are `pre` and `post`.
 - `service` (String) The service of the original packet
 - `source` (List of String) Source address(es) of the original packet
 - `source_translation` (Attributes) Source translation (see [below for nested schema](#nestedatt--data--source_translation))
@@ -102,7 +102,7 @@ Read-Only:
 
 Read-Only:
 
-- `direction` (String) Direction
+- `direction` (String) Direction. Possible values are `reverse` and `forward`.
 
 
 
@@ -111,7 +111,7 @@ Read-Only:
 
 Read-Only:
 
-- `distribution` (String) Distribution method
+- `distribution` (String) Distribution method. Possible values are `round-robin`, `source-ip-hash`, `ip-modulo`, `ip-hash` and `least-sessions`.
 - `translated_address` (String) Translated destination IP address
 - `translated_port` (Number) Translated destination port
 

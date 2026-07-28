@@ -1,0 +1,159 @@
+package provider
+
+/*
+
+import (
+	"context"
+	"fmt"
+	"reflect"
+	"strings"
+
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
+
+	tfTypes "github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/paloaltonetworks/scm-go/generated/security_services"
+
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/models/security_services"
+	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
+)
+
+// DATA SOURCE for SCM AutoTagAction (Package: security_services)
+var (
+	_ datasource.DataSource              = &AutoTagActionDataSource{}
+	_ datasource.DataSourceWithConfigure = &AutoTagActionDataSource{}
+)
+
+func NewAutoTagActionDataSource() datasource.DataSource {
+	return &AutoTagActionDataSource{}
+}
+
+// AutoTagActionDataSource defines the data source implementation.
+type AutoTagActionDataSource struct {
+	client *security_services.APIClient
+}
+
+func (d *AutoTagActionDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
+	tflog.Debug(ctx, "--- ENTER: AutoTagActionDataSource.Metadata ---")
+	resp.TypeName = "scm_auto_tag_action"
+}
+
+func (d *AutoTagActionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
+	tflog.Debug(ctx, "--- ENTER: AutoTagActionDataSource.Schema ---")
+	// Use the pre-generated schema from the model file.
+	resp.Schema = models.AutoTagActionsDataSourceSchema
+}
+
+func (d *AutoTagActionDataSource) Configure(ctx context.Context, req datasource.ConfigureRequest, resp *datasource.ConfigureResponse) {
+	tflog.Debug(ctx, "--- ENTER: AutoTagActionsDataSource.Configure ---")
+	if req.ProviderData == nil {
+		return
+	}
+	clients, ok := req.ProviderData.(map[string]interface{})
+	if !ok {
+		resp.Diagnostics.AddError("Unexpected Data Source Configure Type", fmt.Sprintf("Expected map[string]interface{}, got: %T.", req.ProviderData))
+		return
+	}
+	client, ok := clients["security_services"].(*security_services.APIClient)
+	if !ok {
+		resp.Diagnostics.AddError("Unexpected Client Type", fmt.Sprintf("Expected *security_services.APIClient for 'security_services' client."))
+		return
+	}
+	d.client = client
+}
+
+func (d *AutoTagActionDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
+	tflog.Debug(ctx, "--- ENTER: AutoTagActionDataSource.Read ---")
+
+	var data models.AutoTagActions
+
+	// TF LOGGING ADDED: Log before the potentially crashing line.
+	tflog.Debug(ctx, "--- VERIFICATION LOG: About to call req.Config.Get() ---")
+
+	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
+
+	// TF LOGGING ADDED: This log will ONLY print if the line above succeeds.
+	tflog.Debug(ctx, "--- VERIFICATION LOG: Call to req.Config.Get() succeeded. ---")
+
+	if resp.Diagnostics.HasError() {
+		// TF LOGGING ADDED: Log if diagnostics has an error after Get().
+		tflog.Debug(ctx, "--- VERIFICATION LOG: req.Config.Get() resulted in a diagnostic error.")
+		return
+	}
+	// --- SINGLETON DATA SOURCE LOGIC ---
+	tflog.Debug(ctx, "Reading Singleton AutoTagAction")
+
+	// 1. Perform the API call (no ID argument)
+	readReq := d.client.AutoTagActionsAPI.ListAuto-TagActions(ctx)
+
+	// 2. Add query parameters if any
+	if !data.Name.IsNull() {
+		readReq = readReq.Name(data.Name.ValueString())
+	}
+	if !data.Offset.IsNull() {
+		readReq = readReq.Offset(int32(data.Offset.ValueInt64()))
+	}
+	if !data.Limit.IsNull() {
+		readReq = readReq.Limit(int32(data.Limit.ValueInt64()))
+	}
+
+	// 3. Execute using interface{} to capture any response type
+	var scmObjectInterface interface{}
+	scmObjectInterface, _, err := readReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error Reading AutoTagAction", err.Error())
+		return
+	}
+
+	// 4. Dynamic Response Handling (Reflection + JSON)
+	var scmObject *security_services.AutoTagActions
+	val := reflect.ValueOf(scmObjectInterface)
+	if val.Kind() == reflect.Ptr && !val.IsNil() { val = val.Elem() }
+
+	if val.Kind() == reflect.Struct {
+		dataField := val.FieldByName("Data")
+		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
+			if dataField.Len() > 0 {
+				firstItem := dataField.Index(0).Interface()
+				jsonBytes, _ := json.Marshal(firstItem)
+				var targetStruct security_services.AutoTagActions
+				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+					scmObject = &targetStruct
+				}
+			} else {
+				resp.Diagnostics.AddError("Not Found", "The singleton resource was not found (empty list returned).")
+				return
+			}
+		} else {
+            jsonBytes, _ := json.Marshal(scmObjectInterface)
+            var targetStruct security_services.AutoTagActions
+            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
+                scmObject = &targetStruct
+            }
+        }
+	}
+
+	if scmObject == nil {
+		resp.Diagnostics.AddError("Error Processing Response", "Could not convert API response to expected model.")
+		return
+	}
+
+	// 5. Pack and Set State
+	packedObject, diags := packAutoTagActionsFromSdk(ctx, *scmObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
+
+	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
+	if resp.Diagnostics.HasError() { return }
+
+	// Force synthetic ID
+	data.Tfid = types.StringValue("singleton_auto_tag_actions")
+
+
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+}
+
+*/

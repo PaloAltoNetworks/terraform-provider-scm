@@ -304,12 +304,12 @@ func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
 	actions = append(actions, tfProviderIdentityServices.GetActions()...)
 	// Add ztna_connector_all package actions
 	actions = append(actions, tfProviderZtnaConnectorAll.GetActions()...)
-	// Add config_operations package actions
-	actions = append(actions, tfProviderConfigOperations.GetActions()...)
 	// Add deployment_services package actions
 	actions = append(actions, tfProviderDeploymentServices.GetActions()...)
 	// Add network_services package actions
 	actions = append(actions, tfProviderNetworkServices.GetActions()...)
+	// Add config_operations package actions
+	actions = append(actions, tfProviderConfigOperations.GetActions()...)
 
 	return actions
 }

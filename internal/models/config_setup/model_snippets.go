@@ -79,7 +79,7 @@ var SnippetsResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("predefined", "custom", "readonly"),
 			},
-			MarkdownDescription: "The snippet type",
+			MarkdownDescription: "The snippet type. Possible values are `predefined`, `custom` and `readonly`.",
 			Computed:            true,
 		},
 	},
@@ -112,7 +112,7 @@ var SnippetsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"type": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet type",
+			MarkdownDescription: "The snippet type. Possible values are `predefined`, `custom` and `readonly`.",
 			Computed:            true,
 		},
 	},

@@ -98,7 +98,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("no-asymmetric-routing", "asymmetric-routing-only", "asymmetric-routing-with-load-share"),
 			},
-			MarkdownDescription: "Backbone routing",
+			MarkdownDescription: "Backbone routing. Possible values are `no-asymmetric-routing`, `asymmetric-routing-only` and `asymmetric-routing-with-load-share`.",
 			Optional:            true,
 		},
 		"outbound_routes_for_services": schema.ListAttribute{
@@ -116,7 +116,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("hot_potato_routing"),
 						),
 					},
-					MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Default",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -126,7 +126,7 @@ var BgpRoutingResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("default"),
 						),
 					},
-					MarkdownDescription: "Hot potato routing\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Hot potato routing",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -159,7 +159,7 @@ var BgpRoutingDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"backbone_routing": dsschema.StringAttribute{
-			MarkdownDescription: "Backbone routing",
+			MarkdownDescription: "Backbone routing. Possible values are `no-asymmetric-routing`, `asymmetric-routing-only` and `asymmetric-routing-with-load-share`.",
 			Computed:            true,
 		},
 		"outbound_routes_for_services": dsschema.ListAttribute{
@@ -172,12 +172,12 @@ var BgpRoutingDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"default": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Default",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"hot_potato_routing": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Hot potato routing\n\n> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`.",
+					MarkdownDescription: "Hot potato routing",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},

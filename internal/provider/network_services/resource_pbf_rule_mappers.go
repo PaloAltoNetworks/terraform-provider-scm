@@ -111,6 +111,18 @@ func unpackPbfRulesToSdk(ctx context.Context, obj types.Object) (*network_servic
 	}
 
 	// Handling Primitives
+	if !model.NegateDestination.IsNull() && !model.NegateDestination.IsUnknown() {
+		sdk.NegateDestination = model.NegateDestination.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NegateDestination", "value": *sdk.NegateDestination})
+	}
+
+	// Handling Primitives
+	if !model.NegateSource.IsNull() && !model.NegateSource.IsUnknown() {
+		sdk.NegateSource = model.NegateSource.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "NegateSource", "value": *sdk.NegateSource})
+	}
+
+	// Handling Primitives
 	if !model.Schedule.IsNull() && !model.Schedule.IsUnknown() {
 		sdk.Schedule = model.Schedule.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Schedule", "value": *sdk.Schedule})
@@ -263,6 +275,22 @@ func packPbfRulesFromSdk(ctx context.Context, sdk network_services.PbfRules) (ty
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Name", "value": *sdk.Name})
 	} else {
 		model.Name = basetypes.NewStringNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NegateDestination != nil {
+		model.NegateDestination = basetypes.NewBoolValue(*sdk.NegateDestination)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NegateDestination", "value": *sdk.NegateDestination})
+	} else {
+		model.NegateDestination = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.NegateSource != nil {
+		model.NegateSource = basetypes.NewBoolValue(*sdk.NegateSource)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "NegateSource", "value": *sdk.NegateSource})
+	} else {
+		model.NegateSource = basetypes.NewBoolNull()
 	}
 	// Handling Primitives
 	// Standard primitive packing

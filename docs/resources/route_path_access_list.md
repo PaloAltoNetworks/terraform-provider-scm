@@ -21,17 +21,13 @@ RoutePathAccessList resource
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `aspath_entry` (Attributes List) AS paths (see [below for nested schema](#nestedatt--aspath_entry))
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -43,7 +39,7 @@ RoutePathAccessList resource
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `deny` and `permit`.
 - `aspath_regex` (String) AS path regular expression
 - `name` (Number) Sequence number
 

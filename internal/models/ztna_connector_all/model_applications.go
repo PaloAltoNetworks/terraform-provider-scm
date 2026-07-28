@@ -161,7 +161,7 @@ var ApplicationsResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("tcp_ping", "icmp_ping"),
 						},
-						MarkdownDescription: "The probing type.\n\nThe value can be `tcp_ping`, `icmp_ping`, or omitted.",
+						MarkdownDescription: "The probing type.\n\nThe value can be `tcp_ping`, `icmp_ping`, or omitted. Possible values are `tcp_ping` and `icmp_ping`.",
 						Optional:            true,
 						Computed:            true,
 					},
@@ -248,7 +248,7 @@ var ApplicationsDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"probe_type": dsschema.StringAttribute{
-						MarkdownDescription: "The probing type.\n\nThe value can be `tcp_ping`, `icmp_ping`, or omitted.",
+						MarkdownDescription: "The probing type.\n\nThe value can be `tcp_ping`, `icmp_ping`, or omitted. Possible values are `tcp_ping` and `icmp_ping`.",
 						Computed:            true,
 					},
 					"tcp_port": dsschema.StringAttribute{

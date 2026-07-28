@@ -157,7 +157,7 @@ var JobsResponseResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("OK", "FAIL", "PEND", "WAIT", "CANCELLED", "TIMEOUT"),
 						},
-						MarkdownDescription: "The result of the job",
+						MarkdownDescription: "The result of the job. Possible values are `OK`, `FAIL`, `PEND`, `WAIT`, `CANCELLED` and `TIMEOUT`.",
 						Required:            true,
 					},
 					"start_ts": schema.StringAttribute{
@@ -168,7 +168,7 @@ var JobsResponseResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("ACT", "FIN", "PEND", "PUSHSENT", "PUSHFAIL", "PUSHABORT", "PUSHTIMEOUT"),
 						},
-						MarkdownDescription: "The current status of the job",
+						MarkdownDescription: "The current status of the job. Possible values are `ACT`, `FIN`, `PEND`, `PUSHSENT`, `PUSHFAIL`, `PUSHABORT` and `PUSHTIMEOUT`.",
 						Required:            true,
 					},
 					"summary": schema.StringAttribute{
@@ -179,7 +179,7 @@ var JobsResponseResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("CommitAll", "CommitAndPush", "NGFW-Bootstrap-Push", "Validate"),
 						},
-						MarkdownDescription: "The job type",
+						MarkdownDescription: "The job type. Possible values are `CommitAll`, `CommitAndPush`, `NGFW-Bootstrap-Push` and `Validate`.",
 						Required:            true,
 					},
 					"uname": schema.StringAttribute{
@@ -249,7 +249,7 @@ var JobsResponseDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"result_str": dsschema.StringAttribute{
-						MarkdownDescription: "The result of the job",
+						MarkdownDescription: "The result of the job. Possible values are `OK`, `FAIL`, `PEND`, `WAIT`, `CANCELLED` and `TIMEOUT`.",
 						Computed:            true,
 					},
 					"start_ts": dsschema.StringAttribute{
@@ -257,7 +257,7 @@ var JobsResponseDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"status_str": dsschema.StringAttribute{
-						MarkdownDescription: "The current status of the job",
+						MarkdownDescription: "The current status of the job. Possible values are `ACT`, `FIN`, `PEND`, `PUSHSENT`, `PUSHFAIL`, `PUSHABORT` and `PUSHTIMEOUT`.",
 						Computed:            true,
 					},
 					"summary": dsschema.StringAttribute{
@@ -265,7 +265,7 @@ var JobsResponseDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"type_str": dsschema.StringAttribute{
-						MarkdownDescription: "The job type",
+						MarkdownDescription: "The job type. Possible values are `CommitAll`, `CommitAndPush`, `NGFW-Bootstrap-Push` and `Validate`.",
 						Computed:            true,
 					},
 					"uname": dsschema.StringAttribute{

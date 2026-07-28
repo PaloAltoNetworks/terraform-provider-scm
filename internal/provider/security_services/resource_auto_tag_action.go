@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"reflect"
 	"strings"
-	"encoding/json"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -24,7 +24,7 @@ import (
 	"github.com/paloaltonetworks/terraform-provider-scm/internal/utils"
 )
 
-// SINGLETON RESOURCE for SCM AutoTagAction (Package: security_services)
+// RESOURCE for SCM AutoTagAction (Package: security_services)
 var (
 	_ resource.Resource                = &AutoTagActionResource{}
 	_ resource.ResourceWithConfigure   = &AutoTagActionResource{}
@@ -46,10 +46,6 @@ func (r *AutoTagActionResource) Metadata(ctx context.Context, req resource.Metad
 
 func (r *AutoTagActionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = models.AutoTagActionsResourceSchema
-
-	resp.Schema.MarkdownDescription = "**Singleton Resource.** " + resp.Schema.MarkdownDescription +
-		"\n\nThis resource is a singleton, meaning only one instance can exist. " +
-		"If the resource typically exists (e.g. bgp_routing), you should import it before managing it."
 }
 
 func (r *AutoTagActionResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
@@ -70,7 +66,7 @@ func (r *AutoTagActionResource) Configure(ctx context.Context, req resource.Conf
 }
 
 func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	tflog.Debug(ctx, "Starting Create function for Singleton AutoTagAction")
+	tflog.Debug(ctx, "Starting Create function for AutoTagAction")
 	var data models.AutoTagActions
 
 	// 1. Get the plan from Terraform into the data model.
@@ -79,34 +75,29 @@ func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateR
 
 
 
+
+
 	// Unpack the plan to an SCM SDK object.
 	planObject, diags := types.ObjectValueFrom(ctx, models.AutoTagActions{}.AttrTypes(), &data)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
 
-	// 2. Unpack the request BODY from data into an SDK object.
+    // 2. Unpack the request BODY from data into an SDK object.
     unpackedScmObject, diags := unpackAutoTagActionsToSdk(ctx, planObject)
     resp.Diagnostics.Append(diags...)
     if resp.Diagnostics.HasError() { return }
 
-	tflog.Debug(ctx, "Creating auto_tag_actions on SCM API")
-
-	// --- START: DYNAMIC CREATE LOGIC ---
-	var scmObjectInterface interface{}
-	var err error
+    tflog.Debug(ctx, "Creating auto_tag_actions on SCM API")
 
 
-		// This singleton has a POST for Create (e.g., ssl-decryption-settings)
-		tflog.Debug(ctx, "Using POST operation: CreateAuto-TagActions")
 
+    // 3. Initiate the API request with the body.
+    createReq := r.client.AutoTagActionsAPI.CreateAuto-TagActions(ctx).AutoTagActions(*unpackedScmObject)
 
-		createReq := r.client.AutoTagActionsAPI.CreateAutoTagActions(ctx).AutoTagActions(*unpackedScmObject)
+	// 4. BLOCK 1: Add the request PARAMETERS to the API call.
 
-		scmObjectInterface, _, err = createReq.Execute()
-
-
-	// --- END: DYNAMIC CREATE LOGIC ---
-
+	// 5. Execute the API call.
+	createdObject, _, err := createReq.Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error creating auto_tag_actions", err.Error())
 		detailedMessage := utils.PrintScmError(err)
@@ -118,61 +109,43 @@ func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateR
 		return
 	}
 
-	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Create) ---
-	var createdObject *security_services.AutoTagActions
 
-	// Use reflection to inspect the return type at runtime.
-	val := reflect.ValueOf(scmObjectInterface)
-	if val.Kind() == reflect.Ptr && !val.IsNil() {
-		val = val.Elem()
-	}
-
-	if val.Kind() == reflect.Struct {
-		// 1. Check for "Data" field (List Wrapper pattern)
-		dataField := val.FieldByName("Data")
-		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
-			// It is a list response (e.g., saas-tenant-restrictions)
-			if dataField.Len() > 0 {
-				// Extract the first item
-				firstItem := dataField.Index(0).Interface()
-
-				// We need to convert this interface{} back to the concrete SDK struct type.
-				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct security_services.AutoTagActions
-				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-					createdObject = &targetStruct
-				}
-			} else {
-                // List is empty
-			}
-		} else {
-            // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
-            // Use the same JSON trick to be safe against pointer mismatches
-            jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct security_services.AutoTagActions
-            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-                createdObject = &targetStruct
-            }
-        }
-	}
-
-	if createdObject == nil {
-		// If API returned 200/201 but no object, we cannot set the state.
-		resp.Diagnostics.AddError("API Response Missing Object", "API call successful but returned no object to set state with. Check SCM logs.")
-		return
-	}
-
+	// 6. Pack the API response back into a Terraform model data.
 	packedObject, diags := packAutoTagActionsFromSdk(ctx, *createdObject)
-	// --- END MODIFICATION ---
-
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// 6a. Normalize null lists: when the API returns null for a list field that
+	// the plan had as [] (empty list), coerce to empty list to satisfy Terraform's
+	// consistency requirement. This recurses into nested objects and list elements.
+	packedObject, diags = utils.NormalizeNullLists(ctx, planObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 
 
 
-	data.Tfid = types.StringValue("singleton_auto_tag_actions")
+	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
+    //    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
+
+
+
+
+
+	// Set the Terraform ID and save the final state.
+	var idBuilder strings.Builder
+
+
+	idBuilder.WriteString(":")
+
+	idBuilder.WriteString(":")
+
+	idBuilder.WriteString(":")
+	idBuilder.WriteString(data.Id.ValueString())
+	data.Tfid = types.StringValue(idBuilder.String())
 
 	tflog.Debug(ctx, "Created auto_tag_actions", map[string]interface{}{"tfid": data.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -180,116 +153,63 @@ func (r *AutoTagActionResource) Create(ctx context.Context, req resource.CreateR
 
 func (r *AutoTagActionResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
 	// Step 1 - Initialize a data and savestate of type models.AutoTagActions - which is the TF schema struct
-	tflog.Debug(ctx, "Starting Read function for Singleton AutoTagAction")
+	tflog.Debug(ctx, "Starting Read function for AutoTagAction")
 	var data, savestate models.AutoTagActions
 
 	// Step 2 - Fetch the state into savestate
 	resp.Diagnostics.Append(req.State.Get(ctx, &savestate)...)
 	if resp.Diagnostics.HasError() { return }
 
-	tflog.Debug(ctx, "Reading auto_tag_actions from SCM API")
-	getReq := r.client.AutoTagActionsAPI.ListAutoTagActions(ctx)
-
-	// --- START: DYNAMIC PARAMETERS FOR READ ---
-	// Use reflection to safely check for and use query parameters if they exist in the model
-	v := reflect.ValueOf(savestate)
-	f := v.FieldByName("Name")
-	if f.IsValid() && !f.IsZero() && !f.Interface().(types.String).IsNull() {
-		getReq = getReq.Name(f.Interface().(types.String).ValueString())
+	tokens := strings.Split(savestate.Tfid.ValueString(), ":")
+	if len(tokens) != 4 {
+		resp.Diagnostics.AddError("Error parsing TFID", fmt.Sprintf("Expected a TFID with 4 parts separated by ':', but got %d parts for TFID %s", len(tokens), savestate.Tfid.ValueString()))
+		return
 	}
-	// Use reflection to safely check for and use query parameters if they exist in the model
-	v := reflect.ValueOf(savestate)
-	f := v.FieldByName("Offset")
-	if f.IsValid() && !f.IsZero() && !f.Interface().(types.String).IsNull() {
-		getReq = getReq.Offset(int32(f.Interface().(types.Int64).ValueInt64()))
-	}
-	// Use reflection to safely check for and use query parameters if they exist in the model
-	v := reflect.ValueOf(savestate)
-	f := v.FieldByName("Limit")
-	if f.IsValid() && !f.IsZero() && !f.Interface().(types.String).IsNull() {
-		getReq = getReq.Limit(int32(f.Interface().(types.Int64).ValueInt64()))
-	}
-	// --- END: DYNAMIC PARAMETERS FOR READ ---
+	objectId := tokens[3]
 
-	// Use interface{} to handle flexible return types (List vs Object)
-	var scmObjectInterface interface{}
-	var httpErr *http.Response
-	var err error
-	scmObjectInterface, httpErr, err = getReq.Execute()
-
+	// Step 3 - Make read api call with id = id from state tfid
+	tflog.Debug(ctx, "Reading auto_tag_actions from SCM API", map[string]interface{}{"id": objectId})
+	getReq := r.client.AutoTagActionsAPI.(ctx, objectId)
+	scmObject, httpErr, err := getReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got no auto_tag_actions on read SCM API. Remove from state to let terraform create", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
+			tflog.Debug(ctx, "Got no auto_tag_actions on read SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
 			resp.State.RemoveResource(ctx)
 		} else {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got an exception on read SCM API.", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
+			tflog.Debug(ctx, "Got an exception on read SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error reading auto_tag_actions", err.Error())
 			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError("SCM Resource Read Failed: API Request Failed", detailedMessage)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Read Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
 
-	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Read) ---
-	var scmObject *security_services.AutoTagActions
 
-	// Use reflection to inspect the return type at runtime.
-	val := reflect.ValueOf(scmObjectInterface)
-	if val.Kind() == reflect.Ptr && !val.IsNil() {
-		val = val.Elem()
-	}
-
-	if val.Kind() == reflect.Struct {
-		// 1. Check for "Data" field (List Wrapper pattern)
-		dataField := val.FieldByName("Data")
-		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
-			// It is a list response (e.g., saas-tenant-restrictions)
-			if dataField.Len() > 0 {
-				// Extract the first item
-				firstItem := dataField.Index(0).Interface()
-
-				// We need to convert this interface{} back to the concrete SDK struct type.
-				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct security_services.AutoTagActions
-				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-					scmObject = &targetStruct
-				}
-			} else {
-                // List is empty, treat as Not Found
-                tflog.Debug(ctx, "Got no auto_tag_actions on read SCM API (empty list). Remove from state", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
-				resp.State.RemoveResource(ctx)
-				return
-			}
-		} else {
-            // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
-            // Use the same JSON trick to be safe against pointer mismatches
-            jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct security_services.AutoTagActions
-            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-                scmObject = &targetStruct
-            }
-        }
-	}
-
-	// If after all checks, scmObject is still nil, then the API returned 200 OK but no object was found.
-	if scmObject == nil {
-		tflog.Debug(ctx, "Got no auto_tag_actions on read SCM API (nil object). Remove from state to let terraform create", map[string]interface{}{"tfid": savestate.Tfid.ValueString()})
-		resp.State.RemoveResource(ctx)
-		return
-	}
 
 	// Step 5 - Pack the scm object into a terraform model and put it in data we initialized in step 1
 	packedObject, diags := packAutoTagActionsFromSdk(ctx, *scmObject)
-	// --- END MODIFICATION ---
-
-
-
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Step 5a - Normalize null lists against prior state. Read has no plan, so we
+	// compare the API response against savestate. When the API returns [] for a
+	// list that was null in prior state, coerce it back to null to avoid a
+	// perpetual diff on refresh. Real changes (populated lists) are preserved.
+	savestateObject, diags := types.ObjectValueFrom(ctx, models.AutoTagActions{}.AttrTypes(), &savestate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
+	packedObject, diags = utils.NormalizeNullLists(ctx, savestateObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
+
+
 
 
 
@@ -298,40 +218,27 @@ func (r *AutoTagActionResource) Read(ctx context.Context, req resource.ReadReque
 
 	// Step 8 - Set things in params back into data object from the savestate - things like position of security rule
 
-	// --- START: RESTORE READ PARAMETERS ---
-	// Use reflection to safely copy query parameter back to data model
-	vData := reflect.ValueOf(&data).Elem()
-	vSave := reflect.ValueOf(savestate)
-	fData := vData.FieldByName("Name")
-	fSave := vSave.FieldByName("Name")
-	if fData.IsValid() && fData.CanSet() && fSave.IsValid() {
-		fData.Set(fSave)
-	}
-	// Use reflection to safely copy query parameter back to data model
-	vData := reflect.ValueOf(&data).Elem()
-	vSave := reflect.ValueOf(savestate)
-	fData := vData.FieldByName("Offset")
-	fSave := vSave.FieldByName("Offset")
-	if fData.IsValid() && fData.CanSet() && fSave.IsValid() {
-		fData.Set(fSave)
-	}
-	// Use reflection to safely copy query parameter back to data model
-	vData := reflect.ValueOf(&data).Elem()
-	vSave := reflect.ValueOf(savestate)
-	fData := vData.FieldByName("Limit")
-	fSave := vSave.FieldByName("Limit")
-	if fData.IsValid() && fData.CanSet() && fSave.IsValid() {
-		fData.Set(fSave)
-	}
-	// --- END: RESTORE READ PARAMETERS ---
 
+
+	// Step 9 - Set folder, snippet, device from params back into data if present
+
+	// --- FOLDER RESTORATION (tokens[0]) ---
+
+
+	// --- SNIPPET RESTORATION (tokens[1]) ---
+
+
+	// --- DEVICE RESTORATION (tokens[2]) ---
+
+
+	// Step 10 - Set data back into tf state and done
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
 func (r *AutoTagActionResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 
 	// Step 1: Initialize a plan and state of type models.AutoTagActions which is the terraform schema struct
-	tflog.Debug(ctx, "Starting Update function for Singleton AutoTagAction")
+	tflog.Debug(ctx, "Starting Update function for AutoTagAction")
 	var plan, state models.AutoTagActions
 
 	// Step 2: Get the plan from plan file (resource.tf) into plan and state from tfstate into state
@@ -352,92 +259,69 @@ func (r *AutoTagActionResource) Update(ctx context.Context, req resource.UpdateR
     resp.Diagnostics.Append(diags...)
     if resp.Diagnostics.HasError() { return }
 
-    // --- START: MODIFIED API CALL (no path param) ---
-    var scmObjectInterface interface{}
-    var httpErr *http.Response
-    var err error
 
 
-       tflog.Debug(ctx, "Updating auto_tag_actions on SCM API")
+	// Step 5: Update calls cannot have id sent in payload, so remove it
+	// ID is a string, so we set it to its zero value ("") to omit it from the update payload.
+	unpackedScmObject.Id = ""
 
-       // Call Update (PUT)
-       updateReq := r.client.AutoTagActionsAPI.UpdateAutoTagActions(ctx).AutoTagActions(*unpackedScmObject)
+	// Step 6: Get id from token and make update call
+	tokens := strings.Split(state.Tfid.ValueString(), ":")
+	if len(tokens) != 4 {
+        resp.Diagnostics.AddError("Error parsing TFID", fmt.Sprintf("Expected a TFID with 4 parts separated by ':', but got %d parts for TFID %s", len(tokens), state.Tfid.ValueString()))
+		return
+    }
+	objectId := tokens[3]
 
+	tflog.Debug(ctx, "Updating auto_tag_actions on SCM API", map[string]interface{}{"id": objectId})
+    updateReq := r.client.AutoTagActionsAPI.UpdateAuto-TagActions(ctx, objectId).AutoTagActions(*unpackedScmObject)
 
+	// Step 7: Retain update parameters so we dont lose them
+	// ======================== START: ADD THIS BLOCK ========================
+	// Apply any operation parameters from the plan.
+	// ========================= END: ADD THIS BLOCK =========================
 
-		scmObjectInterface, httpErr, err = updateReq.Execute()
-
-	// --- END: MODIFIED API CALL ---
-
+	// Step 8: Make the update call and get an SCM updatedObject
+	updatedObject, httpErr, err := updateReq.Execute()
 	if err != nil {
 		if httpErr != nil && httpErr.StatusCode == http.StatusNotFound {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got no auto_tag_actions on update SCM API. Remove from state to let terraform create", map[string]interface{}{"tfid": state.Tfid.ValueString()})
+			tflog.Debug(ctx, "Got no auto_tag_actions on update SCM API. Remove from state to let terraform create", map[string]interface{}{"id": objectId})
 			resp.State.RemoveResource(ctx)
 		} else {
-			// FIX: Remove undefined variable objectId from log
-			tflog.Debug(ctx, "Got an exception on update SCM API.", map[string]interface{}{"tfid": state.Tfid.ValueString()})
+			tflog.Debug(ctx, "Got an exception on update SCM API. ", map[string]interface{}{"id": objectId})
 			resp.Diagnostics.AddError("Error updating auto_tag_actions", err.Error())
 			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError("SCM Resource Update Failed: API Request Failed", detailedMessage)
+
+			resp.Diagnostics.AddError(
+				"SCM Resource Update Failed: API Request Failed",
+				detailedMessage,
+			)
 		}
 		return
 	}
 
-	// --- START MODIFICATION: DYNAMIC RESPONSE HANDLING (Applied to Update) ---
-	var updatedObject *security_services.AutoTagActions
 
-	// Use reflection to inspect the return type at runtime.
-	val := reflect.ValueOf(scmObjectInterface)
-	if val.Kind() == reflect.Ptr && !val.IsNil() {
-		val = val.Elem()
-	}
 
-	if val.Kind() == reflect.Struct {
-		// 1. Check for "Data" field (List Wrapper pattern)
-		dataField := val.FieldByName("Data")
-		if dataField.IsValid() && dataField.Kind() == reflect.Slice {
-			// It is a list response (e.g., saas-tenant-restrictions)
-			if dataField.Len() > 0 {
-				// Extract the first item
-				firstItem := dataField.Index(0).Interface()
-
-				// We need to convert this interface{} back to the concrete SDK struct type.
-				jsonBytes, _ := json.Marshal(firstItem)
-				var targetStruct security_services.AutoTagActions
-				if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-					updatedObject = &targetStruct
-				}
-			} else {
-                 // List is empty
-			}
-		} else {
-            // 2. Not a list wrapper, assume it's the direct object (e.g., bgp-routing)
-            // Use the same JSON trick to be safe against pointer mismatches
-            jsonBytes, _ := json.Marshal(scmObjectInterface)
-            var targetStruct security_services.AutoTagActions
-            if err := json.Unmarshal(jsonBytes, &targetStruct); err == nil {
-                updatedObject = &targetStruct
-            }
-        }
-	}
-
-	if updatedObject == nil {
-		// If API returned 200/201 but no object, something is wrong, fail gracefully.
-		resp.Diagnostics.AddError("API Response Missing Object", "API call successful but returned no object after update. Check SCM logs.")
-		return
-	}
-
+	// Step 9: Pack the SCM updatedObject into a TF object
 	packedObject, diags := packAutoTagActionsFromSdk(ctx, *updatedObject)
-	// --- END MODIFICATION ---
-
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() { return }
+
+	// Step 9a: Normalize null lists: when the API returns null for a list field that
+	// the plan had as [] (empty list), coerce to empty list to satisfy Terraform's
+	// consistency requirement. This recurses into nested objects and list elements.
+	packedObject, diags = utils.NormalizeNullLists(ctx, planObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() { return }
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &plan, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() { return }
 
-	// // Preserve any write-only parameter values from the plan.
-	//
+	// Preserve any operation parameter values from the plan (folder, snippet, device).
+	// This ensures the user's configured value is preserved regardless of what the API returns.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
+
+
 
 
 
@@ -446,62 +330,46 @@ func (r *AutoTagActionResource) Update(ctx context.Context, req resource.UpdateR
 
     // Step 11: Copy write-only attributes from the prior state to the plan for things like position in security rule
 
-	// --- START: RESTORE READ PARAMETERS ---
-	// Use reflection to safely copy query parameter back to data model
-	vPlan := reflect.ValueOf(&plan).Elem()
-	vState := reflect.ValueOf(state)
-	fPlan := vPlan.FieldByName("Name")
-	fState := vState.FieldByName("Name")
-	if fPlan.IsValid() && fPlan.CanSet() && fState.IsValid() {
-		fPlan.Set(fState)
-	}
-	// Use reflection to safely copy query parameter back to data model
-	vPlan := reflect.ValueOf(&plan).Elem()
-	vState := reflect.ValueOf(state)
-	fPlan := vPlan.FieldByName("Offset")
-	fState := vState.FieldByName("Offset")
-	if fPlan.IsValid() && fPlan.CanSet() && fState.IsValid() {
-		fPlan.Set(fState)
-	}
-	// Use reflection to safely copy query parameter back to data model
-	vPlan := reflect.ValueOf(&plan).Elem()
-	vState := reflect.ValueOf(state)
-	fPlan := vPlan.FieldByName("Limit")
-	fState := vState.FieldByName("Limit")
-	if fPlan.IsValid() && fPlan.CanSet() && fState.IsValid() {
-		fPlan.Set(fState)
-	}
-	// --- END: RESTORE READ PARAMETERS ---
+
 
 	tflog.Debug(ctx, "Updated auto_tag_actions", map[string]interface{}{"tfid": plan.Tfid.ValueString()})
 	resp.Diagnostics.Append(resp.State.Set(ctx, &plan)...)
 }
 
 func (r *AutoTagActionResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	// --- START: DYNAMIC DELETE LOGIC ---
+	var data models.AutoTagActions
+	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
+	if resp.Diagnostics.HasError() { return }
 
-		tflog.Debug(ctx, "Deleting singleton auto_tag_actions from SCM API")
-		deleteReq := r.client.AutoTagActionsAPI.DeleteAutoTagActions(ctx)
-		_, _, err := deleteReq.Execute()
-		if err != nil {
-			resp.Diagnostics.AddError("Error deleting auto_tag_actions", err.Error())
-			detailedMessage := utils.PrintScmError(err)
-			resp.Diagnostics.AddError("SCM Resource Deletion Failed: API Request Failed", detailedMessage)
-		}
+	tokens := strings.Split(data.Tfid.ValueString(), ":")
+	if len(tokens) != 4 {
+        resp.Diagnostics.AddError("Error parsing TFID", fmt.Sprintf("Expected a TFID with 4 parts separated by ':', but got %d parts for TFID %s", len(tokens), data.Tfid.ValueString()))
+		return
+	}
+	objectId := tokens[3]
 
-	// --- END: DYNAMIC DELETE LOGIC ---
+	tflog.Debug(ctx, "Deleting auto_tag_actions", map[string]interface{}{"id": objectId})
+	deleteReq := r.client.AutoTagActionsAPI.DeleteAuto-TagActions(ctx, objectId)
+	if !data.Name.IsNull() {
+		deleteReq = deleteReq.Name(data.Name.ValueString())
+	}
+	_, err := deleteReq.Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error deleting auto_tag_actions", err.Error())
+		detailedMessage := utils.PrintScmError(err)
+		resp.Diagnostics.AddError(
+			"SCM Resource Deleteion Failed: API Request Failed",
+			detailedMessage,
+		)
+		return
+	}
 }
 
 func (r *AutoTagActionResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// --- START: MODIFIED IMPORT ---
-	// We expect the ID to be "singleton" or the resource name.
-	if req.ID != "singleton" && req.ID != "auto_tag_actions" {
-		resp.Diagnostics.AddError("Unexpected Import Identifier", fmt.Sprintf("Expected 'singleton' or 'auto_tag_actions', got: %s", req.ID))
-		return
-	}
-	// All singleton imports map to a static "singleton" tfid.
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("tfid"), types.StringValue("singleton_auto_tag_actions"))...)
-	// --- END: MODIFIED IMPORT ---
+
+
+	// If validation passes, store the import ID in tfid
+	resource.ImportStatePassthroughID(ctx, path.Root("tfid"), req, resp)
 }
 
 

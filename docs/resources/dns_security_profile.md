@@ -163,18 +163,14 @@ resource "scm_dns_security_profile" "scm_dns_all" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `botnet_domains` (Attributes) Botnet domains (see [below for nested schema](#nestedatt--botnet_domains))
 - `description` (String) The description of the DNS security profile
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the DNS security profile
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -196,10 +192,10 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
-- `log_level` (String) Log level
+- `action` (String) Action. Possible values are `default`, `allow`, `block` and `sinkhole`.
+- `log_level` (String) Log level. Possible values are `default`, `none`, `low`, `informational`, `medium`, `high` and `critical`.
 - `name` (String) Name
-- `packet_capture` (String) Packet capture
+- `packet_capture` (String) Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.
 
 
 <a id="nestedatt--botnet_domains--lists"></a>
@@ -212,25 +208,19 @@ Required:
 Optional:
 
 - `action` (Attributes) Action (see [below for nested schema](#nestedatt--botnet_domains--lists--action))
-- `packet_capture` (String) Packet capture
+- `packet_capture` (String) Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.
 
 <a id="nestedatt--botnet_domains--lists--action"></a>
 ### Nested Schema for `botnet_domains.lists.action`
 
 Optional:
 
-- `alert` (Attributes) Alert
+~> **Note:** You must specify at most one of `alert`, `allow`, `block` or `sinkhole`.
 
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--alert))
-- `allow` (Attributes) Allow
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--allow))
-- `block` (Attributes) Block
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--block))
-- `sinkhole` (Attributes) Sinkhole
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`. (see [below for nested schema](#nestedatt--botnet_domains--lists--action--sinkhole))
+- `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--botnet_domains--lists--action--alert))
+- `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--botnet_domains--lists--action--allow))
+- `block` (Attributes) Block (see [below for nested schema](#nestedatt--botnet_domains--lists--action--block))
+- `sinkhole` (Attributes) Sinkhole (see [below for nested schema](#nestedatt--botnet_domains--lists--action--sinkhole))
 
 <a id="nestedatt--botnet_domains--lists--action--alert"></a>
 ### Nested Schema for `botnet_domains.lists.action.alert`
@@ -255,8 +245,8 @@ Optional:
 
 Optional:
 
-- `ipv4_address` (String) Ipv4 address
-- `ipv6_address` (String) Ipv6 address
+- `ipv4_address` (String) Ipv4 address. Possible values are `127.0.0.1` and `pan-sinkhole-default-ip`.
+- `ipv6_address` (String) Ipv6 address. Possible values are `::1`.
 
 
 <a id="nestedatt--botnet_domains--whitelist"></a>

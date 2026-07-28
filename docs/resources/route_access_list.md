@@ -21,16 +21,12 @@ RouteAccessList resource
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `type` (Attributes) Type (see [below for nested schema](#nestedatt--type))
 
 ### Read-Only
@@ -57,7 +53,7 @@ Optional:
 
 Optional:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `deny` and `permit`.
 - `destination_address` (Attributes) Destination address (see [below for nested schema](#nestedatt--type--ipv4--ipv4_entry--destination_address))
 - `name` (Number) Sequence number
 - `source_address` (Attributes) Source address (see [below for nested schema](#nestedatt--type--ipv4--ipv4_entry--source_address))

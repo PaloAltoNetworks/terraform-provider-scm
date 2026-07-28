@@ -773,7 +773,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -789,7 +789,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -835,7 +835,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										),
 										int64validator.Between(1, 10),
 									},
-									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH",
 									Optional:            true,
 								},
 								"origin": schema.SingleNestedAttribute{
@@ -844,7 +844,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("occurrence"),
 										),
 									},
-									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Origin",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -880,7 +880,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("warning_only"),
 												),
 											},
-											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Restart",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"interval": schema.Int64Attribute{
@@ -898,7 +898,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("restart"),
 												),
 											},
-											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Warning only",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -930,7 +930,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("self_force"),
 										),
 									},
-									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -940,7 +940,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("self"),
 										),
 									},
-									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self force",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -954,7 +954,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Validators: []validator.String{
 										stringvalidator.OneOf("none", "both", "receive", "send"),
 									},
-									MarkdownDescription: "ORF prefix list",
+									MarkdownDescription: "ORF prefix list. Possible values are `none`, `both`, `receive` and `send`.",
 									Optional:            true,
 								},
 							},
@@ -992,7 +992,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "All",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1005,7 +1005,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Both",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1018,7 +1018,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Extended",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1031,7 +1031,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Large",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1044,7 +1044,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("large"),
 										),
 									},
-									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Standard",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1085,7 +1085,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 										),
 										int64validator.Between(1, 10),
 									},
-									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH",
 									Optional:            true,
 								},
 								"origin": schema.SingleNestedAttribute{
@@ -1094,7 +1094,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("occurrence"),
 										),
 									},
-									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Origin",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1130,7 +1130,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("warning_only"),
 												),
 											},
-											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Restart",
 											Optional:            true,
 											Attributes: map[string]schema.Attribute{
 												"interval": schema.Int64Attribute{
@@ -1148,7 +1148,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 													path.MatchRelative().AtParent().AtName("restart"),
 												),
 											},
-											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Warning only",
 											Optional:            true,
 											Attributes:          map[string]schema.Attribute{},
 										},
@@ -1180,7 +1180,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("self_force"),
 										),
 									},
-									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1190,7 +1190,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("self"),
 										),
 									},
-									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self force",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1204,7 +1204,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 									Validators: []validator.String{
 										stringvalidator.OneOf("none", "both", "receive", "send"),
 									},
-									MarkdownDescription: "ORF prefix list",
+									MarkdownDescription: "ORF prefix list. Possible values are `none`, `both`, `receive` and `send`.",
 									Optional:            true,
 								},
 							},
@@ -1242,7 +1242,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "All",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1255,7 +1255,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Both",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1268,7 +1268,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Extended",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1281,7 +1281,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("standard"),
 										),
 									},
-									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Large",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1294,7 +1294,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("large"),
 										),
 									},
-									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Standard",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -1321,7 +1321,7 @@ var BgpAddressFamilyProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1342,12 +1342,12 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "BgpAddressFamilyProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1382,11 +1382,11 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"occurrence": dsschema.Int64Attribute{
-									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH",
 									Computed:            true,
 								},
 								"origin": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Origin",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1417,7 +1417,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"restart": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Restart",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"interval": dsschema.Int64Attribute{
@@ -1427,7 +1427,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 											},
 										},
 										"warning_only": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Warning only",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
@@ -1448,12 +1448,12 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"self": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"self_force": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self force",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1464,7 +1464,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"orf_prefix_list": dsschema.StringAttribute{
-									MarkdownDescription: "ORF prefix list",
+									MarkdownDescription: "ORF prefix list. Possible values are `none`, `both`, `receive` and `send`.",
 									Computed:            true,
 								},
 							},
@@ -1494,27 +1494,27 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"all": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "All",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"both": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Both",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"extended": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Extended",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"large": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Large",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"standard": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Standard",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1549,11 +1549,11 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"occurrence": dsschema.Int64Attribute{
-									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Number of times the firewalls own AS can be in an AS_PATH",
 									Computed:            true,
 								},
 								"origin": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Origin\n\n> ℹ️ **Note:** You must specify exactly one of `occurrence` and `origin`.",
+									MarkdownDescription: "Origin",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1584,7 +1584,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 									Computed:            true,
 									Attributes: map[string]dsschema.Attribute{
 										"restart": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Restart\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Restart",
 											Computed:            true,
 											Attributes: map[string]dsschema.Attribute{
 												"interval": dsschema.Int64Attribute{
@@ -1594,7 +1594,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 											},
 										},
 										"warning_only": dsschema.SingleNestedAttribute{
-											MarkdownDescription: "Warning only\n\n> ℹ️ **Note:** You must specify exactly one of `restart` and `warning_only`.",
+											MarkdownDescription: "Warning only",
 											Computed:            true,
 											Attributes:          map[string]dsschema.Attribute{},
 										},
@@ -1615,12 +1615,12 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"self": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Self\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"self_force": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Self force\n\n> ℹ️ **Note:** You must specify exactly one of `self` and `self_force`.",
+									MarkdownDescription: "Self force",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1631,7 +1631,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"orf_prefix_list": dsschema.StringAttribute{
-									MarkdownDescription: "ORF prefix list",
+									MarkdownDescription: "ORF prefix list. Possible values are `none`, `both`, `receive` and `send`.",
 									Computed:            true,
 								},
 							},
@@ -1661,27 +1661,27 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"all": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "All\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "All",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"both": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Both\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Both",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"extended": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Extended\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Extended",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"large": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Large\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Large",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
 								"standard": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Standard\n\n> ℹ️ **Note:** You must specify exactly one of `all`, `both`, `extended`, `large`, and `standard`.",
+									MarkdownDescription: "Standard",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1701,7 +1701,7 @@ var BgpAddressFamilyProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

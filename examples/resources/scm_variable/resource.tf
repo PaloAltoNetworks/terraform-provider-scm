@@ -1,4 +1,15 @@
 #
+# Creates a variable in ip-netmask format with an empty value
+#
+resource "scm_variable" "scm_variable_ipaddr_empty" {
+  folder      = "ngfw-shared"
+  name        = "$tf_variable_ipaddr_empty"
+  description = "Managed by Terraform"
+  type        = "ip-netmask"
+  value       = "None"
+}
+
+#
 # Creates a variable in as-number format
 #
 resource "scm_variable" "scm_variable_asn" {

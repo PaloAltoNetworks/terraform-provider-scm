@@ -88,22 +88,18 @@ resource "scm_loopback_interface" "scm_loopback_intf_3" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `comment` (String) Description for loopback interface
 - `default_value` (String) Default interface assignment for loopback interface
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `interface_management_profile` (String) Interface management profile for loopback interface
 - `ip` (Attributes List) Loopback IP Parent (see [below for nested schema](#nestedatt--ip))
 - `ipv6` (Attributes) Loopback IPv6 Configuration (see [below for nested schema](#nestedatt--ipv6))
 - `mtu` (Number) MTU for loopback interface
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 

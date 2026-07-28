@@ -108,7 +108,7 @@ var TcpSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -124,7 +124,7 @@ var TcpSettingsResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -146,7 +146,7 @@ var TcpSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -164,7 +164,7 @@ var TcpSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("drop", "bypass"),
 					},
-					MarkdownDescription: "Asymmetric path action",
+					MarkdownDescription: "Asymmetric path action. Possible values are `drop` and `bypass`.",
 					Optional:            true,
 				},
 				"bypass_exceed_oo_queue": schema.BoolAttribute{
@@ -183,7 +183,7 @@ var TcpSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("0", "2", "3"),
 					},
-					MarkdownDescription: "SIP TCP cleartext action (`'0'` = Always Off, `'1'` = Always Enabled, `'2'` = Automatically enable proxy when needed)",
+					MarkdownDescription: "SIP TCP cleartext action (`'0'` = Always Off, `'1'` = Always Enabled, `'2'` = Automatically enable proxy when needed). Possible values are `0`, `2` and `3`.",
 					Optional:            true,
 				},
 				"strip_mptcp_option": schema.BoolAttribute{
@@ -198,7 +198,7 @@ var TcpSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("clear", "oobinline"),
 					},
-					MarkdownDescription: "Urgent data flag action",
+					MarkdownDescription: "Urgent data flag action. Possible values are `clear` and `oobinline`.",
 					Optional:            true,
 				},
 			},
@@ -218,12 +218,12 @@ var TcpSettingsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "TcpSetting data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -232,7 +232,7 @@ var TcpSettingsDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -245,7 +245,7 @@ var TcpSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"asymmetric_path": dsschema.StringAttribute{
-					MarkdownDescription: "Asymmetric path action",
+					MarkdownDescription: "Asymmetric path action. Possible values are `drop` and `bypass`.",
 					Computed:            true,
 				},
 				"bypass_exceed_oo_queue": dsschema.BoolAttribute{
@@ -261,7 +261,7 @@ var TcpSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"siptcp_cleartext_proxy": dsschema.StringAttribute{
-					MarkdownDescription: "SIP TCP cleartext action (`'0'` = Always Off, `'1'` = Always Enabled, `'2'` = Automatically enable proxy when needed)",
+					MarkdownDescription: "SIP TCP cleartext action (`'0'` = Always Off, `'1'` = Always Enabled, `'2'` = Automatically enable proxy when needed). Possible values are `0`, `2` and `3`.",
 					Computed:            true,
 				},
 				"strip_mptcp_option": dsschema.BoolAttribute{
@@ -273,7 +273,7 @@ var TcpSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"urgent_data": dsschema.StringAttribute{
-					MarkdownDescription: "Urgent data flag action",
+					MarkdownDescription: "Urgent data flag action. Possible values are `clear` and `oobinline`.",
 					Computed:            true,
 				},
 			},

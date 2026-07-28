@@ -18,6 +18,7 @@ func GetDataSources() []func() datasource.DataSource {
 		NewTrafficSteeringRuleDataSource,
 		NewBandwidthAllocationListDataSource,
 		// 		NewInternalDnsServerListDataSource,
+		NewLocationListDataSource,
 		NewRemoteNetworkListDataSource,
 		NewServiceConnectionListDataSource,
 		NewServiceConnectionGroupListDataSource,

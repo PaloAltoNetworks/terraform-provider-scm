@@ -13,6 +13,7 @@ func GetResources() []func() resource.Resource {
 		NewSubnetResource,
 		NewWildcardResource,
 		NewConnectorGroupScheduledUpgradeResource,
+		NewConnectorQuiesceResource,
 		NewConnectorScheduledUpgradeResource,
 	}
 }

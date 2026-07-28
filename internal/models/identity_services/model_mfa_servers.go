@@ -283,7 +283,7 @@ var MfaServersResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -305,7 +305,7 @@ var MfaServersResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -334,7 +334,7 @@ var MfaServersResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
 						),
 					},
-					MarkdownDescription: "Integration with [Duo Security](https://duo.com/product)\n\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integration with [Duo Security](https://duo.com/product)\n",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"duo_api_host": schema.StringAttribute{
@@ -383,7 +383,7 @@ var MfaServersResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
 						),
 					},
-					MarkdownDescription: "Integration with [Okta Adaptive MFA](https://www.okta.com/products/adaptive-multi-factor-authentication)\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integration with [Okta Adaptive MFA](https://www.okta.com/products/adaptive-multi-factor-authentication)",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"okta_api_host": schema.StringAttribute{
@@ -426,7 +426,7 @@ var MfaServersResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rsa_securid_access_v1"),
 						),
 					},
-					MarkdownDescription: "Integation with [Ping Identity](https://www.pingidentity.com/en/platform.html)\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integation with [Ping Identity](https://www.pingidentity.com/en/platform.html)",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"ping_api_host": schema.StringAttribute{
@@ -482,7 +482,7 @@ var MfaServersResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ping_identity_v1"),
 						),
 					},
-					MarkdownDescription: "Integration with [RSA SecurID](https://www.rsa.com/products/securid/)\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integration with [RSA SecurID](https://www.rsa.com/products/securid/)",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"rsa_accessid": schema.StringAttribute{
@@ -549,7 +549,7 @@ var MfaServersResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -570,7 +570,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "MfaServer data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -581,7 +581,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -598,7 +598,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"duo_security_v2": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Integration with [Duo Security](https://duo.com/product)\n\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integration with [Duo Security](https://duo.com/product)\n",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"duo_api_host": dsschema.StringAttribute{
@@ -625,7 +625,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"okta_adaptive_v1": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Integration with [Okta Adaptive MFA](https://www.okta.com/products/adaptive-multi-factor-authentication)\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integration with [Okta Adaptive MFA](https://www.okta.com/products/adaptive-multi-factor-authentication)",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"okta_api_host": dsschema.StringAttribute{
@@ -652,7 +652,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ping_identity_v1": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Integation with [Ping Identity](https://www.pingidentity.com/en/platform.html)\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integation with [Ping Identity](https://www.pingidentity.com/en/platform.html)",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"ping_api_host": dsschema.StringAttribute{
@@ -683,7 +683,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rsa_securid_access_v1": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Integration with [RSA SecurID](https://www.rsa.com/products/securid/)\n\n> ℹ️ **Note:** You must specify exactly one of `duo_security_v2`, `okta_adaptive_v1`, `ping_identity_v1`, and `rsa_securid_access_v1`.",
+					MarkdownDescription: "Integration with [RSA SecurID](https://www.rsa.com/products/securid/)",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"rsa_accessid": dsschema.StringAttribute{
@@ -721,7 +721,7 @@ var MfaServersDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

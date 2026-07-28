@@ -193,7 +193,7 @@ resource "scm_decryption_rule" "decryption_rule_ssl_inbound_inspection" {
 
 ### Required
 
-- `action` (String) The action to be taken
+- `action` (String) The action to be taken. Possible values are `decrypt` and `no-decrypt`.
 - `category` (List of String) The destination URL category
 - `destination` (List of String) The destination addresses
 - `from` (List of String) The source security zone
@@ -205,29 +205,25 @@ resource "scm_decryption_rule" "decryption_rule_ssl_inbound_inspection" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) The description of the decryption rule
 - `destination_hip` (List of String) The Host Integrity Profile of the destination host
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Is the rule disabled?
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `log_fail` (Boolean) Log failed decryption events?
 - `log_setting` (String) The log settings of the decryption rule
 - `log_success` (Boolean) Log successful decryption events?
 - `negate_destination` (Boolean) Negate the destination addresses?
 - `negate_source` (Boolean) Negate the source addresses?
-- `position` (String) The position of a security rule
+- `position` (String) The position of a security rule. Possible values are `pre` and `post`.
 - `profile` (String) The decryption profile associated with the decryption rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source_hip` (List of String) Source hip
 - `tag` (List of String) The tags associated with the decryption rule
-- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `target_rule` (String) UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `type` (Attributes) The type of decryption (see [below for nested schema](#nestedatt--type))
 
 ### Read-Only
@@ -240,12 +236,10 @@ resource "scm_decryption_rule" "decryption_rule_ssl_inbound_inspection" {
 
 Optional:
 
-- `ssl_forward_proxy` (Attributes) Ssl forward proxy
+~> **Note:** You must specify at most one of `ssl_forward_proxy` or `ssl_inbound_inspection`.
 
-> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--type--ssl_forward_proxy))
-- `ssl_inbound_inspection` (Attributes) add the certificate name for SSL inbound inspection
-
-> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--type--ssl_inbound_inspection))
+- `ssl_forward_proxy` (Attributes) Ssl forward proxy (see [below for nested schema](#nestedatt--type--ssl_forward_proxy))
+- `ssl_inbound_inspection` (Attributes) add the certificate name for SSL inbound inspection (see [below for nested schema](#nestedatt--type--ssl_inbound_inspection))
 
 <a id="nestedatt--type--ssl_forward_proxy"></a>
 ### Nested Schema for `type.ssl_forward_proxy`

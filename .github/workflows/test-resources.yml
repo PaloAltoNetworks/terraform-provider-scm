@@ -2,7 +2,7 @@ name: Resource Tests
 
 on:
   push:
-    branches: [develop, ztna]
+    branches: [develop]
   pull_request:
     branches: [main, develop]
   workflow_dispatch: # manual trigger
@@ -48,6 +48,7 @@ jobs:
           SCM_CLIENT_SECRET: ${{ secrets.SCM_CLIENT_SECRET }}
           SCM_SCOPE: ${{ secrets.SCM_SCOPE }}
           ZTNA_HOST: ${{ secrets.ZTNA_HOST || secrets.SCM_HOST }}
+          X_PANW_REGION: americas
         run: |
           {
             echo 'provider "scm" {'
@@ -61,6 +62,8 @@ jobs:
             echo ''
             echo 'provider "ztna" {'
             echo "  host          = \"${ZTNA_HOST}\""
+            echo "  ztna_host     = \"${ZTNA_HOST}\""
+            echo "  x_panw_region = \"${X_PANW_REGION}\""
             echo "  auth_url      = \"${SCM_AUTH_URL}\""
             echo "  client_id     = \"${SCM_CLIENT_ID}\""
             echo "  client_secret = \"${SCM_CLIENT_SECRET}\""

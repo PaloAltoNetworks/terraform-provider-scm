@@ -35,8 +35,8 @@ func NewConfigLoadAction() action.Action {
 	return &ConfigLoadAction{}
 }
 
-func (a *ConfigLoadAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_config_load"
+func (a *ConfigLoadAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_config_load"
 }
 
 func (a *ConfigLoadAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

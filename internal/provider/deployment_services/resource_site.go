@@ -224,6 +224,22 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Step 5a - Normalize null lists against prior state. Read has no plan, so we
+	// compare the API response against savestate. When the API returns [] for a
+	// list that was null in prior state, coerce it back to null to avoid a
+	// perpetual diff on refresh. Real changes (populated lists) are preserved.
+	savestateObject, diags := types.ObjectValueFrom(ctx, models.Sites{}.AttrTypes(), &savestate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+	packedObject, diags = utils.NormalizeNullLists(ctx, savestateObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return

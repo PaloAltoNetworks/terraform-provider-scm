@@ -42,6 +42,7 @@ type AggregateInterfaces struct {
 // AggregateInterfacesLayer2 represents a nested structure within the AggregateInterfaces model
 type AggregateInterfacesLayer2 struct {
 	Lacp           basetypes.ObjectValue `tfsdk:"lacp"`
+	Lldp           basetypes.ObjectValue `tfsdk:"lldp"`
 	NetflowProfile basetypes.StringValue `tfsdk:"netflow_profile"`
 	VlanTag        basetypes.StringValue `tfsdk:"vlan_tag"`
 }
@@ -62,6 +63,18 @@ type LacpHighAvailability struct {
 	PassivePreNegotiation basetypes.BoolValue `tfsdk:"passive_pre_negotiation"`
 }
 
+// Lldp represents a nested structure within the AggregateInterfaces model
+type Lldp struct {
+	Enable           basetypes.BoolValue   `tfsdk:"enable"`
+	HighAvailability basetypes.ObjectValue `tfsdk:"high_availability"`
+	Profile          basetypes.StringValue `tfsdk:"profile"`
+}
+
+// LldpHighAvailability represents a nested structure within the AggregateInterfaces model
+type LldpHighAvailability struct {
+	PassivePreNegotiation basetypes.BoolValue `tfsdk:"passive_pre_negotiation"`
+}
+
 // AggregateInterfacesLayer3 represents a nested structure within the AggregateInterfaces model
 type AggregateInterfacesLayer3 struct {
 	Arp                        basetypes.ListValue   `tfsdk:"arp"`
@@ -70,6 +83,7 @@ type AggregateInterfacesLayer3 struct {
 	InterfaceManagementProfile basetypes.StringValue `tfsdk:"interface_management_profile"`
 	Ip                         basetypes.ListValue   `tfsdk:"ip"`
 	Lacp                       basetypes.ObjectValue `tfsdk:"lacp"`
+	Lldp                       basetypes.ObjectValue `tfsdk:"lldp"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 }
@@ -136,6 +150,17 @@ func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 						"transmission_rate": basetypes.StringType{},
 					},
 				},
+				"lldp": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+						"high_availability": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"passive_pre_negotiation": basetypes.BoolType{},
+							},
+						},
+						"profile": basetypes.StringType{},
+					},
+				},
 				"netflow_profile": basetypes.StringType{},
 				"vlan_tag":        basetypes.StringType{},
 			},
@@ -193,6 +218,17 @@ func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 						"transmission_rate": basetypes.StringType{},
 					},
 				},
+				"lldp": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+						"high_availability": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"passive_pre_negotiation": basetypes.BoolType{},
+							},
+						},
+						"profile": basetypes.StringType{},
+					},
+				},
 				"mtu":             basetypes.Int64Type{},
 				"netflow_profile": basetypes.StringType{},
 			},
@@ -225,6 +261,17 @@ func (o AggregateInterfacesLayer2) AttrTypes() map[string]attr.Type {
 				"mode":              basetypes.StringType{},
 				"system_priority":   basetypes.Int64Type{},
 				"transmission_rate": basetypes.StringType{},
+			},
+		},
+		"lldp": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable": basetypes.BoolType{},
+				"high_availability": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"passive_pre_negotiation": basetypes.BoolType{},
+					},
+				},
+				"profile": basetypes.StringType{},
 			},
 		},
 		"netflow_profile": basetypes.StringType{},
@@ -272,6 +319,40 @@ func (o LacpHighAvailability) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of LacpHighAvailability objects.
 func (o LacpHighAvailability) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the Lldp model.
+func (o Lldp) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable": basetypes.BoolType{},
+		"high_availability": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"passive_pre_negotiation": basetypes.BoolType{},
+			},
+		},
+		"profile": basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of Lldp objects.
+func (o Lldp) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the LldpHighAvailability model.
+func (o LldpHighAvailability) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"passive_pre_negotiation": basetypes.BoolType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of LldpHighAvailability objects.
+func (o LldpHighAvailability) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -329,6 +410,17 @@ func (o AggregateInterfacesLayer3) AttrTypes() map[string]attr.Type {
 				"mode":              basetypes.StringType{},
 				"system_priority":   basetypes.Int64Type{},
 				"transmission_rate": basetypes.StringType{},
+			},
+		},
+		"lldp": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable": basetypes.BoolType{},
+				"high_availability": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"passive_pre_negotiation": basetypes.BoolType{},
+					},
+				},
+				"profile": basetypes.StringType{},
 			},
 		},
 		"mtu":             basetypes.Int64Type{},
@@ -453,7 +545,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -469,7 +561,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -488,7 +580,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("layer3"),
 				),
 			},
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Layer2",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"lacp": schema.SingleNestedAttribute{
@@ -532,7 +624,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("passive", "active"),
 							},
-							MarkdownDescription: "Mode",
+							MarkdownDescription: "Mode. Possible values are `passive` and `active`.",
 							Optional:            true,
 							Computed:            true,
 							Default:             stringdefault.StaticString("passive"),
@@ -550,10 +642,36 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("fast", "slow"),
 							},
-							MarkdownDescription: "Transmission mode",
+							MarkdownDescription: "Transmission mode. Possible values are `fast` and `slow`.",
 							Optional:            true,
 							Computed:            true,
 							Default:             stringdefault.StaticString("slow"),
+						},
+					},
+				},
+				"lldp": schema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP settings for the interface",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Required:            true,
+						},
+						"high_availability": schema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"passive_pre_negotiation": schema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Optional:            true,
+									Computed:            true,
+									Default:             booldefault.StaticBool(false),
+								},
+							},
+						},
+						"profile": schema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
+							Optional:            true,
 						},
 					},
 				},
@@ -576,7 +694,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("layer2"),
 				),
 			},
-			MarkdownDescription: "Aggregate Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Aggregate Interface Layer 3 configuration",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"arp": schema.ListNestedAttribute{
@@ -652,7 +770,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
-					MarkdownDescription: "Aggregate Ethernet DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Ethernet DHCP Client Object",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"create_default_route": schema.BoolAttribute{
@@ -714,7 +832,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("dhcp_client"),
 						),
 					},
-					MarkdownDescription: "Aggregate Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Interface IP addresses",
 					Optional:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
@@ -766,7 +884,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("passive", "active"),
 							},
-							MarkdownDescription: "Mode",
+							MarkdownDescription: "Mode. Possible values are `passive` and `active`.",
 							Optional:            true,
 							Computed:            true,
 							Default:             stringdefault.StaticString("passive"),
@@ -784,10 +902,36 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("fast", "slow"),
 							},
-							MarkdownDescription: "Transmission mode",
+							MarkdownDescription: "Transmission mode. Possible values are `fast` and `slow`.",
 							Optional:            true,
 							Computed:            true,
 							Default:             stringdefault.StaticString("slow"),
+						},
+					},
+				},
+				"lldp": schema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP settings for the interface",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Required:            true,
+						},
+						"high_availability": schema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"passive_pre_negotiation": schema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Optional:            true,
+									Computed:            true,
+									Default:             booldefault.StaticBool(false),
+								},
+							},
+						},
+						"profile": schema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
+							Optional:            true,
 						},
 					},
 				},
@@ -819,7 +963,7 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -848,12 +992,12 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -862,7 +1006,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"layer2": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Layer2",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"lacp": dsschema.SingleNestedAttribute{
@@ -892,7 +1036,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"mode": dsschema.StringAttribute{
-							MarkdownDescription: "Mode",
+							MarkdownDescription: "Mode. Possible values are `passive` and `active`.",
 							Computed:            true,
 						},
 						"system_priority": dsschema.Int64Attribute{
@@ -900,7 +1044,31 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"transmission_rate": dsschema.StringAttribute{
-							MarkdownDescription: "Transmission mode",
+							MarkdownDescription: "Transmission mode. Possible values are `fast` and `slow`.",
+							Computed:            true,
+						},
+					},
+				},
+				"lldp": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP settings for the interface",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Computed:            true,
+						},
+						"high_availability": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"passive_pre_negotiation": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Computed:            true,
+								},
+							},
+						},
+						"profile": dsschema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
 							Computed:            true,
 						},
 					},
@@ -916,7 +1084,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"layer3": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Aggregate Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `layer2` and `layer3`.",
+			MarkdownDescription: "Aggregate Interface Layer 3 configuration",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"arp": dsschema.ListNestedAttribute{
@@ -970,7 +1138,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Aggregate Ethernet DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Ethernet DHCP Client Object",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"create_default_route": dsschema.BoolAttribute{
@@ -1006,7 +1174,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"ip": dsschema.ListNestedAttribute{
-					MarkdownDescription: "Aggregate Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `ip`.",
+					MarkdownDescription: "Aggregate Interface IP addresses",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
@@ -1044,7 +1212,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"mode": dsschema.StringAttribute{
-							MarkdownDescription: "Mode",
+							MarkdownDescription: "Mode. Possible values are `passive` and `active`.",
 							Computed:            true,
 						},
 						"system_priority": dsschema.Int64Attribute{
@@ -1052,7 +1220,31 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"transmission_rate": dsschema.StringAttribute{
-							MarkdownDescription: "Transmission mode",
+							MarkdownDescription: "Transmission mode. Possible values are `fast` and `slow`.",
+							Computed:            true,
+						},
+					},
+				},
+				"lldp": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP settings for the interface",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Computed:            true,
+						},
+						"high_availability": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"passive_pre_negotiation": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Computed:            true,
+								},
+							},
+						},
+						"profile": dsschema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
 							Computed:            true,
 						},
 					},
@@ -1073,7 +1265,7 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

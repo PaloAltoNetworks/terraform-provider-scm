@@ -116,16 +116,12 @@ resource "scm_management_interface" "mi_static_example" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `management_interface` (Attributes) Management interface (see [below for nested schema](#nestedatt--management_interface))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -144,19 +140,17 @@ Optional:
 - `netmask` (String) Netmask
 - `permitted_ip` (Attributes List) Permitting IP addresses (see [below for nested schema](#nestedatt--management_interface--permitted_ip))
 - `service` (Attributes) Network services (see [below for nested schema](#nestedatt--management_interface--service))
-- `speed_duplex` (String) Speed and duplex
+- `speed_duplex` (String) Speed and duplex. Possible values are `auto-negotiate`, `10Mbps-half-duplex`, `10Mbps-full-duplex`, `100Mbps-half-duplex`, `100Mbps-full-duplex`, `1Gbps-half-duplex` and `1Gbps-full-duplex`.
 
 <a id="nestedatt--management_interface--mgmt_type"></a>
 ### Nested Schema for `management_interface.mgmt_type`
 
 Optional:
 
-- `dhcp_client` (Attributes) Dhcp client
+~> **Note:** You must specify at most one of `dhcp_client` or `static`.
 
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`. (see [below for nested schema](#nestedatt--management_interface--mgmt_type--dhcp_client))
-- `static` (Attributes) Static
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`. (see [below for nested schema](#nestedatt--management_interface--mgmt_type--static))
+- `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--management_interface--mgmt_type--dhcp_client))
+- `static` (Attributes) Static (see [below for nested schema](#nestedatt--management_interface--mgmt_type--static))
 
 <a id="nestedatt--management_interface--mgmt_type--dhcp_client"></a>
 ### Nested Schema for `management_interface.mgmt_type.dhcp_client`

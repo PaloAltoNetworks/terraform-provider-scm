@@ -111,7 +111,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -119,12 +119,12 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 		},
 		"dh_group": schema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Dh group",
+			MarkdownDescription: "Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
 			Required:            true,
 		},
 		"encryption": schema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Encryption algorithm",
+			MarkdownDescription: "Encryption algorithm. Possible values are `des`, `3des`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-gcm` and `aes-256-gcm`.",
 			Required:            true,
 		},
 		"folder": schema.StringAttribute{
@@ -137,7 +137,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -145,7 +145,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 		},
 		"hash": schema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Hash",
+			MarkdownDescription: "Hash. Possible values are `md5`, `sha1`, `sha256`, `sha384`, `sha512` and `non-auth`.",
 			Required:            true,
 		},
 		"id": schema.StringAttribute{
@@ -168,7 +168,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 365),
 					},
-					MarkdownDescription: "specify lifetime in days\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in days",
 					Optional:            true,
 				},
 				"hours": schema.Int64Attribute{
@@ -180,7 +180,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(1, 65535),
 					},
-					MarkdownDescription: "specify lifetime in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in hours",
 					Optional:            true,
 				},
 				"minutes": schema.Int64Attribute{
@@ -192,7 +192,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(3, 65535),
 					},
-					MarkdownDescription: "specify lifetime in minutes\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in minutes",
 					Optional:            true,
 				},
 				"seconds": schema.Int64Attribute{
@@ -204,7 +204,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 						),
 						int64validator.Between(180, 65535),
 					},
-					MarkdownDescription: "specify lifetime in seconds\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in seconds",
 					Optional:            true,
 				},
 			},
@@ -225,7 +225,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -250,28 +250,28 @@ var IkeCryptoProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"dh_group": dsschema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Dh group",
+			MarkdownDescription: "Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
 			Computed:            true,
 		},
 		"encryption": dsschema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Encryption algorithm",
+			MarkdownDescription: "Encryption algorithm. Possible values are `des`, `3des`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-gcm` and `aes-256-gcm`.",
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"hash": dsschema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Hash",
+			MarkdownDescription: "Hash. Possible values are `md5`, `sha1`, `sha256`, `sha384`, `sha512` and `non-auth`.",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -283,19 +283,19 @@ var IkeCryptoProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"days": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in days\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in days",
 					Computed:            true,
 				},
 				"hours": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in hours\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in hours",
 					Computed:            true,
 				},
 				"minutes": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in minutes\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in minutes",
 					Computed:            true,
 				},
 				"seconds": dsschema.Int64Attribute{
-					MarkdownDescription: "specify lifetime in seconds\n\n> ℹ️ **Note:** You must specify exactly one of `days`, `hours`, `minutes`, and `seconds`.",
+					MarkdownDescription: "specify lifetime in seconds",
 					Computed:            true,
 				},
 			},
@@ -306,7 +306,7 @@ var IkeCryptoProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

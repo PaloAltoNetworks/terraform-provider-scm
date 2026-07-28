@@ -250,7 +250,7 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -266,7 +266,7 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -295,7 +295,7 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -513,7 +513,7 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("sslv3", "tls1-0", "tls1-1", "tls1-2", "tls1-3", "max"),
 					},
-					MarkdownDescription: "Max version",
+					MarkdownDescription: "Max version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2`, `tls1-3` and `max`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("tls1-2"),
@@ -522,7 +522,7 @@ var DecryptionProfilesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("sslv3", "tls1-0", "tls1-1", "tls1-2", "tls1-3"),
 					},
-					MarkdownDescription: "Min version",
+					MarkdownDescription: "Min version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2` and `tls1-3`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("tls1-0"),
@@ -544,12 +544,12 @@ var DecryptionProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "DecryptionProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -563,7 +563,7 @@ var DecryptionProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -714,11 +714,11 @@ var DecryptionProfilesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"max_version": dsschema.StringAttribute{
-					MarkdownDescription: "Max version",
+					MarkdownDescription: "Max version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2`, `tls1-3` and `max`.",
 					Computed:            true,
 				},
 				"min_version": dsschema.StringAttribute{
-					MarkdownDescription: "Min version",
+					MarkdownDescription: "Min version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2` and `tls1-3`.",
 					Computed:            true,
 				},
 			},

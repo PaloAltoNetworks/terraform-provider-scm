@@ -168,15 +168,11 @@ resource "scm_decryption_profile" "full_mixed_decryption_profile" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ssl_forward_proxy` (Attributes) Ssl forward proxy (see [below for nested schema](#nestedatt--ssl_forward_proxy))
 - `ssl_inbound_proxy` (Attributes) Ssl inbound proxy (see [below for nested schema](#nestedatt--ssl_inbound_proxy))
 - `ssl_no_proxy` (Attributes) Ssl no proxy (see [below for nested schema](#nestedatt--ssl_no_proxy))
@@ -244,8 +240,8 @@ Optional:
 - `keyxchg_algo_dhe` (Boolean) Keyxchg algo dhe
 - `keyxchg_algo_ecdhe` (Boolean) Keyxchg algo ecdhe
 - `keyxchg_algo_rsa` (Boolean) Keyxchg algo rsa
-- `max_version` (String) Max version
-- `min_version` (String) Min version
+- `max_version` (String) Max version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2`, `tls1-3` and `max`.
+- `min_version` (String) Min version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2` and `tls1-3`.
 
 
 ## Import

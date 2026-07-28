@@ -98,7 +98,7 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -120,7 +120,7 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -139,7 +139,7 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("password"),
 				),
 			},
-			MarkdownDescription: "MD5s\n\n> ℹ️ **Note:** You must specify exactly one of `md5` and `password`.",
+			MarkdownDescription: "MD5s",
 			Optional:            true,
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
@@ -175,7 +175,7 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("md5"),
 				),
 			},
-			MarkdownDescription: "Password\n\n> ℹ️ **Note:** You must specify exactly one of `md5` and `password`.",
+			MarkdownDescription: "Password",
 			Optional:            true,
 			Sensitive:           true,
 		},
@@ -188,7 +188,7 @@ var OspfAuthProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -209,7 +209,7 @@ var OspfAuthProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "OspfAuthProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -220,7 +220,7 @@ var OspfAuthProfilesDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -229,7 +229,7 @@ var OspfAuthProfilesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"md5": dsschema.ListNestedAttribute{
-			MarkdownDescription: "MD5s\n\n> ℹ️ **Note:** You must specify exactly one of `md5` and `password`.",
+			MarkdownDescription: "MD5s",
 			Computed:            true,
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
@@ -255,12 +255,12 @@ var OspfAuthProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"password": dsschema.StringAttribute{
-			MarkdownDescription: "Password\n\n> ℹ️ **Note:** You must specify exactly one of `md5` and `password`.",
+			MarkdownDescription: "Password",
 			Computed:            true,
 			Sensitive:           true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

@@ -375,7 +375,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -407,7 +407,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Af\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Af",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
@@ -425,7 +425,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Cs\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Cs",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
@@ -443,7 +443,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Custom\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Custom",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.SingleNestedAttribute{
@@ -471,7 +471,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("tos"),
 											),
 										},
-										MarkdownDescription: "Ef\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Ef",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -484,7 +484,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("ef"),
 											),
 										},
-										MarkdownDescription: "Tos\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Tos",
 										Optional:            true,
 										Attributes: map[string]schema.Attribute{
 											"codepoint": schema.StringAttribute{
@@ -510,7 +510,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -531,7 +531,7 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "The relative position of the rule",
+			MarkdownDescription: "The relative position of the rule. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
@@ -559,14 +559,14 @@ var QosPolicyRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
 		"target_rule": schema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{
@@ -598,7 +598,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -620,7 +620,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"af": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Af\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Af",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.StringAttribute{
@@ -630,7 +630,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"cs": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Cs\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Cs",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.StringAttribute{
@@ -640,7 +640,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"custom": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Custom\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Custom",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.SingleNestedAttribute{
@@ -660,12 +660,12 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 										},
 									},
 									"ef": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Ef\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Ef",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
 									"tos": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Tos\n\n> ℹ️ **Note:** You must specify exactly one of `af`, `cs`, `custom`, `ef`, and `tos`.",
+										MarkdownDescription: "Tos",
 										Computed:            true,
 										Attributes: map[string]dsschema.Attribute{
 											"codepoint": dsschema.StringAttribute{
@@ -682,7 +682,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -696,7 +696,7 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "The relative position of the rule",
+			MarkdownDescription: "The relative position of the rule. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"relative_position": dsschema.StringAttribute{
@@ -708,12 +708,12 @@ var QosPolicyRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"target_rule": dsschema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

@@ -59,14 +59,8 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -85,19 +79,15 @@ Read-Only:
 - `netmask` (String) Netmask
 - `permitted_ip` (Attributes List) Permitting IP addresses (see [below for nested schema](#nestedatt--data--management_interface--permitted_ip))
 - `service` (Attributes) Network services (see [below for nested schema](#nestedatt--data--management_interface--service))
-- `speed_duplex` (String) Speed and duplex
+- `speed_duplex` (String) Speed and duplex. Possible values are `auto-negotiate`, `10Mbps-half-duplex`, `10Mbps-full-duplex`, `100Mbps-half-duplex`, `100Mbps-full-duplex`, `1Gbps-half-duplex` and `1Gbps-full-duplex`.
 
 <a id="nestedatt--data--management_interface--mgmt_type"></a>
 ### Nested Schema for `data.management_interface.mgmt_type`
 
 Read-Only:
 
-- `dhcp_client` (Attributes) Dhcp client
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`. (see [below for nested schema](#nestedatt--data--management_interface--mgmt_type--dhcp_client))
-- `static` (Attributes) Static
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`. (see [below for nested schema](#nestedatt--data--management_interface--mgmt_type--static))
+- `dhcp_client` (Attributes) Dhcp client (see [below for nested schema](#nestedatt--data--management_interface--mgmt_type--dhcp_client))
+- `static` (Attributes) Static (see [below for nested schema](#nestedatt--data--management_interface--mgmt_type--static))
 
 <a id="nestedatt--data--management_interface--mgmt_type--dhcp_client"></a>
 ### Nested Schema for `data.management_interface.mgmt_type.dhcp_client`

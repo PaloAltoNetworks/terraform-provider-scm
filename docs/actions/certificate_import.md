@@ -34,19 +34,13 @@ action "scm_certificate_import" "tls_cert" {
 ### Required
 
 - `certificate_file` (String) The Base64 encoded content of the certificate public key
-- `format` (String) Certificate format
+- `format` (String) Certificate format. Possible values are `pem`, `pkcs12` and `der`.
 - `name` (String) The name of the certificate
 
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `key_file` (String) The Base64 encoded content of the certificate private key
 - `passphrase` (String) Passphrase to protect the certificate private key
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.

@@ -134,7 +134,7 @@ resource "scm_scep_profile" "scm_scep_profile_4" {
 
 - `algorithm` (Attributes) Algorithm (see [below for nested schema](#nestedatt--algorithm))
 - `ca_identity_name` (String) Certificate Authority Identity
-- `digest` (String) Digest for CSR
+- `digest` (String) Digest for CSR. Possible values are `sha1`, `sha256`, `sha384` and `sha512`.
 - `name` (String) The name of the SCEP profile
 - `scep_challenge` (Attributes) One Time Password Challenge (see [below for nested schema](#nestedatt--scep_challenge))
 - `scep_url` (String) SCEP server URL
@@ -142,19 +142,15 @@ resource "scm_scep_profile" "scm_scep_profile_4" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `certificate_attributes` (Attributes) Subject Alternative name type (see [below for nested schema](#nestedatt--certificate_attributes))
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `fingerprint` (String) CA Certificate Fingerprint
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `scep_ca_cert` (String) SCEP Server CA Certificate
-- `scep_client_cert` (String) SCEP Client Certificate
+- `scep_ca_cert` (String) SCEP Server CA Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.
+- `scep_client_cert` (String) SCEP Client Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `use_as_digital_signature` (Boolean) Use as digital signature?
 - `use_for_key_encipherment` (Boolean) Use for key encipherment?
 
@@ -176,7 +172,7 @@ Required:
 
 Required:
 
-- `rsa_nbits` (String) Rsa nbits
+- `rsa_nbits` (String) Rsa nbits. Possible values are `1024`, `2048` and `3072`.
 
 
 
@@ -185,15 +181,11 @@ Required:
 
 Optional:
 
-- `dynamic` (Attributes) Dynamic
+~> **Note:** You must specify exactly one of `dynamic`, `fixed` or `none`.
 
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`. (see [below for nested schema](#nestedatt--scep_challenge--dynamic))
+- `dynamic` (Attributes) Dynamic (see [below for nested schema](#nestedatt--scep_challenge--dynamic))
 - `fixed` (String) Challenge to use for SCEP server on mobile clients
-
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.
-- `none` (Attributes) No OTP
-
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`. (see [below for nested schema](#nestedatt--scep_challenge--none))
+- `none` (Attributes) No OTP (see [below for nested schema](#nestedatt--scep_challenge--none))
 
 <a id="nestedatt--scep_challenge--dynamic"></a>
 ### Nested Schema for `scep_challenge.dynamic`
@@ -215,15 +207,11 @@ Optional:
 
 Optional:
 
+~> **Note:** You must specify at most one of `dnsname`, `rfc822name` or `uniform_resource_identifier`.
+
 - `dnsname` (String) Dnsname
-
-> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `rfc822name` (String) Rfc822name
-
-> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 - `uniform_resource_identifier` (String) Uniform resource identifier
-
-> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.
 
 
 ## Import

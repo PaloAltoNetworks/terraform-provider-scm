@@ -582,7 +582,7 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("rules", "pac-file"),
 			},
-			MarkdownDescription: "Enable forwarding rule for forwarding profile",
+			MarkdownDescription: "Enable forwarding rule for forwarding profile. Possible values are `rules` and `pac-file`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("rules"),
@@ -599,7 +599,7 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 				stringvalidator.OneOf("Mobile Users"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n",
+			MarkdownDescription: "The folder in which the resource is defined. Possible values are `Mobile Users`.",
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
@@ -640,7 +640,7 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ztna_agent"),
 						),
 					},
-					MarkdownDescription: "Global Protect proxy-based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
+					MarkdownDescription: "Global Protect proxy-based forwarding configuration",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"block_rule": schema.SingleNestedAttribute{
@@ -764,7 +764,7 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ztna_agent"),
 						),
 					},
-					MarkdownDescription: "PAC file based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
+					MarkdownDescription: "PAC file based forwarding configuration",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"block_rule": schema.SingleNestedAttribute{
@@ -888,7 +888,7 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pac_file"),
 						),
 					},
-					MarkdownDescription: "ZTNA agent-based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
+					MarkdownDescription: "ZTNA agent-based forwarding configuration",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"block_rule": schema.SingleNestedAttribute{
@@ -986,7 +986,7 @@ var ForwardingProfilesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("dns", "dns-and-network-traffic", "network-traffic"),
 										},
-										MarkdownDescription: "Type of traffic this ZTNA rule applies to (dns, network, or both)",
+										MarkdownDescription: "Type of traffic this ZTNA rule applies to (dns, network, or both). Possible values are `dns`, `dns-and-network-traffic` and `network-traffic`.",
 										Optional:            true,
 										Computed:            true,
 										Default:             stringdefault.StaticString("dns"),
@@ -1021,7 +1021,7 @@ var ForwardingProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ForwardingProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"definition_method": dsschema.StringAttribute{
-			MarkdownDescription: "Enable forwarding rule for forwarding profile",
+			MarkdownDescription: "Enable forwarding rule for forwarding profile. Possible values are `rules` and `pac-file`.",
 			Computed:            true,
 		},
 		"description": dsschema.StringAttribute{
@@ -1029,7 +1029,7 @@ var ForwardingProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n",
+			MarkdownDescription: "The folder in which the resource is defined. Possible values are `Mobile Users`.",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1051,7 +1051,7 @@ var ForwardingProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"global_protect_proxy": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Global Protect proxy-based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
+					MarkdownDescription: "Global Protect proxy-based forwarding configuration",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"block_rule": dsschema.SingleNestedAttribute{
@@ -1137,7 +1137,7 @@ var ForwardingProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"pac_file": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "PAC file based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
+					MarkdownDescription: "PAC file based forwarding configuration",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"block_rule": dsschema.SingleNestedAttribute{
@@ -1223,7 +1223,7 @@ var ForwardingProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ztna_agent": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "ZTNA agent-based forwarding configuration\n\n> ℹ️ **Note:** You must specify exactly one of `global_protect_proxy`, `pac_file`, and `ztna_agent`.",
+					MarkdownDescription: "ZTNA agent-based forwarding configuration",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"block_rule": dsschema.SingleNestedAttribute{
@@ -1286,7 +1286,7 @@ var ForwardingProfilesDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 									},
 									"traffic_type": dsschema.StringAttribute{
-										MarkdownDescription: "Type of traffic this ZTNA rule applies to (dns, network, or both)",
+										MarkdownDescription: "Type of traffic this ZTNA rule applies to (dns, network, or both). Possible values are `dns`, `dns-and-network-traffic` and `network-traffic`.",
 										Computed:            true,
 									},
 									"user_locations": dsschema.StringAttribute{

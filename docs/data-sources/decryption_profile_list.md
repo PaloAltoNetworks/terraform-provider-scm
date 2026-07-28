@@ -57,15 +57,9 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Must start with alphanumeric char and should contain only alphanemeric, underscore, hyphen, dot or space
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -132,5 +126,5 @@ Read-Only:
 - `keyxchg_algo_dhe` (Boolean) Keyxchg algo dhe
 - `keyxchg_algo_ecdhe` (Boolean) Keyxchg algo ecdhe
 - `keyxchg_algo_rsa` (Boolean) Keyxchg algo rsa
-- `max_version` (String) Max version
-- `min_version` (String) Min version
+- `max_version` (String) Max version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2`, `tls1-3` and `max`.
+- `min_version` (String) Min version. Possible values are `sslv3`, `tls1-0`, `tls1-1`, `tls1-2` and `tls1-3`.

@@ -38,8 +38,8 @@ func NewConfigPushAction() action.Action {
 	return &ConfigPushAction{}
 }
 
-func (a *ConfigPushAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_config_push"
+func (a *ConfigPushAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_config_push"
 }
 
 func (a *ConfigPushAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

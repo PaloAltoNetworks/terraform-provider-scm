@@ -81,7 +81,7 @@ var AddressesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -97,7 +97,7 @@ var AddressesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -114,7 +114,7 @@ var AddressesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtLeast(1),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$"), "pattern must match "+"^[a-zA-Z0-9_]([a-zA-Z0-9._-])+[a-zA-Z0-9]$"),
 			},
-			MarkdownDescription: "Fully qualified domain name\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "Fully qualified domain name",
 			Optional:            true,
 		},
 		"id": schema.StringAttribute{
@@ -132,7 +132,7 @@ var AddressesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ip_wildcard"),
 				),
 			},
-			MarkdownDescription: "IP address with or without CIDR notation\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "IP address with or without CIDR notation",
 			Optional:            true,
 		},
 		"ip_range": schema.StringAttribute{
@@ -143,7 +143,7 @@ var AddressesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ip_wildcard"),
 				),
 			},
-			MarkdownDescription: "Ip range\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "Ip range",
 			Optional:            true,
 		},
 		"ip_wildcard": schema.StringAttribute{
@@ -154,7 +154,7 @@ var AddressesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ip_range"),
 				),
 			},
-			MarkdownDescription: "IP wildcard mask\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "IP wildcard mask",
 			Optional:            true,
 		},
 		"name": schema.StringAttribute{
@@ -173,7 +173,7 @@ var AddressesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -207,17 +207,17 @@ var AddressesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"fqdn": dsschema.StringAttribute{
-			MarkdownDescription: "Fully qualified domain name\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "Fully qualified domain name",
 			Computed:            true,
 		},
 		"id": dsschema.StringAttribute{
@@ -225,15 +225,15 @@ var AddressesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"ip_netmask": dsschema.StringAttribute{
-			MarkdownDescription: "IP address with or without CIDR notation\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "IP address with or without CIDR notation",
 			Computed:            true,
 		},
 		"ip_range": dsschema.StringAttribute{
-			MarkdownDescription: "Ip range\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "Ip range",
 			Computed:            true,
 		},
 		"ip_wildcard": dsschema.StringAttribute{
-			MarkdownDescription: "IP wildcard mask\n\n> ℹ️ **Note:** You must specify exactly one of `fqdn`, `ip_netmask`, `ip_range`, and `ip_wildcard`.",
+			MarkdownDescription: "IP wildcard mask",
 			Computed:            true,
 		},
 		"name": dsschema.StringAttribute{
@@ -242,7 +242,7 @@ var AddressesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

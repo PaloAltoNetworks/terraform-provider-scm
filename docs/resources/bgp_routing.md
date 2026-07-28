@@ -42,7 +42,7 @@ resource "scm_bgp_routing" "example" {
 
 - `accept_route_over_sc` (Boolean) Accept route over s c
 - `add_host_route_to_ike_peer` (Boolean) Add host route to ike peer
-- `backbone_routing` (String) Backbone routing
+- `backbone_routing` (String) Backbone routing. Possible values are `no-asymmetric-routing`, `asymmetric-routing-only` and `asymmetric-routing-with-load-share`.
 - `outbound_routes_for_services` (List of String) Outbound routes for services
 - `routing_preference` (Attributes) Routing preference (see [below for nested schema](#nestedatt--routing_preference))
 - `withdraw_static_route` (Boolean) Withdraw static route
@@ -56,12 +56,10 @@ resource "scm_bgp_routing" "example" {
 
 Optional:
 
-- `default` (Attributes) Default
+~> **Note:** You must specify at most one of `default` or `hot_potato_routing`.
 
-> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`. (see [below for nested schema](#nestedatt--routing_preference--default))
-- `hot_potato_routing` (Attributes) Hot potato routing
-
-> ℹ️ **Note:** You must specify exactly one of `default` and `hot_potato_routing`. (see [below for nested schema](#nestedatt--routing_preference--hot_potato_routing))
+- `default` (Attributes) Default (see [below for nested schema](#nestedatt--routing_preference--default))
+- `hot_potato_routing` (Attributes) Hot potato routing (see [below for nested schema](#nestedatt--routing_preference--hot_potato_routing))
 
 <a id="nestedatt--routing_preference--default"></a>
 ### Nested Schema for `routing_preference.default`

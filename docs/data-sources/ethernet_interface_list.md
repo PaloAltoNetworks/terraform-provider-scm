@@ -53,37 +53,23 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Interface name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
 - `aggregate_group` (String) Aggregate group
-
-> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.
 - `comment` (String) Interface description
 - `default_value` (String) Default interface assignment
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
-- `layer2` (Attributes) Layer2
-
-> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`. (see [below for nested schema](#nestedatt--data--layer2))
-- `layer3` (Attributes) Ethernet Interface Layer 3 configuration
-
-> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`. (see [below for nested schema](#nestedatt--data--layer3))
-- `link_duplex` (String) Link duplex
-- `link_speed` (String) Link speed
-- `link_state` (String) Link state
+- `layer2` (Attributes) Layer2 (see [below for nested schema](#nestedatt--data--layer2))
+- `layer3` (Attributes) Ethernet Interface Layer 3 configuration (see [below for nested schema](#nestedatt--data--layer3))
+- `link_duplex` (String) Link duplex. Possible values are `auto`, `half` and `full`.
+- `link_speed` (String) Link speed. Possible values are `auto`, `10`, `100`, `1000`, `10000`, `40000` and `100000`.
+- `link_state` (String) Link state. Possible values are `auto`, `up` and `down`.
 - `poe` (Attributes) Poe (see [below for nested schema](#nestedatt--data--poe))
-- `tap` (Attributes) Tap
-
-> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`. (see [below for nested schema](#nestedatt--data--tap))
+- `tap` (Attributes) Tap (see [below for nested schema](#nestedatt--data--tap))
 - `tfid` (String) The Terraform ID.
 
 <a id="nestedatt--data--layer2"></a>
@@ -91,7 +77,7 @@ Read-Only:
 
 Read-Only:
 
-- `lldp` (Attributes) LLDP Settings (see [below for nested schema](#nestedatt--data--layer2--lldp))
+- `lldp` (Attributes) LLDP settings for the interface (see [below for nested schema](#nestedatt--data--layer2--lldp))
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `vlan_tag` (String) Assign interface to VLAN tag
 
@@ -101,6 +87,16 @@ Read-Only:
 Read-Only:
 
 - `enable` (Boolean) Enable LLDP on Interface
+- `high_availability` (Attributes) LLDP high availability settings (see [below for nested schema](#nestedatt--data--layer2--lldp--high_availability))
+- `profile` (String) Name of the LLDP profile to assign to the interface
+
+<a id="nestedatt--data--layer2--lldp--high_availability"></a>
+### Nested Schema for `data.layer2.lldp.high_availability`
+
+Read-Only:
+
+- `passive_pre_negotiation` (Boolean) Passive pre negotiation
+
 
 
 
@@ -111,18 +107,13 @@ Read-Only:
 
 - `arp` (Attributes List) Ethernet Interfaces ARP configuration (see [below for nested schema](#nestedatt--data--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Ethernet Interfaces. (see [below for nested schema](#nestedatt--data--layer3--ddns_config))
-- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
+- `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object (see [below for nested schema](#nestedatt--data--layer3--dhcp_client))
 - `interface_management_profile` (String) Interface management profile
-- `ip` (Attributes List) Ethernet Interface IP addresses
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--data--layer3--ip))
+- `ip` (Attributes List) Ethernet Interface IP addresses (see [below for nested schema](#nestedatt--data--layer3--ip))
+- `lldp` (Attributes) LLDP settings for the interface (see [below for nested schema](#nestedatt--data--layer3--lldp))
 - `mtu` (Number) MTU
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
-- `pppoe` (Attributes) Pppoe
-
-> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`. (see [below for nested schema](#nestedatt--data--layer3--pppoe))
+- `pppoe` (Attributes) Pppoe (see [below for nested schema](#nestedatt--data--layer3--pppoe))
 
 <a id="nestedatt--data--layer3--arp"></a>
 ### Nested Schema for `data.layer3.arp`
@@ -175,13 +166,31 @@ Read-Only:
 - `name` (String) Ethernet Interface IP addresses name
 
 
+<a id="nestedatt--data--layer3--lldp"></a>
+### Nested Schema for `data.layer3.lldp`
+
+Read-Only:
+
+- `enable` (Boolean) Enable LLDP on Interface
+- `high_availability` (Attributes) LLDP high availability settings (see [below for nested schema](#nestedatt--data--layer3--lldp--high_availability))
+- `profile` (String) Name of the LLDP profile to assign to the interface
+
+<a id="nestedatt--data--layer3--lldp--high_availability"></a>
+### Nested Schema for `data.layer3.lldp.high_availability`
+
+Read-Only:
+
+- `passive_pre_negotiation` (Boolean) Passive pre negotiation
+
+
+
 <a id="nestedatt--data--layer3--pppoe"></a>
 ### Nested Schema for `data.layer3.pppoe`
 
 Read-Only:
 
 - `access_concentrator` (String) Access concentrator
-- `authentication` (String) Authentication protocol
+- `authentication` (String) Authentication protocol. Possible values are `CHAP`, `PAP` and `auto`.
 - `default_route_metric` (Number) Metric of the default route created
 - `enable` (Boolean) Enable
 - `passive` (Attributes) Passive (see [below for nested schema](#nestedatt--data--layer3--pppoe--passive))

@@ -59,14 +59,8 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -97,7 +91,7 @@ Read-Only:
 - `color14` = Black
 - `color15` = Gold
 - `color16` = Brown
-- `color17` = Olive
+- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.
 - `banner_footer_text_color` (String) The following list details the supported values and their colors.
 
 - `color1` = Red
@@ -116,7 +110,7 @@ Read-Only:
 - `color14` = Black
 - `color15` = Gold
 - `color16` = Brown
-- `color17` = Olive
+- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.
 - `banner_header` (String) Banner header
 - `banner_header_color` (String) The following list details the supported values and their colors.
 
@@ -136,7 +130,7 @@ Read-Only:
 - `color14` = Black
 - `color15` = Gold
 - `color16` = Brown
-- `color17` = Olive
+- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.
 - `banner_header_footer_match` (Boolean) Banner header footer match
 - `banner_header_text_color` (String) The following list details the supported values and their colors.
 
@@ -156,7 +150,7 @@ Read-Only:
 - `color14` = Black
 - `color15` = Gold
 - `color16` = Brown
-- `color17` = Olive
+- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.
 - `message` (String) Message
 - `motd_color` (String) The following list details the supported values and their colors.
 
@@ -176,8 +170,8 @@ Read-Only:
 - `color14` = Black
 - `color15` = Gold
 - `color16` = Brown
-- `color17` = Olive
+- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.
 - `motd_do_not_display_again` (Boolean) Motd do not display again
 - `motd_enable` (Boolean) Motd enable
 - `motd_title` (String) Motd title
-- `severity` (String) Severity
+- `severity` (String) Severity. Possible values are `warning`, `question`, `error` and `info`.

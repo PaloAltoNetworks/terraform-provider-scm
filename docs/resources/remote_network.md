@@ -114,10 +114,10 @@ resource "scm_remote_network" "example" {
 
 ### Optional
 
-- `ecmp_load_balancing` (String) Ecmp load balancing
+- `ecmp_load_balancing` (String) Ecmp load balancing. Possible values are `enable` and `disable`.
 - `ecmp_tunnels` (Attributes List) ecmp_tunnels is required when ecmp_load_balancing is enable (see [below for nested schema](#nestedatt--ecmp_tunnels))
 - `ipsec_tunnel` (String) ipsec_tunnel is required when ecmp_load_balancing is disable
-- `protocol` (Attributes) setup the protocol when ecmp_load_balancing is disable (see [below for nested schema](#nestedatt--protocol))
+- `protocol` (Attributes) setup the protocol when ecmp_load_balancing is disabled (see [below for nested schema](#nestedatt--protocol))
 - `secondary_ipsec_tunnel` (String) specify secondary ipsec_tunnel if needed
 - `spn_name` (String) spn-name is needed when license_type is FWAAS-AGGREGATE
 - `subnets` (List of String) Subnets
@@ -155,7 +155,7 @@ Optional:
 - `originate_default_route` (Boolean) Originate default route?
 - `peer_as` (String) BGP peer ASN
 - `peer_ip_address` (String) Remote peer IP address
-- `peering_type` (String) Route exchange types
+- `peering_type` (String) Route exchange types. Possible values are `exchange-v4-over-v4`, `exchange-v4-v6-over-v4`, `exchange-v4-over-v4-v6-over-v6` and `exchange-v6-over-v6`.
 - `secret` (String, Sensitive) BGP peering secret
 - `summarize_mobile_user_routes` (Boolean) Summarize mobile user routes?
 
@@ -181,7 +181,7 @@ Optional:
 - `originate_default_route` (Boolean) Originate default route?
 - `peer_as` (String) BGP peer ASN
 - `peer_ip_address` (String) Remote peer IP address
-- `peering_type` (String) Route exchange types
+- `peering_type` (String) Route exchange types. Possible values are `exchange-v4-over-v4`, `exchange-v4-v6-over-v4`, `exchange-v4-over-v4-v6-over-v6` and `exchange-v6-over-v6`.
 - `secret` (String, Sensitive) BGP peering secret
 - `summarize_mobile_user_routes` (Boolean) Summarize mobile user routes?
 

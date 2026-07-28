@@ -153,17 +153,13 @@ resource "scm_http_header_profile" "scm_http_header_profile_3" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) The description of the HTTP header profile
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `http_header_insertion` (Attributes List) A list of HTTP header profile rules (see [below for nested schema](#nestedatt--http_header_insertion))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -185,7 +181,7 @@ Required:
 
 - `domains` (List of String) A list of DNS domains
 - `headers` (Attributes List) Headers (see [below for nested schema](#nestedatt--http_header_insertion--type--headers))
-- `name` (String) The HTTP header insertion type
+- `name` (String) The HTTP header insertion type. Possible values are `Custom`, `Dropbox Network Control`, `Dynamic Fields`, `Google Apps Access Control`, `Microsoft Office365 Tenant Restrictions` and `Youtube Safe Search`.
 
 <a id="nestedatt--http_header_insertion--type--headers"></a>
 ### Nested Schema for `http_header_insertion.type.headers`

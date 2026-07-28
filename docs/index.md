@@ -10,8 +10,114 @@ The `scm` provider provides resources and data sources to manage and query Strat
 
 This provider covers the following aspects of Strata Cloud Manager:
 * NGFW & Prisma Access
+* ZTNA Connector
 
 ## Release Notes
+
+### v1.0.12-beta.4
+
+#### FEATURES
+
+* data-source/scm_location_list: Added support, examples and tests
+* actions/scm_application_defaults: Bootstrap Prisma Access application defaults (certificates, config nodes) on a fresh tenant
+* actions/ztna_tenant_start_onboarding: Initiates ZTNA tenant onboarding
+* actions/ztna_tenant_start_offboarding: Initiates ZTNA tenant deletion and cleanup
+* resource/ztna_connector_quiesce: Added support and examples (resource, data-source)
+* data-source/ztna_license: Added support and examples
+* data-source/ztna_tenant_status: Added support and examples
+* data-source/ztna_connector_group_connectors: Added support and examples
+* data-source/ztna_connector_group_fqdn_rules: Added support and examples
+* data-source/ztna_connector_group_subnet_rules: Added support and examples
+* data-source/ztna_connector_group_wildcards: Added support and examples
+* data-source/ztna_connector_group_filters: Added support and examples
+* data-source/ztna_connector_images: Added support and examples
+* data-source/ztna_connector_filters: Added support and examples
+* data-source/ztna_application_filters: Added support and examples
+* data-source/ztna_subnet_filters: Added support and examples
+* data-source/ztna_wildcard_filters: Added support and examples
+* data-source/ztna_discovered_application_filters: Added support and examples
+* data-source/ztna_connector_quiesce: Added support and examples
+* data-source/ztna_connector_group_upgrade_status: Added support and examples
+* data-source/ztna_connector_group_scheduled_upgrade: Added support and examples
+* data-source/ztna_connector_upgrade_status: Added support and examples
+* data-source/ztna_connector_scheduled_upgrade: Added support and examples
+
+#### BUG FIXES
+
+* resource/scm_service_connection: Resolved model issue with secondary bgp settings ([#128](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/128))
+* resource/scm_ethernet_interface: Added missing lldp support for `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
+* resource/scm_aggregate_interface: Added missing lldp support for `layer2` and layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
+* resource/scm_pbf_rule: Added missing `negate_source` and `negate_destination` flags ([#118](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/118))
+* resources/scm_security_rule: Corrected docs for `target_rule`. Ref-by-name is not supported (#125)
+* Fixed ZTNA x-panw-region header propagation
+* resources/scm_folder: Resolved apply error caused by unset `labels` property (#116)
+
+#### ENHANCEMENTS
+
+* Added possible values to `enum` properties across >500 resources (#86)
+* Consolidated `oneOf` requirements for optional `resource` properties in terraform docs across all `resources`
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.4"
+
+### v1.0.12-beta.3
+
+* Fixed ZTNA documentation display in Terraform Registry and added clarification of
+current functionality.
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.3"
+
+
+### v1.0.12-beta.2
+
+* Fixed ZTNA documentation display in Terraform Registry
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.2"
+
+### v1.0.12-beta.1
+
+#### FEATURES
+
+* ZTNA Connector support is introduced in this release under a new ztna_* resource prefix,
+  separate from the existing scm_* resources. All resources and data sources below target
+  the ZTNA Connector API v2.0.
+
+#### Resources (Supported — fully tested with examples)
+
+* resources/ztna_connector_group: Added support, examples and tests (resource, data-source)
+* resources/ztna_connector: Added support, examples and tests (resource, data-source)
+* resources/ztna_fqdn_application: Added support, examples and tests (resource, data-source)
+* resources/ztna_subnet: Added support, examples and tests (resource, data-source)
+* resources/ztna_wildcard: Added support, examples and tests (resource, data-source)
+* resources/ztna_connector_group_scheduled_upgrade: Added support and examples(resource, data-source)
+* resources/ztna_connector_scheduled_upgrade: Added support and examples(resource, data-source)
+
+
+#### Data Sources (Supported — fully tested with examples)
+
+* data-source/ztna_connector_group: Added support, examples and tests
+* data-source/ztna_connector_group_list: Added support, examples and tests
+* data-source/ztna_connector: Added support, examples and tests
+* data-source/ztna_connector_list: Added support, examples and tests
+* data-source/ztna_fqdn_application: Added support, examples and tests
+* data-source/ztna_fqdn_application_list: Added support, examples and tests
+* data-source/ztna_subnet: Added support, examples and tests
+* data-source/ztna_subnet_list: Added support, examples and tests
+* data-source/ztna_wildcard: Added support, examples and tests
+* data-source/ztna_wildcard_list: Added support, examples and tests
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.1"
 
 ### v1.0.11
 
@@ -331,6 +437,52 @@ THIS SOFTWARE IS RELEASED AS A PROOF OF CONCEPT FOR EXPERIMENTAL PURPOSES ONLY. 
 ## Example Usage
 
 ```terraform
+# This provider serves two resource prefixes from a single binary:
+#   scm_*  — Strata Cloud Manager resources (NGFW & Prisma Access)
+#   ztna_* — ZTNA Connector resources (Zero Trust Network Access)
+#
+# SCM and ZTNA use different API hosts:
+#   scm_*  resources use the "host" field      (e.g. api.strata.paloaltonetworks.com)
+#   ztna_* resources use the "ztna_host" field (e.g. api.sase.paloaltonetworks.com)
+# Both "host" and "ztna_host" can be specified together in the same provider block
+# when configuring credentials inline. If using an auth file, both fields can be
+# included in the same JSON file.
+#
+# ZTNA resources also require the "x_panw_region" field, which sets the
+# x-panw-region HTTP header on all ZTNA API requests. Valid values: americas, europe, apac.
+# This can be set via the provider block, the X_PANW_REGION environment variable,
+# or the "x_panw_region" key in the JSON auth file.
+#
+# To use both, declare two provider aliases in required_providers pointing to
+# the same source, and configure each with its own provider block.
+# The ztna_host and x_panw_region fields in the auth file or provider block are
+# used for ZTNA resources.
+#
+# Example with both providers:
+#
+# terraform {
+#   required_providers {
+#     scm = {
+#       source  = "PaloAltoNetworks/scm"
+#     }
+#     ztna = {
+#       source  = "PaloAltoNetworks/scm"
+#     }
+#   }
+# }
+#
+# provider "scm" {
+#   auth_file = "/path/to/scm-config.json"
+#   logging   = "debug"
+# }
+#
+# provider "ztna" {
+#   auth_file     = "/path/to/scm-config.json"
+#   ztna_host     = "api.sase.paloaltonetworks.com"
+#   x_panw_region = "americas"   # or "europe" / "apac"
+#   logging       = "debug"
+# }
+
 # This file is embedded using go:embed
 provider "scm" {
   host          = ""
@@ -383,6 +535,8 @@ There are multiple ways to specify the provider's parameters.  If overlapping va
 - `port` (Number) The port number to use for API commands, if non-standard for the given protocol. Environment variable: `SCM_PORT`. JSON config file variable: `port`.
 - `protocol` (String) The protocol to use for SCM. This should be 'http' or 'https'. Default: `https`. Environment variable: `SCM_PROTOCOL`. JSON config file variable: `protocol`.
 - `scope` (String) The client scope. Environment variable: `SCM_SCOPE`. JSON config file variable: `scope`.
+- `x_panw_region` (String) The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: americas, europe, apac. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.
+- `ztna_host` (String) The hostname of the ZTNA Connector API. Required when using ztna_* resources. Default: `api.sase.paloaltonetworks.com`. Environment variable: `ZTNA_HOST`. JSON config file variable: `ztna_host`.
 
 
 ## Debugging

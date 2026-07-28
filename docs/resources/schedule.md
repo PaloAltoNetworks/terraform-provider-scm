@@ -22,15 +22,11 @@ Schedule resource
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -42,24 +38,20 @@ Schedule resource
 
 Optional:
 
+~> **Note:** You must specify exactly one of `non_recurring` or `recurring`.
+
 - `non_recurring` (List of String) Non recurring
-
-> ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`.
-- `recurring` (Attributes) Recurring
-
-> ℹ️ **Note:** You must specify exactly one of `non_recurring` and `recurring`. (see [below for nested schema](#nestedatt--schedule_type--recurring))
+- `recurring` (Attributes) Recurring (see [below for nested schema](#nestedatt--schedule_type--recurring))
 
 <a id="nestedatt--schedule_type--recurring"></a>
 ### Nested Schema for `schedule_type.recurring`
 
 Optional:
 
+~> **Note:** You must specify at most one of `daily` or `weekly`.
+
 - `daily` (List of String) Daily
-
-> ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`.
-- `weekly` (Attributes) Weekly
-
-> ℹ️ **Note:** You must specify exactly one of `daily` and `weekly`. (see [below for nested schema](#nestedatt--schedule_type--recurring--weekly))
+- `weekly` (Attributes) Weekly (see [below for nested schema](#nestedatt--schedule_type--recurring--weekly))
 
 <a id="nestedatt--schedule_type--recurring--weekly"></a>
 ### Nested Schema for `schedule_type.recurring.weekly`

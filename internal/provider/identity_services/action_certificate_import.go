@@ -42,8 +42,8 @@ func NewCertificateImportAction() action.Action {
 	return &CertificateImportAction{}
 }
 
-func (a *CertificateImportAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_certificate_import"
+func (a *CertificateImportAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_certificate_import"
 }
 
 func (a *CertificateImportAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {
@@ -55,15 +55,15 @@ func (a *CertificateImportAction) Schema(_ context.Context, _ action.SchemaReque
 				Required:    true,
 			},
 			"device": schema.StringAttribute{
-				Description: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+				Description: "The device in which the resource is defined",
 				Optional:    true,
 			},
 			"folder": schema.StringAttribute{
-				Description: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+				Description: "The folder in which the resource is defined",
 				Optional:    true,
 			},
 			"format": schema.StringAttribute{
-				Description: "Certificate format",
+				Description: "Certificate format. Possible values are `pem`, `pkcs12` and `der`.",
 				Required:    true,
 			},
 			"key_file": schema.StringAttribute{
@@ -79,7 +79,7 @@ func (a *CertificateImportAction) Schema(_ context.Context, _ action.SchemaReque
 				Optional:    true,
 			},
 			"snippet": schema.StringAttribute{
-				Description: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+				Description: "The snippet in which the resource is defined",
 				Optional:    true,
 			},
 		},

@@ -23,6 +23,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 #### BUG FIXES
 
+* resource/scm_bgp_route_map: Fixed int32 overflow for large BGP AS numbers in `aspath_prepend` and `aspath_exclude` fields (now uses int64)
 * resource/scm_service_connection: Resolved model issue with secondary bgp settings ([#128](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/128))
 * resource/scm_ethernet_interface: Added missing lldp support for `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
 * resource/scm_aggregate_interface: Added missing lldp support for `layer2` and layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))

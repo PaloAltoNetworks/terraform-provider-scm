@@ -8,13 +8,13 @@ import (
 func GetActions() []func() action.Action {
 	return []func() action.Action{
 		NewSnippetSnapshotDiffAction,
-		NewSnippetSnapshotCompareAction,
-		NewTrustValidationAction,
-		NewSnippetSnapshotUpdatesAction,
-		NewSnippetSnapshotPublishAction,
-		NewSnippetSnapshotConvertAction,
-		NewSnippetSnapshotSaveAction,
 		NewSharedSnippetsLoadAction,
 		NewSnippetSnapshotLoadAction,
+		NewSnippetSnapshotSaveAction,
+		NewSnippetSnapshotPublishAction,
+		NewSnippetSnapshotCompareAction,
+		NewSnippetSnapshotUpdatesAction,
+		NewSnippetSnapshotConvertAction,
+		NewTrustValidationAction,
 	}
 }

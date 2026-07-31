@@ -294,14 +294,14 @@ func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
 	var actions []func() action.Action
 	// Add config_setup package actions
 	actions = append(actions, tfProviderConfigSetup.GetActions()...)
-	// Add identity_services package actions
-	actions = append(actions, tfProviderIdentityServices.GetActions()...)
-	// Add config_operations package actions
-	actions = append(actions, tfProviderConfigOperations.GetActions()...)
-	// Add deployment_services package actions
-	actions = append(actions, tfProviderDeploymentServices.GetActions()...)
 	// Add network_services package actions
 	actions = append(actions, tfProviderNetworkServices.GetActions()...)
+	// Add deployment_services package actions
+	actions = append(actions, tfProviderDeploymentServices.GetActions()...)
+	// Add config_operations package actions
+	actions = append(actions, tfProviderConfigOperations.GetActions()...)
+	// Add identity_services package actions
+	actions = append(actions, tfProviderIdentityServices.GetActions()...)
 
 	return actions
 }

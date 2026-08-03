@@ -43,6 +43,10 @@ DELETE_FAILED_ERRORS=()
 # Resources to skip (require special setup, not testable in isolation)
 SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade ztna_connector_quiesce"
 
+# Resources that need productized API for complete execution
+NEEDS_PRODUCTIZED_API="scm_config_match_list scm_globalprotect_match_list scm_hipmatch_match_list scm_iptag_match_list scm_log_forwarding_profile scm_system_match_list scm_userid_match_list"
+SKIP_LIST="$SKIP_LIST $NEEDS_PRODUCTIZED_API"
+
 # -----------------------------------------------------------------------------
 # Detect dev_overrides — when active, terraform init must be skipped.
 # -----------------------------------------------------------------------------
@@ -400,7 +404,16 @@ if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
       for r in "${SKIPPED[@]}"; do echo "- $r"; done
       echo ""
       echo "</details>"
+      echo ""
     fi
+
+    # Needs Productized API section
+    echo "### Needs Productized API for Complete Execution"
+    echo ""
+    echo "The following resources are skipped because they require productized API support:"
+    echo ""
+    for r in $NEEDS_PRODUCTIZED_API; do echo "- \`$r\`"; done
+    echo ""
   } >> "$GITHUB_STEP_SUMMARY"
 fi
 

@@ -58,6 +58,7 @@ type ScmProviderModel struct {
 	Protocol     types.String `tfsdk:"protocol"`
 	Host         types.String `tfsdk:"host"`
 	ZtnaHost     types.String `tfsdk:"ztna_host"`
+	XPanwRegion  types.String `tfsdk:"x_panw_region"`
 	Port         types.Int64  `tfsdk:"port"`
 	Headers      types.Map    `tfsdk:"headers"`
 	ClientId     types.String `tfsdk:"client_id"`
@@ -92,6 +93,10 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 			},
 			"ztna_host": schema.StringAttribute{
 				Description: "The hostname of the ZTNA Connector API. Required when using ztna_* resources. Default: `api.sase.paloaltonetworks.com`. Environment variable: `ZTNA_HOST`. JSON config file variable: `ztna_host`.",
+				Optional:    true,
+			},
+			"x_panw_region": schema.StringAttribute{
+				Description: "The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: americas, europe, apac. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.",
 				Optional:    true,
 			},
 			"port": schema.Int64Attribute{
@@ -153,7 +158,8 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		AuthUrl:          config.AuthUrl.ValueString(),
 		Protocol:         config.Protocol.ValueString(),
 		Host:             config.Host.ValueString(),
-		ZtnaHost:         config.Host.ValueString(),
+		ZtnaHost:         config.ZtnaHost.ValueString(),
+		XPanwRegion:      config.XPanwRegion.ValueString(),
 		Port:             int(config.Port.ValueInt64()),
 		Headers:          headers,
 		ClientId:         config.ClientId.ValueString(),
@@ -302,6 +308,8 @@ func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
 	actions = append(actions, tfProviderIdentityServices.GetActions()...)
 	// Add network_services package actions
 	actions = append(actions, tfProviderNetworkServices.GetActions()...)
+	// Add ztna_connector_all package actions
+	actions = append(actions, tfProviderZtnaConnectorAll.GetActions()...)
 
 	return actions
 }

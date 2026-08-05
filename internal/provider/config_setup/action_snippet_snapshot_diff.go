@@ -38,8 +38,8 @@ func NewSnippetSnapshotDiffAction() action.Action {
 	return &SnippetSnapshotDiffAction{}
 }
 
-func (a *SnippetSnapshotDiffAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet_snapshot_diff"
+func (a *SnippetSnapshotDiffAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_snippet_snapshot_diff"
 }
 
 func (a *SnippetSnapshotDiffAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

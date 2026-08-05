@@ -13,12 +13,26 @@ List Connector Filters
 ## Example Usage
 
 ```terraform
-# List available filter fields for ZTNA Connectors.
-# Optionally specify a field name and search term to narrow results.
-data "ztna_connector_filters" "example" {}
+# Without field param: returns all available filter field names categorised by type.
+# free_form_filters and static_filters are populated; values is empty.
+data "ztna_connector_filters" "all_fields" {}
 
-output "connector_filter_fields" {
-  value = data.ztna_connector_filters.example.filters
+output "connector_free_form_filters" {
+  value = data.ztna_connector_filters.all_fields.free_form_filters
+}
+
+output "connector_static_filters" {
+  value = data.ztna_connector_filters.all_fields.static_filters
+}
+
+# With field param: returns the possible values for the specified field.
+# values is populated; free_form_filters and static_filters are empty.
+data "ztna_connector_filters" "by_field" {
+  field = "name"
+}
+
+output "connector_name_values" {
+  value = data.ztna_connector_filters.by_field.values
 }
 ```
 
@@ -32,6 +46,7 @@ output "connector_filter_fields" {
 
 ### Read-Only
 
+- `free_form_filters` (List of String) Free-form filter field names (returned when no field is specified).
+- `static_filters` (List of String) Static filter field names (returned when no field is specified).
 - `tfid` (String)
-- `total` (Number) Number of values returned.
-- `values` (List of String) List of values returned by the API.
+- `values` (List of String) Filter values when a specific field is queried.

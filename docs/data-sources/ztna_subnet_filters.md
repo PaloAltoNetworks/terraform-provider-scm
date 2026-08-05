@@ -13,12 +13,26 @@ List Subnet Filters
 ## Example Usage
 
 ```terraform
-# List available filter fields for ZTNA Subnets.
-# Optionally specify a field name and search term to narrow results.
-data "ztna_subnet_filters" "example" {}
+# Without field param: returns all available filter field names categorised by type.
+# free_form_filters and static_filters are populated; values is empty.
+data "ztna_subnet_filters" "all_fields" {}
 
-output "subnet_filter_fields" {
-  value = data.ztna_subnet_filters.example.filters
+output "subnet_free_form_filters" {
+  value = data.ztna_subnet_filters.all_fields.free_form_filters
+}
+
+output "subnet_static_filters" {
+  value = data.ztna_subnet_filters.all_fields.static_filters
+}
+
+# With field param: returns the possible values for the specified field.
+# values is populated; free_form_filters and static_filters are empty.
+data "ztna_subnet_filters" "by_field" {
+  field = "name"
+}
+
+output "subnet_name_values" {
+  value = data.ztna_subnet_filters.by_field.values
 }
 ```
 
@@ -32,6 +46,7 @@ output "subnet_filter_fields" {
 
 ### Read-Only
 
+- `free_form_filters` (List of String) Free-form filter field names (returned when no field is specified).
+- `static_filters` (List of String) Static filter field names (returned when no field is specified).
 - `tfid` (String)
-- `total` (Number) Number of values returned.
-- `values` (List of String) List of values returned by the API.
+- `values` (List of String) Filter values when a specific field is queried.

@@ -41,7 +41,7 @@ DELETE_FAILED=()
 DELETE_FAILED_ERRORS=()
 
 # Resources to skip (require special setup, not testable in isolation)
-SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade"
+SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade ztna_connector_quiesce"
 
 # Resources that need productized API for complete execution
 NEEDS_PRODUCTIZED_API="scm_config_match_list scm_globalprotect_match_list scm_hipmatch_match_list scm_iptag_match_list scm_log_forwarding_profile scm_system_match_list scm_userid_match_list"

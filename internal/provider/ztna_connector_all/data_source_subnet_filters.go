@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -27,11 +28,12 @@ type SubnetFiltersDataSource struct {
 }
 
 type subnetFiltersModel struct {
-	Field  types.String `tfsdk:"field"`
-	Search types.String `tfsdk:"search"`
-	Values types.List   `tfsdk:"values"`
-	Total  types.Int64  `tfsdk:"total"`
-	Tfid   types.String `tfsdk:"tfid"`
+	Field           types.String `tfsdk:"field"`
+	Search          types.String `tfsdk:"search"`
+	Values          types.List   `tfsdk:"values"`
+	FreeFormFilters types.List   `tfsdk:"free_form_filters"`
+	StaticFilters   types.List   `tfsdk:"static_filters"`
+	Tfid            types.String `tfsdk:"tfid"`
 }
 
 func (d *SubnetFiltersDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
@@ -51,13 +53,19 @@ func (d *SubnetFiltersDataSource) Schema(_ context.Context, _ datasource.SchemaR
 				Optional:    true,
 			},
 			"values": schema.ListAttribute{
-				Description: "List of values returned by the API.",
+				Description: "Filter values when a specific field is queried.",
 				Computed:    true,
 				ElementType: types.StringType,
 			},
-			"total": schema.Int64Attribute{
-				Description: "Number of values returned.",
+			"free_form_filters": schema.ListAttribute{
+				Description: "Free-form filter field names (returned when no field is specified).",
 				Computed:    true,
+				ElementType: types.StringType,
+			},
+			"static_filters": schema.ListAttribute{
+				Description: "Static filter field names (returned when no field is specified).",
+				Computed:    true,
+				ElementType: types.StringType,
 			},
 			"tfid": schema.StringAttribute{
 				Computed: true,
@@ -100,19 +108,50 @@ func (d *SubnetFiltersDataSource) Read(ctx context.Context, req datasource.ReadR
 
 	values, _, err := apiReq.Execute()
 	if err != nil {
+		// When no field param is set the API returns a categorised object instead of a string
+		// array. Detect this by trying to unmarshal the raw error body as the object format.
+		if data.Field.IsNull() {
+			if bodyErr, ok := err.(interface{ Body() []byte }); ok {
+				var filterObj struct {
+					FreeFormFilters []string `json:"free form filters"`
+					StaticFilters   []string `json:"static filters"`
+				}
+				if json.Unmarshal(bodyErr.Body(), &filterObj) == nil {
+					freeFormList, diags := types.ListValueFrom(ctx, types.StringType, filterObj.FreeFormFilters)
+					resp.Diagnostics.Append(diags...)
+					staticList, diags := types.ListValueFrom(ctx, types.StringType, filterObj.StaticFilters)
+					resp.Diagnostics.Append(diags...)
+					emptyList, diags := types.ListValueFrom(ctx, types.StringType, []string{})
+					resp.Diagnostics.Append(diags...)
+					if resp.Diagnostics.HasError() {
+						return
+					}
+					data.Values = emptyList
+					data.FreeFormFilters = freeFormList
+					data.StaticFilters = staticList
+					data.Tfid = types.StringValue("subnet_filters")
+					resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+					return
+				}
+			}
+		}
 		resp.Diagnostics.AddError("Error calling ListSubnetFilters", fmt.Sprintf("API error: %s", err.Error()))
 		resp.Diagnostics.AddError("API Request Failed", utils.PrintScmError(err))
 		return
 	}
 
-	listVal, diags := types.ListValueFrom(ctx, types.StringType, values)
+	// field was specified: response is a string array of matching values
+	valueList, diags := types.ListValueFrom(ctx, types.StringType, values)
+	resp.Diagnostics.Append(diags...)
+	emptyList, diags := types.ListValueFrom(ctx, types.StringType, []string{})
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	data.Values = listVal
-	data.Total = types.Int64Value(int64(len(values)))
+	data.Values = valueList
+	data.FreeFormFilters = emptyList
+	data.StaticFilters = emptyList
 	data.Tfid = types.StringValue("subnet_filters")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

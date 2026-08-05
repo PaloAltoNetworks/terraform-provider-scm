@@ -43,8 +43,8 @@ func NewAutoVpnPushAction() action.Action {
 	return &AutoVpnPushAction{}
 }
 
-func (a *AutoVpnPushAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_auto_vpn_push"
+func (a *AutoVpnPushAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_auto_vpn_push"
 }
 
 func (a *AutoVpnPushAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

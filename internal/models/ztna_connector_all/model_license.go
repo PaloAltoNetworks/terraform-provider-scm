@@ -13,8 +13,8 @@ import (
 // Package: ztna_connector_all
 // This file contains models for the ztna_connector_all SDK package
 
-// LicenseInfo represents the Terraform model for LicenseInfo
-type LicenseInfo struct {
+// License represents the Terraform model for License
+type License struct {
 	Tfid            types.String           `tfsdk:"tfid"`
 	Applications    basetypes.Float64Value `tfsdk:"applications"`
 	Connectors      basetypes.Float64Value `tfsdk:"connectors"`
@@ -24,8 +24,8 @@ type LicenseInfo struct {
 	MaxConnectors   basetypes.Float64Value `tfsdk:"max_connectors"`
 }
 
-// AttrTypes defines the attribute types for the LicenseInfo model.
-func (o LicenseInfo) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the License model.
+func (o License) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid":             basetypes.StringType{},
 		"applications":     basetypes.Float64Type{},
@@ -37,16 +37,16 @@ func (o LicenseInfo) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of LicenseInfo objects.
-func (o LicenseInfo) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of License objects.
+func (o License) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// LicenseInfoResourceSchema defines the schema for LicenseInfo resource
-var LicenseInfoResourceSchema = schema.Schema{
-	MarkdownDescription: "LicenseInfo resource",
+// LicenseResourceSchema defines the schema for License resource
+var LicenseResourceSchema = schema.Schema{
+	MarkdownDescription: "License resource",
 	Attributes: map[string]schema.Attribute{
 		"applications": schema.Float64Attribute{
 			MarkdownDescription: "Applications",
@@ -88,9 +88,9 @@ var LicenseInfoResourceSchema = schema.Schema{
 	},
 }
 
-// LicenseInfoDataSourceSchema defines the schema for LicenseInfo data source
-var LicenseInfoDataSourceSchema = dsschema.Schema{
-	MarkdownDescription: "LicenseInfo data source",
+// LicenseDataSourceSchema defines the schema for License data source
+var LicenseDataSourceSchema = dsschema.Schema{
+	MarkdownDescription: "License data source",
 	Attributes: map[string]dsschema.Attribute{
 		"applications": dsschema.Float64Attribute{
 			MarkdownDescription: "Applications",
@@ -123,21 +123,21 @@ var LicenseInfoDataSourceSchema = dsschema.Schema{
 	},
 }
 
-// LicenseInfoListModel represents the data model for a list data source.
-type LicenseInfoListModel struct {
-	Tfid    types.String  `tfsdk:"tfid"`
-	Data    []LicenseInfo `tfsdk:"data"`
-	Limit   types.Int64   `tfsdk:"limit"`
-	Offset  types.Int64   `tfsdk:"offset"`
-	Name    types.String  `tfsdk:"name"`
-	Total   types.Int64   `tfsdk:"total"`
-	Folder  types.String  `tfsdk:"folder"`
-	Snippet types.String  `tfsdk:"snippet"`
-	Device  types.String  `tfsdk:"device"`
+// LicenseListModel represents the data model for a list data source.
+type LicenseListModel struct {
+	Tfid    types.String `tfsdk:"tfid"`
+	Data    []License    `tfsdk:"data"`
+	Limit   types.Int64  `tfsdk:"limit"`
+	Offset  types.Int64  `tfsdk:"offset"`
+	Name    types.String `tfsdk:"name"`
+	Total   types.Int64  `tfsdk:"total"`
+	Folder  types.String `tfsdk:"folder"`
+	Snippet types.String `tfsdk:"snippet"`
+	Device  types.String `tfsdk:"device"`
 }
 
-// LicenseInfoListDataSourceSchema defines the schema for a list data source.
-var LicenseInfoListDataSourceSchema = dsschema.Schema{
+// LicenseListDataSourceSchema defines the schema for a list data source.
+var LicenseListDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "Retrieves a listing of config items.",
 	Attributes: map[string]dsschema.Attribute{
 		"tfid": dsschema.StringAttribute{Description: "The Terraform ID.", Computed: true},
@@ -145,7 +145,7 @@ var LicenseInfoListDataSourceSchema = dsschema.Schema{
 			Description: "The data.",
 			Computed:    true,
 			NestedObject: dsschema.NestedAttributeObject{
-				Attributes: LicenseInfoDataSourceSchema.Attributes,
+				Attributes: LicenseDataSourceSchema.Attributes,
 			},
 		},
 		"limit":   dsschema.Int64Attribute{Description: "The max number of items to return. Default: 200.", Optional: true},

@@ -2,7 +2,6 @@ package provider
 
 import (
 	"context"
-	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -13,11 +12,11 @@ import (
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/ztna_connector_all"
 )
 
-// --- Unpacker for LicenseInfo ---
-func unpackLicenseInfoToSdk(ctx context.Context, obj types.Object) (*ztna_connector_all.LicenseInfo, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.LicenseInfo", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for License ---
+func unpackLicenseToSdk(ctx context.Context, obj types.Object) (*ztna_connector_all.License, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.License", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.LicenseInfo
+	var model models.License
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -25,7 +24,7 @@ func unpackLicenseInfoToSdk(ctx context.Context, obj types.Object) (*ztna_connec
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk ztna_connector_all.LicenseInfo
+	var sdk ztna_connector_all.License
 	var d diag.Diagnostics
 
 	// Handling Primitives
@@ -44,9 +43,8 @@ func unpackLicenseInfoToSdk(ctx context.Context, obj types.Object) (*ztna_connec
 
 	// Handling Primitives
 	if !model.Expiry.IsNull() && !model.Expiry.IsUnknown() {
-		if t, parseErr := time.Parse(time.RFC3339, model.Expiry.ValueString()); parseErr == nil {
-			sdk.Expiry = &t
-		}
+		sdk.Expiry = model.Expiry.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Expiry", "value": *sdk.Expiry})
 	}
 
 	// Handling Primitives
@@ -71,16 +69,16 @@ func unpackLicenseInfoToSdk(ctx context.Context, obj types.Object) (*ztna_connec
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.LicenseInfo", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.License", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for LicenseInfo ---
-func packLicenseInfoFromSdk(ctx context.Context, sdk ztna_connector_all.LicenseInfo) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.LicenseInfo", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for License ---
+func packLicenseFromSdk(ctx context.Context, sdk ztna_connector_all.License) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.License", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.LicenseInfo
+	var model models.License
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -101,8 +99,8 @@ func packLicenseInfoFromSdk(ctx context.Context, sdk ztna_connector_all.LicenseI
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Expiry != nil {
-		model.Expiry = basetypes.NewStringValue(sdk.Expiry.Format(time.RFC3339))
-		tflog.Debug(ctx, "Packed time pointer", map[string]interface{}{"field": "Expiry", "value": sdk.Expiry.Format(time.RFC3339)})
+		model.Expiry = basetypes.NewStringValue(*sdk.Expiry)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Expiry", "value": *sdk.Expiry})
 	} else {
 		model.Expiry = basetypes.NewStringNull()
 	}
@@ -132,56 +130,56 @@ func packLicenseInfoFromSdk(ctx context.Context, sdk ztna_connector_all.LicenseI
 	}
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.LicenseInfo{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.License{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.LicenseInfo", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.License", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for LicenseInfo ---
-func unpackLicenseInfoListToSdk(ctx context.Context, list types.List) ([]ztna_connector_all.LicenseInfo, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.LicenseInfo")
+// --- List Unpacker for License ---
+func unpackLicenseListToSdk(ctx context.Context, list types.List) ([]ztna_connector_all.License, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.License")
 	diags := diag.Diagnostics{}
-	var data []models.LicenseInfo
+	var data []models.License
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]ztna_connector_all.LicenseInfo, 0, len(data))
+	ans := make([]ztna_connector_all.License, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.LicenseInfo{}.AttrTypes(), &item)
-		unpacked, d := unpackLicenseInfoToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.License{}.AttrTypes(), &item)
+		unpacked, d := unpackLicenseToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.LicenseInfo", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.License", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for LicenseInfo ---
-func packLicenseInfoListFromSdk(ctx context.Context, sdks []ztna_connector_all.LicenseInfo) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.LicenseInfo")
+// --- List Packer for License ---
+func packLicenseListFromSdk(ctx context.Context, sdks []ztna_connector_all.License) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.License")
 	diags := diag.Diagnostics{}
-	var data []models.LicenseInfo
+	var data []models.License
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.LicenseInfo
-		obj, d := packLicenseInfoFromSdk(ctx, sdk)
+		var model models.License
+		obj, d := packLicenseFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.LicenseInfo{}.AttrType()), diags
+			return basetypes.NewListNull(models.License{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.LicenseInfo", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.LicenseInfo{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.License", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.License{}.AttrType(), data)
 }

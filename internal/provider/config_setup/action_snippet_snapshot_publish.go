@@ -39,8 +39,8 @@ func NewSnippetSnapshotPublishAction() action.Action {
 	return &SnippetSnapshotPublishAction{}
 }
 
-func (a *SnippetSnapshotPublishAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet_snapshot_publish"
+func (a *SnippetSnapshotPublishAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_snippet_snapshot_publish"
 }
 
 func (a *SnippetSnapshotPublishAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

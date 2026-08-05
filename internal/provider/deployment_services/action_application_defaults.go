@@ -34,8 +34,8 @@ func NewApplicationDefaultsAction() action.Action {
 	return &ApplicationDefaultsAction{}
 }
 
-func (a *ApplicationDefaultsAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_application_defaults"
+func (a *ApplicationDefaultsAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_application_defaults"
 }
 
 func (a *ApplicationDefaultsAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

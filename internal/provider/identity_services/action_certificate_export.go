@@ -37,8 +37,8 @@ func NewCertificateExportAction() action.Action {
 	return &CertificateExportAction{}
 }
 
-func (a *CertificateExportAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_certificate_export"
+func (a *CertificateExportAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_certificate_export"
 }
 
 func (a *CertificateExportAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

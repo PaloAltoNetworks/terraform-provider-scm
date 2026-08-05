@@ -39,8 +39,8 @@ func NewTrustValidationAction() action.Action {
 	return &TrustValidationAction{}
 }
 
-func (a *TrustValidationAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_trust_validation"
+func (a *TrustValidationAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_trust_validation"
 }
 
 func (a *TrustValidationAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

@@ -42,8 +42,8 @@ func NewCertificateImportAction() action.Action {
 	return &CertificateImportAction{}
 }
 
-func (a *CertificateImportAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_certificate_import"
+func (a *CertificateImportAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_certificate_import"
 }
 
 func (a *CertificateImportAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

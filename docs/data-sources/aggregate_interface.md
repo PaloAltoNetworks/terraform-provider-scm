@@ -109,6 +109,7 @@ Read-Only:
 
 Read-Only:
 
+- `adjust_tcp_mss` (Attributes) TCP MSS adjustment settings for the interface (see [below for nested schema](#nestedatt--layer3--adjust_tcp_mss))
 - `arp` (Attributes List) Aggregate Ethernet ARP configuration (see [below for nested schema](#nestedatt--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Aggregate Interface. (see [below for nested schema](#nestedatt--layer3--ddns_config))
 - `dhcp_client` (Attributes) Aggregate Ethernet DHCP Client Object (see [below for nested schema](#nestedatt--layer3--dhcp_client))
@@ -118,6 +119,16 @@ Read-Only:
 - `lldp` (Attributes) LLDP settings for the interface (see [below for nested schema](#nestedatt--layer3--lldp))
 - `mtu` (Number) MTU
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
+
+<a id="nestedatt--layer3--adjust_tcp_mss"></a>
+### Nested Schema for `layer3.adjust_tcp_mss`
+
+Read-Only:
+
+- `enable` (Boolean) Enable TCP MSS adjustment on the interface
+- `ipv4_mss_adjustment` (Number) IPv4 MSS adjustment size in bytes
+- `ipv6_mss_adjustment` (Number) IPv6 MSS adjustment size in bytes
+
 
 <a id="nestedatt--layer3--arp"></a>
 ### Nested Schema for `layer3.arp`

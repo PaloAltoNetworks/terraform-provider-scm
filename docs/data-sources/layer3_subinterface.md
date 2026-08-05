@@ -49,17 +49,30 @@ output "layer3_subinterface_data_source_results" {
 
 ### Read-Only
 
+- `adjust_tcp_mss` (Attributes) TCP MSS adjustment settings for the interface (see [below for nested schema](#nestedatt--adjust_tcp_mss))
 - `arp` (Attributes List) Layer 3 sub Interfaces ARP configuration (see [below for nested schema](#nestedatt--arp))
 - `comment` (String) Description
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Layer 3 sub Interfaces. (see [below for nested schema](#nestedatt--ddns_config))
 - `dhcp_client` (Attributes) Layer3 sub interfaces DHCP Client Object (see [below for nested schema](#nestedatt--dhcp_client))
+- `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `interface_management_profile` (String) Interface management profile
 - `ip` (Attributes List) L3 sub-interface IP Parent (see [below for nested schema](#nestedatt--ip))
 - `mtu` (Number) MTU
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `parent_interface` (String) Parent interface
+- `pppoe` (Attributes) PPPoE configuration for the interface (see [below for nested schema](#nestedatt--pppoe))
 - `tag` (Number) VLAN tag
 - `tfid` (String) The Terraform ID.
+
+<a id="nestedatt--adjust_tcp_mss"></a>
+### Nested Schema for `adjust_tcp_mss`
+
+Read-Only:
+
+- `enable` (Boolean) Enable TCP MSS adjustment on the interface
+- `ipv4_mss_adjustment` (Number) IPv4 MSS adjustment size in bytes
+- `ipv6_mss_adjustment` (Number) IPv6 MSS adjustment size in bytes
+
 
 <a id="nestedatt--arp"></a>
 ### Nested Schema for `arp`
@@ -110,3 +123,34 @@ Read-Only:
 Read-Only:
 
 - `name` (String) L3 sub-interface IP address(es)
+
+
+<a id="nestedatt--pppoe"></a>
+### Nested Schema for `pppoe`
+
+Read-Only:
+
+- `access_concentrator` (String) Access concentrator
+- `authentication` (String) Authentication protocol. Possible values are `CHAP`, `PAP` and `auto`.
+- `default_route_metric` (Number) Metric of the default route created
+- `enable` (Boolean) Enable PPPoE on the interface
+- `passive` (Attributes) Passive (see [below for nested schema](#nestedatt--pppoe--passive))
+- `password` (String, Sensitive) Password
+- `service` (String) Service
+- `static_address` (Attributes) Static address (see [below for nested schema](#nestedatt--pppoe--static_address))
+- `username` (String) Username
+
+<a id="nestedatt--pppoe--passive"></a>
+### Nested Schema for `pppoe.passive`
+
+Read-Only:
+
+- `enable` (Boolean) Passive Mode enabled
+
+
+<a id="nestedatt--pppoe--static_address"></a>
+### Nested Schema for `pppoe.static_address`
+
+Read-Only:
+
+- `ip` (String) Static IP address

@@ -27,6 +27,19 @@ func unpackVlanInterfacesToSdk(ctx context.Context, obj types.Object) (*network_
 	var sdk network_services.VlanInterfaces
 	var d diag.Diagnostics
 
+	// Handling Objects
+	if !model.AdjustTcpMss.IsNull() && !model.AdjustTcpMss.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field AdjustTcpMss")
+		unpacked, d := unpackAdjustTcpMssToSdk(ctx, model.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		if unpacked != nil {
+			sdk.AdjustTcpMss = unpacked
+		}
+	}
+
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
@@ -149,6 +162,19 @@ func packVlanInterfacesFromSdk(ctx context.Context, sdk network_services.VlanInt
 	diags := diag.Diagnostics{}
 	var model models.VlanInterfaces
 	var d diag.Diagnostics
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.AdjustTcpMss != nil {
+		tflog.Debug(ctx, "Packing nested object for field AdjustTcpMss")
+		packed, d := packAdjustTcpMssFromSdk(ctx, *sdk.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		model.AdjustTcpMss = packed
+	} else {
+		model.AdjustTcpMss = basetypes.NewObjectNull(models.AdjustTcpMss{}.AttrTypes())
+	}
 	// Handling Lists
 	if sdk.Arp != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Arp")

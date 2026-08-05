@@ -98,11 +98,14 @@ resource "scm_aggregate_interface" "scm_aggregate_intf_l3_complex" {
   folder  = "ngfw-shared"
   layer3 = {
     ip = [
-      {
-        name = "198.18.1.1/24"
-        name = "198.18.1.2/32"
-      }
+      { name = "198.18.1.1/24" },
+      { name = "198.18.1.2/32" },
     ]
     mtu = 1500
+    adjust_tcp_mss = {
+      enable              = true
+      ipv4_mss_adjustment = 40
+      ipv6_mss_adjustment = 60
+    }
   }
 }

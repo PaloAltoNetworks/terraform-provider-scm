@@ -540,6 +540,19 @@ func unpackEthernetInterfacesLayer3ToSdk(ctx context.Context, obj types.Object) 
 
 	var sdk network_services.EthernetInterfacesLayer3
 	var d diag.Diagnostics
+	// Handling Objects
+	if !model.AdjustTcpMss.IsNull() && !model.AdjustTcpMss.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field AdjustTcpMss")
+		unpacked, d := unpackAdjustTcpMssToSdk(ctx, model.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		if unpacked != nil {
+			sdk.AdjustTcpMss = unpacked
+		}
+	}
+
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
@@ -617,7 +630,7 @@ func unpackEthernetInterfacesLayer3ToSdk(ctx context.Context, obj types.Object) 
 	// Handling Objects
 	if !model.Pppoe.IsNull() && !model.Pppoe.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Pppoe")
-		unpacked, d := unpackEthernetInterfacesLayer3PppoeToSdk(ctx, model.Pppoe)
+		unpacked, d := unpackPppoeToSdk(ctx, model.Pppoe)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Pppoe"})
@@ -640,6 +653,19 @@ func packEthernetInterfacesLayer3FromSdk(ctx context.Context, sdk network_servic
 	diags := diag.Diagnostics{}
 	var model models.EthernetInterfacesLayer3
 	var d diag.Diagnostics
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.AdjustTcpMss != nil {
+		tflog.Debug(ctx, "Packing nested object for field AdjustTcpMss")
+		packed, d := packAdjustTcpMssFromSdk(ctx, *sdk.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		model.AdjustTcpMss = packed
+	} else {
+		model.AdjustTcpMss = basetypes.NewObjectNull(models.AdjustTcpMss{}.AttrTypes())
+	}
 	// Handling Lists
 	if sdk.Arp != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Arp")
@@ -725,14 +751,14 @@ func packEthernetInterfacesLayer3FromSdk(ctx context.Context, sdk network_servic
 	// This is a regular nested object that has its own packer.
 	if sdk.Pppoe != nil {
 		tflog.Debug(ctx, "Packing nested object for field Pppoe")
-		packed, d := packEthernetInterfacesLayer3PppoeFromSdk(ctx, *sdk.Pppoe)
+		packed, d := packPppoeFromSdk(ctx, *sdk.Pppoe)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Pppoe"})
 		}
 		model.Pppoe = packed
 	} else {
-		model.Pppoe = basetypes.NewObjectNull(models.EthernetInterfacesLayer3Pppoe{}.AttrTypes())
+		model.Pppoe = basetypes.NewObjectNull(models.Pppoe{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -1423,11 +1449,11 @@ func packEthernetInterfacesLayer3IpInnerListFromSdk(ctx context.Context, sdks []
 	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer3IpInner{}.AttrType(), data)
 }
 
-// --- Unpacker for EthernetInterfacesLayer3Pppoe ---
-func unpackEthernetInterfacesLayer3PppoeToSdk(ctx context.Context, obj types.Object) (*network_services.EthernetInterfacesLayer3Pppoe, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.EthernetInterfacesLayer3Pppoe", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for Pppoe ---
+func unpackPppoeToSdk(ctx context.Context, obj types.Object) (*network_services.Pppoe, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.Pppoe", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.EthernetInterfacesLayer3Pppoe
+	var model models.Pppoe
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1435,7 +1461,7 @@ func unpackEthernetInterfacesLayer3PppoeToSdk(ctx context.Context, obj types.Obj
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.EthernetInterfacesLayer3Pppoe
+	var sdk network_services.Pppoe
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.AccessConcentrator.IsNull() && !model.AccessConcentrator.IsUnknown() {
@@ -1465,7 +1491,7 @@ func unpackEthernetInterfacesLayer3PppoeToSdk(ctx context.Context, obj types.Obj
 	// Handling Objects
 	if !model.Passive.IsNull() && !model.Passive.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field Passive")
-		unpacked, d := unpackEthernetInterfacesLayer3PppoePassiveToSdk(ctx, model.Passive)
+		unpacked, d := unpackPppoePassiveToSdk(ctx, model.Passive)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Passive"})
@@ -1490,7 +1516,7 @@ func unpackEthernetInterfacesLayer3PppoeToSdk(ctx context.Context, obj types.Obj
 	// Handling Objects
 	if !model.StaticAddress.IsNull() && !model.StaticAddress.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking nested object for field StaticAddress")
-		unpacked, d := unpackEthernetInterfacesLayer3PppoeStaticAddressToSdk(ctx, model.StaticAddress)
+		unpacked, d := unpackPppoeStaticAddressToSdk(ctx, model.StaticAddress)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "StaticAddress"})
@@ -1508,16 +1534,16 @@ func unpackEthernetInterfacesLayer3PppoeToSdk(ctx context.Context, obj types.Obj
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.EthernetInterfacesLayer3Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for EthernetInterfacesLayer3Pppoe ---
-func packEthernetInterfacesLayer3PppoeFromSdk(ctx context.Context, sdk network_services.EthernetInterfacesLayer3Pppoe) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.EthernetInterfacesLayer3Pppoe", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for Pppoe ---
+func packPppoeFromSdk(ctx context.Context, sdk network_services.Pppoe) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.Pppoe", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.EthernetInterfacesLayer3Pppoe
+	var model models.Pppoe
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1555,14 +1581,14 @@ func packEthernetInterfacesLayer3PppoeFromSdk(ctx context.Context, sdk network_s
 	// This is a regular nested object that has its own packer.
 	if sdk.Passive != nil {
 		tflog.Debug(ctx, "Packing nested object for field Passive")
-		packed, d := packEthernetInterfacesLayer3PppoePassiveFromSdk(ctx, *sdk.Passive)
+		packed, d := packPppoePassiveFromSdk(ctx, *sdk.Passive)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Passive"})
 		}
 		model.Passive = packed
 	} else {
-		model.Passive = basetypes.NewObjectNull(models.EthernetInterfacesLayer3PppoePassive{}.AttrTypes())
+		model.Passive = basetypes.NewObjectNull(models.PppoePassive{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -1580,14 +1606,14 @@ func packEthernetInterfacesLayer3PppoeFromSdk(ctx context.Context, sdk network_s
 	// This is a regular nested object that has its own packer.
 	if sdk.StaticAddress != nil {
 		tflog.Debug(ctx, "Packing nested object for field StaticAddress")
-		packed, d := packEthernetInterfacesLayer3PppoeStaticAddressFromSdk(ctx, *sdk.StaticAddress)
+		packed, d := packPppoeStaticAddressFromSdk(ctx, *sdk.StaticAddress)
 		diags.Append(d...)
 		if d.HasError() {
 			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "StaticAddress"})
 		}
 		model.StaticAddress = packed
 	} else {
-		model.StaticAddress = basetypes.NewObjectNull(models.EthernetInterfacesLayer3PppoeStaticAddress{}.AttrTypes())
+		model.StaticAddress = basetypes.NewObjectNull(models.PppoeStaticAddress{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -1595,65 +1621,65 @@ func packEthernetInterfacesLayer3PppoeFromSdk(ctx context.Context, sdk network_s
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Username", "value": sdk.Username})
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.EthernetInterfacesLayer3Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for EthernetInterfacesLayer3Pppoe ---
-func unpackEthernetInterfacesLayer3PppoeListToSdk(ctx context.Context, list types.List) ([]network_services.EthernetInterfacesLayer3Pppoe, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.EthernetInterfacesLayer3Pppoe")
+// --- List Unpacker for Pppoe ---
+func unpackPppoeListToSdk(ctx context.Context, list types.List) ([]network_services.Pppoe, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.Pppoe")
 	diags := diag.Diagnostics{}
-	var data []models.EthernetInterfacesLayer3Pppoe
+	var data []models.Pppoe
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.EthernetInterfacesLayer3Pppoe, 0, len(data))
+	ans := make([]network_services.Pppoe, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &item)
-		unpacked, d := unpackEthernetInterfacesLayer3PppoeToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &item)
+		unpacked, d := unpackPppoeToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.EthernetInterfacesLayer3Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for EthernetInterfacesLayer3Pppoe ---
-func packEthernetInterfacesLayer3PppoeListFromSdk(ctx context.Context, sdks []network_services.EthernetInterfacesLayer3Pppoe) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.EthernetInterfacesLayer3Pppoe")
+// --- List Packer for Pppoe ---
+func packPppoeListFromSdk(ctx context.Context, sdks []network_services.Pppoe) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.Pppoe")
 	diags := diag.Diagnostics{}
-	var data []models.EthernetInterfacesLayer3Pppoe
+	var data []models.Pppoe
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.EthernetInterfacesLayer3Pppoe
-		obj, d := packEthernetInterfacesLayer3PppoeFromSdk(ctx, sdk)
+		var model models.Pppoe
+		obj, d := packPppoeFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.EthernetInterfacesLayer3Pppoe{}.AttrType()), diags
+			return basetypes.NewListNull(models.Pppoe{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.EthernetInterfacesLayer3Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.Pppoe", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.Pppoe{}.AttrType(), data)
 }
 
-// --- Unpacker for EthernetInterfacesLayer3PppoePassive ---
-func unpackEthernetInterfacesLayer3PppoePassiveToSdk(ctx context.Context, obj types.Object) (*network_services.EthernetInterfacesLayer3PppoePassive, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.EthernetInterfacesLayer3PppoePassive", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for PppoePassive ---
+func unpackPppoePassiveToSdk(ctx context.Context, obj types.Object) (*network_services.PppoePassive, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.PppoePassive", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.EthernetInterfacesLayer3PppoePassive
+	var model models.PppoePassive
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1661,7 +1687,7 @@ func unpackEthernetInterfacesLayer3PppoePassiveToSdk(ctx context.Context, obj ty
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.EthernetInterfacesLayer3PppoePassive
+	var sdk network_services.PppoePassive
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Enable.IsNull() && !model.Enable.IsUnknown() {
@@ -1671,16 +1697,16 @@ func unpackEthernetInterfacesLayer3PppoePassiveToSdk(ctx context.Context, obj ty
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.EthernetInterfacesLayer3PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for EthernetInterfacesLayer3PppoePassive ---
-func packEthernetInterfacesLayer3PppoePassiveFromSdk(ctx context.Context, sdk network_services.EthernetInterfacesLayer3PppoePassive) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.EthernetInterfacesLayer3PppoePassive", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for PppoePassive ---
+func packPppoePassiveFromSdk(ctx context.Context, sdk network_services.PppoePassive) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.PppoePassive", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.EthernetInterfacesLayer3PppoePassive
+	var model models.PppoePassive
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1688,65 +1714,65 @@ func packEthernetInterfacesLayer3PppoePassiveFromSdk(ctx context.Context, sdk ne
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Enable", "value": sdk.Enable})
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3PppoePassive{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.PppoePassive{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.EthernetInterfacesLayer3PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for EthernetInterfacesLayer3PppoePassive ---
-func unpackEthernetInterfacesLayer3PppoePassiveListToSdk(ctx context.Context, list types.List) ([]network_services.EthernetInterfacesLayer3PppoePassive, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.EthernetInterfacesLayer3PppoePassive")
+// --- List Unpacker for PppoePassive ---
+func unpackPppoePassiveListToSdk(ctx context.Context, list types.List) ([]network_services.PppoePassive, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.PppoePassive")
 	diags := diag.Diagnostics{}
-	var data []models.EthernetInterfacesLayer3PppoePassive
+	var data []models.PppoePassive
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.EthernetInterfacesLayer3PppoePassive, 0, len(data))
+	ans := make([]network_services.PppoePassive, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3PppoePassive{}.AttrTypes(), &item)
-		unpacked, d := unpackEthernetInterfacesLayer3PppoePassiveToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.PppoePassive{}.AttrTypes(), &item)
+		unpacked, d := unpackPppoePassiveToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.EthernetInterfacesLayer3PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for EthernetInterfacesLayer3PppoePassive ---
-func packEthernetInterfacesLayer3PppoePassiveListFromSdk(ctx context.Context, sdks []network_services.EthernetInterfacesLayer3PppoePassive) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.EthernetInterfacesLayer3PppoePassive")
+// --- List Packer for PppoePassive ---
+func packPppoePassiveListFromSdk(ctx context.Context, sdks []network_services.PppoePassive) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.PppoePassive")
 	diags := diag.Diagnostics{}
-	var data []models.EthernetInterfacesLayer3PppoePassive
+	var data []models.PppoePassive
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.EthernetInterfacesLayer3PppoePassive
-		obj, d := packEthernetInterfacesLayer3PppoePassiveFromSdk(ctx, sdk)
+		var model models.PppoePassive
+		obj, d := packPppoePassiveFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.EthernetInterfacesLayer3PppoePassive{}.AttrType()), diags
+			return basetypes.NewListNull(models.PppoePassive{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.EthernetInterfacesLayer3PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer3PppoePassive{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.PppoePassive", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.PppoePassive{}.AttrType(), data)
 }
 
-// --- Unpacker for EthernetInterfacesLayer3PppoeStaticAddress ---
-func unpackEthernetInterfacesLayer3PppoeStaticAddressToSdk(ctx context.Context, obj types.Object) (*network_services.EthernetInterfacesLayer3PppoeStaticAddress, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering unpack helper for models.EthernetInterfacesLayer3PppoeStaticAddress", map[string]interface{}{"tf_object": obj})
+// --- Unpacker for PppoeStaticAddress ---
+func unpackPppoeStaticAddressToSdk(ctx context.Context, obj types.Object) (*network_services.PppoeStaticAddress, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.PppoeStaticAddress", map[string]interface{}{"tf_object": obj})
 	diags := diag.Diagnostics{}
-	var model models.EthernetInterfacesLayer3PppoeStaticAddress
+	var model models.PppoeStaticAddress
 	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
@@ -1754,7 +1780,7 @@ func unpackEthernetInterfacesLayer3PppoeStaticAddressToSdk(ctx context.Context, 
 	}
 	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
 
-	var sdk network_services.EthernetInterfacesLayer3PppoeStaticAddress
+	var sdk network_services.PppoeStaticAddress
 	var d diag.Diagnostics
 	// Handling Primitives
 	if !model.Ip.IsNull() && !model.Ip.IsUnknown() {
@@ -1764,16 +1790,16 @@ func unpackEthernetInterfacesLayer3PppoeStaticAddressToSdk(ctx context.Context, 
 
 	diags.Append(d...)
 
-	tflog.Debug(ctx, "Exiting unpack helper for models.EthernetInterfacesLayer3PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting unpack helper for models.PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
 	return &sdk, diags
 
 }
 
-// --- Packer for EthernetInterfacesLayer3PppoeStaticAddress ---
-func packEthernetInterfacesLayer3PppoeStaticAddressFromSdk(ctx context.Context, sdk network_services.EthernetInterfacesLayer3PppoeStaticAddress) (types.Object, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering pack helper for models.EthernetInterfacesLayer3PppoeStaticAddress", map[string]interface{}{"sdk_struct": sdk})
+// --- Packer for PppoeStaticAddress ---
+func packPppoeStaticAddressFromSdk(ctx context.Context, sdk network_services.PppoeStaticAddress) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.PppoeStaticAddress", map[string]interface{}{"sdk_struct": sdk})
 	diags := diag.Diagnostics{}
-	var model models.EthernetInterfacesLayer3PppoeStaticAddress
+	var model models.PppoeStaticAddress
 	var d diag.Diagnostics
 	// Handling Primitives
 	// Standard primitive packing
@@ -1781,58 +1807,58 @@ func packEthernetInterfacesLayer3PppoeStaticAddressFromSdk(ctx context.Context, 
 	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "Ip", "value": sdk.Ip})
 	diags.Append(d...)
 
-	obj, d := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3PppoeStaticAddress{}.AttrTypes(), &model)
+	obj, d := types.ObjectValueFrom(ctx, models.PppoeStaticAddress{}.AttrTypes(), &model)
 	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
 	diags.Append(d...)
-	tflog.Debug(ctx, "Exiting pack helper for models.EthernetInterfacesLayer3PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting pack helper for models.PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
 	return obj, diags
 
 }
 
-// --- List Unpacker for EthernetInterfacesLayer3PppoeStaticAddress ---
-func unpackEthernetInterfacesLayer3PppoeStaticAddressListToSdk(ctx context.Context, list types.List) ([]network_services.EthernetInterfacesLayer3PppoeStaticAddress, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list unpack helper for models.EthernetInterfacesLayer3PppoeStaticAddress")
+// --- List Unpacker for PppoeStaticAddress ---
+func unpackPppoeStaticAddressListToSdk(ctx context.Context, list types.List) ([]network_services.PppoeStaticAddress, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.PppoeStaticAddress")
 	diags := diag.Diagnostics{}
-	var data []models.EthernetInterfacesLayer3PppoeStaticAddress
+	var data []models.PppoeStaticAddress
 	diags.Append(list.ElementsAs(ctx, &data, false)...)
 	if diags.HasError() {
 		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
 		return nil, diags
 	}
 
-	ans := make([]network_services.EthernetInterfacesLayer3PppoeStaticAddress, 0, len(data))
+	ans := make([]network_services.PppoeStaticAddress, 0, len(data))
 	for i, item := range data {
 		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
-		obj, _ := types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3PppoeStaticAddress{}.AttrTypes(), &item)
-		unpacked, d := unpackEthernetInterfacesLayer3PppoeStaticAddressToSdk(ctx, obj)
+		obj, _ := types.ObjectValueFrom(ctx, models.PppoeStaticAddress{}.AttrTypes(), &item)
+		unpacked, d := unpackPppoeStaticAddressToSdk(ctx, obj)
 		diags.Append(d...)
 		if unpacked != nil {
 			ans = append(ans, *unpacked)
 		}
 	}
-	tflog.Debug(ctx, "Exiting list unpack helper for models.EthernetInterfacesLayer3PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	tflog.Debug(ctx, "Exiting list unpack helper for models.PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
 	return ans, diags
 }
 
-// --- List Packer for EthernetInterfacesLayer3PppoeStaticAddress ---
-func packEthernetInterfacesLayer3PppoeStaticAddressListFromSdk(ctx context.Context, sdks []network_services.EthernetInterfacesLayer3PppoeStaticAddress) (types.List, diag.Diagnostics) {
-	tflog.Debug(ctx, "Entering list pack helper for models.EthernetInterfacesLayer3PppoeStaticAddress")
+// --- List Packer for PppoeStaticAddress ---
+func packPppoeStaticAddressListFromSdk(ctx context.Context, sdks []network_services.PppoeStaticAddress) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.PppoeStaticAddress")
 	diags := diag.Diagnostics{}
-	var data []models.EthernetInterfacesLayer3PppoeStaticAddress
+	var data []models.PppoeStaticAddress
 
 	for i, sdk := range sdks {
 		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
-		var model models.EthernetInterfacesLayer3PppoeStaticAddress
-		obj, d := packEthernetInterfacesLayer3PppoeStaticAddressFromSdk(ctx, sdk)
+		var model models.PppoeStaticAddress
+		obj, d := packPppoeStaticAddressFromSdk(ctx, sdk)
 		diags.Append(d...)
 		if diags.HasError() {
-			return basetypes.NewListNull(models.EthernetInterfacesLayer3PppoeStaticAddress{}.AttrType()), diags
+			return basetypes.NewListNull(models.PppoeStaticAddress{}.AttrType()), diags
 		}
 		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
 		data = append(data, model)
 	}
-	tflog.Debug(ctx, "Exiting list pack helper for models.EthernetInterfacesLayer3PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
-	return basetypes.NewListValueFrom(ctx, models.EthernetInterfacesLayer3PppoeStaticAddress{}.AttrType(), data)
+	tflog.Debug(ctx, "Exiting list pack helper for models.PppoeStaticAddress", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.PppoeStaticAddress{}.AttrType(), data)
 }
 
 // --- Unpacker for Poe ---

@@ -8,9 +8,14 @@ resource "scm_loopback_interface" "scm_loopback_intf" {
   folder  = "ngfw-shared"
   ip = [
     {
-      "name" : "198.18.1.1/32"
+      name = "198.18.1.1/32"
     }
   ]
+  adjust_tcp_mss = {
+    enable              = true
+    ipv4_mss_adjustment = 40
+    ipv6_mss_adjustment = 60
+  }
 }
 
 #

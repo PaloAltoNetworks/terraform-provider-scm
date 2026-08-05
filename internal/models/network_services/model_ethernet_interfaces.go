@@ -55,6 +55,7 @@ type EthernetInterfacesLayer2 struct {
 
 // EthernetInterfacesLayer3 represents a nested structure within the EthernetInterfaces model
 type EthernetInterfacesLayer3 struct {
+	AdjustTcpMss               basetypes.ObjectValue `tfsdk:"adjust_tcp_mss"`
 	Arp                        basetypes.ListValue   `tfsdk:"arp"`
 	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
 	DhcpClient                 basetypes.ObjectValue `tfsdk:"dhcp_client"`
@@ -102,8 +103,8 @@ type EthernetInterfacesLayer3IpInner struct {
 	Name basetypes.StringValue `tfsdk:"name"`
 }
 
-// EthernetInterfacesLayer3Pppoe represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesLayer3Pppoe struct {
+// Pppoe represents a nested structure within the EthernetInterfaces model
+type Pppoe struct {
 	AccessConcentrator basetypes.StringValue `tfsdk:"access_concentrator"`
 	Authentication     basetypes.StringValue `tfsdk:"authentication"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
@@ -115,13 +116,13 @@ type EthernetInterfacesLayer3Pppoe struct {
 	Username           basetypes.StringValue `tfsdk:"username"`
 }
 
-// EthernetInterfacesLayer3PppoePassive represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesLayer3PppoePassive struct {
+// PppoePassive represents a nested structure within the EthernetInterfaces model
+type PppoePassive struct {
 	Enable basetypes.BoolValue `tfsdk:"enable"`
 }
 
-// EthernetInterfacesLayer3PppoeStaticAddress represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesLayer3PppoeStaticAddress struct {
+// PppoeStaticAddress represents a nested structure within the EthernetInterfaces model
+type PppoeStaticAddress struct {
 	Ip basetypes.StringValue `tfsdk:"ip"`
 }
 
@@ -166,6 +167,13 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 		},
 		"layer3": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"adjust_tcp_mss": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable":              basetypes.BoolType{},
+						"ipv4_mss_adjustment": basetypes.Int64Type{},
+						"ipv6_mss_adjustment": basetypes.Int64Type{},
+					},
+				},
 				"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"hw_address": basetypes.StringType{},
@@ -293,6 +301,13 @@ func (o EthernetInterfacesLayer2) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the EthernetInterfacesLayer3 model.
 func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"adjust_tcp_mss": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":              basetypes.BoolType{},
+				"ipv4_mss_adjustment": basetypes.Int64Type{},
+				"ipv6_mss_adjustment": basetypes.Int64Type{},
+			},
+		},
 		"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"hw_address": basetypes.StringType{},
@@ -459,8 +474,8 @@ func (o EthernetInterfacesLayer3IpInner) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer3Pppoe model.
-func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the Pppoe model.
+func (o Pppoe) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"access_concentrator":  basetypes.StringType{},
 		"authentication":       basetypes.StringType{},
@@ -482,36 +497,36 @@ func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer3Pppoe objects.
-func (o EthernetInterfacesLayer3Pppoe) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of Pppoe objects.
+func (o Pppoe) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer3PppoePassive model.
-func (o EthernetInterfacesLayer3PppoePassive) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the PppoePassive model.
+func (o PppoePassive) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable": basetypes.BoolType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer3PppoePassive objects.
-func (o EthernetInterfacesLayer3PppoePassive) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of PppoePassive objects.
+func (o PppoePassive) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer3PppoeStaticAddress model.
-func (o EthernetInterfacesLayer3PppoeStaticAddress) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the PppoeStaticAddress model.
+func (o PppoeStaticAddress) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"ip": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer3PppoeStaticAddress objects.
-func (o EthernetInterfacesLayer3PppoeStaticAddress) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of PppoeStaticAddress objects.
+func (o PppoeStaticAddress) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -677,6 +692,30 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Ethernet Interface Layer 3 configuration",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
+				"adjust_tcp_mss": schema.SingleNestedAttribute{
+					MarkdownDescription: "TCP MSS adjustment settings for the interface",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+							Optional:            true,
+						},
+						"ipv4_mss_adjustment": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(40, 300),
+							},
+							MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+							Optional:            true,
+						},
+						"ipv6_mss_adjustment": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(60, 300),
+							},
+							MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+							Optional:            true,
+						},
+					},
+				},
 				"arp": schema.ListNestedAttribute{
 					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Optional:            true,
@@ -871,7 +910,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
-					MarkdownDescription: "Pppoe",
+					MarkdownDescription: "PPPoE configuration for the interface",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"access_concentrator": schema.StringAttribute{
@@ -899,7 +938,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Default:             int64default.StaticInt64(10),
 						},
 						"enable": schema.BoolAttribute{
-							MarkdownDescription: "Enable",
+							MarkdownDescription: "Enable PPPoE on the interface",
 							Optional:            true,
 							Computed:            true,
 							Default:             booldefault.StaticBool(true),
@@ -1127,6 +1166,24 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Ethernet Interface Layer 3 configuration",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
+				"adjust_tcp_mss": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "TCP MSS adjustment settings for the interface",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+							Computed:            true,
+						},
+						"ipv4_mss_adjustment": dsschema.Int64Attribute{
+							MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+							Computed:            true,
+						},
+						"ipv6_mss_adjustment": dsschema.Int64Attribute{
+							MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+							Computed:            true,
+						},
+					},
+				},
 				"arp": dsschema.ListNestedAttribute{
 					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Computed:            true,
@@ -1258,7 +1315,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"pppoe": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Pppoe",
+					MarkdownDescription: "PPPoE configuration for the interface",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"access_concentrator": dsschema.StringAttribute{
@@ -1274,7 +1331,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"enable": dsschema.BoolAttribute{
-							MarkdownDescription: "Enable",
+							MarkdownDescription: "Enable PPPoE on the interface",
 							Computed:            true,
 						},
 						"passive": dsschema.SingleNestedAttribute{

@@ -28,6 +28,7 @@ import (
 // VlanInterfaces represents the Terraform model for VlanInterfaces
 type VlanInterfaces struct {
 	Tfid                       types.String          `tfsdk:"tfid"`
+	AdjustTcpMss               basetypes.ObjectValue `tfsdk:"adjust_tcp_mss"`
 	Arp                        basetypes.ListValue   `tfsdk:"arp"`
 	Comment                    basetypes.StringValue `tfsdk:"comment"`
 	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
@@ -86,6 +87,13 @@ type VlanInterfacesIpInner struct {
 func (o VlanInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"tfid": basetypes.StringType{},
+		"adjust_tcp_mss": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":              basetypes.BoolType{},
+				"ipv4_mss_adjustment": basetypes.Int64Type{},
+				"ipv6_mss_adjustment": basetypes.Int64Type{},
+			},
+		},
 		"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"hw_address": basetypes.StringType{},
@@ -234,6 +242,30 @@ func (o VlanInterfacesIpInner) AttrType() attr.Type {
 var VlanInterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "VlanInterface resource",
 	Attributes: map[string]schema.Attribute{
+		"adjust_tcp_mss": schema.SingleNestedAttribute{
+			MarkdownDescription: "TCP MSS adjustment settings for the interface",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"enable": schema.BoolAttribute{
+					MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+					Optional:            true,
+				},
+				"ipv4_mss_adjustment": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(40, 300),
+					},
+					MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+					Optional:            true,
+				},
+				"ipv6_mss_adjustment": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(60, 300),
+					},
+					MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+					Optional:            true,
+				},
+			},
+		},
 		"arp": schema.ListNestedAttribute{
 			MarkdownDescription: "ARP configuration",
 			Optional:            true,
@@ -481,6 +513,24 @@ var VlanInterfacesResourceSchema = schema.Schema{
 var VlanInterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "VlanInterface data source",
 	Attributes: map[string]dsschema.Attribute{
+		"adjust_tcp_mss": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "TCP MSS adjustment settings for the interface",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"enable": dsschema.BoolAttribute{
+					MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+					Computed:            true,
+				},
+				"ipv4_mss_adjustment": dsschema.Int64Attribute{
+					MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+					Computed:            true,
+				},
+				"ipv6_mss_adjustment": dsschema.Int64Attribute{
+					MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+					Computed:            true,
+				},
+			},
+		},
 		"arp": dsschema.ListNestedAttribute{
 			MarkdownDescription: "ARP configuration",
 			Computed:            true,

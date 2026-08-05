@@ -84,7 +84,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_stash_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_stash_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_stash_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_stash_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_stash_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_stash_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -201,7 +201,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_patch_create_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_patch_create_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_patch_create_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_patch_create_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_patch_create_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_patch_create_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -213,7 +213,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 
 							if !resp.Diagnostics.HasError() {
 
-								temp_patch_create_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &temp_patch_create_Layer3_Pppoe_Password_1)
+								temp_patch_create_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_create_Layer3_Pppoe_Password_1)
 
 								resp.Diagnostics.Append(diags...)
 							}
@@ -392,7 +392,7 @@ func (r *EthernetInterfaceResource) Read(ctx context.Context, req resource.ReadR
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_patch_read_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_patch_read_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_patch_read_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_patch_read_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_patch_read_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_patch_read_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -407,7 +407,7 @@ func (r *EthernetInterfaceResource) Read(ctx context.Context, req resource.ReadR
 
 							if !resp.Diagnostics.HasError() {
 
-								temp_patch_read_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &temp_patch_read_Layer3_Pppoe_Password_1)
+								temp_patch_read_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_read_Layer3_Pppoe_Password_1)
 
 								resp.Diagnostics.Append(diags...)
 							}
@@ -539,7 +539,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_stash_upd_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_stash_upd_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_stash_upd_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_stash_upd_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_stash_upd_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_stash_upd_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -675,7 +675,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_patch_upd_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_patch_upd_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_patch_upd_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -687,7 +687,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 
 							if !resp.Diagnostics.HasError() {
 
-								temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &temp_patch_upd_Layer3_Pppoe_Password_1)
+								temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_upd_Layer3_Pppoe_Password_1)
 
 								resp.Diagnostics.Append(diags...)
 							}

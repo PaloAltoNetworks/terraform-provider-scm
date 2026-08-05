@@ -25,6 +25,7 @@ import (
 // LoopbackInterfaces represents the Terraform model for LoopbackInterfaces
 type LoopbackInterfaces struct {
 	Tfid                       types.String          `tfsdk:"tfid"`
+	AdjustTcpMss               basetypes.ObjectValue `tfsdk:"adjust_tcp_mss"`
 	Comment                    basetypes.StringValue `tfsdk:"comment"`
 	DefaultValue               basetypes.StringValue `tfsdk:"default_value"`
 	Device                     basetypes.StringValue `tfsdk:"device"`
@@ -62,7 +63,14 @@ type LoopbackInterfacesIpv6AddressInner struct {
 // AttrTypes defines the attribute types for the LoopbackInterfaces model.
 func (o LoopbackInterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":                         basetypes.StringType{},
+		"tfid": basetypes.StringType{},
+		"adjust_tcp_mss": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":              basetypes.BoolType{},
+				"ipv4_mss_adjustment": basetypes.Int64Type{},
+				"ipv6_mss_adjustment": basetypes.Int64Type{},
+			},
+		},
 		"comment":                      basetypes.StringType{},
 		"default_value":                basetypes.StringType{},
 		"device":                       basetypes.StringType{},
@@ -172,6 +180,30 @@ func (o LoopbackInterfacesIpv6AddressInner) AttrType() attr.Type {
 var LoopbackInterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "LoopbackInterface resource",
 	Attributes: map[string]schema.Attribute{
+		"adjust_tcp_mss": schema.SingleNestedAttribute{
+			MarkdownDescription: "TCP MSS adjustment settings for the interface",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"enable": schema.BoolAttribute{
+					MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+					Optional:            true,
+				},
+				"ipv4_mss_adjustment": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(40, 300),
+					},
+					MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+					Optional:            true,
+				},
+				"ipv6_mss_adjustment": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(60, 300),
+					},
+					MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+					Optional:            true,
+				},
+			},
+		},
 		"comment": schema.StringAttribute{
 			MarkdownDescription: "Description for loopback interface",
 			Optional:            true,
@@ -330,6 +362,24 @@ var LoopbackInterfacesResourceSchema = schema.Schema{
 var LoopbackInterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "LoopbackInterface data source",
 	Attributes: map[string]dsschema.Attribute{
+		"adjust_tcp_mss": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "TCP MSS adjustment settings for the interface",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"enable": dsschema.BoolAttribute{
+					MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+					Computed:            true,
+				},
+				"ipv4_mss_adjustment": dsschema.Int64Attribute{
+					MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+					Computed:            true,
+				},
+				"ipv6_mss_adjustment": dsschema.Int64Attribute{
+					MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+					Computed:            true,
+				},
+			},
+		},
 		"comment": dsschema.StringAttribute{
 			MarkdownDescription: "Description for loopback interface",
 			Computed:            true,

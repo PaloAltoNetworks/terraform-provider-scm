@@ -14,12 +14,10 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 ## Release Notes
 
-### v1.0.12-beta.4
+### v1.0.12-beta.5
 
 #### FEATURES
 
-* data-source/scm_location_list: Added support, examples and tests
-* actions/scm_application_defaults: Bootstrap Prisma Access application defaults (certificates, config nodes) on a fresh tenant
 * actions/ztna_tenant_start_onboarding: Initiates ZTNA tenant onboarding
 * actions/ztna_tenant_start_offboarding: Initiates ZTNA tenant deletion and cleanup
 * resource/ztna_connector_quiesce: Added support and examples (resource, data-source)
@@ -44,13 +42,31 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 #### BUG FIXES
 
+* Fixed ZTNA x-panw-region header propagation
+* resource/ztna_connector_quiesce: Added to test skip list — test requires a real connector OID and cannot run in isolation
+* generator: Fixed `data_source_auto_tag_action` and `data_source_ssl_decryption_setting` being incorrectly deleted on regeneration
+* generator: Restricted `normalizeRFC3339` time compatibility injection to `ztna_connector_all` package only — was incorrectly applied to `config_setup` as a side effect
+
+#### NOTES
+
+* This is a beta release for ZTNA Connector support
+* Customers must explicitly opt-in by specifying version = "1.0.12-beta.5"
+
+### v1.0.12-beta.4
+
+#### FEATURES
+
+* data-source/scm_location_list: Added support, examples and tests
+* actions/scm_application_defaults: Bootstrap Prisma Access application defaults (certificates, config nodes) on a fresh tenant
+
+#### BUG FIXES
+
 * resource/scm_bgp_route_map: Fixed int32 overflow for large BGP AS numbers in `aspath_prepend` and `aspath_exclude` fields (now uses int64)
 * resource/scm_service_connection: Resolved model issue with secondary bgp settings ([#128](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/128))
 * resource/scm_ethernet_interface: Added missing lldp support for `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
 * resource/scm_aggregate_interface: Added missing lldp support for `layer2` and layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
 * resource/scm_pbf_rule: Added missing `negate_source` and `negate_destination` flags ([#118](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/118))
 * resources/scm_security_rule: Corrected docs for `target_rule`. Ref-by-name is not supported (#125)
-* Fixed ZTNA x-panw-region header propagation
 * resources/scm_folder: Resolved apply error caused by unset `labels` property (#116)
 
 #### ENHANCEMENTS

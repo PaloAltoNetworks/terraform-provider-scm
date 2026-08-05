@@ -47,6 +47,7 @@ output "scm_loopback_interface_data_source_results" {
 
 ### Read-Only
 
+- `adjust_tcp_mss` (Attributes) TCP MSS adjustment settings for the interface (see [below for nested schema](#nestedatt--adjust_tcp_mss))
 - `comment` (String) Description for loopback interface
 - `default_value` (String) Default interface assignment for loopback interface
 - `interface_management_profile` (String) Interface management profile for loopback interface
@@ -55,6 +56,16 @@ output "scm_loopback_interface_data_source_results" {
 - `mtu` (Number) MTU for loopback interface
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `tfid` (String) The Terraform ID.
+
+<a id="nestedatt--adjust_tcp_mss"></a>
+### Nested Schema for `adjust_tcp_mss`
+
+Read-Only:
+
+- `enable` (Boolean) Enable TCP MSS adjustment on the interface
+- `ipv4_mss_adjustment` (Number) IPv4 MSS adjustment size in bytes
+- `ipv6_mss_adjustment` (Number) IPv6 MSS adjustment size in bytes
+
 
 <a id="nestedatt--ip"></a>
 ### Nested Schema for `ip`

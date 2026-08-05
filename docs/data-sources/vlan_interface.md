@@ -48,6 +48,7 @@ output "vlan_interface_data_source_results" {
 
 ### Read-Only
 
+- `adjust_tcp_mss` (Attributes) TCP MSS adjustment settings for the interface (see [below for nested schema](#nestedatt--adjust_tcp_mss))
 - `arp` (Attributes List) ARP configuration (see [below for nested schema](#nestedatt--arp))
 - `comment` (String) Description
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Vlan Interfaces. (see [below for nested schema](#nestedatt--ddns_config))
@@ -59,6 +60,16 @@ output "vlan_interface_data_source_results" {
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
 - `tfid` (String) The Terraform ID.
 - `vlan_tag` (String) VLAN tag
+
+<a id="nestedatt--adjust_tcp_mss"></a>
+### Nested Schema for `adjust_tcp_mss`
+
+Read-Only:
+
+- `enable` (Boolean) Enable TCP MSS adjustment on the interface
+- `ipv4_mss_adjustment` (Number) IPv4 MSS adjustment size in bytes
+- `ipv6_mss_adjustment` (Number) IPv6 MSS adjustment size in bytes
+
 
 <a id="nestedatt--arp"></a>
 ### Nested Schema for `arp`

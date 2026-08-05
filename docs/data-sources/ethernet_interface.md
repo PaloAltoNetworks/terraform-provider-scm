@@ -93,6 +93,7 @@ Read-Only:
 
 Read-Only:
 
+- `adjust_tcp_mss` (Attributes) TCP MSS adjustment settings for the interface (see [below for nested schema](#nestedatt--layer3--adjust_tcp_mss))
 - `arp` (Attributes List) Ethernet Interfaces ARP configuration (see [below for nested schema](#nestedatt--layer3--arp))
 - `ddns_config` (Attributes) Dynamic DNS configuration specific to the Ethernet Interfaces. (see [below for nested schema](#nestedatt--layer3--ddns_config))
 - `dhcp_client` (Attributes) Ethernet Interfaces DHCP Client Object (see [below for nested schema](#nestedatt--layer3--dhcp_client))
@@ -101,7 +102,17 @@ Read-Only:
 - `lldp` (Attributes) LLDP settings for the interface (see [below for nested schema](#nestedatt--layer3--lldp))
 - `mtu` (Number) MTU
 - `netflow_profile` (String) Name of Netflow Profile to assign to Interface
-- `pppoe` (Attributes) Pppoe (see [below for nested schema](#nestedatt--layer3--pppoe))
+- `pppoe` (Attributes) PPPoE configuration for the interface (see [below for nested schema](#nestedatt--layer3--pppoe))
+
+<a id="nestedatt--layer3--adjust_tcp_mss"></a>
+### Nested Schema for `layer3.adjust_tcp_mss`
+
+Read-Only:
+
+- `enable` (Boolean) Enable TCP MSS adjustment on the interface
+- `ipv4_mss_adjustment` (Number) IPv4 MSS adjustment size in bytes
+- `ipv6_mss_adjustment` (Number) IPv6 MSS adjustment size in bytes
+
 
 <a id="nestedatt--layer3--arp"></a>
 ### Nested Schema for `layer3.arp`
@@ -180,7 +191,7 @@ Read-Only:
 - `access_concentrator` (String) Access concentrator
 - `authentication` (String) Authentication protocol. Possible values are `CHAP`, `PAP` and `auto`.
 - `default_route_metric` (Number) Metric of the default route created
-- `enable` (Boolean) Enable
+- `enable` (Boolean) Enable PPPoE on the interface
 - `passive` (Attributes) Passive (see [below for nested schema](#nestedatt--layer3--pppoe--passive))
 - `password` (String, Sensitive) Password
 - `service` (String) Service

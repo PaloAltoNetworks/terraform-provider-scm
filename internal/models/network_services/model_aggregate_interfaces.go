@@ -77,6 +77,7 @@ type LldpHighAvailability struct {
 
 // AggregateInterfacesLayer3 represents a nested structure within the AggregateInterfaces model
 type AggregateInterfacesLayer3 struct {
+	AdjustTcpMss               basetypes.ObjectValue `tfsdk:"adjust_tcp_mss"`
 	Arp                        basetypes.ListValue   `tfsdk:"arp"`
 	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
 	DhcpClient                 basetypes.ObjectValue `tfsdk:"dhcp_client"`
@@ -86,6 +87,13 @@ type AggregateInterfacesLayer3 struct {
 	Lldp                       basetypes.ObjectValue `tfsdk:"lldp"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
+}
+
+// AdjustTcpMss represents a nested structure within the AggregateInterfaces model
+type AdjustTcpMss struct {
+	Enable            basetypes.BoolValue  `tfsdk:"enable"`
+	Ipv4MssAdjustment basetypes.Int64Value `tfsdk:"ipv4_mss_adjustment"`
+	Ipv6MssAdjustment basetypes.Int64Value `tfsdk:"ipv6_mss_adjustment"`
 }
 
 // AggEthernetArpInner represents a nested structure within the AggregateInterfaces model
@@ -167,6 +175,13 @@ func (o AggregateInterfaces) AttrTypes() map[string]attr.Type {
 		},
 		"layer3": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"adjust_tcp_mss": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable":              basetypes.BoolType{},
+						"ipv4_mss_adjustment": basetypes.Int64Type{},
+						"ipv6_mss_adjustment": basetypes.Int64Type{},
+					},
+				},
 				"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"hw_address": basetypes.StringType{},
@@ -361,6 +376,13 @@ func (o LldpHighAvailability) AttrType() attr.Type {
 // AttrTypes defines the attribute types for the AggregateInterfacesLayer3 model.
 func (o AggregateInterfacesLayer3) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"adjust_tcp_mss": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":              basetypes.BoolType{},
+				"ipv4_mss_adjustment": basetypes.Int64Type{},
+				"ipv6_mss_adjustment": basetypes.Int64Type{},
+			},
+		},
 		"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"hw_address": basetypes.StringType{},
@@ -430,6 +452,22 @@ func (o AggregateInterfacesLayer3) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of AggregateInterfacesLayer3 objects.
 func (o AggregateInterfacesLayer3) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the AdjustTcpMss model.
+func (o AdjustTcpMss) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"enable":              basetypes.BoolType{},
+		"ipv4_mss_adjustment": basetypes.Int64Type{},
+		"ipv6_mss_adjustment": basetypes.Int64Type{},
+	}
+}
+
+// AttrType returns the attribute type for a list of AdjustTcpMss objects.
+func (o AdjustTcpMss) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -697,6 +735,30 @@ var AggregateInterfacesResourceSchema = schema.Schema{
 			MarkdownDescription: "Aggregate Interface Layer 3 configuration",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
+				"adjust_tcp_mss": schema.SingleNestedAttribute{
+					MarkdownDescription: "TCP MSS adjustment settings for the interface",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+							Optional:            true,
+						},
+						"ipv4_mss_adjustment": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(40, 300),
+							},
+							MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+							Optional:            true,
+						},
+						"ipv6_mss_adjustment": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(60, 300),
+							},
+							MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+							Optional:            true,
+						},
+					},
+				},
 				"arp": schema.ListNestedAttribute{
 					MarkdownDescription: "Aggregate Ethernet ARP configuration",
 					Optional:            true,
@@ -1087,6 +1149,24 @@ var AggregateInterfacesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "Aggregate Interface Layer 3 configuration",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
+				"adjust_tcp_mss": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "TCP MSS adjustment settings for the interface",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+							Computed:            true,
+						},
+						"ipv4_mss_adjustment": dsschema.Int64Attribute{
+							MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+							Computed:            true,
+						},
+						"ipv6_mss_adjustment": dsschema.Int64Attribute{
+							MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+							Computed:            true,
+						},
+					},
+				},
 				"arp": dsschema.ListNestedAttribute{
 					MarkdownDescription: "Aggregate Ethernet ARP configuration",
 					Computed:            true,

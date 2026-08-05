@@ -28,6 +28,8 @@ import (
 // Layer3Subinterfaces represents the Terraform model for Layer3Subinterfaces
 type Layer3Subinterfaces struct {
 	Tfid                       types.String          `tfsdk:"tfid"`
+	EncryptedValues            basetypes.MapValue    `tfsdk:"encrypted_values"`
+	AdjustTcpMss               basetypes.ObjectValue `tfsdk:"adjust_tcp_mss"`
 	Arp                        basetypes.ListValue   `tfsdk:"arp"`
 	Comment                    basetypes.StringValue `tfsdk:"comment"`
 	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
@@ -41,6 +43,7 @@ type Layer3Subinterfaces struct {
 	Name                       basetypes.StringValue `tfsdk:"name"`
 	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 	ParentInterface            basetypes.StringValue `tfsdk:"parent_interface"`
+	Pppoe                      basetypes.ObjectValue `tfsdk:"pppoe"`
 	Snippet                    basetypes.StringValue `tfsdk:"snippet"`
 	Tag                        basetypes.Int64Value  `tfsdk:"tag"`
 }
@@ -84,7 +87,15 @@ type Layer3SubinterfacesIpInner struct {
 // AttrTypes defines the attribute types for the Layer3Subinterfaces model.
 func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid": basetypes.StringType{},
+		"tfid":             basetypes.StringType{},
+		"encrypted_values": basetypes.MapType{ElemType: basetypes.StringType{}},
+		"adjust_tcp_mss": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":              basetypes.BoolType{},
+				"ipv4_mss_adjustment": basetypes.Int64Type{},
+				"ipv6_mss_adjustment": basetypes.Int64Type{},
+			},
+		},
 		"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"hw_address": basetypes.StringType{},
@@ -129,8 +140,29 @@ func (o Layer3Subinterfaces) AttrTypes() map[string]attr.Type {
 		"name":             basetypes.StringType{},
 		"netflow_profile":  basetypes.StringType{},
 		"parent_interface": basetypes.StringType{},
-		"snippet":          basetypes.StringType{},
-		"tag":              basetypes.Int64Type{},
+		"pppoe": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"access_concentrator":  basetypes.StringType{},
+				"authentication":       basetypes.StringType{},
+				"default_route_metric": basetypes.Int64Type{},
+				"enable":               basetypes.BoolType{},
+				"passive": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+					},
+				},
+				"password": basetypes.StringType{},
+				"service":  basetypes.StringType{},
+				"static_address": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"ip": basetypes.StringType{},
+					},
+				},
+				"username": basetypes.StringType{},
+			},
+		},
+		"snippet": basetypes.StringType{},
+		"tag":     basetypes.Int64Type{},
 	}
 }
 
@@ -231,6 +263,30 @@ func (o Layer3SubinterfacesIpInner) AttrType() attr.Type {
 var Layer3SubinterfacesResourceSchema = schema.Schema{
 	MarkdownDescription: "Layer3Subinterface resource",
 	Attributes: map[string]schema.Attribute{
+		"adjust_tcp_mss": schema.SingleNestedAttribute{
+			MarkdownDescription: "TCP MSS adjustment settings for the interface",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"enable": schema.BoolAttribute{
+					MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+					Optional:            true,
+				},
+				"ipv4_mss_adjustment": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(40, 300),
+					},
+					MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+					Optional:            true,
+				},
+				"ipv6_mss_adjustment": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(60, 300),
+					},
+					MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+					Optional:            true,
+				},
+			},
+		},
 		"arp": schema.ListNestedAttribute{
 			MarkdownDescription: "Layer 3 sub Interfaces ARP configuration",
 			Optional:            true,
@@ -321,6 +377,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			Validators: []validator.Object{
 				objectvalidator.ExactlyOneOf(
 					path.MatchRelative().AtParent().AtName("ip"),
+					path.MatchRelative().AtParent().AtName("pppoe"),
 				),
 			},
 			MarkdownDescription: "Layer3 sub interfaces DHCP Client Object",
@@ -372,6 +429,12 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 				},
 			},
 		},
+		"encrypted_values": schema.MapAttribute{
+			ElementType:         basetypes.StringType{},
+			MarkdownDescription: "Map of sensitive values returned from the API.",
+			Computed:            true,
+			Sensitive:           true,
+		},
 		"folder": schema.StringAttribute{
 			Validators: []validator.String{
 				stringvalidator.ExactlyOneOf(
@@ -403,6 +466,7 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 			Validators: []validator.List{
 				listvalidator.ExactlyOneOf(
 					path.MatchRelative().AtParent().AtName("dhcp_client"),
+					path.MatchRelative().AtParent().AtName("pppoe"),
 				),
 			},
 			MarkdownDescription: "L3 sub-interface IP Parent",
@@ -434,6 +498,95 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 		"parent_interface": schema.StringAttribute{
 			MarkdownDescription: "Parent interface",
 			Optional:            true,
+		},
+		"pppoe": schema.SingleNestedAttribute{
+			Validators: []validator.Object{
+				objectvalidator.ExactlyOneOf(
+					path.MatchRelative().AtParent().AtName("dhcp_client"),
+					path.MatchRelative().AtParent().AtName("ip"),
+				),
+			},
+			MarkdownDescription: "PPPoE configuration for the interface",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"access_concentrator": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(255),
+						stringvalidator.LengthAtLeast(1),
+					},
+					MarkdownDescription: "Access concentrator",
+					Optional:            true,
+				},
+				"authentication": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.OneOf("CHAP", "PAP", "auto"),
+					},
+					MarkdownDescription: "Authentication protocol. Possible values are `CHAP`, `PAP` and `auto`.",
+					Optional:            true,
+				},
+				"default_route_metric": schema.Int64Attribute{
+					Validators: []validator.Int64{
+						int64validator.Between(1, 65535),
+					},
+					MarkdownDescription: "Metric of the default route created",
+					Optional:            true,
+					Computed:            true,
+					Default:             int64default.StaticInt64(10),
+				},
+				"enable": schema.BoolAttribute{
+					MarkdownDescription: "Enable PPPoE on the interface",
+					Optional:            true,
+					Computed:            true,
+					Default:             booldefault.StaticBool(true),
+				},
+				"passive": schema.SingleNestedAttribute{
+					MarkdownDescription: "Passive",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Passive Mode enabled",
+							Required:            true,
+						},
+					},
+				},
+				"password": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(255),
+					},
+					MarkdownDescription: "Password",
+					Required:            true,
+					Sensitive:           true,
+				},
+				"service": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(255),
+						stringvalidator.LengthAtLeast(1),
+					},
+					MarkdownDescription: "Service",
+					Optional:            true,
+				},
+				"static_address": schema.SingleNestedAttribute{
+					MarkdownDescription: "Static address",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"ip": schema.StringAttribute{
+							Validators: []validator.String{
+								stringvalidator.LengthAtMost(63),
+							},
+							MarkdownDescription: "Static IP address",
+							Required:            true,
+						},
+					},
+				},
+				"username": schema.StringAttribute{
+					Validators: []validator.String{
+						stringvalidator.LengthAtMost(255),
+						stringvalidator.LengthAtLeast(1),
+					},
+					MarkdownDescription: "Username",
+					Required:            true,
+				},
+			},
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -471,6 +624,24 @@ var Layer3SubinterfacesResourceSchema = schema.Schema{
 var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "Layer3Subinterface data source",
 	Attributes: map[string]dsschema.Attribute{
+		"adjust_tcp_mss": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "TCP MSS adjustment settings for the interface",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"enable": dsschema.BoolAttribute{
+					MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+					Computed:            true,
+				},
+				"ipv4_mss_adjustment": dsschema.Int64Attribute{
+					MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+					Computed:            true,
+				},
+				"ipv6_mss_adjustment": dsschema.Int64Attribute{
+					MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+					Computed:            true,
+				},
+			},
+		},
 		"arp": dsschema.ListNestedAttribute{
 			MarkdownDescription: "Layer 3 sub Interfaces ARP configuration",
 			Computed:            true,
@@ -562,6 +733,12 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 				},
 			},
 		},
+		"encrypted_values": dsschema.MapAttribute{
+			ElementType:         basetypes.StringType{},
+			MarkdownDescription: "Map of sensitive values returned from the API.",
+			Computed:            true,
+			Sensitive:           true,
+		},
 		"folder": dsschema.StringAttribute{
 			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
@@ -603,6 +780,61 @@ var Layer3SubinterfacesDataSourceSchema = dsschema.Schema{
 		"parent_interface": dsschema.StringAttribute{
 			MarkdownDescription: "Parent interface",
 			Computed:            true,
+		},
+		"pppoe": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "PPPoE configuration for the interface",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"access_concentrator": dsschema.StringAttribute{
+					MarkdownDescription: "Access concentrator",
+					Computed:            true,
+				},
+				"authentication": dsschema.StringAttribute{
+					MarkdownDescription: "Authentication protocol. Possible values are `CHAP`, `PAP` and `auto`.",
+					Computed:            true,
+				},
+				"default_route_metric": dsschema.Int64Attribute{
+					MarkdownDescription: "Metric of the default route created",
+					Computed:            true,
+				},
+				"enable": dsschema.BoolAttribute{
+					MarkdownDescription: "Enable PPPoE on the interface",
+					Computed:            true,
+				},
+				"passive": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Passive",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Passive Mode enabled",
+							Computed:            true,
+						},
+					},
+				},
+				"password": dsschema.StringAttribute{
+					MarkdownDescription: "Password",
+					Computed:            true,
+					Sensitive:           true,
+				},
+				"service": dsschema.StringAttribute{
+					MarkdownDescription: "Service",
+					Computed:            true,
+				},
+				"static_address": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "Static address",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"ip": dsschema.StringAttribute{
+							MarkdownDescription: "Static IP address",
+							Computed:            true,
+						},
+					},
+				},
+				"username": dsschema.StringAttribute{
+					MarkdownDescription: "Username",
+					Computed:            true,
+				},
+			},
 		},
 		"snippet": dsschema.StringAttribute{
 			MarkdownDescription: "The snippet in which the resource is defined",

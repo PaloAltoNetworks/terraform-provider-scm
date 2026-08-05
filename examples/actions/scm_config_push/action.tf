@@ -13,7 +13,7 @@ resource "scm_address" "web_server" {
 # on "terraform apply" — it must be explicitly invoked.
 action "scm_config_push" "deploy" {
   config {
-    devices     = ["Service Connection"]
+    folders     = ["Service Connections"]
     description = "Push after Terraform changes"
   }
 }

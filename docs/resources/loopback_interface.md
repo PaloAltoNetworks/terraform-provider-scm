@@ -23,9 +23,14 @@ resource "scm_loopback_interface" "scm_loopback_intf" {
   folder  = "ngfw-shared"
   ip = [
     {
-      "name" : "198.18.1.1/32"
+      name = "198.18.1.1/32"
     }
   ]
+  adjust_tcp_mss = {
+    enable              = true
+    ipv4_mss_adjustment = 40
+    ipv6_mss_adjustment = 60
+  }
 }
 
 #
@@ -90,6 +95,7 @@ resource "scm_loopback_interface" "scm_loopback_intf_3" {
 
 ~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
 
+- `adjust_tcp_mss` (Attributes) TCP MSS adjustment settings for the interface (see [below for nested schema](#nestedatt--adjust_tcp_mss))
 - `comment` (String) Description for loopback interface
 - `default_value` (String) Default interface assignment for loopback interface
 - `device` (String) The device in which the resource is defined
@@ -105,6 +111,16 @@ resource "scm_loopback_interface" "scm_loopback_intf_3" {
 
 - `id` (String) UUID of the resource loopback interface
 - `tfid` (String) The Terraform ID.
+
+<a id="nestedatt--adjust_tcp_mss"></a>
+### Nested Schema for `adjust_tcp_mss`
+
+Optional:
+
+- `enable` (Boolean) Enable TCP MSS adjustment on the interface
+- `ipv4_mss_adjustment` (Number) IPv4 MSS adjustment size in bytes
+- `ipv6_mss_adjustment` (Number) IPv6 MSS adjustment size in bytes
+
 
 <a id="nestedatt--ip"></a>
 ### Nested Schema for `ip`

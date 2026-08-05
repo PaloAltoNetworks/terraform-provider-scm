@@ -941,6 +941,19 @@ func unpackAggregateInterfacesLayer3ToSdk(ctx context.Context, obj types.Object)
 
 	var sdk network_services.AggregateInterfacesLayer3
 	var d diag.Diagnostics
+	// Handling Objects
+	if !model.AdjustTcpMss.IsNull() && !model.AdjustTcpMss.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field AdjustTcpMss")
+		unpacked, d := unpackAdjustTcpMssToSdk(ctx, model.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		if unpacked != nil {
+			sdk.AdjustTcpMss = unpacked
+		}
+	}
+
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
 		tflog.Debug(ctx, "Unpacking list of objects for field Arp")
@@ -1041,6 +1054,19 @@ func packAggregateInterfacesLayer3FromSdk(ctx context.Context, sdk network_servi
 	diags := diag.Diagnostics{}
 	var model models.AggregateInterfacesLayer3
 	var d diag.Diagnostics
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.AdjustTcpMss != nil {
+		tflog.Debug(ctx, "Packing nested object for field AdjustTcpMss")
+		packed, d := packAdjustTcpMssFromSdk(ctx, *sdk.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		model.AdjustTcpMss = packed
+	} else {
+		model.AdjustTcpMss = basetypes.NewObjectNull(models.AdjustTcpMss{}.AttrTypes())
+	}
 	// Handling Lists
 	if sdk.Arp != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Arp")
@@ -1189,6 +1215,133 @@ func packAggregateInterfacesLayer3ListFromSdk(ctx context.Context, sdks []networ
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.AggregateInterfacesLayer3", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.AggregateInterfacesLayer3{}.AttrType(), data)
+}
+
+// --- Unpacker for AdjustTcpMss ---
+func unpackAdjustTcpMssToSdk(ctx context.Context, obj types.Object) (*network_services.AdjustTcpMss, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.AdjustTcpMss", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.AdjustTcpMss
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk network_services.AdjustTcpMss
+	var d diag.Diagnostics
+	// Handling Primitives
+	if !model.Enable.IsNull() && !model.Enable.IsUnknown() {
+		sdk.Enable = model.Enable.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Enable", "value": *sdk.Enable})
+	}
+
+	// Handling Primitives
+	if !model.Ipv4MssAdjustment.IsNull() && !model.Ipv4MssAdjustment.IsUnknown() {
+		val := int32(model.Ipv4MssAdjustment.ValueInt64())
+		sdk.Ipv4MssAdjustment = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ipv4MssAdjustment", "value": *sdk.Ipv4MssAdjustment})
+	}
+
+	// Handling Primitives
+	if !model.Ipv6MssAdjustment.IsNull() && !model.Ipv6MssAdjustment.IsUnknown() {
+		val := int32(model.Ipv6MssAdjustment.ValueInt64())
+		sdk.Ipv6MssAdjustment = &val
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Ipv6MssAdjustment", "value": *sdk.Ipv6MssAdjustment})
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.AdjustTcpMss", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for AdjustTcpMss ---
+func packAdjustTcpMssFromSdk(ctx context.Context, sdk network_services.AdjustTcpMss) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.AdjustTcpMss", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.AdjustTcpMss
+	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Enable != nil {
+		model.Enable = basetypes.NewBoolValue(*sdk.Enable)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Enable", "value": *sdk.Enable})
+	} else {
+		model.Enable = basetypes.NewBoolNull()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ipv4MssAdjustment != nil {
+		model.Ipv4MssAdjustment = basetypes.NewInt64Value(int64(*sdk.Ipv4MssAdjustment))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ipv4MssAdjustment", "value": *sdk.Ipv4MssAdjustment})
+	} else {
+		model.Ipv4MssAdjustment = basetypes.NewInt64Null()
+	}
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.Ipv6MssAdjustment != nil {
+		model.Ipv6MssAdjustment = basetypes.NewInt64Value(int64(*sdk.Ipv6MssAdjustment))
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "Ipv6MssAdjustment", "value": *sdk.Ipv6MssAdjustment})
+	} else {
+		model.Ipv6MssAdjustment = basetypes.NewInt64Null()
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.AdjustTcpMss{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.AdjustTcpMss", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for AdjustTcpMss ---
+func unpackAdjustTcpMssListToSdk(ctx context.Context, list types.List) ([]network_services.AdjustTcpMss, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.AdjustTcpMss")
+	diags := diag.Diagnostics{}
+	var data []models.AdjustTcpMss
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]network_services.AdjustTcpMss, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.AdjustTcpMss{}.AttrTypes(), &item)
+		unpacked, d := unpackAdjustTcpMssToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.AdjustTcpMss", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for AdjustTcpMss ---
+func packAdjustTcpMssListFromSdk(ctx context.Context, sdks []network_services.AdjustTcpMss) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.AdjustTcpMss")
+	diags := diag.Diagnostics{}
+	var data []models.AdjustTcpMss
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.AdjustTcpMss
+		obj, d := packAdjustTcpMssFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.AdjustTcpMss{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.AdjustTcpMss", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.AdjustTcpMss{}.AttrType(), data)
 }
 
 // --- Unpacker for AggEthernetArpInner ---

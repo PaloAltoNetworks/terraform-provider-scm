@@ -12,6 +12,47 @@ import (
 	models "github.com/paloaltonetworks/terraform-provider-scm/internal/models/network_services"
 )
 
+// layer3SubinterfacesSensitiveValuePatcher is an in-memory struct to temporarily store plaintext
+// and encrypted values for sensitive fields during the Create/Update/Read workflows.
+type layer3SubinterfacesSensitiveValuePatcher struct {
+	pppoe_password_plaintext basetypes.StringValue
+	pppoe_password_encrypted basetypes.StringValue
+}
+
+// populatePatcherFromState populates the patcher struct from the resource's state.
+func (p *layer3SubinterfacesSensitiveValuePatcher) populatePatcherFromState(ctx context.Context, state models.Layer3Subinterfaces) diag.Diagnostics {
+	var diags diag.Diagnostics
+	if state.EncryptedValues.IsNull() || state.EncryptedValues.IsUnknown() {
+		return diags
+	}
+
+	var ev map[string]string
+	diags.Append(state.EncryptedValues.ElementsAs(ctx, &ev, false)...)
+	if diags.HasError() {
+		return diags
+	}
+	if val, ok := ev["pppoe_password_plaintext"]; ok {
+		p.pppoe_password_plaintext = basetypes.NewStringValue(val)
+	}
+	if val, ok := ev["pppoe_password_encrypted"]; ok {
+		p.pppoe_password_encrypted = basetypes.NewStringValue(val)
+	}
+
+	return diags
+}
+
+// populateEncryptedValuesMap returns a map of the patcher's values for saving to state.
+func (p *layer3SubinterfacesSensitiveValuePatcher) populateEncryptedValuesMap() map[string]string {
+	ev := make(map[string]string)
+	if !p.pppoe_password_plaintext.IsNull() {
+		ev["pppoe_password_plaintext"] = p.pppoe_password_plaintext.ValueString()
+	}
+	if !p.pppoe_password_encrypted.IsNull() {
+		ev["pppoe_password_encrypted"] = p.pppoe_password_encrypted.ValueString()
+	}
+	return ev
+}
+
 // --- Unpacker for Layer3Subinterfaces ---
 func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*network_services.Layer3Subinterfaces, diag.Diagnostics) {
 	tflog.Debug(ctx, "Entering unpack helper for models.Layer3Subinterfaces", map[string]interface{}{"tf_object": obj})
@@ -26,6 +67,19 @@ func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 
 	var sdk network_services.Layer3Subinterfaces
 	var d diag.Diagnostics
+
+	// Handling Objects
+	if !model.AdjustTcpMss.IsNull() && !model.AdjustTcpMss.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field AdjustTcpMss")
+		unpacked, d := unpackAdjustTcpMssToSdk(ctx, model.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		if unpacked != nil {
+			sdk.AdjustTcpMss = unpacked
+		}
+	}
 
 	// Handling Lists
 	if !model.Arp.IsNull() && !model.Arp.IsUnknown() {
@@ -124,6 +178,19 @@ func unpackLayer3SubinterfacesToSdk(ctx context.Context, obj types.Object) (*net
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "ParentInterface", "value": *sdk.ParentInterface})
 	}
 
+	// Handling Objects
+	if !model.Pppoe.IsNull() && !model.Pppoe.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking nested object for field Pppoe")
+		unpacked, d := unpackPppoeToSdk(ctx, model.Pppoe)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Pppoe"})
+		}
+		if unpacked != nil {
+			sdk.Pppoe = unpacked
+		}
+	}
+
 	// Handling Primitives
 	if !model.Snippet.IsNull() && !model.Snippet.IsUnknown() {
 		sdk.Snippet = model.Snippet.ValueStringPointer()
@@ -150,6 +217,21 @@ func packLayer3SubinterfacesFromSdk(ctx context.Context, sdk network_services.La
 	diags := diag.Diagnostics{}
 	var model models.Layer3Subinterfaces
 	var d diag.Diagnostics
+	// MEGA FIX FOR MAP TYPE MISMATCH (NOT ALL MODELS MAY HAVE EncryptedValues)
+	model.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.AdjustTcpMss != nil {
+		tflog.Debug(ctx, "Packing nested object for field AdjustTcpMss")
+		packed, d := packAdjustTcpMssFromSdk(ctx, *sdk.AdjustTcpMss)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "AdjustTcpMss"})
+		}
+		model.AdjustTcpMss = packed
+	} else {
+		model.AdjustTcpMss = basetypes.NewObjectNull(models.AdjustTcpMss{}.AttrTypes())
+	}
 	// Handling Lists
 	if sdk.Arp != nil {
 		tflog.Debug(ctx, "Packing list of objects for field Arp")
@@ -261,6 +343,19 @@ func packLayer3SubinterfacesFromSdk(ctx context.Context, sdk network_services.La
 		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "ParentInterface", "value": *sdk.ParentInterface})
 	} else {
 		model.ParentInterface = basetypes.NewStringNull()
+	}
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	if sdk.Pppoe != nil {
+		tflog.Debug(ctx, "Packing nested object for field Pppoe")
+		packed, d := packPppoeFromSdk(ctx, *sdk.Pppoe)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Pppoe"})
+		}
+		model.Pppoe = packed
+	} else {
+		model.Pppoe = basetypes.NewObjectNull(models.Pppoe{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing

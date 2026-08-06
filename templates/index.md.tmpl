@@ -40,9 +40,20 @@ This provider covers the following aspects of Strata Cloud Manager:
 * data-source/ztna_connector_upgrade_status: Added support and examples
 * data-source/ztna_connector_scheduled_upgrade: Added support and examples
 
+#### ENHANCEMENTS
+
+* resource/scm_layer3_subinterface: Added support for `pppoe` configuration (#133)
+* resource/scm_layer3_subinterface: Added support for `adjust_tcp_mss` configuration (#130)
+* resource/scm_aggregate_interface: Added support for `adjust_tcp_mss` configuration (#130)
+* resource/scm_loopback_interface: Added support for `adjust_tcp_mss` configuration (#130)
+* resource/scm_vlan_interface: Added support for `adjust_tcp_mss` configuration (#130)
+
 #### BUG FIXES
 
-* Fixed ZTNA x-panw-region header propagation
+* Fixed ZTNA x-panw-region header propagation (#129)
+* resource/scm_route_prefix_list: Fixed Response Type (#136)
+* resource/scm_route_access_list: Fixed Response Type (#134)
+* actions/scm_config_push: Fixed incorrect `folders` property name
 * resource/ztna_connector_quiesce: Added to test skip list — test requires a real connector OID and cannot run in isolation
 * generator: Fixed `data_source_auto_tag_action` and `data_source_ssl_decryption_setting` being incorrectly deleted on regeneration
 * generator: Restricted `normalizeRFC3339` time compatibility injection to `ztna_connector_all` package only — was incorrectly applied to `config_setup` as a side effect

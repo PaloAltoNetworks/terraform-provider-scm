@@ -466,7 +466,9 @@ THIS SOFTWARE IS RELEASED AS A PROOF OF CONCEPT FOR EXPERIMENTAL PURPOSES ONLY. 
 # included in the same JSON file.
 #
 # ZTNA resources also require the "x_panw_region" field, which sets the
-# x-panw-region HTTP header on all ZTNA API requests. Valid values: americas, europe, apac.
+# x-panw-region HTTP header on all ZTNA API requests. Valid values:
+#   ae, americas, au, br, ca, ch, cn, de, es, europe, fr, id, il, in, it,
+#   jp, kr, pl, qa, sa, sg, tw, uk, za
 # This can be set via the provider block, the X_PANW_REGION environment variable,
 # or the "x_panw_region" key in the JSON auth file.
 #
@@ -496,7 +498,7 @@ THIS SOFTWARE IS RELEASED AS A PROOF OF CONCEPT FOR EXPERIMENTAL PURPOSES ONLY. 
 # provider "ztna" {
 #   auth_file     = "/path/to/scm-config.json"
 #   ztna_host     = "api.sase.paloaltonetworks.com"
-#   x_panw_region = "americas"   # or "europe" / "apac"
+#   x_panw_region = "americas"   # see valid values above
 #   logging       = "debug"
 # }
 
@@ -552,7 +554,7 @@ There are multiple ways to specify the provider's parameters.  If overlapping va
 - `port` (Number) The port number to use for API commands, if non-standard for the given protocol. Environment variable: `SCM_PORT`. JSON config file variable: `port`.
 - `protocol` (String) The protocol to use for SCM. This should be 'http' or 'https'. Default: `https`. Environment variable: `SCM_PROTOCOL`. JSON config file variable: `protocol`.
 - `scope` (String) The client scope. Environment variable: `SCM_SCOPE`. JSON config file variable: `scope`.
-- `x_panw_region` (String) The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: americas, europe, apac. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.
+- `x_panw_region` (String) The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: ae, americas, au, br, ca, ch, cn, de, es, europe, fr, id, il, in, it, jp, kr, pl, qa, sa, sg, tw, uk, za. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.
 - `ztna_host` (String) The hostname of the ZTNA Connector API. Required when using ztna_* resources. Default: `api.sase.paloaltonetworks.com`. Environment variable: `ZTNA_HOST`. JSON config file variable: `ztna_host`.
 
 

@@ -96,7 +96,7 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 				Optional:    true,
 			},
 			"x_panw_region": schema.StringAttribute{
-				Description: "The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: americas, europe, apac. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.",
+				Description: "The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: ae, americas, au, br, ca, ch, cn, de, es, europe, fr, id, il, in, it, jp, kr, pl, qa, sa, sg, tw, uk, za. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.",
 				Optional:    true,
 			},
 			"port": schema.Int64Attribute{
@@ -298,18 +298,18 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 // Actions defines the actions for this provider.
 func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
 	var actions []func() action.Action
-	// Add config_setup package actions
-	actions = append(actions, tfProviderConfigSetup.GetActions()...)
-	// Add identity_services package actions
-	actions = append(actions, tfProviderIdentityServices.GetActions()...)
-	// Add ztna_connector_all package actions
-	actions = append(actions, tfProviderZtnaConnectorAll.GetActions()...)
-	// Add deployment_services package actions
-	actions = append(actions, tfProviderDeploymentServices.GetActions()...)
-	// Add network_services package actions
-	actions = append(actions, tfProviderNetworkServices.GetActions()...)
 	// Add config_operations package actions
 	actions = append(actions, tfProviderConfigOperations.GetActions()...)
+	// Add config_setup package actions
+	actions = append(actions, tfProviderConfigSetup.GetActions()...)
+	// Add deployment_services package actions
+	actions = append(actions, tfProviderDeploymentServices.GetActions()...)
+	// Add identity_services package actions
+	actions = append(actions, tfProviderIdentityServices.GetActions()...)
+	// Add network_services package actions
+	actions = append(actions, tfProviderNetworkServices.GetActions()...)
+	// Add ztna_connector_all package actions
+	actions = append(actions, tfProviderZtnaConnectorAll.GetActions()...)
 
 	return actions
 }

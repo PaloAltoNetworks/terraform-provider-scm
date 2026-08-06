@@ -10,7 +10,9 @@
 # included in the same JSON file.
 #
 # ZTNA resources also require the "x_panw_region" field, which sets the
-# x-panw-region HTTP header on all ZTNA API requests. Valid values: americas, europe, apac.
+# x-panw-region HTTP header on all ZTNA API requests. Valid values:
+#   ae, americas, au, br, ca, ch, cn, de, es, europe, fr, id, il, in, it,
+#   jp, kr, pl, qa, sa, sg, tw, uk, za
 # This can be set via the provider block, the X_PANW_REGION environment variable,
 # or the "x_panw_region" key in the JSON auth file.
 #
@@ -40,7 +42,7 @@
 # provider "ztna" {
 #   auth_file     = "/path/to/scm-config.json"
 #   ztna_host     = "api.sase.paloaltonetworks.com"
-#   x_panw_region = "americas"   # or "europe" / "apac"
+#   x_panw_region = "americas"   # see valid values above
 #   logging       = "debug"
 # }
 

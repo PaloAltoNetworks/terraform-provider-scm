@@ -96,7 +96,7 @@ func (p *ScmProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *
 				Optional:    true,
 			},
 			"x_panw_region": schema.StringAttribute{
-				Description: "The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: americas, europe, apac. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.",
+				Description: "The region for ZTNA Connector API requests (x-panw-region header). Required when using ztna_* resources. Valid values: ae, americas, au, br, ca, ch, cn, de, es, europe, fr, id, il, in, it, jp, kr, pl, qa, sa, sg, tw, uk, za. Environment variable: `X_PANW_REGION`. JSON config file variable: `x_panw_region`.",
 				Optional:    true,
 			},
 			"port": schema.Int64Attribute{

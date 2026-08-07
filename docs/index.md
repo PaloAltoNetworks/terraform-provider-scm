@@ -55,6 +55,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * resource/scm_route_prefix_list: Fixed Response Type (#136)
 * resource/scm_route_access_list: Fixed Response Type (#134)
 * actions/scm_config_push: Fixed incorrect `folders` property name (#135)
+* /resource/*: Improved non zero referential error logging (#122)
 
 #### NOTES
 

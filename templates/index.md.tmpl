@@ -21,6 +21,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * actions/ztna_tenant_start_onboarding: Initiates ZTNA tenant onboarding
 * actions/ztna_tenant_start_offboarding: Initiates ZTNA tenant deletion and cleanup
 * resource/ztna_connector_quiesce: Added support and examples (resource, data-source)
+* resource/scm_route_access_list: Added examples (resources)
 * data-source/ztna_license: Added support and examples
 * data-source/ztna_tenant_status: Added support and examples
 * data-source/ztna_connector_group_connectors: Added support and examples
@@ -53,10 +54,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * Fixed ZTNA x-panw-region header propagation (#129)
 * resource/scm_route_prefix_list: Fixed Response Type (#136)
 * resource/scm_route_access_list: Fixed Response Type (#134)
-* actions/scm_config_push: Fixed incorrect `folders` property name
-* resource/ztna_connector_quiesce: Added to test skip list — test requires a real connector OID and cannot run in isolation
-* generator: Fixed `data_source_auto_tag_action` and `data_source_ssl_decryption_setting` being incorrectly deleted on regeneration
-* generator: Restricted `normalizeRFC3339` time compatibility injection to `ztna_connector_all` package only — was incorrectly applied to `config_setup` as a side effect
+* actions/scm_config_push: Fixed incorrect `folders` property name (#135)
 
 #### NOTES
 

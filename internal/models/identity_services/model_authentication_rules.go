@@ -102,6 +102,8 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 		"authentication_enforcement": schema.StringAttribute{
 			MarkdownDescription: "The authentication profile name",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("default-no-captive-portal"),
 		},
 		"category": schema.ListAttribute{
 			ElementType:         types.StringType,

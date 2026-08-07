@@ -127,7 +127,7 @@ var AuthenticationPortalsResourceSchema = schema.Schema{
 		},
 		"redirect_host": schema.StringAttribute{
 			MarkdownDescription: "The authentication portal IP address or hostname",
-			Required:            true,
+			Optional:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{

@@ -50,7 +50,7 @@ Read-Only:
 - `description` (String) Description
 - `destination` (List of String) List of destination addresses
 - `disabled` (Boolean) Rule disabled?
-- `from` (List of String) List of source zones
+- `from` (Attributes) Source zones and interfaces (see [below for nested schema](#nestedatt--data--from))
 - `log_setting` (String) Log forwarding profile name
 - `position` (String) Position relative to local device rules. Possible values are `pre` and `post`.
 - `protection` (Attributes) Protection (see [below for nested schema](#nestedatt--data--protection))
@@ -60,7 +60,7 @@ Read-Only:
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.
 - `tag` (List of String) List of tags
 - `tfid` (String) The Terraform ID.
-- `to` (List of String) List of destination zones
+- `to` (Attributes) Destination zones and interfaces (see [below for nested schema](#nestedatt--data--to))
 
 <a id="nestedatt--data--action"></a>
 ### Nested Schema for `data.action`
@@ -82,6 +82,15 @@ Read-Only:
 <a id="nestedatt--data--action--protect"></a>
 ### Nested Schema for `data.action.protect`
 
+
+
+<a id="nestedatt--data--from"></a>
+### Nested Schema for `data.from`
+
+Read-Only:
+
+- `interface` (List of String) Interface
+- `zone` (List of String) Zone
 
 
 <a id="nestedatt--data--protection"></a>
@@ -114,3 +123,14 @@ Read-Only:
 Read-Only:
 
 - `address` (String) Address
+
+
+
+
+<a id="nestedatt--data--to"></a>
+### Nested Schema for `data.to`
+
+Read-Only:
+
+- `interface` (List of String) Interface
+- `zone` (List of String) Zone

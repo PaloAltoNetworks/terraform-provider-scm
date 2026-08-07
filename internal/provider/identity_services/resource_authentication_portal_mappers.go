@@ -73,8 +73,8 @@ func unpackAuthenticationPortalsToSdk(ctx context.Context, obj types.Object) (*i
 
 	// Handling Primitives
 	if !model.RedirectHost.IsNull() && !model.RedirectHost.IsUnknown() {
-		sdk.RedirectHost = model.RedirectHost.ValueString()
-		tflog.Debug(ctx, "Unpacked primitive value", map[string]interface{}{"field": "RedirectHost", "value": sdk.RedirectHost})
+		sdk.RedirectHost = model.RedirectHost.ValueStringPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "RedirectHost", "value": *sdk.RedirectHost})
 	}
 
 	// Handling Primitives
@@ -167,8 +167,12 @@ func packAuthenticationPortalsFromSdk(ctx context.Context, sdk identity_services
 	}
 	// Handling Primitives
 	// Standard primitive packing
-	model.RedirectHost = basetypes.NewStringValue(sdk.RedirectHost)
-	tflog.Debug(ctx, "Packed primitive value", map[string]interface{}{"field": "RedirectHost", "value": sdk.RedirectHost})
+	if sdk.RedirectHost != nil {
+		model.RedirectHost = basetypes.NewStringValue(*sdk.RedirectHost)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "RedirectHost", "value": *sdk.RedirectHost})
+	} else {
+		model.RedirectHost = basetypes.NewStringNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Snippet != nil {

@@ -32,7 +32,7 @@ DosProtectionRule data source
 - `description` (String) Description
 - `destination` (List of String) List of destination addresses
 - `disabled` (Boolean) Rule disabled?
-- `from` (List of String) List of source zones
+- `from` (Attributes) Source zones and interfaces (see [below for nested schema](#nestedatt--from))
 - `log_setting` (String) Log forwarding profile name
 - `position` (String) Position relative to local device rules. Possible values are `pre` and `post`.
 - `protection` (Attributes) Protection (see [below for nested schema](#nestedatt--protection))
@@ -42,7 +42,7 @@ DosProtectionRule data source
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.
 - `tag` (List of String) List of tags
 - `tfid` (String) The Terraform ID.
-- `to` (List of String) List of destination zones
+- `to` (Attributes) Destination zones and interfaces (see [below for nested schema](#nestedatt--to))
 
 <a id="nestedatt--action"></a>
 ### Nested Schema for `action`
@@ -64,6 +64,15 @@ Read-Only:
 <a id="nestedatt--action--protect"></a>
 ### Nested Schema for `action.protect`
 
+
+
+<a id="nestedatt--from"></a>
+### Nested Schema for `from`
+
+Read-Only:
+
+- `interface` (List of String) Interface
+- `zone` (List of String) Zone
 
 
 <a id="nestedatt--protection"></a>
@@ -96,3 +105,14 @@ Read-Only:
 Read-Only:
 
 - `address` (String) Address
+
+
+
+
+<a id="nestedatt--to"></a>
+### Nested Schema for `to`
+
+Read-Only:
+
+- `interface` (List of String) Interface
+- `zone` (List of String) Zone

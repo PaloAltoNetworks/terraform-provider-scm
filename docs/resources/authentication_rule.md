@@ -39,7 +39,8 @@ resource "scm_authentication_rule" "anchor_rule" {
   service     = ["service-http", "service-https"]
 
   # Identity and Enforcement
-  source_user = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 
   # Optional fields
   timeout                    = 1200
@@ -69,12 +70,13 @@ resource "scm_authentication_rule" "rule_top_of_list" {
   relative_position = "top"
 
   # Core fields
-  destination = ["any"]
-  from        = ["untrust"]
-  to          = ["trust"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"]
+  destination                = ["any"]
+  from                       = ["untrust"]
+  to                         = ["trust"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 
 
@@ -89,12 +91,13 @@ resource "scm_authentication_rule" "rule_bottom_of_list" {
   relative_position = "bottom"
 
   # Core fields
-  destination = ["any"]
-  from        = ["any"]
-  to          = ["any"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"]
+  destination                = ["any"]
+  from                       = ["any"]
+  to                         = ["any"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 
 # -----------------------------------------------------------------------------
@@ -113,12 +116,13 @@ resource "scm_authentication_rule" "rule_before_anchor" {
   target_rule       = scm_authentication_rule.anchor_rule.id # Reference anchor by its ID
 
   # Core fields
-  destination = ["any"]
-  from        = ["any"]
-  to          = ["any"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"]
+  destination                = ["any"]
+  from                       = ["any"]
+  to                         = ["any"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 
 resource "scm_authentication_rule" "rule_after_anchor" {
@@ -133,12 +137,13 @@ resource "scm_authentication_rule" "rule_after_anchor" {
   target_rule       = scm_authentication_rule.anchor_rule.id # Reference anchor by its ID
 
   # Core fields
-  destination = ["any"]
-  from        = ["any"]
-  to          = ["any"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"] # Example specific user
+  destination                = ["any"]
+  from                       = ["any"]
+  to                         = ["any"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 ```
 

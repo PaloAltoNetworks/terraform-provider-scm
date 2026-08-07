@@ -72,10 +72,17 @@ func unpackDosProtectionRulesToSdk(ctx context.Context, obj types.Object) (*secu
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Folder", "value": *sdk.Folder})
 	}
 
-	// Handling Lists
+	// Handling Objects
 	if !model.From.IsNull() && !model.From.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field From")
-		diags.Append(model.From.ElementsAs(ctx, &sdk.From, false)...)
+		tflog.Debug(ctx, "Unpacking nested object for field From")
+		unpacked, d := unpackDosProtectionRulesFromToSdk(ctx, model.From)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "From"})
+		}
+		if unpacked != nil {
+			sdk.From = *unpacked
+		}
 	}
 
 	// Handling Primitives
@@ -111,7 +118,7 @@ func unpackDosProtectionRulesToSdk(ctx context.Context, obj types.Object) (*secu
 			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "Protection"})
 		}
 		if unpacked != nil {
-			sdk.Protection = unpacked
+			sdk.Protection = *unpacked
 		}
 	}
 
@@ -151,10 +158,17 @@ func unpackDosProtectionRulesToSdk(ctx context.Context, obj types.Object) (*secu
 		diags.Append(model.Tag.ElementsAs(ctx, &sdk.Tag, false)...)
 	}
 
-	// Handling Lists
+	// Handling Objects
 	if !model.To.IsNull() && !model.To.IsUnknown() {
-		tflog.Debug(ctx, "Unpacking list of primitives for field To")
-		diags.Append(model.To.ElementsAs(ctx, &sdk.To, false)...)
+		tflog.Debug(ctx, "Unpacking nested object for field To")
+		unpacked, d := unpackDosProtectionRulesToToSdk(ctx, model.To)
+		diags.Append(d...)
+		if d.HasError() {
+			tflog.Error(ctx, "Error unpacking nested object", map[string]interface{}{"field": "To"})
+		}
+		if unpacked != nil {
+			sdk.To = *unpacked
+		}
 	}
 
 	diags.Append(d...)
@@ -228,18 +242,16 @@ func packDosProtectionRulesFromSdk(ctx context.Context, sdk security_services.Do
 	} else {
 		model.Folder = basetypes.NewStringNull()
 	}
-	// Handling Lists
-	if sdk.From != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field From")
-		var d diag.Diagnostics
-		// This logic now dynamically determines the element type based on the SDK's Go type.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.From, d = basetypes.NewListValueFrom(ctx, elemType, sdk.From)
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	// Logic for non-pointer / value-type nested objects
+	if !reflect.ValueOf(sdk.From).IsZero() {
+		tflog.Debug(ctx, "Packing nested object for field From")
+		packed, d := packDosProtectionRulesFromFromSdk(ctx, sdk.From)
 		diags.Append(d...)
+		model.From = packed
 	} else {
-		// This logic now creates a correctly typed null list.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.From = basetypes.NewListNull(elemType)
+		model.From = basetypes.NewObjectNull(models.DosProtectionRulesFrom{}.AttrTypes())
 	}
 	// Handling Primitives
 	// Standard primitive packing
@@ -271,13 +283,11 @@ func packDosProtectionRulesFromSdk(ctx context.Context, sdk security_services.Do
 	}
 	// Handling Objects
 	// This is a regular nested object that has its own packer.
-	if sdk.Protection != nil {
+	// Logic for non-pointer / value-type nested objects
+	if !reflect.ValueOf(sdk.Protection).IsZero() {
 		tflog.Debug(ctx, "Packing nested object for field Protection")
-		packed, d := packDosProtectionRulesProtectionFromSdk(ctx, *sdk.Protection)
+		packed, d := packDosProtectionRulesProtectionFromSdk(ctx, sdk.Protection)
 		diags.Append(d...)
-		if d.HasError() {
-			tflog.Error(ctx, "Error packing nested object", map[string]interface{}{"field": "Protection"})
-		}
 		model.Protection = packed
 	} else {
 		model.Protection = basetypes.NewObjectNull(models.DosProtectionRulesProtection{}.AttrTypes())
@@ -350,18 +360,16 @@ func packDosProtectionRulesFromSdk(ctx context.Context, sdk security_services.Do
 		var elemType attr.Type = basetypes.StringType{} // Default to string
 		model.Tag = basetypes.NewListNull(elemType)
 	}
-	// Handling Lists
-	if sdk.To != nil {
-		tflog.Debug(ctx, "Packing list of primitives for field To")
-		var d diag.Diagnostics
-		// This logic now dynamically determines the element type based on the SDK's Go type.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.To, d = basetypes.NewListValueFrom(ctx, elemType, sdk.To)
+	// Handling Objects
+	// This is a regular nested object that has its own packer.
+	// Logic for non-pointer / value-type nested objects
+	if !reflect.ValueOf(sdk.To).IsZero() {
+		tflog.Debug(ctx, "Packing nested object for field To")
+		packed, d := packDosProtectionRulesToFromSdk(ctx, sdk.To)
 		diags.Append(d...)
+		model.To = packed
 	} else {
-		// This logic now creates a correctly typed null list.
-		var elemType attr.Type = basetypes.StringType{} // Default to string
-		model.To = basetypes.NewListNull(elemType)
+		model.To = basetypes.NewObjectNull(models.DosProtectionRulesTo{}.AttrTypes())
 	}
 	diags.Append(d...)
 
@@ -557,6 +565,127 @@ func packDosProtectionRulesActionListFromSdk(ctx context.Context, sdks []securit
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.DosProtectionRulesAction", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.DosProtectionRulesAction{}.AttrType(), data)
+}
+
+// --- Unpacker for DosProtectionRulesFrom ---
+func unpackDosProtectionRulesFromToSdk(ctx context.Context, obj types.Object) (*security_services.DosProtectionRulesFrom, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.DosProtectionRulesFrom", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.DosProtectionRulesFrom
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk security_services.DosProtectionRulesFrom
+	var d diag.Diagnostics
+	// Handling Lists
+	if !model.Interface.IsNull() && !model.Interface.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Interface")
+		diags.Append(model.Interface.ElementsAs(ctx, &sdk.Interface, false)...)
+	}
+
+	// Handling Lists
+	if !model.Zone.IsNull() && !model.Zone.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Zone")
+		diags.Append(model.Zone.ElementsAs(ctx, &sdk.Zone, false)...)
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.DosProtectionRulesFrom", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for DosProtectionRulesFrom ---
+func packDosProtectionRulesFromFromSdk(ctx context.Context, sdk security_services.DosProtectionRulesFrom) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.DosProtectionRulesFrom", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.DosProtectionRulesFrom
+	var d diag.Diagnostics
+	// Handling Lists
+	if sdk.Interface != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Interface")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Interface, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Interface)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Interface = basetypes.NewListNull(elemType)
+	}
+	// Handling Lists
+	if sdk.Zone != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Zone")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Zone, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Zone)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Zone = basetypes.NewListNull(elemType)
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.DosProtectionRulesFrom{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.DosProtectionRulesFrom", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for DosProtectionRulesFrom ---
+func unpackDosProtectionRulesFromListToSdk(ctx context.Context, list types.List) ([]security_services.DosProtectionRulesFrom, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.DosProtectionRulesFrom")
+	diags := diag.Diagnostics{}
+	var data []models.DosProtectionRulesFrom
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]security_services.DosProtectionRulesFrom, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.DosProtectionRulesFrom{}.AttrTypes(), &item)
+		unpacked, d := unpackDosProtectionRulesFromToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.DosProtectionRulesFrom", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for DosProtectionRulesFrom ---
+func packDosProtectionRulesFromListFromSdk(ctx context.Context, sdks []security_services.DosProtectionRulesFrom) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.DosProtectionRulesFrom")
+	diags := diag.Diagnostics{}
+	var data []models.DosProtectionRulesFrom
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.DosProtectionRulesFrom
+		obj, d := packDosProtectionRulesFromFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.DosProtectionRulesFrom{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.DosProtectionRulesFrom", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.DosProtectionRulesFrom{}.AttrType(), data)
 }
 
 // --- Unpacker for DosProtectionRulesProtection ---
@@ -995,4 +1124,125 @@ func packDosProtectionRulesProtectionClassifiedClassificationCriteriaListFromSdk
 	}
 	tflog.Debug(ctx, "Exiting list pack helper for models.DosProtectionRulesProtectionClassifiedClassificationCriteria", map[string]interface{}{"has_errors": diags.HasError()})
 	return basetypes.NewListValueFrom(ctx, models.DosProtectionRulesProtectionClassifiedClassificationCriteria{}.AttrType(), data)
+}
+
+// --- Unpacker for DosProtectionRulesTo ---
+func unpackDosProtectionRulesToToSdk(ctx context.Context, obj types.Object) (*security_services.DosProtectionRulesTo, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering unpack helper for models.DosProtectionRulesTo", map[string]interface{}{"tf_object": obj})
+	diags := diag.Diagnostics{}
+	var model models.DosProtectionRulesTo
+	diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting Terraform object to Go model", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+	tflog.Debug(ctx, "Successfully converted Terraform object to Go model")
+
+	var sdk security_services.DosProtectionRulesTo
+	var d diag.Diagnostics
+	// Handling Lists
+	if !model.Interface.IsNull() && !model.Interface.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Interface")
+		diags.Append(model.Interface.ElementsAs(ctx, &sdk.Interface, false)...)
+	}
+
+	// Handling Lists
+	if !model.Zone.IsNull() && !model.Zone.IsUnknown() {
+		tflog.Debug(ctx, "Unpacking list of primitives for field Zone")
+		diags.Append(model.Zone.ElementsAs(ctx, &sdk.Zone, false)...)
+	}
+
+	diags.Append(d...)
+
+	tflog.Debug(ctx, "Exiting unpack helper for models.DosProtectionRulesTo", map[string]interface{}{"has_errors": diags.HasError()})
+	return &sdk, diags
+
+}
+
+// --- Packer for DosProtectionRulesTo ---
+func packDosProtectionRulesToFromSdk(ctx context.Context, sdk security_services.DosProtectionRulesTo) (types.Object, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering pack helper for models.DosProtectionRulesTo", map[string]interface{}{"sdk_struct": sdk})
+	diags := diag.Diagnostics{}
+	var model models.DosProtectionRulesTo
+	var d diag.Diagnostics
+	// Handling Lists
+	if sdk.Interface != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Interface")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Interface, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Interface)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Interface = basetypes.NewListNull(elemType)
+	}
+	// Handling Lists
+	if sdk.Zone != nil {
+		tflog.Debug(ctx, "Packing list of primitives for field Zone")
+		var d diag.Diagnostics
+		// This logic now dynamically determines the element type based on the SDK's Go type.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Zone, d = basetypes.NewListValueFrom(ctx, elemType, sdk.Zone)
+		diags.Append(d...)
+	} else {
+		// This logic now creates a correctly typed null list.
+		var elemType attr.Type = basetypes.StringType{} // Default to string
+		model.Zone = basetypes.NewListNull(elemType)
+	}
+	diags.Append(d...)
+
+	obj, d := types.ObjectValueFrom(ctx, models.DosProtectionRulesTo{}.AttrTypes(), &model)
+	tflog.Debug(ctx, "Final object to be returned from pack helper", map[string]interface{}{"object": obj})
+	diags.Append(d...)
+	tflog.Debug(ctx, "Exiting pack helper for models.DosProtectionRulesTo", map[string]interface{}{"has_errors": diags.HasError()})
+	return obj, diags
+
+}
+
+// --- List Unpacker for DosProtectionRulesTo ---
+func unpackDosProtectionRulesToListToSdk(ctx context.Context, list types.List) ([]security_services.DosProtectionRulesTo, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list unpack helper for models.DosProtectionRulesTo")
+	diags := diag.Diagnostics{}
+	var data []models.DosProtectionRulesTo
+	diags.Append(list.ElementsAs(ctx, &data, false)...)
+	if diags.HasError() {
+		tflog.Error(ctx, "Error converting list elements to Go models", map[string]interface{}{"diags": diags})
+		return nil, diags
+	}
+
+	ans := make([]security_services.DosProtectionRulesTo, 0, len(data))
+	for i, item := range data {
+		tflog.Debug(ctx, "Unpacking item from list", map[string]interface{}{"index": i})
+		obj, _ := types.ObjectValueFrom(ctx, models.DosProtectionRulesTo{}.AttrTypes(), &item)
+		unpacked, d := unpackDosProtectionRulesToToSdk(ctx, obj)
+		diags.Append(d...)
+		if unpacked != nil {
+			ans = append(ans, *unpacked)
+		}
+	}
+	tflog.Debug(ctx, "Exiting list unpack helper for models.DosProtectionRulesTo", map[string]interface{}{"has_errors": diags.HasError()})
+	return ans, diags
+}
+
+// --- List Packer for DosProtectionRulesTo ---
+func packDosProtectionRulesToListFromSdk(ctx context.Context, sdks []security_services.DosProtectionRulesTo) (types.List, diag.Diagnostics) {
+	tflog.Debug(ctx, "Entering list pack helper for models.DosProtectionRulesTo")
+	diags := diag.Diagnostics{}
+	var data []models.DosProtectionRulesTo
+
+	for i, sdk := range sdks {
+		tflog.Debug(ctx, "Packing item to list", map[string]interface{}{"index": i})
+		var model models.DosProtectionRulesTo
+		obj, d := packDosProtectionRulesToFromSdk(ctx, sdk)
+		diags.Append(d...)
+		if diags.HasError() {
+			return basetypes.NewListNull(models.DosProtectionRulesTo{}.AttrType()), diags
+		}
+		diags.Append(obj.As(ctx, &model, basetypes.ObjectAsOptions{})...)
+		data = append(data, model)
+	}
+	tflog.Debug(ctx, "Exiting list pack helper for models.DosProtectionRulesTo", map[string]interface{}{"has_errors": diags.HasError()})
+	return basetypes.NewListValueFrom(ctx, models.DosProtectionRulesTo{}.AttrType(), data)
 }

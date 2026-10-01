@@ -14,6 +14,13 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 ## Release Notes
 
+### v1.0.13
+
+#### BUG FIXES
+
+* resource/scm_ike_crypto_profile: Added support for `group21` for dh_group property
+* resource/scm_ipsec_crypto_profile: Added support for `group21` for dh_group property
+
 ### v1.0.12-beta.5
 
 #### FEATURES

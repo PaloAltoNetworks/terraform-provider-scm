@@ -211,9 +211,9 @@ var IpsecCryptoProfilesResourceSchema = schema.Schema{
 		},
 		"dh_group": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.OneOf("no-pfs", "group1", "group2", "group5", "group14", "group19", "group20"),
+				stringvalidator.OneOf("no-pfs", "group1", "group2", "group5", "group14", "group19", "group20", "group21", "ml-kem-512", "ml-kem-768", "ml-kem-1024"),
 			},
-			MarkdownDescription: "phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
+			MarkdownDescription: "phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19`, `group20`, `group21`, `ml-kem-512`, `ml-kem-768` and `ml-kem-1024`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("group2"),
@@ -423,7 +423,7 @@ var IpsecCryptoProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"dh_group": dsschema.StringAttribute{
-			MarkdownDescription: "phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
+			MarkdownDescription: "phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19`, `group20`, `group21`, `ml-kem-512`, `ml-kem-768` and `ml-kem-1024`.",
 			Computed:            true,
 		},
 		"esp": dsschema.SingleNestedAttribute{

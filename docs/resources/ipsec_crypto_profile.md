@@ -57,7 +57,7 @@ resource "scm_ipsec_crypto_profile" "scm_ipsec_crypto_profile_2" {
 
 - `ah` (Attributes) Ah (see [below for nested schema](#nestedatt--ah))
 - `device` (String) The device in which the resource is defined
-- `dh_group` (String) phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.
+- `dh_group` (String) phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19`, `group20`, `group21`, `ml-kem-512`, `ml-kem-768` and `ml-kem-1024`.
 - `esp` (Attributes) Esp (see [below for nested schema](#nestedatt--esp))
 - `folder` (String) The folder in which the resource is defined
 - `lifesize` (Attributes) Lifesize (see [below for nested schema](#nestedatt--lifesize))

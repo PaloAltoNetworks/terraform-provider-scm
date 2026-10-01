@@ -129,7 +129,7 @@ var ApplicationsResourceSchema = schema.Schema{
 		},
 		"name": schema.StringAttribute{
 			Validators: []validator.String{
-				stringvalidator.LengthAtMost(63),
+				stringvalidator.LengthAtMost(255),
 				stringvalidator.LengthAtLeast(1),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},

@@ -119,7 +119,7 @@ var IkeCryptoProfilesResourceSchema = schema.Schema{
 		},
 		"dh_group": schema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
+			MarkdownDescription: "Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19`, `group20`, `group21`, `ml-kem-512`, `ml-kem-768` and `ml-kem-1024`.",
 			Required:            true,
 		},
 		"encryption": schema.ListAttribute{
@@ -256,7 +256,7 @@ var IkeCryptoProfilesDataSourceSchema = dsschema.Schema{
 		},
 		"dh_group": dsschema.ListAttribute{
 			ElementType:         types.StringType,
-			MarkdownDescription: "Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.",
+			MarkdownDescription: "Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19`, `group20`, `group21`, `ml-kem-512`, `ml-kem-768` and `ml-kem-1024`.",
 			Computed:            true,
 		},
 		"encryption": dsschema.ListAttribute{

@@ -41,7 +41,7 @@ output "ipsec_profile_by_id" {
 ### Read-Only
 
 - `ah` (Attributes) Ah (see [below for nested schema](#nestedatt--ah))
-- `dh_group` (String) phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.
+- `dh_group` (String) phase-2 DH group (PFS DH group). Possible values are `no-pfs`, `group1`, `group2`, `group5`, `group14`, `group19`, `group20`, `group21`, `ml-kem-512`, `ml-kem-768` and `ml-kem-1024`.
 - `esp` (Attributes) Esp (see [below for nested schema](#nestedatt--esp))
 - `lifesize` (Attributes) Lifesize (see [below for nested schema](#nestedatt--lifesize))
 - `lifetime` (Attributes) Ipsec crypto profile lifetime (see [below for nested schema](#nestedatt--lifetime))

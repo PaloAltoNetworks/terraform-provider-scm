@@ -43,7 +43,7 @@ resource "scm_ike_crypto_profile" "scm_ike_crypto_profile_2" {
 
 ### Required
 
-- `dh_group` (List of String) Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19` and `group20`.
+- `dh_group` (List of String) Dh group. Possible values are `group1`, `group2`, `group5`, `group14`, `group19`, `group20`, `group21`, `ml-kem-512`, `ml-kem-768` and `ml-kem-1024`.
 - `encryption` (List of String) Encryption algorithm. Possible values are `des`, `3des`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-gcm` and `aes-256-gcm`.
 - `hash` (List of String) Hash. Possible values are `md5`, `sha1`, `sha256`, `sha384`, `sha512` and `non-auth`.
 - `name` (String) Alphanumeric string begin with letter: [0-9a-zA-Z._-]

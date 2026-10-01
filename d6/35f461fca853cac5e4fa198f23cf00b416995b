@@ -1,0 +1,34 @@
+docs/data-sources/ike_crypto_profile.md
+  h_55d70f393a1b06 44
+docs/data-sources/ike_crypto_profile_list.md
+  h_55d70f393a1b06 62
+docs/data-sources/ipsec_crypto_profile.md
+  h_55d70f393a1b06 44
+docs/data-sources/ipsec_crypto_profile_list.md
+  h_55d70f393a1b06 62
+docs/index.md
+  h_55d70f393a1b06 17-23
+docs/resources/ike_crypto_profile.md
+  h_55d70f393a1b06 46
+docs/resources/ipsec_crypto_profile.md
+  h_55d70f393a1b06 60
+internal/models/network_services/model_ike_crypto_profiles.go
+  h_55d70f393a1b06 122,259
+internal/models/network_services/model_ipsec_crypto_profiles.go
+  h_55d70f393a1b06 214,216,426
+internal/models/ztna_connector_all/model_applications.go
+  h_55d70f393a1b06 132
+templates/index.md.tmpl
+  h_55d70f393a1b06 17-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "d635f461fca853cac5e4fa198f23cf00b416995b",
+  "prompts": {},
+  "humans": {
+    "h_55d70f393a1b06": {
+      "author": "Dhiren Chotwani <dchotwani@paloaltonetworks.com>"
+    }
+  }
+}

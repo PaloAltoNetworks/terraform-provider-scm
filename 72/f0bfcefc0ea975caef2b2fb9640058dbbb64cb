@@ -1,0 +1,25 @@
+go.sum
+  s_6c56cc473ef0f4::t_ed4ec5b1b8c420 171-172,250-251
+docs/index.md
+  s_6c56cc473ef0f4::t_326a438c1dc594 17,100-104
+go.mod
+  s_6c56cc473ef0f4::t_1977acbdabb1dd 3,13,82-84
+templates/index.md.tmpl
+  s_6c56cc473ef0f4::t_c48993b44df6bc 17,100-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "72f0bfcefc0ea975caef2b2fb9640058dbbb64cb",
+  "prompts": {},
+  "sessions": {
+    "s_6c56cc473ef0f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "59b84f6f-2c08-4a2b-8787-e9fc2013bdd0",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Dhiren Chotwani <dchotwani@paloaltonetworks.com>"
+    }
+  }
+}

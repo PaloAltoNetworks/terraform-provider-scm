@@ -20,7 +20,7 @@ This provider covers the following aspects of Strata Cloud Manager:
   separate from the existing scm_* resources. All resources and data sources below target
   the ZTNA Connector API v2.0.
 
-#### Resources (Supported — fully tested with examples)
+#### Resources
 
 * resources/ztna_connector_group: Added support, examples and tests (resource, data-source)
 * resources/ztna_connector: Added support, examples and tests (resource, data-source)
@@ -37,7 +37,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * resource/ztna_connector_quiesce: Added support and examples (resource, data-source)
 * resource/scm_route_access_list: Added examples (resources)
 
-#### Data Sources (Supported — fully tested with examples)
+#### Data Sources
 
 * data-source/ztna_connector_group: Added support, examples and tests
 * data-source/ztna_connector_group_list: Added support, examples and tests
@@ -69,7 +69,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * data-source/ztna_connector_upgrade_status: Added support and examples
 * data-source/ztna_connector_scheduled_upgrade: Added support and examples
 
-#### Actions (Supported — fully tested with examples)
+#### Actions
 * actions/scm_application_defaults: Bootstrap Prisma Access application defaults (certificates, config nodes) on a fresh tenant
 * actions/ztna_tenant_start_onboarding: Initiates ZTNA tenant onboarding
 * actions/ztna_tenant_start_offboarding: Initiates ZTNA tenant deletion and cleanup
@@ -81,7 +81,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * resource/scm_bgp_route_map: Fixed int32 overflow for large BGP AS numbers in `aspath_prepend` and `aspath_exclude` fields (now uses int64)
 * resource/scm_service_connection: Resolved model issue with secondary bgp settings ([#128](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/128))
 * resource/scm_ethernet_interface: Added missing lldp support for `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
-* resource/scm_aggregate_interface: Added missing lldp support for `layer2` and layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
+* resource/scm_aggregate_interface: Added missing lldp support for `layer2` and `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
 * resource/scm_pbf_rule: Added missing `negate_source` and `negate_destination` flags ([#118](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/118))
 * resources/scm_security_rule: Corrected docs for `target_rule`. Ref-by-name is not supported (#125)
 * resources/scm_folder: Resolved apply error caused by unset `labels` property (#116)
@@ -89,7 +89,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * resource/scm_route_prefix_list: Fixed Response Type (#136)
 * resource/scm_route_access_list: Fixed Response Type (#134)
 * actions/scm_config_push: Fixed incorrect `folders` property name (#135)
-* /resource/*: Improved non zero referential error logging (#122)
+* /resource/: Improved non zero referential error logging (#122)
 
 #### ENHANCEMENTS
 
@@ -138,7 +138,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * resource/scm_route_prefix_list: Fixed Response Type (#136)
 * resource/scm_route_access_list: Fixed Response Type (#134)
 * actions/scm_config_push: Fixed incorrect `folders` property name (#135)
-* /resource/*: Improved non zero referential error logging (#122)
+* /resource/: Improved non zero referential error logging (#122)
 
 #### NOTES
 
@@ -157,7 +157,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * resource/scm_bgp_route_map: Fixed int32 overflow for large BGP AS numbers in `aspath_prepend` and `aspath_exclude` fields (now uses int64)
 * resource/scm_service_connection: Resolved model issue with secondary bgp settings ([#128](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/128))
 * resource/scm_ethernet_interface: Added missing lldp support for `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
-* resource/scm_aggregate_interface: Added missing lldp support for `layer2` and layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
+* resource/scm_aggregate_interface: Added missing lldp support for `layer2` and `layer3` interface ([#126](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/126))
 * resource/scm_pbf_rule: Added missing `negate_source` and `negate_destination` flags ([#118](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/118))
 * resources/scm_security_rule: Corrected docs for `target_rule`. Ref-by-name is not supported (#125)
 * resources/scm_folder: Resolved apply error caused by unset `labels` property (#116)

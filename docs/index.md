@@ -14,7 +14,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 ## Release Notes
 
-### v1.0.12
+### v1.0.13
 
 * ZTNA Connector support is introduced in this release under a new ztna_* resource prefix,
   separate from the existing scm_* resources. All resources and data sources below target
@@ -95,6 +95,11 @@ This provider covers the following aspects of Strata Cloud Manager:
 
 * Added possible values to `enum` properties across >500 resources (#86)
 * Consolidated `oneOf` requirements for optional `resource` properties in terraform docs across all `resources`
+
+
+### v1.0.12
+
+* This version release is skipped due to operational maintainability of Go updates.
 
 
 ### v1.0.12-beta.5

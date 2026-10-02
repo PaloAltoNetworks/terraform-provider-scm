@@ -1,6 +1,6 @@
 module github.com/paloaltonetworks/terraform-provider-scm
 
-go 1.26.0
+go 1.25.8
 
 //replace github.com/paloaltonetworks/scm-go => ../scm-go
 
@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework-validators v0.19.0
 	github.com/hashicorp/terraform-plugin-log v0.10.0
 	github.com/hashicorp/terraform-plugin-testing v1.16.0
-	github.com/paloaltonetworks/scm-go v1.0.12
+	github.com/paloaltonetworks/scm-go v1.0.13
 )
 
 require (
@@ -79,7 +79,9 @@ require (
 
 	// Security overrides - force minimum versions to address known vulnerabilities
 	golang.org/x/net v0.56.0 // indirect
-	golang.org/x/oauth2 v0.37.0 // indirect
+	// oauth2 v0.37.0+ declares go 1.26.0, which makes go mod tidy raise the
+	// go directive to 1.26 and breaks the windows/arm GoReleaser build.
+	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.21.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
 	golang.org/x/text v0.39.0 // indirect

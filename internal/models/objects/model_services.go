@@ -246,7 +246,7 @@ var ServicesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -262,7 +262,7 @@ var ServicesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -293,7 +293,7 @@ var ServicesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("udp"),
 						),
 					},
-					MarkdownDescription: "Tcp\n\n> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`.",
+					MarkdownDescription: "Tcp",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"override": schema.SingleNestedAttribute{
@@ -353,7 +353,7 @@ var ServicesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("tcp"),
 						),
 					},
-					MarkdownDescription: "Udp\n\n> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`.",
+					MarkdownDescription: "Udp",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"override": schema.SingleNestedAttribute{
@@ -400,7 +400,7 @@ var ServicesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -434,12 +434,12 @@ var ServicesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -457,7 +457,7 @@ var ServicesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"tcp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Tcp\n\n> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`.",
+					MarkdownDescription: "Tcp",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"override": dsschema.SingleNestedAttribute{
@@ -489,7 +489,7 @@ var ServicesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"udp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Udp\n\n> ℹ️ **Note:** You must specify exactly one of `tcp` and `udp`.",
+					MarkdownDescription: "Udp",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"override": dsschema.SingleNestedAttribute{
@@ -515,7 +515,7 @@ var ServicesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

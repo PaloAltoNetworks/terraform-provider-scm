@@ -11,11 +11,14 @@ func GetDataSources() []func() datasource.DataSource {
 		NewFolderDataSource,
 		NewLabelDataSource,
 		NewSnippetDataSource,
+		NewSnippetCategoryDataSource,
+		NewTrustedTenantOverviewDataSource,
 		NewVariableDataSource,
 		NewDeviceListDataSource,
 		NewFolderListDataSource,
 		NewLabelListDataSource,
 		NewSnippetListDataSource,
+		NewSnippetCategoryListDataSource,
 		NewVariableListDataSource,
 	}
 }

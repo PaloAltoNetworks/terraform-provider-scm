@@ -33,7 +33,7 @@ type AutoVpnSettingDataSource struct {
 
 func (d *AutoVpnSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AutoVpnSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_auto_vpn_setting"
+	resp.TypeName = "scm_auto_vpn_setting"
 }
 
 func (d *AutoVpnSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -31,7 +31,7 @@ type DosProtectionRules struct {
 	Device      basetypes.StringValue `tfsdk:"device"`
 	Disabled    basetypes.BoolValue   `tfsdk:"disabled"`
 	Folder      basetypes.StringValue `tfsdk:"folder"`
-	From        basetypes.ListValue   `tfsdk:"from"`
+	From        basetypes.ObjectValue `tfsdk:"from"`
 	Id          basetypes.StringValue `tfsdk:"id"`
 	LogSetting  basetypes.StringValue `tfsdk:"log_setting"`
 	Name        basetypes.StringValue `tfsdk:"name"`
@@ -43,7 +43,7 @@ type DosProtectionRules struct {
 	Source      basetypes.ListValue   `tfsdk:"source"`
 	SourceUser  basetypes.ListValue   `tfsdk:"source_user"`
 	Tag         basetypes.ListValue   `tfsdk:"tag"`
-	To          basetypes.ListValue   `tfsdk:"to"`
+	To          basetypes.ObjectValue `tfsdk:"to"`
 }
 
 // DosProtectionRulesAction represents a nested structure within the DosProtectionRules model
@@ -51,6 +51,12 @@ type DosProtectionRulesAction struct {
 	Allow   basetypes.ObjectValue `tfsdk:"allow"`
 	Deny    basetypes.ObjectValue `tfsdk:"deny"`
 	Protect basetypes.ObjectValue `tfsdk:"protect"`
+}
+
+// DosProtectionRulesFrom represents a nested structure within the DosProtectionRules model
+type DosProtectionRulesFrom struct {
+	Interface basetypes.ListValue `tfsdk:"interface"`
+	Zone      basetypes.ListValue `tfsdk:"zone"`
 }
 
 // DosProtectionRulesProtection represents a nested structure within the DosProtectionRules model
@@ -75,6 +81,12 @@ type DosProtectionRulesProtectionClassifiedClassificationCriteria struct {
 	Address basetypes.StringValue `tfsdk:"address"`
 }
 
+// DosProtectionRulesTo represents a nested structure within the DosProtectionRules model
+type DosProtectionRulesTo struct {
+	Interface basetypes.ListValue `tfsdk:"interface"`
+	Zone      basetypes.ListValue `tfsdk:"zone"`
+}
+
 // AttrTypes defines the attribute types for the DosProtectionRules model.
 func (o DosProtectionRules) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -97,7 +109,12 @@ func (o DosProtectionRules) AttrTypes() map[string]attr.Type {
 		"device":      basetypes.StringType{},
 		"disabled":    basetypes.BoolType{},
 		"folder":      basetypes.StringType{},
-		"from":        basetypes.ListType{ElemType: basetypes.StringType{}},
+		"from": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"interface": basetypes.ListType{ElemType: basetypes.StringType{}},
+				"zone":      basetypes.ListType{ElemType: basetypes.StringType{}},
+			},
+		},
 		"id":          basetypes.StringType{},
 		"log_setting": basetypes.StringType{},
 		"name":        basetypes.StringType{},
@@ -127,7 +144,12 @@ func (o DosProtectionRules) AttrTypes() map[string]attr.Type {
 		"source":      basetypes.ListType{ElemType: basetypes.StringType{}},
 		"source_user": basetypes.ListType{ElemType: basetypes.StringType{}},
 		"tag":         basetypes.ListType{ElemType: basetypes.StringType{}},
-		"to":          basetypes.ListType{ElemType: basetypes.StringType{}},
+		"to": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"interface": basetypes.ListType{ElemType: basetypes.StringType{}},
+				"zone":      basetypes.ListType{ElemType: basetypes.StringType{}},
+			},
+		},
 	}
 }
 
@@ -155,6 +177,21 @@ func (o DosProtectionRulesAction) AttrTypes() map[string]attr.Type {
 
 // AttrType returns the attribute type for a list of DosProtectionRulesAction objects.
 func (o DosProtectionRulesAction) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
+// AttrTypes defines the attribute types for the DosProtectionRulesFrom model.
+func (o DosProtectionRulesFrom) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"interface": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"zone":      basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of DosProtectionRulesFrom objects.
+func (o DosProtectionRulesFrom) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -235,6 +272,21 @@ func (o DosProtectionRulesProtectionClassifiedClassificationCriteria) AttrType()
 	}
 }
 
+// AttrTypes defines the attribute types for the DosProtectionRulesTo model.
+func (o DosProtectionRulesTo) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"interface": basetypes.ListType{ElemType: basetypes.StringType{}},
+		"zone":      basetypes.ListType{ElemType: basetypes.StringType{}},
+	}
+}
+
+// AttrType returns the attribute type for a list of DosProtectionRulesTo objects.
+func (o DosProtectionRulesTo) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // DosProtectionRulesResourceSchema defines the schema for DosProtectionRules resource
 var DosProtectionRulesResourceSchema = schema.Schema{
 	MarkdownDescription: "DosProtectionRule resource",
@@ -250,7 +302,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("protect"),
 						),
 					},
-					MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Allow",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -261,7 +313,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("protect"),
 						),
 					},
-					MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Deny",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -272,7 +324,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("deny"),
 						),
 					},
-					MarkdownDescription: "Protect\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Protect",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -299,7 +351,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -321,16 +373,27 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
 			},
 		},
-		"from": schema.ListAttribute{
-			ElementType:         types.StringType,
-			MarkdownDescription: "List of source zones",
-			Optional:            true,
+		"from": schema.SingleNestedAttribute{
+			MarkdownDescription: "Source zones and interfaces",
+			Required:            true,
+			Attributes: map[string]schema.Attribute{
+				"interface": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Interface",
+					Optional:            true,
+				},
+				"zone": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Zone",
+					Optional:            true,
+				},
+			},
 		},
 		"id": schema.StringAttribute{
 			MarkdownDescription: "The UUID of the DNS security profile",
@@ -356,22 +419,22 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "Position relative to local device rules",
+			MarkdownDescription: "Position relative to local device rules. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
 		},
 		"protection": schema.SingleNestedAttribute{
 			MarkdownDescription: "Protection",
-			Optional:            true,
+			Required:            true,
 			Attributes: map[string]schema.Attribute{
 				"aggregate": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ConflictsWith(
+						objectvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("classified"),
 						),
 					},
-					MarkdownDescription: "Aggregate\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Aggregate",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"profile": schema.StringAttribute{
@@ -382,11 +445,11 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				},
 				"classified": schema.SingleNestedAttribute{
 					Validators: []validator.Object{
-						objectvalidator.ConflictsWith(
+						objectvalidator.ExactlyOneOf(
 							path.MatchRelative().AtParent().AtName("aggregate"),
 						),
 					},
-					MarkdownDescription: "Classified\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Classified",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"classification_criteria": schema.SingleNestedAttribute{
@@ -414,7 +477,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 		"service": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "List of services",
-			Optional:            true,
+			Required:            true,
 		},
 		"snippet": schema.StringAttribute{
 			Validators: []validator.String{
@@ -425,7 +488,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -434,7 +497,7 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 		"source": schema.ListAttribute{
 			ElementType:         types.StringType,
 			MarkdownDescription: "List of source addresses",
-			Optional:            true,
+			Required:            true,
 		},
 		"source_user": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -453,10 +516,21 @@ var DosProtectionRulesResourceSchema = schema.Schema{
 				stringplanmodifier.UseStateForUnknown(),
 			},
 		},
-		"to": schema.ListAttribute{
-			ElementType:         types.StringType,
-			MarkdownDescription: "List of destination zones",
-			Optional:            true,
+		"to": schema.SingleNestedAttribute{
+			MarkdownDescription: "Destination zones and interfaces",
+			Required:            true,
+			Attributes: map[string]schema.Attribute{
+				"interface": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Interface",
+					Optional:            true,
+				},
+				"zone": schema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Zone",
+					Optional:            true,
+				},
+			},
 		},
 	},
 }
@@ -470,17 +544,17 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"allow": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Allow",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"deny": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Deny\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Deny",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"protect": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Protect\n\n> ℹ️ **Note:** You must specify exactly one of `allow`, `deny`, and `protect`.",
+					MarkdownDescription: "Protect",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
@@ -496,7 +570,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -505,14 +579,25 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
-		"from": dsschema.ListAttribute{
-			ElementType:         types.StringType,
-			MarkdownDescription: "List of source zones",
+		"from": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Source zones and interfaces",
 			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"interface": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Interface",
+					Computed:            true,
+				},
+				"zone": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Zone",
+					Computed:            true,
+				},
+			},
 		},
 		"id": dsschema.StringAttribute{
 			MarkdownDescription: "The UUID of the DNS security profile",
@@ -528,7 +613,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "Position relative to local device rules",
+			MarkdownDescription: "Position relative to local device rules. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"protection": dsschema.SingleNestedAttribute{
@@ -536,7 +621,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"aggregate": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Aggregate\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Aggregate",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"profile": dsschema.StringAttribute{
@@ -546,7 +631,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"classified": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Classified\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate` and `classified`.",
+					MarkdownDescription: "Classified",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"classification_criteria": dsschema.SingleNestedAttribute{
@@ -577,7 +662,7 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -600,10 +685,21 @@ var DosProtectionRulesDataSourceSchema = dsschema.Schema{
 			MarkdownDescription: "The Terraform ID.",
 			Computed:            true,
 		},
-		"to": dsschema.ListAttribute{
-			ElementType:         types.StringType,
-			MarkdownDescription: "List of destination zones",
+		"to": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Destination zones and interfaces",
 			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"interface": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Interface",
+					Computed:            true,
+				},
+				"zone": dsschema.ListAttribute{
+					ElementType:         types.StringType,
+					MarkdownDescription: "Zone",
+					Computed:            true,
+				},
+			},
 		},
 	},
 }

@@ -32,7 +32,7 @@ type IkeCryptoProfileListDataSource struct {
 }
 
 func (d *IkeCryptoProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ike_crypto_profile_list"
+	resp.TypeName = "scm_ike_crypto_profile_list"
 }
 
 func (d *IkeCryptoProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

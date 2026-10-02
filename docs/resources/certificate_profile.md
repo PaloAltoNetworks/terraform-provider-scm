@@ -50,6 +50,8 @@ resource "scm_certificate_profile" "scm_cp_1" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `block_expired_cert` (Boolean) Block sessions with expired certificates?
 - `block_timeout_cert` (Boolean) Block session if certificate status cannot be retrieved within timeout?
 - `block_unauthenticated_cert` (Boolean) Block session if the certificate was not issued to the authenticating device?
@@ -57,16 +59,10 @@ resource "scm_certificate_profile" "scm_cp_1" {
 - `cert_status_timeout` (String) Certificate status timeout
 - `crl_receive_timeout` (String) CRL receive timeout (seconds)
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `domain` (String) User domain
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `ocsp_receive_timeout` (String) OCSP receive timeout (seconds)
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `use_crl` (Boolean) Use CRL?
 - `use_ocsp` (Boolean) Use OCSP?
 - `username_field` (Attributes) Certificate username field (see [below for nested schema](#nestedatt--username_field))
@@ -95,8 +91,8 @@ Optional:
 
 Optional:
 
-- `subject` (String) Common name
-- `subject_alt` (String) Email address
+- `subject` (String) Common name. Possible values are `common-name`.
+- `subject_alt` (String) Email address. Possible values are `email`.
 
 
 ## Import

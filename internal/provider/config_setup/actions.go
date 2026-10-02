@@ -7,14 +7,14 @@ import (
 // GetActions returns all actions for this package.
 func GetActions() []func() action.Action {
 	return []func() action.Action{
-		NewSnippetSnapshotUpdatesAction,
+		NewSharedSnippetsLoadAction,
 		NewSnippetSnapshotCompareAction,
+		NewSnippetSnapshotConvertAction,
+		NewSnippetSnapshotDiffAction,
 		NewSnippetSnapshotLoadAction,
 		NewSnippetSnapshotPublishAction,
 		NewSnippetSnapshotSaveAction,
-		NewSharedSnippetsLoadAction,
-		NewSnippetSnapshotDiffAction,
-		NewSnippetSnapshotConvertAction,
+		NewSnippetSnapshotUpdatesAction,
 		NewTrustValidationAction,
 	}
 }

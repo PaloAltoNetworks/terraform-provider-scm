@@ -34,7 +34,7 @@ type InternalDnsServerListDataSource struct {
 }
 
 func (d *InternalDnsServerListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_internal_dns_server_list"
+	resp.TypeName = "scm_internal_dns_server_list"
 }
 
 func (d *InternalDnsServerListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

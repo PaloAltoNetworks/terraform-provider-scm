@@ -32,7 +32,7 @@ type RadiusServerProfileListDataSource struct {
 }
 
 func (d *RadiusServerProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_radius_server_profile_list"
+	resp.TypeName = "scm_radius_server_profile_list"
 }
 
 func (d *RadiusServerProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

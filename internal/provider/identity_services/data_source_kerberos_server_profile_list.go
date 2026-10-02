@@ -32,7 +32,7 @@ type KerberosServerProfileListDataSource struct {
 }
 
 func (d *KerberosServerProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_kerberos_server_profile_list"
+	resp.TypeName = "scm_kerberos_server_profile_list"
 }
 
 func (d *KerberosServerProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

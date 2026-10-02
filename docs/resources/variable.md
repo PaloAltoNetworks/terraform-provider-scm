@@ -14,6 +14,17 @@ Variable resource
 
 ```terraform
 #
+# Creates a variable in ip-netmask format with an empty value
+#
+resource "scm_variable" "scm_variable_ipaddr_empty" {
+  folder      = "ngfw-shared"
+  name        = "$tf_variable_ipaddr_empty"
+  description = "Managed by Terraform"
+  type        = "ip-netmask"
+  value       = "None"
+}
+
+#
 # Creates a variable in as-number format
 #
 resource "scm_variable" "scm_variable_asn" {
@@ -152,21 +163,17 @@ resource "scm_variable" "scm_variable_zone" {
 ### Required
 
 - `name` (String) The name of the variable
-- `type` (String) The variable type
+- `type` (String) The variable type. Possible values are `percent`, `count`, `ip-netmask`, `zone`, `ip-range`, `ip-wildcard`, `device-priority`, `device-id`, `egress-max`, `as-number`, `fqdn`, `port`, `link-tag`, `group-id`, `rate`, `router-id`, `qos-profile` and `timer`.
 - `value` (String) The value of the variable
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) The description of the variable
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 

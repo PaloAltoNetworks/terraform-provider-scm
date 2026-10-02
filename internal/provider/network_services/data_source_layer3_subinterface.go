@@ -34,7 +34,7 @@ type Layer3SubinterfaceDataSource struct {
 
 func (d *Layer3SubinterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: Layer3SubinterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_layer3_subinterface"
+	resp.TypeName = "scm_layer3_subinterface"
 }
 
 func (d *Layer3SubinterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
@@ -224,6 +224,9 @@ func (d *Layer3SubinterfaceDataSource) Read(ctx context.Context, req datasource.
 	idBuilder.WriteString(":")
 	idBuilder.WriteString(data.Id.ValueString())
 	data.Tfid = types.StringValue(idBuilder.String())
+
+	// Data sources don't store sensitive values, but the model requires the field to be properly initialized.
+	data.EncryptedValues = types.MapNull(types.StringType)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

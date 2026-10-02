@@ -34,7 +34,7 @@ type MotdBannerSettingDataSource struct {
 
 func (d *MotdBannerSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: MotdBannerSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_motd_banner_setting"
+	resp.TypeName = "scm_motd_banner_setting"
 }
 
 func (d *MotdBannerSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

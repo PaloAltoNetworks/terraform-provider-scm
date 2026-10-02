@@ -59,14 +59,8 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -135,7 +129,7 @@ Read-Only:
 - `url-`updates = URL update server
 - `vmmonitor` = VM monitor
 - `wildfire-`private = WildFire Appliance
-- `ztp` = ZTP and Auto-VPN DDNS
+- `ztp` = ZTP and Auto-VPN DDNS. Possible values are `autofocus`, `crl-status`, `data-services`, `ddns`, `deployments`, `dns`, `edl-updates`, `email`, `hsm`, `http`, `iot`, `kerberos`, `ldap`, `mdm`, `mfa`, `netflow`, `ntp`, `paloalto-networks-services`, `panorama`, `panorama-log-forwarding`, `proxy`, `radius`, `scep`, `snmp`, `syslog`, `tacplus`, `uid-agent`, `url-updates`, `vmmonitor`, `wildfire-private` and `ztp`.
 - `source` (Attributes) Source (see [below for nested schema](#nestedatt--data--route--service--source))
 - `source_v6` (Attributes) Source v6 (see [below for nested schema](#nestedatt--data--route--service--source_v6))
 

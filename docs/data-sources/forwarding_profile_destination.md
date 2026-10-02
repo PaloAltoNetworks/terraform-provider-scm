@@ -48,7 +48,7 @@ output "forwarding_profile_destination_data_source_results" {
 
 ### Optional
 
-- `folder` (String) The folder in which the resource is defined
+- `folder` (String) The folder in which the resource is defined. Possible values are `Mobile Users`.
 - `name` (String) alphanumeric string [ 0-9a-zA-Z._ -]
 
 ### Read-Only

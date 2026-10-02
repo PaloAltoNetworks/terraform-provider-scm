@@ -32,7 +32,7 @@ type SessionTimeoutListDataSource struct {
 }
 
 func (d *SessionTimeoutListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_session_timeout_list"
+	resp.TypeName = "scm_session_timeout_list"
 }
 
 func (d *SessionTimeoutListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

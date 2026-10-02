@@ -32,7 +32,7 @@ type UrlCategoryListDataSource struct {
 }
 
 func (d *UrlCategoryListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_url_category_list"
+	resp.TypeName = "scm_url_category_list"
 }
 
 func (d *UrlCategoryListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

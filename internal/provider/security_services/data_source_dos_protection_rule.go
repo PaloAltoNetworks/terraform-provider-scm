@@ -34,7 +34,7 @@ type DosProtectionRuleDataSource struct {
 
 func (d *DosProtectionRuleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DosProtectionRuleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dos_protection_rule"
+	resp.TypeName = "scm_dos_protection_rule"
 }
 
 func (d *DosProtectionRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -57,7 +57,7 @@ resource "scm_forwarding_profile_user_location" "scm_user_location_4" {
 ### Optional
 
 - `description` (String) Description of the user location
-- `folder` (String) The folder in which the resource is defined
+- `folder` (String) The folder in which the resource is defined. Possible values are `Mobile Users`.
 - `internal_host_detection` (Attributes) Configuration for detecting internal hosts using IP address and FQDN (see [below for nested schema](#nestedatt--internal_host_detection))
 - `ip_addresses` (List of String) List of IP addresses that define the user location
 - `name` (String) alphanumeric string [ 0-9a-zA-Z._-]

@@ -34,7 +34,7 @@ type SystemMatchListDataSource struct {
 
 func (d *SystemMatchListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SystemMatchListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_system_match_list"
+	resp.TypeName = "scm_system_match_list"
 }
 
 func (d *SystemMatchListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

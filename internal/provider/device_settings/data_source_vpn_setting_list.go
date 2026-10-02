@@ -32,7 +32,7 @@ type VpnSettingListDataSource struct {
 }
 
 func (d *VpnSettingListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_vpn_setting_list"
+	resp.TypeName = "scm_vpn_setting_list"
 }
 
 func (d *VpnSettingListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

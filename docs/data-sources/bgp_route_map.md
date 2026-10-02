@@ -40,15 +40,9 @@ output "bgp_route_map_data_source_results" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -61,7 +55,7 @@ output "bgp_route_map_data_source_results" {
 
 Read-Only:
 
-- `action` (String) Action
+- `action` (String) Action. Possible values are `permit` and `deny`.
 - `description` (String) Description
 - `match` (Attributes) Match (see [below for nested schema](#nestedatt--route_map--match))
 - `name` (Number) Sequence number
@@ -80,7 +74,7 @@ Read-Only:
 - `local_preference` (Number) Local preference
 - `metric` (Number) Metric
 - `origin` (String) Origin
-- `peer` (String) Peer
+- `peer` (String) Peer. Possible values are `local` and `none`.
 - `regular_community` (String) Regular community
 - `tag` (Number) Tag
 
@@ -135,11 +129,11 @@ Read-Only:
 - `large_community` (List of String) Large community
 - `local_preference` (Number) Local preference
 - `metric` (Attributes) Metric (see [below for nested schema](#nestedatt--route_map--set--metric))
-- `origin` (String) Origin
+- `origin` (String) Origin. Possible values are `none`, `egp`, `igp` and `incomplete`.
 - `originator_id` (String) Originator ID
 - `overwrite_large_community` (Boolean) Overwrite large community?
 - `overwrite_regular_community` (Boolean) Overwrite regular community?
-- `regular_community` (List of String) Regular community
+- `regular_community` (List of String) Regular community. Possible values are `none`, `blackhole`, `no-peer`, `graceful-shutdown`, `accept-own`, `local-as`, `route-filter-v4`, `route-filter-v6`, `no-advertise`, `no-export` and `internet`.
 - `remove_large_community` (String) Remove large community name
 - `remove_regular_community` (String) Remove regular community name
 - `tag` (Number) Tag
@@ -168,5 +162,5 @@ Read-Only:
 
 Read-Only:
 
-- `action` (String) Metric action
+- `action` (String) Metric action. Possible values are `set`, `add` and `substract`.
 - `value` (Number) Metric value

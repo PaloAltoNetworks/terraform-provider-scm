@@ -34,7 +34,7 @@ type ConfigMatchListDataSource struct {
 
 func (d *ConfigMatchListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ConfigMatchListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_config_match_list"
+	resp.TypeName = "scm_config_match_list"
 }
 
 func (d *ConfigMatchListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

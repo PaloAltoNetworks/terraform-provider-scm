@@ -32,7 +32,7 @@ type RoutePathAccessListListDataSource struct {
 }
 
 func (d *RoutePathAccessListListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_route_path_access_list_list"
+	resp.TypeName = "scm_route_path_access_list_list"
 }
 
 func (d *RoutePathAccessListListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

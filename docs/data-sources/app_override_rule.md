@@ -34,15 +34,9 @@ output "single_app_override_rule_name" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -55,11 +49,11 @@ output "single_app_override_rule_name" {
 - `negate_destination` (Boolean) Negate destination
 - `negate_source` (Boolean) Negate source
 - `port` (String) Port
-- `position` (String) The position of a security rule
-- `protocol` (String) Protocol
+- `position` (String) The position of a security rule. Possible values are `pre` and `post`.
+- `protocol` (String) Protocol. Possible values are `tcp` and `udp`.
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `source` (List of String) Source
 - `tag` (List of String) Tag
-- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `target_rule` (String) UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `tfid` (String) The Terraform ID.
 - `to` (List of String) To

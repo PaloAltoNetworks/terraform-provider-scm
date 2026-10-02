@@ -83,7 +83,7 @@ resource "scm_forwarding_profile_destination" "example_mixed" {
 ### Optional
 
 - `description` (String) description of the destination
-- `folder` (String) The folder in which the resource is defined
+- `folder` (String) The folder in which the resource is defined. Possible values are `Mobile Users`.
 - `fqdn` (Attributes List) List of FQDN based destination entries (see [below for nested schema](#nestedatt--fqdn))
 - `ip_addresses` (Attributes List) List of IP address based destination entries (see [below for nested schema](#nestedatt--ip_addresses))
 

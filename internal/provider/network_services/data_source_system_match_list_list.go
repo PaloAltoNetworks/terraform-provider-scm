@@ -32,7 +32,7 @@ type SystemMatchListListDataSource struct {
 }
 
 func (d *SystemMatchListListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_system_match_list_list"
+	resp.TypeName = "scm_system_match_list_list"
 }
 
 func (d *SystemMatchListListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

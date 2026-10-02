@@ -34,7 +34,7 @@ type ContentIdSettingDataSource struct {
 
 func (d *ContentIdSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ContentIdSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_content_id_setting"
+	resp.TypeName = "scm_content_id_setting"
 }
 
 func (d *ContentIdSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type SiteDataSource struct {
 
 func (d *SiteDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SiteDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_site"
+	resp.TypeName = "scm_site"
 }
 
 func (d *SiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

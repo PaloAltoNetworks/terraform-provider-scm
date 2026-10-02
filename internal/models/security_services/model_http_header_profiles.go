@@ -177,7 +177,7 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -193,7 +193,7 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -248,7 +248,7 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 									Validators: []validator.String{
 										stringvalidator.OneOf("Custom", "Dropbox Network Control", "Dynamic Fields", "Google Apps Access Control", "Microsoft Office365 Tenant Restrictions", "Youtube Safe Search"),
 									},
-									MarkdownDescription: "The HTTP header insertion type",
+									MarkdownDescription: "The HTTP header insertion type. Possible values are `Custom`, `Dropbox Network Control`, `Dynamic Fields`, `Google Apps Access Control`, `Microsoft Office365 Tenant Restrictions` and `Youtube Safe Search`.",
 									Required:            true,
 								},
 							},
@@ -277,7 +277,7 @@ var HttpHeaderProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -302,12 +302,12 @@ var HttpHeaderProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -355,7 +355,7 @@ var HttpHeaderProfilesDataSourceSchema = dsschema.Schema{
 									},
 								},
 								"name": dsschema.StringAttribute{
-									MarkdownDescription: "The HTTP header insertion type",
+									MarkdownDescription: "The HTTP header insertion type. Possible values are `Custom`, `Dropbox Network Control`, `Dynamic Fields`, `Google Apps Access Control`, `Microsoft Office365 Tenant Restrictions` and `Youtube Safe Search`.",
 									Computed:            true,
 								},
 							},
@@ -374,7 +374,7 @@ var HttpHeaderProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

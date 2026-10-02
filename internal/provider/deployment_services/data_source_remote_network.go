@@ -34,7 +34,7 @@ type RemoteNetworkDataSource struct {
 
 func (d *RemoteNetworkDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: RemoteNetworkDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_remote_network"
+	resp.TypeName = "scm_remote_network"
 }
 
 func (d *RemoteNetworkDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

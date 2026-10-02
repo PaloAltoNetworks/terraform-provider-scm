@@ -32,7 +32,7 @@ type RegionListDataSource struct {
 }
 
 func (d *RegionListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_region_list"
+	resp.TypeName = "scm_region_list"
 }
 
 func (d *RegionListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

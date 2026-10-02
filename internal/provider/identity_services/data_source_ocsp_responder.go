@@ -37,7 +37,7 @@ type OcspResponderDataSource struct {
 
 func (d *OcspResponderDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: OcspResponderDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ocsp_responder"
+	resp.TypeName = "scm_ocsp_responder"
 }
 
 func (d *OcspResponderDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

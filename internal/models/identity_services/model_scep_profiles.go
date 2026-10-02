@@ -238,7 +238,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("1024", "2048", "3072"),
 							},
-							MarkdownDescription: "Rsa nbits",
+							MarkdownDescription: "Rsa nbits. Possible values are `1024`, `2048` and `3072`.",
 							Required:            true,
 						},
 					},
@@ -260,7 +260,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
 					},
-					MarkdownDescription: "Dnsname\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Dnsname",
 					Optional:            true,
 				},
 				"rfc822name": schema.StringAttribute{
@@ -270,7 +270,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("uniform_resource_identifier"),
 						),
 					},
-					MarkdownDescription: "Rfc822name\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Rfc822name",
 					Optional:            true,
 				},
 				"uniform_resource_identifier": schema.StringAttribute{
@@ -280,7 +280,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rfc822name"),
 						),
 					},
-					MarkdownDescription: "Uniform resource identifier\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Uniform resource identifier",
 					Optional:            true,
 				},
 			},
@@ -294,7 +294,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -304,7 +304,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("sha1", "sha256", "sha384", "sha512"),
 			},
-			MarkdownDescription: "Digest for CSR",
+			MarkdownDescription: "Digest for CSR. Possible values are `sha1`, `sha256`, `sha384` and `sha512`.",
 			Required:            true,
 		},
 		"encrypted_values": schema.MapAttribute{
@@ -327,7 +327,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -351,7 +351,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("Authentication Cookie CA", "Forward-Trust-CA", "Forward-Trust-CA-ECDSA", "Forward-UnTrust-CA", "Forward-UnTrust-CA-ECDSA", "Global Authentication Cookie CA", "GlobalSign-Root-CA", "Root CA"),
 			},
-			MarkdownDescription: "SCEP Server CA Certificate",
+			MarkdownDescription: "SCEP Server CA Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.",
 			Optional:            true,
 		},
 		"scep_challenge": schema.SingleNestedAttribute{
@@ -365,7 +365,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("none"),
 						),
 					},
-					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Dynamic",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"otp_server_url": schema.StringAttribute{
@@ -400,7 +400,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 						),
 						stringvalidator.LengthAtMost(1024),
 					},
-					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Challenge to use for SCEP server on mobile clients",
 					Optional:            true,
 				},
 				"none": schema.SingleNestedAttribute{
@@ -410,7 +410,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("fixed"),
 						),
 					},
-					MarkdownDescription: "No OTP\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "No OTP",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -420,7 +420,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("Authentication Cookie CA", "Forward-Trust-CA", "Forward-Trust-CA-ECDSA", "Forward-UnTrust-CA", "Forward-UnTrust-CA-ECDSA", "Global Authentication Cookie CA", "GlobalSign-Root-CA", "Root CA"),
 			},
-			MarkdownDescription: "SCEP Client Certificate",
+			MarkdownDescription: "SCEP Client Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.",
 			Optional:            true,
 		},
 		"scep_url": schema.StringAttribute{
@@ -436,7 +436,7 @@ var ScepProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -477,7 +477,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"rsa_nbits": dsschema.StringAttribute{
-							MarkdownDescription: "Rsa nbits",
+							MarkdownDescription: "Rsa nbits. Possible values are `1024`, `2048` and `3072`.",
 							Computed:            true,
 						},
 					},
@@ -493,26 +493,26 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"dnsname": dsschema.StringAttribute{
-					MarkdownDescription: "Dnsname\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Dnsname",
 					Computed:            true,
 				},
 				"rfc822name": dsschema.StringAttribute{
-					MarkdownDescription: "Rfc822name\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Rfc822name",
 					Computed:            true,
 				},
 				"uniform_resource_identifier": dsschema.StringAttribute{
-					MarkdownDescription: "Uniform resource identifier\n\n> ℹ️ **Note:** You must specify exactly one of `dnsname`, `rfc822name`, and `uniform_resource_identifier`.",
+					MarkdownDescription: "Uniform resource identifier",
 					Computed:            true,
 				},
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"digest": dsschema.StringAttribute{
-			MarkdownDescription: "Digest for CSR",
+			MarkdownDescription: "Digest for CSR. Possible values are `sha1`, `sha256`, `sha384` and `sha512`.",
 			Computed:            true,
 		},
 		"encrypted_values": dsschema.MapAttribute{
@@ -526,7 +526,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -540,7 +540,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"scep_ca_cert": dsschema.StringAttribute{
-			MarkdownDescription: "SCEP Server CA Certificate",
+			MarkdownDescription: "SCEP Server CA Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.",
 			Computed:            true,
 		},
 		"scep_challenge": dsschema.SingleNestedAttribute{
@@ -548,7 +548,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"dynamic": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Dynamic",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"otp_server_url": dsschema.StringAttribute{
@@ -567,18 +567,18 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"fixed": dsschema.StringAttribute{
-					MarkdownDescription: "Challenge to use for SCEP server on mobile clients\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "Challenge to use for SCEP server on mobile clients",
 					Computed:            true,
 				},
 				"none": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "No OTP\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fixed`, and `none`.",
+					MarkdownDescription: "No OTP",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 			},
 		},
 		"scep_client_cert": dsschema.StringAttribute{
-			MarkdownDescription: "SCEP Client Certificate",
+			MarkdownDescription: "SCEP Client Certificate. Possible values are `Authentication Cookie CA`, `Forward-Trust-CA`, `Forward-Trust-CA-ECDSA`, `Forward-UnTrust-CA`, `Forward-UnTrust-CA-ECDSA`, `Global Authentication Cookie CA`, `GlobalSign-Root-CA` and `Root CA`.",
 			Computed:            true,
 		},
 		"scep_url": dsschema.StringAttribute{
@@ -586,7 +586,7 @@ var ScepProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

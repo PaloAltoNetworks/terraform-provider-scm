@@ -34,7 +34,7 @@ type TacacsServerProfileDataSource struct {
 
 func (d *TacacsServerProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TacacsServerProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_tacacs_server_profile"
+	resp.TypeName = "scm_tacacs_server_profile"
 }
 
 func (d *TacacsServerProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

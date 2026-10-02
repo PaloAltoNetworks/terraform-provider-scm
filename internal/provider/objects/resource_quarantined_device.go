@@ -41,7 +41,7 @@ type QuarantinedDeviceResource struct {
 }
 
 func (r *QuarantinedDeviceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_quarantined_device"
+	resp.TypeName = "scm_quarantined_device"
 }
 
 func (r *QuarantinedDeviceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

@@ -32,7 +32,7 @@ type SdwanTrafficDistributionProfileListDataSource struct {
 }
 
 func (d *SdwanTrafficDistributionProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_sdwan_traffic_distribution_profile_list"
+	resp.TypeName = "scm_sdwan_traffic_distribution_profile_list"
 }
 
 func (d *SdwanTrafficDistributionProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

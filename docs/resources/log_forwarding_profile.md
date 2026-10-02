@@ -107,16 +107,12 @@ resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_4" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) Log forwarding profile description
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -129,7 +125,7 @@ resource "scm_log_forwarding_profile" "scm_log_forwarding_profile_4" {
 Required:
 
 - `filter` (String) Filter match criteria
-- `log_type` (String) Log type
+- `log_type` (String) Log type. Possible values are `traffic`, `threat`, `wildfire`, `url`, `data`, `tunnel`, `auth`, `decryption`, `dns-security`, `gtp` and `sctp`.
 - `name` (String) Name of the match profile
 
 Optional:

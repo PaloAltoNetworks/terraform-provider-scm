@@ -32,7 +32,7 @@ type ServiceRouteListDataSource struct {
 }
 
 func (d *ServiceRouteListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_service_route_list"
+	resp.TypeName = "scm_service_route_list"
 }
 
 func (d *ServiceRouteListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

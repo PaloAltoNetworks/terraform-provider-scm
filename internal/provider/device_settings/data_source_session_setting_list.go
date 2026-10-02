@@ -32,7 +32,7 @@ type SessionSettingListDataSource struct {
 }
 
 func (d *SessionSettingListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_session_setting_list"
+	resp.TypeName = "scm_session_setting_list"
 }
 
 func (d *SessionSettingListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

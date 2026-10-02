@@ -161,7 +161,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("decrypt", "no-decrypt"),
 			},
-			MarkdownDescription: "The action to be taken",
+			MarkdownDescription: "The action to be taken. Possible values are `decrypt` and `no-decrypt`.",
 			Required:            true,
 		},
 		"category": schema.ListAttribute{
@@ -192,7 +192,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -212,7 +212,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -258,7 +258,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "The position of a security rule\n",
+			MarkdownDescription: "The position of a security rule. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
@@ -291,7 +291,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -318,7 +318,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"target_rule": schema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{
@@ -343,7 +343,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ssl_inbound_inspection"),
 						),
 					},
-					MarkdownDescription: "Ssl forward proxy\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+					MarkdownDescription: "Ssl forward proxy",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -353,7 +353,7 @@ var DecryptionRulesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ssl_forward_proxy"),
 						),
 					},
-					MarkdownDescription: "add the certificate name for SSL inbound inspection\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+					MarkdownDescription: "add the certificate name for SSL inbound inspection",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"certificates": schema.ListAttribute{
@@ -373,7 +373,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "DecryptionRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.StringAttribute{
-			MarkdownDescription: "The action to be taken",
+			MarkdownDescription: "The action to be taken. Possible values are `decrypt` and `no-decrypt`.",
 			Computed:            true,
 		},
 		"category": dsschema.ListAttribute{
@@ -396,7 +396,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -405,7 +405,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -444,7 +444,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "The position of a security rule\n",
+			MarkdownDescription: "The position of a security rule. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"profile": dsschema.StringAttribute{
@@ -461,7 +461,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -486,7 +486,7 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"target_rule": dsschema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{
@@ -503,12 +503,12 @@ var DecryptionRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ssl_forward_proxy": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ssl forward proxy\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+					MarkdownDescription: "Ssl forward proxy",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"ssl_inbound_inspection": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "add the certificate name for SSL inbound inspection\n\n> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`.",
+					MarkdownDescription: "add the certificate name for SSL inbound inspection",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"certificates": dsschema.ListAttribute{

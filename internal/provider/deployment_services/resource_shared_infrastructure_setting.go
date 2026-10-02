@@ -41,7 +41,7 @@ type SharedInfrastructureSettingResource struct {
 }
 
 func (r *SharedInfrastructureSettingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_shared_infrastructure_setting"
+	resp.TypeName = "scm_shared_infrastructure_setting"
 }
 
 func (r *SharedInfrastructureSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

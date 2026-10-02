@@ -32,7 +32,7 @@ type ZoneListDataSource struct {
 }
 
 func (d *ZoneListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_zone_list"
+	resp.TypeName = "scm_zone_list"
 }
 
 func (d *ZoneListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

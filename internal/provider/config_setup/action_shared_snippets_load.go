@@ -36,8 +36,8 @@ func NewSharedSnippetsLoadAction() action.Action {
 	return &SharedSnippetsLoadAction{}
 }
 
-func (a *SharedSnippetsLoadAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_shared_snippets_load"
+func (a *SharedSnippetsLoadAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_shared_snippets_load"
 }
 
 func (a *SharedSnippetsLoadAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

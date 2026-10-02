@@ -61,19 +61,13 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the decryption rule
 - `snippet` (String) The snippet in which the resource is defined
 
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-
 Read-Only:
 
-- `action` (String) The action to be taken
+- `action` (String) The action to be taken. Possible values are `decrypt` and `no-decrypt`.
 - `category` (List of String) The destination URL category
 - `description` (String) The description of the decryption rule
 - `destination` (List of String) The destination addresses
@@ -85,7 +79,7 @@ Read-Only:
 - `log_success` (Boolean) Log successful decryption events?
 - `negate_destination` (Boolean) Negate the destination addresses?
 - `negate_source` (Boolean) Negate the source addresses?
-- `position` (String) The position of a security rule
+- `position` (String) The position of a security rule. Possible values are `pre` and `post`.
 - `profile` (String) The decryption profile associated with the decryption rule
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `service` (List of String) The destination services and/or service groups
@@ -93,7 +87,7 @@ Read-Only:
 - `source_hip` (List of String) Source hip
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.
 - `tag` (List of String) The tags associated with the decryption rule
-- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `target_rule` (String) UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `tfid` (String) The Terraform ID.
 - `to` (List of String) The destination security zone
 - `type` (Attributes) The type of decryption (see [below for nested schema](#nestedatt--data--type))
@@ -103,12 +97,8 @@ Read-Only:
 
 Read-Only:
 
-- `ssl_forward_proxy` (Attributes) Ssl forward proxy
-
-> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--data--type--ssl_forward_proxy))
-- `ssl_inbound_inspection` (Attributes) add the certificate name for SSL inbound inspection
-
-> ℹ️ **Note:** You must specify exactly one of `ssl_forward_proxy` and `ssl_inbound_inspection`. (see [below for nested schema](#nestedatt--data--type--ssl_inbound_inspection))
+- `ssl_forward_proxy` (Attributes) Ssl forward proxy (see [below for nested schema](#nestedatt--data--type--ssl_forward_proxy))
+- `ssl_inbound_inspection` (Attributes) add the certificate name for SSL inbound inspection (see [below for nested schema](#nestedatt--data--type--ssl_inbound_inspection))
 
 <a id="nestedatt--data--type--ssl_forward_proxy"></a>
 ### Nested Schema for `data.type.ssl_forward_proxy`

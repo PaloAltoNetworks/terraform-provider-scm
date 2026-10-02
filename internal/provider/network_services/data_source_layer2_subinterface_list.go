@@ -32,7 +32,7 @@ type Layer2SubinterfaceListDataSource struct {
 }
 
 func (d *Layer2SubinterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_layer2_subinterface_list"
+	resp.TypeName = "scm_layer2_subinterface_list"
 }
 
 func (d *Layer2SubinterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

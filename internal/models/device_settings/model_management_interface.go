@@ -286,7 +286,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -302,7 +302,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -337,7 +337,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("static"),
 								),
 							},
-							MarkdownDescription: "Dhcp client\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Dhcp client",
 							Optional:            true,
 							Attributes: map[string]schema.Attribute{
 								"accept_dhcp_domain": schema.BoolAttribute{
@@ -372,7 +372,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 									path.MatchRelative().AtParent().AtName("dhcp_client"),
 								),
 							},
-							MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Static",
 							Optional:            true,
 							Attributes:          map[string]schema.Attribute{},
 						},
@@ -474,7 +474,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("auto-negotiate", "10Mbps-half-duplex", "10Mbps-full-duplex", "100Mbps-half-duplex", "100Mbps-full-duplex", "1Gbps-half-duplex", "1Gbps-full-duplex"),
 					},
-					MarkdownDescription: "Speed and duplex",
+					MarkdownDescription: "Speed and duplex. Possible values are `auto-negotiate`, `10Mbps-half-duplex`, `10Mbps-full-duplex`, `100Mbps-half-duplex`, `100Mbps-full-duplex`, `1Gbps-half-duplex` and `1Gbps-full-duplex`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("auto-negotiate"),
@@ -490,7 +490,7 @@ var ManagementInterfaceResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -511,12 +511,12 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "ManagementInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -541,7 +541,7 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"dhcp_client": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Dhcp client\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Dhcp client",
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"accept_dhcp_domain": dsschema.BoolAttribute{
@@ -563,7 +563,7 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 							},
 						},
 						"static": dsschema.SingleNestedAttribute{
-							MarkdownDescription: "Static\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client` and `static`.",
+							MarkdownDescription: "Static",
 							Computed:            true,
 							Attributes:          map[string]dsschema.Attribute{},
 						},
@@ -640,13 +640,13 @@ var ManagementInterfaceDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"speed_duplex": dsschema.StringAttribute{
-					MarkdownDescription: "Speed and duplex",
+					MarkdownDescription: "Speed and duplex. Possible values are `auto-negotiate`, `10Mbps-half-duplex`, `10Mbps-full-duplex`, `100Mbps-half-duplex`, `100Mbps-full-duplex`, `1Gbps-half-duplex` and `1Gbps-full-duplex`.",
 					Computed:            true,
 				},
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

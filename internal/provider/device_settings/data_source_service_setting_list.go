@@ -32,7 +32,7 @@ type ServiceSettingListDataSource struct {
 }
 
 func (d *ServiceSettingListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_service_setting_list"
+	resp.TypeName = "scm_service_setting_list"
 }
 
 func (d *ServiceSettingListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -92,7 +92,7 @@ resource "scm_auto_vpn_cluster" "test_cluster" {
 - `enable_sdwan` (Boolean) Enable SD-WAN?
 - `gateways` (Attributes List) Hubs (see [below for nested schema](#nestedatt--gateways))
 - `name` (String) VPN cluster name
-- `type` (String) VPN cluster type
+- `type` (String) VPN cluster type. Possible values are `hub-spoke` and `mesh`.
 
 ### Read-Only
 
@@ -142,12 +142,10 @@ Optional:
 
 Optional:
 
+~> **Note:** You must specify at most one of `fqdn` or `ip_address`.
+
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -183,12 +181,10 @@ Optional:
 
 Optional:
 
+~> **Note:** You must specify at most one of `fqdn` or `ip_address`.
+
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -205,7 +201,7 @@ Optional:
 - `interfaces` (Attributes List) Interfaces (see [below for nested schema](#nestedatt--gateways--interfaces))
 - `logical_router` (String) Router
 - `name` (String) Hub firewall serial number
-- `priority` (String) Priority
+- `priority` (String) Priority. Possible values are `1`, `2`, `3`, `4`, `5`, `6`, `7` and `8`.
 - `private_interfaces` (Attributes List) Private interfaces (see [below for nested schema](#nestedatt--gateways--private_interfaces))
 - `site` (String) Site name
 
@@ -240,12 +236,10 @@ Optional:
 
 Optional:
 
+~> **Note:** You must specify at most one of `fqdn` or `ip_address`.
+
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -281,12 +275,10 @@ Optional:
 
 Optional:
 
+~> **Note:** You must specify at most one of `fqdn` or `ip_address`.
+
 - `fqdn` (String) FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 ## Import

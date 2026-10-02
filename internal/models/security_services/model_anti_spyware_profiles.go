@@ -471,7 +471,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -487,7 +487,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -519,7 +519,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("alert", "allow", "drop", "reset-both", "reset-client", "reset-server"),
 						},
-						MarkdownDescription: "Inline policy action",
+						MarkdownDescription: "Inline policy action. Possible values are `alert`, `allow`, `drop`, `reset-both`, `reset-client` and `reset-server`.",
 						Optional:            true,
 						Computed:            true,
 						Default:             stringdefault.StaticString("alert"),
@@ -555,7 +555,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Alert",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -570,7 +570,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Allow",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -585,7 +585,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "anti spyware profiles rules action block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "anti spyware profiles rules action block ip",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
 									"duration": schema.Int64Attribute{
@@ -599,7 +599,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("source-and-destination", "source"),
 										},
-										MarkdownDescription: "Track by",
+										MarkdownDescription: "Track by. Possible values are `source-and-destination` and `source`.",
 										Optional:            true,
 									},
 								},
@@ -615,7 +615,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Drop",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -630,7 +630,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset both",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -645,7 +645,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset client",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -660,7 +660,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_client"),
 									),
 								},
-								MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset server",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -670,7 +670,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("adns-adtracking", "adns-benign", "adns-c2", "adns-ddns", "adns-dnsmisconfig", "adns-grayware", "adns-hijacking", "adns-malware", "adns-new-domain", "adns-parked", "adns-phishing", "adns-proxy", "adware", "any", "autogen", "backdoor", "botnet", "browser-hijack", "command-and-control", "cryptominer", "data-theft", "dns", "dns-adtracking", "dns-benign", "dns-c2", "dns-ddns", "dns-grayware", "dns-malware", "dns-new-domain", "dns-parked", "dns-phishing", "dns-proxy", "dns-security", "dns-wildfire", "domain-edl", "downloader", "fraud", "hacktool", "inline-cloud-c2", "keylogger", "net-worm", "p2p-communication", "phishing-kit", "post-exploitation", "spyware", "tls-fingerprint", "webshell"),
 						},
-						MarkdownDescription: "Category",
+						MarkdownDescription: "Category. Possible values are `adns-adtracking`, `adns-benign`, `adns-c2`, `adns-ddns`, `adns-dnsmisconfig`, `adns-grayware`, `adns-hijacking`, `adns-malware`, `adns-new-domain`, `adns-parked`, `adns-phishing`, `adns-proxy`, `adware`, `any`, `autogen`, `backdoor`, `botnet`, `browser-hijack`, `command-and-control`, `cryptominer`, `data-theft`, `dns`, `dns-adtracking`, `dns-benign`, `dns-c2`, `dns-ddns`, `dns-grayware`, `dns-malware`, `dns-new-domain`, `dns-parked`, `dns-phishing`, `dns-proxy`, `dns-security`, `dns-wildfire`, `domain-edl`, `downloader`, `fraud`, `hacktool`, `inline-cloud-c2`, `keylogger`, `net-worm`, `p2p-communication`, `phishing-kit`, `post-exploitation`, `spyware`, `tls-fingerprint` and `webshell`.",
 						Optional:            true,
 					},
 					"name": schema.StringAttribute{
@@ -681,7 +681,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("disable", "single-packet", "extended-capture"),
 						},
-						MarkdownDescription: "Packet capture",
+						MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 						Optional:            true,
 					},
 					"severity": schema.ListAttribute{
@@ -710,7 +710,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -744,7 +744,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Alert",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -760,7 +760,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Allow",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -776,7 +776,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "anti spyware profiles threat exception action block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "anti spyware profiles threat exception action block ip",
 								Optional:            true,
 								Attributes: map[string]schema.Attribute{
 									"duration": schema.Int64Attribute{
@@ -790,7 +790,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("source-and-destination", "source"),
 										},
-										MarkdownDescription: "Track by",
+										MarkdownDescription: "Track by. Possible values are `source-and-destination` and `source`.",
 										Optional:            true,
 									},
 								},
@@ -807,7 +807,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Default",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -823,7 +823,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Drop",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -839,7 +839,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset both",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -855,7 +855,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_server"),
 									),
 								},
-								MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset client",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -871,7 +871,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 										path.MatchRelative().AtParent().AtName("reset_client"),
 									),
 								},
-								MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset server",
 								Optional:            true,
 								Attributes:          map[string]schema.Attribute{},
 							},
@@ -901,7 +901,7 @@ var AntiSpywareProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("disable", "single-packet", "extended-capture"),
 						},
-						MarkdownDescription: "Packet capture",
+						MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 						Optional:            true,
 					},
 				},
@@ -923,12 +923,12 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -952,7 +952,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"inline_policy_action": dsschema.StringAttribute{
-						MarkdownDescription: "Inline policy action",
+						MarkdownDescription: "Inline policy action. Possible values are `alert`, `allow`, `drop`, `reset-both`, `reset-client` and `reset-server`.",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
@@ -977,17 +977,17 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
 							"alert": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Alert",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"allow": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Allow",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"block_ip": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "anti spyware profiles rules action block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "anti spyware profiles rules action block ip",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"duration": dsschema.Int64Attribute{
@@ -995,35 +995,35 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 									},
 									"track_by": dsschema.StringAttribute{
-										MarkdownDescription: "Track by",
+										MarkdownDescription: "Track by. Possible values are `source-and-destination` and `source`.",
 										Computed:            true,
 									},
 								},
 							},
 							"drop": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Drop",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"reset_both": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset both",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"reset_client": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset client",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"reset_server": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset server",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 						},
 					},
 					"category": dsschema.StringAttribute{
-						MarkdownDescription: "Category",
+						MarkdownDescription: "Category. Possible values are `adns-adtracking`, `adns-benign`, `adns-c2`, `adns-ddns`, `adns-dnsmisconfig`, `adns-grayware`, `adns-hijacking`, `adns-malware`, `adns-new-domain`, `adns-parked`, `adns-phishing`, `adns-proxy`, `adware`, `any`, `autogen`, `backdoor`, `botnet`, `browser-hijack`, `command-and-control`, `cryptominer`, `data-theft`, `dns`, `dns-adtracking`, `dns-benign`, `dns-c2`, `dns-ddns`, `dns-grayware`, `dns-malware`, `dns-new-domain`, `dns-parked`, `dns-phishing`, `dns-proxy`, `dns-security`, `dns-wildfire`, `domain-edl`, `downloader`, `fraud`, `hacktool`, `inline-cloud-c2`, `keylogger`, `net-worm`, `p2p-communication`, `phishing-kit`, `post-exploitation`, `spyware`, `tls-fingerprint` and `webshell`.",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
@@ -1031,7 +1031,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"packet_capture": dsschema.StringAttribute{
-						MarkdownDescription: "Packet capture",
+						MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 						Computed:            true,
 					},
 					"severity": dsschema.ListAttribute{
@@ -1047,7 +1047,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1065,17 +1065,17 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
 							"alert": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Alert",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"allow": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Allow",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"block_ip": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "anti spyware profiles threat exception action block ip\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "anti spyware profiles threat exception action block ip",
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"duration": dsschema.Int64Attribute{
@@ -1083,33 +1083,33 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 										Computed:            true,
 									},
 									"track_by": dsschema.StringAttribute{
-										MarkdownDescription: "Track by",
+										MarkdownDescription: "Track by. Possible values are `source-and-destination` and `source`.",
 										Computed:            true,
 									},
 								},
 							},
 							"default": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Default\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Default",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"drop": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Drop\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Drop",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"reset_both": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Reset both\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset both",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"reset_client": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Reset client\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset client",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
 							"reset_server": dsschema.SingleNestedAttribute{
-								MarkdownDescription: "Reset server\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `default`, `drop`, `reset_both`, `reset_client`, and `reset_server`.",
+								MarkdownDescription: "Reset server",
 								Computed:            true,
 								Attributes:          map[string]dsschema.Attribute{},
 							},
@@ -1136,7 +1136,7 @@ var AntiSpywareProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"packet_capture": dsschema.StringAttribute{
-						MarkdownDescription: "Packet capture",
+						MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 						Computed:            true,
 					},
 				},

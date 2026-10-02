@@ -32,7 +32,7 @@ type DnsSecurityProfileListDataSource struct {
 }
 
 func (d *DnsSecurityProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_dns_security_profile_list"
+	resp.TypeName = "scm_dns_security_profile_list"
 }
 
 func (d *DnsSecurityProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

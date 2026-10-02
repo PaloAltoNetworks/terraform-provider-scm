@@ -32,7 +32,7 @@ type DosProtectionRuleListDataSource struct {
 }
 
 func (d *DosProtectionRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_dos_protection_rule_list"
+	resp.TypeName = "scm_dos_protection_rule_list"
 }
 
 func (d *DosProtectionRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -22,15 +22,9 @@ DosProtectionProfile data source
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Profile name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -38,7 +32,7 @@ DosProtectionProfile data source
 - `flood` (Attributes) Flood (see [below for nested schema](#nestedatt--flood))
 - `resource` (Attributes) Resource (see [below for nested schema](#nestedatt--resource))
 - `tfid` (String) The Terraform ID.
-- `type` (String) Type
+- `type` (String) Type. Possible values are `aggregate` and `classified`.
 
 <a id="nestedatt--flood"></a>
 ### Nested Schema for `flood`

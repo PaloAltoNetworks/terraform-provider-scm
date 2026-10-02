@@ -43,24 +43,18 @@ output "scm_saml_server_profile_details" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The name of the SAML server profile
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `certificate` (String) The identity provider certificate
 - `entity_id` (String) The identity provider ID
 - `max_clock_skew` (Number) Maxiumum clock skew
-- `slo_bindings` (String) SAML HTTP binding for SLO requests to the identity provider
+- `slo_bindings` (String) SAML HTTP binding for SLO requests to the identity provider. Possible values are `post` and `redirect`.
 - `slo_url` (String) Identity provider SLO URL
-- `sso_bindings` (String) SAML HTTP binding for SSO requests to the identity provider
+- `sso_bindings` (String) SAML HTTP binding for SSO requests to the identity provider. Possible values are `post` and `redirect`.
 - `sso_url` (String) Identity provider SSO URL
 - `tfid` (String) The Terraform ID.
 - `validate_idp_certificate` (Boolean) Validate the identity provider certificate?

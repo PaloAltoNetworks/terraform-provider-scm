@@ -34,7 +34,7 @@ type AuthenticationPortalListDataSource struct {
 }
 
 func (d *AuthenticationPortalListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_authentication_portal_list"
+	resp.TypeName = "scm_authentication_portal_list"
 }
 
 func (d *AuthenticationPortalListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type AuthenticationRuleListDataSource struct {
 }
 
 func (d *AuthenticationRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_authentication_rule_list"
+	resp.TypeName = "scm_authentication_rule_list"
 }
 
 func (d *AuthenticationRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

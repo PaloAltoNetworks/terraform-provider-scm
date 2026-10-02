@@ -36,8 +36,8 @@ func NewSnippetSnapshotConvertAction() action.Action {
 	return &SnippetSnapshotConvertAction{}
 }
 
-func (a *SnippetSnapshotConvertAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet_snapshot_convert"
+func (a *SnippetSnapshotConvertAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_snippet_snapshot_convert"
 }
 
 func (a *SnippetSnapshotConvertAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

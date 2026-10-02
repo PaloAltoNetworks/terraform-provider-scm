@@ -34,7 +34,7 @@ type VpnSettingDataSource struct {
 
 func (d *VpnSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: VpnSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_vpn_setting"
+	resp.TypeName = "scm_vpn_setting"
 }
 
 func (d *VpnSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

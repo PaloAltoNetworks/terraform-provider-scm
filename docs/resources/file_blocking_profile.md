@@ -99,17 +99,13 @@ resource "scm_file_blocking_profile" "scm_file_blocking_profile" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `rules` (Attributes List) A list of file blocking rules (see [below for nested schema](#nestedatt--rules))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -121,10 +117,10 @@ resource "scm_file_blocking_profile" "scm_file_blocking_profile" {
 
 Required:
 
-- `action` (String) The action to take when the rule match criteria is met
-- `application` (List of String) The application transferring the files (App-ID naming)
-- `direction` (String) The direction of the file transfer
-- `file_type` (List of String) The file type
+- `action` (String) The action to take when the rule match criteria is met. Possible values are `alert`, `block` and `continue`.
+- `application` (List of String) The application transferring the files (App-ID naming). Possible values are `any`, `axifile`, `dl-free`, `facebook-mail`, `file.io`, `giphy-base`, `glassdoor-uploading`, `http-proxy`, `redbooth`, `send-anywhere` and `zoho-mail`.
+- `direction` (String) The direction of the file transfer. Possible values are `download`, `upload` and `both`.
+- `file_type` (List of String) The file type. Possible values are `7z`, `Multi-Level-Encoding`, `PE`, `access-shortcut`, `ace`, `ade`, `adp`, `ai`, `aip-encrypted-docx`, `aip-encrypted-pptx`, `aip-encrypted-xlsx`, `any`, `apk`, `arj`, `asp`, `avi`, `avi-divx`, `avi-xvid`, `bas`, `bat`, `bmp`, `bmp-upload`, `bzip2`, `cab`, `catpart`, `cdr`, `chm`, `cin`, `class`, `cmd`, `com`, `cpl`, `csv`, `deflate64-zip`, `der`, `dll`, `dmg`, `doc`, `docm`, `docx`, `dpx`, `dsn`, `dwf`, `dwg`, `dxf`, `edif`, `elf`, `emf`, `encrypted-7z`, `encrypted-doc`, `encrypted-docx`, `encrypted-office2007`, `encrypted-pdf`, `encrypted-ppt`, `encrypted-pptx`, `encrypted-rar`, `encrypted-xls`, `encrypted-xlsx`, `encrypted-zip`, `eps`, `exe`, `exr`, `flash`, `flv`, `gds`, `gif`, `gif-upload`, `gzip`, `hlp`, `hta`, `hwp`, `hwpx`, `ichitaro`, `iff`, `inf`, `ins`, `iqy`, `iso`, `its`, `iwork-keynote`, `iwork-numbers`, `iwork-pages`, `jar`, `jpeg`, `jpeg-upload`, `js`, `jse`, `lnk`, `lzh`, `ma`, `macapp`, `mach-o`, `mb`, `mda`, `mdb`, `mdi`, `mdt`, `mdw`, `mdz`, `mht`, `microsoft-shell`, `mif`, `mkv`, `mov`, `mp3`, `mp4`, `mpeg`, `mpeg-ts`, `mpkg`, `msc`, `msi`, `msoffice`, `msp`, `ocx`, `pbix`, `pbm`, `pcl`, `pdf`, `pem`, `pgp`, `pif`, `pkg`, `pl`, `png`, `png-upload`, `powershell`, `ppt`, `pptx`, `prg`, `psd`, `py`, `rar`, `reg`, `renamed-zip`, `rla`, `rm`, `rpf`, `rtf`, `scf`, `scr`, `sgi`, `sh`, `shk`, `shs`, `slk`, `softimg`, `split-cab`, `split-rar`, `stp`, `svg`, `sys`, `tar`, `tdb`, `tif`, `tiff`, `tmp`, `torrent`, `url`, `vb`, `vbe`, `vbs`, `vxd`, `webm`, `wmf`, `wmv`, `wri`, `wsf`, `wsh`, `xll`, `xls`, `xlsx`, `xpm`, `zcompressed` and `zip`.
 - `name` (String) The name of the file blocking rule
 
 

@@ -32,7 +32,7 @@ type IpsecCryptoProfileListDataSource struct {
 }
 
 func (d *IpsecCryptoProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ipsec_crypto_profile_list"
+	resp.TypeName = "scm_ipsec_crypto_profile_list"
 }
 
 func (d *IpsecCryptoProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

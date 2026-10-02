@@ -104,7 +104,7 @@ var FileBlockingProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -120,7 +120,7 @@ var FileBlockingProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -146,24 +146,24 @@ var FileBlockingProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("alert", "block", "continue"),
 						},
-						MarkdownDescription: "The action to take when the rule match criteria is met",
+						MarkdownDescription: "The action to take when the rule match criteria is met. Possible values are `alert`, `block` and `continue`.",
 						Required:            true,
 					},
 					"application": schema.ListAttribute{
 						ElementType:         types.StringType,
-						MarkdownDescription: "The application transferring the files (App-ID naming)",
+						MarkdownDescription: "The application transferring the files (App-ID naming). Possible values are `any`, `axifile`, `dl-free`, `facebook-mail`, `file.io`, `giphy-base`, `glassdoor-uploading`, `http-proxy`, `redbooth`, `send-anywhere` and `zoho-mail`.",
 						Required:            true,
 					},
 					"direction": schema.StringAttribute{
 						Validators: []validator.String{
 							stringvalidator.OneOf("download", "upload", "both"),
 						},
-						MarkdownDescription: "The direction of the file transfer",
+						MarkdownDescription: "The direction of the file transfer. Possible values are `download`, `upload` and `both`.",
 						Required:            true,
 					},
 					"file_type": schema.ListAttribute{
 						ElementType:         types.StringType,
-						MarkdownDescription: "The file type",
+						MarkdownDescription: "The file type. Possible values are `7z`, `Multi-Level-Encoding`, `PE`, `access-shortcut`, `ace`, `ade`, `adp`, `ai`, `aip-encrypted-docx`, `aip-encrypted-pptx`, `aip-encrypted-xlsx`, `any`, `apk`, `arj`, `asp`, `avi`, `avi-divx`, `avi-xvid`, `bas`, `bat`, `bmp`, `bmp-upload`, `bzip2`, `cab`, `catpart`, `cdr`, `chm`, `cin`, `class`, `cmd`, `com`, `cpl`, `csv`, `deflate64-zip`, `der`, `dll`, `dmg`, `doc`, `docm`, `docx`, `dpx`, `dsn`, `dwf`, `dwg`, `dxf`, `edif`, `elf`, `emf`, `encrypted-7z`, `encrypted-doc`, `encrypted-docx`, `encrypted-office2007`, `encrypted-pdf`, `encrypted-ppt`, `encrypted-pptx`, `encrypted-rar`, `encrypted-xls`, `encrypted-xlsx`, `encrypted-zip`, `eps`, `exe`, `exr`, `flash`, `flv`, `gds`, `gif`, `gif-upload`, `gzip`, `hlp`, `hta`, `hwp`, `hwpx`, `ichitaro`, `iff`, `inf`, `ins`, `iqy`, `iso`, `its`, `iwork-keynote`, `iwork-numbers`, `iwork-pages`, `jar`, `jpeg`, `jpeg-upload`, `js`, `jse`, `lnk`, `lzh`, `ma`, `macapp`, `mach-o`, `mb`, `mda`, `mdb`, `mdi`, `mdt`, `mdw`, `mdz`, `mht`, `microsoft-shell`, `mif`, `mkv`, `mov`, `mp3`, `mp4`, `mpeg`, `mpeg-ts`, `mpkg`, `msc`, `msi`, `msoffice`, `msp`, `ocx`, `pbix`, `pbm`, `pcl`, `pdf`, `pem`, `pgp`, `pif`, `pkg`, `pl`, `png`, `png-upload`, `powershell`, `ppt`, `pptx`, `prg`, `psd`, `py`, `rar`, `reg`, `renamed-zip`, `rla`, `rm`, `rpf`, `rtf`, `scf`, `scr`, `sgi`, `sh`, `shk`, `shs`, `slk`, `softimg`, `split-cab`, `split-rar`, `stp`, `svg`, `sys`, `tar`, `tdb`, `tif`, `tiff`, `tmp`, `torrent`, `url`, `vb`, `vbe`, `vbs`, `vxd`, `webm`, `wmf`, `wmv`, `wri`, `wsf`, `wsh`, `xll`, `xls`, `xlsx`, `xpm`, `zcompressed` and `zip`.",
 						Required:            true,
 					},
 					"name": schema.StringAttribute{
@@ -182,7 +182,7 @@ var FileBlockingProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -207,12 +207,12 @@ var FileBlockingProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -231,21 +231,21 @@ var FileBlockingProfilesDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"action": dsschema.StringAttribute{
-						MarkdownDescription: "The action to take when the rule match criteria is met",
+						MarkdownDescription: "The action to take when the rule match criteria is met. Possible values are `alert`, `block` and `continue`.",
 						Computed:            true,
 					},
 					"application": dsschema.ListAttribute{
 						ElementType:         types.StringType,
-						MarkdownDescription: "The application transferring the files (App-ID naming)",
+						MarkdownDescription: "The application transferring the files (App-ID naming). Possible values are `any`, `axifile`, `dl-free`, `facebook-mail`, `file.io`, `giphy-base`, `glassdoor-uploading`, `http-proxy`, `redbooth`, `send-anywhere` and `zoho-mail`.",
 						Computed:            true,
 					},
 					"direction": dsschema.StringAttribute{
-						MarkdownDescription: "The direction of the file transfer",
+						MarkdownDescription: "The direction of the file transfer. Possible values are `download`, `upload` and `both`.",
 						Computed:            true,
 					},
 					"file_type": dsschema.ListAttribute{
 						ElementType:         types.StringType,
-						MarkdownDescription: "The file type",
+						MarkdownDescription: "The file type. Possible values are `7z`, `Multi-Level-Encoding`, `PE`, `access-shortcut`, `ace`, `ade`, `adp`, `ai`, `aip-encrypted-docx`, `aip-encrypted-pptx`, `aip-encrypted-xlsx`, `any`, `apk`, `arj`, `asp`, `avi`, `avi-divx`, `avi-xvid`, `bas`, `bat`, `bmp`, `bmp-upload`, `bzip2`, `cab`, `catpart`, `cdr`, `chm`, `cin`, `class`, `cmd`, `com`, `cpl`, `csv`, `deflate64-zip`, `der`, `dll`, `dmg`, `doc`, `docm`, `docx`, `dpx`, `dsn`, `dwf`, `dwg`, `dxf`, `edif`, `elf`, `emf`, `encrypted-7z`, `encrypted-doc`, `encrypted-docx`, `encrypted-office2007`, `encrypted-pdf`, `encrypted-ppt`, `encrypted-pptx`, `encrypted-rar`, `encrypted-xls`, `encrypted-xlsx`, `encrypted-zip`, `eps`, `exe`, `exr`, `flash`, `flv`, `gds`, `gif`, `gif-upload`, `gzip`, `hlp`, `hta`, `hwp`, `hwpx`, `ichitaro`, `iff`, `inf`, `ins`, `iqy`, `iso`, `its`, `iwork-keynote`, `iwork-numbers`, `iwork-pages`, `jar`, `jpeg`, `jpeg-upload`, `js`, `jse`, `lnk`, `lzh`, `ma`, `macapp`, `mach-o`, `mb`, `mda`, `mdb`, `mdi`, `mdt`, `mdw`, `mdz`, `mht`, `microsoft-shell`, `mif`, `mkv`, `mov`, `mp3`, `mp4`, `mpeg`, `mpeg-ts`, `mpkg`, `msc`, `msi`, `msoffice`, `msp`, `ocx`, `pbix`, `pbm`, `pcl`, `pdf`, `pem`, `pgp`, `pif`, `pkg`, `pl`, `png`, `png-upload`, `powershell`, `ppt`, `pptx`, `prg`, `psd`, `py`, `rar`, `reg`, `renamed-zip`, `rla`, `rm`, `rpf`, `rtf`, `scf`, `scr`, `sgi`, `sh`, `shk`, `shs`, `slk`, `softimg`, `split-cab`, `split-rar`, `stp`, `svg`, `sys`, `tar`, `tdb`, `tif`, `tiff`, `tmp`, `torrent`, `url`, `vb`, `vbe`, `vbs`, `vxd`, `webm`, `wmf`, `wmv`, `wri`, `wsf`, `wsh`, `xll`, `xls`, `xlsx`, `xpm`, `zcompressed` and `zip`.",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
@@ -256,7 +256,7 @@ var FileBlockingProfilesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

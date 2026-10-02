@@ -51,12 +51,11 @@ output "created_service_connection_subnets" {
 ### Read-Only
 
 - `backup_sc` (String) Backup s c
-- `bgp_peer` (Attributes) Bgp peer (see [below for nested schema](#nestedatt--bgp_peer))
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `ipsec_tunnel` (String) Ipsec tunnel
 - `nat_pool` (String) Nat pool
-- `no_export_community` (String) No export community
-- `onboarding_type` (String) Onboarding type
+- `no_export_community` (String) No export community. Possible values are `Disabled`, `Enabled-In`, `Enabled-Out` and `Enabled-Both`.
+- `onboarding_type` (String) Onboarding type. Possible values are `classic`.
 - `protocol` (Attributes) Protocol (see [below for nested schema](#nestedatt--protocol))
 - `qos` (Attributes) Qos (see [below for nested schema](#nestedatt--qos))
 - `region` (String) Region
@@ -66,25 +65,13 @@ output "created_service_connection_subnets" {
 - `subnets` (List of String) Subnets
 - `tfid` (String) The Terraform ID.
 
-<a id="nestedatt--bgp_peer"></a>
-### Nested Schema for `bgp_peer`
-
-Read-Only:
-
-- `local_ip_address` (String) Local ip address
-- `local_ipv6_address` (String) Local ipv6 address
-- `peer_ip_address` (String) Peer ip address
-- `peer_ipv6_address` (String) Peer ipv6 address
-- `same_as_primary` (Boolean) Same peer IP address for SC
-- `secret` (String, Sensitive) Secret
-
-
 <a id="nestedatt--protocol"></a>
 ### Nested Schema for `protocol`
 
 Read-Only:
 
 - `bgp` (Attributes) Bgp (see [below for nested schema](#nestedatt--protocol--bgp))
+- `bgp_peer` (Attributes) Bgp peer (see [below for nested schema](#nestedatt--protocol--bgp_peer))
 
 <a id="nestedatt--protocol--bgp"></a>
 ### Nested Schema for `protocol.bgp`
@@ -100,6 +87,18 @@ Read-Only:
 - `peer_ip_address` (String) Peer ip address
 - `secret` (String, Sensitive) Secret
 - `summarize_mobile_user_routes` (Boolean) Summarize mobile user routes
+
+
+<a id="nestedatt--protocol--bgp_peer"></a>
+### Nested Schema for `protocol.bgp_peer`
+
+Read-Only:
+
+- `local_ip_address` (String) Local peer IP address (secondary WAN)
+- `local_ipv6_address` (String) Local peer IPv6 address (secondary WAN)
+- `peer_ip_address` (String) Remote peer IP address (secondary WAN)
+- `peer_ipv6_address` (String) Remote peer IPv6 address (secondary WAN)
+- `secret` (String, Sensitive) BGP peering secret (secondary WAN)
 
 
 

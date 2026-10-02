@@ -34,7 +34,7 @@ type DynamicUserGroupDataSource struct {
 
 func (d *DynamicUserGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DynamicUserGroupDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dynamic_user_group"
+	resp.TypeName = "scm_dynamic_user_group"
 }
 
 func (d *DynamicUserGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

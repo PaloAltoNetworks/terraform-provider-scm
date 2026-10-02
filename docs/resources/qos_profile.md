@@ -123,17 +123,13 @@ resource "scm_qos_profile" "scm_qos_profile_4" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `aggregate_bandwidth` (Attributes) Aggregate bandwidth (see [below for nested schema](#nestedatt--aggregate_bandwidth))
 - `class_bandwidth_type` (Attributes) Class bandwidth type (see [below for nested schema](#nestedatt--class_bandwidth_type))
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -154,12 +150,10 @@ Optional:
 
 Optional:
 
-- `mbps` (Attributes) Mbps
+~> **Note:** You must specify at most one of `mbps` or `percentage`.
 
-> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`. (see [below for nested schema](#nestedatt--class_bandwidth_type--mbps))
-- `percentage` (Attributes) Percentage
-
-> ℹ️ **Note:** You must specify exactly one of `mbps` and `percentage`. (see [below for nested schema](#nestedatt--class_bandwidth_type--percentage))
+- `mbps` (Attributes) Mbps (see [below for nested schema](#nestedatt--class_bandwidth_type--mbps))
+- `percentage` (Attributes) Percentage (see [below for nested schema](#nestedatt--class_bandwidth_type--percentage))
 
 <a id="nestedatt--class_bandwidth_type--mbps"></a>
 ### Nested Schema for `class_bandwidth_type.mbps`
@@ -174,8 +168,8 @@ Optional:
 Optional:
 
 - `class_bandwidth` (Attributes) Class bandwidth (see [below for nested schema](#nestedatt--class_bandwidth_type--mbps--class--class_bandwidth))
-- `name` (String) Traffic class
-- `priority` (String) traffic class priority
+- `name` (String) Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.
+- `priority` (String) traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.
 
 <a id="nestedatt--class_bandwidth_type--mbps--class--class_bandwidth"></a>
 ### Nested Schema for `class_bandwidth_type.mbps.class.class_bandwidth`
@@ -201,8 +195,8 @@ Optional:
 Optional:
 
 - `class_bandwidth` (Attributes) Class bandwidth (see [below for nested schema](#nestedatt--class_bandwidth_type--percentage--class--class_bandwidth))
-- `name` (String) Traffic class
-- `priority` (String) traffic class priority
+- `name` (String) Traffic class. Possible values are `class1`, `class2`, `class3`, `class4`, `class5`, `class6`, `class7` and `class8`.
+- `priority` (String) traffic class priority. Possible values are `real-time`, `high`, `medium` and `low`.
 
 <a id="nestedatt--class_bandwidth_type--percentage--class--class_bandwidth"></a>
 ### Nested Schema for `class_bandwidth_type.percentage.class.class_bandwidth`

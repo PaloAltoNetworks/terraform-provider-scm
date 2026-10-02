@@ -34,7 +34,7 @@ type HipmatchMatchListDataSource struct {
 
 func (d *HipmatchMatchListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: HipmatchMatchListDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_hipmatch_match_list"
+	resp.TypeName = "scm_hipmatch_match_list"
 }
 
 func (d *HipmatchMatchListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type LogForwardingProfileListDataSource struct {
 }
 
 func (d *LogForwardingProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_log_forwarding_profile_list"
+	resp.TypeName = "scm_log_forwarding_profile_list"
 }
 
 func (d *LogForwardingProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

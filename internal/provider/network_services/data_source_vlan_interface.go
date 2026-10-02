@@ -34,7 +34,7 @@ type VlanInterfaceDataSource struct {
 
 func (d *VlanInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: VlanInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_vlan_interface"
+	resp.TypeName = "scm_vlan_interface"
 }
 
 func (d *VlanInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

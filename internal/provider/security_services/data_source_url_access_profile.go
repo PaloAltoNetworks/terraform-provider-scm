@@ -34,7 +34,7 @@ type UrlAccessProfileDataSource struct {
 
 func (d *UrlAccessProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: UrlAccessProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_url_access_profile"
+	resp.TypeName = "scm_url_access_profile"
 }
 
 func (d *UrlAccessProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

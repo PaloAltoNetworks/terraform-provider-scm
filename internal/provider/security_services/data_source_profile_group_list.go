@@ -32,7 +32,7 @@ type ProfileGroupListDataSource struct {
 }
 
 func (d *ProfileGroupListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_profile_group_list"
+	resp.TypeName = "scm_profile_group_list"
 }
 
 func (d *ProfileGroupListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type KerberosServerProfileDataSource struct {
 
 func (d *KerberosServerProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: KerberosServerProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_kerberos_server_profile"
+	resp.TypeName = "scm_kerberos_server_profile"
 }
 
 func (d *KerberosServerProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

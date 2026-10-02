@@ -21,6 +21,11 @@ resource "scm_layer3_subinterface" "scm_l3_subinterface" {
   parent_interface = "$scm_tf_parent_interface"
   depends_on       = [scm_ethernet_interface.scm_parent_interface]
   ip               = [{ name = "198.18.1.1/32" }]
+  adjust_tcp_mss = {
+    enable              = true
+    ipv4_mss_adjustment = 40
+    ipv6_mss_adjustment = 60
+  }
 }
 
 resource "scm_ethernet_interface" "scm_parent_dhcp_interface" {
@@ -59,5 +64,37 @@ resource "scm_layer3_subinterface" "scm_l3_dhcp_subinterface" {
       # Set interface hostname (Default is "system-hostname")
       hostname = "client-vlan50-host"
     }
+  }
+}
+
+#
+# Creates an ethernet interface used as parent-interface for the pppoe example
+#
+
+resource "scm_ethernet_interface" "scm_parent_pppoe_interface" {
+  name    = "$scm_parent_tf_pppoe_interface"
+  comment = "Managed by Terraform"
+  folder  = "ngfw-shared"
+  layer3  = {}
+}
+
+#
+# Creates a layer3 sub-interface with pppoe
+#
+
+resource "scm_layer3_subinterface" "scm_l3_pppoe_subinterface" {
+  name             = "$scm_parent_tf_pppoe_interface.100"
+  comment          = "Managed by Terraform"
+  folder           = "ngfw-shared"
+  tag              = 100
+  parent_interface = "$scm_parent_tf_pppoe_interface"
+  depends_on       = [scm_ethernet_interface.scm_parent_pppoe_interface]
+
+  pppoe = {
+    enable               = true
+    username             = "testname"
+    password             = "testpass"
+    authentication       = "auto"
+    default_route_metric = 10
   }
 }

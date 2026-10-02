@@ -31,7 +31,7 @@ type AutoVpnClusterListDataSource struct {
 }
 
 func (d *AutoVpnClusterListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_auto_vpn_cluster_list"
+	resp.TypeName = "scm_auto_vpn_cluster_list"
 }
 
 func (d *AutoVpnClusterListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

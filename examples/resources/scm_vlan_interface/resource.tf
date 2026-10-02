@@ -10,4 +10,9 @@ resource "scm_vlan_interface" "scm_vlan_interface_ipv4" {
   ip = [
     { name = "198.18.1.1/24" }
   ]
+  adjust_tcp_mss = {
+    enable              = true
+    ipv4_mss_adjustment = 40
+    ipv6_mss_adjustment = 60
+  }
 }

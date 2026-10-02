@@ -34,7 +34,7 @@ type LldpProfileDataSource struct {
 
 func (d *LldpProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LldpProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_lldp_profile"
+	resp.TypeName = "scm_lldp_profile"
 }
 
 func (d *LldpProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type HttpHeaderProfileListDataSource struct {
 }
 
 func (d *HttpHeaderProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_http_header_profile_list"
+	resp.TypeName = "scm_http_header_profile_list"
 }
 
 func (d *HttpHeaderProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

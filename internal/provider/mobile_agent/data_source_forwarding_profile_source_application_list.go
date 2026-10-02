@@ -32,7 +32,7 @@ type ForwardingProfileSourceApplicationListDataSource struct {
 }
 
 func (d *ForwardingProfileSourceApplicationListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_forwarding_profile_source_application_list"
+	resp.TypeName = "scm_forwarding_profile_source_application_list"
 }
 
 func (d *ForwardingProfileSourceApplicationListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

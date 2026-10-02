@@ -112,7 +112,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -134,7 +134,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -185,7 +185,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "The position of a security rule\n",
+			MarkdownDescription: "The position of a security rule. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
@@ -197,7 +197,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("tcp", "udp"),
 			},
-			MarkdownDescription: "Protocol",
+			MarkdownDescription: "Protocol. Possible values are `tcp` and `udp`.",
 			Optional:            true,
 		},
 		"relative_position": schema.StringAttribute{
@@ -216,7 +216,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -234,7 +234,7 @@ var AppOverrideRulesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"target_rule": schema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{
@@ -271,7 +271,7 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -280,7 +280,7 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -315,11 +315,11 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "The position of a security rule\n",
+			MarkdownDescription: "The position of a security rule. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"protocol": dsschema.StringAttribute{
-			MarkdownDescription: "Protocol",
+			MarkdownDescription: "Protocol. Possible values are `tcp` and `udp`.",
 			Computed:            true,
 		},
 		"relative_position": dsschema.StringAttribute{
@@ -327,7 +327,7 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -342,7 +342,7 @@ var AppOverrideRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"target_rule": dsschema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

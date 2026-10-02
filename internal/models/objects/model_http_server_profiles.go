@@ -871,7 +871,7 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -887,7 +887,7 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1816,7 +1816,7 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("GET", "POST", "PUT", "DELETE"),
 						},
-						MarkdownDescription: "HTTP operation to perform",
+						MarkdownDescription: "HTTP operation to perform. Possible values are `GET`, `POST`, `PUT` and `DELETE`.",
 						Optional:            true,
 					},
 					"name": schema.StringAttribute{
@@ -1831,14 +1831,14 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("HTTP", "HTTPS"),
 						},
-						MarkdownDescription: "HTTP server protocol",
+						MarkdownDescription: "HTTP server protocol. Possible values are `HTTP` and `HTTPS`.",
 						Optional:            true,
 					},
 					"tls_version": schema.StringAttribute{
 						Validators: []validator.String{
 							stringvalidator.OneOf("1.0", "1.1", "1.2", "1.3"),
 						},
-						MarkdownDescription: "HTTP server TLS version",
+						MarkdownDescription: "HTTP server TLS version. Possible values are `1.0`, `1.1`, `1.2` and `1.3`.",
 						Optional:            true,
 					},
 				},
@@ -1853,7 +1853,7 @@ var HttpServerProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -1878,12 +1878,12 @@ var HttpServerProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "HttpServerProfile data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -2766,7 +2766,7 @@ var HttpServerProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"http_method": dsschema.StringAttribute{
-						MarkdownDescription: "HTTP operation to perform",
+						MarkdownDescription: "HTTP operation to perform. Possible values are `GET`, `POST`, `PUT` and `DELETE`.",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
@@ -2778,18 +2778,18 @@ var HttpServerProfilesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"protocol": dsschema.StringAttribute{
-						MarkdownDescription: "HTTP server protocol",
+						MarkdownDescription: "HTTP server protocol. Possible values are `HTTP` and `HTTPS`.",
 						Computed:            true,
 					},
 					"tls_version": dsschema.StringAttribute{
-						MarkdownDescription: "HTTP server TLS version",
+						MarkdownDescription: "HTTP server TLS version. Possible values are `1.0`, `1.1`, `1.2` and `1.3`.",
 						Computed:            true,
 					},
 				},
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

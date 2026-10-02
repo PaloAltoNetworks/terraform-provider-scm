@@ -34,7 +34,7 @@ type AggregateInterfaceDataSource struct {
 
 func (d *AggregateInterfaceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AggregateInterfaceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_aggregate_interface"
+	resp.TypeName = "scm_aggregate_interface"
 }
 
 func (d *AggregateInterfaceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

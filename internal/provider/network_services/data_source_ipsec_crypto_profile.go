@@ -34,7 +34,7 @@ type IpsecCryptoProfileDataSource struct {
 
 func (d *IpsecCryptoProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: IpsecCryptoProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ipsec_crypto_profile"
+	resp.TypeName = "scm_ipsec_crypto_profile"
 }
 
 func (d *IpsecCryptoProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

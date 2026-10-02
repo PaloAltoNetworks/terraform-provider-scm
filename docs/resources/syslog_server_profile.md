@@ -112,16 +112,12 @@ resource "scm_syslog_server_profile" "scm_syslog_server_prof_3" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `format` (Attributes) Format (see [below for nested schema](#nestedatt--format))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -133,12 +129,12 @@ resource "scm_syslog_server_profile" "scm_syslog_server_prof_3" {
 
 Optional:
 
-- `facility` (String) Syslog facility
-- `format` (String) Syslog format
+- `facility` (String) Syslog facility. Possible values are `LOG_USER`, `LOG_LOCAL0`, `LOG_LOCAL1`, `LOG_LOCAL2`, `LOG_LOCAL3`, `LOG_LOCAL4`, `LOG_LOCAL5`, `LOG_LOCAL6` and `LOG_LOCAL7`.
+- `format` (String) Syslog format. Possible values are `BSD` and `IETF`.
 - `name` (String) Syslog server name
 - `port` (Number) Syslog server port
 - `server` (String) Syslog server address
-- `transport` (String) Transport protocol
+- `transport` (String) Transport protocol. Possible values are `UDP` and `TCP`.
 
 
 <a id="nestedatt--format"></a>

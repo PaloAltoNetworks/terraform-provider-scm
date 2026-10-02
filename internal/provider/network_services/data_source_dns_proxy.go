@@ -34,7 +34,7 @@ type DnsProxyDataSource struct {
 
 func (d *DnsProxyDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DnsProxyDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dns_proxy"
+	resp.TypeName = "scm_dns_proxy"
 }
 
 func (d *DnsProxyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

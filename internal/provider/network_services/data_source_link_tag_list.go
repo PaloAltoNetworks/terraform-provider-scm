@@ -32,7 +32,7 @@ type LinkTagListDataSource struct {
 }
 
 func (d *LinkTagListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_link_tag_list"
+	resp.TypeName = "scm_link_tag_list"
 }
 
 func (d *LinkTagListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

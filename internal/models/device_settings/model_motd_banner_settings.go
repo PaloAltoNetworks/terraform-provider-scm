@@ -120,7 +120,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -136,7 +136,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -161,14 +161,14 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("color1", "color2", "color3", "color4", "color5", "color6", "color7", "color8", "color9", "color10", "color11", "color12", "color13", "color14", "color15", "color16", "color17"),
 					},
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Optional:            true,
 				},
 				"banner_footer_text_color": schema.StringAttribute{
 					Validators: []validator.String{
 						stringvalidator.OneOf("color1", "color2", "color3", "color4", "color5", "color6", "color7", "color8", "color9", "color10", "color11", "color12", "color13", "color14", "color15", "color16", "color17"),
 					},
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Optional:            true,
 				},
 				"banner_header": schema.StringAttribute{
@@ -179,7 +179,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("color1", "color2", "color3", "color4", "color5", "color6", "color7", "color8", "color9", "color10", "color11", "color12", "color13", "color14", "color15", "color16", "color17"),
 					},
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Optional:            true,
 				},
 				"banner_header_footer_match": schema.BoolAttribute{
@@ -190,7 +190,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("color1", "color2", "color3", "color4", "color5", "color6", "color7", "color8", "color9", "color10", "color11", "color12", "color13", "color14", "color15", "color16", "color17"),
 					},
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Optional:            true,
 				},
 				"message": schema.StringAttribute{
@@ -201,7 +201,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("color1", "color2", "color3", "color4", "color5", "color6", "color7", "color8", "color9", "color10", "color11", "color12", "color13", "color14", "color15", "color16", "color17"),
 					},
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Optional:            true,
 				},
 				"motd_do_not_display_again": schema.BoolAttribute{
@@ -220,7 +220,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("warning", "question", "error", "info"),
 					},
-					MarkdownDescription: "Severity",
+					MarkdownDescription: "Severity. Possible values are `warning`, `question`, `error` and `info`.",
 					Optional:            true,
 				},
 			},
@@ -234,7 +234,7 @@ var MotdBannerSettingsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -255,12 +255,12 @@ var MotdBannerSettingsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "MotdBannerSetting data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -277,11 +277,11 @@ var MotdBannerSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"banner_footer_color": dsschema.StringAttribute{
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Computed:            true,
 				},
 				"banner_footer_text_color": dsschema.StringAttribute{
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Computed:            true,
 				},
 				"banner_header": dsschema.StringAttribute{
@@ -289,7 +289,7 @@ var MotdBannerSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"banner_header_color": dsschema.StringAttribute{
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Computed:            true,
 				},
 				"banner_header_footer_match": dsschema.BoolAttribute{
@@ -297,7 +297,7 @@ var MotdBannerSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"banner_header_text_color": dsschema.StringAttribute{
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Computed:            true,
 				},
 				"message": dsschema.StringAttribute{
@@ -305,7 +305,7 @@ var MotdBannerSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"motd_color": dsschema.StringAttribute{
-					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive\n",
+					MarkdownDescription: "The following list details the supported values and their colors.\n\n- `color1` = Red\n- `color2` = Green\n- `color3` = Blue\n- `color4` = Yellow\n- `color5` = Copper\n- `color6` = Orange\n- `color7` = Purple\n- `color8` = Gray\n- `color9` = Light Green\n- `color10` = Cyan\n- `color11` = Light Gray\n- `color12` = Blue Gray\n- `color13` = Lime\n- `color14` = Black\n- `color15` = Gold\n- `color16` = Brown\n- `color17` = Olive. Possible values are `color1`, `color2`, `color3`, `color4`, `color5`, `color6`, `color7`, `color8`, `color9`, `color10`, `color11`, `color12`, `color13`, `color14`, `color15`, `color16` and `color17`.",
 					Computed:            true,
 				},
 				"motd_do_not_display_again": dsschema.BoolAttribute{
@@ -321,13 +321,13 @@ var MotdBannerSettingsDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"severity": dsschema.StringAttribute{
-					MarkdownDescription: "Severity",
+					MarkdownDescription: "Severity. Possible values are `warning`, `question`, `error` and `info`.",
 					Computed:            true,
 				},
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

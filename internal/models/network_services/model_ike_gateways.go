@@ -511,7 +511,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pre_shared_key"),
 						),
 					},
-					MarkdownDescription: "Certificate\n\n> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`.",
+					MarkdownDescription: "Certificate",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"allow_id_payload_mismatch": schema.BoolAttribute{
@@ -548,7 +548,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("certificate"),
 						),
 					},
-					MarkdownDescription: "Pre shared key\n\n> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`.",
+					MarkdownDescription: "Pre shared key",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"key": schema.StringAttribute{
@@ -569,7 +569,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -591,7 +591,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -659,7 +659,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
-					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.",
+					MarkdownDescription: "Dynamic",
 					Optional:            true,
 					Attributes:          map[string]schema.Attribute{},
 				},
@@ -671,7 +671,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 						),
 						stringvalidator.LengthAtMost(255),
 					},
-					MarkdownDescription: "peer gateway FQDN name\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.",
+					MarkdownDescription: "peer gateway FQDN name",
 					Optional:            true,
 				},
 				"ip": schema.StringAttribute{
@@ -681,7 +681,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("fqdn"),
 						),
 					},
-					MarkdownDescription: "peer gateway has static IP address\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.",
+					MarkdownDescription: "peer gateway has static IP address",
 					Optional:            true,
 				},
 			},
@@ -703,7 +703,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("ipaddr", "keyid", "fqdn", "ufqdn"),
 					},
-					MarkdownDescription: "Type",
+					MarkdownDescription: "Type. Possible values are `ipaddr`, `keyid`, `fqdn` and `ufqdn`.",
 					Optional:            true,
 				},
 			},
@@ -756,7 +756,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("ikev2-preferred", "ikev1", "ikev2"),
 					},
-					MarkdownDescription: "Version",
+					MarkdownDescription: "Version. Possible values are `ikev2-preferred`, `ikev1` and `ikev2`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("ikev2-preferred"),
@@ -811,7 +811,7 @@ var IkeGatewaysResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -836,7 +836,7 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"certificate": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Certificate\n\n> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`.",
+					MarkdownDescription: "Certificate",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"allow_id_payload_mismatch": dsschema.BoolAttribute{
@@ -868,7 +868,7 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"pre_shared_key": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Pre shared key\n\n> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`.",
+					MarkdownDescription: "Pre shared key",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"key": dsschema.StringAttribute{
@@ -881,7 +881,7 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -892,7 +892,7 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -938,16 +938,16 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"dynamic": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Dynamic\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.",
+					MarkdownDescription: "Dynamic",
 					Computed:            true,
 					Attributes:          map[string]dsschema.Attribute{},
 				},
 				"fqdn": dsschema.StringAttribute{
-					MarkdownDescription: "peer gateway FQDN name\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.",
+					MarkdownDescription: "peer gateway FQDN name",
 					Computed:            true,
 				},
 				"ip": dsschema.StringAttribute{
-					MarkdownDescription: "peer gateway has static IP address\n\n> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.",
+					MarkdownDescription: "peer gateway has static IP address",
 					Computed:            true,
 				},
 			},
@@ -961,7 +961,7 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"type": dsschema.StringAttribute{
-					MarkdownDescription: "Type",
+					MarkdownDescription: "Type. Possible values are `ipaddr`, `keyid`, `fqdn` and `ufqdn`.",
 					Computed:            true,
 				},
 			},
@@ -1011,7 +1011,7 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"version": dsschema.StringAttribute{
-					MarkdownDescription: "Version",
+					MarkdownDescription: "Version. Possible values are `ikev2-preferred`, `ikev1` and `ikev2`.",
 					Computed:            true,
 				},
 			},
@@ -1047,7 +1047,7 @@ var IkeGatewaysDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

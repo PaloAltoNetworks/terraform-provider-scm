@@ -34,7 +34,7 @@ type HttpHeaderProfileDataSource struct {
 
 func (d *HttpHeaderProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: HttpHeaderProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_http_header_profile"
+	resp.TypeName = "scm_http_header_profile"
 }
 
 func (d *HttpHeaderProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

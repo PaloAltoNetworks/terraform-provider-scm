@@ -34,7 +34,7 @@ type BgpRouteMapRedistributionDataSource struct {
 
 func (d *BgpRouteMapRedistributionDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: BgpRouteMapRedistributionDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_bgp_route_map_redistribution"
+	resp.TypeName = "scm_bgp_route_map_redistribution"
 }
 
 func (d *BgpRouteMapRedistributionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

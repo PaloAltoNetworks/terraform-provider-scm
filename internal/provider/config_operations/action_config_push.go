@@ -31,15 +31,15 @@ type ConfigPushActionModel struct {
 	Admin       types.List   `tfsdk:"admin"`
 	Description types.String `tfsdk:"description"`
 	Devices     types.List   `tfsdk:"devices"`
-	Folder      types.List   `tfsdk:"folder"`
+	Folders     types.List   `tfsdk:"folders"`
 }
 
 func NewConfigPushAction() action.Action {
 	return &ConfigPushAction{}
 }
 
-func (a *ConfigPushAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_config_push"
+func (a *ConfigPushAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_config_push"
 }
 
 func (a *ConfigPushAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {
@@ -60,8 +60,8 @@ func (a *ConfigPushAction) Schema(_ context.Context, _ action.SchemaRequest, res
 				Optional:    true,
 				ElementType: types.StringType,
 			},
-			"folder": schema.ListAttribute{
-				Description: "Folder",
+			"folders": schema.ListAttribute{
+				Description: "Folders",
 				Optional:    true,
 				ElementType: types.StringType,
 			},
@@ -124,11 +124,11 @@ func (a *ConfigPushAction) Invoke(ctx context.Context, req action.InvokeRequest,
 		_ = data.Devices.ElementsAs(ctx, &vals, false)
 		sdkReq.SetDevices(vals)
 	}
-	if !data.Folder.IsNull() && !data.Folder.IsUnknown() {
+	if !data.Folders.IsNull() && !data.Folders.IsUnknown() {
 		var vals []string
 		// ElementsAs failures already include attribute path information.
-		_ = data.Folder.ElementsAs(ctx, &vals, false)
-		sdkReq.SetFolder(vals)
+		_ = data.Folders.ElementsAs(ctx, &vals, false)
+		sdkReq.SetFolders(vals)
 	}
 
 	// Execute the API call

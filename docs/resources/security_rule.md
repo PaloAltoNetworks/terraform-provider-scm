@@ -232,7 +232,7 @@ resource "scm_security_rule" "internet_rule_example" {
 
 ### Optional
 
-- `action` (String) The action to be taken when the rule is matched
+- `action` (String) The action to be taken when the rule is matched. Possible values are `allow`, `deny`, `drop`, `reset-client`, `reset-server` and `reset-both`.
 - `allow_url_category` (Attributes List) Allow url category (see [below for nested schema](#nestedatt--allow_url_category))
 - `allow_web_application` (Attributes List) Allow web application (see [below for nested schema](#nestedatt--allow_web_application))
 - `application` (List of String) The application(s) being accessed
@@ -257,7 +257,7 @@ resource "scm_security_rule" "internet_rule_example" {
 - `negate_source` (Boolean) Negate the source address(es)?
 - `negate_user` (Boolean) Negate user
 - `policy_type` (String) Policy type
-- `position` (String) The position of a security rule
+- `position` (String) The position of a security rule. Possible values are `pre` and `post`.
 - `profile_setting` (Attributes) The security profile object (see [below for nested schema](#nestedatt--profile_setting))
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `schedule` (String) Schedule in which this rule will be applied
@@ -268,7 +268,7 @@ resource "scm_security_rule" "internet_rule_example" {
 - `source_hip` (List of String) The source Host Integrity Profile(s)
 - `source_user` (List of String) List of source users and/or groups.  Reserved words include `any`, `pre-login`, `known-user`, and `unknown`.
 - `tag` (List of String) The tags associated with the security rule
-- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `target_rule` (String) UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `tenant_restrictions` (List of String) Tenant restrictions
 - `to` (List of String) The destination security zone(s)
 
@@ -282,9 +282,9 @@ resource "scm_security_rule" "internet_rule_example" {
 
 Optional:
 
-- `additional_action` (String) Additional action
-- `credential_enforcement` (String) Credential enforcement
-- `decryption` (String) Decryption
+- `additional_action` (String) Additional action. Possible values are `none`, `continue`, `redirect` and `isolate`.
+- `credential_enforcement` (String) Credential enforcement. Possible values are `enabled` and `disabled`.
+- `decryption` (String) Decryption. Possible values are `enabled` and `disabled`.
 - `dlp` (String) Dlp
 - `file_control` (Attributes) File control (see [below for nested schema](#nestedatt--allow_url_category--file_control))
 - `isolation_profiles` (String) Isolation profiles
@@ -295,8 +295,8 @@ Optional:
 
 Optional:
 
-- `download` (String) Download
-- `upload` (String) Upload
+- `download` (String) Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.
+- `upload` (String) Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.
 
 
 
@@ -321,8 +321,8 @@ Optional:
 
 Optional:
 
-- `download` (String) Download
-- `upload` (String) Upload
+- `download` (String) Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.
+- `upload` (String) Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.
 
 
 <a id="nestedatt--allow_web_application--saas_enterprise_control"></a>
@@ -338,7 +338,7 @@ Optional:
 
 Optional:
 
-- `enable` (String) Enable
+- `enable` (String) Enable. Possible values are `yes` and `no`.
 
 
 <a id="nestedatt--allow_web_application--saas_enterprise_control--enterprise_access"></a>
@@ -346,7 +346,7 @@ Optional:
 
 Optional:
 
-- `enable` (String) Enable
+- `enable` (String) Enable. Possible values are `yes` and `no`.
 - `tenant_restrictions` (List of String) Tenant restrictions
 
 
@@ -376,8 +376,8 @@ Optional:
 
 Optional:
 
-- `download` (String) Download
-- `upload` (String) Upload
+- `download` (String) Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.
+- `upload` (String) Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.
 
 
 
@@ -402,9 +402,9 @@ Optional:
 
 Optional:
 
-- `anti_spyware` (String) Anti spyware
-- `virus_and_wildfire_analysis` (String) Virus and wildfire analysis
-- `vulnerability` (String) Vulnerability
+- `anti_spyware` (String) Anti spyware. Possible values are `yes` and `no`.
+- `virus_and_wildfire_analysis` (String) Virus and wildfire analysis. Possible values are `yes` and `no`.
+- `vulnerability` (String) Vulnerability. Possible values are `yes` and `no`.
 
 
 ## Import

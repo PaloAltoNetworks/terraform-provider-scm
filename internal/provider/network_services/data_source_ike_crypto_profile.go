@@ -34,7 +34,7 @@ type IkeCryptoProfileDataSource struct {
 
 func (d *IkeCryptoProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: IkeCryptoProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_ike_crypto_profile"
+	resp.TypeName = "scm_ike_crypto_profile"
 }
 
 func (d *IkeCryptoProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

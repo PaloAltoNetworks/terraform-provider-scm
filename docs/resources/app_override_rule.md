@@ -143,30 +143,26 @@ resource "scm_app_override_rule" "rule_after_anchor_override" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `application` (String) Application
 - `description` (String) Description
 - `destination` (List of String) Destination
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Disabled
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (List of String) From
 - `group_tag` (String) Group tag
 - `negate_destination` (Boolean) Negate destination
 - `negate_source` (Boolean) Negate source
 - `port` (String) Port
-- `position` (String) The position of a security rule
-- `protocol` (String) Protocol
+- `position` (String) The position of a security rule. Possible values are `pre` and `post`.
+- `protocol` (String) Protocol. Possible values are `tcp` and `udp`.
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) Source
 - `tag` (List of String) Tag
-- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `target_rule` (String) UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `to` (List of String) To
 
 ### Read-Only

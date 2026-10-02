@@ -102,6 +102,8 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 		"authentication_enforcement": schema.StringAttribute{
 			MarkdownDescription: "The authentication profile name",
 			Optional:            true,
+			Computed:            true,
+			Default:             stringdefault.StaticString("default-no-captive-portal"),
 		},
 		"category": schema.ListAttribute{
 			ElementType:         types.StringType,
@@ -129,7 +131,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("snippet"),
 				),
 			},
-			MarkdownDescription: "Device\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Device",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -149,7 +151,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 				),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "Folder\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Folder",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -206,7 +208,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "The relative position of the rule\n",
+			MarkdownDescription: "The relative position of the rule. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
@@ -233,7 +235,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("folder"),
 				),
 			},
-			MarkdownDescription: "Snippet\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Snippet",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -260,7 +262,7 @@ var AuthenticationRulesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"target_rule": schema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tfid": schema.StringAttribute{
@@ -313,7 +315,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "Device\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Device",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -322,7 +324,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "Folder\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Folder",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -366,7 +368,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "The relative position of the rule\n",
+			MarkdownDescription: "The relative position of the rule. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"relative_position": dsschema.StringAttribute{
@@ -379,7 +381,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "Snippet\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "Snippet",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -404,7 +406,7 @@ var AuthenticationRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"target_rule": dsschema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Computed:            true,
 		},
 		"tfid": dsschema.StringAttribute{

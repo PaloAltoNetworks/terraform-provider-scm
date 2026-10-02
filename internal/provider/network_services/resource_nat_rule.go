@@ -35,7 +35,7 @@ type NatRuleResource struct {
 }
 
 func (r *NatRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_nat_rule"
+	resp.TypeName = "scm_nat_rule"
 }
 
 func (r *NatRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -129,6 +129,7 @@ func (r *NatRuleResource) Create(ctx context.Context, req resource.CreateRequest
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 	_ = req.Plan.GetAttribute(ctx, path.Root("position"), &data.Position)
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
@@ -239,6 +240,22 @@ func (r *NatRuleResource) Read(ctx context.Context, req resource.ReadRequest, re
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Step 5a - Normalize null lists against prior state. Read has no plan, so we
+	// compare the API response against savestate. When the API returns [] for a
+	// list that was null in prior state, coerce it back to null to avoid a
+	// perpetual diff on refresh. Real changes (populated lists) are preserved.
+	savestateObject, diags := types.ObjectValueFrom(ctx, models.NatRules{}.AttrTypes(), &savestate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+	packedObject, diags = utils.NormalizeNullLists(ctx, savestateObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -433,7 +450,7 @@ func (r *NatRuleResource) Update(ctx context.Context, req resource.UpdateRequest
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 	_ = req.Plan.GetAttribute(ctx, path.Root("position"), &plan.Position)
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
@@ -495,11 +512,11 @@ func (r *NatRuleResource) Delete(ctx context.Context, req resource.DeleteRequest
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting nat_rules", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

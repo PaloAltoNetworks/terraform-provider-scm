@@ -53,14 +53,8 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -68,9 +62,9 @@ Read-Only:
 - `comment` (String) Comment
 - `cve` (List of String) Cve
 - `default_action` (Attributes) anti spyware signature default action (see [below for nested schema](#nestedatt--data--default_action))
-- `direction` (String) Direction
+- `direction` (String) Direction. Possible values are `client2server`, `server2client` and `both`.
 - `reference` (List of String) Reference
-- `severity` (String) Severity
+- `severity` (String) Severity. Possible values are `critical`, `low`, `high`, `medium` and `informational`.
 - `signature` (Attributes) anti spyware signature (see [below for nested schema](#nestedatt--data--signature))
 - `tfid` (String) The Terraform ID.
 - `threat_id` (String) threat id range <15000-18000> and <6900001-7000000>
@@ -82,27 +76,13 @@ Read-Only:
 
 Read-Only:
 
-- `alert` (Attributes) Alert
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--default_action--alert))
-- `allow` (Attributes) Allow
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--default_action--allow))
-- `block_ip` (Attributes) anti spyware signature block ip
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--default_action--block_ip))
-- `drop` (Attributes) Drop
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--default_action--drop))
-- `reset_both` (Attributes) Reset both
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--default_action--reset_both))
-- `reset_client` (Attributes) Reset client
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--default_action--reset_client))
-- `reset_server` (Attributes) Reset server
-
-> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block_ip`, `drop`, `reset_both`, `reset_client`, and `reset_server`. (see [below for nested schema](#nestedatt--data--default_action--reset_server))
+- `alert` (Attributes) Alert (see [below for nested schema](#nestedatt--data--default_action--alert))
+- `allow` (Attributes) Allow (see [below for nested schema](#nestedatt--data--default_action--allow))
+- `block_ip` (Attributes) anti spyware signature block ip (see [below for nested schema](#nestedatt--data--default_action--block_ip))
+- `drop` (Attributes) Drop (see [below for nested schema](#nestedatt--data--default_action--drop))
+- `reset_both` (Attributes) Reset both (see [below for nested schema](#nestedatt--data--default_action--reset_both))
+- `reset_client` (Attributes) Reset client (see [below for nested schema](#nestedatt--data--default_action--reset_client))
+- `reset_server` (Attributes) Reset server (see [below for nested schema](#nestedatt--data--default_action--reset_server))
 
 <a id="nestedatt--data--default_action--alert"></a>
 ### Nested Schema for `data.default_action.alert`
@@ -118,7 +98,7 @@ Read-Only:
 Read-Only:
 
 - `duration` (Number) Duration
-- `track_by` (String) Track by
+- `track_by` (String) Track by. Possible values are `source-and-destination` and `source`.
 
 
 <a id="nestedatt--data--default_action--drop"></a>
@@ -143,12 +123,8 @@ Read-Only:
 
 Read-Only:
 
-- `combination` (Attributes) anti spyware signature combination
-
-> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`. (see [below for nested schema](#nestedatt--data--signature--combination))
-- `standard` (Attributes List) Standard
-
-> ℹ️ **Note:** You must specify exactly one of `combination` and `standard`. (see [below for nested schema](#nestedatt--data--signature--standard))
+- `combination` (Attributes) anti spyware signature combination (see [below for nested schema](#nestedatt--data--signature--combination))
+- `standard` (Attributes List) Standard (see [below for nested schema](#nestedatt--data--signature--standard))
 
 <a id="nestedatt--data--signature--combination"></a>
 ### Nested Schema for `data.signature.combination`
@@ -184,7 +160,7 @@ Read-Only:
 
 - `interval` (Number) Interval
 - `threshold` (Number) Threshold
-- `track_by` (String) Track by
+- `track_by` (String) Track by. Possible values are `source-and-destination`, `source` and `destination`.
 
 
 
@@ -197,7 +173,7 @@ Read-Only:
 - `comment` (String) Comment
 - `name` (String) Name
 - `order_free` (Boolean) Order free
-- `scope` (String) Scope
+- `scope` (String) Scope. Possible values are `protocol-data-unit` and `session`.
 
 <a id="nestedatt--data--signature--standard--and_condition"></a>
 ### Nested Schema for `data.signature.standard.and_condition`

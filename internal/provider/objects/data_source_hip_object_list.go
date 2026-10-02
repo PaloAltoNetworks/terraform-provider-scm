@@ -32,7 +32,7 @@ type HipObjectListDataSource struct {
 }
 
 func (d *HipObjectListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_hip_object_list"
+	resp.TypeName = "scm_hip_object_list"
 }
 
 func (d *HipObjectListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

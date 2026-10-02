@@ -31,7 +31,7 @@ type DeviceListDataSource struct {
 }
 
 func (d *DeviceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_device_list"
+	resp.TypeName = "scm_device_list"
 }
 
 func (d *DeviceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

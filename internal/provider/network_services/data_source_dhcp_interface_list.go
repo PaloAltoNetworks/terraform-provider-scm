@@ -32,7 +32,7 @@ type DhcpInterfaceListDataSource struct {
 }
 
 func (d *DhcpInterfaceListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_dhcp_interface_list"
+	resp.TypeName = "scm_dhcp_interface_list"
 }
 
 func (d *DhcpInterfaceListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

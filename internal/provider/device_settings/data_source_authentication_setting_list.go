@@ -32,7 +32,7 @@ type AuthenticationSettingListDataSource struct {
 }
 
 func (d *AuthenticationSettingListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_authentication_setting_list"
+	resp.TypeName = "scm_authentication_setting_list"
 }
 
 func (d *AuthenticationSettingListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

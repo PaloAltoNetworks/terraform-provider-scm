@@ -39,7 +39,8 @@ resource "scm_authentication_rule" "anchor_rule" {
   service     = ["service-http", "service-https"]
 
   # Identity and Enforcement
-  source_user = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 
   # Optional fields
   timeout                    = 1200
@@ -69,12 +70,13 @@ resource "scm_authentication_rule" "rule_top_of_list" {
   relative_position = "top"
 
   # Core fields
-  destination = ["any"]
-  from        = ["untrust"]
-  to          = ["trust"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"]
+  destination                = ["any"]
+  from                       = ["untrust"]
+  to                         = ["trust"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 
 
@@ -89,12 +91,13 @@ resource "scm_authentication_rule" "rule_bottom_of_list" {
   relative_position = "bottom"
 
   # Core fields
-  destination = ["any"]
-  from        = ["any"]
-  to          = ["any"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"]
+  destination                = ["any"]
+  from                       = ["any"]
+  to                         = ["any"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 
 # -----------------------------------------------------------------------------
@@ -113,12 +116,13 @@ resource "scm_authentication_rule" "rule_before_anchor" {
   target_rule       = scm_authentication_rule.anchor_rule.id # Reference anchor by its ID
 
   # Core fields
-  destination = ["any"]
-  from        = ["any"]
-  to          = ["any"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"]
+  destination                = ["any"]
+  from                       = ["any"]
+  to                         = ["any"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 
 resource "scm_authentication_rule" "rule_after_anchor" {
@@ -133,12 +137,13 @@ resource "scm_authentication_rule" "rule_after_anchor" {
   target_rule       = scm_authentication_rule.anchor_rule.id # Reference anchor by its ID
 
   # Core fields
-  destination = ["any"]
-  from        = ["any"]
-  to          = ["any"]
-  source      = ["any"]
-  service     = ["any"]
-  source_user = ["any"] # Example specific user
+  destination                = ["any"]
+  from                       = ["any"]
+  to                         = ["any"]
+  source                     = ["any"]
+  service                    = ["any"]
+  source_user                = ["any"]
+  authentication_enforcement = "default-no-captive-portal"
 }
 ```
 
@@ -156,32 +161,28 @@ resource "scm_authentication_rule" "rule_after_anchor" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `authentication_enforcement` (String) The authentication profile name
 - `category` (List of String) The destination URL categories
 - `description` (String) The description of the authentication rule
 - `destination_hip` (List of String) The destination Host Integrity Profile (HIP)
 - `device` (String) Device
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `disabled` (Boolean) Is the authentication rule disabled?
 - `folder` (String) Folder
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `group_tag` (String) Group tag
 - `hip_profiles` (List of String) The source Host Integrity Profile (HIP)
 - `log_authentication_timeout` (Boolean) Log authentication timeouts?
 - `log_setting` (String) The log forwarding profile name
 - `negate_destination` (Boolean) Are the destination addresses negated?
 - `negate_source` (Boolean) Are the source addresses negated?
-- `position` (String) The relative position of the rule
+- `position` (String) The relative position of the rule. Possible values are `pre` and `post`.
 - `relative_position` (String) Relative positioning rule. String must be one of these: `"before"`, `"after"`, `"top"`, `"bottom"`. If not specified, rule is created at the bottom of the ruleset.
 - `snippet` (String) Snippet
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source_hip` (List of String) The source Host Integrity Profile (HIP)
 - `source_user` (List of String) The source users
 - `tag` (List of String) The authentication rule tags
-- `target_rule` (String) The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
+- `target_rule` (String) UUID of the rule to position this rule relative to. Required when `relative_position` is `"before"` or `"after"`.
 - `timeout` (Number) The authentication session timeout (seconds)
 
 ### Read-Only

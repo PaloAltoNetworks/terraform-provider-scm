@@ -34,7 +34,7 @@ type BgpAuthProfileDataSource struct {
 
 func (d *BgpAuthProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: BgpAuthProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_bgp_auth_profile"
+	resp.TypeName = "scm_bgp_auth_profile"
 }
 
 func (d *BgpAuthProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

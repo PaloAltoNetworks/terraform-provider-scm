@@ -40,15 +40,9 @@ Required:
 Optional:
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Rule name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 Read-Only:
 
@@ -62,7 +56,7 @@ Read-Only:
 - `negate_destination` (Boolean) Negate destination address(es)?
 - `negate_source` (Boolean) Negate source address(es)?
 - `path_quality_profile` (String) Path quality profile
-- `position` (String) Rule postion relative to device rules
+- `position` (String) Rule postion relative to device rules. Possible values are `pre` and `post`.
 - `saas_quality_profile` (String) SaaS quality profile
 - `service` (List of String) List of services
 - `source` (List of String) List of source addresses

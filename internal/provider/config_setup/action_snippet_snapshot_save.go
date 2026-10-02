@@ -36,8 +36,8 @@ func NewSnippetSnapshotSaveAction() action.Action {
 	return &SnippetSnapshotSaveAction{}
 }
 
-func (a *SnippetSnapshotSaveAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet_snapshot_save"
+func (a *SnippetSnapshotSaveAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_snippet_snapshot_save"
 }
 
 func (a *SnippetSnapshotSaveAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

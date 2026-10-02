@@ -22,15 +22,9 @@ SdwanPathQualityProfile data source
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) Profile name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -51,7 +45,7 @@ Read-Only:
 
 Read-Only:
 
-- `sensitivity` (String) Jitter sensitivity
+- `sensitivity` (String) Jitter sensitivity. Possible values are `low`, `medium` and `high`.
 - `threshold` (Number) Jitter threshold (ms)
 
 
@@ -60,7 +54,7 @@ Read-Only:
 
 Read-Only:
 
-- `sensitivity` (String) Latency sensitivity
+- `sensitivity` (String) Latency sensitivity. Possible values are `low`, `medium` and `high`.
 - `threshold` (Number) Latency threshold (ms)
 
 
@@ -69,5 +63,5 @@ Read-Only:
 
 Read-Only:
 
-- `sensitivity` (String) Packet loss sensitivity
+- `sensitivity` (String) Packet loss sensitivity. Possible values are `low`, `medium` and `high`.
 - `threshold` (Number) Packet loss threshold (percentage)

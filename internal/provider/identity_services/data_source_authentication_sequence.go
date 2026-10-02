@@ -34,7 +34,7 @@ type AuthenticationSequenceDataSource struct {
 
 func (d *AuthenticationSequenceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AuthenticationSequenceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_authentication_sequence"
+	resp.TypeName = "scm_authentication_sequence"
 }
 
 func (d *AuthenticationSequenceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

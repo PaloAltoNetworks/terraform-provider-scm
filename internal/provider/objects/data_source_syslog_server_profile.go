@@ -34,7 +34,7 @@ type SyslogServerProfileDataSource struct {
 
 func (d *SyslogServerProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SyslogServerProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_syslog_server_profile"
+	resp.TypeName = "scm_syslog_server_profile"
 }
 
 func (d *SyslogServerProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

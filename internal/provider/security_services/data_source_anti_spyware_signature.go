@@ -34,7 +34,7 @@ type AntiSpywareSignatureDataSource struct {
 
 func (d *AntiSpywareSignatureDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: AntiSpywareSignatureDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_anti_spyware_signature"
+	resp.TypeName = "scm_anti_spyware_signature"
 }
 
 func (d *AntiSpywareSignatureDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

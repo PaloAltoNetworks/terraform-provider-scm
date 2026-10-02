@@ -32,7 +32,7 @@ type DecryptionRuleListDataSource struct {
 }
 
 func (d *DecryptionRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_decryption_rule_list"
+	resp.TypeName = "scm_decryption_rule_list"
 }
 
 func (d *DecryptionRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

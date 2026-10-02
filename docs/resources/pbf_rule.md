@@ -158,24 +158,22 @@ resource "scm_pbf_rule" "example_forward_pbf_rule" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `action` (Attributes) Action (see [below for nested schema](#nestedatt--action))
 - `application` (List of String) Applications
 - `description` (String) Description
 - `destination` (List of String) Destination addresses
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `enforce_symmetric_return` (Attributes) Enforce symmetric return (see [below for nested schema](#nestedatt--enforce_symmetric_return))
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `from` (Attributes) From (see [below for nested schema](#nestedatt--from))
 - `name` (String) PBF rule name
+- `negate_destination` (Boolean) Negate destination address
+- `negate_source` (Boolean) Negate source address
 - `schedule` (String) Schedule
 - `service` (List of String) Services
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `source` (List of String) Source addresses
 - `source_user` (List of String) Source users
 - `tag` (List of String) Tags
@@ -190,15 +188,11 @@ resource "scm_pbf_rule" "example_forward_pbf_rule" {
 
 Optional:
 
-- `discard` (Attributes) Discard
+~> **Note:** You must specify at most one of `discard`, `forward` or `no_pbf`.
 
-> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--action--discard))
-- `forward` (Attributes) Forward
-
-> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--action--forward))
-- `no_pbf` (Attributes) No pbf
-
-> ℹ️ **Note:** You must specify exactly one of `discard`, `forward`, and `no_pbf`. (see [below for nested schema](#nestedatt--action--no_pbf))
+- `discard` (Attributes) Discard (see [below for nested schema](#nestedatt--action--discard))
+- `forward` (Attributes) Forward (see [below for nested schema](#nestedatt--action--forward))
+- `no_pbf` (Attributes) No pbf (see [below for nested schema](#nestedatt--action--no_pbf))
 
 <a id="nestedatt--action--discard"></a>
 ### Nested Schema for `action.discard`
@@ -228,12 +222,10 @@ Optional:
 
 Optional:
 
+~> **Note:** You must specify at most one of `fqdn` or `ip_address`.
+
 - `fqdn` (String) Next hop FQDN
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 - `ip_address` (String) Next hop IP address
-
-> ℹ️ **Note:** You must specify exactly one of `fqdn` and `ip_address`.
 
 
 
@@ -264,12 +256,10 @@ Optional:
 
 Optional:
 
+~> **Note:** You must specify at most one of `interface` or `zone`.
+
 - `interface` (List of String) Source interfaces
-
-> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.
 - `zone` (List of String) Source zones
-
-> ℹ️ **Note:** You must specify exactly one of `interface` and `zone`.
 
 
 ## Import

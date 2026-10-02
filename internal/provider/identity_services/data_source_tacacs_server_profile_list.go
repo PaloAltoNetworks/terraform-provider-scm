@@ -32,7 +32,7 @@ type TacacsServerProfileListDataSource struct {
 }
 
 func (d *TacacsServerProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_tacacs_server_profile_list"
+	resp.TypeName = "scm_tacacs_server_profile_list"
 }
 
 func (d *TacacsServerProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

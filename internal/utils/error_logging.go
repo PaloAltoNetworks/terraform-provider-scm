@@ -29,7 +29,79 @@ type SCMErrorAccessor interface {
 	Body() []byte       // Accesses the raw HTTP response body for debugging
 }
 
-// FormatDetailedScmError safely extracts, unmarshals, and formats the detailed API error body.
+// formatNonZeroRefsDetails produces a human-readable message from a NON_ZERO_REFS details map.
+// The API returns something like:
+//
+//	errors: [{extra: "container/[folder]/address-group/[group]/static/[addr]", type: "NON_ZERO_REFS"}]
+//
+// We extract each blocked resource and its referencing container into plain English.
+func formatNonZeroRefsDetails(d map[string]interface{}) string {
+	raw, ok := d["errors"]
+	if !ok {
+		return ""
+	}
+	// The value is []interface{}, each element a map[string]interface{}
+	entries, ok := raw.([]interface{})
+	if !ok || len(entries) == 0 {
+		return ""
+	}
+
+	var lines []string
+	for _, entry := range entries {
+		m, ok := entry.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		// extra can be a string or a []interface{} depending on the API version.
+		var extra string
+		switch v := m["extra"].(type) {
+		case string:
+			extra = v
+		case []interface{}:
+			if len(v) > 0 {
+				extra, _ = v[0].(string)
+			}
+		}
+		if extra == "" {
+			continue
+		}
+		if t, _ := m["type"].(string); t != "NON_ZERO_REFS" {
+			continue
+		}
+		// extra looks like: container/[ngfw-shared]/address-group/[scm_address_group_1]/static/[tf_address_2]
+		// Split on "/" and extract bracketed segments.
+		parts := strings.Split(extra, "/")
+		var segments []string
+		for _, p := range parts {
+			if strings.HasPrefix(p, "[") && strings.HasSuffix(p, "]") {
+				segments = append(segments, p[1:len(p)-1])
+			}
+		}
+		// We expect at least [folder, referencing-resource-name, object-name]
+		if len(segments) < 3 {
+			lines = append(lines, fmt.Sprintf("Still referenced via: %s", extra))
+			continue
+		}
+		objectName := segments[len(segments)-1]
+		refName := segments[len(segments)-2]
+		// Derive a human-readable resource type from the path segment before the name.
+		refType := "resource"
+		for i, p := range parts {
+			if strings.HasPrefix(p, "[") && p[1:len(p)-1] == refName && i > 0 {
+				refType = parts[i-1]
+				break
+			}
+		}
+		lines = append(lines, fmt.Sprintf(
+			"'%s' is still referenced by %s '%s'. Remove the reference from that resource first, then re-run terraform apply.",
+			objectName, refType, refName,
+		))
+	}
+
+	return strings.Join(lines, "\n      ")
+}
+
+// PrintScmError safely extracts, unmarshals, and formats the detailed API error body.
 func PrintScmError(err error) string {
 	scmErr, ok := err.(SCMErrorAccessor)
 	if !ok {
@@ -70,6 +142,12 @@ func PrintScmError(err error) string {
 			case string:
 				output.WriteString(fmt.Sprintf("      %s\n", d))
 			case map[string]interface{}:
+				if e.Code == "API_I00013" {
+					if msg := formatNonZeroRefsDetails(d); msg != "" {
+						output.WriteString(fmt.Sprintf("      %s\n", msg))
+						continue
+					}
+				}
 				for key, val := range d {
 					output.WriteString(fmt.Sprintf("        - %s: %v\n", key, val))
 				}

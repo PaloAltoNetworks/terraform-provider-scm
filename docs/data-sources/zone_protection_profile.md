@@ -22,22 +22,16 @@ ZoneProtectionProfile data source
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) The profile name
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
 - `asymmetric_path` (String) Determine whether to drop or bypass packets that contain out-of-sync ACKs or out-of-window sequence numbers:
 * `global` — Use system-wide setting that is assigned through TCP Settings or the CLI.
 * `drop` — Drop packets that contain an asymmetric path.
-* `bypass` — Bypass scanning on packets that contain an asymmetric path.
+* `bypass` — Bypass scanning on packets that contain an asymmetric path. Possible values are `global`, `drop` and `bypass`.
 - `description` (String) The description of the profile
 - `discard_icmp_embedded_error` (Boolean) Discard ICMP packets that are embedded with an error message.
 - `flood` (Attributes) Flood (see [below for nested schema](#nestedatt--flood))
@@ -53,13 +47,13 @@ ZoneProtectionProfile data source
 - `mptcp_option_strip` (String) MPTCP is an extension of TCP that allows a client to maintain a connection by simultaneously using multiple paths to connect to the destination host. By default, MPTCP support is disabled, based on the global MPTCP setting.  Review or adjust the MPTCP settings for the security zones associated with this profile:
 * `no` — Enable MPTCP support (do not strip the MPTCP option).
 * `yes` — Disable MPTCP support (strip the MPTCP option). With this configured, MPTCP connections are converted to standard TCP connections, as MPTCP is backwards compatible with TCP.
-* `global` — Support MPTCP based on the global MPTCP setting. By default, the global MPTCP setting is set to yes so that MPTCP is disabled (the MPTCP option is stripped from the packet).
+* `global` — Support MPTCP based on the global MPTCP setting. By default, the global MPTCP setting is set to yes so that MPTCP is disabled (the MPTCP option is stripped from the packet). Possible values are `no`, `yes` and `global`.
 - `non_ip_protocol` (Attributes) Non ip protocol (see [below for nested schema](#nestedatt--non_ip_protocol))
 - `record_route_discard` (Boolean) Discard packets with the Record Route IP option set. When a datagram has this option, each router that routes the datagram adds its own IP address to the header, thus providing the path to the recipient.
 - `reject_non_syn_tcp` (String) Determine whether to reject the packet if the first packet for the TCP session setup is not a SYN packet:
 * `global` — Use system-wide setting that is assigned through the CLI.
 * `yes` — Reject non-SYN TCP.
-* `no` — Accept non-SYN TCP.
+* `no` — Accept non-SYN TCP. Possible values are `global`, `yes` and `no`.
 - `scan` (Attributes List) Scan (see [below for nested schema](#nestedatt--scan))
 - `scan_white_list` (Attributes List) Scan white list (see [below for nested schema](#nestedatt--scan_white_list))
 - `security_discard` (Boolean) Discard packets if the security option is defined.
@@ -288,7 +282,7 @@ Read-Only:
 
 - `list_type` (String) Specify the type of list you are creating for protocol protection:
 * Include List—Only the protocols on the list are allowed—in addition to IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), and VLAN tagged frames (0x8100). All other protocols are implicitly denied (blocked).
-* Exclude List—Only the protocols on the list are denied; all other protocols are implicitly allowed. You cannot exclude IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), or VLAN tagged frames (0x8100).
+* Exclude List—Only the protocols on the list are denied; all other protocols are implicitly allowed. You cannot exclude IPv4 (0x0800), IPv6 (0x86DD), ARP (0x0806), or VLAN tagged frames (0x8100). Possible values are `exclude` and `include`.
 - `protocol` (Attributes List) Protocol (see [below for nested schema](#nestedatt--non_ip_protocol--protocol))
 
 <a id="nestedatt--non_ip_protocol--protocol"></a>
@@ -316,7 +310,7 @@ Read-Only:
 * "8001" - TCP Port Scan
 * "8002" - Host Sweep
 * "8003" - UDP Port Scan
-* "8006" - Port Scan
+* "8006" - Port Scan. Possible values are `8001`, `8002`, `8003` and `8006`.
 - `threshold` (Number) Threshold
 
 <a id="nestedatt--scan--action"></a>
@@ -347,7 +341,7 @@ Read-Only:
 Read-Only:
 
 - `duration` (Number) Duration
-- `track_by` (String) Track by
+- `track_by` (String) Track by. Possible values are `source-and-destination` and `source`.
 
 
 

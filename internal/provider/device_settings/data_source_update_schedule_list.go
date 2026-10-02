@@ -32,7 +32,7 @@ type UpdateScheduleListDataSource struct {
 }
 
 func (d *UpdateScheduleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_update_schedule_list"
+	resp.TypeName = "scm_update_schedule_list"
 }
 
 func (d *UpdateScheduleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

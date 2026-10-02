@@ -32,7 +32,7 @@ type DecryptionProfileListDataSource struct {
 }
 
 func (d *DecryptionProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_decryption_profile_list"
+	resp.TypeName = "scm_decryption_profile_list"
 }
 
 func (d *DecryptionProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

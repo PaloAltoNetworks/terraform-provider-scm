@@ -32,7 +32,7 @@ type AppOverrideRuleListDataSource struct {
 }
 
 func (d *AppOverrideRuleListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_app_override_rule_list"
+	resp.TypeName = "scm_app_override_rule_list"
 }
 
 func (d *AppOverrideRuleListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

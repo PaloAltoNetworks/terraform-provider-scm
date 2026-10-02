@@ -37,8 +37,8 @@ func NewSnippetSnapshotCompareAction() action.Action {
 	return &SnippetSnapshotCompareAction{}
 }
 
-func (a *SnippetSnapshotCompareAction) Metadata(_ context.Context, req action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_snippet_snapshot_compare"
+func (a *SnippetSnapshotCompareAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
+	resp.TypeName = "scm_snippet_snapshot_compare"
 }
 
 func (a *SnippetSnapshotCompareAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

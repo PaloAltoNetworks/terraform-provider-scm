@@ -32,7 +32,7 @@ type AddressListDataSource struct {
 }
 
 func (d *AddressListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_address_list"
+	resp.TypeName = "scm_address_list"
 }
 
 func (d *AddressListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

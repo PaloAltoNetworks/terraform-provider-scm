@@ -33,7 +33,7 @@ type DeviceDataSource struct {
 
 func (d *DeviceDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DeviceDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_device"
+	resp.TypeName = "scm_device"
 }
 
 func (d *DeviceDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type UrlAccessProfileListDataSource struct {
 }
 
 func (d *UrlAccessProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_url_access_profile_list"
+	resp.TypeName = "scm_url_access_profile_list"
 }
 
 func (d *UrlAccessProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

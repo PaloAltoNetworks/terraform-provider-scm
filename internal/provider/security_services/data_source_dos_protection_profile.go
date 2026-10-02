@@ -34,7 +34,7 @@ type DosProtectionProfileDataSource struct {
 
 func (d *DosProtectionProfileDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DosProtectionProfileDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_dos_protection_profile"
+	resp.TypeName = "scm_dos_protection_profile"
 }
 
 func (d *DosProtectionProfileDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

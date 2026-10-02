@@ -35,22 +35,18 @@ resource "scm_system_match_list" "system_match_list" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `description` (String) Description of the system match list entry
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `filter` (String) Filter of the system match list entry
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `send_email` (List of String) Send Email List of the system match list entry
 - `send_http` (List of String) Send HTTP List of the system match list entry
 - `send_snmptrap` (List of String) Send SNMP Trap List of the system match list entry
 - `send_syslog` (List of String) Send Sys Log List of the system match list entry
 - `send_to_panorama` (Boolean) Send to Panorama Flag of the system match list entry
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 

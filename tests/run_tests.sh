@@ -41,7 +41,11 @@ DELETE_FAILED=()
 DELETE_FAILED_ERRORS=()
 
 # Resources to skip (require special setup, not testable in isolation)
-SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster"
+SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade ztna_connector_quiesce"
+
+# Resources that need productized API for complete execution
+NEEDS_PRODUCTIZED_API="scm_config_match_list scm_globalprotect_match_list scm_hipmatch_match_list scm_iptag_match_list scm_log_forwarding_profile scm_system_match_list scm_userid_match_list"
+SKIP_LIST="$SKIP_LIST $NEEDS_PRODUCTIZED_API"
 
 # -----------------------------------------------------------------------------
 # Detect dev_overrides — when active, terraform init must be skipped.
@@ -182,14 +186,23 @@ test_resource() {
     parse_phases "$resource_name" "$test_output"
   else
     if grep -qi "already exists\|OBJECT_ALREADY_EXISTS" "$test_output" 2>/dev/null; then
+      local exists_detail
+      exists_detail=$(grep -i -A 10 "already exists\|OBJECT_ALREADY_EXISTS" "$test_output" 2>/dev/null | grep -v "^--$" | head -10 || echo "")
       echo "  FAIL: ${resource_name} (object already exists)"
+      if [ -n "$exists_detail" ]; then
+        echo "$exists_detail" | sed 's/^/        /'
+      fi
       FAILED_ALREADY_EXISTS+=("${resource_name}")
     else
-      local failed_step err_msg
+      local failed_step err_msg err_detail
       failed_step=$(grep -E 'run ".*"\.\.\. fail' "$test_output" 2>/dev/null | head -1 | sed -E 's/.*run "([^"]+)".*/\1/' || echo "unknown")
       err_msg=$(grep -m1 "^Error:" "$test_output" 2>/dev/null | head -1 || echo "Unknown error")
+      err_detail=$(grep -A 15 "^Error:" "$test_output" 2>/dev/null | grep -v "^Error:" | grep -v "^--$" | head -15 || echo "")
       echo "  FAIL: ${resource_name} (${failed_step})"
       echo "        ${err_msg}"
+      if [ -n "$err_detail" ]; then
+        echo "$err_detail" | sed 's/^/        /'
+      fi
       FAILED+=("${resource_name}")
       FAILED_ERRORS+=("${failed_step}: ${err_msg}")
     fi
@@ -207,7 +220,7 @@ resources_to_test=()
 for arg in "$@"; do
   case "$arg" in
     --all)
-      for d in "${SCRIPT_DIR}"/scm_*/; do
+      for d in "${SCRIPT_DIR}"/*_*/; do
         [ -d "$d" ] || continue
         resources_to_test+=("$(basename "$d")")
       done
@@ -391,7 +404,16 @@ if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
       for r in "${SKIPPED[@]}"; do echo "- $r"; done
       echo ""
       echo "</details>"
+      echo ""
     fi
+
+    # Needs Productized API section
+    echo "### Needs Productized API for Complete Execution"
+    echo ""
+    echo "The following resources are skipped because they require productized API support:"
+    echo ""
+    for r in $NEEDS_PRODUCTIZED_API; do echo "- \`$r\`"; done
+    echo ""
   } >> "$GITHUB_STEP_SUMMARY"
 fi
 

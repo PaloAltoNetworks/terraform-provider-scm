@@ -32,7 +32,7 @@ type AntiSpywareSignatureListDataSource struct {
 }
 
 func (d *AntiSpywareSignatureListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_anti_spyware_signature_list"
+	resp.TypeName = "scm_anti_spyware_signature_list"
 }
 
 func (d *AntiSpywareSignatureListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -32,7 +32,7 @@ type DataObjectListDataSource struct {
 }
 
 func (d *DataObjectListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_data_object_list"
+	resp.TypeName = "scm_data_object_list"
 }
 
 func (d *DataObjectListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -34,7 +34,7 @@ type ScheduleDataSource struct {
 
 func (d *ScheduleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ScheduleDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_schedule"
+	resp.TypeName = "scm_schedule"
 }
 
 func (d *ScheduleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

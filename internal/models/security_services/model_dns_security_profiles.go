@@ -317,7 +317,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("default", "allow", "block", "sinkhole"),
 								},
-								MarkdownDescription: "Action",
+								MarkdownDescription: "Action. Possible values are `default`, `allow`, `block` and `sinkhole`.",
 								Optional:            true,
 								Computed:            true,
 								Default:             stringdefault.StaticString("default"),
@@ -326,7 +326,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("default", "none", "low", "informational", "medium", "high", "critical"),
 								},
-								MarkdownDescription: "Log level",
+								MarkdownDescription: "Log level. Possible values are `default`, `none`, `low`, `informational`, `medium`, `high` and `critical`.",
 								Optional:            true,
 								Computed:            true,
 								Default:             stringdefault.StaticString("default"),
@@ -339,7 +339,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("disable", "single-packet", "extended-capture"),
 								},
-								MarkdownDescription: "Packet capture",
+								MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 								Optional:            true,
 							},
 						},
@@ -362,7 +362,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("sinkhole"),
 											),
 										},
-										MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Alert",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -374,7 +374,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("sinkhole"),
 											),
 										},
-										MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Allow",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -386,7 +386,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("sinkhole"),
 											),
 										},
-										MarkdownDescription: "Block\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Block",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -398,7 +398,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 												path.MatchRelative().AtParent().AtName("block"),
 											),
 										},
-										MarkdownDescription: "Sinkhole\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Sinkhole",
 										Optional:            true,
 										Attributes:          map[string]schema.Attribute{},
 									},
@@ -412,7 +412,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("disable", "single-packet", "extended-capture"),
 								},
-								MarkdownDescription: "Packet capture",
+								MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 								Optional:            true,
 							},
 						},
@@ -426,14 +426,14 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("127.0.0.1", "pan-sinkhole-default-ip"),
 							},
-							MarkdownDescription: "Ipv4 address",
+							MarkdownDescription: "Ipv4 address. Possible values are `127.0.0.1` and `pan-sinkhole-default-ip`.",
 							Optional:            true,
 						},
 						"ipv6_address": schema.StringAttribute{
 							Validators: []validator.String{
 								stringvalidator.OneOf("::1"),
 							},
-							MarkdownDescription: "Ipv6 address",
+							MarkdownDescription: "Ipv6 address. Possible values are `::1`.",
 							Optional:            true,
 						},
 					},
@@ -469,7 +469,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -485,7 +485,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -511,7 +511,7 @@ var DnsSecurityProfilesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -541,11 +541,11 @@ var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
 							"action": dsschema.StringAttribute{
-								MarkdownDescription: "Action",
+								MarkdownDescription: "Action. Possible values are `default`, `allow`, `block` and `sinkhole`.",
 								Computed:            true,
 							},
 							"log_level": dsschema.StringAttribute{
-								MarkdownDescription: "Log level",
+								MarkdownDescription: "Log level. Possible values are `default`, `none`, `low`, `informational`, `medium`, `high` and `critical`.",
 								Computed:            true,
 							},
 							"name": dsschema.StringAttribute{
@@ -553,7 +553,7 @@ var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 							},
 							"packet_capture": dsschema.StringAttribute{
-								MarkdownDescription: "Packet capture",
+								MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 								Computed:            true,
 							},
 						},
@@ -569,22 +569,22 @@ var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"alert": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Alert\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Alert",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
 									"allow": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Allow\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Allow",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
 									"block": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Block\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Block",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
 									"sinkhole": dsschema.SingleNestedAttribute{
-										MarkdownDescription: "Sinkhole\n\n> ℹ️ **Note:** You must specify exactly one of `alert`, `allow`, `block`, and `sinkhole`.",
+										MarkdownDescription: "Sinkhole",
 										Computed:            true,
 										Attributes:          map[string]dsschema.Attribute{},
 									},
@@ -595,7 +595,7 @@ var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 							},
 							"packet_capture": dsschema.StringAttribute{
-								MarkdownDescription: "Packet capture",
+								MarkdownDescription: "Packet capture. Possible values are `disable`, `single-packet` and `extended-capture`.",
 								Computed:            true,
 							},
 						},
@@ -606,11 +606,11 @@ var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"ipv4_address": dsschema.StringAttribute{
-							MarkdownDescription: "Ipv4 address",
+							MarkdownDescription: "Ipv4 address. Possible values are `127.0.0.1` and `pan-sinkhole-default-ip`.",
 							Computed:            true,
 						},
 						"ipv6_address": dsschema.StringAttribute{
-							MarkdownDescription: "Ipv6 address",
+							MarkdownDescription: "Ipv6 address. Possible values are `::1`.",
 							Computed:            true,
 						},
 					},
@@ -638,12 +638,12 @@ var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -657,7 +657,7 @@ var DnsSecurityProfilesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

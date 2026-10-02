@@ -32,7 +32,7 @@ type SamlServerProfileListDataSource struct {
 }
 
 func (d *SamlServerProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_saml_server_profile_list"
+	resp.TypeName = "scm_saml_server_profile_list"
 }
 
 func (d *SamlServerProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

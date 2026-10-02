@@ -32,7 +32,7 @@ type QosProfileListDataSource struct {
 }
 
 func (d *QosProfileListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_qos_profile_list"
+	resp.TypeName = "scm_qos_profile_list"
 }
 
 func (d *QosProfileListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

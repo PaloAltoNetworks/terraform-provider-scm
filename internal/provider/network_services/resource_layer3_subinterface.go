@@ -35,7 +35,7 @@ type Layer3SubinterfaceResource struct {
 }
 
 func (r *Layer3SubinterfaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_layer3_subinterface"
+	resp.TypeName = "scm_layer3_subinterface"
 }
 
 func (r *Layer3SubinterfaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -67,6 +67,32 @@ func (r *Layer3SubinterfaceResource) Create(ctx context.Context, req resource.Cr
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
+	}
+
+	// Create a patcher to temporarily store sensitive values.
+	patcher := &layer3SubinterfacesSensitiveValuePatcher{}
+
+	// Stash plaintext values from the plan.
+
+	{ // Stash plaintext for Pppoe.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Pppoe.IsNull() && !data.Pppoe.IsUnknown() {
+				var temp_stash_Pppoe_Password_0 models.Pppoe
+				resp.Diagnostics.Append(data.Pppoe.As(ctx, &temp_stash_Pppoe_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					finalVal = temp_stash_Pppoe_Password_0.Password
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.pppoe_password_plaintext = finalVal
+		}
 	}
 
 	// Unpack the plan to an SCM SDK object.
@@ -126,6 +152,7 @@ func (r *Layer3SubinterfaceResource) Create(ctx context.Context, req resource.Cr
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -153,6 +180,48 @@ func (r *Layer3SubinterfaceResource) Create(ctx context.Context, req resource.Cr
 			"api_returned": apiReturnedFolder,
 			"normalized":   translatedFolder,
 		})
+	}
+
+	// Stash the encrypted values from the API response and apply the patch.
+
+	{ // Patch plaintext for Pppoe.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Pppoe.IsNull() && !data.Pppoe.IsUnknown() {
+				var temp_patch_create_Pppoe_Password_0 models.Pppoe
+				resp.Diagnostics.Append(data.Pppoe.As(ctx, &temp_patch_create_Pppoe_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					patcher.pppoe_password_encrypted = temp_patch_create_Pppoe_Password_0.Password
+					temp_patch_create_Pppoe_Password_0.Password = patcher.pppoe_password_plaintext
+
+					// Repack the modified structs.
+
+					if !resp.Diagnostics.HasError() {
+
+						data.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_create_Pppoe_Password_0)
+
+						resp.Diagnostics.Append(diags...)
+					}
+
+				}
+			}
+
+		}
+	}
+
+	// Save the patcher's data to the EncryptedValues map in the state.
+	evMap := patcher.populateEncryptedValuesMap()
+	if len(evMap) > 0 {
+		// Create the map using NewMapValueFrom with explicit context and type
+		data.EncryptedValues, diags = basetypes.NewMapValueFrom(ctx, basetypes.StringType{}, evMap)
+	} else {
+		data.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// Set the Terraform ID and save the final state.
@@ -229,12 +298,36 @@ func (r *Layer3SubinterfaceResource) Read(ctx context.Context, req resource.Read
 		return
 	}
 
+	// Step 4 - Encrypted values logic
+	// Populate a patcher from the state's encrypted_values map.
+	patcher := &layer3SubinterfacesSensitiveValuePatcher{}
+	resp.Diagnostics.Append(patcher.populatePatcherFromState(ctx, savestate)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	// Step 5 - Pack the scm object into a terraform model and put it in data we initialized in step 1
 	packedObject, diags := packLayer3SubinterfacesFromSdk(ctx, *scmObject)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Step 5a - Normalize null lists against prior state. Read has no plan, so we
+	// compare the API response against savestate. When the API returns [] for a
+	// list that was null in prior state, coerce it back to null to avoid a
+	// perpetual diff on refresh. Real changes (populated lists) are preserved.
+	savestateObject, diags := types.ObjectValueFrom(ctx, models.Layer3Subinterfaces{}.AttrTypes(), &savestate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+	packedObject, diags = utils.NormalizeNullLists(ctx, savestateObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -262,6 +355,52 @@ func (r *Layer3SubinterfaceResource) Read(ctx context.Context, req resource.Read
 			"api_returned": apiReturnedFolder,
 			"normalized":   translatedFolder,
 		})
+	}
+
+	// Step 6 - Encrypted values logic
+	// Check for out-of-band changes and apply the patch.
+
+	{ // Patch plaintext for Pppoe.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !data.Pppoe.IsNull() && !data.Pppoe.IsUnknown() {
+				var temp_patch_read_Pppoe_Password_0 models.Pppoe
+				resp.Diagnostics.Append(data.Pppoe.As(ctx, &temp_patch_read_Pppoe_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block: Perform comparison and patch.
+					if patcher.pppoe_password_encrypted.Equal(temp_patch_read_Pppoe_Password_0.Password) {
+						temp_patch_read_Pppoe_Password_0.Password = patcher.pppoe_password_plaintext
+					} else {
+						temp_patch_read_Pppoe_Password_0.Password = basetypes.NewStringNull()
+					}
+
+					// Repack the modified structs.
+
+					if !resp.Diagnostics.HasError() {
+
+						data.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_read_Pppoe_Password_0)
+
+						resp.Diagnostics.Append(diags...)
+					}
+
+				}
+			}
+
+		}
+	}
+
+	// Persist the patcher's data to the EncryptedValues map in the state.
+	evMap := patcher.populateEncryptedValuesMap()
+	if len(evMap) > 0 {
+		// Create the map using NewMapValueFrom with explicit context and type
+		data.EncryptedValues, diags = basetypes.NewMapValueFrom(ctx, basetypes.StringType{}, evMap)
+	} else {
+		data.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// Step 7 - Carry over tfid from state back into data
@@ -349,6 +488,30 @@ func (r *Layer3SubinterfaceResource) Update(ctx context.Context, req resource.Up
 		return
 	}
 
+	// Step 3: Encrypted values logic
+	patcher := &layer3SubinterfacesSensitiveValuePatcher{}
+
+	{ // Stash plaintext for Pppoe.Password
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Pppoe.IsNull() && !plan.Pppoe.IsUnknown() {
+				var temp_stash_upd_Pppoe_Password_0 models.Pppoe
+				resp.Diagnostics.Append(plan.Pppoe.As(ctx, &temp_stash_upd_Pppoe_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					finalVal = temp_stash_upd_Pppoe_Password_0.Password
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.pppoe_password_plaintext = finalVal
+		}
+	}
+
 	// Step 3: Creates a plan object from the plan
 	planObject, diags := types.ObjectValueFrom(ctx, models.Layer3Subinterfaces{}.AttrTypes(), &plan)
 	resp.Diagnostics.Append(diags...)
@@ -425,7 +588,7 @@ func (r *Layer3SubinterfaceResource) Update(ctx context.Context, req resource.Up
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -453,6 +616,46 @@ func (r *Layer3SubinterfaceResource) Update(ctx context.Context, req resource.Up
 			"api_returned": apiReturnedFolder,
 			"normalized":   translatedFolder,
 		})
+	}
+
+	// Step 10: Encrypted values logic
+
+	{ // Patch plaintext for Pppoe.Password
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.Pppoe.IsNull() && !plan.Pppoe.IsUnknown() {
+				var temp_patch_upd_Pppoe_Password_0 models.Pppoe
+				resp.Diagnostics.Append(plan.Pppoe.As(ctx, &temp_patch_upd_Pppoe_Password_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					patcher.pppoe_password_encrypted = temp_patch_upd_Pppoe_Password_0.Password
+					temp_patch_upd_Pppoe_Password_0.Password = patcher.pppoe_password_plaintext
+
+					// Repack the modified structs.
+
+					if !resp.Diagnostics.HasError() {
+
+						plan.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_upd_Pppoe_Password_0)
+
+						resp.Diagnostics.Append(diags...)
+					}
+
+				}
+			}
+
+		}
+	}
+	evMap := patcher.populateEncryptedValuesMap()
+	if len(evMap) > 0 {
+		// Create the map using NewMapValueFrom with explicit context and type
+		plan.EncryptedValues, diags = basetypes.NewMapValueFrom(ctx, basetypes.StringType{}, evMap)
+	} else {
+		plan.EncryptedValues = basetypes.NewMapNull(basetypes.StringType{})
+	}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// Step 10: Carry over tfid from state into plan
@@ -484,11 +687,11 @@ func (r *Layer3SubinterfaceResource) Delete(ctx context.Context, req resource.De
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting layer3_subinterfaces", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

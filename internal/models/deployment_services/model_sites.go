@@ -173,7 +173,7 @@ var SitesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(63),
 				stringvalidator.OneOf("FWAAS-SITE-25Mbps", "FWAAS-SITE-50Mbps", "FWAAS-SITE-250Mbps", "FWAAS-SITE-1000Mbps", "FWAAS-SITE-2500Mbps"),
 			},
-			MarkdownDescription: "The license type of the site",
+			MarkdownDescription: "The license type of the site. Possible values are `FWAAS-SITE-25Mbps`, `FWAAS-SITE-50Mbps`, `FWAAS-SITE-250Mbps`, `FWAAS-SITE-1000Mbps` and `FWAAS-SITE-2500Mbps`.",
 			Optional:            true,
 		},
 		"longitude": schema.StringAttribute{
@@ -193,7 +193,7 @@ var SitesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("active", "backup"),
 						},
-						MarkdownDescription: "The mode of the remote network",
+						MarkdownDescription: "The mode of the remote network. Possible values are `active` and `backup`.",
 						Required:            true,
 					},
 					"name": schema.StringAttribute{
@@ -247,7 +247,7 @@ var SitesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("prisma-sdwan", "third-party-branch", "third-party-discovered"),
 			},
-			MarkdownDescription: "The site type",
+			MarkdownDescription: "The site type. Possible values are `prisma-sdwan`, `third-party-branch` and `third-party-discovered`.",
 			Optional:            true,
 		},
 		"zip_code": schema.StringAttribute{
@@ -291,7 +291,7 @@ var SitesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"license_type": dsschema.StringAttribute{
-			MarkdownDescription: "The license type of the site",
+			MarkdownDescription: "The license type of the site. Possible values are `FWAAS-SITE-25Mbps`, `FWAAS-SITE-50Mbps`, `FWAAS-SITE-250Mbps`, `FWAAS-SITE-1000Mbps` and `FWAAS-SITE-2500Mbps`.",
 			Computed:            true,
 		},
 		"longitude": dsschema.StringAttribute{
@@ -308,7 +308,7 @@ var SitesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 					},
 					"mode": dsschema.StringAttribute{
-						MarkdownDescription: "The mode of the remote network",
+						MarkdownDescription: "The mode of the remote network. Possible values are `active` and `backup`.",
 						Computed:            true,
 					},
 					"name": dsschema.StringAttribute{
@@ -354,7 +354,7 @@ var SitesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"type": dsschema.StringAttribute{
-			MarkdownDescription: "The site type",
+			MarkdownDescription: "The site type. Possible values are `prisma-sdwan`, `third-party-branch` and `third-party-discovered`.",
 			Computed:            true,
 		},
 		"zip_code": dsschema.StringAttribute{

@@ -34,7 +34,7 @@ type DecryptionExclusionDataSource struct {
 
 func (d *DecryptionExclusionDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: DecryptionExclusionDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_decryption_exclusion"
+	resp.TypeName = "scm_decryption_exclusion"
 }
 
 func (d *DecryptionExclusionDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -53,18 +53,15 @@ type EthernetInterfacesLayer2 struct {
 	VlanTag        basetypes.StringValue `tfsdk:"vlan_tag"`
 }
 
-// EthernetInterfacesLayer2Lldp represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesLayer2Lldp struct {
-	Enable basetypes.BoolValue `tfsdk:"enable"`
-}
-
 // EthernetInterfacesLayer3 represents a nested structure within the EthernetInterfaces model
 type EthernetInterfacesLayer3 struct {
+	AdjustTcpMss               basetypes.ObjectValue `tfsdk:"adjust_tcp_mss"`
 	Arp                        basetypes.ListValue   `tfsdk:"arp"`
 	DdnsConfig                 basetypes.ObjectValue `tfsdk:"ddns_config"`
 	DhcpClient                 basetypes.ObjectValue `tfsdk:"dhcp_client"`
 	InterfaceManagementProfile basetypes.StringValue `tfsdk:"interface_management_profile"`
 	Ip                         basetypes.ListValue   `tfsdk:"ip"`
+	Lldp                       basetypes.ObjectValue `tfsdk:"lldp"`
 	Mtu                        basetypes.Int64Value  `tfsdk:"mtu"`
 	NetflowProfile             basetypes.StringValue `tfsdk:"netflow_profile"`
 	Pppoe                      basetypes.ObjectValue `tfsdk:"pppoe"`
@@ -106,8 +103,8 @@ type EthernetInterfacesLayer3IpInner struct {
 	Name basetypes.StringValue `tfsdk:"name"`
 }
 
-// EthernetInterfacesLayer3Pppoe represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesLayer3Pppoe struct {
+// Pppoe represents a nested structure within the EthernetInterfaces model
+type Pppoe struct {
 	AccessConcentrator basetypes.StringValue `tfsdk:"access_concentrator"`
 	Authentication     basetypes.StringValue `tfsdk:"authentication"`
 	DefaultRouteMetric basetypes.Int64Value  `tfsdk:"default_route_metric"`
@@ -119,13 +116,13 @@ type EthernetInterfacesLayer3Pppoe struct {
 	Username           basetypes.StringValue `tfsdk:"username"`
 }
 
-// EthernetInterfacesLayer3PppoePassive represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesLayer3PppoePassive struct {
+// PppoePassive represents a nested structure within the EthernetInterfaces model
+type PppoePassive struct {
 	Enable basetypes.BoolValue `tfsdk:"enable"`
 }
 
-// EthernetInterfacesLayer3PppoeStaticAddress represents a nested structure within the EthernetInterfaces model
-type EthernetInterfacesLayer3PppoeStaticAddress struct {
+// PppoeStaticAddress represents a nested structure within the EthernetInterfaces model
+type PppoeStaticAddress struct {
 	Ip basetypes.StringValue `tfsdk:"ip"`
 }
 
@@ -156,6 +153,12 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 				"lldp": basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"enable": basetypes.BoolType{},
+						"high_availability": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"passive_pre_negotiation": basetypes.BoolType{},
+							},
+						},
+						"profile": basetypes.StringType{},
 					},
 				},
 				"netflow_profile": basetypes.StringType{},
@@ -164,6 +167,13 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 		},
 		"layer3": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
+				"adjust_tcp_mss": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable":              basetypes.BoolType{},
+						"ipv4_mss_adjustment": basetypes.Int64Type{},
+						"ipv6_mss_adjustment": basetypes.Int64Type{},
+					},
+				},
 				"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 					AttrTypes: map[string]attr.Type{
 						"hw_address": basetypes.StringType{},
@@ -200,6 +210,17 @@ func (o EthernetInterfaces) AttrTypes() map[string]attr.Type {
 						"name": basetypes.StringType{},
 					},
 				}},
+				"lldp": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"enable": basetypes.BoolType{},
+						"high_availability": basetypes.ObjectType{
+							AttrTypes: map[string]attr.Type{
+								"passive_pre_negotiation": basetypes.BoolType{},
+							},
+						},
+						"profile": basetypes.StringType{},
+					},
+				},
 				"mtu":             basetypes.Int64Type{},
 				"netflow_profile": basetypes.StringType{},
 				"pppoe": basetypes.ObjectType{
@@ -257,6 +278,12 @@ func (o EthernetInterfacesLayer2) AttrTypes() map[string]attr.Type {
 		"lldp": basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"enable": basetypes.BoolType{},
+				"high_availability": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"passive_pre_negotiation": basetypes.BoolType{},
+					},
+				},
+				"profile": basetypes.StringType{},
 			},
 		},
 		"netflow_profile": basetypes.StringType{},
@@ -271,23 +298,16 @@ func (o EthernetInterfacesLayer2) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer2Lldp model.
-func (o EthernetInterfacesLayer2Lldp) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"enable": basetypes.BoolType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer2Lldp objects.
-func (o EthernetInterfacesLayer2Lldp) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AttrTypes defines the attribute types for the EthernetInterfacesLayer3 model.
 func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
+		"adjust_tcp_mss": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable":              basetypes.BoolType{},
+				"ipv4_mss_adjustment": basetypes.Int64Type{},
+				"ipv6_mss_adjustment": basetypes.Int64Type{},
+			},
+		},
 		"arp": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"hw_address": basetypes.StringType{},
@@ -324,6 +344,17 @@ func (o EthernetInterfacesLayer3) AttrTypes() map[string]attr.Type {
 				"name": basetypes.StringType{},
 			},
 		}},
+		"lldp": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"enable": basetypes.BoolType{},
+				"high_availability": basetypes.ObjectType{
+					AttrTypes: map[string]attr.Type{
+						"passive_pre_negotiation": basetypes.BoolType{},
+					},
+				},
+				"profile": basetypes.StringType{},
+			},
+		},
 		"mtu":             basetypes.Int64Type{},
 		"netflow_profile": basetypes.StringType{},
 		"pppoe": basetypes.ObjectType{
@@ -443,8 +474,8 @@ func (o EthernetInterfacesLayer3IpInner) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer3Pppoe model.
-func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the Pppoe model.
+func (o Pppoe) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"access_concentrator":  basetypes.StringType{},
 		"authentication":       basetypes.StringType{},
@@ -466,36 +497,36 @@ func (o EthernetInterfacesLayer3Pppoe) AttrTypes() map[string]attr.Type {
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer3Pppoe objects.
-func (o EthernetInterfacesLayer3Pppoe) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of Pppoe objects.
+func (o Pppoe) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer3PppoePassive model.
-func (o EthernetInterfacesLayer3PppoePassive) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the PppoePassive model.
+func (o PppoePassive) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"enable": basetypes.BoolType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer3PppoePassive objects.
-func (o EthernetInterfacesLayer3PppoePassive) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of PppoePassive objects.
+func (o PppoePassive) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
 }
 
-// AttrTypes defines the attribute types for the EthernetInterfacesLayer3PppoeStaticAddress model.
-func (o EthernetInterfacesLayer3PppoeStaticAddress) AttrTypes() map[string]attr.Type {
+// AttrTypes defines the attribute types for the PppoeStaticAddress model.
+func (o PppoeStaticAddress) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
 		"ip": basetypes.StringType{},
 	}
 }
 
-// AttrType returns the attribute type for a list of EthernetInterfacesLayer3PppoeStaticAddress objects.
-func (o EthernetInterfacesLayer3PppoeStaticAddress) AttrType() attr.Type {
+// AttrType returns the attribute type for a list of PppoeStaticAddress objects.
+func (o PppoeStaticAddress) AttrType() attr.Type {
 	return basetypes.ObjectType{
 		AttrTypes: o.AttrTypes(),
 	}
@@ -542,7 +573,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("tap"),
 				),
 			},
-			MarkdownDescription: "Aggregate group\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Aggregate group",
 			Optional:            true,
 		},
 		"comment": schema.StringAttribute{
@@ -565,7 +596,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -587,7 +618,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -608,16 +639,32 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("tap"),
 				),
 			},
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Layer2",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"lldp": schema.SingleNestedAttribute{
-					MarkdownDescription: "LLDP Settings",
+					MarkdownDescription: "LLDP settings for the interface",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"enable": schema.BoolAttribute{
 							MarkdownDescription: "Enable LLDP on Interface",
 							Required:            true,
+						},
+						"high_availability": schema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"passive_pre_negotiation": schema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Optional:            true,
+									Computed:            true,
+									Default:             booldefault.StaticBool(false),
+								},
+							},
+						},
+						"profile": schema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
+							Optional:            true,
 						},
 					},
 				},
@@ -642,9 +689,33 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("tap"),
 				),
 			},
-			MarkdownDescription: "Ethernet Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Ethernet Interface Layer 3 configuration",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
+				"adjust_tcp_mss": schema.SingleNestedAttribute{
+					MarkdownDescription: "TCP MSS adjustment settings for the interface",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+							Optional:            true,
+						},
+						"ipv4_mss_adjustment": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(40, 300),
+							},
+							MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+							Optional:            true,
+						},
+						"ipv6_mss_adjustment": schema.Int64Attribute{
+							Validators: []validator.Int64{
+								int64validator.Between(60, 300),
+							},
+							MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+							Optional:            true,
+						},
+					},
+				},
 				"arp": schema.ListNestedAttribute{
 					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Optional:            true,
@@ -719,7 +790,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					MarkdownDescription: "Ethernet Interfaces DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"create_default_route": schema.BoolAttribute{
@@ -782,7 +853,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("pppoe"),
 						),
 					},
-					MarkdownDescription: "Ethernet Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interface IP addresses",
 					Optional:            true,
 					NestedObject: schema.NestedAttributeObject{
 						Attributes: map[string]schema.Attribute{
@@ -790,6 +861,32 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 								MarkdownDescription: "Ethernet Interface IP addresses name",
 								Required:            true,
 							},
+						},
+					},
+				},
+				"lldp": schema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP settings for the interface",
+					Optional:            true,
+					Attributes: map[string]schema.Attribute{
+						"enable": schema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Required:            true,
+						},
+						"high_availability": schema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Optional:            true,
+							Attributes: map[string]schema.Attribute{
+								"passive_pre_negotiation": schema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Optional:            true,
+									Computed:            true,
+									Default:             booldefault.StaticBool(false),
+								},
+							},
+						},
+						"profile": schema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
+							Optional:            true,
 						},
 					},
 				},
@@ -813,7 +910,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ip"),
 						),
 					},
-					MarkdownDescription: "Pppoe\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "PPPoE configuration for the interface",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"access_concentrator": schema.StringAttribute{
@@ -828,7 +925,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("CHAP", "PAP", "auto"),
 							},
-							MarkdownDescription: "Authentication protocol",
+							MarkdownDescription: "Authentication protocol. Possible values are `CHAP`, `PAP` and `auto`.",
 							Optional:            true,
 						},
 						"default_route_metric": schema.Int64Attribute{
@@ -841,7 +938,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 							Default:             int64default.StaticInt64(10),
 						},
 						"enable": schema.BoolAttribute{
-							MarkdownDescription: "Enable",
+							MarkdownDescription: "Enable PPPoE on the interface",
 							Optional:            true,
 							Computed:            true,
 							Default:             booldefault.StaticBool(true),
@@ -901,7 +998,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("auto", "half", "full"),
 			},
-			MarkdownDescription: "Link duplex",
+			MarkdownDescription: "Link duplex. Possible values are `auto`, `half` and `full`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("auto"),
@@ -910,7 +1007,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("auto", "10", "100", "1000", "10000", "40000", "100000"),
 			},
-			MarkdownDescription: "Link speed",
+			MarkdownDescription: "Link speed. Possible values are `auto`, `10`, `100`, `1000`, `10000`, `40000` and `100000`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("auto"),
@@ -919,7 +1016,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("auto", "up", "down"),
 			},
-			MarkdownDescription: "Link state",
+			MarkdownDescription: "Link state. Possible values are `auto`, `up` and `down`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("auto"),
@@ -958,7 +1055,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -972,7 +1069,7 @@ var EthernetInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("layer3"),
 				),
 			},
-			MarkdownDescription: "Tap\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Tap",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"netflow_profile": schema.StringAttribute{
@@ -996,7 +1093,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "EthernetInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"aggregate_group": dsschema.StringAttribute{
-			MarkdownDescription: "Aggregate group\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Aggregate group",
 			Computed:            true,
 		},
 		"comment": dsschema.StringAttribute{
@@ -1008,7 +1105,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1019,7 +1116,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Sensitive:           true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -1028,15 +1125,29 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			Required:            true,
 		},
 		"layer2": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Layer2\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Layer2",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"lldp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "LLDP Settings",
+					MarkdownDescription: "LLDP settings for the interface",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"enable": dsschema.BoolAttribute{
 							MarkdownDescription: "Enable LLDP on Interface",
+							Computed:            true,
+						},
+						"high_availability": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"passive_pre_negotiation": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Computed:            true,
+								},
+							},
+						},
+						"profile": dsschema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
 							Computed:            true,
 						},
 					},
@@ -1052,9 +1163,27 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"layer3": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ethernet Interface Layer 3 configuration\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Ethernet Interface Layer 3 configuration",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
+				"adjust_tcp_mss": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "TCP MSS adjustment settings for the interface",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable TCP MSS adjustment on the interface",
+							Computed:            true,
+						},
+						"ipv4_mss_adjustment": dsschema.Int64Attribute{
+							MarkdownDescription: "IPv4 MSS adjustment size in bytes",
+							Computed:            true,
+						},
+						"ipv6_mss_adjustment": dsschema.Int64Attribute{
+							MarkdownDescription: "IPv6 MSS adjustment size in bytes",
+							Computed:            true,
+						},
+					},
+				},
 				"arp": dsschema.ListNestedAttribute{
 					MarkdownDescription: "Ethernet Interfaces ARP configuration",
 					Computed:            true,
@@ -1106,7 +1235,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"dhcp_client": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ethernet Interfaces DHCP Client Object\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interfaces DHCP Client Object",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"create_default_route": dsschema.BoolAttribute{
@@ -1142,7 +1271,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"ip": dsschema.ListNestedAttribute{
-					MarkdownDescription: "Ethernet Interface IP addresses\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "Ethernet Interface IP addresses",
 					Computed:            true,
 					NestedObject: dsschema.NestedAttributeObject{
 						Attributes: map[string]dsschema.Attribute{
@@ -1150,6 +1279,30 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 								MarkdownDescription: "Ethernet Interface IP addresses name",
 								Computed:            true,
 							},
+						},
+					},
+				},
+				"lldp": dsschema.SingleNestedAttribute{
+					MarkdownDescription: "LLDP settings for the interface",
+					Computed:            true,
+					Attributes: map[string]dsschema.Attribute{
+						"enable": dsschema.BoolAttribute{
+							MarkdownDescription: "Enable LLDP on Interface",
+							Computed:            true,
+						},
+						"high_availability": dsschema.SingleNestedAttribute{
+							MarkdownDescription: "LLDP high availability settings",
+							Computed:            true,
+							Attributes: map[string]dsschema.Attribute{
+								"passive_pre_negotiation": dsschema.BoolAttribute{
+									MarkdownDescription: "Passive pre negotiation",
+									Computed:            true,
+								},
+							},
+						},
+						"profile": dsschema.StringAttribute{
+							MarkdownDescription: "Name of the LLDP profile to assign to the interface",
+							Computed:            true,
 						},
 					},
 				},
@@ -1162,7 +1315,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"pppoe": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Pppoe\n\n> ℹ️ **Note:** You must specify exactly one of `dhcp_client`, `ip`, and `pppoe`.",
+					MarkdownDescription: "PPPoE configuration for the interface",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"access_concentrator": dsschema.StringAttribute{
@@ -1170,7 +1323,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"authentication": dsschema.StringAttribute{
-							MarkdownDescription: "Authentication protocol",
+							MarkdownDescription: "Authentication protocol. Possible values are `CHAP`, `PAP` and `auto`.",
 							Computed:            true,
 						},
 						"default_route_metric": dsschema.Int64Attribute{
@@ -1178,7 +1331,7 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 						},
 						"enable": dsschema.BoolAttribute{
-							MarkdownDescription: "Enable",
+							MarkdownDescription: "Enable PPPoE on the interface",
 							Computed:            true,
 						},
 						"passive": dsschema.SingleNestedAttribute{
@@ -1219,15 +1372,15 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"link_duplex": dsschema.StringAttribute{
-			MarkdownDescription: "Link duplex",
+			MarkdownDescription: "Link duplex. Possible values are `auto`, `half` and `full`.",
 			Computed:            true,
 		},
 		"link_speed": dsschema.StringAttribute{
-			MarkdownDescription: "Link speed",
+			MarkdownDescription: "Link speed. Possible values are `auto`, `10`, `100`, `1000`, `10000`, `40000` and `100000`.",
 			Computed:            true,
 		},
 		"link_state": dsschema.StringAttribute{
-			MarkdownDescription: "Link state",
+			MarkdownDescription: "Link state. Possible values are `auto`, `up` and `down`.",
 			Computed:            true,
 		},
 		"name": dsschema.StringAttribute{
@@ -1250,12 +1403,12 @@ var EthernetInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"tap": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Tap\n\n> ℹ️ **Note:** You must specify exactly one of `aggregate_group`, `layer2`, `layer3`, and `tap`.",
+			MarkdownDescription: "Tap",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"netflow_profile": dsschema.StringAttribute{

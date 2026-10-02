@@ -71,19 +71,15 @@ resource "scm_ike_gateway" "scm_ike_gateway_1" {
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `local_address` (Attributes) Local address (see [below for nested schema](#nestedatt--local_address))
 - `local_id` (Attributes) Local id (see [below for nested schema](#nestedatt--local_id))
 - `peer_id` (Attributes) Peer id (see [below for nested schema](#nestedatt--peer_id))
 - `protocol_common` (Attributes) Protocol common (see [below for nested schema](#nestedatt--protocol_common))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -96,12 +92,10 @@ resource "scm_ike_gateway" "scm_ike_gateway_1" {
 
 Optional:
 
-- `certificate` (Attributes) Certificate
+~> **Note:** You must specify exactly one of `certificate` or `pre_shared_key`.
 
-> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`. (see [below for nested schema](#nestedatt--authentication--certificate))
-- `pre_shared_key` (Attributes) Pre shared key
-
-> ℹ️ **Note:** You must specify exactly one of `certificate` and `pre_shared_key`. (see [below for nested schema](#nestedatt--authentication--pre_shared_key))
+- `certificate` (Attributes) Certificate (see [below for nested schema](#nestedatt--authentication--certificate))
+- `pre_shared_key` (Attributes) Pre shared key (see [below for nested schema](#nestedatt--authentication--pre_shared_key))
 
 <a id="nestedatt--authentication--certificate"></a>
 ### Nested Schema for `authentication.certificate`
@@ -137,15 +131,11 @@ Optional:
 
 Optional:
 
-- `dynamic` (Attributes) Dynamic
+~> **Note:** You must specify exactly one of `dynamic`, `fqdn` or `ip`.
 
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`. (see [below for nested schema](#nestedatt--peer_address--dynamic))
+- `dynamic` (Attributes) Dynamic (see [below for nested schema](#nestedatt--peer_address--dynamic))
 - `fqdn` (String) peer gateway FQDN name
-
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.
 - `ip` (String) peer gateway has static IP address
-
-> ℹ️ **Note:** You must specify exactly one of `dynamic`, `fqdn`, and `ip`.
 
 <a id="nestedatt--peer_address--dynamic"></a>
 ### Nested Schema for `peer_address.dynamic`
@@ -159,7 +149,7 @@ Optional:
 
 - `ikev1` (Attributes) Ikev1 (see [below for nested schema](#nestedatt--protocol--ikev1))
 - `ikev2` (Attributes) Ikev2 (see [below for nested schema](#nestedatt--protocol--ikev2))
-- `version` (String) Version
+- `version` (String) Version. Possible values are `ikev2-preferred`, `ikev1` and `ikev2`.
 
 <a id="nestedatt--protocol--ikev1"></a>
 ### Nested Schema for `protocol.ikev1`
@@ -220,7 +210,7 @@ Optional:
 Optional:
 
 - `id` (String) Peer ID string
-- `type` (String) Type
+- `type` (String) Type. Possible values are `ipaddr`, `keyid`, `fqdn` and `ufqdn`.
 
 
 <a id="nestedatt--protocol_common"></a>

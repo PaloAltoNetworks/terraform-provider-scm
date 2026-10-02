@@ -34,7 +34,7 @@ type GeneralSettingDataSource struct {
 
 func (d *GeneralSettingDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: GeneralSettingDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_general_setting"
+	resp.TypeName = "scm_general_setting"
 }
 
 func (d *GeneralSettingDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

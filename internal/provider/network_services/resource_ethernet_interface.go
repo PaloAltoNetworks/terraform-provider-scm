@@ -35,7 +35,7 @@ type EthernetInterfaceResource struct {
 }
 
 func (r *EthernetInterfaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_ethernet_interface"
+	resp.TypeName = "scm_ethernet_interface"
 }
 
 func (r *EthernetInterfaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
@@ -84,7 +84,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_stash_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_stash_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_stash_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_stash_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_stash_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_stash_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -160,6 +160,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 
 	// 7. BLOCK 2: Restore the PARAMETER values from the original plan.
 	//    This is necessary for parameters that are sent to the API but not returned in the response.
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -200,7 +201,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_patch_create_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_patch_create_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_patch_create_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_patch_create_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_patch_create_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_patch_create_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -212,7 +213,7 @@ func (r *EthernetInterfaceResource) Create(ctx context.Context, req resource.Cre
 
 							if !resp.Diagnostics.HasError() {
 
-								temp_patch_create_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &temp_patch_create_Layer3_Pppoe_Password_1)
+								temp_patch_create_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_create_Layer3_Pppoe_Password_1)
 
 								resp.Diagnostics.Append(diags...)
 							}
@@ -334,6 +335,22 @@ func (r *EthernetInterfaceResource) Read(ctx context.Context, req resource.ReadR
 	if resp.Diagnostics.HasError() {
 		return
 	}
+
+	// Step 5a - Normalize null lists against prior state. Read has no plan, so we
+	// compare the API response against savestate. When the API returns [] for a
+	// list that was null in prior state, coerce it back to null to avoid a
+	// perpetual diff on refresh. Real changes (populated lists) are preserved.
+	savestateObject, diags := types.ObjectValueFrom(ctx, models.EthernetInterfaces{}.AttrTypes(), &savestate)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+	packedObject, diags = utils.NormalizeNullLists(ctx, savestateObject, packedObject)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	resp.Diagnostics.Append(packedObject.As(ctx, &data, basetypes.ObjectAsOptions{})...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -375,7 +392,7 @@ func (r *EthernetInterfaceResource) Read(ctx context.Context, req resource.ReadR
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_patch_read_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_patch_read_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_patch_read_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_patch_read_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_patch_read_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_patch_read_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -390,7 +407,7 @@ func (r *EthernetInterfaceResource) Read(ctx context.Context, req resource.ReadR
 
 							if !resp.Diagnostics.HasError() {
 
-								temp_patch_read_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &temp_patch_read_Layer3_Pppoe_Password_1)
+								temp_patch_read_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_read_Layer3_Pppoe_Password_1)
 
 								resp.Diagnostics.Append(diags...)
 							}
@@ -522,7 +539,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_stash_upd_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_stash_upd_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_stash_upd_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_stash_upd_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_stash_upd_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_stash_upd_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -617,7 +634,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 
 	// Preserve any operation parameter values from the plan (folder, snippet, device).
 	// This ensures the user's configured value is preserved regardless of what the API returns.
-	_ = req.Plan.GetAttribute(ctx, path.Root("id"), &plan.Id)
+	// NOTE: Skip the path parameter (e.g. "id", "oid") — its value comes from the API re-fetch, not the plan.
 
 	// FOLDER NORMALIZATION: Handle folder value translation and normalization.
 	// This handles both deprecated value translation and Shared/Prisma Access normalization.
@@ -658,7 +675,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 				if !resp.Diagnostics.HasError() {
 
 					if !temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe.IsNull() && !temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe.IsUnknown() {
-						var temp_patch_upd_Layer3_Pppoe_Password_1 models.EthernetInterfacesLayer3Pppoe
+						var temp_patch_upd_Layer3_Pppoe_Password_1 models.Pppoe
 						resp.Diagnostics.Append(temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe.As(ctx, &temp_patch_upd_Layer3_Pppoe_Password_1, basetypes.ObjectAsOptions{})...)
 						if !resp.Diagnostics.HasError() {
 
@@ -670,7 +687,7 @@ func (r *EthernetInterfaceResource) Update(ctx context.Context, req resource.Upd
 
 							if !resp.Diagnostics.HasError() {
 
-								temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.EthernetInterfacesLayer3Pppoe{}.AttrTypes(), &temp_patch_upd_Layer3_Pppoe_Password_1)
+								temp_patch_upd_Layer3_Pppoe_Password_0.Pppoe, diags = types.ObjectValueFrom(ctx, models.Pppoe{}.AttrTypes(), &temp_patch_upd_Layer3_Pppoe_Password_1)
 
 								resp.Diagnostics.Append(diags...)
 							}
@@ -731,11 +748,11 @@ func (r *EthernetInterfaceResource) Delete(ctx context.Context, req resource.Del
 	if err != nil {
 		resp.Diagnostics.AddError("Error deleting ethernet_interfaces", err.Error())
 		detailedMessage := utils.PrintScmError(err)
-
 		resp.Diagnostics.AddError(
 			"SCM Resource Deleteion Failed: API Request Failed",
 			detailedMessage,
 		)
+		return
 	}
 }
 

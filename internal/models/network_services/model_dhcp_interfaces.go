@@ -537,7 +537,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -553,7 +553,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -576,7 +576,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("server"),
 				),
 			},
-			MarkdownDescription: "Relay\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
+			MarkdownDescription: "Relay",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip": schema.SingleNestedAttribute{
@@ -602,7 +602,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("relay"),
 				),
 			},
-			MarkdownDescription: "Server\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
+			MarkdownDescription: "Server",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ip_pool": schema.ListAttribute{
@@ -614,7 +614,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("auto", "enabled", "disabled"),
 					},
-					MarkdownDescription: "DHCP server mode",
+					MarkdownDescription: "DHCP server mode. Possible values are `auto`, `enabled` and `disabled`.",
 					Optional:            true,
 				},
 				"option": schema.SingleNestedAttribute{
@@ -664,7 +664,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 										),
 										int64validator.Between(0, 1000000),
 									},
-									MarkdownDescription: "DHCP lease timeout (minutes)\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
+									MarkdownDescription: "DHCP lease timeout (minutes)",
 									Optional:            true,
 								},
 								"unlimited": schema.SingleNestedAttribute{
@@ -673,7 +673,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 											path.MatchRelative().AtParent().AtName("timeout"),
 										),
 									},
-									MarkdownDescription: "Unlimited\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
+									MarkdownDescription: "Unlimited",
 									Optional:            true,
 									Attributes:          map[string]schema.Attribute{},
 								},
@@ -808,7 +808,7 @@ var DhcpInterfacesResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -829,12 +829,12 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "DhcpInterface data source",
 	Attributes: map[string]dsschema.Attribute{
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -848,7 +848,7 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"relay": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Relay\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
+			MarkdownDescription: "Relay",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip": dsschema.SingleNestedAttribute{
@@ -869,7 +869,7 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"server": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Server\n\n> ℹ️ **Note:** You must specify exactly one of `relay` and `server`.",
+			MarkdownDescription: "Server",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ip_pool": dsschema.ListAttribute{
@@ -878,7 +878,7 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 				},
 				"mode": dsschema.StringAttribute{
-					MarkdownDescription: "DHCP server mode",
+					MarkdownDescription: "DHCP server mode. Possible values are `auto`, `enabled` and `disabled`.",
 					Computed:            true,
 				},
 				"option": dsschema.SingleNestedAttribute{
@@ -922,11 +922,11 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 							Computed:            true,
 							Attributes: map[string]dsschema.Attribute{
 								"timeout": dsschema.Int64Attribute{
-									MarkdownDescription: "DHCP lease timeout (minutes)\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
+									MarkdownDescription: "DHCP lease timeout (minutes)",
 									Computed:            true,
 								},
 								"unlimited": dsschema.SingleNestedAttribute{
-									MarkdownDescription: "Unlimited\n\n> ℹ️ **Note:** You must specify exactly one of `timeout` and `unlimited`.",
+									MarkdownDescription: "Unlimited",
 									Computed:            true,
 									Attributes:          map[string]dsschema.Attribute{},
 								},
@@ -1050,7 +1050,7 @@ var DhcpInterfacesDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

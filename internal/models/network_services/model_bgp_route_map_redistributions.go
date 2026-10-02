@@ -2954,7 +2954,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ospf"),
 				),
 			},
-			MarkdownDescription: "Bgp\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
+			MarkdownDescription: "Bgp",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"ospf": schema.SingleNestedAttribute{
@@ -2963,7 +2963,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
+					MarkdownDescription: "Ospf",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -2975,7 +2975,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "BGP Root OSPF Route maps Action",
+										MarkdownDescription: "BGP Root OSPF Route maps Action. Possible values are `permit` and `deny`.",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
@@ -3072,7 +3072,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("local", "none"),
 												},
-												MarkdownDescription: "BGP Root OSPF Route maps match Peer",
+												MarkdownDescription: "BGP Root OSPF Route maps match Peer. Possible values are `local` and `none`.",
 												Optional:            true,
 											},
 											"regular_community": schema.StringAttribute{
@@ -3107,7 +3107,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "subtract"),
 														},
-														MarkdownDescription: "BGP Root OSPF Route maps set Metric action",
+														MarkdownDescription: "BGP Root OSPF Route maps set Metric action. Possible values are `set`, `add` and `subtract`.",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
@@ -3123,7 +3123,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("type-1", "type-2"),
 												},
-												MarkdownDescription: "BGP Root OSPF Route maps set Metric type",
+												MarkdownDescription: "BGP Root OSPF Route maps set Metric type. Possible values are `type-1` and `type-2`.",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
@@ -3146,7 +3146,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ospf"),
 						),
 					},
-					MarkdownDescription: "BGP Root RIB\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
+					MarkdownDescription: "BGP Root RIB",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3158,7 +3158,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "BGP Root RIB Route maps Action",
+										MarkdownDescription: "BGP Root RIB Route maps Action. Possible values are `permit` and `deny`.",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
@@ -3255,7 +3255,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("local", "none"),
 												},
-												MarkdownDescription: "BGP Root RIB Route maps match Peer",
+												MarkdownDescription: "BGP Root RIB Route maps match Peer. Possible values are `local` and `none`.",
 												Optional:            true,
 											},
 											"regular_community": schema.StringAttribute{
@@ -3302,7 +3302,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("ospf"),
 				),
 			},
-			MarkdownDescription: "Connected static\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
+			MarkdownDescription: "Connected static",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
@@ -3312,7 +3312,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Connected Static Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
+					MarkdownDescription: "Connected Static Root BGP",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3324,7 +3324,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Connected Static BGP Route maps Action",
+										MarkdownDescription: "Connected Static BGP Route maps Action. Possible values are `permit` and `deny`.",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
@@ -3453,7 +3453,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "substract"),
 														},
-														MarkdownDescription: "Connected Static BGP Route maps set Metric action",
+														MarkdownDescription: "Connected Static BGP Route maps set Metric action. Possible values are `set`, `add` and `substract`.",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
@@ -3469,7 +3469,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("none", "egp", "igp", "incomplete"),
 												},
-												MarkdownDescription: "Connected Static BGP Route maps set Origin",
+												MarkdownDescription: "Connected Static BGP Route maps set Origin. Possible values are `none`, `egp`, `igp` and `incomplete`.",
 												Optional:            true,
 											},
 											"originator_id": schema.StringAttribute{
@@ -3509,7 +3509,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
+					MarkdownDescription: "Ospf",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3521,7 +3521,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Connected Static BGP OSPF Route map Action",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Action. Possible values are `permit` and `deny`.",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
@@ -3598,7 +3598,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "substract"),
 														},
-														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric action",
+														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric action. Possible values are `set`, `add` and `substract`.",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
@@ -3614,7 +3614,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("type-1", "type-2"),
 												},
-												MarkdownDescription: "Connected Static BGP OSPF Route map set Metric type",
+												MarkdownDescription: "Connected Static BGP OSPF Route map set Metric type. Possible values are `type-1` and `type-2`.",
 												Optional:            true,
 											},
 											"tag": schema.Int64Attribute{
@@ -3638,7 +3638,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("ospf"),
 						),
 					},
-					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
+					MarkdownDescription: "Rib",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3650,7 +3650,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "Connected Static BGP Rib Route maps Action",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Action. Possible values are `permit` and `deny`.",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
@@ -3745,7 +3745,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -3761,7 +3761,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -3785,7 +3785,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 					path.MatchRelative().AtParent().AtName("connected_static"),
 				),
 			},
-			MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
+			MarkdownDescription: "Ospf",
 			Optional:            true,
 			Attributes: map[string]schema.Attribute{
 				"bgp": schema.SingleNestedAttribute{
@@ -3794,7 +3794,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("rib"),
 						),
 					},
-					MarkdownDescription: "OSPF Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
+					MarkdownDescription: "OSPF Root BGP",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -3806,7 +3806,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "OSPF BGP Route maps Action",
+										MarkdownDescription: "OSPF BGP Route maps Action. Possible values are `permit` and `deny`.",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
@@ -3936,7 +3936,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 														Validators: []validator.String{
 															stringvalidator.OneOf("set", "add", "substract"),
 														},
-														MarkdownDescription: "OSPF BGP Route maps set Metric action",
+														MarkdownDescription: "OSPF BGP Route maps set Metric action. Possible values are `set`, `add` and `substract`.",
 														Optional:            true,
 													},
 													"value": schema.Int64Attribute{
@@ -3952,7 +3952,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 												Validators: []validator.String{
 													stringvalidator.OneOf("none", "egp", "igp", "incomplete"),
 												},
-												MarkdownDescription: "OSPF BGP Route maps set Origin",
+												MarkdownDescription: "OSPF BGP Route maps set Origin. Possible values are `none`, `egp`, `igp` and `incomplete`.",
 												Optional:            true,
 											},
 											"originator_id": schema.StringAttribute{
@@ -3991,7 +3991,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 							path.MatchRelative().AtParent().AtName("bgp"),
 						),
 					},
-					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
+					MarkdownDescription: "Rib",
 					Optional:            true,
 					Attributes: map[string]schema.Attribute{
 						"route_map": schema.ListNestedAttribute{
@@ -4003,7 +4003,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("permit", "deny"),
 										},
-										MarkdownDescription: "OSPF RIB Route maps Action",
+										MarkdownDescription: "OSPF RIB Route maps Action. Possible values are `permit` and `deny`.",
 										Optional:            true,
 									},
 									"description": schema.StringAttribute{
@@ -4095,7 +4095,7 @@ var BgpRouteMapRedistributionsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -4116,11 +4116,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "BgpRouteMapRedistribution data source",
 	Attributes: map[string]dsschema.Attribute{
 		"bgp": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Bgp\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
+			MarkdownDescription: "Bgp",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"ospf": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
+					MarkdownDescription: "Ospf",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4129,7 +4129,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "BGP Root OSPF Route maps Action",
+										MarkdownDescription: "BGP Root OSPF Route maps Action. Possible values are `permit` and `deny`.",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
@@ -4217,7 +4217,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 											},
 											"peer": dsschema.StringAttribute{
-												MarkdownDescription: "BGP Root OSPF Route maps match Peer",
+												MarkdownDescription: "BGP Root OSPF Route maps match Peer. Possible values are `local` and `none`.",
 												Computed:            true,
 											},
 											"regular_community": dsschema.StringAttribute{
@@ -4243,7 +4243,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "BGP Root OSPF Route maps set Metric action",
+														MarkdownDescription: "BGP Root OSPF Route maps set Metric action. Possible values are `set`, `add` and `subtract`.",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
@@ -4253,7 +4253,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"metric_type": dsschema.StringAttribute{
-												MarkdownDescription: "BGP Root OSPF Route maps set Metric type",
+												MarkdownDescription: "BGP Root OSPF Route maps set Metric type. Possible values are `type-1` and `type-2`.",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
@@ -4268,7 +4268,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rib": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "BGP Root RIB\n\n> ℹ️ **Note:** You must specify exactly one of `ospf` and `rib`.",
+					MarkdownDescription: "BGP Root RIB",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4277,7 +4277,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "BGP Root RIB Route maps Action",
+										MarkdownDescription: "BGP Root RIB Route maps Action. Possible values are `permit` and `deny`.",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
@@ -4365,7 +4365,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 											},
 											"peer": dsschema.StringAttribute{
-												MarkdownDescription: "BGP Root RIB Route maps match Peer",
+												MarkdownDescription: "BGP Root RIB Route maps match Peer. Possible values are `local` and `none`.",
 												Computed:            true,
 											},
 											"regular_community": dsschema.StringAttribute{
@@ -4400,11 +4400,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"connected_static": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Connected static\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
+			MarkdownDescription: "Connected static",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"bgp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Connected Static Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
+					MarkdownDescription: "Connected Static Root BGP",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4413,7 +4413,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Connected Static BGP Route maps Action",
+										MarkdownDescription: "Connected Static BGP Route maps Action. Possible values are `permit` and `deny`.",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
@@ -4527,7 +4527,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "Connected Static BGP Route maps set Metric action",
+														MarkdownDescription: "Connected Static BGP Route maps set Metric action. Possible values are `set`, `add` and `substract`.",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
@@ -4537,7 +4537,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"origin": dsschema.StringAttribute{
-												MarkdownDescription: "Connected Static BGP Route maps set Origin",
+												MarkdownDescription: "Connected Static BGP Route maps set Origin. Possible values are `none`, `egp`, `igp` and `incomplete`.",
 												Computed:            true,
 											},
 											"originator_id": dsschema.StringAttribute{
@@ -4565,7 +4565,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"ospf": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
+					MarkdownDescription: "Ospf",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4574,7 +4574,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Connected Static BGP OSPF Route map Action",
+										MarkdownDescription: "Connected Static BGP OSPF Route map Action. Possible values are `permit` and `deny`.",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
@@ -4642,7 +4642,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric action",
+														MarkdownDescription: "Connected Static BGP OSPF Route map set Metric action. Possible values are `set`, `add` and `substract`.",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
@@ -4652,7 +4652,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"metric_type": dsschema.StringAttribute{
-												MarkdownDescription: "Connected Static BGP OSPF Route map set Metric type",
+												MarkdownDescription: "Connected Static BGP OSPF Route map set Metric type. Possible values are `type-1` and `type-2`.",
 												Computed:            true,
 											},
 											"tag": dsschema.Int64Attribute{
@@ -4667,7 +4667,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rib": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `ospf`, and `rib`.",
+					MarkdownDescription: "Rib",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4676,7 +4676,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Connected Static BGP Rib Route maps Action",
+										MarkdownDescription: "Connected Static BGP Rib Route maps Action. Possible values are `permit` and `deny`.",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
@@ -4757,12 +4757,12 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -4776,11 +4776,11 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"ospf": dsschema.SingleNestedAttribute{
-			MarkdownDescription: "Ospf\n\n> ℹ️ **Note:** You must specify exactly one of `bgp`, `connected_static`, and `ospf`.",
+			MarkdownDescription: "Ospf",
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"bgp": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "OSPF Root BGP\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
+					MarkdownDescription: "OSPF Root BGP",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4789,7 +4789,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "OSPF BGP Route maps Action",
+										MarkdownDescription: "OSPF BGP Route maps Action. Possible values are `permit` and `deny`.",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
@@ -4901,7 +4901,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												Computed:            true,
 												Attributes: map[string]dsschema.Attribute{
 													"action": dsschema.StringAttribute{
-														MarkdownDescription: "OSPF BGP Route maps set Metric action",
+														MarkdownDescription: "OSPF BGP Route maps set Metric action. Possible values are `set`, `add` and `substract`.",
 														Computed:            true,
 													},
 													"value": dsschema.Int64Attribute{
@@ -4911,7 +4911,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 												},
 											},
 											"origin": dsschema.StringAttribute{
-												MarkdownDescription: "OSPF BGP Route maps set Origin",
+												MarkdownDescription: "OSPF BGP Route maps set Origin. Possible values are `none`, `egp`, `igp` and `incomplete`.",
 												Computed:            true,
 											},
 											"originator_id": dsschema.StringAttribute{
@@ -4939,7 +4939,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 					},
 				},
 				"rib": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Rib\n\n> ℹ️ **Note:** You must specify exactly one of `bgp` and `rib`.",
+					MarkdownDescription: "Rib",
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"route_map": dsschema.ListNestedAttribute{
@@ -4948,7 +4948,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 							NestedObject: dsschema.NestedAttributeObject{
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "OSPF RIB Route maps Action",
+										MarkdownDescription: "OSPF RIB Route maps Action. Possible values are `permit` and `deny`.",
 										Computed:            true,
 									},
 									"description": dsschema.StringAttribute{
@@ -5023,7 +5023,7 @@ var BgpRouteMapRedistributionsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

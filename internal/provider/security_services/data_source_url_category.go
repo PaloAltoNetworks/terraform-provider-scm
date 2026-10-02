@@ -34,7 +34,7 @@ type UrlCategoryDataSource struct {
 
 func (d *UrlCategoryDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: UrlCategoryDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_url_category"
+	resp.TypeName = "scm_url_category"
 }
 
 func (d *UrlCategoryDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -42,15 +42,9 @@ output "scm_tls_service_profile_details" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `name` (String) TLS service profile name. The value is `muCustomDomainSSLProfile` when it is used on mobile-agent infra settings.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -73,5 +67,5 @@ Read-Only:
 - `keyxchg_algo_dhe` (Boolean) Allow DHE algorithm?
 - `keyxchg_algo_ecdhe` (Boolean) Allow ECDHE algorithm?
 - `keyxchg_algo_rsa` (Boolean) Allow RSA algorithm?
-- `max_version` (String) Maximum TLS version
-- `min_version` (String) Minimum TLS version
+- `max_version` (String) Maximum TLS version. Possible values are `tls1-0`, `tls1-1`, `tls1-2` and `tls1-3`.
+- `min_version` (String) Minimum TLS version. Possible values are `tls1-0`, `tls1-1`, `tls1-2` and `tls1-3`.

@@ -493,7 +493,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -509,7 +509,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -535,7 +535,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("permit", "deny"),
 						},
-						MarkdownDescription: "Action",
+						MarkdownDescription: "Action. Possible values are `permit` and `deny`.",
 						Optional:            true,
 					},
 					"description": schema.StringAttribute{
@@ -632,7 +632,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("local", "none"),
 								},
-								MarkdownDescription: "Peer",
+								MarkdownDescription: "Peer. Possible values are `local` and `none`.",
 								Optional:            true,
 							},
 							"regular_community": schema.StringAttribute{
@@ -724,7 +724,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("set", "add", "substract"),
 										},
-										MarkdownDescription: "Metric action",
+										MarkdownDescription: "Metric action. Possible values are `set`, `add` and `substract`.",
 										Optional:            true,
 									},
 									"value": schema.Int64Attribute{
@@ -740,7 +740,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("none", "egp", "igp", "incomplete"),
 								},
-								MarkdownDescription: "Origin",
+								MarkdownDescription: "Origin. Possible values are `none`, `egp`, `igp` and `incomplete`.",
 								Optional:            true,
 							},
 							"originator_id": schema.StringAttribute{
@@ -757,7 +757,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 							},
 							"regular_community": schema.ListAttribute{
 								ElementType:         types.StringType,
-								MarkdownDescription: "Regular community",
+								MarkdownDescription: "Regular community. Possible values are `none`, `blackhole`, `no-peer`, `graceful-shutdown`, `accept-own`, `local-as`, `route-filter-v4`, `route-filter-v6`, `no-advertise`, `no-export` and `internet`.",
 								Optional:            true,
 							},
 							"remove_large_community": schema.StringAttribute{
@@ -796,7 +796,7 @@ var BgpRouteMapsResourceSchema = schema.Schema{
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z\\d\\-_\\. ]+$"), "pattern must match "+"^[a-zA-Z\\d\\-_\\. ]+$"),
 			},
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			PlanModifiers: []planmodifier.String{
 				stringplanmodifier.RequiresReplace(),
@@ -821,12 +821,12 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"device": dsschema.StringAttribute{
-			MarkdownDescription: "The device in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The device in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The folder in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},
@@ -845,7 +845,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"action": dsschema.StringAttribute{
-						MarkdownDescription: "Action",
+						MarkdownDescription: "Action. Possible values are `permit` and `deny`.",
 						Computed:            true,
 					},
 					"description": dsschema.StringAttribute{
@@ -933,7 +933,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 							},
 							"peer": dsschema.StringAttribute{
-								MarkdownDescription: "Peer",
+								MarkdownDescription: "Peer. Possible values are `local` and `none`.",
 								Computed:            true,
 							},
 							"regular_community": dsschema.StringAttribute{
@@ -1010,7 +1010,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"action": dsschema.StringAttribute{
-										MarkdownDescription: "Metric action",
+										MarkdownDescription: "Metric action. Possible values are `set`, `add` and `substract`.",
 										Computed:            true,
 									},
 									"value": dsschema.Int64Attribute{
@@ -1020,7 +1020,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 								},
 							},
 							"origin": dsschema.StringAttribute{
-								MarkdownDescription: "Origin",
+								MarkdownDescription: "Origin. Possible values are `none`, `egp`, `igp` and `incomplete`.",
 								Computed:            true,
 							},
 							"originator_id": dsschema.StringAttribute{
@@ -1037,7 +1037,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 							},
 							"regular_community": dsschema.ListAttribute{
 								ElementType:         types.StringType,
-								MarkdownDescription: "Regular community",
+								MarkdownDescription: "Regular community. Possible values are `none`, `blackhole`, `no-peer`, `graceful-shutdown`, `accept-own`, `local-as`, `route-filter-v4`, `route-filter-v6`, `no-advertise`, `no-export` and `internet`.",
 								Computed:            true,
 							},
 							"remove_large_community": dsschema.StringAttribute{
@@ -1062,7 +1062,7 @@ var BgpRouteMapsDataSourceSchema = dsschema.Schema{
 			},
 		},
 		"snippet": dsschema.StringAttribute{
-			MarkdownDescription: "The snippet in which the resource is defined\n\n> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.",
+			MarkdownDescription: "The snippet in which the resource is defined",
 			Optional:            true,
 			Computed:            true,
 		},

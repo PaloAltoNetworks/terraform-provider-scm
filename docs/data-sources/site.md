@@ -43,13 +43,13 @@ output "single_site_details" {
 - `city` (String) The city in which the site exists
 - `country` (String) The country in which the site exists
 - `latitude` (String) The latitude coordinate for the site
-- `license_type` (String) The license type of the site
+- `license_type` (String) The license type of the site. Possible values are `FWAAS-SITE-25Mbps`, `FWAAS-SITE-50Mbps`, `FWAAS-SITE-250Mbps`, `FWAAS-SITE-1000Mbps` and `FWAAS-SITE-2500Mbps`.
 - `longitude` (String) The longitude coordinate for the site
 - `members` (Attributes List) Members (see [below for nested schema](#nestedatt--members))
 - `qos` (Attributes) Qos (see [below for nested schema](#nestedatt--qos))
 - `state` (String) The state in which the site exists
 - `tfid` (String) The Terraform ID.
-- `type` (String) The site type
+- `type` (String) The site type. Possible values are `prisma-sdwan`, `third-party-branch` and `third-party-discovered`.
 - `zip_code` (String) The postal code in which the site exists
 
 <a id="nestedatt--members"></a>
@@ -58,7 +58,7 @@ output "single_site_details" {
 Read-Only:
 
 - `id` (String) UUID of the remote network
-- `mode` (String) The mode of the remote network
+- `mode` (String) The mode of the remote network. Possible values are `active` and `backup`.
 - `name` (String) The member name
 - `remote_network` (String) The remote network name
 

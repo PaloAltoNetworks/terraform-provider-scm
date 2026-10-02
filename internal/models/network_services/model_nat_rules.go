@@ -419,7 +419,7 @@ var NatRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("primary", "both", "0", "1"),
 			},
-			MarkdownDescription: "Active active device binding",
+			MarkdownDescription: "Active active device binding. Possible values are `primary`, `both`, `0` and `1`.",
 			Optional:            true,
 		},
 		"description": schema.StringAttribute{
@@ -443,7 +443,7 @@ var NatRulesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("reverse", "forward"),
 							},
-							MarkdownDescription: "Direction",
+							MarkdownDescription: "Direction. Possible values are `reverse` and `forward`.",
 							Optional:            true,
 						},
 					},
@@ -486,7 +486,7 @@ var NatRulesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("round-robin", "source-ip-hash", "ip-modulo", "ip-hash", "least-sessions"),
 					},
-					MarkdownDescription: "Distribution method",
+					MarkdownDescription: "Distribution method. Possible values are `round-robin`, `source-ip-hash`, `ip-modulo`, `ip-hash` and `least-sessions`.",
 					Optional:            true,
 				},
 				"translated_address": schema.StringAttribute{
@@ -534,7 +534,7 @@ var NatRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("ipv4", "nat64", "nptv6"),
 			},
-			MarkdownDescription: "NAT type",
+			MarkdownDescription: "NAT type. Possible values are `ipv4`, `nat64` and `nptv6`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("ipv4"),
@@ -543,7 +543,7 @@ var NatRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "The relative position of the rule",
+			MarkdownDescription: "The relative position of the rule. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
@@ -689,7 +689,7 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "NatRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"active_active_device_binding": dsschema.StringAttribute{
-			MarkdownDescription: "Active active device binding",
+			MarkdownDescription: "Active active device binding. Possible values are `primary`, `both`, `0` and `1`.",
 			Computed:            true,
 		},
 		"description": dsschema.StringAttribute{
@@ -710,7 +710,7 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"direction": dsschema.StringAttribute{
-							MarkdownDescription: "Direction",
+							MarkdownDescription: "Direction. Possible values are `reverse` and `forward`.",
 							Computed:            true,
 						},
 					},
@@ -739,7 +739,7 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"distribution": dsschema.StringAttribute{
-					MarkdownDescription: "Distribution method",
+					MarkdownDescription: "Distribution method. Possible values are `round-robin`, `source-ip-hash`, `ip-modulo`, `ip-hash` and `least-sessions`.",
 					Computed:            true,
 				},
 				"translated_address": dsschema.StringAttribute{
@@ -772,11 +772,11 @@ var NatRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"nat_type": dsschema.StringAttribute{
-			MarkdownDescription: "NAT type",
+			MarkdownDescription: "NAT type. Possible values are `ipv4`, `nat64` and `nptv6`.",
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "The relative position of the rule",
+			MarkdownDescription: "The relative position of the rule. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"service": dsschema.StringAttribute{

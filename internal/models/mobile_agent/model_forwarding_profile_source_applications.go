@@ -72,7 +72,7 @@ var ForwardingProfileSourceApplicationsResourceSchema = schema.Schema{
 				stringvalidator.OneOf("Mobile Users"),
 				utils.FolderValidator(),
 			},
-			MarkdownDescription: "The folder in which the resource is defined\n",
+			MarkdownDescription: "The folder in which the resource is defined. Possible values are `Mobile Users`.",
 			Optional:            true,
 			Computed:            true,
 			PlanModifiers: []planmodifier.String{
@@ -119,7 +119,7 @@ var ForwardingProfileSourceApplicationsDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"folder": dsschema.StringAttribute{
-			MarkdownDescription: "The folder in which the resource is defined\n",
+			MarkdownDescription: "The folder in which the resource is defined. Possible values are `Mobile Users`.",
 			Optional:            true,
 			Computed:            true,
 		},

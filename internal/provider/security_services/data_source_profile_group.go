@@ -34,7 +34,7 @@ type ProfileGroupDataSource struct {
 
 func (d *ProfileGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ProfileGroupDataSource.Metadata ---")
-	resp.TypeName = req.ProviderTypeName + "_profile_group"
+	resp.TypeName = "scm_profile_group"
 }
 
 func (d *ProfileGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

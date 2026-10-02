@@ -34,14 +34,8 @@ output "fetched_settings" {
 ### Optional
 
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 
 ### Read-Only
 
@@ -54,11 +48,11 @@ output "fetched_settings" {
 Read-Only:
 
 - `allow_challenge_ack` (Boolean) Allow arbitrary ACK in response to SYN?
-- `asymmetric_path` (String) Asymmetric path action
+- `asymmetric_path` (String) Asymmetric path action. Possible values are `drop` and `bypass`.
 - `bypass_exceed_oo_queue` (Boolean) Forward segments exceeding TCP out-of-order queue?
 - `check_timestamp_option` (Boolean) Drop segments with null timestamp option?
 - `drop_zero_flag` (Boolean) Drop segments without flag?
-- `siptcp_cleartext_proxy` (String) SIP TCP cleartext action (`'0'` = Always Off, `'1'` = Always Enabled, `'2'` = Automatically enable proxy when needed)
+- `siptcp_cleartext_proxy` (String) SIP TCP cleartext action (`'0'` = Always Off, `'1'` = Always Enabled, `'2'` = Automatically enable proxy when needed). Possible values are `0`, `2` and `3`.
 - `strip_mptcp_option` (Boolean) Strip MPTCP option?
 - `tcp_retransmit_scan` (Boolean) TCP retransmit scan?
-- `urgent_data` (String) Urgent data flag action
+- `urgent_data` (String) Urgent data flag action. Possible values are `clear` and `oobinline`.

@@ -32,7 +32,7 @@ type TagListDataSource struct {
 }
 
 func (d *TagListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_tag_list"
+	resp.TypeName = "scm_tag_list"
 }
 
 func (d *TagListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

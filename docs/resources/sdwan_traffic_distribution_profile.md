@@ -21,17 +21,13 @@ SdwanTrafficDistributionProfile resource
 
 ### Optional
 
+~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
+
 - `device` (String) The device in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `folder` (String) The folder in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
 - `link_tags` (Attributes List) Link-Tags for interfaces identified by defined tags (see [below for nested schema](#nestedatt--link_tags))
 - `snippet` (String) The snippet in which the resource is defined
-
-> ℹ️ **Note:** You must specify exactly one of `device`, `folder`, and `snippet`.
-- `traffic_distribution` (String) Traffic distribution
+- `traffic_distribution` (String) Traffic distribution. Possible values are `Best Available Path`, `Top Down Priority` and `Weighted Session Distribution`.
 
 ### Read-Only
 

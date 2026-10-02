@@ -507,7 +507,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("allow", "deny", "drop", "reset-client", "reset-server", "reset-both"),
 			},
-			MarkdownDescription: "The action to be taken when the rule is matched",
+			MarkdownDescription: "The action to be taken when the rule is matched. Possible values are `allow`, `deny`, `drop`, `reset-client`, `reset-server` and `reset-both`.",
 			Optional:            true,
 		},
 		"allow_url_category": schema.ListNestedAttribute{
@@ -520,7 +520,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("none", "continue", "redirect", "isolate"),
 						},
-						MarkdownDescription: "Additional action",
+						MarkdownDescription: "Additional action. Possible values are `none`, `continue`, `redirect` and `isolate`.",
 						Optional:            true,
 						Computed:            true,
 						Default:             stringdefault.StaticString("none"),
@@ -529,7 +529,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("enabled", "disabled"),
 						},
-						MarkdownDescription: "Credential enforcement",
+						MarkdownDescription: "Credential enforcement. Possible values are `enabled` and `disabled`.",
 						Optional:            true,
 						Computed:            true,
 						Default:             stringdefault.StaticString("enabled"),
@@ -538,7 +538,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 						Validators: []validator.String{
 							stringvalidator.OneOf("enabled", "disabled"),
 						},
-						MarkdownDescription: "Decryption",
+						MarkdownDescription: "Decryption. Possible values are `enabled` and `disabled`.",
 						Optional:            true,
 						Computed:            true,
 						Default:             stringdefault.StaticString("enabled"),
@@ -555,14 +555,14 @@ var SecurityRulesResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("allow-all-file-types", "best-practice", "block-all-file-types"),
 								},
-								MarkdownDescription: "Download",
+								MarkdownDescription: "Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Optional:            true,
 							},
 							"upload": schema.StringAttribute{
 								Validators: []validator.String{
 									stringvalidator.OneOf("allow-all-file-types", "best-practice", "block-all-file-types"),
 								},
-								MarkdownDescription: "Upload",
+								MarkdownDescription: "Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Optional:            true,
 							},
 						},
@@ -608,14 +608,14 @@ var SecurityRulesResourceSchema = schema.Schema{
 								Validators: []validator.String{
 									stringvalidator.OneOf("allow-all-file-types", "best-practice", "block-all-file-types"),
 								},
-								MarkdownDescription: "Download",
+								MarkdownDescription: "Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Optional:            true,
 							},
 							"upload": schema.StringAttribute{
 								Validators: []validator.String{
 									stringvalidator.OneOf("allow-all-file-types", "best-practice", "block-all-file-types"),
 								},
-								MarkdownDescription: "Upload",
+								MarkdownDescription: "Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Optional:            true,
 							},
 						},
@@ -636,7 +636,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("yes", "no"),
 										},
-										MarkdownDescription: "Enable",
+										MarkdownDescription: "Enable. Possible values are `yes` and `no`.",
 										Optional:            true,
 									},
 								},
@@ -649,7 +649,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 										Validators: []validator.String{
 											stringvalidator.OneOf("yes", "no"),
 										},
-										MarkdownDescription: "Enable",
+										MarkdownDescription: "Enable. Possible values are `yes` and `no`.",
 										Optional:            true,
 									},
 									"tenant_restrictions": schema.ListAttribute{
@@ -746,7 +746,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("allow-all-file-types", "best-practice", "block-all-file-types"),
 							},
-							MarkdownDescription: "Download",
+							MarkdownDescription: "Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 							Optional:            true,
 							Computed:            true,
 						},
@@ -754,7 +754,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 							Validators: []validator.String{
 								stringvalidator.OneOf("allow-all-file-types", "best-practice", "block-all-file-types"),
 							},
-							MarkdownDescription: "Upload",
+							MarkdownDescription: "Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 							Optional:            true,
 							Computed:            true,
 						},
@@ -882,7 +882,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 			Validators: []validator.String{
 				stringvalidator.OneOf("pre", "post"),
 			},
-			MarkdownDescription: "The position of a security rule\n",
+			MarkdownDescription: "The position of a security rule. Possible values are `pre` and `post`.",
 			Optional:            true,
 			Computed:            true,
 			Default:             stringdefault.StaticString("pre"),
@@ -923,7 +923,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("yes", "no"),
 					},
-					MarkdownDescription: "Anti spyware",
+					MarkdownDescription: "Anti spyware. Possible values are `yes` and `no`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("yes"),
@@ -932,7 +932,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("yes", "no"),
 					},
-					MarkdownDescription: "Virus and wildfire analysis",
+					MarkdownDescription: "Virus and wildfire analysis. Possible values are `yes` and `no`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("yes"),
@@ -941,7 +941,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 					Validators: []validator.String{
 						stringvalidator.OneOf("yes", "no"),
 					},
-					MarkdownDescription: "Vulnerability",
+					MarkdownDescription: "Vulnerability. Possible values are `yes` and `no`.",
 					Optional:            true,
 					Computed:            true,
 					Default:             stringdefault.StaticString("yes"),
@@ -986,7 +986,7 @@ var SecurityRulesResourceSchema = schema.Schema{
 			Optional:            true,
 		},
 		"target_rule": schema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Optional:            true,
 		},
 		"tenant_restrictions": schema.ListAttribute{
@@ -1015,7 +1015,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "SecurityRule data source",
 	Attributes: map[string]dsschema.Attribute{
 		"action": dsschema.StringAttribute{
-			MarkdownDescription: "The action to be taken when the rule is matched",
+			MarkdownDescription: "The action to be taken when the rule is matched. Possible values are `allow`, `deny`, `drop`, `reset-client`, `reset-server` and `reset-both`.",
 			Computed:            true,
 		},
 		"allow_url_category": dsschema.ListNestedAttribute{
@@ -1024,15 +1024,15 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 			NestedObject: dsschema.NestedAttributeObject{
 				Attributes: map[string]dsschema.Attribute{
 					"additional_action": dsschema.StringAttribute{
-						MarkdownDescription: "Additional action",
+						MarkdownDescription: "Additional action. Possible values are `none`, `continue`, `redirect` and `isolate`.",
 						Computed:            true,
 					},
 					"credential_enforcement": dsschema.StringAttribute{
-						MarkdownDescription: "Credential enforcement",
+						MarkdownDescription: "Credential enforcement. Possible values are `enabled` and `disabled`.",
 						Computed:            true,
 					},
 					"decryption": dsschema.StringAttribute{
-						MarkdownDescription: "Decryption",
+						MarkdownDescription: "Decryption. Possible values are `enabled` and `disabled`.",
 						Computed:            true,
 					},
 					"dlp": dsschema.StringAttribute{
@@ -1044,11 +1044,11 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
 							"download": dsschema.StringAttribute{
-								MarkdownDescription: "Download",
+								MarkdownDescription: "Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Computed:            true,
 							},
 							"upload": dsschema.StringAttribute{
-								MarkdownDescription: "Upload",
+								MarkdownDescription: "Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Computed:            true,
 							},
 						},
@@ -1087,11 +1087,11 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 						Computed:            true,
 						Attributes: map[string]dsschema.Attribute{
 							"download": dsschema.StringAttribute{
-								MarkdownDescription: "Download",
+								MarkdownDescription: "Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Computed:            true,
 							},
 							"upload": dsschema.StringAttribute{
-								MarkdownDescription: "Upload",
+								MarkdownDescription: "Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 								Computed:            true,
 							},
 						},
@@ -1109,7 +1109,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"enable": dsschema.StringAttribute{
-										MarkdownDescription: "Enable",
+										MarkdownDescription: "Enable. Possible values are `yes` and `no`.",
 										Computed:            true,
 									},
 								},
@@ -1119,7 +1119,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 								Computed:            true,
 								Attributes: map[string]dsschema.Attribute{
 									"enable": dsschema.StringAttribute{
-										MarkdownDescription: "Enable",
+										MarkdownDescription: "Enable. Possible values are `yes` and `no`.",
 										Computed:            true,
 									},
 									"tenant_restrictions": dsschema.ListAttribute{
@@ -1206,11 +1206,11 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 					Computed:            true,
 					Attributes: map[string]dsschema.Attribute{
 						"download": dsschema.StringAttribute{
-							MarkdownDescription: "Download",
+							MarkdownDescription: "Download. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 							Computed:            true,
 						},
 						"upload": dsschema.StringAttribute{
-							MarkdownDescription: "Upload",
+							MarkdownDescription: "Upload. Possible values are `allow-all-file-types`, `best-practice` and `block-all-file-types`.",
 							Computed:            true,
 						},
 					},
@@ -1303,7 +1303,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"position": dsschema.StringAttribute{
-			MarkdownDescription: "The position of a security rule\n",
+			MarkdownDescription: "The position of a security rule. Possible values are `pre` and `post`.",
 			Computed:            true,
 		},
 		"profile_setting": dsschema.SingleNestedAttribute{
@@ -1330,15 +1330,15 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 			Attributes: map[string]dsschema.Attribute{
 				"anti_spyware": dsschema.StringAttribute{
-					MarkdownDescription: "Anti spyware",
+					MarkdownDescription: "Anti spyware. Possible values are `yes` and `no`.",
 					Computed:            true,
 				},
 				"virus_and_wildfire_analysis": dsschema.StringAttribute{
-					MarkdownDescription: "Virus and wildfire analysis",
+					MarkdownDescription: "Virus and wildfire analysis. Possible values are `yes` and `no`.",
 					Computed:            true,
 				},
 				"vulnerability": dsschema.StringAttribute{
-					MarkdownDescription: "Vulnerability",
+					MarkdownDescription: "Vulnerability. Possible values are `yes` and `no`.",
 					Computed:            true,
 				},
 			},
@@ -1374,7 +1374,7 @@ var SecurityRulesDataSourceSchema = dsschema.Schema{
 			Computed:            true,
 		},
 		"target_rule": dsschema.StringAttribute{
-			MarkdownDescription: "The name or UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
+			MarkdownDescription: "UUID of the rule to position this rule relative to. Required when `relative_position` is `\"before\"` or `\"after\"`.",
 			Computed:            true,
 		},
 		"tenant_restrictions": dsschema.ListAttribute{

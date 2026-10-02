@@ -1,0 +1,16 @@
+docs/index.md
+  h_55d70f393a1b06 23,40,72,84,92,141,160
+templates/index.md.tmpl
+  h_55d70f393a1b06 23,40,72,84,92,141,160
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "d11a2931c4b6230946d678c20b837ce28240eac8",
+  "prompts": {},
+  "humans": {
+    "h_55d70f393a1b06": {
+      "author": "Dhiren Chotwani <dchotwani@paloaltonetworks.com>"
+    }
+  }
+}

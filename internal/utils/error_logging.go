@@ -129,6 +129,7 @@ func PrintScmError(err error) string {
 
 		// Iterate over the Errors array
 		for i, e := range localGenErr.Errors {
+			e.Details = redactHTTPValue(e.Details)
 			output.WriteString(fmt.Sprintf("\n  Error %d: Code=[%s], Message=\"%s\"\n", i+1, e.Code, e.Message))
 
 			// Structured Details Logic
@@ -178,13 +179,13 @@ func PrintScmError(err error) string {
 
 	if len(rawBody) > 0 {
 		dump.WriteString("Raw Response Body:\n")
-		// Pretty-print the raw JSON body if it exists and is valid
+		// Pretty-print the raw JSON body with secret-like fields masked.
+		// Non-JSON bodies are omitted because they cannot be redacted reliably.
 		var prettyJSON bytes.Buffer
-		if err := json.Indent(&prettyJSON, rawBody, "", "  "); err == nil {
+		if err := json.Indent(&prettyJSON, []byte(redactHTTPBody(rawBody)), "", "  "); err == nil {
 			dump.Write(prettyJSON.Bytes())
 		} else {
-			// Body exists but isn't JSON; dump as raw text
-			dump.Write(rawBody)
+			dump.WriteString(redactHTTPBody(rawBody))
 		}
 		dump.WriteString("\n")
 	} else {

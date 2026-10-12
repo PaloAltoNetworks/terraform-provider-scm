@@ -1,0 +1,21 @@
+internal/utils/error_logging.go
+  s_8f55b490cf2739::t_1fcbcb8d7091e0 132,182-183,185,188
+internal/utils/http_logging.go
+  s_8f55b490cf2739::t_70f2c10840253a 6,10,29,39,42,61,73-152
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "f26f3888db7edb3a1145b571bac1928ad4c4adc1",
+  "prompts": {},
+  "sessions": {
+    "s_8f55b490cf2739": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "s_8f55b490cf2739",
+        "model": "unknown"
+      },
+      "human_author": "Dhiren Chotwani <dchotwani@paloaltonetworks.com>"
+    }
+  }
+}

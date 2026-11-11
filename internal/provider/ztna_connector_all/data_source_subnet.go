@@ -33,7 +33,7 @@ type SubnetDataSource struct {
 
 func (d *SubnetDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: SubnetDataSource.Metadata ---")
-	resp.TypeName = "ztna_subnet"
+	resp.TypeName = "scm_ztna_subnet"
 }
 
 func (d *SubnetDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

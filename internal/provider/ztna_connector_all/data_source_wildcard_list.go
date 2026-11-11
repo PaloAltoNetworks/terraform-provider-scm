@@ -31,7 +31,7 @@ type WildcardListDataSource struct {
 }
 
 func (d *WildcardListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_wildcard_list"
+	resp.TypeName = "scm_ztna_wildcard_list"
 }
 
 func (d *WildcardListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

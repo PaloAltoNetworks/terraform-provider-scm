@@ -31,7 +31,7 @@ type DiscoveredApplicationListDataSource struct {
 }
 
 func (d *DiscoveredApplicationListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_discovered_application_list"
+	resp.TypeName = "scm_ztna_discovered_application_list"
 }
 
 func (d *DiscoveredApplicationListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

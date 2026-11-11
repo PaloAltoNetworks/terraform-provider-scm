@@ -35,7 +35,7 @@ type ConnectorGroupResource struct {
 }
 
 func (r *ConnectorGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_group"
+	resp.TypeName = "scm_ztna_connector_group"
 }
 
 func (r *ConnectorGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

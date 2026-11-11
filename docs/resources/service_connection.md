@@ -119,6 +119,7 @@ resource "scm_service_connection" "site_a_vpn_sc" {
 ### Optional
 
 - `backup_sc` (String) Backup s c
+- `bgp_peer` (Attributes) Secondary BGP peer (secondary WAN) (see [below for nested schema](#nestedatt--bgp_peer))
 - `nat_pool` (String) Nat pool
 - `no_export_community` (String) No export community. Possible values are `Disabled`, `Enabled-In`, `Enabled-Out` and `Enabled-Both`.
 - `onboarding_type` (String) Onboarding type. Possible values are `classic`.
@@ -136,13 +137,24 @@ resource "scm_service_connection" "site_a_vpn_sc" {
 - `id` (String) The UUID of the service connection
 - `tfid` (String) The Terraform ID.
 
+<a id="nestedatt--bgp_peer"></a>
+### Nested Schema for `bgp_peer`
+
+Optional:
+
+- `local_ip_address` (String) Local peer IP address (secondary WAN)
+- `local_ipv6_address` (String) Local peer IPv6 address (secondary WAN)
+- `peer_ip_address` (String) Remote peer IP address (secondary WAN)
+- `peer_ipv6_address` (String) Remote peer IPv6 address (secondary WAN)
+- `secret` (String, Sensitive) BGP peering secret (secondary WAN)
+
+
 <a id="nestedatt--protocol"></a>
 ### Nested Schema for `protocol`
 
 Optional:
 
 - `bgp` (Attributes) Bgp (see [below for nested schema](#nestedatt--protocol--bgp))
-- `bgp_peer` (Attributes) Bgp peer (see [below for nested schema](#nestedatt--protocol--bgp_peer))
 
 <a id="nestedatt--protocol--bgp"></a>
 ### Nested Schema for `protocol.bgp`
@@ -161,18 +173,6 @@ Optional:
 - `peer_ip_address` (String) Peer ip address
 - `secret` (String, Sensitive) Secret
 - `summarize_mobile_user_routes` (Boolean) Summarize mobile user routes
-
-
-<a id="nestedatt--protocol--bgp_peer"></a>
-### Nested Schema for `protocol.bgp_peer`
-
-Optional:
-
-- `local_ip_address` (String) Local peer IP address (secondary WAN)
-- `local_ipv6_address` (String) Local peer IPv6 address (secondary WAN)
-- `peer_ip_address` (String) Remote peer IP address (secondary WAN)
-- `peer_ipv6_address` (String) Remote peer IPv6 address (secondary WAN)
-- `secret` (String, Sensitive) BGP peering secret (secondary WAN)
 
 
 

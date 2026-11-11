@@ -4,7 +4,7 @@ set -euo pipefail
 # =============================================================================
 # Setup: generate test workspaces from examples/resources
 # =============================================================================
-# For each examples/resources/<prefix>_* (scm_*, ztna_*, ...):
+# For each examples/resources/scm_* (scm_address, scm_ztna_subnet, scm_cngfw_ngfirewall, ...):
 #   1. Creates tests/<prefix>_<resource>/
 #   2. Generates main.tf = matching provider block + resource.tf (always overwritten)
 #   3. Generates a .tftest.hcl with create + update + auto-destroy
@@ -17,7 +17,7 @@ set -euo pipefail
 # Usage:
 #   ./tests/setup.sh                  # all resources (all prefixes)
 #   ./tests/setup.sh scm_address      # single scm resource
-#   ./tests/setup.sh ztna_connector   # single ztna resource
+#   ./tests/setup.sh scm_ztna_connector   # single ztna resource
 # =============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -35,7 +35,7 @@ fi
 NO_ID_RESOURCES="scm_bgp_routing scm_bandwidth_allocation"
 
 # Resources that use "oid" instead of "id" as their identifier attribute
-OID_RESOURCES="ztna_connector ztna_fqdn_application ztna_subnet ztna_wildcard ztna_connector_group ztna_connector_scheduled_upgrade ztna_connector_group_scheduled_upgrade"
+OID_RESOURCES="scm_ztna_connector scm_ztna_fqdn_application scm_ztna_subnet scm_ztna_wildcard scm_ztna_connector_group scm_ztna_connector_scheduled_upgrade scm_ztna_connector_group_scheduled_upgrade"
 
 # -----------------------------------------------------------------------------
 # Check if a field exists at root level (brace depth 1) inside any resource block.
@@ -251,21 +251,13 @@ for resource_name in "${targets[@]}"; do
   # Determine update strategy
   update_field=$(get_update_field "${resource_dir}/resource.tf")
 
-  # Determine the resource prefix (everything before the first underscore).
-  resource_prefix="${resource_name%%_*}"
-
   # Build main.tf from scratch:
-  # 1. Extract only the provider "<resource_prefix>" { ... } block from provider.tf
-  #    using awk brace-depth tracking.
-  # 2. Append a terraform {} block declaring only this prefix's provider.
-  # This avoids the "Duplicate required provider" warning that occurs when two
-  # local names (scm, ztna) point to the same source binary.
-  awk -v prefix="$resource_prefix" '
-    /^provider "/ {
-      # Extract the provider name between the first pair of quotes
-      line = $0; sub(/^provider "/, "", line); sub(/".*/, "", line)
-      if (line == prefix) { in_block=1; depth=0 }
-    }
+  # 1. Extract the provider "scm" { ... } block from provider.tf using awk
+  #    brace-depth tracking. Every type is scm_<...>, so one provider block
+  #    (which also carries ztna_host / x_panw_region) configures them all.
+  # 2. Append a terraform {} block declaring the scm provider.
+  awk '
+    /^provider "scm"/ { in_block=1; depth=0 }
     in_block {
       print
       n = split($0, chars, "")
@@ -283,7 +275,7 @@ for resource_name in "${targets[@]}"; do
 
 terraform {
   required_providers {
-    ${resource_prefix} = {
+    scm = {
       source = "paloaltonetworks-local/scm"
     }
   }

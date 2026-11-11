@@ -35,7 +35,7 @@ type FqdnApplicationResource struct {
 }
 
 func (r *FqdnApplicationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = "ztna_fqdn_application"
+	resp.TypeName = "scm_ztna_fqdn_application"
 }
 
 func (r *FqdnApplicationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

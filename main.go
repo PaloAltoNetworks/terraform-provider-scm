@@ -16,9 +16,8 @@ import (
 // ensure the documentation is formatted properly.
 //go:generate terraform fmt -recursive ./examples/
 
-// Run the docs generation tool. Because this provider registers resources under two prefixes
-// (scm and ztna), generate-docs.sh runs tfplugindocs once per prefix so each resource gets
-// the correct page title. See generate-docs.sh for details.
+// Run the docs generation tool. generate-docs.sh builds the provider with the "docsgen" tag so
+// the deprecated unprefixed type names are left out of the docs. See generate-docs.sh.
 //go:generate bash generate-docs.sh
 
 var (

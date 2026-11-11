@@ -28,6 +28,7 @@ WildfireAntiVirusProfile data source
 
 ### Read-Only
 
+- `cloud_inline_analysis` (Boolean) Cloud inline analysis
 - `description` (String) Description
 - `mlav_exception` (Attributes List) Mlav exception (see [below for nested schema](#nestedatt--mlav_exception))
 - `packet_capture` (Boolean) Packet capture

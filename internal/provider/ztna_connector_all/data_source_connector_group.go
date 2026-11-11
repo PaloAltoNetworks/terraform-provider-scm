@@ -33,7 +33,7 @@ type ConnectorGroupDataSource struct {
 
 func (d *ConnectorGroupDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: ConnectorGroupDataSource.Metadata ---")
-	resp.TypeName = "ztna_connector_group"
+	resp.TypeName = "scm_ztna_connector_group"
 }
 
 func (d *ConnectorGroupDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

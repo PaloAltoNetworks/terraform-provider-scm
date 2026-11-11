@@ -37,7 +37,7 @@ type wildcardFiltersModel struct {
 }
 
 func (d *WildcardFiltersDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_wildcard_filters"
+	resp.TypeName = "scm_ztna_wildcard_filters"
 }
 
 func (d *WildcardFiltersDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

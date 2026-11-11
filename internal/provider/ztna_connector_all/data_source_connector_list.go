@@ -31,7 +31,7 @@ type ConnectorListDataSource struct {
 }
 
 func (d *ConnectorListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_list"
+	resp.TypeName = "scm_ztna_connector_list"
 }
 
 func (d *ConnectorListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

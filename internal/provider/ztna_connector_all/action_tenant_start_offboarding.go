@@ -21,7 +21,7 @@ var (
 	_ action.ActionWithConfigure = &TenantStartOffboardingAction{}
 )
 
-// TenantStartOffboardingAction implements the ztna_tenant_start_offboarding Terraform action.
+// TenantStartOffboardingAction implements the scm_ztna_tenant_start_offboarding Terraform action.
 type TenantStartOffboardingAction struct {
 	client *ztna_connector_all.APIClient
 }
@@ -35,7 +35,7 @@ func NewTenantStartOffboardingAction() action.Action {
 }
 
 func (a *TenantStartOffboardingAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = "ztna_tenant_start_offboarding"
+	resp.TypeName = "scm_ztna_tenant_start_offboarding"
 }
 
 func (a *TenantStartOffboardingAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

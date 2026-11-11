@@ -33,7 +33,7 @@ type connectorQuiesceModel struct {
 }
 
 func (d *ConnectorQuiesceDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_quiesce"
+	resp.TypeName = "scm_ztna_connector_quiesce"
 }
 
 func (d *ConnectorQuiesceDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -23,6 +23,7 @@ func GetResources() []func() resource.Resource {
 		NewHttpHeaderProfileResource,
 		NewProfileGroupResource,
 		NewSecurityRuleResource,
+		NewSecurityRuleOrderResource,
 		// 		NewSslDecryptionSettingResource,
 		NewUrlAccessProfileResource,
 		NewUrlCategoryResource,

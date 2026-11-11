@@ -74,6 +74,7 @@ Optional:
 Read-Only:
 
 - `backup_sc` (String) Backup s c
+- `bgp_peer` (Attributes) Secondary BGP peer (secondary WAN) (see [below for nested schema](#nestedatt--data--bgp_peer))
 - `encrypted_values` (Map of String, Sensitive) Map of sensitive values returned from the API.
 - `ipsec_tunnel` (String) Ipsec tunnel
 - `nat_pool` (String) Nat pool
@@ -88,13 +89,24 @@ Read-Only:
 - `subnets` (List of String) Subnets
 - `tfid` (String) The Terraform ID.
 
+<a id="nestedatt--data--bgp_peer"></a>
+### Nested Schema for `data.bgp_peer`
+
+Read-Only:
+
+- `local_ip_address` (String) Local peer IP address (secondary WAN)
+- `local_ipv6_address` (String) Local peer IPv6 address (secondary WAN)
+- `peer_ip_address` (String) Remote peer IP address (secondary WAN)
+- `peer_ipv6_address` (String) Remote peer IPv6 address (secondary WAN)
+- `secret` (String, Sensitive) BGP peering secret (secondary WAN)
+
+
 <a id="nestedatt--data--protocol"></a>
 ### Nested Schema for `data.protocol`
 
 Read-Only:
 
 - `bgp` (Attributes) Bgp (see [below for nested schema](#nestedatt--data--protocol--bgp))
-- `bgp_peer` (Attributes) Bgp peer (see [below for nested schema](#nestedatt--data--protocol--bgp_peer))
 
 <a id="nestedatt--data--protocol--bgp"></a>
 ### Nested Schema for `data.protocol.bgp`
@@ -110,18 +122,6 @@ Read-Only:
 - `peer_ip_address` (String) Peer ip address
 - `secret` (String, Sensitive) Secret
 - `summarize_mobile_user_routes` (Boolean) Summarize mobile user routes
-
-
-<a id="nestedatt--data--protocol--bgp_peer"></a>
-### Nested Schema for `data.protocol.bgp_peer`
-
-Read-Only:
-
-- `local_ip_address` (String) Local peer IP address (secondary WAN)
-- `local_ipv6_address` (String) Local peer IPv6 address (secondary WAN)
-- `peer_ip_address` (String) Remote peer IP address (secondary WAN)
-- `peer_ipv6_address` (String) Remote peer IPv6 address (secondary WAN)
-- `secret` (String, Sensitive) BGP peering secret (secondary WAN)
 
 
 

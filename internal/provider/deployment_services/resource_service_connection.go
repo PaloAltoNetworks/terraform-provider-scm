@@ -74,6 +74,27 @@ func (r *ServiceConnectionResource) Create(ctx context.Context, req resource.Cre
 
 	// Stash plaintext values from the plan.
 
+	{ // Stash plaintext for BgpPeer.Secret
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !data.BgpPeer.IsNull() && !data.BgpPeer.IsUnknown() {
+				var temp_stash_BgpPeer_Secret_0 models.ServiceConnectionsBgpPeer
+				resp.Diagnostics.Append(data.BgpPeer.As(ctx, &temp_stash_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					finalVal = temp_stash_BgpPeer_Secret_0.Secret
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.bgp_peer_secret_plaintext = finalVal
+		}
+	}
+
 	{ // Stash plaintext for Protocol.Bgp.Secret
 		var finalVal basetypes.StringValue
 		if !resp.Diagnostics.HasError() {
@@ -100,35 +121,6 @@ func (r *ServiceConnectionResource) Create(ctx context.Context, req resource.Cre
 		}
 		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
 			patcher.protocol_bgp_secret_plaintext = finalVal
-		}
-	}
-
-	{ // Stash plaintext for Protocol.BgpPeer.Secret
-		var finalVal basetypes.StringValue
-		if !resp.Diagnostics.HasError() {
-
-			if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
-				var temp_stash_Protocol_BgpPeer_Secret_0 models.ServiceConnectionsProtocol
-				resp.Diagnostics.Append(data.Protocol.As(ctx, &temp_stash_Protocol_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
-				if !resp.Diagnostics.HasError() {
-
-					if !temp_stash_Protocol_BgpPeer_Secret_0.BgpPeer.IsNull() && !temp_stash_Protocol_BgpPeer_Secret_0.BgpPeer.IsUnknown() {
-						var temp_stash_Protocol_BgpPeer_Secret_1 models.ServiceConnectionsProtocolBgpPeer
-						resp.Diagnostics.Append(temp_stash_Protocol_BgpPeer_Secret_0.BgpPeer.As(ctx, &temp_stash_Protocol_BgpPeer_Secret_1, basetypes.ObjectAsOptions{})...)
-						if !resp.Diagnostics.HasError() {
-
-							// Innermost block
-							finalVal = temp_stash_Protocol_BgpPeer_Secret_1.Secret
-
-						}
-					}
-
-				}
-			}
-
-		}
-		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
-			patcher.protocol_bgp_peer_secret_plaintext = finalVal
 		}
 	}
 
@@ -221,6 +213,33 @@ func (r *ServiceConnectionResource) Create(ctx context.Context, req resource.Cre
 
 	// Stash the encrypted values from the API response and apply the patch.
 
+	{ // Patch plaintext for BgpPeer.Secret
+		if !resp.Diagnostics.HasError() {
+
+			if !data.BgpPeer.IsNull() && !data.BgpPeer.IsUnknown() {
+				var temp_patch_create_BgpPeer_Secret_0 models.ServiceConnectionsBgpPeer
+				resp.Diagnostics.Append(data.BgpPeer.As(ctx, &temp_patch_create_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					patcher.bgp_peer_secret_encrypted = temp_patch_create_BgpPeer_Secret_0.Secret
+					temp_patch_create_BgpPeer_Secret_0.Secret = patcher.bgp_peer_secret_plaintext
+
+					// Repack the modified structs.
+
+					if !resp.Diagnostics.HasError() {
+
+						data.BgpPeer, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsBgpPeer{}.AttrTypes(), &temp_patch_create_BgpPeer_Secret_0)
+
+						resp.Diagnostics.Append(diags...)
+					}
+
+				}
+			}
+
+		}
+	}
+
 	{ // Patch plaintext for Protocol.Bgp.Secret
 		if !resp.Diagnostics.HasError() {
 
@@ -250,48 +269,6 @@ func (r *ServiceConnectionResource) Create(ctx context.Context, req resource.Cre
 							if !resp.Diagnostics.HasError() {
 
 								data.Protocol, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocol{}.AttrTypes(), &temp_patch_create_Protocol_Bgp_Secret_0)
-
-								resp.Diagnostics.Append(diags...)
-							}
-
-						}
-					}
-
-				}
-			}
-
-		}
-	}
-
-	{ // Patch plaintext for Protocol.BgpPeer.Secret
-		if !resp.Diagnostics.HasError() {
-
-			if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
-				var temp_patch_create_Protocol_BgpPeer_Secret_0 models.ServiceConnectionsProtocol
-				resp.Diagnostics.Append(data.Protocol.As(ctx, &temp_patch_create_Protocol_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
-				if !resp.Diagnostics.HasError() {
-
-					if !temp_patch_create_Protocol_BgpPeer_Secret_0.BgpPeer.IsNull() && !temp_patch_create_Protocol_BgpPeer_Secret_0.BgpPeer.IsUnknown() {
-						var temp_patch_create_Protocol_BgpPeer_Secret_1 models.ServiceConnectionsProtocolBgpPeer
-						resp.Diagnostics.Append(temp_patch_create_Protocol_BgpPeer_Secret_0.BgpPeer.As(ctx, &temp_patch_create_Protocol_BgpPeer_Secret_1, basetypes.ObjectAsOptions{})...)
-						if !resp.Diagnostics.HasError() {
-
-							// Innermost block
-							patcher.protocol_bgp_peer_secret_encrypted = temp_patch_create_Protocol_BgpPeer_Secret_1.Secret
-							temp_patch_create_Protocol_BgpPeer_Secret_1.Secret = patcher.protocol_bgp_peer_secret_plaintext
-
-							// Repack the modified structs.
-
-							if !resp.Diagnostics.HasError() {
-
-								temp_patch_create_Protocol_BgpPeer_Secret_0.BgpPeer, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocolBgpPeer{}.AttrTypes(), &temp_patch_create_Protocol_BgpPeer_Secret_1)
-
-								resp.Diagnostics.Append(diags...)
-							}
-
-							if !resp.Diagnostics.HasError() {
-
-								data.Protocol, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocol{}.AttrTypes(), &temp_patch_create_Protocol_BgpPeer_Secret_0)
 
 								resp.Diagnostics.Append(diags...)
 							}
@@ -442,6 +419,36 @@ func (r *ServiceConnectionResource) Read(ctx context.Context, req resource.ReadR
 	// Step 6 - Encrypted values logic
 	// Check for out-of-band changes and apply the patch.
 
+	{ // Patch plaintext for BgpPeer.Secret
+		if !resp.Diagnostics.HasError() {
+
+			if !data.BgpPeer.IsNull() && !data.BgpPeer.IsUnknown() {
+				var temp_patch_read_BgpPeer_Secret_0 models.ServiceConnectionsBgpPeer
+				resp.Diagnostics.Append(data.BgpPeer.As(ctx, &temp_patch_read_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block: Perform comparison and patch.
+					if patcher.bgp_peer_secret_encrypted.Equal(temp_patch_read_BgpPeer_Secret_0.Secret) {
+						temp_patch_read_BgpPeer_Secret_0.Secret = patcher.bgp_peer_secret_plaintext
+					} else {
+						temp_patch_read_BgpPeer_Secret_0.Secret = basetypes.NewStringNull()
+					}
+
+					// Repack the modified structs.
+
+					if !resp.Diagnostics.HasError() {
+
+						data.BgpPeer, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsBgpPeer{}.AttrTypes(), &temp_patch_read_BgpPeer_Secret_0)
+
+						resp.Diagnostics.Append(diags...)
+					}
+
+				}
+			}
+
+		}
+	}
+
 	{ // Patch plaintext for Protocol.Bgp.Secret
 		if !resp.Diagnostics.HasError() {
 
@@ -474,51 +481,6 @@ func (r *ServiceConnectionResource) Read(ctx context.Context, req resource.ReadR
 							if !resp.Diagnostics.HasError() {
 
 								data.Protocol, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocol{}.AttrTypes(), &temp_patch_read_Protocol_Bgp_Secret_0)
-
-								resp.Diagnostics.Append(diags...)
-							}
-
-						}
-					}
-
-				}
-			}
-
-		}
-	}
-
-	{ // Patch plaintext for Protocol.BgpPeer.Secret
-		if !resp.Diagnostics.HasError() {
-
-			if !data.Protocol.IsNull() && !data.Protocol.IsUnknown() {
-				var temp_patch_read_Protocol_BgpPeer_Secret_0 models.ServiceConnectionsProtocol
-				resp.Diagnostics.Append(data.Protocol.As(ctx, &temp_patch_read_Protocol_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
-				if !resp.Diagnostics.HasError() {
-
-					if !temp_patch_read_Protocol_BgpPeer_Secret_0.BgpPeer.IsNull() && !temp_patch_read_Protocol_BgpPeer_Secret_0.BgpPeer.IsUnknown() {
-						var temp_patch_read_Protocol_BgpPeer_Secret_1 models.ServiceConnectionsProtocolBgpPeer
-						resp.Diagnostics.Append(temp_patch_read_Protocol_BgpPeer_Secret_0.BgpPeer.As(ctx, &temp_patch_read_Protocol_BgpPeer_Secret_1, basetypes.ObjectAsOptions{})...)
-						if !resp.Diagnostics.HasError() {
-
-							// Innermost block: Perform comparison and patch.
-							if patcher.protocol_bgp_peer_secret_encrypted.Equal(temp_patch_read_Protocol_BgpPeer_Secret_1.Secret) {
-								temp_patch_read_Protocol_BgpPeer_Secret_1.Secret = patcher.protocol_bgp_peer_secret_plaintext
-							} else {
-								temp_patch_read_Protocol_BgpPeer_Secret_1.Secret = basetypes.NewStringNull()
-							}
-
-							// Repack the modified structs.
-
-							if !resp.Diagnostics.HasError() {
-
-								temp_patch_read_Protocol_BgpPeer_Secret_0.BgpPeer, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocolBgpPeer{}.AttrTypes(), &temp_patch_read_Protocol_BgpPeer_Secret_1)
-
-								resp.Diagnostics.Append(diags...)
-							}
-
-							if !resp.Diagnostics.HasError() {
-
-								data.Protocol, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocol{}.AttrTypes(), &temp_patch_read_Protocol_BgpPeer_Secret_0)
 
 								resp.Diagnostics.Append(diags...)
 							}
@@ -601,6 +563,27 @@ func (r *ServiceConnectionResource) Update(ctx context.Context, req resource.Upd
 	// Step 3: Encrypted values logic
 	patcher := &serviceConnectionsSensitiveValuePatcher{}
 
+	{ // Stash plaintext for BgpPeer.Secret
+		var finalVal basetypes.StringValue
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.BgpPeer.IsNull() && !plan.BgpPeer.IsUnknown() {
+				var temp_stash_upd_BgpPeer_Secret_0 models.ServiceConnectionsBgpPeer
+				resp.Diagnostics.Append(plan.BgpPeer.As(ctx, &temp_stash_upd_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					finalVal = temp_stash_upd_BgpPeer_Secret_0.Secret
+
+				}
+			}
+
+		}
+		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
+			patcher.bgp_peer_secret_plaintext = finalVal
+		}
+	}
+
 	{ // Stash plaintext for Protocol.Bgp.Secret
 		var finalVal basetypes.StringValue
 		if !resp.Diagnostics.HasError() {
@@ -627,35 +610,6 @@ func (r *ServiceConnectionResource) Update(ctx context.Context, req resource.Upd
 		}
 		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
 			patcher.protocol_bgp_secret_plaintext = finalVal
-		}
-	}
-
-	{ // Stash plaintext for Protocol.BgpPeer.Secret
-		var finalVal basetypes.StringValue
-		if !resp.Diagnostics.HasError() {
-
-			if !plan.Protocol.IsNull() && !plan.Protocol.IsUnknown() {
-				var temp_stash_upd_Protocol_BgpPeer_Secret_0 models.ServiceConnectionsProtocol
-				resp.Diagnostics.Append(plan.Protocol.As(ctx, &temp_stash_upd_Protocol_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
-				if !resp.Diagnostics.HasError() {
-
-					if !temp_stash_upd_Protocol_BgpPeer_Secret_0.BgpPeer.IsNull() && !temp_stash_upd_Protocol_BgpPeer_Secret_0.BgpPeer.IsUnknown() {
-						var temp_stash_upd_Protocol_BgpPeer_Secret_1 models.ServiceConnectionsProtocolBgpPeer
-						resp.Diagnostics.Append(temp_stash_upd_Protocol_BgpPeer_Secret_0.BgpPeer.As(ctx, &temp_stash_upd_Protocol_BgpPeer_Secret_1, basetypes.ObjectAsOptions{})...)
-						if !resp.Diagnostics.HasError() {
-
-							// Innermost block
-							finalVal = temp_stash_upd_Protocol_BgpPeer_Secret_1.Secret
-
-						}
-					}
-
-				}
-			}
-
-		}
-		if !resp.Diagnostics.HasError() && !finalVal.IsUnknown() && !finalVal.IsNull() {
-			patcher.protocol_bgp_peer_secret_plaintext = finalVal
 		}
 	}
 
@@ -767,6 +721,33 @@ func (r *ServiceConnectionResource) Update(ctx context.Context, req resource.Upd
 
 	// Step 10: Encrypted values logic
 
+	{ // Patch plaintext for BgpPeer.Secret
+		if !resp.Diagnostics.HasError() {
+
+			if !plan.BgpPeer.IsNull() && !plan.BgpPeer.IsUnknown() {
+				var temp_patch_upd_BgpPeer_Secret_0 models.ServiceConnectionsBgpPeer
+				resp.Diagnostics.Append(plan.BgpPeer.As(ctx, &temp_patch_upd_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
+				if !resp.Diagnostics.HasError() {
+
+					// Innermost block
+					patcher.bgp_peer_secret_encrypted = temp_patch_upd_BgpPeer_Secret_0.Secret
+					temp_patch_upd_BgpPeer_Secret_0.Secret = patcher.bgp_peer_secret_plaintext
+
+					// Repack the modified structs.
+
+					if !resp.Diagnostics.HasError() {
+
+						plan.BgpPeer, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsBgpPeer{}.AttrTypes(), &temp_patch_upd_BgpPeer_Secret_0)
+
+						resp.Diagnostics.Append(diags...)
+					}
+
+				}
+			}
+
+		}
+	}
+
 	{ // Patch plaintext for Protocol.Bgp.Secret
 		if !resp.Diagnostics.HasError() {
 
@@ -796,48 +777,6 @@ func (r *ServiceConnectionResource) Update(ctx context.Context, req resource.Upd
 							if !resp.Diagnostics.HasError() {
 
 								plan.Protocol, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocol{}.AttrTypes(), &temp_patch_upd_Protocol_Bgp_Secret_0)
-
-								resp.Diagnostics.Append(diags...)
-							}
-
-						}
-					}
-
-				}
-			}
-
-		}
-	}
-
-	{ // Patch plaintext for Protocol.BgpPeer.Secret
-		if !resp.Diagnostics.HasError() {
-
-			if !plan.Protocol.IsNull() && !plan.Protocol.IsUnknown() {
-				var temp_patch_upd_Protocol_BgpPeer_Secret_0 models.ServiceConnectionsProtocol
-				resp.Diagnostics.Append(plan.Protocol.As(ctx, &temp_patch_upd_Protocol_BgpPeer_Secret_0, basetypes.ObjectAsOptions{})...)
-				if !resp.Diagnostics.HasError() {
-
-					if !temp_patch_upd_Protocol_BgpPeer_Secret_0.BgpPeer.IsNull() && !temp_patch_upd_Protocol_BgpPeer_Secret_0.BgpPeer.IsUnknown() {
-						var temp_patch_upd_Protocol_BgpPeer_Secret_1 models.ServiceConnectionsProtocolBgpPeer
-						resp.Diagnostics.Append(temp_patch_upd_Protocol_BgpPeer_Secret_0.BgpPeer.As(ctx, &temp_patch_upd_Protocol_BgpPeer_Secret_1, basetypes.ObjectAsOptions{})...)
-						if !resp.Diagnostics.HasError() {
-
-							// Innermost block
-							patcher.protocol_bgp_peer_secret_encrypted = temp_patch_upd_Protocol_BgpPeer_Secret_1.Secret
-							temp_patch_upd_Protocol_BgpPeer_Secret_1.Secret = patcher.protocol_bgp_peer_secret_plaintext
-
-							// Repack the modified structs.
-
-							if !resp.Diagnostics.HasError() {
-
-								temp_patch_upd_Protocol_BgpPeer_Secret_0.BgpPeer, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocolBgpPeer{}.AttrTypes(), &temp_patch_upd_Protocol_BgpPeer_Secret_1)
-
-								resp.Diagnostics.Append(diags...)
-							}
-
-							if !resp.Diagnostics.HasError() {
-
-								plan.Protocol, diags = types.ObjectValueFrom(ctx, models.ServiceConnectionsProtocol{}.AttrTypes(), &temp_patch_upd_Protocol_BgpPeer_Secret_0)
 
 								resp.Diagnostics.Append(diags...)
 							}

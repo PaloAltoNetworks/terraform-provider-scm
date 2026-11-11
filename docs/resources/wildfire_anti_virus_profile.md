@@ -23,6 +23,7 @@ WildfireAntiVirusProfile resource
 
 ~> **Note:** You must specify exactly one of `device`, `folder` or `snippet`.
 
+- `cloud_inline_analysis` (Boolean) Cloud inline analysis
 - `description` (String) Description
 - `device` (String) The device in which the resource is defined
 - `folder` (String) The folder in which the resource is defined

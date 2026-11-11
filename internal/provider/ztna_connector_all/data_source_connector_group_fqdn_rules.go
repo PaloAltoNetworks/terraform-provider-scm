@@ -35,7 +35,7 @@ type connectorGroupFqdnRulesModel struct {
 }
 
 func (d *ConnectorGroupFqdnRulesDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_group_fqdn_rules"
+	resp.TypeName = "scm_ztna_connector_group_fqdn_rules"
 }
 
 func (d *ConnectorGroupFqdnRulesDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

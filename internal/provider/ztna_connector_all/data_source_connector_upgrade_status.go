@@ -42,7 +42,7 @@ type connectorUpgradeStatusModel struct {
 }
 
 func (d *ConnectorUpgradeStatusDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_upgrade_status"
+	resp.TypeName = "scm_ztna_connector_upgrade_status"
 }
 
 func (d *ConnectorUpgradeStatusDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

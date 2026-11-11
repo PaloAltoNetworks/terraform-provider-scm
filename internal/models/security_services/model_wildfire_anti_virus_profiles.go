@@ -21,17 +21,18 @@ import (
 
 // WildfireAntiVirusProfiles represents the Terraform model for WildfireAntiVirusProfiles
 type WildfireAntiVirusProfiles struct {
-	Tfid            types.String          `tfsdk:"tfid"`
-	Description     basetypes.StringValue `tfsdk:"description"`
-	Device          basetypes.StringValue `tfsdk:"device"`
-	Folder          basetypes.StringValue `tfsdk:"folder"`
-	Id              basetypes.StringValue `tfsdk:"id"`
-	MlavException   basetypes.ListValue   `tfsdk:"mlav_exception"`
-	Name            basetypes.StringValue `tfsdk:"name"`
-	PacketCapture   basetypes.BoolValue   `tfsdk:"packet_capture"`
-	Rules           basetypes.ListValue   `tfsdk:"rules"`
-	Snippet         basetypes.StringValue `tfsdk:"snippet"`
-	ThreatException basetypes.ListValue   `tfsdk:"threat_exception"`
+	Tfid                types.String          `tfsdk:"tfid"`
+	CloudInlineAnalysis basetypes.BoolValue   `tfsdk:"cloud_inline_analysis"`
+	Description         basetypes.StringValue `tfsdk:"description"`
+	Device              basetypes.StringValue `tfsdk:"device"`
+	Folder              basetypes.StringValue `tfsdk:"folder"`
+	Id                  basetypes.StringValue `tfsdk:"id"`
+	MlavException       basetypes.ListValue   `tfsdk:"mlav_exception"`
+	Name                basetypes.StringValue `tfsdk:"name"`
+	PacketCapture       basetypes.BoolValue   `tfsdk:"packet_capture"`
+	Rules               basetypes.ListValue   `tfsdk:"rules"`
+	Snippet             basetypes.StringValue `tfsdk:"snippet"`
+	ThreatException     basetypes.ListValue   `tfsdk:"threat_exception"`
 }
 
 // WildfireAntiVirusProfilesMlavExceptionInner represents a nested structure within the WildfireAntiVirusProfiles model
@@ -59,11 +60,12 @@ type WildfireAntiVirusProfilesThreatExceptionInner struct {
 // AttrTypes defines the attribute types for the WildfireAntiVirusProfiles model.
 func (o WildfireAntiVirusProfiles) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":        basetypes.StringType{},
-		"description": basetypes.StringType{},
-		"device":      basetypes.StringType{},
-		"folder":      basetypes.StringType{},
-		"id":          basetypes.StringType{},
+		"tfid":                  basetypes.StringType{},
+		"cloud_inline_analysis": basetypes.BoolType{},
+		"description":           basetypes.StringType{},
+		"device":                basetypes.StringType{},
+		"folder":                basetypes.StringType{},
+		"id":                    basetypes.StringType{},
 		"mlav_exception": basetypes.ListType{ElemType: basetypes.ObjectType{
 			AttrTypes: map[string]attr.Type{
 				"description": basetypes.StringType{},
@@ -152,6 +154,10 @@ func (o WildfireAntiVirusProfilesThreatExceptionInner) AttrType() attr.Type {
 var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 	MarkdownDescription: "WildfireAntiVirusProfile resource",
 	Attributes: map[string]schema.Attribute{
+		"cloud_inline_analysis": schema.BoolAttribute{
+			MarkdownDescription: "Cloud inline analysis",
+			Optional:            true,
+		},
 		"description": schema.StringAttribute{
 			MarkdownDescription: "Description",
 			Optional:            true,
@@ -306,6 +312,10 @@ var WildfireAntiVirusProfilesResourceSchema = schema.Schema{
 var WildfireAntiVirusProfilesDataSourceSchema = dsschema.Schema{
 	MarkdownDescription: "WildfireAntiVirusProfile data source",
 	Attributes: map[string]dsschema.Attribute{
+		"cloud_inline_analysis": dsschema.BoolAttribute{
+			MarkdownDescription: "Cloud inline analysis",
+			Computed:            true,
+		},
 		"description": dsschema.StringAttribute{
 			MarkdownDescription: "Description",
 			Computed:            true,

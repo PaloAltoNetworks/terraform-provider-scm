@@ -22,6 +22,7 @@ type ServiceConnections struct {
 	Tfid                 types.String          `tfsdk:"tfid"`
 	EncryptedValues      basetypes.MapValue    `tfsdk:"encrypted_values"`
 	BackupSC             basetypes.StringValue `tfsdk:"backup_sc"`
+	BgpPeer              basetypes.ObjectValue `tfsdk:"bgp_peer"`
 	Id                   basetypes.StringValue `tfsdk:"id"`
 	IpsecTunnel          basetypes.StringValue `tfsdk:"ipsec_tunnel"`
 	Name                 basetypes.StringValue `tfsdk:"name"`
@@ -38,10 +39,18 @@ type ServiceConnections struct {
 	Folder               basetypes.StringValue `tfsdk:"folder"`
 }
 
+// ServiceConnectionsBgpPeer represents a nested structure within the ServiceConnections model
+type ServiceConnectionsBgpPeer struct {
+	LocalIpAddress   basetypes.StringValue `tfsdk:"local_ip_address"`
+	LocalIpv6Address basetypes.StringValue `tfsdk:"local_ipv6_address"`
+	PeerIpAddress    basetypes.StringValue `tfsdk:"peer_ip_address"`
+	PeerIpv6Address  basetypes.StringValue `tfsdk:"peer_ipv6_address"`
+	Secret           basetypes.StringValue `tfsdk:"secret"`
+}
+
 // ServiceConnectionsProtocol represents a nested structure within the ServiceConnections model
 type ServiceConnectionsProtocol struct {
-	Bgp     basetypes.ObjectValue `tfsdk:"bgp"`
-	BgpPeer basetypes.ObjectValue `tfsdk:"bgp_peer"`
+	Bgp basetypes.ObjectValue `tfsdk:"bgp"`
 }
 
 // ServiceConnectionsProtocolBgp represents a nested structure within the ServiceConnections model
@@ -57,15 +66,6 @@ type ServiceConnectionsProtocolBgp struct {
 	SummarizeMobileUserRoutes basetypes.BoolValue   `tfsdk:"summarize_mobile_user_routes"`
 }
 
-// ServiceConnectionsProtocolBgpPeer represents a nested structure within the ServiceConnections model
-type ServiceConnectionsProtocolBgpPeer struct {
-	LocalIpAddress   basetypes.StringValue `tfsdk:"local_ip_address"`
-	LocalIpv6Address basetypes.StringValue `tfsdk:"local_ipv6_address"`
-	PeerIpAddress    basetypes.StringValue `tfsdk:"peer_ip_address"`
-	PeerIpv6Address  basetypes.StringValue `tfsdk:"peer_ipv6_address"`
-	Secret           basetypes.StringValue `tfsdk:"secret"`
-}
-
 // ServiceConnectionsQos represents a nested structure within the ServiceConnections model
 type ServiceConnectionsQos struct {
 	Enable     basetypes.BoolValue   `tfsdk:"enable"`
@@ -75,9 +75,18 @@ type ServiceConnectionsQos struct {
 // AttrTypes defines the attribute types for the ServiceConnections model.
 func (o ServiceConnections) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
-		"tfid":                basetypes.StringType{},
-		"encrypted_values":    basetypes.MapType{ElemType: basetypes.StringType{}},
-		"backup_sc":           basetypes.StringType{},
+		"tfid":             basetypes.StringType{},
+		"encrypted_values": basetypes.MapType{ElemType: basetypes.StringType{}},
+		"backup_sc":        basetypes.StringType{},
+		"bgp_peer": basetypes.ObjectType{
+			AttrTypes: map[string]attr.Type{
+				"local_ip_address":   basetypes.StringType{},
+				"local_ipv6_address": basetypes.StringType{},
+				"peer_ip_address":    basetypes.StringType{},
+				"peer_ipv6_address":  basetypes.StringType{},
+				"secret":             basetypes.StringType{},
+			},
+		},
 		"id":                  basetypes.StringType{},
 		"ipsec_tunnel":        basetypes.StringType{},
 		"name":                basetypes.StringType{},
@@ -97,15 +106,6 @@ func (o ServiceConnections) AttrTypes() map[string]attr.Type {
 						"peer_ip_address":              basetypes.StringType{},
 						"secret":                       basetypes.StringType{},
 						"summarize_mobile_user_routes": basetypes.BoolType{},
-					},
-				},
-				"bgp_peer": basetypes.ObjectType{
-					AttrTypes: map[string]attr.Type{
-						"local_ip_address":   basetypes.StringType{},
-						"local_ipv6_address": basetypes.StringType{},
-						"peer_ip_address":    basetypes.StringType{},
-						"peer_ipv6_address":  basetypes.StringType{},
-						"secret":             basetypes.StringType{},
 					},
 				},
 			},
@@ -132,6 +132,24 @@ func (o ServiceConnections) AttrType() attr.Type {
 	}
 }
 
+// AttrTypes defines the attribute types for the ServiceConnectionsBgpPeer model.
+func (o ServiceConnectionsBgpPeer) AttrTypes() map[string]attr.Type {
+	return map[string]attr.Type{
+		"local_ip_address":   basetypes.StringType{},
+		"local_ipv6_address": basetypes.StringType{},
+		"peer_ip_address":    basetypes.StringType{},
+		"peer_ipv6_address":  basetypes.StringType{},
+		"secret":             basetypes.StringType{},
+	}
+}
+
+// AttrType returns the attribute type for a list of ServiceConnectionsBgpPeer objects.
+func (o ServiceConnectionsBgpPeer) AttrType() attr.Type {
+	return basetypes.ObjectType{
+		AttrTypes: o.AttrTypes(),
+	}
+}
+
 // AttrTypes defines the attribute types for the ServiceConnectionsProtocol model.
 func (o ServiceConnectionsProtocol) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -146,15 +164,6 @@ func (o ServiceConnectionsProtocol) AttrTypes() map[string]attr.Type {
 				"peer_ip_address":              basetypes.StringType{},
 				"secret":                       basetypes.StringType{},
 				"summarize_mobile_user_routes": basetypes.BoolType{},
-			},
-		},
-		"bgp_peer": basetypes.ObjectType{
-			AttrTypes: map[string]attr.Type{
-				"local_ip_address":   basetypes.StringType{},
-				"local_ipv6_address": basetypes.StringType{},
-				"peer_ip_address":    basetypes.StringType{},
-				"peer_ipv6_address":  basetypes.StringType{},
-				"secret":             basetypes.StringType{},
 			},
 		},
 	}
@@ -189,24 +198,6 @@ func (o ServiceConnectionsProtocolBgp) AttrType() attr.Type {
 	}
 }
 
-// AttrTypes defines the attribute types for the ServiceConnectionsProtocolBgpPeer model.
-func (o ServiceConnectionsProtocolBgpPeer) AttrTypes() map[string]attr.Type {
-	return map[string]attr.Type{
-		"local_ip_address":   basetypes.StringType{},
-		"local_ipv6_address": basetypes.StringType{},
-		"peer_ip_address":    basetypes.StringType{},
-		"peer_ipv6_address":  basetypes.StringType{},
-		"secret":             basetypes.StringType{},
-	}
-}
-
-// AttrType returns the attribute type for a list of ServiceConnectionsProtocolBgpPeer objects.
-func (o ServiceConnectionsProtocolBgpPeer) AttrType() attr.Type {
-	return basetypes.ObjectType{
-		AttrTypes: o.AttrTypes(),
-	}
-}
-
 // AttrTypes defines the attribute types for the ServiceConnectionsQos model.
 func (o ServiceConnectionsQos) AttrTypes() map[string]attr.Type {
 	return map[string]attr.Type{
@@ -229,6 +220,33 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 		"backup_sc": schema.StringAttribute{
 			MarkdownDescription: "Backup s c",
 			Optional:            true,
+		},
+		"bgp_peer": schema.SingleNestedAttribute{
+			MarkdownDescription: "Secondary BGP peer (secondary WAN)",
+			Optional:            true,
+			Attributes: map[string]schema.Attribute{
+				"local_ip_address": schema.StringAttribute{
+					MarkdownDescription: "Local peer IP address (secondary WAN)",
+					Optional:            true,
+				},
+				"local_ipv6_address": schema.StringAttribute{
+					MarkdownDescription: "Local peer IPv6 address (secondary WAN)",
+					Optional:            true,
+				},
+				"peer_ip_address": schema.StringAttribute{
+					MarkdownDescription: "Remote peer IP address (secondary WAN)",
+					Optional:            true,
+				},
+				"peer_ipv6_address": schema.StringAttribute{
+					MarkdownDescription: "Remote peer IPv6 address (secondary WAN)",
+					Optional:            true,
+				},
+				"secret": schema.StringAttribute{
+					MarkdownDescription: "BGP peering secret (secondary WAN)",
+					Optional:            true,
+					Sensitive:           true,
+				},
+			},
 		},
 		"encrypted_values": schema.MapAttribute{
 			ElementType:         basetypes.StringType{},
@@ -329,33 +347,6 @@ var ServiceConnectionsResourceSchema = schema.Schema{
 						},
 					},
 				},
-				"bgp_peer": schema.SingleNestedAttribute{
-					MarkdownDescription: "Bgp peer",
-					Optional:            true,
-					Attributes: map[string]schema.Attribute{
-						"local_ip_address": schema.StringAttribute{
-							MarkdownDescription: "Local peer IP address (secondary WAN)",
-							Optional:            true,
-						},
-						"local_ipv6_address": schema.StringAttribute{
-							MarkdownDescription: "Local peer IPv6 address (secondary WAN)",
-							Optional:            true,
-						},
-						"peer_ip_address": schema.StringAttribute{
-							MarkdownDescription: "Remote peer IP address (secondary WAN)",
-							Optional:            true,
-						},
-						"peer_ipv6_address": schema.StringAttribute{
-							MarkdownDescription: "Remote peer IPv6 address (secondary WAN)",
-							Optional:            true,
-						},
-						"secret": schema.StringAttribute{
-							MarkdownDescription: "BGP peering secret (secondary WAN)",
-							Optional:            true,
-							Sensitive:           true,
-						},
-					},
-				},
 			},
 		},
 		"qos": schema.SingleNestedAttribute{
@@ -411,6 +402,33 @@ var ServiceConnectionsDataSourceSchema = dsschema.Schema{
 		"backup_sc": dsschema.StringAttribute{
 			MarkdownDescription: "Backup s c",
 			Computed:            true,
+		},
+		"bgp_peer": dsschema.SingleNestedAttribute{
+			MarkdownDescription: "Secondary BGP peer (secondary WAN)",
+			Computed:            true,
+			Attributes: map[string]dsschema.Attribute{
+				"local_ip_address": dsschema.StringAttribute{
+					MarkdownDescription: "Local peer IP address (secondary WAN)",
+					Computed:            true,
+				},
+				"local_ipv6_address": dsschema.StringAttribute{
+					MarkdownDescription: "Local peer IPv6 address (secondary WAN)",
+					Computed:            true,
+				},
+				"peer_ip_address": dsschema.StringAttribute{
+					MarkdownDescription: "Remote peer IP address (secondary WAN)",
+					Computed:            true,
+				},
+				"peer_ipv6_address": dsschema.StringAttribute{
+					MarkdownDescription: "Remote peer IPv6 address (secondary WAN)",
+					Computed:            true,
+				},
+				"secret": dsschema.StringAttribute{
+					MarkdownDescription: "BGP peering secret (secondary WAN)",
+					Computed:            true,
+					Sensitive:           true,
+				},
+			},
 		},
 		"encrypted_values": dsschema.MapAttribute{
 			ElementType:         basetypes.StringType{},
@@ -492,33 +510,6 @@ var ServiceConnectionsDataSourceSchema = dsschema.Schema{
 						"summarize_mobile_user_routes": dsschema.BoolAttribute{
 							MarkdownDescription: "Summarize mobile user routes",
 							Computed:            true,
-						},
-					},
-				},
-				"bgp_peer": dsschema.SingleNestedAttribute{
-					MarkdownDescription: "Bgp peer",
-					Computed:            true,
-					Attributes: map[string]dsschema.Attribute{
-						"local_ip_address": dsschema.StringAttribute{
-							MarkdownDescription: "Local peer IP address (secondary WAN)",
-							Computed:            true,
-						},
-						"local_ipv6_address": dsschema.StringAttribute{
-							MarkdownDescription: "Local peer IPv6 address (secondary WAN)",
-							Computed:            true,
-						},
-						"peer_ip_address": dsschema.StringAttribute{
-							MarkdownDescription: "Remote peer IP address (secondary WAN)",
-							Computed:            true,
-						},
-						"peer_ipv6_address": dsschema.StringAttribute{
-							MarkdownDescription: "Remote peer IPv6 address (secondary WAN)",
-							Computed:            true,
-						},
-						"secret": dsschema.StringAttribute{
-							MarkdownDescription: "BGP peering secret (secondary WAN)",
-							Computed:            true,
-							Sensitive:           true,
 						},
 					},
 				},

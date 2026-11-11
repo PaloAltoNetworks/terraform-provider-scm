@@ -37,7 +37,7 @@ type subnetFiltersModel struct {
 }
 
 func (d *SubnetFiltersDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_subnet_filters"
+	resp.TypeName = "scm_ztna_subnet_filters"
 }
 
 func (d *SubnetFiltersDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -35,7 +35,7 @@ type WildcardResource struct {
 }
 
 func (r *WildcardResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = "ztna_wildcard"
+	resp.TypeName = "scm_ztna_wildcard"
 }
 
 func (r *WildcardResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {

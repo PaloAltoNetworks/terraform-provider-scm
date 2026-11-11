@@ -12,7 +12,112 @@ This provider covers the following aspects of Strata Cloud Manager:
 * NGFW & Prisma Access
 * ZTNA Connector
 
+## Resource type names and migrating from `ztna_*`
+
+Every resource, data source and action in this provider starts with `scm_`, for example `scm_address`, `scm_ztna_subnet` and `scm_cngfw_ngfirewall`. Terraform picks a provider from the text before the first underscore in a type, so the `scm_` prefix is what makes Terraform use this provider with no extra configuration.
+
+The ZTNA types were registered as `ztna_*` (for example `ztna_subnet`) in v1.0.13. Those names are deprecated: they still work and Terraform shows a deprecation warning, and they will be removed in a future major version. Use the `scm_ztna_*` names instead.
+
+### Migrating existing ZTNA configurations
+
+Rename the type in each block, and for resources add a `moved` block so Terraform keeps the existing object instead of recreating it:
+
+```terraform
+resource "scm_ztna_subnet" "example" {
+  # ...
+}
+
+moved {
+  from = ztna_subnet.example
+  to   = scm_ztna_subnet.example
+}
+```
+
+Moving a resource to a different type requires Terraform 1.8 or later. Data sources and actions hold no state, so renaming the type is enough.
+
+### Deprecated names
+
+Every ZTNA type is still registered under its old name as a deprecated alias of the `scm_` type. The two names behave identically: same schema, same API calls, same state. Using the old name only adds a deprecation warning to `terraform validate`, `plan` and `apply`. The rule is the same for all of them: the new name is the old name with `scm_` in front.
+
+**Resources**
+
+| Deprecated name | Use instead |
+|---|---|
+| `ztna_connector` | `scm_ztna_connector` |
+| `ztna_connector_group` | `scm_ztna_connector_group` |
+| `ztna_connector_group_scheduled_upgrade` | `scm_ztna_connector_group_scheduled_upgrade` |
+| `ztna_connector_quiesce` | `scm_ztna_connector_quiesce` |
+| `ztna_connector_scheduled_upgrade` | `scm_ztna_connector_scheduled_upgrade` |
+| `ztna_fqdn_application` | `scm_ztna_fqdn_application` |
+| `ztna_subnet` | `scm_ztna_subnet` |
+| `ztna_wildcard` | `scm_ztna_wildcard` |
+
+**Data sources**
+
+| Deprecated name | Use instead |
+|---|---|
+| `ztna_application_filters` | `scm_ztna_application_filters` |
+| `ztna_connector` | `scm_ztna_connector` |
+| `ztna_connector_filters` | `scm_ztna_connector_filters` |
+| `ztna_connector_group` | `scm_ztna_connector_group` |
+| `ztna_connector_group_connectors` | `scm_ztna_connector_group_connectors` |
+| `ztna_connector_group_filters` | `scm_ztna_connector_group_filters` |
+| `ztna_connector_group_fqdn_rules` | `scm_ztna_connector_group_fqdn_rules` |
+| `ztna_connector_group_list` | `scm_ztna_connector_group_list` |
+| `ztna_connector_group_scheduled_upgrade` | `scm_ztna_connector_group_scheduled_upgrade` |
+| `ztna_connector_group_subnet_rules` | `scm_ztna_connector_group_subnet_rules` |
+| `ztna_connector_group_upgrade_status` | `scm_ztna_connector_group_upgrade_status` |
+| `ztna_connector_group_wildcards` | `scm_ztna_connector_group_wildcards` |
+| `ztna_connector_image_list` | `scm_ztna_connector_image_list` |
+| `ztna_connector_list` | `scm_ztna_connector_list` |
+| `ztna_connector_quiesce` | `scm_ztna_connector_quiesce` |
+| `ztna_connector_scheduled_upgrade` | `scm_ztna_connector_scheduled_upgrade` |
+| `ztna_connector_upgrade_status` | `scm_ztna_connector_upgrade_status` |
+| `ztna_discovered_application_filters` | `scm_ztna_discovered_application_filters` |
+| `ztna_discovered_application_list` | `scm_ztna_discovered_application_list` |
+| `ztna_fqdn_application` | `scm_ztna_fqdn_application` |
+| `ztna_fqdn_application_list` | `scm_ztna_fqdn_application_list` |
+| `ztna_license` | `scm_ztna_license` |
+| `ztna_subnet` | `scm_ztna_subnet` |
+| `ztna_subnet_filters` | `scm_ztna_subnet_filters` |
+| `ztna_subnet_list` | `scm_ztna_subnet_list` |
+| `ztna_tenant_status` | `scm_ztna_tenant_status` |
+| `ztna_wildcard` | `scm_ztna_wildcard` |
+| `ztna_wildcard_filters` | `scm_ztna_wildcard_filters` |
+| `ztna_wildcard_list` | `scm_ztna_wildcard_list` |
+
+**Actions**
+
+| Deprecated name | Use instead |
+|---|---|
+| `ztna_tenant_start_offboarding` | `scm_ztna_tenant_start_offboarding` |
+| `ztna_tenant_start_onboarding` | `scm_ztna_tenant_start_onboarding` |
+
+### Staying on the old `ztna_*` names for now
+
+On v1.0.13 and later you can keep using the old names. Terraform cannot infer the provider from them, so set `provider = scm` on every `ztna_*` block, otherwise `terraform init` fails with `Missing required provider`:
+
+```terraform
+resource "ztna_subnet" "example" {
+  provider = scm
+  # ...
+}
+```
+
+Modules that use these blocks must also declare `scm` in their own `required_providers`.
+
 ## Release Notes
+
+### v1.0.14-beta.1
+
+#### NOTES
+
+* The ZTNA types are now registered as `scm_ztna_*`, so Terraform resolves them to this provider without `provider = scm`. The old `ztna_*` names remain as deprecated aliases and will be removed in a future major version. See *Resource type names and migrating from `ztna_*`* above.
+
+#### BUG FIXES
+
+* resource/scm_service_connection: Fixed `inconsistent values for sensitive attribute` on apply when a secondary BGP peer is set. `bgp_peer` moves from `protocol.bgp_peer` back to the resource top level ([#151](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/151))
+* resource/scm_wildfire_anti_virus_profile: Added missing `cloud_inline_analysis` flag ([#152](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/152))
 
 ### v1.0.13
 
@@ -552,13 +657,13 @@ THIS SOFTWARE IS RELEASED AS A PROOF OF CONCEPT FOR EXPERIMENTAL PURPOSES ONLY. 
 ## Example Usage
 
 ```terraform
-# This provider serves two resource prefixes from a single binary:
-#   scm_*  — Strata Cloud Manager resources (NGFW & Prisma Access)
-#   ztna_* — ZTNA Connector resources (Zero Trust Network Access)
+# This provider serves several API families from a single binary:
+#   scm_address, ...      — Strata Cloud Manager resources (NGFW & Prisma Access)
+#   scm_ztna_*            — ZTNA Connector resources (Zero Trust Network Access)
 #
 # SCM and ZTNA use different API hosts:
-#   scm_*  resources use the "host" field      (e.g. api.strata.paloaltonetworks.com)
-#   ztna_* resources use the "ztna_host" field (e.g. api.sase.paloaltonetworks.com)
+#   scm_* (non-ZTNA) resources use the "host" field      (e.g. api.strata.paloaltonetworks.com)
+#   scm_ztna_* resources use the "ztna_host" field (e.g. api.sase.paloaltonetworks.com)
 # Both "host" and "ztna_host" can be specified together in the same provider block
 # when configuring credentials inline. If using an auth file, both fields can be
 # included in the same JSON file.
@@ -570,35 +675,25 @@ THIS SOFTWARE IS RELEASED AS A PROOF OF CONCEPT FOR EXPERIMENTAL PURPOSES ONLY. 
 # This can be set via the provider block, the X_PANW_REGION environment variable,
 # or the "x_panw_region" key in the JSON auth file.
 #
-# To use both, declare two provider aliases in required_providers pointing to
-# the same source, and configure each with its own provider block.
-# The ztna_host and x_panw_region fields in the auth file or provider block are
-# used for ZTNA resources.
-#
-# Example with both providers:
+# Every resource, data source and action starts with scm_ (scm_address,
+# scm_ztna_subnet, scm_cngfw_ngfirewall, ...), so one provider block configures
+# all of them. ZTNA types need the ztna_host and x_panw_region settings:
 #
 # terraform {
 #   required_providers {
 #     scm = {
-#       source  = "PaloAltoNetworks/scm"
-#     }
-#     ztna = {
-#       source  = "PaloAltoNetworks/scm"
+#       source = "PaloAltoNetworks/scm"
 #     }
 #   }
 # }
 #
 # provider "scm" {
-#   auth_file = "/path/to/scm-config.json"
-#   logging   = "debug"
-# }
-#
-# provider "ztna" {
 #   auth_file     = "/path/to/scm-config.json"
 #   ztna_host     = "api.sase.paloaltonetworks.com"
 #   x_panw_region = "americas"   # see valid values above
 #   logging       = "debug"
 # }
+
 
 # This file is embedded using go:embed
 provider "scm" {

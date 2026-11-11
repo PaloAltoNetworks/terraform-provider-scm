@@ -21,7 +21,7 @@ var (
 	_ action.ActionWithConfigure = &TenantStartOnboardingAction{}
 )
 
-// TenantStartOnboardingAction implements the ztna_tenant_start_onboarding Terraform action.
+// TenantStartOnboardingAction implements the scm_ztna_tenant_start_onboarding Terraform action.
 type TenantStartOnboardingAction struct {
 	client *ztna_connector_all.APIClient
 }
@@ -35,7 +35,7 @@ func NewTenantStartOnboardingAction() action.Action {
 }
 
 func (a *TenantStartOnboardingAction) Metadata(_ context.Context, _ action.MetadataRequest, resp *action.MetadataResponse) {
-	resp.TypeName = "ztna_tenant_start_onboarding"
+	resp.TypeName = "scm_ztna_tenant_start_onboarding"
 }
 
 func (a *TenantStartOnboardingAction) Schema(_ context.Context, _ action.SchemaRequest, resp *action.SchemaResponse) {

@@ -31,7 +31,7 @@ type FqdnApplicationListDataSource struct {
 }
 
 func (d *FqdnApplicationListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_fqdn_application_list"
+	resp.TypeName = "scm_ztna_fqdn_application_list"
 }
 
 func (d *FqdnApplicationListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

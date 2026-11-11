@@ -38,7 +38,7 @@ type connectorGroupScheduledUpgradeModel struct {
 }
 
 func (d *ConnectorGroupScheduledUpgradeDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_group_scheduled_upgrade"
+	resp.TypeName = "scm_ztna_connector_group_scheduled_upgrade"
 }
 
 func (d *ConnectorGroupScheduledUpgradeDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

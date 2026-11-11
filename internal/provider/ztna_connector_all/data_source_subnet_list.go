@@ -31,7 +31,7 @@ type SubnetListDataSource struct {
 }
 
 func (d *SubnetListDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_subnet_list"
+	resp.TypeName = "scm_ztna_subnet_list"
 }
 
 func (d *SubnetListDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

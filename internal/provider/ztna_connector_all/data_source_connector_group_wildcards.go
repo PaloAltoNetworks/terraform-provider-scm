@@ -35,7 +35,7 @@ type connectorGroupWildcardsModel struct {
 }
 
 func (d *ConnectorGroupWildcardsDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_group_wildcards"
+	resp.TypeName = "scm_ztna_connector_group_wildcards"
 }
 
 func (d *ConnectorGroupWildcardsDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

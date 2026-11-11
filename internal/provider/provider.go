@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	setup "github.com/paloaltonetworks/scm-go"
 
+	tfProviderCloudNgfw "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/cloud_ngfw"
 	tfProviderConfigOperations "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_operations"
 	tfProviderConfigSetup "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_setup"
 	tfProviderDeploymentServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
@@ -228,6 +229,8 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 	// Create a client container with all service-specific clients
 	// Create clients map
 	clients := map[string]interface{}{
+		"setup":               setupClient,
+		"cloud_ngfw":          setup.GetCloudNgfwAPIClient(setupClient),
 		"config_setup":        setup.GetConfigSetupAPIClient(setupClient),
 		"deployment_services": setup.GetDeploymentServicesAPIClient(setupClient),
 		"device_settings":     setup.GetDeviceSettingsAPIClient(setupClient),
@@ -249,6 +252,8 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 // DataSources defines the data sources for this provider.
 func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	var dataSources []func() datasource.DataSource
+	// Add cloud_ngfw package data sources
+	dataSources = append(dataSources, tfProviderCloudNgfw.GetDataSources()...)
 	// Add config_setup package data sources
 	dataSources = append(dataSources, tfProviderConfigSetup.GetDataSources()...)
 	// Add deployment_services package data sources
@@ -265,14 +270,16 @@ func (p *ScmProvider) DataSources(ctx context.Context) []func() datasource.DataS
 	dataSources = append(dataSources, tfProviderObjects.GetDataSources()...)
 	// Add security_services package data sources
 	dataSources = append(dataSources, tfProviderSecurityServices.GetDataSources()...)
-	// Add ztna_connector_all package data sources
-	dataSources = append(dataSources, tfProviderZtnaConnectorAll.GetDataSources()...)
+	// Add ztna_connector_all package data sources also under their old unprefixed names (deprecated)
+	dataSources = append(dataSources, legacyDataSources(tfProviderZtnaConnectorAll.GetDataSources())...)
 	return dataSources
 }
 
 // Resources defines the resources for this provider.
 func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource {
 	var resources []func() resource.Resource
+	// Add cloud_ngfw package resources
+	resources = append(resources, tfProviderCloudNgfw.GetResources()...)
 	// Add config_setup package resources
 	resources = append(resources, tfProviderConfigSetup.GetResources()...)
 	// Add deployment_services package resources
@@ -289,8 +296,8 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 	resources = append(resources, tfProviderObjects.GetResources()...)
 	// Add security_services package resources
 	resources = append(resources, tfProviderSecurityServices.GetResources()...)
-	// Add ztna_connector_all package resources
-	resources = append(resources, tfProviderZtnaConnectorAll.GetResources()...)
+	// Add ztna_connector_all package resources also under their old unprefixed names (deprecated)
+	resources = append(resources, legacyResources(tfProviderZtnaConnectorAll.GetResources())...)
 
 	return resources
 }
@@ -308,8 +315,8 @@ func (p *ScmProvider) Actions(_ context.Context) []func() action.Action {
 	actions = append(actions, tfProviderIdentityServices.GetActions()...)
 	// Add network_services package actions
 	actions = append(actions, tfProviderNetworkServices.GetActions()...)
-	// Add ztna_connector_all package actions
-	actions = append(actions, tfProviderZtnaConnectorAll.GetActions()...)
+	// Add ztna_connector_all package actions also under their old unprefixed names (deprecated)
+	actions = append(actions, legacyActions(tfProviderZtnaConnectorAll.GetActions())...)
 
 	return actions
 }

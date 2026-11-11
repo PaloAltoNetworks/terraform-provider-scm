@@ -33,7 +33,7 @@ type LicenseDataSource struct {
 
 func (d *LicenseDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: LicenseDataSource.Metadata ---")
-	resp.TypeName = "ztna_license"
+	resp.TypeName = "scm_ztna_license"
 }
 
 func (d *LicenseDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

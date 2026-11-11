@@ -36,6 +36,14 @@ jobs:
       - name: Build provider
         run: go build -o terraform-provider-scm
 
+      # Naming rule: every type starts with scm_, or is a deprecated alias of a
+      # scm_ type (the legacy ztna_* names). The docsgen build, used to generate
+      # the docs, must contain only scm_ types.
+      - name: Check registered type names
+        run: |
+          go test ./internal/provider/
+          go test -tags docsgen ./internal/provider/
+
       - name: Configure dev_overrides
         run: |
           printf 'provider_installation {\n  dev_overrides {\n    "paloaltonetworks-local/scm" = "%s"\n  }\n  direct {}\n}\n' "${{ github.workspace }}" > ~/.terraformrc
@@ -58,25 +66,13 @@ jobs:
             echo "  client_secret = \"${SCM_CLIENT_SECRET}\""
             echo "  scope         = \"${SCM_SCOPE}\""
             echo '  logging       = "debug"'
-            echo '}'
-            echo ''
-            echo 'provider "ztna" {'
-            echo "  host          = \"${ZTNA_HOST}\""
             echo "  ztna_host     = \"${ZTNA_HOST}\""
             echo "  x_panw_region = \"${X_PANW_REGION}\""
-            echo "  auth_url      = \"${SCM_AUTH_URL}\""
-            echo "  client_id     = \"${SCM_CLIENT_ID}\""
-            echo "  client_secret = \"${SCM_CLIENT_SECRET}\""
-            echo "  scope         = \"${SCM_SCOPE}\""
-            echo '  logging       = "debug"'
             echo '}'
             echo ''
             echo 'terraform {'
             echo '  required_providers {'
             echo '    scm = {'
-            echo '      source = "paloaltonetworks-local/scm"'
-            echo '    }'
-            echo '    ztna = {'
             echo '      source = "paloaltonetworks-local/scm"'
             echo '    }'
             echo '  }'

@@ -29,6 +29,12 @@ func unpackWildfireAntiVirusProfilesToSdk(ctx context.Context, obj types.Object)
 	var d diag.Diagnostics
 
 	// Handling Primitives
+	if !model.CloudInlineAnalysis.IsNull() && !model.CloudInlineAnalysis.IsUnknown() {
+		sdk.CloudInlineAnalysis = model.CloudInlineAnalysis.ValueBoolPointer()
+		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "CloudInlineAnalysis", "value": *sdk.CloudInlineAnalysis})
+	}
+
+	// Handling Primitives
 	if !model.Description.IsNull() && !model.Description.IsUnknown() {
 		sdk.Description = model.Description.ValueStringPointer()
 		tflog.Debug(ctx, "Unpacked primitive pointer", map[string]interface{}{"field": "Description", "value": *sdk.Description})
@@ -107,6 +113,14 @@ func packWildfireAntiVirusProfilesFromSdk(ctx context.Context, sdk security_serv
 	diags := diag.Diagnostics{}
 	var model models.WildfireAntiVirusProfiles
 	var d diag.Diagnostics
+	// Handling Primitives
+	// Standard primitive packing
+	if sdk.CloudInlineAnalysis != nil {
+		model.CloudInlineAnalysis = basetypes.NewBoolValue(*sdk.CloudInlineAnalysis)
+		tflog.Debug(ctx, "Packed primitive pointer", map[string]interface{}{"field": "CloudInlineAnalysis", "value": *sdk.CloudInlineAnalysis})
+	} else {
+		model.CloudInlineAnalysis = basetypes.NewBoolNull()
+	}
 	// Handling Primitives
 	// Standard primitive packing
 	if sdk.Description != nil {

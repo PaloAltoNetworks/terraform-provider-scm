@@ -35,7 +35,7 @@ type connectorGroupConnectorsModel struct {
 }
 
 func (d *ConnectorGroupConnectorsDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_group_connectors"
+	resp.TypeName = "scm_ztna_connector_group_connectors"
 }
 
 func (d *ConnectorGroupConnectorsDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

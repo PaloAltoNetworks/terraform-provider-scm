@@ -33,7 +33,7 @@ type WildcardDataSource struct {
 
 func (d *WildcardDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: WildcardDataSource.Metadata ---")
-	resp.TypeName = "ztna_wildcard"
+	resp.TypeName = "scm_ztna_wildcard"
 }
 
 func (d *WildcardDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

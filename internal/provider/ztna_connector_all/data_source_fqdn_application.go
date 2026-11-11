@@ -33,7 +33,7 @@ type FqdnApplicationDataSource struct {
 
 func (d *FqdnApplicationDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: FqdnApplicationDataSource.Metadata ---")
-	resp.TypeName = "ztna_fqdn_application"
+	resp.TypeName = "scm_ztna_fqdn_application"
 }
 
 func (d *FqdnApplicationDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

@@ -37,7 +37,7 @@ type applicationFiltersModel struct {
 }
 
 func (d *ApplicationFiltersDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_application_filters"
+	resp.TypeName = "scm_ztna_application_filters"
 }
 
 func (d *ApplicationFiltersDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

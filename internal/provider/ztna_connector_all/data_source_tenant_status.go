@@ -33,7 +33,7 @@ type TenantStatusDataSource struct {
 
 func (d *TenantStatusDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	tflog.Debug(ctx, "--- ENTER: TenantStatusDataSource.Metadata ---")
-	resp.TypeName = "ztna_tenant_status"
+	resp.TypeName = "scm_ztna_tenant_status"
 }
 
 func (d *TenantStatusDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {

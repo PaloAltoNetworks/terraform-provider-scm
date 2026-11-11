@@ -35,7 +35,7 @@ type connectorGroupSubnetRulesModel struct {
 }
 
 func (d *ConnectorGroupSubnetRulesDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
-	resp.TypeName = "ztna_connector_group_subnet_rules"
+	resp.TypeName = "scm_ztna_connector_group_subnet_rules"
 }
 
 func (d *ConnectorGroupSubnetRulesDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {

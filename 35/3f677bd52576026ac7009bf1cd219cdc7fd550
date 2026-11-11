@@ -1,0 +1,353 @@
+docs/data-sources/ztna_license.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,21-26
+docs/data-sources/ztna_wildcard_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,21,26
+examples/provider/provider.tf
+  s_b6b6b50ae05f70::t_d074cabecd8acf 26
+  s_b6b6b50ae05f70::t_1f8f0ef86052fc 56
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1-3,6-7,19-21
+  s_b6b6b50ae05f70::t_8f18ce93b569f9 38-39,46,49,53
+docs/index.md
+  s_b6b6b50ae05f70::t_d074cabecd8acf 16,18,25,27-29,33-35,685
+  s_b6b6b50ae05f70::t_ee80ed45270c58 38-95
+  s_b6b6b50ae05f70::t_1a7d440758a42d 97,99-100,104-106,108
+  s_b6b6b50ae05f70::t_689b72c011ea5d 15,17,19-24,26,30-32,36,96,98,101-103,107,115-121,660-662,665-666,678-680
+  s_b6b6b50ae05f70::t_3621c45599ace4 37,112-114
+  s_b6b6b50ae05f70::t_fb234c5a7c9119 111,697
+docs/data-sources/ztna_connector_group_scheduled_upgrade.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-26
+docs/data-sources/ztna_connector_scheduled_upgrade.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-25
+examples/data-sources/scm_ztna_wildcard_filters/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,6,10,15,20
+examples/resources/scm_ztna_connector/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1,6,8
+examples/data-sources/scm_ztna_connector_group_wildcards/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,7
+docs/data-sources/ztna_subnet.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-28
+docs/data-sources/ztna_application_filters.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,21,25,30,35
+docs/data-sources/ztna_connector.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-26
+examples/data-sources/scm_ztna_connector_filters/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,6,10,15,20
+examples/data-sources/scm_ztna_connector/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-11
+internal/provider/cloud_ngfw/resource_ngfirewall.go
+  s_b6b6b50ae05f70::t_689b72c011ea5d 46
+  s_b6b6b50ae05f70::t_d074cabecd8acf 1-45,47-616
+docs/actions/ztna_tenant_start_offboarding.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,20,22
+internal/models/deployment_services/model_service_connections.go
+  s_b6b6b50ae05f70::t_d074cabecd8acf 25,42-50,53,78-89,135-152,224-250,406-432
+docs/resources/ztna_connector_scheduled_upgrade.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,19,21-22,26,28,57
+examples/data-sources/scm_ztna_subnet_filters/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,6,10,15,20
+examples/data-sources/scm_ztna_wildcard/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-13
+docs/data-sources/ztna_connector_upgrade_status.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-26
+docs/resources/ztna_subnet.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,16,21,24,64
+examples/data-sources/scm_cngfw_ngfirewall_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1-14
+docs/data-sources/ztna_connector_group.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-25
+docs/data-sources/ztna_connector_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,21,26
+docs/resources/ztna_wildcard.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,16,21,24,91
+internal/provider/cloud_ngfw/datasources.go
+  s_b6b6b50ae05f70::t_d074cabecd8acf 1-13
+docs/data-sources/ztna_tenant_status.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,20
+docs/data-sources/ztna_subnet_filters.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,21,25,30,35
+docs/data-sources/ztna_connector_filters.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,21,25,30,35
+examples/actions/scm_ztna_tenant_start_onboarding/action.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 5,7
+examples/data-sources/scm_ztna_wildcard_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,6,11
+examples/data-sources/scm_ztna_discovered_application_filters/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,6,10,15,20
+examples/resources/scm_ztna_wildcard/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1,6,9
+docs/data-sources/cngfw_ngfirewall.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3-35
+  s_b6b6b50ae05f70::t_1c4b288cc5b00e 1-2,36-323
+docs/data-sources/ztna_connector_group_connectors.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,22
+docs/data-sources/cngfw_ngfirewall_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3-28
+  s_b6b6b50ae05f70::t_5f091bae905237 1-2,29-308
+internal/provider/cloud_ngfw/data_source_ngfirewall.go
+  s_b6b6b50ae05f70::t_d074cabecd8acf 1-35,37-156
+  s_b6b6b50ae05f70::t_689b72c011ea5d 36
+internal/provider/cloud_ngfw/data_source_ngfirewall_list.go
+  s_b6b6b50ae05f70::t_d074cabecd8acf 1-33,35-115
+  s_b6b6b50ae05f70::t_689b72c011ea5d 34
+docs/data-sources/ztna_connector_image_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,21
+examples/resources/scm_ztna_connector_group_scheduled_upgrade/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 5,7-8,12,14
+docs/data-sources/ztna_wildcard_filters.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,21,25,30,35
+docs/data-sources/ztna_wildcard.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-28
+examples/data-sources/scm_ztna_discovered_application_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,5
+docs/data-sources/ztna_connector_quiesce.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23
+examples/data-sources/scm_ztna_subnet/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-13
+docs/resources/ztna_connector_group_scheduled_upgrade.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,20,22-23,27,29,62
+examples/data-sources/scm_ztna_connector_group_subnet_rules/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,7
+examples/data-sources/scm_ztna_connector_quiesce/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8
+examples/data-sources/scm_ztna_license/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,6-11
+docs/data-sources/ztna_discovered_application_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,20
+internal/provider/cloud_ngfw/resources.go
+  s_b6b6b50ae05f70::t_d074cabecd8acf 1-12
+docs/resources/cngfw_ngfirewall.md
+  s_b6b6b50ae05f70::t_d8ec09a75ea331 34,168-174,176-177
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3-16,175
+  s_b6b6b50ae05f70::t_38998f4adfbc6d 1-2,17-33,35-167
+examples/resources/scm_ztna_connector_quiesce/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2
+examples/data-sources/scm_ztna_connector_upgrade_status/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-11
+docs/data-sources/ztna_discovered_application_filters.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,21,25,30,35
+internal/models/security_services/model_wildfire_anti_virus_profiles.go
+  s_b6b6b50ae05f70::t_d074cabecd8acf 24-35,63-68,157-160,315-318
+examples/data-sources/scm_ztna_fqdn_application/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-13
+examples/data-sources/scm_ztna_fqdn_application_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,6,11
+examples/data-sources/scm_ztna_application_filters/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,6,10,15,20
+examples/data-sources/scm_ztna_connector_image_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,6
+examples/data-sources/scm_ztna_connector_group_upgrade_status/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9-11
+examples/data-sources/scm_ztna_connector_group_scheduled_upgrade/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-11
+docs/data-sources/ztna_subnet_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,21,26
+examples/data-sources/scm_ztna_connector_group/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-10
+examples/data-sources/scm_cngfw_ngfirewall/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1-22
+docs/actions/ztna_tenant_start_onboarding.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,20,22
+docs/resources/ztna_fqdn_application.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,16,21,23,99
+examples/data-sources/scm_ztna_connector_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,6,11
+examples/resources/scm_ztna_subnet/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1,6,9
+docs/resources/ztna_connector_quiesce.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,41
+examples/data-sources/scm_ztna_tenant_status/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,5
+examples/data-sources/scm_ztna_connector_group_connectors/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,7
+docs/resources/ztna_connector_group.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,16,65
+examples/data-sources/scm_ztna_connector_scheduled_upgrade/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,8-10
+docs/data-sources/ztna_fqdn_application.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,23-28
+examples/resources/scm_ztna_connector_group/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1
+docs/data-sources/ztna_connector_group_wildcards.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,22
+docs/data-sources/ztna_connector_group_fqdn_rules.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,22
+docs/data-sources/ztna_connector_group_upgrade_status.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,24-26
+internal/provider/cloud_ngfw/resource_ngfirewall_mappers.go
+  s_b6b6b50ae05f70::t_d074cabecd8acf 1-4135
+examples/resources/scm_ztna_connector_scheduled_upgrade/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 4,6-7,11,13
+docs/data-sources/ztna_connector_group_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,21,26
+docs/data-sources/ztna_fqdn_application_list.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,21,26
+generate-docs.sh
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2-5,8,10
+.github/workflows/test-resources.yml
+  s_b6b6b50ae05f70::t_8bd33fb36e805f 39-46
+examples/data-sources/scm_ztna_connector_group_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,6,11
+examples/resources/scm_ztna_fqdn_application/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1,6,8
+examples/data-sources/scm_ztna_connector_group_fqdn_rules/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,7
+examples/actions/scm_ztna_tenant_start_offboarding/action.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 5,7
+examples/data-sources/scm_ztna_connector_group_filters/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,6,10,15,20
+docs/resources/ztna_connector.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,16,21,23,56
+docs/data-sources/ztna_connector_group_filters.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,18,21,25,30,35
+internal/models/cloud_ngfw/model_ngfirewalls.go
+  s_b6b6b50ae05f70::t_1f8f0ef86052fc 233,1231
+  s_b6b6b50ae05f70::t_d074cabecd8acf 1-26,28-231,234-431,433-1229,1232-5789
+  s_b6b6b50ae05f70::t_1a7d440758a42d 27,432
+  s_b6b6b50ae05f70::t_ee80ed45270c58 232,1230
+docs/data-sources/ztna_connector_group_subnet_rules.md
+  s_b6b6b50ae05f70::t_689b72c011ea5d 3,9,17,22
+examples/data-sources/scm_ztna_subnet_list/data-source.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 2,6,11
+examples/resources/scm_cngfw_ngfirewall/resource.tf
+  s_b6b6b50ae05f70::t_689b72c011ea5d 1-19
+docs/data-sources/service_connection.md
+  s_b6b6b50ae05f70::t_de40c2950ce407 54,69-80
+docs/data-sources/service_connection_list.md
+  s_b6b6b50ae05f70::t_b39f22b3ad664d 77,92-103
+docs/data-sources/wildfire_anti_virus_profile.md
+  s_b6b6b50ae05f70::t_1ced68862062ed 31
+docs/data-sources/wildfire_anti_virus_profile_list.md
+  s_b6b6b50ae05f70::t_a704ebfcf1ab2b 49
+docs/resources/security_rule_order.md
+  s_b6b6b50ae05f70::t_4a15bc76c84b0f 1-58
+docs/resources/service_connection.md
+  s_b6b6b50ae05f70::t_5946b2559fa562 122,140-151
+docs/resources/wildfire_anti_virus_profile.md
+  s_b6b6b50ae05f70::t_51ab08b4b0da41 26
+internal/provider/deployment_services/resource_service_connection.go
+  s_b6b6b50ae05f70::t_4956f342c8622b 77,81-83,86-87,94,98,103-104,107-109,113,123,216,219-221,224-226,228,230,232,234,243,247-248,251-253,257-258,264,271,422,425-427,430-435,437,439,441,443,452,456-457,460-462,466-467,469,476,483,566,570-572,575-576,583,587,592-593,596-598,602,612,724,727-729,732-734,736,738,740,742,751,755-756,759-761,765-766,772,779
+internal/provider/deployment_services/resource_service_connection_mappers.go
+  s_b6b6b50ae05f70::t_8048389e63a78a 19-22,37-42,56-61,92-104,220-232,392-544
+internal/provider/prefix_aliases.go
+  s_b6b6b50ae05f70::t_8ed97493ebab77 1-285
+internal/provider/prefix_aliases_docs.go
+  s_b6b6b50ae05f70::t_149674ece1ae76 1-20
+internal/provider/prefix_aliases_docs_test.go
+  s_b6b6b50ae05f70::t_63456d736bfa19 1-40
+internal/provider/prefix_aliases_test.go
+  s_b6b6b50ae05f70::t_a9aa492abc4546 1-139
+internal/provider/provider.go
+  s_b6b6b50ae05f70::t_7c5826e5dd5dcc 18,232-233,255-256,273-274,281-282,299-300,318-319
+internal/provider/security_services/resource_security_rule_order.go
+  s_b6b6b50ae05f70::t_a93ad372e20a4c 1-762
+internal/provider/security_services/resource_wildfire_anti_virus_profile_mappers.go
+  s_b6b6b50ae05f70::t_948806c9071976 31-36,118-125
+internal/provider/security_services/resources.go
+  s_b6b6b50ae05f70::t_0f68b21ca54877 26
+internal/provider/security_services/rule_order_lis.go
+  s_b6b6b50ae05f70::t_a6499b64ffc512 1-813
+internal/provider/security_services/rule_order_lis_test.go
+  s_b6b6b50ae05f70::t_18be54d3d42b55 1-677
+internal/provider/ztna_connector_all/action_tenant_start_offboarding.go
+  s_b6b6b50ae05f70::t_4db36a0553a9d1 24,38
+internal/provider/ztna_connector_all/action_tenant_start_onboarding.go
+  s_b6b6b50ae05f70::t_07ce84cd7c5694 24,38
+internal/provider/ztna_connector_all/data_source_application_filters.go
+  s_b6b6b50ae05f70::t_01c08be3ad2c98 40
+internal/provider/ztna_connector_all/data_source_connector.go
+  s_b6b6b50ae05f70::t_22726f9a1531c4 36
+internal/provider/ztna_connector_all/data_source_connector_filters.go
+  s_b6b6b50ae05f70::t_efbec8e180bd91 40
+internal/provider/ztna_connector_all/data_source_connector_group.go
+  s_b6b6b50ae05f70::t_0f1b800688ef7d 36
+internal/provider/ztna_connector_all/data_source_connector_group_connectors.go
+  s_b6b6b50ae05f70::t_13d3fbe1a319e3 38
+internal/provider/ztna_connector_all/data_source_connector_group_filters.go
+  s_b6b6b50ae05f70::t_d415a865b1528b 40
+internal/provider/ztna_connector_all/data_source_connector_group_fqdn_rules.go
+  s_b6b6b50ae05f70::t_e83ee3dcc53936 38
+internal/provider/ztna_connector_all/data_source_connector_group_list.go
+  s_b6b6b50ae05f70::t_2146ec0356b4c6 34
+internal/provider/ztna_connector_all/data_source_connector_group_scheduled_upgrade.go
+  s_b6b6b50ae05f70::t_bca2bce0e70050 41
+internal/provider/ztna_connector_all/data_source_connector_group_subnet_rules.go
+  s_b6b6b50ae05f70::t_d9f9fdfcc1e5c7 38
+internal/provider/ztna_connector_all/data_source_connector_group_upgrade_status.go
+  s_b6b6b50ae05f70::t_f4a34a16c7c5d9 40
+internal/provider/ztna_connector_all/data_source_connector_group_wildcards.go
+  s_b6b6b50ae05f70::t_5c96ae9c9d02b6 38
+internal/provider/ztna_connector_all/data_source_connector_image_list.go
+  s_b6b6b50ae05f70::t_6fc484cdbbcb2d 34
+internal/provider/ztna_connector_all/data_source_connector_list.go
+  s_b6b6b50ae05f70::t_a9c545b261a068 34
+internal/provider/ztna_connector_all/data_source_connector_quiesce.go
+  s_b6b6b50ae05f70::t_2a0792917db387 36
+internal/provider/ztna_connector_all/data_source_connector_scheduled_upgrade.go
+  s_b6b6b50ae05f70::t_d5f8d67b2742a0 39
+internal/provider/ztna_connector_all/data_source_connector_upgrade_status.go
+  s_b6b6b50ae05f70::t_009717fb073980 45
+internal/provider/ztna_connector_all/data_source_discovered_application_filters.go
+  s_b6b6b50ae05f70::t_d42b6c680f7b90 40
+internal/provider/ztna_connector_all/data_source_discovered_application_list.go
+  s_b6b6b50ae05f70::t_3d8ac5961a0193 34
+internal/provider/ztna_connector_all/data_source_fqdn_application.go
+  s_b6b6b50ae05f70::t_6f68d6ab846aef 36
+internal/provider/ztna_connector_all/data_source_fqdn_application_list.go
+  s_b6b6b50ae05f70::t_db596476e479fc 34
+internal/provider/ztna_connector_all/data_source_license.go
+  s_b6b6b50ae05f70::t_3ac016fb390e91 36
+internal/provider/ztna_connector_all/data_source_subnet.go
+  s_b6b6b50ae05f70::t_640186d9f929c4 36
+internal/provider/ztna_connector_all/data_source_subnet_filters.go
+  s_b6b6b50ae05f70::t_eb55828dd0a4de 40
+internal/provider/ztna_connector_all/data_source_subnet_list.go
+  s_b6b6b50ae05f70::t_1bb1dca1ecbd8a 34
+internal/provider/ztna_connector_all/data_source_tenant_status.go
+  s_b6b6b50ae05f70::t_920e38d02d9ecc 36
+internal/provider/ztna_connector_all/data_source_wildcard.go
+  s_b6b6b50ae05f70::t_1db472eb1e7cca 36
+internal/provider/ztna_connector_all/data_source_wildcard_filters.go
+  s_b6b6b50ae05f70::t_09088bda7f00a0 40
+internal/provider/ztna_connector_all/data_source_wildcard_list.go
+  s_b6b6b50ae05f70::t_c87268f41b365a 34
+internal/provider/ztna_connector_all/resource_connector.go
+  s_b6b6b50ae05f70::t_7c8682a97391f6 38
+internal/provider/ztna_connector_all/resource_connector_group.go
+  s_b6b6b50ae05f70::t_7ad38bafd1e0e9 38
+internal/provider/ztna_connector_all/resource_connector_group_scheduled_upgrade.go
+  s_b6b6b50ae05f70::t_774f26ea53bc41 43
+internal/provider/ztna_connector_all/resource_connector_quiesce.go
+  s_b6b6b50ae05f70::t_4e04b7c292cb20 38
+internal/provider/ztna_connector_all/resource_connector_scheduled_upgrade.go
+  s_b6b6b50ae05f70::t_3e288497bc3ce9 41
+internal/provider/ztna_connector_all/resource_fqdn_application.go
+  s_b6b6b50ae05f70::t_ab1318a2e18f3d 38
+internal/provider/ztna_connector_all/resource_subnet.go
+  s_b6b6b50ae05f70::t_3951af27c23b75 38
+internal/provider/ztna_connector_all/resource_wildcard.go
+  s_b6b6b50ae05f70::t_155f3a6e59fe6a 38
+main.go
+  s_b6b6b50ae05f70::t_76ee2f8b690249 19-20
+templates/index.md.tmpl
+  s_b6b6b50ae05f70::t_035595e8786f2f 15-56,59-69
+tests/run_tests.sh
+  s_b6b6b50ae05f70::t_926518b357847b 44
+tests/setup.sh
+  s_b6b6b50ae05f70::t_c3a8f3762b26bf 7,20,38,255-260,278
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "353f677bd52576026ac7009bf1cd219cdc7fd550",
+  "prompts": {},
+  "sessions": {
+    "s_b6b6b50ae05f70": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "82a64b52-a889-4c7b-b3ca-922ae92f12fb",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Dhiren Chotwani <dchotwani@paloaltonetworks.com>"
+    }
+  }
+}

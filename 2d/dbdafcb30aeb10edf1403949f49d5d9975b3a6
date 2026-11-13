@@ -1,0 +1,16 @@
+go.mod
+  h_55d70f393a1b06 13,66
+go.sum
+  h_55d70f393a1b06 171-172,182-183
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "2ddbdafcb30aeb10edf1403949f49d5d9975b3a6",
+  "prompts": {},
+  "humans": {
+    "h_55d70f393a1b06": {
+      "author": "Dhiren Chotwani <dchotwani@paloaltonetworks.com>"
+    }
+  }
+}

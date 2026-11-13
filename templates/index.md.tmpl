@@ -11,6 +11,7 @@ The `scm` provider provides resources and data sources to manage and query Strat
 This provider covers the following aspects of Strata Cloud Manager:
 * NGFW & Prisma Access
 * ZTNA Connector
+* Cloud NGFW (AWS)
 
 ## Resource type names and migrating from `ztna_*`
 
@@ -58,14 +59,105 @@ Modules that use these blocks must also declare `scm` in their own `required_pro
 
 ### v1.0.14-beta.1
 
-#### NOTES
+#### FEATURES
+* CNGFW (Cloud Next Generation Firewall) support is introduced in this release under a new scm_cngfw_* resource prefix,
+  separate from the existing scm_* resources. All resources and data sources below target the CNGFW API v2.0.
+* New Security Rule order resource (`scm_security_rule_order`)
 
-* The ZTNA types are now registered as `scm_ztna_*`, so Terraform resolves them to this provider without `provider = scm`. The old `ztna_*` names remain as deprecated aliases and will be removed in a future major version. See *Resource type names and migrating from `ztna_*`* above.
+#### Managing Security Rule Order (`scm_security_rule_order`)
+
+Use `scm_security_rule_order` to control the order of your security rules in Terraform. You list the rules in the order you want, and the provider moves them into that order. It leaves rules that are already in the right place alone.
+
+##### What you can configure
+
+| Attribute | Required | Description |
+|-----------|----------|-------------|
+| `folder` / `snippet` / `device` | Exactly one | Where the rules live |
+| `rulebase` | Yes | `pre` or `post` |
+| `ordered_rules` | Yes | Rule names, top to bottom |
+| `destination` | No | Where the rules sit in the rulebase: `top`, `bottom`, `before`, `after`. The default is no fixed position. |
+| `destination_rule` | With `before` / `after` | The existing rule to position next to. It must not be in `ordered_rules`. |
+| `order` | No | `consecutive` (default) or `strictly_consecutive` |
+
+##### Ordering modes
+
+- **`consecutive`** (default): Your rules keep the order you listed. Other rules, such as ones added manually or by someone else, can still appear between them.
+- **`strictly_consecutive`**: Your rules stay together in one block, in your order, with no other rules between them.
+
+##### Example
+
+```hcl
+resource "scm_security_rule_order" "pre" {
+  folder   = "Shared"
+  rulebase = "pre"
+
+  ordered_rules = [
+    "block-known-bad",
+    "allow-dns",
+    "allow-web",
+  ]
+
+  destination = "top"
+  order       = "strictly_consecutive"
+}
+```
+
+To place your rules next to a rule you don't manage with this resource:
+
+```hcl
+resource "scm_security_rule_order" "after_baseline" {
+  folder           = "Shared"
+  rulebase         = "post"
+  ordered_rules    = ["app-a", "app-b"]
+  destination      = "after"
+  destination_rule = "baseline-deny"
+}
+```
+
+##### Good to know
+
+- The resource only orders rules that already exist. Create them with `scm_security_rule`.
+- Rules inherited from a parent folder can't be reordered here, so they're ignored.
+- `terraform plan` shows when the live order differs from your configuration, for example after someone changes it in the console.
+
+##### Importing an existing order
+
+Use the format `folder:snippet:device:<rulebase>:<rule1>,<rule2>,...`. Leave the unused container fields empty.
+
+```bash
+terraform import scm_security_rule_order.pre 'Shared:::pre:block-known-bad,allow-dns,allow-web'
+```
+
+After an import, `destination` and `order` start at their defaults. If your configuration sets other values, the first `terraform plan` will show a change for them.
+
+#### Resources
+
+* resources/scm_cngfw_ngfirewall: Added support, examples and tests for Cloud NGFW firewalls on AWS.
+* resources/scm_security_rule_order: Added support examples and tests for ordering security rules.  ([#146](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/146))
+
+#### Data Sources
+
+* data-source/scm_cngfw_ngfirewall: Added support, examples and tests for Cloud NGFW firewalls on AWS.
+
 
 #### BUG FIXES
 
 * resource/scm_service_connection: Fixed `inconsistent values for sensitive attribute` on apply when a secondary BGP peer is set. `bgp_peer` moves from `protocol.bgp_peer` back to the resource top level ([#151](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/151))
 * resource/scm_wildfire_anti_virus_profile: Added missing `cloud_inline_analysis` flag ([#152](https://github.com/PaloAltoNetworks/terraform-provider-scm/issues/152))
+
+#### NOTES
+
+* This is a beta release for the SCM Terraform Provider.
+* Customers must explicitly opt-in by specifying version = "1.0.14-beta.1"
+* The scm_cngfw_* resources and data sources are in beta, and their schema may change before general availability.
+* scm_cngfw_ngfirewall create waits until the firewall finishes provisioning (up to 60 minutes) and saves the
+  service-assigned values, such as `tier`, `link_id` and `endpoints`, to state. Delete waits until the
+  firewall is removed (up to 30 minutes).
+* scm_cngfw_ngfirewall `link_id` is looked up from your tenant automatically when it is not set.
+* Import a firewall with `terraform import scm_cngfw_ngfirewall.<name> <region>:<firewall_id>`.
+* scm_cngfw_ngfirewall_list returns all firewalls in the region across all pages.
+* The scm_cngfw_* resources use the same authentication mechanism as the scm_* and scm_ztna_* resources.
+* The ZTNA types are now registered as `scm_ztna_*`, so Terraform resolves them to this provider without `provider = scm`. The old `ztna_*` names remain as deprecated aliases and will be removed in a future major version. See *Resource type names and migrating from `ztna_*`* above.
 
 ### v1.0.13
 

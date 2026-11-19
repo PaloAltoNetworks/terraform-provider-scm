@@ -47,6 +47,11 @@ SKIP_LIST="scm_auto_vpn_setting scm_auto_vpn_cluster scm_ztna_connector_schedule
 NEEDS_PRODUCTIZED_API="scm_config_match_list scm_globalprotect_match_list scm_hipmatch_match_list scm_iptag_match_list scm_log_forwarding_profile scm_system_match_list scm_userid_match_list"
 SKIP_LIST="$SKIP_LIST $NEEDS_PRODUCTIZED_API"
 
+# Resources tested by hand: every apply generates a live link code for the GCP tenant IDs in the example,
+# so they are tested with throwaway tenant IDs instead
+MANUAL_TEST_ONLY="scm_cngfw_gcp_link"
+SKIP_LIST="$SKIP_LIST $MANUAL_TEST_ONLY"
+
 # -----------------------------------------------------------------------------
 # Detect dev_overrides — when active, terraform init must be skipped.
 # -----------------------------------------------------------------------------

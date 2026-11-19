@@ -16,6 +16,7 @@ import (
 	setup "github.com/paloaltonetworks/scm-go"
 
 	tfProviderCloudNgfw "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/cloud_ngfw"
+	tfProviderCngfwGcp "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/cngfw_gcp"
 	tfProviderConfigOperations "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_operations"
 	tfProviderConfigSetup "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/config_setup"
 	tfProviderDeploymentServices "github.com/paloaltonetworks/terraform-provider-scm/internal/provider/deployment_services"
@@ -241,6 +242,8 @@ func (p *ScmProvider) Configure(ctx context.Context, req provider.ConfigureReque
 		"security_services":   setup.GetSecurityServicesAPIClient(setupClient),
 		"ztna_connector_all":  setup.GetZtnaConnectorAllAPIClient(setupClient),
 		"config_operations":   setup.GetConfigOperationsAPIClient(setupClient),
+		// Hand-written package, copied from static_templates/cngfw_gcp (see cngfw_gcp.go)
+		"cngfw_gcp": tfProviderCngfwGcp.NewClient(ctx, setupClient),
 	}
 
 	resp.DataSourceData = clients
@@ -298,6 +301,8 @@ func (p *ScmProvider) Resources(ctx context.Context) []func() resource.Resource 
 	resources = append(resources, tfProviderSecurityServices.GetResources()...)
 	// Add ztna_connector_all package resources also under their old unprefixed names (deprecated)
 	resources = append(resources, legacyResources(tfProviderZtnaConnectorAll.GetResources())...)
+	// Add cngfw_gcp package resources
+	resources = append(resources, tfProviderCngfwGcp.GetResources()...)
 
 	return resources
 }

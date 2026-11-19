@@ -2,7 +2,8 @@ name: Resource Tests
 
 on:
   push:
-    branches: [develop]
+    # Temporary: cngfw-gcp-link is CI for openapi-integration-creator PR #195, remove after merge
+    branches: [develop, cngfw-gcp-link]
   pull_request:
     branches: [main, develop]
   workflow_dispatch: # manual trigger

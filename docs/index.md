@@ -12,6 +12,7 @@ This provider covers the following aspects of Strata Cloud Manager:
 * NGFW & Prisma Access
 * ZTNA Connector
 * Cloud NGFW (AWS)
+* Cloud NGFW (GCP)
 
 ## Resource type names and migrating from `ztna_*`
 
@@ -108,6 +109,32 @@ resource "ztna_subnet" "example" {
 Modules that use these blocks must also declare `scm` in their own `required_providers`.
 
 ## Release Notes
+
+### v1.0.14-beta.2
+
+#### FEATURES
+* Cloud NGFW for GCP support is introduced with the `scm_cngfw_gcp_link` resource. It generates the one-time
+  link code a customer enters in the Google Cloud console when creating a firewall endpoint, which links the
+  Google Cloud tenant to the TSG the provider credentials are scoped to.
+
+#### Resources
+
+* resources/scm_cngfw_gcp_link: Added support, examples and tests for Cloud NGFW for GCP link codes.
+
+#### NOTES
+
+* This is a beta release for the SCM Terraform Provider.
+* Customers must explicitly opt-in by specifying version = "1.0.14-beta.2"
+* scm_cngfw_gcp_link is in beta, and its schema may change before general availability.
+* `link_code` is sensitive, but like every attribute it is stored in the Terraform state, so protect your state.
+  The code expires 48 hours after it is generated (`expires_at`).
+* `tsg_id` and `csp_id` are read-only: the link service fills them in from the provider credentials.
+* There is no API to read a link back, so scm_cngfw_gcp_link cannot be imported and changes made outside
+  Terraform are not detected. Changing any argument replaces the resource.
+* Destroying scm_cngfw_gcp_link unlinks the firewall endpoint created with its code. A code that was never used
+  is not revoked: it stays valid until it expires.
+* `region` is optional and is sent as the `x-panw-region` header. When it is not set, the API gateway default is
+  used.
 
 ### v1.0.14-beta.1
 

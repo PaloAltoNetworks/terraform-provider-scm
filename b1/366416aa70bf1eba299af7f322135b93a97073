@@ -1,0 +1,41 @@
+templates/index.md.tmpl
+  s_b9ede404895335::t_b48eb867e5cccc 15,61-86
+tests/run_tests.sh
+  s_b9ede404895335::t_ebb9a9ccb084d9 50-54
+internal/provider/cngfw_gcp/client_test.go
+  s_b9ede404895335::t_6fd487e25cb451 1-272
+internal/provider/cngfw_gcp/resource_link_test.go
+  s_b9ede404895335::t_6c27a91b44ad80 1-259
+docs/index.md
+  s_b9ede404895335::t_bf4de7c00c36cc 15,113-138
+internal/provider/cngfw_gcp/client.go
+  s_b9ede404895335::t_0b64c1cec847f1 1-214
+examples/resources/scm_cngfw_gcp_link/resource.tf
+  s_b9ede404895335::t_b9ed02e373b4a7 1-22
+internal/provider/cngfw_gcp/resources.go
+  s_b9ede404895335::t_ccc9f0ba595611 1-12
+docs/resources/cngfw_gcp_link.md
+  s_b9ede404895335::t_19645dd00a3f69 1-57
+internal/provider/provider.go
+  s_b9ede404895335::t_f6abd9e440bf43 19,245-246,304-305
+internal/provider/cngfw_gcp/resource_link.go
+  s_b9ede404895335::t_ce8aa6f2f9a9ee 1-200
+.github/workflows/test-resources.yml
+  s_b9ede404895335::t_cd4fe96293d9fa 5-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "b1366416aa70bf1eba299af7f322135b93a97073",
+  "prompts": {},
+  "sessions": {
+    "s_b9ede404895335": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "923ba837-fd81-474b-b3de-339454339596",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Prateek Garg <pragarg@paloaltonetworks.com>"
+    }
+  }
+}
